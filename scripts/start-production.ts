@@ -24,6 +24,10 @@ function hasPortArgument(args: string[]) {
   return args.some((argument) => argument === "--port" || argument.startsWith("--port="));
 }
 
+function hasIpArgument(args: string[]) {
+  return args.some((argument) => argument === "--ip" || argument.startsWith("--ip="));
+}
+
 if (!existsSync(workerConfig)) {
   throw new Error("Chưa có production build. Hãy chạy `npm run build` trước `npm start`.");
 }
@@ -33,9 +37,10 @@ if (!existsSync(wranglerCli)) {
 }
 
 const environmentFile = resolveEnvironmentFile();
-if (!environmentFile || !existsSync(environmentFile)) {
+const isRailwayRuntime = Boolean(process.env.RAILWAY_SERVICE_ID);
+if (process.env.HANZIWORK_ENV_FILE?.trim() && (!environmentFile || !existsSync(environmentFile))) {
   throw new Error(
-    "Không tìm thấy file môi trường cho production local. Tạo `.env.local` hoặc đặt HANZIWORK_ENV_FILE tới file cần dùng.",
+    `Không tìm thấy file môi trường đã cấu hình: ${process.env.HANZIWORK_ENV_FILE.trim()}`,
   );
 }
 
@@ -44,14 +49,22 @@ const wranglerArgs = [
   "dev",
   "--config",
   workerConfig,
-  "--env-file",
-  environmentFile,
   "--show-interactive-dev-session",
   "false",
 ];
 
+if (!isRailwayRuntime && environmentFile && existsSync(environmentFile)) {
+  wranglerArgs.push("--env-file", environmentFile);
+} else {
+  console.log("Using runtime environment variables.");
+}
+
 if (!hasPortArgument(forwardedArgs)) {
   wranglerArgs.push("--port", process.env.PORT?.trim() || "3000");
+}
+
+if (!hasIpArgument(forwardedArgs) && isRailwayRuntime) {
+  wranglerArgs.push("--ip", "0.0.0.0");
 }
 
 wranglerArgs.push(...forwardedArgs);

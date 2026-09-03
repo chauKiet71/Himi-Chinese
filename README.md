@@ -42,6 +42,8 @@ npm start
 
 `npm start` phục vụ production bundle bằng Wrangler/Cloudflare Workers runtime, đúng với target trong `vite.config.ts`, và mặc định mở cổng `3000`. Lệnh tự nạp `.env.local` (hoặc `.env`) bằng đường dẫn tuyệt đối; có thể dùng `HANZIWORK_ENV_FILE` để chọn file khác và `npm start -- --port 4177` để đổi cổng. Cần chạy `npm run build` trước khi start.
 
+Trên nền tảng container như Railway, biến môi trường được đọc trực tiếp từ runtime khi không có tệp `.env`. `railway.json` cấu hình build production và cho Wrangler lắng nghe trên `0.0.0.0:$PORT`.
+
 ### Staging Cloudflare
 
 Worker staging hiện dùng tên `hanziwork-staging`. Sau khi đăng nhập Wrangler, triển khai và kiểm tra bằng PowerShell:
