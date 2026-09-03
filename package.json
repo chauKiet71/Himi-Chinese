@@ -1,0 +1,66 @@
+{
+  "name": "hanziwork-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "vinext dev",
+    "build": "vinext build",
+    "start": "node --experimental-strip-types scripts/start-production.ts",
+    "deploy:staging": "npm run build && wrangler deploy --name hanziwork-staging",
+    "staging:secrets": "node --env-file=.env.local --experimental-strip-types scripts/configure-staging-secrets.ts",
+    "verify:staging": "node --env-file=.env.local --experimental-strip-types scripts/verify-staging.ts",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .wrangler",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "node --experimental-strip-types db/seed.ts",
+    "content:high-frequency:import": "node --experimental-strip-types scripts/import-high-frequency-topics.ts",
+    "practice:audio:generate": "node --experimental-strip-types scripts/generate-practice-audio.ts",
+    "practice:audio:seed": "node --experimental-strip-types scripts/seed-practice-audio.ts",
+    "practice:audio:migrate-cloudinary": "node --experimental-strip-types scripts/migrate-practice-audio-cloudinary.ts",
+    "admin:create": "node --experimental-strip-types scripts/create-admin.ts",
+    "auth:cleanup": "node --experimental-strip-types scripts/cleanup-auth.ts",
+    "auth:password-audit": "node --env-file=.env.local --experimental-strip-types scripts/audit-password-hashes.ts",
+    "auth:password-migrate": "node --experimental-strip-types scripts/migrate-account-password.ts"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "cloudinary": "^2.10.0",
+    "drizzle-orm": "0.45.2",
+    "gsap": "^3.15.0",
+    "hanzi-writer": "^3.7.3",
+    "lucide-react": "^1.28.0",
+    "motion": "^12.43.0",
+    "next": "^16.2.12",
+    "postgres": "^3.4.9",
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "1.37.1",
+    "@openai/sites-vite-plugin": "0.2.0",
+    "@tailwindcss/postcss": "4.2.1",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-rsc": "0.5.26",
+    "drizzle-kit": "0.31.10",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.6",
+    "react-server-dom-webpack": "19.2.6",
+    "tailwindcss": "4.2.1",
+    "typescript": "5.9.3",
+    "vinext": "0.0.50",
+    "vite": "8.0.13",
+    "wrangler": "4.92.0"
+  },
+  "overrides": {
+    "postcss": "8.5.25",
+    "sharp": "0.35.3"
+  },
+  "type": "module"
+}
