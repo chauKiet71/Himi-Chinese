@@ -16,6 +16,7 @@ import {
   accountNumberMatchesSepayConfig,
   buildSepayVietQrUrl,
   createSepayPaymentCode,
+  ensureVietQrTransferDescription,
   extractSepayPaymentCode,
   getSepayBankAccount,
   parseSepayTransactionDate,
@@ -70,11 +71,13 @@ function paymentOrderDto(row: {
     amountVnd: row.amountVnd,
     referenceCode: row.referenceCode,
     status: row.status,
-    qrImageUrl: row.qrContent || buildSepayVietQrUrl({
-      amountVnd: row.amountVnd,
-      bankAccount,
-      paymentCode: row.referenceCode,
-    }),
+    qrImageUrl: row.qrContent
+      ? ensureVietQrTransferDescription(row.qrContent, row.referenceCode)
+      : buildSepayVietQrUrl({
+        amountVnd: row.amountVnd,
+        bankAccount,
+        paymentCode: row.referenceCode,
+      }),
     bankAccount,
     paidAt: row.paidAt?.toISOString() ?? null,
     expiresAt: row.expiresAt.toISOString(),

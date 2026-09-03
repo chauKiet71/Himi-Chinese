@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   authenticateSepayWebhook,
   buildSepayVietQrUrl,
+  ensureVietQrTransferDescription,
   extractSepayPaymentCode,
   parseSepayTransactionDate,
   parseSepayWebhookPayload,
@@ -49,8 +50,18 @@ test("VietQR contains the configured ACB account, exact amount and payment code"
   assert.equal(result.searchParams.get("bank"), "ACB");
   assert.equal(result.searchParams.get("acc"), "12897891");
   assert.equal(result.searchParams.get("amount"), "329000");
-  assert.equal(result.searchParams.get("addInfo"), "HIMI23456789ABCD");
+  assert.equal(result.searchParams.get("des"), "HIMI23456789ABCD");
+  assert.equal(result.searchParams.has("addInfo"), false);
   assert.equal(result.searchParams.get("holder"), "LE CHAU KIET");
+});
+
+test("stored VietQR links are upgraded to embed the payment code", () => {
+  const result = new URL(ensureVietQrTransferDescription(
+    "https://vietqr.app/img?bank=ACB&acc=12897891&amount=11000&addInfo=OLD_CODE",
+    "HIMI23456789ABCD",
+  ));
+  assert.equal(result.searchParams.get("des"), "HIMI23456789ABCD");
+  assert.equal(result.searchParams.has("addInfo"), false);
 });
 
 test("SePay payload validation and payment-code extraction are strict", () => {

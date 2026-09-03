@@ -102,10 +102,24 @@ export function buildSepayVietQrUrl(input: {
   url.searchParams.set("acc", bankAccount.accountNumber);
   url.searchParams.set("template", "compact");
   url.searchParams.set("amount", String(input.amountVnd));
-  url.searchParams.set("addInfo", input.paymentCode);
+  // vietqr.app uses `des` for the transfer description embedded in the QR.
+  // `addInfo` belongs to img.vietqr.io and is silently ignored by this endpoint.
+  url.searchParams.set("des", input.paymentCode);
   url.searchParams.set("showinfo", "true");
   url.searchParams.set("holder", bankAccount.accountName);
   return url.toString();
+}
+
+export function ensureVietQrTransferDescription(qrImageUrl: string, paymentCode: string): string {
+  try {
+    const url = new URL(qrImageUrl);
+    if (url.origin !== "https://vietqr.app" || url.pathname !== "/img") return qrImageUrl;
+    url.searchParams.delete("addInfo");
+    url.searchParams.set("des", paymentCode);
+    return url.toString();
+  } catch {
+    return qrImageUrl;
+  }
 }
 
 export function parseSepayWebhookPayload(value: unknown): SepayWebhookPayload | null {

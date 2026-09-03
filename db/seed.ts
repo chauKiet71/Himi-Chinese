@@ -29,8 +29,10 @@ import { salesLessons, salesModules } from "../lib/sales-course-seed.ts";
 import type { CourseSeedBundle } from "../lib/course-seed-types.ts";
 import { LIFETIME_VIP_PLAN_CODE, LIFETIME_VIP_STORAGE_DAYS } from "../lib/vip-plan.ts";
 
-const localEnvPath = resolve(process.cwd(), ".env.local");
-if (existsSync(localEnvPath)) process.loadEnvFile(localEnvPath);
+const environmentPath = [".env.local", ".env"]
+  .map((fileName) => resolve(process.cwd(), fileName))
+  .find(existsSync);
+if (environmentPath) process.loadEnvFile(environmentPath);
 
 const publishedAt = new Date();
 
