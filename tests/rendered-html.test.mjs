@@ -108,6 +108,8 @@ test("production start uses the Cloudflare runtime with an absolute local env fi
   assert.match(startScript, /"--config",\s*workerConfig/);
   assert.match(startScript, /"--env-file",\s*environmentFile/);
   assert.match(startScript, /resolve\(projectRoot, filename\)/);
+  assert.match(startScript, /createRailwayEnvironmentFile/);
+  assert.match(startScript, /AUTH_TRUST_FORWARDED_ORIGIN/);
   assert.match(startScript, /process\.env\.PORT/);
   assert.match(database, /replaceAll\(configuredUrl, "\[DATABASE_URL\]"\)/);
   assert.match(database, /params: \[redacted\]/);
