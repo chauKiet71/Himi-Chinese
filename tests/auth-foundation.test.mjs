@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createSessionToken, hashPassword, hashPrivateIdentifier, hashSessionToken, verifyPassword } from "../lib/auth-crypto.ts";
 import { normalizeEmail, parseRegistrationInput, safeReturnTo, validateAuthToken } from "../lib/auth-validation.ts";
-import { clientAddress, isSameOriginRequest } from "../lib/request-security.ts";
+import { authRedirectUrl, clientAddress, isSameOriginRequest } from "../lib/request-security.ts";
 import { scheduleReview } from "../lib/review-scheduler.ts";
 
 test("passwords are salted and verified with PBKDF2", async () => {
@@ -69,6 +69,33 @@ test("auth mutations require a matching Origin header", () => {
   assert.equal(isSameOriginRequest(new Request("https://hanziwork.vn/api/auth/login", { headers: { origin: "https://evil.example" } })), false);
   assert.equal(isSameOriginRequest(new Request("https://hanziwork.vn/api/auth/login")), false);
   assert.equal(clientAddress(new Request("https://hanziwork.vn", { headers: { "x-forwarded-for": "203.0.113.9, 10.0.0.1" } })), "203.0.113.9");
+});
+
+test("auth mutations use Railway's trusted public origin", () => {
+  const previousTrustForwardedOrigin = process.env.AUTH_TRUST_FORWARDED_ORIGIN;
+  try {
+    process.env.AUTH_TRUST_FORWARDED_ORIGIN = "1";
+    const request = new Request("http://0.0.0.0:3000/api/auth/login", {
+      headers: {
+        origin: "https://himi-chinese-production.up.railway.app",
+        "x-forwarded-host": "himi-chinese-production.up.railway.app",
+        "x-forwarded-proto": "https",
+      },
+    });
+
+    assert.equal(isSameOriginRequest(request), true);
+    assert.equal(
+      isSameOriginRequest(new Request(request, { headers: { ...Object.fromEntries(request.headers), origin: "https://evil.example" } })),
+      false,
+    );
+    assert.equal(
+      authRedirectUrl(request, "/login", { error: "invalid_credentials" }).href,
+      "https://himi-chinese-production.up.railway.app/login?error=invalid_credentials",
+    );
+  } finally {
+    if (previousTrustForwardedOrigin === undefined) delete process.env.AUTH_TRUST_FORWARDED_ORIGIN;
+    else process.env.AUTH_TRUST_FORWARDED_ORIGIN = previousTrustForwardedOrigin;
+  }
 });
 
 test("review scheduling advances remembered words and resets hard words", () => {

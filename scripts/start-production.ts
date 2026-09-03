@@ -67,6 +67,10 @@ if (!hasIpArgument(forwardedArgs) && isRailwayRuntime) {
   wranglerArgs.push("--ip", "0.0.0.0");
 }
 
+if (isRailwayRuntime) {
+  wranglerArgs.push("--var", "AUTH_TRUST_FORWARDED_ORIGIN:1");
+}
+
 wranglerArgs.push(...forwardedArgs);
 
 console.log("Starting HanziWork production build in the Cloudflare Workers runtime...");
