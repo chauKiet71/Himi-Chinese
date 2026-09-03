@@ -57,7 +57,7 @@ const practiceAudioByExercise = new Map(
 
 const planSeeds = [
   { code: LIFETIME_VIP_PLAN_CODE, name: "VIP vĩnh viễn", durationDays: LIFETIME_VIP_STORAGE_DAYS, priceVnd: 1_090_000, discountPercent: 0, promotionLabel: null },
-  { code: "VIP_1M", name: "VIP 1 tháng", durationDays: 30, priceVnd: 79_000, discountPercent: 0, promotionLabel: null },
+  { code: "VIP_1M", name: "VIP 1 tháng", durationDays: 30, priceVnd: 11_000, discountPercent: 0, promotionLabel: null },
   { code: "VIP_6M", name: "VIP 6 tháng", durationDays: 180, priceVnd: 329_000, discountPercent: 15, promotionLabel: "Tiết kiệm hơn theo kỳ 6 tháng" },
   { code: "VIP_12M", name: "VIP 1 năm", durationDays: 365, priceVnd: 549_000, discountPercent: 30, promotionLabel: "Ưu đãi tốt nhất trong năm" },
 ] as const;

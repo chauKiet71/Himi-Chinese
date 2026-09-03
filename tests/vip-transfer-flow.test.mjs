@@ -29,6 +29,7 @@ test("VIP payment opens a SePay QR flow and waits for automatic confirmation", a
   assert.match(page, /vipPlanAccessLabel/);
   assert.doesNotMatch(page, /Học miễn phí|Tiếp tục học miễn phí|is-free/);
   assert.match(seed, /name: "VIP vĩnh viễn"[\s\S]*priceVnd: 1_090_000/);
+  assert.match(seed, /code: "VIP_1M"[\s\S]*?priceVnd: 11_000/);
   assert.match(subscriptionService, /calculateVipPlanEndsAt/);
   assert.match(subscriptionService, /endsAt: endsAt\?\.toISOString\(\) \?\? null/);
   assert.doesNotMatch(transferFlow, /requestVipActivationAction|name="userNote"/);
