@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { withRequestDb } from "@/db/index";
 import { authenticateWithPassword } from "@/lib/auth-service";
 import { recordAuthEvent } from "@/lib/auth-audit";
 import { consumeAuthRateLimit, clearSuccessfulLoginLimit } from "@/lib/auth-rate-limit";
@@ -18,46 +19,46 @@ export async function POST(request: Request) {
   const email = normalizeEmail(formString(formData, "email", 255));
   const password = formString(formData, "password", 128);
 
-  const rateLimit = await consumeAuthRateLimit(request, "login", email || "invalid");
-  if (!rateLimit.allowed) {
-    await recordAuthEvent({ action: "auth.login.rate_limited", request, identifier: email, metadata: { mode } });
-    const response = NextResponse.redirect(authRedirectUrl(request, loginPath, { error: "rate_limited", returnTo }), 303);
-    response.headers.set("Retry-After", String(rateLimit.retryAfterSeconds));
-    return response;
-  }
-
-  if (!validateEmail(email) || !validatePassword(password)) {
-    await recordAuthEvent({ action: "auth.login.failed", request, identifier: email, metadata: { mode, reason: "invalid_input" } });
-    return NextResponse.redirect(authRedirectUrl(request, loginPath, { error: "invalid_credentials", returnTo }), 303);
-  }
-
-  const user = await authenticateWithPassword(email, password);
-  if (!user || (mode === "admin" && !isPracticeStaffRole(user.role))) {
-    await recordAuthEvent({ action: "auth.login.failed", request, identifier: email, userId: user?.id, metadata: { mode, reason: user ? "role" : "credentials" } });
-    return NextResponse.redirect(authRedirectUrl(request, loginPath, { error: "invalid_credentials", returnTo }), 303);
-  }
-
-  if (!user.emailVerified) {
-    let delivery: "brevo" | "console" | "failed" = "failed";
-    try {
-      delivery = await sendAuthLink(user, "verify_email");
-    } catch (error) {
-      console.error("Không thể gửi email xác minh.", error instanceof Error ? error.message : "unknown");
+  return withRequestDb(async (database) => {
+    const rateLimit = await consumeAuthRateLimit(request, "login", email || "invalid", database);
+    if (!rateLimit.allowed) {
+      await recordAuthEvent({ action: "auth.login.rate_limited", request, identifier: email, metadata: { mode } }, database);
+      const response = NextResponse.redirect(authRedirectUrl(request, loginPath, { error: "rate_limited", returnTo }), 303);
+      response.headers.set("Retry-After", String(rateLimit.retryAfterSeconds));
+      return response;
     }
-    await recordAuthEvent({ action: "auth.email_verification.requested", request, identifier: email, userId: user.id, metadata: { delivery } });
-    const url = new URL("/verify-email", request.url);
-    url.searchParams.set("required", "1");
-    if (delivery === "failed") url.searchParams.set("error", "delivery_failed");
-    return NextResponse.redirect(url, 303);
-  }
 
-  const session = await createSession(user.id);
-  await Promise.all([
-    clearSuccessfulLoginLimit(request, email),
-    recordAuthEvent({ action: "auth.login.succeeded", request, identifier: email, userId: user.id, metadata: { mode } }),
-  ]);
-  const staffReturnTo = mode === "admin" && user.role !== "admin" && returnTo === "/admin" ? "/admin/practice" : returnTo;
-  const response = NextResponse.redirect(new URL(staffReturnTo, request.url), 303);
-  response.cookies.set(sessionCookieName(), session.token, sessionCookieOptions(session.expiresAt));
-  return response;
+    if (!validateEmail(email) || !validatePassword(password)) {
+      await recordAuthEvent({ action: "auth.login.failed", request, identifier: email, metadata: { mode, reason: "invalid_input" } }, database);
+      return NextResponse.redirect(authRedirectUrl(request, loginPath, { error: "invalid_credentials", returnTo }), 303);
+    }
+
+    const user = await authenticateWithPassword(email, password, database);
+    if (!user || (mode === "admin" && !isPracticeStaffRole(user.role))) {
+      await recordAuthEvent({ action: "auth.login.failed", request, identifier: email, userId: user?.id, metadata: { mode, reason: user ? "role" : "credentials" } }, database);
+      return NextResponse.redirect(authRedirectUrl(request, loginPath, { error: "invalid_credentials", returnTo }), 303);
+    }
+
+    if (!user.emailVerified) {
+      let delivery: "brevo" | "console" | "failed" = "failed";
+      try {
+        delivery = await sendAuthLink(user, "verify_email", database);
+      } catch (error) {
+        console.error("Không thể gửi email xác minh.", error instanceof Error ? error.message : "unknown");
+      }
+      await recordAuthEvent({ action: "auth.email_verification.requested", request, identifier: email, userId: user.id, metadata: { delivery } }, database);
+      const url = authRedirectUrl(request, "/verify-email");
+      url.searchParams.set("required", "1");
+      if (delivery === "failed") url.searchParams.set("error", "delivery_failed");
+      return NextResponse.redirect(url, 303);
+    }
+
+    const session = await createSession(user.id, database);
+    await clearSuccessfulLoginLimit(request, email, database);
+    await recordAuthEvent({ action: "auth.login.succeeded", request, identifier: email, userId: user.id, metadata: { mode } }, database);
+    const staffReturnTo = mode === "admin" && user.role !== "admin" && returnTo === "/admin" ? "/admin/practice" : returnTo;
+    const response = NextResponse.redirect(authRedirectUrl(request, staffReturnTo), 303);
+    response.cookies.set(sessionCookieName(), session.token, sessionCookieOptions(session.expiresAt));
+    return response;
+  });
 }

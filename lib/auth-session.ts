@@ -2,7 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { and, eq, gt, isNotNull, sql } from "drizzle-orm";
 import { cookies } from "next/headers";
-import { readDb, writeDb } from "../db/index.ts";
+import { readDb, writeDb, type Database } from "../db/index.ts";
 import { authSessions, notifications, users } from "../db/schema.ts";
 import { createSessionToken, hashSessionToken } from "./auth-crypto.ts";
 import type { AuthenticatedUser } from "./auth-service.ts";
@@ -36,11 +36,12 @@ export function sessionCookieOptions(expiresAt: Date) {
   };
 }
 
-export async function createSession(userId: string): Promise<NewSession> {
+export async function createSession(userId: string, database?: Database): Promise<NewSession> {
   const token = createSessionToken();
   const tokenHash = await hashSessionToken(token);
   const expiresAt = new Date(Date.now() + SESSION_TTL_SECONDS * 1_000);
-  await writeDb((db) => db.insert(authSessions).values({ userId, tokenHash, expiresAt }));
+  const insert = (db: Database) => db.insert(authSessions).values({ userId, tokenHash, expiresAt });
+  await (database ? insert(database) : writeDb(insert));
   return { token, expiresAt };
 }
 

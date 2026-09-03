@@ -51,8 +51,8 @@ export function getDb() {
 
 export type Database = ReturnType<typeof getDb>;
 
-async function withRequestDb<T>(operation: (db: Database) => PromiseLike<T>): Promise<T> {
-  const requestClient = postgres(connectionString(), { prepare: false, max: 4 });
+export async function withRequestDb<T>(operation: (db: Database) => PromiseLike<T>): Promise<T> {
+  const requestClient = postgres(connectionString(), { prepare: false, max: 4, fetch_types: false });
   const requestDb = drizzle(requestClient, { schema }) as Database;
 
   try {

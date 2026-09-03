@@ -1,6 +1,6 @@
 import "server-only";
 import { eq } from "drizzle-orm";
-import { readDb, writeDb } from "../db/index.ts";
+import { readDb, writeDb, type Database } from "../db/index.ts";
 import { users } from "../db/schema.ts";
 import { hashPassword, verifyPassword } from "./auth-crypto.ts";
 import type { RegistrationInput } from "./auth-validation.ts";
@@ -48,8 +48,13 @@ export async function registerLearner(input: RegistrationInput): Promise<{ user?
   return user ? { user: toAuthenticatedUser(user) } : { duplicate: true };
 }
 
-export async function authenticateWithPassword(email: string, password: string): Promise<AuthenticatedUser | null> {
-  const rows = await readDb((db) => db.select().from(users).where(eq(users.email, email)).limit(1));
+export async function authenticateWithPassword(
+  email: string,
+  password: string,
+  database?: Database,
+): Promise<AuthenticatedUser | null> {
+  const query = (db: Database) => db.select().from(users).where(eq(users.email, email)).limit(1);
+  const rows = database ? await query(database) : await readDb(query);
   const user = rows[0];
 
   if (!user?.passwordHash) {

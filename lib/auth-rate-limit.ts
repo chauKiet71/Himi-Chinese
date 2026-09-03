@@ -64,7 +64,12 @@ async function keyHash(action: AuthRateLimitAction, scope: "identifier" | "ip", 
   return hashPrivateIdentifier(`${action}:${scope}:${value}`);
 }
 
-export async function consumeAuthRateLimit(request: Request, action: AuthRateLimitAction, identifier?: string): Promise<RateLimitResult> {
+export async function consumeAuthRateLimit(
+  request: Request,
+  action: AuthRateLimitAction,
+  identifier?: string,
+  database?: Database,
+): Promise<RateLimitResult> {
   const policy = policies[action];
   const address = clientAddress(request);
   const [ipHash, identifierHash] = await Promise.all([
@@ -73,17 +78,24 @@ export async function consumeAuthRateLimit(request: Request, action: AuthRateLim
   ]);
   const now = new Date();
 
-  return writeDb(async (db) => {
+  const consume = async (db: Database) => {
     const ipResult = await consumeKey(db, `${action}:ip`, ipHash, policy.ipAttempts, policy, now);
     if (!ipResult.allowed || !identifierHash) return ipResult;
     return consumeKey(db, `${action}:identifier`, identifierHash, policy.identifierAttempts, policy, now);
-  });
+  };
+
+  return database ? consume(database) : writeDb(consume);
 }
 
-export async function clearSuccessfulLoginLimit(request: Request, identifier: string): Promise<void> {
+export async function clearSuccessfulLoginLimit(
+  request: Request,
+  identifier: string,
+  database?: Database,
+): Promise<void> {
   const hash = await keyHash("login", "identifier", `${identifier}|${clientAddress(request)}`);
-  await writeDb((db) => db.delete(authRateLimits).where(and(
+  const clear = (db: Database) => db.delete(authRateLimits).where(and(
     eq(authRateLimits.action, "login:identifier"),
     eq(authRateLimits.keyHash, hash),
-  )));
+  ));
+  await (database ? clear(database) : writeDb(clear));
 }

@@ -1,6 +1,6 @@
 import "server-only";
 import { and, eq, gt, isNotNull, isNull, lt, or } from "drizzle-orm";
-import { writeDb } from "../db/index.ts";
+import { writeDb, type Database } from "../db/index.ts";
 import { authRateLimits, authSessions, authTokens, users } from "../db/schema.ts";
 import { createAuthToken, hashAuthToken, hashPassword } from "./auth-crypto.ts";
 
@@ -17,20 +17,25 @@ export type IssuedAuthToken = {
   expiresAt: Date;
 };
 
-export async function issueAuthToken(userId: string, purpose: AuthTokenPurpose): Promise<IssuedAuthToken> {
+export async function issueAuthToken(
+  userId: string,
+  purpose: AuthTokenPurpose,
+  database?: Database,
+): Promise<IssuedAuthToken> {
   const token = createAuthToken();
   const tokenHash = await hashAuthToken(token);
   const now = new Date();
   const expiresAt = new Date(now.getTime() + tokenTtlMinutes[purpose] * 60_000);
 
-  const inserted = await writeDb((db) => db.transaction(async (tx) => {
+  const issue = (db: Database) => db.transaction(async (tx) => {
     await tx.update(authTokens).set({ usedAt: now }).where(and(
       eq(authTokens.userId, userId),
       eq(authTokens.purpose, purpose),
       isNull(authTokens.usedAt),
     ));
     return tx.insert(authTokens).values({ userId, purpose, tokenHash, expiresAt }).returning({ id: authTokens.id });
-  }));
+  });
+  const inserted = database ? await issue(database) : await writeDb(issue);
 
   return { id: inserted[0].id, token, expiresAt };
 }
