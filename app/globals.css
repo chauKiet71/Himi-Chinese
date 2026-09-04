@@ -11114,17 +11114,39 @@ body:has(.learner-app-shell) > .mobile-nav {
 }
 
 .writing-hit-score {
+  min-width: 96px;
   position: absolute;
   left: var(--strike-x);
   top: var(--strike-y);
   z-index: 12;
+  padding: 7px 11px;
+  display: grid;
+  justify-items: center;
+  gap: 2px;
   pointer-events: none;
   color: #805b10;
-  font-size: 14px;
-  font-weight: 860;
+  border: 1px solid rgba(146, 110, 22, .22);
+  border-radius: 11px;
+  background: rgba(255, 248, 157, .96);
+  box-shadow: 0 9px 22px rgba(92, 78, 22, .18);
   opacity: 0;
   text-shadow: 0 2px 0 rgba(255, 255, 239, .88);
   transform: translate3d(32px, -6px, 0);
+}
+
+.writing-hit-score strong {
+  font-size: 14px;
+  font-weight: 860;
+}
+
+.writing-hit-score small {
+  max-width: 132px;
+  overflow: hidden;
+  color: #3e503e;
+  font-size: 10px;
+  font-weight: 780;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .writing-arena.is-slicing .writing-hit-score {

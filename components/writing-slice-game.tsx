@@ -342,7 +342,10 @@ export function WritingSliceGame({
         .set(face, { autoAlpha: 0 })
         .set([leftHalf, rightHalf], { autoAlpha: 1 })
         .to(impact, { autoAlpha: 1, duration: .1, rotation: 0, scale: .8 })
-        .to([leftHalf, rightHalf, impact], { autoAlpha: 0, duration: .16 });
+        .to(hitScore, { autoAlpha: 1, duration: .12, scale: 1, x: 38, y: -18 }, 0)
+        .to([leftHalf, rightHalf, impact], { autoAlpha: 0, duration: .16 }, .12)
+        .to(hitScore, { autoAlpha: 1, duration: .65, x: 39, y: -20 }, .12)
+        .to(hitScore, { autoAlpha: 0, duration: .22, scale: .98, x: 40, y: -34 }, .77);
     } else {
       timeline
         .to(penguin, { duration: .2, ease: "power2.out", rotation: -10, scale: 1.03, x: -24, y: 17 }, 0)
@@ -359,7 +362,8 @@ export function WritingSliceGame({
         .to(leftHalf, { autoAlpha: 0, duration: .68, ease: "power2.in", rotation: -18, x: -46, y: 78 }, "impact")
         .to(rightHalf, { autoAlpha: 0, duration: .68, ease: "power2.in", rotation: 17, x: 48, y: 70 }, "impact")
         .to(hitScore, { autoAlpha: 1, duration: .17, ease: "power3.out", scale: 1.04, x: 38, y: -18 }, "impact")
-        .to(hitScore, { autoAlpha: 0, duration: .46, ease: "power1.in", scale: .96, x: 43, y: -58 }, "impact+=.17")
+        .to(hitScore, { autoAlpha: 1, duration: .62, ease: "none", x: 39, y: -22 }, "impact+=.17")
+        .to(hitScore, { autoAlpha: 0, duration: .28, ease: "power1.in", scale: .96, x: 43, y: -58 }, "impact+=.79")
         .to(impact, { autoAlpha: 0, duration: .38, ease: "power1.out", rotation: 3, scale: 1.18 }, "impact+=.16")
         .to(penguin, { autoAlpha: 0, duration: .45, ease: "power2.in", filter: "drop-shadow(-30px 25px 6px rgba(35, 75, 47, 0))", rotation: 19, scale: .78, x: strikePoint.exitX, y: strikePoint.exitY }, "impact+=.1")
         .to(cape, { autoAlpha: 0, duration: .42, ease: "sine.in", rotation: -4, scaleX: .86, skewY: 3 }, "impact+=.1");
@@ -462,8 +466,11 @@ export function WritingSliceGame({
                 src="/assets/writing/bamboo-slice-burst.png"
                 width="1254"
               />
-              <span aria-hidden="true" className="writing-hit-score">
-                +{100 + Math.min(Math.max(combo - 1, 0), 5) * 20}
+              <span aria-live="polite" className="writing-hit-score" role="status">
+                {mode === "slicing" ? <>
+                  <strong>+{100 + Math.min(Math.max(combo - 1, 0), 5) * 20}</strong>
+                  <small>{word.meaning}</small>
+                </> : null}
               </span>
 
               <div className="writing-combo" aria-live="polite">
