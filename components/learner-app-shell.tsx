@@ -254,6 +254,11 @@ export function LearnerAppShell({ children, user }: { children: ReactNode; user:
     setPracticeMenuOpen(next);
     setPracticeTriggerSelected(next);
   };
+  const closeMobilePracticeMenuAndNavigate = (event: MouseEvent<HTMLElement>, href: string) => {
+    setPracticeMenuOpen(false);
+    setPracticeTriggerSelected(false);
+    beginRoute(event, href);
+  };
   const toggleAccountMenu = () => {
     setPracticeMenuOpen(false);
     setPracticeTriggerSelected(false);
@@ -493,7 +498,7 @@ export function LearnerAppShell({ children, user }: { children: ReactNode; user:
                 className={matches(visualPathname) ? "active" : ""}
                 href={href}
                 key={href}
-                onClick={(event) => beginRoute(event, href)}
+                onClick={(event) => closeMobilePracticeMenuAndNavigate(event, href)}
                 onPointerEnter={() => prepareRoute(href)}
                 prefetch
               >
