@@ -307,6 +307,9 @@ test("learner routes share one responsive application shell", async () => {
   assert.match(shell, /closeMobilePracticeMenuAndNavigate/);
   assert.match(shell, /setPracticeMenuOpen\(false\);[\s\S]*beginRoute\(event, href\);/);
   assert.match(shell, /onClick=\{\(event\) => closeMobilePracticeMenuAndNavigate\(event, href\)\}/);
+  assert.match(shell, /const mobileCoursesActive = !practiceTriggerSelected/);
+  assert.match(shell, /aria-current=\{mobileCoursesActive \? "page" : undefined\}/);
+  assert.match(shell, /className=\{mobileCoursesActive \? "active" : ""\}/);
   assert.doesNotMatch(shell, /navigationHiddenPrefixes/);
   assert.doesNotMatch(shell, /is-navigation-hidden/);
   assert.match(shell, /"\/admin"/);
