@@ -487,8 +487,8 @@ export function LearnerAppShell({ children, user }: { children: ReactNode; user:
       <div className="learner-shell-content" id="learner-main-content" tabIndex={-1}>{children}</div>
 
       <nav className="learner-mobile-nav" aria-label="Điều hướng học tập trên điện thoại">
-        <Link aria-current={mobileHomeActive ? "page" : undefined} className={mobileHomeActive ? "active" : ""} href="/" onClick={(event) => beginRoute(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch><Home aria-hidden="true" size={20} /><span>Hôm nay</span></Link>
-        <Link aria-current={mobileCoursesActive ? "page" : undefined} className={mobileCoursesActive ? "active" : ""} href="/courses" onClick={(event) => beginRoute(event, "/courses")} onPointerEnter={() => prepareRoute("/courses")} prefetch><BookOpen aria-hidden="true" size={20} /><span>Lộ trình</span></Link>
+        <Link aria-current={mobileHomeActive ? "page" : undefined} className={mobileHomeActive ? "active" : ""} href="/" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch><Home aria-hidden="true" size={20} /><span>Hôm nay</span></Link>
+        <Link aria-current={mobileCoursesActive ? "page" : undefined} className={mobileCoursesActive ? "active" : ""} href="/courses" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/courses")} onPointerEnter={() => prepareRoute("/courses")} prefetch><BookOpen aria-hidden="true" size={20} /><span>Lộ trình</span></Link>
         <div className={`mobile-practice-group ${practiceMenuOpen ? "is-open" : ""}`.trim()}>
           <button
             aria-controls="mobile-practice-menu"
@@ -516,9 +516,9 @@ export function LearnerAppShell({ children, user }: { children: ReactNode; user:
             ))}
           </div>
         </div>
-        <Link aria-current={mobileGamesActive ? "page" : undefined} className={mobileGamesActive ? "active" : ""} href="/games" onClick={(event) => beginRoute(event, "/games")} onPointerEnter={() => prepareRoute("/games")} prefetch><Gamepad2 aria-hidden="true" size={20} /><span>Trò chơi</span></Link>
-        <Link aria-current={mobileVipActive ? "page" : undefined} className={mobileVipActive ? "active" : ""} href="/vip" onClick={(event) => beginRoute(event, "/vip")} onPointerEnter={() => prepareRoute("/vip")} prefetch><Crown aria-hidden="true" size={20} /><span>VIP</span></Link>
-        <Link aria-current={mobileAccountActive ? "page" : undefined} className={mobileAccountActive ? "active" : ""} href={profileHref} onClick={(event) => beginRoute(event, profileHref)} onPointerEnter={() => prepareRoute(profileHref)} prefetch><UserRound aria-hidden="true" size={20} /><span>Tài khoản</span></Link>
+        <Link aria-current={mobileGamesActive ? "page" : undefined} className={mobileGamesActive ? "active" : ""} href="/games" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/games")} onPointerEnter={() => prepareRoute("/games")} prefetch><Gamepad2 aria-hidden="true" size={20} /><span>Trò chơi</span></Link>
+        <Link aria-current={mobileVipActive ? "page" : undefined} className={mobileVipActive ? "active" : ""} href="/vip" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/vip")} onPointerEnter={() => prepareRoute("/vip")} prefetch><Crown aria-hidden="true" size={20} /><span>VIP</span></Link>
+        <Link aria-current={mobileAccountActive ? "page" : undefined} className={mobileAccountActive ? "active" : ""} href={profileHref} onClick={(event) => closeMobilePracticeMenuAndNavigate(event, profileHref)} onPointerEnter={() => prepareRoute(profileHref)} prefetch><UserRound aria-hidden="true" size={20} /><span>Tài khoản</span></Link>
       </nav>
     </div>
   );

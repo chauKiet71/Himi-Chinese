@@ -307,6 +307,11 @@ test("learner routes share one responsive application shell", async () => {
   assert.match(shell, /closeMobilePracticeMenuAndNavigate/);
   assert.match(shell, /setPracticeMenuOpen\(false\);[\s\S]*beginRoute\(event, href\);/);
   assert.match(shell, /onClick=\{\(event\) => closeMobilePracticeMenuAndNavigate\(event, href\)\}/);
+  assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, "\/"\)/);
+  assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, "\/courses"\)/);
+  assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, "\/games"\)/);
+  assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, "\/vip"\)/);
+  assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, profileHref\)/);
   assert.match(shell, /const mobileCoursesActive = !practiceTriggerSelected/);
   assert.match(shell, /aria-current=\{mobileCoursesActive \? "page" : undefined\}/);
   assert.match(shell, /className=\{mobileCoursesActive \? "active" : ""\}/);
