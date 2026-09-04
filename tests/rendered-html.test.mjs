@@ -448,6 +448,8 @@ test("slice game flies to the target, splits the word and reveals its Vietnamese
 
   assert.match(game, /setMode\("slicing"\)/);
   assert.match(game, /\.to\(penguin,[\s\S]*strikePoint\.impactX/);
+  assert.match(game, /if \(reducedMotion\)[\s\S]*?\.to\(penguin, \{[\s\S]*?x: strikePoint\.impactX,[\s\S]*?y: strikePoint\.impactY,[\s\S]*?\.addLabel\("impact"/);
+  assert.match(game, /if \(penguin\) \{[\s\S]*?gsap\.set\(penguin, \{[\s\S]*?autoAlpha: 1,[\s\S]*?x: 0,[\s\S]*?y: 0,/);
   assert.match(game, /\.set\(\[leftHalf, rightHalf\], \{ autoAlpha: 1 \}, "impact"\)/);
   assert.match(game, /aria-live="polite" className="writing-hit-score" role="status"/);
   assert.match(game, /mode === "slicing"[\s\S]*\{word\.meaning\}/);

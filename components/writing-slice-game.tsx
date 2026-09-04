@@ -277,7 +277,21 @@ export function WritingSliceGame({
     if (mode !== "playing") return;
     const arena = arenaRef.current;
     const fallingWord = wordRef.current;
+    const penguin = penguinRef.current;
     if (!arena || !fallingWord) return;
+
+    if (penguin) {
+      const cape = penguin.querySelector<HTMLElement>(".writing-penguin-cape");
+      gsap.set(penguin, {
+        autoAlpha: 1,
+        filter: "drop-shadow(0 17px 18px rgba(35, 75, 47, .14))",
+        rotation: -4,
+        scale: 1,
+        x: 0,
+        y: 0,
+      });
+      if (cape) gsap.set(cape, { autoAlpha: 0, rotation: 3, scaleX: .34, skewY: -2 });
+    }
 
     const fallDistance = Math.max(220, arena.clientHeight - 176);
     gsap.set(fallingWord, { autoAlpha: 1, xPercent: -50, y: 0 });
@@ -339,13 +353,28 @@ export function WritingSliceGame({
 
     if (reducedMotion) {
       timeline
-        .set(face, { autoAlpha: 0 })
-        .set([leftHalf, rightHalf], { autoAlpha: 1 })
-        .to(impact, { autoAlpha: 1, duration: .1, rotation: 0, scale: .8 })
-        .to(hitScore, { autoAlpha: 1, duration: .12, scale: 1, x: 38, y: -18 }, 0)
-        .to([leftHalf, rightHalf, impact], { autoAlpha: 0, duration: .16 }, .12)
-        .to(hitScore, { autoAlpha: 1, duration: .65, x: 39, y: -20 }, .12)
-        .to(hitScore, { autoAlpha: 0, duration: .22, scale: .98, x: 40, y: -34 }, .77);
+        // The flight is essential gameplay feedback, so reduced motion keeps one
+        // direct, slower-to-read movement and removes the extra wind-up/exit arc.
+        .to(penguin, {
+          duration: .52,
+          ease: "power1.inOut",
+          filter: "drop-shadow(-18px 19px 11px rgba(35, 75, 47, .11))",
+          rotation: 6,
+          scale: .95,
+          x: strikePoint.impactX,
+          y: strikePoint.impactY,
+        }, 0)
+        .to(cape, { autoAlpha: .72, duration: .24, rotation: 4, scaleX: .8 }, .1)
+        .addLabel("impact", .52)
+        .set(face, { autoAlpha: 0 }, "impact")
+        .set([leftHalf, rightHalf], { autoAlpha: 1 }, "impact")
+        .to(impact, { autoAlpha: 1, duration: .12, rotation: 0, scale: .88 }, "impact")
+        .to(hitScore, { autoAlpha: 1, duration: .14, scale: 1, x: 38, y: -18 }, "impact")
+        .to([leftHalf, rightHalf, impact], { autoAlpha: 0, duration: .22 }, "impact+=.14")
+        .to(hitScore, { autoAlpha: 1, duration: .68, x: 39, y: -20 }, "impact+=.14")
+        .to(penguin, { autoAlpha: 0, duration: .2 }, "impact+=.34")
+        .to(cape, { autoAlpha: 0, duration: .18 }, "impact+=.34")
+        .to(hitScore, { autoAlpha: 0, duration: .22, scale: .98, x: 40, y: -34 }, "impact+=.82");
     } else {
       timeline
         .to(penguin, { duration: .2, ease: "power2.out", rotation: -10, scale: 1.03, x: -24, y: 17 }, 0)
