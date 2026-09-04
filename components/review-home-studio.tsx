@@ -107,7 +107,7 @@ export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {
         >
           <h1 id="home-portal-title">
             <span>Mỗi ngày một tí,</span>
-            <span>tự tin cùng <em>Homi</em>.</span>
+            <span>tự tin cùng <em>Himi</em>.</span>
           </h1>
           <p>Tình huống thật. Phản xạ tự nhiên.</p>
 

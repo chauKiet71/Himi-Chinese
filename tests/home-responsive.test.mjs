@@ -29,13 +29,13 @@ test("home portal reserves mobile navigation space and keeps phone controls touc
   assert.match(brand, /\.home-portal-copy > p\s*\{\s*\n\s*color:\s*color-mix\(in srgb, var\(--himi-black\) 86%, var\(--himi-white\)\);\s*\n\s*font-weight:\s*650/);
 });
 
-test("home portal uses the rhythmic Homi headline and Roboto Vietnamese display typeface", async () => {
+test("home portal uses the rhythmic Himi headline and Roboto Vietnamese display typeface", async () => {
   const page = await read("components/review-home-studio.tsx");
   const layout = await read("app/layout.tsx");
   const css = await read("app/home-portal.css");
 
   assert.match(page, /<span>Mỗi ngày một tí,<\/span>/);
-  assert.match(page, /<span>tự tin cùng <em>Homi<\/em>\.<\/span>/);
+  assert.match(page, /<span>tự tin cùng <em>Himi<\/em>\.<\/span>/);
   assert.match(page, /Tình huống thật\. Phản xạ tự nhiên\./);
   assert.match(layout, /Roboto/);
   assert.match(layout, /subsets:\s*\["latin", "vietnamese"\]/);
