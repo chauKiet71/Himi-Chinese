@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Suspense, type CSSProperties } from "react";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
@@ -27,6 +28,22 @@ export const metadata: Metadata = {
   description: "Học tiếng Trung chuyên ngành theo tình huống thực tế tại nơi làm việc.",
 };
 
+const developmentBrowserErrorGuard = String.raw`(() => {
+  const extensionOrigin = "chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/";
+  const isUrbanVpnRejection = (reason) => {
+    const details = [reason?.message, reason?.stack, reason?.cause?.stack]
+      .filter(Boolean)
+      .join("\n");
+    return details.includes(extensionOrigin) && details.includes("M_ID");
+  };
+
+  window.addEventListener("unhandledrejection", (event) => {
+    if (!isUrbanVpnRejection(event.reason)) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, { capture: true });
+})();`;
+
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const user = await getCurrentUser();
   const shellUser = user ? {
@@ -38,6 +55,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   } : null;
 
   return <html lang="vi" className={`${inter.variable} ${roboto.variable}`} style={createBrandTheme() as CSSProperties}><body>
+    {process.env.NODE_ENV === "development" ? <Script
+      dangerouslySetInnerHTML={{ __html: developmentBrowserErrorGuard }}
+      id="development-browser-error-guard"
+      strategy="beforeInteractive"
+    /> : null}
     <Suspense fallback={<SiteHeaderFallback />}><SiteHeader /></Suspense>
     <Suspense fallback={<div className="standalone-route-shell">{children}</div>}><LearnerAppShell user={shellUser}>{children}</LearnerAppShell></Suspense>
     <SiteFooter />

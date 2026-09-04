@@ -283,6 +283,16 @@ test("layout provides Vietnamese metadata", async () => {
   assert.match(source, /<html lang="vi"/);
 });
 
+test("development layout suppresses only the known Urban VPN rejection", async () => {
+  const source = await read("app/layout.tsx");
+  assert.match(source, /strategy="beforeInteractive"/);
+  assert.match(source, /process\.env\.NODE_ENV === "development"/);
+  assert.match(source, /chrome-extension:\/\/eppiocemhmnlbhjplcgkofciiegomcon\//);
+  assert.match(source, /details\.includes\("M_ID"\)/);
+  assert.match(source, /event\.preventDefault\(\)/);
+  assert.match(source, /event\.stopImmediatePropagation\(\)/);
+});
+
 test("learner routes share one responsive application shell", async () => {
   const [layout, shell, home, practice] = await Promise.all([
     read("app/layout.tsx"),
