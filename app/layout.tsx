@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Suspense, type CSSProperties } from "react";
-import { Inter, Roboto } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import "./motion.css";
 import "./responsive.css";
 import "./white-backgrounds.css";
 import "./brand-theme.css";
+import "./account-wallet.css";
 import "./lesson-interactive.css";
 import { SiteHeader, SiteHeaderFallback } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -15,10 +16,9 @@ import { LearnerAppShell } from "@/components/learner-app-shell";
 import { getCurrentUser } from "@/lib/auth-session";
 import { createBrandTheme } from "@/lib/brand";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const roboto = Roboto({
   subsets: ["latin", "vietnamese"],
-  weight: "800",
+  weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-roboto",
   display: "swap",
 });
@@ -54,7 +54,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     unreadNotificationCount: user.unreadNotificationCount,
   } : null;
 
-  return <html lang="vi" className={`${inter.variable} ${roboto.variable}`} style={createBrandTheme() as CSSProperties}><body>
+  return <html lang="vi" className={roboto.variable} style={createBrandTheme() as CSSProperties}><body>
     {process.env.NODE_ENV === "development" ? <Script
       dangerouslySetInnerHTML={{ __html: developmentBrowserErrorGuard }}
       id="development-browser-error-guard"

@@ -4029,8 +4029,17 @@ body:has(.admin-page) > .mobile-nav {
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--font-inter); -webkit-font-smoothing: antialiased; }
-/* Keep typography consistent across the entire product, including Hanzi UI. */
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font-roboto), "Roboto", "Arial", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* Keep Vietnamese UI typography consistent across desktop and mobile. */
 body *,
 body *::before,
 body *::after { font-family: inherit !important; }
@@ -13358,12 +13367,26 @@ body:has(.learner-app-shell) > .mobile-nav {
   --auth-coral-deep: #ed4f4d;
   --auth-cream: #fffaf0;
   position: relative;
-  min-height: 100dvh;
+  --auth-scene-min-height: 720px;
+  min-height: max(100dvh, var(--auth-scene-min-height));
   padding: 0;
   display: block;
   overflow: hidden;
   isolation: isolate;
   background: #fffaf0;
+}
+
+.auth-page-register-scene { --auth-scene-min-height: 780px; }
+
+.auth-scene-stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: max(100vw, 150dvh);
+  aspect-ratio: 3 / 2;
+  overflow: visible;
+  transform: translate(-50%, -50%);
 }
 
 body:has(.auth-page-login-scene) > .site-header,
@@ -13383,7 +13406,7 @@ body:has(.auth-register-is-success) { overflow: hidden; }
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: url("/assets/auth/login-bag-scene.webp") center / cover no-repeat;
+  background: url("/assets/auth/login-paper-scene-desktop-v2.webp") center / 100% 100% no-repeat;
   opacity: 0;
   transform: translateY(14px) scale(1.012);
 }
@@ -13621,30 +13644,26 @@ body:has(.auth-register-is-success) { overflow: hidden; }
 }
 
 .auth-card-login-scene {
+  box-sizing: border-box;
   position: absolute;
-  top: clamp(102px, 12vh, 130px);
-  left: 33.6vw;
+  top: 10.6%;
+  left: 23.35%;
   z-index: 7;
-  --auth-center-x: -50%;
-  --auth-pocket-x: 0px;
-  --auth-pocket-y: clamp(94px, 12vh, 126px);
-  width: clamp(370px, 27.5vw, 420px);
-  padding: clamp(29px, 2.5vw, 38px);
-  border: 1px solid rgba(210, 152, 111, .24);
-  border-radius: 28px 28px 20px 20px;
-  background: rgba(255, 253, 247, .985);
-  box-shadow: 0 26px 55px rgba(78, 62, 46, .14);
+  width: 32.85%;
+  padding: clamp(27px, 2.45vw, 42px);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   opacity: 0;
-  clip-path: inset(42% 36% 42% 36% round 24px);
-  transform: translate3d(calc(var(--auth-center-x) + var(--auth-pocket-x)), var(--auth-pocket-y), 0) scale(.2, .12) rotate(-1.2deg);
-  transform-origin: 50% 72%;
-  will-change: transform, opacity, clip-path;
+  transform: translateY(54px) scale(.975);
+  transform-origin: 50% 82%;
+  will-change: transform, opacity;
 }
 
 .auth-card-register-scene {
-  top: clamp(86px, 9.4vh, 102px);
-  --auth-pocket-y: clamp(48px, 6.6vh, 70px);
-  padding-block: clamp(23px, 2vw, 31px);
+  top: 11.7%;
+  padding-block: clamp(22px, 1.8vw, 30px);
 }
 
 .auth-login-motion-ready .auth-login-scene-art {
@@ -13680,17 +13699,7 @@ body:has(.auth-register-is-success) { overflow: hidden; }
 }
 
 .auth-card-login-scene::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -15px;
-  width: 56%;
-  height: 24px;
-  border-radius: 50%;
-  background: rgba(91, 54, 36, .13);
-  filter: blur(12px);
-  transform: translateX(-50%);
-  z-index: -1;
+  content: none;
 }
 
 .auth-card-login-scene .auth-heading { margin-top: 0; }
@@ -13713,7 +13722,7 @@ body:has(.auth-register-is-success) { overflow: hidden; }
   line-height: 1.6;
 }
 
-.auth-card-login-scene .auth-form { margin-top: 27px; gap: 17px; }
+.auth-card-login-scene .auth-form { margin-top: 23px; gap: 14px; }
 .auth-card-login-scene .auth-form label { gap: 8px; color: #254e47; font-size: 12px; }
 
 .auth-input-shell {
@@ -13734,7 +13743,7 @@ body:has(.auth-register-is-success) { overflow: hidden; }
 .auth-form label .auth-input-shell input { padding-left: 46px; }
 
 .auth-card-login-scene .auth-input-shell input {
-  min-height: 53px;
+  min-height: 51px;
   border-color: #d8e1dd;
   border-radius: 14px;
   background: rgba(255, 255, 255, .9);
@@ -13747,7 +13756,7 @@ body:has(.auth-register-is-success) { overflow: hidden; }
 .auth-card-login-scene .auth-input-shell input:focus { transform: translateY(-1px); }
 
 .auth-card-login-scene .auth-form .button {
-  min-height: 54px;
+  min-height: 52px;
   margin-top: 2px;
   display: inline-flex;
   align-items: center;
@@ -13769,8 +13778,8 @@ body:has(.auth-register-is-success) { overflow: hidden; }
 .auth-card-login-scene .auth-form .button:active { transform: translateY(0) scale(.98); }
 
 .auth-card-login-scene .auth-switch {
-  margin-top: 23px;
-  padding-top: 19px;
+  margin-top: 18px;
+  padding-top: 16px;
   border-top: 1px solid #e7e8e2;
   font-size: 12px;
 }
@@ -13778,6 +13787,14 @@ body:has(.auth-register-is-success) { overflow: hidden; }
 .auth-card-login-scene .auth-switch > div { width: 100%; gap: 10px; }
 .auth-card-login-scene .auth-switch a { color: #0d7866; }
 .auth-card-login-scene .auth-switch a:hover { color: var(--auth-coral-deep); }
+
+.auth-card-register-scene .auth-heading h1 { font-size: clamp(31px, 2.6vw, 37px); }
+.auth-card-register-scene .auth-heading p { margin-top: 8px; font-size: 12px; line-height: 1.42; }
+.auth-card-register-scene .auth-form { margin-top: 13px; gap: 8px; }
+.auth-card-register-scene .auth-form label { gap: 5px; font-size: 11px; }
+.auth-card-register-scene .auth-input-shell input { min-height: 45px; font-size: 13px; }
+.auth-card-register-scene .auth-form .button { min-height: 47px; }
+.auth-card-register-scene .auth-switch { margin-top: 10px; padding-top: 10px; }
 
 @keyframes auth-walker-travel {
   0% { opacity: 0; transform: translate3d(-130%, 0, 0) scale(.92); }
@@ -13912,40 +13929,31 @@ body:has(.auth-register-is-success) { overflow: hidden; }
 
 @media (max-width: 900px) {
   .auth-page-login-scene {
-    min-height: max(100dvh, 860px);
+    --auth-scene-min-height: 760px;
+    min-height: max(100dvh, var(--auth-scene-min-height));
     overflow-x: hidden;
     overflow-y: auto;
   }
 
+  .auth-page-register-scene { --auth-scene-min-height: 844px; }
+  .auth-page-forgot-scene { --auth-scene-min-height: 700px; }
+
+  .auth-scene-stage {
+    top: 0;
+    left: 50%;
+    width: auto;
+    height: max(100dvh, var(--auth-scene-min-height));
+    aspect-ratio: 2 / 3;
+    transform: translateX(-50%);
+  }
+
   .auth-login-scene-art {
-    position: fixed;
-    background-image: url("/assets/auth/login-bag-scene-mobile.webp");
-    background-position: center bottom;
-    background-size: cover;
+    position: absolute;
+    background: url("/assets/auth/login-paper-scene-mobile-v2.webp") center / 100% 100% no-repeat;
   }
 
-  .auth-login-scene-foreground {
-    position: fixed;
-    background-image: url("/assets/auth/login-bag-scene-mobile.webp");
-    background-position: center bottom;
-    background-size: cover;
-    clip-path: inset(70% 20% 0 0);
-  }
-
-  .auth-password-mascot { position: fixed; }
-
-  .auth-password-mascot::before {
-    left: calc(50vw + 1vh);
-    top: 55vh;
-    width: 29vh;
-    height: 17vh;
-  }
-
-  .auth-password-mascot img {
-    left: calc(50vw + 6vh);
-    top: 55vh;
-    width: 20vh;
-  }
+  .auth-login-scene-foreground,
+  .auth-password-mascot { display: none; }
 
   .auth-scene-brand { top: 18px; left: 18px; font-size: 20px; gap: 9px; }
   .auth-scene-brand .brand-mark { width: 37px; height: 37px; }
@@ -13953,36 +13961,42 @@ body:has(.auth-register-is-success) { overflow: hidden; }
   .auth-scene-replay { top: 20px; right: 162px; width: 38px; height: 38px; }
 
   .auth-card-login-scene {
-    position: relative;
-    top: auto;
-    left: auto;
-    --auth-center-x: 0%;
-    width: min(calc(100% - 32px), 458px);
-    margin: 84px auto 320px;
-    padding: 30px 26px;
-    border-radius: 24px 24px 18px 18px;
+    position: absolute;
+    top: 13.7%;
+    left: 18%;
+    width: 64%;
+    max-width: none;
+    margin: 0;
+    padding: 22px 24px;
+    border-radius: 0;
   }
 
   .auth-card-register-scene {
-    margin-bottom: 220px;
-    --auth-pocket-x: 0px;
-    --auth-pocket-y: 160px;
+    top: 12.2%;
+    padding: 19px 23px;
   }
 
   .auth-page-forgot-scene {
-    min-height: max(100dvh, 680px);
-    display: grid;
-    place-items: center;
+    display: block;
   }
 
   .auth-page-forgot-scene .auth-card-forgot-scene {
+    top: 15.5%;
     margin: 0;
   }
 
-  .auth-card-login-scene .auth-heading h1 { font-size: clamp(30px, 8.5vw, 38px); }
+  .auth-card-login-scene .auth-heading h1 { font-size: clamp(29px, 7vw, 37px); }
   .auth-card-login-scene .auth-form { margin-top: 22px; gap: 14px; }
   .auth-card-login-scene .auth-input-shell input { min-height: 50px; }
   .auth-card-login-scene .auth-form .button { min-height: 51px; }
+
+  .auth-card-register-scene .auth-heading h1 { font-size: clamp(27px, 6.5vw, 32px); }
+  .auth-card-register-scene .auth-heading p { margin-top: 7px; font-size: 11px; line-height: 1.42; }
+  .auth-card-register-scene .auth-form { margin-top: 12px; gap: 8px; }
+  .auth-card-register-scene .auth-form label { gap: 5px; font-size: 11px; }
+  .auth-card-register-scene .auth-input-shell input { min-height: 44px; font-size: 14px; }
+  .auth-card-register-scene .auth-form .button { min-height: 46px; }
+  .auth-card-register-scene .auth-switch { margin-top: 10px; padding-top: 10px; }
   .auth-motion-walker { bottom: 18%; width: 84px; }
   .auth-login-motion-ready .auth-motion-walker { animation-name: auth-walker-travel-mobile; }
 }
@@ -13992,7 +14006,8 @@ body:has(.auth-register-is-success) { overflow: hidden; }
   .auth-scene-home { font-size: 0; }
   .auth-scene-home svg { width: 18px; height: 18px; }
   .auth-scene-replay { right: 64px; }
-  .auth-card-login-scene { width: calc(100% - 24px); margin-top: 72px; padding: 27px 22px; }
+  .auth-card-login-scene { width: 64%; margin: 0; padding: 21px 22px; }
+  .auth-card-register-scene { padding: 18px 21px; }
   .auth-card-login-scene .auth-heading p { font-size: 13px; }
   .auth-card-login-scene .auth-switch { font-size: 11px; }
   .auth-registration-success { padding: 18px; }

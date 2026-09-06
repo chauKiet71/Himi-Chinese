@@ -261,9 +261,11 @@ test("admin business console exposes dashboard, users, VIP payments and analytic
 });
 
 test("account page uses the approved profile-first layout without learning progress", async () => {
-  const [account, session] = await Promise.all([
+  const [account, passwordSheet, session, walletStyles] = await Promise.all([
     read("app/account/page.tsx"),
+    read("components/account-password-sheet.tsx"),
     read("lib/auth-session.ts"),
+    read("app/account-wallet.css"),
   ]);
 
   assert.match(account, /Tài khoản của tôi/);
@@ -271,10 +273,46 @@ test("account page uses the approved profile-first layout without learning progr
   assert.match(account, /Thông tin tài khoản/);
   assert.match(account, /Tài khoản &amp; bảo mật/);
   assert.match(account, /Ngày tham gia/);
-  assert.match(account, /account-security-details/);
+  assert.match(passwordSheet, /account-security-details/);
+  assert.match(account, /account-membership-vip/);
+  assert.match(account, /account-membership-free/);
+  assert.match(account, /account-membership-pending/);
+  assert.match(account, /Khám phá VIP/);
+  assert.match(account, /Đang chờ duyệt/);
+  assert.match(account, /AccountPasswordSheet/);
+  assert.match(passwordSheet, /showModal\(\)/);
+  assert.match(passwordSheet, /Cập nhật mật khẩu/);
+  assert.ok(account.indexOf("account-profile-hero") < account.indexOf("account-membership-band"));
+  assert.ok(account.indexOf("account-membership-band") < account.indexOf("Thông tin tài khoản"));
+  assert.match(walletStyles, /Responsive account structure/);
+  assert.match(walletStyles, /@media \(min-width: 721px\) and \(max-width: 1024px\)/);
+  assert.match(walletStyles, /account-membership-vip \.account-membership-band/);
+  assert.match(walletStyles, /account-vip-ticket-mobile\.webp/);
+  assert.match(walletStyles, /Active VIP mobile ticket/);
+  assert.match(account, /account-page-\$\{membershipState\}/);
+  assert.match(account, /account-membership-days/);
+  assert.match(account, /account-membership-meta-icon/);
+  assert.match(walletStyles, /Selected desktop direction/);
+  assert.match(walletStyles, /@media \(min-width: 1025px\)/);
+  assert.match(walletStyles, /\.account-page-vip \.account-membership-band::before/);
+  assert.match(walletStyles, /account-vip-ticket-notch-left-clean\.png/);
   assert.doesNotMatch(account, /getLearningSummary/);
   assert.doesNotMatch(account, /Tiến độ học tập|Tiếp tục phiên hôm nay/);
   assert.match(session, /createdAt: users\.createdAt/);
+});
+
+test("global UI typography uses Roboto with Vietnamese glyph coverage", async () => {
+  const [layout, globals] = await Promise.all([
+    read("app/layout.tsx"),
+    read("app/globals.css"),
+  ]);
+
+  assert.match(layout, /import \{ Roboto \} from "next\/font\/google"/);
+  assert.match(layout, /subsets: \["latin", "vietnamese"\]/);
+  assert.match(layout, /weight: \["400", "500", "600", "700", "800", "900"\]/);
+  assert.doesNotMatch(layout, /\bInter\b/);
+  assert.match(globals, /font-family: var\(--font-roboto\), "Roboto", "Arial", sans-serif/);
+  assert.match(globals, /font-synthesis: none/);
 });
 
 test("layout provides Vietnamese metadata", async () => {

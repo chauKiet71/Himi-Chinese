@@ -755,11 +755,642 @@ video {
   }
 }
 
+/* Authentication: the animated desktop scene uses absolute positioning, while
+ * phones need a normal document flow so every field remains reachable when the
+ * viewport is narrow, short, rotated, or reduced by the software keyboard. */
+@media (max-width: 720px) {
+  body:has(.auth-page-login-scene),
+  body:has(.auth-page-login-scene) > .standalone-route-shell {
+    width: 100%;
+    min-width: 0;
+    min-height: 100dvh;
+    overflow-x: clip;
+  }
+
+  .auth-page-login-scene {
+    width: 100%;
+    min-width: 0;
+    min-height: 100dvh;
+    padding: 0 max(12px, env(safe-area-inset-right))
+      max(112px, calc(72px + env(safe-area-inset-bottom)))
+      max(12px, env(safe-area-inset-left));
+    overflow-x: clip;
+  }
+
+  .auth-scene-brand {
+    top: max(12px, env(safe-area-inset-top));
+    left: max(12px, env(safe-area-inset-left));
+    max-width: calc(100% - 132px - max(12px, env(safe-area-inset-left)) - max(12px, env(safe-area-inset-right)));
+    min-width: 0;
+    min-height: 44px;
+    gap: 8px;
+    font-size: clamp(17px, 4.8vw, 20px);
+  }
+
+  .auth-scene-brand .brand-mark {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    flex: 0 0 44px;
+    border-radius: 14px;
+  }
+
+  .auth-scene-brand .brand-wordmark {
+    min-width: 0;
+  }
+
+  .auth-scene-home,
+  .auth-scene-replay {
+    top: max(12px, env(safe-area-inset-top));
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+  }
+
+  .auth-scene-home {
+    right: max(12px, env(safe-area-inset-right));
+    font-size: 0;
+  }
+
+  .auth-scene-replay {
+    right: calc(max(12px, env(safe-area-inset-right)) + 52px);
+  }
+
+  .auth-scene-home svg,
+  .auth-scene-replay svg {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 auto;
+  }
+
+  .auth-card-login-scene {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(100%, 458px);
+    max-width: 100%;
+    min-width: 0;
+    margin: calc(max(12px, env(safe-area-inset-top)) + 62px) auto 0;
+    padding: clamp(21px, 6vw, 28px);
+    border-radius: clamp(20px, 6vw, 24px) clamp(20px, 6vw, 24px) 18px 18px;
+  }
+
+  .auth-card-register-scene {
+    margin-bottom: 0;
+  }
+
+  .auth-page-forgot-scene {
+    min-height: 100dvh;
+    padding-top: calc(max(12px, env(safe-area-inset-top)) + 62px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .auth-page-forgot-scene .auth-card-forgot-scene {
+    margin: 0 auto;
+  }
+
+  .auth-card-login-scene :where(.auth-heading, .auth-form, .auth-form label, .auth-input-shell, .auth-switch, .auth-switch > div, .auth-switch p) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .auth-card-login-scene .auth-heading h1 {
+    max-width: 100%;
+    font-size: clamp(28px, 8vw, 35px);
+    line-height: 1.06;
+    overflow-wrap: anywhere;
+  }
+
+  .auth-card-login-scene .auth-heading p {
+    max-width: 100%;
+    margin-top: 11px;
+    font-size: 13px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  .auth-card-login-scene .auth-form {
+    margin-top: 20px;
+    gap: 13px;
+  }
+
+  .auth-card-login-scene .auth-form label {
+    gap: 7px;
+    font-size: 13px;
+  }
+
+  .auth-card-login-scene .auth-input-shell input {
+    width: 100%;
+    min-width: 0;
+    min-height: 50px;
+    padding-right: 13px;
+    font-size: 16px;
+  }
+
+  .auth-card-login-scene .auth-form .button {
+    width: 100%;
+    min-width: 0;
+    min-height: 50px;
+  }
+
+  .auth-card-login-scene .auth-switch {
+    margin-top: 18px;
+    padding-top: 14px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .auth-card-login-scene .auth-switch > div {
+    gap: 4px;
+  }
+
+  .auth-card-login-scene .auth-switch p {
+    overflow-wrap: anywhere;
+  }
+
+  .auth-registration-success {
+    padding: max(18px, env(safe-area-inset-top))
+      max(16px, env(safe-area-inset-right))
+      max(18px, env(safe-area-inset-bottom))
+      max(16px, env(safe-area-inset-left));
+  }
+}
+
+@media (max-width: 359px) {
+  .auth-page-login-scene {
+    padding-right: max(10px, env(safe-area-inset-right));
+    padding-left: max(10px, env(safe-area-inset-left));
+  }
+
+  .auth-scene-brand {
+    left: max(10px, env(safe-area-inset-left));
+    max-width: calc(100% - 124px - max(10px, env(safe-area-inset-left)) - max(10px, env(safe-area-inset-right)));
+    gap: 6px;
+    font-size: 16px;
+  }
+
+  .auth-scene-brand .brand-mark {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    flex-basis: 42px;
+  }
+
+  .auth-scene-home {
+    right: max(10px, env(safe-area-inset-right));
+  }
+
+  .auth-scene-replay {
+    right: calc(max(10px, env(safe-area-inset-right)) + 50px);
+  }
+
+  .auth-card-login-scene {
+    padding: 20px 17px;
+    border-radius: 20px 20px 16px 16px;
+  }
+
+  .auth-card-login-scene .auth-heading h1 {
+    font-size: 27px;
+  }
+}
+
+/* Phones in landscape can be wider than the portrait breakpoint but have much
+ * less vertical space. Keep the compact header/card rules and let the page
+ * scroll instead of shrinking controls below a comfortable touch size. */
+@media (orientation: landscape) and (max-height: 500px) and (min-width: 560px) and (max-width: 980px) {
+  body:has(.auth-page-login-scene),
+  body:has(.auth-page-login-scene) > .standalone-route-shell {
+    min-width: 0;
+    min-height: 100dvh;
+    overflow-x: clip;
+  }
+
+  .auth-page-login-scene,
+  .auth-page-forgot-scene {
+    width: 100%;
+    min-width: 0;
+    min-height: 100dvh;
+    padding: 0 max(16px, env(safe-area-inset-right))
+      max(48px, calc(24px + env(safe-area-inset-bottom)))
+      max(16px, env(safe-area-inset-left));
+    display: block;
+    overflow-x: clip;
+  }
+
+  .auth-scene-brand {
+    top: max(10px, env(safe-area-inset-top));
+    left: max(16px, env(safe-area-inset-left));
+    gap: 8px;
+    font-size: 18px;
+  }
+
+  .auth-scene-brand .brand-mark {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    flex: 0 0 42px;
+    border-radius: 13px;
+  }
+
+  .auth-scene-home,
+  .auth-scene-replay {
+    top: max(10px, env(safe-area-inset-top));
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+  }
+
+  .auth-scene-home {
+    right: max(16px, env(safe-area-inset-right));
+    font-size: 0;
+  }
+
+  .auth-scene-replay {
+    right: calc(max(16px, env(safe-area-inset-right)) + 52px);
+  }
+
+  .auth-card-login-scene,
+  .auth-page-forgot-scene .auth-card-forgot-scene {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(100%, 500px);
+    max-width: 100%;
+    min-width: 0;
+    margin: calc(max(10px, env(safe-area-inset-top)) + 58px) auto 0;
+    padding: 22px 26px;
+  }
+
+  .auth-card-login-scene :where(.auth-heading, .auth-form, .auth-form label, .auth-input-shell, .auth-switch, .auth-switch > div, .auth-switch p) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .auth-card-register-scene {
+    margin-bottom: 0;
+  }
+
+  .auth-card-login-scene .auth-heading h1 {
+    font-size: 30px;
+  }
+
+  .auth-card-login-scene .auth-heading p {
+    margin-top: 8px;
+    line-height: 1.45;
+  }
+
+  .auth-card-login-scene .auth-form {
+    margin-top: 17px;
+    gap: 11px;
+  }
+
+  .auth-card-login-scene .auth-input-shell input,
+  .auth-card-login-scene .auth-form .button {
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+  }
+
+  .auth-card-login-scene .auth-input-shell input {
+    font-size: 16px;
+  }
+
+  .auth-card-login-scene .auth-switch {
+    margin-top: 13px;
+    padding-top: 10px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .learner-mobile-nav,
   .review-peek-card,
   .course-card,
   .learning-video-card {
     scroll-behavior: auto;
+  }
+}
+
+/* Auth paper stage: the illustration and form share one coordinate system.
+ * This final layer intentionally wins over the earlier generic phone-card
+ * rules, so the paper remains seated in the satchel at every portrait size. */
+@media (max-width: 720px) {
+  body:has(.auth-page-login-scene),
+  body:has(.auth-page-login-scene) > .standalone-route-shell {
+    min-height: max(100dvh, var(--auth-scene-min-height));
+    overflow-x: clip;
+  }
+
+  body:has(.auth-page-login-scene) {
+    padding-bottom: 0;
+  }
+
+  .auth-page-login-scene,
+  .auth-page-forgot-scene {
+    width: 100%;
+    min-height: max(100dvh, var(--auth-scene-min-height));
+    padding: 0;
+    display: block;
+    overflow-x: clip;
+    overflow-y: auto;
+  }
+
+  .auth-page-login-scene { --auth-scene-min-height: 760px; }
+  .auth-page-register-scene { --auth-scene-min-height: 844px; }
+  .auth-page-forgot-scene { --auth-scene-min-height: 700px; }
+
+  .auth-scene-stage {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: auto;
+    height: max(100dvh, var(--auth-scene-min-height));
+    aspect-ratio: 2 / 3;
+    transform: translateX(-50%);
+  }
+
+  .auth-login-scene-art {
+    position: absolute;
+    inset: 0;
+    background: url("/assets/auth/login-paper-scene-mobile-v2.webp") center / 100% 100% no-repeat;
+  }
+
+  .auth-card-login-scene,
+  .auth-page-forgot-scene .auth-card-forgot-scene {
+    position: absolute;
+    top: 13.7%;
+    left: 18%;
+    width: 64%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 22px 24px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .auth-card-register-scene {
+    top: 12.2%;
+    margin: 0;
+    padding: 19px 23px;
+  }
+
+  .auth-page-forgot-scene .auth-card-forgot-scene {
+    top: 15.5%;
+  }
+
+  .auth-card-login-scene .auth-heading h1 {
+    font-size: clamp(29px, 7vw, 35px);
+  }
+
+  .auth-card-login-scene .auth-heading p {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .auth-card-login-scene .auth-form {
+    margin-top: 20px;
+    gap: 12px;
+  }
+
+  .auth-card-login-scene .auth-input-shell input,
+  .auth-card-login-scene .auth-form .button {
+    min-height: 50px;
+  }
+
+  .auth-card-login-scene .auth-switch {
+    margin-top: 16px;
+    padding-top: 13px;
+    font-size: 12px;
+  }
+
+  .auth-card-register-scene .auth-heading h1 {
+    font-size: clamp(27px, 6.5vw, 31px);
+  }
+
+  .auth-card-register-scene .auth-heading p {
+    margin-top: 7px;
+    font-size: 11px;
+    line-height: 1.42;
+  }
+
+  .auth-card-register-scene .auth-form {
+    margin-top: 12px;
+    gap: 8px;
+  }
+
+  .auth-card-register-scene .auth-form label {
+    gap: 5px;
+    font-size: 11px;
+  }
+
+  .auth-card-register-scene .auth-input-shell input {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .auth-card-register-scene .auth-form .button {
+    min-height: 46px;
+  }
+
+  .auth-card-register-scene .auth-switch {
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+}
+
+@media (max-width: 359px) {
+  .auth-card-login-scene,
+  .auth-page-forgot-scene .auth-card-forgot-scene {
+    width: 64%;
+    padding-inline: 20px;
+    border-radius: 0;
+  }
+
+  .auth-card-register-scene {
+    padding-inline: 19px;
+  }
+
+  .auth-card-login-scene .auth-heading h1 {
+    font-size: 27px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) and (min-width: 721px) and (max-width: 980px) {
+  body:has(.auth-page-login-scene),
+  body:has(.auth-page-login-scene) > .standalone-route-shell,
+  .auth-page-login-scene,
+  .auth-page-forgot-scene {
+    min-height: max(100dvh, 720px);
+    padding: 0;
+    display: block;
+    overflow-x: clip;
+    overflow-y: auto;
+  }
+
+  .auth-page-register-scene { min-height: max(100dvh, 760px); }
+
+  .auth-scene-stage {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: auto;
+    height: max(100dvh, 720px);
+    aspect-ratio: 3 / 2;
+    transform: translateX(-50%);
+  }
+
+  .auth-page-register-scene .auth-scene-stage { height: max(100dvh, 760px); }
+
+  .auth-login-scene-art {
+    background: url("/assets/auth/login-paper-scene-desktop-v2.webp") center / 100% 100% no-repeat;
+  }
+
+  .auth-card-login-scene,
+  .auth-page-forgot-scene .auth-card-forgot-scene {
+    position: absolute;
+    top: 10.6%;
+    left: 23.35%;
+    width: 32.85%;
+    max-width: none;
+    margin: 0;
+    padding: 24px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .auth-card-register-scene {
+    top: 7.8%;
+    padding: 18px 22px;
+  }
+}
+
+/* Compact and mid-size laptops: keep the live form centered inside the paper,
+ * move the satchel seam below the controls, and avoid a page-level scrollbar
+ * on standard 720/768/800/864/900px-tall laptop displays. */
+@media (min-width: 901px) and (max-width: 1600px) and (max-height: 900px) {
+  body:has(.auth-page-login-scene),
+  body:has(.auth-page-login-scene) > .standalone-route-shell {
+    min-height: max(100dvh, 560px);
+    padding-bottom: 0;
+    overflow-x: clip;
+  }
+
+  .auth-page-login-scene,
+  .auth-page-forgot-scene {
+    --auth-scene-min-height: 560px;
+    width: 100%;
+    min-height: max(100dvh, var(--auth-scene-min-height));
+    overflow-x: clip;
+    overflow-y: hidden;
+  }
+
+  .auth-scene-stage {
+    top: 0;
+    left: 50%;
+    width: max(100vw, 150dvh, 1275px);
+    height: auto;
+    aspect-ratio: 3 / 2;
+    transform: translateX(-50%);
+  }
+
+  .auth-card-login-scene,
+  .auth-page-forgot-scene .auth-card-forgot-scene {
+    top: 100px;
+    left: calc(39.775% - 195px);
+    width: 390px;
+    max-width: 390px;
+    padding: 20px 28px;
+  }
+
+  .auth-card-login-scene .auth-heading h1 {
+    font-size: clamp(28px, 2.4vw, 32px);
+    line-height: 1.04;
+  }
+
+  .auth-card-login-scene .auth-heading p {
+    margin-top: 7px;
+    font-size: 12px;
+    line-height: 1.42;
+  }
+
+  .auth-card-login-scene .auth-form {
+    margin-top: 14px;
+    gap: 9px;
+  }
+
+  .auth-card-login-scene .auth-form label {
+    gap: 5px;
+    font-size: 11px;
+  }
+
+  .auth-card-login-scene .auth-input-shell input {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .auth-card-login-scene .auth-form .button {
+    min-height: 46px;
+  }
+
+  .auth-card-login-scene .auth-switch {
+    margin-top: 10px;
+    padding-top: 10px;
+    font-size: 11px;
+  }
+
+  .auth-card-login-scene .auth-switch > div {
+    gap: 7px;
+  }
+
+  .auth-card-register-scene {
+    top: 100px;
+    padding: 15px 27px;
+  }
+
+  .auth-card-register-scene .auth-heading h1 {
+    font-size: 28px;
+  }
+
+  .auth-card-register-scene .auth-heading p {
+    margin-top: 5px;
+    font-size: 10px;
+    line-height: 1.36;
+  }
+
+  .auth-card-register-scene .auth-form {
+    margin-top: 9px;
+    gap: 5px;
+  }
+
+  .auth-card-register-scene .auth-form label {
+    gap: 3px;
+    font-size: 10px;
+  }
+
+  .auth-card-register-scene .auth-input-shell input {
+    min-height: 40px;
+    font-size: 12px;
+  }
+
+  .auth-card-register-scene .auth-form .button {
+    min-height: 43px;
+    margin-top: 1px;
+  }
+
+  .auth-card-register-scene .auth-switch {
+    margin-top: 7px;
+    padding-top: 7px;
+    font-size: 10px;
   }
 }
