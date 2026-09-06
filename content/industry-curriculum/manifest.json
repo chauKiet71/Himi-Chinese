@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    "Văn phòng",
+    "Nhà máy",
+    "Logistics",
+    "Kinh doanh",
+    "Dịch vụ"
+  ],
+  "courses": [
+    {
+      "courseSlug": "van-phong-hanh-chinh",
+      "category": "Văn phòng",
+      "file": "van-phong-hanh-chinh.json",
+      "lessons": 30,
+      "modules": 5,
+      "originalLessons": 24,
+      "newLessons": 6,
+      "freeLessons": 6
+    },
+    {
+      "courseSlug": "nha-may-san-xuat",
+      "category": "Nhà máy",
+      "file": "nha-may-san-xuat.json",
+      "lessons": 30,
+      "modules": 5,
+      "originalLessons": 24,
+      "newLessons": 6,
+      "freeLessons": 6
+    },
+    {
+      "courseSlug": "kho-van-logistics",
+      "category": "Logistics",
+      "file": "kho-van-logistics.json",
+      "lessons": 30,
+      "modules": 5,
+      "originalLessons": 24,
+      "newLessons": 6,
+      "freeLessons": 6
+    },
+    {
+      "courseSlug": "ban-hang-cham-soc-khach-hang",
+      "category": "Kinh doanh",
+      "file": "ban-hang-cham-soc-khach-hang.json",
+      "lessons": 30,
+      "modules": 5,
+      "originalLessons": 24,
+      "newLessons": 6,
+      "freeLessons": 6
+    },
+    {
+      "courseSlug": "nha-hang-dich-vu",
+      "category": "Dịch vụ",
+      "file": "nha-hang-dich-vu.json",
+      "lessons": 30,
+      "modules": 5,
+      "originalLessons": 24,
+      "newLessons": 6,
+      "freeLessons": 6
+    },
+    {
+      "courseSlug": "thuong-mai-dien-tu",
+      "category": "Kinh doanh",
+      "file": "thuong-mai-dien-tu.json",
+      "lessons": 30,
+      "modules": 5,
+      "originalLessons": 24,
+      "newLessons": 6,
+      "freeLessons": 6
+    }
+  ],
+  "totals": {
+    "lessons": 180,
+    "newLessons": 36,
+    "vocabularyEntries": 1080,
+    "newVocabularyEntries": 216,
+    "newPracticeSentences": 144,
+    "newQuestions": 108
+  }
+}

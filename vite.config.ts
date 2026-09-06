@@ -43,6 +43,8 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
+    // Keep the app's optimizer separate from middleware-mode tests using .vite.
+    cacheDir: "node_modules/.vite-app",
     optimizeDeps: {
       // Vinext runs separate client/RSC/SSR Vite environments. Keeping these
       // browser-ready ESM packages out of the shared pre-bundle avoids stale

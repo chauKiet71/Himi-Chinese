@@ -1,0 +1,149 @@
+[
+  {
+    "filename": "01_van-phong-hanh-chinh.docx",
+    "title": "Văn phòng & hành chính",
+    "lessons": 30,
+    "paragraphs": 816,
+    "sha256": "f7389de6cd14bc4fb51a512e7a59f24f83a5af807fa509bdb2a11a7de6923048"
+  },
+  {
+    "filename": "02_nha-may-san-xuat.docx",
+    "title": "Nhà máy & sản xuất",
+    "lessons": 30,
+    "paragraphs": 840,
+    "sha256": "aff764084befb1aaea7b00271874846be8e5031b3cbeec7b26703ce91ae88ba5"
+  },
+  {
+    "filename": "03_kho-van-logistics.docx",
+    "title": "Kho vận & logistics",
+    "lessons": 30,
+    "paragraphs": 840,
+    "sha256": "9488122ff0fda5fa97b631196b5548f576124a6878c1dd73adb259b660c48594"
+  },
+  {
+    "filename": "04_ban-hang-cham-soc-khach-hang.docx",
+    "title": "Bán hàng & chăm sóc khách",
+    "lessons": 30,
+    "paragraphs": 840,
+    "sha256": "c9198b16dcc01b74abf8acfa9de08e5391e1fdd796ac2b157eb9605e56b48d26"
+  },
+  {
+    "filename": "05_nha-hang-dich-vu.docx",
+    "title": "Nhà hàng & dịch vụ",
+    "lessons": 30,
+    "paragraphs": 840,
+    "sha256": "a8011312201181ea36c67c7974ad323a5ba5e436c5937c603e99dbc8c110cc64"
+  },
+  {
+    "filename": "06_thuong-mai-dien-tu.docx",
+    "title": "Thương mại điện tử",
+    "lessons": 30,
+    "paragraphs": 840,
+    "sha256": "25d1d9d2b438ec2db0c1b9d4a6c4e16db396c350a8a69f711344c7f2cf40897e"
+  },
+  {
+    "filename": "07_giao-tiep-cong-so.docx",
+    "title": "Giao tiếp công sở cốt lõi",
+    "lessons": 24,
+    "paragraphs": 586,
+    "sha256": "75c424926ec7a51bd7bfc58e189042735c26a9d556063b6c130b25ec571dd2c2"
+  },
+  {
+    "filename": "08_tieng-trung-tan-suat-cao.docx",
+    "title": "Tiếng Trung tần suất cao",
+    "lessons": 27,
+    "paragraphs": 1148,
+    "sha256": "8c3157b3e686c165578d813cf48ed3a3e0377c3fba93910af31a610d7d7a97ed"
+  },
+  {
+    "filename": "09_hsk-1.docx",
+    "title": "HSK 1",
+    "lessons": 15,
+    "paragraphs": 888,
+    "sha256": "a7a56343fd80de0c93f8438dd0ce7281231605797bcf8bb67a41a7c9bc7d6d1f"
+  },
+  {
+    "filename": "10_hsk-2.docx",
+    "title": "HSK 2",
+    "lessons": 15,
+    "paragraphs": 1247,
+    "sha256": "e697b5b974c8b6fa8b20f725142d0a39a35652fa82c541d4ae6f9334932f1fd4"
+  },
+  {
+    "filename": "11_hsk-3.docx",
+    "title": "HSK 3",
+    "lessons": 20,
+    "paragraphs": 1650,
+    "sha256": "cdc7175f851acd3bf22336630717401aec4892823095b1dcaa0cdd7632e684f1"
+  },
+  {
+    "filename": "12_hsk-4.docx",
+    "title": "HSK 4",
+    "lessons": 20,
+    "paragraphs": 2318,
+    "sha256": "c29ff0ed8d55a9e44d0ca509754d6f799b1974668c82578f7223f720945cd888"
+  },
+  {
+    "filename": "13_hsk-5.docx",
+    "title": "HSK 5",
+    "lessons": 36,
+    "paragraphs": 6329,
+    "sha256": "ede9f2bca93d9195e1396dede38347fee5f2d316a968252d10211042f8b2f823"
+  },
+  {
+    "filename": "14_hsk-6.docx",
+    "title": "HSK 6",
+    "lessons": 40,
+    "paragraphs": 4367,
+    "sha256": "6a4146a65d8af2883dc53496aefc506344224cd2c60cdc5405480f22d9638d63"
+  },
+  {
+    "filename": "15_hsk-7-9.docx",
+    "title": "HSK 7–9",
+    "lessons": 16,
+    "paragraphs": 39,
+    "sha256": "2079f6fc1a4964bae9ede065c14beaafd5aa262488963534c1d8c4ddd13d445a"
+  },
+  {
+    "filename": "16_hsk-2-sach-bai-tap.docx",
+    "title": "HSK 2 Sách bài tập",
+    "lessons": 15,
+    "paragraphs": 2732,
+    "sha256": "bfe9bcd473934428aa7a4957b46425cbfd6a0ba1d0ada03808820cb4b34a2728"
+  },
+  {
+    "filename": "17_luyen-tap-tinh-huong.docx",
+    "title": "Luyện tập theo tình huống",
+    "lessons": 22,
+    "paragraphs": 1051,
+    "sha256": "98ff9ab71446a95d44d8dd4670d03b13ade5b075b235f03dcf1e080eaff47e4c"
+  },
+  {
+    "filename": "18_luyen-nghe.docx",
+    "title": "Luyện nghe",
+    "lessons": 28,
+    "paragraphs": 325,
+    "sha256": "c803a4cc5b9fafe48962d14f4f91da7f5c6546632f8273b924726add3eacee9b"
+  },
+  {
+    "filename": "19_luyen-viet.docx",
+    "title": "Luyện viết chữ Hán",
+    "lessons": 146,
+    "paragraphs": 1183,
+    "sha256": "a80a3df0ca99fc3965c45d723c1334bed3b88bf95b7a8ed1a56b9ae3a5392f9b"
+  },
+  {
+    "filename": "20_hoc-qua-video.docx",
+    "title": "Học qua video",
+    "lessons": 13,
+    "paragraphs": 3135,
+    "sha256": "272d2ffe61db538cea5acc2507da3f0274f80d769aafcb17b9a779cbbd24b1b7"
+  },
+  {
+    "filename": "21_tro-choi-tu-vung.docx",
+    "title": "Trò chơi từ vựng",
+    "lessons": 12,
+    "paragraphs": 16,
+    "sha256": "124ed11353814a84810a555ef3efb98bf0bc1da9b4268387f67b48c62e598ccb"
+  }
+]

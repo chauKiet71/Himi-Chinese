@@ -1,0 +1,107 @@
+[
+  {
+    "file": "01_van-phong-hanh-chinh.docx",
+    "verified_strings": 813,
+    "package_preserved": true
+  },
+  {
+    "file": "02_nha-may-san-xuat.docx",
+    "verified_strings": 837,
+    "package_preserved": true
+  },
+  {
+    "file": "03_kho-van-logistics.docx",
+    "verified_strings": 837,
+    "package_preserved": true
+  },
+  {
+    "file": "04_ban-hang-cham-soc-khach-hang.docx",
+    "verified_strings": 837,
+    "package_preserved": true
+  },
+  {
+    "file": "05_nha-hang-dich-vu.docx",
+    "verified_strings": 837,
+    "package_preserved": true
+  },
+  {
+    "file": "06_thuong-mai-dien-tu.docx",
+    "verified_strings": 837,
+    "package_preserved": true
+  },
+  {
+    "file": "07_giao-tiep-cong-so.docx",
+    "verified_strings": 583,
+    "package_preserved": true
+  },
+  {
+    "file": "08_tieng-trung-tan-suat-cao.docx",
+    "verified_strings": 1145,
+    "package_preserved": true
+  },
+  {
+    "file": "09_hsk-1.docx",
+    "verified_strings": 1618,
+    "package_preserved": true
+  },
+  {
+    "file": "10_hsk-2.docx",
+    "verified_strings": 1965,
+    "package_preserved": true
+  },
+  {
+    "file": "11_hsk-3.docx",
+    "verified_strings": 2963,
+    "package_preserved": true
+  },
+  {
+    "file": "12_hsk-4.docx",
+    "verified_strings": 4855,
+    "package_preserved": true
+  },
+  {
+    "file": "13_hsk-5.docx",
+    "verified_strings": 8802,
+    "package_preserved": true
+  },
+  {
+    "file": "14_hsk-6.docx",
+    "verified_strings": 12220,
+    "package_preserved": true
+  },
+  {
+    "file": "15_hsk-7-9.docx",
+    "verified_strings": 36,
+    "package_preserved": true
+  },
+  {
+    "file": "16_hsk-2-sach-bai-tap.docx",
+    "verified_strings": 2729,
+    "package_preserved": true
+  },
+  {
+    "file": "17_luyen-tap-tinh-huong.docx",
+    "verified_strings": 1048,
+    "package_preserved": true
+  },
+  {
+    "file": "18_luyen-nghe.docx",
+    "verified_strings": 322,
+    "package_preserved": true
+  },
+  {
+    "file": "19_luyen-viet.docx",
+    "verified_strings": 12875,
+    "package_preserved": true
+  },
+  {
+    "file": "20_hoc-qua-video.docx",
+    "verified_strings": 3132,
+    "package_preserved": true
+  },
+  {
+    "file": "21_tro-choi-tu-vung.docx",
+    "verified_strings": 13,
+    "package_preserved": true
+  }
+]

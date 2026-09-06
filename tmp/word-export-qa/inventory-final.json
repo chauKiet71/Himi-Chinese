@@ -1,0 +1,281 @@
+{
+  "courses": [
+    {
+      "title": "Văn phòng & hành chính",
+      "lessons": 30
+    },
+    {
+      "title": "Nhà máy & sản xuất",
+      "lessons": 30
+    },
+    {
+      "title": "Kho vận & logistics",
+      "lessons": 30
+    },
+    {
+      "title": "Bán hàng & chăm sóc khách",
+      "lessons": 30
+    },
+    {
+      "title": "Nhà hàng & dịch vụ",
+      "lessons": 30
+    },
+    {
+      "title": "Thương mại điện tử",
+      "lessons": 30
+    },
+    {
+      "title": "Giao tiếp công sở cốt lõi",
+      "lessons": 24
+    },
+    {
+      "title": "Tiếng Trung tần suất cao",
+      "lessons": 27
+    }
+  ],
+  "hsk": [
+    {
+      "title": "HSK 1",
+      "lessons": 15
+    },
+    {
+      "title": "HSK 2",
+      "lessons": 15
+    },
+    {
+      "title": "HSK 3",
+      "lessons": 20
+    },
+    {
+      "title": "HSK 4",
+      "lessons": 20
+    },
+    {
+      "title": "HSK 5",
+      "lessons": 36
+    },
+    {
+      "title": "HSK 6",
+      "lessons": 40
+    },
+    {
+      "title": "HSK 7–9",
+      "lessons": 16
+    }
+  ],
+  "workbook2": 15,
+  "practice": 22,
+  "listening": 28,
+  "games": 12,
+  "videos": 13,
+  "missing": [
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-dat-cau-hoi-nghien-cuu",
+      "lessonNumber": 1,
+      "title": "Đặt câu hỏi nghiên cứu",
+      "vocabulary": 28,
+      "grammar": 2,
+      "dialogues": 1,
+      "writing": 28,
+      "minutes": 12,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-doc-tai-lieu-chuyen-nganh",
+      "lessonNumber": 2,
+      "title": "Đọc tài liệu chuyên ngành",
+      "vocabulary": 29,
+      "grammar": 3,
+      "dialogues": 2,
+      "writing": 29,
+      "minutes": 13,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-phan-tich-phuong-phap",
+      "lessonNumber": 3,
+      "title": "Phân tích phương pháp",
+      "vocabulary": 30,
+      "grammar": 2,
+      "dialogues": 1,
+      "writing": 30,
+      "minutes": 14,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-trinh-bay-phat-hien",
+      "lessonNumber": 4,
+      "title": "Trình bày phát hiện",
+      "vocabulary": 28,
+      "grammar": 3,
+      "dialogues": 2,
+      "writing": 28,
+      "minutes": 12,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-xac-lap-loi-ich",
+      "lessonNumber": 1,
+      "title": "Xác lập lợi ích",
+      "vocabulary": 27,
+      "grammar": 2,
+      "dialogues": 1,
+      "writing": 27,
+      "minutes": 12,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-doc-ham-y",
+      "lessonNumber": 2,
+      "title": "Đọc hàm ý",
+      "vocabulary": 28,
+      "grammar": 3,
+      "dialogues": 2,
+      "writing": 28,
+      "minutes": 13,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-xu-ly-be-tac",
+      "lessonNumber": 3,
+      "title": "Xử lý bế tắc",
+      "vocabulary": 29,
+      "grammar": 2,
+      "dialogues": 1,
+      "writing": 29,
+      "minutes": 14,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-soan-thoa-thuan",
+      "lessonNumber": 4,
+      "title": "Soạn thỏa thuận",
+      "vocabulary": 27,
+      "grammar": 3,
+      "dialogues": 2,
+      "writing": 27,
+      "minutes": 12,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-doc-chi-bao-kinh-te",
+      "lessonNumber": 1,
+      "title": "Đọc chỉ báo kinh tế",
+      "vocabulary": 28,
+      "grammar": 2,
+      "dialogues": 1,
+      "writing": 28,
+      "minutes": 12,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-phan-tich-chu-ky",
+      "lessonNumber": 2,
+      "title": "Phân tích chu kỳ",
+      "vocabulary": 29,
+      "grammar": 3,
+      "dialogues": 2,
+      "writing": 29,
+      "minutes": 13,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-danh-gia-chinh-sach",
+      "lessonNumber": 3,
+      "title": "Đánh giá chính sách",
+      "vocabulary": 30,
+      "grammar": 2,
+      "dialogues": 1,
+      "writing": 30,
+      "minutes": 14,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-du-bao-kich-ban",
+      "lessonNumber": 4,
+      "title": "Dự báo kịch bản",
+      "vocabulary": 28,
+      "grammar": 3,
+      "dialogues": 2,
+      "writing": 28,
+      "minutes": 12,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-mo-ta-doi-moi",
+      "lessonNumber": 1,
+      "title": "Mô tả đổi mới",
+      "vocabulary": 29,
+      "grammar": 2,
+      "dialogues": 1,
+      "writing": 29,
+      "minutes": 12,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-phan-tich-tac-dong",
+      "lessonNumber": 2,
+      "title": "Phân tích tác động",
+      "vocabulary": 30,
+      "grammar": 3,
+      "dialogues": 2,
+      "writing": 30,
+      "minutes": 13,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-tranh-luan-dao-duc",
+      "lessonNumber": 3,
+      "title": "Tranh luận đạo đức",
+      "vocabulary": 31,
+      "grammar": 2,
+      "dialogues": 1,
+      "writing": 31,
+      "minutes": 14,
+      "guidedSteps": 0,
+      "available": false
+    },
+    {
+      "level": "hsk-7-9",
+      "id": "hsk-7-9-viet-bao-cao-chuyen-mon",
+      "lessonNumber": 4,
+      "title": "Viết báo cáo chuyên môn",
+      "vocabulary": 29,
+      "grammar": 3,
+      "dialogues": 2,
+      "writing": 29,
+      "minutes": 12,
+      "guidedSteps": 0,
+      "available": false
+    }
+  ]
+}

@@ -136,7 +136,7 @@ export function LessonPhrasebook({
   };
 
   if (!currentPhrase) {
-    return <div className="lesson-vocab-empty"><h2>Bài này chưa có cụm từ</h2><p>Hãy chuyển sang Nghe & nói hoặc Hội thoại để tiếp tục học.</p></div>;
+    return <div className="lesson-vocab-empty"><h2>Bài này chưa có cụm từ</h2><p>Hãy chuyển sang Từ vựng hoặc Nghe & nói để tiếp tục học.</p></div>;
   }
 
   return <section aria-label="Bộ thẻ cụm từ" className="lesson-vocab-deck lesson-phrase-deck" data-testid="lesson-phrase-deck">

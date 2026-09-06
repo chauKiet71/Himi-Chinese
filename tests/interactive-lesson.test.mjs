@@ -29,7 +29,7 @@ test("iFlytek authorization keeps the API secret out of the signed websocket URL
   assert.doesNotMatch(url, /never-expose-this-secret/);
 });
 
-test("an unlocked workplace lesson exposes phrase, pronunciation and role-play modes", async (t) => {
+test("an unlocked workplace lesson exposes vocabulary, phrase and pronunciation modes", async (t) => {
   const server = await createServer({
     appType: "custom",
     configFile: false,
@@ -85,7 +85,8 @@ test("an unlocked workplace lesson exposes phrase, pronunciation and role-play m
     dailyNextStep: null,
   }));
 
-  for (const label of ["Từ vựng", "Cụm từ", "Nghe &amp; nói", "Hội thoại"]) assert.match(html, new RegExp(`>${label}<`));
+  for (const label of ["Từ vựng", "Cụm từ", "Nghe &amp; nói"]) assert.match(html, new RegExp(`>${label}<`));
+  for (const label of ["Hội thoại", "Ghi chú"]) assert.doesNotMatch(html, new RegExp(`>${label}<`));
 
   const { LessonPhrasebook } = await server.ssrLoadModule("/components/lesson-phrasebook.tsx");
   const phraseHtml = renderToStaticMarkup(React.createElement(LessonPhrasebook, {

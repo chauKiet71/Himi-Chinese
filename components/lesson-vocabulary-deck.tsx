@@ -163,7 +163,7 @@ export function LessonVocabularyDeck({
   };
 
   if (!currentWord) {
-    return <div className="lesson-vocab-empty"><h2>Bài này chưa có từ vựng</h2><p>Hãy chuyển sang Hội thoại hoặc Ghi chú để tiếp tục học.</p></div>;
+    return <div className="lesson-vocab-empty"><h2>Bài này chưa có từ vựng</h2><p>Hãy chuyển sang Cụm từ hoặc Nghe & nói để tiếp tục học.</p></div>;
   }
 
   return <section aria-label="Bộ thẻ từ vựng" className="lesson-vocab-deck" data-testid="lesson-vocabulary-deck">

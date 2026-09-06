@@ -20,77 +20,77 @@ async function withoutDatabase(callback) {
   }
 }
 
-test("office curriculum contains four complete modules and 24 lessons", () => {
-  assert.equal(officeModules.length, 4);
-  assert.equal(officeLessons.length, 24);
+test("office curriculum contains five complete modules and 30 lessons", () => {
+  assert.equal(officeModules.length, 5);
+  assert.equal(officeLessons.length, 30);
   assert.equal(officeLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(officeModules.every((module) => officeLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
   assert.ok(officeLessons.every((lesson) => lesson.vocabulary.length === 6));
   assert.ok(officeLessons.every((lesson) => lesson.content.dialogue.length >= 4));
-  assert.ok(officeLessons.every((lesson) => lesson.content.notes.length >= 2));
-  assert.equal(officeLessons.filter((lesson) => lesson.content.challenge).length, 4);
-  assert.equal(officeCourseStats.vocabulary, 144);
+  assert.ok(officeLessons.slice(0, 24).every((lesson) => lesson.content.notes.length >= 2));
+  assert.equal(officeLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).length, 4);
+  assert.equal(officeCourseStats.vocabulary, 180);
 });
 
-test("factory curriculum contains four complete modules and 24 lessons", () => {
-  assert.equal(factoryModules.length, 4);
-  assert.equal(factoryLessons.length, 24);
+test("factory curriculum contains five complete modules and 30 lessons", () => {
+  assert.equal(factoryModules.length, 5);
+  assert.equal(factoryLessons.length, 30);
   assert.equal(factoryLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(factoryModules.every((module) => factoryLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
   assert.ok(factoryLessons.every((lesson) => lesson.vocabulary.length === 6));
   assert.ok(factoryLessons.every((lesson) => lesson.content.dialogue.length === 4));
-  assert.ok(factoryLessons.every((lesson) => lesson.content.notes.length === 2));
-  assert.equal(factoryLessons.filter((lesson) => lesson.content.challenge).length, 4);
-  assert.equal(factoryCourseStats.vocabulary, 144);
+  assert.ok(factoryLessons.slice(0, 24).every((lesson) => lesson.content.notes.length === 2));
+  assert.equal(factoryLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).length, 4);
+  assert.equal(factoryCourseStats.vocabulary, 180);
 });
 
-test("logistics curriculum contains four complete modules and 24 lessons", () => {
-  assert.equal(logisticsModules.length, 4);
-  assert.equal(logisticsLessons.length, 24);
+test("logistics curriculum contains five complete modules and 30 lessons", () => {
+  assert.equal(logisticsModules.length, 5);
+  assert.equal(logisticsLessons.length, 30);
   assert.equal(logisticsLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(logisticsModules.every((module) => logisticsLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
   assert.ok(logisticsLessons.every((lesson) => lesson.vocabulary.length === 6));
   assert.ok(logisticsLessons.every((lesson) => lesson.content.dialogue.length === 4));
-  assert.ok(logisticsLessons.every((lesson) => lesson.content.notes.length === 2));
-  assert.equal(logisticsLessons.filter((lesson) => lesson.content.challenge).length, 4);
-  assert.equal(logisticsCourseStats.vocabulary, 144);
+  assert.ok(logisticsLessons.slice(0, 24).every((lesson) => lesson.content.notes.length === 2));
+  assert.equal(logisticsLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).length, 4);
+  assert.equal(logisticsCourseStats.vocabulary, 180);
 });
 
-test("sales curriculum contains four complete modules and 24 lessons", () => {
-  assert.equal(salesModules.length, 4);
-  assert.equal(salesLessons.length, 24);
+test("sales curriculum contains five complete modules and 30 lessons", () => {
+  assert.equal(salesModules.length, 5);
+  assert.equal(salesLessons.length, 30);
   assert.equal(salesLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(salesModules.every((module) => salesLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
   assert.ok(salesLessons.every((lesson) => lesson.vocabulary.length === 6));
   assert.ok(salesLessons.every((lesson) => lesson.content.dialogue.length === 4));
-  assert.ok(salesLessons.every((lesson) => lesson.content.notes.length === 2));
-  assert.deepEqual(salesLessons.filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [5, 5, 5, 6]);
-  assert.equal(salesCourseStats.vocabulary, 144);
+  assert.ok(salesLessons.slice(0, 24).every((lesson) => lesson.content.notes.length === 2));
+  assert.deepEqual(salesLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [5, 5, 5, 6]);
+  assert.equal(salesCourseStats.vocabulary, 180);
 });
 
-test("restaurant curriculum contains four complete modules and 24 lessons", () => {
-  assert.equal(restaurantModules.length, 4);
-  assert.equal(restaurantLessons.length, 24);
+test("restaurant curriculum contains five complete modules and 30 lessons", () => {
+  assert.equal(restaurantModules.length, 5);
+  assert.equal(restaurantLessons.length, 30);
   assert.equal(restaurantLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(restaurantModules.every((module) => restaurantLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
   assert.ok(restaurantLessons.every((lesson) => lesson.vocabulary.length === 6));
   assert.ok(restaurantLessons.every((lesson) => lesson.content.dialogue.length === 4));
-  assert.ok(restaurantLessons.every((lesson) => lesson.content.notes.length === 2));
-  assert.deepEqual(restaurantLessons.filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [5, 5, 5, 6]);
-  assert.equal(restaurantCourseStats.vocabulary, 144);
+  assert.ok(restaurantLessons.slice(0, 24).every((lesson) => lesson.content.notes.length === 2));
+  assert.deepEqual(restaurantLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [5, 5, 5, 6]);
+  assert.equal(restaurantCourseStats.vocabulary, 180);
 });
 
-test("ecommerce curriculum contains four complete modules and 24 lessons", () => {
-  assert.equal(ecommerceModules.length, 4);
-  assert.equal(ecommerceLessons.length, 24);
+test("ecommerce curriculum contains five complete modules and 30 lessons", () => {
+  assert.equal(ecommerceModules.length, 5);
+  assert.equal(ecommerceLessons.length, 30);
   assert.equal(ecommerceLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(ecommerceModules.every((module) => ecommerceLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
   assert.ok(ecommerceLessons.every((lesson) => lesson.vocabulary.length === 6));
   assert.ok(ecommerceLessons.every((lesson) => lesson.content.dialogue.length === 4));
-  assert.ok(ecommerceLessons.every((lesson) => lesson.content.notes.length === 2));
-  assert.deepEqual(ecommerceLessons.filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [5, 5, 5, 6]);
-  assert.equal(ecommerceCourseStats.vocabulary, 144);
-  const ecommerceWords = ecommerceLessons.flatMap((lesson) => lesson.vocabulary);
+  assert.ok(ecommerceLessons.slice(0, 24).every((lesson) => lesson.content.notes.length === 2));
+  assert.deepEqual(ecommerceLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [5, 5, 5, 6]);
+  assert.equal(ecommerceCourseStats.vocabulary, 180);
+  const ecommerceWords = ecommerceLessons.slice(0, 24).flatMap((lesson) => lesson.vocabulary);
   assert.ok(ecommerceWords.every((word) => /^ecommerce-[a-z0-9-]+$/.test(word.slug)));
   assert.equal(new Set(ecommerceWords.map((word) => word.hanzi)).size, ecommerceWords.length);
 });

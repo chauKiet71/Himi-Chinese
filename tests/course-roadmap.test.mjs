@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { officeLessons, officeModules } from "../lib/office-course-seed.ts";
 
-test("course roadmap groups 24 lessons into four stages and identifies the next lesson", async () => {
+test("course roadmap groups 30 lessons into five stages and identifies the next lesson", async () => {
   const roadmapModule = await import("../lib/course-roadmap.ts").catch(() => null);
   assert.ok(roadmapModule, "the course roadmap builder should be available");
 
@@ -19,11 +19,11 @@ test("course roadmap groups 24 lessons into four stages and identifies the next 
     viewerHasVip: true,
   });
 
-  assert.equal(roadmap.modules.length, 4);
-  assert.deepEqual(roadmap.modules.map((module) => module.lessons.length), [6, 6, 6, 6]);
+  assert.equal(roadmap.modules.length, 5);
+  assert.deepEqual(roadmap.modules.map((module) => module.lessons.length), [6, 6, 6, 6, 6]);
   assert.equal(roadmap.completedLessons, 8);
   assert.equal(roadmap.completedModules, 1);
-  assert.equal(roadmap.progressPercent, 33);
+  assert.equal(roadmap.progressPercent, 27);
   assert.equal(roadmap.modules[0].status, "completed");
   assert.equal(roadmap.modules[1].status, "active");
   assert.equal(roadmap.modules[1].lessons[2].status, "current");
@@ -67,8 +67,8 @@ test("roadmap repository returns a complete public course overview without a dat
       userId: null,
     });
     assert.equal(data?.course.title, "Văn phòng & hành chính");
-    assert.equal(data?.roadmap.modules.length, 4);
-    assert.equal(data?.roadmap.totalLessons, 24);
+    assert.equal(data?.roadmap.modules.length, 5);
+    assert.equal(data?.roadmap.totalLessons, 30);
     assert.equal(data?.roadmap.nextLesson?.slug, "chao-hoi-tai-noi-lam-viec");
     assert.equal(data?.viewerHasVip, false);
   } finally {
