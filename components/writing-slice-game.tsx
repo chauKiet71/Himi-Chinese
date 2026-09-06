@@ -26,7 +26,8 @@ import {
   type FormEvent,
   type ReactNode,
 } from "react";
-import { gameWords, speakChinese } from "@/lib/game-content";
+import { speakChinese, type GameWord } from "@/lib/game-content";
+import { createSliceDeck, normalizeSliceAnswer as normalizeAnswer, SLICE_HSK_COURSES, type SliceHskLevel } from "@/lib/slice-game";
 
 gsap.registerPlugin(useGSAP);
 
@@ -44,16 +45,6 @@ type StrikeMotion = {
 };
 
 const TARGET_ROUNDS = 12;
-
-function normalizeAnswer(value: string): string {
-  return value
-    .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, "")
-    .toLocaleLowerCase("vi-VN")
-    .replace(/[^a-z\s]/gu, "")
-    .replace(/\s+/gu, " ")
-    .trim();
-}
 
 function GameOverlay({
   mode,
@@ -95,16 +86,76 @@ function GameOverlay({
   );
 }
 
-export function WritingSliceGame({
-  onExit,
-  onComplete,
-  completionAction,
-}: {
+type WritingSliceGameProps = {
   onExit?: () => void;
   onComplete?: (score: number) => void;
   completionAction?: ReactNode;
-} = {}) {
-  const [mode, setMode] = useState<GameMode>("ready");
+};
+
+export function WritingSliceGame(props: WritingSliceGameProps = {}) {
+  const [session, setSession] = useState<{ level: SliceHskLevel; words: GameWord[] } | null>(null);
+  const [loading, setLoading] = useState<SliceHskLevel | null>(null);
+  const [error, setError] = useState("");
+  const requestRef = useRef<AbortController | null>(null);
+
+  useEffect(() => () => requestRef.current?.abort(), []);
+
+  const selectCourse = async (level: SliceHskLevel) => {
+    requestRef.current?.abort();
+    const controller = new AbortController();
+    requestRef.current = controller;
+    setLoading(level);
+    setError("");
+    try {
+      const response = await fetch(`/api/games/slice?level=${level}`, { signal: controller.signal });
+      if (!response.ok) throw new Error("Không thể tải từ vựng.");
+      const data = await response.json();
+      if (!Array.isArray(data.words) || data.words.length < TARGET_ROUNDS) throw new Error("Chưa đủ từ vựng.");
+      if (!controller.signal.aborted) setSession({ level, words: createSliceDeck(data.words) });
+    } catch {
+      if (!controller.signal.aborted) setError("Chưa tải được từ vựng. Bạn hãy chọn lại khóa để thử lại nhé.");
+    } finally {
+      if (!controller.signal.aborted) setLoading(null);
+    }
+  };
+
+  if (session) {
+    return <SliceSession {...props} initialWords={session.words} level={session.level} onChangeCourse={() => setSession(null)} />;
+  }
+
+  return (
+    <main className="learner-dashboard writing-game-dashboard game-immersive-dashboard">
+      <div className="writing-course-shell">
+        {props.onExit ? <button className="writing-course-back" onClick={props.onExit} type="button"><ArrowLeft size={18} /> Tất cả trò chơi</button> : null}
+        <span className="writing-course-kicker">LUYỆN CHÉM TỪ</span>
+        <h1>Chọn khóa HSK để chơi</h1>
+        <p>Từ vựng từ các bài học của bạn. Mỗi lượt chơi là một bộ từ được xáo trộn mới.</p>
+        <div className="writing-course-grid" aria-label="Các khóa HSK">
+          {SLICE_HSK_COURSES.map((course, index) => (
+            <button className="writing-course-card" key={course.id} onClick={() => void selectCourse(course.id)} type="button" aria-busy={loading === course.id}>
+              <span className="writing-course-number" aria-hidden="true">{index + 1}</span>
+              <strong>{course.label}</strong>
+              <span>{course.description}</span>
+              <small>{loading === course.id ? "Đang tải từ vựng…" : "Chơi ngay"}<ArrowRight size={16} /></small>
+            </button>
+          ))}
+        </div>
+        <p className="writing-course-status" role={error ? "alert" : "status"}>{error || (loading ? "Đang chuẩn bị từ vựng cho lượt chơi…" : "Chém đúng 12 từ · 3 lượt bỏ lỡ · Gõ pinyin có dấu hoặc không dấu")}</p>
+      </div>
+    </main>
+  );
+}
+
+function SliceSession({
+  onExit,
+  onComplete,
+  completionAction,
+  initialWords,
+  level,
+  onChangeCourse,
+}: WritingSliceGameProps & { initialWords: GameWord[]; level: SliceHskLevel; onChangeCourse: () => void }) {
+  const [words, setWords] = useState(initialWords);
+  const [mode, setMode] = useState<GameMode>("playing");
   const [wordIndex, setWordIndex] = useState(0);
   const [runKey, setRunKey] = useState(0);
   const [answer, setAnswer] = useState("");
@@ -132,7 +183,7 @@ export function WritingSliceGame({
   const strikeTimelineRef = useRef<gsap.core.Timeline | null>(null);
   const pendingStrikeRef = useRef<{ finalScore: number; nextCompleted: number } | null>(null);
 
-  const word = gameWords[wordIndex];
+  const word = words[wordIndex];
   const normalizedTarget = useMemo(() => normalizeAnswer(word.pinyin), [word.pinyin]);
   const gameStyle = {
     "--word-lane": `${word.lane}%`,
@@ -167,6 +218,10 @@ export function WritingSliceGame({
   const startGame = () => {
     clearNextTimer();
     window.speechSynthesis?.cancel();
+    fallTweenRef.current?.kill();
+    strikeTimelineRef.current?.kill();
+    pendingStrikeRef.current = null;
+    setWords(createSliceDeck(initialWords));
     setMode("playing");
     setWordIndex(0);
     setRunKey((value) => value + 1);
@@ -179,7 +234,7 @@ export function WritingSliceGame({
   };
 
   const advanceWord = (nextMode: GameMode = "playing") => {
-    setWordIndex((value) => (value + 1) % gameWords.length);
+    setWordIndex((value) => (value + 1) % words.length);
     setRunKey((value) => value + 1);
     setAnswer("");
     setMissed(false);
@@ -535,6 +590,11 @@ export function WritingSliceGame({
           </section>
 
           <aside className="writing-session-aside" aria-label="Thông tin lượt chơi">
+            <div className="writing-course-current">
+              <strong>{SLICE_HSK_COURSES.find((course) => course.id === level)?.label} · {words.length} từ vựng</strong>
+              <span>Ngẫu nhiên từ các bài học trong khóa</span>
+              <button className="writing-course-back" onClick={onChangeCourse} type="button"><ArrowLeft size={16} /> Đổi khóa HSK</button>
+            </div>
             <details className="writing-session-details">
               <summary className="writing-session-summary">
                 <span aria-hidden="true" className="writing-session-summary-icon">

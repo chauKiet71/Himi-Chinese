@@ -10720,6 +10720,61 @@ body:has(.learner-app-shell) > .mobile-nav {
 }
 
 /* Writing slice game — bamboo reaction training */
+.writing-course-shell {
+  width: min(960px, 100%);
+  margin: auto;
+  padding: clamp(24px, 5vw, 64px) 24px;
+}
+
+.writing-course-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  color: #176d59;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.writing-course-kicker {
+  display: block;
+  margin-top: 32px;
+  color: #176d59;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.writing-course-shell h1 { margin: 12px 0; font-size: clamp(28px, 4vw, 42px); color: #203f35; }
+.writing-course-shell > p { color: #52665d; line-height: 1.7; }
+.writing-course-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 30px; }
+.writing-course-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 24px;
+  border: 1px solid #cee0cd;
+  border-radius: 22px;
+  background: #fffdf5;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #dce6d2;
+}
+.writing-course-card:hover { border-color: #32866b; background: #f3f9eb; }
+.writing-course-card:focus-visible, .writing-course-back:focus-visible { outline: 3px solid #32866b; outline-offset: 4px; }
+.writing-course-number { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 14px; background: #e4efce; color: #486d2d; font-weight: 800; }
+.writing-course-card > strong { font-size: 25px; color: #203f35; }
+.writing-course-card > span:not(.writing-course-number) { color: #52665d; font-size: 14px; line-height: 1.6; }
+.writing-course-card > small { display: flex; align-items: center; gap: 8px; margin-top: auto; color: #176d59; font-weight: 800; }
+.writing-course-status { margin-top: 24px; font-size: 13px; }
+.writing-course-current { display: grid; gap: 8px; padding: 18px; margin-bottom: 14px; border: 1px solid #cee0cd; border-radius: 18px; background: #fffdf5; color: #203f35; }
+.writing-course-current > span { font-size: 12px; color: #52665d; }
+@media (max-width: 640px) {
+  .writing-course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .writing-course-card { padding: 18px; }
+}
+
 .writing-game-dashboard {
   min-height: 100dvh;
   overflow: hidden;

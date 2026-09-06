@@ -368,8 +368,8 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
 
       {activeLine ? <section className="youtube-shadow-card" aria-live="polite">
         <div><span>Luyện nói theo câu</span><strong>Câu {activeIndex + 1} / {transcript.length}</strong></div>
-        {showPinyin ? <p className="youtube-shadow-pinyin">{activeLine.pinyin}</p> : null}
         <p className="youtube-shadow-hanzi" lang="zh">{activeLine.hanzi}</p>
+        {showPinyin ? <p className="youtube-shadow-pinyin">{activeLine.pinyin}</p> : null}
         {showTranslation ? <p className="youtube-shadow-translation">{activeLine.translation}</p> : null}
         <button onClick={() => playLine(activeIndex)} type="button"><Volume2 aria-hidden="true" size={16} /> Nghe lại câu</button>
       </section> : null}
@@ -438,8 +438,8 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
           type="button"
         >
           <span>#{index + 1}</span>
-          {showPinyin ? <small>{line.pinyin}</small> : null}
           <strong lang="zh">{line.hanzi}</strong>
+          {showPinyin ? <small>{line.pinyin}</small> : null}
           {showTranslation ? <p>{line.translation}</p> : null}
         </button>)}
       </div>
