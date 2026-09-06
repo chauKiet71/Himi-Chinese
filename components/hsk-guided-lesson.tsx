@@ -21,7 +21,7 @@ import {
   X,
 } from "lucide-react";
 import type { HskExercise, HskLessonContent } from "@/lib/hsk-lesson-content";
-import { buildHskGuidedLessonSteps, buildHskGuidedSections, type HskGuidedStepKind } from "@/lib/hsk-guided-lesson";
+import { buildHskGuidedExercises, buildHskGuidedLessonSteps, buildHskGuidedSections, type HskGuidedStepKind } from "@/lib/hsk-guided-lesson";
 import {
   EMPTY_HSK_LESSON_PROGRESS,
   getHskLessonProgressStorageKey,
@@ -51,12 +51,12 @@ function saveProgress(lessonId: string, progress: HskLessonProgress) {
   }
 }
 
-function GuidedIntroduction({ lesson }: { lesson: HskLessonContent }) {
+function GuidedIntroduction({ lesson, exerciseCount }: { lesson: HskLessonContent; exerciseCount: number }) {
   const stats = [
     lesson.vocabulary.length ? { icon: BookOpen, value: lesson.vocabulary.length, label: "từ vựng" } : null,
     lesson.grammar.length ? { icon: GraduationCap, value: lesson.grammar.length, label: "ngữ pháp" } : null,
     lesson.dialogues.length ? { icon: MessageCircle, value: lesson.dialogues.length, label: "hội thoại" } : null,
-    lesson.exercises.length ? { icon: Target, value: lesson.exercises.length, label: "bài tập" } : null,
+    exerciseCount ? { icon: Target, value: exerciseCount, label: "bài tập" } : null,
     { icon: Target, value: `~${lesson.minutes}`, label: "phút học" },
   ].filter((item): item is NonNullable<typeof item> => item !== null);
   return <section className="hsk-guided-introduction">
@@ -306,19 +306,20 @@ function GuidedPractice({ exercise, showPinyin, speak }: { exercise: HskExercise
   </section>;
 }
 
-function GuidedCompletion({ lesson }: { lesson: HskLessonContent }) {
+function GuidedCompletion({ lesson, exerciseCount }: { lesson: HskLessonContent; exerciseCount: number }) {
   const baseHref = `/hsk/${lesson.levelId.replace(/^hsk-/, "")}/${lesson.id}`;
   return <section className="hsk-guided-completion">
     <span><Trophy aria-hidden="true" size={34} /></span>
     <small>Hoàn thành</small>
     <h1>Hoàn thành bài học!</h1>
     <p>Bạn vừa học xong <strong>Bài {lesson.lessonNumber}: {lesson.title}</strong>.</p>
-    <div>{lesson.vocabulary.length ? <article><strong>{lesson.vocabulary.length}</strong><span>từ vựng</span></article> : null}{lesson.grammar.length ? <article><strong>{lesson.grammar.length}</strong><span>điểm ngữ pháp</span></article> : null}{lesson.exercises.length ? <article><strong>{lesson.exercises.length}</strong><span>bài tập</span></article> : null}{lesson.writingCharacters.length ? <article><strong>{lesson.writingCharacters.length}</strong><span>từ luyện viết</span></article> : null}</div>
+    <div>{lesson.vocabulary.length ? <article><strong>{lesson.vocabulary.length}</strong><span>từ vựng</span></article> : null}{lesson.grammar.length ? <article><strong>{lesson.grammar.length}</strong><span>điểm ngữ pháp</span></article> : null}{exerciseCount ? <article><strong>{exerciseCount}</strong><span>bài tập</span></article> : null}{lesson.writingCharacters.length ? <article><strong>{lesson.writingCharacters.length}</strong><span>từ luyện viết</span></article> : null}</div>
     <nav><Link href="/courses?view=hsk">Danh sách bài học</Link>{lesson.vocabulary.length ? <Link href={`${baseHref}/flashcard`}>Ôn tập Flashcard</Link> : <Link href={baseHref}>Xem lại bài học</Link>}</nav>
   </section>;
 }
 
 export function HskGuidedLesson({ lesson }: { lesson: HskLessonContent }) {
+  const exercises = useMemo(() => buildHskGuidedExercises(lesson), [lesson]);
   const steps = useMemo(() => buildHskGuidedLessonSteps(lesson), [lesson]);
   const sections = useMemo(() => buildHskGuidedSections(lesson), [lesson]);
   const [currentStep, setCurrentStep] = useState(0);
@@ -385,7 +386,7 @@ export function HskGuidedLesson({ lesson }: { lesson: HskLessonContent }) {
     commit((current) => ({ writing: current.writing.includes(writingId) ? current.writing : [...current.writing, writingId] }));
   }, [commit]);
 
-  let content = <GuidedIntroduction lesson={lesson} />;
+  let content = <GuidedIntroduction exerciseCount={exercises.length} lesson={lesson} />;
   if (step.kind === "vocabulary") content = lesson.vocabulary.length
     ? <GuidedVocabulary itemIndex={step.itemIndex ?? 0} lesson={lesson} showPinyin={showPinyin} speak={speak} />
     : <GuidedUnavailableSection kind="vocabulary" />;
@@ -399,8 +400,11 @@ export function HskGuidedLesson({ lesson }: { lesson: HskLessonContent }) {
   if (step.kind === "writing") content = lesson.writingCharacters.length
     ? <GuidedWriting lesson={lesson} onComplete={completeWriting} speak={speak} />
     : <GuidedUnavailableSection kind="writing" />;
-  if (step.kind === "practice") content = <GuidedPractice exercise={lesson.exercises[step.itemIndex ?? 0]} showPinyin={showPinyin} speak={speak} />;
-  if (step.kind === "complete") content = <GuidedCompletion lesson={lesson} />;
+  if (step.kind === "practice") {
+    const exercise = exercises[step.itemIndex ?? 0];
+    content = <GuidedPractice exercise={exercise} key={exercise.id} showPinyin={showPinyin} speak={speak} />;
+  }
+  if (step.kind === "complete") content = <GuidedCompletion exerciseCount={exercises.length} lesson={lesson} />;
 
   return <div className="hsk-guided-page">
     <header className="hsk-guided-header">

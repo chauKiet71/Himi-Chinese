@@ -1,4 +1,5 @@
 import type { HskLessonContent } from "./hsk-lesson-content";
+import { buildHskGuidedLessonSteps } from "./hsk-guided-lesson.ts";
 
 export type HskLessonProgress = {
   vocabulary: string[];
@@ -61,20 +62,7 @@ function ratio(completed: number, total: number): number {
 }
 
 export function calculateHskLessonProgress(lesson: HskLessonContent, progress: HskLessonProgress): number {
-  const placeholderSteps = (lesson.guidedPlaceholders ?? []).filter((kind) => {
-    if (kind === "vocabulary") return lesson.vocabulary.length === 0;
-    if (kind === "dialogue") return lesson.dialogues.length === 0;
-    if (kind === "pronunciation") return lesson.pronunciationTopics.length === 0;
-    return lesson.writingCharacters.length === 0;
-  }).length;
-  const guidedSteps = lesson.vocabulary.length
-    + lesson.grammar.length
-    + lesson.dialogues.length
-    + (lesson.pronunciationTopics.length ? 1 : 0)
-    + lesson.exercises.length
-    + (lesson.writingCharacters.length ? 1 : 0)
-    + placeholderSteps
-    + 2;
+  const guidedSteps = buildHskGuidedLessonSteps(lesson).length;
   const completedWriting = lesson.writingCharacters
     .filter((item) => progress.writing.includes(item.id) || progress.writing.includes(item.hanzi))
     .map((item) => item.id);

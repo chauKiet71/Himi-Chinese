@@ -18,8 +18,11 @@ test("guided HSK lesson builds its journey from the textbook section counts", as
   assert.ok(lesson);
   const steps = guidedModule.buildHskGuidedLessonSteps(lesson);
   const sections = guidedModule.buildHskGuidedSections(lesson);
+  const exercises = guidedModule.buildHskGuidedExercises(lesson);
 
-  assert.equal(steps.length, 15);
+  assert.equal(exercises.length, lesson.vocabulary.length);
+  assert.ok(exercises.every((exercise) => exercise.answer && exercise.options.includes(exercise.answer)));
+  assert.equal(steps.length, 19);
   assert.deepEqual(
     steps.map((step) => step.kind),
     [
@@ -30,8 +33,7 @@ test("guided HSK lesson builds its journey from the textbook section counts", as
       "dialogue",
       "pronunciation",
       "writing",
-      "practice",
-      "practice",
+      ...Array(6).fill("practice"),
       "complete",
     ],
   );
@@ -43,10 +45,23 @@ test("guided HSK lesson builds its journey from the textbook section counts", as
       ["Hội thoại", 3],
       ["Phát âm", undefined],
       ["Luyện viết", undefined],
-      ["Luyện tập", 2],
+      ["Luyện tập", 6],
       ["Hoàn thành", undefined],
     ],
   );
+});
+
+test("guided HSK practice creates one exercise for every vocabulary word", async () => {
+  const [contentModule, guidedModule] = await Promise.all([
+    import("../lib/hsk-lesson-content.ts"),
+    import("../lib/hsk-guided-lesson.ts"),
+  ]);
+
+  for (const lesson of contentModule.HSK_LESSONS) {
+    const exercises = guidedModule.buildHskGuidedExercises(lesson);
+    assert.equal(exercises.length, lesson.vocabulary.length, lesson.id);
+    assert.deepEqual(exercises.map((exercise) => exercise.prompt), lesson.vocabulary.map((word) => word.hanzi), lesson.id);
+  }
 });
 
 test("guided progress is restored safely and can complete the whole lesson", async () => {
@@ -98,7 +113,7 @@ test("guided HSK lesson exposes progress, controls, sections and step navigation
 
   assert.match(html, /aria-label="Thoát bài học"/);
   assert.match(html, /aria-valuenow="1"/);
-  assert.match(html, /1 \/ 15/);
+  assert.match(html, /1 \/ 19/);
   assert.match(html, /Ẩn pinyin/);
   assert.match(html, /0\.75×/);
   assert.match(html, /Từ vựng/);
