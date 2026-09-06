@@ -426,13 +426,18 @@
   box-shadow: 0 12px 28px rgba(17, 124, 111, .1);
   text-align: center;
   text-decoration: none;
-  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  transform-origin: center bottom;
+  transition:
+    border-color 280ms ease,
+    background-color 280ms ease,
+    box-shadow 380ms cubic-bezier(.22, 1, .36, 1),
+    transform 380ms cubic-bezier(.22, 1, .36, 1);
 }
 
 .learner-app-shell .rail-pro-card:hover {
   border-color: #b7e4dc;
   box-shadow: 0 16px 32px rgba(17, 124, 111, .15);
-  transform: translateY(-2px);
+  transform: translateY(-5px) scale(1.015);
 }
 
 .learner-app-shell .rail-pro-card:active {
@@ -453,6 +458,14 @@
   border-radius: 50%;
   background: #119b91;
   box-shadow: 0 8px 20px rgba(17, 155, 145, .2);
+  transition:
+    box-shadow 360ms ease,
+    transform 420ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.learner-app-shell .rail-pro-card:hover .rail-pro-crown {
+  box-shadow: 0 12px 24px rgba(17, 155, 145, .28);
+  transform: translateY(-3px) rotate(-6deg) scale(1.06);
 }
 
 .learner-app-shell .rail-pro-title {
@@ -494,6 +507,14 @@
   letter-spacing: .015em;
   line-height: 1;
   text-transform: uppercase;
+  transition:
+    box-shadow 320ms ease,
+    transform 360ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.learner-app-shell .rail-pro-card:hover .rail-pro-action {
+  box-shadow: 0 8px 18px rgba(17, 124, 111, .18);
+  transform: translateY(-2px);
 }
 
 .learner-app-shell .rail-pro-action > svg {
@@ -508,6 +529,11 @@
   color: #0c8d82;
   border-radius: 50%;
   background: #fff;
+  transition: transform 360ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.learner-app-shell .rail-pro-card:hover .rail-pro-arrow {
+  transform: translateX(3px);
 }
 
 .learner-app-shell .learn-topbar {
@@ -988,7 +1014,11 @@
   .learner-app-shell .rail-nav a,
   .learner-app-shell .rail-practice-trigger,
   .learner-app-shell .learner-shell-content,
-  .learner-app-shell .route-transition-progress {
+  .learner-app-shell .route-transition-progress,
+  .learner-app-shell .rail-pro-card,
+  .learner-app-shell .rail-pro-crown,
+  .learner-app-shell .rail-pro-action,
+  .learner-app-shell .rail-pro-arrow {
     transition-duration: 180ms !important;
     transition-timing-function: ease-out !important;
   }
@@ -1009,5 +1039,18 @@
   .learning-mode-placeholder-card > a {
     scroll-behavior: auto;
     transition-duration: 1ms !important;
+  }
+
+  .learner-app-shell .rail-pro-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .learner-app-shell .rail-pro-card:hover .rail-pro-crown,
+  .learner-app-shell .rail-pro-card:hover .rail-pro-action {
+    transform: none;
+  }
+
+  .learner-app-shell .rail-pro-card:hover .rail-pro-arrow {
+    transform: translateX(2px);
   }
 }
