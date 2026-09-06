@@ -1,0 +1,3750 @@
+{
+  "$schema": "./course.schema.json",
+  "schemaVersion": 1,
+  "courseSlug": "thuong-mai-dien-tu",
+  "category": "Kinh doanh",
+  "language": "zh-CN",
+  "translationLanguage": "vi",
+  "level": "Cơ bản đến ứng dụng",
+  "modules": [
+    {
+      "slug": "san-pham-va-gian-hang",
+      "title": "Sản phẩm & gian hàng",
+      "description": "Chuẩn hóa danh mục, SKU, tiêu đề, mô tả, hình ảnh và biến thể trước khi đăng bán."
+    },
+    {
+      "slug": "nha-cung-cap-va-gia",
+      "title": "Nhà cung cấp & giá",
+      "description": "Tìm nguồn, hỏi MOQ, kiểm mẫu, làm rõ báo giá, lead time và điều kiện giao dịch."
+    },
+    {
+      "slug": "van-hanh-don-va-ton",
+      "title": "Vận hành đơn & tồn",
+      "description": "Xác nhận đơn, đồng bộ tồn, soạn đóng gói, theo dõi vận chuyển và xử lý thay đổi."
+    },
+    {
+      "slug": "hau-mai-va-toi-uu",
+      "title": "Hậu mãi & tối ưu",
+      "description": "Tư vấn, giải quyết sai hỏng, đổi trả, phản hồi đánh giá và đọc dữ liệu kinh doanh."
+    },
+    {
+      "slug": "thuc-hanh-giao-tiep-doc-lap",
+      "title": "Thực hành vận hành đơn trực tuyến",
+      "description": "Xác nhận phân loại, địa chỉ, kiện thiếu và trạng thái hậu mãi bằng thông tin có thể đối chiếu."
+    }
+  ],
+  "lessons": [
+    {
+      "moduleSlug": "san-pham-va-gian-hang",
+      "slug": "phan-loai-san-pham-va-vai-tro-gian-hang",
+      "title": "Phân loại sản phẩm và vai trò gian hàng",
+      "summary": "Nhận diện sản phẩm, danh mục và các khu vực cơ bản của một gian hàng trực tuyến.",
+      "situation": "Nhân viên mới làm quen danh mục",
+      "estimatedMinutes": 11,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l01-shangpin",
+          "hanzi": "商品",
+          "pinyin": "shāngpǐn",
+          "meaning": "sản phẩm, hàng hóa",
+          "example": "这个商品属于哪个类目？",
+          "translation": "Sản phẩm này thuộc danh mục nào?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l01-dianpu",
+          "hanzi": "店铺",
+          "pinyin": "diànpù",
+          "meaning": "gian hàng",
+          "example": "店铺首页需要更新。",
+          "translation": "Trang chủ gian hàng cần cập nhật.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l01-leimu",
+          "hanzi": "类目",
+          "pinyin": "lèimù",
+          "meaning": "danh mục",
+          "example": "请先选择正确的类目。",
+          "translation": "Hãy chọn đúng danh mục trước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l01-shangjia",
+          "hanzi": "上架",
+          "pinyin": "shàngjià",
+          "meaning": "đăng bán",
+          "example": "这个新品明天上架。",
+          "translation": "Sản phẩm mới này sẽ đăng bán ngày mai.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l01-xiajia",
+          "hanzi": "下架",
+          "pinyin": "xiàjià",
+          "meaning": "gỡ bán",
+          "example": "缺货商品先下架。",
+          "translation": "Sản phẩm hết hàng tạm thời gỡ bán.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l01-houtai",
+          "hanzi": "后台",
+          "pinyin": "hòutái",
+          "meaning": "trang quản trị",
+          "example": "请在后台检查商品状态。",
+          "translation": "Hãy kiểm tra trạng thái sản phẩm trong trang quản trị.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "新员工需要了解店铺和商品类目。",
+            "pinyin": "Xīn yuángōng xūyào liǎojiě diànpù hé shāngpǐn lèimù.",
+            "translation": "Nhân viên mới cần hiểu gian hàng và danh mục sản phẩm."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我先说明上架、下架和后台的基本流程。",
+            "pinyin": "Wǒ xiān shuōmíng shàngjià, xiàjià hé hòutái de jīběn liúchéng.",
+            "translation": "Tôi sẽ giải thích quy trình cơ bản về đăng bán, gỡ bán và trang quản trị."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Động tác đưa lên bán",
+            "pattern": "把商品上架 / 商品已上架",
+            "explanation": "上架 có thể dùng như động từ hoặc trạng thái đã được đăng bán."
+          },
+          {
+            "title": "Chọn đúng danh mục",
+            "pattern": "属于 + 类目",
+            "explanation": "Danh mục ảnh hưởng trường dữ liệu và quy tắc đăng sản phẩm của từng nền tảng."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "san-pham-va-gian-hang",
+      "slug": "thu-thap-thong-so-va-tao-sku",
+      "title": "Thu thập thông số và tạo SKU",
+      "summary": "Ghi nhận thuộc tính, mã hàng, kích thước và dữ liệu cần thiết cho từng biến thể.",
+      "situation": "Chuẩn bị bảng thông tin sản phẩm",
+      "estimatedMinutes": 13,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l02-sku",
+          "hanzi": "库存单位",
+          "pinyin": "kùcún dānwèi",
+          "meaning": "đơn vị lưu kho, SKU",
+          "example": "每个库存单位都有独立编码。",
+          "translation": "Mỗi SKU có một mã riêng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l02-bianma",
+          "hanzi": "编码",
+          "pinyin": "biānmǎ",
+          "meaning": "mã",
+          "example": "请核对产品编码。",
+          "translation": "Hãy đối chiếu mã sản phẩm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l02-shuxing",
+          "hanzi": "属性",
+          "pinyin": "shǔxìng",
+          "meaning": "thuộc tính",
+          "example": "颜色和尺寸是主要属性。",
+          "translation": "Màu sắc và kích thước là thuộc tính chính.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l02-canshu",
+          "hanzi": "参数",
+          "pinyin": "cānshù",
+          "meaning": "thông số",
+          "example": "参数表还缺少重量。",
+          "translation": "Bảng thông số còn thiếu trọng lượng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l02-chicun",
+          "hanzi": "尺寸",
+          "pinyin": "chǐcùn",
+          "meaning": "kích thước",
+          "example": "请确认包装尺寸。",
+          "translation": "Hãy xác nhận kích thước bao bì.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l02-zhongliang",
+          "hanzi": "重量",
+          "pinyin": "zhòngliàng",
+          "meaning": "trọng lượng",
+          "example": "净重量是五百克。",
+          "translation": "Trọng lượng tịnh là 500 gram.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "这个产品有三个颜色和两个尺寸。",
+            "pinyin": "Zhège chǎnpǐn yǒu sān ge yánsè hé liǎng ge chǐcùn.",
+            "translation": "Sản phẩm này có ba màu và hai kích thước."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会为每个组合建立独立的库存单位。",
+            "pinyin": "Wǒ huì wèi měi ge zǔhé jiànlì dúlì de kùcún dānwèi.",
+            "translation": "Tôi sẽ tạo một SKU riêng cho mỗi tổ hợp."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Mỗi tổ hợp một mã",
+            "pattern": "每个组合 + 独立编码",
+            "explanation": "Cấu trúc này giúp làm rõ rằng mỗi biến thể cần mã nhận diện riêng."
+          },
+          {
+            "title": "Phân biệt trọng lượng",
+            "pattern": "净重 / 毛重",
+            "explanation": "净重 là trọng lượng tịnh; 毛重 là tổng trọng lượng gồm bao bì."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "san-pham-va-gian-hang",
+      "slug": "viet-tieu-de-va-tu-khoa",
+      "title": "Viết tiêu đề và từ khóa",
+      "summary": "Sắp xếp tên sản phẩm, đặc điểm chính và từ khóa theo quy định nền tảng.",
+      "situation": "Soạn tiêu đề cho sản phẩm mới",
+      "estimatedMinutes": 12,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l03-biaoti",
+          "hanzi": "标题",
+          "pinyin": "biāotí",
+          "meaning": "tiêu đề",
+          "example": "商品标题要清楚。",
+          "translation": "Tiêu đề sản phẩm cần rõ ràng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l03-guanjianci",
+          "hanzi": "关键词",
+          "pinyin": "guānjiàncí",
+          "meaning": "từ khóa",
+          "example": "关键词要和商品相关。",
+          "translation": "Từ khóa phải liên quan đến sản phẩm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l03-pinpaiming",
+          "hanzi": "品牌名",
+          "pinyin": "pǐnpái míng",
+          "meaning": "tên thương hiệu",
+          "example": "请核对品牌名的写法。",
+          "translation": "Hãy kiểm tra cách viết tên thương hiệu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l03-maidian",
+          "hanzi": "卖点",
+          "pinyin": "màidiǎn",
+          "meaning": "điểm bán nổi bật",
+          "example": "标题里保留一个主要卖点。",
+          "translation": "Giữ một điểm bán chính trong tiêu đề.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l03-zifu",
+          "hanzi": "字符",
+          "pinyin": "zìfú",
+          "meaning": "ký tự",
+          "example": "标题不能超过规定字符。",
+          "translation": "Tiêu đề không được vượt quá số ký tự quy định.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l03-weigui",
+          "hanzi": "违规",
+          "pinyin": "wéiguī",
+          "meaning": "vi phạm quy định",
+          "example": "夸大宣传可能违规。",
+          "translation": "Quảng cáo phóng đại có thể vi phạm.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "这个标题太长，也有重复关键词。",
+            "pinyin": "Zhège biāotí tài cháng, yě yǒu chóngfù guānjiàncí.",
+            "translation": "Tiêu đề này quá dài và có từ khóa lặp."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会保留品名和主要卖点，并检查平台规则。",
+            "pinyin": "Wǒ huì bǎoliú pǐnmíng hé zhǔyào màidiǎn, bìng jiǎnchá píngtái guīzé.",
+            "translation": "Tôi sẽ giữ tên sản phẩm và điểm bán chính, đồng thời kiểm tra quy định nền tảng."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Thứ tự rõ ràng",
+            "pattern": "品名 + 核心属性 + 主要卖点",
+            "explanation": "Ưu tiên thông tin người mua cần để nhận diện sản phẩm."
+          },
+          {
+            "title": "Không nhồi từ khóa",
+            "pattern": "与商品相关",
+            "explanation": "Từ khóa phải đúng nội dung và phù hợp quy định của nền tảng đang dùng."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "san-pham-va-gian-hang",
+      "slug": "viet-mo-ta-va-diem-ban",
+      "title": "Viết mô tả và điểm bán",
+      "summary": "Trình bày tính năng, lợi ích, phạm vi sử dụng và giới hạn đã được xác minh.",
+      "situation": "Biên tập phần mô tả chi tiết",
+      "estimatedMinutes": 13,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l04-miaoshu",
+          "hanzi": "描述",
+          "pinyin": "miáoshù",
+          "meaning": "mô tả",
+          "example": "商品描述需要修改。",
+          "translation": "Mô tả sản phẩm cần chỉnh sửa.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l04-gongneng",
+          "hanzi": "功能",
+          "pinyin": "gōngnéng",
+          "meaning": "tính năng",
+          "example": "请说明主要功能。",
+          "translation": "Hãy nêu tính năng chính.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l04-youshi",
+          "hanzi": "优势",
+          "pinyin": "yōushì",
+          "meaning": "ưu điểm",
+          "example": "这个材料的优势是耐用。",
+          "translation": "Ưu điểm của vật liệu này là bền.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l04-shiyong",
+          "hanzi": "适用",
+          "pinyin": "shìyòng",
+          "meaning": "phù hợp sử dụng",
+          "example": "这款产品适用于室内。",
+          "translation": "Sản phẩm này phù hợp dùng trong nhà.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l04-xianzhi",
+          "hanzi": "限制",
+          "pinyin": "xiànzhì",
+          "meaning": "giới hạn",
+          "example": "页面要说明使用限制。",
+          "translation": "Trang sản phẩm cần nêu giới hạn sử dụng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l04-kuazhang",
+          "hanzi": "夸张",
+          "pinyin": "kuāzhāng",
+          "meaning": "phóng đại",
+          "example": "不要使用夸张承诺。",
+          "translation": "Không dùng cam kết phóng đại.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "页面只写了优点，没有说明使用限制。",
+            "pinyin": "Yèmiàn zhǐ xiě le yōudiǎn, méiyǒu shuōmíng shǐyòng xiànzhì.",
+            "translation": "Trang chỉ viết ưu điểm mà chưa nêu giới hạn sử dụng."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会补充适用范围，并删除没有依据的承诺。",
+            "pinyin": "Wǒ huì bǔchōng shìyòng fànwéi, bìng shānchú méiyǒu yījù de chéngnuò.",
+            "translation": "Tôi sẽ bổ sung phạm vi phù hợp và xóa cam kết không có căn cứ."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Nêu cả phạm vi",
+            "pattern": "适用于…… / 不适用于……",
+            "explanation": "Hai mẫu giúp mô tả rõ trường hợp phù hợp và không phù hợp."
+          },
+          {
+            "title": "Dựa trên dữ liệu",
+            "pattern": "根据已确认的信息",
+            "explanation": "Không tự tạo công dụng, chứng nhận hoặc cam kết chưa được xác minh."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "san-pham-va-gian-hang",
+      "slug": "quan-ly-hinh-anh-va-bien-the",
+      "title": "Quản lý hình ảnh và biến thể",
+      "summary": "Đối chiếu ảnh chính, ảnh chi tiết, màu sắc và lựa chọn biến thể với hàng thực tế.",
+      "situation": "Kiểm tra tài nguyên trước khi đăng",
+      "estimatedMinutes": 12,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l05-zhutu",
+          "hanzi": "主图",
+          "pinyin": "zhǔtú",
+          "meaning": "ảnh chính",
+          "example": "主图要展示实际商品。",
+          "translation": "Ảnh chính phải thể hiện sản phẩm thực tế.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l05-xiangqingtu",
+          "hanzi": "详情图",
+          "pinyin": "xiángqíng tú",
+          "meaning": "ảnh chi tiết",
+          "example": "详情图说明产品结构。",
+          "translation": "Ảnh chi tiết giải thích cấu tạo sản phẩm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l05-biantitu",
+          "hanzi": "变体图",
+          "pinyin": "biàntǐ tú",
+          "meaning": "ảnh biến thể",
+          "example": "每个颜色需要对应的变体图。",
+          "translation": "Mỗi màu cần ảnh biến thể tương ứng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l05-fenbianlv",
+          "hanzi": "分辨率",
+          "pinyin": "fēnbiànlǜ",
+          "meaning": "độ phân giải",
+          "example": "图片分辨率不够。",
+          "translation": "Độ phân giải ảnh chưa đủ.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l05-beijing",
+          "hanzi": "背景",
+          "pinyin": "bèijǐng",
+          "meaning": "nền ảnh",
+          "example": "主图背景要符合平台要求。",
+          "translation": "Nền ảnh chính phải phù hợp yêu cầu nền tảng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l05-secha",
+          "hanzi": "色差",
+          "pinyin": "sèchā",
+          "meaning": "chênh lệch màu",
+          "example": "页面要提示可能存在色差。",
+          "translation": "Trang cần lưu ý có thể có chênh lệch màu.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "蓝色变体用了黑色商品的图片。",
+            "pinyin": "Lánsè biàntǐ yòng le hēisè shāngpǐn de túpiàn.",
+            "translation": "Biến thể màu xanh đang dùng ảnh sản phẩm màu đen."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会重新对应图片，并检查所有变体。",
+            "pinyin": "Wǒ huì chóngxīn duìyìng túpiàn, bìng jiǎnchá suǒyǒu biàntǐ.",
+            "translation": "Tôi sẽ ghép lại đúng ảnh và kiểm tra tất cả biến thể."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Ảnh và biến thể tương ứng",
+            "pattern": "A 对应 B",
+            "explanation": "对应 diễn tả quan hệ ghép đúng giữa lựa chọn và tài nguyên."
+          },
+          {
+            "title": "Ảnh phản ánh thực tế",
+            "pattern": "以实物和已审核素材为准",
+            "explanation": "Chỉ dùng tài nguyên có quyền sử dụng và phản ánh đúng hàng hóa."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "san-pham-va-gian-hang",
+      "slug": "kiem-tra-san-pham-va-gian-hang",
+      "title": "Kiểm tra: Sản phẩm & gian hàng",
+      "summary": "Ôn danh mục, SKU, tiêu đề, mô tả, hình ảnh và quy tắc đăng bán.",
+      "situation": "Đánh giá cuối module 1",
+      "estimatedMinutes": 14,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l06-fabu",
+          "hanzi": "发布",
+          "pinyin": "fābù",
+          "meaning": "xuất bản",
+          "example": "商品审核通过后再发布。",
+          "translation": "Chỉ xuất bản sản phẩm sau khi duyệt.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l06-shenhe",
+          "hanzi": "审核",
+          "pinyin": "shěnhé",
+          "meaning": "kiểm duyệt",
+          "example": "页面正在等待审核。",
+          "translation": "Trang đang chờ kiểm duyệt.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l06-zhuangtai",
+          "hanzi": "状态",
+          "pinyin": "zhuàngtài",
+          "meaning": "trạng thái",
+          "example": "请确认商品状态。",
+          "translation": "Hãy xác nhận trạng thái sản phẩm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l06-bianji",
+          "hanzi": "编辑",
+          "pinyin": "biānjí",
+          "meaning": "chỉnh sửa",
+          "example": "我先编辑错误信息。",
+          "translation": "Tôi sẽ chỉnh sửa thông tin sai trước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l06-yulan",
+          "hanzi": "预览",
+          "pinyin": "yùlǎn",
+          "meaning": "xem trước",
+          "example": "发布前请预览页面。",
+          "translation": "Hãy xem trước trang trước khi xuất bản.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l06-jilu",
+          "hanzi": "记录",
+          "pinyin": "jìlù",
+          "meaning": "bản ghi, ghi lại",
+          "example": "修改后保留审核记录。",
+          "translation": "Sau khi sửa cần giữ bản ghi kiểm duyệt.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "新品资料已经填写完了。",
+            "pinyin": "Xīnpǐn zīliào yǐjīng tiánxiě wán le.",
+            "translation": "Dữ liệu sản phẩm mới đã được điền xong."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会先预览和审核，再安排发布。",
+            "pinyin": "Wǒ huì xiān yùlǎn hé shěnhé, zài ānpái fābù.",
+            "translation": "Tôi sẽ xem trước và kiểm duyệt rồi mới xuất bản."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Trình tự trước khi đăng",
+            "pattern": "先预览，再审核，最后发布",
+            "explanation": "先……再……最后…… giúp nêu quy trình theo thứ tự."
+          },
+          {
+            "title": "Giữ dấu vết thay đổi",
+            "pattern": "保留修改记录",
+            "explanation": "Bản ghi giúp xác định nội dung nào đã được duyệt và ai chịu trách nhiệm."
+          }
+        ],
+        "challenge": {
+          "title": "Kiểm tra sản phẩm & gian hàng",
+          "description": "Đạt 4/5 câu để chuyển sang làm việc với nhà cung cấp.",
+          "passScore": 4,
+          "questions": [
+            {
+              "prompt": "商品类目 dùng để chỉ gì?",
+              "options": [
+                "Danh mục sản phẩm",
+                "Mã vận đơn",
+                "Điều kiện hoàn tiền"
+              ],
+              "correctOption": 0,
+              "explanation": "商品 là sản phẩm; 类目 là nhóm hoặc danh mục phân loại."
+            },
+            {
+              "prompt": "SKU có vai trò nào trong vận hành?",
+              "options": [
+                "Phân biệt từng mặt hàng hoặc biến thể",
+                "Thay cho tên nhà cung cấp",
+                "Xác nhận đã giao hàng"
+              ],
+              "correctOption": 0,
+              "explanation": "SKU giúp đội ngũ nhận diện chính xác từng mặt hàng hoặc biến thể."
+            },
+            {
+              "prompt": "标题关键词 nghĩa là gì?",
+              "options": [
+                "Từ khóa trong tiêu đề",
+                "Giá niêm yết",
+                "Ảnh chi tiết"
+              ],
+              "correctOption": 0,
+              "explanation": "标题 là tiêu đề; 关键词 là từ khóa."
+            },
+            {
+              "prompt": "Khẳng định tuyệt đối về công dụng khi chưa có bằng chứng có phù hợp không?",
+              "options": [
+                "Không, phải bám dữ liệu đã xác minh và quy định nền tảng",
+                "Có, miễn giúp tăng lượt nhấp",
+                "Có, nếu đối thủ cũng dùng"
+              ],
+              "correctOption": 0,
+              "explanation": "Mô tả phải đúng dữ liệu, chính sách quảng cáo và quy định ngành hàng áp dụng."
+            },
+            {
+              "prompt": "主图 và 详情图 khác nhau thế nào?",
+              "options": [
+                "Ảnh chính đại diện và ảnh trình bày chi tiết",
+                "Ảnh cũ và ảnh mới",
+                "Ảnh nhà cung cấp và ảnh khách hàng"
+              ],
+              "correctOption": 0,
+              "explanation": "主图 là ảnh đại diện chính; 详情图 giải thích thêm đặc điểm và cách dùng."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "moduleSlug": "nha-cung-cap-va-gia",
+      "slug": "tim-kiem-va-sang-loc-nha-cung-cap",
+      "title": "Tìm kiếm và sàng lọc nhà cung cấp",
+      "summary": "Hỏi năng lực, mặt hàng chính và tài liệu cần thiết trước khi đưa vào danh sách đánh giá.",
+      "situation": "Liên hệ một nhà cung cấp mới",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l07-gongyingshang",
+          "hanzi": "供应商",
+          "pinyin": "gōngyìngshāng",
+          "meaning": "nhà cung cấp",
+          "example": "我们正在评估新供应商。",
+          "translation": "Chúng tôi đang đánh giá nhà cung cấp mới.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l07-gonghuo",
+          "hanzi": "供货",
+          "pinyin": "gōnghuò",
+          "meaning": "cung ứng hàng",
+          "example": "贵司可以稳定供货吗？",
+          "translation": "Quý công ty có thể cung ứng ổn định không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l07-zizhi",
+          "hanzi": "资质",
+          "pinyin": "zīzhì",
+          "meaning": "tư cách, hồ sơ năng lực",
+          "example": "请提供相关资质文件。",
+          "translation": "Hãy cung cấp hồ sơ năng lực liên quan.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l07-zhuying",
+          "hanzi": "主营",
+          "pinyin": "zhǔyíng",
+          "meaning": "kinh doanh chính",
+          "example": "贵司主营哪些产品？",
+          "translation": "Quý công ty chủ yếu kinh doanh sản phẩm nào?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l07-chaneng",
+          "hanzi": "产能",
+          "pinyin": "chǎnnéng",
+          "meaning": "năng lực sản xuất",
+          "example": "月产能大约是多少？",
+          "translation": "Năng lực sản xuất tháng khoảng bao nhiêu?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l07-beixuan",
+          "hanzi": "备选",
+          "pinyin": "bèixuǎn",
+          "meaning": "phương án dự phòng",
+          "example": "我们需要两家备选供应商。",
+          "translation": "Chúng tôi cần hai nhà cung cấp dự phòng.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们需要为新品寻找稳定的供应商。",
+            "pinyin": "Wǒmen xūyào wèi xīnpǐn xúnzhǎo wěndìng de gōngyìngshāng.",
+            "translation": "Chúng ta cần tìm nhà cung cấp ổn định cho sản phẩm mới."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会先确认主营产品、产能和资质。",
+            "pinyin": "Wǒ huì xiān quèrèn zhǔyíng chǎnpǐn, chǎnnéng hé zīzhì.",
+            "translation": "Tôi sẽ xác nhận mặt hàng chính, năng lực và hồ sơ trước."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Câu hỏi về năng lực",
+            "pattern": "贵司可以……吗？",
+            "explanation": "贵司 là cách gọi lịch sự công ty đối tác trong trao đổi thương mại."
+          },
+          {
+            "title": "Chưa kết luận từ lời giới thiệu",
+            "pattern": "需要进一步审核",
+            "explanation": "Thông tin tự cung cấp cần được kiểm chứng theo quy trình mua hàng thực tế."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "nha-cung-cap-va-gia",
+      "slug": "hoi-moq-va-bac-so-luong",
+      "title": "Hỏi MOQ và bậc số lượng",
+      "summary": "Làm rõ số lượng đặt tối thiểu và mức giá tương ứng với từng bậc mua.",
+      "situation": "Hỏi điều kiện đặt lô đầu",
+      "estimatedMinutes": 12,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l08-qidingliang",
+          "hanzi": "起订量",
+          "pinyin": "qǐdìngliàng",
+          "meaning": "số lượng đặt tối thiểu",
+          "example": "这款产品的起订量是多少？",
+          "translation": "MOQ của sản phẩm này là bao nhiêu?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l08-piliang",
+          "hanzi": "批量",
+          "pinyin": "pīliàng",
+          "meaning": "số lượng theo lô",
+          "example": "批量采购可以优惠吗？",
+          "translation": "Mua theo lô có thể ưu đãi không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l08-jieti",
+          "hanzi": "阶梯价",
+          "pinyin": "jiētī jià",
+          "meaning": "giá theo bậc",
+          "example": "请提供阶梯价。",
+          "translation": "Hãy cung cấp giá theo bậc.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l08-hunpi",
+          "hanzi": "混批",
+          "pinyin": "hùnpī",
+          "meaning": "gộp nhiều mẫu trong một lô",
+          "example": "不同颜色可以混批吗？",
+          "translation": "Có thể gộp nhiều màu trong một lô không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l08-xianhuo",
+          "hanzi": "现货",
+          "pinyin": "xiànhuò",
+          "meaning": "hàng có sẵn",
+          "example": "目前有多少现货？",
+          "translation": "Hiện có bao nhiêu hàng sẵn?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l08-dingzhi",
+          "hanzi": "定制",
+          "pinyin": "dìngzhì",
+          "meaning": "tùy chỉnh",
+          "example": "定制包装有单独起订量。",
+          "translation": "Bao bì tùy chỉnh có MOQ riêng.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们想先下小批量试单。",
+            "pinyin": "Wǒmen xiǎng xiān xià xiǎo pīliàng shìdān.",
+            "translation": "Chúng tôi muốn đặt thử một lô nhỏ trước."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会确认起订量、混批条件和阶梯价。",
+            "pinyin": "Wǒ huì quèrèn qǐdìngliàng, hùnpī tiáojiàn hé jiētī jià.",
+            "translation": "Tôi sẽ xác nhận MOQ, điều kiện gộp mẫu và giá theo bậc."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Hỏi MOQ",
+            "pattern": "起订量是多少？",
+            "explanation": "Có thể thêm 按颜色 hoặc 按款式 để hỏi MOQ theo màu hay mẫu."
+          },
+          {
+            "title": "Phân biệt hàng sẵn và tùy chỉnh",
+            "pattern": "现货 / 定制",
+            "explanation": "Hai loại thường có MOQ và thời gian chuẩn bị khác nhau."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "nha-cung-cap-va-gia",
+      "slug": "yeu-cau-mau-va-kiem-mau",
+      "title": "Yêu cầu mẫu và kiểm mẫu",
+      "summary": "Xác nhận phí mẫu, thời gian gửi, tiêu chuẩn và kết quả kiểm tra trước lô lớn.",
+      "situation": "Đề nghị gửi mẫu thử",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l09-yangpin",
+          "hanzi": "样品",
+          "pinyin": "yàngpǐn",
+          "meaning": "mẫu",
+          "example": "请先寄两个样品。",
+          "translation": "Hãy gửi trước hai mẫu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l09-yangpinfei",
+          "hanzi": "样品费",
+          "pinyin": "yàngpǐn fèi",
+          "meaning": "phí mẫu",
+          "example": "样品费可以退吗？",
+          "translation": "Phí mẫu có được hoàn lại không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l09-jiyang",
+          "hanzi": "寄样",
+          "pinyin": "jìyàng",
+          "meaning": "gửi mẫu",
+          "example": "确认付款后安排寄样。",
+          "translation": "Sau khi xác nhận thanh toán sẽ gửi mẫu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l09-jiance",
+          "hanzi": "检测",
+          "pinyin": "jiǎncè",
+          "meaning": "kiểm tra, kiểm nghiệm",
+          "example": "样品需要做功能检测。",
+          "translation": "Mẫu cần kiểm tra tính năng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l09-biaozhun",
+          "hanzi": "标准",
+          "pinyin": "biāozhǔn",
+          "meaning": "tiêu chuẩn",
+          "example": "请按照确认的标准生产。",
+          "translation": "Hãy sản xuất theo tiêu chuẩn đã xác nhận.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l09-querenyang",
+          "hanzi": "确认样",
+          "pinyin": "quèrèn yàng",
+          "meaning": "mẫu đã duyệt",
+          "example": "确认样要保留作对照。",
+          "translation": "Cần giữ mẫu đã duyệt để đối chiếu.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "量产前需要先确认样品质量。",
+            "pinyin": "Liàngchǎn qián xūyào xiān quèrèn yàngpǐn zhìliàng.",
+            "translation": "Trước sản xuất hàng loạt cần xác nhận chất lượng mẫu."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会写清样品规格、检测标准和寄样时间。",
+            "pinyin": "Wǒ huì xiě qīng yàngpǐn guīgé, jiǎncè biāozhǔn hé jìyàng shíjiān.",
+            "translation": "Tôi sẽ ghi rõ quy cách mẫu, tiêu chuẩn kiểm và thời gian gửi mẫu."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Làm rõ phạm vi mẫu",
+            "pattern": "样品规格 + 数量 + 标准",
+            "explanation": "Ba phần giúp giảm việc hai bên gửi và đánh giá sai mẫu."
+          },
+          {
+            "title": "Mẫu duyệt làm đối chiếu",
+            "pattern": "以确认样为准",
+            "explanation": "Chỉ dùng khi hai bên đã thống nhất mẫu nào là bản tham chiếu."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "nha-cung-cap-va-gia",
+      "slug": "doc-bao-gia-va-chi-phi",
+      "title": "Đọc báo giá và chi phí",
+      "summary": "Phân biệt đơn giá, thuế, đóng gói, vận chuyển và thời hạn hiệu lực của báo giá.",
+      "situation": "Đối chiếu báo giá từ đối tác",
+      "estimatedMinutes": 14,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l10-baojia",
+          "hanzi": "报价",
+          "pinyin": "bàojià",
+          "meaning": "báo giá",
+          "example": "请发送正式报价。",
+          "translation": "Hãy gửi báo giá chính thức.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l10-danjia",
+          "hanzi": "单价",
+          "pinyin": "dānjià",
+          "meaning": "đơn giá",
+          "example": "这个单价对应多少数量？",
+          "translation": "Đơn giá này ứng với số lượng bao nhiêu?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l10-hanshuijia",
+          "hanzi": "含税价",
+          "pinyin": "hánshuì jià",
+          "meaning": "giá gồm thuế",
+          "example": "请确认是否为含税价。",
+          "translation": "Hãy xác nhận đây có phải giá gồm thuế không.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l10-baozhuangfei",
+          "hanzi": "包装费",
+          "pinyin": "bāozhuāng fèi",
+          "meaning": "phí đóng gói",
+          "example": "定制包装费单独计算。",
+          "translation": "Phí bao bì tùy chỉnh được tính riêng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l10-yunfei",
+          "hanzi": "运费",
+          "pinyin": "yùnfèi",
+          "meaning": "phí vận chuyển",
+          "example": "报价里不包含运费。",
+          "translation": "Báo giá chưa gồm phí vận chuyển.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l10-youxiaoqi",
+          "hanzi": "有效期",
+          "pinyin": "yǒuxiàoqī",
+          "meaning": "thời hạn hiệu lực",
+          "example": "这份报价有效期为七天。",
+          "translation": "Báo giá này có hiệu lực bảy ngày.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "这份报价没有说明税费和运费。",
+            "pinyin": "Zhè fèn bàojià méiyǒu shuōmíng shuìfèi hé yùnfèi.",
+            "translation": "Báo giá này chưa nêu thuế và phí vận chuyển."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会请供应商补充费用明细和有效期。",
+            "pinyin": "Wǒ huì qǐng gōngyìngshāng bǔchōng fèiyòng míngxì hé yǒuxiàoqī.",
+            "translation": "Tôi sẽ đề nghị nhà cung cấp bổ sung chi tiết chi phí và thời hạn hiệu lực."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Giá ứng với điều kiện",
+            "pattern": "单价对应 + 数量",
+            "explanation": "Một đơn giá chỉ có ý nghĩa khi đi cùng số lượng, quy cách và điều kiện liên quan."
+          },
+          {
+            "title": "Xác nhận bao gồm hay chưa",
+            "pattern": "包含 / 不包含",
+            "explanation": "Dùng để làm rõ thuế, phí đóng gói, vận chuyển và các khoản khác."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "nha-cung-cap-va-gia",
+      "slug": "thuong-luong-giao-hang-va-thanh-toan",
+      "title": "Thương lượng giao hàng và thanh toán",
+      "summary": "Làm rõ lead time, đặt cọc, số dư và mốc giao mà không vượt thẩm quyền.",
+      "situation": "Thống nhất điều kiện trước đơn mua",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l11-jiaoqi",
+          "hanzi": "交期",
+          "pinyin": "jiāoqī",
+          "meaning": "thời hạn giao",
+          "example": "正常交期是十五天。",
+          "translation": "Lead time thông thường là 15 ngày.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l11-dingjin",
+          "hanzi": "定金",
+          "pinyin": "dìngjīn",
+          "meaning": "tiền đặt cọc",
+          "example": "合同确认后支付定金。",
+          "translation": "Sau khi xác nhận hợp đồng sẽ trả đặt cọc.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l11-weikuan",
+          "hanzi": "尾款",
+          "pinyin": "wěikuǎn",
+          "meaning": "số tiền còn lại",
+          "example": "验货后支付尾款。",
+          "translation": "Sau khi kiểm hàng sẽ trả số tiền còn lại.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l11-fukuantiaojian",
+          "hanzi": "付款条件",
+          "pinyin": "fùkuǎn tiáojiàn",
+          "meaning": "điều kiện thanh toán",
+          "example": "双方要确认付款条件。",
+          "translation": "Hai bên cần xác nhận điều kiện thanh toán.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l11-yanqi",
+          "hanzi": "延期",
+          "pinyin": "yánqī",
+          "meaning": "trì hoãn",
+          "example": "如果延期，请提前通知。",
+          "translation": "Nếu trì hoãn, hãy báo trước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l11-shenpi",
+          "hanzi": "审批",
+          "pinyin": "shěnpī",
+          "meaning": "phê duyệt",
+          "example": "付款需要内部审批。",
+          "translation": "Thanh toán cần phê duyệt nội bộ.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "供应商希望先付全部货款。",
+            "pinyin": "Gōngyìngshāng xīwàng xiān fù quánbù huòkuǎn.",
+            "translation": "Nhà cung cấp muốn thanh toán toàn bộ tiền hàng trước."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会记录条件并提交审批，不会自行承诺。",
+            "pinyin": "Wǒ huì jìlù tiáojiàn bìng tíjiāo shěnpī, bú huì zìxíng chéngnuò.",
+            "translation": "Tôi sẽ ghi nhận điều kiện và trình phê duyệt, không tự cam kết."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Điều kiện nếu trì hoãn",
+            "pattern": "如果延期，请……",
+            "explanation": "如果 nêu điều kiện; vế sau nêu hành động mong muốn."
+          },
+          {
+            "title": "Không tự cam kết thanh toán",
+            "pattern": "需要内部审批",
+            "explanation": "Luôn theo hợp đồng, thẩm quyền và quy trình xác minh tài khoản thực tế."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "nha-cung-cap-va-gia",
+      "slug": "kiem-tra-nha-cung-cap-va-gia",
+      "title": "Kiểm tra: Nhà cung cấp & giá",
+      "summary": "Ôn sàng lọc đối tác, MOQ, mẫu, báo giá, lead time và điều kiện thanh toán.",
+      "situation": "Đánh giá cuối module 2",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l12-caigou",
+          "hanzi": "采购",
+          "pinyin": "cǎigòu",
+          "meaning": "mua hàng, thu mua",
+          "example": "采购团队正在比价。",
+          "translation": "Đội thu mua đang so sánh giá.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l12-xunjia",
+          "hanzi": "询价",
+          "pinyin": "xúnjià",
+          "meaning": "hỏi giá",
+          "example": "我们向三家供应商询价。",
+          "translation": "Chúng tôi hỏi giá ba nhà cung cấp.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l12-bijia",
+          "hanzi": "比价",
+          "pinyin": "bǐjià",
+          "meaning": "so sánh giá",
+          "example": "比价时也要看交期。",
+          "translation": "Khi so giá cũng phải xem lead time.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l12-hetong",
+          "hanzi": "合同",
+          "pinyin": "hétong",
+          "meaning": "hợp đồng",
+          "example": "合同条款需要审核。",
+          "translation": "Điều khoản hợp đồng cần được duyệt.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l12-tiaokuan",
+          "hanzi": "条款",
+          "pinyin": "tiáokuǎn",
+          "meaning": "điều khoản",
+          "example": "请确认质量条款。",
+          "translation": "Hãy xác nhận điều khoản chất lượng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l12-fengxian",
+          "hanzi": "风险",
+          "pinyin": "fēngxiǎn",
+          "meaning": "rủi ro",
+          "example": "预付款存在一定风险。",
+          "translation": "Trả trước có một mức rủi ro nhất định.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们要从三份报价中选择合作方案。",
+            "pinyin": "Wǒmen yào cóng sān fèn bàojià zhōng xuǎnzé hézuò fāng'àn.",
+            "translation": "Chúng ta cần chọn phương án hợp tác từ ba báo giá."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会综合比较价格、质量、交期和风险。",
+            "pinyin": "Wǒ huì zōnghé bǐjiào jiàgé, zhìliàng, jiāoqī hé fēngxiǎn.",
+            "translation": "Tôi sẽ so sánh tổng hợp giá, chất lượng, lead time và rủi ro."
+          }
+        ],
+        "notes": [
+          {
+            "title": "So sánh nhiều yếu tố",
+            "pattern": "综合比较 A、B 和 C",
+            "explanation": "综合比较 nhấn mạnh quyết định không chỉ dựa trên một chỉ số."
+          },
+          {
+            "title": "Hợp đồng cần chuyên môn",
+            "pattern": "条款需要审核",
+            "explanation": "Nội dung ngôn ngữ không thay thế tư vấn pháp lý, thuế, hải quan hoặc tài chính."
+          }
+        ],
+        "challenge": {
+          "title": "Kiểm tra nhà cung cấp & giá",
+          "description": "Đạt 4/5 câu để chuyển sang vận hành đơn và tồn kho.",
+          "passScore": 4,
+          "questions": [
+            {
+              "prompt": "起订量 nghĩa là gì?",
+              "options": [
+                "Số lượng đặt tối thiểu",
+                "Số lượng đã bán",
+                "Số lượng hàng lỗi"
+              ],
+              "correctOption": 0,
+              "explanation": "起订量 là ngưỡng số lượng tối thiểu nhà cung cấp chấp nhận cho một đơn."
+            },
+            {
+              "prompt": "Khi yêu cầu mẫu, nên xác nhận thêm điều gì?",
+              "options": [
+                "Phí mẫu, thời gian gửi và tiêu chuẩn kiểm",
+                "Chỉ màu bao bì",
+                "Chỉ số người liên hệ"
+              ],
+              "correctOption": 0,
+              "explanation": "Các điều kiện này giúp hai bên hiểu cùng phạm vi trước khi đánh giá mẫu."
+            },
+            {
+              "prompt": "含税价 dùng để chỉ gì?",
+              "options": [
+                "Giá đã gồm thuế",
+                "Giá chưa gồm vận chuyển",
+                "Giá bán lẻ đề xuất"
+              ],
+              "correctOption": 0,
+              "explanation": "含税 nghĩa là đã bao gồm thuế trong mức giá được nêu."
+            },
+            {
+              "prompt": "交期 nên được xác nhận bằng cách nào?",
+              "options": [
+                "Nêu mốc cụ thể và điều kiện bắt đầu tính",
+                "Chỉ nói càng sớm càng tốt",
+                "Tự ước lượng thay nhà cung cấp"
+              ],
+              "correctOption": 0,
+              "explanation": "Lead time cần mốc và điểm bắt đầu rõ ràng để theo dõi."
+            },
+            {
+              "prompt": "Trước khi đặt cọc, cần làm gì?",
+              "options": [
+                "Xác minh đối tác, hợp đồng và quy trình phê duyệt",
+                "Chuyển tiền theo tin nhắn cá nhân",
+                "Bỏ qua thông tin tài khoản"
+              ],
+              "correctOption": 0,
+              "explanation": "Khóa học ngôn ngữ không thay thế quy trình pháp lý, tài chính và kiểm soát nhà cung cấp."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "moduleSlug": "van-hanh-don-va-ton",
+      "slug": "tiep-nhan-va-xac-nhan-don",
+      "title": "Tiếp nhận và xác nhận đơn",
+      "summary": "Đọc trạng thái, xác nhận thanh toán và phát hiện thông tin đơn còn thiếu.",
+      "situation": "Kiểm tra danh sách đơn mới",
+      "estimatedMinutes": 12,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l13-dingdan",
+          "hanzi": "订单",
+          "pinyin": "dìngdān",
+          "meaning": "đơn hàng",
+          "example": "今天有五十个新订单。",
+          "translation": "Hôm nay có 50 đơn mới.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l13-daifukuan",
+          "hanzi": "待付款",
+          "pinyin": "dài fùkuǎn",
+          "meaning": "chờ thanh toán",
+          "example": "这个订单还是待付款。",
+          "translation": "Đơn này vẫn đang chờ thanh toán.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l13-yifukuan",
+          "hanzi": "已付款",
+          "pinyin": "yǐ fùkuǎn",
+          "meaning": "đã thanh toán",
+          "example": "系统显示买家已付款。",
+          "translation": "Hệ thống hiển thị người mua đã thanh toán.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l13-daifahuo",
+          "hanzi": "待发货",
+          "pinyin": "dài fāhuò",
+          "meaning": "chờ gửi hàng",
+          "example": "待发货订单需要今天处理。",
+          "translation": "Đơn chờ gửi cần xử lý hôm nay.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l13-beizhu",
+          "hanzi": "备注",
+          "pinyin": "bèizhù",
+          "meaning": "ghi chú",
+          "example": "买家在订单里留了备注。",
+          "translation": "Người mua đã để lại ghi chú trong đơn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l13-shouhuoren",
+          "hanzi": "收货人",
+          "pinyin": "shōuhuòrén",
+          "meaning": "người nhận",
+          "example": "请核对收货人姓名。",
+          "translation": "Hãy đối chiếu tên người nhận.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "这个订单已付款，但收货信息不完整。",
+            "pinyin": "Zhège dìngdān yǐ fùkuǎn, dàn shōuhuò xìnxī bù wánzhěng.",
+            "translation": "Đơn này đã thanh toán nhưng thông tin nhận hàng chưa đầy đủ."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会先联系买家确认，再安排发货。",
+            "pinyin": "Wǒ huì xiān liánxì mǎijiā quèrèn, zài ānpái fāhuò.",
+            "translation": "Tôi sẽ liên hệ người mua xác nhận rồi mới sắp xếp gửi hàng."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Trạng thái với 待 / 已",
+            "pattern": "待付款 / 已付款",
+            "explanation": "待 là đang chờ; 已 cho biết hành động đã hoàn thành."
+          },
+          {
+            "title": "Không tự suy đoán thông tin",
+            "pattern": "联系买家确认",
+            "explanation": "Địa chỉ và người nhận cần được xác nhận theo luồng được nền tảng cho phép."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "van-hanh-don-va-ton",
+      "slug": "dong-bo-ton-kho-va-canh-bao-het-hang",
+      "title": "Đồng bộ tồn kho và cảnh báo hết hàng",
+      "summary": "Đối chiếu tồn khả dụng, tồn giữ chỗ và ngăn bán vượt số lượng thực tế.",
+      "situation": "Số tồn giữa kho và gian hàng lệch nhau",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l14-kucun",
+          "hanzi": "库存",
+          "pinyin": "kùcún",
+          "meaning": "tồn kho",
+          "example": "系统库存和实际数量不同。",
+          "translation": "Tồn hệ thống và số lượng thực tế khác nhau.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l14-tongbu",
+          "hanzi": "同步",
+          "pinyin": "tóngbù",
+          "meaning": "đồng bộ",
+          "example": "库存每十分钟同步一次。",
+          "translation": "Tồn kho đồng bộ mỗi 10 phút.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l14-keyong",
+          "hanzi": "可用库存",
+          "pinyin": "kěyòng kùcún",
+          "meaning": "tồn khả dụng",
+          "example": "可用库存只剩十件。",
+          "translation": "Tồn khả dụng chỉ còn 10 món.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l14-suoding",
+          "hanzi": "锁定库存",
+          "pinyin": "suǒdìng kùcún",
+          "meaning": "tồn đã giữ chỗ",
+          "example": "未付款订单会短暂锁定库存。",
+          "translation": "Đơn chưa thanh toán sẽ tạm giữ tồn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l14-chaomai",
+          "hanzi": "超卖",
+          "pinyin": "chāomài",
+          "meaning": "bán vượt tồn",
+          "example": "库存延迟可能导致超卖。",
+          "translation": "Tồn cập nhật chậm có thể gây bán vượt.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l14-quexiao",
+          "hanzi": "缺货",
+          "pinyin": "quēhuò",
+          "meaning": "hết hàng",
+          "example": "这个颜色暂时缺货。",
+          "translation": "Màu này tạm thời hết hàng.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "平台显示二十件，仓库实际只有十二件。",
+            "pinyin": "Píngtái xiǎnshì èrshí jiàn, cāngkù shíjì zhǐ yǒu shí'èr jiàn.",
+            "translation": "Nền tảng hiển thị 20 món nhưng kho thực tế chỉ có 12."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会暂停销售并核对库存同步记录。",
+            "pinyin": "Wǒ huì zàntíng xiāoshòu bìng héduì kùcún tóngbù jìlù.",
+            "translation": "Tôi sẽ tạm dừng bán và đối chiếu bản ghi đồng bộ tồn."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Số hệ thống và thực tế",
+            "pattern": "系统显示……，实际只有……",
+            "explanation": "Cấu trúc này nêu rõ hai nguồn số liệu đang chênh lệch."
+          },
+          {
+            "title": "Ưu tiên ngăn bán vượt",
+            "pattern": "先暂停，再核对",
+            "explanation": "Hành động cụ thể phải theo SOP và quyền của hệ thống đang vận hành."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "van-hanh-don-va-ton",
+      "slug": "soan-hang-dong-goi-va-ban-giao",
+      "title": "Soạn hàng, đóng gói và bàn giao",
+      "summary": "Xác nhận mã hàng, số lượng, vật liệu đóng gói và biên bản bàn giao vận chuyển.",
+      "situation": "Chuẩn bị đơn cho ca lấy hàng",
+      "estimatedMinutes": 14,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l15-jianhuo",
+          "hanzi": "拣货",
+          "pinyin": "jiǎnhuò",
+          "meaning": "soạn hàng",
+          "example": "请按照清单拣货。",
+          "translation": "Hãy soạn hàng theo danh sách.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l15-fuhe",
+          "hanzi": "复核",
+          "pinyin": "fùhé",
+          "meaning": "kiểm tra lại",
+          "example": "打包前要复核型号。",
+          "translation": "Trước đóng gói phải kiểm tra lại mẫu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l15-dabao",
+          "hanzi": "打包",
+          "pinyin": "dǎbāo",
+          "meaning": "đóng gói",
+          "example": "易碎品需要单独打包。",
+          "translation": "Hàng dễ vỡ cần đóng gói riêng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l15-miandan",
+          "hanzi": "面单",
+          "pinyin": "miàndān",
+          "meaning": "nhãn vận chuyển",
+          "example": "面单上的地址不清楚。",
+          "translation": "Địa chỉ trên nhãn vận chuyển không rõ.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l15-jiaojie",
+          "hanzi": "交接",
+          "pinyin": "jiāojiē",
+          "meaning": "bàn giao",
+          "example": "下午三点和快递交接。",
+          "translation": "Ba giờ chiều bàn giao cho chuyển phát.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l15-saomiao",
+          "hanzi": "扫描",
+          "pinyin": "sǎomiáo",
+          "meaning": "quét mã",
+          "example": "出库前扫描条码。",
+          "translation": "Quét mã vạch trước khi xuất kho.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "今天下午快递会来取两百个包裹。",
+            "pinyin": "Jīntiān xiàwǔ kuàidì huì lái qǔ liǎngbǎi ge bāoguǒ.",
+            "translation": "Chiều nay đơn vị chuyển phát sẽ lấy 200 kiện."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们先拣货复核，再扫描面单并完成交接。",
+            "pinyin": "Wǒmen xiān jiǎnhuò fùhé, zài sǎomiáo miàndān bìng wánchéng jiāojiē.",
+            "translation": "Chúng ta soạn và kiểm lại trước, sau đó quét nhãn và hoàn tất bàn giao."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Chuỗi thao tác",
+            "pattern": "拣货 → 复核 → 打包 → 交接",
+            "explanation": "Bốn từ giúp mô tả luồng hoàn tất đơn theo thứ tự."
+          },
+          {
+            "title": "Hàng đặc biệt theo SOP",
+            "pattern": "易碎品需要……",
+            "explanation": "Vật liệu và cách đóng gói phải theo tiêu chuẩn hàng hóa và đơn vị vận chuyển."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "van-hanh-don-va-ton",
+      "slug": "theo-doi-van-don-va-bao-cham",
+      "title": "Theo dõi vận đơn và báo chậm",
+      "summary": "Tra cứu vận đơn, nhận diện cập nhật bất thường và báo người mua bằng mốc có căn cứ.",
+      "situation": "Vận đơn chưa cập nhật hai ngày",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l16-yundan",
+          "hanzi": "运单",
+          "pinyin": "yùndān",
+          "meaning": "vận đơn",
+          "example": "请提供运单号码。",
+          "translation": "Hãy cung cấp mã vận đơn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l16-guiji",
+          "hanzi": "物流轨迹",
+          "pinyin": "wùliú guǐjì",
+          "meaning": "hành trình vận chuyển",
+          "example": "物流轨迹两天没有更新。",
+          "translation": "Hành trình vận chuyển chưa cập nhật hai ngày.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l16-lanzhou",
+          "hanzi": "揽收",
+          "pinyin": "lǎnshōu",
+          "meaning": "đã nhận kiện",
+          "example": "包裹还没有揽收记录。",
+          "translation": "Kiện chưa có bản ghi nhận hàng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l16-zhongzhuan",
+          "hanzi": "中转",
+          "pinyin": "zhōngzhuǎn",
+          "meaning": "trung chuyển",
+          "example": "包裹正在中转站。",
+          "translation": "Kiện đang ở trạm trung chuyển.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l16-yichang",
+          "hanzi": "异常",
+          "pinyin": "yìcháng",
+          "meaning": "bất thường",
+          "example": "系统提示物流异常。",
+          "translation": "Hệ thống báo vận chuyển bất thường.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l16-cuijian",
+          "hanzi": "催件",
+          "pinyin": "cuījiàn",
+          "meaning": "thúc giao kiện",
+          "example": "我们已经向承运方催件。",
+          "translation": "Chúng tôi đã thúc đơn vị vận chuyển.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "买家问为什么物流一直没有更新。",
+            "pinyin": "Mǎijiā wèn wèishénme wùliú yìzhí méiyǒu gēngxīn.",
+            "translation": "Người mua hỏi vì sao vận chuyển chưa cập nhật."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我先联系承运方核实，再给买家明确回复时间。",
+            "pinyin": "Wǒ xiān liánxì chéngyùnfāng héshí, zài gěi mǎijiā míngquè huífù shíjiān.",
+            "translation": "Tôi sẽ xác minh với đơn vị vận chuyển rồi báo người mua mốc phản hồi rõ ràng."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Chưa cập nhật",
+            "pattern": "一直没有更新",
+            "explanation": "一直 nhấn mạnh trạng thái kéo dài đến hiện tại."
+          },
+          {
+            "title": "Không hứa mốc chưa xác minh",
+            "pattern": "核实后回复",
+            "explanation": "Phân biệt mốc phản hồi của đội hỗ trợ với mốc giao thực tế của đơn vị vận chuyển."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "van-hanh-don-va-ton",
+      "slug": "xu-ly-huy-don-va-doi-dia-chi",
+      "title": "Xử lý hủy đơn và đổi địa chỉ",
+      "summary": "Kiểm tra trạng thái trước khi hủy, chặn xuất hoặc đề nghị thay đổi thông tin nhận hàng.",
+      "situation": "Người mua muốn thay đổi sau khi đặt",
+      "estimatedMinutes": 14,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l17-quxiao",
+          "hanzi": "取消订单",
+          "pinyin": "qǔxiāo dìngdān",
+          "meaning": "hủy đơn",
+          "example": "买家申请取消订单。",
+          "translation": "Người mua yêu cầu hủy đơn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l17-gaizhi",
+          "hanzi": "修改地址",
+          "pinyin": "xiūgǎi dìzhǐ",
+          "meaning": "đổi địa chỉ",
+          "example": "发货后可能无法修改地址。",
+          "translation": "Sau khi gửi có thể không đổi được địa chỉ.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l17-lanjie",
+          "hanzi": "拦截",
+          "pinyin": "lánjié",
+          "meaning": "chặn kiện",
+          "example": "我们正在申请拦截包裹。",
+          "translation": "Chúng tôi đang đề nghị chặn kiện.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l17-chuku",
+          "hanzi": "出库",
+          "pinyin": "chūkù",
+          "meaning": "xuất kho",
+          "example": "订单已经出库。",
+          "translation": "Đơn đã xuất kho.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l17-chehui",
+          "hanzi": "撤回",
+          "pinyin": "chèhuí",
+          "meaning": "rút lại",
+          "example": "仓库还可以撤回任务。",
+          "translation": "Kho vẫn có thể rút lại tác vụ.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l17-yuandizhi",
+          "hanzi": "原地址",
+          "pinyin": "yuán dìzhǐ",
+          "meaning": "địa chỉ ban đầu",
+          "example": "包裹可能继续寄往原地址。",
+          "translation": "Kiện có thể tiếp tục gửi đến địa chỉ ban đầu.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "订单已经出库，买家现在要改地址。",
+            "pinyin": "Dìngdān yǐjīng chūkù, mǎijiā xiànzài yào gǎi dìzhǐ.",
+            "translation": "Đơn đã xuất kho, giờ người mua muốn đổi địa chỉ."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会查询是否可以拦截，并说明可能的结果。",
+            "pinyin": "Wǒ huì cháxún shìfǒu kěyǐ lánjié, bìng shuōmíng kěnéng de jiéguǒ.",
+            "translation": "Tôi sẽ kiểm tra có thể chặn kiện không và giải thích các kết quả có thể xảy ra."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Khả năng thay đổi",
+            "pattern": "是否可以……",
+            "explanation": "Dùng để hỏi khả năng thực tế thay vì cam kết trước."
+          },
+          {
+            "title": "Nêu kết quả có thể",
+            "pattern": "可能……",
+            "explanation": "Giúp người mua hiểu rủi ro khi đơn đã sang bước kho hoặc vận chuyển."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "van-hanh-don-va-ton",
+      "slug": "kiem-tra-van-hanh-don-va-ton",
+      "title": "Kiểm tra: Vận hành đơn & tồn",
+      "summary": "Ôn trạng thái đơn, tồn kho, soạn đóng gói, vận đơn và thay đổi sau đặt hàng.",
+      "situation": "Đánh giá cuối module 3",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l18-lvyue",
+          "hanzi": "订单履约",
+          "pinyin": "dìngdān lǚyuē",
+          "meaning": "thực hiện đơn hàng",
+          "example": "订单履约效率需要提高。",
+          "translation": "Hiệu quả thực hiện đơn cần cải thiện.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l18-shixiao",
+          "hanzi": "时效",
+          "pinyin": "shíxiào",
+          "meaning": "thời gian đáp ứng",
+          "example": "这个渠道的配送时效更快。",
+          "translation": "Kênh này có thời gian giao nhanh hơn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l18-jiedan",
+          "hanzi": "截单",
+          "pinyin": "jiédān",
+          "meaning": "chốt đơn theo giờ",
+          "example": "每天四点截单。",
+          "translation": "Mỗi ngày chốt đơn lúc bốn giờ.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l18-loudan",
+          "hanzi": "漏单",
+          "pinyin": "lòudān",
+          "meaning": "bỏ sót đơn",
+          "example": "系统异常导致一个订单漏单。",
+          "translation": "Lỗi hệ thống khiến một đơn bị bỏ sót.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l18-duizhang",
+          "hanzi": "对账",
+          "pinyin": "duìzhàng",
+          "meaning": "đối soát",
+          "example": "交接后要核对账目。",
+          "translation": "Sau bàn giao cần đối soát.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l18-bihe",
+          "hanzi": "闭环",
+          "pinyin": "bìhuán",
+          "meaning": "khép kín quy trình",
+          "example": "异常处理后要形成闭环。",
+          "translation": "Sau xử lý bất thường cần khép kín quy trình.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "昨天有一个订单没有按时发出。",
+            "pinyin": "Zuótiān yǒu yí ge dìngdān méiyǒu ànshí fāchū.",
+            "translation": "Hôm qua có một đơn không được gửi đúng hạn."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会查明漏单环节，补发并记录闭环。",
+            "pinyin": "Wǒ huì chámíng lòudān huánjié, bǔfā bìng jìlù bìhuán.",
+            "translation": "Tôi sẽ xác định khâu bỏ sót, gửi bổ sung và ghi lại việc khép kín xử lý."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Đúng hạn",
+            "pattern": "按时 + 动词",
+            "explanation": "按时发出 nghĩa là gửi đúng thời hạn đã quy định."
+          },
+          {
+            "title": "Khép kín sự cố",
+            "pattern": "原因 + 处理 + 预防",
+            "explanation": "Một bản ghi tốt gồm nguyên nhân, cách xử lý và biện pháp ngăn lặp lại."
+          }
+        ],
+        "challenge": {
+          "title": "Kiểm tra vận hành đơn & tồn",
+          "description": "Đạt 4/5 câu để chuyển sang hậu mãi và tối ưu.",
+          "passScore": 4,
+          "questions": [
+            {
+              "prompt": "待发货 mô tả trạng thái nào?",
+              "options": [
+                "Chờ gửi hàng",
+                "Đã hoàn tiền",
+                "Đã đánh giá"
+              ],
+              "correctOption": 0,
+              "explanation": "待 phát biểu trạng thái đang chờ; 发货 là gửi hàng."
+            },
+            {
+              "prompt": "库存同步 có tác dụng gì?",
+              "options": [
+                "Đồng bộ số lượng tồn giữa các hệ thống",
+                "Đổi địa chỉ nhận hàng",
+                "Tạo mã giảm giá"
+              ],
+              "correctOption": 0,
+              "explanation": "Đồng bộ tồn giúp giảm rủi ro bán vượt số lượng thực tế."
+            },
+            {
+              "prompt": "拣货 và 打包 là gì?",
+              "options": [
+                "Soạn hàng và đóng gói",
+                "Kiểm hàng và hoàn tiền",
+                "Đặt hàng và hủy hàng"
+              ],
+              "correctOption": 0,
+              "explanation": "拣货 là lấy đúng mặt hàng; 打包 là đóng gói để bàn giao."
+            },
+            {
+              "prompt": "Đơn có nguy cơ giao trễ. Nên làm gì?",
+              "options": [
+                "Xác minh với đơn vị vận chuyển rồi cập nhật mốc có căn cứ",
+                "Tự hứa chắc chắn giao trong ngày",
+                "Ẩn trạng thái đơn"
+              ],
+              "correctOption": 0,
+              "explanation": "Thông tin có căn cứ giúp người mua quyết định và tránh cam kết sai."
+            },
+            {
+              "prompt": "Khách xin đổi địa chỉ sau khi đã xuất kho. Cách xử lý đúng là gì?",
+              "options": [
+                "Kiểm tra trạng thái và khả năng can thiệp theo quy trình",
+                "Tự sửa mà không báo kho",
+                "Luôn khẳng định đổi được"
+              ],
+              "correctOption": 0,
+              "explanation": "Khả năng đổi địa chỉ phụ thuộc trạng thái thực tế và chính sách vận chuyển."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "moduleSlug": "hau-mai-va-toi-uu",
+      "slug": "tu-van-truoc-ban-va-xac-nhan-nhu-cau",
+      "title": "Tư vấn trước bán và xác nhận nhu cầu",
+      "summary": "Hỏi mục đích sử dụng, thông số cần thiết và trả lời trong phạm vi đã xác minh.",
+      "situation": "Người mua nhắn hỏi trước khi đặt",
+      "estimatedMinutes": 12,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l19-shouqian",
+          "hanzi": "售前咨询",
+          "pinyin": "shòuqián zīxún",
+          "meaning": "tư vấn trước bán",
+          "example": "客服正在回复售前咨询。",
+          "translation": "Chăm sóc khách đang trả lời tư vấn trước bán.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l19-xuqiu",
+          "hanzi": "需求",
+          "pinyin": "xūqiú",
+          "meaning": "nhu cầu",
+          "example": "请问您的主要需求是什么？",
+          "translation": "Xin hỏi nhu cầu chính của anh/chị là gì?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l19-tuijian",
+          "hanzi": "推荐",
+          "pinyin": "tuījiàn",
+          "meaning": "đề xuất",
+          "example": "我根据用途推荐合适的型号。",
+          "translation": "Tôi đề xuất mẫu phù hợp theo mục đích.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l19-shipei",
+          "hanzi": "适配",
+          "pinyin": "shìpèi",
+          "meaning": "tương thích",
+          "example": "这个配件是否适配旧型号？",
+          "translation": "Phụ kiện này có tương thích mẫu cũ không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l19-kefu",
+          "hanzi": "客服",
+          "pinyin": "kèfú",
+          "meaning": "chăm sóc khách hàng",
+          "example": "客服不能承诺未确认的信息。",
+          "translation": "CSKH không được cam kết thông tin chưa xác nhận.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l19-zhuanye",
+          "hanzi": "专业",
+          "pinyin": "zhuānyè",
+          "meaning": "chuyên môn",
+          "example": "专业问题需要转给技术人员。",
+          "translation": "Vấn đề chuyên môn cần chuyển cho kỹ thuật.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "买家不确定哪个型号适合他的设备。",
+            "pinyin": "Mǎijiā bù quèdìng nǎge xínghào shìhé tā de shèbèi.",
+            "translation": "Người mua chưa chắc mẫu nào phù hợp thiết bị của họ."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会先确认设备信息，再根据已审核资料推荐。",
+            "pinyin": "Wǒ huì xiān quèrèn shèbèi xìnxī, zài gēnjù yǐ shěnhé zīliào tuījiàn.",
+            "translation": "Tôi sẽ xác nhận thông tin thiết bị rồi đề xuất theo tài liệu đã duyệt."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Hỏi nhu cầu trước",
+            "pattern": "请问您主要用于……？",
+            "explanation": "Câu hỏi về mục đích giúp tránh đề xuất chỉ dựa trên giá."
+          },
+          {
+            "title": "Chuyển câu hỏi chuyên môn",
+            "pattern": "需要转给……确认",
+            "explanation": "Các vấn đề kỹ thuật, an toàn hoặc pháp lý phải được người có thẩm quyền xác nhận."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hau-mai-va-toi-uu",
+      "slug": "xu-ly-thieu-sai-va-hong-hang",
+      "title": "Xử lý thiếu, sai và hỏng hàng",
+      "summary": "Phân loại sự cố, thu thập thông tin và chuyển phương án xử lý theo chính sách.",
+      "situation": "Người mua báo kiện có vấn đề",
+      "estimatedMinutes": 14,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l20-quejian",
+          "hanzi": "缺件",
+          "pinyin": "quējiàn",
+          "meaning": "thiếu món trong kiện",
+          "example": "买家说包裹里缺了一件。",
+          "translation": "Người mua nói kiện thiếu một món.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l20-facuohuo",
+          "hanzi": "发错货",
+          "pinyin": "fā cuò huò",
+          "meaning": "gửi sai hàng",
+          "example": "仓库确认发错货了。",
+          "translation": "Kho xác nhận đã gửi sai hàng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l20-posun",
+          "hanzi": "破损",
+          "pinyin": "pòsǔn",
+          "meaning": "hư hỏng",
+          "example": "外包装有明显破损。",
+          "translation": "Bao bì ngoài bị hư hỏng rõ rệt.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l20-kaixiang",
+          "hanzi": "开箱",
+          "pinyin": "kāixiāng",
+          "meaning": "mở kiện",
+          "example": "请提供开箱视频。",
+          "translation": "Hãy cung cấp video mở kiện.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l20-pingzheng",
+          "hanzi": "凭证",
+          "pinyin": "píngzhèng",
+          "meaning": "chứng từ, bằng chứng",
+          "example": "平台要求上传相关凭证。",
+          "translation": "Nền tảng yêu cầu tải bằng chứng liên quan.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l20-bufa",
+          "hanzi": "补发",
+          "pinyin": "bǔfā",
+          "meaning": "gửi bù",
+          "example": "审核通过后可以安排补发。",
+          "translation": "Sau khi duyệt có thể sắp xếp gửi bù.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "买家说收到的颜色和订单不一样。",
+            "pinyin": "Mǎijiā shuō shōudào de yánsè hé dìngdān bù yíyàng.",
+            "translation": "Người mua nói màu nhận được không giống đơn."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我先核对订单和凭证，再按政策提交处理。",
+            "pinyin": "Wǒ xiān héduì dìngdān hé píngzhèng, zài àn zhèngcè tíjiāo chǔlǐ.",
+            "translation": "Tôi sẽ đối chiếu đơn và bằng chứng rồi gửi xử lý theo chính sách."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Mô tả loại sự cố",
+            "pattern": "缺件 / 发错货 / 破损",
+            "explanation": "Phân loại đúng giúp chuyển đúng luồng hậu mãi."
+          },
+          {
+            "title": "Không yêu cầu dữ liệu ngoài phạm vi",
+            "pattern": "按平台要求提供凭证",
+            "explanation": "Chỉ thu thập bằng chứng cần thiết và xử lý dữ liệu theo quy định bảo mật."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hau-mai-va-toi-uu",
+      "slug": "xu-ly-tra-hang-va-hoan-tien",
+      "title": "Xử lý trả hàng và hoàn tiền",
+      "summary": "Giải thích điều kiện, trạng thái xét duyệt và thời gian xử lý trả hàng hoặc hoàn tiền.",
+      "situation": "Người mua gửi yêu cầu hậu mãi",
+      "estimatedMinutes": 14,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l21-tuihuo",
+          "hanzi": "退货",
+          "pinyin": "tuìhuò",
+          "meaning": "trả hàng",
+          "example": "买家申请七天内退货。",
+          "translation": "Người mua xin trả hàng trong bảy ngày.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l21-tuikuan",
+          "hanzi": "退款",
+          "pinyin": "tuìkuǎn",
+          "meaning": "hoàn tiền",
+          "example": "退款正在原路处理。",
+          "translation": "Khoản hoàn đang được xử lý theo phương thức ban đầu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l21-shouhou",
+          "hanzi": "售后申请",
+          "pinyin": "shòuhòu shēnqǐng",
+          "meaning": "yêu cầu hậu mãi",
+          "example": "请在平台提交售后申请。",
+          "translation": "Hãy gửi yêu cầu hậu mãi trên nền tảng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l21-shenhezhong",
+          "hanzi": "审核中",
+          "pinyin": "shěnhé zhōng",
+          "meaning": "đang xét duyệt",
+          "example": "您的申请目前在审核中。",
+          "translation": "Yêu cầu của anh/chị hiện đang được xét.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l21-yuanlu",
+          "hanzi": "原路退回",
+          "pinyin": "yuánlù tuìhuí",
+          "meaning": "hoàn theo phương thức ban đầu",
+          "example": "款项会原路退回。",
+          "translation": "Tiền sẽ được hoàn theo phương thức ban đầu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l21-shixian",
+          "hanzi": "处理时限",
+          "pinyin": "chǔlǐ shíxiàn",
+          "meaning": "thời hạn xử lý",
+          "example": "页面会显示预计处理时限。",
+          "translation": "Trang sẽ hiển thị thời hạn xử lý dự kiến.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "买家想知道退款什么时候到账。",
+            "pinyin": "Mǎijiā xiǎng zhīdào tuìkuǎn shénme shíhou dàozhàng.",
+            "translation": "Người mua muốn biết khi nào tiền hoàn về tài khoản."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会说明审核状态和平台显示的预计时限。",
+            "pinyin": "Wǒ huì shuōmíng shěnhé zhuàngtài hé píngtái xiǎnshì de yùjì shíxiàn.",
+            "translation": "Tôi sẽ giải thích trạng thái xét duyệt và thời hạn dự kiến nền tảng hiển thị."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Đang trong quá trình",
+            "pattern": "正在…… / ……中",
+            "explanation": "Hai cấu trúc đều diễn tả một việc đang được xử lý."
+          },
+          {
+            "title": "Không tự hứa hoàn tiền",
+            "pattern": "按照政策和审核结果",
+            "explanation": "Điều kiện và thời hạn phụ thuộc nền tảng, phương thức thanh toán và quy định áp dụng."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hau-mai-va-toi-uu",
+      "slug": "phan-hoi-danh-gia-va-khieu-nai",
+      "title": "Phản hồi đánh giá và khiếu nại",
+      "summary": "Ghi nhận phản hồi, xác minh đơn và trả lời công khai hoặc riêng tư đúng phạm vi.",
+      "situation": "Gian hàng nhận một đánh giá thấp",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l22-pingjia",
+          "hanzi": "评价",
+          "pinyin": "píngjià",
+          "meaning": "đánh giá",
+          "example": "我们收到了新的商品评价。",
+          "translation": "Chúng tôi nhận được đánh giá sản phẩm mới.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l22-haoping",
+          "hanzi": "好评",
+          "pinyin": "hǎopíng",
+          "meaning": "đánh giá tốt",
+          "example": "感谢您的好评和支持。",
+          "translation": "Cảm ơn đánh giá tốt và sự ủng hộ.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l22-chaping",
+          "hanzi": "差评",
+          "pinyin": "chàpíng",
+          "meaning": "đánh giá xấu",
+          "example": "团队正在核实这条差评。",
+          "translation": "Đội ngũ đang xác minh đánh giá xấu này.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l22-tousu",
+          "hanzi": "投诉",
+          "pinyin": "tóusù",
+          "meaning": "khiếu nại",
+          "example": "客户通过平台提交投诉。",
+          "translation": "Khách gửi khiếu nại qua nền tảng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l22-gongkai",
+          "hanzi": "公开回复",
+          "pinyin": "gōngkāi huífù",
+          "meaning": "phản hồi công khai",
+          "example": "公开回复不要包含个人信息。",
+          "translation": "Phản hồi công khai không được chứa thông tin cá nhân.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l22-xieshang",
+          "hanzi": "协商",
+          "pinyin": "xiéshāng",
+          "meaning": "trao đổi để thống nhất",
+          "example": "我们会联系买家协商处理。",
+          "translation": "Chúng tôi sẽ liên hệ người mua để trao đổi xử lý.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "买家因为配送延迟给了差评。",
+            "pinyin": "Mǎijiā yīnwèi pèisòng yánchí gěi le chàpíng.",
+            "translation": "Người mua đánh giá xấu vì giao hàng trễ."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我会核实订单，礼貌回复并邀请私下沟通。",
+            "pinyin": "Wǒ huì héshí dìngdān, lǐmào huífù bìng yāoqǐng sīxià gōutōng.",
+            "translation": "Tôi sẽ xác minh đơn, phản hồi lịch sự và mời trao đổi riêng."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Phản hồi không tranh luận",
+            "pattern": "感谢反馈 + 核实情况 + 提供渠道",
+            "explanation": "Cấu trúc này ghi nhận, nêu hành động và đưa kênh hỗ trợ."
+          },
+          {
+            "title": "Bảo vệ thông tin cá nhân",
+            "pattern": "不要公开个人信息",
+            "explanation": "Không đưa số điện thoại, địa chỉ, mã thanh toán hoặc dữ liệu nhạy cảm vào phản hồi công khai."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hau-mai-va-toi-uu",
+      "slug": "doc-du-lieu-va-toi-uu-chuyen-doi",
+      "title": "Đọc dữ liệu và tối ưu chuyển đổi",
+      "summary": "Đọc lượt hiển thị, lượt nhấp, tỷ lệ chuyển đổi và đặt giả thuyết cải thiện có kiểm soát.",
+      "situation": "Đánh giá hiệu quả trang sản phẩm",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l23-puguang",
+          "hanzi": "曝光量",
+          "pinyin": "pùguāng liàng",
+          "meaning": "lượt hiển thị",
+          "example": "这个商品的曝光量下降了。",
+          "translation": "Lượt hiển thị sản phẩm này đã giảm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l23-dianjilv",
+          "hanzi": "点击率",
+          "pinyin": "diǎnjīlǜ",
+          "meaning": "tỷ lệ nhấp",
+          "example": "新主图提高了点击率。",
+          "translation": "Ảnh chính mới đã tăng tỷ lệ nhấp.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l23-zhuanhualv",
+          "hanzi": "转化率",
+          "pinyin": "zhuǎnhuàlǜ",
+          "meaning": "tỷ lệ chuyển đổi",
+          "example": "本周转化率是百分之三。",
+          "translation": "Tỷ lệ chuyển đổi tuần này là 3%.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l23-fangke",
+          "hanzi": "访客",
+          "pinyin": "fǎngkè",
+          "meaning": "khách truy cập",
+          "example": "昨天有一千名访客。",
+          "translation": "Hôm qua có 1.000 khách truy cập.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l23-loushi",
+          "hanzi": "漏斗",
+          "pinyin": "lòudǒu",
+          "meaning": "phễu",
+          "example": "要分步骤分析转化漏斗。",
+          "translation": "Cần phân tích phễu chuyển đổi theo từng bước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l23-ceshi",
+          "hanzi": "对照测试",
+          "pinyin": "duìzhào cèshì",
+          "meaning": "thử nghiệm đối chứng",
+          "example": "我们只测试一个主要变量。",
+          "translation": "Chúng ta chỉ kiểm thử một biến chính.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "商品有很多曝光，但点击率比较低。",
+            "pinyin": "Shāngpǐn yǒu hěn duō pùguāng, dàn diǎnjīlǜ bǐjiào dī.",
+            "translation": "Sản phẩm có nhiều hiển thị nhưng tỷ lệ nhấp khá thấp."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们先检查主图和标题，再设计对照测试。",
+            "pinyin": "Wǒmen xiān jiǎnchá zhǔtú hé biāotí, zài shèjì duìzhào cèshì.",
+            "translation": "Chúng ta kiểm tra ảnh chính và tiêu đề trước, sau đó thiết kế thử nghiệm đối chứng."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Đọc theo phễu",
+            "pattern": "曝光 → 点击 → 下单",
+            "explanation": "Nhìn từng bước giúp tránh quy toàn bộ vấn đề cho một chỉ số."
+          },
+          {
+            "title": "Không khẳng định nhân quả sớm",
+            "pattern": "可能与……有关",
+            "explanation": "Một thay đổi số liệu chỉ là tín hiệu; cần kiểm tra định nghĩa và thử nghiệm phù hợp."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hau-mai-va-toi-uu",
+      "slug": "kiem-tra-tong-hop-thuong-mai-dien-tu",
+      "title": "Kiểm tra tổng hợp: Thương mại điện tử",
+      "summary": "Tổng hợp gian hàng, nguồn hàng, thực hiện đơn, hậu mãi, dữ liệu và khuyến mãi.",
+      "situation": "Đánh giá cuối lộ trình",
+      "estimatedMinutes": 16,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "ecommerce-l24-yunying",
+          "hanzi": "运营",
+          "pinyin": "yùnyíng",
+          "meaning": "vận hành",
+          "example": "店铺运营需要跨团队配合。",
+          "translation": "Vận hành gian hàng cần phối hợp liên đội.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l24-hegui",
+          "hanzi": "合规",
+          "pinyin": "hégé",
+          "meaning": "tuân thủ",
+          "example": "商品信息必须合规。",
+          "translation": "Thông tin sản phẩm phải tuân thủ.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l24-shuju",
+          "hanzi": "数据",
+          "pinyin": "shùjù",
+          "meaning": "dữ liệu",
+          "example": "我们根据数据调整方案。",
+          "translation": "Chúng tôi điều chỉnh phương án theo dữ liệu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l24-liucheng",
+          "hanzi": "流程",
+          "pinyin": "liúchéng",
+          "meaning": "quy trình",
+          "example": "请按照售后流程处理。",
+          "translation": "Hãy xử lý theo quy trình hậu mãi.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l24-xietong",
+          "hanzi": "协同",
+          "pinyin": "xiétóng",
+          "meaning": "phối hợp",
+          "example": "客服和仓库需要及时协同。",
+          "translation": "CSKH và kho cần phối hợp kịp thời.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ecommerce-l24-fupan",
+          "hanzi": "复盘",
+          "pinyin": "fùpán",
+          "meaning": "tổng kết, nhìn lại",
+          "example": "活动结束后安排复盘。",
+          "translation": "Sau chương trình sẽ tổ chức tổng kết.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "现在需要确认什么？",
+            "pinyin": "Xiànzài xūyào quèrèn shénme?",
+            "translation": "Hiện tại cần xác nhận điều gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "这个月出现了超卖、延迟和投诉上升。",
+            "pinyin": "Zhège yuè chūxiàn le chāomài, yánchí hé tóusù shàngshēng.",
+            "translation": "Tháng này xuất hiện bán vượt tồn, chậm giao và khiếu nại tăng."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "下一步应该怎么处理？",
+            "pinyin": "Xià yí bù yīnggāi zěnme chǔlǐ?",
+            "translation": "Bước tiếp theo nên xử lý thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们会按数据复盘流程，并明确各团队的改进任务。",
+            "pinyin": "Wǒmen huì àn shùjù fùpán liúchéng, bìng míngquè gè tuánduì de gǎijìn rènwu.",
+            "translation": "Chúng ta sẽ nhìn lại quy trình theo dữ liệu và giao rõ nhiệm vụ cải thiện cho từng đội."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Từ dữ liệu đến hành động",
+            "pattern": "数据 + 原因 + 负责人 + 截止时间",
+            "explanation": "Một buổi tổng kết nên kết thúc bằng người phụ trách và thời hạn cụ thể."
+          },
+          {
+            "title": "Tuân thủ theo thị trường",
+            "pattern": "按照适用规则处理",
+            "explanation": "Chính sách nền tảng, thuế, quảng cáo, dữ liệu và quyền người tiêu dùng khác nhau theo thị trường."
+          }
+        ],
+        "challenge": {
+          "title": "Kiểm tra tổng hợp Thương mại điện tử",
+          "description": "Đạt 5/6 câu để hoàn thành lộ trình.",
+          "passScore": 5,
+          "questions": [
+            {
+              "prompt": "售前咨询 là gì?",
+              "options": [
+                "Tư vấn trước bán",
+                "Xử lý đổi trả",
+                "Đối soát kho"
+              ],
+              "correctOption": 0,
+              "explanation": "售前 là trước bán; 咨询 là hỏi hoặc tư vấn."
+            },
+            {
+              "prompt": "Khách báo nhận sai hàng. Cần xác minh gì trước?",
+              "options": [
+                "Mã đơn, mặt hàng thực nhận và bằng chứng theo chính sách",
+                "Chỉ tên khách",
+                "Chỉ đánh giá sao"
+              ],
+              "correctOption": 0,
+              "explanation": "Thông tin đơn và bằng chứng giúp xác định đúng loại sự cố."
+            },
+            {
+              "prompt": "退款 và 退货 khác nhau thế nào?",
+              "options": [
+                "Hoàn tiền và trả hàng",
+                "Giảm giá và đổi hàng",
+                "Hủy đơn và giao lại"
+              ],
+              "correctOption": 0,
+              "explanation": "退款 là hoàn tiền; 退货 là trả sản phẩm."
+            },
+            {
+              "prompt": "遇到差评时 nên làm gì?",
+              "options": [
+                "Xác minh vấn đề và phản hồi theo quy tắc nền tảng",
+                "Tranh luận công khai với khách",
+                "Mua đánh giá giả"
+              ],
+              "correctOption": 0,
+              "explanation": "Phản hồi cần dựa trên dữ kiện, lịch sự và tuân thủ chính sách nền tảng."
+            },
+            {
+              "prompt": "转化率 dùng để đo gì?",
+              "options": [
+                "Tỷ lệ người thực hiện hành động mục tiêu",
+                "Tổng số hàng tồn",
+                "Thời gian giao hàng"
+              ],
+              "correctOption": 0,
+              "explanation": "Tỷ lệ chuyển đổi phải được đọc cùng định nghĩa sự kiện và khoảng thời gian."
+            },
+            {
+              "prompt": "Khi chạy khuyến mãi, nguyên tắc nào quan trọng?",
+              "options": [
+                "Giá, điều kiện và tồn kho phải đúng; tuân thủ quy định nền tảng",
+                "Có thể tạo khan hiếm giả",
+                "Có thể bỏ điều kiện áp dụng"
+              ],
+              "correctOption": 0,
+              "explanation": "Thông tin minh bạch và tuân thủ giúp giảm khiếu nại và rủi ro vận hành."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "xac-nhan-phan-loai-truoc-khi-dat",
+      "title": "Xác nhận phân loại trước khi đặt",
+      "summary": "Đối chiếu màu, kích cỡ và tồn kho của đúng phân loại sản phẩm.",
+      "situation": "Xác nhận phân loại trước khi đặt",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "这个规格的尺码还有库存吗？",
+            "pinyin": "Zhè ge guīgé de chǐmǎ hái yǒu kùcún ma?",
+            "translation": "Cỡ thuộc phân loại này còn hàng không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "请告诉我颜色和尺码，我帮您查一下。",
+            "pinyin": "Qǐng gàosu wǒ yánsè hé chǐmǎ, wǒ bāng nín chá yíxià.",
+            "translation": "Vui lòng cho tôi biết màu và cỡ, tôi kiểm tra giúp anh/chị."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "页面上蓝色的选项是中号，对吗？",
+            "pinyin": "Yèmiàn shàng lánsè de xuǎnxiàng shì zhōng hào, duì ma?",
+            "translation": "Tùy chọn màu xanh trên trang là cỡ vừa, đúng không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "对，请确认选项无误后再下单。",
+            "pinyin": "Duì, qǐng quèrèn xuǎnxiàng wúwù hòu zài xià dān.",
+            "translation": "Đúng, vui lòng xác nhận tùy chọn chính xác rồi đặt hàng."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "这个规格的尺码还有库存吗？",
+            "pinyin": "Zhè ge guīgé de chǐmǎ hái yǒu kùcún ma?",
+            "translation": "Cỡ thuộc phân loại này còn hàng không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "请告诉我颜色和尺码，我帮您查一下。",
+            "pinyin": "Qǐng gàosu wǒ yánsè hé chǐmǎ, wǒ bāng nín chá yíxià.",
+            "translation": "Vui lòng cho tôi biết màu và cỡ, tôi kiểm tra giúp anh/chị."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "页面上蓝色的选项是中号，对吗？",
+            "pinyin": "Yèmiàn shàng lánsè de xuǎnxiàng shì zhōng hào, duì ma?",
+            "translation": "Tùy chọn màu xanh trên trang là cỡ vừa, đúng không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "对，请确认选项无误后再下单。",
+            "pinyin": "Duì, qǐng quèrèn xuǎnxiàng wúwù hòu zài xià dān.",
+            "translation": "Đúng, vui lòng xác nhận tùy chọn chính xác rồi đặt hàng."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Xác nhận phân loại trước khi đặt",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Khách đang hỏi phân loại nào trên trang?",
+              "options": [
+                "Màu xanh, cỡ vừa.",
+                "Màu đỏ, cỡ lớn.",
+                "Màu đen, cỡ nhỏ."
+              ],
+              "correctOption": 0,
+              "explanation": "蓝色 là màu xanh; 中号 là cỡ vừa."
+            },
+            {
+              "prompt": "Trong bài này, “尺码” có nghĩa là gì?",
+              "options": [
+                "trang hiển thị",
+                "cỡ; size",
+                "đặt hàng"
+              ],
+              "correctOption": 1,
+              "explanation": "尺码 (chǐmǎ) nghĩa là cỡ; size."
+            },
+            {
+              "prompt": "Câu “对，请确认选项无误后再下单。” truyền đạt điều gì?",
+              "options": [
+                "Cỡ thuộc phân loại này còn hàng không?",
+                "Tùy chọn màu xanh trên trang là cỡ vừa, đúng không?",
+                "Đúng, vui lòng xác nhận tùy chọn chính xác rồi đặt hàng."
+              ],
+              "correctOption": 2,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Đúng, vui lòng xác nhận tùy chọn chính xác rồi đặt hàng."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-xac-nhan-phan-loai-truoc-khi-dat-1",
+          "hanzi": "规格",
+          "pinyin": "guīgé",
+          "meaning": "quy cách; phân loại",
+          "example": "这个规格的尺码还有库存吗？",
+          "translation": "Cỡ thuộc phân loại này còn hàng không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-xac-nhan-phan-loai-truoc-khi-dat-2",
+          "hanzi": "尺码",
+          "pinyin": "chǐmǎ",
+          "meaning": "cỡ; size",
+          "example": "这个规格的尺码还有库存吗？",
+          "translation": "Cỡ thuộc phân loại này còn hàng không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-xac-nhan-phan-loai-truoc-khi-dat-3",
+          "hanzi": "库存",
+          "pinyin": "kùcún",
+          "meaning": "tồn kho",
+          "example": "这个规格的尺码还有库存吗？",
+          "translation": "Cỡ thuộc phân loại này còn hàng không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-xac-nhan-phan-loai-truoc-khi-dat-4",
+          "hanzi": "页面",
+          "pinyin": "yèmiàn",
+          "meaning": "trang hiển thị",
+          "example": "页面上蓝色的选项是中号，对吗？",
+          "translation": "Tùy chọn màu xanh trên trang là cỡ vừa, đúng không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-xac-nhan-phan-loai-truoc-khi-dat-5",
+          "hanzi": "选项",
+          "pinyin": "xuǎnxiàng",
+          "meaning": "tùy chọn",
+          "example": "页面上蓝色的选项是中号，对吗？",
+          "translation": "Tùy chọn màu xanh trên trang là cỡ vừa, đúng không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-xac-nhan-phan-loai-truoc-khi-dat-6",
+          "hanzi": "下单",
+          "pinyin": "xià dān",
+          "meaning": "đặt hàng",
+          "example": "对，请确认选项无误后再下单。",
+          "translation": "Đúng, vui lòng xác nhận tùy chọn chính xác rồi đặt hàng.",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "doi-dia-chi-khi-don-chua-gui",
+      "title": "Đổi địa chỉ khi đơn chưa gửi",
+      "summary": "Hỏi trạng thái gửi hàng và xác nhận khả năng sửa địa chỉ trước khi hứa với khách.",
+      "situation": "Đổi địa chỉ khi đơn chưa gửi",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "还没发货的话，可以修改地址吗？",
+            "pinyin": "Hái méi fāhuò de huà, kěyǐ xiūgǎi dìzhǐ ma?",
+            "translation": "Nếu chưa gửi hàng thì có thể sửa địa chỉ không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我先查订单状态，确认能不能修改。",
+            "pinyin": "Wǒ xiān chá dìngdān zhuàngtài, quèrèn néng bu néng xiūgǎi.",
+            "translation": "Tôi kiểm tra trạng thái đơn trước, xác nhận có thể sửa không."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "如果已经发出，需要申请拦截吗？",
+            "pinyin": "Rúguǒ yǐjīng fā chū, xūyào shēnqǐng lánjié ma?",
+            "translation": "Nếu đã gửi đi thì có cần đề nghị giữ kiện lại không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "要先联系承运方，不能保证拦截成功。",
+            "pinyin": "Yào xiān liánxì chéngyùnfāng, bù néng bǎozhèng lánjié chénggōng.",
+            "translation": "Cần liên hệ bên vận chuyển trước, không thể bảo đảm giữ kiện lại thành công."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "还没发货的话，可以修改地址吗？",
+            "pinyin": "Hái méi fāhuò de huà, kěyǐ xiūgǎi dìzhǐ ma?",
+            "translation": "Nếu chưa gửi hàng thì có thể sửa địa chỉ không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我先查订单状态，确认能不能修改。",
+            "pinyin": "Wǒ xiān chá dìngdān zhuàngtài, quèrèn néng bu néng xiūgǎi.",
+            "translation": "Tôi kiểm tra trạng thái đơn trước, xác nhận có thể sửa không."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "如果已经发出，需要申请拦截吗？",
+            "pinyin": "Rúguǒ yǐjīng fā chū, xūyào shēnqǐng lánjié ma?",
+            "translation": "Nếu đã gửi đi thì có cần đề nghị giữ kiện lại không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "要先联系承运方，不能保证拦截成功。",
+            "pinyin": "Yào xiān liánxì chéngyùnfāng, bù néng bǎozhèng lánjié chénggōng.",
+            "translation": "Cần liên hệ bên vận chuyển trước, không thể bảo đảm giữ kiện lại thành công."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Đổi địa chỉ khi đơn chưa gửi",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "不能保证拦截成功 có ý nghĩa gì?",
+              "options": [
+                "Đã đổi địa chỉ thành công.",
+                "Chưa thể cam kết giữ kiện lại thành công.",
+                "Hàng chắc chắn chưa được gửi."
+              ],
+              "correctOption": 1,
+              "explanation": "不能保证 là không thể bảo đảm; cần xác nhận với bên vận chuyển."
+            },
+            {
+              "prompt": "Trong bài này, “修改” có nghĩa là gì?",
+              "options": [
+                "trạng thái",
+                "thành công",
+                "sửa đổi"
+              ],
+              "correctOption": 2,
+              "explanation": "修改 (xiūgǎi) nghĩa là sửa đổi."
+            },
+            {
+              "prompt": "Câu “要先联系承运方，不能保证拦截成功。” truyền đạt điều gì?",
+              "options": [
+                "Cần liên hệ bên vận chuyển trước, không thể bảo đảm giữ kiện lại thành công.",
+                "Nếu chưa gửi hàng thì có thể sửa địa chỉ không?",
+                "Nếu đã gửi đi thì có cần đề nghị giữ kiện lại không?"
+              ],
+              "correctOption": 0,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Cần liên hệ bên vận chuyển trước, không thể bảo đảm giữ kiện lại thành công."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-doi-dia-chi-khi-don-chua-gui-1",
+          "hanzi": "发货",
+          "pinyin": "fāhuò",
+          "meaning": "gửi hàng đi",
+          "example": "还没发货的话，可以修改地址吗？",
+          "translation": "Nếu chưa gửi hàng thì có thể sửa địa chỉ không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-doi-dia-chi-khi-don-chua-gui-2",
+          "hanzi": "修改",
+          "pinyin": "xiūgǎi",
+          "meaning": "sửa đổi",
+          "example": "还没发货的话，可以修改地址吗？",
+          "translation": "Nếu chưa gửi hàng thì có thể sửa địa chỉ không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-doi-dia-chi-khi-don-chua-gui-3",
+          "hanzi": "地址",
+          "pinyin": "dìzhǐ",
+          "meaning": "địa chỉ",
+          "example": "还没发货的话，可以修改地址吗？",
+          "translation": "Nếu chưa gửi hàng thì có thể sửa địa chỉ không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-doi-dia-chi-khi-don-chua-gui-4",
+          "hanzi": "状态",
+          "pinyin": "zhuàngtài",
+          "meaning": "trạng thái",
+          "example": "我先查订单状态，确认能不能修改。",
+          "translation": "Tôi kiểm tra trạng thái đơn trước, xác nhận có thể sửa không.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-doi-dia-chi-khi-don-chua-gui-5",
+          "hanzi": "拦截",
+          "pinyin": "lánjié",
+          "meaning": "chặn; giữ lại",
+          "example": "如果已经发出，需要申请拦截吗？",
+          "translation": "Nếu đã gửi đi thì có cần đề nghị giữ kiện lại không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-doi-dia-chi-khi-don-chua-gui-6",
+          "hanzi": "成功",
+          "pinyin": "chénggōng",
+          "meaning": "thành công",
+          "example": "要先联系承运方，不能保证拦截成功。",
+          "translation": "Cần liên hệ bên vận chuyển trước, không thể bảo đảm giữ kiện lại thành công.",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "giai-thich-don-duoc-tach-hai-kien",
+      "title": "Giải thích đơn được tách hai kiện",
+      "summary": "Giải thích việc giao riêng từng kiện và cung cấp mã theo dõi tương ứng.",
+      "situation": "Giải thích đơn được tách hai kiện",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "我只收到一个包裹，还有一件商品呢？",
+            "pinyin": "Wǒ zhǐ shōudào yí ge bāoguǒ, hái yǒu yí jiàn shāngpǐn ne?",
+            "translation": "Tôi chỉ nhận một kiện, còn một sản phẩm nữa đâu?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "这笔订单分开寄出了，一共有两个单号。",
+            "pinyin": "Zhè bǐ dìngdān fēnkāi jì chū le, yígòng yǒu liǎng ge dānhào.",
+            "translation": "Đơn này được gửi tách riêng, tổng cộng có hai mã vận đơn."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "请把另一个单号发给我。",
+            "pinyin": "Qǐng bǎ lìng yí ge dānhào fā gěi wǒ.",
+            "translation": "Vui lòng gửi mã vận đơn còn lại cho tôi."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，您可以分别查询两个包裹的物流。",
+            "pinyin": "Hǎo de, nín kěyǐ fēnbié cháxún liǎng ge bāoguǒ de wùliú.",
+            "translation": "Được, anh/chị có thể tra cứu vận chuyển của hai kiện riêng biệt."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "我只收到一个包裹，还有一件商品呢？",
+            "pinyin": "Wǒ zhǐ shōudào yí ge bāoguǒ, hái yǒu yí jiàn shāngpǐn ne?",
+            "translation": "Tôi chỉ nhận một kiện, còn một sản phẩm nữa đâu?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "这笔订单分开寄出了，一共有两个单号。",
+            "pinyin": "Zhè bǐ dìngdān fēnkāi jì chū le, yígòng yǒu liǎng ge dānhào.",
+            "translation": "Đơn này được gửi tách riêng, tổng cộng có hai mã vận đơn."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "请把另一个单号发给我。",
+            "pinyin": "Qǐng bǎ lìng yí ge dānhào fā gěi wǒ.",
+            "translation": "Vui lòng gửi mã vận đơn còn lại cho tôi."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，您可以分别查询两个包裹的物流。",
+            "pinyin": "Hǎo de, nín kěyǐ fēnbié cháxún liǎng ge bāoguǒ de wùliú.",
+            "translation": "Được, anh/chị có thể tra cứu vận chuyển của hai kiện riêng biệt."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Giải thích đơn được tách hai kiện",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Vì sao khách mới nhận một phần hàng trong tình huống này?",
+              "options": [
+                "Cửa hàng xác nhận thiếu hàng trong kho.",
+                "Khách đã hủy sản phẩm còn lại.",
+                "Đơn được tách thành hai kiện với hai mã vận đơn."
+              ],
+              "correctOption": 2,
+              "explanation": "分开寄出 và 两个单号 giải thích đơn được gửi riêng thành hai kiện."
+            },
+            {
+              "prompt": "Trong bài này, “分开” có nghĩa là gì?",
+              "options": [
+                "tách riêng",
+                "cái khác; phần còn lại",
+                "logistics; vận chuyển hàng"
+              ],
+              "correctOption": 0,
+              "explanation": "分开 (fēnkāi) nghĩa là tách riêng."
+            },
+            {
+              "prompt": "Câu “好的，您可以分别查询两个包裹的物流。” truyền đạt điều gì?",
+              "options": [
+                "Tôi chỉ nhận một kiện, còn một sản phẩm nữa đâu?",
+                "Được, anh/chị có thể tra cứu vận chuyển của hai kiện riêng biệt.",
+                "Vui lòng gửi mã vận đơn còn lại cho tôi."
+              ],
+              "correctOption": 1,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Được, anh/chị có thể tra cứu vận chuyển của hai kiện riêng biệt."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-giai-thich-don-duoc-tach-hai-kien-1",
+          "hanzi": "包裹",
+          "pinyin": "bāoguǒ",
+          "meaning": "kiện hàng",
+          "example": "我只收到一个包裹，还有一件商品呢？",
+          "translation": "Tôi chỉ nhận một kiện, còn một sản phẩm nữa đâu?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-giai-thich-don-duoc-tach-hai-kien-2",
+          "hanzi": "分开",
+          "pinyin": "fēnkāi",
+          "meaning": "tách riêng",
+          "example": "这笔订单分开寄出了，一共有两个单号。",
+          "translation": "Đơn này được gửi tách riêng, tổng cộng có hai mã vận đơn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-giai-thich-don-duoc-tach-hai-kien-3",
+          "hanzi": "单号",
+          "pinyin": "dānhào",
+          "meaning": "mã vận đơn; số phiếu",
+          "example": "这笔订单分开寄出了，一共有两个单号。",
+          "translation": "Đơn này được gửi tách riêng, tổng cộng có hai mã vận đơn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-giai-thich-don-duoc-tach-hai-kien-4",
+          "hanzi": "另一",
+          "pinyin": "lìng yī",
+          "meaning": "cái khác; phần còn lại",
+          "example": "请把另一个单号发给我。",
+          "translation": "Vui lòng gửi mã vận đơn còn lại cho tôi.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-giai-thich-don-duoc-tach-hai-kien-5",
+          "hanzi": "查询",
+          "pinyin": "cháxún",
+          "meaning": "tra cứu",
+          "example": "好的，您可以分别查询两个包裹的物流。",
+          "translation": "Được, anh/chị có thể tra cứu vận chuyển của hai kiện riêng biệt.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-giai-thich-don-duoc-tach-hai-kien-6",
+          "hanzi": "物流",
+          "pinyin": "wùliú",
+          "meaning": "logistics; vận chuyển hàng",
+          "example": "好的，您可以分别查询两个包裹的物流。",
+          "translation": "Được, anh/chị có thể tra cứu vận chuyển của hai kiện riêng biệt.",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "kiem-tra-phu-kien-thieu-trong-hop",
+      "title": "Kiểm tra phụ kiện thiếu trong hộp",
+      "summary": "Đối chiếu danh sách đóng gói và mô tả phụ kiện khách chưa tìm thấy.",
+      "situation": "Kiểm tra phụ kiện thiếu trong hộp",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "配件清单上有一根线，盒子里没有。",
+            "pinyin": "Pèijiàn qīngdān shàng yǒu yì gēn xiàn, hézi lǐ méiyǒu.",
+            "translation": "Danh sách phụ kiện có một sợi dây, trong hộp không có."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "您是说缺少一根线，其他数量都对吗？",
+            "pinyin": "Nín shì shuō quēshǎo yì gēn xiàn, qítā shùliàng dōu duì ma?",
+            "translation": "Ý anh/chị là thiếu một sợi dây, số lượng các món khác đều đúng phải không?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "对，我可以提供盒子和清单的照片。",
+            "pinyin": "Duì, wǒ kěyǐ tígōng hézi hé qīngdān de zhàopiàn.",
+            "translation": "Đúng, tôi có thể cung cấp ảnh hộp và danh sách."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "谢谢，核对后我们会联系您确认补寄安排。",
+            "pinyin": "Xièxie, héduì hòu wǒmen huì liánxì nín quèrèn bǔjì ānpái.",
+            "translation": "Cảm ơn, sau khi đối chiếu chúng tôi sẽ liên hệ xác nhận việc gửi bổ sung."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "配件清单上有一根线，盒子里没有。",
+            "pinyin": "Pèijiàn qīngdān shàng yǒu yì gēn xiàn, hézi lǐ méiyǒu.",
+            "translation": "Danh sách phụ kiện có một sợi dây, trong hộp không có."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "您是说缺少一根线，其他数量都对吗？",
+            "pinyin": "Nín shì shuō quēshǎo yì gēn xiàn, qítā shùliàng dōu duì ma?",
+            "translation": "Ý anh/chị là thiếu một sợi dây, số lượng các món khác đều đúng phải không?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "对，我可以提供盒子和清单的照片。",
+            "pinyin": "Duì, wǒ kěyǐ tígōng hézi hé qīngdān de zhàopiàn.",
+            "translation": "Đúng, tôi có thể cung cấp ảnh hộp và danh sách."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "谢谢，核对后我们会联系您确认补寄安排。",
+            "pinyin": "Xièxie, héduì hòu wǒmen huì liánxì nín quèrèn bǔjì ānpái.",
+            "translation": "Cảm ơn, sau khi đối chiếu chúng tôi sẽ liên hệ xác nhận việc gửi bổ sung."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Kiểm tra phụ kiện thiếu trong hộp",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Khách báo thiếu vật gì?",
+              "options": [
+                "Một sợi dây trong danh sách phụ kiện.",
+                "Toàn bộ sản phẩm chính.",
+                "Hai chiếc hộp rỗng."
+              ],
+              "correctOption": 0,
+              "explanation": "一根线 là một sợi dây; khách đã xác nhận số lượng các món khác đúng."
+            },
+            {
+              "prompt": "Trong bài này, “清单” có nghĩa là gì?",
+              "options": [
+                "số lượng",
+                "danh sách",
+                "gửi bổ sung"
+              ],
+              "correctOption": 1,
+              "explanation": "清单 (qīngdān) nghĩa là danh sách."
+            },
+            {
+              "prompt": "Câu “谢谢，核对后我们会联系您确认补寄安排。” truyền đạt điều gì?",
+              "options": [
+                "Danh sách phụ kiện có một sợi dây, trong hộp không có.",
+                "Đúng, tôi có thể cung cấp ảnh hộp và danh sách.",
+                "Cảm ơn, sau khi đối chiếu chúng tôi sẽ liên hệ xác nhận việc gửi bổ sung."
+              ],
+              "correctOption": 2,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Cảm ơn, sau khi đối chiếu chúng tôi sẽ liên hệ xác nhận việc gửi bổ sung."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-kiem-tra-phu-kien-thieu-trong-hop-1",
+          "hanzi": "配件",
+          "pinyin": "pèijiàn",
+          "meaning": "phụ kiện",
+          "example": "配件清单上有一根线，盒子里没有。",
+          "translation": "Danh sách phụ kiện có một sợi dây, trong hộp không có.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-kiem-tra-phu-kien-thieu-trong-hop-2",
+          "hanzi": "清单",
+          "pinyin": "qīngdān",
+          "meaning": "danh sách",
+          "example": "配件清单上有一根线，盒子里没有。",
+          "translation": "Danh sách phụ kiện có một sợi dây, trong hộp không có.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-kiem-tra-phu-kien-thieu-trong-hop-3",
+          "hanzi": "缺少",
+          "pinyin": "quēshǎo",
+          "meaning": "thiếu",
+          "example": "您是说缺少一根线，其他数量都对吗？",
+          "translation": "Ý anh/chị là thiếu một sợi dây, số lượng các món khác đều đúng phải không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-kiem-tra-phu-kien-thieu-trong-hop-4",
+          "hanzi": "数量",
+          "pinyin": "shùliàng",
+          "meaning": "số lượng",
+          "example": "您是说缺少一根线，其他数量都对吗？",
+          "translation": "Ý anh/chị là thiếu một sợi dây, số lượng các món khác đều đúng phải không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-kiem-tra-phu-kien-thieu-trong-hop-5",
+          "hanzi": "核对",
+          "pinyin": "héduì",
+          "meaning": "đối chiếu",
+          "example": "谢谢，核对后我们会联系您确认补寄安排。",
+          "translation": "Cảm ơn, sau khi đối chiếu chúng tôi sẽ liên hệ xác nhận việc gửi bổ sung.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-kiem-tra-phu-kien-thieu-trong-hop-6",
+          "hanzi": "补寄",
+          "pinyin": "bǔjì",
+          "meaning": "gửi bổ sung",
+          "example": "谢谢，核对后我们会联系您确认补寄安排。",
+          "translation": "Cảm ơn, sau khi đối chiếu chúng tôi sẽ liên hệ xác nhận việc gửi bổ sung.",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "hoi-trang-thai-yeu-cau-hoan-tien",
+      "title": "Hỏi trạng thái yêu cầu hoàn tiền",
+      "summary": "Phân biệt đã nộp yêu cầu, đang xét và đã hoàn tất trong trao đổi với khách.",
+      "situation": "Hỏi trạng thái yêu cầu hoàn tiền",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "我的退款申请昨天已经提交了。",
+            "pinyin": "Wǒ de tuìkuǎn shēnqǐng zuótiān yǐjīng tíjiāo le.",
+            "translation": "Tôi đã gửi yêu cầu hoàn tiền hôm qua."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我查到了，目前还在审核中。",
+            "pinyin": "Wǒ chá dào le, mùqián hái zài shěnhé zhōng.",
+            "translation": "Tôi tra thấy rồi, hiện vẫn đang xét duyệt."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "完成后会有通知吗？",
+            "pinyin": "Wánchéng hòu huì yǒu tōngzhī ma?",
+            "translation": "Sau khi hoàn tất sẽ có thông báo không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "会，请留意订单页面的最新状态。",
+            "pinyin": "Huì, qǐng liúyì dìngdān yèmiàn de zuìxīn zhuàngtài.",
+            "translation": "Có, vui lòng theo dõi trạng thái mới nhất trên trang đơn hàng."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "我的退款申请昨天已经提交了。",
+            "pinyin": "Wǒ de tuìkuǎn shēnqǐng zuótiān yǐjīng tíjiāo le.",
+            "translation": "Tôi đã gửi yêu cầu hoàn tiền hôm qua."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我查到了，目前还在审核中。",
+            "pinyin": "Wǒ chá dào le, mùqián hái zài shěnhé zhōng.",
+            "translation": "Tôi tra thấy rồi, hiện vẫn đang xét duyệt."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "完成后会有通知吗？",
+            "pinyin": "Wánchéng hòu huì yǒu tōngzhī ma?",
+            "translation": "Sau khi hoàn tất sẽ có thông báo không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "会，请留意订单页面的最新状态。",
+            "pinyin": "Huì, qǐng liúyì dìngdān yèmiàn de zuìxīn zhuàngtài.",
+            "translation": "Có, vui lòng theo dõi trạng thái mới nhất trên trang đơn hàng."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Hỏi trạng thái yêu cầu hoàn tiền",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "审核中 cho biết điều gì về yêu cầu hoàn tiền?",
+              "options": [
+                "Tiền chắc chắn đã vào tài khoản.",
+                "Yêu cầu đang được xét duyệt.",
+                "Yêu cầu chưa được nộp."
+              ],
+              "correctOption": 1,
+              "explanation": "审核中 là đang xét duyệt, khác với 已完成 là đã hoàn tất."
+            },
+            {
+              "prompt": "Trong bài này, “申请” có nghĩa là gì?",
+              "options": [
+                "xét duyệt",
+                "thông báo",
+                "yêu cầu; đơn đề nghị"
+              ],
+              "correctOption": 2,
+              "explanation": "申请 (shēnqǐng) nghĩa là yêu cầu; đơn đề nghị."
+            },
+            {
+              "prompt": "Câu “会，请留意订单页面的最新状态。” truyền đạt điều gì?",
+              "options": [
+                "Có, vui lòng theo dõi trạng thái mới nhất trên trang đơn hàng.",
+                "Tôi đã gửi yêu cầu hoàn tiền hôm qua.",
+                "Sau khi hoàn tất sẽ có thông báo không?"
+              ],
+              "correctOption": 0,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Có, vui lòng theo dõi trạng thái mới nhất trên trang đơn hàng."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-hoi-trang-thai-yeu-cau-hoan-tien-1",
+          "hanzi": "退款",
+          "pinyin": "tuìkuǎn",
+          "meaning": "hoàn tiền",
+          "example": "我的退款申请昨天已经提交了。",
+          "translation": "Tôi đã gửi yêu cầu hoàn tiền hôm qua.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-hoi-trang-thai-yeu-cau-hoan-tien-2",
+          "hanzi": "申请",
+          "pinyin": "shēnqǐng",
+          "meaning": "yêu cầu; đơn đề nghị",
+          "example": "我的退款申请昨天已经提交了。",
+          "translation": "Tôi đã gửi yêu cầu hoàn tiền hôm qua.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-hoi-trang-thai-yeu-cau-hoan-tien-3",
+          "hanzi": "提交",
+          "pinyin": "tíjiāo",
+          "meaning": "gửi nộp",
+          "example": "我的退款申请昨天已经提交了。",
+          "translation": "Tôi đã gửi yêu cầu hoàn tiền hôm qua.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-hoi-trang-thai-yeu-cau-hoan-tien-4",
+          "hanzi": "审核",
+          "pinyin": "shěnhé",
+          "meaning": "xét duyệt",
+          "example": "我查到了，目前还在审核中。",
+          "translation": "Tôi tra thấy rồi, hiện vẫn đang xét duyệt.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-hoi-trang-thai-yeu-cau-hoan-tien-5",
+          "hanzi": "完成",
+          "pinyin": "wánchéng",
+          "meaning": "hoàn tất",
+          "example": "完成后会有通知吗？",
+          "translation": "Sau khi hoàn tất sẽ có thông báo không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-hoi-trang-thai-yeu-cau-hoan-tien-6",
+          "hanzi": "通知",
+          "pinyin": "tōngzhī",
+          "meaning": "thông báo",
+          "example": "完成后会有通知吗？",
+          "translation": "Sau khi hoàn tất sẽ có thông báo không?",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "tra-loi-danh-gia-can-lam-ro",
+      "title": "Trả lời đánh giá cần làm rõ",
+      "summary": "Cảm ơn góp ý, hỏi chi tiết trải nghiệm và chuyển sang kênh hỗ trợ phù hợp.",
+      "situation": "Trả lời đánh giá cần làm rõ",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "谢谢您的评价和建议。",
+            "pinyin": "Xièxie nín de píngjià hé jiànyì.",
+            "translation": "Cảm ơn đánh giá và góp ý của anh/chị."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我觉得说明不够清楚。",
+            "pinyin": "Wǒ juéde shuōmíng bú gòu qīngchu.",
+            "translation": "Tôi thấy phần hướng dẫn chưa đủ rõ."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "请通过私信联系客服，告诉我们具体是哪一部分。",
+            "pinyin": "Qǐng tōngguò sīxìn liánxì kèfú, gàosu wǒmen jùtǐ shì nǎ yí bùfen.",
+            "translation": "Vui lòng nhắn riêng cho bộ phận chăm sóc khách hàng, cho chúng tôi biết cụ thể là phần nào."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，希望你们能改进说明。",
+            "pinyin": "Hǎo de, xīwàng nǐmen néng gǎijìn shuōmíng.",
+            "translation": "Được, mong các bạn có thể cải thiện phần hướng dẫn."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "谢谢您的评价和建议。",
+            "pinyin": "Xièxie nín de píngjià hé jiànyì.",
+            "translation": "Cảm ơn đánh giá và góp ý của anh/chị."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我觉得说明不够清楚。",
+            "pinyin": "Wǒ juéde shuōmíng bú gòu qīngchu.",
+            "translation": "Tôi thấy phần hướng dẫn chưa đủ rõ."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "请通过私信联系客服，告诉我们具体是哪一部分。",
+            "pinyin": "Qǐng tōngguò sīxìn liánxì kèfú, gàosu wǒmen jùtǐ shì nǎ yí bùfen.",
+            "translation": "Vui lòng nhắn riêng cho bộ phận chăm sóc khách hàng, cho chúng tôi biết cụ thể là phần nào."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，希望你们能改进说明。",
+            "pinyin": "Hǎo de, xīwàng nǐmen néng gǎijìn shuōmíng.",
+            "translation": "Được, mong các bạn có thể cải thiện phần hướng dẫn."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Trả lời đánh giá cần làm rõ",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Nội dung khách muốn cửa hàng cải thiện là gì?",
+              "options": [
+                "Phí vận chuyển quá cao.",
+                "Màu sắc không giống ảnh.",
+                "Phần hướng dẫn chưa đủ rõ."
+              ],
+              "correctOption": 2,
+              "explanation": "说明不够清楚 nêu vấn đề ở phần hướng dẫn; cần hỏi chi tiết để hiểu đúng góp ý."
+            },
+            {
+              "prompt": "Trong bài này, “建议” có nghĩa là gì?",
+              "options": [
+                "góp ý; đề xuất",
+                "chăm sóc khách hàng",
+                "cải thiện"
+              ],
+              "correctOption": 0,
+              "explanation": "建议 (jiànyì) nghĩa là góp ý; đề xuất."
+            },
+            {
+              "prompt": "Câu “好的，希望你们能改进说明。” truyền đạt điều gì?",
+              "options": [
+                "Cảm ơn đánh giá và góp ý của anh/chị.",
+                "Được, mong các bạn có thể cải thiện phần hướng dẫn.",
+                "Vui lòng nhắn riêng cho bộ phận chăm sóc khách hàng, cho chúng tôi biết cụ thể là phần nào."
+              ],
+              "correctOption": 1,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Được, mong các bạn có thể cải thiện phần hướng dẫn."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-tra-loi-danh-gia-can-lam-ro-1",
+          "hanzi": "评价",
+          "pinyin": "píngjià",
+          "meaning": "đánh giá",
+          "example": "谢谢您的评价和建议。",
+          "translation": "Cảm ơn đánh giá và góp ý của anh/chị.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-tra-loi-danh-gia-can-lam-ro-2",
+          "hanzi": "建议",
+          "pinyin": "jiànyì",
+          "meaning": "góp ý; đề xuất",
+          "example": "谢谢您的评价和建议。",
+          "translation": "Cảm ơn đánh giá và góp ý của anh/chị.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-tra-loi-danh-gia-can-lam-ro-3",
+          "hanzi": "具体",
+          "pinyin": "jùtǐ",
+          "meaning": "cụ thể",
+          "example": "请通过私信联系客服，告诉我们具体是哪一部分。",
+          "translation": "Vui lòng nhắn riêng cho bộ phận chăm sóc khách hàng, cho chúng tôi biết cụ thể là phần nào.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-tra-loi-danh-gia-can-lam-ro-4",
+          "hanzi": "客服",
+          "pinyin": "kèfú",
+          "meaning": "chăm sóc khách hàng",
+          "example": "请通过私信联系客服，告诉我们具体是哪一部分。",
+          "translation": "Vui lòng nhắn riêng cho bộ phận chăm sóc khách hàng, cho chúng tôi biết cụ thể là phần nào.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-tra-loi-danh-gia-can-lam-ro-5",
+          "hanzi": "私信",
+          "pinyin": "sīxìn",
+          "meaning": "tin nhắn riêng",
+          "example": "请通过私信联系客服，告诉我们具体是哪一部分。",
+          "translation": "Vui lòng nhắn riêng cho bộ phận chăm sóc khách hàng, cho chúng tôi biết cụ thể là phần nào.",
+          "audioUrl": null
+        },
+        {
+          "slug": "thuong-mai-dien-tu-ung-dung-tra-loi-danh-gia-can-lam-ro-6",
+          "hanzi": "改进",
+          "pinyin": "gǎijìn",
+          "meaning": "cải thiện",
+          "example": "好的，希望你们能改进说明。",
+          "translation": "Được, mong các bạn có thể cải thiện phần hướng dẫn.",
+          "audioUrl": null
+        }
+      ]
+    }
+  ],
+  "learningDesign": {
+    "audience": "Người Việt đã biết pinyin và câu giao tiếp cơ bản, cần dùng tiếng Trung trong công việc.",
+    "sequence": [
+      "Học 6 từ qua ví dụ",
+      "Đọc câu mẫu và đối chiếu nghĩa Việt",
+      "Nghe mẫu, đọc lại từng câu",
+      "Làm kiểm tra tình huống"
+    ],
+    "authoredAppliedLessons": 6,
+    "originalLessonCount": 24,
+    "audio": "Dùng phát âm tiếng Trung và luyện đọc có sẵn của web; gói JSON không chứa bản thu âm."
+  }
+}

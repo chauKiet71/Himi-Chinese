@@ -14,7 +14,7 @@ test("demo catalog contains the approved tracks and imported topic course", () =
 test("factory track is published with the same depth as office", () => {
   const course = getCourse("nha-may-san-xuat");
   assert.equal(course?.chineseTitle, "工厂与生产");
-  assert.equal(course?.lessons, 24);
+  assert.equal(course?.lessons, 30);
   assert.equal(course?.freeLessons, 6);
   assert.equal(course?.availability, "available");
 });
@@ -22,7 +22,7 @@ test("factory track is published with the same depth as office", () => {
 test("logistics track is published with the same depth as office", () => {
   const course = getCourse("kho-van-logistics");
   assert.equal(course?.chineseTitle, "仓储与物流");
-  assert.equal(course?.lessons, 24);
+  assert.equal(course?.lessons, 30);
   assert.equal(course?.freeLessons, 6);
   assert.equal(course?.availability, "available");
 });
@@ -30,7 +30,7 @@ test("logistics track is published with the same depth as office", () => {
 test("sales track is published with the same depth as office", () => {
   const course = getCourse("ban-hang-cham-soc-khach-hang");
   assert.equal(course?.chineseTitle, "销售与客户服务");
-  assert.equal(course?.lessons, 24);
+  assert.equal(course?.lessons, 30);
   assert.equal(course?.freeLessons, 6);
   assert.equal(course?.availability, "available");
 });
@@ -38,7 +38,7 @@ test("sales track is published with the same depth as office", () => {
 test("restaurant track is published with the same depth as office", () => {
   const course = getCourse("nha-hang-dich-vu");
   assert.equal(course?.chineseTitle, "餐饮与服务");
-  assert.equal(course?.lessons, 24);
+  assert.equal(course?.lessons, 30);
   assert.equal(course?.freeLessons, 6);
   assert.equal(course?.availability, "available");
 });
@@ -46,7 +46,7 @@ test("restaurant track is published with the same depth as office", () => {
 test("ecommerce track is published with the same depth as office", () => {
   const course = getCourse("thuong-mai-dien-tu");
   assert.equal(course?.chineseTitle, "电子商务");
-  assert.equal(course?.lessons, 24);
+  assert.equal(course?.lessons, 30);
   assert.equal(course?.freeLessons, 6);
   assert.equal(course?.availability, "available");
 });
@@ -71,7 +71,7 @@ test("course lookup returns the approved office track", () => {
   const course = getCourse("van-phong-hanh-chinh");
   assert.equal(course?.chineseTitle, "办公室与行政");
   assert.equal(course?.hanzi, "办");
-  assert.equal(course?.lessons, 24);
+  assert.equal(course?.lessons, 30);
   assert.equal(course?.freeLessons, 6);
 });
 

@@ -24,7 +24,7 @@ export function LessonPronunciationCoach({ words, dialogue }: { words: Vocabular
   const [passed, setPassed] = useState<Set<string>>(() => new Set());
   const current = targets[index];
 
-  if (!current) return <div className="lesson-vocab-empty"><h2>Bài này chưa có câu luyện nghe</h2><p>Hãy chuyển sang phần Hội thoại để tiếp tục.</p></div>;
+  if (!current) return <div className="lesson-vocab-empty"><h2>Bài này chưa có câu luyện nghe</h2><p>Hãy chuyển sang Từ vựng hoặc Cụm từ để tiếp tục học.</p></div>;
 
   return <section className="lesson-pronunciation-coach" aria-labelledby="lesson-pronunciation-title">
     <div className="lesson-interactive-heading">

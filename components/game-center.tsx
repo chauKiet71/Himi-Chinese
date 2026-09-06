@@ -46,7 +46,17 @@ import {
   type GameId,
   type GameProgressSnapshot,
 } from "@/lib/activity-progress";
-import { gameRoundWords, gameWords, speakChinese, type GameWord } from "@/lib/game-content";
+import { speakChinese } from "@/lib/game-content";
+import { HskGameSession, HskGameCourseContext } from "@/components/hsk-game-session";
+import { shuffleGameItems, hskMeaningOptions, type HskGameId } from "@/lib/hsk-game-round";
+import type { SliceVocabulary } from "@/lib/slice-game";
+
+type HskRoundProps = {
+  words: SliceVocabulary[];
+  onRestart: () => void;
+  onExit: () => void;
+  onComplete: (score: number) => void;
+};
 
 gsap.registerPlugin(useGSAP, MotionPathPlugin);
 
@@ -181,9 +191,14 @@ function GameFrame({
   onExit: () => void;
   children: ReactNode;
 }) {
+  const course = useContext(HskGameCourseContext);
   return (
     <main className="learner-dashboard game-center-dashboard game-session-dashboard game-immersive-dashboard">
       <div className="game-center-shell game-session-shell">
+        {course ? <div className="game-hsk-course-bar">
+          <span><strong>{course.label}</strong> · {title}</span>
+          <button onClick={course.onChangeCourse} type="button"><ArrowLeft size={16} /> Đổi khóa HSK</button>
+        </div> : null}
         <section aria-label={title} className={`game-session-world is-${gameId}`} data-session-game={gameId}>
           <div className="game-session-sr-copy">
             <h1>{title}</h1>
@@ -237,14 +252,17 @@ function DailyGameCompletionAction() {
   </NextLink>;
 }
 
-function MemoryGame({ onExit, onComplete }: { onExit: () => void; onComplete: (score: number) => void }) {
-  const words = gameRoundWords.slice(0, 4);
+function MemoryGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
+  const matchTimerRef = useRef<number | null>(null);
+  useEffect(() => () => {
+    if (matchTimerRef.current !== null) window.clearTimeout(matchTimerRef.current);
+  }, []);
   const tiles = useMemo(() => {
     const paired = words.flatMap((word) => [
       { id: `${word.id}-hanzi`, wordId: word.id, kind: "hanzi" as const, label: word.hanzi },
       { id: `${word.id}-meaning`, wordId: word.id, kind: "meaning" as const, label: word.meaning },
     ]);
-    return [paired[0], paired[5], paired[2], paired[7], paired[4], paired[1], paired[6], paired[3]];
+    return shuffleGameItems(paired);
   }, [words]);
   const [selected, setSelected] = useState<string[]>([]);
   const [matched, setMatched] = useState<string[]>([]);
@@ -264,7 +282,7 @@ function MemoryGame({ onExit, onComplete }: { onExit: () => void; onComplete: (s
     setMoves((value) => value + 1);
     setSelected([selected[0], tile.id]);
     if (first?.wordId === tile.wordId && first.kind !== tile.kind) {
-      window.setTimeout(() => {
+      matchTimerRef.current = window.setTimeout(() => {
         const nextMatched = [...matched, tile.wordId];
         setMatched(nextMatched);
         setSelected([]);
@@ -275,21 +293,14 @@ function MemoryGame({ onExit, onComplete }: { onExit: () => void; onComplete: (s
         }
       }, 360);
     } else {
-      window.setTimeout(() => setSelected([]), 620);
+      matchTimerRef.current = window.setTimeout(() => setSelected([]), 620);
     }
-  };
-
-  const restart = () => {
-    setSelected([]);
-    setMatched([]);
-    setMoves(0);
-    setFinished(false);
   };
 
   return (
     <GameFrame description="Lật từng thẻ và tìm đúng cặp Hán tự – nghĩa Việt." gameId="memory" mascotAlt="Cánh Cụt Himi cổ vũ trò ghép cặp" mascotSrc="/assets/games/memory-penguin-cutout.png" onExit={onExit} progress={`${matched.length} / ${words.length}`} roundValue={moves} score={score} title="Ghép cặp siêu tốc">
       <section className="game-play-card memory-game-stage">
-        {finished ? <GameResult label="Bạn đã tìm đủ bốn cặp!" onExit={onExit} onRestart={restart} score={score} /> : (
+        {finished ? <GameResult label="Bạn đã tìm đủ bốn cặp!" onExit={onExit} onRestart={onRestart} score={score} /> : (
           <>
             <div className="game-instruction"><Layers3 size={18} /><span>Hai thẻ đúng sẽ được giữ sáng. Càng ít lượt lật, điểm càng cao.</span><b>{moves} lượt</b></div>
             <div className="memory-grid" aria-label="Bàn ghép cặp">
@@ -310,9 +321,12 @@ function MemoryGame({ onExit, onComplete }: { onExit: () => void; onComplete: (s
   );
 }
 
-function ConnectGame({ onExit, onComplete }: { onExit: () => void; onComplete: (score: number) => void }) {
-  const words = gameRoundWords.slice(0, 5);
-  const rightWords = [words[2], words[4], words[0], words[3], words[1]];
+function ConnectGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
+  const mistakeTimerRef = useRef<number | null>(null);
+  useEffect(() => () => {
+    if (mistakeTimerRef.current !== null) window.clearTimeout(mistakeTimerRef.current);
+  }, []);
+  const rightWords = useMemo(() => shuffleGameItems(words), [words]);
   const [left, setLeft] = useState<string | null>(null);
   const [matched, setMatched] = useState<string[]>([]);
   const [mistakes, setMistakes] = useState(0);
@@ -320,7 +334,7 @@ function ConnectGame({ onExit, onComplete }: { onExit: () => void; onComplete: (
   const [finished, setFinished] = useState(false);
   const score = Math.max(300, 1000 - mistakes * 100);
 
-  const chooseRight = (word: GameWord) => {
+  const chooseRight = (word: SliceVocabulary) => {
     if (!left || matched.includes(word.id) || wrong) return;
     if (left === word.id) {
       const nextMatched = [...matched, word.id];
@@ -334,24 +348,16 @@ function ConnectGame({ onExit, onComplete }: { onExit: () => void; onComplete: (
     }
     setMistakes((value) => value + 1);
     setWrong(word.id);
-    window.setTimeout(() => {
+    mistakeTimerRef.current = window.setTimeout(() => {
       setWrong(null);
       setLeft(null);
     }, 460);
   };
 
-  const restart = () => {
-    setLeft(null);
-    setMatched([]);
-    setMistakes(0);
-    setWrong(null);
-    setFinished(false);
-  };
-
   return (
     <GameFrame description="Chọn một Hán tự bên trái, sau đó nối với pinyin đúng bên phải." gameId="connect" mascotAlt="Cánh Cụt Himi đang nối chữ với âm" mascotSrc="/assets/games/connect-penguin-cutout.png" onExit={onExit} progress={`${matched.length} / ${words.length}`} roundLabel="lỗi" roundValue={mistakes} score={score} title="Nối nhanh chữ – âm">
       <section className="game-play-card connect-game-stage">
-        {finished ? <GameResult label="Các liên kết đã khớp hoàn toàn!" onExit={onExit} onRestart={restart} score={score} /> : (
+        {finished ? <GameResult label="Các liên kết đã khớp hoàn toàn!" onExit={onExit} onRestart={onRestart} score={score} /> : (
           <>
             <div className="game-instruction"><Link2 size={18} /><span>Mỗi cặp đúng sẽ khóa lại. Chọn sai trừ 100 điểm.</span><b>{mistakes} lỗi</b></div>
             <div className="connect-board">
@@ -372,21 +378,13 @@ function ConnectGame({ onExit, onComplete }: { onExit: () => void; onComplete: (
   );
 }
 
-function optionMeanings(index: number): string[] {
-  const current = gameRoundWords[index];
-  const offsets = [2, 4, 1];
-  const wrong = offsets.map((offset) => gameWords[(index + offset) % gameWords.length].meaning);
-  return index % 2 === 0 ? [wrong[0], current.meaning, wrong[1], wrong[2]] : [current.meaning, wrong[0], wrong[2], wrong[1]];
-}
-
-function ListenGame({ onExit, onComplete }: { onExit: () => void; onComplete: (score: number) => void }) {
-  const words = gameRoundWords.slice(0, 5);
+function ListenGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [correct, setCorrect] = useState(0);
   const [finished, setFinished] = useState(false);
   const word = words[index];
-  const options = optionMeanings(index);
+  const options = useMemo(() => hskMeaningOptions(words, index), [words, index]);
   const score = correct * 200;
 
   const choose = (option: string) => {
@@ -407,17 +405,10 @@ function ListenGame({ onExit, onComplete }: { onExit: () => void; onComplete: (s
     setSelected(null);
   };
 
-  const restart = () => {
-    setIndex(0);
-    setSelected(null);
-    setCorrect(0);
-    setFinished(false);
-  };
-
   return (
     <GameFrame description="Nghe từ tiếng Trung, sau đó chọn nghĩa tiếng Việt chính xác." gameId="listen" mascotAlt="Cánh Cụt Himi luyện nghe" mascotSrc="/assets/games/listen-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Nghe và chọn đúng">
       <section className="game-play-card listen-game-stage">
-        {finished ? <GameResult label={`Bạn nghe đúng ${correct}/${words.length} từ.`} onExit={onExit} onRestart={restart} score={correct * 200} /> : (
+        {finished ? <GameResult label={`Bạn nghe đúng ${correct}/${words.length} từ.`} onExit={onExit} onRestart={onRestart} score={correct * 200} /> : (
           <>
             <div className="listen-prompt">
               <span>NGHE TỪ SỐ {String(index + 1).padStart(2, "0")}</span>
@@ -439,8 +430,7 @@ function ListenGame({ onExit, onComplete }: { onExit: () => void; onComplete: (s
   );
 }
 
-function WriteGame({ onExit, onComplete }: { onExit: () => void; onComplete: (score: number) => void }) {
-  const words = gameRoundWords.slice(1, 6);
+function WriteGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   const [index, setIndex] = useState(0);
   const [answer, setAnswer] = useState("");
   const [status, setStatus] = useState<"idle" | "correct" | "wrong">("idle");
@@ -473,18 +463,10 @@ function WriteGame({ onExit, onComplete }: { onExit: () => void; onComplete: (sc
     setStatus("idle");
   };
 
-  const restart = () => {
-    setIndex(0);
-    setAnswer("");
-    setStatus("idle");
-    setCorrect(0);
-    setFinished(false);
-  };
-
   return (
     <GameFrame description="Nhìn nghĩa tiếng Việt và nhập đúng Hán tự tương ứng." gameId="write" mascotAlt="Cánh Cụt Himi tập viết Hán tự" mascotSrc="/assets/games/write-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Viết chữ theo nghĩa">
       <section className="game-play-card write-game-stage">
-        {finished ? <GameResult label="Bạn đã gọi lại đủ năm từ!" onExit={onExit} onRestart={restart} score={correct * 200} /> : (
+        {finished ? <GameResult label="Bạn đã gọi lại đủ năm từ!" onExit={onExit} onRestart={onRestart} score={correct * 200} /> : (
           <>
             <div className="write-prompt">
               <span>NGHĨA TIẾNG VIỆT</span>
@@ -507,8 +489,7 @@ function WriteGame({ onExit, onComplete }: { onExit: () => void; onComplete: (sc
   );
 }
 
-function FlashcardGame({ onExit, onComplete }: { onExit: () => void; onComplete: (score: number) => void }) {
-  const words = gameRoundWords;
+function FlashcardGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [known, setKnown] = useState(0);
@@ -530,17 +511,10 @@ function FlashcardGame({ onExit, onComplete }: { onExit: () => void; onComplete:
     setFlipped(false);
   };
 
-  const restart = () => {
-    setIndex(0);
-    setFlipped(false);
-    setKnown(0);
-    setFinished(false);
-  };
-
   return (
     <GameFrame description="Lật thẻ để xem nghĩa, nghe phát âm rồi tự đánh giá mức nhớ." gameId="flash" mascotAlt="Cánh Cụt Himi ôn tập cùng flashcard" mascotSrc="/assets/games/flashcard-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="nhớ" roundValue={known} score={score} title="Flashcard 3D">
       <section className="game-play-card flash-game-stage">
-        {finished ? <GameResult label={`Bạn nhớ chắc ${known}/${words.length} từ.`} onExit={onExit} onRestart={restart} score={known * 160} /> : (
+        {finished ? <GameResult label={`Bạn nhớ chắc ${known}/${words.length} từ.`} onExit={onExit} onRestart={onRestart} score={known * 160} /> : (
           <>
             <button aria-label={flipped ? "Xem mặt Hán tự" : "Lật thẻ xem nghĩa"} className={`flashcard-3d ${flipped ? "is-flipped" : ""}`} onClick={() => setFlipped((value) => !value)} type="button">
               <span className="flashcard-3d-inner">
@@ -557,20 +531,13 @@ function FlashcardGame({ onExit, onComplete }: { onExit: () => void; onComplete:
   );
 }
 
-function quizOptions(index: number): string[] {
-  const word = gameRoundWords[index];
-  const values = [word.meaning, gameWords[(index + 2) % gameWords.length].meaning, gameWords[(index + 4) % gameWords.length].meaning, gameWords[(index + 7) % gameWords.length].meaning];
-  return index % 2 ? [values[2], values[0], values[3], values[1]] : [values[1], values[3], values[0], values[2]];
-}
-
-function QuizGame({ onExit, onComplete }: { onExit: () => void; onComplete: (score: number) => void }) {
-  const words = gameRoundWords.slice(0, 5);
+function QuizGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [correct, setCorrect] = useState(0);
   const [finished, setFinished] = useState(false);
   const word = words[index];
-  const options = quizOptions(index);
+  const options = useMemo(() => hskMeaningOptions(words, index), [words, index]);
   const score = correct * 200;
 
   const choose = (option: string) => {
@@ -591,17 +558,10 @@ function QuizGame({ onExit, onComplete }: { onExit: () => void; onComplete: (sco
     setSelected(null);
   };
 
-  const restart = () => {
-    setIndex(0);
-    setSelected(null);
-    setCorrect(0);
-    setFinished(false);
-  };
-
   return (
     <GameFrame description="Một lượt kiểm tra ngắn kết hợp nhận diện chữ, nghĩa và phát âm." gameId="quiz" mascotAlt="Cánh Cụt Himi tham gia thử thách tổng hợp" mascotSrc="/assets/games/quiz-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Thử thách tổng hợp">
       <section className="game-play-card quiz-game-stage">
-        {finished ? <GameResult label={`Bạn trả lời đúng ${correct}/${words.length} câu.`} onExit={onExit} onRestart={restart} score={correct * 200} /> : (
+        {finished ? <GameResult label={`Bạn trả lời đúng ${correct}/${words.length} câu.`} onExit={onExit} onRestart={onRestart} score={correct * 200} /> : (
           <>
             <div className="quiz-question"><span>CÂU {String(index + 1).padStart(2, "0")}</span><small>Chọn nghĩa đúng của từ</small><h2 lang="zh-CN">{word.hanzi}</h2><button aria-label="Nghe phát âm" onClick={() => speakChinese(word.hanzi)} type="button"><Volume2 size={18} /></button></div>
             <div className="quiz-options">
@@ -617,6 +577,15 @@ function QuizGame({ onExit, onComplete }: { onExit: () => void; onComplete: (sco
     </GameFrame>
   );
 }
+
+const hskGameComponents = {
+  memory: MemoryGame,
+  connect: ConnectGame,
+  listen: ListenGame,
+  write: WriteGame,
+  flash: FlashcardGame,
+  quiz: QuizGame,
+};
 
 export function GameCenter({
   authenticated,
@@ -697,12 +666,14 @@ export function GameCenter({
 
   let activeGameView: ReactNode = null;
   if (activeGame === "slice") activeGameView = <WritingSliceGame completionAction={<DailyGameCompletionAction />} onComplete={(score) => completeGame("slice", score)} onExit={exitGame} />;
-  if (activeGame === "memory") activeGameView = <MemoryGame onComplete={(score) => completeGame("memory", score)} onExit={exitGame} />;
-  if (activeGame === "connect") activeGameView = <ConnectGame onComplete={(score) => completeGame("connect", score)} onExit={exitGame} />;
-  if (activeGame === "listen") activeGameView = <ListenGame onComplete={(score) => completeGame("listen", score)} onExit={exitGame} />;
-  if (activeGame === "write") activeGameView = <WriteGame onComplete={(score) => completeGame("write", score)} onExit={exitGame} />;
-  if (activeGame === "flash") activeGameView = <FlashcardGame onComplete={(score) => completeGame("flash", score)} onExit={exitGame} />;
-  if (activeGame === "quiz") activeGameView = <QuizGame onComplete={(score) => completeGame("quiz", score)} onExit={exitGame} />;
+  if (activeGame && activeGame !== "slice") {
+    const game = catalogGames.find((item) => item.id === activeGame)!;
+    const gameId: HskGameId = activeGame;
+    const Game = hskGameComponents[gameId];
+    activeGameView = <HskGameSession gameId={gameId} key={gameId} onExit={exitGame} title={game.title}>
+      {(words, onRestart) => <Game words={words} onRestart={onRestart} onComplete={(score) => completeGame(gameId, score)} onExit={exitGame} />}
+    </HskGameSession>;
+  }
   if (activeGameView) return <DailyGameFlowContext.Provider value={{ enabled: dailyFlow, syncState }}>
     {activeGameView}
   </DailyGameFlowContext.Provider>;
@@ -788,7 +759,7 @@ export function GameCenter({
           </aside>
         </section>
 
-        <footer className="game-center-footer-note"><Sparkles size={17} /><span><strong>Từ thật trong công việc.</strong> Nội dung trò chơi dùng chung bộ từ Văn phòng & hành chính và sẽ mở rộng theo chuyên ngành bạn học.</span></footer>
+        <footer className="game-center-footer-note"><Sparkles size={17} /><span><strong>Ôn từ vựng HSK qua trò chơi.</strong> Chọn HSK1–HSK6 để luyện từ các bài học trong khóa. Mỗi lượt chơi là một bộ từ mới.</span></footer>
       </div>
     </main>
   );

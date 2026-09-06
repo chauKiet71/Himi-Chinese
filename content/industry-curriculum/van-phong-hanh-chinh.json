@@ -1,0 +1,3710 @@
+{
+  "$schema": "./course.schema.json",
+  "schemaVersion": 1,
+  "courseSlug": "van-phong-hanh-chinh",
+  "category": "Văn phòng",
+  "language": "zh-CN",
+  "translationLanguage": "vi",
+  "level": "Cơ bản đến ứng dụng",
+  "modules": [
+    {
+      "slug": "giao-tiep-van-phong-can-ban",
+      "title": "Giao tiếp văn phòng căn bản",
+      "description": "Sáu tình huống nền tảng từ ngày đầu nhận việc đến phối hợp cùng đồng nghiệp."
+    },
+    {
+      "slug": "phoi-hop-va-giai-quyet-cong-viec",
+      "title": "Phối hợp & giải quyết công việc",
+      "description": "Làm rõ yêu cầu, bàn giao, xử lý thay đổi và đưa ra phản hồi trong công việc hằng ngày."
+    },
+    {
+      "slug": "hop-bao-cao-va-du-an",
+      "title": "Họp, báo cáo & dự án",
+      "description": "Tham gia cuộc họp, trình bày số liệu, ghi nhận quyết định và quản lý rủi ro dự án."
+    },
+    {
+      "slug": "hanh-chinh-va-giao-tiep-nang-cao",
+      "title": "Hành chính & giao tiếp nâng cao",
+      "description": "Xử lý thủ tục, tiếp khách, điện thoại và những tình huống dễ gây hiểu lầm tại công sở."
+    },
+    {
+      "slug": "thuc-hanh-giao-tiep-doc-lap",
+      "title": "Thực hành phối hợp công việc",
+      "description": "Xử lý lịch trùng, tài liệu thiếu, ưu tiên, làm việc từ xa và bàn giao bằng lời xác nhận rõ ràng."
+    }
+  ],
+  "lessons": [
+    {
+      "slug": "chao-hoi-tai-noi-lam-viec",
+      "title": "Chào hỏi tại nơi làm việc",
+      "summary": "Giới thiệu bản thân, bộ phận và phạm vi công việc với đồng nghiệp mới.",
+      "situation": "Ngày đầu nhận việc",
+      "estimatedMinutes": 10,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "tongshi",
+          "hanzi": "同事",
+          "pinyin": "tóngshì",
+          "meaning": "đồng nghiệp",
+          "example": "她是我们部门的新同事。",
+          "translation": "Cô ấy là đồng nghiệp mới của bộ phận chúng tôi.",
+          "audioUrl": null
+        },
+        {
+          "slug": "bumen",
+          "hanzi": "部门",
+          "pinyin": "bùmén",
+          "meaning": "bộ phận, phòng ban",
+          "example": "你在哪个部门工作？",
+          "translation": "Bạn làm việc ở bộ phận nào?",
+          "audioUrl": null
+        },
+        {
+          "slug": "fuze",
+          "hanzi": "负责",
+          "pinyin": "fùzé",
+          "meaning": "phụ trách",
+          "example": "我负责客户服务。",
+          "translation": "Tôi phụ trách chăm sóc khách hàng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ruzhi",
+          "hanzi": "入职",
+          "pinyin": "rùzhí",
+          "meaning": "nhận việc, vào làm",
+          "example": "我今天正式入职。",
+          "translation": "Hôm nay tôi chính thức nhận việc.",
+          "audioUrl": null
+        },
+        {
+          "slug": "jieshao",
+          "hanzi": "介绍",
+          "pinyin": "jièshào",
+          "meaning": "giới thiệu",
+          "example": "请允许我介绍一下自己。",
+          "translation": "Xin cho phép tôi giới thiệu đôi chút về bản thân.",
+          "audioUrl": null
+        },
+        {
+          "slug": "qing-duo-guanzhao",
+          "hanzi": "请多关照",
+          "pinyin": "qǐng duō guānzhào",
+          "meaning": "mong được giúp đỡ",
+          "example": "我是新来的，请多关照。",
+          "translation": "Tôi là người mới, mong mọi người giúp đỡ.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "大家好，我是新来的同事，我叫安。",
+            "pinyin": "Dàjiā hǎo, wǒ shì xīn lái de tóngshì, wǒ jiào Ān.",
+            "translation": "Chào mọi người, tôi là đồng nghiệp mới, tôi tên An."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "欢迎你！你在哪个部门工作？",
+            "pinyin": "Huānyíng nǐ! Nǐ zài nǎge bùmén gōngzuò?",
+            "translation": "Chào mừng bạn! Bạn làm việc ở bộ phận nào?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "我在行政部，负责办公室事务。",
+            "pinyin": "Wǒ zài xíngzhèng bù, fùzé bàngōngshì shìwù.",
+            "translation": "Tôi ở phòng hành chính, phụ trách công việc văn phòng."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，以后有问题可以找我。",
+            "pinyin": "Hǎo de, yǐhòu yǒu wèntí kěyǐ zhǎo wǒ.",
+            "translation": "Được, sau này có vấn đề bạn có thể tìm tôi."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Giới thiệu vai trò",
+            "pattern": "我负责……",
+            "explanation": "Dùng để nói ngắn gọn phần việc mình phụ trách. Có thể đặt tên khách hàng, dự án hoặc nghiệp vụ sau 负责."
+          },
+          {
+            "title": "Lời chào khi mới vào nhóm",
+            "pattern": "请多关照",
+            "explanation": "Cách nói lịch sự khi mới gia nhập. Trong môi trường thân mật có thể dùng 请大家多多关照 để hướng tới cả nhóm."
+          }
+        ]
+      },
+      "moduleSlug": "giao-tiep-van-phong-can-ban"
+    },
+    {
+      "slug": "nhan-va-giao-nhiem-vu",
+      "title": "Nhận và giao nhiệm vụ",
+      "summary": "Hiểu yêu cầu, mức độ ưu tiên và xác nhận thời hạn hoàn thành.",
+      "situation": "Quản lý giao việc",
+      "estimatedMinutes": 12,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "renwu",
+          "hanzi": "任务",
+          "pinyin": "rènwu",
+          "meaning": "nhiệm vụ",
+          "example": "今天有一个新任务。",
+          "translation": "Hôm nay có một nhiệm vụ mới.",
+          "audioUrl": null
+        },
+        {
+          "slug": "anpai",
+          "hanzi": "安排",
+          "pinyin": "ānpái",
+          "meaning": "sắp xếp, phân công",
+          "example": "经理安排我整理资料。",
+          "translation": "Quản lý phân công tôi sắp xếp tài liệu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "jiezhiriqi",
+          "hanzi": "截止日期",
+          "pinyin": "jiézhǐ rìqī",
+          "meaning": "hạn chót",
+          "example": "这个任务的截止日期是周五。",
+          "translation": "Hạn chót của nhiệm vụ này là thứ Sáu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "youxian-chuli",
+          "hanzi": "优先处理",
+          "pinyin": "yōuxiān chǔlǐ",
+          "meaning": "xử lý ưu tiên",
+          "example": "请优先处理客户的邮件。",
+          "translation": "Hãy ưu tiên xử lý email của khách hàng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "tijiao",
+          "hanzi": "提交",
+          "pinyin": "tíjiāo",
+          "meaning": "nộp, gửi lên",
+          "example": "下班前请提交文件。",
+          "translation": "Vui lòng nộp tài liệu trước khi tan làm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "queren",
+          "hanzi": "确认",
+          "pinyin": "quèrèn",
+          "meaning": "xác nhận",
+          "example": "我想确认一下具体要求。",
+          "translation": "Tôi muốn xác nhận lại yêu cầu cụ thể.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "小安，这份客户名单请你整理一下。",
+            "pinyin": "Xiǎo Ān, zhè fèn kèhù míngdān qǐng nǐ zhěnglǐ yíxià.",
+            "translation": "An, bạn hãy sắp xếp lại danh sách khách hàng này."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，请问截止日期是什么时候？",
+            "pinyin": "Hǎo de, qǐngwèn jiézhǐ rìqī shì shénme shíhou?",
+            "translation": "Vâng, xin hỏi hạn chót là khi nào?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "明天下午三点前提交，请优先处理。",
+            "pinyin": "Míngtiān xiàwǔ sān diǎn qián tíjiāo, qǐng yōuxiān chǔlǐ.",
+            "translation": "Hãy nộp trước 3 giờ chiều mai và ưu tiên xử lý."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "明白，我整理好以后发给您确认。",
+            "pinyin": "Míngbai, wǒ zhěnglǐ hǎo yǐhòu fā gěi nín quèrèn.",
+            "translation": "Tôi hiểu rồi, sau khi sắp xếp xong tôi sẽ gửi anh/chị xác nhận."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Xác nhận thời hạn",
+            "pattern": "截止日期是什么时候？",
+            "explanation": "Nên hỏi rõ hạn chót ngay khi nhận việc. Với quản lý, thêm 请问 giúp câu hỏi lịch sự hơn."
+          },
+          {
+            "title": "Xác nhận đã hiểu",
+            "pattern": "明白，我会……",
+            "explanation": "Dùng 明白 rồi nhắc lại hành động và thời hạn để giảm hiểu nhầm khi nhận nhiệm vụ."
+          }
+        ]
+      },
+      "moduleSlug": "giao-tiep-van-phong-can-ban"
+    },
+    {
+      "slug": "sap-xep-lich-hop",
+      "title": "Sắp xếp lịch họp",
+      "summary": "Hỏi thời gian rảnh, gửi lời mời và xử lý yêu cầu đổi lịch.",
+      "situation": "Điều phối cuộc họp",
+      "estimatedMinutes": 11,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "huiyi",
+          "hanzi": "会议",
+          "pinyin": "huìyì",
+          "meaning": "cuộc họp",
+          "example": "我们下午有一个项目会议。",
+          "translation": "Chiều nay chúng ta có một cuộc họp dự án.",
+          "audioUrl": null
+        },
+        {
+          "slug": "richeng",
+          "hanzi": "日程",
+          "pinyin": "rìchéng",
+          "meaning": "lịch làm việc",
+          "example": "我先查看一下今天的日程。",
+          "translation": "Tôi kiểm tra lịch làm việc hôm nay trước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "youkong",
+          "hanzi": "有空",
+          "pinyin": "yǒu kòng",
+          "meaning": "có thời gian rảnh",
+          "example": "您明天上午有空吗？",
+          "translation": "Sáng mai anh/chị có rảnh không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "gaiqi",
+          "hanzi": "改期",
+          "pinyin": "gǎiqī",
+          "meaning": "đổi lịch",
+          "example": "客户希望把会议改期。",
+          "translation": "Khách hàng muốn đổi lịch cuộc họp.",
+          "audioUrl": null
+        },
+        {
+          "slug": "huiyishi",
+          "hanzi": "会议室",
+          "pinyin": "huìyìshì",
+          "meaning": "phòng họp",
+          "example": "三号会议室已经预订了。",
+          "translation": "Phòng họp số 3 đã được đặt.",
+          "audioUrl": null
+        },
+        {
+          "slug": "yaoqing",
+          "hanzi": "邀请",
+          "pinyin": "yāoqǐng",
+          "meaning": "mời, lời mời",
+          "example": "我已经发送了会议邀请。",
+          "translation": "Tôi đã gửi lời mời họp.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "王经理，您明天下午有空吗？",
+            "pinyin": "Wáng jīnglǐ, nín míngtiān xiàwǔ yǒu kòng ma?",
+            "translation": "Quản lý Vương, chiều mai anh có rảnh không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "两点以后可以。有什么安排？",
+            "pinyin": "Liǎng diǎn yǐhòu kěyǐ. Yǒu shénme ānpái?",
+            "translation": "Sau 2 giờ thì được. Có lịch gì vậy?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "我们想开一个项目会议，三点可以吗？",
+            "pinyin": "Wǒmen xiǎng kāi yí ge xiàngmù huìyì, sān diǎn kěyǐ ma?",
+            "translation": "Chúng tôi muốn họp dự án, 3 giờ có được không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "可以，请把会议邀请发给我。",
+            "pinyin": "Kěyǐ, qǐng bǎ huìyì yāoqǐng fā gěi wǒ.",
+            "translation": "Được, hãy gửi lời mời họp cho tôi."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Hỏi lịch một cách lịch sự",
+            "pattern": "您……有空吗？",
+            "explanation": "Dùng 您 khi hỏi quản lý hoặc khách hàng. Nên nêu rõ ngày và buổi để người nghe dễ xác nhận."
+          },
+          {
+            "title": "Đề xuất thời gian",
+            "pattern": "……点可以吗？",
+            "explanation": "Mẫu ngắn gọn để chốt giờ. Khi cần đổi lịch, dùng 把会议改到…… được hiểu là chuyển cuộc họp sang thời điểm mới."
+          }
+        ]
+      },
+      "moduleSlug": "giao-tiep-van-phong-can-ban"
+    },
+    {
+      "slug": "viet-va-gui-bao-cao",
+      "title": "Viết và gửi báo cáo",
+      "summary": "Trao đổi về dữ liệu, tệp đính kèm và yêu cầu chỉnh sửa báo cáo.",
+      "situation": "Gửi báo cáo tuần",
+      "estimatedMinutes": 12,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "baogao",
+          "hanzi": "报告",
+          "pinyin": "bàogào",
+          "meaning": "báo cáo",
+          "example": "本周报告已经完成了。",
+          "translation": "Báo cáo tuần này đã hoàn thành.",
+          "audioUrl": null
+        },
+        {
+          "slug": "shuju",
+          "hanzi": "数据",
+          "pinyin": "shùjù",
+          "meaning": "dữ liệu",
+          "example": "请检查一下销售数据。",
+          "translation": "Hãy kiểm tra lại dữ liệu bán hàng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "fujian",
+          "hanzi": "附件",
+          "pinyin": "fùjiàn",
+          "meaning": "tệp đính kèm",
+          "example": "详细内容请查看附件。",
+          "translation": "Vui lòng xem nội dung chi tiết trong tệp đính kèm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "zongjie",
+          "hanzi": "总结",
+          "pinyin": "zǒngjié",
+          "meaning": "tổng kết",
+          "example": "报告最后需要一个简短的总结。",
+          "translation": "Cuối báo cáo cần một phần tổng kết ngắn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "fasong",
+          "hanzi": "发送",
+          "pinyin": "fāsòng",
+          "meaning": "gửi",
+          "example": "我现在把报告发送给您。",
+          "translation": "Bây giờ tôi gửi báo cáo cho anh/chị.",
+          "audioUrl": null
+        },
+        {
+          "slug": "xiugai",
+          "hanzi": "修改",
+          "pinyin": "xiūgǎi",
+          "meaning": "chỉnh sửa",
+          "example": "请根据意见修改报告。",
+          "translation": "Hãy chỉnh sửa báo cáo theo góp ý.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "本周的工作报告完成了吗？",
+            "pinyin": "Běn zhōu de gōngzuò bàogào wánchéng le ma?",
+            "translation": "Báo cáo công việc tuần này đã hoàn thành chưa?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "已经完成了，我正在检查数据。",
+            "pinyin": "Yǐjīng wánchéng le, wǒ zhèngzài jiǎnchá shùjù.",
+            "translation": "Đã hoàn thành rồi, tôi đang kiểm tra dữ liệu."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "好的，请加上项目总结以后发给我。",
+            "pinyin": "Hǎo de, qǐng jiā shàng xiàngmù zǒngjié yǐhòu fā gěi wǒ.",
+            "translation": "Được, hãy thêm phần tổng kết dự án rồi gửi cho tôi."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "没问题，我会把文件放在附件里。",
+            "pinyin": "Méi wèntí, wǒ huì bǎ wénjiàn fàng zài fùjiàn lǐ.",
+            "translation": "Không vấn đề, tôi sẽ để tài liệu trong tệp đính kèm."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Thông báo tệp đính kèm",
+            "pattern": "请查看附件",
+            "explanation": "Dùng trong email công việc để nhắc người nhận mở tệp. Có thể thêm 详细内容 ở đầu câu khi tệp chứa phần chi tiết."
+          },
+          {
+            "title": "Diễn tả hành động đang làm",
+            "pattern": "正在……",
+            "explanation": "正在 đặt trước động từ để nhấn mạnh hành động đang diễn ra, ví dụ 正在检查数据."
+          }
+        ]
+      },
+      "moduleSlug": "giao-tiep-van-phong-can-ban"
+    },
+    {
+      "slug": "theo-doi-tien-do-cong-viec",
+      "title": "Theo dõi tiến độ công việc",
+      "summary": "Hỏi, cập nhật và nhắc về tiến độ một cách tự nhiên tại nơi làm việc.",
+      "situation": "Cập nhật tiến độ dự án",
+      "estimatedMinutes": 12,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "jindu",
+          "hanzi": "进度",
+          "pinyin": "jìndù",
+          "meaning": "tiến độ",
+          "example": "项目进度怎么样？",
+          "translation": "Tiến độ dự án thế nào rồi?",
+          "audioUrl": null
+        },
+        {
+          "slug": "anshi",
+          "hanzi": "按时",
+          "pinyin": "ànshí",
+          "meaning": "đúng giờ, đúng hạn",
+          "example": "请按时完成任务。",
+          "translation": "Hãy hoàn thành nhiệm vụ đúng hạn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "huibao",
+          "hanzi": "汇报",
+          "pinyin": "huìbào",
+          "meaning": "báo cáo, báo cáo lại",
+          "example": "下午向经理汇报。",
+          "translation": "Buổi chiều báo cáo với quản lý.",
+          "audioUrl": null
+        },
+        {
+          "slug": "tuichi",
+          "hanzi": "推迟",
+          "pinyin": "tuīchí",
+          "meaning": "trì hoãn",
+          "example": "会议推迟到明天。",
+          "translation": "Cuộc họp lùi sang ngày mai.",
+          "audioUrl": null
+        },
+        {
+          "slug": "yi-wancheng",
+          "hanzi": "已完成",
+          "pinyin": "yǐ wánchéng",
+          "meaning": "đã hoàn thành",
+          "example": "这个部分已完成。",
+          "translation": "Phần này đã hoàn thành.",
+          "audioUrl": null
+        },
+        {
+          "slug": "jinxingzhong",
+          "hanzi": "进行中",
+          "pinyin": "jìnxíng zhōng",
+          "meaning": "đang tiến hành",
+          "example": "测试工作还在进行中。",
+          "translation": "Công việc kiểm thử vẫn đang tiến hành.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "项目进度怎么样？",
+            "pinyin": "Xiàngmù jìndù zěnmeyàng?",
+            "translation": "Tiến độ dự án thế nào rồi?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "已经完成百分之八十了。",
+            "pinyin": "Yǐjīng wánchéng bǎifēnzhī bāshí le.",
+            "translation": "Đã hoàn thành 80% rồi."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "可以按时完成吗？",
+            "pinyin": "Kěyǐ ànshí wánchéng ma?",
+            "translation": "Có thể hoàn thành đúng hạn không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "没问题，明天下午向您汇报。",
+            "pinyin": "Méi wèntí, míngtiān xiàwǔ xiàng nín huìbào.",
+            "translation": "Không vấn đề, chiều mai tôi sẽ báo cáo anh/chị."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Hỏi tình trạng công việc",
+            "pattern": "……进度怎么样？",
+            "explanation": "Mẫu hỏi trực tiếp nhưng trung tính. Khi nói với quản lý hoặc khách hàng, có thể thêm 请问 ở đầu câu để lịch sự hơn."
+          },
+          {
+            "title": "Ba trạng thái hữu ích",
+            "pattern": "已完成 / 进行中 / 待处理",
+            "explanation": "Dùng ba cụm này để báo cáo nhanh: đã hoàn thành, đang tiến hành và chờ xử lý."
+          }
+        ]
+      },
+      "moduleSlug": "giao-tiep-van-phong-can-ban"
+    },
+    {
+      "slug": "xin-ho-tro-tu-dong-nghiep",
+      "title": "Xin hỗ trợ từ đồng nghiệp",
+      "summary": "Mô tả vấn đề, nhờ hỗ trợ và phản hồi lịch sự khi phối hợp công việc.",
+      "situation": "Gặp vướng mắc khi xử lý việc",
+      "estimatedMinutes": 11,
+      "isFree": true,
+      "vocabulary": [
+        {
+          "slug": "xiezhu",
+          "hanzi": "协助",
+          "pinyin": "xiézhù",
+          "meaning": "hỗ trợ, phối hợp",
+          "example": "感谢您的协助。",
+          "translation": "Cảm ơn sự hỗ trợ của anh/chị.",
+          "audioUrl": null
+        },
+        {
+          "slug": "bangmang",
+          "hanzi": "帮忙",
+          "pinyin": "bāngmáng",
+          "meaning": "giúp đỡ",
+          "example": "你可以帮我一个忙吗？",
+          "translation": "Bạn có thể giúp tôi một việc không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "yudao-wenti",
+          "hanzi": "遇到问题",
+          "pinyin": "yùdào wèntí",
+          "meaning": "gặp vấn đề",
+          "example": "我在导出文件时遇到问题。",
+          "translation": "Tôi gặp vấn đề khi xuất tệp.",
+          "audioUrl": null
+        },
+        {
+          "slug": "jiejue",
+          "hanzi": "解决",
+          "pinyin": "jiějué",
+          "meaning": "giải quyết",
+          "example": "我们一起解决这个问题。",
+          "translation": "Chúng ta cùng giải quyết vấn đề này.",
+          "audioUrl": null
+        },
+        {
+          "slug": "qingjiao",
+          "hanzi": "请教",
+          "pinyin": "qǐngjiào",
+          "meaning": "xin chỉ dẫn, hỏi ý kiến",
+          "example": "我想向你请教一个问题。",
+          "translation": "Tôi muốn xin bạn chỉ dẫn một vấn đề.",
+          "audioUrl": null
+        },
+        {
+          "slug": "mafan-ni-le",
+          "hanzi": "麻烦你了",
+          "pinyin": "máfan nǐ le",
+          "meaning": "làm phiền bạn rồi",
+          "example": "这件事麻烦你了。",
+          "translation": "Việc này làm phiền bạn rồi.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "不好意思，我想向你请教一个问题。",
+            "pinyin": "Bù hǎoyìsi, wǒ xiǎng xiàng nǐ qǐngjiào yí ge wèntí.",
+            "translation": "Xin lỗi, tôi muốn hỏi bạn một vấn đề."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "可以，你遇到什么问题了？",
+            "pinyin": "Kěyǐ, nǐ yùdào shénme wèntí le?",
+            "translation": "Được, bạn gặp vấn đề gì?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "我不能导出这个文件，你可以帮忙看看吗？",
+            "pinyin": "Wǒ bù néng dǎochū zhège wénjiàn, nǐ kěyǐ bāngmáng kànkan ma?",
+            "translation": "Tôi không thể xuất tệp này, bạn có thể giúp xem không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "没问题，我们一起解决。",
+            "pinyin": "Méi wèntí, wǒmen yìqǐ jiějué.",
+            "translation": "Không vấn đề, chúng ta cùng giải quyết."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Mở lời nhờ hỗ trợ",
+            "pattern": "我想向你请教……",
+            "explanation": "Lịch sự hơn hỏi thẳng. Với quản lý hoặc người chưa thân, đổi 你 thành 您."
+          },
+          {
+            "title": "Nêu rõ vấn đề",
+            "pattern": "我在……时遇到问题",
+            "explanation": "Đặt hành động sau 在 và trước 时 để mô tả chính xác lúc vấn đề xảy ra, giúp đồng nghiệp hỗ trợ nhanh hơn."
+          }
+        ],
+        "challenge": {
+          "title": "Kiểm tra nền tảng văn phòng",
+          "description": "Hoàn thành 3/4 câu để xác nhận bạn đã sẵn sàng chuyển sang các tình huống phối hợp công việc.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Bạn muốn hỏi lịch sự hạn chót của nhiệm vụ. Câu nào phù hợp nhất?",
+              "options": [
+                "请问，截止日期是什么时候？",
+                "你为什么还没做？",
+                "这个工作不重要。"
+              ],
+              "correctOption": 0,
+              "explanation": "请问 làm câu hỏi mềm và lịch sự hơn; 截止日期 là hạn chót."
+            },
+            {
+              "prompt": "Cụm nào dùng để báo công việc đang được thực hiện?",
+              "options": [
+                "已完成",
+                "进行中",
+                "改期"
+              ],
+              "correctOption": 1,
+              "explanation": "进行中 nghĩa là đang tiến hành; 已完成 là đã hoàn thành."
+            },
+            {
+              "prompt": "Khi gửi báo cáo qua email, câu nào nhắc người nhận xem tệp đính kèm?",
+              "options": [
+                "请查看附件。",
+                "请安排会议。",
+                "请介绍自己。"
+              ],
+              "correctOption": 0,
+              "explanation": "附件 là tệp đính kèm, vì vậy 请查看附件 là mẫu phù hợp."
+            },
+            {
+              "prompt": "Bạn gặp lỗi khi xuất tệp và muốn nhờ đồng nghiệp xem giúp. Câu nào tự nhiên nhất?",
+              "options": [
+                "你必须解决。",
+                "你可以帮忙看看吗？",
+                "这个文件没问题。"
+              ],
+              "correctOption": 1,
+              "explanation": "你可以帮忙看看吗？ là lời nhờ hỗ trợ nhẹ nhàng và phù hợp giữa đồng nghiệp."
+            }
+          ]
+        }
+      },
+      "moduleSlug": "giao-tiep-van-phong-can-ban"
+    },
+    {
+      "moduleSlug": "phoi-hop-va-giai-quyet-cong-viec",
+      "slug": "lam-ro-yeu-cau-cong-viec",
+      "title": "Làm rõ yêu cầu công việc",
+      "summary": "Hỏi lại phạm vi, tiêu chuẩn và ví dụ để tránh bắt đầu công việc khi yêu cầu còn mơ hồ.",
+      "situation": "Nhận yêu cầu chưa đầy đủ",
+      "estimatedMinutes": 12,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "yaoqiu",
+          "hanzi": "要求",
+          "pinyin": "yāoqiú",
+          "meaning": "yêu cầu",
+          "example": "请说明一下具体要求。",
+          "translation": "Vui lòng giải thích yêu cầu cụ thể.",
+          "audioUrl": null
+        },
+        {
+          "slug": "juti",
+          "hanzi": "具体",
+          "pinyin": "jùtǐ",
+          "meaning": "cụ thể",
+          "example": "我们需要一个具体的计划。",
+          "translation": "Chúng ta cần một kế hoạch cụ thể.",
+          "audioUrl": null
+        },
+        {
+          "slug": "shuoming",
+          "hanzi": "说明",
+          "pinyin": "shuōmíng",
+          "meaning": "giải thích, trình bày",
+          "example": "请说明这个表格怎么填写。",
+          "translation": "Vui lòng giải thích cách điền biểu mẫu này.",
+          "audioUrl": null
+        },
+        {
+          "slug": "fanwei",
+          "hanzi": "范围",
+          "pinyin": "fànwéi",
+          "meaning": "phạm vi",
+          "example": "这项工作不在我的负责范围内。",
+          "translation": "Việc này không thuộc phạm vi phụ trách của tôi.",
+          "audioUrl": null
+        },
+        {
+          "slug": "biaozhun",
+          "hanzi": "标准",
+          "pinyin": "biāozhǔn",
+          "meaning": "tiêu chuẩn",
+          "example": "文件格式要符合公司的标准。",
+          "translation": "Định dạng tài liệu phải phù hợp tiêu chuẩn công ty.",
+          "audioUrl": null
+        },
+        {
+          "slug": "juli",
+          "hanzi": "举例",
+          "pinyin": "jǔlì",
+          "meaning": "nêu ví dụ",
+          "example": "您可以举例说明吗？",
+          "translation": "Anh/chị có thể nêu ví dụ để giải thích không?",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "这份客户资料今天整理一下。",
+            "pinyin": "Zhè fèn kèhù zīliào jīntiān zhěnglǐ yíxià.",
+            "translation": "Hôm nay hãy sắp xếp lại bộ tài liệu khách hàng này."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，请问具体要求是什么？",
+            "pinyin": "Hǎo de, qǐngwèn jùtǐ yāoqiú shì shénme?",
+            "translation": "Vâng, xin hỏi yêu cầu cụ thể là gì?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "请按地区分类，格式要符合这个标准。",
+            "pinyin": "Qǐng àn dìqū fēnlèi, géshì yào fúhé zhège biāozhǔn.",
+            "translation": "Hãy phân loại theo khu vực và dùng định dạng theo tiêu chuẩn này."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "明白了，您可以再举一个例子吗？",
+            "pinyin": "Míngbai le, nín kěyǐ zài jǔ yí ge lìzi ma?",
+            "translation": "Tôi hiểu rồi, anh/chị có thể cho thêm một ví dụ không?"
+          }
+        ],
+        "notes": [
+          {
+            "title": "Hỏi phần chưa rõ",
+            "pattern": "请问具体要求是什么？",
+            "explanation": "Dùng khi yêu cầu mới chỉ nói mục tiêu chung. Hỏi rõ trước khi làm giúp giảm sửa lại về sau."
+          },
+          {
+            "title": "Xin ví dụ",
+            "pattern": "您可以举例说明吗？",
+            "explanation": "Mẫu lịch sự để xin một trường hợp minh họa khi tiêu chuẩn hoặc phạm vi còn trừu tượng."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "phoi-hop-va-giai-quyet-cong-viec",
+      "slug": "ban-giao-cong-viec",
+      "title": "Bàn giao công việc",
+      "summary": "Chuyển giao tài liệu, quyền truy cập và những lưu ý quan trọng cho người tiếp nhận.",
+      "situation": "Bàn giao trước khi nghỉ phép",
+      "estimatedMinutes": 12,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "jiaojie",
+          "hanzi": "交接",
+          "pinyin": "jiāojiē",
+          "meaning": "bàn giao",
+          "example": "我们下午进行工作交接。",
+          "translation": "Chiều nay chúng ta tiến hành bàn giao công việc.",
+          "audioUrl": null
+        },
+        {
+          "slug": "jieshou",
+          "hanzi": "接手",
+          "pinyin": "jiēshǒu",
+          "meaning": "tiếp nhận",
+          "example": "下周由小李接手这个项目。",
+          "translation": "Tuần sau Tiểu Lý sẽ tiếp nhận dự án này.",
+          "audioUrl": null
+        },
+        {
+          "slug": "ziliao",
+          "hanzi": "资料",
+          "pinyin": "zīliào",
+          "meaning": "tài liệu, dữ liệu",
+          "example": "相关资料都在这个文件夹里。",
+          "translation": "Tài liệu liên quan đều nằm trong thư mục này.",
+          "audioUrl": null
+        },
+        {
+          "slug": "quanxian",
+          "hanzi": "权限",
+          "pinyin": "quánxiàn",
+          "meaning": "quyền truy cập",
+          "example": "我已经为你开通系统权限。",
+          "translation": "Tôi đã mở quyền truy cập hệ thống cho bạn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "fuzeren",
+          "hanzi": "负责人",
+          "pinyin": "fùzérén",
+          "meaning": "người phụ trách",
+          "example": "有问题可以联系项目负责人。",
+          "translation": "Nếu có vấn đề, bạn có thể liên hệ người phụ trách dự án.",
+          "audioUrl": null
+        },
+        {
+          "slug": "zhuyi-shixiang",
+          "hanzi": "注意事项",
+          "pinyin": "zhùyì shìxiàng",
+          "meaning": "điều cần lưu ý",
+          "example": "请先看一下交接的注意事项。",
+          "translation": "Hãy xem trước các điều cần lưu ý khi bàn giao.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "我下周请假，项目需要交接给你。",
+            "pinyin": "Wǒ xià zhōu qǐngjià, xiàngmù xūyào jiāojiē gěi nǐ.",
+            "translation": "Tuần sau tôi nghỉ phép nên cần bàn giao dự án cho bạn."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，相关资料都在哪里？",
+            "pinyin": "Hǎo de, xiāngguān zīliào dōu zài nǎli?",
+            "translation": "Được, toàn bộ tài liệu liên quan ở đâu?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "都在共享文件夹里，系统权限也开通了。",
+            "pinyin": "Dōu zài gòngxiǎng wénjiànjiā lǐ, xìtǒng quánxiàn yě kāitōng le.",
+            "translation": "Tất cả ở thư mục dùng chung, quyền hệ thống cũng đã được mở."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "明白，还有什么注意事项吗？",
+            "pinyin": "Míngbai, hái yǒu shénme zhùyì shìxiàng ma?",
+            "translation": "Tôi hiểu rồi, còn điều gì cần lưu ý không?"
+          }
+        ],
+        "notes": [
+          {
+            "title": "Thông báo bàn giao",
+            "pattern": "需要交接给……",
+            "explanation": "Dùng để nói rõ người tiếp nhận. Có thể đặt tên công việc hoặc dự án trước 需要."
+          },
+          {
+            "title": "Kiểm tra thông tin còn thiếu",
+            "pattern": "还有什么注意事项吗？",
+            "explanation": "Câu hỏi giúp người nhận chủ động tìm những rủi ro hoặc ngoại lệ chưa được ghi trong tài liệu."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "phoi-hop-va-giai-quyet-cong-viec",
+      "slug": "xu-ly-thay-doi-uu-tien",
+      "title": "Xử lý thay đổi ưu tiên",
+      "summary": "Xác nhận việc khẩn cấp, điều chỉnh thứ tự xử lý và làm rõ ảnh hưởng đến kế hoạch cũ.",
+      "situation": "Có nhiệm vụ khẩn chen ngang",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "youxianji",
+          "hanzi": "优先级",
+          "pinyin": "yōuxiānjí",
+          "meaning": "mức độ ưu tiên",
+          "example": "这个任务的优先级最高。",
+          "translation": "Nhiệm vụ này có mức ưu tiên cao nhất.",
+          "audioUrl": null
+        },
+        {
+          "slug": "tiaozheng",
+          "hanzi": "调整",
+          "pinyin": "tiáozhěng",
+          "meaning": "điều chỉnh",
+          "example": "我们需要调整工作计划。",
+          "translation": "Chúng ta cần điều chỉnh kế hoạch công việc.",
+          "audioUrl": null
+        },
+        {
+          "slug": "jinji",
+          "hanzi": "紧急",
+          "pinyin": "jǐnjí",
+          "meaning": "khẩn cấp",
+          "example": "客户有一个紧急需求。",
+          "translation": "Khách hàng có một yêu cầu khẩn cấp.",
+          "audioUrl": null
+        },
+        {
+          "slug": "zanting",
+          "hanzi": "暂停",
+          "pinyin": "zàntíng",
+          "meaning": "tạm dừng",
+          "example": "请先暂停现在的任务。",
+          "translation": "Hãy tạm dừng nhiệm vụ hiện tại.",
+          "audioUrl": null
+        },
+        {
+          "slug": "chongxin-anpai",
+          "hanzi": "重新安排",
+          "pinyin": "chóngxīn ānpái",
+          "meaning": "sắp xếp lại",
+          "example": "我会重新安排今天的工作。",
+          "translation": "Tôi sẽ sắp xếp lại công việc hôm nay.",
+          "audioUrl": null
+        },
+        {
+          "slug": "yingxiang",
+          "hanzi": "影响",
+          "pinyin": "yǐngxiǎng",
+          "meaning": "ảnh hưởng",
+          "example": "这个变化会影响原来的进度。",
+          "translation": "Thay đổi này sẽ ảnh hưởng tiến độ ban đầu.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "客户刚发来一个紧急需求。",
+            "pinyin": "Kèhù gāng fā lái yí ge jǐnjí xūqiú.",
+            "translation": "Khách hàng vừa gửi một yêu cầu khẩn cấp."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "需要提高这个任务的优先级吗？",
+            "pinyin": "Xūyào tígāo zhège rènwu de yōuxiānjí ma?",
+            "translation": "Có cần nâng mức ưu tiên của nhiệm vụ này không?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "是的，请先暂停原来的工作。",
+            "pinyin": "Shì de, qǐng xiān zàntíng yuánlái de gōngzuò.",
+            "translation": "Có, hãy tạm dừng công việc ban đầu trước."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "这样会影响进度，我重新安排后向您确认。",
+            "pinyin": "Zhèyàng huì yǐngxiǎng jìndù, wǒ chóngxīn ānpái hòu xiàng nín quèrèn.",
+            "translation": "Việc này sẽ ảnh hưởng tiến độ; tôi sẽ sắp xếp lại rồi xác nhận với anh/chị."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Xác nhận mức ưu tiên",
+            "pattern": "需要提高……的优先级吗？",
+            "explanation": "Giúp tránh tự ý đổi thứ tự công việc khi yêu cầu khẩn chưa được người phụ trách xác nhận."
+          },
+          {
+            "title": "Nêu ảnh hưởng",
+            "pattern": "这样会影响……",
+            "explanation": "Nói rõ tác động trước khi nhận việc mới giúp quản lý cân đối kỳ vọng và nguồn lực."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "phoi-hop-va-giai-quyet-cong-viec",
+      "slug": "bao-tre-va-xin-gia-han",
+      "title": "Báo trễ và xin gia hạn",
+      "summary": "Thông báo sớm nguyên nhân, thời gian dự kiến và phương án bù khi không thể giữ hạn cũ.",
+      "situation": "Không kịp hoàn thành đúng hạn",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "yanqi",
+          "hanzi": "延期",
+          "pinyin": "yánqī",
+          "meaning": "gia hạn, hoãn",
+          "example": "项目需要延期两天。",
+          "translation": "Dự án cần gia hạn hai ngày.",
+          "audioUrl": null
+        },
+        {
+          "slug": "yuanyin",
+          "hanzi": "原因",
+          "pinyin": "yuányīn",
+          "meaning": "nguyên nhân",
+          "example": "请说明延期的原因。",
+          "translation": "Vui lòng giải thích nguyên nhân trì hoãn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "yuji",
+          "hanzi": "预计",
+          "pinyin": "yùjì",
+          "meaning": "dự kiến",
+          "example": "预计明天下午完成。",
+          "translation": "Dự kiến hoàn thành vào chiều mai.",
+          "audioUrl": null
+        },
+        {
+          "slug": "yanchang",
+          "hanzi": "延长",
+          "pinyin": "yáncháng",
+          "meaning": "kéo dài",
+          "example": "可以把期限延长一天吗？",
+          "translation": "Có thể kéo dài thời hạn thêm một ngày không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "jinkuai",
+          "hanzi": "尽快",
+          "pinyin": "jǐnkuài",
+          "meaning": "sớm nhất có thể",
+          "example": "我们会尽快处理。",
+          "translation": "Chúng tôi sẽ xử lý sớm nhất có thể.",
+          "audioUrl": null
+        },
+        {
+          "slug": "bujiu",
+          "hanzi": "补救",
+          "pinyin": "bǔjiù",
+          "meaning": "khắc phục, bù đắp",
+          "example": "团队正在制定补救方案。",
+          "translation": "Nhóm đang xây dựng phương án khắc phục.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "报告今天可以完成吗？",
+            "pinyin": "Bàogào jīntiān kěyǐ wánchéng ma?",
+            "translation": "Hôm nay báo cáo có thể hoàn thành không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "很抱歉，因为数据有问题，可能需要延期。",
+            "pinyin": "Hěn bàoqiàn, yīnwèi shùjù yǒu wèntí, kěnéng xūyào yánqī.",
+            "translation": "Rất xin lỗi, do dữ liệu có vấn đề nên có thể cần gia hạn."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "预计什么时候可以完成？",
+            "pinyin": "Yùjì shénme shíhou kěyǐ wánchéng?",
+            "translation": "Dự kiến khi nào có thể hoàn thành?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "预计明天下午完成，我们会尽快补救。",
+            "pinyin": "Yùjì míngtiān xiàwǔ wánchéng, wǒmen huì jǐnkuài bǔjiù.",
+            "translation": "Dự kiến chiều mai hoàn thành; chúng tôi sẽ khắc phục sớm nhất có thể."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Báo trễ có trách nhiệm",
+            "pattern": "因为……，可能需要延期",
+            "explanation": "Nêu nguyên nhân ngắn gọn, sau đó đưa ngay mốc dự kiến mới thay vì chỉ thông báo không kịp."
+          },
+          {
+            "title": "Đưa thời gian mới",
+            "pattern": "预计……完成",
+            "explanation": "预计 thể hiện đây là mốc dự kiến. Chỉ đưa mốc mà bạn đã cân nhắc và có khả năng giữ được."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "phoi-hop-va-giai-quyet-cong-viec",
+      "slug": "dua-ra-phan-hoi-va-de-xuat",
+      "title": "Đưa ra phản hồi và đề xuất",
+      "summary": "Góp ý vào kế hoạch bằng cách nêu điểm tốt, rủi ro và phương án cải thiện có thể thực hiện.",
+      "situation": "Đánh giá một phương án mới",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "fankui",
+          "hanzi": "反馈",
+          "pinyin": "fǎnkuì",
+          "meaning": "phản hồi",
+          "example": "谢谢你的反馈。",
+          "translation": "Cảm ơn phản hồi của bạn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "jianyi",
+          "hanzi": "建议",
+          "pinyin": "jiànyì",
+          "meaning": "đề xuất, góp ý",
+          "example": "我建议先做一个小测试。",
+          "translation": "Tôi đề xuất làm một thử nghiệm nhỏ trước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "gaijin",
+          "hanzi": "改进",
+          "pinyin": "gǎijìn",
+          "meaning": "cải thiện",
+          "example": "这个流程还有改进空间。",
+          "translation": "Quy trình này vẫn còn chỗ để cải thiện.",
+          "audioUrl": null
+        },
+        {
+          "slug": "kexing",
+          "hanzi": "可行",
+          "pinyin": "kěxíng",
+          "meaning": "khả thi",
+          "example": "这个方案在时间上可行。",
+          "translation": "Phương án này khả thi về mặt thời gian.",
+          "audioUrl": null
+        },
+        {
+          "slug": "youdian",
+          "hanzi": "优点",
+          "pinyin": "yōudiǎn",
+          "meaning": "ưu điểm",
+          "example": "这个方法的优点是速度快。",
+          "translation": "Ưu điểm của phương pháp này là nhanh.",
+          "audioUrl": null
+        },
+        {
+          "slug": "fangan-fengxian",
+          "hanzi": "方案风险",
+          "pinyin": "fāng'àn fēngxiǎn",
+          "meaning": "rủi ro của phương án",
+          "example": "我们需要评估方案风险。",
+          "translation": "Chúng ta cần đánh giá rủi ro của phương án.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "你觉得这个新流程怎么样？",
+            "pinyin": "Nǐ juéde zhège xīn liúchéng zěnmeyàng?",
+            "translation": "Bạn thấy quy trình mới này thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "优点是速度快，但方案风险还没有评估。",
+            "pinyin": "Yōudiǎn shì sùdù kuài, dàn fāng'àn fēngxiǎn hái méiyǒu pínggū.",
+            "translation": "Ưu điểm là nhanh, nhưng rủi ro phương án chưa được đánh giá."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "你有什么改进建议？",
+            "pinyin": "Nǐ yǒu shénme gǎijìn jiànyì?",
+            "translation": "Bạn có đề xuất cải thiện nào không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我建议先做一个小测试，确认可行以后再使用。",
+            "pinyin": "Wǒ jiànyì xiān zuò yí ge xiǎo cèshì, quèrèn kěxíng yǐhòu zài shǐyòng.",
+            "translation": "Tôi đề xuất thử nhỏ trước, xác nhận khả thi rồi mới áp dụng."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Góp ý cân bằng",
+            "pattern": "优点是……，但……",
+            "explanation": "Nêu điểm tốt trước rồi mới nói rủi ro giúp phản hồi rõ ràng mà không tạo cảm giác phủ nhận toàn bộ phương án."
+          },
+          {
+            "title": "Đưa đề xuất",
+            "pattern": "我建议先……",
+            "explanation": "先 nhấn mạnh bước thử nghiệm hoặc kiểm tra trước khi triển khai rộng."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "phoi-hop-va-giai-quyet-cong-viec",
+      "slug": "kiem-tra-phoi-hop-cong-viec",
+      "title": "Kiểm tra: Phối hợp công việc",
+      "summary": "Xử lý một tình huống tổng hợp gồm thay đổi ưu tiên, trễ hạn và phối hợp giữa nhiều người.",
+      "situation": "Thực hành cuối module 2",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "xietiao",
+          "hanzi": "协调",
+          "pinyin": "xiétiáo",
+          "meaning": "điều phối",
+          "example": "我来协调两个部门的时间。",
+          "translation": "Tôi sẽ điều phối thời gian của hai bộ phận.",
+          "audioUrl": null
+        },
+        {
+          "slug": "gongshi",
+          "hanzi": "共识",
+          "pinyin": "gòngshí",
+          "meaning": "đồng thuận",
+          "example": "大家对新计划达成了共识。",
+          "translation": "Mọi người đã đạt đồng thuận về kế hoạch mới.",
+          "audioUrl": null
+        },
+        {
+          "slug": "chongtu",
+          "hanzi": "冲突",
+          "pinyin": "chōngtū",
+          "meaning": "xung đột",
+          "example": "两个任务的时间有冲突。",
+          "translation": "Thời gian của hai nhiệm vụ bị xung đột.",
+          "audioUrl": null
+        },
+        {
+          "slug": "jiejue-fangan",
+          "hanzi": "解决方案",
+          "pinyin": "jiějué fāng'àn",
+          "meaning": "phương án giải quyết",
+          "example": "我们需要一个可行的解决方案。",
+          "translation": "Chúng ta cần một phương án giải quyết khả thi.",
+          "audioUrl": null
+        },
+        {
+          "slug": "genjin",
+          "hanzi": "跟进",
+          "pinyin": "gēnjìn",
+          "meaning": "theo dõi tiếp",
+          "example": "我明天会跟进处理结果。",
+          "translation": "Ngày mai tôi sẽ theo dõi kết quả xử lý.",
+          "audioUrl": null
+        },
+        {
+          "slug": "queren-jieguo",
+          "hanzi": "确认结果",
+          "pinyin": "quèrèn jiéguǒ",
+          "meaning": "xác nhận kết quả",
+          "example": "完成后请确认结果。",
+          "translation": "Sau khi hoàn thành hãy xác nhận kết quả.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "两个紧急任务的时间有冲突。",
+            "pinyin": "Liǎng ge jǐnjí rènwu de shíjiān yǒu chōngtū.",
+            "translation": "Thời gian của hai nhiệm vụ khẩn bị xung đột."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我来协调负责人，重新确认优先级。",
+            "pinyin": "Wǒ lái xiétiáo fùzérén, chóngxīn quèrèn yōuxiānjí.",
+            "translation": "Tôi sẽ điều phối người phụ trách và xác nhận lại mức ưu tiên."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "请今天给出一个可行的解决方案。",
+            "pinyin": "Qǐng jīntiān gěichū yí ge kěxíng de jiějué fāng'àn.",
+            "translation": "Hãy đưa ra một phương án khả thi trong hôm nay."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，我会跟进并确认结果。",
+            "pinyin": "Hǎo de, wǒ huì gēnjìn bìng quèrèn jiéguǒ.",
+            "translation": "Vâng, tôi sẽ theo dõi và xác nhận kết quả."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Điều phối khi có xung đột",
+            "pattern": "我来协调……",
+            "explanation": "我来 thể hiện bạn chủ động nhận trách nhiệm điều phối, sau đó cần nói rõ người hoặc nguồn lực liên quan."
+          },
+          {
+            "title": "Chốt vòng phối hợp",
+            "pattern": "跟进并确认结果",
+            "explanation": "跟进 là theo dõi tiếp, còn 确认结果 đóng vòng công việc bằng một kết quả đã được xác nhận."
+          }
+        ],
+        "challenge": {
+          "title": "Bài kiểm tra phối hợp công việc",
+          "description": "Chọn cách phản hồi phù hợp trong các tình huống thay đổi và phối hợp.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Quản lý giao thêm việc khẩn. Bạn nên làm gì trước?",
+              "options": [
+                "Tự bỏ việc cũ",
+                "Xác nhận lại mức ưu tiên và ảnh hưởng",
+                "Từ chối ngay"
+              ],
+              "correctOption": 1,
+              "explanation": "Cần xác nhận ưu tiên và tác động trước khi thay đổi kế hoạch."
+            },
+            {
+              "prompt": "Câu nào báo trễ có trách nhiệm nhất?",
+              "options": [
+                "我做不完。",
+                "因为数据有问题，预计明天下午完成。",
+                "以后再说。"
+              ],
+              "correctOption": 1,
+              "explanation": "Câu này có nguyên nhân và thời gian dự kiến mới."
+            },
+            {
+              "prompt": "Cụm nào dùng để nói hai lịch bị xung đột?",
+              "options": [
+                "时间有冲突",
+                "已经达成共识",
+                "请查看附件"
+              ],
+              "correctOption": 0,
+              "explanation": "时间有冲突 nghĩa là thời gian bị trùng hoặc xung đột."
+            },
+            {
+              "prompt": "Sau khi đưa phương án, hành động nào giúp đóng vòng công việc?",
+              "options": [
+                "等待别人提醒",
+                "跟进并确认结果",
+                "删除原来的资料"
+              ],
+              "correctOption": 1,
+              "explanation": "Theo dõi tiếp và xác nhận kết quả giúp tránh công việc bị bỏ lửng."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "moduleSlug": "hop-bao-cao-va-du-an",
+      "slug": "chuan-bi-cuoc-hop",
+      "title": "Chuẩn bị cuộc họp",
+      "summary": "Xác định mục tiêu, người tham gia, chương trình và tài liệu cần gửi trước cuộc họp.",
+      "situation": "Chuẩn bị họp dự án",
+      "estimatedMinutes": 12,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "yicheng",
+          "hanzi": "议程",
+          "pinyin": "yìchéng",
+          "meaning": "chương trình họp",
+          "example": "我已经更新了会议议程。",
+          "translation": "Tôi đã cập nhật chương trình cuộc họp.",
+          "audioUrl": null
+        },
+        {
+          "slug": "canhui-renyuan",
+          "hanzi": "参会人员",
+          "pinyin": "cānhuì rényuán",
+          "meaning": "người tham dự",
+          "example": "请确认参会人员名单。",
+          "translation": "Vui lòng xác nhận danh sách người tham dự.",
+          "audioUrl": null
+        },
+        {
+          "slug": "huiyi-cailiao",
+          "hanzi": "会议材料",
+          "pinyin": "huìyì cáiliào",
+          "meaning": "tài liệu họp",
+          "example": "会议材料会提前发送。",
+          "translation": "Tài liệu họp sẽ được gửi trước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "mubiao",
+          "hanzi": "目标",
+          "pinyin": "mùbiāo",
+          "meaning": "mục tiêu",
+          "example": "这次会议的目标是什么？",
+          "translation": "Mục tiêu của cuộc họp lần này là gì?",
+          "audioUrl": null
+        },
+        {
+          "slug": "tiqian",
+          "hanzi": "提前",
+          "pinyin": "tíqián",
+          "meaning": "trước, sớm hơn",
+          "example": "请提前十分钟到会议室。",
+          "translation": "Vui lòng đến phòng họp trước mười phút.",
+          "audioUrl": null
+        },
+        {
+          "slug": "zhunbei",
+          "hanzi": "准备",
+          "pinyin": "zhǔnbèi",
+          "meaning": "chuẩn bị",
+          "example": "我正在准备汇报材料。",
+          "translation": "Tôi đang chuẩn bị tài liệu báo cáo.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "明天的项目会议准备得怎么样了？",
+            "pinyin": "Míngtiān de xiàngmù huìyì zhǔnbèi de zěnmeyàng le?",
+            "translation": "Cuộc họp dự án ngày mai chuẩn bị đến đâu rồi?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "议程和参会人员已经确认了。",
+            "pinyin": "Yìchéng hé cānhuì rényuán yǐjīng quèrèn le.",
+            "translation": "Chương trình và người tham dự đã được xác nhận."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "会议材料今天可以发送吗？",
+            "pinyin": "Huìyì cáiliào jīntiān kěyǐ fāsòng ma?",
+            "translation": "Hôm nay có thể gửi tài liệu họp không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "可以，我会提前发给大家。",
+            "pinyin": "Kěyǐ, wǒ huì tíqián fā gěi dàjiā.",
+            "translation": "Được, tôi sẽ gửi trước cho mọi người."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Kiểm tra mức độ chuẩn bị",
+            "pattern": "准备得怎么样了？",
+            "explanation": "得怎么样 dùng để hỏi mức độ hoặc chất lượng thực hiện của một hành động."
+          },
+          {
+            "title": "Thông báo gửi trước",
+            "pattern": "会提前发给大家",
+            "explanation": "提前 cho biết hành động sẽ diễn ra trước mốc cần thiết, giúp người tham dự có thời gian đọc tài liệu."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hop-bao-cao-va-du-an",
+      "slug": "phat-bieu-y-kien-trong-cuoc-hop",
+      "title": "Phát biểu ý kiến trong cuộc họp",
+      "summary": "Đồng ý, không đồng ý và bổ sung quan điểm mà vẫn giữ thái độ hợp tác.",
+      "situation": "Thảo luận phương án",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "yijian",
+          "hanzi": "意见",
+          "pinyin": "yìjiàn",
+          "meaning": "ý kiến",
+          "example": "我想听听大家的意见。",
+          "translation": "Tôi muốn nghe ý kiến của mọi người.",
+          "audioUrl": null
+        },
+        {
+          "slug": "tongyi",
+          "hanzi": "同意",
+          "pinyin": "tóngyì",
+          "meaning": "đồng ý",
+          "example": "我同意这个安排。",
+          "translation": "Tôi đồng ý với sắp xếp này.",
+          "audioUrl": null
+        },
+        {
+          "slug": "bu-tongyi",
+          "hanzi": "不同意",
+          "pinyin": "bù tóngyì",
+          "meaning": "không đồng ý",
+          "example": "我不完全同意这个观点。",
+          "translation": "Tôi không hoàn toàn đồng ý với quan điểm này.",
+          "audioUrl": null
+        },
+        {
+          "slug": "buchong",
+          "hanzi": "补充",
+          "pinyin": "bǔchōng",
+          "meaning": "bổ sung",
+          "example": "我想补充一点。",
+          "translation": "Tôi muốn bổ sung một điểm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "guandian",
+          "hanzi": "观点",
+          "pinyin": "guāndiǎn",
+          "meaning": "quan điểm",
+          "example": "这个观点很有参考价值。",
+          "translation": "Quan điểm này rất đáng tham khảo.",
+          "audioUrl": null
+        },
+        {
+          "slug": "kaolv",
+          "hanzi": "考虑",
+          "pinyin": "kǎolǜ",
+          "meaning": "cân nhắc",
+          "example": "我们还需要考虑成本。",
+          "translation": "Chúng ta còn cần cân nhắc chi phí.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "大家对这个方案有什么意见？",
+            "pinyin": "Dàjiā duì zhège fāng'àn yǒu shénme yìjiàn?",
+            "translation": "Mọi người có ý kiến gì về phương án này?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我基本同意，不过还需要考虑成本。",
+            "pinyin": "Wǒ jīběn tóngyì, búguò hái xūyào kǎolǜ chéngběn.",
+            "translation": "Tôi cơ bản đồng ý, nhưng vẫn cần cân nhắc chi phí."
+          },
+          {
+            "speaker": "C",
+            "hanzi": "我想补充一点，时间也比较紧。",
+            "pinyin": "Wǒ xiǎng bǔchōng yìdiǎn, shíjiān yě bǐjiào jǐn.",
+            "translation": "Tôi muốn bổ sung một điểm: thời gian cũng khá gấp."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "好的，我们把这两个问题一起讨论。",
+            "pinyin": "Hǎo de, wǒmen bǎ zhè liǎng ge wèntí yìqǐ tǎolùn.",
+            "translation": "Được, chúng ta sẽ thảo luận hai vấn đề này cùng nhau."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Không đồng ý mềm",
+            "pattern": "我基本同意，不过……",
+            "explanation": "Thừa nhận phần bạn đồng ý trước, sau đó dùng 不过 để nêu điểm còn băn khoăn."
+          },
+          {
+            "title": "Xin bổ sung",
+            "pattern": "我想补充一点",
+            "explanation": "Mẫu mở lời ngắn và lịch sự để thêm thông tin mà không ngắt mạch cuộc họp quá mạnh."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hop-bao-cao-va-du-an",
+      "slug": "ghi-nhan-quyet-dinh-va-hanh-dong",
+      "title": "Ghi nhận quyết định và hành động",
+      "summary": "Chốt kết luận, người phụ trách, thời hạn và các việc cần làm sau cuộc họp.",
+      "situation": "Kết thúc cuộc họp",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "jueding",
+          "hanzi": "决定",
+          "pinyin": "juédìng",
+          "meaning": "quyết định",
+          "example": "会议决定下周开始测试。",
+          "translation": "Cuộc họp quyết định bắt đầu thử nghiệm vào tuần sau.",
+          "audioUrl": null
+        },
+        {
+          "slug": "jielun",
+          "hanzi": "结论",
+          "pinyin": "jiélùn",
+          "meaning": "kết luận",
+          "example": "请把会议结论写清楚。",
+          "translation": "Vui lòng ghi rõ kết luận cuộc họp.",
+          "audioUrl": null
+        },
+        {
+          "slug": "huiyi-jilu",
+          "hanzi": "会议记录",
+          "pinyin": "huìyì jìlù",
+          "meaning": "biên bản họp",
+          "example": "我会整理会议记录。",
+          "translation": "Tôi sẽ tổng hợp biên bản họp.",
+          "audioUrl": null
+        },
+        {
+          "slug": "xingdong-xiang",
+          "hanzi": "行动项",
+          "pinyin": "xíngdòng xiàng",
+          "meaning": "hạng mục hành động",
+          "example": "每个行动项都要有负责人。",
+          "translation": "Mỗi hạng mục hành động đều phải có người phụ trách.",
+          "audioUrl": null
+        },
+        {
+          "slug": "fengong",
+          "hanzi": "分工",
+          "pinyin": "fēngōng",
+          "meaning": "phân công",
+          "example": "项目分工已经确认。",
+          "translation": "Phân công dự án đã được xác nhận.",
+          "audioUrl": null
+        },
+        {
+          "slug": "qixian",
+          "hanzi": "期限",
+          "pinyin": "qīxiàn",
+          "meaning": "thời hạn",
+          "example": "这个行动项的期限是周五。",
+          "translation": "Thời hạn của hạng mục này là thứ Sáu.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "今天的会议结论是什么？",
+            "pinyin": "Jīntiān de huìyì jiélùn shì shénme?",
+            "translation": "Kết luận cuộc họp hôm nay là gì?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们决定下周开始小范围测试。",
+            "pinyin": "Wǒmen juédìng xià zhōu kāishǐ xiǎo fànwéi cèshì.",
+            "translation": "Chúng ta quyết định bắt đầu thử nghiệm quy mô nhỏ tuần sau."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "请确认行动项、负责人和期限。",
+            "pinyin": "Qǐng quèrèn xíngdòng xiàng, fùzérén hé qīxiàn.",
+            "translation": "Hãy xác nhận hạng mục hành động, người phụ trách và thời hạn."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，我会写进会议记录并发给大家。",
+            "pinyin": "Hǎo de, wǒ huì xiě jìn huìyì jìlù bìng fā gěi dàjiā.",
+            "translation": "Vâng, tôi sẽ ghi vào biên bản và gửi cho mọi người."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Chốt ba thông tin",
+            "pattern": "行动项、负责人和期限",
+            "explanation": "Ba thành phần này giúp quyết định trong cuộc họp trở thành công việc có thể theo dõi."
+          },
+          {
+            "title": "Ghi vào biên bản",
+            "pattern": "写进会议记录",
+            "explanation": "进 sau động từ nhấn mạnh đưa thông tin vào một tài liệu hoặc hệ thống cụ thể."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hop-bao-cao-va-du-an",
+      "slug": "bao-cao-so-lieu-va-xu-huong",
+      "title": "Báo cáo số liệu và xu hướng",
+      "summary": "Mô tả tăng giảm, tỷ trọng và xu hướng chính mà không chỉ đọc lại từng con số.",
+      "situation": "Trình bày báo cáo tháng",
+      "estimatedMinutes": 14,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "tongbi",
+          "hanzi": "同比",
+          "pinyin": "tóngbǐ",
+          "meaning": "so với cùng kỳ",
+          "example": "销售额同比增长了百分之十。",
+          "translation": "Doanh số tăng 10% so với cùng kỳ.",
+          "audioUrl": null
+        },
+        {
+          "slug": "huanbi",
+          "hanzi": "环比",
+          "pinyin": "huánbǐ",
+          "meaning": "so với kỳ liền trước",
+          "example": "本月订单量环比下降。",
+          "translation": "Số đơn tháng này giảm so với tháng trước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "zengzhang",
+          "hanzi": "增长",
+          "pinyin": "zēngzhǎng",
+          "meaning": "tăng trưởng",
+          "example": "线上销售保持增长。",
+          "translation": "Bán hàng trực tuyến duy trì tăng trưởng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "xiajiang",
+          "hanzi": "下降",
+          "pinyin": "xiàjiàng",
+          "meaning": "giảm",
+          "example": "客户投诉数量明显下降。",
+          "translation": "Số lượng khiếu nại của khách giảm rõ rệt.",
+          "audioUrl": null
+        },
+        {
+          "slug": "zhanbi",
+          "hanzi": "占比",
+          "pinyin": "zhànbǐ",
+          "meaning": "tỷ trọng",
+          "example": "新客户的占比是百分之三十。",
+          "translation": "Khách hàng mới chiếm tỷ trọng 30%.",
+          "audioUrl": null
+        },
+        {
+          "slug": "qushi",
+          "hanzi": "趋势",
+          "pinyin": "qūshì",
+          "meaning": "xu hướng",
+          "example": "整体趋势比较稳定。",
+          "translation": "Xu hướng tổng thể khá ổn định.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "请介绍一下本月的主要数据。",
+            "pinyin": "Qǐng jièshào yíxià běn yuè de zhǔyào shùjù.",
+            "translation": "Hãy giới thiệu các số liệu chính của tháng này."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "销售额同比增长了百分之十。",
+            "pinyin": "Xiāoshòu'é tóngbǐ zēngzhǎng le bǎifēnzhī shí.",
+            "translation": "Doanh số tăng 10% so với cùng kỳ."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "订单量的趋势怎么样？",
+            "pinyin": "Dìngdān liàng de qūshì zěnmeyàng?",
+            "translation": "Xu hướng số lượng đơn hàng thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "整体比较稳定，不过线下订单环比有所下降。",
+            "pinyin": "Zhěngtǐ bǐjiào wěndìng, búguò xiànxià dìngdān huánbǐ yǒusuǒ xiàjiàng.",
+            "translation": "Tổng thể khá ổn định, nhưng đơn hàng ngoại tuyến giảm nhẹ so với kỳ trước."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Phân biệt hai kiểu so sánh",
+            "pattern": "同比 / 环比",
+            "explanation": "同比 so với cùng kỳ năm trước; 环比 so với kỳ ngay trước đó. Nên ghi rõ mốc nếu người nghe chưa quen."
+          },
+          {
+            "title": "Mô tả giảm nhẹ",
+            "pattern": "有所下降",
+            "explanation": "有所 làm mức thay đổi nghe trung tính hơn, phù hợp khi mức giảm không quá lớn."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hop-bao-cao-va-du-an",
+      "slug": "quan-ly-rui-ro-du-an",
+      "title": "Quản lý rủi ro dự án",
+      "summary": "Nêu trở ngại, phụ thuộc, phương án dự phòng và trường hợp cần báo cáo lên cấp trên.",
+      "situation": "Rà soát rủi ro hằng tuần",
+      "estimatedMinutes": 14,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "zhangai",
+          "hanzi": "障碍",
+          "pinyin": "zhàng'ài",
+          "meaning": "trở ngại",
+          "example": "目前最大的障碍是人手不足。",
+          "translation": "Trở ngại lớn nhất hiện tại là thiếu nhân lực.",
+          "audioUrl": null
+        },
+        {
+          "slug": "yilai",
+          "hanzi": "依赖",
+          "pinyin": "yīlài",
+          "meaning": "sự phụ thuộc",
+          "example": "这个任务依赖技术部门的支持。",
+          "translation": "Nhiệm vụ này phụ thuộc vào hỗ trợ của bộ phận kỹ thuật.",
+          "audioUrl": null
+        },
+        {
+          "slug": "yufang",
+          "hanzi": "预防",
+          "pinyin": "yùfáng",
+          "meaning": "phòng ngừa",
+          "example": "我们需要提前预防这个问题。",
+          "translation": "Chúng ta cần phòng ngừa vấn đề này từ sớm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "yingdui",
+          "hanzi": "应对",
+          "pinyin": "yìngduì",
+          "meaning": "ứng phó",
+          "example": "团队已经准备好应对变化。",
+          "translation": "Nhóm đã sẵn sàng ứng phó thay đổi.",
+          "audioUrl": null
+        },
+        {
+          "slug": "beiyong-fangan",
+          "hanzi": "备用方案",
+          "pinyin": "bèiyòng fāng'àn",
+          "meaning": "phương án dự phòng",
+          "example": "如果系统失败，我们有备用方案。",
+          "translation": "Nếu hệ thống gặp lỗi, chúng ta có phương án dự phòng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "shangbao",
+          "hanzi": "上报",
+          "pinyin": "shàngbào",
+          "meaning": "báo cáo lên cấp trên",
+          "example": "严重问题要及时上报。",
+          "translation": "Vấn đề nghiêm trọng cần được báo cáo kịp thời.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "项目目前有什么主要障碍？",
+            "pinyin": "Xiàngmù mùqián yǒu shénme zhǔyào zhàng'ài?",
+            "translation": "Dự án hiện có trở ngại chính nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "测试任务依赖技术部门的支持。",
+            "pinyin": "Cèshì rènwu yīlài jìshù bùmén de zhīchí.",
+            "translation": "Nhiệm vụ kiểm thử phụ thuộc vào hỗ trợ của bộ phận kỹ thuật."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "如果他们不能按时完成，我们怎么应对？",
+            "pinyin": "Rúguǒ tāmen bù néng ànshí wánchéng, wǒmen zěnme yìngduì?",
+            "translation": "Nếu họ không hoàn thành đúng hạn, chúng ta ứng phó thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们有备用方案，严重问题会及时上报。",
+            "pinyin": "Wǒmen yǒu bèiyòng fāng'àn, yánzhòng wèntí huì jíshí shàngbào.",
+            "translation": "Chúng ta có phương án dự phòng; vấn đề nghiêm trọng sẽ được báo cáo kịp thời."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Nêu sự phụ thuộc",
+            "pattern": "……依赖……的支持",
+            "explanation": "Mẫu này giúp chỉ rõ bên nào hoặc điều kiện nào đang ảnh hưởng khả năng hoàn thành."
+          },
+          {
+            "title": "Đặt tình huống rủi ro",
+            "pattern": "如果……，我们怎么应对？",
+            "explanation": "Nếu nêu một rủi ro, nên nối ngay bằng câu hỏi về cách ứng phó hoặc phương án dự phòng."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hop-bao-cao-va-du-an",
+      "slug": "kiem-tra-hop-bao-cao-du-an",
+      "title": "Kiểm tra: Họp, báo cáo & dự án",
+      "summary": "Thực hành chuẩn bị họp, trình bày xu hướng và chốt trách nhiệm sau cuộc họp.",
+      "situation": "Thực hành cuối module 3",
+      "estimatedMinutes": 16,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "zhuchi",
+          "hanzi": "主持",
+          "pinyin": "zhǔchí",
+          "meaning": "chủ trì",
+          "example": "今天的会议由王经理主持。",
+          "translation": "Cuộc họp hôm nay do quản lý Vương chủ trì.",
+          "audioUrl": null
+        },
+        {
+          "slug": "huizong",
+          "hanzi": "汇总",
+          "pinyin": "huìzǒng",
+          "meaning": "tổng hợp",
+          "example": "请汇总各部门的数据。",
+          "translation": "Vui lòng tổng hợp dữ liệu của các bộ phận.",
+          "audioUrl": null
+        },
+        {
+          "slug": "zhongdian",
+          "hanzi": "重点",
+          "pinyin": "zhòngdiǎn",
+          "meaning": "trọng điểm",
+          "example": "汇报时请说明三个重点。",
+          "translation": "Khi báo cáo hãy trình bày ba trọng điểm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "xiayibu",
+          "hanzi": "下一步",
+          "pinyin": "xià yí bù",
+          "meaning": "bước tiếp theo",
+          "example": "下一步是安排客户测试。",
+          "translation": "Bước tiếp theo là sắp xếp thử nghiệm với khách hàng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "zerenren",
+          "hanzi": "责任人",
+          "pinyin": "zérènrén",
+          "meaning": "người chịu trách nhiệm",
+          "example": "每个任务都要确认责任人。",
+          "translation": "Mỗi nhiệm vụ đều phải xác nhận người chịu trách nhiệm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "wancheng-shijian",
+          "hanzi": "完成时间",
+          "pinyin": "wánchéng shíjiān",
+          "meaning": "thời gian hoàn thành",
+          "example": "请确认预计完成时间。",
+          "translation": "Vui lòng xác nhận thời gian dự kiến hoàn thành.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "请先汇总数据，再说明三个重点。",
+            "pinyin": "Qǐng xiān huìzǒng shùjù, zài shuōmíng sān ge zhòngdiǎn.",
+            "translation": "Hãy tổng hợp dữ liệu trước, sau đó trình bày ba trọng điểm."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，我也会准备风险和备用方案。",
+            "pinyin": "Hǎo de, wǒ yě huì zhǔnbèi fēngxiǎn hé bèiyòng fāng'àn.",
+            "translation": "Vâng, tôi cũng sẽ chuẩn bị phần rủi ro và phương án dự phòng."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "会议结束前要确认下一步和责任人。",
+            "pinyin": "Huìyì jiéshù qián yào quèrèn xià yí bù hé zérènrén.",
+            "translation": "Trước khi kết thúc họp cần xác nhận bước tiếp theo và người chịu trách nhiệm."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "明白，我会记录预计完成时间。",
+            "pinyin": "Míngbai, wǒ huì jìlù yùjì wánchéng shíjiān.",
+            "translation": "Tôi hiểu, tôi sẽ ghi lại thời gian dự kiến hoàn thành."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Trình bày có cấu trúc",
+            "pattern": "先……，再……",
+            "explanation": "先…再… giúp người nghe theo dõi thứ tự các phần trong một bài báo cáo."
+          },
+          {
+            "title": "Chốt trước khi kết thúc",
+            "pattern": "结束前要确认……",
+            "explanation": "Mẫu nhắc việc phải hoàn tất trước một mốc; ở đây là bước tiếp theo, người chịu trách nhiệm và thời gian."
+          }
+        ],
+        "challenge": {
+          "title": "Bài kiểm tra họp và dự án",
+          "description": "Kiểm tra khả năng chuẩn bị, trình bày và chốt việc sau cuộc họp.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Tài liệu họp nên được gửi khi nào?",
+              "options": [
+                "Sau cuộc họp",
+                "提前发送",
+                "Chỉ khi có người hỏi"
+              ],
+              "correctOption": 1,
+              "explanation": "提前发送 cho người tham dự thời gian đọc trước."
+            },
+            {
+              "prompt": "Cách nào không đồng ý mềm và hợp tác?",
+              "options": [
+                "你错了。",
+                "我基本同意，不过还需要考虑成本。",
+                "这个方案不能用。"
+              ],
+              "correctOption": 1,
+              "explanation": "Câu này thừa nhận điểm đồng thuận rồi mới nêu điều cần cân nhắc."
+            },
+            {
+              "prompt": "Ba thông tin cần chốt sau họp là gì?",
+              "options": [
+                "行动项、负责人和期限",
+                "标题、颜色和字体",
+                "姓名、年龄和地址"
+              ],
+              "correctOption": 0,
+              "explanation": "Đây là ba thành phần biến quyết định thành hành động theo dõi được."
+            },
+            {
+              "prompt": "Nếu nhiệm vụ phụ thuộc bộ phận khác, bạn nên làm rõ điều gì?",
+              "options": [
+                "Sở thích của họ",
+                "Sự phụ thuộc và phương án dự phòng",
+                "Chỉ chờ đến hạn"
+              ],
+              "correctOption": 1,
+              "explanation": "Làm rõ phụ thuộc và dự phòng giúp quản lý rủi ro trước khi trễ."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "moduleSlug": "hanh-chinh-va-giao-tiep-nang-cao",
+      "slug": "xin-nghi-va-bao-di-muon",
+      "title": "Xin nghỉ và báo đi muộn",
+      "summary": "Thông báo lý do, thời gian vắng mặt và cách bàn giao để không ảnh hưởng công việc chung.",
+      "situation": "Thông báo thay đổi giờ làm",
+      "estimatedMinutes": 12,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "qingjia",
+          "hanzi": "请假",
+          "pinyin": "qǐngjià",
+          "meaning": "xin nghỉ",
+          "example": "我想请一天假。",
+          "translation": "Tôi muốn xin nghỉ một ngày.",
+          "audioUrl": null
+        },
+        {
+          "slug": "chidao",
+          "hanzi": "迟到",
+          "pinyin": "chídào",
+          "meaning": "đi muộn",
+          "example": "今天路上堵车，我会迟到。",
+          "translation": "Hôm nay đường tắc nên tôi sẽ đến muộn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "bingjia",
+          "hanzi": "病假",
+          "pinyin": "bìngjià",
+          "meaning": "nghỉ ốm",
+          "example": "他今天请病假。",
+          "translation": "Hôm nay anh ấy nghỉ ốm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "shijia",
+          "hanzi": "事假",
+          "pinyin": "shìjià",
+          "meaning": "nghỉ việc riêng",
+          "example": "我需要请半天事假。",
+          "translation": "Tôi cần xin nghỉ việc riêng nửa ngày.",
+          "audioUrl": null
+        },
+        {
+          "slug": "pizhun",
+          "hanzi": "批准",
+          "pinyin": "pīzhǔn",
+          "meaning": "phê duyệt",
+          "example": "请假申请已经批准了。",
+          "translation": "Đơn xin nghỉ đã được phê duyệt.",
+          "audioUrl": null
+        },
+        {
+          "slug": "kaoqin",
+          "hanzi": "考勤",
+          "pinyin": "kǎoqín",
+          "meaning": "chấm công",
+          "example": "请在系统里更新考勤。",
+          "translation": "Vui lòng cập nhật chấm công trong hệ thống.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "经理，不好意思，我明天想请一天病假。",
+            "pinyin": "Jīnglǐ, bù hǎoyìsi, wǒ míngtiān xiǎng qǐng yì tiān bìngjià.",
+            "translation": "Quản lý, xin lỗi, ngày mai tôi muốn xin nghỉ ốm một ngày."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，手上的工作安排好了吗？",
+            "pinyin": "Hǎo de, shǒushàng de gōngzuò ānpái hǎo le ma?",
+            "translation": "Được, công việc đang phụ trách đã sắp xếp ổn chưa?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "已经交接给小李了，我也会更新考勤。",
+            "pinyin": "Yǐjīng jiāojiē gěi Xiǎo Lǐ le, wǒ yě huì gēngxīn kǎoqín.",
+            "translation": "Tôi đã bàn giao cho Tiểu Lý và cũng sẽ cập nhật chấm công."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "可以，申请批准以后好好休息。",
+            "pinyin": "Kěyǐ, shēnqǐng pīzhǔn yǐhòu hǎohāo xiūxi.",
+            "translation": "Được, sau khi đơn được duyệt thì hãy nghỉ ngơi cho tốt."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Nói rõ loại nghỉ",
+            "pattern": "请一天病假 / 请半天事假",
+            "explanation": "Nói rõ loại nghỉ và thời lượng giúp người quản lý xử lý chấm công và sắp xếp thay thế."
+          },
+          {
+            "title": "Chủ động bàn giao",
+            "pattern": "已经交接给……了",
+            "explanation": "Khi xin nghỉ, cho biết công việc đã được bàn giao sẽ tạo cảm giác đáng tin cậy và giảm câu hỏi tiếp theo."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hanh-chinh-va-giao-tiep-nang-cao",
+      "slug": "xu-ly-quy-trinh-phe-duyet",
+      "title": "Xử lý quy trình phê duyệt",
+      "summary": "Hỏi đúng bước, chuẩn bị biểu mẫu và theo dõi hồ sơ đang chờ ký hoặc đóng dấu.",
+      "situation": "Nộp đề nghị mua hàng",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "shenpi",
+          "hanzi": "审批",
+          "pinyin": "shěnpī",
+          "meaning": "phê duyệt",
+          "example": "这份申请正在审批中。",
+          "translation": "Đơn này đang trong quá trình phê duyệt.",
+          "audioUrl": null
+        },
+        {
+          "slug": "shenqing",
+          "hanzi": "申请",
+          "pinyin": "shēnqǐng",
+          "meaning": "đề nghị, đơn đăng ký",
+          "example": "请先提交采购申请。",
+          "translation": "Vui lòng nộp đề nghị mua hàng trước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "biaoge",
+          "hanzi": "表格",
+          "pinyin": "biǎogé",
+          "meaning": "biểu mẫu",
+          "example": "这个表格需要填写完整。",
+          "translation": "Biểu mẫu này cần được điền đầy đủ.",
+          "audioUrl": null
+        },
+        {
+          "slug": "qianzi",
+          "hanzi": "签字",
+          "pinyin": "qiānzì",
+          "meaning": "ký tên",
+          "example": "请负责人在这里签字。",
+          "translation": "Vui lòng để người phụ trách ký tại đây.",
+          "audioUrl": null
+        },
+        {
+          "slug": "gaizhang",
+          "hanzi": "盖章",
+          "pinyin": "gàizhāng",
+          "meaning": "đóng dấu",
+          "example": "合同签字后还需要盖章。",
+          "translation": "Hợp đồng sau khi ký còn cần đóng dấu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "liucheng",
+          "hanzi": "流程",
+          "pinyin": "liúchéng",
+          "meaning": "quy trình",
+          "example": "我不太清楚报销流程。",
+          "translation": "Tôi chưa rõ quy trình hoàn ứng.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "我想提交采购申请，请问流程是什么？",
+            "pinyin": "Wǒ xiǎng tíjiāo cǎigòu shēnqǐng, qǐngwèn liúchéng shì shénme?",
+            "translation": "Tôi muốn nộp đề nghị mua hàng, xin hỏi quy trình thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "先填写表格，再请部门负责人签字。",
+            "pinyin": "Xiān tiánxiě biǎogé, zài qǐng bùmén fùzérén qiānzì.",
+            "translation": "Trước tiên điền biểu mẫu, sau đó xin người phụ trách bộ phận ký."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "签字以后需要盖章吗？",
+            "pinyin": "Qiānzì yǐhòu xūyào gàizhāng ma?",
+            "translation": "Sau khi ký có cần đóng dấu không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "这类申请不需要，直接进入审批流程。",
+            "pinyin": "Zhè lèi shēnqǐng bù xūyào, zhíjiē jìnrù shěnpī liúchéng.",
+            "translation": "Loại đề nghị này không cần, sẽ đi thẳng vào quy trình phê duyệt."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Hỏi quy trình",
+            "pattern": "请问流程是什么？",
+            "explanation": "Dùng khi bạn biết mục tiêu nhưng chưa rõ thứ tự các bước hoặc người cần phê duyệt."
+          },
+          {
+            "title": "Mô tả thứ tự",
+            "pattern": "先……，再……",
+            "explanation": "Mẫu quen thuộc để hướng dẫn một quy trình ngắn gồm các bước tuần tự."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hanh-chinh-va-giao-tiep-nang-cao",
+      "slug": "don-tiep-doi-tac-va-khach-den",
+      "title": "Đón tiếp đối tác và khách đến",
+      "summary": "Xác nhận lịch hẹn, hướng dẫn đăng ký và đưa khách đến đúng người phụ trách.",
+      "situation": "Khách đến văn phòng",
+      "estimatedMinutes": 12,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "jiedai",
+          "hanzi": "接待",
+          "pinyin": "jiēdài",
+          "meaning": "đón tiếp",
+          "example": "今天由我负责接待客户。",
+          "translation": "Hôm nay tôi phụ trách đón tiếp khách hàng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "laifang",
+          "hanzi": "来访",
+          "pinyin": "láifǎng",
+          "meaning": "đến thăm, ghé làm việc",
+          "example": "感谢您来访我们公司。",
+          "translation": "Cảm ơn anh/chị đã đến thăm công ty chúng tôi.",
+          "audioUrl": null
+        },
+        {
+          "slug": "qiantai",
+          "hanzi": "前台",
+          "pinyin": "qiántái",
+          "meaning": "quầy lễ tân",
+          "example": "请先到前台登记。",
+          "translation": "Vui lòng đăng ký tại quầy lễ tân trước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "yuyue",
+          "hanzi": "预约",
+          "pinyin": "yùyuē",
+          "meaning": "đặt hẹn",
+          "example": "请问您有预约吗？",
+          "translation": "Xin hỏi anh/chị có lịch hẹn không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "fangke",
+          "hanzi": "访客",
+          "pinyin": "fǎngkè",
+          "meaning": "khách đến làm việc",
+          "example": "访客需要佩戴临时证件。",
+          "translation": "Khách cần đeo thẻ tạm thời.",
+          "audioUrl": null
+        },
+        {
+          "slug": "yindao",
+          "hanzi": "引导",
+          "pinyin": "yǐndǎo",
+          "meaning": "hướng dẫn, dẫn đường",
+          "example": "我来引导您去会议室。",
+          "translation": "Tôi sẽ dẫn anh/chị đến phòng họp.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "您好，请问您有预约吗？",
+            "pinyin": "Nín hǎo, qǐngwèn nín yǒu yùyuē ma?",
+            "translation": "Xin chào, xin hỏi anh/chị có lịch hẹn không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "有，我和销售部的陈经理约了十点。",
+            "pinyin": "Yǒu, wǒ hé xiāoshòubù de Chén jīnglǐ yuē le shí diǎn.",
+            "translation": "Có, tôi hẹn quản lý Trần của bộ phận kinh doanh lúc 10 giờ."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "好的，请先在前台登记。",
+            "pinyin": "Hǎo de, qǐng xiān zài qiántái dēngjì.",
+            "translation": "Vâng, vui lòng đăng ký tại lễ tân trước."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "登记后我带您去会议室。",
+            "pinyin": "Dēngjì hòu wǒ dài nín qù huìyìshì.",
+            "translation": "Sau khi đăng ký, tôi sẽ đưa anh/chị đến phòng họp."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Xác nhận lịch hẹn",
+            "pattern": "请问您有预约吗？",
+            "explanation": "Dùng 您 để giữ mức lịch sự khi tiếp khách; sau đó hỏi tên người hoặc bộ phận được hẹn."
+          },
+          {
+            "title": "Hướng dẫn bước tiếp theo",
+            "pattern": "请先……，登记后……",
+            "explanation": "Nêu từng bước giúp khách biết phải làm gì trước khi được dẫn vào khu vực làm việc."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hanh-chinh-va-giao-tiep-nang-cao",
+      "slug": "giao-tiep-qua-dien-thoai",
+      "title": "Giao tiếp qua điện thoại",
+      "summary": "Xác nhận người gọi, chuyển máy, ghi lời nhắn và xử lý khi đường dây đang bận.",
+      "situation": "Nhận cuộc gọi cho đồng nghiệp",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "jie-dianhua",
+          "hanzi": "接电话",
+          "pinyin": "jiē diànhuà",
+          "meaning": "nghe điện thoại",
+          "example": "现在方便接电话吗？",
+          "translation": "Bây giờ có tiện nghe điện thoại không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "zhuanjie",
+          "hanzi": "转接",
+          "pinyin": "zhuǎnjiē",
+          "meaning": "chuyển máy",
+          "example": "我帮您转接销售部。",
+          "translation": "Tôi sẽ chuyển máy cho anh/chị sang bộ phận kinh doanh.",
+          "audioUrl": null
+        },
+        {
+          "slug": "fenji",
+          "hanzi": "分机",
+          "pinyin": "fēnjī",
+          "meaning": "số máy lẻ",
+          "example": "他的分机号码是八零六。",
+          "translation": "Số máy lẻ của anh ấy là 806.",
+          "audioUrl": null
+        },
+        {
+          "slug": "liuyan",
+          "hanzi": "留言",
+          "pinyin": "liúyán",
+          "meaning": "để lại lời nhắn",
+          "example": "您需要留言吗？",
+          "translation": "Anh/chị có cần để lại lời nhắn không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "shaodeng",
+          "hanzi": "稍等",
+          "pinyin": "shāoděng",
+          "meaning": "chờ một chút",
+          "example": "请稍等，我帮您查询。",
+          "translation": "Vui lòng chờ một chút, tôi sẽ kiểm tra giúp.",
+          "audioUrl": null
+        },
+        {
+          "slug": "zhanxian",
+          "hanzi": "占线",
+          "pinyin": "zhànxiàn",
+          "meaning": "máy bận",
+          "example": "经理的电话现在占线。",
+          "translation": "Điện thoại của quản lý hiện đang bận.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "您好，这里是汉字公司。请问您找哪位？",
+            "pinyin": "Nín hǎo, zhèlǐ shì Hànzì gōngsī. Qǐngwèn nín zhǎo nǎ wèi?",
+            "translation": "Xin chào, đây là công ty Hanzi. Xin hỏi anh/chị tìm ai?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我找销售部的王经理。",
+            "pinyin": "Wǒ zhǎo xiāoshòubù de Wáng jīnglǐ.",
+            "translation": "Tôi tìm quản lý Vương của bộ phận kinh doanh."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "请稍等，他的电话现在占线。",
+            "pinyin": "Qǐng shāoděng, tā de diànhuà xiànzài zhànxiàn.",
+            "translation": "Vui lòng chờ một chút, điện thoại của anh ấy hiện đang bận."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "您需要留言，还是稍后再打来？",
+            "pinyin": "Nín xūyào liúyán, háishì shāohòu zài dǎ lái?",
+            "translation": "Anh/chị muốn để lại lời nhắn hay gọi lại sau?"
+          }
+        ],
+        "notes": [
+          {
+            "title": "Hỏi người cần gặp",
+            "pattern": "请问您找哪位？",
+            "explanation": "哪位 là cách hỏi lịch sự hơn 谁 trong giao tiếp qua điện thoại hoặc lễ tân."
+          },
+          {
+            "title": "Đưa hai lựa chọn",
+            "pattern": "您需要……，还是……？",
+            "explanation": "还是 nối hai lựa chọn trong câu hỏi, giúp người gọi quyết định để lại lời nhắn hay gọi lại."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hanh-chinh-va-giao-tiep-nang-cao",
+      "slug": "xu-ly-hieu-lam-trong-cong-viec",
+      "title": "Xử lý hiểu lầm trong công việc",
+      "summary": "Làm rõ điều đã nghe, xin lỗi khi cần và xác nhận lại để tránh lặp lại hiểu lầm.",
+      "situation": "Hai bên hiểu khác một yêu cầu",
+      "estimatedMinutes": 13,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "wuhui",
+          "hanzi": "误会",
+          "pinyin": "wùhuì",
+          "meaning": "hiểu lầm",
+          "example": "这可能是一个误会。",
+          "translation": "Đây có thể là một hiểu lầm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "chengqing",
+          "hanzi": "澄清",
+          "pinyin": "chéngqīng",
+          "meaning": "làm rõ",
+          "example": "我想澄清一下刚才的要求。",
+          "translation": "Tôi muốn làm rõ yêu cầu lúc nãy.",
+          "audioUrl": null
+        },
+        {
+          "slug": "biaoda",
+          "hanzi": "表达",
+          "pinyin": "biǎodá",
+          "meaning": "diễn đạt",
+          "example": "可能是我表达得不够清楚。",
+          "translation": "Có thể tôi diễn đạt chưa đủ rõ.",
+          "audioUrl": null
+        },
+        {
+          "slug": "lijie",
+          "hanzi": "理解",
+          "pinyin": "lǐjiě",
+          "meaning": "hiểu",
+          "example": "我理解的意思不太一样。",
+          "translation": "Cách tôi hiểu hơi khác.",
+          "audioUrl": null
+        },
+        {
+          "slug": "baoqian",
+          "hanzi": "抱歉",
+          "pinyin": "bàoqiàn",
+          "meaning": "xin lỗi",
+          "example": "很抱歉给您带来不便。",
+          "translation": "Rất xin lỗi vì đã gây bất tiện cho anh/chị.",
+          "audioUrl": null
+        },
+        {
+          "slug": "zai-queren",
+          "hanzi": "再确认",
+          "pinyin": "zài quèrèn",
+          "meaning": "xác nhận lại",
+          "example": "我们把要求再确认一次。",
+          "translation": "Chúng ta hãy xác nhận lại yêu cầu một lần nữa.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "为什么你把所有文件都发给客户了？",
+            "pinyin": "Wèishénme nǐ bǎ suǒyǒu wénjiàn dōu fā gěi kèhù le?",
+            "translation": "Tại sao bạn gửi toàn bộ tài liệu cho khách hàng?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "抱歉，我理解的是需要发送全部文件。",
+            "pinyin": "Bàoqiàn, wǒ lǐjiě de shì xūyào fāsòng quánbù wénjiàn.",
+            "translation": "Xin lỗi, tôi hiểu là cần gửi toàn bộ tài liệu."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "可能是我表达得不够清楚。",
+            "pinyin": "Kěnéng shì wǒ biǎodá de bú gòu qīngchu.",
+            "translation": "Có thể tôi diễn đạt chưa đủ rõ."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们把要求再确认一次，避免再次误会。",
+            "pinyin": "Wǒmen bǎ yāoqiú zài quèrèn yí cì, bìmiǎn zàicì wùhuì.",
+            "translation": "Chúng ta hãy xác nhận lại yêu cầu để tránh hiểu lầm lần nữa."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Làm dịu tình huống",
+            "pattern": "可能是我表达得不够清楚",
+            "explanation": "Nhận một phần trách nhiệm về cách diễn đạt giúp chuyển cuộc trao đổi từ đổ lỗi sang giải quyết."
+          },
+          {
+            "title": "Xác nhận lại",
+            "pattern": "把要求再确认一次",
+            "explanation": "把 đưa 要求 lên trước hành động 确认, nhấn mạnh đối tượng cần xác nhận lại."
+          }
+        ]
+      }
+    },
+    {
+      "moduleSlug": "hanh-chinh-va-giao-tiep-nang-cao",
+      "slug": "kiem-tra-tong-hop-van-phong",
+      "title": "Kiểm tra tổng hợp: Văn phòng & hành chính",
+      "summary": "Tổng hợp các kỹ năng nhận việc, phối hợp, họp, báo cáo và xử lý tình huống hành chính.",
+      "situation": "Bài kiểm tra cuối lộ trình",
+      "estimatedMinutes": 18,
+      "isFree": false,
+      "vocabulary": [
+        {
+          "slug": "qingjing",
+          "hanzi": "情境",
+          "pinyin": "qíngjìng",
+          "meaning": "tình huống, bối cảnh",
+          "example": "请根据工作情境选择表达。",
+          "translation": "Hãy chọn cách diễn đạt dựa trên tình huống công việc.",
+          "audioUrl": null
+        },
+        {
+          "slug": "goutong-mubiao",
+          "hanzi": "沟通目标",
+          "pinyin": "gōutōng mùbiāo",
+          "meaning": "mục tiêu giao tiếp",
+          "example": "先确认这次沟通的目标。",
+          "translation": "Trước tiên xác nhận mục tiêu giao tiếp lần này.",
+          "audioUrl": null
+        },
+        {
+          "slug": "guanjian-ju",
+          "hanzi": "关键句",
+          "pinyin": "guānjiàn jù",
+          "meaning": "câu then chốt",
+          "example": "请记住这个情境的关键句。",
+          "translation": "Hãy nhớ câu then chốt của tình huống này.",
+          "audioUrl": null
+        },
+        {
+          "slug": "deti",
+          "hanzi": "得体",
+          "pinyin": "détǐ",
+          "meaning": "phù hợp, đúng mực",
+          "example": "这种表达更礼貌得体。",
+          "translation": "Cách diễn đạt này lịch sự và phù hợp hơn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "zonghe-zongjie",
+          "hanzi": "总结",
+          "pinyin": "zǒngjié",
+          "meaning": "tổng kết",
+          "example": "最后请总结下一步安排。",
+          "translation": "Cuối cùng hãy tổng kết sắp xếp bước tiếp theo.",
+          "audioUrl": null
+        },
+        {
+          "slug": "fupan",
+          "hanzi": "复盘",
+          "pinyin": "fùpán",
+          "meaning": "xem lại, rút kinh nghiệm",
+          "example": "项目结束后我们会进行复盘。",
+          "translation": "Sau khi dự án kết thúc, chúng ta sẽ cùng xem lại và rút kinh nghiệm.",
+          "audioUrl": null
+        }
+      ],
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "请总结一下今天的问题和下一步安排。",
+            "pinyin": "Qǐng zǒngjié yíxià jīntiān de wèntí hé xià yí bù ānpái.",
+            "translation": "Hãy tổng kết vấn đề hôm nay và sắp xếp bước tiếp theo."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们先澄清客户要求，再调整任务优先级。",
+            "pinyin": "Wǒmen xiān chéngqīng kèhù yāoqiú, zài tiáozhěng rènwu yōuxiānjí.",
+            "translation": "Chúng ta sẽ làm rõ yêu cầu khách hàng trước, rồi điều chỉnh ưu tiên nhiệm vụ."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "请确认负责人和预计完成时间。",
+            "pinyin": "Qǐng quèrèn fùzérén hé yùjì wánchéng shíjiān.",
+            "translation": "Hãy xác nhận người phụ trách và thời gian dự kiến hoàn thành."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，项目结束后我们也会进行复盘。",
+            "pinyin": "Hǎo de, xiàngmù jiéshù hòu wǒmen yě huì jìnxíng fùpán.",
+            "translation": "Vâng, sau khi dự án kết thúc chúng ta cũng sẽ xem lại để rút kinh nghiệm."
+          }
+        ],
+        "notes": [
+          {
+            "title": "Tổng kết hành động",
+            "pattern": "总结问题和下一步安排",
+            "explanation": "Một phần tổng kết tốt cần nêu vấn đề đã thống nhất và bước cụ thể tiếp theo."
+          },
+          {
+            "title": "Tạo thói quen xem lại",
+            "pattern": "结束后进行复盘",
+            "explanation": "复盘 không chỉ là kể lại; mục tiêu là tìm điều cần giữ, điều cần sửa và hành động cho lần sau."
+          }
+        ],
+        "challenge": {
+          "title": "Bài kiểm tra cuối lộ trình",
+          "description": "Hoàn thành 4/5 câu để kết thúc lộ trình Văn phòng & hành chính.",
+          "passScore": 4,
+          "questions": [
+            {
+              "prompt": "Khi yêu cầu chưa rõ, hành động đầu tiên phù hợp là gì?",
+              "options": [
+                "Bắt đầu theo suy đoán",
+                "Hỏi cụ thể phạm vi và tiêu chuẩn",
+                "Chuyển việc cho người khác"
+              ],
+              "correctOption": 1,
+              "explanation": "Làm rõ phạm vi và tiêu chuẩn giảm rủi ro phải làm lại."
+            },
+            {
+              "prompt": "Khi chắc chắn sẽ trễ, thông báo tốt cần có gì?",
+              "options": [
+                "Chỉ nói xin lỗi",
+                "Nguyên nhân, mốc dự kiến mới và phương án khắc phục",
+                "Chờ đến khi bị hỏi"
+              ],
+              "correctOption": 1,
+              "explanation": "Ba phần này giúp người nhận đánh giá và điều chỉnh kế hoạch."
+            },
+            {
+              "prompt": "Sau cuộc họp, đâu là bộ thông tin cần xác nhận?",
+              "options": [
+                "行动项、负责人和期限",
+                "会议室、饮料和座位",
+                "文件名、字体和颜色"
+              ],
+              "correctOption": 0,
+              "explanation": "Hạng mục hành động, người phụ trách và thời hạn giúp theo dõi quyết định."
+            },
+            {
+              "prompt": "Khi phát hiện hiểu lầm, câu nào hợp tác nhất?",
+              "options": [
+                "你完全错了。",
+                "可能是我表达得不够清楚，我们再确认一次。",
+                "以后不要再问。"
+              ],
+              "correctOption": 1,
+              "explanation": "Câu này giảm đổ lỗi và đưa cuộc trao đổi về việc xác nhận lại."
+            },
+            {
+              "prompt": "VIP giữ chân người học tốt nhất bằng giá trị nào trong lộ trình này?",
+              "options": [
+                "Chỉ khóa thêm bài",
+                "Ôn từ yếu, kiểm tra module và thử thách mới",
+                "Hiệu ứng chuyển động thật nhiều"
+              ],
+              "correctOption": 1,
+              "explanation": "Giá trị lặp lại và phản hồi cá nhân hóa mới tạo lý do quay lại."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "xu-ly-hai-cuoc-hop-trung-lich",
+      "title": "Xử lý hai cuộc họp trùng lịch",
+      "summary": "Báo lịch bị trùng, đề xuất giờ khác và xác nhận lời mời mới.",
+      "situation": "Xử lý hai cuộc họp trùng lịch",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "两个会议的时间有冲突。",
+            "pinyin": "Liǎng ge huìyì de shíjiān yǒu chōngtū.",
+            "translation": "Thời gian của hai cuộc họp bị trùng."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们可以把讨论改到下午三点吗？",
+            "pinyin": "Wǒmen kěyǐ bǎ tǎolùn gǎi dào xiàwǔ sān diǎn ma?",
+            "translation": "Chúng ta có thể đổi buổi thảo luận sang ba giờ chiều không?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "可以，请更新会议邀请。",
+            "pinyin": "Kěyǐ, qǐng gēngxīn huìyì yāoqǐng.",
+            "translation": "Được, vui lòng cập nhật lời mời họp."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，我会把新的时间发给大家。",
+            "pinyin": "Hǎo de, wǒ huì bǎ xīn de shíjiān fā gěi dàjiā.",
+            "translation": "Được, tôi sẽ gửi giờ mới cho mọi người."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "两个会议的时间有冲突。",
+            "pinyin": "Liǎng ge huìyì de shíjiān yǒu chōngtū.",
+            "translation": "Thời gian của hai cuộc họp bị trùng."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "我们可以把讨论改到下午三点吗？",
+            "pinyin": "Wǒmen kěyǐ bǎ tǎolùn gǎi dào xiàwǔ sān diǎn ma?",
+            "translation": "Chúng ta có thể đổi buổi thảo luận sang ba giờ chiều không?"
+          },
+          {
+            "speaker": "A",
+            "hanzi": "可以，请更新会议邀请。",
+            "pinyin": "Kěyǐ, qǐng gēngxīn huìyì yāoqǐng.",
+            "translation": "Được, vui lòng cập nhật lời mời họp."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，我会把新的时间发给大家。",
+            "pinyin": "Hǎo de, wǒ huì bǎ xīn de shíjiān fā gěi dàjiā.",
+            "translation": "Được, tôi sẽ gửi giờ mới cho mọi người."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Xử lý hai cuộc họp trùng lịch",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Đồng nghiệp báo 时间有冲突. Bạn cần hiểu vấn đề nào?",
+              "options": [
+                "Hai lịch hẹn bị trùng nhau.",
+                "Cuộc họp đã kết thúc.",
+                "Địa chỉ email bị sai."
+              ],
+              "correctOption": 0,
+              "explanation": "时间有冲突 nói về xung đột thời gian, nên cần trao đổi để đổi lịch."
+            },
+            {
+              "prompt": "Trong bài này, “冲突” có nghĩa là gì?",
+              "options": [
+                "buổi chiều",
+                "xung đột; bị trùng",
+                "cập nhật"
+              ],
+              "correctOption": 1,
+              "explanation": "冲突 (chōngtū) nghĩa là xung đột; bị trùng."
+            },
+            {
+              "prompt": "Câu “好的，我会把新的时间发给大家。” truyền đạt điều gì?",
+              "options": [
+                "Thời gian của hai cuộc họp bị trùng.",
+                "Được, vui lòng cập nhật lời mời họp.",
+                "Được, tôi sẽ gửi giờ mới cho mọi người."
+              ],
+              "correctOption": 2,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Được, tôi sẽ gửi giờ mới cho mọi người."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xu-ly-hai-cuoc-hop-trung-lich-1",
+          "hanzi": "时间",
+          "pinyin": "shíjiān",
+          "meaning": "thời gian",
+          "example": "两个会议的时间有冲突。",
+          "translation": "Thời gian của hai cuộc họp bị trùng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xu-ly-hai-cuoc-hop-trung-lich-2",
+          "hanzi": "冲突",
+          "pinyin": "chōngtū",
+          "meaning": "xung đột; bị trùng",
+          "example": "两个会议的时间有冲突。",
+          "translation": "Thời gian của hai cuộc họp bị trùng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xu-ly-hai-cuoc-hop-trung-lich-3",
+          "hanzi": "改到",
+          "pinyin": "gǎi dào",
+          "meaning": "đổi sang",
+          "example": "我们可以把讨论改到下午三点吗？",
+          "translation": "Chúng ta có thể đổi buổi thảo luận sang ba giờ chiều không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xu-ly-hai-cuoc-hop-trung-lich-4",
+          "hanzi": "下午",
+          "pinyin": "xiàwǔ",
+          "meaning": "buổi chiều",
+          "example": "我们可以把讨论改到下午三点吗？",
+          "translation": "Chúng ta có thể đổi buổi thảo luận sang ba giờ chiều không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xu-ly-hai-cuoc-hop-trung-lich-5",
+          "hanzi": "邀请",
+          "pinyin": "yāoqǐng",
+          "meaning": "lời mời",
+          "example": "可以，请更新会议邀请。",
+          "translation": "Được, vui lòng cập nhật lời mời họp.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xu-ly-hai-cuoc-hop-trung-lich-6",
+          "hanzi": "更新",
+          "pinyin": "gēngxīn",
+          "meaning": "cập nhật",
+          "example": "可以，请更新会议邀请。",
+          "translation": "Được, vui lòng cập nhật lời mời họp.",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "nhac-gui-lai-tep-dinh-kem",
+      "title": "Nhắc gửi lại tệp đính kèm",
+      "summary": "Thông báo email thiếu tệp, yêu cầu gửi lại và xác nhận đã nhận đúng bản.",
+      "situation": "Nhắc gửi lại tệp đính kèm",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "您的邮件里没有附件。",
+            "pinyin": "Nín de yóujiàn lǐ méiyǒu fùjiàn.",
+            "translation": "Email của anh/chị không có tệp đính kèm."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "不好意思，我重新发送。",
+            "pinyin": "Bù hǎoyìsi, wǒ chóngxīn fāsòng.",
+            "translation": "Xin lỗi, tôi gửi lại."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "请发今天更新的版本。",
+            "pinyin": "Qǐng fā jīntiān gēngxīn de bǎnběn.",
+            "translation": "Vui lòng gửi phiên bản được cập nhật hôm nay."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "已经收到，谢谢您。",
+            "pinyin": "Yǐjīng shōudào, xièxie nín.",
+            "translation": "Tôi đã nhận được, cảm ơn anh/chị."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "您的邮件里没有附件。",
+            "pinyin": "Nín de yóujiàn lǐ méiyǒu fùjiàn.",
+            "translation": "Email của anh/chị không có tệp đính kèm."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "不好意思，我重新发送。",
+            "pinyin": "Bù hǎoyìsi, wǒ chóngxīn fāsòng.",
+            "translation": "Xin lỗi, tôi gửi lại."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "请发今天更新的版本。",
+            "pinyin": "Qǐng fā jīntiān gēngxīn de bǎnběn.",
+            "translation": "Vui lòng gửi phiên bản được cập nhật hôm nay."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "已经收到，谢谢您。",
+            "pinyin": "Yǐjīng shōudào, xièxie nín.",
+            "translation": "Tôi đã nhận được, cảm ơn anh/chị."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Nhắc gửi lại tệp đính kèm",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Bạn mở email nhưng không thấy tài liệu. Câu nào phù hợp?",
+              "options": [
+                "我已经看完附件了。",
+                "您的邮件里没有附件。",
+                "今天不用发邮件。"
+              ],
+              "correctOption": 1,
+              "explanation": "没有附件 là không có tệp đính kèm; câu này báo đúng vấn đề mà không quy lỗi."
+            },
+            {
+              "prompt": "Trong bài này, “附件” có nghĩa là gì?",
+              "options": [
+                "gửi",
+                "nhận được",
+                "tệp đính kèm"
+              ],
+              "correctOption": 2,
+              "explanation": "附件 (fùjiàn) nghĩa là tệp đính kèm."
+            },
+            {
+              "prompt": "Câu “已经收到，谢谢您。” truyền đạt điều gì?",
+              "options": [
+                "Tôi đã nhận được, cảm ơn anh/chị.",
+                "Email của anh/chị không có tệp đính kèm.",
+                "Vui lòng gửi phiên bản được cập nhật hôm nay."
+              ],
+              "correctOption": 0,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Tôi đã nhận được, cảm ơn anh/chị."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-nhac-gui-lai-tep-dinh-kem-1",
+          "hanzi": "邮件",
+          "pinyin": "yóujiàn",
+          "meaning": "email",
+          "example": "您的邮件里没有附件。",
+          "translation": "Email của anh/chị không có tệp đính kèm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-nhac-gui-lai-tep-dinh-kem-2",
+          "hanzi": "附件",
+          "pinyin": "fùjiàn",
+          "meaning": "tệp đính kèm",
+          "example": "您的邮件里没有附件。",
+          "translation": "Email của anh/chị không có tệp đính kèm.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-nhac-gui-lai-tep-dinh-kem-3",
+          "hanzi": "重新",
+          "pinyin": "chóngxīn",
+          "meaning": "lại; một lần nữa",
+          "example": "不好意思，我重新发送。",
+          "translation": "Xin lỗi, tôi gửi lại.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-nhac-gui-lai-tep-dinh-kem-4",
+          "hanzi": "发送",
+          "pinyin": "fāsòng",
+          "meaning": "gửi",
+          "example": "不好意思，我重新发送。",
+          "translation": "Xin lỗi, tôi gửi lại.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-nhac-gui-lai-tep-dinh-kem-5",
+          "hanzi": "版本",
+          "pinyin": "bǎnběn",
+          "meaning": "phiên bản",
+          "example": "请发今天更新的版本。",
+          "translation": "Vui lòng gửi phiên bản được cập nhật hôm nay.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-nhac-gui-lai-tep-dinh-kem-6",
+          "hanzi": "收到",
+          "pinyin": "shōudào",
+          "meaning": "nhận được",
+          "example": "已经收到，谢谢您。",
+          "translation": "Tôi đã nhận được, cảm ơn anh/chị.",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "xac-nhan-thu-tu-uu-tien",
+      "title": "Xác nhận thứ tự ưu tiên",
+      "summary": "Nêu hai nhiệm vụ cạnh tranh thời gian và hỏi việc nào cần làm trước.",
+      "situation": "Xác nhận thứ tự ưu tiên",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "这两个任务需要同时完成吗？",
+            "pinyin": "Zhè liǎng ge rènwu xūyào tóngshí wánchéng ma?",
+            "translation": "Hai nhiệm vụ này có cần hoàn thành cùng lúc không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "请优先完成客户报告。",
+            "pinyin": "Qǐng yōuxiān wánchéng kèhù bàogào.",
+            "translation": "Vui lòng ưu tiên hoàn thành báo cáo khách hàng."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "报告的截止时间是几点？",
+            "pinyin": "Bàogào de jiézhǐ shíjiān shì jǐ diǎn?",
+            "translation": "Hạn chót của báo cáo là mấy giờ?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "下午四点，其他任务明天再安排。",
+            "pinyin": "Xiàwǔ sì diǎn, qítā rènwu míngtiān zài ānpái.",
+            "translation": "Bốn giờ chiều; các nhiệm vụ khác sẽ sắp xếp vào ngày mai."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "这两个任务需要同时完成吗？",
+            "pinyin": "Zhè liǎng ge rènwu xūyào tóngshí wánchéng ma?",
+            "translation": "Hai nhiệm vụ này có cần hoàn thành cùng lúc không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "请优先完成客户报告。",
+            "pinyin": "Qǐng yōuxiān wánchéng kèhù bàogào.",
+            "translation": "Vui lòng ưu tiên hoàn thành báo cáo khách hàng."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "报告的截止时间是几点？",
+            "pinyin": "Bàogào de jiézhǐ shíjiān shì jǐ diǎn?",
+            "translation": "Hạn chót của báo cáo là mấy giờ?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "下午四点，其他任务明天再安排。",
+            "pinyin": "Xiàwǔ sì diǎn, qítā rènwu míngtiān zài ānpái.",
+            "translation": "Bốn giờ chiều; các nhiệm vụ khác sẽ sắp xếp vào ngày mai."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Xác nhận thứ tự ưu tiên",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Nghe 请优先完成客户报告, bạn nên xác nhận điều gì?",
+              "options": [
+                "Mọi nhiệm vụ đều bị hủy.",
+                "Báo cáo được chuyển sang tháng sau.",
+                "Báo cáo khách hàng là việc cần hoàn thành trước."
+              ],
+              "correctOption": 2,
+              "explanation": "优先 chỉ việc cần được ưu tiên, không có nghĩa là hủy các việc khác."
+            },
+            {
+              "prompt": "Trong bài này, “同时” có nghĩa là gì?",
+              "options": [
+                "đồng thời",
+                "báo cáo",
+                "sắp xếp"
+              ],
+              "correctOption": 0,
+              "explanation": "同时 (tóngshí) nghĩa là đồng thời."
+            },
+            {
+              "prompt": "Câu “下午四点，其他任务明天再安排。” truyền đạt điều gì?",
+              "options": [
+                "Hai nhiệm vụ này có cần hoàn thành cùng lúc không?",
+                "Bốn giờ chiều; các nhiệm vụ khác sẽ sắp xếp vào ngày mai.",
+                "Hạn chót của báo cáo là mấy giờ?"
+              ],
+              "correctOption": 1,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Bốn giờ chiều; các nhiệm vụ khác sẽ sắp xếp vào ngày mai."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xac-nhan-thu-tu-uu-tien-1",
+          "hanzi": "任务",
+          "pinyin": "rènwu",
+          "meaning": "nhiệm vụ",
+          "example": "这两个任务需要同时完成吗？",
+          "translation": "Hai nhiệm vụ này có cần hoàn thành cùng lúc không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xac-nhan-thu-tu-uu-tien-2",
+          "hanzi": "同时",
+          "pinyin": "tóngshí",
+          "meaning": "đồng thời",
+          "example": "这两个任务需要同时完成吗？",
+          "translation": "Hai nhiệm vụ này có cần hoàn thành cùng lúc không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xac-nhan-thu-tu-uu-tien-3",
+          "hanzi": "优先",
+          "pinyin": "yōuxiān",
+          "meaning": "ưu tiên",
+          "example": "请优先完成客户报告。",
+          "translation": "Vui lòng ưu tiên hoàn thành báo cáo khách hàng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xac-nhan-thu-tu-uu-tien-4",
+          "hanzi": "报告",
+          "pinyin": "bàogào",
+          "meaning": "báo cáo",
+          "example": "请优先完成客户报告。",
+          "translation": "Vui lòng ưu tiên hoàn thành báo cáo khách hàng.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xac-nhan-thu-tu-uu-tien-5",
+          "hanzi": "截止时间",
+          "pinyin": "jiézhǐ shíjiān",
+          "meaning": "hạn chót",
+          "example": "报告的截止时间是几点？",
+          "translation": "Hạn chót của báo cáo là mấy giờ?",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-xac-nhan-thu-tu-uu-tien-6",
+          "hanzi": "安排",
+          "pinyin": "ānpái",
+          "meaning": "sắp xếp",
+          "example": "下午四点，其他任务明天再安排。",
+          "translation": "Bốn giờ chiều; các nhiệm vụ khác sẽ sắp xếp vào ngày mai.",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "bao-tien-do-khi-lam-viec-tu-xa",
+      "title": "Báo tiến độ khi làm việc từ xa",
+      "summary": "Nêu phần đã làm, phần đang chờ và thời điểm sẽ báo lại.",
+      "situation": "Báo tiến độ khi làm việc từ xa",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "你今天远程办公，进度怎么样？",
+            "pinyin": "Nǐ jīntiān yuǎnchéng bàngōng, jìndù zěnmeyàng?",
+            "translation": "Hôm nay bạn làm việc từ xa, tiến độ thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "表格已经做好了，还在等数据。",
+            "pinyin": "Biǎogé yǐjīng zuò hǎo le, hái zài děng shùjù.",
+            "translation": "Tôi đã làm xong bảng biểu, vẫn đang chờ dữ liệu."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "数据确认后，请给我反馈。",
+            "pinyin": "Shùjù quèrèn hòu, qǐng gěi wǒ fǎnkuì.",
+            "translation": "Sau khi xác nhận dữ liệu, vui lòng phản hồi cho tôi."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，我下午五点前再向您汇报。",
+            "pinyin": "Hǎo de, wǒ xiàwǔ wǔ diǎn qián zài xiàng nín huìbào.",
+            "translation": "Được, tôi sẽ báo lại với anh/chị trước năm giờ chiều."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "你今天远程办公，进度怎么样？",
+            "pinyin": "Nǐ jīntiān yuǎnchéng bàngōng, jìndù zěnmeyàng?",
+            "translation": "Hôm nay bạn làm việc từ xa, tiến độ thế nào?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "表格已经做好了，还在等数据。",
+            "pinyin": "Biǎogé yǐjīng zuò hǎo le, hái zài děng shùjù.",
+            "translation": "Tôi đã làm xong bảng biểu, vẫn đang chờ dữ liệu."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "数据确认后，请给我反馈。",
+            "pinyin": "Shùjù quèrèn hòu, qǐng gěi wǒ fǎnkuì.",
+            "translation": "Sau khi xác nhận dữ liệu, vui lòng phản hồi cho tôi."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "好的，我下午五点前再向您汇报。",
+            "pinyin": "Hǎo de, wǒ xiàwǔ wǔ diǎn qián zài xiàng nín huìbào.",
+            "translation": "Được, tôi sẽ báo lại với anh/chị trước năm giờ chiều."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Báo tiến độ khi làm việc từ xa",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Câu 还在等数据 cho biết việc nào chưa xong?",
+              "options": [
+                "Chưa nhận được dữ liệu cần chờ.",
+                "Bảng biểu chưa được tạo.",
+                "Nhân viên chưa bắt đầu làm việc."
+              ],
+              "correctOption": 0,
+              "explanation": "还在等 nêu trở ngại còn tồn tại; câu trước đã xác nhận bảng biểu hoàn thành."
+            },
+            {
+              "prompt": "Trong bài này, “进度” có nghĩa là gì?",
+              "options": [
+                "dữ liệu",
+                "tiến độ",
+                "phản hồi"
+              ],
+              "correctOption": 1,
+              "explanation": "进度 (jìndù) nghĩa là tiến độ."
+            },
+            {
+              "prompt": "Câu “好的，我下午五点前再向您汇报。” truyền đạt điều gì?",
+              "options": [
+                "Hôm nay bạn làm việc từ xa, tiến độ thế nào?",
+                "Sau khi xác nhận dữ liệu, vui lòng phản hồi cho tôi.",
+                "Được, tôi sẽ báo lại với anh/chị trước năm giờ chiều."
+              ],
+              "correctOption": 2,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Được, tôi sẽ báo lại với anh/chị trước năm giờ chiều."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-bao-tien-do-khi-lam-viec-tu-xa-1",
+          "hanzi": "远程",
+          "pinyin": "yuǎnchéng",
+          "meaning": "từ xa",
+          "example": "你今天远程办公，进度怎么样？",
+          "translation": "Hôm nay bạn làm việc từ xa, tiến độ thế nào?",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-bao-tien-do-khi-lam-viec-tu-xa-2",
+          "hanzi": "进度",
+          "pinyin": "jìndù",
+          "meaning": "tiến độ",
+          "example": "你今天远程办公，进度怎么样？",
+          "translation": "Hôm nay bạn làm việc từ xa, tiến độ thế nào?",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-bao-tien-do-khi-lam-viec-tu-xa-3",
+          "hanzi": "表格",
+          "pinyin": "biǎogé",
+          "meaning": "bảng biểu",
+          "example": "表格已经做好了，还在等数据。",
+          "translation": "Tôi đã làm xong bảng biểu, vẫn đang chờ dữ liệu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-bao-tien-do-khi-lam-viec-tu-xa-4",
+          "hanzi": "数据",
+          "pinyin": "shùjù",
+          "meaning": "dữ liệu",
+          "example": "表格已经做好了，还在等数据。",
+          "translation": "Tôi đã làm xong bảng biểu, vẫn đang chờ dữ liệu.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-bao-tien-do-khi-lam-viec-tu-xa-5",
+          "hanzi": "确认",
+          "pinyin": "quèrèn",
+          "meaning": "xác nhận",
+          "example": "数据确认后，请给我反馈。",
+          "translation": "Sau khi xác nhận dữ liệu, vui lòng phản hồi cho tôi.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-bao-tien-do-khi-lam-viec-tu-xa-6",
+          "hanzi": "反馈",
+          "pinyin": "fǎnkuì",
+          "meaning": "phản hồi",
+          "example": "数据确认后，请给我反馈。",
+          "translation": "Sau khi xác nhận dữ liệu, vui lòng phản hồi cho tôi.",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "ban-giao-truoc-khi-nghi-phep",
+      "title": "Bàn giao trước khi nghỉ phép",
+      "summary": "Ghi việc còn mở, người tiếp nhận và vị trí tài liệu để đồng nghiệp tiếp tục.",
+      "situation": "Bàn giao trước khi nghỉ phép",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "我明天请假，今天先做交接。",
+            "pinyin": "Wǒ míngtiān qǐngjià, jīntiān xiān zuò jiāojiē.",
+            "translation": "Ngày mai tôi nghỉ phép, hôm nay tôi bàn giao trước."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "请把待办清单放在共享文件夹里。",
+            "pinyin": "Qǐng bǎ dàibàn qīngdān fàng zài gòngxiǎng wénjiànjiā lǐ.",
+            "translation": "Vui lòng để danh sách việc cần làm trong thư mục dùng chung."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "客户有问题时联系谁？",
+            "pinyin": "Kèhù yǒu wèntí shí liánxì shéi?",
+            "translation": "Khi khách hàng có câu hỏi thì liên hệ với ai?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "这两天由小林负责，我已经告诉他了。",
+            "pinyin": "Zhè liǎng tiān yóu Xiǎo Lín fùzé, wǒ yǐjīng gàosu tā le.",
+            "translation": "Hai ngày này Tiểu Lâm phụ trách, tôi đã báo cho anh ấy rồi."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "我明天请假，今天先做交接。",
+            "pinyin": "Wǒ míngtiān qǐngjià, jīntiān xiān zuò jiāojiē.",
+            "translation": "Ngày mai tôi nghỉ phép, hôm nay tôi bàn giao trước."
+          },
+          {
+            "speaker": "B",
+            "hanzi": "请把待办清单放在共享文件夹里。",
+            "pinyin": "Qǐng bǎ dàibàn qīngdān fàng zài gòngxiǎng wénjiànjiā lǐ.",
+            "translation": "Vui lòng để danh sách việc cần làm trong thư mục dùng chung."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "客户有问题时联系谁？",
+            "pinyin": "Kèhù yǒu wèntí shí liánxì shéi?",
+            "translation": "Khi khách hàng có câu hỏi thì liên hệ với ai?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "这两天由小林负责，我已经告诉他了。",
+            "pinyin": "Zhè liǎng tiān yóu Xiǎo Lín fùzé, wǒ yǐjīng gàosu tā le.",
+            "translation": "Hai ngày này Tiểu Lâm phụ trách, tôi đã báo cho anh ấy rồi."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Bàn giao trước khi nghỉ phép",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "Bạn cần tìm các việc chưa hoàn thành. Tài liệu nào được nhắc đến?",
+              "options": [
+                "Bảng lương năm trước.",
+                "待办清单 trong thư mục dùng chung.",
+                "Danh sách khách đã hủy đơn."
+              ],
+              "correctOption": 1,
+              "explanation": "待办清单 là danh sách việc cần làm, giúp người nhận bàn giao biết việc còn mở."
+            },
+            {
+              "prompt": "Trong bài này, “交接” có nghĩa là gì?",
+              "options": [
+                "thư mục",
+                "phụ trách",
+                "bàn giao"
+              ],
+              "correctOption": 2,
+              "explanation": "交接 (jiāojiē) nghĩa là bàn giao."
+            },
+            {
+              "prompt": "Câu “这两天由小林负责，我已经告诉他了。” truyền đạt điều gì?",
+              "options": [
+                "Hai ngày này Tiểu Lâm phụ trách, tôi đã báo cho anh ấy rồi.",
+                "Ngày mai tôi nghỉ phép, hôm nay tôi bàn giao trước.",
+                "Khi khách hàng có câu hỏi thì liên hệ với ai?"
+              ],
+              "correctOption": 0,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Hai ngày này Tiểu Lâm phụ trách, tôi đã báo cho anh ấy rồi."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-ban-giao-truoc-khi-nghi-phep-1",
+          "hanzi": "请假",
+          "pinyin": "qǐngjià",
+          "meaning": "xin nghỉ phép",
+          "example": "我明天请假，今天先做交接。",
+          "translation": "Ngày mai tôi nghỉ phép, hôm nay tôi bàn giao trước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-ban-giao-truoc-khi-nghi-phep-2",
+          "hanzi": "交接",
+          "pinyin": "jiāojiē",
+          "meaning": "bàn giao",
+          "example": "我明天请假，今天先做交接。",
+          "translation": "Ngày mai tôi nghỉ phép, hôm nay tôi bàn giao trước.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-ban-giao-truoc-khi-nghi-phep-3",
+          "hanzi": "清单",
+          "pinyin": "qīngdān",
+          "meaning": "danh sách",
+          "example": "请把待办清单放在共享文件夹里。",
+          "translation": "Vui lòng để danh sách việc cần làm trong thư mục dùng chung.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-ban-giao-truoc-khi-nghi-phep-4",
+          "hanzi": "文件夹",
+          "pinyin": "wénjiànjiā",
+          "meaning": "thư mục",
+          "example": "请把待办清单放在共享文件夹里。",
+          "translation": "Vui lòng để danh sách việc cần làm trong thư mục dùng chung.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-ban-giao-truoc-khi-nghi-phep-5",
+          "hanzi": "联系",
+          "pinyin": "liánxì",
+          "meaning": "liên hệ",
+          "example": "客户有问题时联系谁？",
+          "translation": "Khi khách hàng có câu hỏi thì liên hệ với ai?",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-ban-giao-truoc-khi-nghi-phep-6",
+          "hanzi": "负责",
+          "pinyin": "fùzé",
+          "meaning": "phụ trách",
+          "example": "这两天由小林负责，我已经告诉他了。",
+          "translation": "Hai ngày này Tiểu Lâm phụ trách, tôi đã báo cho anh ấy rồi.",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "moduleSlug": "thuc-hanh-giao-tiep-doc-lap",
+      "slug": "chot-dau-viec-sau-cuoc-hop",
+      "title": "Chốt đầu việc sau cuộc họp",
+      "summary": "Tóm tắt quyết định, gắn người phụ trách và kiểm tra xem còn thiếu gì.",
+      "situation": "Chốt đầu việc sau cuộc họp",
+      "estimatedMinutes": 15,
+      "isFree": false,
+      "content": {
+        "dialogue": [
+          {
+            "speaker": "A",
+            "hanzi": "今天的决定都记录好了吗？",
+            "pinyin": "Jīntiān de juédìng dōu jìlù hǎo le ma?",
+            "translation": "Các quyết định hôm nay đã được ghi lại đầy đủ chưa?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "记录好了，每项工作都有负责人和期限。",
+            "pinyin": "Jìlù hǎo le, měi xiàng gōngzuò dōu yǒu fùzérén hé qīxiàn.",
+            "translation": "Đã ghi rồi, mỗi công việc đều có người phụ trách và thời hạn."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "大家还有需要补充的吗？",
+            "pinyin": "Dàjiā hái yǒu xūyào bǔchōng de ma?",
+            "translation": "Mọi người còn điều gì cần bổ sung không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "没有了，我今天下班前发会议纪要。",
+            "pinyin": "Méiyǒu le, wǒ jīntiān xiàbān qián fā huìyì jìyào.",
+            "translation": "Không còn, tôi sẽ gửi biên bản họp trước khi tan làm hôm nay."
+          }
+        ],
+        "phrases": [
+          {
+            "speaker": "A",
+            "hanzi": "今天的决定都记录好了吗？",
+            "pinyin": "Jīntiān de juédìng dōu jìlù hǎo le ma?",
+            "translation": "Các quyết định hôm nay đã được ghi lại đầy đủ chưa?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "记录好了，每项工作都有负责人和期限。",
+            "pinyin": "Jìlù hǎo le, měi xiàng gōngzuò dōu yǒu fùzérén hé qīxiàn.",
+            "translation": "Đã ghi rồi, mỗi công việc đều có người phụ trách và thời hạn."
+          },
+          {
+            "speaker": "A",
+            "hanzi": "大家还有需要补充的吗？",
+            "pinyin": "Dàjiā hái yǒu xūyào bǔchōng de ma?",
+            "translation": "Mọi người còn điều gì cần bổ sung không?"
+          },
+          {
+            "speaker": "B",
+            "hanzi": "没有了，我今天下班前发会议纪要。",
+            "pinyin": "Méiyǒu le, wǒ jīntiān xiàbān qián fā huìyì jìyào.",
+            "translation": "Không còn, tôi sẽ gửi biên bản họp trước khi tan làm hôm nay."
+          }
+        ],
+        "notes": [],
+        "challenge": {
+          "title": "Thực hành: Chốt đầu việc sau cuộc họp",
+          "description": "Chọn cách hiểu hoặc phản hồi phù hợp. Đạt 3/3 câu; có thể làm lại sau khi xem giải thích.",
+          "passScore": 3,
+          "questions": [
+            {
+              "prompt": "每项工作都有负责人和期限 xác nhận những gì?",
+              "options": [
+                "Mọi việc đều đã hoàn thành.",
+                "Chỉ cần ghi tên cuộc họp.",
+                "Mỗi việc có người phụ trách và thời hạn."
+              ],
+              "correctOption": 2,
+              "explanation": "负责人 là người phụ trách; 期限 là thời hạn. Đây là hai thông tin để theo dõi đầu việc."
+            },
+            {
+              "prompt": "Trong bài này, “记录” có nghĩa là gì?",
+              "options": [
+                "ghi lại; bản ghi",
+                "thời hạn",
+                "biên bản tóm tắt"
+              ],
+              "correctOption": 0,
+              "explanation": "记录 (jìlù) nghĩa là ghi lại; bản ghi."
+            },
+            {
+              "prompt": "Câu “没有了，我今天下班前发会议纪要。” truyền đạt điều gì?",
+              "options": [
+                "Các quyết định hôm nay đã được ghi lại đầy đủ chưa?",
+                "Không còn, tôi sẽ gửi biên bản họp trước khi tan làm hôm nay.",
+                "Mọi người còn điều gì cần bổ sung không?"
+              ],
+              "correctOption": 1,
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Không còn, tôi sẽ gửi biên bản họp trước khi tan làm hôm nay."
+            }
+          ]
+        }
+      },
+      "vocabulary": [
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-chot-dau-viec-sau-cuoc-hop-1",
+          "hanzi": "决定",
+          "pinyin": "juédìng",
+          "meaning": "quyết định",
+          "example": "今天的决定都记录好了吗？",
+          "translation": "Các quyết định hôm nay đã được ghi lại đầy đủ chưa?",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-chot-dau-viec-sau-cuoc-hop-2",
+          "hanzi": "记录",
+          "pinyin": "jìlù",
+          "meaning": "ghi lại; bản ghi",
+          "example": "今天的决定都记录好了吗？",
+          "translation": "Các quyết định hôm nay đã được ghi lại đầy đủ chưa?",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-chot-dau-viec-sau-cuoc-hop-3",
+          "hanzi": "负责人",
+          "pinyin": "fùzérén",
+          "meaning": "người phụ trách",
+          "example": "记录好了，每项工作都有负责人和期限。",
+          "translation": "Đã ghi rồi, mỗi công việc đều có người phụ trách và thời hạn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-chot-dau-viec-sau-cuoc-hop-4",
+          "hanzi": "期限",
+          "pinyin": "qīxiàn",
+          "meaning": "thời hạn",
+          "example": "记录好了，每项工作都有负责人和期限。",
+          "translation": "Đã ghi rồi, mỗi công việc đều có người phụ trách và thời hạn.",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-chot-dau-viec-sau-cuoc-hop-5",
+          "hanzi": "补充",
+          "pinyin": "bǔchōng",
+          "meaning": "bổ sung",
+          "example": "大家还有需要补充的吗？",
+          "translation": "Mọi người còn điều gì cần bổ sung không?",
+          "audioUrl": null
+        },
+        {
+          "slug": "van-phong-hanh-chinh-ung-dung-chot-dau-viec-sau-cuoc-hop-6",
+          "hanzi": "纪要",
+          "pinyin": "jìyào",
+          "meaning": "biên bản tóm tắt",
+          "example": "没有了，我今天下班前发会议纪要。",
+          "translation": "Không còn, tôi sẽ gửi biên bản họp trước khi tan làm hôm nay.",
+          "audioUrl": null
+        }
+      ]
+    }
+  ],
+  "learningDesign": {
+    "audience": "Người Việt đã biết pinyin và câu giao tiếp cơ bản, cần dùng tiếng Trung trong công việc.",
+    "sequence": [
+      "Học 6 từ qua ví dụ",
+      "Đọc câu mẫu và đối chiếu nghĩa Việt",
+      "Nghe mẫu, đọc lại từng câu",
+      "Làm kiểm tra tình huống"
+    ],
+    "authoredAppliedLessons": 6,
+    "originalLessonCount": 24,
+    "audio": "Dùng phát âm tiếng Trung và luyện đọc có sẵn của web; gói JSON không chứa bản thu âm."
+  }
+}

@@ -41,7 +41,7 @@ export function LessonChallengePanel({
 
   return <section className="lesson-challenge" aria-labelledby="lesson-challenge-title">
     <div className="lesson-challenge-heading">
-      <div><span className="section-kicker">Kiểm tra module</span><h2 id="lesson-challenge-title">{challenge.title}</h2><p>{challenge.description}</p></div>
+      <div><span className="section-kicker">Kiểm tra kiến thức</span><h2 id="lesson-challenge-title">{challenge.title}</h2><p>{challenge.description}</p></div>
       <div className="lesson-challenge-target"><strong>{challenge.passScore}/{challenge.questions.length}</strong><span>Điểm đạt</span></div>
     </div>
 

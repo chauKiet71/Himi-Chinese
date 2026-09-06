@@ -10720,6 +10720,15 @@ body:has(.learner-app-shell) > .mobile-nav {
 }
 
 /* Writing slice game — bamboo reaction training */
+.game-hsk-course-bar { width: 100%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 10px 14px; margin-bottom: 10px; border-radius: 16px; background: #fffdf5; color: #203f35; font-size: 14px; }
+.game-hsk-course-bar > span { min-width: 0; overflow-wrap: anywhere; }
+.game-hsk-course-bar button { display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1px solid #cee0cd; border-radius: 10px; cursor: pointer; color: #176d59; font-weight: 700; }
+.game-hsk-course-bar button:focus-visible { outline: 3px solid #32866b; outline-offset: 3px; }
+.game-session-world .memory-grid button > span,
+.game-session-world .connect-board button > span,
+.game-session-world .quiz-options button > span,
+.game-session-world .flashcard-face > strong { min-width: 0; overflow-wrap: anywhere; }
+.game-session-world .memory-grid button.is-revealed > span:not([lang]) { font-size: clamp(13px, 1.8vw, 20px); line-height: 1.4; }
 .writing-course-shell {
   width: min(960px, 100%);
   margin: auto;
