@@ -225,6 +225,7 @@ function SliceSession({
   const penguinRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const nextTimerRef = useRef<number | null>(null);
+  const feedbackTimerRef = useRef<number | null>(null);
   const fallTweenRef = useRef<gsap.core.Tween | null>(null);
   const strikeTimelineRef = useRef<gsap.core.Timeline | null>(null);
   const pendingStrikeRef = useRef<{ finalScore: number; nextCompleted: number } | null>(null);
@@ -246,6 +247,7 @@ function SliceSession({
 
   useEffect(() => () => {
     if (nextTimerRef.current) window.clearTimeout(nextTimerRef.current);
+    if (feedbackTimerRef.current) window.clearTimeout(feedbackTimerRef.current);
     fallTweenRef.current?.kill();
     strikeTimelineRef.current?.kill();
     window.speechSynthesis?.cancel();
@@ -263,6 +265,7 @@ function SliceSession({
 
   const startGame = () => {
     clearNextTimer();
+    if (feedbackTimerRef.current) window.clearTimeout(feedbackTimerRef.current);
     window.speechSynthesis?.cancel();
     fallTweenRef.current?.kill();
     strikeTimelineRef.current?.kill();
@@ -280,6 +283,7 @@ function SliceSession({
   };
 
   const advanceWord = (nextMode: GameMode = "playing") => {
+    if (feedbackTimerRef.current) window.clearTimeout(feedbackTimerRef.current);
     setWordIndex((value) => (value + 1) % words.length);
     setRunKey((value) => value + 1);
     setAnswer("");
@@ -356,7 +360,8 @@ function SliceSession({
     if (normalizeAnswer(answer) === normalizedTarget) handleCorrect();
     else if (answer.trim()) {
       setMissed(true);
-      window.setTimeout(() => setMissed(false), 560);
+      if (feedbackTimerRef.current) window.clearTimeout(feedbackTimerRef.current);
+      feedbackTimerRef.current = window.setTimeout(() => setMissed(false), 560);
     }
   };
 
@@ -384,13 +389,13 @@ function SliceSession({
     if (penguin) {
       const cape = penguin.querySelector<HTMLElement>(".writing-penguin-cape");
       gsap.set(penguin, {
-        autoAlpha: 1,
-        filter: "drop-shadow(0 17px 18px rgba(35, 75, 47, .14))",
+        autoAlpha: 0,
         rotation: -4,
         scale: 1,
         x: 0,
         y: 0,
       });
+      gsap.to(penguin, { autoAlpha: 1, duration: .18, ease: "power1.out" });
       if (cape) gsap.set(cape, { autoAlpha: 0, rotation: 3, scaleX: .34, skewY: -2 });
     }
 
@@ -408,7 +413,7 @@ function SliceSession({
       tween.kill();
       if (fallTweenRef.current === tween) fallTweenRef.current = null;
     };
-  }, { dependencies: [runKey], scope: arenaRef });
+  }, { dependencies: [runKey], scope: arenaRef, revertOnUpdate: true });
 
   useGSAP(() => {
     if (mode !== "slicing") return;
@@ -443,7 +448,7 @@ function SliceSession({
 
     gsap.set(face, { autoAlpha: 1 });
     gsap.set([leftHalf, rightHalf], { autoAlpha: 0, display: "grid", rotation: 0, x: 0, y: 0 });
-    gsap.set(penguin, { autoAlpha: 1, filter: "drop-shadow(0 17px 18px rgba(35, 75, 47, .14))", rotation: -4, scale: 1, x: 0, y: 0 });
+    gsap.set(penguin, { autoAlpha: 1, rotation: -4, scale: 1, x: 0, y: 0 });
     gsap.set(cape, { autoAlpha: 0, rotation: 3, scaleX: .34, skewY: -2 });
     gsap.set(impact, { autoAlpha: 0, rotation: -7, scale: .42, xPercent: -50, yPercent: -50 });
     gsap.set(hitScore, { autoAlpha: 0, rotation: 0, scale: .84, x: 32, y: -4 });
@@ -454,56 +459,36 @@ function SliceSession({
 
     if (reducedMotion) {
       timeline
-        // The flight is essential gameplay feedback, so reduced motion keeps one
-        // direct, slower-to-read movement and removes the extra wind-up/exit arc.
-        .to(penguin, {
-          duration: .52,
-          ease: "power1.inOut",
-          filter: "drop-shadow(-18px 19px 11px rgba(35, 75, 47, .11))",
-          rotation: 6,
-          scale: .95,
-          x: strikePoint.impactX,
-          y: strikePoint.impactY,
-        }, 0)
-        .to(cape, { autoAlpha: .72, duration: .24, rotation: 4, scaleX: .8 }, .1)
-        .addLabel("impact", .52)
-        .set(face, { autoAlpha: 0 }, "impact")
-        .set([leftHalf, rightHalf], { autoAlpha: 1 }, "impact")
-        .to(impact, { autoAlpha: 1, duration: .12, rotation: 0, scale: .88 }, "impact")
-        .to(hitScore, { autoAlpha: 1, duration: .14, scale: 1, x: 38, y: -18 }, "impact")
-        .to([leftHalf, rightHalf, impact], { autoAlpha: 0, duration: .22 }, "impact+=.14")
-        .to(hitScore, { autoAlpha: 1, duration: .68, x: 39, y: -20 }, "impact+=.14")
-        .to(penguin, { autoAlpha: 0, duration: .2 }, "impact+=.34")
-        .to(cape, { autoAlpha: 0, duration: .18 }, "impact+=.34")
-        .to(hitScore, { autoAlpha: 0, duration: .22, scale: .98, x: 40, y: -34 }, "impact+=.82");
+        // Keep the timed falling target, but replace decorative flight with a fade.
+        .set(hitScore, { scale: 1, x: 38, y: -18 })
+        .to(face, { autoAlpha: 0, duration: .16 }, 0)
+        .to(hitScore, { autoAlpha: 1, duration: .16 }, 0)
+        .to(hitScore, { autoAlpha: 0, duration: .16 }, .64);
     } else {
       timeline
-        .to(penguin, { duration: .2, ease: "power2.out", rotation: -10, scale: 1.03, x: -24, y: 17 }, 0)
-        .to(cape, { autoAlpha: .72, duration: .2, ease: "power2.out", rotation: 6, scaleX: .72, skewY: -5 }, .06)
-        .to(penguin, { duration: .58, ease: "power2.inOut", filter: "drop-shadow(-18px 19px 11px rgba(35, 75, 47, .11))", rotation: 3, scale: .95, x: strikePoint.approachX, y: strikePoint.approachY }, .2)
-        .to(cape, { autoAlpha: 1, duration: .58, ease: "sine.inOut", rotation: -5, scaleX: 1.08, skewY: 5 }, .2)
-        .to(penguin, { duration: .16, ease: "power3.in", filter: "drop-shadow(-24px 22px 9px rgba(35, 75, 47, .08))", rotation: 11, scale: .92, x: strikePoint.impactX, y: strikePoint.impactY }, .78)
-        .to(cape, { duration: .16, ease: "power2.in", rotation: 7, scaleX: .94, skewY: -6 }, .78)
-        .addLabel("impact", .94)
+        .to(penguin, { duration: .16, ease: "power2.out", rotation: -8, scale: 1.02, x: -12, y: 8 }, 0)
+        .to(cape, { autoAlpha: .72, duration: .16, ease: "power2.out", rotation: 4, scaleX: .72, skewY: -3 }, .04)
+        .to(penguin, { duration: .42, ease: "power2.in", rotation: 9, scale: .94, x: strikePoint.impactX, y: strikePoint.impactY }, .16)
+        .to(cape, { autoAlpha: 1, duration: .42, ease: "sine.inOut", rotation: -3, scaleX: 1.04, skewY: 3 }, .16)
+        .addLabel("impact", .58)
         .set(face, { autoAlpha: 0 }, "impact")
         .set([leftHalf, rightHalf], { autoAlpha: 1 }, "impact")
         .to(impact, { autoAlpha: 1, duration: .16, ease: "power3.out", rotation: -1, scale: .96 }, "impact")
-        .to(arena, { duration: .04, repeat: 3, x: (index) => index % 2 ? -2 : 2, yoyo: true }, "impact")
         .to(leftHalf, { autoAlpha: 0, duration: .68, ease: "power2.in", rotation: -18, x: -46, y: 78 }, "impact")
         .to(rightHalf, { autoAlpha: 0, duration: .68, ease: "power2.in", rotation: 17, x: 48, y: 70 }, "impact")
         .to(hitScore, { autoAlpha: 1, duration: .17, ease: "power3.out", scale: 1.04, x: 38, y: -18 }, "impact")
-        .to(hitScore, { autoAlpha: 1, duration: .62, ease: "none", x: 39, y: -22 }, "impact+=.17")
-        .to(hitScore, { autoAlpha: 0, duration: .28, ease: "power1.in", scale: .96, x: 43, y: -58 }, "impact+=.79")
+        .to(hitScore, { autoAlpha: 1, duration: .38, ease: "none", x: 39, y: -22 }, "impact+=.17")
+        .to(hitScore, { autoAlpha: 0, duration: .24, ease: "power1.in", scale: .98, x: 41, y: -42 }, "impact+=.55")
         .to(impact, { autoAlpha: 0, duration: .38, ease: "power1.out", rotation: 3, scale: 1.18 }, "impact+=.16")
-        .to(penguin, { autoAlpha: 0, duration: .45, ease: "power2.in", filter: "drop-shadow(-30px 25px 6px rgba(35, 75, 47, 0))", rotation: 19, scale: .78, x: strikePoint.exitX, y: strikePoint.exitY }, "impact+=.1")
-        .to(cape, { autoAlpha: 0, duration: .42, ease: "sine.in", rotation: -4, scaleX: .86, skewY: 3 }, "impact+=.1");
+        .to(penguin, { autoAlpha: 0, duration: .36, ease: "power2.out", rotation: 15, scale: .84, x: strikePoint.exitX, y: strikePoint.exitY }, "impact")
+        .to(cape, { autoAlpha: 0, duration: .36, ease: "sine.out", rotation: -4, scaleX: .86, skewY: 3 }, "impact");
     }
 
     return () => {
       timeline.kill();
       if (strikeTimelineRef.current === timeline) strikeTimelineRef.current = null;
     };
-  }, { dependencies: [mode], scope: arenaRef });
+  }, { dependencies: [mode], scope: arenaRef, revertOnUpdate: true });
 
   return (
     <main className="learner-dashboard writing-game-dashboard game-immersive-dashboard">

@@ -7,6 +7,8 @@ import "./motion.css";
 import "./responsive.css";
 import "./white-backgrounds.css";
 import "./brand-theme.css";
+import "./chatbot-widget.css";
+import "./game-motion.css";
 import "./account-wallet.css";
 import "./lesson-interactive.css";
 import "./vip/vip-policy.css";
@@ -15,6 +17,7 @@ import "./adaptive-responsive.css";
 import { SiteHeader, SiteHeaderFallback } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MobileNav } from "@/components/mobile-nav";
+import { HimiChatbot } from "@/components/himi-chatbot";
 import { LearnerAppShell } from "@/components/learner-app-shell";
 import { getCurrentUser } from "@/lib/auth-session";
 import { createBrandTheme } from "@/lib/brand";
@@ -67,5 +70,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <Suspense fallback={<div className="standalone-route-shell">{children}</div>}><LearnerAppShell user={shellUser}>{children}</LearnerAppShell></Suspense>
     <SiteFooter />
     <MobileNav />
+    <HimiChatbot />
   </body></html>;
 }

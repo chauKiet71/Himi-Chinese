@@ -19,6 +19,9 @@ const bytea = customType<{ data: Uint8Array; driverData: Uint8Array }>({
   dataType: () => "bytea",
 });
 
+export const supportStatus = pgEnum("support_status", ["OPEN", "CLAIMED", "WAITING_USER", "COMPLETED"]);
+export const supportSender = pgEnum("support_sender", ["USER", "ADMIN", "SYSTEM"]);
+
 export const userRole = pgEnum("user_role", ["learner", "editor", "reviewer", "admin"]);
 export const contentStatus = pgEnum("content_status", ["draft", "review", "published", "archived"]);
 export const subscriptionStatus = pgEnum("subscription_status", ["pending", "active", "expired", "cancelled", "refunded"]);
@@ -41,6 +44,78 @@ export const users = pgTable("users", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 }, (table) => [uniqueIndex("users_email_uq").on(table.email)]);
+
+export const supportConversations = pgTable("support_conversations", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull().references(() => users.id),
+  userName: varchar("user_name", { length: 120 }).notNull(),
+  userEmail: varchar("user_email", { length: 255 }).notNull(),
+  status: supportStatus("status").notNull().default("OPEN"),
+  claimedByTelegramUserId: text("claimed_by_telegram_user_id"),
+  claimedAt: timestamp("claimed_at", { withTimezone: true }),
+  completedAt: timestamp("completed_at", { withTimezone: true }),
+  completedBy: text("completed_by"),
+  nextReminderAt: timestamp("next_reminder_at", { withTimezone: true }),
+  reminderCount: integer("reminder_count").notNull().default(0),
+  reminderFailures: integer("reminder_failures").notNull().default(0),
+  lastReminderError: text("last_reminder_error"),
+  telegramChatId: text("telegram_chat_id").notNull(),
+  telegramNotificationMessageId: integer("telegram_notification_message_id"),
+  telegramReminderMessageId: integer("telegram_reminder_message_id"),
+  generation: integer("generation").notNull().default(1),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+}, (t) => [index("support_conversation_user_idx").on(t.userId, t.updatedAt),
+  index("support_reminder_due_idx").on(t.nextReminderAt).where(sql`${t.status} = 'OPEN'`)]);
+
+export const supportImages = pgTable("support_images", {
+  id: uuid("id").primaryKey(),
+  ownerId: uuid("owner_id").notNull().references(() => users.id),
+  publicId: text("public_id").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const supportMessages = pgTable("support_messages", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  conversationId: uuid("conversation_id").notNull().references(() => supportConversations.id),
+  senderType: supportSender("sender_type").notNull(),
+  senderId: text("sender_id").notNull(),
+  content: text("content").notNull().default(""),
+  imageUrl: text("image_url"),
+  imageId: uuid("image_id").references(() => supportImages.id),
+  telegramMessageId: integer("telegram_message_id"),
+  requestId: uuid("request_id"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (t) => [uniqueIndex("support_message_request_uq").on(t.senderId, t.requestId),
+  index("support_message_conversation_idx").on(t.conversationId, t.createdAt)]);
+
+export const supportReplySessions = pgTable("support_reply_sessions", {
+  telegramChatId: text("telegram_chat_id").notNull(),
+  telegramAdminUserId: text("telegram_admin_user_id").notNull(),
+  promptMessageId: integer("prompt_message_id").notNull(),
+  conversationId: uuid("conversation_id").notNull().references(() => supportConversations.id),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+}, (t) => [primaryKey({ columns: [t.telegramChatId, t.telegramAdminUserId, t.promptMessageId] }),
+  index("support_reply_expiry_idx").on(t.expiresAt)]);
+
+export const supportJobs = pgTable("support_jobs", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  conversationId: uuid("conversation_id").references(() => supportConversations.id),
+  kind: text("kind").notNull(),
+  dedupeKey: text("dedupe_key").notNull(),
+  payload: jsonb("payload").$type<Record<string, unknown>>().notNull().default({}),
+  attempts: integer("attempts").notNull().default(0),
+  availableAt: timestamp("available_at", { withTimezone: true }).notNull().defaultNow(),
+  finishedAt: timestamp("finished_at", { withTimezone: true }),
+  lastError: text("last_error"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (t) => [uniqueIndex("support_job_dedupe_uq").on(t.dedupeKey),
+  index("support_job_due_idx").on(t.availableAt).where(sql`${t.finishedAt} is null`)]);
+
+export const supportTelegramUpdates = pgTable("support_telegram_updates", {
+  updateId: text("update_id").primaryKey(),
+  receivedAt: timestamp("received_at", { withTimezone: true }).notNull().defaultNow(),
+});
 
 export const authSessions = pgTable("auth_sessions", {
   id: uuid("id").defaultRandom().primaryKey(),

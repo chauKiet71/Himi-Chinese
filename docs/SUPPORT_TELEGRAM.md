@@ -1,0 +1,124 @@
+# Himi Support qua Telegram
+
+## Phạm vi và kiến trúc
+
+Widget Himi hiện có được nối với hỗ trợ **do nhân viên trả lời**, không có LLM/câu trả lời AI giả. Màu đỏ–cam và mascot giữ theo website.
+
+Luồng: client có session → API cùng origin → transaction PostgreSQL lưu conversation + message + outbox → worker Node gửi Telegram → webhook lưu update/claim hoặc enqueue reply → worker xử lý ForceReply/ảnh → client polling.
+
+- Next/Vinext tiếp tục chạy Cloudflare như hiện tại. **Worker support là tiến trình Node riêng, thường trực**, triển khai trên VM/container/Railway worker hoặc máy vận hành có kết nối PostgreSQL. Không chạy script này trong request Cloudflare, Vercel Function hay Next.js. Không cần Redis/WebSocket.
+- Dữ liệu/lịch nhắc/backoff nằm trong PostgreSQL. Worker dùng transaction, row lock và `FOR UPDATE SKIP LOCKED`; có thể chạy nhiều replica. Khóa conversation được giữ qua lượt gửi nhắc để claim/complete không chạy xen giữa kiểm tra và gửi.
+- Polling 5 giây khi widget mở và tab hiện, backoff tối đa 30 giây lúc lỗi; không chồng request. Ẩn dựa trên `completedAt + 60 giây`, có bù lệch đồng hồ từ `serverNow`. Không xóa hội thoại/tin nhắn. Danh sách lấy 50 hội thoại gần nhất, lịch sử tin phân trang 100 mục với cursor ID.
+- State: `OPEN → CLAIMED → WAITING_USER → CLAIMED` (người dùng hỏi tiếp); complete từ trạng thái chưa hoàn thành; tin mới trên `COMPLETED → OPEN` xóa claim/completion, tăng generation và tạo thông báo Telegram mới. Nút trên mọi thông báo active mang conversation ID + generation, vì vậy callback từ generation cũ không tác động lần mở lại mới.
+- Mọi thông báo văn bản, ảnh, reminder và biên nhận đang còn xử lý đều có `Trả lời` / `Hoàn thành`. Một admin sở hữu conversation sau claim; admin khác được báo ID người đang xử lý, không ghi đè và không complete thay. Khi bấm `Trả lời`, bot tạo một ForceReply trả lời đúng thông báo vừa bấm; prompt này dùng bàn phím ForceReply thay cho inline keyboard theo mô hình `reply_markup` của Telegram. ForceReply có hiệu lực 24 giờ, mapping chính xác theo chat ID + admin ID + prompt message ID. Reply thường không trả lời đúng prompt sẽ bị bỏ qua/từ chối, không tự đoán hội thoại.
+
+## Migration và file chính
+
+- `drizzle/0018_support_telegram.sql`: enums và 6 bảng support (conversations, messages, images, jobs, reply sessions, processed Telegram updates).
+- `drizzle/0019_support_reminder_retry.sql`: số lỗi/lỗi gần nhất của reminder.
+- `db/schema.ts`, `lib/support-domain.ts`, `support-service.ts`, `support-worker.ts`, `support-telegram.ts`, `support-storage.ts`, `support-api.ts`.
+- `app/api/support/**`, `app/api/telegram/webhook/route.ts`.
+- `components/himi-chatbot.tsx`, `app/chatbot-widget.css`; root layout đã gắn widget.
+- `scripts/support-worker.ts`, `scripts/support-webhook.ts`, `tests/support-chat.test.mjs`.
+
+Migration chỉ thêm bảng/cột, không xóa hoặc sửa dữ liệu học/auth hiện có. Backup DB theo quy trình hiện tại rồi chạy `npm run db:migrate` ở môi trường đích **trước khi bật widget/API mới**. Chưa tự chạy migration vào DB của người dùng trong phiên triển khai này.
+
+## Cấu hình
+
+Điền trong secret store của web **và** worker, không đưa vào biến `NEXT_PUBLIC_*`, Git, URL trình duyệt hay log:
+
+| Biến | Giá trị |
+| --- | --- |
+| `DATABASE_URL` | PostgreSQL hiện có, cả web và worker dùng cùng DB |
+| `AUTH_SECRET` | Secret auth hiện có của website |
+| `CLOUDINARY_URL` | Storage hiện có; cần cho ảnh user/admin |
+| `TELEGRAM_BOT_TOKEN` | Token do BotFather cấp |
+| `TELEGRAM_ADMIN_CHAT_ID` | Numeric ID của một group/supergroup hỗ trợ, giữ dấu âm |
+| `TELEGRAM_ADMIN_USER_IDS` | Numeric user IDs, phân cách dấu phẩy; không phải username |
+| `TELEGRAM_WEBHOOK_SECRET` | Chuỗi ngẫu nhiên 32–64 ký tự thuộc A-Z/a-z/0-9/_/- |
+| `SUPPORT_WEBHOOK_BASE_URL` | Origin HTTPS công khai; local dùng tunnel HTTPS |
+| `SUPPORT_WORKER_POLL_MS` | Mặc định 1000; cho phép 250–5000 |
+
+Web sử dụng biến môi trường hiện có theo runtime Cloudflare. Script npm local nạp `.env.local` mà không in giá trị. Container production inject env và chạy trực tiếp `node --experimental-strip-types scripts/support-worker.ts`, không cần tạo `.env.local`. Dùng supervisor có restart tự động; graceful shutdown SIGTERM/SIGINT chờ xử lý hiện tại kết thúc.
+
+## Tạo bot, lấy ID, đăng ký webhook
+
+1. Mở [BotFather](https://t.me/BotFather), dùng `/newbot`, lưu token trong secret store.
+2. Tạo group hỗ trợ riêng, thêm bot và các nhân viên. Cho bot quyền gửi tin/ảnh. Chỉ người trong allowlist được thao tác dù họ là admin Telegram.
+3. Trước khi đặt webhook, gửi một lệnh hoặc tin nhắn nhắc tên bot trong group. Dùng Bot API `getUpdates` bằng công cụ phía server để xem **chỉ** `message.chat.id` và `message.from.id` của nhân viên. Không dán token vào thanh địa chỉ, ảnh chụp hoặc log. Mỗi nhân viên cần gửi một tin để lấy numeric ID của họ. Khi webhook đang bật, không dùng `getUpdates`; lấy ID từ thao tác thử trong group/Telegram client đáng tin cậy.
+4. Giữ privacy mode của bot nếu muốn: admin phải Reply vào ForceReply của bot; luồng này không cần đọc toàn bộ cuộc trò chuyện group.
+5. Cấu hình các biến trên rồi chạy:
+
+```powershell
+npm run db:migrate
+npm run dev
+```
+
+Terminal khác:
+
+```powershell
+npm run support:worker
+```
+
+Sau khi HTTPS domain/tunnel trỏ tới web:
+
+```powershell
+npm run support:webhook
+```
+
+Script gọi `setWebhook` với `secret_token`, `allowed_updates: ["message", "callback_query"]`, **không** drop update đang chờ. Endpoint là `POST /api/telegram/webhook`; header bí mật `X-Telegram-Bot-Api-Secret-Token` được so sánh timing-safe. Chạy script đăng ký webhook là thao tác thay đổi cấu hình bot: chỉ thực hiện trên đúng bot/môi trường.
+
+Bot API tham chiếu: [webhook](https://core.telegram.org/bots/api#setwebhook), [ForceReply](https://core.telegram.org/bots/api#forcereply), [gửi ảnh](https://core.telegram.org/bots/api#sendphoto).
+
+## API và dữ liệu
+
+Client cần cookie session thật; mutation bắt buộc Origin trùng website. GET không cache và chỉ trả DTO của chủ sở hữu.
+
+- `GET /api/support/conversations`: profile và 50 hội thoại gần nhất.
+- `POST /api/support/conversations`: `{ requestId: UUID, userName, userEmail, content, imageId?: UUID }`.
+- `GET /api/support/conversations/:id?before=<messageUUID>`: status, completedAt, serverNow, messages, nextBefore.
+- `POST /api/support/conversations/:id/messages`: body như create; mở lại nếu đã hoàn thành.
+- `POST /api/support/images`: body binary JPG/PNG/WebP, Content-Type đúng MIME, header `Idempotency-Key: UUID`.
+- `GET /api/support/images/:id`: kiểm tra session/owner trước khi lấy ảnh private từ Cloudinary.
+
+Tên 2–120 ký tự, email tối đa 255, tin tối đa 3.000 ký tự; ảnh tối đa 5 MB, kiểm cả MIME lẫn magic bytes, Cloudinary decode/giới hạn kích thước 2000px. Ảnh user và admin lưu `authenticated`, không dùng URL Telegram làm nơi lưu chính, không trả signed Cloudinary URL cho client. Worker tải ảnh về server rồi multipart-upload cho Telegram. Tin đầy đủ nằm ở message văn bản có nút; ảnh gửi kèm dưới dạng reply và cũng có nút để admin thao tác ngay trên ảnh mà không cắt nội dung ở giới hạn caption.
+
+Rate limit bền vững theo tài khoản: 10 mutation/phút, 5 upload/phút, 90 lượt đọc/phút. API trả 401/403/404/400/413/429 rõ ràng; lỗi hạ tầng trả thông báo chung 503. Idempotency key retry phải giữ nguyên nội dung/ảnh; thay nội dung dùng key mới. UI khóa submit và giữ key khi request lỗi.
+
+## Reminder, retry và vận hành
+
+- Hạn nhắc đầu = thời điểm tạo/mở lại + 30 giây; các lần tiếp = +30 giây khi vẫn OPEN/chưa claim. Độ trễ thực tế phụ thuộc poll worker, backlog, mạng và Telegram rate limit; không phải cam kết chính xác tuyệt đối từng mili giây.
+- Nếu thông báo đầu chưa gửi được, outbox tiếp tục retry và nhắc chờ thông báo gốc tồn tại.
+- Chỉ tạo **một message nhắc** mỗi generation, sau đó edit số lần nhắc và liên kết thông báo gốc. **Telegram không phát push mới cho mỗi lần edit**; đây là lựa chọn chống spam group. Nếu nghiệp vụ cần âm thanh/push mỗi 30 giây, cần đổi chính sách gửi tin mới và kiểm soát giới hạn Telegram.
+- Claim/complete xóa deadline ngay trong transaction. Worker đọc lại DB mỗi lượt, không có scheduler trong API. Backoff outbox 2 giây → tối đa 5 phút; reminder lỗi backoff tối đa 5 phút; tôn trọng `retry_after` của Telegram. Không mất message user khi Telegram hỏng.
+- Kiểm tra `npm run support:status`: job pending/lỗi và độ cũ của backlog, không in nội dung/email/token. Xem thêm `reminder_failures`/`last_reminder_error` nếu nhắc không chạy. Cảnh báo vận hành khi worker dừng, pending kéo dài, lỗi 401/403/429 hoặc DB không truy cập được. Không tự bỏ job sau N lần.
+- Reply session hết hạn được dọn định kỳ; job đã xong giữ metadata 30 ngày rồi dọn; payload nhạy cảm bị xóa khi job thành công. Update ID giữ để chống replay. Hội thoại/message không bị dọn. Upload chưa gắn vào tin có thể thành orphan nếu người dùng bỏ form: lên lịch chính sách retention riêng trước khi vận hành quy mô lớn.
+
+### Giới hạn exactly-once
+
+DB mutation/webhook được dedup, row locks ngăn hai worker gửi cùng lượt bình thường. Tuy nhiên Telegram `sendMessage/sendPhoto` không hỗ trợ idempotency key: nếu Telegram đã nhận nhưng kết nối mất/worker chết **trước khi DB commit**, retry có thể tạo thêm một notification/photo/prompt/reminder đầu. Không thể đảm bảo exactly-once giữa DB và Telegram bằng transaction DB. Edit reminder/complete là idempotent; mọi prompt không có mapping đã commit đều không thể chuyển nhầm phản hồi. Khi gặp notification trùng, dùng thông báo có nút còn hợp lệ; đối chiếu conversation ID. Đây là giới hạn cần chấp nhận trước production, không tuyên bố gửi Telegram exactly-once.
+
+## Kiểm thử và nghiệm thu thật
+
+```powershell
+npm run test:support
+npx tsc --noEmit
+npm run lint -- --ignore-pattern .vinext --ignore-pattern tmp
+npm test
+npm run build
+```
+
+Test support dùng PGlite (PostgreSQL nhúng) chạy migration thật, service và transaction thật, chỉ thay transport Telegram/Cloudinary. Bao phủ tạo/idempotency, payload text/ảnh, 30 giây/repeat/stop, hai claim đồng thời, hai worker, mapping đúng, update trùng, allowlist, complete, hide60s/refresh, mở lại, ownership, lỗi Telegram/restart/backoff và phân trang. PGlite serialize transaction trên một kết nối: **cần kiểm tra nhiều kết nối PostgreSQL/replica thật** trước production, không coi test này là load test distributed.
+
+Checklist bắt buộc với bot + DB + Cloudinary thật (chưa được tự xác nhận trong phiên code):
+
+1. Đăng nhập learner A, gửi text và một JPG. Refresh vẫn có tin; Telegram nhận đúng tên/email/mã, nội dung và ảnh; cả thông báo text lẫn ảnh đều có hai nút.
+2. Chờ ít nhất 65 giây không claim: một reminder xuất hiện rồi được edit lần 2. Đối chiếu deadline/count DB; không xuất hiện reminder mới vô hạn.
+3. Hai admin allowlist bấm Trả lời gần đồng thời, chỉ một người claim. Chờ 35 giây: count không tăng. Admin ngoài allowlist không làm đổi DB.
+4. Tạo thêm hội thoại B, bấm Trả lời B rồi Reply vào prompt A bằng text và ảnh có caption: chỉ A nhận, status WAITING_USER.
+5. Gửi lại cùng webhook update (giữ secret trong công cụ server): không thêm message. Mở A bằng session learner khác: 404.
+6. Admin sở hữu bấm Hoàn thành hai lần: chỉ một completedAt và system message; nút gốc bị bỏ. Refresh client sau 30 giây: còn khoảng 30 giây; đủ 60 giây ẩn. Query DB vẫn còn lịch sử.
+7. Gửi tin mới từ ô chat sau khi ẩn: A mở lại, deadline mới, completedAt null, thông báo gốc cũ không complete được A.
+8. Tạm dừng worker, gửi tin, refresh: tin vẫn có. Chạy lại worker: gửi tiếp. Thử lỗi mạng Telegram rồi khôi phục; kiểm tra backlog được giải phóng. Chạy hai worker để kiểm tra khóa trên PostgreSQL thật.
+
+Không dùng thông tin cá nhân/ảnh nhạy cảm thật cho fixture; xóa fixture chỉ sau khi đã xác định đúng IDs và được phép. Không tự gọi webhook bot thật hoặc migrate DB thật chỉ để làm xanh test.

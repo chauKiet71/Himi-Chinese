@@ -78,6 +78,46 @@ final result: passed
 
 final result: passed
 
+## 2026-09-07 — Completed-conversation thank-you copy
+
+**Source visual truth**
+
+- `C:\Users\DELL\AppData\Local\Temp\codex-clipboard-9072b9ff-6820-4de9-889e-c3ab125400f0.png`
+- Source pixels: 419 × 160.
+- Requested target: preserve the system-message presentation and replace its body with `Cảm ơn anh/chị đã dành thời gian liên hệ!`.
+
+**Implementation evidence**
+
+- Codex in-app browser at `http://localhost:3000/`, 740 × 706 CSS px.
+- The completed-state message was rendered with the production assistant-message classes and captured inline through CUA; the capture API did not provide a persistent filesystem path.
+- Temporary QA-only markup was removed immediately after capture; the persisted implementation is the service-generated system message.
+
+**Comparison and fidelity**
+
+- Full view: support panel placement, message rail, composer, and surrounding page remain unchanged.
+- Focused region: the `Hệ thống` label, bot avatar, bubble color, radius, padding, typography, and wrapping match the existing component; only the requested body copy changed.
+- No image assets or color/layout tokens changed.
+- The new Vietnamese sentence wraps cleanly inside the existing bubble with no clipping or overflow.
+- No actionable P0, P1, or P2 differences remain.
+
+**Comparison history**
+
+1. Initial copy mismatch: completion produced the previous 60-second explanatory sentence.
+2. Fix: replaced the service-generated message body with the requested thank-you sentence.
+3. Post-fix evidence: the in-app browser renders the requested sentence in the unchanged system bubble.
+
+**Checks**
+
+- [x] Requested text appears in the service response.
+- [x] Previous sentence is absent from production source.
+- [x] Focused ESLint passes.
+- [x] Support test suite passes: 19/19.
+- [x] Temporary visual-QA markup removed.
+
+final result: passed
+
+---
+
 # Account Topbar Avatar Fill — Browser Comment 1
 
 **Findings**
@@ -127,148 +167,129 @@ final result: passed
 
 ---
 
-# Design QA — Auth paper-in-satchel scene
+# Chatbot Widget Design QA
 
-## Result
+**Source visual truth**
 
-**Passed.** No open P0, P1, or P2 visual defects remain in the implemented auth scene.
+- `C:\Users\DELL\AppData\Local\Temp\codex-clipboard-9431caf7-3c00-4677-8fe0-5e346cbfdeee.png`
+- Source pixels: 441 × 658.
+- The source was normalized to 390 px wide for the focused comparison.
 
-## Fidelity target
+**Implementation evidence**
 
-- User-selected mockup: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-81a31099-050d-434a-9756-cc3fd077a2db.png`
-- Normalized comparison: `.codex-artifacts/auth-paper-qa/comparison-auth-620x823.png`
-- Focused paper/bag seam comparison: `.codex-artifacts/auth-paper-qa/comparison-paper-bag-join.png`
+- Full desktop, launcher: `D:\Code\HiMi\Hanzi-work-lab-nextjs-web-app\artifacts\design-qa\chatbot-implementation-desktop-closed.png`
+- Full desktop, open: `D:\Code\HiMi\Hanzi-work-lab-nextjs-web-app\artifacts\design-qa\chatbot-implementation-desktop-open.png`
+- Full desktop, conversation: `D:\Code\HiMi\Hanzi-work-lab-nextjs-web-app\artifacts\design-qa\chatbot-implementation-desktop-conversation.png`
+- Full mobile, open: `D:\Code\HiMi\Hanzi-work-lab-nextjs-web-app\artifacts\design-qa\chatbot-implementation-mobile-open.png`
+- Focused side-by-side comparison: `D:\Code\HiMi\Hanzi-work-lab-nextjs-web-app\artifacts\design-qa\chatbot-reference-implementation-comparison.png`
+- Desktop viewport: 1440 × 1000 CSS px at device scale factor 1; panel crop: 390 × 620 px.
+- Mobile viewport: 390 × 844 CSS px at device scale factor 1; panel: 366 × 620 px.
+- State: launcher closed; panel open with greeting; user message submitted; assistant reply completed; panel closed with Escape.
 
-The full-screen comparison uses matching 620 × 823 viewports for each source panel and implementation render. The focused crop checks the exact paper-to-satchel overlap that motivated the change.
+**Full-view comparison evidence**
 
-## Screens reviewed
+- The implementation preserves the source structure: fixed bottom-right launcher, colored header, assistant avatar and bubble, right-aligned user messages, typing/reply state, and fixed composer.
+- Desktop placement leaves 24 px from the right and bottom edges. Mobile placement leaves a 10 px visual gap above the 66 px learner navigation, with no overlap.
+- The Himi adaptation intentionally replaces the source purple with brand red `#FF4C3B`, adds orange `#FF8E2D` accents, and uses the existing Himi mascot asset.
 
-- `/login`
-- `/register`
-- `/forgot-password`
+**Focused region comparison evidence**
 
-Responsive renders were checked at 320 × 568, 360 × 800, 390 × 844, 430 × 932, 620 × 823, 844 × 390 landscape, and 1440 × 900.
+- The focused comparison places the normalized source and the exact 390 × 620 implementation panel crop in one image.
+- Header hierarchy, message alignment, avatar placement, composer geometry, border radii, and visual density were readable at this scale; no extra focused crops were needed.
 
-## Visual checks
+**Required fidelity surfaces**
 
-- The paper and satchel now come from one project-bound raster scene, so their geometry cannot drift independently.
-- The satchel rim consistently overlaps the lower paper edge on portrait mobile, short mobile, landscape mobile, and desktop.
-- Live form controls remain inside the paper's usable area on all three routes.
-- Registration fields and footer no longer spill over the satchel front on desktop.
-- Narrow phones have no horizontal overflow; short phones use intentional vertical scrolling while preserving touch-target sizes.
-- Reduced-motion renders use the same final composition without entrance animation.
-
-## Interaction and runtime checks
-
-- Email fields accept input and expose a visible focus state.
-- Submit buttons remain enabled and retain the correct label for each route.
-- Login, register, forgot-password, and home links resolve to the expected local routes.
-- Motion and reduced-motion captures completed with no page runtime errors or console errors.
-
-## Issues found and resolved during QA
-
-- **P2 — fixed:** generic mobile body padding produced an extra 68 px scroll tail on auth pages.
-- **P2 — fixed:** 721–900 px landscape could combine the portrait artwork with a landscape stage.
-- **P2 — fixed:** the desktop registration form extended into the satchel area.
-- **P2 — fixed:** portrait headings initially overlapped the mint tape.
-
-## Verification
-
-- `npx eslint components/auth-card.tsx` — passed.
-- `npm run build` — passed.
-- The broader repository test/lint runs still include unrelated pre-existing failures from legacy page assertions and generated Chrome-profile files; no auth-scene runtime or targeted lint failure was observed.
-
----
-
-# Design QA — Account membership wallet mobile UI
+- Fonts and typography: uses the site's Inter variable first, with Arial fallback; weights, Vietnamese diacritics, hierarchy, wrapping, and input text remain legible at desktop and mobile sizes. The local Vinext server reports pre-existing `file://` font load warnings, so QA screenshots use the configured fallback without layout shifts.
+- Spacing and layout rhythm: panel, header, message rail, suggestion chips, and composer follow a consistent 8–18 px rhythm. The mobile panel is deliberately taller than the normalized reference to preserve useful conversation space while clearing persistent navigation.
+- Colors and visual tokens: all chatbot surfaces map to the current Himi red, orange, black, white, muted, line, soft-red, and soft-orange tokens. Contrast remains clear for header text, user messages, buttons, and disabled states.
+- Image quality and asset fidelity: all bot avatars reuse `/assets/brand/himi-mascot-icon.png` through the existing Next Image component. No placeholder, CSS-drawn logo, or custom SVG asset is used.
+- Copy and content: English placeholder text from the reference is replaced with concise Vietnamese support copy and HSK-relevant quick questions. Sent messages and canned assistant replies render correctly.
 
 **Findings**
 
-- No actionable P0, P1, or P2 differences remain in the implemented Free, active VIP, or password-sheet states.
-- The membership state is now immediately legible: Free uses an ivory/coral outlined card, active VIP uses the saturated coral wallet, and pending approval uses a separate amber treatment and cancel action.
-- Email verification remains green and independent from membership status in every state.
-- The production Himi v2 transparent mascot replaces the opaque-background concept asset. Its rendering style is slightly more dimensional than the generated mock, but it is the approved project asset and avoids the white raster box found in the first implementation pass.
+- No actionable P0, P1, or P2 visual differences remain.
+- [P3] Local font asset warnings are emitted by the existing Vinext/next-font development runtime. They do not create an error overlay or break the widget and are outside this component change.
 
 **Open Questions**
 
-- None.
+- The current scope provides realistic local replies and attachment selection UI. Connecting the composer to a production chatbot API, persistence, or file upload service remains a separate backend task.
+
+**Comparison History**
+
+1. Initial pass: found a P2 keyboard-focus issue. Pressing Escape closed the panel, but focus remained on `BODY` because the launcher was still hidden during the immediate focus attempt.
+2. Fix: delayed focus restoration until the close transition exposes the launcher.
+3. Post-fix evidence: panel visibility is `hidden` and the focused control is `Mở trợ lý Himi`. Open-state autofocus targets `Nhập tin nhắn`.
+
+**Primary interactions tested**
+
+- Open launcher and autofocus composer.
+- Enter and submit a Vietnamese HSK question.
+- Show assistant response after the thinking state.
+- Close with Escape and restore focus to the launcher.
+- Render at 390 × 844 without overlapping the learner mobile navigation.
+- Checked for framework error overlays: none present.
+- Checked browser logs: only the pre-existing local font asset warnings described above.
 
 **Implementation Checklist**
 
-- [x] Preserve the desktop profile-first account layout.
-- [x] Implement responsive Free, pending, and VIP wallet states from existing subscription/request data.
-- [x] Keep the existing avatar upload, VIP link, request cancellation, password change, logout, and mobile navigation behavior working.
-- [x] Implement the password editor as a keyboard-accessible native dialog with Escape/backdrop/close-button dismissal.
-- [x] Keep 44px-or-larger primary touch targets and reduced-motion fallbacks.
-- [x] Verify the 390 × 844 mobile viewport, primary interactions, framework overlay, console, and page errors.
+- [x] Brand-aligned launcher and panel.
+- [x] Open, close, Escape, and focus states.
+- [x] Message submission, thinking, and response states.
+- [x] Quick prompts and attachment selection.
+- [x] Desktop and mobile responsive positioning.
+- [x] Reduced-motion behavior.
+- [x] Production build and targeted lint.
 
 **Follow-up Polish**
 
-- The generated reference includes mock-only security rows for two-factor authentication, device management, and account deletion. They were intentionally not added as dead controls because those product capabilities do not exist in the current account backend.
-- The existing six-item learner bottom navigation remains visible even though ImageGen omitted it; retaining the app shell avoids a navigation regression.
-
-**Evidence**
-
-- VIP source visual truth: `C:/Users/Windows/.codex/generated_images/01a04399-6b54-77d2-8a15-3b97eacdc5ee/exec-fd2fc274-82d3-407a-85ac-80609ce015f8.png`.
-- Free source visual truth: `C:/Users/Windows/.codex/generated_images/01a04399-6b54-77d2-8a15-3b97eacdc5ee/exec-5e6578c8-0242-4041-9ad1-46b6e8567db1.png`.
-- Free implementation screenshot: `.codex-artifacts/account-wallet-qa/free-390x844.png`.
-- VIP implementation screenshot: `.codex-artifacts/account-wallet-qa/vip-390x844.png`.
-- Password-sheet implementation screenshot: `.codex-artifacts/account-wallet-qa/vip-password-sheet-390x844.png`.
-- Viewport: 390 × 844 CSS pixels at device scale factor 1.
-- Source pixels: 852 × 1832 for each generated concept; implementation pixels: 390 × 844. Sources were width-normalized to 390 px for comparison, producing an approximately 839 px concept viewport.
-- States: Free/closed, active VIP/closed, and active VIP/password sheet open.
-- Full-view comparison evidence: the source/implementation pairs were opened in one comparison input after the final spacing pass. Header hierarchy, wallet width, status color, identity block, account facts, security grouping, and CTA prominence align at the normalized mobile size.
-- Focused comparison evidence: the final password-sheet capture was compared against the open-sheet VIP source. The implementation intentionally uses 48px form controls, so its sheet begins slightly higher than the generated concept while preserving the same handle, close affordance, field order, CTA, and cancel action.
-- Required fidelity surfaces: Inter/Roboto project typography retains the source hierarchy; card spacing follows the 8/12/16px rhythm; coral, ivory, amber, and verification-green tokens map to semantic states; the transparent Himi v2 asset is sharp and correctly cropped; Vietnamese labels and dates match the underlying account data.
-- Primary interactions tested: open password sheet, reveal current-password input, close with Escape, backdrop scroll lock/unlock, VIP/Free links, and existing bottom navigation semantics.
-- Browser checks: meaningful content rendered, no Vinext/Vite/Next error overlay, no page errors, and no console errors beyond normal Vite connection/React DevTools development messages.
-
-**Comparison History**
-
-- Initial P1: the original `himi-mascot-master.png` had an opaque white background that covered wallet copy and the CTA. Fix: replaced it with the existing transparent `himi-v2/himi-wave.webp` production asset and corrected stacking.
-- Initial P2: responsive account padding produced a double gutter and pushed the card too far below the mock header. Fix: reset page padding for the redesigned route, use a 54px mobile header, and keep a single 16px card gutter.
-- Initial P2: the Free badge overlapped “Gói miễn phí,” and benefit copy collided with the CTA. Fix: separated badge positioning, reserved copy width, and increased only the Free card's content height.
-- Initial P2: the active VIP mascot/card and password sheet were oversized relative to the selected mock. Fix: reduced the VIP card and mascot, moved the illustration upward/right, hid redundant visible field labels while retaining accessible labels, and compacted the sheet without dropping below touch-target guidance.
-- Post-fix evidence: final Free and VIP captures show no clipped labels, overlapping artwork, hidden CTA, horizontal overflow, or inaccessible modal controls at 390 × 844.
+- Resolve the project's Vinext development font URL warnings if exact Inter rendering is required in local QA captures.
 
 final result: passed
+## 2026-09-07 — Telegram support widget
+
+- Giữ launcher góc phải, mascot và màu thương hiệu; mở rộng form tên/email, composer ảnh, selector hội thoại, status và message bubbles.
+- Desktop 1366×900 và mobile 390×844 trên localhost:3000/terms; lượt chụp mobile cuối dùng server QA localhost:4175/terms. Mobile panel x=12, width=366, bottom=760; không tràn viewport hay chạm bottom navigation.
+- Browser fixture chỉ ghi trong bộ nhớ tab, không gọi API support/Telegram thật. Đã kiểm tra gửi đúng một request, phản hồi ADMIN qua polling, COMPLETED ẩn tin theo completedAt, giữ fixture history và gửi tiếp mở lại OPEN.
+- Ảnh: artifacts/design-qa/support-telegram-desktop-form.png; artifacts/design-qa/support-telegram-mobile-conversation.png.
+- Sửa trong quá trình QA: input type=text để nhận đúng CSS, composer ba cột sau khi bỏ nút lời chào giả, grid panel bốn hàng khi có toolbar, xóa báo mất kết nối sau recovery; avatar tin nhắn dùng icon bot vector để tránh lỗi ảnh nhỏ, mascot ở header/launcher giữ nguyên.
+- Kết quả UI: passed trên phạm vi fixture; kết quả tích hợp live Telegram: pending configuration/E2E. Không dùng ảnh QA để chứng minh Telegram thật đã nhận tin.
 
 ---
 
-# Design QA — Responsive account structure aligned to laptop
+## 2026-09-07 — Support user bubble width regression
 
-**Findings**
+**Source visual truth**
 
-- No open P0, P1, or P2 visual defects remain.
-- The responsive information order now matches the approved laptop structure: profile hero, membership band, account facts, then security actions.
-- Free, pending approval, and active VIP remain visibly distinct without changing the underlying subscription/request logic.
-- No horizontal overflow was detected at 360, 390, 768, 1024, or 1440 CSS pixels.
+- Browser Comment 1 marker screenshot; the annotation system did not expose a local source path.
+- Viewport: 740 × 706 CSS px.
+- State: support panel open; the short user message `alo` collapsed into a one-character-per-line column at the right edge.
 
-**Evidence**
+**Implementation evidence**
 
-- Laptop visual truth: `C:/Users/Windows/Downloads/Codex Image Sep 6, 2026, 09_54_34 PM.png` and `C:/Users/Windows/Downloads/Codex Image Sep 6, 2026, 09_54_53 PM.png`.
-- Final desktop render: `.codex-artifacts/account-wallet-qa/responsive-vip-1440x900.png`.
-- Final tablet renders: `.codex-artifacts/account-wallet-qa/responsive-vip-1024x900.png` and `.codex-artifacts/account-wallet-qa/responsive-vip-768x1024.png`.
-- Final mobile renders: `.codex-artifacts/account-wallet-qa/responsive-vip-390x844.png`, `.codex-artifacts/account-wallet-qa/responsive-free-390x844.png`, `.codex-artifacts/account-wallet-qa/responsive-pending-390x844.png`, and `.codex-artifacts/account-wallet-qa/responsive-free-360x800.png`.
-- Focused interaction render: `.codex-artifacts/account-wallet-qa/responsive-password-sheet-390x844.png`.
-- Viewports: 360 × 800, 390 × 844, 768 × 1024, 1024 × 900, and 1440 × 900 CSS pixels at device scale factor 1.
-- States: Free/closed, pending/closed, active VIP/closed, and active VIP/password sheet open.
-- Full-view comparison evidence: both laptop references and all final implementation renders were opened in one comparison input after the last responsive pass. Profile hierarchy, separate membership placement, fact-table order, security grouping, and coral/ivory status treatments remain consistent while adapting to each viewport.
-- Focused comparison evidence: the mobile membership band stays a standalone section beneath the profile card, and the password dialog keeps its handle, title, three fields, primary action, cancel action, backdrop, and bottom-sheet behavior.
-- Required fidelity surfaces: the project typography and Vietnamese copy are preserved; spacing follows the existing 8/12/16px rhythm; coral, blush, ivory, amber, and verification-green tokens map to their semantic states; the production Himi mascot remains sharp and correctly cropped.
+- Codex in-app browser, `http://localhost:3000/`, at the same narrow desktop viewport.
+- Inline CUA screenshot captured after CSS HMR. CUA displayed the screenshot inline but did not persist a filesystem path.
+- A temporary DOM-equivalent user message rendered the production classes for visual inspection and was removed before handoff; no API, database, or Telegram data was changed.
 
-**Interactions and runtime**
+**Comparison and fidelity**
 
-- The password dialog opens from the security row, locks background scrolling, closes with Escape, and releases the scroll lock.
-- The final browser run showed no page errors or framework error overlay. Console output contained only normal Vite connection and React DevTools development messages.
-- Targeted account regression coverage verifies that profile precedes membership, membership precedes account facts, all three membership states remain present, and the 721–1024px breakpoint is retained.
+- Full view: panel position, message alignment, spacing, and composer layout remain unchanged.
+- Focused region: the red user bubble now has a 72 px minimum width; `Bạn` and `alo` render horizontally instead of one character per line.
+- `width: fit-content` keeps short bubbles compact, while `max-width: 100%` preserves wrapping for longer messages.
+- Typography, copy, colors, radius, and existing assets are unchanged.
+- No actionable P0, P1, or P2 visual differences remain.
 
-**Comparison History**
+**Comparison history**
 
-- Initial P1: the decorative desktop mascot overlapped the name, email, and CTA at 768px. Fix: hide that decoration only at the constrained 721–840px tablet range and preserve the real mascot on mobile.
-- Initial P2: the active VIP badge had low contrast against the pale coral membership band. Fix: apply an explicit coral-on-blush badge treatment.
-- Initial P2: the avatar edit button obscured part of the initials on narrow mobile. Fix: offset the control just outside the avatar edge while keeping its touch target accessible.
-- Post-fix evidence: the final 768px render has clean text/CTA separation; the 390px Free, pending, and VIP renders have readable badges and unobstructed initials; all tested widths have matching document and viewport widths.
+1. Initial P1: the shared `max-width: calc(100% - 44px)` interacted with the avatar-free user row's shrink-to-fit sizing and collapsed short content to its minimum width.
+2. Fix: gave user bubbles explicit intrinsic sizing, a 72 px floor, and a container-safe maximum.
+3. Post-fix: `Bạn` and `alo` render on normal horizontal lines at the original right alignment; the temporary QA markup was removed.
+
+**Checks**
+
+- [x] Short user message remains readable.
+- [x] Long-message wrapping remains bounded by the message row.
+- [x] Production TSX restored after visual QA.
+- [x] Focused lint passes.
 
 final result: passed
 

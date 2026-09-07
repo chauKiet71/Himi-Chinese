@@ -13,6 +13,10 @@
     "staging:secrets": "node --env-file=.env.local --experimental-strip-types scripts/configure-staging-secrets.ts",
     "verify:staging": "node --env-file=.env.local --experimental-strip-types scripts/verify-staging.ts",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "test:support": "node --experimental-strip-types --test tests/support-*.test.mjs",
+    "support:worker": "node --env-file=.env --experimental-strip-types scripts/support-worker.ts",
+    "support:status": "node --env-file=.env --experimental-strip-types scripts/support-worker.ts --status",
+    "support:webhook": "node --env-file=.env --experimental-strip-types scripts/support-webhook.ts",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .wrangler",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
@@ -43,6 +47,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.37.1",
+    "@electric-sql/pglite": "^0.5.8",
     "@openai/sites-vite-plugin": "0.2.0",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",
