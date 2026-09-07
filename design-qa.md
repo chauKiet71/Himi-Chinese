@@ -44,6 +44,40 @@
 
 final result: passed
 
+---
+
+# Design QA — HSK picker intro contrast follow-up
+
+**Findings**
+
+- No actionable P0, P1, or P2 issue remains in the annotated introduction block.
+- The “Luyện chém từ / Chọn khóa HSK để chơi / Từ vựng…” copy now sits on a warm, nearly opaque paper card, so bamboo and foliage no longer compete with the text.
+- Title, kicker, and supporting copy use stronger forest/coral contrast while preserving the approved dojo composition, Himi asset, rules panel, course cards, and interactions.
+
+**Implementation Checklist**
+
+- [x] Preserve the existing responsive split-dojo layout and assets.
+- [x] Add a dedicated text surface with product-matched border, radius, and shadow.
+- [x] Verify the annotated 674 × 534 viewport and a 430 × 932 phone viewport.
+- [x] Confirm the desktop split grid remains active at 1440 × 900.
+- [x] Confirm no horizontal overflow and pass the production build.
+
+**Evidence**
+
+- Source visual truth: Browser Comment 1 on `http://localhost:3000/games`, targeting `.writing-course-intro` at 674 × 534.
+- Implementation captures: Codex in-app browser `browser 1 / tab 1` at 674 × 534 and 430 × 932; both were emitted during this QA pass.
+- Annotated viewport measurement: copy surface `391.84 × 195.80px`, `rgba(255, 253, 248, 0.96)` background, and no horizontal overflow.
+- Phone measurement: copy surface `240.55 × 257.05px`; Himi remains visible on the right and the page reports no horizontal overflow.
+- Desktop measurement: viewport `1440 × 900`, shell columns `504px 936px`; the approved split composition remains intact.
+- Production verification: `npm run build` completed successfully.
+
+**Comparison History**
+
+- User-reported P1: the introduction copy visually merged with the bamboo scene, especially where foliage crossed the title and description. Fix: add a warm paper surface and deepen the text colors without altering content or layout hierarchy.
+- Post-fix visual review: all three copy levels are immediately readable, the surface feels native to the cream/mint Himi palette, and mascot overlap remains minimal and intentional on phone widths.
+
+final result: passed
+
 # Account Topbar Avatar Fill — Browser Comment 1
 
 **Findings**
@@ -357,3 +391,202 @@ final result: passed
 - [ ] Capture and compare the revised browser render at matching viewport/state.
 
 final result: blocked
+
+---
+
+# Design QA — HSK course picker option 2
+
+**Findings**
+
+- No actionable P0, P1, or P2 issue remains in the selected HSK course picker.
+- The desktop composition follows the chosen split-dojo mockup: Himi, title, rules, and exit action stay in the left scene while the six HSK choices use a two-column grid on the right.
+- HSK 1 is visibly prioritized with the coral border, recommendation badge, and primary action; HSK 2–6 retain equal visual weight and clear selection affordances.
+- Responsive behavior preserves the same hierarchy rather than shrinking the desktop frame: tablet uses a compact hero plus two-column level grid, while phones use one full-width level card per row.
+
+**Open Questions**
+
+- None.
+
+**Implementation Checklist**
+
+- [x] Recreate selected option 2 using the existing Himi slicing asset and bamboo-garden raster scene.
+- [x] Preserve the existing HSK loading, error, course selection, and return-to-picker behavior.
+- [x] Keep all primary touch targets at least 42px and provide visible focus styles.
+- [x] Verify 1440 × 1024, 768 × 1024, 430 × 932, and 320 × 568 responsive states.
+- [x] Test HSK 1 selection and the “Đổi khóa HSK” return path.
+- [x] Check the rendered browser console and framework overlay.
+
+**Follow-up Polish**
+
+- P3: the production bamboo landscape is more detailed than the softer abstract background in the ImageGen mockup. This is intentional because it reuses the approved project-bound game scene and keeps the new screen visually connected to the actual slicing game.
+
+**Evidence**
+
+- Source visual truth path: `C:/Users/Windows/.codex/generated_images/01a04399-6b54-77d2-8a15-3b97eacdc5ee/exec-b291b811-ff03-4759-b38a-8c520c160458.png`.
+- Implementation screenshot: Codex in-app browser `browser 1 / tab 1`; desktop, tablet, 430px phone, 320px phone, and scrolled phone captures were emitted during this QA pass. The browser surface did not expose a filesystem screenshot path.
+- Route: `http://localhost:3000/games`, with the “Luyện chém từ” course picker open.
+- Source pixels: 1487 × 1058. Primary implementation comparison: 1440 × 1024 CSS pixels at device scale factor 1; phone comparisons: 430 × 932 and 320 × 568 CSS pixels at device scale factor 1.
+- State: course picker idle; interaction checks also covered HSK 1 loading/entry and returning from the active game.
+- Full-view comparison evidence: the source and rendered captures were reviewed in the same task context at matched desktop aspect ratios. Left/right proportions, title hierarchy, mascot placement, six-card ordering, HSK 1 emphasis, cream/mint/coral palette, radii, and shadows follow the selected direction.
+- Focused comparison evidence: browser layout measurements at 1440px showed a 504px introduction panel and 936px picker panel; the six cards render as two 396px columns. At 430px the introduction becomes a 420px banner and all six 392px cards form one column with no horizontal overflow.
+- Required fidelity surfaces: Roboto renders all Vietnamese copy; spacing follows the 12/18/24/32px product rhythm; colors map to forest, mint, cream, and Himi coral tokens; the transparent `himi-v2-slice.webp` asset remains sharp and correctly cropped; all HSK descriptions and action copy match the existing course data.
+- Primary interactions tested: open the course picker, choose HSK 1, load the slicing session, return via “Đổi khóa HSK,” and scroll through HSK 2–6 on mobile.
+- Console errors checked: no warnings or errors were reported in the final browser run.
+
+**Comparison History**
+
+- Initial P2 risk: the old selector used a generic centered 3 × 2 grid and did not preserve the visual story or CTA hierarchy of option 2. Fix: introduced the split hero/picker composition and a featured HSK 1 card.
+- Initial P2 responsive risk: directly shrinking the desktop split would leave narrow cards and an oversized hero on phones. Fix: stack the hero at 920px, keep two columns for tablet, and switch to one column at 700px with compact card/action sizing.
+- Post-fix evidence: DOM measurements report equal viewport/document widths at 320px and 430px, six unique course buttons, and no clipped text or controls; the real course-selection round trip succeeds.
+
+final result: passed
+
+---
+
+# Design QA — Reduce framing in HSK picker intro
+
+**Findings**
+
+- No actionable P0, P1, or P2 issue remains in the scoped intro treatment.
+- The extra rounded paper card introduced in the previous iteration has been removed. Kicker, title, and description now sit directly on the illustrated scene, restoring a more editorial and less component-heavy composition.
+- Readability remains strong because the bamboo garden crop now places its quiet cream field behind the copy instead of placing dense bamboo over it.
+
+**Open Questions**
+
+- None.
+
+**Implementation Checklist**
+
+- [x] Remove background, border, radius, shadow, and padding from `.writing-course-copy`.
+- [x] Reposition the existing bamboo garden background at desktop and stacked breakpoints.
+- [x] Preserve Himi, copy, rules strip, HSK cards, routes, and interactions.
+- [x] Verify laptop and phone breakpoints without horizontal overflow.
+- [x] Pass the production build and browser-console check.
+
+**Required Fidelity Surfaces**
+
+- Typography: Roboto hierarchy, weights, line heights, and Vietnamese copy remain unchanged.
+- Spacing: removing inner card padding shortens the intro block without altering the section grid or rules strip.
+- Colors: existing forest/coral text tokens remain readable on the source cream background.
+- Image quality: the approved bamboo garden and Himi raster assets remain unchanged; only their responsive crop is adjusted.
+- Copy: all existing labels and HSK descriptions are preserved verbatim.
+
+**Evidence**
+
+- Source visual truth: the live pre-fix `/games` capture at 674 × 534 showing the newly added rounded paper card, together with the user's instruction to reduce visible framing.
+- Implementation capture: Codex in-app browser `browser 1 / tab 1` at 674 × 534 after reopening the HSK picker; a 430 × 932 phone capture was also emitted.
+- Desktop measurement: viewport `1440 × 900`, shell columns `504px 936px`, transparent copy surface, zero border, zero shadow, zero padding, and no horizontal overflow.
+- Phone measurement: viewport `430 × 932`, document width `420px`, transparent copy surface, zero border/shadow/padding, and no horizontal overflow.
+- State: HSK picker idle with HSK 1 featured.
+- Full-view comparison: the before/after captures show one fewer framed surface above the fold while preserving the approved split-dojo hierarchy.
+- Focused comparison was not needed because the complete intro region and all frame boundaries are legible in the full-view captures.
+- Production verification: `npm run build` completed successfully; the existing bundle-size advisory remains non-blocking.
+
+**Comparison History**
+
+- Earlier P1: copy merged into bamboo foliage. First fix added a rounded paper card, which solved contrast but introduced excessive framing.
+- User-reported P2: the added card made the screen feel box-heavy and AI-generated. Final fix removes that card and shifts the existing background crop so the copy occupies the quiet cream field.
+- Post-fix visual evidence: at 674px the title and description remain distinct while the hero reads as one continuous scene; at 430px the composition stays compact and overflow-free.
+
+final result: passed
+
+---
+
+# Design QA — Remove HSK picker supporting description
+
+**Findings**
+
+- No actionable P0, P1, or P2 issue remains in the annotated copy area.
+- The selected supporting sentence has been removed from the component, not merely hidden at one breakpoint, so desktop and mobile now share the same simplified hierarchy.
+- The resulting space improves separation between the title and Himi without changing the illustration, facts strip, HSK cards, or navigation.
+
+**Open Questions**
+
+- None.
+
+**Implementation Checklist**
+
+- [x] Remove the annotated paragraph from `writing-slice-game.tsx`.
+- [x] Remove its unused desktop and mobile CSS rules.
+- [x] Confirm the sentence is absent from the rendered DOM.
+- [x] Verify the 1440 × 900 and 430 × 932 states without horizontal overflow.
+- [x] Pass targeted ESLint and the production build.
+
+**Required Fidelity Surfaces**
+
+- Typography: the kicker and display heading retain their existing Roboto hierarchy and wrapping.
+- Spacing: the copy block contracts naturally; no artificial spacer replaces the removed paragraph.
+- Colors: forest heading and coral kicker tokens are unchanged.
+- Image quality: the existing Himi and bamboo garden raster assets remain untouched and correctly cropped.
+- Copy: only the user-selected supporting sentence is removed; all course labels and descriptions remain intact.
+
+**Evidence**
+
+- Source visual truth: Browser Comment 1 marker screenshot at 1440 × 900, targeting `.writing-course-copy > p` on `http://localhost:3000/games`.
+- Implementation capture: Codex in-app browser `browser 1 / tab 1`, HSK picker idle at 1440 × 900 after the scoped removal; a 430 × 932 responsive capture was also emitted.
+- DOM verification: `.writing-course-copy p` count is `0` and the removed sentence is absent from `document.body.innerText`.
+- Phone measurement: viewport `430 × 932`; title ends at `198.8px`, Himi remains visible on the right, and no horizontal overflow is present.
+- Full-view comparison: the post-fix desktop capture preserves the split-dojo layout while removing exactly the blue-marked line.
+- Focused comparison was not needed because the selected paragraph and resulting whitespace are clearly visible in the full desktop capture.
+- Primary interaction checked: reopening the HSK picker from “Tiếp tục chơi” still works.
+- Production verification: `npx eslint components/writing-slice-game.tsx` and `npm run build` both completed successfully.
+
+**Comparison History**
+
+- User-reported P2: the supporting sentence added visual noise below the large title. Fix: delete the paragraph from the shared component and remove its dead responsive CSS.
+- Post-fix evidence: the desktop capture shows the title flowing directly into the Himi composition; the phone DOM check confirms the same removal with no overflow.
+
+final result: passed
+
+---
+
+# Design QA — Game-name label typography correction
+
+**Findings**
+
+- No actionable P0, P1, or P2 issue remains in the game-name labels.
+- Game names are retained on both the custom “Luyện chém từ” selector and the shared selectors used by the other six games.
+- The labels now use the same Roboto family, `760` weight, and compact negative tracking as “Chọn khóa HSK để chơi”; their smaller size and coral/forest color preserve hierarchy.
+
+**Open Questions**
+
+- None.
+
+**Implementation Checklist**
+
+- [x] Restore “Luyện chém từ” in title case instead of the previous all-caps treatment.
+- [x] Restore the dynamic game title in `HskGameSession` for all other games.
+- [x] Pass the selected game title through `GameCenter` again.
+- [x] Unify label and heading font family, weight, and tracking.
+- [x] Verify desktop and 430px phone states without horizontal overflow.
+- [x] Pass targeted ESLint and the production build.
+
+**Required Fidelity Surfaces**
+
+- Typography: label and heading resolve to the same Roboto stack, `760` weight, and `-0.035em` tracking; label size remains intentionally subordinate.
+- Spacing: the label adds a compact pre-heading cue without restoring the removed supporting paragraph or a new frame.
+- Colors: the split selector keeps Himi coral for the game label, while shared selectors use the existing forest text token.
+- Image quality: Himi and bamboo garden assets remain unchanged.
+- Copy: all seven game names come from their existing catalog titles; “Luyện chém từ” uses natural title case.
+
+**Evidence**
+
+- Source visual truth: Browser Comment 1 at 1440 × 900 targeting `.writing-course-kicker`, followed by the user's correction to retain names and match the heading font.
+- Implementation captures: Codex in-app browser `browser 1 / tab 1`; split selector desktop capture, shared “Ghép cặp siêu tốc” selector capture, and 430 × 932 split-selector capture were emitted during this QA pass.
+- Split selector measurement: label and heading both resolve to `Roboto, sans-serif, Roboto, Arial, sans-serif`, weight `760`; no horizontal overflow.
+- Shared selector measurement: “Ghép cặp siêu tốc” and “Chọn khóa HSK để chơi” both resolve to the same Roboto stack and weight `760`; no horizontal overflow.
+- Phone measurement: viewport `430 × 932`; label renders at `15px`, heading at `40.888px`, both weight `760`, with no horizontal overflow.
+- State: HSK picker idle with HSK 1 featured; shared picker idle after entering “Ghép cặp siêu tốc.”
+- Full-view comparison: the restored title-case label reads as part of the same typographic system while remaining clearly secondary to the course-selection heading.
+- Focused comparison: computed font-family, weight, and letter-spacing were checked directly for both label and heading in the split and shared selector implementations.
+- Primary interactions checked: enter the slice picker, return to the game map, enter the memory-game picker, and verify the shared title path.
+- Production verification: targeted ESLint and `npm run build` completed successfully; the existing bundle-size advisory remains non-blocking.
+
+**Comparison History**
+
+- Initial P2: the all-caps, widely tracked “LUYỆN CHÉM TỪ” label felt typographically disconnected from the heading.
+- Interim interpretation removed the repeated labels across selectors. The user clarified that the labels should remain.
+- Final fix restores every label in title case and aligns its family, weight, and tracking with the heading while preserving a smaller size for hierarchy.
+- Post-fix evidence: desktop, shared-selector, and phone captures show consistent typography with no wrapping or overflow regression.
+
+final result: passed

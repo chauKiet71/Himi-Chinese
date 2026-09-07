@@ -48,3 +48,10 @@ export function safeReturnTo(value: string | null | undefined, fallback = "/"): 
     return fallback;
   }
 }
+
+export function safeAdminReturnTo(value: string | null | undefined, fallback = "/admin"): string {
+  const target = safeReturnTo(value, fallback);
+  return target === "/admin" || target.startsWith("/admin/") || target.startsWith("/api/admin/")
+    ? target
+    : fallback;
+}

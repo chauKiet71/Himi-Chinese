@@ -26,6 +26,9 @@ const errorMessages: Record<string, string> = {
   rate_limited: "Có quá nhiều yêu cầu trong thời gian ngắn. Hãy đợi một lúc rồi thử lại.",
   required: "Hãy đăng nhập để tiếp tục.",
   forbidden: "Tài khoản hiện tại không có quyền truy cập khu vực quản trị.",
+  mfa_delivery_failed: "Chưa thể gửi mã xác minh quản trị. Hãy thử lại sau ít phút.",
+  mfa_expired: "Phiên xác minh đã hết hạn. Hãy đăng nhập lại để nhận mã mới.",
+  reauth_required: "Để bảo vệ thao tác nhạy cảm, hãy xác minh lại tài khoản quản trị.",
   register_failed: "Chưa thể tạo tài khoản lúc này. Hãy thử lại sau ít phút.",
 };
 

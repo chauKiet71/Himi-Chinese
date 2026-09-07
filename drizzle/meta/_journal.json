@@ -120,6 +120,13 @@
       "when": 1788339525648,
       "tag": "0016_natural_marvel_apes",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1788796005342,
+      "tag": "0017_nosy_sunspot",
+      "breakpoints": true
     }
   ]
 }

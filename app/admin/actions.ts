@@ -2,7 +2,7 @@
 
 import { revalidatePath, revalidateTag } from "next/cache.js";
 import { redirect } from "next/navigation";
-import { requireAdminUser, requirePracticeStaffUser } from "@/lib/admin-auth";
+import { requireAdminUser, requirePracticeStaffUser, requireRecentAdminUser } from "@/lib/admin-auth";
 import { deactivateAdminUser, updateUserRole } from "@/lib/admin-user-service";
 import {
   createVipPlan,
@@ -283,7 +283,7 @@ function vipPlanInput(formData: FormData): AdminVipPlanInput | null {
 }
 
 export async function updateUserRoleAction(formData: FormData) {
-  const admin = await requireAdminUser();
+  const admin = await requireRecentAdminUser("/admin/team");
   const userId = valueString(formData, "userId", 40);
   const roleValue = valueString(formData, "role", 20);
   const role = (["learner", "editor", "reviewer", "admin"] as UserRole[]).find((item) => item === roleValue);
@@ -293,7 +293,7 @@ export async function updateUserRoleAction(formData: FormData) {
 }
 
 export async function deleteAdminUserAction(formData: FormData) {
-  const admin = await requireAdminUser();
+  const admin = await requireRecentAdminUser("/admin/users");
   const userId = valueString(formData, "userId", 40);
   if (!isUuid(userId) || !confirmedDelete(formData)) invalid("/admin/users");
   const result = await deactivateAdminUser(userId, admin.id);
@@ -301,7 +301,7 @@ export async function deleteAdminUserAction(formData: FormData) {
 }
 
 export async function grantOrExtendVipAction(formData: FormData) {
-  const admin = await requireAdminUser();
+  const admin = await requireRecentAdminUser("/admin/subscriptions");
   const userId = valueString(formData, "userId", 40);
   const planId = valueString(formData, "planId", 40);
   const returnPath = adminBusinessReturnPath(formData, "/admin/subscriptions");
@@ -311,7 +311,7 @@ export async function grantOrExtendVipAction(formData: FormData) {
 }
 
 export async function createVipPlanAction(formData: FormData) {
-  const admin = await requireAdminUser();
+  const admin = await requireRecentAdminUser("/admin/subscriptions");
   const input = vipPlanInput(formData);
   if (!input) invalid("/admin/subscriptions");
   const result = await createVipPlan(input, admin.id);
@@ -319,7 +319,7 @@ export async function createVipPlanAction(formData: FormData) {
 }
 
 export async function updateVipPlanAction(formData: FormData) {
-  const admin = await requireAdminUser();
+  const admin = await requireRecentAdminUser("/admin/subscriptions");
   const planId = valueString(formData, "planId", 40);
   const input = vipPlanInput(formData);
   if (!isUuid(planId) || !input) invalid("/admin/subscriptions");
@@ -328,7 +328,7 @@ export async function updateVipPlanAction(formData: FormData) {
 }
 
 export async function toggleVipPlanAction(formData: FormData) {
-  const admin = await requireAdminUser();
+  const admin = await requireRecentAdminUser("/admin/subscriptions");
   const planId = valueString(formData, "planId", 40);
   if (!isUuid(planId)) invalid("/admin/subscriptions");
   const result = await setVipPlanActive(planId, parseBoolean(formData, "isActive"), admin.id);
@@ -336,7 +336,7 @@ export async function toggleVipPlanAction(formData: FormData) {
 }
 
 export async function deleteVipPlanAction(formData: FormData) {
-  const admin = await requireAdminUser();
+  const admin = await requireRecentAdminUser("/admin/subscriptions");
   const planId = valueString(formData, "planId", 40);
   if (!isUuid(planId) || !confirmedDelete(formData)) invalid("/admin/subscriptions");
   const result = await deleteVipPlan(planId, admin.id);
@@ -344,7 +344,7 @@ export async function deleteVipPlanAction(formData: FormData) {
 }
 
 export async function revokeVipAction(formData: FormData) {
-  const admin = await requireAdminUser();
+  const admin = await requireRecentAdminUser("/admin/subscriptions");
   const userId = valueString(formData, "userId", 40);
   const confirmation = valueString(formData, "confirmRevoke", 20);
   if (!isUuid(userId) || confirmation !== "REVOKE") invalid("/admin/subscriptions");
@@ -353,7 +353,7 @@ export async function revokeVipAction(formData: FormData) {
 }
 
 export async function approveVipActivationRequestAction(formData: FormData) {
-  const admin = await requireAdminUser();
+  const admin = await requireRecentAdminUser("/admin/subscriptions");
   const requestId = valueString(formData, "requestId", 40);
   const adminNote = valueString(formData, "adminNote", 500);
   if (!isUuid(requestId)) invalid("/admin/subscriptions");
@@ -362,7 +362,7 @@ export async function approveVipActivationRequestAction(formData: FormData) {
 }
 
 export async function rejectVipActivationRequestAction(formData: FormData) {
-  const admin = await requireAdminUser();
+  const admin = await requireRecentAdminUser("/admin/subscriptions");
   const requestId = valueString(formData, "requestId", 40);
   const adminNote = valueString(formData, "adminNote", 500);
   if (!isUuid(requestId) || !adminNote) invalid("/admin/subscriptions");

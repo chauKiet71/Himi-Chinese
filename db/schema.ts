@@ -47,8 +47,25 @@ export const authSessions = pgTable("auth_sessions", {
   userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   tokenHash: varchar("token_hash", { length: 64 }).notNull(),
   expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  lastSeenAt: timestamp("last_seen_at", { withTimezone: true }).notNull().defaultNow(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 }, (table) => [uniqueIndex("auth_sessions_token_hash_uq").on(table.tokenHash), index("auth_sessions_user_idx").on(table.userId), index("auth_sessions_expiry_idx").on(table.expiresAt)]);
+
+export const adminLoginChallenges = pgTable("admin_login_challenges", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  challengeHash: varchar("challenge_hash", { length: 64 }).notNull(),
+  codeHash: varchar("code_hash", { length: 64 }).notNull(),
+  returnTo: varchar("return_to", { length: 500 }).notNull().default("/admin"),
+  attempts: integer("attempts").notNull().default(0),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  usedAt: timestamp("used_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("admin_login_challenges_hash_uq").on(table.challengeHash),
+  index("admin_login_challenges_user_idx").on(table.userId),
+  index("admin_login_challenges_expiry_idx").on(table.expiresAt),
+]);
 
 export const authTokens = pgTable("auth_tokens", {
   id: uuid("id").defaultRandom().primaryKey(),

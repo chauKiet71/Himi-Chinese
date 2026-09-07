@@ -424,7 +424,7 @@ test("practice content has PostgreSQL schema, seed and authenticated admin CRUD"
   assert.match(mediaRoute, /Content-Range/);
 });
 
-test("games route renders the Cánh Cụt slice game and six video-inspired activities", async () => {
+test("games route renders the new Himi slice game and six video-inspired activities", async () => {
   const [page, center, game, shell, styles, content] = await Promise.all([
     read("app/games/page.tsx"),
     read("components/game-center.tsx"),
@@ -444,18 +444,19 @@ test("games route renders the Cánh Cụt slice game and six video-inspired acti
   assert.match(center, /Hành trình phản xạ/);
   assert.match(center, /journey-map-desktop\.webp/);
   assert.match(center, /journey-map-mobile-long\.webp/);
-  assert.match(center, /memory-penguin-cutout\.png/);
-  assert.match(center, /connect-penguin-cutout\.png/);
-  assert.match(center, /listen-penguin-cutout\.png/);
-  assert.match(center, /write-penguin-cutout\.png/);
-  assert.match(center, /flashcard-penguin-cutout\.png/);
-  assert.match(center, /quiz-penguin-cutout\.png/);
+  assert.match(center, /himi-v2-memory\.webp/);
+  assert.match(center, /himi-v2-connect\.webp/);
+  assert.match(center, /himi-v2-listen\.webp/);
+  assert.match(center, /himi-v2-write\.webp/);
+  assert.match(center, /himi-v2-flashcard\.webp/);
+  assert.match(center, /himi-v2-quiz\.webp/);
   assert.match(center, /localStorage/);
   assert.match(center, /\/api\/progress\/game/);
   assert.match(center, /game-immersive-dashboard/);
   assert.match(game, /bamboo-landscape\.webp/);
-  assert.match(game, /penguin-bamboo-warrior\.png/);
-  assert.match(game, /penguin-bamboo-warrior-cape\.png/);
+  assert.match(center, /himi-v2-slice\.webp/);
+  assert.match(game, /himi-v2-slice\.webp/);
+  assert.doesNotMatch(game, /penguin-bamboo-warrior(?:-cape)?\.png/);
   assert.match(game, /bamboo-slice-burst\.png/);
   assert.match(game, /normalizeAnswer/);
   assert.match(game, /handleCorrect/);

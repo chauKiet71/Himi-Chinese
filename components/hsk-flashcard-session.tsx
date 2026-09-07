@@ -94,11 +94,11 @@ export function HskFlashcardSession({ lesson, backHref }: {
         </div>
 
         <Image
-          alt="Cánh Cụt Himi đang lật bộ flashcard nhiều màu"
+          alt="Himi mới đang lật bộ flashcard nhiều màu"
           className="game-session-mascot"
           height={640}
           priority
-          src="/assets/games/flashcard-penguin-cutout.png"
+          src="/assets/games/himi-v2-flashcard.webp"
           width={960}
         />
 

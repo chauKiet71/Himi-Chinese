@@ -1,20 +1,23 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createSessionToken, hashPassword, hashPrivateIdentifier, hashSessionToken, verifyPassword } from "../lib/auth-crypto.ts";
-import { normalizeEmail, parseRegistrationInput, safeReturnTo, validateAuthToken } from "../lib/auth-validation.ts";
+import { createSessionToken, hashPassword, hashPrivateIdentifier, hashSessionToken, passwordNeedsRehash, verifyPassword } from "../lib/auth-crypto.ts";
+import { normalizeEmail, parseRegistrationInput, safeAdminReturnTo, safeReturnTo, validateAuthToken } from "../lib/auth-validation.ts";
 import { authRedirectUrl, clientAddress, isSameOriginRequest } from "../lib/request-security.ts";
 import { scheduleReview } from "../lib/review-scheduler.ts";
+import { adminSecurityHeaders, applicationSecurityHeaders, contentSecurityPolicy, secureResponse } from "../lib/security-headers.ts";
 
 test("passwords are salted and verified with PBKDF2", async () => {
   const first = await hashPassword("Mat-khau-an-toan-2026!");
   const second = await hashPassword("Mat-khau-an-toan-2026!");
   assert.notEqual(first, second);
-  assert.match(first, /^pbkdf2-sha256-v2\$100000\$/u);
+  assert.match(first, /^pbkdf2-sha256-v3\$600000\$/u);
+  assert.equal(passwordNeedsRehash(first), false);
+  assert.equal(passwordNeedsRehash("pbkdf2-sha256-v2$100000$salt$hash"), true);
   assert.equal(await verifyPassword("Mat-khau-an-toan-2026!", first), true);
   assert.equal(await verifyPassword("mat-khau-sai", first), false);
 });
 
-test("password v2 hashes require the configured server-side pepper", async () => {
+test("current password hashes require the configured server-side pepper", async () => {
   const previousSecret = process.env.AUTH_SECRET;
   try {
     process.env.AUTH_SECRET = "pepper-qa-a";
@@ -62,6 +65,27 @@ test("return targets reject cross-origin redirects", () => {
   assert.equal(safeReturnTo("/learn/van-phong-hanh-chinh?lesson=1"), "/learn/van-phong-hanh-chinh?lesson=1");
   assert.equal(safeReturnTo("https://example.com/steal"), "/");
   assert.equal(safeReturnTo("//example.com/steal"), "/");
+  assert.equal(safeAdminReturnTo("/admin/users?q=test"), "/admin/users?q=test");
+  assert.equal(safeAdminReturnTo("/account"), "/admin");
+  assert.equal(safeAdminReturnTo("https://example.com/admin"), "/admin");
+});
+
+test("security headers prevent framing and harden admin responses", async () => {
+  const policy = contentSecurityPolicy(false);
+  assert.match(policy, /frame-ancestors 'none'/u);
+  assert.match(policy, /object-src 'none'/u);
+  assert.equal(policy.includes("'unsafe-eval'"), false);
+  assert.equal(contentSecurityPolicy(true).includes("'unsafe-eval'"), true);
+  assert.equal(applicationSecurityHeaders().find((header) => header.key === "X-Content-Type-Options")?.value, "nosniff");
+  assert.equal(adminSecurityHeaders().find((header) => header.key === "X-Robots-Tag")?.value, "noindex, nofollow, noarchive");
+
+  const secured = secureResponse(
+    new Response("ok", { headers: { "Content-Type": "text/plain" } }),
+    new Request("https://hanziwork.vn/admin/users"),
+  );
+  assert.equal(secured.headers.get("x-frame-options"), "DENY");
+  assert.equal(secured.headers.get("cache-control"), "private, no-store, max-age=0");
+  assert.equal(await secured.text(), "ok");
 });
 
 test("auth mutations require a matching Origin header", () => {

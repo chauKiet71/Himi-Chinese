@@ -10757,13 +10757,15 @@ body:has(.learner-app-shell) > .mobile-nav {
 .writing-course-kicker {
   display: block;
   margin-top: 32px;
-  color: #176d59;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .12em;
+  color: #203f35;
+  font-family: inherit;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 760;
+  line-height: 1.2;
+  letter-spacing: -.035em;
 }
 
-.writing-course-shell h1 { margin: 12px 0; font-size: clamp(28px, 4vw, 42px); color: #203f35; }
+.writing-course-shell h1 { margin: 12px 0; color: #203f35; font-family: inherit; font-size: clamp(28px, 4vw, 42px); font-weight: 760; line-height: 1.1; letter-spacing: -.035em; }
 .writing-course-shell > p { color: #52665d; line-height: 1.7; }
 .writing-course-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 30px; }
 .writing-course-card {
@@ -10801,6 +10803,533 @@ body:has(.learner-app-shell) > .mobile-nav {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+/* HSK picker — split dojo layout */
+.writing-course-selection-page {
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #153f36;
+  background: #fffdf8;
+  font-family: var(--font-roboto), "Roboto", Arial, sans-serif;
+}
+
+.writing-course-shell--split {
+  width: 100%;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(370px, 35vw) minmax(0, 1fr);
+}
+
+.writing-course-intro {
+  min-width: 0;
+  min-height: 100dvh;
+  padding: 32px clamp(30px, 3.2vw, 52px) 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #fff1e5;
+  background-image: url("/assets/writing/bamboo-garden-session-bg.webp");
+  background-position: 18% bottom;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+.writing-course-selection-page .writing-course-back {
+  width: fit-content;
+  min-height: 46px;
+  padding: 0 18px;
+  position: relative;
+  z-index: 3;
+  border: 1px solid rgba(31, 72, 62, .11);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .9);
+  color: #244b42;
+  box-shadow: 0 6px 18px rgba(58, 78, 65, .08);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.writing-course-selection-page .writing-course-back:hover {
+  border-color: rgba(31, 109, 89, .34);
+  box-shadow: 0 9px 22px rgba(58, 78, 65, .12);
+  transform: translateY(-1px);
+}
+
+.writing-course-copy {
+  width: min(100%, 438px);
+  margin-top: clamp(42px, 8vh, 82px);
+  position: relative;
+  z-index: 3;
+}
+
+.writing-course-copy .writing-course-kicker {
+  margin: 0 0 12px;
+  color: #e84237;
+  font-family: inherit;
+  font-size: clamp(17px, 1.45vw, 20px);
+  font-weight: 760;
+  line-height: 1.2;
+  letter-spacing: -.035em;
+}
+
+.writing-course-copy h1 {
+  margin: 16px 0 14px;
+  color: #0d392f;
+  font-size: clamp(46px, 4.4vw, 68px);
+  font-weight: 760;
+  line-height: 1.08;
+  letter-spacing: -.035em;
+}
+
+.writing-course-mascot {
+  width: min(84%, 430px);
+  max-height: 47vh;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  bottom: 132px;
+  z-index: 2;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 18px 20px rgba(58, 79, 55, .15));
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.writing-course-facts {
+  width: calc(100% - clamp(60px, 6.4vw, 104px));
+  min-height: 92px;
+  padding: 15px 12px;
+  position: absolute;
+  right: clamp(30px, 3.2vw, 52px);
+  bottom: 28px;
+  left: clamp(30px, 3.2vw, 52px);
+  z-index: 4;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  border: 1px solid rgba(31, 72, 62, .1);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 12px 32px rgba(58, 78, 65, .1);
+  backdrop-filter: blur(8px);
+}
+
+.writing-course-facts > span {
+  min-width: 0;
+  min-height: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #173f36;
+  text-align: center;
+}
+
+.writing-course-facts > span + span {
+  border-left: 1px solid #d8dfd7;
+}
+
+.writing-course-facts svg {
+  color: #173f36;
+  stroke-width: 2;
+}
+
+.writing-course-facts strong {
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.writing-course-picker {
+  min-width: 0;
+  min-height: 100dvh;
+  padding: clamp(28px, 5vh, 64px) clamp(24px, 4vw, 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fffdf8;
+}
+
+.writing-course-picker .writing-course-grid {
+  width: 100%;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.writing-course-picker .writing-course-card {
+  min-width: 0;
+  min-height: clamp(170px, 23vh, 250px);
+  padding: clamp(22px, 2.2vw, 32px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+  overflow: hidden;
+  border: 1px solid #d3dfca;
+  border-radius: 22px;
+  background: #fffdf8;
+  color: #173f36;
+  text-align: left;
+  box-shadow: 0 5px 0 #dfe7d8, 0 16px 30px rgba(44, 69, 54, .055);
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease, background-color .22s ease;
+}
+
+.writing-course-picker .writing-course-card:hover {
+  border-color: #8eae7a;
+  background: #fffefb;
+  box-shadow: 0 7px 0 #d8e4d0, 0 20px 34px rgba(44, 69, 54, .09);
+  transform: translateY(-3px);
+}
+
+.writing-course-picker .writing-course-card.is-featured {
+  border: 2px solid #ff4d40;
+  background: #fffaf7;
+  box-shadow: 0 5px 0 #ffd0ca, 0 20px 34px rgba(255, 77, 64, .09);
+}
+
+.writing-course-picker .writing-course-card.is-loading {
+  cursor: progress;
+  opacity: .72;
+}
+
+.writing-course-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.writing-course-picker .writing-course-number {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  border-radius: 15px;
+  background: #e4efd1;
+  color: #4e712f;
+  font-size: 20px;
+  font-weight: 850;
+}
+
+.writing-course-picker .is-featured .writing-course-number {
+  background: #ff4d40;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(255, 77, 64, .22);
+}
+
+.writing-course-card-heading > strong {
+  color: #143f36;
+  font-size: clamp(25px, 2vw, 32px);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.writing-course-picker .writing-course-description {
+  max-width: calc(100% - 42px);
+  color: #5b6662;
+  font-size: clamp(14px, 1.12vw, 17px);
+  line-height: 1.55;
+}
+
+.writing-course-picker .writing-course-action {
+  color: #507a3f;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.writing-course-picker .writing-course-card:not(.is-featured) .writing-course-action {
+  width: 42px;
+  height: 42px;
+  margin: 0;
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  justify-content: center;
+  gap: 0;
+  font-size: 0;
+}
+
+.writing-course-picker .writing-course-card:hover .writing-course-action {
+  color: #f04a3d;
+  transform: translateX(2px);
+}
+
+.writing-course-picker .is-featured .writing-course-action {
+  width: min(220px, 72%);
+  min-height: 50px;
+  margin-top: auto;
+  padding: 10px 18px;
+  justify-content: center;
+  border-radius: 12px;
+  background: #ff4d40;
+  color: #fff;
+  font-size: 15px;
+  box-shadow: 0 9px 18px rgba(255, 77, 64, .19);
+}
+
+.writing-course-picker .is-featured:hover .writing-course-action {
+  color: #fff;
+}
+
+.writing-course-recommended {
+  min-height: 32px;
+  padding: 0 14px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 0 18px 0 14px;
+  background: #ff4d40;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+.writing-course-picker .writing-course-status {
+  min-height: 22px;
+  margin: 22px 0 0;
+  color: #66746e;
+  font-size: 13px;
+  text-align: center;
+}
+
+.writing-course-picker .writing-course-status[role="alert"] {
+  color: #c7352b;
+  font-weight: 700;
+}
+
+@media (max-width: 1180px) {
+  .writing-course-shell--split {
+    grid-template-columns: minmax(340px, 36vw) minmax(0, 1fr);
+  }
+
+  .writing-course-copy h1 {
+    font-size: clamp(42px, 4.8vw, 56px);
+  }
+
+  .writing-course-picker {
+    padding-inline: 26px;
+  }
+
+  .writing-course-picker .writing-course-card {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 920px) {
+  .writing-course-shell--split {
+    display: block;
+  }
+
+  .writing-course-intro {
+    min-height: 440px;
+    padding: 24px 28px 26px;
+    background-position: right bottom;
+    background-size: cover;
+  }
+
+  .writing-course-copy {
+    width: min(60%, 440px);
+    margin-top: 28px;
+  }
+
+  .writing-course-copy h1 {
+    font-size: clamp(38px, 7vw, 54px);
+  }
+
+  .writing-course-mascot {
+    width: min(36%, 270px);
+    max-height: 300px;
+    right: 5%;
+    bottom: 82px;
+    left: auto;
+    transform: none;
+  }
+
+  .writing-course-facts {
+    width: auto;
+    right: 28px;
+    bottom: 20px;
+    left: 28px;
+  }
+
+  .writing-course-picker {
+    min-height: 0;
+    padding: 30px 28px 42px;
+  }
+
+  .writing-course-picker .writing-course-card {
+    min-height: 190px;
+  }
+}
+
+@media (max-width: 700px) {
+  .writing-course-intro {
+    min-height: 420px;
+    padding: 18px 16px 20px;
+  }
+
+  .writing-course-selection-page .writing-course-back {
+    min-height: 42px;
+    padding-inline: 14px;
+    font-size: 13px;
+  }
+
+  .writing-course-copy {
+    width: 62%;
+    margin-top: 24px;
+  }
+
+  .writing-course-copy .writing-course-kicker {
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  .writing-course-copy h1 {
+    margin: 10px 0;
+    font-size: clamp(31px, 9.5vw, 42px);
+    line-height: 1.08;
+  }
+
+  .writing-course-mascot {
+    width: min(43%, 190px);
+    max-height: 205px;
+    right: -2px;
+    bottom: 84px;
+  }
+
+  .writing-course-facts {
+    min-height: 76px;
+    padding: 10px 4px;
+    right: 16px;
+    bottom: 14px;
+    left: 16px;
+    border-radius: 19px;
+  }
+
+  .writing-course-facts > span {
+    min-height: 48px;
+    gap: 4px;
+  }
+
+  .writing-course-facts svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .writing-course-facts strong {
+    font-size: 10px;
+  }
+
+  .writing-course-picker {
+    padding: 20px 14px 34px;
+  }
+
+  .writing-course-picker .writing-course-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .writing-course-picker .writing-course-card {
+    min-height: 148px;
+    padding: 20px;
+    gap: 12px;
+    border-radius: 19px;
+  }
+
+  .writing-course-picker .writing-course-card.is-featured {
+    min-height: 184px;
+  }
+
+  .writing-course-picker .writing-course-number {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+    border-radius: 13px;
+    font-size: 18px;
+  }
+
+  .writing-course-card-heading {
+    gap: 14px;
+  }
+
+  .writing-course-card-heading > strong {
+    font-size: 24px;
+  }
+
+  .writing-course-picker .writing-course-description {
+    max-width: calc(100% - 68px);
+    font-size: 14px;
+  }
+
+  .writing-course-picker .writing-course-card:not(.is-featured) .writing-course-action {
+    width: auto;
+    height: 38px;
+    right: 18px;
+    bottom: 16px;
+    gap: 6px;
+    color: #507a3f;
+    font-size: 12px;
+  }
+
+  .writing-course-picker .is-featured .writing-course-action {
+    width: min(220px, 75%);
+    min-height: 46px;
+  }
+
+  .writing-course-recommended {
+    min-height: 29px;
+    padding-inline: 11px;
+    font-size: 10px;
+  }
+
+  .writing-course-picker .writing-course-status {
+    margin-top: 18px;
+    padding-inline: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 380px) {
+  .writing-course-intro {
+    min-height: 400px;
+  }
+
+  .writing-course-copy {
+    width: 65%;
+  }
+
+  .writing-course-copy h1 {
+    font-size: 29px;
+  }
+
+  .writing-course-mascot {
+    width: 42%;
+    bottom: 87px;
+  }
+
+  .writing-course-picker .writing-course-card {
+    padding: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .writing-course-selection-page .writing-course-back,
+  .writing-course-picker .writing-course-card,
+  .writing-course-picker .writing-course-action {
+    transition: none;
+  }
 }
 
 .writing-page-shell {

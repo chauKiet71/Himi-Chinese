@@ -6,7 +6,7 @@ import { authRateLimits } from "../db/schema.ts";
 import { hashPrivateIdentifier } from "./auth-crypto.ts";
 import { clientAddress } from "./request-security.ts";
 
-export type AuthRateLimitAction = "login" | "register" | "forgot_password" | "resend_verification" | "verify_email" | "reset_password";
+export type AuthRateLimitAction = "login" | "admin_mfa" | "register" | "forgot_password" | "resend_verification" | "verify_email" | "reset_password";
 
 type RateLimitPolicy = {
   identifierAttempts: number;
@@ -17,6 +17,7 @@ type RateLimitPolicy = {
 
 const policies: Record<AuthRateLimitAction, RateLimitPolicy> = {
   login: { identifierAttempts: 8, ipAttempts: 40, windowMinutes: 15, blockMinutes: 15 },
+  admin_mfa: { identifierAttempts: 6, ipAttempts: 20, windowMinutes: 15, blockMinutes: 30 },
   register: { identifierAttempts: 3, ipAttempts: 10, windowMinutes: 60, blockMinutes: 60 },
   forgot_password: { identifierAttempts: 3, ipAttempts: 20, windowMinutes: 15, blockMinutes: 30 },
   resend_verification: { identifierAttempts: 3, ipAttempts: 20, windowMinutes: 15, blockMinutes: 30 },

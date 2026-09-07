@@ -101,12 +101,12 @@ function parseStoredProgress(value: string): GameProgressSnapshot | null {
 }
 
 const catalogGames: CatalogGame[] = [
-  { id: "memory", title: "Ghép cặp siêu tốc", description: "Lật và ghép Hán tự với nghĩa tiếng Việt trước khi hết lượt.", duration: "3 phút", skill: "Trí nhớ", image: "/assets/games/memory-penguin-cutout.png", imageAlt: "Cánh Cụt Himi đang chơi ghép cặp thẻ", tone: "coral", icon: Layers3 },
-  { id: "connect", title: "Nối nhanh chữ – âm", description: "Nối Hán tự với pinyin tương ứng theo đúng nhịp của video mẫu.", duration: "2 phút", skill: "Liên kết", image: "/assets/games/connect-penguin-cutout.png", imageAlt: "Cánh Cụt Himi nối thẻ chữ với thẻ âm thanh", tone: "blue", icon: Link2 },
-  { id: "listen", title: "Nghe và chọn đúng", description: "Nghe giọng Trung rồi chọn nghĩa chính xác trong bốn đáp án.", duration: "4 phút", skill: "Nghe hiểu", image: "/assets/games/listen-penguin-cutout.png", imageAlt: "Cánh Cụt Himi đeo tai nghe và chọn đáp án", tone: "gold", icon: Headphones },
-  { id: "write", title: "Viết chữ theo nghĩa", description: "Nhìn nghĩa tiếng Việt và nhập đúng Hán tự cần dùng.", duration: "4 phút", skill: "Gợi nhớ", image: "/assets/games/write-penguin-cutout.png", imageAlt: "Cánh Cụt Himi tập viết bằng bút trên bảng", tone: "violet", icon: Keyboard },
-  { id: "flash", title: "Flashcard 3D", description: "Lật thẻ, nghe phát âm và tự chấm mức độ ghi nhớ của bạn.", duration: "3 phút", skill: "Ôn nhanh", image: "/assets/games/flashcard-penguin-cutout.png", imageAlt: "Cánh Cụt Himi đang lật bộ flashcard nhiều màu", tone: "rose", icon: BrainCircuit },
-  { id: "quiz", title: "Thử thách tổng hợp", description: "Trộn chữ, pinyin và nghĩa thành một lượt kiểm tra ngắn.", duration: "5 phút", skill: "Tổng hợp", image: "/assets/games/quiz-penguin-cutout.png", imageAlt: "Cánh Cụt Himi tham gia thử thách chọn đáp án", tone: "teal", icon: CircleHelp },
+  { id: "memory", title: "Ghép cặp siêu tốc", description: "Lật và ghép Hán tự với nghĩa tiếng Việt trước khi hết lượt.", duration: "3 phút", skill: "Trí nhớ", image: "/assets/games/himi-v2-memory.webp", imageAlt: "Himi mới đang chơi ghép cặp thẻ", tone: "coral", icon: Layers3 },
+  { id: "connect", title: "Nối nhanh chữ – âm", description: "Nối Hán tự với pinyin tương ứng theo đúng nhịp của video mẫu.", duration: "2 phút", skill: "Liên kết", image: "/assets/games/himi-v2-connect.webp", imageAlt: "Himi mới nối thẻ chữ với thẻ âm thanh", tone: "blue", icon: Link2 },
+  { id: "listen", title: "Nghe và chọn đúng", description: "Nghe giọng Trung rồi chọn nghĩa chính xác trong bốn đáp án.", duration: "4 phút", skill: "Nghe hiểu", image: "/assets/games/himi-v2-listen.webp", imageAlt: "Himi mới đeo tai nghe và chọn đáp án", tone: "gold", icon: Headphones },
+  { id: "write", title: "Viết chữ theo nghĩa", description: "Nhìn nghĩa tiếng Việt và nhập đúng Hán tự cần dùng.", duration: "4 phút", skill: "Gợi nhớ", image: "/assets/games/himi-v2-write.webp", imageAlt: "Himi mới tập viết bằng bút trên bảng", tone: "violet", icon: Keyboard },
+  { id: "flash", title: "Flashcard 3D", description: "Lật thẻ, nghe phát âm và tự chấm mức độ ghi nhớ của bạn.", duration: "3 phút", skill: "Ôn nhanh", image: "/assets/games/himi-v2-flashcard.webp", imageAlt: "Himi mới đang lật bộ flashcard nhiều màu", tone: "rose", icon: BrainCircuit },
+  { id: "quiz", title: "Thử thách tổng hợp", description: "Trộn chữ, pinyin và nghĩa thành một lượt kiểm tra ngắn.", duration: "5 phút", skill: "Tổng hợp", image: "/assets/games/himi-v2-quiz.webp", imageAlt: "Himi mới tham gia thử thách chọn đáp án", tone: "teal", icon: CircleHelp },
 ];
 
 function JourneyTraveler({ targetGameId }: { targetGameId: GameId | null }) {
@@ -163,7 +163,7 @@ function JourneyTraveler({ targetGameId }: { targetGameId: GameId | null }) {
   }, { dependencies: [targetGameId] });
 
   if (!targetGameId) return null;
-  return <img alt="" aria-hidden="true" className="game-journey-traveler" height={1254} ref={travelerRef} src="/assets/writing/penguin-bamboo-warrior.png" width={1254} />;
+  return <img alt="" aria-hidden="true" className="game-journey-traveler" height={1016} ref={travelerRef} src="/assets/games/himi-v2-slice.webp" width={966} />;
 }
 
 function GameFrame({
@@ -298,7 +298,7 @@ function MemoryGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   };
 
   return (
-    <GameFrame description="Lật từng thẻ và tìm đúng cặp Hán tự – nghĩa Việt." gameId="memory" mascotAlt="Cánh Cụt Himi cổ vũ trò ghép cặp" mascotSrc="/assets/games/memory-penguin-cutout.png" onExit={onExit} progress={`${matched.length} / ${words.length}`} roundValue={moves} score={score} title="Ghép cặp siêu tốc">
+    <GameFrame description="Lật từng thẻ và tìm đúng cặp Hán tự – nghĩa Việt." gameId="memory" mascotAlt="Himi mới cổ vũ trò ghép cặp" mascotSrc="/assets/games/himi-v2-memory.webp" onExit={onExit} progress={`${matched.length} / ${words.length}`} roundValue={moves} score={score} title="Ghép cặp siêu tốc">
       <section className="game-play-card memory-game-stage">
         {finished ? <GameResult label="Bạn đã tìm đủ bốn cặp!" onExit={onExit} onRestart={onRestart} score={score} /> : (
           <>
@@ -355,7 +355,7 @@ function ConnectGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   };
 
   return (
-    <GameFrame description="Chọn một Hán tự bên trái, sau đó nối với pinyin đúng bên phải." gameId="connect" mascotAlt="Cánh Cụt Himi đang nối chữ với âm" mascotSrc="/assets/games/connect-penguin-cutout.png" onExit={onExit} progress={`${matched.length} / ${words.length}`} roundLabel="lỗi" roundValue={mistakes} score={score} title="Nối nhanh chữ – âm">
+    <GameFrame description="Chọn một Hán tự bên trái, sau đó nối với pinyin đúng bên phải." gameId="connect" mascotAlt="Himi mới đang nối chữ với âm" mascotSrc="/assets/games/himi-v2-connect.webp" onExit={onExit} progress={`${matched.length} / ${words.length}`} roundLabel="lỗi" roundValue={mistakes} score={score} title="Nối nhanh chữ – âm">
       <section className="game-play-card connect-game-stage">
         {finished ? <GameResult label="Các liên kết đã khớp hoàn toàn!" onExit={onExit} onRestart={onRestart} score={score} /> : (
           <>
@@ -406,7 +406,7 @@ function ListenGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   };
 
   return (
-    <GameFrame description="Nghe từ tiếng Trung, sau đó chọn nghĩa tiếng Việt chính xác." gameId="listen" mascotAlt="Cánh Cụt Himi luyện nghe" mascotSrc="/assets/games/listen-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Nghe và chọn đúng">
+    <GameFrame description="Nghe từ tiếng Trung, sau đó chọn nghĩa tiếng Việt chính xác." gameId="listen" mascotAlt="Himi mới luyện nghe" mascotSrc="/assets/games/himi-v2-listen.webp" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Nghe và chọn đúng">
       <section className="game-play-card listen-game-stage">
         {finished ? <GameResult label={`Bạn nghe đúng ${correct}/${words.length} từ.`} onExit={onExit} onRestart={onRestart} score={correct * 200} /> : (
           <>
@@ -464,7 +464,7 @@ function WriteGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   };
 
   return (
-    <GameFrame description="Nhìn nghĩa tiếng Việt và nhập đúng Hán tự tương ứng." gameId="write" mascotAlt="Cánh Cụt Himi tập viết Hán tự" mascotSrc="/assets/games/write-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Viết chữ theo nghĩa">
+    <GameFrame description="Nhìn nghĩa tiếng Việt và nhập đúng Hán tự tương ứng." gameId="write" mascotAlt="Himi mới tập viết Hán tự" mascotSrc="/assets/games/himi-v2-write.webp" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Viết chữ theo nghĩa">
       <section className="game-play-card write-game-stage">
         {finished ? <GameResult label="Bạn đã gọi lại đủ năm từ!" onExit={onExit} onRestart={onRestart} score={correct * 200} /> : (
           <>
@@ -512,7 +512,7 @@ function FlashcardGame({ words, onRestart, onExit, onComplete }: HskRoundProps) 
   };
 
   return (
-    <GameFrame description="Lật thẻ để xem nghĩa, nghe phát âm rồi tự đánh giá mức nhớ." gameId="flash" mascotAlt="Cánh Cụt Himi ôn tập cùng flashcard" mascotSrc="/assets/games/flashcard-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="nhớ" roundValue={known} score={score} title="Flashcard 3D">
+    <GameFrame description="Lật thẻ để xem nghĩa, nghe phát âm rồi tự đánh giá mức nhớ." gameId="flash" mascotAlt="Himi mới ôn tập cùng flashcard" mascotSrc="/assets/games/himi-v2-flashcard.webp" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="nhớ" roundValue={known} score={score} title="Flashcard 3D">
       <section className="game-play-card flash-game-stage">
         {finished ? <GameResult label={`Bạn nhớ chắc ${known}/${words.length} từ.`} onExit={onExit} onRestart={onRestart} score={known * 160} /> : (
           <>
@@ -559,7 +559,7 @@ function QuizGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   };
 
   return (
-    <GameFrame description="Một lượt kiểm tra ngắn kết hợp nhận diện chữ, nghĩa và phát âm." gameId="quiz" mascotAlt="Cánh Cụt Himi tham gia thử thách tổng hợp" mascotSrc="/assets/games/quiz-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Thử thách tổng hợp">
+    <GameFrame description="Một lượt kiểm tra ngắn kết hợp nhận diện chữ, nghĩa và phát âm." gameId="quiz" mascotAlt="Himi mới tham gia thử thách tổng hợp" mascotSrc="/assets/games/himi-v2-quiz.webp" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Thử thách tổng hợp">
       <section className="game-play-card quiz-game-stage">
         {finished ? <GameResult label={`Bạn trả lời đúng ${correct}/${words.length} câu.`} onExit={onExit} onRestart={onRestart} score={correct * 200} /> : (
           <>
@@ -707,9 +707,9 @@ export function GameCenter({
             <div className="game-journey-featured-card">
               <span className="game-journey-featured-number">01</span>
               {record.completed.includes("slice") ? <span className="game-journey-done"><Check size={13} /> Đã hoàn thành</span> : null}
-              <small>PHẢN XẠ PINYIN · CÁNH CỤT MODE</small>
+              <small>PHẢN XẠ PINYIN · HIMI MODE</small>
               <h2>Luyện chém từ</h2>
-              <p>Nhìn chữ đang rơi, gõ pinyin trước khi chạm đất. Cánh Cụt sẽ lao lên chém gọn đáp án đúng và giữ combo cho bạn.</p>
+              <p>Nhìn chữ đang rơi, gõ pinyin trước khi chạm đất. Himi sẽ lao lên chém gọn đáp án đúng và giữ combo cho bạn.</p>
               <div className="game-journey-featured-meta">
                 <span><Timer size={14} /> 4 phút</span>
                 <span><Zap size={14} /> 12 từ</span>
@@ -718,7 +718,7 @@ export function GameCenter({
                 <Play fill="currentColor" size={17} /> Tiếp tục chơi
               </button>
             </div>
-            <img alt="Cánh Cụt Himi cầm gậy tre chỉ về thử thách tiếp theo" className="game-journey-guide" height={1254} src="/assets/writing/penguin-bamboo-warrior.png" width={1254} />
+            <img alt="Himi mới cầm gậy tre chỉ về thử thách tiếp theo" className="game-journey-guide" height={1016} src="/assets/games/himi-v2-slice.webp" width={966} />
           </section>
 
           <div className="game-journey-stations" aria-label="Các trạm trò chơi">

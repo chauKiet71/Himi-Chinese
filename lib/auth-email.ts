@@ -106,3 +106,21 @@ export async function sendPasswordChangedEmail(user: AuthEmailUser): Promise<"br
     idempotencyKey: `password-changed/${emailKey}/${Date.now()}`,
   });
 }
+
+export async function sendAdminLoginCodeEmail(
+  user: AuthEmailUser,
+  code: string,
+  challengeId: string,
+): Promise<"brevo" | "console"> {
+  const subject = "Mã xác minh đăng nhập Himi Chinese Console";
+  const safeName = escapeHtml(user.displayName);
+  const safeCode = escapeHtml(code);
+  return deliverEmail({
+    to: user.email,
+    subject,
+    text: `Xin chào ${user.displayName},\n\nMã xác minh đăng nhập Console của bạn là: ${code}\n\nMã hết hạn sau 10 phút và chỉ dùng được một lần. Nếu bạn không thực hiện yêu cầu này, hãy đổi mật khẩu ngay.`,
+    html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;color:#173c33"><h1 style="font-size:24px">${subject}</h1><p>Xin chào ${safeName},</p><p style="line-height:1.6">Nhập mã sau để hoàn tất đăng nhập Console:</p><p style="margin:24px 0;padding:16px;border-radius:10px;background:#f1f6f3;font-size:30px;font-weight:800;letter-spacing:.22em;text-align:center">${safeCode}</p><p style="font-size:13px;color:#65766f">Mã hết hạn sau 10 phút và chỉ dùng được một lần. Nếu bạn không thực hiện yêu cầu này, hãy đổi mật khẩu ngay.</p></div>`,
+    idempotencyKey: `admin-mfa/${challengeId}`,
+    developmentLink: `code=${code}`,
+  });
+}
