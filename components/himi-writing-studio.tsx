@@ -322,6 +322,12 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
             <button onClick={replayOrReset} type="button"><RotateCcw aria-hidden="true" size={18} /> {mode === "watch" ? "Phát lại" : "Viết lại"}</button>
             {mode !== "quiz" ? <button className="primary" onClick={() => changeMode(mode === "watch" ? "trace" : "quiz")} type="button"><Play aria-hidden="true" fill="currentColor" size={17} /> {mode === "watch" ? "Bắt đầu tô" : "Thử tự viết"}</button> : null}
           </div>
+
+          <div className="himi-writing-navigation">
+            <button aria-label="Chữ trước" onClick={() => moveCharacter(-1)} type="button"><ArrowLeft aria-hidden="true" size={18} /></button>
+            <span>{selectedIndex + 1} / {topic.characters.length}</span>
+            <button aria-label="Chữ tiếp theo" onClick={() => moveCharacter(1)} type="button"><ArrowRight aria-hidden="true" size={18} /></button>
+          </div>
         </section>
 
         <aside className="himi-writing-character-info">
@@ -333,24 +339,6 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
             <div className="himi-writing-meta"><span>{topic.level}</span><span>{totalStrokes ? `${totalStrokes} nét` : "Đang tải số nét"}</span></div>
           </div>
 
-          <div className="himi-writing-navigation">
-            <button aria-label="Chữ trước" onClick={() => moveCharacter(-1)} type="button"><ArrowLeft aria-hidden="true" size={18} /></button>
-            <span>{selectedIndex + 1} / {topic.characters.length}</span>
-            <button aria-label="Chữ tiếp theo" onClick={() => moveCharacter(1)} type="button"><ArrowRight aria-hidden="true" size={18} /></button>
-          </div>
-
-          <div className="himi-writing-daily-card">
-            <span><Sparkles aria-hidden="true" size={17} /> Tiến độ hôm nay</span>
-            <strong>{completedCharacters.length}<small> / 5 chữ</small></strong>
-            <div aria-label={`Đã luyện ${Math.min(completedCharacters.length, 5)} trên 5 chữ`} role="progressbar" aria-valuemin={0} aria-valuemax={5} aria-valuenow={Math.min(completedCharacters.length, 5)}><span style={{ width: `${Math.min(100, completedCharacters.length * 20)}%` }} /></div>
-            <p>{completedCharacters.length >= 5 ? "Hoàn thành mục tiêu rồi — giỏi lắm!" : "Mỗi ngày 5 chữ là đủ để tạo thói quen."}</p>
-          </div>
-
-          <div className="himi-writing-rule-card">
-            <span>Mẹo bút thuận</span>
-            <strong>Trên trước, dưới sau.</strong>
-            <p>Ưu tiên nét ngang trước nét dọc và đi từ trái sang phải.</p>
-          </div>
         </aside>
       </section>
     </main>

@@ -51,15 +51,7 @@ export default async function WritingLevelPage({ params }: WritingLevelPageProps
       </div>
     </header>
 
-    <section className="writing-lesson-list-section" aria-labelledby="writing-lesson-list-title">
-      <div className="writing-lesson-list-heading">
-        <div>
-          <span>Danh sách bài học</span>
-          <h2 id="writing-lesson-list-title">Chọn bài để bắt đầu viết</h2>
-        </div>
-        <p>{lessons.length} bài · dữ liệu chữ lấy trực tiếp từ giáo trình {level.label}</p>
-      </div>
-
+    <section className="writing-lesson-list-section" aria-label="Danh sách bài học">
       <div className="writing-lesson-grid">
         {lessons.map((lesson) => (
           <article className="writing-lesson-card" key={lesson.id}>

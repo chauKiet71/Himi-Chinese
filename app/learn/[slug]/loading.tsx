@@ -1,7 +1,7 @@
 export default function LessonLoading() {
   return <main aria-busy="true" className="lesson-page">
     <span className="sr-only" role="status">Đang tải bài học…</span>
-    <div className="section-shell">
+    <div className="section-shell lesson-responsive-shell">
       <div aria-hidden="true" className="lesson-breadcrumb lesson-loading-breadcrumb skeleton-block" />
       <section aria-hidden="true" className="lesson-main">
         <div className="lesson-header-card lesson-loading-header">

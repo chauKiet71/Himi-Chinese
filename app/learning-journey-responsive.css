@@ -1,0 +1,912 @@
+/* Learning journey responsiveness
+ *
+ * Course roadmaps and lesson workspaces live beside a collapsible learner
+ * rail. Viewport media queries alone cannot know how much usable space is
+ * left after that rail opens, so these layouts also respond to the width of
+ * the learner content area.
+ */
+
+.learner-app-shell .learner-shell-content {
+  container-name: learner-content;
+  container-type: inline-size;
+}
+
+:where(.course-roadmap-page, .lesson-page) {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+:where(.course-roadmap-shell, .lesson-responsive-shell),
+:where(.course-roadmap-layout, .course-roadmap-stages, .lesson-main),
+:where(.roadmap-stage-card, .roadmap-lesson-list, .lesson-tab-panel-viewport) {
+  min-width: 0;
+}
+
+.lesson-responsive-shell {
+  width: min(1180px, calc(100% - clamp(28px, 4vw, 56px)));
+}
+
+.lesson-breadcrumb {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lesson-breadcrumb::-webkit-scrollbar {
+  display: none;
+}
+
+.lesson-breadcrumb > * {
+  flex: 0 0 auto;
+}
+
+.lesson-breadcrumb > span[aria-current="page"] {
+  min-width: 0;
+  color: #35534c;
+  font-weight: 680;
+}
+
+.lesson-heading-row > div:first-child,
+.lesson-complete-message,
+.daily-flow-next-step > div,
+.lesson-scenario-video-heading > div {
+  min-width: 0;
+}
+
+.lesson-heading-row h1,
+.lesson-heading-row p,
+.lesson-scenario-video-heading :is(h2, p),
+.lesson-interactive-heading :is(h2, p),
+.challenge-question :is(legend, label, p) {
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+
+.lesson-tabs {
+  max-width: 100%;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: 12px;
+  scroll-snap-type: inline proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lesson-tab {
+  position: relative;
+  scroll-snap-align: start;
+  touch-action: manipulation;
+}
+
+.lesson-tab:focus-visible {
+  z-index: 1;
+  outline: 3px solid rgba(8, 121, 109, .24);
+  outline-offset: -3px;
+  border-radius: 9px 9px 0 0;
+}
+
+.lesson-content-card,
+.lesson-vocab-card,
+.pronunciation-practice-card,
+.challenge-question {
+  max-width: 100%;
+}
+
+.lesson-complete-row form,
+.lesson-complete-row .button {
+  max-width: 100%;
+}
+
+/* Compact laptops and an expanded learner rail. */
+@container learner-content (max-width: 1020px) {
+  .course-roadmap-shell,
+  .lesson-responsive-shell {
+    width: calc(100% - 32px);
+  }
+
+  .course-roadmap-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .course-roadmap-aside {
+    position: static;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, .86fr);
+  }
+
+  .course-roadmap-coach {
+    min-height: 170px;
+  }
+
+  .lesson-content-card:not(.lesson-content-card-vocabulary) {
+    padding: 24px;
+  }
+
+  .lesson-vocab-deck {
+    padding-inline: 0;
+  }
+
+  .lesson-vocab-progress {
+    width: min(540px, calc(100% - 100px));
+  }
+
+  .lesson-vocab-carousel {
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
+    gap: 10px;
+  }
+
+  .lesson-vocab-nav > span {
+    width: 46px;
+    height: 46px;
+  }
+
+  .lesson-vocab-card {
+    width: calc(100% - 34px);
+    padding-inline: 32px;
+  }
+
+  .lesson-vocab-card-back-one {
+    right: 17px;
+  }
+
+  .lesson-vocab-card-back-two {
+    left: 30px;
+  }
+
+  .challenge-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Tablets, small laptops and split-screen windows. */
+@container learner-content (max-width: 820px) {
+  .course-roadmap-header {
+    gap: 18px;
+  }
+
+  .roadmap-stage-summary {
+    grid-template-columns: 132px minmax(0, 1fr) auto;
+    gap: 14px;
+  }
+
+  .roadmap-stage-image {
+    width: 132px;
+  }
+
+  .roadmap-lesson-row {
+    padding-inline: 12px;
+    grid-template-columns: 25px minmax(0, 1fr) 62px minmax(0, 140px) 19px;
+    gap: 8px;
+  }
+
+  .lesson-page {
+    padding-top: 24px;
+  }
+
+  .lesson-heading-row h1 {
+    font-size: clamp(28px, 5.3cqi, 36px);
+  }
+
+  .lesson-content-card:not(.lesson-content-card-vocabulary) {
+    padding: 21px 20px;
+  }
+
+  .lesson-interactive-heading,
+  .lesson-challenge-heading {
+    gap: 18px;
+  }
+
+  .pronunciation-practice-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pronunciation-target-list {
+    max-height: none;
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+    scroll-snap-type: inline proximity;
+  }
+
+  .pronunciation-target-list button {
+    width: min(190px, 42cqi);
+    min-width: 150px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  .pronunciation-practice-card {
+    min-height: 460px;
+  }
+
+  .video-player-toolbar {
+    grid-template-columns: auto minmax(80px, 1fr);
+  }
+
+  .video-player-options {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .video-player-options button {
+    justify-content: center;
+  }
+
+  .transcript-line {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .transcript-repeat {
+    margin: 0 12px 11px 54px;
+    justify-content: center;
+  }
+}
+
+/* Phones and very narrow content columns. */
+@container learner-content (max-width: 680px) {
+  .course-roadmap-shell,
+  .lesson-responsive-shell {
+    width: calc(100% - 24px);
+  }
+
+  .course-roadmap-header {
+    min-height: 0;
+    padding-bottom: 16px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .course-roadmap-header > div,
+  .course-roadmap-progress-row {
+    width: 100%;
+  }
+
+  .course-roadmap-progress-row {
+    grid-template-columns: auto minmax(72px, 1fr) auto;
+    gap: 10px;
+  }
+
+  .course-roadmap-layout {
+    padding-top: 16px;
+    gap: 18px;
+  }
+
+  .course-roadmap-aside {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .roadmap-stage {
+    grid-template-columns: 36px minmax(0, 1fr);
+  }
+
+  .roadmap-stage-marker {
+    width: 32px;
+    height: 32px;
+    margin-top: 18px;
+    font-size: 14px;
+  }
+
+  .roadmap-stage-summary {
+    min-height: 94px;
+    grid-template-columns: clamp(88px, 26cqi, 112px) minmax(0, 1fr);
+    align-items: stretch;
+    gap: 11px;
+  }
+
+  .roadmap-stage-image {
+    width: 100%;
+    height: 100%;
+    min-height: 94px;
+    grid-row: 1 / span 2;
+  }
+
+  .roadmap-stage-copy {
+    align-self: end;
+    padding: 11px 6px 2px 0;
+  }
+
+  .roadmap-stage-copy h2 {
+    font-size: 15px;
+    white-space: normal;
+  }
+
+  .roadmap-stage-status {
+    width: fit-content;
+    min-height: 28px;
+    margin: 0 7px 8px 0;
+    padding-inline: 8px;
+    align-self: start;
+    grid-column: 2;
+    font-size: 9.5px;
+  }
+
+  .roadmap-lesson-list {
+    margin: 0 8px 8px;
+  }
+
+  .roadmap-lesson-row {
+    min-height: 68px;
+    padding: 11px 12px;
+    grid-template-columns: 24px minmax(0, 1fr) 20px;
+    grid-template-rows: auto auto;
+    gap: 3px 8px;
+  }
+
+  .roadmap-lesson-state {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .roadmap-lesson-copy {
+    grid-column: 2;
+    grid-row: 1;
+    flex-wrap: wrap;
+    gap: 3px 5px;
+  }
+
+  .roadmap-lesson-copy > i {
+    display: none;
+  }
+
+  .roadmap-lesson-copy > strong {
+    width: 100%;
+    flex-basis: 100%;
+    font-size: 13px;
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  .roadmap-lesson-minutes {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: left;
+    font-size: 10.5px;
+  }
+
+  .roadmap-lesson-chevron {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+
+  .roadmap-lesson-cta,
+  .roadmap-lesson-vip {
+    width: 100%;
+    min-height: 44px;
+    margin-top: 6px;
+    grid-column: 2 / 4;
+    grid-row: 3;
+  }
+
+  .roadmap-lesson-row.is-current,
+  .roadmap-lesson-row.is-vip-locked {
+    grid-template-rows: auto auto auto;
+  }
+
+  .lesson-page {
+    min-height: 0;
+    padding-block: 16px 96px;
+  }
+
+  .lesson-breadcrumb {
+    margin-bottom: 14px;
+    padding-bottom: 2px;
+    gap: 5px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .lesson-breadcrumb > span[aria-current="page"] {
+    max-width: 68cqi;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .lesson-header-card {
+    padding-top: 0;
+  }
+
+  .lesson-heading-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+  }
+
+  .lesson-heading-row h1 {
+    margin-block: 6px;
+    font-size: clamp(25px, 8cqi, 32px);
+    line-height: 1.12;
+  }
+
+  .lesson-heading-row p {
+    font-size: 12px;
+  }
+
+  .lesson-progress-badge {
+    min-width: 78px;
+    margin-top: 0;
+    padding: 9px 8px;
+  }
+
+  .lesson-progress-badge strong {
+    font-size: 16px;
+  }
+
+  .lesson-tabs {
+    margin-top: 14px;
+    gap: 2px;
+  }
+
+  .lesson-tab {
+    min-height: 48px;
+    padding-inline: 13px;
+    font-size: 12px;
+  }
+
+  .lesson-content-card:not(.lesson-content-card-vocabulary) {
+    margin-top: 12px;
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+
+  .lesson-content-card-vocabulary {
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .lesson-scenario-video-heading {
+    margin-bottom: 14px;
+  }
+
+  .lesson-scenario-video-heading h2,
+  .lesson-interactive-heading h2,
+  .lesson-challenge-heading h2 {
+    font-size: clamp(22px, 6.6cqi, 27px);
+    line-height: 1.2;
+  }
+
+  .lesson-interactive-heading,
+  .lesson-challenge-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .lesson-interactive-heading-icon {
+    display: none;
+  }
+
+  .lesson-phrase-grid {
+    margin-top: 20px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lesson-phrase-card {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .lesson-vocab-deck {
+    min-height: 0;
+    padding-top: 20px;
+  }
+
+  .lesson-vocab-progress {
+    width: 100%;
+    padding-inline: 8px;
+  }
+
+  .lesson-vocab-progress-segments {
+    gap: 7px;
+  }
+
+  .lesson-vocab-carousel {
+    margin-top: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .lesson-vocab-stack {
+    min-height: 398px;
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .lesson-vocab-card {
+    width: calc(100% - 24px);
+    min-height: 392px;
+    padding: 22px 18px 18px;
+    border-radius: 18px;
+  }
+
+  .lesson-vocab-card-back {
+    border-radius: 18px;
+  }
+
+  .lesson-vocab-card-back-one {
+    inset: 12px 12px -12px 10px;
+  }
+
+  .lesson-vocab-card-back-two {
+    inset: 24px 0 -24px 20px;
+  }
+
+  .lesson-vocab-nav {
+    min-height: 48px;
+    padding: 4px 11px;
+    display: flex;
+    border: 1px solid #d7e0db;
+    border-radius: 12px;
+    background: #fff;
+  }
+
+  .lesson-vocab-nav-prev {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .lesson-vocab-nav-next {
+    grid-column: 2;
+    grid-row: 2;
+    justify-content: flex-end;
+  }
+
+  .lesson-vocab-nav > span {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    background: var(--sage-light);
+    box-shadow: none;
+  }
+
+  .lesson-vocab-continue {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .pronunciation-target-list button {
+    width: min(180px, 72cqi);
+  }
+
+  .pronunciation-practice-card {
+    min-height: 0;
+    padding: 26px 18px 18px;
+  }
+
+  .pronunciation-practice-card > strong {
+    margin-top: 20px;
+    font-size: clamp(28px, 9cqi, 38px);
+  }
+
+  .pronunciation-actions {
+    flex-wrap: wrap;
+  }
+
+  .pronunciation-dimensions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pronunciation-next-row {
+    margin-top: 24px;
+  }
+
+  .challenge-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .challenge-question {
+    padding: 15px 13px;
+  }
+
+  .challenge-result,
+  .lesson-complete-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .challenge-result .button,
+  .lesson-complete-row form,
+  .lesson-complete-row .button,
+  .lesson-complete-row form .button {
+    width: 100%;
+  }
+
+  .daily-flow-next-step {
+    padding-inline: 0;
+    grid-template-columns: 38px minmax(0, 1fr);
+  }
+
+  .daily-flow-next-step .button {
+    width: 100%;
+    grid-column: 1 / -1;
+  }
+
+  .lesson-loading-tabs {
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .lesson-loading-tabs .skeleton-block {
+    flex: 0 0 64px;
+  }
+
+  .lesson-loading-row {
+    min-height: 72px;
+    padding: 14px;
+    grid-template-columns: 25% minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .lesson-loading-row .skeleton-block:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .lesson-locked-panel {
+    min-height: 330px;
+  }
+
+  .lesson-locked-panel h2 {
+    font-size: 27px;
+  }
+
+  .video-learning-player {
+    border-radius: 15px;
+  }
+
+  .video-player-toolbar {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .interactive-transcript {
+    padding: 13px;
+  }
+
+  .interactive-transcript-heading {
+    align-items: flex-start;
+  }
+}
+
+/* Very small phones (320–420px). */
+@container learner-content (max-width: 420px) {
+  .course-roadmap-shell,
+  .lesson-responsive-shell {
+    width: calc(100% - 16px);
+  }
+
+  .course-roadmap-header h1 {
+    font-size: 23px;
+  }
+
+  .roadmap-stage {
+    grid-template-columns: 30px minmax(0, 1fr);
+  }
+
+  .roadmap-stage-marker {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .roadmap-stage-summary {
+    grid-template-columns: clamp(76px, 24cqi, 90px) minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .roadmap-stage-copy h2 {
+    font-size: 14px;
+  }
+
+  .roadmap-stage-status {
+    padding-inline: 6px;
+    font-size: 9px;
+  }
+
+  .roadmap-lesson-list {
+    margin-inline: 5px;
+  }
+
+  .roadmap-lesson-row {
+    padding-inline: 9px;
+    grid-template-columns: 21px minmax(0, 1fr) 17px;
+    gap-inline: 6px;
+  }
+
+  .roadmap-lesson-cta,
+  .roadmap-lesson-vip {
+    grid-column: 1 / -1;
+  }
+
+  .lesson-page {
+    padding-top: 11px;
+  }
+
+  .lesson-heading-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lesson-progress-badge {
+    width: fit-content;
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+  }
+
+  .lesson-progress-badge strong,
+  .lesson-progress-badge span {
+    display: inline;
+  }
+
+  .lesson-progress-badge span {
+    margin-top: 0;
+  }
+
+  .lesson-content-card:not(.lesson-content-card-vocabulary) {
+    padding: 16px 13px;
+  }
+
+  .lesson-tab {
+    padding-inline: 12px;
+  }
+
+  .lesson-vocab-card {
+    width: calc(100% - 18px);
+    padding-inline: 14px;
+  }
+
+  .lesson-vocab-card-back-one {
+    inset-inline: 9px;
+  }
+
+  .lesson-vocab-card-back-two {
+    left: 16px;
+  }
+
+  .lesson-vocab-keyboard {
+    display: none;
+  }
+
+  .lesson-phrase-card {
+    padding: 16px 14px;
+  }
+
+  .pronunciation-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pronunciation-actions button {
+    width: 100%;
+  }
+
+  .pronunciation-error,
+  .pronunciation-next-row,
+  .interactive-transcript-heading,
+  .youtube-source-note {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .pronunciation-error button,
+  .pronunciation-next-row > button {
+    width: 100%;
+  }
+
+  .pronunciation-result {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .pronunciation-feedback {
+    text-align: center;
+  }
+
+  .pronunciation-dimensions {
+    width: 100%;
+  }
+
+  .video-player-options button {
+    min-width: 0;
+    padding-inline: 6px;
+    gap: 4px;
+    font-size: 8px;
+  }
+
+  .transcript-line-main {
+    padding: 11px 9px 8px;
+    grid-template-columns: 23px minmax(0, 1fr) 26px;
+    gap: 7px;
+  }
+
+  .transcript-repeat {
+    min-height: 44px;
+    margin-left: 39px;
+  }
+
+  .challenge-result {
+    padding: 13px;
+  }
+
+  .daily-flow-next-step {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .daily-flow-next-mark {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* True phone viewports need room for the persistent bottom navigation and
+ * notches, regardless of the selected rail state. */
+@media (max-width: 720px) {
+  .course-roadmap-page,
+  .lesson-page {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+    padding-bottom: calc(106px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 720px) and (max-height: 520px) and (orientation: landscape) {
+  .lesson-page {
+    padding-top: max(8px, env(safe-area-inset-top));
+  }
+
+  .lesson-breadcrumb {
+    margin-bottom: 8px;
+  }
+
+  .lesson-heading-row h1 {
+    font-size: 25px;
+  }
+
+  .lesson-heading-row p {
+    display: none;
+  }
+
+  .lesson-tabs {
+    margin-top: 8px;
+  }
+
+  .pronunciation-practice-card {
+    min-height: 340px;
+  }
+}
+
+@media (pointer: coarse) {
+  :where(
+    .course-roadmap-switch,
+    .roadmap-lesson-row,
+    .roadmap-lesson-cta,
+    .roadmap-lesson-vip,
+    .lesson-tab,
+    .lesson-vocab-nav,
+    .lesson-vocab-save,
+    .pronunciation-target-list button,
+    .pronunciation-actions button,
+    .pronunciation-next-row button,
+    .challenge-options label,
+    .transcript-repeat
+  ) {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .course-roadmap-progress-track > span,
+  .roadmap-stage-expand,
+  .lesson-tab-panel,
+  .lesson-vocab-card,
+  .lesson-vocab-nav > span,
+  .video-progress-track > span,
+  .transcript-line {
+    animation: none !important;
+    transition-duration: .01ms !important;
+  }
+}

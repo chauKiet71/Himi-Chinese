@@ -25,7 +25,6 @@ export default function WritingPage() {
     <section className="writing-topic-section" aria-labelledby="writing-topic-heading">
       <div className="writing-topic-heading">
         <div>
-          <span>6 cấp độ · {lessonCount} bài học</span>
           <h2 id="writing-topic-heading">Bài luyện viết theo HSK</h2>
         </div>
         <p>Chọn cấp độ rồi vào đúng bài đang học. Mỗi bài đều có xem nét, tô theo và tự viết.</p>

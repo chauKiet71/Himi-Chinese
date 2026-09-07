@@ -38,10 +38,14 @@ test("prototype includes learner, VIP and admin routes", async () => {
   const files = await Promise.all([read("app/courses/page.tsx"), read("app/vip/page.tsx"), read("app/admin/page.tsx")]);
   assert.match(files[0], /CourseLibraryView/);
   assert.match(files[1], /getVipUpgradeOverview/);
-  assert.match(files[1], /: "Nâng cấp";/);
-  assert.doesNotMatch(files[1], /Gửi yêu cầu kích hoạt/);
+  assert.doesNotMatch(files[1], /Quyền lợi của bạn|Điều kiện áp dụng/);
+  assert.doesNotMatch(files[1], /Tiến độ của bạn luôn được giữ lại/);
+  assert.match(files[1], /Xem nội dung VIP/);
+  assert.match(files[1], /Đọc điều khoản đầy đủ/);
+  assert.match(files[1], /Chọn gói VIP phù hợp/);
   assert.match(files[1], /VipTransferFlow/);
-  assert.match(files[1], /Thanh toán một lần qua SePay/);
+  assert.match(files[1], /Đầy đủ quyền VIP trong \$\{plan\.durationDays\} ngày/);
+  assert.match(files[1], /Đầy đủ quyền VIP, không cần gia hạn/);
   assert.match(files[2], /Tổng quan vận hành/);
 });
 
@@ -506,11 +510,13 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   ]);
   assert.match(catalog, /getWritingLevels/);
   assert.match(catalog, /\{lessonCount\} bài học/);
+  assert.doesNotMatch(catalog, /<span>6 cấp độ/);
   assert.match(catalog, /href=\{`\/writing\/\$\{level\.id\}`\}/);
   assert.match(content, /WRITING_LEVEL_IDS/);
   assert.match(content, /getHskLearningLessonContent/);
   assert.match(lessons, /getWritingLessons/);
   assert.match(lessons, /lessons\.map/);
+  assert.doesNotMatch(lessons, /writing-lesson-list-heading/);
   assert.match(lessons, /href=\{`\/writing\/\$\{level\.id\}\/\$\{lesson\.id\}\/practice`\}/);
   assert.match(legacyPractice, /redirect/);
   assert.match(practice, /HimiWritingStudio/);
@@ -523,11 +529,15 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   assert.match(studio, /Đang phát lại thứ tự từng nét/);
   assert.match(studio, /Đang tự động phát thứ tự từng nét/);
   assert.doesNotMatch(studio, /prefers-reduced-motion/);
+  assert.doesNotMatch(studio, /himi-writing-daily-card/);
+  assert.doesNotMatch(studio, /himi-writing-rule-card/);
+  assert.match(studio, /himi-writing-board-actions[\s\S]*himi-writing-navigation[\s\S]*<\/section>[\s\S]*himi-writing-character-info/);
   assert.match(studio, /import HanziWriter from "hanzi-writer"/);
   assert.doesNotMatch(studio, /import\("hanzi-writer"\)/);
   assert.match(styles, /\.writing-topic-grid/);
   assert.match(styles, /\.writing-lesson-grid/);
   assert.match(styles, /\.himi-writing-session-header/);
+  assert.match(styles, /@media \(max-width: 920px\) \{[\s\S]*?\.himi-writing-library \{ order: 1; \}[\s\S]*?\.himi-writing-practice \{ order: 2; \}/);
 });
 
 test("practice and game progress persist per authenticated learner", async () => {

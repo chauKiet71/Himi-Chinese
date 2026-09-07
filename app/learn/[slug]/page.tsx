@@ -34,8 +34,8 @@ export default async function LearnPage({
         ? dailySource.game
         : { href: "/#today-summary", title: "Tổng kết phiên 10 phút" };
 
-  return <main className="lesson-page"><div className="section-shell">
-    <div className="lesson-breadcrumb"><Link href="/courses">Lộ trình</Link><ChevronRight size={13} /><Link href={`/courses/${data.course.slug}`}>{data.course.title}</Link>{data.lesson ? <><ChevronRight size={13} /><span>{data.lesson.title}</span></> : null}</div>
+  return <main className="lesson-page"><div className="section-shell lesson-responsive-shell">
+    <nav aria-label="Điều hướng bài học" className="lesson-breadcrumb"><Link href="/courses">Lộ trình</Link><ChevronRight aria-hidden="true" size={13} /><Link href={`/courses/${data.course.slug}`}>{data.course.title}</Link>{data.lesson ? <><ChevronRight aria-hidden="true" size={13} /><span aria-current="page">{data.lesson.title}</span></> : null}</nav>
     {data.lesson && data.access
       ? <LessonWorkspace
         course={data.course}
