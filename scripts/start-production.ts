@@ -30,6 +30,12 @@ const railwayEnvironmentVariables = [
   "IFLYTEK_ISE_APP_ID",
   "IFLYTEK_ISE_API_KEY",
   "IFLYTEK_ISE_API_SECRET",
+  "TELEGRAM_BOT_TOKEN",
+  "TELEGRAM_ADMIN_CHAT_ID",
+  "TELEGRAM_ADMIN_USER_IDS",
+  "TELEGRAM_WEBHOOK_SECRET",
+  "SUPPORT_WEBHOOK_BASE_URL",
+  "SUPPORT_WORKER_POLL_MS",
 ] as const;
 
 function resolveEnvironmentFile() {
