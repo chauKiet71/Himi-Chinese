@@ -1,0 +1,112 @@
+/* Keep gameplay motion local, brief and driven by transform/opacity. */
+.game-session-dashboard,
+.writing-game-dashboard {
+  --game-motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --game-flip-ease: cubic-bezier(.4, 0, .2, 1);
+}
+
+.game-session-world button,
+.writing-game-dashboard button {
+  touch-action: manipulation;
+  transition: transform 220ms var(--game-motion-ease), background-color 180ms ease,
+    color 180ms ease, border-color 180ms ease;
+}
+
+.game-session-world button:active:not(:disabled),
+.writing-game-dashboard button:active:not(:disabled) { transform: scale(.98); }
+
+.game-session-world .memory-grid button {
+  padding: 0;
+  perspective: 1000px;
+}
+
+/* Faces own their surface so colors never flash through during a flip. */
+.game-session-world .memory-grid button:nth-child(n),
+.game-session-world .memory-grid button:is(:hover, :active, :disabled, .is-revealed, .is-matched) {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.game-session-world .memory-grid .memory-tile-inner {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: inherit;
+  transform-style: preserve-3d;
+  transition: transform 420ms var(--game-flip-ease);
+}
+
+.game-session-world .memory-grid button.is-revealed .memory-tile-inner { transform: rotateY(180deg); }
+
+.game-session-world .memory-grid .memory-tile-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  border: 6px solid var(--himi-white);
+  border-radius: inherit;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: var(--game-brand-lift);
+}
+
+.game-session-world .memory-grid .memory-tile-cover { color: var(--himi-on-red); background: var(--himi-red); }
+.game-session-world .memory-grid button:nth-child(even) .memory-tile-cover { color: var(--himi-black); background: var(--himi-orange); }
+.game-session-world .memory-grid .memory-tile-answer {
+  color: var(--himi-black);
+  background: var(--himi-white);
+  transform: rotateY(180deg);
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+.game-session-world .memory-grid .memory-tile-answer > span:not([lang]) { font-size: clamp(13px, 1.8vw, 20px); line-height: 1.4; }
+.game-session-world .memory-grid button.is-matched .memory-tile-answer { color: #176349; border-color: #b4d8c7; background: #edf8f1; }
+
+.game-session-world .flashcard-3d-inner { transition: transform 460ms var(--game-flip-ease); }
+.game-session-world .flashcard-face { -webkit-backface-visibility: hidden; }
+.writing-game-dashboard .writing-penguin { will-change: transform, opacity; }
+
+@keyframes game-content-enter {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes game-answer-confirm {
+  0%, 100% { transform: scale(1); }
+  45% { transform: scale(1.025); }
+}
+@keyframes game-answer-retry {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  65% { transform: translateX(2px); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .game-session-world .game-play-card,
+  .writing-course-shell,
+  .writing-game-overlay {
+    animation: game-content-enter 280ms var(--game-motion-ease) both;
+  }
+  .game-session-world .game-result { animation: game-content-enter 320ms var(--game-motion-ease) both; }
+  .game-session-world :is(.connect-board button.is-matched, .listen-options button.is-correct, .quiz-options button.is-correct) {
+    animation: game-answer-confirm 280ms var(--game-motion-ease);
+  }
+  .game-session-world :is(.connect-board button.is-wrong, .listen-options button.is-wrong, .quiz-options button.is-wrong),
+  .game-session-world .write-answer-form.is-wrong > div {
+    animation: game-answer-retry 260ms ease-out;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .game-session-world button:hover:not(:disabled):not(.is-matched),
+  .writing-game-dashboard button:hover:not(:disabled) { transform: translateY(-2px); }
+  .game-session-world button:active:not(:disabled),
+  .writing-game-dashboard button:active:not(:disabled) { transform: translateY(0) scale(.98); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-session-world button,
+  .writing-game-dashboard button { transform: none !important; }
+  .game-session-world .memory-tile-inner,
+  .game-session-world .flashcard-3d-inner { transition: none; }
+}

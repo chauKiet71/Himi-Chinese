@@ -160,7 +160,7 @@ function JourneyTraveler({ targetGameId }: { targetGameId: GameId | null }) {
     });
 
     return () => media.revert();
-  }, { dependencies: [targetGameId] });
+  }, { dependencies: [targetGameId], revertOnUpdate: true });
 
   if (!targetGameId) return null;
   return <img alt="" aria-hidden="true" className="game-journey-traveler" height={1254} ref={travelerRef} src="/assets/writing/penguin-bamboo-warrior.png" width={1254} />;
@@ -288,12 +288,14 @@ function MemoryGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
         setSelected([]);
         if (nextMatched.length === words.length) {
           const finalScore = Math.max(240, 1000 - Math.max(0, moves + 1 - 4) * 70);
-          setFinished(true);
-          onComplete(finalScore);
+          matchTimerRef.current = window.setTimeout(() => {
+            setFinished(true);
+            onComplete(finalScore);
+          }, 280);
         }
-      }, 360);
+      }, 460);
     } else {
-      matchTimerRef.current = window.setTimeout(() => setSelected([]), 620);
+      matchTimerRef.current = window.setTimeout(() => setSelected([]), 900);
     }
   };
 
@@ -308,8 +310,13 @@ function MemoryGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
                 const revealed = selected.includes(tile.id) || matched.includes(tile.wordId);
                 return (
                   <button aria-label={revealed ? `${tile.kind === "hanzi" ? "Hán tự" : "Nghĩa"}: ${tile.label}` : "Lật thẻ ghi nhớ"} aria-pressed={revealed} className={`${revealed ? "is-revealed" : ""} ${matched.includes(tile.wordId) ? "is-matched" : ""}`.trim()} data-tile-id={tile.id} disabled={matched.includes(tile.wordId)} key={tile.id} onClick={() => chooseTile(tile)} type="button">
-                    <span aria-hidden={!revealed} lang={tile.kind === "hanzi" ? "zh-CN" : undefined}>{revealed ? tile.label : "?"}</span>
-                    {matched.includes(tile.wordId) ? <Check size={16} /> : null}
+                    <span className="memory-tile-inner">
+                      <span aria-hidden="true" className="memory-tile-face memory-tile-cover">?</span>
+                      <span aria-hidden={!revealed} className="memory-tile-face memory-tile-answer">
+                        <span lang={tile.kind === "hanzi" ? "zh-CN" : undefined}>{tile.label}</span>
+                        {matched.includes(tile.wordId) ? <Check size={16} /> : null}
+                      </span>
+                    </span>
                   </button>
                 );
               })}
@@ -335,14 +342,16 @@ function ConnectGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   const score = Math.max(300, 1000 - mistakes * 100);
 
   const chooseRight = (word: SliceVocabulary) => {
-    if (!left || matched.includes(word.id) || wrong) return;
+    if (!left || matched.includes(left) || matched.includes(word.id) || wrong) return;
     if (left === word.id) {
       const nextMatched = [...matched, word.id];
       setMatched(nextMatched);
       setLeft(null);
       if (nextMatched.length === words.length) {
-        setFinished(true);
-        onComplete(score);
+        mistakeTimerRef.current = window.setTimeout(() => {
+          setFinished(true);
+          onComplete(score);
+        }, 280);
       }
       return;
     }
@@ -378,8 +387,18 @@ function ConnectGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   );
 }
 
+// A new round gets fresh animation nodes; retain a useful keyboard focus target.
+function useGameRoundFocus(index: number) {
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (index > 0) ref.current?.querySelector<HTMLElement>("input, button")?.focus({ preventScroll: true });
+  }, [index]);
+  return ref;
+}
+
 function ListenGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   const [index, setIndex] = useState(0);
+  const roundRef = useGameRoundFocus(index);
   const [selected, setSelected] = useState<string | null>(null);
   const [correct, setCorrect] = useState(0);
   const [finished, setFinished] = useState(false);
@@ -407,7 +426,7 @@ function ListenGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
 
   return (
     <GameFrame description="Nghe từ tiếng Trung, sau đó chọn nghĩa tiếng Việt chính xác." gameId="listen" mascotAlt="Cánh Cụt Himi luyện nghe" mascotSrc="/assets/games/listen-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Nghe và chọn đúng">
-      <section className="game-play-card listen-game-stage">
+      <section className="game-play-card listen-game-stage" key={index} ref={roundRef}>
         {finished ? <GameResult label={`Bạn nghe đúng ${correct}/${words.length} từ.`} onExit={onExit} onRestart={onRestart} score={correct * 200} /> : (
           <>
             <div className="listen-prompt">
@@ -432,6 +451,7 @@ function ListenGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
 
 function WriteGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   const [index, setIndex] = useState(0);
+  const roundRef = useGameRoundFocus(index);
   const [answer, setAnswer] = useState("");
   const [status, setStatus] = useState<"idle" | "correct" | "wrong">("idle");
   const [correct, setCorrect] = useState(0);
@@ -465,7 +485,7 @@ function WriteGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
 
   return (
     <GameFrame description="Nhìn nghĩa tiếng Việt và nhập đúng Hán tự tương ứng." gameId="write" mascotAlt="Cánh Cụt Himi tập viết Hán tự" mascotSrc="/assets/games/write-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Viết chữ theo nghĩa">
-      <section className="game-play-card write-game-stage">
+      <section className="game-play-card write-game-stage" key={index} ref={roundRef}>
         {finished ? <GameResult label="Bạn đã gọi lại đủ năm từ!" onExit={onExit} onRestart={onRestart} score={correct * 200} /> : (
           <>
             <div className="write-prompt">
@@ -491,6 +511,7 @@ function WriteGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
 
 function FlashcardGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   const [index, setIndex] = useState(0);
+  const roundRef = useGameRoundFocus(index);
   const [flipped, setFlipped] = useState(false);
   const [known, setKnown] = useState(0);
   const [finished, setFinished] = useState(false);
@@ -498,6 +519,7 @@ function FlashcardGame({ words, onRestart, onExit, onComplete }: HskRoundProps) 
   const score = known * 160;
 
   const rate = (remembered: boolean) => {
+    if (!flipped) return;
     const nextKnown = known + (remembered ? 1 : 0);
     if (index === words.length - 1) {
       const finalScore = nextKnown * 160;
@@ -513,7 +535,7 @@ function FlashcardGame({ words, onRestart, onExit, onComplete }: HskRoundProps) 
 
   return (
     <GameFrame description="Lật thẻ để xem nghĩa, nghe phát âm rồi tự đánh giá mức nhớ." gameId="flash" mascotAlt="Cánh Cụt Himi ôn tập cùng flashcard" mascotSrc="/assets/games/flashcard-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="nhớ" roundValue={known} score={score} title="Flashcard 3D">
-      <section className="game-play-card flash-game-stage">
+      <section className="game-play-card flash-game-stage" key={index} ref={roundRef}>
         {finished ? <GameResult label={`Bạn nhớ chắc ${known}/${words.length} từ.`} onExit={onExit} onRestart={onRestart} score={known * 160} /> : (
           <>
             <button aria-label={flipped ? "Xem mặt Hán tự" : "Lật thẻ xem nghĩa"} className={`flashcard-3d ${flipped ? "is-flipped" : ""}`} onClick={() => setFlipped((value) => !value)} type="button">
@@ -533,6 +555,7 @@ function FlashcardGame({ words, onRestart, onExit, onComplete }: HskRoundProps) 
 
 function QuizGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
   const [index, setIndex] = useState(0);
+  const roundRef = useGameRoundFocus(index);
   const [selected, setSelected] = useState<string | null>(null);
   const [correct, setCorrect] = useState(0);
   const [finished, setFinished] = useState(false);
@@ -560,7 +583,7 @@ function QuizGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
 
   return (
     <GameFrame description="Một lượt kiểm tra ngắn kết hợp nhận diện chữ, nghĩa và phát âm." gameId="quiz" mascotAlt="Cánh Cụt Himi tham gia thử thách tổng hợp" mascotSrc="/assets/games/quiz-penguin-cutout.png" onExit={onExit} progress={`${index + 1} / ${words.length}`} roundLabel="đúng" roundValue={correct} score={score} title="Thử thách tổng hợp">
-      <section className="game-play-card quiz-game-stage">
+      <section className="game-play-card quiz-game-stage" key={index} ref={roundRef}>
         {finished ? <GameResult label={`Bạn trả lời đúng ${correct}/${words.length} câu.`} onExit={onExit} onRestart={onRestart} score={correct * 200} /> : (
           <>
             <div className="quiz-question"><span>CÂU {String(index + 1).padStart(2, "0")}</span><small>Chọn nghĩa đúng của từ</small><h2 lang="zh-CN">{word.hanzi}</h2><button aria-label="Nghe phát âm" onClick={() => speakChinese(word.hanzi)} type="button"><Volume2 size={18} /></button></div>
