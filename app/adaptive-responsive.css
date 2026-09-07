@@ -1,0 +1,395 @@
+/* Product-wide adaptive layout contract
+ *
+ * Page styles define the visual language. This final layer only coordinates
+ * those page families across phones, tablets and laptops, including the usable
+ * width left behind by the collapsible learner rail.
+ */
+
+:where(
+  .home-portal,
+  .course-library-page,
+  .course-roadmap-page,
+  .lesson-page,
+  .video-library-page,
+  .video-detail-page,
+  .listening-studio,
+  .listening-scenario-page,
+  .practice-dashboard,
+  .game-center-dashboard,
+  .writing-catalog-page,
+  .writing-lesson-page,
+  .himi-writing-studio,
+  .vip-page,
+  .account-page,
+  .notifications-page,
+  .legal-page,
+  .auth-page,
+  .admin-page
+) {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+:where(main, main > *, main section, main article, main aside, main form, main fieldset) {
+  min-width: 0;
+}
+
+:where(main h1, main h2, main h3, main p, main strong, main small, main label) {
+  overflow-wrap: anywhere;
+}
+
+:where(main img, main video, main iframe, main canvas, main svg) {
+  max-inline-size: 100%;
+}
+
+:where(button, [role="button"], input, select, textarea) {
+  touch-action: manipulation;
+}
+
+:where(.table-scroll, .admin-chart, .lesson-tabs, .video-category-filters, .filter-list) {
+  max-width: 100%;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Laptop widths must react to the content left after the learner rail opens,
+ * rather than to viewport width alone. */
+@media (min-width: 721px) {
+  @container learner-content (max-width: 1020px) {
+    :where(
+      .video-library-shell,
+      .video-detail-shell,
+      .listening-banner-shell,
+      .listening-mode-shell,
+      .listening-level-section,
+      .listening-lesson-section,
+      .writing-catalog-page,
+      .writing-lesson-page,
+      .himi-writing-studio,
+      .hsk-curriculum
+    ) {
+      max-width: 100%;
+    }
+
+    .video-library-shell,
+    .video-detail-page.is-study-studio .video-detail-shell,
+    .hsk-curriculum {
+      width: calc(100% - 32px);
+    }
+
+    .video-library-header {
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 36%);
+      gap: 20px;
+    }
+
+    .learning-video-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .listening-level-picker {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .listening-lesson-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .listening-performance-summary {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .listening-performance-metrics > div:first-child {
+      border-left: 0;
+    }
+  }
+
+  @container learner-content (max-width: 860px) {
+    .video-library-header {
+      grid-template-columns: minmax(0, 1fr) minmax(210px, 31%);
+    }
+
+    .video-detail-header,
+    .video-detail-header.is-compact {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .youtube-study-studio,
+    .youtube-study-studio.has-dictation,
+    .youtube-study-studio.has-dictation.transcript-is-hidden {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .youtube-dictation-panel,
+    .youtube-transcript-panel,
+    .youtube-study-studio.has-dictation .youtube-transcript-panel {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      max-height: none;
+      grid-column: auto;
+    }
+
+    .hsk-curriculum-layout,
+    .himi-writing-workspace,
+    .video-detail-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .himi-writing-library { order: 1; }
+    .himi-writing-practice { order: 2; }
+    .himi-writing-character-info {
+      order: 3;
+      grid-column: auto;
+    }
+
+    .game-catalog-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  :where(
+    .home-portal,
+    .course-library-page,
+    .course-roadmap-page,
+    .lesson-page,
+    .video-library-page,
+    .video-detail-page,
+    .listening-studio,
+    .listening-scenario-page,
+    .practice-dashboard,
+    .game-center-dashboard,
+    .writing-catalog-page,
+    .writing-lesson-page,
+    .himi-writing-studio,
+    .vip-page,
+    .account-page,
+    .notifications-page,
+    .legal-page,
+    .auth-page,
+    .admin-page
+  ) {
+    min-height: 100dvh;
+    overflow-x: clip;
+  }
+
+  :where(input, select, textarea) {
+    font-size: 16px;
+  }
+
+  :where(
+    .video-detail-back,
+    .youtube-study-toolstrip button,
+    .youtube-study-switch,
+    .youtube-shadow-card > button,
+    .youtube-transcript-toggles button,
+    .dictation-level-tabs button,
+    .dictation-navigation button,
+    .dictation-prompt button,
+    .dictation-actions button,
+    .listening-back,
+    .listening-speed
+  ) {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .video-detail-page.is-study-studio .video-detail-shell {
+    width: min(calc(100% - 22px), 620px);
+    padding-top: max(18px, env(safe-area-inset-top));
+    padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  }
+
+  .video-detail-header.is-compact h1 {
+    font-size: clamp(24px, 7.7vw, 29px);
+    line-height: 1.08;
+    letter-spacing: -.04em;
+    text-wrap: pretty;
+  }
+
+  .video-detail-meta {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .youtube-study-toolstrip button {
+    min-height: 52px;
+    font-size: clamp(9px, 2.6vw, 10px);
+    line-height: 1.15;
+  }
+
+  .youtube-study-switches {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .youtube-study-switch {
+    width: 100%;
+    justify-content: center;
+    gap: 6px;
+    font-size: 10px;
+  }
+
+  .youtube-study-switch > span {
+    flex: 0 0 31px;
+  }
+
+  .youtube-shadow-card > button,
+  .youtube-transcript-toggles button {
+    font-size: 10px;
+  }
+
+  .video-detail-page .youtube-shadow-card > button,
+  .video-detail-page .youtube-transcript-toggles button {
+    min-height: 44px;
+  }
+
+  .youtube-transcript-panel {
+    max-height: none;
+  }
+
+  .listening-performance-metrics small {
+    font-size: 10px;
+    letter-spacing: .02em;
+  }
+
+  .hsk-curriculum-heading > div > span {
+    font-size: 10px;
+  }
+
+  .hsk-curriculum-heading p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 359px) {
+  .video-detail-page.is-study-studio .video-detail-shell {
+    width: calc(100% - 18px);
+  }
+
+  .video-detail-header.is-compact h1 {
+    font-size: clamp(22px, 7.4vw, 25px);
+  }
+
+  .youtube-study-toolstrip {
+    gap: 4px;
+  }
+
+  .youtube-study-toolstrip button {
+    padding-inline: 2px;
+    font-size: 9px;
+  }
+
+  .youtube-study-switches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) and (min-width: 560px) and (max-width: 980px) {
+  :where(
+    .video-library-shell,
+    .video-detail-shell,
+    .listening-studio,
+    .writing-catalog-page,
+    .writing-lesson-page,
+    .himi-writing-studio,
+    .game-center-dashboard
+  ) {
+    padding-top: max(10px, env(safe-area-inset-top));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  .video-detail-page.is-study-studio .video-detail-shell {
+    width: min(calc(100% - 28px), 900px);
+  }
+
+  .youtube-study-studio,
+  .youtube-study-studio.has-dictation,
+  .youtube-study-studio.has-dictation.transcript-is-hidden {
+    grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr);
+  }
+
+  .youtube-study-frame {
+    max-height: calc(100dvh - 118px);
+  }
+
+  .learner-app-shell .rail-toggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .video-detail-page .youtube-study-toolstrip button,
+  .video-detail-page .youtube-study-switch,
+  .video-detail-page .youtube-shadow-card > button,
+  .video-detail-page .youtube-transcript-toggles button,
+  .video-detail-page .dictation-level-tabs button,
+  .video-detail-page .dictation-navigation button,
+  .video-detail-page .dictation-prompt button,
+  .video-detail-page .dictation-actions button {
+    min-height: 44px;
+  }
+}
+
+@media (pointer: coarse) {
+  :where(button, [role="button"], input, select, textarea) {
+    min-height: 44px;
+  }
+
+  :where(.rail-toggle, .video-detail-back, .listening-back) {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(
+    .home-portal,
+    .course-library-page,
+    .video-library-page,
+    .video-detail-page,
+    .listening-studio,
+    .game-center-dashboard,
+    .writing-catalog-page,
+    .writing-lesson-page,
+    .himi-writing-studio,
+    .vip-page,
+    .account-page
+  ) *,
+  :where(
+    .home-portal,
+    .course-library-page,
+    .video-library-page,
+    .video-detail-page,
+    .listening-studio,
+    .game-center-dashboard,
+    .writing-catalog-page,
+    .writing-lesson-page,
+    .himi-writing-studio,
+    .vip-page,
+    .account-page
+  ) *::before,
+  :where(
+    .home-portal,
+    .course-library-page,
+    .video-library-page,
+    .video-detail-page,
+    .listening-studio,
+    .game-center-dashboard,
+    .writing-catalog-page,
+    .writing-lesson-page,
+    .himi-writing-studio,
+    .vip-page,
+    .account-page
+  ) *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

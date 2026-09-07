@@ -38,10 +38,14 @@ test("prototype includes learner, VIP and admin routes", async () => {
   const files = await Promise.all([read("app/courses/page.tsx"), read("app/vip/page.tsx"), read("app/admin/page.tsx")]);
   assert.match(files[0], /CourseLibraryView/);
   assert.match(files[1], /getVipUpgradeOverview/);
-  assert.match(files[1], /: "Nâng cấp";/);
-  assert.doesNotMatch(files[1], /Gửi yêu cầu kích hoạt/);
+  assert.doesNotMatch(files[1], /Quyền lợi của bạn|Điều kiện áp dụng/);
+  assert.doesNotMatch(files[1], /Tiến độ của bạn luôn được giữ lại/);
+  assert.match(files[1], /Xem nội dung VIP/);
+  assert.match(files[1], /Đọc điều khoản đầy đủ/);
+  assert.match(files[1], /Chọn gói VIP phù hợp/);
   assert.match(files[1], /VipTransferFlow/);
-  assert.match(files[1], /Thanh toán một lần qua SePay/);
+  assert.match(files[1], /Đầy đủ quyền VIP trong \$\{plan\.durationDays\} ngày/);
+  assert.match(files[1], /Đầy đủ quyền VIP, không cần gia hạn/);
   assert.match(files[2], /Tổng quan vận hành/);
 });
 
@@ -261,9 +265,11 @@ test("admin business console exposes dashboard, users, VIP payments and analytic
 });
 
 test("account page uses the approved profile-first layout without learning progress", async () => {
-  const [account, session] = await Promise.all([
+  const [account, passwordSheet, session, walletStyles] = await Promise.all([
     read("app/account/page.tsx"),
+    read("components/account-password-sheet.tsx"),
     read("lib/auth-session.ts"),
+    read("app/account-wallet.css"),
   ]);
 
   assert.match(account, /Tài khoản của tôi/);
@@ -271,10 +277,46 @@ test("account page uses the approved profile-first layout without learning progr
   assert.match(account, /Thông tin tài khoản/);
   assert.match(account, /Tài khoản &amp; bảo mật/);
   assert.match(account, /Ngày tham gia/);
-  assert.match(account, /account-security-details/);
+  assert.match(passwordSheet, /account-security-details/);
+  assert.match(account, /account-membership-vip/);
+  assert.match(account, /account-membership-free/);
+  assert.match(account, /account-membership-pending/);
+  assert.match(account, /Khám phá VIP/);
+  assert.match(account, /Đang chờ duyệt/);
+  assert.match(account, /AccountPasswordSheet/);
+  assert.match(passwordSheet, /showModal\(\)/);
+  assert.match(passwordSheet, /Cập nhật mật khẩu/);
+  assert.ok(account.indexOf("account-profile-hero") < account.indexOf("account-membership-band"));
+  assert.ok(account.indexOf("account-membership-band") < account.indexOf("Thông tin tài khoản"));
+  assert.match(walletStyles, /Responsive account structure/);
+  assert.match(walletStyles, /@media \(min-width: 721px\) and \(max-width: 1024px\)/);
+  assert.match(walletStyles, /account-membership-vip \.account-membership-band/);
+  assert.match(walletStyles, /account-vip-ticket-mobile\.webp/);
+  assert.match(walletStyles, /Active VIP mobile ticket/);
+  assert.match(account, /account-page-\$\{membershipState\}/);
+  assert.match(account, /account-membership-days/);
+  assert.match(account, /account-membership-meta-icon/);
+  assert.match(walletStyles, /Selected desktop direction/);
+  assert.match(walletStyles, /@media \(min-width: 1025px\)/);
+  assert.match(walletStyles, /\.account-page-vip \.account-membership-band::before/);
+  assert.match(walletStyles, /account-vip-ticket-notch-left-clean\.png/);
   assert.doesNotMatch(account, /getLearningSummary/);
   assert.doesNotMatch(account, /Tiến độ học tập|Tiếp tục phiên hôm nay/);
   assert.match(session, /createdAt: users\.createdAt/);
+});
+
+test("global UI typography uses Roboto with Vietnamese glyph coverage", async () => {
+  const [layout, globals] = await Promise.all([
+    read("app/layout.tsx"),
+    read("app/globals.css"),
+  ]);
+
+  assert.match(layout, /import \{ Roboto \} from "next\/font\/google"/);
+  assert.match(layout, /subsets: \["latin", "vietnamese"\]/);
+  assert.match(layout, /weight: \["400", "500", "600", "700", "800", "900"\]/);
+  assert.doesNotMatch(layout, /\bInter\b/);
+  assert.match(globals, /font-family: var\(--font-roboto\), "Roboto", "Arial", sans-serif/);
+  assert.match(globals, /font-synthesis: none/);
 });
 
 test("layout provides Vietnamese metadata", async () => {
@@ -468,11 +510,13 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   ]);
   assert.match(catalog, /getWritingLevels/);
   assert.match(catalog, /\{lessonCount\} bài học/);
+  assert.doesNotMatch(catalog, /<span>6 cấp độ/);
   assert.match(catalog, /href=\{`\/writing\/\$\{level\.id\}`\}/);
   assert.match(content, /WRITING_LEVEL_IDS/);
   assert.match(content, /getHskLearningLessonContent/);
   assert.match(lessons, /getWritingLessons/);
   assert.match(lessons, /lessons\.map/);
+  assert.doesNotMatch(lessons, /writing-lesson-list-heading/);
   assert.match(lessons, /href=\{`\/writing\/\$\{level\.id\}\/\$\{lesson\.id\}\/practice`\}/);
   assert.match(legacyPractice, /redirect/);
   assert.match(practice, /HimiWritingStudio/);
@@ -485,11 +529,15 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   assert.match(studio, /Đang phát lại thứ tự từng nét/);
   assert.match(studio, /Đang tự động phát thứ tự từng nét/);
   assert.doesNotMatch(studio, /prefers-reduced-motion/);
+  assert.doesNotMatch(studio, /himi-writing-daily-card/);
+  assert.doesNotMatch(studio, /himi-writing-rule-card/);
+  assert.match(studio, /himi-writing-board-actions[\s\S]*himi-writing-navigation[\s\S]*<\/section>[\s\S]*himi-writing-character-info/);
   assert.match(studio, /import HanziWriter from "hanzi-writer"/);
   assert.doesNotMatch(studio, /import\("hanzi-writer"\)/);
   assert.match(styles, /\.writing-topic-grid/);
   assert.match(styles, /\.writing-lesson-grid/);
   assert.match(styles, /\.himi-writing-session-header/);
+  assert.match(styles, /@media \(max-width: 920px\) \{[\s\S]*?\.himi-writing-library \{ order: 1; \}[\s\S]*?\.himi-writing-practice \{ order: 2; \}/);
 });
 
 test("practice and game progress persist per authenticated learner", async () => {

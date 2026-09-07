@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
-import { type FocusEvent, type FormEvent, useEffect, useRef, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 import { ArrowRight, Home, KeyRound, LockKeyhole, Mail, RotateCcw, ShieldCheck, UserPlus, UserRound } from "lucide-react";
 import { BrandMark, BrandWordmark } from "@/components/brand-logo";
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from "@/lib/auth-validation";
@@ -33,7 +33,6 @@ type RegisterState = "idle" | "submitting" | "success";
 
 export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo, sent = false }: { mode: AuthMode; error?: string; initialRegisterSuccess?: boolean; returnTo: string; sent?: boolean }) {
   const [motionRun, setMotionRun] = useState(0);
-  const [passwordActive, setPasswordActive] = useState(false);
   const [registerState, setRegisterState] = useState<RegisterState>(initialRegisterSuccess ? "success" : "idle");
   const [registerError, setRegisterError] = useState<string>();
   const authRootRef = useRef<HTMLElement>(null);
@@ -62,18 +61,11 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
   const notice = error === "password_changed" || error === "password_reset";
   const visibleError = registerError ?? error;
 
-  const handlePasswordBlur = (event: FocusEvent<HTMLInputElement>) => {
-    const nextField = event.relatedTarget;
-    if (nextField instanceof HTMLInputElement && nextField.type === "password") return;
-    setPasswordActive(false);
-  };
-
   useGSAP(() => {
     const root = authRootRef.current;
     if (!learnerAuth || !root) return;
 
     const sceneArt = root.querySelector<HTMLElement>(".auth-login-scene-art");
-    const foreground = root.querySelector<HTMLElement>(".auth-login-scene-foreground");
     const walker = root.querySelector<HTMLElement>(".auth-motion-walker");
     const sprite = root.querySelector<HTMLElement>(".auth-motion-walker-sprite");
     const shadow = root.querySelector<HTMLElement>(".auth-motion-walker-shadow");
@@ -81,32 +73,28 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
     const brand = root.querySelector<HTMLElement>(".auth-scene-brand");
     const home = root.querySelector<HTMLElement>(".auth-scene-home");
     const replay = root.querySelector<HTMLElement>(".auth-scene-replay");
-    if (!sceneArt || !foreground || !walker || !sprite || !shadow || !card || !brand || !home || !replay) return;
+    if (!sceneArt || !walker || !sprite || !shadow || !card || !brand || !home || !replay) return;
 
     const interfaceElements = [brand, home, replay];
     const media = gsap.matchMedia();
 
     const buildEntrance = (mobile: boolean) => {
-      const cardXPercent = mobile ? 0 : -50;
-      const pocketY = mobile ? 160 : registering ? 62 : 108;
       const walkerMidX = mobile ? "61vw" : "55vw";
       const walkerPointX = mobile ? "76vw" : "68vw";
       const walkerExitX = mobile ? "80vw" : "72vw";
 
       gsap.set(sceneArt, { autoAlpha: 0, scale: 1.012, y: 14 });
-      gsap.set(foreground, { autoAlpha: 0, scale: 1, y: 8 });
       gsap.set(interfaceElements, { autoAlpha: 0, y: -7 });
       gsap.set(walker, { autoAlpha: 0, scale: .92, xPercent: -130, y: 0 });
       gsap.set(sprite, { backgroundPosition: "0% 0%", rotation: -.65, y: 0 });
       gsap.set(shadow, { autoAlpha: .42, scaleX: 1 });
       gsap.set(card, {
         autoAlpha: 0,
-        clipPath: "inset(42% 36% 42% 36% round 24px)",
-        rotation: -1.2,
-        scaleX: .2,
-        scaleY: .12,
-        xPercent: cardXPercent,
-        y: pocketY,
+        rotation: 0,
+        scale: .975,
+        skewX: 0,
+        skewY: 0,
+        y: mobile ? 38 : 54,
       });
 
       const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -119,52 +107,28 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
         .to(sprite, { duration: .1925, ease: "sine.inOut", repeat: 11, rotation: .65, y: -3, yoyo: true }, 0)
         .to(shadow, { autoAlpha: .27, duration: .1925, ease: "sine.inOut", repeat: 11, scaleX: .84, yoyo: true }, 0)
         .to(sceneArt, { autoAlpha: 1, duration: .42, scale: 1, y: 0 }, 1.82)
-        .to(foreground, { autoAlpha: 1, duration: .16, y: 0 }, 2.08)
         .to(card, {
           autoAlpha: 1,
-          clipPath: "inset(31% 27% 31% 27% round 24px)",
-          duration: .2,
-          ease: "power2.out",
-          rotation: -.7,
-          scaleX: .36,
-          scaleY: .27,
-          xPercent: cardXPercent,
-          y: pocketY - 8,
-        }, 2.18)
-        .to(card, {
-          clipPath: "inset(2% round 27px)",
-          duration: .5,
+          duration: .7,
           ease: "power4.out",
-          rotation: .24,
-          scaleX: .96,
-          scaleY: .985,
-          xPercent: cardXPercent,
-          y: -16,
-        }, 2.38)
-        .to(card, {
-          clipPath: "inset(0 round 27px)",
-          duration: .4,
-          ease: "power3.out",
           rotation: 0,
-          scaleX: 1,
-          scaleY: 1,
-          xPercent: cardXPercent,
+          scale: 1,
+          skewX: 0,
+          skewY: 0,
           y: 0,
-        }, 2.82)
-        .to(foreground, { autoAlpha: 0, duration: .42, ease: "power2.out", scale: 1.004, y: -4 }, 3.02)
-        .to(interfaceElements, { autoAlpha: 1, duration: .46, stagger: .05, y: 0 }, 3.08);
+        }, 2.18)
+        .to(interfaceElements, { autoAlpha: 1, duration: .46, stagger: .05, y: 0 }, 2.56);
 
       return () => timeline.kill();
     };
 
-    media.add("(min-width: 901px) and (prefers-reduced-motion: no-preference)", () => buildEntrance(false));
-    media.add("(max-width: 900px) and (prefers-reduced-motion: no-preference)", () => buildEntrance(true));
+    media.add("(min-width: 901px) and (min-height: 501px) and (prefers-reduced-motion: no-preference), (min-width: 981px) and (prefers-reduced-motion: no-preference)", () => buildEntrance(false));
+    media.add("(max-width: 900px) and (prefers-reduced-motion: no-preference), (orientation: landscape) and (max-height: 500px) and (min-width: 901px) and (max-width: 980px) and (prefers-reduced-motion: no-preference)", () => buildEntrance(true));
     media.add("(prefers-reduced-motion: reduce)", () => {
-      const mobile = window.matchMedia("(max-width: 900px)").matches;
-      gsap.set([walker, foreground], { display: "none" });
+      gsap.set(walker, { display: "none" });
       gsap.set(sceneArt, { autoAlpha: 1, scale: 1, y: 0 });
       gsap.set(interfaceElements, { autoAlpha: 1, y: 0 });
-      gsap.set(card, { autoAlpha: 1, clipPath: "inset(0 round 27px)", rotation: 0, scale: 1, xPercent: mobile ? 0 : -50, y: 0 });
+      gsap.set(card, { autoAlpha: 1, rotation: 0, scale: 1, skewX: 0, skewY: 0, y: 0 });
     });
 
     return () => media.revert();
@@ -223,7 +187,6 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
         return;
       }
 
-      setPasswordActive(false);
       setRegisterState("success");
       redirectTimer.current = window.setTimeout(() => window.location.assign(result.redirectTo!), 1900);
     } catch {
@@ -232,11 +195,35 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
     }
   };
 
-  return <main className={`auth-page auth-gsap-motion ${learnerAuth ? "auth-page-login-scene" : ""} ${forgotPassword ? "auth-page-forgot-scene" : ""} ${passwordActive ? "auth-password-is-active" : ""} ${registerState === "success" ? "auth-register-is-success" : ""}`.trim()} ref={authRootRef}>
+  const authPanel = <section className={`auth-card ${admin ? "auth-card-admin" : ""} ${learnerAuth ? "auth-card-login-scene" : ""} ${registering ? "auth-card-register-scene" : ""} ${forgotPassword ? "auth-card-forgot-scene" : ""}`.trim()}>
+    {!learnerAuth ? <div className="auth-brand"><BrandMark priority /><BrandWordmark /></div> : null}
+    {!learnerAuth ? <div className="auth-icon"><Icon size={24} /></div> : null}
+    <div className="auth-heading"><span>{admin ? "Himi Chinese Console" : "Tài khoản Himi Chinese"}</span><h1>{title}</h1><p>{description}</p></div>
+    {visibleError && errorMessages[visibleError] ? <p className={notice ? "auth-notice" : "auth-error"} role="status">{errorMessages[visibleError]}</p> : null}
+    {sent ? <p className="auth-notice" role="status">Nếu email khớp với một tài khoản, liên kết đặt lại mật khẩu đã được gửi. Hãy kiểm tra cả thư rác.</p> : null}
+    <form action={action} className="auth-form" method="post" onSubmit={handleRegisterSubmit}>
+      {!forgotPassword ? <input name="returnTo" type="hidden" value={returnTo} /> : null}
+      {admin ? <input name="mode" type="hidden" value="admin" /> : null}
+      {registering ? <label><span>Họ và tên</span><span className="auth-input-shell"><UserRound aria-hidden="true" size={18} /><input autoComplete="name" maxLength={120} minLength={2} name="displayName" placeholder="Nhập họ và tên của bạn" required type="text" /></span></label> : null}
+      <label><span>Email</span><span className="auth-input-shell"><Mail aria-hidden="true" size={18} /><input autoCapitalize="none" autoComplete="email" inputMode="email" maxLength={255} name="email" placeholder={learnerAuth ? "Nhập email của bạn" : undefined} required type="email" /></span></label>
+      {!forgotPassword ? <label><span>Mật khẩu</span><span className="auth-input-shell"><LockKeyhole aria-hidden="true" size={18} /><input autoComplete={registering ? "new-password" : "current-password"} maxLength={MAX_PASSWORD_LENGTH} minLength={MIN_PASSWORD_LENGTH} name="password" placeholder={learnerAuth ? "Nhập mật khẩu của bạn" : undefined} required type="password" /></span></label> : null}
+      {registering ? <label><span>Nhập lại mật khẩu</span><span className="auth-input-shell"><LockKeyhole aria-hidden="true" size={18} /><input autoComplete="new-password" maxLength={MAX_PASSWORD_LENGTH} minLength={MIN_PASSWORD_LENGTH} name="confirmPassword" placeholder="Nhập lại mật khẩu" required type="password" /></span></label> : null}
+      <button className="button button-primary button-full" disabled={registerState === "submitting"} type="submit"><span>{registerState === "submitting" ? "Đang tạo tài khoản..." : registering ? "Tạo tài khoản" : forgotPassword ? "Gửi liên kết đặt lại" : "Đăng nhập"}</span>{learnerAuth ? <ArrowRight aria-hidden="true" size={18} /> : null}</button>
+    </form>
+    <div className="auth-switch">
+      {admin
+        ? <><Link href="/login">Đăng nhập người học</Link><span>·</span><Link href="/">Về trang chủ</Link></>
+        : registering
+          ? <p>Đã có tài khoản? <Link href={`/login?returnTo=${encodeURIComponent(returnTo)}`}>Đăng nhập</Link></p>
+          : forgotPassword
+            ? <p><Link href={`/login?returnTo=${encodeURIComponent(returnTo)}`}>Quay lại đăng nhập</Link></p>
+          : <div><p><Link href="/forgot-password">Quên mật khẩu?</Link></p><p>Chưa có tài khoản? <Link href={`/register?returnTo=${encodeURIComponent(returnTo)}`}>Đăng ký ngay</Link></p></div>}
+    </div>
+  </section>;
+
+  return <main className={`auth-page auth-gsap-motion ${learnerAuth ? "auth-page-login-scene" : ""} ${registering ? "auth-page-register-scene" : ""} ${forgotPassword ? "auth-page-forgot-scene" : ""} ${registerState === "success" ? "auth-register-is-success" : ""}`.trim()} ref={authRootRef}>
     {learnerAuth ? <>
-      <div aria-hidden="true" className="auth-login-scene-art" />
-      <div aria-hidden="true" className="auth-login-scene-foreground" />
-      <span aria-hidden="true" className="auth-password-mascot"><Image alt="" height={961} src="/assets/auth/penguin-cover-eyes.png" unoptimized width={566} /></span>
+      <div className="auth-scene-stage"><div aria-hidden="true" className="auth-login-scene-art" />{authPanel}</div>
       <Link aria-label="Himi Chinese - Về trang chủ" className="auth-scene-brand" href="/"><BrandMark priority /><BrandWordmark /></Link>
       <Link className="auth-scene-home" href="/"><Home aria-hidden="true" size={17} />Về trang chủ</Link>
       <button aria-label="Phát lại chuyển động" className="auth-scene-replay" onClick={() => setMotionRun((run) => run + 1)} title="Xem lại chuyển động" type="button"><RotateCcw aria-hidden="true" size={17} /></button>
@@ -252,29 +239,6 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
         </div>
       </div>
     </section> : null}
-    <section className={`auth-card ${admin ? "auth-card-admin" : ""} ${learnerAuth ? "auth-card-login-scene" : ""} ${registering ? "auth-card-register-scene" : ""} ${forgotPassword ? "auth-card-forgot-scene" : ""}`.trim()}>
-    {!learnerAuth ? <div className="auth-brand"><BrandMark priority /><BrandWordmark /></div> : null}
-    {!learnerAuth ? <div className="auth-icon"><Icon size={24} /></div> : null}
-    <div className="auth-heading"><span>{admin ? "Himi Chinese Console" : "Tài khoản Himi Chinese"}</span><h1>{title}</h1><p>{description}</p></div>
-    {visibleError && errorMessages[visibleError] ? <p className={notice ? "auth-notice" : "auth-error"} role="status">{errorMessages[visibleError]}</p> : null}
-    {sent ? <p className="auth-notice" role="status">Nếu email khớp với một tài khoản, liên kết đặt lại mật khẩu đã được gửi. Hãy kiểm tra cả thư rác.</p> : null}
-    <form action={action} className="auth-form" method="post" onSubmit={handleRegisterSubmit}>
-      {!forgotPassword ? <input name="returnTo" type="hidden" value={returnTo} /> : null}
-      {admin ? <input name="mode" type="hidden" value="admin" /> : null}
-      {registering ? <label><span>Họ và tên</span><span className="auth-input-shell"><UserRound aria-hidden="true" size={18} /><input autoComplete="name" maxLength={120} minLength={2} name="displayName" placeholder="Nhập họ và tên của bạn" required type="text" /></span></label> : null}
-      <label><span>Email</span><span className="auth-input-shell"><Mail aria-hidden="true" size={18} /><input autoCapitalize="none" autoComplete="email" inputMode="email" maxLength={255} name="email" placeholder={learnerAuth ? "Nhập email của bạn" : undefined} required type="email" /></span></label>
-      {!forgotPassword ? <label><span>Mật khẩu</span><span className="auth-input-shell"><LockKeyhole aria-hidden="true" size={18} /><input autoComplete={registering ? "new-password" : "current-password"} maxLength={MAX_PASSWORD_LENGTH} minLength={MIN_PASSWORD_LENGTH} name="password" onBlur={handlePasswordBlur} onFocus={() => setPasswordActive(true)} placeholder={learnerAuth ? "Nhập mật khẩu của bạn" : undefined} required type="password" /></span></label> : null}
-      {registering ? <label><span>Nhập lại mật khẩu</span><span className="auth-input-shell"><LockKeyhole aria-hidden="true" size={18} /><input autoComplete="new-password" maxLength={MAX_PASSWORD_LENGTH} minLength={MIN_PASSWORD_LENGTH} name="confirmPassword" onBlur={handlePasswordBlur} onFocus={() => setPasswordActive(true)} placeholder="Nhập lại mật khẩu" required type="password" /></span></label> : null}
-      <button className="button button-primary button-full" disabled={registerState === "submitting"} type="submit"><span>{registerState === "submitting" ? "Đang tạo tài khoản..." : registering ? "Tạo tài khoản" : forgotPassword ? "Gửi liên kết đặt lại" : "Đăng nhập"}</span>{learnerAuth ? <ArrowRight aria-hidden="true" size={18} /> : null}</button>
-    </form>
-    <div className="auth-switch">
-      {admin
-        ? <><Link href="/login">Đăng nhập người học</Link><span>·</span><Link href="/">Về trang chủ</Link></>
-        : registering
-          ? <p>Đã có tài khoản? <Link href={`/login?returnTo=${encodeURIComponent(returnTo)}`}>Đăng nhập</Link></p>
-          : forgotPassword
-            ? <p><Link href={`/login?returnTo=${encodeURIComponent(returnTo)}`}>Quay lại đăng nhập</Link></p>
-          : <div><p><Link href="/forgot-password">Quên mật khẩu?</Link></p><p>Chưa có tài khoản? <Link href={`/register?returnTo=${encodeURIComponent(returnTo)}`}>Đăng ký ngay</Link></p></div>}
-    </div>
-  </section></main>;
+    {!learnerAuth ? authPanel : null}
+  </main>;
 }

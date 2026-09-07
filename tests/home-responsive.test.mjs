@@ -39,7 +39,7 @@ test("home portal uses the rhythmic Himi headline and Roboto Vietnamese display 
   assert.match(page, /Tình huống thật\. Phản xạ tự nhiên\./);
   assert.match(layout, /Roboto/);
   assert.match(layout, /subsets:\s*\["latin", "vietnamese"\]/);
-  assert.match(layout, /weight:\s*"800"/);
+  assert.match(layout, /weight:\s*\[[^\]]*"800"[^\]]*\]/);
   assert.match(css, /font-family:\s*var\(--font-roboto\) !important/);
   assert.match(css, /\.home-portal-copy h1 em[\s\S]*color:\s*#ff4c3b/);
 });

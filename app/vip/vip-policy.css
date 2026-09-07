@@ -1,0 +1,94 @@
+.vip-page {
+  padding-bottom: 64px;
+  color: #133f38;
+}
+
+.vip-page-header .himi-section-banner.is-vip {
+  border-color: rgba(225, 205, 167, .82);
+  box-shadow: 0 22px 58px rgba(85, 67, 30, .1);
+}
+
+.vip-purchase-section {
+  margin-top: 28px;
+}
+
+.vip-purchase-heading {
+  max-width: 720px;
+  display: grid;
+  gap: 8px;
+}
+
+.vip-purchase-heading h2 {
+  margin: 0;
+  color: #103f38;
+  font-size: clamp(27px, 2.7vw, 37px);
+  font-weight: 790;
+  line-height: 1.08;
+  letter-spacing: -.04em;
+}
+
+.vip-purchase-heading p {
+  margin: 0;
+  color: #6b7e79;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.vip-purchase-section .vip-pricing-grid {
+  margin-top: 22px;
+  padding: 0;
+}
+
+.vip-bottom-actions {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.vip-policy-button {
+  min-height: 52px;
+  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 780;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+}
+
+.vip-policy-button:hover { transform: translateY(-2px); }
+.vip-policy-button:focus-visible { outline: 3px solid rgba(9, 136, 119, .24); outline-offset: 3px; }
+.vip-policy-button.is-primary { color: #fff; background: #ff5c4d; box-shadow: 0 11px 25px rgba(237, 85, 66, .2); }
+.vip-policy-button.is-primary:hover { background: #ed4f41; box-shadow: 0 14px 30px rgba(237, 85, 66, .26); }
+.vip-policy-button.is-secondary { color: #155b50; border-color: #cbded8; background: #fff; }
+.vip-policy-button.is-secondary:hover { box-shadow: 0 10px 22px rgba(31, 85, 73, .09); }
+.vip-policy-button svg { transition: transform 220ms ease; }
+.vip-policy-button.is-primary:hover svg { transform: translateX(2px); }
+
+.vip-current-status > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (max-width: 720px) {
+  .vip-page { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+  .vip-purchase-section { margin-top: 20px; }
+  .vip-purchase-heading { gap: 7px; }
+  .vip-purchase-heading h2 { font-size: clamp(25px, 7.5vw, 30px); }
+  .vip-purchase-heading p { font-size: 12px; }
+  .vip-purchase-section .vip-pricing-grid { margin-top: 17px; padding-block: 0; }
+  .vip-bottom-actions { margin-top: 14px; grid-template-columns: 1fr; gap: 9px; }
+  .vip-policy-button { min-height: 48px; font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vip-policy-button,
+  .vip-policy-button svg { transition: none; }
+}

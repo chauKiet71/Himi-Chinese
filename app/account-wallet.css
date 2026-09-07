@@ -1,0 +1,2249 @@
+/* Account membership wallet — selected mobile direction.
+ * Desktop keeps the approved profile-first layout; phones combine profile and
+ * membership into one compact card with explicit Free, pending, and VIP states. */
+
+.account-mobile-header,
+.account-wallet-mascot,
+.account-profile-verified,
+.account-membership-status-badge,
+.account-membership-short-status,
+.account-membership-days,
+.account-membership-expiry {
+  display: none;
+}
+
+.account-membership-meta-icon {
+  display: none;
+}
+
+.account-membership-wallet {
+  display: contents;
+}
+
+html[data-account-sheet-open="true"] {
+  overflow: hidden;
+}
+
+.account-password-dialog {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  inset: 0;
+  margin: 0;
+  padding: 24px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.account-password-dialog[open] {
+  display: grid;
+}
+
+.account-password-dialog::backdrop {
+  background: rgba(24, 21, 20, .46);
+  backdrop-filter: blur(5px);
+  animation: account-sheet-backdrop-in 180ms ease-out both;
+}
+
+.account-password-sheet {
+  width: min(540px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  padding: 28px;
+  overflow: auto;
+  color: #272322;
+  border: 1px solid rgba(94, 72, 64, .12);
+  border-radius: 28px;
+  background: #fffdfc;
+  box-shadow: 0 34px 92px rgba(50, 37, 33, .28);
+  animation: account-sheet-in 280ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.account-password-sheet-handle {
+  display: none;
+}
+
+.account-password-sheet > header,
+.account-password-sheet > header > div {
+  display: flex;
+  align-items: center;
+}
+
+.account-password-sheet > header {
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.account-password-sheet > header > div {
+  min-width: 0;
+  gap: 11px;
+}
+
+.account-password-sheet h2 {
+  margin: 0;
+  color: #272322;
+  font-size: 26px;
+  font-weight: 780;
+  line-height: 1.1;
+  letter-spacing: -.035em;
+}
+
+.account-password-sheet-icon,
+.account-password-sheet > header > button {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.account-password-sheet-icon {
+  color: #0a866f;
+  background: #e8f6f1;
+}
+
+.account-password-sheet > header > button {
+  color: #2d2928;
+  border: 0;
+  background: #f3efed;
+  cursor: pointer;
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.account-password-sheet > header > button:hover {
+  background: #ebe5e2;
+  transform: rotate(4deg);
+}
+
+.account-password-sheet > p {
+  margin: 20px 0 22px;
+  padding: 13px 15px;
+  color: #56616f;
+  border-radius: 14px;
+  background: #f2f8f6;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.account-password-sheet-form {
+  display: grid;
+  gap: 15px;
+}
+
+.account-password-field {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+  color: #4d4947;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.account-password-input-shell {
+  min-height: 52px;
+  padding: 0 12px 0 14px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  color: #7a716d;
+  border: 1px solid #d9ceca;
+  border-radius: 14px;
+  background: #fff;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.account-password-input-shell:focus-within {
+  border-color: #ff5a43;
+  box-shadow: 0 0 0 4px rgba(255, 90, 67, .12);
+}
+
+.account-password-input-shell input {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  padding: 0;
+  color: #282321;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 560;
+}
+
+.account-password-input-shell input::placeholder {
+  color: #aea6a2;
+}
+
+.account-password-input-shell > button {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  color: #706966;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.account-password-submit,
+.account-password-cancel {
+  min-height: 50px;
+  border: 0;
+  border-radius: 14px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 760;
+  cursor: pointer;
+}
+
+.account-password-submit {
+  margin-top: 4px;
+  color: #fff;
+  background: #ff4d3b;
+  box-shadow: 0 12px 26px rgba(255, 77, 59, .22);
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.account-password-submit:hover {
+  background: #f43f2f;
+  box-shadow: 0 15px 30px rgba(255, 77, 59, .28);
+  transform: translateY(-1px);
+}
+
+.account-password-cancel {
+  min-height: 42px;
+  color: #ee4b38;
+  background: transparent;
+}
+
+.account-password-sheet :is(button, input):focus-visible,
+.account-mobile-header a:focus-visible,
+.account-membership-band > a:focus-visible {
+  outline: 3px solid rgba(255, 86, 64, .3);
+  outline-offset: 3px;
+}
+
+@keyframes account-sheet-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes account-sheet-in {
+  from { opacity: 0; transform: translateY(18px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 720px) {
+  .account-wallet-redesign.account-page {
+    min-height: 100dvh;
+    padding: 0;
+    overflow: visible;
+    color: #2c2928;
+    background: #fffdfb;
+  }
+
+  .account-wallet-redesign .account-page-inner {
+    width: 100%;
+    padding: 0 0 max(108px, calc(82px + env(safe-area-inset-bottom)));
+  }
+
+  .account-mobile-header {
+    min-height: 54px;
+    padding: env(safe-area-inset-top) 18px 0;
+    position: sticky;
+    z-index: 20;
+    top: 0;
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    align-items: center;
+    color: #211f1e;
+    border-bottom: 1px solid rgba(82, 65, 60, .08);
+    background: rgba(255, 253, 251, .9);
+    backdrop-filter: blur(18px) saturate(1.2);
+  }
+
+  .account-mobile-header strong {
+    justify-self: center;
+    font-size: 23px;
+    font-weight: 780;
+    letter-spacing: -.035em;
+  }
+
+  .account-mobile-header a {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    color: inherit;
+    border-radius: 14px;
+    transition: color 160ms ease, background-color 160ms ease, transform 160ms ease;
+  }
+
+  .account-mobile-header a:last-child {
+    justify-self: end;
+  }
+
+  .account-mobile-header a:active {
+    color: #ff4f3c;
+    background: #fff0ec;
+    transform: scale(.94);
+  }
+
+  .account-wallet-redesign .account-page-title {
+    display: none;
+  }
+
+  .account-wallet-redesign .account-feedback {
+    width: auto;
+    margin: 12px 16px 0;
+  }
+
+  .account-membership-wallet {
+    min-height: 300px;
+    margin: 8px 16px 0;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    isolation: isolate;
+    border: 1px solid rgba(255, 92, 61, .42);
+    border-radius: 25px;
+    background: #fff9f5;
+    box-shadow: 0 16px 34px rgba(87, 50, 39, .12);
+  }
+
+  .account-membership-wallet::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 15% 12%, rgba(255, 255, 255, .34), transparent 30%),
+      radial-gradient(circle at 88% 80%, rgba(255, 142, 79, .18), transparent 34%);
+  }
+
+  .account-membership-wallet.account-membership-vip {
+    min-height: 246px;
+    color: #fff;
+    border-color: rgba(255, 184, 135, .72);
+    background: linear-gradient(135deg, #ff4939 0%, #ff653f 55%, #ff9a56 100%);
+    box-shadow: 0 18px 38px rgba(238, 69, 45, .25);
+  }
+
+  .account-membership-wallet.account-membership-pending {
+    min-height: 304px;
+    border-color: #ebc479;
+    background: #fff9ec;
+    box-shadow: 0 16px 34px rgba(113, 78, 28, .12);
+  }
+
+  .account-wallet-redesign .account-profile-hero {
+    width: 76%;
+    min-height: 0;
+    padding: 18px 18px 7px;
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 70px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    isolation: auto;
+  }
+
+  .account-wallet-redesign .account-profile-hero::after {
+    display: none;
+  }
+
+  .account-wallet-redesign .account-avatar-uploader {
+    width: 70px;
+  }
+
+  .account-wallet-redesign .account-profile-avatar {
+    width: 68px;
+    height: 68px;
+    margin: 0;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, .92);
+    background: linear-gradient(145deg, #ff5039, #ff8a24);
+    box-shadow: 0 8px 22px rgba(108, 46, 31, .18);
+  }
+
+  .account-membership-vip .account-profile-avatar {
+    border-color: rgba(255, 255, 255, .86);
+    background: rgba(232, 70, 32, .58);
+  }
+
+  .account-wallet-redesign .account-profile-avatar-initials {
+    font-size: 24px;
+  }
+
+  .account-wallet-redesign .account-profile-avatar > button {
+    width: 30px;
+    height: 30px;
+    right: -4px;
+    bottom: 0;
+    color: #fff;
+    border-width: 3px;
+    border-color: #fff9f5;
+    background: #ff582f;
+  }
+
+  .account-membership-vip .account-profile-avatar > button {
+    border-color: #ff6842;
+    background: rgba(255, 255, 255, .18);
+  }
+
+  .account-membership-pending .account-profile-avatar > button {
+    border-color: #fff9ec;
+  }
+
+  .account-wallet-redesign .account-profile-avatar > button svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .account-wallet-redesign .account-avatar-status {
+    width: 112px;
+    margin: 7px 0 0 -21px;
+    color: #6f4a3e;
+    font-size: 10px;
+  }
+
+  .account-membership-vip .account-avatar-status {
+    color: rgba(255, 255, 255, .9);
+  }
+
+  .account-wallet-redesign .account-profile-copy {
+    min-width: 0;
+    margin: 0;
+  }
+
+  .account-wallet-redesign .account-profile-copy h2 {
+    max-width: 100%;
+    margin: 0;
+    overflow: hidden;
+    color: #282321;
+    font-size: clamp(23px, 7vw, 29px);
+    font-weight: 790;
+    line-height: 1.05;
+    letter-spacing: -.045em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .account-membership-vip .account-profile-copy h2 {
+    color: #fff;
+  }
+
+  .account-wallet-redesign .account-profile-copy > p,
+  .account-wallet-redesign .account-profile-email,
+  .account-wallet-redesign .account-vip-outline {
+    display: none;
+  }
+
+  .account-profile-verified {
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 9px;
+    padding: 5px 9px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #087967;
+    border: 1px solid rgba(16, 145, 118, .22);
+    border-radius: 999px;
+    background: rgba(236, 249, 244, .92);
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 760;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .account-wallet-mascot {
+    width: 166px;
+    height: 166px;
+    position: absolute;
+    z-index: 1;
+    top: 112px;
+    right: -7px;
+    display: block;
+    object-fit: contain;
+    filter: saturate(.9);
+    transform: rotate(1deg);
+    transition: transform 420ms cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .account-membership-wallet:hover .account-wallet-mascot {
+    transform: translateY(-3px) rotate(-1deg) scale(1.02);
+  }
+
+  .account-membership-vip .account-wallet-mascot {
+    width: 174px;
+    height: 174px;
+    top: 38px;
+    right: -5px;
+    filter: saturate(1.04) drop-shadow(0 12px 18px rgba(135, 42, 24, .14));
+  }
+
+  .account-membership-pending .account-wallet-mascot {
+    width: 156px;
+    height: 156px;
+    top: 121px;
+    opacity: .82;
+    filter: saturate(.72);
+  }
+
+  .account-wallet-redesign .account-membership-band,
+  .account-wallet-redesign .account-membership-band.is-active {
+    min-height: 188px;
+    padding: 8px 18px 18px;
+    position: relative;
+    z-index: 2;
+    display: block;
+    color: inherit;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .account-membership-vip .account-membership-band,
+  .account-membership-vip .account-membership-band.is-active {
+    min-height: 148px;
+  }
+
+  .account-membership-free .account-membership-band,
+  .account-membership-pending .account-membership-band {
+    min-height: 204px;
+  }
+
+  .account-wallet-redesign .account-membership-icon {
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    top: 9px;
+    left: 18px;
+    color: #ff513b;
+    border-radius: 12px;
+    background: #fff0ea;
+  }
+
+  .account-membership-vip .account-membership-icon {
+    color: #fff;
+    background: rgba(255, 255, 255, .14);
+  }
+
+  .account-membership-pending .account-membership-icon {
+    color: #9a681c;
+    background: #f7e8c6;
+  }
+
+  .account-wallet-redesign .account-membership-band > div {
+    width: 58%;
+    min-width: 0;
+    margin-left: 46px;
+    display: grid;
+    grid-template-columns: minmax(0, auto) auto;
+    align-items: center;
+    justify-content: start;
+    column-gap: 8px;
+  }
+
+  .account-membership-status-badge {
+    min-height: 24px;
+    padding: 0 9px;
+    display: inline-flex;
+    grid-column: 2;
+    grid-row: 1;
+    align-items: center;
+    justify-content: center;
+    color: #f0523d;
+    border-radius: 999px;
+    background: #ffe9e1;
+    font-size: 10px;
+    font-weight: 820;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .account-membership-vip .account-membership-status-badge {
+    color: #fff;
+    background: rgba(255, 255, 255, .16);
+  }
+
+  .account-membership-pending .account-membership-status-badge {
+    color: #80530f;
+    background: #f4e2b8;
+    font-size: 9px;
+  }
+
+  .account-membership-free .account-membership-status-badge {
+    position: absolute;
+    top: 11px;
+    left: 190px;
+  }
+
+  .account-membership-free .account-membership-band > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .account-membership-pending .account-membership-band > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .account-membership-pending .account-membership-status-badge {
+    width: fit-content;
+    margin-bottom: 6px;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .account-membership-pending .account-membership-band h2 {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .account-membership-pending .account-membership-short-status {
+    grid-row: 3;
+  }
+
+  .account-wallet-redesign .account-membership-band h2 {
+    min-width: 0;
+    margin: 0;
+    grid-column: 1;
+    grid-row: 1;
+    color: #363130;
+    font-size: 21px;
+    font-weight: 780;
+    line-height: 1.12;
+    letter-spacing: -.035em;
+  }
+
+  .account-membership-vip .account-membership-band h2 {
+    color: #fff;
+  }
+
+  .account-membership-short-status {
+    margin: 6px 0 0;
+    display: block;
+    grid-column: 1 / -1;
+    color: #746b67;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .account-membership-vip .account-membership-short-status {
+    color: rgba(255, 255, 255, .9);
+  }
+
+  .account-membership-pending .account-membership-short-status {
+    color: #7f6a47;
+  }
+
+  .account-wallet-redesign .account-membership-description {
+    margin: 16px 0 0;
+    padding-top: 13px;
+    display: block;
+    grid-column: 1 / -1;
+    color: #6d6562;
+    border-top: 1px dashed rgba(236, 101, 70, .25);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .account-membership-free .account-membership-description {
+    width: 140px;
+  }
+
+  .account-membership-pending .account-membership-description {
+    width: 154px;
+    grid-row: 4;
+  }
+
+  .account-membership-vip .account-membership-description {
+    display: none;
+  }
+
+  .account-membership-pending .account-membership-description {
+    color: #846e48;
+    border-top-color: rgba(155, 105, 29, .2);
+  }
+
+  .account-membership-expiry {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    display: grid;
+    gap: 1px;
+    color: #fff;
+  }
+
+  .account-membership-expiry small {
+    color: rgba(255, 255, 255, .78);
+    font-size: 10px;
+  }
+
+  .account-membership-expiry strong {
+    font-size: 15px;
+    font-weight: 720;
+  }
+
+  .account-wallet-redesign .account-membership-band > a {
+    min-height: 44px;
+    padding: 0 15px;
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #fff;
+    border: 0;
+    border-radius: 13px;
+    background: #ff4f3b;
+    box-shadow: 0 10px 22px rgba(239, 67, 45, .2);
+    font-size: 12px;
+    font-weight: 780;
+    line-height: 1;
+    white-space: nowrap;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .account-membership-free .account-membership-band > a,
+  .account-membership-pending .account-membership-band > a {
+    right: auto;
+    left: 18px;
+  }
+
+  .account-membership-vip .account-membership-band > a {
+    color: #ef4735;
+    background: rgba(255, 255, 255, .93);
+    box-shadow: 0 10px 24px rgba(136, 43, 26, .18);
+  }
+
+  .account-membership-pending .account-membership-band > a {
+    color: #fff;
+    background: #b97a1c;
+    box-shadow: 0 10px 22px rgba(139, 91, 22, .18);
+  }
+
+  .account-wallet-redesign .account-membership-band > a:active {
+    transform: scale(.96);
+  }
+
+  .account-wallet-redesign .account-pending-request {
+    margin: 12px 16px 0;
+    padding: 13px 14px;
+    border-radius: 16px;
+  }
+
+  .account-wallet-redesign .account-information {
+    margin: 14px 16px 0;
+  }
+
+  .account-wallet-redesign .account-information h2 {
+    display: none;
+  }
+
+  .account-wallet-redesign .account-information dl > div {
+    min-height: 58px;
+    padding: 0 4px;
+    display: grid;
+    grid-template-columns: minmax(112px, .8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #ebe4e1;
+  }
+
+  .account-wallet-redesign .account-information dt,
+  .account-wallet-redesign .account-information dd {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #66605d;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .account-wallet-redesign .account-information dt svg {
+    color: #ff4d3b;
+  }
+
+  .account-wallet-redesign .account-information dd {
+    min-width: 0;
+    justify-content: flex-end;
+    gap: 7px;
+    text-align: right;
+  }
+
+  .account-wallet-redesign .account-information dd > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .account-wallet-redesign .account-information dd em {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    flex: 0 0 32px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    font-size: 0;
+  }
+
+  .account-wallet-redesign .account-information dd em svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .account-wallet-redesign .account-security-panel {
+    margin: 27px 16px 0;
+  }
+
+  .account-wallet-redesign .account-security-panel h2 {
+    margin: 0 0 12px 3px;
+    color: #242120;
+    font-size: 20px;
+    font-weight: 790;
+    letter-spacing: -.03em;
+  }
+
+  .account-wallet-redesign .account-security-list {
+    overflow: hidden;
+    border: 1px solid #eee7e3;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 11px 28px rgba(68, 46, 39, .08);
+  }
+
+  .account-wallet-redesign .account-security-row {
+    min-height: 76px;
+    padding: 12px 15px;
+    grid-template-columns: 29px minmax(0, 1fr) auto;
+    gap: 12px;
+    color: #2d2927;
+  }
+
+  .account-wallet-redesign .account-security-row:hover {
+    background: #fff5f1;
+  }
+
+  .account-wallet-redesign .account-security-row > svg:first-child {
+    color: #ff4f3b;
+  }
+
+  .account-wallet-redesign .account-security-row strong {
+    color: #292523;
+    font-size: 14px;
+    font-weight: 740;
+  }
+
+  .account-wallet-redesign .account-security-row small {
+    color: #7a7471;
+    font-size: 11px;
+    line-height: 1.42;
+  }
+
+  .account-wallet-redesign .account-security-details,
+  .account-wallet-redesign .account-logout-form {
+    border-top: 1px solid #eee7e3;
+  }
+
+  .account-wallet-redesign .account-logout-form .account-security-row > svg:first-child,
+  .account-wallet-redesign .account-logout-form .account-security-row strong {
+    color: #e94636;
+  }
+
+  .account-wallet-redesign .account-page-footer {
+    margin: 24px 19px 0;
+    color: #9b918d;
+  }
+
+  .account-password-dialog {
+    padding: 0;
+    place-items: end center;
+  }
+
+  .account-password-dialog::backdrop {
+    background: rgba(27, 22, 20, .44);
+    backdrop-filter: blur(4px);
+  }
+
+  .account-password-sheet {
+    width: 100%;
+    max-height: min(90dvh, 720px);
+    padding: 10px 18px max(14px, env(safe-area-inset-bottom));
+    border: 0;
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -20px 60px rgba(46, 31, 26, .2);
+    animation-name: account-sheet-up;
+  }
+
+  .account-password-sheet-handle {
+    width: 48px;
+    height: 5px;
+    margin: 0 auto 12px;
+    display: block;
+    border-radius: 999px;
+    background: #c9c1be;
+  }
+
+  .account-password-sheet h2 {
+    font-size: 25px;
+  }
+
+  .account-password-sheet-icon {
+    display: none;
+  }
+
+  .account-password-sheet > p {
+    margin: 12px 0 13px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .account-password-sheet-form {
+    gap: 9px;
+  }
+
+  .account-password-field {
+    gap: 0;
+  }
+
+  .account-password-field > span:first-child {
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .account-password-input-shell {
+    min-height: 48px;
+  }
+
+  .account-password-input-shell input {
+    min-height: 46px;
+  }
+
+  .account-password-submit {
+    min-height: 48px;
+  }
+
+  .account-password-cancel {
+    min-height: 36px;
+  }
+}
+
+@keyframes account-sheet-up {
+  from { opacity: 0; transform: translateY(44px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 365px) {
+  .account-membership-wallet {
+    margin-inline: 12px;
+  }
+
+  .account-wallet-redesign .account-profile-hero {
+    width: 80%;
+    padding-inline: 15px;
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 11px;
+  }
+
+  .account-wallet-redesign .account-profile-avatar,
+  .account-wallet-redesign .account-avatar-uploader {
+    width: 60px;
+    height: 60px;
+  }
+
+  .account-wallet-redesign .account-profile-copy h2 {
+    font-size: 22px;
+  }
+
+  .account-membership-vip .account-wallet-mascot {
+    width: 176px;
+    height: 176px;
+    right: -22px;
+  }
+
+  .account-wallet-redesign .account-membership-band > div {
+    width: 62%;
+  }
+
+  .account-wallet-redesign .account-membership-band h2 {
+    font-size: 19px;
+  }
+
+  .account-membership-status-badge {
+    padding-inline: 7px;
+    font-size: 9px;
+  }
+
+  .account-wallet-redesign .account-information,
+  .account-wallet-redesign .account-security-panel,
+  .account-wallet-redesign .account-pending-request {
+    margin-inline: 12px;
+  }
+}
+
+/* Responsive account structure — keep the laptop information order on every
+ * viewport: profile first, membership band second, then account facts and
+ * security. The state lives on the wrapper so Free, pending, and VIP can share
+ * one layout without hiding or reordering product information. */
+@media (min-width: 721px) {
+  .account-membership-vip .account-membership-band,
+  .account-membership-vip .account-membership-band.is-active {
+    color: #3c2b27;
+    border-color: #ffc7b9;
+    background: linear-gradient(90deg, #fff0eb, #fff7f0);
+  }
+
+  .account-membership-vip .account-membership-icon {
+    color: #ff4f3b;
+    background: #ffe2da;
+  }
+
+  .account-membership-vip .account-membership-band h2,
+  .account-membership-vip .account-membership-band > a {
+    color: #e94735;
+  }
+
+  .account-membership-free .account-membership-band {
+    border-color: #e7dcd7;
+    background: linear-gradient(90deg, #fffaf7, #fffdfb);
+  }
+
+  .account-membership-free .account-membership-icon {
+    color: #ef604c;
+    background: #fff0eb;
+  }
+
+  .account-membership-free .account-membership-band h2 {
+    color: #4a3732;
+  }
+
+  .account-membership-free .account-membership-band > a {
+    color: #e94d3a;
+  }
+
+  .account-membership-pending .account-membership-band {
+    border-color: #ead4a8;
+    background: linear-gradient(90deg, #fff8e9, #fffdf8);
+  }
+
+  .account-membership-pending .account-membership-icon {
+    color: #916019;
+    background: #f7e8c8;
+  }
+
+  .account-membership-pending .account-membership-band h2,
+  .account-membership-pending .account-membership-band > a {
+    color: #805617;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1024px) {
+  .account-wallet-redesign .account-page-inner {
+    width: min(calc(100% - 48px), 920px);
+    padding-top: 30px;
+  }
+
+  .account-wallet-redesign .account-profile-hero {
+    min-height: 238px;
+    grid-template-columns: 132px minmax(0, 1fr);
+    gap: 34px;
+  }
+
+  .account-wallet-redesign .account-avatar-uploader {
+    width: 132px;
+  }
+
+  .account-wallet-redesign .account-profile-avatar {
+    width: 126px;
+    height: 126px;
+    margin-top: 52px;
+  }
+
+  .account-wallet-redesign .account-profile-copy {
+    margin-top: 56px;
+  }
+
+  .account-wallet-redesign .account-profile-copy h2 {
+    font-size: clamp(32px, 5vw, 40px);
+  }
+
+  .account-wallet-redesign .account-membership-band {
+    min-height: 96px;
+    padding: 17px 20px;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 840px) {
+  .account-wallet-redesign .account-profile-hero::after {
+    display: none;
+  }
+
+  .account-wallet-redesign .account-membership-band {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .account-wallet-redesign .account-membership-band > a {
+    padding: 12px 0 1px 66px;
+    grid-column: 1 / -1;
+    justify-content: space-between;
+    border-top: 1px solid rgba(91, 67, 60, .11);
+  }
+}
+
+@media (max-width: 720px) {
+  .account-membership-wallet,
+  .account-membership-wallet.account-membership-vip,
+  .account-membership-wallet.account-membership-pending {
+    min-height: 0;
+    margin: 8px 16px 0;
+    position: relative;
+    display: grid;
+    gap: 12px;
+    overflow: visible;
+    isolation: isolate;
+    color: #2c2928;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .account-membership-wallet::before {
+    display: none;
+  }
+
+  .account-wallet-redesign .account-profile-hero {
+    width: 100%;
+    min-height: 150px;
+    padding: 18px 128px 18px 16px;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    overflow: hidden;
+    isolation: isolate;
+    border: 1px solid #eee2dd;
+    border-radius: 22px;
+    background: #fffaf7;
+    box-shadow: 0 12px 28px rgba(77, 53, 45, .08);
+  }
+
+  .account-wallet-redesign .account-avatar-uploader {
+    width: 64px;
+  }
+
+  .account-wallet-redesign .account-profile-avatar {
+    width: 62px;
+    height: 62px;
+    margin: 0;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, .94);
+    background: linear-gradient(145deg, #ff5039, #ff8a24);
+    box-shadow: 0 8px 20px rgba(108, 46, 31, .16);
+  }
+
+  .account-membership-vip .account-profile-avatar {
+    color: #fff;
+    border-color: rgba(255, 255, 255, .94);
+    background: linear-gradient(145deg, #ff5039, #ff8a24);
+  }
+
+  .account-wallet-redesign .account-profile-avatar-initials {
+    font-size: 22px;
+  }
+
+  .account-wallet-redesign .account-profile-avatar > button,
+  .account-membership-vip .account-profile-avatar > button {
+    width: 29px;
+    height: 29px;
+    right: -15px;
+    bottom: -4px;
+    color: #fff;
+    border: 3px solid #fffaf7;
+    background: #ff582f;
+  }
+
+  .account-wallet-redesign .account-avatar-status,
+  .account-membership-vip .account-avatar-status {
+    width: 104px;
+    margin: 7px 0 0 -20px;
+    color: #75635d;
+    font-size: 9px;
+  }
+
+  .account-wallet-redesign .account-profile-copy {
+    min-width: 0;
+    margin: 0;
+  }
+
+  .account-wallet-redesign .account-profile-copy h2,
+  .account-membership-vip .account-profile-copy h2 {
+    max-width: 100%;
+    margin: 0;
+    overflow: hidden;
+    color: #282321;
+    font-size: clamp(22px, 6.4vw, 27px);
+    font-weight: 790;
+    line-height: 1.06;
+    letter-spacing: -.042em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .account-wallet-redesign .account-profile-copy > p {
+    margin: 8px 0 0;
+    display: block;
+    color: #716764;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .account-wallet-redesign .account-profile-email,
+  .account-wallet-redesign .account-vip-outline {
+    display: none;
+  }
+
+  .account-profile-verified {
+    margin-top: 8px;
+  }
+
+  .account-wallet-mascot,
+  .account-membership-vip .account-wallet-mascot,
+  .account-membership-pending .account-wallet-mascot {
+    width: 138px;
+    height: 138px;
+    position: absolute;
+    z-index: 3;
+    top: 7px;
+    right: -2px;
+    display: block;
+    opacity: .92;
+    object-fit: contain;
+    filter: saturate(.9) drop-shadow(0 10px 14px rgba(80, 44, 34, .1));
+    transform: rotate(1deg);
+  }
+
+  .account-wallet-redesign .account-membership-band,
+  .account-wallet-redesign .account-membership-band.is-active,
+  .account-membership-vip .account-membership-band,
+  .account-membership-vip .account-membership-band.is-active,
+  .account-membership-free .account-membership-band,
+  .account-membership-pending .account-membership-band {
+    min-height: 0;
+    padding: 16px;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    align-items: start;
+    gap: 12px;
+    color: #4a3732;
+    border: 1px solid #e8ddd8;
+    border-radius: 20px;
+    background: #fffdfb;
+    box-shadow: 0 10px 24px rgba(77, 53, 45, .06);
+  }
+
+  .account-membership-vip .account-membership-band,
+  .account-membership-vip .account-membership-band.is-active {
+    color: #3d2a25;
+    border-color: #ffc4b5;
+    background: linear-gradient(100deg, #fff0eb, #fff8f1);
+    box-shadow: 0 12px 27px rgba(225, 73, 47, .1);
+  }
+
+  .account-membership-pending .account-membership-band {
+    color: #6f4d18;
+    border-color: #ead4a8;
+    background: linear-gradient(100deg, #fff7e6, #fffdf8);
+    box-shadow: 0 10px 24px rgba(113, 78, 28, .08);
+  }
+
+  .account-wallet-redesign .account-membership-icon,
+  .account-membership-vip .account-membership-icon,
+  .account-membership-pending .account-membership-icon {
+    width: 42px;
+    height: 42px;
+    position: static;
+    display: grid;
+    place-items: center;
+    color: #ef5844;
+    border-radius: 13px;
+    background: #fff0eb;
+  }
+
+  .account-membership-vip .account-membership-icon {
+    color: #ff4f3b;
+    background: #ffe0d8;
+  }
+
+  .account-membership-pending .account-membership-icon {
+    color: #916019;
+    background: #f7e8c8;
+  }
+
+  .account-wallet-redesign .account-membership-band > div,
+  .account-membership-free .account-membership-band > div,
+  .account-membership-pending .account-membership-band > div {
+    width: auto;
+    min-width: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(0, auto) auto;
+    align-items: center;
+    justify-content: start;
+    column-gap: 8px;
+  }
+
+  .account-wallet-redesign .account-membership-band h2,
+  .account-membership-vip .account-membership-band h2,
+  .account-membership-pending .account-membership-band h2 {
+    min-width: 0;
+    margin: 1px 0 0;
+    grid-column: 1;
+    grid-row: 1;
+    color: #3f302c;
+    font-size: 17px;
+    font-weight: 780;
+    line-height: 1.2;
+    letter-spacing: -.025em;
+  }
+
+  .account-membership-vip .account-membership-band h2 {
+    color: #df4534;
+  }
+
+  .account-membership-pending .account-membership-band h2 {
+    color: #7d5517;
+  }
+
+  .account-membership-status-badge,
+  .account-membership-free .account-membership-status-badge,
+  .account-membership-pending .account-membership-status-badge {
+    min-height: 22px;
+    margin: 0;
+    padding: 0 8px;
+    position: static;
+    display: inline-flex;
+    grid-column: 2;
+    grid-row: 1;
+    align-items: center;
+    justify-content: center;
+    color: #e84a38;
+    border-radius: 999px;
+    background: #ffe7df;
+    font-size: 9px;
+    font-weight: 820;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .account-membership-pending .account-membership-status-badge {
+    color: #80530f;
+    background: #f4e2b8;
+  }
+
+  .account-membership-vip .account-membership-status-badge {
+    color: #df4534;
+    background: #ffe0d8;
+  }
+
+  .account-membership-short-status,
+  .account-membership-expiry {
+    display: none;
+  }
+
+  .account-wallet-redesign .account-membership-description,
+  .account-membership-free .account-membership-description,
+  .account-membership-pending .account-membership-description,
+  .account-membership-vip .account-membership-description {
+    width: auto;
+    margin: 6px 0 0;
+    padding: 0;
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    color: #706763;
+    border: 0;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .account-membership-pending .account-membership-description {
+    color: #806b49;
+  }
+
+  .account-wallet-redesign .account-membership-band > a,
+  .account-membership-free .account-membership-band > a,
+  .account-membership-pending .account-membership-band > a,
+  .account-membership-vip .account-membership-band > a {
+    width: 100%;
+    min-height: 44px;
+    margin-top: 2px;
+    padding: 10px 2px 0;
+    position: static;
+    grid-column: 1 / -1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: #e94d3a;
+    border: 0;
+    border-top: 1px solid rgba(230, 78, 58, .14);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    font-size: 12px;
+    font-weight: 780;
+  }
+
+  .account-membership-pending .account-membership-band > a {
+    color: #805617;
+    border-top-color: rgba(128, 86, 23, .14);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .account-wallet-redesign .account-information {
+    margin-top: 24px;
+  }
+
+  .account-wallet-redesign .account-information h2 {
+    margin: 0 0 12px 3px;
+    display: block;
+    color: #242120;
+    font-size: 20px;
+    font-weight: 790;
+    letter-spacing: -.03em;
+  }
+
+  .account-wallet-redesign .account-information dl {
+    overflow: hidden;
+    border: 1px solid #eee7e3;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 11px 28px rgba(68, 46, 39, .06);
+  }
+
+  .account-wallet-redesign .account-information dl > div {
+    min-height: 58px;
+    padding: 0 14px;
+    grid-template-columns: minmax(92px, .75fr) minmax(0, 1.25fr);
+  }
+
+  .account-wallet-redesign .account-information dl > div:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .account-wallet-redesign .account-profile-hero {
+    padding-right: 110px;
+    grid-template-columns: 60px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .account-wallet-redesign .account-avatar-uploader {
+    width: 60px;
+  }
+
+  .account-wallet-redesign .account-profile-avatar {
+    width: 58px;
+    height: 58px;
+  }
+
+  .account-wallet-mascot,
+  .account-membership-vip .account-wallet-mascot,
+  .account-membership-pending .account-wallet-mascot {
+    width: 122px;
+    height: 122px;
+    top: 18px;
+    right: -5px;
+  }
+}
+
+@media (max-width: 365px) {
+  .account-membership-wallet,
+  .account-membership-wallet.account-membership-vip,
+  .account-membership-wallet.account-membership-pending {
+    margin-inline: 12px;
+  }
+
+  .account-wallet-redesign .account-profile-hero {
+    min-height: 144px;
+    padding: 16px 96px 16px 14px;
+    grid-template-columns: 54px minmax(0, 1fr);
+  }
+
+  .account-wallet-redesign .account-avatar-uploader {
+    width: 54px;
+  }
+
+  .account-wallet-redesign .account-profile-avatar {
+    width: 52px;
+    height: 52px;
+  }
+
+  .account-wallet-redesign .account-profile-copy h2,
+  .account-membership-vip .account-profile-copy h2 {
+    font-size: 21px;
+  }
+
+  .account-profile-verified {
+    padding-inline: 7px;
+    font-size: 9px;
+  }
+
+  .account-wallet-mascot,
+  .account-membership-vip .account-wallet-mascot,
+  .account-membership-pending .account-wallet-mascot {
+    width: 108px;
+    height: 108px;
+    top: 22px;
+  }
+
+  .account-wallet-redesign .account-information,
+  .account-wallet-redesign .account-security-panel,
+  .account-wallet-redesign .account-pending-request {
+    margin-inline: 12px;
+  }
+}
+
+/* Active VIP mobile ticket — the profile and membership remain separate in
+ * the document, while sharing one premium ticket surface visually. */
+@media (max-width: 720px) {
+  .account-membership-wallet.account-membership-vip {
+    min-height: 228px;
+    margin-top: 3px;
+    margin-inline: 20px;
+    display: block;
+    gap: 0;
+    overflow: hidden;
+    color: #fff;
+    border: 1px solid rgba(255, 205, 170, .88);
+    border-radius: 24px;
+    background-color: #ff623f;
+    background-image: url("/assets/backgrounds/account-vip-ticket-mobile.webp");
+    background-position: left center;
+    background-size: 125% 100%;
+    box-shadow: 0 18px 38px rgba(220, 63, 40, .28), 0 3px 8px rgba(96, 45, 30, .12);
+  }
+
+  .account-membership-wallet.account-membership-vip::before {
+    display: none;
+  }
+
+  .account-membership-vip .account-profile-hero {
+    min-height: 106px;
+    padding: 18px 138px 6px 18px;
+    overflow: visible;
+    grid-template-columns: 70px minmax(0, 1fr);
+    gap: 13px;
+    color: #fff;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .account-membership-vip .account-avatar-uploader {
+    width: 70px;
+  }
+
+  .account-membership-vip .account-profile-avatar {
+    width: 70px;
+    height: 70px;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, .94);
+    background: rgba(222, 64, 30, .46);
+    box-shadow: 0 8px 20px rgba(105, 39, 25, .18);
+  }
+
+  .account-membership-vip .account-profile-avatar > button {
+    right: -12px;
+    bottom: -2px;
+    border-color: rgba(255, 255, 255, .94);
+    background: #f04a2e;
+  }
+
+  .account-membership-vip .account-avatar-status {
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .account-membership-vip .account-profile-copy h2 {
+    color: #fff;
+    font-size: clamp(23px, 6.8vw, 28px);
+    text-shadow: 0 2px 8px rgba(128, 43, 24, .14);
+  }
+
+  .account-membership-vip .account-profile-copy > p {
+    display: none;
+  }
+
+  .account-membership-vip .account-profile-verified {
+    min-height: 27px;
+    margin-top: 8px;
+    padding: 0 10px;
+    color: #087d6c;
+    border-color: rgba(255, 255, 255, .62);
+    background: rgba(255, 255, 255, .84);
+    box-shadow: 0 5px 14px rgba(116, 50, 31, .1);
+    backdrop-filter: blur(8px);
+  }
+
+  .account-membership-vip .account-wallet-mascot {
+    width: clamp(154px, 43vw, 168px);
+    height: clamp(154px, 43vw, 168px);
+    top: 19px;
+    right: -9px;
+    z-index: 4;
+    opacity: 1;
+    object-position: center bottom;
+    filter: saturate(1.04) drop-shadow(0 10px 13px rgba(103, 43, 25, .17));
+    clip-path: inset(0 0 15% 0);
+    transform: rotate(1deg);
+  }
+
+  .account-membership-vip .account-membership-band,
+  .account-membership-vip .account-membership-band.is-active {
+    min-height: 120px;
+    padding: 10px 16px 12px 18px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    align-items: start;
+    gap: 10px;
+    color: #fff;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .account-membership-vip .account-membership-band::after {
+    content: "";
+    height: 1px;
+    position: absolute;
+    right: 18px;
+    bottom: 65px;
+    left: 18px;
+    background: rgba(255, 255, 255, .18);
+  }
+
+  .account-membership-vip .account-membership-icon {
+    width: 36px;
+    height: 36px;
+    color: #fff;
+    background: transparent;
+  }
+
+  .account-membership-vip .account-membership-icon svg {
+    width: 29px;
+    height: 29px;
+    stroke-width: 1.8;
+  }
+
+  .account-membership-vip .account-membership-band > div {
+    min-width: 0;
+    display: block;
+  }
+
+  .account-membership-vip .account-membership-band h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 760;
+    line-height: 1.12;
+    letter-spacing: -.025em;
+    text-shadow: 0 2px 8px rgba(122, 39, 22, .12);
+  }
+
+  .account-membership-vip .account-membership-status-badge,
+  .account-membership-vip .account-membership-description {
+    display: none;
+  }
+
+  .account-membership-vip .account-membership-short-status {
+    margin-top: 5px;
+    display: block;
+    color: rgba(255, 255, 255, .9);
+    font-size: 14px;
+    font-weight: 520;
+    line-height: 1.25;
+  }
+
+  .account-membership-vip .account-membership-expiry {
+    position: absolute;
+    z-index: 2;
+    bottom: 20px;
+    left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    color: #fff;
+  }
+
+  .account-membership-vip .account-membership-expiry small {
+    color: rgba(255, 255, 255, .78);
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .account-membership-vip .account-membership-expiry strong {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .account-membership-vip .account-membership-band > a {
+    width: 142px;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 13px;
+    position: absolute;
+    z-index: 3;
+    right: 13px;
+    bottom: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #eb4934;
+    border: 1px solid rgba(255, 255, 255, .72);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .9);
+    box-shadow: 0 8px 20px rgba(119, 42, 26, .12);
+    backdrop-filter: blur(10px);
+    font-size: 12px;
+    font-weight: 800;
+  }
+}
+
+@media (max-width: 365px) {
+  .account-membership-wallet.account-membership-vip {
+    margin-inline: 18px;
+  }
+
+  .account-membership-vip .account-profile-hero {
+    min-height: 104px;
+    padding: 17px 116px 5px 14px;
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 11px;
+  }
+
+  .account-membership-vip .account-avatar-uploader,
+  .account-membership-vip .account-profile-avatar {
+    width: 62px;
+  }
+
+  .account-membership-vip .account-profile-avatar {
+    height: 62px;
+  }
+
+  .account-membership-vip .account-wallet-mascot {
+    width: 148px;
+    height: 148px;
+    top: 24px;
+    right: -13px;
+  }
+
+  .account-membership-vip .account-membership-band,
+  .account-membership-vip .account-membership-band.is-active {
+    min-height: 124px;
+    padding-inline: 14px;
+  }
+
+  .account-membership-vip .account-membership-band::after {
+    right: 14px;
+    left: 14px;
+  }
+
+  .account-membership-vip .account-membership-expiry {
+    left: 14px;
+  }
+
+  .account-membership-vip .account-membership-band > a {
+    width: 134px;
+    right: 10px;
+  }
+}
+
+/* Selected desktop direction — premium horizontal membership ticket. */
+@media (min-width: 1025px) {
+  .account-wallet-redesign.account-page-vip {
+    background: #fffdfb;
+  }
+
+  .account-page-vip .account-page-inner {
+    width: min(1240px, calc(100% - 72px));
+    padding-top: 40px;
+  }
+
+  .account-page-vip .account-page-title {
+    display: none;
+  }
+
+  .account-page-vip .account-membership-wallet.account-membership-vip {
+    position: relative;
+    display: block;
+    isolation: isolate;
+  }
+
+  .account-page-vip .account-profile-hero {
+    min-height: 245px;
+    padding-inline: 30px;
+    position: relative;
+    z-index: 2;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 56px;
+  }
+
+  .account-page-vip .account-profile-hero::after {
+    display: none;
+  }
+
+  .account-page-vip .account-avatar-uploader {
+    width: 180px;
+  }
+
+  .account-page-vip .account-profile-avatar {
+    width: 180px;
+    height: 180px;
+    margin-top: 12px;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .42);
+    background: #ff612f;
+    box-shadow: 0 18px 40px rgba(216, 69, 37, .14);
+  }
+
+  .account-page-vip .account-profile-avatar-initials {
+    font-size: 52px;
+    font-weight: 780;
+  }
+
+  .account-page-vip .account-profile-avatar > button {
+    width: 46px;
+    height: 46px;
+    right: -1px;
+    bottom: 12px;
+    color: #fff;
+    border-color: #fffdfb;
+    background: #ff7a24;
+    box-shadow: 0 8px 20px rgba(205, 75, 34, .22);
+  }
+
+  .account-page-vip .account-profile-copy {
+    width: fit-content;
+    max-width: min(560px, 100%);
+    margin-top: 43px;
+    display: grid;
+    grid-template-columns: minmax(0, max-content) auto;
+    align-items: center;
+    gap: 0 16px;
+  }
+
+  .account-page-vip .account-profile-copy h2 {
+    grid-column: 1;
+    grid-row: 1;
+    color: #242120;
+    font-size: clamp(42px, 3.35vw, 50px);
+    font-weight: 790;
+    letter-spacing: -.05em;
+  }
+
+  .account-page-vip .account-profile-verified {
+    min-height: 30px;
+    margin: 2px 0 0;
+    padding: 0 12px;
+    display: inline-flex;
+    grid-column: 2;
+    grid-row: 1;
+    align-items: center;
+    gap: 6px;
+    color: #087b6c;
+    border: 0;
+    border-radius: 999px;
+    background: #e5f5f0;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 760;
+    white-space: nowrap;
+  }
+
+  .account-page-vip .account-profile-copy > p {
+    margin-top: 13px;
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    color: #6a6461;
+    font-size: 16px;
+  }
+
+  .account-page-vip .account-profile-email {
+    margin-top: 14px;
+    display: flex;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    color: #625d5a;
+    font-size: 14px;
+  }
+
+  .account-page-vip .account-profile-email em,
+  .account-page-vip .account-vip-outline {
+    display: none;
+  }
+
+  .account-page-vip .account-wallet-mascot {
+    width: 292px;
+    height: 292px;
+    position: absolute;
+    z-index: 1;
+    top: -27px;
+    right: 18px;
+    display: block;
+    opacity: 1;
+    object-fit: contain;
+    filter: saturate(1.02) drop-shadow(0 18px 24px rgba(95, 49, 34, .12));
+    transform: rotate(1deg);
+  }
+
+  .account-page-vip .account-membership-wallet:hover .account-wallet-mascot {
+    transform: translateY(-3px) rotate(-1deg) scale(1.015);
+  }
+
+  .account-page-vip .account-membership-band,
+  .account-page-vip .account-membership-band.is-active {
+    min-height: 150px;
+    padding: 20px 24px;
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 76px 276px 204px minmax(190px, 1fr) 210px;
+    align-items: center;
+    gap: 16px;
+    overflow: hidden;
+    color: #fff;
+    border: 1px solid rgba(255, 192, 142, .64);
+    border-radius: 16px;
+    background-color: #ff5a3d;
+    background-image: url("/assets/backgrounds/account-vip-ticket-mobile.webp");
+    background-position: left center;
+    background-size: cover;
+    box-shadow: 0 18px 36px rgba(219, 67, 39, .2), 0 4px 10px rgba(90, 42, 29, .08);
+  }
+
+  .account-page-vip .account-membership-band::before,
+  .account-page-vip .account-membership-band::after {
+    content: "";
+    width: 30px;
+    height: 56px;
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 56px;
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  .account-page-vip .account-membership-band::before {
+    left: 0;
+    background-image: url("/assets/backgrounds/account-vip-ticket-notch-left-clean.png");
+  }
+
+  .account-page-vip .account-membership-band::after {
+    right: 0;
+    left: auto;
+    bottom: auto;
+    background-color: transparent;
+    background-image: url("/assets/backgrounds/account-vip-ticket-notch-right-clean.png");
+  }
+
+  .account-page-vip .account-membership-icon {
+    width: 76px;
+    height: 76px;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, .84);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .08);
+  }
+
+  .account-page-vip .account-membership-icon svg {
+    width: 38px;
+    height: 38px;
+    stroke-width: 1.8;
+  }
+
+  .account-page-vip .account-membership-band > div {
+    display: contents;
+  }
+
+  .account-page-vip .account-membership-status-badge,
+  .account-page-vip .account-membership-short-status {
+    display: none;
+  }
+
+  .account-page-vip .account-membership-band h2 {
+    margin: 0 0 21px;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    color: #fff;
+    font-size: 31px;
+    font-weight: 790;
+    line-height: 1.1;
+    letter-spacing: -.035em;
+    text-shadow: 0 2px 8px rgba(111, 37, 22, .12);
+  }
+
+  .account-page-vip .account-membership-description {
+    max-width: 268px;
+    margin: 34px 0 0;
+    padding: 0;
+    display: block;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    overflow: hidden;
+    color: rgba(255, 255, 255, .88);
+    border: 0;
+    font-size: 12px;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .account-page-vip .account-membership-days,
+  .account-page-vip .account-membership-expiry {
+    min-height: 86px;
+    padding-left: 26px;
+    position: static;
+    display: grid;
+    grid-template-columns: 26px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-content: center;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 4px;
+    color: #fff;
+    border-left: 1px dashed rgba(255, 255, 255, .42);
+  }
+
+  .account-page-vip .account-membership-meta-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    color: rgba(255, 255, 255, .96);
+    stroke-width: 1.8;
+  }
+
+  .account-page-vip .account-membership-days {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+
+  .account-page-vip .account-membership-expiry {
+    grid-column: 4;
+    grid-row: 1 / span 2;
+  }
+
+  .account-page-vip .account-membership-days small,
+  .account-page-vip .account-membership-expiry small {
+    grid-column: 2;
+    grid-row: 1;
+    color: rgba(255, 255, 255, .78);
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .account-page-vip .account-membership-days strong,
+  .account-page-vip .account-membership-expiry strong {
+    grid-column: 2;
+    grid-row: 2;
+    color: #fff;
+    font-size: 23px;
+    font-weight: 780;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+
+  .account-page-vip .account-membership-band > a {
+    min-height: 56px;
+    padding: 0 22px;
+    position: static;
+    grid-column: 5;
+    grid-row: 1 / span 2;
+    justify-self: stretch;
+    color: #e94834;
+    border: 1px solid rgba(255, 255, 255, .75);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .92);
+    box-shadow: 0 12px 26px rgba(117, 40, 25, .13);
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .account-page-vip .account-information,
+  .account-page-vip .account-security-panel {
+    margin-top: 31px;
+  }
+
+  .account-page-vip .account-information h2,
+  .account-page-vip .account-security-panel h2 {
+    margin-left: 0;
+    color: #282422;
+    font-size: 20px;
+    font-weight: 780;
+  }
+
+  .account-page-vip .account-information dl > div {
+    min-height: 56px;
+    padding-inline: 8px;
+    border-bottom-color: #eee5e0;
+  }
+
+  .account-page-vip .account-information dt,
+  .account-page-vip .account-information dd {
+    color: #66605d;
+    font-size: 13px;
+  }
+
+  .account-page-vip .account-information dt svg,
+  .account-page-vip .account-security-row > svg:first-child {
+    color: #ff4f3b;
+  }
+
+  .account-page-vip .account-security-list {
+    border-width: 1px 0;
+    border-color: #eee5e0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .account-page-vip .account-security-row {
+    min-height: 62px;
+    padding-inline: 8px;
+    color: #2f2a28;
+  }
+
+  .account-page-vip .account-security-details,
+  .account-page-vip .account-logout-form {
+    border-top-color: #eee5e0;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1379px) {
+  .account-page-vip .account-membership-band,
+  .account-page-vip .account-membership-band.is-active {
+    padding-inline: 16px;
+    grid-template-columns: 58px minmax(190px, 1.2fr) minmax(125px, .8fr) minmax(145px, 1fr) 139px;
+    gap: 12px;
+  }
+
+  .account-page-vip .account-membership-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .account-page-vip .account-membership-icon svg {
+    width: 29px;
+    height: 29px;
+  }
+
+  .account-page-vip .account-membership-band h2 {
+    font-size: 24px;
+  }
+
+  .account-page-vip .account-membership-description {
+    max-width: 210px;
+    font-size: 11px;
+  }
+
+  .account-page-vip .account-membership-days,
+  .account-page-vip .account-membership-expiry {
+    padding-left: 14px;
+    grid-template-columns: 20px minmax(0, 1fr);
+    column-gap: 7px;
+  }
+
+  .account-page-vip .account-membership-meta-icon {
+    width: 19px;
+    height: 19px;
+  }
+
+  .account-page-vip .account-membership-days strong,
+  .account-page-vip .account-membership-expiry strong {
+    font-size: 18px;
+  }
+
+  .account-page-vip .account-membership-band > a {
+    min-height: 48px;
+    padding-inline: 13px;
+    font-size: 12px;
+  }
+
+  .account-page-vip .account-wallet-mascot {
+    width: 268px;
+    height: 268px;
+    top: -14px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1079px) {
+  .account-page-vip .account-wallet-mascot {
+    width: 238px;
+    height: 238px;
+    top: 1px;
+    right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .account-password-dialog::backdrop,
+  .account-password-sheet {
+    animation: none;
+  }
+
+  .account-wallet-mascot,
+  .account-password-submit,
+  .account-mobile-header a,
+  .account-membership-band > a {
+    transition: none;
+  }
+}
