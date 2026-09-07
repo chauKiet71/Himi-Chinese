@@ -143,3 +143,8 @@ Sáu bài đầu của mỗi lộ trình đang mở là miễn phí; 18 bài chu
 - Micro cần HTTPS trên môi trường thật (localhost vẫn được trình duyệt cho phép). Vì WebSocket được mở trực tiếp từ trình duyệt người học, ứng dụng iFlytek dùng cho web công khai thường phải tắt IP whitelist; nếu bật, IP công khai của từng máy học phải nằm trong danh sách cho phép.
 
 Đăng nhập, xác minh email, reset mật khẩu, rate-limit, RBAC, tiến độ bài học, lịch ôn, Admin CRUD và Kho ca làm responsive đã hoạt động. Bước tiếp theo hợp lý là lưu lịch sử xử lý ca theo tài khoản và đưa tình huống vào Admin CRUD; Brevo sẽ gửi email thật sau khi API key và địa chỉ gửi đã được xác minh.
+# Himi Support qua Telegram
+
+Chatbot góc phải nay hỗ trợ hội thoại lưu PostgreSQL, ảnh Cloudinary có xác thực, nhân viên trả lời qua Telegram, reminder 30 giây và ẩn 60 giây sau hoàn thành. Cần migrate và cấu hình **worker Node chạy thường trực riêng**; không có phản hồi AI giả.
+
+Hướng dẫn bot/chat IDs, biến môi trường, webhook, local/production, retry, giới hạn và checklist E2E: [docs/SUPPORT_TELEGRAM.md](docs/SUPPORT_TELEGRAM.md).

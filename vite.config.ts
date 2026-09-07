@@ -1,6 +1,6 @@
 import vinext from "vinext";
 import { sites } from "@openai/sites-vite-plugin";
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import hostingConfig from "./.openai/hosting.json";
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
@@ -32,7 +32,7 @@ const localBindingConfig = {
     : [],
 };
 
-export default defineConfig(async () => {
+export default defineConfig(async ({ mode }) => {
   // Keep Wrangler and Miniflare state project-local. These are non-secret tool
   // settings; application environment belongs in ignored `.env*` files.
   process.env.WRANGLER_WRITE_LOGS ??= "false";
@@ -41,6 +41,10 @@ export default defineConfig(async () => {
 
   // Wrangler snapshots its log path while the Cloudflare plugin is imported.
   const { cloudflare } = await import("@cloudflare/vite-plugin");
+  const viteEnv = loadEnv(mode, process.cwd(), "");
+  const supportWebhookHost = viteEnv.SUPPORT_WEBHOOK_BASE_URL
+    ? new URL(viteEnv.SUPPORT_WEBHOOK_BASE_URL).hostname
+    : undefined;
 
   return {
     // Keep the app's optimizer separate from middleware-mode tests using .vite.
@@ -56,9 +60,14 @@ export default defineConfig(async () => {
         "gsap/MotionPathPlugin",
       ],
     },
-    server: isCodexSeatbeltSandbox
-      ? { watch: { useFsEvents: false, usePolling: true } }
-      : undefined,
+    server: {
+      ...(isCodexSeatbeltSandbox
+        ? { watch: { useFsEvents: false, usePolling: true } }
+        : {}),
+      ...(supportWebhookHost
+        ? { allowedHosts: [supportWebhookHost, ".lhr.life"] }
+        : {}),
+    },
     plugins: [
       vinext(),
       sites(),

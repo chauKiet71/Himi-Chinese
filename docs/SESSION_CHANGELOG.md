@@ -1,5 +1,24 @@
 # Nhật ký bàn giao phiên làm việc
 
+## 2026-09-07 — Himi Support qua Telegram
+
+- Mở rộng widget Himi hiện có, bỏ câu trả lời/tệp giả lập; thêm tên/email, ảnh thật, trạng thái gửi/lỗi, lịch sử và polling theo session.
+- Thêm PostgreSQL outbox, state machine OPEN/CLAIMED/WAITING_USER/COMPLETED, ownership, rate limit, idempotency, callback generation, ForceReply mapping bền vững và lưu ảnh authenticated Cloudinary.
+- Thêm worker Node riêng với row locks/SKIP LOCKED, reminder 30 giây, retry/backoff, queue status và script đăng ký webhook. Complete ẩn UI sau 60 giây theo server, không xóa lịch sử; tin mới mở lại.
+- Migration mới: 0017_support_telegram.sql, 0018_support_reminder_retry.sql. Chưa áp dụng vào DB người dùng; chưa đăng ký/gửi bot Telegram thật.
+- Hướng dẫn đầy đủ: docs/SUPPORT_TELEGRAM.md (env, bot/chat IDs, webhook, worker local/production, giới hạn delivery/push, checklist nghiệm thu).
+
+### Kiểm tra
+
+- Support integration: 18/18 passed, migration thật trên PGlite; Telegram/Cloudinary transport giả lập trong test.
+- Browser: khách nhận yêu cầu đăng nhập; fixture chỉ trong browser kiểm tra tạo/gửi, polling phản hồi, complete/ẩn, mở lại; desktop 1366×900 và mobile 390×844 không tràn ngang.
+- Lint toàn repo (bỏ cache .vinext/tmp) passed; targeted support lint passed.
+- Typecheck còn 4 TS7053 có sẵn ở lib/admin-analytics-service.ts:63,64,65,92; không sửa phần không liên quan.
+- npm test bị giữ process bởi test Vite cũ; chạy lại Node test với --test-force-exit: 206/221 passed, 15 lỗi ngoài support (assertion UI cũ và EPERM cache Vite).
+- npm run build bị EPERM tại dist/.openai/hosting.json của plugin Sites. Build kiểm tra riêng bỏ duy nhất plugin ghi metadata Sites, dùng output tạm: RSC/client/SSR compiled successfully; không coi là build/deploy production chuẩn đã qua.
+- Còn cần cấu hình secrets, migrate DB, chạy worker, đăng ký webhook và kiểm tra nhiều kết nối PostgreSQL + Telegram/Cloudinary thật trước nghiệm thu production.
+- Đã dừng server/browser QA và bỏ script fixture tạm. Output build kiểm tra còn tại tmp/support-build-20260907 (lệnh dọn bị policy chặn); đã thêm ignore cụ thể để tránh đưa artifact build vào Git.
+
 ## 2026-08-29 — Chi tiết lộ trình cho 7 chuyên ngành
 
 ### Phần đã thay đổi
