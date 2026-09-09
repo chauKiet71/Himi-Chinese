@@ -425,10 +425,11 @@ test("practice content has PostgreSQL schema, seed and authenticated admin CRUD"
 });
 
 test("games route renders the new Himi slice game and six video-inspired activities", async () => {
-  const [page, center, game, shell, styles, content] = await Promise.all([
+  const [page, center, game, hskSession, shell, styles, content] = await Promise.all([
     read("app/games/page.tsx"),
     read("components/game-center.tsx"),
     read("components/writing-slice-game.tsx"),
+    read("components/hsk-game-session.tsx"),
     read("components/learner-app-shell.tsx"),
     read("app/globals.css"),
     read("lib/game-content.ts"),
@@ -462,6 +463,12 @@ test("games route renders the new Himi slice game and six video-inspired activit
   assert.match(game, /handleCorrect/);
   assert.match(game, /speechSynthesis/);
   assert.match(game, /writing-game-back/);
+  assert.match(hskSession, /writing-course-selection-page/);
+  assert.match(hskSession, /writing-course-shell--split/);
+  assert.match(hskSession, /writing-course-intro/);
+  assert.match(hskSession, /writing-course-picker/);
+  assert.match(hskSession, /GAME_PICKER_DETAILS/);
+  assert.equal((hskSession.match(/image: "\/assets\/games\/himi-v2-/g) ?? []).length, 6);
   assert.match(shell, /href: "\/games"/);
   assert.match(shell, /label: "Trò chơi"/);
   assert.doesNotMatch(shell, /navigationHiddenPrefixes/);
