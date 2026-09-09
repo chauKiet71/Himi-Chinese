@@ -1,7 +1,8 @@
 import { withRequestDb } from "@/db";
 import { supportBody, supportFailure, supportJson } from "@/lib/support-api";
 import { acceptTelegramUpdate } from "@/lib/support-service";
-import { authorizedTelegramUpdate, telegramCall, telegramConfig, telegramGroupIdCommand, validTelegramUpdate, verifyTelegramSecret } from "@/lib/support-telegram";
+import { SupportError } from "@/lib/support-domain";
+import { telegramCall, telegramConfig, telegramGroupIdCommand, validTelegramUpdate, verifyTelegramSecret } from "@/lib/support-telegram";
 
 export async function POST(request: Request) {
   try {
@@ -19,17 +20,20 @@ export async function POST(request: Request) {
     // acknowledged and ignored so it cannot block later group setup commands.
     // Callback queries also need an explicit Bot API acknowledgement; otherwise
     // Telegram leaves the button spinner running even though the webhook returned 200.
-    if (!authorizedTelegramUpdate(update, config)) {
+    let text: string;
+    try {
+      text = await withRequestDb(db => acceptTelegramUpdate(db, update, config));
+    } catch (error) {
+      if (!(error instanceof SupportError) || error.status !== 403) throw error;
       if (update.callback_query) {
         await telegramCall("answerCallbackQuery", {
           callback_query_id: update.callback_query.id,
-          text: "Tài khoản Telegram này chưa được cấp quyền hỗ trợ.",
+          text: "Chỉ thành viên hiện tại của nhóm hỗ trợ mới được thao tác. Hãy dùng tài khoản cá nhân.",
           show_alert: true,
         }).catch(() => undefined);
       }
       return supportJson({ ok: true, ignored: true });
     }
-    const text = await withRequestDb(db => acceptTelegramUpdate(db, update, config));
     if (update.callback_query) {
       // Bound acknowledgement latency; durable prompt/edits happen in the worker, not the webhook.
       await telegramCall("answerCallbackQuery", { callback_query_id: update.callback_query.id, text }).catch(() => undefined);

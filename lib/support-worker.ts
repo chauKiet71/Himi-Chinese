@@ -5,7 +5,7 @@ import { supportConversations as conversations, supportMessages as messages, sup
 import { reminderDue, retryDelay, SUPPORT_REMINDER_MS } from "./support-domain.ts";
 import { enqueue, type SupportConversation, type SupportTx } from "./support-service.ts";
 import { importTelegramPhoto, readSupportImage } from "./support-storage.ts";
-import { notificationText, supportKeyboard, telegramCall, TelegramError, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
+import { authorizedTelegramUpdate, notificationText, supportKeyboard, telegramCall, TelegramError, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
 
 export type SupportTransport = {
   call: TelegramCall;
@@ -28,6 +28,11 @@ async function processJob(tx: SupportTx, job: Job, io: SupportTransport) {
     const [c] = mapping ? await tx.select().from(conversations).where(eq(conversations.id, mapping.conversationId)).for("update") : [];
     if (!mapping || mapping.expiresAt <= new Date() || !c || c.status === "COMPLETED" || c.claimedByTelegramUserId !== adminId) {
       await enqueue(tx, "receipt", `receipt:${u.update_id}`, null, { chatId, text: "Không gửi phản hồi: phiên trả lời đã hết hạn hoặc không thuộc bạn. Hãy bấm Trả lời ở yêu cầu cần xử lý." });
+      return;
+    }
+    if (!await authorizedTelegramUpdate(u, { chatId: c.telegramChatId }, io.call)) {
+      await enqueue(tx, "receipt", `receipt:${u.update_id}`, null, { chatId,
+        text: "Không gửi phản hồi: người phụ trách không còn là thành viên của nhóm hỗ trợ." });
       return;
     }
     let imageId: string | null = null;
@@ -132,7 +137,8 @@ export async function processSupportJob(db: Database, io: SupportTransport = tra
       const delay = Math.max(retryDelay(job.attempts + 1), error instanceof TelegramError ? error.retryAfter : 0);
       await tx.update(jobs).set({ attempts: job.attempts + 1, availableAt: new Date(Date.now() + delay),
         lastError: error instanceof TelegramError ? error.message : "support_delivery_failed" }).where(eq(jobs.id, job.id));
-      console.warn("[support] delivery retry", { jobId: job.id, kind: job.kind, attempt: job.attempts + 1 });
+      console.warn("[support] delivery retry", { jobId: job.id, kind: job.kind, attempt: job.attempts + 1,
+        error: error instanceof TelegramError ? error.message : "support_delivery_failed" });
     }
     return true;
   });

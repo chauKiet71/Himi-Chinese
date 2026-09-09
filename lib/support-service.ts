@@ -3,7 +3,7 @@ import type { Database } from "../db/index.ts";
 import { authRateLimits, supportConversations as conversations, supportMessages as messages, supportImages as images,
   supportJobs as jobs, supportReplySessions as sessions, supportTelegramUpdates as updates, users } from "../db/schema.ts";
 import { parseSupportCallback, requireUuid, SUPPORT_REMINDER_MS, SupportError, validateSupportInput } from "./support-domain.ts";
-import { authorizedTelegramUpdate, type TelegramUpdate } from "./support-telegram.ts";
+import { authorizedTelegramUpdate, telegramCall, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
 
 export type SupportTx = Parameters<Parameters<Database["transaction"]>[0]>[0];
 export type SupportConversation = typeof conversations.$inferSelect;
@@ -119,8 +119,8 @@ export async function listSupportConversations(db: Database, userId: string) {
   return { conversations: rows, serverNow: new Date().toISOString() };
 }
 
-export async function acceptTelegramUpdate(db: Database, u: TelegramUpdate, config: { chatId: string; admins: string[] }) {
-  if (!authorizedTelegramUpdate(u, config)) throw new SupportError("Forbidden", 403);
+export async function acceptTelegramUpdate(db: Database, u: TelegramUpdate, config: { chatId: string }, call: TelegramCall = telegramCall) {
+  if (!await authorizedTelegramUpdate(u, config, call)) throw new SupportError("Forbidden", 403);
   return db.transaction(async tx => {
     const inserted = await tx.insert(updates).values({ updateId: String(u.update_id) }).onConflictDoNothing().returning();
     if (!inserted.length) return "Yêu cầu này đã được tiếp nhận.";
@@ -140,6 +140,7 @@ export async function acceptTelegramUpdate(db: Database, u: TelegramUpdate, conf
     const adminId = String(cb.from.id);
     if (c.status === "COMPLETED") return "Yêu cầu đã hoàn thành.";
     if (c.claimedByTelegramUserId && c.claimedByTelegramUserId !== adminId) return `Admin ${c.claimedByTelegramUserId} đang xử lý yêu cầu này.`;
+    if (parsed.action === "support_complete" && !c.claimedByTelegramUserId) return "Hãy bấm Trả lời để nhận phụ trách yêu cầu trước khi hoàn thành.";
     const now = new Date();
     if (parsed.action === "support_reply") {
       const clickedMessageId = cb.message!.message_id;
