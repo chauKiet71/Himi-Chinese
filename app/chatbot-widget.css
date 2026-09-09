@@ -5,9 +5,11 @@
   --himi-line: #eee1dc;
   --himi-red-soft: #fff0ed;
   --himi-orange-soft: #fff5e9;
+  --himi-online: #43c56b;
+  --himi-ease: cubic-bezier(.22, 1, .36, 1);
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  right: clamp(18px, 2.2vw, 32px);
+  bottom: clamp(18px, 2.2vw, 32px);
   z-index: 120;
   font-family: var(--font-inter), Arial, sans-serif;
 }
@@ -38,13 +40,18 @@ body:has(.admin-page) > .himi-chatbot-widget {
   background: var(--himi-red);
   box-shadow: 0 16px 34px color-mix(in srgb, var(--himi-red) 27%, transparent), 0 5px 14px rgba(34, 34, 34, .12);
   transform-origin: bottom right;
-  transition: transform 180ms ease, box-shadow 180ms ease, opacity 150ms ease, visibility 0s linear 0s;
+  transition: transform 220ms var(--himi-ease), box-shadow 220ms ease, background-color 180ms ease, opacity 160ms ease, visibility 0s linear 0s;
 }
 
 .himi-chatbot-launcher:hover {
-  background: color-mix(in srgb, var(--himi-red) 84%, var(--himi-orange));
-  box-shadow: 0 22px 48px color-mix(in srgb, var(--himi-red) 34%, transparent), 0 7px 18px rgba(34, 34, 34, .14);
-  transform: translateY(-3px);
+  background: color-mix(in srgb, var(--himi-red) 92%, var(--himi-black));
+  box-shadow: 0 20px 42px color-mix(in srgb, var(--himi-red) 30%, transparent), 0 7px 18px rgba(34, 34, 34, .13);
+  transform: translateY(-2px) scale(1.025);
+}
+
+.himi-chatbot-launcher:active {
+  transform: translateY(0) scale(.96);
+  transition-duration: 100ms;
 }
 
 .himi-chatbot-launcher:focus-visible {
@@ -62,6 +69,7 @@ body:has(.admin-page) > .himi-chatbot-widget {
 
 .himi-chatbot-header-avatar,
 .himi-chatbot-message-avatar {
+  position: relative;
   display: grid;
   place-items: center;
   flex: 0 0 auto;
@@ -95,8 +103,11 @@ body:has(.admin-page) > .himi-chatbot-widget {
 }
 
 .himi-chatbot-panel {
-  width: min(390px, calc(100vw - 48px));
-  height: min(620px, calc(100dvh - 48px));
+  width: min(420px, calc(100vw - 48px));
+  height: min(720px, calc(100vh - 48px));
+  height: min(720px, calc(100dvh - 48px));
+  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
   position: absolute;
   right: 0;
   bottom: 0;
@@ -105,15 +116,25 @@ body:has(.admin-page) > .himi-chatbot-widget {
   grid-template-rows: auto minmax(0, 1fr) auto;
   color: var(--himi-black);
   border: 1px solid color-mix(in srgb, var(--himi-line) 86%, var(--himi-black));
-  border-radius: 26px;
+  border-radius: 24px;
   background: var(--himi-white);
-  box-shadow: 0 30px 80px rgba(34, 34, 34, .2), 0 8px 24px rgba(34, 34, 34, .1);
+  box-shadow: 0 30px 76px rgba(50, 31, 24, .18), 0 8px 24px rgba(50, 31, 24, .08);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transform: translateY(16px) scale(.96);
   transform-origin: bottom right;
-  transition: opacity 170ms ease, transform 260ms cubic-bezier(.22, 1, .36, 1), visibility 0s linear 260ms;
+  transition: opacity 180ms ease, transform 280ms var(--himi-ease), visibility 0s linear 280ms;
+}
+
+.himi-chatbot-panel.is-compact {
+  height: auto;
+  min-height: 0;
+  grid-template-rows: auto auto;
+}
+
+.himi-chatbot-panel.is-compact .himi-chatbot-messages {
+  min-height: 116px;
 }
 
 .himi-chatbot-widget.is-open .himi-chatbot-panel {
@@ -125,31 +146,37 @@ body:has(.admin-page) > .himi-chatbot-widget {
 }
 
 .himi-chatbot-header {
-  min-height: 86px;
-  padding: 17px 17px 15px;
+  min-height: 80px;
+  padding: 13px 16px 12px;
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) 38px;
+  grid-template-columns: 48px minmax(0, 1fr) 44px;
   align-items: center;
   gap: 11px;
   color: var(--himi-on-red);
-  border-top: 4px solid var(--himi-orange);
+  border-top: 3px solid var(--himi-orange);
   background: var(--himi-red);
 }
 
 .himi-chatbot-header-avatar {
   width: 46px;
   height: 46px;
-  box-shadow: 0 5px 14px rgba(34, 34, 34, .16);
+  overflow: visible;
+  box-shadow: 0 5px 14px rgba(34, 34, 34, .14);
+}
+
+.himi-chatbot-header-avatar img {
+  overflow: hidden;
+  border-radius: 50%;
 }
 
 .himi-chatbot-header-copy {
   min-width: 0;
   display: grid;
-  gap: 5px;
+  gap: 3px;
 }
 
 .himi-chatbot-header-copy strong {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 820;
   letter-spacing: -.025em;
 }
@@ -157,49 +184,87 @@ body:has(.admin-page) > .himi-chatbot-widget {
 .himi-chatbot-header-copy > span {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   color: color-mix(in srgb, var(--himi-white) 84%, transparent);
-  font-size: 10px;
-  font-weight: 620;
+  font-size: 11.5px;
+  font-weight: 560;
+  line-height: 1.35;
+}
+
+.himi-chatbot-header-copy i {
+  font-style: normal;
+  opacity: .72;
 }
 
 .himi-chatbot-online-dot {
-  width: 8px;
-  height: 8px;
-  border: 2px solid color-mix(in srgb, var(--himi-white) 72%, transparent);
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  border: 3px solid var(--himi-white);
   border-radius: 50%;
-  background: var(--himi-orange);
+  background: var(--himi-online);
+  box-shadow: 0 2px 6px rgba(25, 114, 62, .25);
 }
 
 .himi-chatbot-header > button {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   cursor: pointer;
   color: var(--himi-white);
   border: 0;
-  border-radius: 12px;
+  border-radius: 14px;
   background: color-mix(in srgb, var(--himi-black) 12%, transparent);
-  transition: background 160ms ease, transform 160ms ease;
+  transition: background-color 190ms ease, transform 220ms var(--himi-ease), box-shadow 190ms ease;
 }
 
 .himi-chatbot-header > button:hover {
-  background: color-mix(in srgb, var(--himi-black) 22%, transparent);
-  transform: translateY(1px);
+  background: color-mix(in srgb, var(--himi-black) 18%, transparent);
+  box-shadow: 0 7px 16px rgba(80, 20, 14, .12);
+  transform: translateY(-1px) scale(1.025);
+}
+
+.himi-chatbot-header > button:active {
+  transform: translateY(0) scale(.95);
+  transition-duration: 100ms;
+}
+
+.himi-chatbot-header > button:focus-visible,
+.himi-chatbot-icon-button:focus-visible,
+.himi-chatbot-send:focus-visible,
+.himi-support-history:focus-visible,
+.himi-chatbot-attachment button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--himi-orange) 48%, var(--himi-white));
+  outline-offset: 2px;
 }
 
 .himi-chatbot-messages {
   min-height: 0;
-  padding: 22px 18px 26px;
+  padding: 24px 20px 28px;
   overflow-y: auto;
   overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  background: color-mix(in srgb, var(--himi-orange) 4%, var(--himi-white));
+  gap: 19px;
+  background: color-mix(in srgb, var(--himi-orange) 3%, var(--himi-white));
   scrollbar-color: color-mix(in srgb, var(--himi-red) 26%, transparent) transparent;
   scrollbar-width: thin;
+}
+
+.himi-chatbot-messages > p {
+  margin: 0;
+  color: color-mix(in srgb, var(--himi-black) 86%, var(--himi-muted));
+  font-size: 13.5px;
+  line-height: 1.58;
+}
+
+.himi-chatbot-messages > p a {
+  color: var(--himi-red);
+  font-weight: 750;
+  text-underline-offset: 3px;
 }
 
 .himi-chatbot-date {
@@ -213,11 +278,11 @@ body:has(.admin-page) > .himi-chatbot-widget {
 
 .himi-chatbot-message {
   width: fit-content;
-  max-width: 92%;
+  max-width: 84%;
   margin: 0;
   display: flex;
   align-items: flex-start;
-  gap: 9px;
+  gap: 10px;
 }
 
 .himi-chatbot-message.is-assistant {
@@ -226,17 +291,39 @@ body:has(.admin-page) > .himi-chatbot-widget {
 
 .himi-chatbot-message.is-user {
   width: auto;
-  max-width: 78%;
+  max-width: 76%;
   align-self: flex-end;
   justify-content: flex-end;
 }
 
+.himi-chatbot-message-stack {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.himi-chatbot-message.is-user .himi-chatbot-message-stack {
+  align-items: flex-end;
+}
+
 .himi-chatbot-message-avatar {
-  width: 32px;
-  height: 32px;
-  margin-top: 5px;
+  width: 34px;
+  height: 34px;
+  margin-top: 24px;
   border: 1px solid color-mix(in srgb, var(--himi-red) 14%, var(--himi-white));
-  box-shadow: 0 6px 16px color-mix(in srgb, var(--himi-red) 12%, transparent);
+  box-shadow: 0 6px 15px color-mix(in srgb, var(--himi-red) 10%, transparent);
+}
+
+.himi-chatbot-message-time {
+  margin: 6px 5px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: color-mix(in srgb, var(--himi-muted) 76%, var(--himi-white));
+  font-size: 10.5px;
+  font-weight: 560;
+  line-height: 1;
 }
 
 .himi-chatbot-message.is-thinking p {
@@ -268,20 +355,21 @@ body:has(.admin-page) > .himi-chatbot-widget {
   background: var(--himi-white);
   font-size: 10px;
   font-weight: 720;
-  transition: color 150ms ease, border-color 150ms ease, background 150ms ease, transform 150ms ease;
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease, transform 220ms var(--himi-ease), box-shadow 180ms ease;
 }
 
 .himi-chatbot-suggestions button:hover {
   color: var(--himi-on-red);
   border-color: var(--himi-red);
   background: var(--himi-red);
-  transform: translateY(-1px);
+  box-shadow: 0 7px 14px color-mix(in srgb, var(--himi-red) 11%, transparent);
+  transform: translateY(-1px) scale(1.01);
 }
 
 .himi-chatbot-composer {
-  padding: 11px 12px 13px;
+  padding: 12px 14px 14px;
   display: grid;
-  gap: 8px;
+  gap: 7px;
   border-top: 1px solid var(--himi-line);
   background: var(--himi-white);
 }
@@ -317,41 +405,55 @@ body:has(.admin-page) > .himi-chatbot-widget {
   border: 0;
   border-radius: 6px;
   background: transparent;
+  transition: color 180ms ease, background-color 180ms ease, transform 220ms var(--himi-ease);
 }
 
 .himi-chatbot-attachment button:hover {
   color: var(--himi-red);
   background: var(--himi-white);
+  transform: scale(1.06);
 }
 
 .himi-chatbot-input-shell {
-  min-height: 52px;
-  padding: 5px;
+  min-height: 56px;
+  padding: 5px 6px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 34px 42px;
+  grid-template-areas: "attach field send";
+  grid-template-columns: 42px minmax(0, 1fr) 44px;
   align-items: center;
-  gap: 3px;
-  border: 0;
-  border-radius: 18px;
-  background: color-mix(in srgb, var(--himi-black) 2%, var(--himi-white));
-  transition: background 150ms ease;
+  gap: 4px;
+  border: 1px solid color-mix(in srgb, var(--himi-line) 88%, var(--himi-black));
+  border-radius: 24px;
+  background: var(--himi-white);
+  box-shadow: 0 7px 20px rgba(63, 43, 36, .055);
+  transition: border-color 190ms ease, box-shadow 220ms ease, transform 220ms var(--himi-ease);
 }
 
 .himi-chatbot-input-shell:focus-within {
   background: var(--himi-white);
-  box-shadow: none;
+  border-color: color-mix(in srgb, var(--himi-red) 45%, var(--himi-line));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--himi-red) 8%, transparent), 0 9px 24px rgba(63, 43, 36, .07);
+  transform: translateY(-1px);
 }
 
 .himi-chatbot-input-shell > input[type="text"] {
+  grid-area: field;
   width: 100%;
   min-width: 0;
   height: 40px;
-  padding: 0 8px;
+  padding: 0 8px 0 3px;
   color: var(--himi-black);
   border: 0;
   outline: 0;
   background: transparent;
-  font-size: 12px;
+  box-shadow: none;
+  font-size: 13.5px;
+}
+
+.himi-chatbot-input-shell > input[type="text"]:focus,
+.himi-chatbot-input-shell > input[type="text"]:focus-visible {
+  outline: 0;
+  box-shadow: none;
 }
 
 .himi-chatbot-input-shell > input::placeholder {
@@ -367,17 +469,24 @@ body:has(.admin-page) > .himi-chatbot-widget {
 }
 
 .himi-chatbot-icon-button {
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
+  grid-area: attach;
   color: var(--himi-muted);
-  border-radius: 10px;
-  background: transparent;
-  transition: color 150ms ease, background 150ms ease;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--himi-black) 3%, var(--himi-white));
+  transition: color 180ms ease, background-color 180ms ease, transform 220ms var(--himi-ease);
 }
 
 .himi-chatbot-icon-button:hover {
   color: var(--himi-red);
   background: var(--himi-red-soft);
+  transform: translateY(-1px) scale(1.035);
+}
+
+.himi-chatbot-icon-button:active {
+  transform: scale(.95);
+  transition-duration: 100ms;
 }
 
 .himi-chatbot-file-input {
@@ -391,18 +500,25 @@ body:has(.admin-page) > .himi-chatbot-widget {
 }
 
 .himi-chatbot-send {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
+  grid-area: send;
   color: var(--himi-on-red);
-  border-radius: 13px;
+  border-radius: 50%;
   background: var(--himi-red);
   box-shadow: 0 7px 16px color-mix(in srgb, var(--himi-red) 23%, transparent);
-  transition: background 150ms ease, transform 150ms ease, opacity 150ms ease;
+  transition: background-color 180ms ease, box-shadow 220ms ease, transform 220ms var(--himi-ease), opacity 160ms ease;
 }
 
 .himi-chatbot-send:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--himi-red) 84%, var(--himi-orange));
-  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--himi-red) 92%, var(--himi-black));
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--himi-red) 28%, transparent);
+  transform: translateY(-2px) scale(1.035);
+}
+
+.himi-chatbot-send:active:not(:disabled) {
+  transform: translateY(0) scale(.94);
+  transition-duration: 100ms;
 }
 
 .himi-chatbot-send:disabled {
@@ -419,27 +535,113 @@ body:has(.admin-page) > .himi-chatbot-widget {
 
 @media (max-width: 720px) {
   .himi-chatbot-widget {
-    right: 12px;
-    bottom: calc(84px + env(safe-area-inset-bottom));
+    right: max(10px, env(safe-area-inset-right));
+    bottom: calc(82px + env(safe-area-inset-bottom));
   }
 
   .himi-chatbot-panel {
-    width: calc(100vw - 24px);
-    height: min(620px, calc(100dvh - 100px - env(safe-area-inset-bottom)));
-    border-radius: 23px;
+    width: auto;
+    height: min(680px, calc(100vh - 102px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+    height: min(680px, calc(100dvh - 102px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+    max-height: calc(100vh - 102px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    max-height: calc(100dvh - 102px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    position: fixed;
+    right: max(10px, env(safe-area-inset-right));
+    bottom: calc(82px + env(safe-area-inset-bottom));
+    left: max(10px, env(safe-area-inset-left));
+    border-radius: 24px;
+    transform-origin: bottom center;
   }
-}
 
-@media (max-width: 390px) {
+  .himi-chatbot-panel.is-compact {
+    height: auto;
+  }
+
+  .himi-chatbot-panel.is-compact .himi-chatbot-messages {
+    min-height: 108px;
+    padding-block: 18px 20px;
+  }
+
+  .himi-chatbot-launcher {
+    width: 58px;
+    min-width: 58px;
+    height: 58px;
+    min-height: 58px;
+    border-radius: 18px;
+  }
+
   .himi-chatbot-header {
-    min-height: 78px;
-    padding: 13px 13px 12px;
-    grid-template-columns: 44px minmax(0, 1fr) 36px;
+    min-height: 80px;
+    padding: 13px 14px 12px;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    gap: 10px;
   }
 
   .himi-chatbot-header-avatar {
     width: 42px;
     height: 42px;
+  }
+
+  .himi-chatbot-header-copy {
+    gap: 3px;
+  }
+
+  .himi-chatbot-header-copy strong {
+    font-size: 16px;
+  }
+
+  .himi-chatbot-header-copy > span {
+    overflow: hidden;
+    font-size: 10.5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .himi-chatbot-header > button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .himi-chatbot-messages {
+    padding: 18px 15px 20px;
+    gap: 14px;
+  }
+
+  .himi-chatbot-composer {
+    padding: 9px 10px max(10px, env(safe-area-inset-bottom));
+  }
+
+  .himi-chatbot-input-shell {
+    min-height: 54px;
+    grid-template-columns: 40px minmax(0, 1fr) 44px;
+  }
+
+  .himi-chatbot-input-shell > input[type="text"] {
+    font-size: 16px;
+  }
+
+  .himi-chatbot-icon-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .himi-chatbot-send {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 390px) {
+  .himi-chatbot-header {
+    min-height: 76px;
+    padding-inline: 12px;
+    grid-template-columns: 42px minmax(0, 1fr) 44px;
+    gap: 9px;
+  }
+
+  .himi-chatbot-header-avatar {
+    width: 40px;
+    height: 40px;
   }
 
   .himi-chatbot-messages {
@@ -451,57 +653,126 @@ body:has(.admin-page) > .himi-chatbot-widget {
   }
 
   .himi-chatbot-input-shell {
-    grid-template-columns: minmax(0, 1fr) 32px 32px 40px;
+    grid-template-columns: 38px minmax(0, 1fr) 42px;
+  }
+
+  .himi-chatbot-icon-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .himi-chatbot-send {
+    width: 42px;
+    height: 42px;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .himi-chatbot-launcher,
-  .himi-chatbot-panel,
-  .himi-chatbot-suggestions button,
-  .himi-chatbot-message.is-thinking svg {
-    animation: none;
-    scroll-behavior: auto;
-    transition-duration: 1ms;
+@media (min-width: 480px) and (max-width: 720px) {
+  .himi-chatbot-panel {
+    width: min(410px, calc(100vw - 28px));
+    right: max(14px, env(safe-area-inset-right));
+    left: auto;
   }
 }
-.himi-support-history { border: 0; border-radius: 8px; padding: 6px; color: #ff4c3b; background: #fff0ee; cursor: pointer; }
-.himi-support-status { color: #625b58; font-size: 12px; line-height: 1.6; text-align: center; }
+
+@media (max-width: 720px) and (max-height: 560px) {
+  .himi-chatbot-widget {
+    bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+
+  .himi-chatbot-panel {
+    height: calc(100vh - 88px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    height: calc(100dvh - 88px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    max-height: calc(100vh - 88px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    max-height: calc(100dvh - 88px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+
+  .himi-chatbot-panel.is-compact {
+    height: auto;
+  }
+}
+
+.himi-support-history {
+  min-height: 34px;
+  padding: 7px 12px;
+  align-self: center;
+  cursor: pointer;
+  color: var(--himi-red);
+  border: 1px solid color-mix(in srgb, var(--himi-red) 14%, var(--himi-white));
+  border-radius: 999px;
+  background: var(--himi-red-soft);
+  font-size: 11px;
+  font-weight: 720;
+  transition: color 180ms ease, background-color 180ms ease, transform 220ms var(--himi-ease), box-shadow 180ms ease;
+}
+
+.himi-support-history:hover {
+  color: var(--himi-on-red);
+  background: var(--himi-red);
+  box-shadow: 0 7px 15px color-mix(in srgb, var(--himi-red) 15%, transparent);
+  transform: translateY(-1px);
+}
+
+.himi-support-status {
+  width: fit-content;
+  margin-inline: auto !important;
+  padding: 5px 10px;
+  color: #625b58 !important;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--himi-orange) 8%, var(--himi-white));
+  font-size: 10.5px !important;
+  font-weight: 650;
+  line-height: 1.45 !important;
+  text-align: center;
+}
+
 .himi-support-error { color: #b42318; font-size: 12px; margin: 6px 0; }
 .himi-support-notice { color: #625b58; font-size: 11px; margin: 4px 0; }
 .himi-support-notice:empty { display: none; }
 .himi-support-bubble {
-  max-width: calc(100% - 41px);
-  padding: 13px 14px 14px;
+  max-width: 100%;
+  padding: 13px 16px 14px;
   color: var(--himi-black);
-  border: 1px solid color-mix(in srgb, var(--himi-red) 9%, var(--himi-white));
-  border-radius: 18px 18px 18px 7px;
-  background: color-mix(in srgb, var(--himi-orange) 7%, var(--himi-white));
-  box-shadow: 0 10px 26px rgba(67, 44, 36, .07);
+  border: 1px solid color-mix(in srgb, var(--himi-red) 7%, var(--himi-white));
+  border-radius: 20px 20px 20px 7px;
+  background: color-mix(in srgb, var(--himi-orange) 6%, var(--himi-white));
+  box-shadow: 0 8px 22px rgba(67, 44, 36, .055);
   overflow-wrap: anywhere;
+  transition: border-color 180ms ease, box-shadow 220ms ease, transform 220ms var(--himi-ease);
+}
+
+.himi-chatbot-message:hover .himi-support-bubble {
+  border-color: color-mix(in srgb, var(--himi-red) 13%, var(--himi-white));
+  box-shadow: 0 11px 25px rgba(67, 44, 36, .075);
+  transform: translateY(-1px);
 }
 .himi-chatbot-message.is-user .himi-support-bubble {
   width: max-content;
   min-width: 62px;
   max-width: 100%;
-  padding: 9px 14px 10px;
+  padding: 11px 15px 12px;
   color: var(--himi-on-red);
   border: 0;
-  border-radius: 18px 18px 6px 18px;
-  background: linear-gradient(135deg, var(--himi-red), color-mix(in srgb, var(--himi-red) 72%, var(--himi-orange)));
-  box-shadow: 0 9px 20px color-mix(in srgb, var(--himi-red) 20%, transparent);
+  border-radius: 20px 20px 7px 20px;
+  background: var(--himi-red);
+  box-shadow: 0 8px 19px color-mix(in srgb, var(--himi-red) 16%, transparent);
+}
+
+.himi-chatbot-message.is-user:hover .himi-support-bubble {
+  box-shadow: 0 11px 24px color-mix(in srgb, var(--himi-red) 21%, transparent);
 }
 .himi-chatbot-message .himi-support-bubble p {
   max-width: 100%;
-  margin: 4px 0 0;
+  margin: 0;
   padding: 0;
   color: inherit;
   border: 0;
   background: transparent;
   box-shadow: none;
-  font-size: 12.5px;
-  font-weight: 530;
-  line-height: 1.55;
+  font-size: 14px;
+  font-weight: 520;
+  line-height: 1.5;
   white-space: pre-wrap;
 }
 .himi-support-bubble > a {
@@ -512,6 +783,13 @@ body:has(.admin-page) > .himi-chatbot-widget {
   border-radius: 13px;
   background: #ffffff;
   box-shadow: 0 5px 14px rgba(67, 44, 36, .06);
+  transition: border-color 180ms ease, box-shadow 220ms ease, transform 220ms var(--himi-ease);
+}
+
+.himi-support-bubble > a:hover {
+  border-color: color-mix(in srgb, var(--himi-red) 22%, var(--himi-white));
+  box-shadow: 0 8px 18px rgba(67, 44, 36, .09);
+  transform: translateY(-1px);
 }
 .himi-chatbot-message.is-user .himi-support-bubble > a {
   border: 0;
@@ -527,15 +805,35 @@ body:has(.admin-page) > .himi-chatbot-widget {
 }
 .himi-support-sender {
   display: block;
-  color: var(--himi-red);
-  font-size: 9.5px;
-  font-weight: 760;
-  letter-spacing: .01em;
+  margin: 0 0 6px 6px;
+  color: color-mix(in srgb, var(--himi-muted) 82%, var(--himi-black));
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: 0;
 }
 .himi-chatbot-message.is-user .himi-support-bubble p {
-  width: max-content;
   margin-top: 0;
 }
 .himi-support-spinner { animation: himi-support-spin 1s linear infinite; }
 @keyframes himi-support-spin { to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .himi-support-spinner { animation: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .himi-chatbot-launcher,
+  .himi-chatbot-panel,
+  .himi-chatbot-header > button,
+  .himi-chatbot-suggestions button,
+  .himi-chatbot-input-shell,
+  .himi-chatbot-icon-button,
+  .himi-chatbot-send,
+  .himi-chatbot-attachment button,
+  .himi-support-history,
+  .himi-support-bubble,
+  .himi-support-bubble > a,
+  .himi-chatbot-message.is-thinking svg {
+    animation: none;
+    scroll-behavior: auto;
+    transition-duration: 1ms;
+  }
+
+  .himi-support-spinner { animation: none; }
+}

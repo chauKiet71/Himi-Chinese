@@ -398,3 +398,63 @@ final result: passed
 - P3: consider adding timestamps only if support operations require them; omitting them keeps the visual closer to the supplied reference.
 
 final result: passed
+
+---
+
+# Design QA — Himi support widget
+
+- Date: 2026-09-10
+- Source visual truth: `C:\Users\Windows\.codex\generated_images\019fb6fe-431e-7c62-917c-2abef5ccee3c\exec-f9024eee-c1eb-4253-9e0c-6d89e2d1ad9c.png`
+- Browser-rendered implementation: `C:\Users\Windows\Documents\INDIVIDUAL PROJECT\Himi-Chinese\tmp\himi-support-production-full.jpg`
+- Focused widget capture: `C:\Users\Windows\Documents\INDIVIDUAL PROJECT\Himi-Chinese\tmp\himi-support-production-widget.png`
+- Route: `http://localhost:3010/`
+- State: authenticated learner, support panel open, real conversation loaded, composer empty
+
+## Capture normalization
+
+- Source pixels: 943 × 1668. The ideation brief defined a natural component target of approximately 430 × 760 CSS px.
+- Browser viewport: 934 × 698 CSS px at device pixel ratio 1.25.
+- Rendered panel: 420 × 650 CSS px. The height is intentionally clamped by the available viewport; the unconstrained desktop maximum remains 720 px.
+- The production screenshot fills the 934 × 698 browser canvas. The focused widget crop was extracted directly at 420 × 650 pixels for a 1:1 CSS-size comparison.
+
+## Full-view comparison evidence
+
+The source visual and the production screenshot were opened together in one comparison input. The implementation preserves the selected direction: solid coral header, warm off-white body, circular Himi presence marker, compact online/response status, left/right message hierarchy, quiet timestamps, round attachment control, and circular send action. The production capture uses the learner's real support history rather than the mock conversation, so message count and wrapping differ intentionally.
+
+## Focused region comparison evidence
+
+The source visual and direct 420 × 650 widget crop were opened together in one comparison input. Header height, 24 px panel radius, 46 px brand avatar, 44 px collapse/send controls, solid user bubbles, warm staff bubbles, sender labels, timestamps, and bottom composer all follow the selected visual system. Text remains readable at the smaller height without clipping persistent controls.
+
+## Required fidelity surfaces
+
+- Fonts and typography: existing Inter product font retained; Vietnamese diacritics render correctly; title, metadata, message, timestamp, and placeholder weights remain clearly separated.
+- Spacing and layout rhythm: consistent 16–20 px interior spacing; message groups retain breathing room; the composer remains pinned without covering conversation content.
+- Colors and visual tokens: existing Himi coral, orange, charcoal, warm white, and green presence colors are reused; no new gradient was introduced.
+- Image quality and assets: the existing Himi brand asset is reused for header and staff avatars; no placeholder, emoji, CSS illustration, or handcrafted SVG replaces it.
+- Copy and content: human-support wording is preserved, response expectation is concise, and real conversation content is not replaced by mock data.
+
+## Comparison history
+
+- Earlier P2: the global input focus style produced a rectangular coral ring inside the rounded composer, which visibly diverged from the selected mock.
+- Fix: the chat input now explicitly clears inherited outline and box-shadow while the outer composer shell owns the accessible focus treatment.
+- Post-fix evidence: `tmp/himi-support-production-full.jpg` and `tmp/himi-support-production-widget.png` show one clean rounded focus surface with no inner rectangle.
+
+## Interaction and runtime checks
+
+- Opened the widget from the launcher and closed it with Escape.
+- Confirmed focus returns to the launcher after closing.
+- Reopened the panel and confirmed the draft remains intact.
+- Confirmed entering text enables the send action, then cleared the test draft without submitting.
+- Verified production support endpoints returned 200 responses and browser console inspection showed no errors.
+- Computed transitions use 180–220 ms durations with `cubic-bezier(.22, 1, .36, 1)` for transform motion. Active states compress gently and `prefers-reduced-motion` reduces animation to 1 ms.
+- Responsive rules remain in place for widths at 720 px, 390 px, and short mobile heights, including safe-area and bottom-navigation clearance.
+
+## Findings
+
+No actionable P0, P1, or P2 differences remain. The shorter captured panel height is expected responsive behavior for the 698 px-tall browser viewport, not a layout defect.
+
+## Follow-up polish
+
+- P3: a future visual-only pass could tune bubble density against longer production conversations, but no change is needed for this handoff.
+
+final result: passed

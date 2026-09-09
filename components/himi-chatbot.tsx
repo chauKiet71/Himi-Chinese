@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
-import { ChevronDown, LoaderCircle, MessageSquareMore, Paperclip, Send, X } from "lucide-react";
+import { CheckCheck, ChevronDown, LoaderCircle, MessageSquareMore, Paperclip, Send, X } from "lucide-react";
 import { BrandLogoImage } from "@/components/brand-logo";
 import { hiddenAfterCompletion, SUPPORT_IMAGE_BYTES, type SupportStatus } from "@/lib/support-domain";
 
@@ -10,6 +10,12 @@ type Conversation = { id: string; status: SupportStatus; completedAt: string | n
 type Message = { id: string; senderType: "USER" | "ADMIN" | "SYSTEM"; content: string; imageUrl: string | null; createdAt: string };
 type Detail = { conversation: Conversation; messages: Message[]; serverNow: string; nextBefore: string | null };
 const labels: Record<SupportStatus, string> = { OPEN: "Đang chờ nhân viên tiếp nhận", CLAIMED: "Nhân viên đang hỗ trợ", WAITING_USER: "Nhân viên đã phản hồi", COMPLETED: "Yêu cầu đã hoàn thành" };
+const messageTime = new Intl.DateTimeFormat("vi-VN", { hour: "2-digit", minute: "2-digit" });
+
+function formatMessageTime(value: string) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? "" : messageTime.format(date);
+}
 class ApiError extends Error {
   status: number;
   constructor(message: string, status: number) { super(message); this.status = status; }
@@ -162,10 +168,22 @@ export function HimiChatbot() {
 
   return (
     <aside className={"himi-chatbot-widget " + (open ? "is-open" : "")} aria-label="Himi hỗ trợ">
-      <section id="himi-support-panel" aria-label="Hỗ trợ Himi qua nhân viên" aria-hidden={!open} className="himi-chatbot-panel" role="dialog">
+      <section
+        id="himi-support-panel"
+        aria-label="Hỗ trợ Himi qua nhân viên"
+        aria-hidden={!open}
+        className={`himi-chatbot-panel${authenticated === true ? "" : " is-compact"}`}
+        role="dialog"
+      >
         <header className="himi-chatbot-header">
-          <span className="himi-chatbot-header-avatar"><BrandLogoImage size={46} /></span>
-          <span className="himi-chatbot-header-copy"><strong>Himi hỗ trợ</strong><span>Trao đổi trực tiếp với nhân viên</span></span>
+          <span className="himi-chatbot-header-avatar">
+            <BrandLogoImage size={46} />
+            <span className="himi-chatbot-online-dot" aria-hidden="true" />
+          </span>
+          <span className="himi-chatbot-header-copy">
+            <strong>Himi hỗ trợ</strong>
+            <span>Nhân viên đang trực tuyến <i aria-hidden="true">·</i> Phản hồi 1–3 phút</span>
+          </span>
           <button aria-label="Thu gọn cửa sổ chat" onClick={closeChat} type="button"><ChevronDown size={22} /></button>
         </header>
         <div className="himi-chatbot-messages" ref={listRef} onScroll={() => {
@@ -177,14 +195,21 @@ export function HimiChatbot() {
               {active && !hidden ? <p className="himi-support-status" role="status">{labels[active.conversation.status]}
                 {active.conversation.completedAt ? " · Ẩn sau " + Math.max(0, Math.ceil((new Date(active.conversation.completedAt).getTime() + 60_000 - now) / 1000)) + " giây" : ""}</p> : null}
               {!hidden && (olderCursor === undefined ? active?.nextBefore : olderCursor) ? <button className="himi-support-history" disabled={busy} onClick={loadOlder} type="button">Xem tin nhắn trước</button> : null}
-              {visibleMessages.map(message => <article className={"himi-chatbot-message is-" + (message.senderType === "USER" ? "user" : "assistant")} key={message.id}>
-                {message.senderType !== "USER" ? <span className="himi-chatbot-message-avatar" aria-hidden="true"><BrandLogoImage size={28} /></span> : null}
-                <div className="himi-support-bubble">
-                  {message.senderType !== "USER" ? <span className="himi-support-sender">{message.senderType === "ADMIN" ? "Nhân viên Himi" : "Hệ thống"}</span> : null}
-                  {message.content ? <p>{message.content}</p> : null}
-                  {message.imageUrl ? <a href={message.imageUrl} target="_blank" rel="noreferrer"><Image alt="Ảnh đính kèm trong hội thoại" src={message.imageUrl} width={240} height={180} unoptimized /></a> : null}
-                </div>
-              </article>)}
+              {visibleMessages.map(message => {
+                const fromUser = message.senderType === "USER";
+                const time = formatMessageTime(message.createdAt);
+                return <article className={"himi-chatbot-message is-" + (fromUser ? "user" : "assistant")} key={message.id}>
+                  {!fromUser ? <span className="himi-chatbot-message-avatar" aria-hidden="true"><BrandLogoImage size={28} /></span> : null}
+                  <div className="himi-chatbot-message-stack">
+                    {!fromUser ? <span className="himi-support-sender">{message.senderType === "ADMIN" ? "Nhân viên Himi" : "Hệ thống"}</span> : null}
+                    <div className="himi-support-bubble">
+                      {message.content ? <p>{message.content}</p> : null}
+                      {message.imageUrl ? <a href={message.imageUrl} target="_blank" rel="noreferrer"><Image alt="Ảnh đính kèm trong hội thoại" src={message.imageUrl} width={240} height={180} unoptimized /></a> : null}
+                    </div>
+                    {time ? <time className="himi-chatbot-message-time" dateTime={message.createdAt}>{time}{fromUser ? <CheckCheck aria-hidden="true" size={15} strokeWidth={2} /> : null}</time> : null}
+                  </div>
+                </article>;
+              })}
             </>}
         </div>
         {authenticated ? <form className="himi-chatbot-composer" onSubmit={submit}>
