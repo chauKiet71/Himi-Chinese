@@ -46,6 +46,77 @@ final result: passed
 
 ---
 
+## 2026-09-08 — Compact branded chat launcher
+
+**Source visual truth**
+
+- Browser Comment 1 marker screenshot of the existing `button.himi-chatbot-launcher` and its additional inline chat-notification icon reference; the browser annotation did not expose a local filesystem path.
+- Reference icon pixels: 563 × 641. Existing-page marker screenshot pixels: 922 × 882.
+- Intended state: chatbot closed, floating launcher visible at the lower-right edge.
+
+**Implementation evidence**
+
+- Implementation: `http://localhost:3001/courses`, authenticated learner view.
+- Implementation screenshot: Codex in-app Browser closed-state capture emitted inline; the capture API did not expose a filesystem path.
+- Viewport: 740 × 706 CSS px at device pixel ratio 1.25.
+- Rendered launcher: 64 × 64 CSS px; notification dot: 19 × 19 CSS px.
+- Density normalization: the source is a standalone raster icon on a white canvas while the implementation is a live UI control. The focused comparison normalizes by the launcher silhouette, icon-to-container ratio, badge placement, corner radius, and color hierarchy rather than canvas dimensions.
+
+**Full-view comparison evidence**
+
+- The previous 190 × 68 mascot-and-copy launcher has been replaced by a compact icon-only control, reducing obstruction of page content and matching the reference's notification-button role.
+- The control remains anchored to the existing lower-right widget position and clears the learner navigation behavior already defined for small screens.
+
+**Focused region comparison evidence**
+
+- The live closed-state capture clearly shows the 64 px red rounded-square control, centered white chat glyph, and orange circular badge with a white separation ring at the top-right corner.
+- The icon uses the project's installed Lucide library rather than a CSS drawing, text glyph, emoji, traced SVG, or copied watermarked raster.
+- Open-state verification confirms that activating the icon hides the launcher and reveals the existing support panel; Escape closes the panel and restores the launcher after its transition.
+
+**Findings**
+
+- No actionable P0, P1, or P2 differences remain.
+- The reference's blue and red palette is intentionally remapped to Himi red `#ff4c3b`, orange `#ff8e2d`, and white.
+- The badge is a non-numeric notification dot to avoid presenting a false unread count when the application does not currently expose unread-message state.
+
+**Comparison history**
+
+1. Initial P1: the existing launcher was a wide branded box with mascot and two lines of copy, which did not match the requested compact icon form and covered more content.
+2. Fix: replaced the launcher contents with `MessageSquareMore`, reduced the control to 64 × 64 px, introduced the orange/white notification dot, and added a visible keyboard-focus ring.
+3. Post-fix evidence: the browser capture shows the intended compact silhouette and brand palette; computed dimensions resolve to exactly 64 × 64 px and 19 × 19 px after the close transition.
+
+**Required fidelity surfaces**
+
+- Fonts and typography: no visible launcher text remains; the accessible name `Mở trợ lý Himi` is preserved for assistive technology.
+- Spacing and layout rhythm: centered 34 px glyph, 20 px launcher radius, top-right 19 px badge, and existing responsive fixed positioning create the same visual hierarchy as the reference without crowding nearby content.
+- Colors and visual tokens: launcher, hover shadow, focus ring, and badge use the current Himi red, orange, white, and black tokens.
+- Image quality and asset fidelity: no raster asset was required because the target is a standard chat UI icon; the installed icon library provides a crisp vector at every density. The watermarked reference image was not copied into the product.
+- Copy and content: visible promotional copy and mascot were removed only from the closed launcher; the support panel header and conversation content are unchanged.
+
+**Primary interactions tested**
+
+- Activate the icon and open the support panel.
+- Confirm the icon becomes hidden while the panel is open.
+- Close with Escape and confirm the icon returns after the transition.
+- Confirm the composer remains available in the opened panel.
+- Confirm no framework error overlay and no broken images.
+
+**Implementation checklist**
+
+- [x] Replace the wide launcher with an icon-only control.
+- [x] Use a real icon-library glyph.
+- [x] Apply Himi red/orange brand styling.
+- [x] Preserve accessible labeling and open/close behavior.
+- [x] Preserve responsive placement.
+
+**Follow-up polish**
+
+- P3: connect the badge to a true unread count if the support API later exposes unread-message state.
+
+final result: passed
+
+---
+
 ## 2026-09-07 — Completed-conversation thank-you copy
 
 **Source visual truth**
@@ -258,5 +329,72 @@ final result: passed
 - [x] Long-message wrapping remains bounded by the message row.
 - [x] Production TSX restored after visual QA.
 - [x] Focused lint passes.
+
+final result: passed
+
+---
+
+## 2026-09-08 — Branded support conversation redesign
+
+
+**Comparison Target**
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-6f7d35a8-2960-441d-ba58-aa5af5d82d03.png`
+- Source dimensions: 356 × 281 px.
+- Implementation: `http://localhost:3001/courses`, chatbot open with an authenticated conversation.
+- Implementation screenshot: Codex in-app Browser capture from the open localhost tab (inline browser evidence; no filesystem path exposed by the capture API).
+- Browser viewport: 740 × 706 CSS px at device pixel ratio 1.25; chatbot panel: 388 × 618 CSS px.
+- State: light theme, existing conversation with user and system messages, composer visible.
+- Normalization: the source is a cropped message-area style reference rather than a full application viewport. Comparison therefore uses the chatbot message region and evaluates relative alignment, bubble proportions, spacing, palette, and hierarchy rather than absolute page coordinates.
+
+**Full-view Comparison Evidence**
+
+- The implementation preserves the reference's primary composition: compact user pills aligned right and a wider support card aligned left with a circular identity mark.
+- The pale source surface is translated to Himi's warm cream background; the blue-purple source accent is intentionally remapped to the product's red/coral and orange brand colors.
+- The chatbot header and composer remain product-owned framing around the recreated message treatment.
+
+**Focused Region Comparison Evidence**
+
+- The message region was inspected at readable scale in the live browser. Short content (`alooo`) and longer content (`Tôi bị lỗi đăng nhập`) both render horizontally inside compact right-aligned pills.
+- System responses render in wide cream cards with the Himi mascot offset to the left, matching the source avatar-plus-card relationship.
+- Attachment styling was checked in code and uses a white inset media card inside the message bubble; no placeholder or recreated brand asset is used.
+
+**Findings**
+
+- No remaining P0, P1, or P2 visual mismatch.
+- The centered live support status above the messages differs from the cropped reference but is an intentional functional element and does not compete with the conversation hierarchy.
+- Sender labels are retained as a small product-specific affordance; their size and contrast keep them subordinate to message content.
+
+**Comparison History**
+
+- Iteration 1 — P2: very short user messages inherited a nested `fit-content` layout and could become too narrow. Fix: made the user row auto-width and its bubble/content `max-content` within a 78% responsive cap. Post-fix evidence: the live browser capture shows both short and long user messages with natural horizontal wrapping and no vertical-letter stack.
+- Iteration 2 — passed: live capture shows branded message hierarchy, stable composer placement, no broken images, no framework error overlay, and no toolbar regression.
+
+**Required Fidelity Surfaces**
+
+- Fonts and typography: existing Inter family retained; message text uses 12.5 px/1.55 for readability, compact 9.5 px sender labels, and no clipping or unintended vertical wrapping.
+- Spacing and layout rhythm: 18 px message rhythm, 9 px avatar gap, compact user padding, wider support-card padding, rounded corners, and restrained elevation reproduce the source density within the narrower product panel.
+- Colors and visual tokens: Himi red `#ff4c3b`, orange `#ff8e2d`, black, warm cream, and locally scoped neutral tokens replace the source blue-purple palette while preserving contrast and semantic separation.
+- Image quality and asset fidelity: the existing production Himi mascot asset is used for support avatars. Attachment images remain real uploaded assets and are shown uncropped inside a white media card.
+- Copy and content: conversation content is unchanged; only presentation changed.
+
+**Primary Interactions Tested**
+
+- Open chatbot from the launcher.
+- Existing conversation renders and scrolls.
+- Composer, attachment button, and send control remain visible.
+- No Next/Vite error overlay; zero broken images in the rendered page.
+
+**Implementation Checklist**
+
+- [x] Right-align compact branded user pills.
+- [x] Left-align wide Himi response cards with mascot identity.
+- [x] Style uploaded images as inset media cards.
+- [x] Preserve responsive width caps and readable wrapping.
+- [x] Preserve existing conversation and composer behavior.
+
+**Follow-up Polish**
+
+- P3: consider adding timestamps only if support operations require them; omitting them keeps the visual closer to the supplied reference.
 
 final result: passed
