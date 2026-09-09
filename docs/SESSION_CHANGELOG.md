@@ -5,7 +5,7 @@
 - Mở rộng widget Himi hiện có, bỏ câu trả lời/tệp giả lập; thêm tên/email, ảnh thật, trạng thái gửi/lỗi, lịch sử và polling theo session.
 - Thêm PostgreSQL outbox, state machine OPEN/CLAIMED/WAITING_USER/COMPLETED, ownership, rate limit, idempotency, callback generation, ForceReply mapping bền vững và lưu ảnh authenticated Cloudinary.
 - Thêm worker Node riêng với row locks/SKIP LOCKED, reminder 30 giây, retry/backoff, queue status và script đăng ký webhook. Complete ẩn UI sau 60 giây theo server, không xóa lịch sử; tin mới mở lại.
-- Migration mới: 0017_support_telegram.sql, 0018_support_reminder_retry.sql. Chưa áp dụng vào DB người dùng; chưa đăng ký/gửi bot Telegram thật.
+- Migration mới: 0018_support_telegram.sql, 0019_support_reminder_retry.sql. Chưa áp dụng vào DB người dùng; chưa đăng ký/gửi bot Telegram thật.
 - Hướng dẫn đầy đủ: docs/SUPPORT_TELEGRAM.md (env, bot/chat IDs, webhook, worker local/production, giới hạn delivery/push, checklist nghiệm thu).
 
 ### Kiểm tra

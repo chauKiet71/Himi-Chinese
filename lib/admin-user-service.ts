@@ -1,6 +1,6 @@
 import "server-only";
 
-import { and, asc, count, desc, eq, gt, ilike, inArray, isNull, lte, or } from "drizzle-orm";
+import { and, asc, count, desc, eq, gt, ilike, inArray, isNull, lte, or, sql } from "drizzle-orm";
 import { readDb, writeDb } from "../db/index.ts";
 import {
   auditLogs,
@@ -145,8 +145,11 @@ export async function deactivateAdminUser(userId: string, actorId: string): Prom
 
 export async function updateUserRole(userId: string, role: UserRole, actorId: string): Promise<MutationResult> {
   return writeDb((db) => db.transaction(async (tx) => {
+    // Serialize every role change so two concurrent demotions cannot both
+    // conclude that another administrator will remain.
+    await tx.execute(sql`select pg_advisory_xact_lock(48494, 1)`);
     const rows = await tx.select({ id: users.id, email: users.email, role: users.role, emailVerifiedAt: users.emailVerifiedAt })
-      .from(users).where(eq(users.id, userId)).limit(1);
+      .from(users).where(eq(users.id, userId)).for("update").limit(1);
     const target = rows[0];
     if (!target) return { ok: false, error: "not_found" };
     if (target.id === actorId || (!target.emailVerifiedAt && role !== "learner")) {
@@ -157,12 +160,13 @@ export async function updateUserRole(userId: string, role: UserRole, actorId: st
       if ((adminRows[0]?.value ?? 0) <= 1) return { ok: false, error: "role_change_forbidden" };
     }
     await tx.update(users).set({ role, updatedAt: new Date() }).where(eq(users.id, userId));
+    if (target.role !== role) await tx.delete(authSessions).where(eq(authSessions.userId, userId));
     await tx.insert(auditLogs).values({
       actorId,
       action: "admin.user.role_updated",
       entityType: "user",
       entityId: userId,
-      metadata: { email: target.email, fromRole: target.role, toRole: role },
+      metadata: { email: target.email, fromRole: target.role, sessionsRevoked: target.role !== role, toRole: role },
     });
     return { ok: true, id: userId };
   }));

@@ -1,9 +1,140 @@
 {
-  "id": "a272d302-aab5-4ce4-9357-31c39fa4f544",
-  "prevId": "68e1ac69-ce86-47fb-860c-58b62836e4ab",
+  "id": "ecfd91b9-b872-4517-a80a-1061fdce8a3e",
+  "prevId": "4741f117-4e2a-4fb6-84f7-2e387bda493e",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.admin_login_challenges": {
+      "name": "admin_login_challenges",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "challenge_hash": {
+          "name": "challenge_hash",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code_hash": {
+          "name": "code_hash",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "return_to": {
+          "name": "return_to",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'/admin'"
+        },
+        "attempts": {
+          "name": "attempts",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "used_at": {
+          "name": "used_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "admin_login_challenges_hash_uq": {
+          "name": "admin_login_challenges_hash_uq",
+          "columns": [
+            {
+              "expression": "challenge_hash",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "admin_login_challenges_user_idx": {
+          "name": "admin_login_challenges_user_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "admin_login_challenges_expiry_idx": {
+          "name": "admin_login_challenges_expiry_idx",
+          "columns": [
+            {
+              "expression": "expires_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "admin_login_challenges_user_id_users_id_fk": {
+          "name": "admin_login_challenges_user_id_users_id_fk",
+          "tableFrom": "admin_login_challenges",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.audit_logs": {
       "name": "audit_logs",
       "schema": "",
@@ -217,6 +348,13 @@
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true
+        },
+        "last_seen_at": {
+          "name": "last_seen_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         },
         "created_at": {
           "name": "created_at",
@@ -3053,19 +3191,6 @@
           "primaryKey": false,
           "notNull": true,
           "default": 0
-        },
-        "reminder_failures": {
-          "name": "reminder_failures",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "last_reminder_error": {
-          "name": "last_reminder_error",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
         },
         "telegram_chat_id": {
           "name": "telegram_chat_id",

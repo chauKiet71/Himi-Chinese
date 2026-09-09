@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import {
   ArrowLeft,
   ArrowRight,
+  BookOpen,
   Check,
   ChevronDown,
   Heart,
@@ -67,15 +68,15 @@ function GameOverlay({
         {complete ? <Check size={28} /> : gameover ? <RotateCcw size={26} /> : <Keyboard size={28} />}
       </span>
       <span className="writing-overlay-kicker">
-        {complete ? "Lượt luyện hoàn tất" : gameover ? "Cánh Cụt cần nghỉ một nhịp" : "Phản xạ pinyin"}
+        {complete ? "Lượt luyện hoàn tất" : gameover ? "Himi cần nghỉ một nhịp" : "Phản xạ pinyin"}
       </span>
-      <h2>{complete ? `${score} điểm — rất gọn!` : gameover ? "Mình thử lại chậm hơn nhé." : "Gõ đúng. Cánh Cụt chém gọn."}</h2>
+      <h2>{complete ? `${score} điểm — rất gọn!` : gameover ? "Mình thử lại chậm hơn nhé." : "Gõ đúng. Himi chém gọn."}</h2>
       <p>
         {complete
           ? "Bạn đã xử lý đủ 12 từ của lượt hôm nay."
           : gameover
             ? "Ba từ đã chạm đất. Lượt mới sẽ bắt đầu lại từ đầu."
-            : "Nhìn Hán tự đang rơi, gõ pinyin không dấu hoặc có dấu. Đúng từ là Cánh Cụt sẽ lao lên cắt ngay."}
+            : "Nhìn Hán tự đang rơi, gõ pinyin không dấu hoặc có dấu. Đúng từ là Himi sẽ lao lên cắt ngay."}
       </p>
       <button className="writing-primary-action" onClick={onStart} type="button">
         <Play fill="currentColor" size={16} /> {mode === "ready" ? "Bắt đầu chém từ" : "Chơi lại"}
@@ -124,23 +125,68 @@ export function WritingSliceGame(props: WritingSliceGameProps = {}) {
   }
 
   return (
-    <main className="learner-dashboard writing-game-dashboard game-immersive-dashboard">
-      <div className="writing-course-shell">
-        {props.onExit ? <button className="writing-course-back" onClick={props.onExit} type="button"><ArrowLeft size={18} /> Tất cả trò chơi</button> : null}
-        <span className="writing-course-kicker">LUYỆN CHÉM TỪ</span>
-        <h1>Chọn khóa HSK để chơi</h1>
-        <p>Từ vựng từ các bài học của bạn. Mỗi lượt chơi là một bộ từ được xáo trộn mới.</p>
-        <div className="writing-course-grid" aria-label="Các khóa HSK">
-          {SLICE_HSK_COURSES.map((course, index) => (
-            <button className="writing-course-card" key={course.id} onClick={() => void selectCourse(course.id)} type="button" aria-busy={loading === course.id}>
-              <span className="writing-course-number" aria-hidden="true">{index + 1}</span>
-              <strong>{course.label}</strong>
-              <span>{course.description}</span>
-              <small>{loading === course.id ? "Đang tải từ vựng…" : "Chơi ngay"}<ArrowRight size={16} /></small>
+    <main className="learner-dashboard writing-game-dashboard game-immersive-dashboard writing-course-selection-page">
+      <div className="writing-course-shell writing-course-shell--split">
+        <section className="writing-course-intro" aria-labelledby="writing-course-title">
+          {props.onExit ? (
+            <button className="writing-course-back" onClick={props.onExit} type="button">
+              <ArrowLeft size={19} /> Tất cả trò chơi
             </button>
-          ))}
-        </div>
-        <p className="writing-course-status" role={error ? "alert" : "status"}>{error || (loading ? "Đang chuẩn bị từ vựng cho lượt chơi…" : "Chém đúng 12 từ · 3 lượt bỏ lỡ · Gõ pinyin có dấu hoặc không dấu")}</p>
+          ) : null}
+
+          <div className="writing-course-copy">
+            <span className="writing-course-kicker">Luyện chém từ</span>
+            <h1 id="writing-course-title">Chọn khóa HSK để chơi</h1>
+          </div>
+
+          <img
+            alt="Himi đội nón tre, sẵn sàng luyện chém từ"
+            className="writing-course-mascot"
+            height="1016"
+            src="/assets/games/himi-v2-slice.webp"
+            width="966"
+          />
+
+          <div className="writing-course-facts" aria-label="Thể lệ mỗi lượt chơi">
+            <span><BookOpen aria-hidden="true" size={25} /><strong>12 từ</strong></span>
+            <span><Heart aria-hidden="true" size={25} /><strong>3 lượt bỏ lỡ</strong></span>
+            <span><Keyboard aria-hidden="true" size={25} /><strong>Gõ pinyin</strong></span>
+          </div>
+        </section>
+
+        <section className="writing-course-picker" aria-label="Chọn cấp độ HSK">
+          <div className="writing-course-grid">
+            {SLICE_HSK_COURSES.map((course, index) => {
+              const featured = index === 0;
+              const isLoading = loading === course.id;
+
+              return (
+                <button
+                  aria-busy={isLoading}
+                  aria-label={`${course.label}: ${course.description}`}
+                  className={`writing-course-card${featured ? " is-featured" : ""}${isLoading ? " is-loading" : ""}`}
+                  key={course.id}
+                  onClick={() => void selectCourse(course.id)}
+                  type="button"
+                >
+                  {featured ? <span className="writing-course-recommended"><Sparkles aria-hidden="true" size={14} /> Đề xuất</span> : null}
+                  <span className="writing-course-card-heading">
+                    <span className="writing-course-number" aria-hidden="true">{index + 1}</span>
+                    <strong>{course.label}</strong>
+                  </span>
+                  <span className="writing-course-description">{course.description}</span>
+                  <small className="writing-course-action">
+                    {isLoading ? "Đang tải…" : featured ? "Chơi ngay" : "Chọn khóa"}
+                    <ArrowRight aria-hidden="true" size={featured ? 19 : 21} />
+                  </small>
+                </button>
+              );
+            })}
+          </div>
+          <p className="writing-course-status" role={error ? "alert" : "status"}>
+            {error || (loading ? "Đang chuẩn bị từ vựng cho lượt chơi…" : "Chém đúng 12 từ · 3 lượt bỏ lỡ · Gõ pinyin có dấu hoặc không dấu")}
+          </p>
+        </section>
       </div>
     </main>
   );
@@ -447,7 +493,7 @@ function SliceSession({
   return (
     <main className="learner-dashboard writing-game-dashboard game-immersive-dashboard">
       <div className="writing-page-shell">
-        <h1 className="writing-page-title">Luyện chém từ cùng Cánh Cụt</h1>
+        <h1 className="writing-page-title">Luyện chém từ cùng Himi</h1>
         <div className="writing-game-layout">
           <section className="writing-arena-column" aria-label="Sân chơi chém từ">
             <div className={`writing-arena writing-gsap-motion is-${mode}`} ref={arenaRef} style={gameStyle}>
@@ -514,16 +560,16 @@ function SliceSession({
                   alt=""
                   aria-hidden="true"
                   className="writing-penguin-cape"
-                  height="1254"
-                  src="/assets/writing/penguin-bamboo-warrior-cape.png"
-                  width="1254"
+                  height="1016"
+                  src="/assets/games/himi-v2-slice.webp"
+                  width="966"
                 />
                 <img
-                  alt="Chim cánh cụt đội nón tre và cầm gậy tre"
+                  alt="Himi mới đội nón tre và cầm gậy tre"
                   className="writing-penguin-body"
-                  height="1254"
-                  src="/assets/writing/penguin-bamboo-warrior.png"
-                  width="1254"
+                  height="1016"
+                  src="/assets/games/himi-v2-slice.webp"
+                  width="966"
                 />
               </div>
 
@@ -610,7 +656,7 @@ function SliceSession({
                   <ol>
                     <li><b>01</b><span>Nhìn Hán tự và nghĩa gợi ý.</span></li>
                     <li><b>02</b><span>Gõ pinyin trước khi từ chạm đất.</span></li>
-                    <li><b>03</b><span>Đúng từ để Cánh Cụt chém và giữ combo.</span></li>
+                    <li><b>03</b><span>Đúng từ để Himi chém và giữ combo.</span></li>
                   </ol>
                 </section>
 

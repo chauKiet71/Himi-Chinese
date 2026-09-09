@@ -1,6 +1,9 @@
 import { getAdminUserConsole, parseAdminUserPeriod } from "@/lib/admin-user-service";
+import { hasRecentAdminAuthentication } from "@/lib/admin-auth";
+import { recordAuthEvent } from "@/lib/auth-audit";
 import { getCurrentUser } from "@/lib/auth-session";
 import { escapeAdminCsvCell } from "@/lib/admin-reporting";
+import { authRedirectUrl } from "@/lib/request-security";
 
 function spreadsheetSafe(value: string): string {
   return /^[=+\-@]/u.test(value) ? `'${value}` : value;
@@ -22,12 +25,19 @@ export async function GET(request: Request) {
   const admin = await getCurrentUser();
   if (!admin) return Response.json({ error: "authentication_required" }, { status: 401 });
   if (admin.role !== "admin") return Response.json({ error: "forbidden" }, { status: 403 });
+  if (!hasRecentAdminAuthentication(admin)) {
+    const url = new URL(request.url);
+    const returnTo = `${url.pathname}${url.search}`;
+    return Response.redirect(authRedirectUrl(request, "/admin/login", { error: "reauth_required", returnTo }), 303);
+  }
 
   const { searchParams } = new URL(request.url);
+  const period = parseAdminUserPeriod(searchParams.get("period"));
+  const search = searchParams.get("q") ?? "";
   const data = await getAdminUserConsole({
     limit: 5_000,
-    period: parseAdminUserPeriod(searchParams.get("period")),
-    search: searchParams.get("q") ?? "",
+    period,
+    search,
   });
   const rows = [
     ["Tên người dùng", "Email", "Vai trò", "Trạng thái", "Gói VIP", "Ngày hết hạn", "Thời gian đăng ký"],
@@ -43,6 +53,12 @@ export async function GET(request: Request) {
   ];
   const csv = `\uFEFF${rows.map((row) => row.map(escapeAdminCsvCell).join(",")).join("\r\n")}`;
   const date = new Date().toISOString().slice(0, 10);
+  await recordAuthEvent({
+    action: "admin.users.exported",
+    request,
+    userId: admin.id,
+    metadata: { exportedRows: data.users.length, period, searchApplied: Boolean(search.trim()) },
+  });
   return new Response(csv, {
     headers: {
       "Cache-Control": "private, no-store",

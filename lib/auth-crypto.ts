@@ -1,8 +1,10 @@
 import { pbkdf2 } from "node:crypto";
 
-const CURRENT_PASSWORD_ALGORITHM = "pbkdf2-sha256-v2";
+const CURRENT_PASSWORD_ALGORITHM = "pbkdf2-sha256-v3";
+const PREVIOUS_PASSWORD_ALGORITHM = "pbkdf2-sha256-v2";
 const LEGACY_PASSWORD_ALGORITHM = "pbkdf2-sha256";
-const PASSWORD_ITERATIONS = 100_000;
+const PASSWORD_ITERATIONS = 600_000;
+const PREVIOUS_PASSWORD_ITERATIONS = 100_000;
 const LEGACY_PASSWORD_MAX_ITERATIONS = 600_000;
 const PASSWORD_SALT_BYTES = 16;
 const PASSWORD_HASH_BYTES = 32;
@@ -74,20 +76,31 @@ export async function verifyPassword(password: string, encodedHash: string): Pro
   const [algorithm, iterationsValue, saltValue, hashValue, extra] = encodedHash.split("$");
   const iterations = Number(iterationsValue);
   const isCurrent = algorithm === CURRENT_PASSWORD_ALGORITHM;
+  const isPrevious = algorithm === PREVIOUS_PASSWORD_ALGORITHM;
   const isLegacy = algorithm === LEGACY_PASSWORD_ALGORITHM;
-  if ((!isCurrent && !isLegacy) || extra !== undefined || !Number.isSafeInteger(iterations) || iterations < 1) return false;
+  if ((!isCurrent && !isPrevious && !isLegacy) || extra !== undefined || !Number.isSafeInteger(iterations) || iterations < 1) return false;
   if (isCurrent && iterations !== PASSWORD_ITERATIONS) return false;
+  if (isPrevious && iterations !== PREVIOUS_PASSWORD_ITERATIONS) return false;
   if (isLegacy && iterations > LEGACY_PASSWORD_MAX_ITERATIONS) return false;
 
   try {
     const salt = base64UrlToBytes(saltValue);
     const expected = base64UrlToBytes(hashValue);
-    const passwordMaterial = isCurrent ? await pepperPassword(password) : password;
+    const passwordMaterial = isCurrent || isPrevious ? await pepperPassword(password) : password;
     const actual = await derivePasswordHash(passwordMaterial, salt, iterations);
     return constantTimeEqual(actual, expected);
   } catch {
     return false;
   }
+}
+
+export function constantTimeTextEqual(left: string, right: string): boolean {
+  return constantTimeEqual(new TextEncoder().encode(left), new TextEncoder().encode(right));
+}
+
+export function passwordNeedsRehash(encodedHash: string): boolean {
+  const [algorithm, iterationsValue] = encodedHash.split("$", 3);
+  return algorithm !== CURRENT_PASSWORD_ALGORITHM || Number(iterationsValue) !== PASSWORD_ITERATIONS;
 }
 
 export function createSessionToken(): string {

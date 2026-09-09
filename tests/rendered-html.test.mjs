@@ -424,11 +424,12 @@ test("practice content has PostgreSQL schema, seed and authenticated admin CRUD"
   assert.match(mediaRoute, /Content-Range/);
 });
 
-test("games route renders the Cánh Cụt slice game and six video-inspired activities", async () => {
-  const [page, center, game, shell, styles, content] = await Promise.all([
+test("games route renders the new Himi slice game and six video-inspired activities", async () => {
+  const [page, center, game, hskSession, shell, styles, content] = await Promise.all([
     read("app/games/page.tsx"),
     read("components/game-center.tsx"),
     read("components/writing-slice-game.tsx"),
+    read("components/hsk-game-session.tsx"),
     read("components/learner-app-shell.tsx"),
     read("app/globals.css"),
     read("lib/game-content.ts"),
@@ -441,26 +442,33 @@ test("games route renders the Cánh Cụt slice game and six video-inspired acti
   assert.match(center, /Viết chữ theo nghĩa/);
   assert.match(center, /Flashcard 3D/);
   assert.match(center, /Thử thách tổng hợp/);
-  assert.match(center, /Hành trình phản xạ/);
+  assert.match(center, /Hành trình trò chơi/);
   assert.match(center, /journey-map-desktop\.webp/);
   assert.match(center, /journey-map-mobile-long\.webp/);
-  assert.match(center, /memory-penguin-cutout\.png/);
-  assert.match(center, /connect-penguin-cutout\.png/);
-  assert.match(center, /listen-penguin-cutout\.png/);
-  assert.match(center, /write-penguin-cutout\.png/);
-  assert.match(center, /flashcard-penguin-cutout\.png/);
-  assert.match(center, /quiz-penguin-cutout\.png/);
+  assert.match(center, /himi-v2-memory\.webp/);
+  assert.match(center, /himi-v2-connect\.webp/);
+  assert.match(center, /himi-v2-listen\.webp/);
+  assert.match(center, /himi-v2-write\.webp/);
+  assert.match(center, /himi-v2-flashcard\.webp/);
+  assert.match(center, /himi-v2-quiz\.webp/);
   assert.match(center, /localStorage/);
   assert.match(center, /\/api\/progress\/game/);
   assert.match(center, /game-immersive-dashboard/);
   assert.match(game, /bamboo-landscape\.webp/);
-  assert.match(game, /penguin-bamboo-warrior\.png/);
-  assert.match(game, /penguin-bamboo-warrior-cape\.png/);
+  assert.match(center, /himi-v2-slice\.webp/);
+  assert.match(game, /himi-v2-slice\.webp/);
+  assert.doesNotMatch(game, /penguin-bamboo-warrior(?:-cape)?\.png/);
   assert.match(game, /bamboo-slice-burst\.png/);
   assert.match(game, /normalizeAnswer/);
   assert.match(game, /handleCorrect/);
   assert.match(game, /speechSynthesis/);
   assert.match(game, /writing-game-back/);
+  assert.match(hskSession, /writing-course-selection-page/);
+  assert.match(hskSession, /writing-course-shell--split/);
+  assert.match(hskSession, /writing-course-intro/);
+  assert.match(hskSession, /writing-course-picker/);
+  assert.match(hskSession, /GAME_PICKER_DETAILS/);
+  assert.equal((hskSession.match(/image: "\/assets\/games\/himi-v2-/g) ?? []).length, 6);
   assert.match(shell, /href: "\/games"/);
   assert.match(shell, /label: "Trò chơi"/);
   assert.doesNotMatch(shell, /navigationHiddenPrefixes/);
@@ -490,8 +498,8 @@ test("slice game flies to the target, splits the word and reveals its Vietnamese
 
   assert.match(game, /setMode\("slicing"\)/);
   assert.match(game, /\.to\(penguin,[\s\S]*strikePoint\.impactX/);
-  assert.match(game, /if \(reducedMotion\)[\s\S]*?\.to\(penguin, \{[\s\S]*?x: strikePoint\.impactX,[\s\S]*?y: strikePoint\.impactY,[\s\S]*?\.addLabel\("impact"/);
-  assert.match(game, /if \(penguin\) \{[\s\S]*?gsap\.set\(penguin, \{[\s\S]*?autoAlpha: 1,[\s\S]*?x: 0,[\s\S]*?y: 0,/);
+  assert.match(game, /if \(reducedMotion\)[\s\S]*?\.to\(face, \{ autoAlpha: 0[\s\S]*?\.to\(hitScore, \{ autoAlpha: 1/);
+  assert.match(game, /if \(penguin\) \{[\s\S]*?gsap\.set\(penguin, \{[\s\S]*?autoAlpha: 0,[\s\S]*?x: 0,[\s\S]*?y: 0,[\s\S]*?gsap\.to\(penguin, \{ autoAlpha: 1/);
   assert.match(game, /\.set\(\[leftHalf, rightHalf\], \{ autoAlpha: 1 \}, "impact"\)/);
   assert.match(game, /aria-live="polite" className="writing-hit-score" role="status"/);
   assert.match(game, /mode === "slicing"[\s\S]*\{word\.meaning\}/);

@@ -1,7 +1,7 @@
 import "server-only";
 import { and, eq, gt, isNotNull, isNull, lt, or } from "drizzle-orm";
 import { writeDb, type Database } from "../db/index.ts";
-import { authRateLimits, authSessions, authTokens, users } from "../db/schema.ts";
+import { adminLoginChallenges, authRateLimits, authSessions, authTokens, users } from "../db/schema.ts";
 import { createAuthToken, hashAuthToken, hashPassword } from "./auth-crypto.ts";
 
 export type AuthTokenPurpose = typeof authTokens.$inferSelect.purpose;
@@ -111,17 +111,21 @@ export async function resetPasswordWithToken(token: string, password: string): P
   }));
 }
 
-export async function cleanupExpiredAuthData(): Promise<{ sessions: number; tokens: number; rateLimits: number }> {
+export async function cleanupExpiredAuthData(): Promise<{ challenges: number; sessions: number; tokens: number; rateLimits: number }> {
   const now = new Date();
   const staleRateLimitBefore = new Date(now.getTime() - 48 * 60 * 60_000);
   const result = await writeDb((db) => db.transaction(async (tx) => {
     const removedSessions = await tx.delete(authSessions).where(lt(authSessions.expiresAt, now)).returning({ id: authSessions.id });
+    const removedChallenges = await tx.delete(adminLoginChallenges).where(or(
+      lt(adminLoginChallenges.expiresAt, now),
+      and(isNotNull(adminLoginChallenges.usedAt), lt(adminLoginChallenges.usedAt, staleRateLimitBefore)),
+    )).returning({ id: adminLoginChallenges.id });
     const removedTokens = await tx.delete(authTokens).where(or(
       lt(authTokens.expiresAt, now),
       and(isNotNull(authTokens.usedAt), lt(authTokens.usedAt, staleRateLimitBefore)),
     )).returning({ id: authTokens.id });
     const removedRateLimits = await tx.delete(authRateLimits).where(lt(authRateLimits.updatedAt, staleRateLimitBefore)).returning({ keyHash: authRateLimits.keyHash });
-    return { sessions: removedSessions.length, tokens: removedTokens.length, rateLimits: removedRateLimits.length };
+    return { challenges: removedChallenges.length, sessions: removedSessions.length, tokens: removedTokens.length, rateLimits: removedRateLimits.length };
   }));
   return result;
 }

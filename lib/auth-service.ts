@@ -2,7 +2,7 @@ import "server-only";
 import { eq } from "drizzle-orm";
 import { readDb, writeDb, type Database } from "../db/index.ts";
 import { users } from "../db/schema.ts";
-import { hashPassword, verifyPassword } from "./auth-crypto.ts";
+import { hashPassword, passwordNeedsRehash, verifyPassword } from "./auth-crypto.ts";
 import type { RegistrationInput } from "./auth-validation.ts";
 
 export type UserRole = typeof users.$inferSelect.role;
@@ -16,6 +16,7 @@ export type AuthenticatedUser = {
   emailVerified: boolean;
   unreadNotificationCount: number;
   createdAt: Date;
+  sessionCreatedAt?: Date;
 };
 
 function toAuthenticatedUser(user: typeof users.$inferSelect): AuthenticatedUser {
@@ -64,6 +65,13 @@ export async function authenticateWithPassword(
 
   const passwordValid = await verifyPassword(password, user.passwordHash);
   if (!passwordValid || !user.isActive) return null;
+  if (passwordNeedsRehash(user.passwordHash)) {
+    const passwordHash = await hashPassword(password);
+    const update = (db: Database) => db.update(users)
+      .set({ passwordHash, updatedAt: new Date() })
+      .where(eq(users.id, user.id));
+    await (database ? update(database) : writeDb(update));
+  }
   return toAuthenticatedUser(user);
 }
 

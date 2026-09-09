@@ -14,8 +14,8 @@ Luồng: client có session → API cùng origin → transaction PostgreSQL lưu
 
 ## Migration và file chính
 
-- `drizzle/0017_support_telegram.sql`: enums và 6 bảng support (conversations, messages, images, jobs, reply sessions, processed Telegram updates).
-- `drizzle/0018_support_reminder_retry.sql`: số lỗi/lỗi gần nhất của reminder.
+- `drizzle/0018_support_telegram.sql`: enums và 6 bảng support (conversations, messages, images, jobs, reply sessions, processed Telegram updates).
+- `drizzle/0019_support_reminder_retry.sql`: số lỗi/lỗi gần nhất của reminder.
 - `db/schema.ts`, `lib/support-domain.ts`, `support-service.ts`, `support-worker.ts`, `support-telegram.ts`, `support-storage.ts`, `support-api.ts`.
 - `app/api/support/**`, `app/api/telegram/webhook/route.ts`.
 - `components/himi-chatbot.tsx`, `app/chatbot-widget.css`; root layout đã gắn widget.

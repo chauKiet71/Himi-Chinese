@@ -124,15 +124,22 @@
     {
       "idx": 17,
       "version": "7",
-      "when": 1788787403802,
-      "tag": "0017_support_telegram",
+      "when": 1788802644982,
+      "tag": "0017_nosy_sunspot",
       "breakpoints": true
     },
     {
       "idx": 18,
       "version": "7",
-      "when": 1788788324024,
-      "tag": "0018_support_reminder_retry",
+      "when": 1788802674582,
+      "tag": "0018_support_telegram",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1788802686478,
+      "tag": "0019_support_reminder_retry",
       "breakpoints": true
     }
   ]

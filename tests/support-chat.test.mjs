@@ -20,8 +20,8 @@ before(async () => {
   client = new PGlite();
   db = drizzle(client, { schema });
   await client.exec("CREATE TABLE users(id uuid PRIMARY KEY); CREATE TABLE auth_rate_limits(action varchar(50), key_hash varchar(64), attempts integer NOT NULL DEFAULT 0, window_started_at timestamptz NOT NULL DEFAULT now(), blocked_until timestamptz, updated_at timestamptz NOT NULL DEFAULT now(), PRIMARY KEY(action,key_hash));");
-  await client.exec(await readFile(new URL("../drizzle/0017_support_telegram.sql", import.meta.url), "utf8"));
-  await client.exec(await readFile(new URL("../drizzle/0018_support_reminder_retry.sql", import.meta.url), "utf8"));
+  await client.exec(await readFile(new URL("../drizzle/0018_support_telegram.sql", import.meta.url), "utf8"));
+  await client.exec(await readFile(new URL("../drizzle/0019_support_reminder_retry.sql", import.meta.url), "utf8"));
   await client.query("INSERT INTO users VALUES ($1), ($2)", [user, other]);
 });
 after(async () => { await client?.close(); });
