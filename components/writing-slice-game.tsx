@@ -30,7 +30,7 @@ import {
 import { speakChinese, type GameWord } from "@/lib/game-content";
 import { createSliceDeck, normalizeSliceAnswer as normalizeAnswer, SLICE_HSK_COURSES, type SliceHskLevel } from "@/lib/slice-game";
 
-gsap.registerPlugin(useGSAP);
+if (typeof window !== "undefined") gsap.registerPlugin(useGSAP);
 
 type GameMode = "ready" | "playing" | "paused" | "slicing" | "complete" | "gameover";
 
@@ -91,6 +91,7 @@ type WritingSliceGameProps = {
   onExit?: () => void;
   onComplete?: (score: number) => void;
   completionAction?: ReactNode;
+  exitLabel?: string;
 };
 
 export function WritingSliceGame(props: WritingSliceGameProps = {}) {
@@ -130,7 +131,7 @@ export function WritingSliceGame(props: WritingSliceGameProps = {}) {
         <section className="writing-course-intro" aria-labelledby="writing-course-title">
           {props.onExit ? (
             <button className="writing-course-back" onClick={props.onExit} type="button">
-              <ArrowLeft size={19} /> Tất cả trò chơi
+              <ArrowLeft size={19} /> {props.exitLabel ?? "Tất cả trò chơi"}
             </button>
           ) : null}
 
@@ -196,6 +197,7 @@ function SliceSession({
   onExit,
   onComplete,
   completionAction,
+  exitLabel,
   initialWords,
   level,
   onChangeCourse,
@@ -507,9 +509,9 @@ function SliceSession({
               />
 
               {onExit ? (
-                <button aria-label="Quay lại tất cả trò chơi" className="writing-game-back" onClick={onExit} type="button">
+                <button aria-label={exitLabel === "Trở lại" ? "Trở về trang trước" : "Quay lại tất cả trò chơi"} className="writing-game-back" onClick={onExit} type="button">
                   <ArrowLeft size={18} />
-                  <span>Tất cả trò chơi</span>
+                  <span>{exitLabel ?? "Tất cả trò chơi"}</span>
                 </button>
               ) : null}
 

@@ -13756,6 +13756,72 @@ body:has(.learner-app-shell) > .mobile-nav {
 }
 
 .notifications-page-inner { padding-bottom: 100px; }
+
+.notification-hero {
+  position: relative;
+  min-height: 238px;
+  padding: 31px clamp(26px, 4vw, 50px) 29px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid color-mix(in srgb, var(--himi-red) 12%, var(--himi-line));
+  background-color: #fff7f2;
+  background-image: url("/assets/notifications/himi-notification-header.webp");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+.notification-hero-copy {
+  position: relative;
+  z-index: 1;
+  width: min(650px, 62%);
+}
+
+.notification-hero h1 {
+  margin: 0 0 9px;
+  color: var(--himi-black);
+  font-size: clamp(40px, 4vw, 52px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+.notification-hero-meta {
+  display: flex;
+  align-items: center;
+  color: var(--himi-muted);
+  font-size: 12px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.notification-hero-meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notification-hero-meta svg,
+.notification-hero-meta strong { color: var(--himi-red); }
+.notification-hero-meta strong { font-size: 15px; }
+
+.notification-hero-note {
+  position: absolute;
+  z-index: 1;
+  top: 72px;
+  right: clamp(245px, 23%, 315px);
+  width: 150px;
+  margin: 0;
+  color: color-mix(in srgb, var(--himi-red) 84%, var(--himi-orange));
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: -.01em;
+  transform: rotate(-2deg);
+}
+
 .notifications-header-aside {
   min-height: 132px;
   display: grid;
@@ -13886,7 +13952,18 @@ body:has(.learner-app-shell) > .mobile-nav {
 
 @media (max-width: 720px) {
   .notifications-page-inner { padding-inline: 12px; padding-bottom: 92px; }
-  .notifications-page .learner-page-header { border-radius: 0 0 18px 18px; }
+  .notification-hero {
+    min-height: 318px;
+    padding: 23px 18px 132px;
+    align-items: flex-start;
+    border-radius: 0 0 22px 22px;
+    background-position: right bottom;
+    background-size: auto 46%;
+  }
+  .notification-hero-copy { width: 100%; }
+  .notification-hero h1 { margin: 0 0 8px; font-size: clamp(34px, 10.5vw, 42px); }
+  .notification-hero-meta { max-width: 58%; font-size: 11px; }
+  .notification-hero-note { display: none; }
   .notifications-header-aside { min-height: 92px; border-top: 1px solid #dfe6e1; border-left: 0; }
   .notification-message { margin-top: 14px; }
   .notification-feed { margin-top: 16px; padding: 21px 16px 4px; border-radius: 16px; }

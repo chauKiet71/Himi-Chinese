@@ -88,6 +88,8 @@ test("in-app notifications are user-scoped, readable and linked to VIP decisions
   assert.match(actions, /getCurrentUser/);
   assert.match(actions, /markAllUserNotificationsRead/);
   assert.match(page, /Hộp thư của bạn/);
+  assert.match(page, /notification-hero/);
+  assert.match(page, /Himi sẽ báo bạn/);
   assert.match(page, /openNotificationAction/);
   assert.match(shell, /topbar-notification-count/);
   assert.match(shell, /href=\{notificationsHref\}/);

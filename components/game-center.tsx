@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import NextLink from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
@@ -58,7 +59,7 @@ type HskRoundProps = {
   onComplete: (score: number) => void;
 };
 
-gsap.registerPlugin(useGSAP, MotionPathPlugin);
+if (typeof window !== "undefined") gsap.registerPlugin(useGSAP, MotionPathPlugin);
 
 type GameSyncState = "idle" | "saving" | "saved" | "error";
 
@@ -192,6 +193,7 @@ function GameFrame({
   children: ReactNode;
 }) {
   const course = useContext(HskGameCourseContext);
+  const exitLabel = course?.exitLabel ?? "Tất cả trò chơi";
   return (
     <main className="learner-dashboard game-center-dashboard game-session-dashboard game-immersive-dashboard">
       <div className="game-center-shell game-session-shell">
@@ -205,7 +207,7 @@ function GameFrame({
             <p>{description}</p>
           </div>
           <div className="game-session-hud">
-            <button aria-label="Quay lại tất cả trò chơi" className="game-back-button" onClick={onExit} type="button"><ArrowLeft size={17} /><span>Tất cả trò chơi</span></button>
+            <button aria-label={exitLabel === "Trở lại" ? "Trở về trang trước" : "Quay lại tất cả trò chơi"} className="game-back-button" onClick={onExit} type="button"><ArrowLeft size={17} /><span>{exitLabel}</span></button>
             <div className="game-session-metrics" aria-label="Tiến độ trò chơi">
               <span><Target aria-hidden="true" size={22} /><span><small>TIẾN ĐỘ</small><strong>{progress}</strong></span></span>
               <span><Star aria-hidden="true" size={22} /><span><small>ĐIỂM</small><strong>{score}</strong></span></span>
@@ -222,6 +224,8 @@ function GameFrame({
 }
 
 function GameResult({ score, label, onRestart, onExit }: { score: number; label: string; onRestart: () => void; onExit: () => void }) {
+  const course = useContext(HskGameCourseContext);
+  const returnsToPreviousPage = course?.exitLabel === "Trở lại";
   return (
     <div className="game-result" role="status">
       <span><Trophy size={28} /></span>
@@ -230,7 +234,9 @@ function GameResult({ score, label, onRestart, onExit }: { score: number; label:
       <strong>{score} điểm</strong>
       <div>
         <button onClick={onRestart} type="button"><RotateCcw size={16} /> Chơi lại</button>
-        <button onClick={onExit} type="button">Chọn trò khác <ArrowRight size={16} /></button>
+        <button onClick={onExit} type="button">
+          {returnsToPreviousPage ? <><ArrowLeft size={16} /> Trở lại</> : <>Chọn trò khác <ArrowRight size={16} /></>}
+        </button>
         <DailyGameCompletionAction />
       </div>
     </div>
@@ -621,12 +627,14 @@ export function GameCenter({
   initialGameId: GameId | null;
   initialProgress: GameProgressSnapshot;
 }) {
+  const router = useRouter();
   const [activeGame, setActiveGame] = useState<GameId | null>(initialGameId);
   const [record, setRecord] = useState<GameProgressSnapshot>(initialProgress);
   const [syncState, setSyncState] = useState<GameSyncState>("idle");
   const recommendedGameId = record.completed.includes("slice")
     ? catalogGames.find((game) => !record.completed.includes(game.id))?.id ?? null
     : null;
+  const exitLabel = initialGameId ? "Trở lại" : "Tất cả trò chơi";
 
   useEffect(() => {
     if (authenticated) return;
@@ -685,15 +693,22 @@ export function GameCenter({
     }).catch(() => setSyncState("error"));
   }, [authenticated]);
 
-  const exitGame = () => setActiveGame(null);
+  const exitGame = useCallback(() => {
+    if (initialGameId) {
+      if (window.history.length > 1) router.back();
+      else router.replace("/games");
+      return;
+    }
+    setActiveGame(null);
+  }, [initialGameId, router]);
 
   let activeGameView: ReactNode = null;
-  if (activeGame === "slice") activeGameView = <WritingSliceGame completionAction={<DailyGameCompletionAction />} onComplete={(score) => completeGame("slice", score)} onExit={exitGame} />;
+  if (activeGame === "slice") activeGameView = <WritingSliceGame completionAction={<DailyGameCompletionAction />} exitLabel={exitLabel} onComplete={(score) => completeGame("slice", score)} onExit={exitGame} />;
   if (activeGame && activeGame !== "slice") {
     const game = catalogGames.find((item) => item.id === activeGame)!;
     const gameId: HskGameId = activeGame;
     const Game = hskGameComponents[gameId];
-    activeGameView = <HskGameSession gameId={gameId} key={gameId} onExit={exitGame} title={game.title}>
+    activeGameView = <HskGameSession exitLabel={exitLabel} gameId={gameId} key={gameId} onExit={exitGame} title={game.title}>
       {(words, onRestart) => <Game words={words} onRestart={onRestart} onComplete={(score) => completeGame(gameId, score)} onExit={exitGame} />}
     </HskGameSession>;
   }

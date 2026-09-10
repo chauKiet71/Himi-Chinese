@@ -44,7 +44,7 @@ const secrets = {
   CLOUDINARY_URL: requiredEnvironmentValue("CLOUDINARY_URL"),
   BREVO_API_KEY: requiredEnvironmentValue("BREVO_API_KEY"),
   BREVO_FROM_EMAIL: requiredEnvironmentValue("BREVO_FROM_EMAIL"),
-  BREVO_FROM_NAME: process.env.BREVO_FROM_NAME?.trim() || "HanziWork",
+  BREVO_FROM_NAME: process.env.BREVO_FROM_NAME?.trim() || "Himi",
   SEPAY_WEBHOOK_SECRET: requiredEnvironmentValue("SEPAY_WEBHOOK_SECRET"),
   SEPAY_BANK_CODE: process.env.SEPAY_BANK_CODE?.trim() || "ACB",
   SEPAY_BANK_ACCOUNT_NUMBER: process.env.SEPAY_BANK_ACCOUNT_NUMBER?.trim() || "12897891",
