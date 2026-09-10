@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent } from "react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useLinkStatus } from "next/link";
+import { usePathname } from "next/navigation";
 import {
   BarChart3,
   BookOpenText,
@@ -10,10 +9,12 @@ import {
   Headphones,
   Languages,
   LayoutDashboard,
+  LockKeyhole,
   LoaderCircle,
   UserCog,
   UsersRound,
 } from "lucide-react";
+import { AdminLink } from "@/components/admin-link";
 import type { UserRole } from "@/lib/auth-service";
 
 const navigationGroups = [
@@ -48,6 +49,12 @@ const navigationGroups = [
         label: "Kho Luyện ca",
         icon: Headphones,
         matches: (pathname: string) => pathname.startsWith("/admin/practice"),
+      },
+      {
+        href: "/admin/access",
+        label: "Khóa nội dung VIP",
+        icon: LockKeyhole,
+        matches: (pathname: string) => pathname.startsWith("/admin/access"),
       },
     ],
   },
@@ -86,60 +93,17 @@ function canSeeItem(role: UserRole, href: string): boolean {
   return role === "admin" || href === "/admin/practice";
 }
 
-function getAdminPrefetchHrefs(role: UserRole): string[] {
-  const hrefs: string[] = [];
-  for (const group of navigationGroups) {
-    for (const item of group.items) {
-      if (canSeeItem(role, item.href)) hrefs.push(item.href);
-    }
-  }
-  return hrefs;
-}
-
-function isPlainNavigation(event: MouseEvent<HTMLAnchorElement>): boolean {
-  return event.button === 0 && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
+function AdminNavigationIcon({ Icon }: { Icon: typeof LayoutDashboard }) {
+  const { pending } = useLinkStatus();
+  return pending
+    ? <LoaderCircle aria-hidden="true" className="admin-nav-spinner" size={17} />
+    : <Icon aria-hidden="true" size={17} />;
 }
 
 export function AdminNavigation({ userRole }: { userRole: UserRole }) {
   const pathname = usePathname();
-  const router = useRouter();
-  const [pendingHref, setPendingHref] = useState<string | null>(null);
-  const navigating = Boolean(pendingHref && pathname !== pendingHref);
 
-  useEffect(() => {
-    const warmAdminRoutes = () => {
-      for (const href of getAdminPrefetchHrefs(userRole)) {
-        if (href !== pathname) router.prefetch(href);
-      }
-    };
-    const browserWindow = window as typeof window & {
-      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
-      cancelIdleCallback?: (handle: number) => void;
-    };
-
-    if (browserWindow.requestIdleCallback) {
-      const handle = browserWindow.requestIdleCallback(warmAdminRoutes, { timeout: 1_200 });
-      return () => browserWindow.cancelIdleCallback?.(handle);
-    }
-
-    const handle = window.setTimeout(warmAdminRoutes, 250);
-    return () => window.clearTimeout(handle);
-  }, [pathname, router, userRole]);
-
-  useEffect(() => {
-    if (!pendingHref) return;
-    const timeout = window.setTimeout(() => setPendingHref(null), 10_000);
-    return () => window.clearTimeout(timeout);
-  }, [pendingHref]);
-
-  const beginNavigation = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (!isPlainNavigation(event) || pathname === href) return;
-    setPendingHref(href);
-  };
-  const prepareRoute = (href: string) => router.prefetch(href);
-
-  return <>
-    <nav aria-busy={navigating} aria-label="Điều hướng Console" className="admin-nav">
+  return <nav aria-label="Điều hướng Console" className="admin-nav">
     {navigationGroups.map((group) => {
       const items = group.items.filter((item) => canSeeItem(userRole, item.href));
       if (!items.length) return null;
@@ -147,26 +111,20 @@ export function AdminNavigation({ userRole }: { userRole: UserRole }) {
         <span>{group.label}</span>
         <div>{items.map(({ href, icon: Icon, label, matches }) => {
           const active = matches(pathname);
-          const pending = navigating && pendingHref === href;
-          return <Link
+          return <AdminLink
             aria-current={active ? "page" : undefined}
-            className={`${active ? "active" : ""} ${pending ? "pending" : ""}`.trim() || undefined}
+            className={active ? "active" : undefined}
             href={href}
+            intentPrefetch
             key={href}
-            onClick={(event) => beginNavigation(event, href)}
-            onFocus={() => prepareRoute(href)}
-            onMouseEnter={() => prepareRoute(href)}
-            onTouchStart={() => prepareRoute(href)}
-            prefetch={false}
+            pendingLabel={`Đang mở ${label}…`}
+            pendingVisual={false}
           >
-            {pending ? <LoaderCircle aria-hidden="true" className="admin-nav-spinner" size={17} /> : <Icon aria-hidden="true" size={17} />}
+            <AdminNavigationIcon Icon={Icon} />
             <span>{label}</span>
-          </Link>;
+          </AdminLink>;
         })}</div>
       </div>;
     })}
-    </nav>
-    <span aria-hidden="true" className={`admin-route-progress ${navigating ? "active" : ""}`}><span /></span>
-    <span aria-live="polite" className="sr-only" role="status">{navigating ? "Đang tải trang quản trị…" : ""}</span>
-  </>;
+  </nav>;
 }

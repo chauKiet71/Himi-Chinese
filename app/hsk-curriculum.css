@@ -89,6 +89,18 @@
   background: rgba(255, 255, 255, .2);
 }
 
+.hsk-level-tabs button.is-vip-locked {
+  color: #8d611e;
+  border-color: #edcf98;
+  background: #fff9ed;
+  box-shadow: 0 4px 0 #f4e4c5;
+}
+
+.hsk-level-tabs button.is-vip-locked > span {
+  color: #8d611e;
+  background: #fff0ce;
+}
+
 .hsk-curriculum-heading {
   min-height: 112px;
   margin-top: 30px;
@@ -152,6 +164,16 @@
 }
 
 .hsk-industry-link:hover { color: var(--hsk-accent-deep); border-color: #86cfc6; }
+
+.hsk-vip-trigger { cursor: pointer; font: inherit; }
+
+button.hsk-lesson-start {
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  font: inherit;
+}
 
 .hsk-curriculum-layout {
   display: grid;
@@ -340,6 +362,19 @@
   border-color: #afe0d9;
   background: #f5fcfa;
   box-shadow: 0 4px 0 #d9f0ec;
+}
+
+.hsk-lesson-row.is-vip-locked,
+.hsk-lesson-row.is-vip-locked.is-active {
+  border-color: #edcf98;
+  background: #fff9ed;
+  box-shadow: 0 4px 0 #f4e4c5;
+}
+
+.hsk-lesson-row.is-vip-locked .hsk-lesson-index {
+  color: #8d611e;
+  background: #fff0ce;
+  box-shadow: none;
 }
 
 .hsk-lesson-select {

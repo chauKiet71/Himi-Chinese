@@ -56,6 +56,8 @@ import {
 } from "@/lib/admin-practice-service";
 import { parsePracticeReviewDueDate, parsePracticeReviewPriority } from "@/lib/practice-review-queue";
 import { parsePracticeAudioReviewIssues, parsePracticeAudioReviewStatus } from "@/lib/practice-audio-review";
+import { setContentAccessPolicy } from "@/lib/content-access-repository";
+import { CONTENT_ACCESS_TARGET_TYPES, type AccessTier } from "@/lib/content-access-types";
 import {
   isUuid,
   normalizeSlug,
@@ -447,6 +449,25 @@ export async function deleteLessonAction(formData: FormData) {
   if (!isUuid(lessonId) || !isUuid(moduleId) || !confirmedDelete(formData)) invalid(isUuid(lessonId) ? `/admin/lessons/${lessonId}` : "/admin/courses");
   const result = await deleteLesson(lessonId, admin.id);
   resultRedirect(result, `/admin/modules/${moduleId}`, `/admin/lessons/${lessonId}`, "deleted");
+}
+
+export async function updateContentAccessPolicyAction(formData: FormData) {
+  const admin = await requireAdminUser();
+  const targetTypeValue = valueString(formData, "targetType", 40);
+  const targetType = CONTENT_ACCESS_TARGET_TYPES.find((value) => value === targetTypeValue);
+  const targetKey = valueString(formData, "targetKey", 500);
+  const tierValue = valueString(formData, "tier", 10);
+  const tier = (["free", "vip"] as AccessTier[]).find((value) => value === tierValue);
+  const returnToValue = valueString(formData, "returnTo", 500);
+  const returnTo = /^\/admin(?:\/[a-z0-9_-]+)*$/iu.test(returnToValue) ? returnToValue : "/admin/access";
+  if (!targetType || !targetKey || !tier) invalid(returnTo);
+
+  await setContentAccessPolicy({ targetType, targetKey, tier, actorId: admin.id });
+  revalidatePath("/courses");
+  revalidatePath("/hsk", "layout");
+  revalidatePath(returnTo);
+  revalidateTag("published-content", "max");
+  redirect(`${returnTo}?success=content_access_updated`);
 }
 
 export async function createVocabularyAction(formData: FormData) {

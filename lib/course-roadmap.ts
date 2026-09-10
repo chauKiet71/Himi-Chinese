@@ -5,6 +5,7 @@ export type RoadmapLessonStatus = "completed" | "current" | "locked" | "vip_lock
 export type RoadmapLesson = LessonSummary & {
   status: RoadmapLessonStatus;
   href: string | null;
+  vipLocked: boolean;
 };
 
 export type RoadmapModule = {
@@ -15,6 +16,7 @@ export type RoadmapModule = {
   completedLessons: number;
   totalMinutes: number;
   lessons: RoadmapLesson[];
+  vipLocked: boolean;
 };
 
 export type CourseRoadmap = {
@@ -58,6 +60,7 @@ export function buildCourseRoadmap({
     return {
       ...lesson,
       status,
+      vipLocked: !lesson.isFree && !viewerHasVip,
       href: (status === "completed" || status === "current") && (lesson.isFree || viewerHasVip)
         ? `/learn/${courseSlug}?lesson=${lesson.slug}`
         : null,
@@ -74,6 +77,7 @@ export function buildCourseRoadmap({
       completedLessons: 0,
       totalMinutes: 0,
       lessons: [],
+      vipLocked: false,
     };
     stage.lessons.push(lesson);
     stage.totalMinutes += lesson.estimatedMinutes;
@@ -85,6 +89,7 @@ export function buildCourseRoadmap({
     .sort((a, b) => a.order - b.order)
     .map((module): RoadmapModule => ({
       ...module,
+      vipLocked: !viewerHasVip && module.lessons.length > 0 && module.lessons.every((lesson) => !lesson.isFree),
       status: module.completedLessons === module.lessons.length
         ? "completed"
         : module.lessons.some((lesson) => lesson.status === "current" || lesson.status === "vip_locked")

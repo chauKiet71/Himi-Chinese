@@ -1,0 +1,2 @@
+ALTER TYPE "public"."content_access_target_type" ADD VALUE 'hsk_vocabulary' BEFORE 'hsk_question';--> statement-breakpoint
+ALTER TYPE "public"."content_access_target_type" ADD VALUE 'hsk_writing' BEFORE 'hsk_question';

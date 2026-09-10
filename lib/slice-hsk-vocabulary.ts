@@ -18,10 +18,16 @@ const lessonsByLevel: Record<SliceHskLevel, HskLessonContent[]> = {
   "hsk-6": [...HSK6_VOLUME1_TEXTBOOK_LESSONS, ...HSK6_VOLUME2_TEXTBOOK_LESSONS],
 };
 
-export function getSliceHskVocabulary(level: SliceHskLevel): SliceVocabulary[] {
+export function getSliceHskVocabulary(
+  level: SliceHskLevel,
+  allowedLessonIds?: ReadonlySet<string>,
+  allowedVocabularyKeys?: ReadonlySet<string>,
+): SliceVocabulary[] {
   const words = new Map<string, SliceVocabulary>();
   for (const lesson of lessonsByLevel[level]) {
+    if (allowedLessonIds && !allowedLessonIds.has(lesson.id)) continue;
     for (const word of lesson.vocabulary) {
+      if (allowedVocabularyKeys && !allowedVocabularyKeys.has(`${lesson.id}:${word.id}`)) continue;
       const hanzi = word.hanzi.trim();
       const pinyin = word.pinyin.trim();
       if (!hanzi || !pinyin || !word.meaning.trim()) continue;

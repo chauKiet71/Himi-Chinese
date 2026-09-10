@@ -1,32 +1,45 @@
 import { timingSafeEqual } from "node:crypto";
 import { parseSupportCallback, SupportError } from "./support-domain.ts";
 
+type TelegramUser = { id: number; first_name?: string; is_bot?: boolean };
 export type TelegramMessage = {
-  message_id: number; chat: { id: number }; from?: { id: number; first_name?: string };
+  message_id: number; chat: { id: number; type?: string }; from?: TelegramUser;
+  sender_chat?: { id: number };
   text?: string; caption?: string; photo?: { file_id: string; file_size?: number }[];
   reply_to_message?: { message_id: number };
 };
 export type TelegramUpdate = {
   update_id: number;
-  callback_query?: { id: string; from: { id: number; first_name?: string }; data?: string; message?: TelegramMessage };
+  callback_query?: { id: string; from: TelegramUser; data?: string; message?: TelegramMessage };
   message?: TelegramMessage;
 };
-export function telegramConfig() {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
-  const secret = process.env.TELEGRAM_WEBHOOK_SECRET;
-  const admins = (process.env.TELEGRAM_ADMIN_USER_IDS ?? "").split(",").map(x => x.trim()).filter(x => /^\d+$/.test(x));
-  if (!token || !chatId || !/^-?\d+$/.test(chatId) || !secret || !admins.length) throw new SupportError("Kênh hỗ trợ chưa được cấu hình.", 503);
+export function telegramConfig(environment: NodeJS.ProcessEnv = process.env) {
+  const token = environment.TELEGRAM_BOT_TOKEN;
+  const chatId = environment.TELEGRAM_ADMIN_CHAT_ID;
+  const secret = environment.TELEGRAM_WEBHOOK_SECRET;
+  // Optional bootstrap operators for /groupid, not a support staff allowlist.
+  const admins = (environment.TELEGRAM_ADMIN_USER_IDS ?? "").split(",").map(x => x.trim()).filter(x => /^\d+$/.test(x));
+  if (!token || !chatId || !/^-[1-9]\d*$/.test(chatId) || !secret) throw new SupportError("Kênh hỗ trợ chưa được cấu hình.", 503);
   return { token, chatId, secret, admins };
 }
 export function verifyTelegramSecret(actual: string | null, expected: string) {
   const a = Buffer.from(actual ?? ""); const b = Buffer.from(expected);
   return a.length === b.length && b.length > 0 && timingSafeEqual(a, b);
 }
-export function authorizedTelegramUpdate(update: TelegramUpdate, config: { chatId: string; admins: string[] }) {
+export async function authorizedTelegramUpdate(update: TelegramUpdate, config: { chatId: string }, call: TelegramCall = telegramCall) {
   const actor = update.callback_query?.from ?? update.message?.from;
   const message = update.callback_query?.message ?? update.message;
-  return !!actor && !!message && String(message.chat?.id) === config.chatId && config.admins.includes(String(actor.id));
+  if (!actor || !message || !Number.isSafeInteger(actor.id) || actor.id <= 0 || actor.is_bot ||
+    !/^-[1-9]\d*$/.test(config.chatId) || String(message.chat?.id) !== config.chatId ||
+    (message.chat.type && !["group", "supergroup"].includes(message.chat.type)) ||
+    (!update.callback_query && message.sender_chat)) return false;
+  // Never cache membership: removed staff must not retain access through old buttons.
+  // API failures propagate so the webhook/worker retries without authorizing anyone.
+  const member = await call("getChatMember", { chat_id: config.chatId, user_id: actor.id });
+  const user = member.user as TelegramUser | undefined;
+  if (!user || user.id !== actor.id || user.is_bot) return false;
+  return ["creator", "administrator", "member"].includes(String(member.status)) ||
+    (member.status === "restricted" && member.is_member === true);
 }
 export function telegramGroupIdCommand(value: unknown, admins: string[]) {
   if (!value || typeof value !== "object") return null;
@@ -51,7 +64,23 @@ export function validTelegramUpdate(value: unknown): value is TelegramUpdate {
 }
 export class TelegramError extends Error {
   retryAfter: number;
-  constructor(code: number, retryAfter = 0) { super(`telegram_${code}`); this.retryAfter = retryAfter; }
+  migrateToChatId?: string;
+  constructor(code: number, retryAfter = 0, details: { description?: string; migrateToChatId?: number } = {}) {
+    const migrated = Number.isSafeInteger(details.migrateToChatId) && String(details.migrateToChatId).startsWith("-100");
+    // Keep only known diagnostic categories, never raw API text, tokens or customer data.
+    const reasons = [
+      ["group chat was upgraded to a supergroup chat", "group_migrated"],
+      ["chat not found", "chat_not_found"],
+      ["message to be replied not found", "reply_not_found"],
+      ["bot was kicked", "bot_removed"],
+      ["not enough rights", "insufficient_rights"],
+      ["BUTTON_DATA_INVALID", "invalid_button_data"],
+    ];
+    const reason = migrated ? "group_migrated" : reasons.find(([text]) => details.description?.includes(text))?.[1];
+    super(`telegram_${code}${reason ? `_${reason}` : ""}`);
+    this.retryAfter = retryAfter;
+    if (migrated) this.migrateToChatId = String(details.migrateToChatId);
+  }
 }
 export type TelegramCall = (method: string, parameters: Record<string, unknown>, photo?: Uint8Array) => Promise<Record<string, unknown>>;
 export const telegramCall: TelegramCall = async (method, parameters, photo) => {
@@ -68,10 +97,12 @@ export const telegramCall: TelegramCall = async (method, parameters, photo) => {
       body: form ?? JSON.stringify(parameters), signal: AbortSignal.timeout(method === "answerCallbackQuery" ? 1500 : 12_000),
     });
   } catch { throw new TelegramError(503); }
-  const data = await response.json() as { ok: boolean; result: Record<string, unknown>; error_code?: number; description?: string; parameters?: { retry_after?: number } };
+  const data = await response.json() as { ok: boolean; result: Record<string, unknown>; error_code?: number; description?: string; parameters?: { retry_after?: number; migrate_to_chat_id?: number } };
   // Editing the same deterministic payload is safe to retry after an ambiguous response.
   if (!data.ok && method.startsWith("editMessage") && data.description?.includes("message is not modified")) return {};
-  if (!data.ok) throw new TelegramError(data.error_code ?? response.status, (data.parameters?.retry_after ?? 0) * 1000);
+  if (!data.ok) throw new TelegramError(data.error_code ?? response.status, (data.parameters?.retry_after ?? 0) * 1000, {
+    description: data.description, migrateToChatId: data.parameters?.migrate_to_chat_id,
+  });
   return data.result;
 };
 export function supportKeyboard(id: string, generation: number) {

@@ -91,6 +91,26 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   assert.match(html, /3 hội thoại/);
   assert.match(html, /href="\/hsk\/1\/hsk1-bai-01-chao-anh"/);
   assert.doesNotMatch(html, />HSK 7–9</);
+
+  const lockedCurriculum = curriculumModule.HSK_CURRICULUM.map((level, levelIndex) => levelIndex ? level : {
+    ...level,
+    access: { allowed: false },
+    topics: level.topics.map((topic, topicIndex) => topicIndex ? topic : {
+      ...topic,
+      lessons: topic.lessons.map((lesson, lessonIndex) => lessonIndex ? lesson : {
+        ...lesson,
+        access: { allowed: false },
+      }),
+    }),
+  });
+  const lockedHtml = renderToStaticMarkup(React.createElement(viewModule.HskCurriculumExplorer, {
+    curriculum: lockedCurriculum,
+  }));
+  assert.match(lockedHtml, /hsk-level-tabs[\s\S]*is-vip-locked/);
+  assert.match(lockedHtml, /hsk-lesson-row is-active is-vip-locked/);
+  assert.match(lockedHtml, />Cần nâng cấp để tiếp tục học</);
+  assert.match(lockedHtml, /action="\/vip"/);
+  assert.doesNotMatch(lockedHtml, /href="\/hsk\/1\/hsk1-bai-01-chao-anh"/);
 });
 
 test("course library opens the HSK curriculum from a dedicated catalog card", async (t) => {

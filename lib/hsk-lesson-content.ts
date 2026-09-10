@@ -18,6 +18,7 @@ import lesson12 from "../content/hsk1-textbook-json/lessons/lesson-12.json" with
 import lesson13 from "../content/hsk1-textbook-json/lessons/lesson-13.json" with { type: "json" };
 import lesson14 from "../content/hsk1-textbook-json/lessons/lesson-14.json" with { type: "json" };
 import lesson15 from "../content/hsk1-textbook-json/lessons/lesson-15.json" with { type: "json" };
+import type { AccessTier } from "./content-access-types.ts";
 
 export type HskLessonMode = "vocabulary" | "exercise" | "pronunciation" | "hanzi";
 
@@ -36,6 +37,8 @@ export type HskVocabularyItem = {
     strokes: number;
     note: string;
   }>;
+  accessTier?: AccessTier;
+  locked?: boolean;
 };
 
 export type HskGrammarPoint = {
@@ -74,6 +77,8 @@ export type HskExercise = {
   speakText?: string;
   options: string[];
   answer: string | null;
+  accessTier?: AccessTier;
+  locked?: boolean;
 };
 
 export type HskWritingCharacter = {
@@ -82,6 +87,8 @@ export type HskWritingCharacter = {
   hanzi: string;
   pinyin: string;
   meaning: string;
+  accessTier?: AccessTier;
+  locked?: boolean;
 };
 
 const HANZI_GLYPH_PATTERN = /[\u3400-\u9fff]/u;
@@ -133,6 +140,7 @@ export type HskLessonContent = {
   contentStatus: "draft" | "review" | "published" | "archived";
   languageReviewStatus: "pending" | "approved" | "changes-requested";
   audioAvailable: boolean;
+  accessTier?: AccessTier;
   guidedPlaceholders?: Array<"vocabulary" | "dialogue" | "pronunciation" | "writing">;
 };
 
@@ -154,6 +162,10 @@ type RawLesson = {
     estimatedMinutes: number;
   };
   sections: RawLessonSection[];
+  access?: {
+    tier: AccessTier;
+    previewSectionIds?: string[];
+  };
   editorial: {
     languageReviewStatus: HskLessonContent["languageReviewStatus"];
   };
@@ -396,6 +408,7 @@ function composeLesson(raw: RawLesson): HskLessonContent {
     contentStatus: raw.status,
     languageReviewStatus: raw.editorial.languageReviewStatus,
     audioAvailable: pronunciation.every((item) => item.audioStatus === "available"),
+    accessTier: raw.access?.tier ?? "free",
   };
 }
 

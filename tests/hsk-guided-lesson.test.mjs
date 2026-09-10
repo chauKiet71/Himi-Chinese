@@ -64,6 +64,31 @@ test("guided HSK practice creates one exercise for every vocabulary word", async
   }
 });
 
+test("guided HSK practice preserves a VIP placeholder for a locked vocabulary item", async () => {
+  const [contentModule, guidedModule] = await Promise.all([
+    import("../lib/hsk-lesson-content.ts"),
+    import("../lib/hsk-guided-lesson.ts"),
+  ]);
+  const lesson = contentModule.getHskLessonContent("hsk-1", "hsk1-bai-01-chao-anh");
+  const lockedLesson = {
+    ...lesson,
+    vocabulary: lesson.vocabulary.map((word, index) => index ? word : {
+      ...word,
+      hanzi: "",
+      pinyin: "",
+      meaning: "",
+      example: "",
+      examplePinyin: "",
+      translation: "",
+      locked: true,
+    }),
+  };
+  const [exercise] = guidedModule.buildHskGuidedExercises(lockedLesson);
+  assert.equal(exercise.locked, true);
+  assert.equal(exercise.prompt, "");
+  assert.deepEqual(exercise.options, []);
+});
+
 test("guided progress is restored safely and can complete the whole lesson", async () => {
   const [contentModule, progressModule] = await Promise.all([
     import("../lib/hsk-lesson-content.ts"),
@@ -118,7 +143,8 @@ test("guided HSK lesson exposes progress, controls, sections and step navigation
   assert.match(html, /0\.75×/);
   assert.match(html, /Từ vựng/);
   assert.doesNotMatch(html, /<span>Ngữ pháp<\/span>/);
-  assert.match(html, /Hội thoại/);
+  assert.doesNotMatch(html, /<span>Hội thoại<\/span>/);
+  assert.doesNotMatch(html, /<span>Phát âm<\/span>/);
   assert.match(html, /Luyện viết/);
   assert.match(html, /Luyện tập/);
   assert.match(html, /Hoàn thành/);

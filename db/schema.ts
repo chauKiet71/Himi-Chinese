@@ -30,6 +30,18 @@ export const paymentStatus = pgEnum("payment_status", ["pending", "paid", "faile
 export const reviewState = pgEnum("review_state", ["new", "learning", "reviewing", "mastered"]);
 export const authTokenPurpose = pgEnum("auth_token_purpose", ["verify_email", "reset_password"]);
 export const practiceAudioReviewStatus = pgEnum("practice_audio_review_status", ["pending", "approved", "re_record"]);
+export const accessTier = pgEnum("access_tier", ["free", "vip"]);
+export const contentAccessTargetType = pgEnum("content_access_target_type", [
+  "learning_path",
+  "learning_module",
+  "learning_lesson",
+  "learning_question",
+  "hsk_level",
+  "hsk_lesson",
+  "hsk_vocabulary",
+  "hsk_writing",
+  "hsk_question",
+]);
 
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -416,6 +428,19 @@ export const subscriptions = pgTable("subscriptions", {
   activatedBy: uuid("activated_by").references(() => users.id),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 }, (table) => [index("subscriptions_user_status_idx").on(table.userId, table.status)]);
+
+export const contentAccessPolicies = pgTable("content_access_policies", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  targetType: contentAccessTargetType("target_type").notNull(),
+  targetKey: varchar("target_key", { length: 500 }).notNull(),
+  tier: accessTier("tier").notNull().default("free"),
+  updatedBy: uuid("updated_by").references(() => users.id, { onDelete: "set null" }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("content_access_policies_target_uq").on(table.targetType, table.targetKey),
+  index("content_access_policies_target_type_idx").on(table.targetType),
+]);
 
 export const vipActivationRequests = pgTable("vip_activation_requests", {
   id: uuid("id").defaultRandom().primaryKey(),

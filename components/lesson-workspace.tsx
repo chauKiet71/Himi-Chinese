@@ -7,6 +7,7 @@ import { LessonChallengePanel } from "@/components/lesson-challenge";
 import { LessonPhrasebook } from "@/components/lesson-phrasebook";
 import { LessonPronunciationCoach } from "@/components/lesson-pronunciation-coach";
 import { LessonVocabularyDeck } from "@/components/lesson-vocabulary-deck";
+import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 import { VideoLearningPlayer } from "@/components/video-learning-player";
 import type { Course, LessonAccess, LessonDetail, LessonProgressState, LessonSummary } from "@/lib/content-types";
 import { withDailySessionFlow, type DailyRecommendation } from "@/lib/daily-session";
@@ -96,7 +97,7 @@ export function LessonWorkspace({
         <span className="section-kicker">Nội dung VIP</span>
         <h2>Mở khóa bài học này</h2>
         <p>Nâng cấp VIP để học từ vựng, cụm từ và luyện nghe & nói trong bài học này.</p>
-        <Link className="button button-primary" href="/vip">Xem quyền lợi VIP</Link>
+        <VipUpgradeInlineForm />
       </div> : <div className={`lesson-content-card${tab === "Từ vựng" || tab === "Cụm từ" ? " lesson-content-card-vocabulary" : ""}${tab === "Tình huống" ? " lesson-content-card-video" : ""}`}>
         <div className="lesson-tab-panel-viewport">
           <div

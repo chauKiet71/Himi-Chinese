@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { HskLessonWorkspace } from "@/components/hsk-lesson-workspace";
+import { HskVipLocked } from "@/components/hsk-vip-locked";
+import { getCurrentUser } from "@/lib/auth-session";
+import { getHskLessonPageData } from "@/lib/hsk-access-repository";
 import { getHskLearningLessonContent } from "@/lib/hsk-learning-content";
 
 type HskLessonPageProps = {
@@ -22,7 +25,9 @@ export async function generateMetadata({ params }: HskLessonPageProps): Promise<
 }
 
 export default async function HskLessonPage({ params }: HskLessonPageProps) {
-  const lesson = await getLessonFromParams(params);
-  if (!lesson) notFound();
-  return <HskLessonWorkspace lesson={lesson} />;
+  const [{ level, lesson: lessonId }, user] = await Promise.all([params, getCurrentUser()]);
+  const data = await getHskLessonPageData({ level, lessonId, userId: user?.id ?? null });
+  if (!data) notFound();
+  if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
+  return <HskLessonWorkspace lesson={data.lesson} />;
 }

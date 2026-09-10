@@ -10,6 +10,8 @@ import {
   Clock3,
   Globe2,
   GraduationCap,
+  Crown,
+  LockKeyhole,
   MapPin,
   MessageCircle,
   Play,
@@ -28,6 +30,7 @@ import {
   getHskLessonProgressStorageKey,
   parseHskLessonProgress,
 } from "@/lib/hsk-lesson-progress";
+import { VipUpgradeDialog, type VipUpgradeTarget } from "@/components/vip-upgrade-prompt";
 
 const topicIcons: Record<HskTopicIcon, LucideIcon> = {
   message: MessageCircle,
@@ -63,6 +66,7 @@ export function HskCurriculumExplorer({
   const activeTopic = activeLevel.topics.find((topic) => topic.id === activeTopicId) ?? activeLevel.topics[0];
   const [activeLessonId, setActiveLessonId] = useState(activeTopic.lessons[0].id);
   const [lessonProgress, setLessonProgress] = useState<Record<string, number>>({});
+  const [upgradeTarget, setUpgradeTarget] = useState<VipUpgradeTarget | null>(null);
   const totalLessons = activeLevel.topics.reduce((total, topic) => total + topic.lessons.length, 0);
   const completedActiveLessons = activeTopic.lessons.filter((lesson) => lessonProgress[lesson.id] === 100).length;
 
@@ -95,6 +99,10 @@ export function HskCurriculumExplorer({
   const selectLevel = (levelId: string) => {
     const nextLevel = curriculum.find((level) => level.id === levelId);
     if (!nextLevel) return;
+    if (nextLevel.access && !nextLevel.access.allowed) {
+      setUpgradeTarget({ kind: "Lộ trình", title: nextLevel.label });
+      return;
+    }
     setActiveLevelId(nextLevel.id);
     setActiveTopicId(nextLevel.topics[0].id);
     setActiveLessonId(nextLevel.topics[0].lessons[0].id);
@@ -111,7 +119,7 @@ export function HskCurriculumExplorer({
     <div aria-label="Chọn cấp độ HSK" className="hsk-level-tabs" role="group">
       {visibleCurriculum.map((level) => <button
         aria-pressed={activeLevel.id === level.id}
-        className={activeLevel.id === level.id ? "is-active" : ""}
+        className={`${activeLevel.id === level.id ? "is-active" : ""}${level.access && !level.access.allowed ? " is-vip-locked" : ""}`}
         key={level.id}
         onClick={() => selectLevel(level.id)}
         type="button"
@@ -125,6 +133,7 @@ export function HskCurriculumExplorer({
         <h1 id="hsk-curriculum-title">Lộ trình bài học {activeLevel.label}</h1>
         <p>Hoàn thành từng bài để mở khóa chủ đề tiếp theo.</p>
       </div>
+      {activeLevel.access && !activeLevel.access.allowed ? <button className="hsk-industry-link hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Lộ trình", title: activeLevel.label })} type="button"><Crown aria-hidden="true" size={17} /> Cần nâng cấp</button> : null}
       <Link className="hsk-industry-link" href={catalogHref}>Lộ trình theo ngành <ArrowRight aria-hidden="true" size={17} /></Link>
     </header>
 
@@ -161,10 +170,11 @@ export function HskCurriculumExplorer({
         <div aria-live="polite" className="hsk-lesson-list">
           {activeTopic.lessons.map((lesson) => {
             const selected = lesson.id === activeLessonId;
-            const lessonAvailable = lesson.available;
+            const accessAllowed = lesson.access?.allowed ?? true;
+            const lessonAvailable = lesson.available && accessAllowed;
             const lessonHref = `/hsk/${activeLevel.id.replace(/^hsk-/, "")}/${lesson.id}`;
             const savedPercent = lessonProgress[lesson.id] ?? 0;
-            return <article className={`hsk-lesson-row${selected ? " is-active" : ""}`} key={lesson.id}>
+            return <article className={`hsk-lesson-row${selected ? " is-active" : ""}${!accessAllowed ? " is-vip-locked" : ""}`} key={lesson.id}>
               {lessonAvailable ? <Link aria-label={`Bài ${lesson.lessonNumber}: ${lesson.title}`} className="hsk-lesson-select" href={lessonHref} prefetch>
                 <span className="hsk-lesson-index">{selected ? <Play aria-hidden="true" fill="currentColor" size={20} /> : lesson.lessonNumber}</span>
                 <span className="hsk-lesson-copy">
@@ -175,10 +185,12 @@ export function HskCurriculumExplorer({
                 aria-label={`Bài ${lesson.lessonNumber}: ${lesson.title}`}
                 aria-pressed={selected}
                 className="hsk-lesson-select"
-                onClick={() => setActiveLessonId(lesson.id)}
+                onClick={() => accessAllowed
+                  ? setActiveLessonId(lesson.id)
+                  : setUpgradeTarget({ kind: "Bài học", title: lesson.title })}
                 type="button"
               >
-                <span className="hsk-lesson-index">{lesson.lessonNumber}</span>
+                <span className="hsk-lesson-index">{accessAllowed ? lesson.lessonNumber : <LockKeyhole aria-hidden="true" size={17} />}</span>
                 <span className="hsk-lesson-copy">
                   <strong>Bài {lesson.lessonNumber}: {lesson.title}</strong>
                   <LessonMeta lesson={lesson} />
@@ -186,11 +198,12 @@ export function HskCurriculumExplorer({
               </button>}
               {selected && lessonAvailable ? <Link className="hsk-lesson-start" href={lessonHref} prefetch>
                 <span>{savedPercent === 100 ? "Đã xong" : "Đang học"}</span><strong>{savedPercent}%</strong><Play aria-hidden="true" fill="currentColor" size={16} />
-              </Link> : <span className="hsk-lesson-duration">{lessonAvailable ? `${lesson.minutes} phút` : "Sắp ra mắt"} <ChevronRight aria-hidden="true" size={19} /></span>}
+              </Link> : !accessAllowed ? <button className="hsk-lesson-start hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Bài học", title: lesson.title })} type="button"><span>VIP</span><Crown aria-hidden="true" size={16} /></button> : <span className="hsk-lesson-duration">{lessonAvailable ? `${lesson.minutes} phút` : "Sắp ra mắt"} <ChevronRight aria-hidden="true" size={19} /></span>}
             </article>;
           })}
         </div>
       </section>
     </div>
+    <VipUpgradeDialog onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} target={upgradeTarget} />
   </section>;
 }

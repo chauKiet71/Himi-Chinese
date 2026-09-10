@@ -2,6 +2,16 @@
 
 ## Phạm vi và kiến trúc
 
+### Quyền nhân viên (cập nhật 10/09/2026)
+
+Mọi thành viên hiện tại của **đúng nhóm hỗ trợ được cấu hình** đều có thể nhận yêu cầu, không cần khai báo ID từng nhân viên. Ai bấm `Trả lời` và claim thành công đầu tiên là người phụ trách duy nhất; người khác không được trả lời hay hoàn thành thay. Yêu cầu chưa có người nhận phải được claim trước khi hoàn thành. Khóa hàng PostgreSQL bảo vệ cả khi bấm đồng thời; không cần migration mới cho thay đổi quyền này.
+
+Webhook kiểm tra secret rồi gọi `getChatMember` trước khi ghi DB; worker kiểm tra lại trước khi chuyển phản hồi đã xếp hàng. Chỉ chấp nhận creator/administrator/member hoặc restricted còn `is_member=true`; từ chối người đã rời/bị xóa khỏi nhóm, bot và tin nhắn gửi ẩn danh dưới danh nghĩa nhóm. Lỗi API kiểm tra quyền được retry, không cấp quyền mặc định và không ghi nhận update là đã xử lý. Nhân viên cần trả lời bằng tài khoản cá nhân.
+
+**Đặt bot làm quản trị viên nhóm** để `getChatMember` hoạt động đáng tin cậy đối với các thành viên khác; không cần cấp thêm quyền xóa tin/chặn người cho chức năng này. Bot là quản trị viên có thể nhận tin nhắn nhóm dù privacy mode đang bật. Chỉ dùng nhóm hỗ trợ riêng tư; thêm một người vào nhóm đồng nghĩa cấp quyền nhận yêu cầu và xem thông tin khách hàng. [Telegram getChatMember](https://core.telegram.org/bots/api#getchatmember), [privacy mode](https://core.telegram.org/bots/features#privacy-mode).
+
+`TELEGRAM_ADMIN_USER_IDS` không còn là danh sách cấp quyền hỗ trợ: giữ tùy chọn cho người cấu hình dùng lệnh `/groupid` ở nhóm mới. Không cần sửa/xóa biến này khi thêm nhân viên. Muốn thu hồi quyền hỗ trợ, loại nhân viên khỏi nhóm. Không tự chuyển yêu cầu khi người phụ trách rời nhóm; cần quy trình bàn giao riêng, tránh âm thầm đổi chủ sở hữu. Sau cập nhật, khởi động lại/redeploy web và worker; chưa tự thay quyền bot hoặc triển khai production trong phiên code này.
+
 Widget Himi hiện có được nối với hỗ trợ **do nhân viên trả lời**, không có LLM/câu trả lời AI giả. Màu đỏ–cam và mascot giữ theo website.
 
 Luồng: client có session → API cùng origin → transaction PostgreSQL lưu conversation + message + outbox → worker Node gửi Telegram → webhook lưu update/claim hoặc enqueue reply → worker xử lý ForceReply/ảnh → client polling.
@@ -34,19 +44,25 @@ Migration chỉ thêm bảng/cột, không xóa hoặc sửa dữ liệu học/a
 | `CLOUDINARY_URL` | Storage hiện có; cần cho ảnh user/admin |
 | `TELEGRAM_BOT_TOKEN` | Token do BotFather cấp |
 | `TELEGRAM_ADMIN_CHAT_ID` | Numeric ID của một group/supergroup hỗ trợ, giữ dấu âm |
-| `TELEGRAM_ADMIN_USER_IDS` | Numeric user IDs, phân cách dấu phẩy; không phải username |
+| `TELEGRAM_ADMIN_USER_IDS` | Tùy chọn: numeric IDs của người cấu hình được dùng `/groupid`; không giới hạn nhân viên hỗ trợ |
 | `TELEGRAM_WEBHOOK_SECRET` | Chuỗi ngẫu nhiên 32–64 ký tự thuộc A-Z/a-z/0-9/_/- |
 | `SUPPORT_WEBHOOK_BASE_URL` | Origin HTTPS công khai; local dùng tunnel HTTPS |
 | `SUPPORT_WORKER_POLL_MS` | Mặc định 1000; cho phép 250–5000 |
 
-Web sử dụng biến môi trường hiện có theo runtime Cloudflare. Script npm local nạp `.env.local` mà không in giá trị. Container production inject env và chạy trực tiếp `node --experimental-strip-types scripts/support-worker.ts`, không cần tạo `.env.local`. Dùng supervisor có restart tự động; graceful shutdown SIGTERM/SIGINT chờ xử lý hiện tại kết thúc.
+Web sử dụng biến môi trường hiện có theo runtime Cloudflare. Các script npm `support:*` local hiện nạp `.env` mà không in giá trị; giữ cùng cấu hình với web (lưu ý `.env.local` có thể ghi đè khi chạy web). Container production inject env và chạy trực tiếp `node --experimental-strip-types scripts/support-worker.ts`, không cần tạo file env. Dùng supervisor có restart tự động; graceful shutdown SIGTERM/SIGINT chờ xử lý hiện tại kết thúc.
+
+### Lỗi gửi sau khi nâng cấp nhóm thành supergroup
+
+Telegram đổi chat ID khi nhóm được nâng cấp. `sendMessage` tới ID cũ trả lỗi 400 kèm `parameters.migrate_to_chat_id`; `getChat` ở ID cũ vẫn có thể thành công, nên kiểm tra token/quyền đơn thuần chưa đủ. Xem [Telegram ResponseParameters](https://core.telegram.org/bots/api#responseparameters).
+
+Transport giữ `TelegramError.migrateToChatId` và lưu mã an toàn `telegram_400_group_migrated` vào hàng đợi/log, không lưu nguyên văn mô tả API hoặc tự gửi lại sang một đích khác khi cấu hình web chưa đồng bộ. Cần xác minh ID mới do Telegram trả về, cập nhật `TELEGRAM_ADMIN_CHAT_ID` ở cả web và worker, chuyển conversation bị ảnh hưởng sang cùng ID mới, vô hiệu hóa mapping ForceReply/message ID cũ và retry các job chưa gửi. Giữ nguyên nội dung, người phụ trách và lịch sử; không đánh dấu job hoàn thành trước khi Telegram xác nhận. Khởi động lại các tiến trình để nạp cấu hình mới. Kiểm tra `npm run support:status`: pending bằng 0, failed và reminderFailures rỗng.
 
 ## Tạo bot, lấy ID, đăng ký webhook
 
 1. Mở [BotFather](https://t.me/BotFather), dùng `/newbot`, lưu token trong secret store.
-2. Tạo group hỗ trợ riêng, thêm bot và các nhân viên. Cho bot quyền gửi tin/ảnh. Chỉ người trong allowlist được thao tác dù họ là admin Telegram.
-3. Trước khi đặt webhook, gửi một lệnh hoặc tin nhắn nhắc tên bot trong group. Dùng Bot API `getUpdates` bằng công cụ phía server để xem **chỉ** `message.chat.id` và `message.from.id` của nhân viên. Không dán token vào thanh địa chỉ, ảnh chụp hoặc log. Mỗi nhân viên cần gửi một tin để lấy numeric ID của họ. Khi webhook đang bật, không dùng `getUpdates`; lấy ID từ thao tác thử trong group/Telegram client đáng tin cậy.
-4. Giữ privacy mode của bot nếu muốn: admin phải Reply vào ForceReply của bot; luồng này không cần đọc toàn bộ cuộc trò chuyện group.
+2. Tạo group hỗ trợ riêng, thêm bot và các nhân viên. Đặt bot làm quản trị viên và cho phép gửi tin/ảnh. Mọi thành viên hiện tại đều có thể nhận yêu cầu; nhân viên không cần quyền quản trị Telegram.
+3. Lấy numeric ID nhóm để đặt `TELEGRAM_ADMIN_CHAT_ID`. Nếu webhook đã chạy và người cấu hình có trong `TELEGRAM_ADMIN_USER_IDS`, dùng `/groupid@TenBot` trong nhóm. Hoặc trước khi đặt webhook, gửi lệnh nhắc tên bot rồi dùng Bot API `getUpdates` ở server để đọc `message.chat.id`. Không dùng `getUpdates` khi webhook đang bật; không dán token vào thanh địa chỉ/ảnh chụp/log. Không cần lấy ID từng nhân viên.
+4. Nhân viên bấm `Trả lời` rồi Reply vào ForceReply bằng tài khoản cá nhân. Không gửi dưới danh nghĩa nhóm hoặc quản trị viên ẩn danh. Việc bot là quản trị viên cho phép bot nhận tin nhắn nhóm, nhưng hệ thống chỉ xử lý các lệnh/callback/reply hợp lệ.
 5. Cấu hình các biến trên rồi chạy:
 
 ```powershell
@@ -114,7 +130,7 @@ Checklist bắt buộc với bot + DB + Cloudinary thật (chưa được tự x
 
 1. Đăng nhập learner A, gửi text và một JPG. Refresh vẫn có tin; Telegram nhận đúng tên/email/mã, nội dung và ảnh; cả thông báo text lẫn ảnh đều có hai nút.
 2. Chờ ít nhất 65 giây không claim: một reminder xuất hiện rồi được edit lần 2. Đối chiếu deadline/count DB; không xuất hiện reminder mới vô hạn.
-3. Hai admin allowlist bấm Trả lời gần đồng thời, chỉ một người claim. Chờ 35 giây: count không tăng. Admin ngoài allowlist không làm đổi DB.
+3. Hai thành viên nhóm (không cần có trong `TELEGRAM_ADMIN_USER_IDS`) bấm Trả lời gần đồng thời, chỉ một người claim. Người còn lại không trả lời hoặc hoàn thành thay được. Chờ 35 giây: count không tăng. Người ngoài nhóm/đã rời nhóm không làm đổi DB; lỗi `getChatMember` không tự cấp quyền.
 4. Tạo thêm hội thoại B, bấm Trả lời B rồi Reply vào prompt A bằng text và ảnh có caption: chỉ A nhận, status WAITING_USER.
 5. Gửi lại cùng webhook update (giữ secret trong công cụ server): không thêm message. Mở A bằng session learner khác: 404.
 6. Admin sở hữu bấm Hoàn thành hai lần: chỉ một completedAt và system message; nút gốc bị bỏ. Refresh client sau 30 giây: còn khoảng 30 giây; đủ 60 giây ẩn. Query DB vẫn còn lịch sử.

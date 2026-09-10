@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Bell, Check, Clock3, GitBranch, RotateCcw, UsersRound, X } from "lucide-react";
-import { AdminNavigation } from "@/components/admin-navigation";
-import { BrandLogoImage } from "@/components/brand-logo";
+import { AdminLink } from "@/components/admin-link";
 import { PracticeAudioUploader } from "@/components/practice-audio-uploader";
 import type { ContentStatus } from "@/lib/admin-content-validation";
 import type { UserRole } from "@/lib/auth-service";
+import type { AccessTier, ContentAccessTargetType } from "@/lib/content-access-types";
 import type { PracticeReadinessItem } from "@/lib/practice-workflow";
 import type { PracticeScenarioSnapshot } from "@/lib/practice-version";
 import {
@@ -75,6 +75,7 @@ const successMessages: Record<string, string> = {
   vip_plan_status_updated: "Đã cập nhật trạng thái hiển thị của gói VIP.",
   vip_plan_deleted: "Đã xóa gói VIP chưa có dữ liệu liên quan.",
   user_deleted: "Đã khóa tài khoản, thu hồi phiên đăng nhập và giữ lại lịch sử giao dịch.",
+  content_access_updated: "Đã cập nhật quyền truy cập nội dung và ghi audit log.",
 };
 
 const roleLabels: Record<UserRole, string> = {
@@ -84,7 +85,7 @@ const roleLabels: Record<UserRole, string> = {
   admin: "Quản trị viên",
 };
 
-export function AdminConsoleHeader({ title, eyebrow, description, userName, userRole = "admin", backHref }: {
+export function AdminConsoleHeader(props: {
   title: string;
   eyebrow: string;
   description?: string;
@@ -92,34 +93,18 @@ export function AdminConsoleHeader({ title, eyebrow, description, userName, user
   userRole?: UserRole;
   backHref?: string;
 }) {
-  const userInitial = userName.trim().slice(0, 1).toLocaleUpperCase("vi-VN") || "H";
+  const { title, eyebrow, description, backHref } = props;
 
-  return <>
-    <aside className="admin-sidebar">
-      <Link aria-label="Himi Chinese Console - Tổng quan" className="admin-sidebar-brand" href="/admin" prefetch={false}>
-        <span><BrandLogoImage priority size={40} /></span>
-        <div><strong>Himi Chinese</strong><small>Admin Console</small></div>
-      </Link>
-      <AdminNavigation userRole={userRole} />
-      <div className="admin-sidebar-footer">
-        <Link href="/account" prefetch={false}>
-          <span aria-hidden="true" className="admin-user-avatar">{userInitial}</span>
-          <span><strong>{userName}</strong><small>{roleLabels[userRole]}</small></span>
-          <ArrowUpRight aria-hidden="true" size={14} />
-        </Link>
-      </div>
-    </aside>
-    <header className="admin-top">
+  return <header className="admin-top">
       <div className="admin-title">
-        {backHref ? <Link className="admin-back" href={backHref} prefetch={false}><ArrowLeft size={14} /> Quay lại</Link> : null}
+        {backHref ? <AdminLink className="admin-back" href={backHref} pendingLabel="Đang quay lại…"><ArrowLeft size={14} /> Quay lại</AdminLink> : null}
         <span>{eyebrow}</span><h1>{title}</h1>{description ? <p>{description}</p> : null}
       </div>
       <div className="admin-top-actions">
         <Link aria-label="Thông báo" className="admin-icon-button" href="/notifications" prefetch={false} title="Thông báo"><Bell aria-hidden="true" size={17} /></Link>
         <Link className="button button-primary admin-learner-link" href="/" prefetch={false}>Trang người học <ArrowUpRight aria-hidden="true" size={15} /></Link>
       </div>
-    </header>
-  </>;
+    </header>;
 }
 
 export function AdminNotice({ error, success }: { error?: string; success?: string }) {
@@ -130,6 +115,42 @@ export function AdminNotice({ error, success }: { error?: string; success?: stri
 
 export function StatusBadge({ status }: { status: ContentStatus }) {
   return <span className={`status ${status}`}>{statusLabels[status]}</span>;
+}
+
+export function ContentAccessPolicyForm({
+  action,
+  currentTier,
+  defaultTier = "free",
+  description,
+  returnTo,
+  targetKey,
+  targetType,
+}: {
+  action: FormAction;
+  currentTier?: AccessTier | null;
+  defaultTier?: AccessTier;
+  description?: string;
+  returnTo: string;
+  targetKey: string;
+  targetType: ContentAccessTargetType;
+}) {
+  return <form action={action} className="admin-access-form">
+    <input name="returnTo" type="hidden" value={returnTo} />
+    <input name="targetKey" type="hidden" value={targetKey} />
+    <input name="targetType" type="hidden" value={targetType} />
+    <div>
+      <strong>{currentTier ? "Quy tắc trực tiếp" : "Đang dùng mặc định"}</strong>
+      <small>{description ?? "VIP ở cấp cha luôn khóa toàn bộ nội dung con."}</small>
+    </div>
+    <label>
+      <span className="sr-only">Quyền truy cập</span>
+      <select defaultValue={currentTier ?? defaultTier} name="tier">
+        <option value="free">Miễn phí</option>
+        <option value="vip">VIP</option>
+      </select>
+    </label>
+    <button className="button button-secondary" type="submit">Lưu quyền</button>
+  </form>;
 }
 
 const transitionLabels: Partial<Record<ContentStatus, string>> = {
@@ -241,7 +262,7 @@ export function PracticeReviewQueue({
         return <article className={overdue ? "is-overdue" : ""} key={item.id}>
           <div className="practice-review-task-copy">
             <div className="practice-review-task-meta"><span className={`practice-review-priority ${priority}`}>{reviewPriorityLabels[priority]}</span><span>{item.industryLabel}</span><span>{item.isFree ? "Miễn phí" : "VIP"}</span></div>
-            <Link href={`/admin/practice/scenarios/${item.id}`} prefetch={false}><strong>{item.title}</strong><span>{item.brief}</span></Link>
+            <AdminLink href={`/admin/practice/scenarios/${item.id}`} intentPrefetch><strong>{item.title}</strong><span>{item.brief}</span></AdminLink>
             <div className="practice-review-task-status"><span>{item.reviewerId ? `Phụ trách: ${item.reviewerName || item.reviewerEmail}` : "Chưa có người nhận"}</span><span className={overdue ? "overdue" : ""}><Clock3 size={12} /> {overdue ? "Quá hạn · " : ""}{reviewDateLabel(item.reviewDueAt)}</span><span>{item.readiness.passed}/{item.readiness.items.length} điều kiện xuất bản</span></div>
           </div>
           {userRole === "admin" ? <form action={action} className="practice-review-assignment-form">
@@ -249,8 +270,8 @@ export function PracticeReviewQueue({
             <ReviewAssignmentFields assignees={assignees} item={item} />
             <button className="button button-secondary" type="submit">Lưu phân công</button>
           </form> : userRole === "reviewer" ? <div className="practice-review-task-actions">
-            {assignedToCurrentUser ? <><Link className="button button-primary" href={`/admin/practice/scenarios/${item.id}`} prefetch={false}>Mở kiểm duyệt</Link><form action={releaseAction}><input name="scenarioId" type="hidden" value={item.id} /><input name="returnPath" type="hidden" value="queue" /><button className="button button-secondary" type="submit">Bỏ nhận</button></form></> : <form action={claimAction}><input name="scenarioId" type="hidden" value={item.id} /><input name="returnPath" type="hidden" value="queue" /><button className="button button-primary" type="submit">Nhận ca này</button></form>}
-          </div> : <Link className="button button-secondary" href={`/admin/practice/scenarios/${item.id}`} prefetch={false}>Xem trạng thái</Link>}
+            {assignedToCurrentUser ? <><AdminLink className="button button-primary" href={`/admin/practice/scenarios/${item.id}`} intentPrefetch>Mở kiểm duyệt</AdminLink><form action={releaseAction}><input name="scenarioId" type="hidden" value={item.id} /><input name="returnPath" type="hidden" value="queue" /><button className="button button-secondary" type="submit">Bỏ nhận</button></form></> : <form action={claimAction}><input name="scenarioId" type="hidden" value={item.id} /><input name="returnPath" type="hidden" value="queue" /><button className="button button-primary" type="submit">Nhận ca này</button></form>}
+          </div> : <AdminLink className="button button-secondary" href={`/admin/practice/scenarios/${item.id}`} intentPrefetch>Xem trạng thái</AdminLink>}
         </article>;
       }) : <p className="admin-empty">Không có ca nào đang chờ duyệt trong phạm vi của bạn.</p>}
     </div>

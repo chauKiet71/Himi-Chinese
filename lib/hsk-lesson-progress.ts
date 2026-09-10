@@ -63,17 +63,28 @@ function ratio(completed: number, total: number): number {
 
 export function calculateHskLessonProgress(lesson: HskLessonContent, progress: HskLessonProgress): number {
   const guidedSteps = buildHskGuidedLessonSteps(lesson).length;
-  const completedWriting = lesson.writingCharacters
-    .filter((item) => progress.writing.includes(item.id) || progress.writing.includes(item.hanzi))
+  const accessibleVocabulary = lesson.vocabulary.filter((item) => !item.locked);
+  const accessibleExercises = lesson.exercises.filter((item) => !item.locked);
+  const accessibleWriting = lesson.writingCharacters.filter((item) => !item.locked);
+  const accessibleVocabularyIds = new Set(accessibleVocabulary.map((item) => item.id));
+  const accessibleExerciseIds = new Set(accessibleExercises.map((item) => item.id));
+  const completedWriting = accessibleWriting
+    .filter((item) => (progress.writing ?? []).includes(item.id) || (progress.writing ?? []).includes(item.hanzi))
     .map((item) => item.id);
   return calculateHskLessonProgressFromCounts({
-    vocabulary: lesson.vocabulary.length,
-    pronunciation: lesson.modes.includes("pronunciation") ? lesson.vocabulary.length : 0,
-    exercises: lesson.exercises.length,
-    scoredExercises: lesson.exercises.some((exercise) => exercise.answer !== null),
-    writing: lesson.writingCharacters.length,
+    vocabulary: accessibleVocabulary.length,
+    pronunciation: lesson.modes.includes("pronunciation") ? accessibleVocabulary.length : 0,
+    exercises: accessibleExercises.length,
+    scoredExercises: accessibleExercises.length > 0 && accessibleExercises.every((exercise) => exercise.answer !== null),
+    writing: accessibleWriting.length,
     guidedSteps,
-  }, { ...progress, writing: completedWriting });
+  }, {
+    ...progress,
+    vocabulary: (progress.vocabulary ?? []).filter((id) => accessibleVocabularyIds.has(id)),
+    pronunciation: (progress.pronunciation ?? []).filter((id) => accessibleVocabularyIds.has(id)),
+    reviewedExercises: (progress.reviewedExercises ?? []).filter((id) => accessibleExerciseIds.has(id)),
+    writing: completedWriting,
+  });
 }
 
 export function calculateHskLessonProgressFromCounts(

@@ -1,5 +1,33 @@
 # Nhật ký bàn giao phiên làm việc
 
+## 2026-09-10 — Triển khai quyền thành viên Telegram lên Railway production
+
+- Đăng nhập Railway với chấp thuận của người dùng. Xác minh project himi, hai service Himi-Chinese/Himi-Support-Worker đều chạy bản cũ 7c48806 và chat ID nhóm trước migration.
+- Đồng bộ chỉ TELEGRAM_ADMIN_CHAT_ID cho cả hai service; bot token, webhook secret và DATABASE_URL giữ nguyên. Webhook vẫn trỏ tới https://himi-chinese-production.up.railway.app/api/telegram/webhook.
+- Gói upload CLI bị từ chối 413 vì dung lượng; không có deployment được tạo từ lần upload đó. Chuyển sang GitHub autodeploy hiện có: clean worktree dựa trên đúng commit production, chỉ commit 6 file support. Đã push commit 6cf99a66ec365f2d39c072b1066014c5380cd018 lên origin/master; không đưa thay đổi UI/admin chưa hoàn thành lên production.
+- Railway xác nhận cả web deployment cbf4de10-259e-42da-bbe7-bcc04a9370c6 và worker deployment 8c02b861-ee47-486c-96c0-228523610993 SUCCESS, cùng commit 6cf99a6. Worker mới có log khởi động; đã dừng worker local tạm PID 42356 để production tự xử lý.
+- Kiểm tra production: trang chủ 200; webhook thiếu secret trả 403; webhook có secret và update rỗng trả 200/ignored, không ghi dữ liệu hoặc giả mạo callback nhân viên. Telegram pending updates=0; support pending=0, failed=[], reminderFailures=[]. 32/32 support tests đạt trên gói tách riêng.
+- Chưa kiểm thử bằng thao tác thật của tài khoản thành viên; đã đề nghị người dùng bấm Trả lời trên yêu cầu chưa được nhận. Không có SSH key local nên không kiểm tra checksum trong container; deployment metadata xác nhận commit đang chạy.
+- Checkout làm việc chính giữ nguyên HEAD cũ và các thay đổi người dùng. Commit deploy nằm ở branch codex/support-telegram-production-20260910 trong worktree riêng; không reset/stash/merge checkout bẩn. Khi đồng bộ Git lần sau cần giữ các thay đổi hiện tại.
+
+## 2026-09-10 — Khôi phục gửi Telegram sau khi nhóm đổi thành supergroup
+
+- Xác minh lỗi thật từ job đang chờ: Telegram 400, group chat was upgraded to a supergroup chat, có migrate_to_chat_id; xác minh bot là administrator tại supergroup mới.
+- Chỉ đổi TELEGRAM_ADMIN_CHAT_ID trong .env, đồng bộ 3 conversation thuộc nhóm cũ, xóa liên kết message/ForceReply cũ (không xóa nội dung hoặc đổi người phụ trách), retry 3 job notify đang chờ.
+- Chạy lại worker local; 3 tin USER có Telegram message ID xác nhận giao thành công; pending=0, failed=[], reminderFailures=[]. Worker là tiến trình local, chưa thiết lập dịch vụ tự khởi động lại máy hoặc triển khai production.
+- Transport giữ thông tin migration, phân loại lỗi bằng mã an toàn thay vì ghi raw API text; log retry có mã lỗi. Không tự chuyển nhóm chỉ trong transport vì sẽ làm sai kiểm tra quyền ở webhook.
+- Khởi động lại web local tại cổng 3001 với cấu hình mới; không có web lắng nghe cổng 3000.
+- 32/32 support tests passed; targeted ESLint passed. Typecheck vẫn có 4 lỗi TS7053 có sẵn ở lib/admin-analytics-service.ts, không liên quan support.
+
+## 2026-09-10 — Thành viên nhóm Telegram, một người phụ trách mỗi yêu cầu
+
+- Thay allowlist nhân viên bằng kiểm tra thành viên hiện tại qua Telegram getChatMember, đúng nhóm cấu hình; bot cần quyền quản trị nhóm. TELEGRAM_ADMIN_USER_IDS chỉ còn tùy chọn cho lệnh thiết lập /groupid.
+- Giữ khóa claim trong transaction và mapping ForceReply riêng cho người phụ trách; chặn hoàn thành yêu cầu chưa claim, người khác không được trả lời/hoàn thành thay.
+- Worker kiểm tra lại quyền trước khi giao phản hồi đang chờ; từ chối người đã rời nhóm, bot và người gửi ẩn danh. Lỗi xác minh quyền không làm thay đổi DB, để retry an toàn.
+- Support tests: 29/29 passed, gồm 7 test mới về thành viên không có trong danh sách, tranh claim, độc quyền xử lý, trạng thái membership, lỗi Telegram và thu hồi quyền. Targeted lint passed.
+- Typecheck không có lỗi mới ở support; vẫn còn 4 TS7053 có sẵn trong lib/admin-analytics-service.ts (63/64/65/92), không sửa phần ngoài phạm vi.
+- Không đổi giao diện, không thêm migration, không sửa secrets hoặc quyền bot ngoài Telegram; cần restart/redeploy web và worker để áp dụng.
+
 ## 2026-09-07 — Himi Support qua Telegram
 
 - Mở rộng widget Himi hiện có, bỏ câu trả lời/tệp giả lập; thêm tên/email, ảnh thật, trạng thái gửi/lỗi, lịch sử và polling theo session.

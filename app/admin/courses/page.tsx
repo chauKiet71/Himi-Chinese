@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { AdminLink } from "@/components/admin-link";
 import { AdminConsoleHeader, AdminNotice, CourseForm, StatusBadge } from "@/components/admin-console";
 import { requireAdminUser } from "@/lib/admin-auth";
 import { listAdminCourses } from "@/lib/admin-content-service";
@@ -15,7 +15,7 @@ export default async function AdminCoursesPage({ searchParams }: { searchParams:
     <AdminNotice error={params.error} success={params.success} />
     <div className="admin-content-grid">
       <section className="admin-panel"><div className="panel-heading"><h2>Tạo lộ trình</h2><span>Mặc định bản nháp</span></div><CourseForm action={createCourseAction} submitLabel="Tạo lộ trình" /></section>
-      <section className="admin-panel"><div className="panel-heading"><h2>{courses.length} lộ trình</h2><span>PostgreSQL</span></div><div className="table-scroll"><table className="data-table"><thead><tr><th>Lộ trình</th><th>Bài</th><th>Miễn phí</th><th>Trạng thái</th></tr></thead><tbody>{courses.map((course) => <tr key={course.id}><td><Link className="table-course" href={`/admin/courses/${course.id}`} prefetch={false}><span className="table-mark">{course.hanzi}</span><span>{course.titleVi}<small>{course.slug}</small></span></Link></td><td>{course.lessonCount}</td><td>{course.freeLessonCount}</td><td><StatusBadge status={course.status} /></td></tr>)}</tbody></table></div></section>
+      <section className="admin-panel"><div className="panel-heading"><h2>{courses.length} lộ trình</h2><span>PostgreSQL</span></div><div className="table-scroll"><table className="data-table"><thead><tr><th>Lộ trình</th><th>Bài</th><th>Miễn phí</th><th>Trạng thái</th></tr></thead><tbody>{courses.map((course) => <tr key={course.id}><td><AdminLink className="table-course" href={`/admin/courses/${course.id}`} intentPrefetch><span className="table-mark">{course.hanzi}</span><span>{course.titleVi}<small>{course.slug}</small></span></AdminLink></td><td>{course.lessonCount}</td><td>{course.freeLessonCount}</td><td><StatusBadge status={course.status} /></td></tr>)}</tbody></table></div></section>
     </div>
   </div></main>;
 }

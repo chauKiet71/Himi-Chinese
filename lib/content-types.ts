@@ -1,3 +1,5 @@
+import type { ContentAccessState } from "./content-access-types.ts";
+
 export type Course = {
   slug: string;
   category: string;
@@ -12,6 +14,7 @@ export type Course = {
   color: string;
   ink: string;
   availability: "available" | "coming_soon";
+  access?: ContentAccessState;
 };
 
 export type Vocabulary = {
@@ -38,10 +41,13 @@ export type UsageNote = {
 };
 
 export type ChallengeQuestion = {
+  id?: string;
   prompt: string;
   options: string[];
   correctOption: number;
   explanation: string;
+  accessTier?: "free" | "vip";
+  locked?: boolean;
 };
 
 export type LessonChallenge = {
@@ -78,6 +84,8 @@ export type LessonDetail = LessonSummary & LessonContent & {
 export type LessonAccess = {
   allowed: boolean;
   source: "free" | "vip" | "vip_required";
+  requiredTier?: "free" | "vip";
+  lockedAt?: string | null;
 };
 
 export type LessonProgressState = {

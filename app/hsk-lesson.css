@@ -346,6 +346,11 @@
   background: #fff;
   box-shadow: 0 16px 38px rgba(32, 57, 52, .09), 8px 8px 0 #eef5f3;
 }
+.hsk-flashcard.is-locked { justify-content: center; border-color: #ead9b9; background: #fffaf0; }
+.hsk-item-vip-lock { width: 100%; min-height: 260px; display: grid; justify-items: center; align-content: center; gap: 13px; color: #8d671e; text-align: center; }
+.hsk-item-vip-lock > small { font-size: 9px; font-weight: 800; letter-spacing: .08em; }
+.hsk-item-vip-lock h3 { margin: 0; color: #60491f; font-size: 23px; }
+.hsk-item-vip-lock p { max-width: 430px; margin: 0 0 5px; color: #746956; font-size: 12px; line-height: 1.6; }
 
 .hsk-flashcard-flip {
   width: 100%;
@@ -580,6 +585,8 @@
 .hsk-pronunciation-list button > span { font-family: Georgia, "Noto Serif SC", serif; font-size: 24px; }
 .hsk-pronunciation-list button small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hsk-pronunciation-list button.is-active { color: var(--hsk-learn-deep); border-color: #b9ded7; background: #eaf8f5; }
+.hsk-pronunciation-list button.is-locked { color: #96671d; border-color: #ead9b9; background: #fff8e8; }
+.hsk-pronunciation-list button.is-locked > svg { justify-self: center; }
 
 .hsk-pronunciation-card { min-height: 540px; padding: 36px; display: grid; justify-items: center; align-content: start; border: 1px solid #dce6e3; border-radius: 24px; background: #fff; box-shadow: 0 14px 34px rgba(32, 57, 52, .07); text-align: center; }
 .hsk-pronunciation-card > small { color: var(--hsk-learn-accent); font-size: 9px; font-weight: 800; letter-spacing: .08em; }
@@ -602,8 +609,11 @@
 .hsk-hanzi-list button small { font-size: 9px; }
 .hsk-hanzi-list button svg { position: absolute; top: 5px; right: 5px; color: var(--hsk-learn-accent); }
 .hsk-hanzi-list button.is-active { color: var(--hsk-learn-deep); border-color: #99d7cb; background: #eaf8f5; }
+.hsk-hanzi-list button.is-locked { color: #96671d; border-color: #ead9b9; background: #fff8e8; }
+.hsk-hanzi-list button.is-locked svg { position: static; }
 
 .hsk-hanzi-practice { display: grid; justify-items: center; }
+.hsk-hanzi-practice.is-locked { min-height: 430px; align-content: center; border: 1px solid #ead9b9; border-radius: 22px; background: #fffaf0; }
 .hsk-writing-modes { margin-bottom: 14px; padding: 5px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; border: 1px solid #dce7e3; border-radius: 14px; background: #f6f9f8; }
 .hsk-writing-modes button { min-height: 38px; padding: 0 12px; display: flex; align-items: center; gap: 7px; cursor: pointer; color: #657771; border: 0; border-radius: 10px; background: transparent; font-size: 10px; font-weight: 730; }
 .hsk-writing-modes button[aria-pressed="true"] { color: #fff; background: var(--hsk-learn-accent); box-shadow: 0 3px 0 var(--hsk-learn-deep); }
@@ -623,6 +633,8 @@
 .hsk-character-detail b { color: var(--hsk-learn-accent); font-size: 17px; }
 .hsk-character-detail > div > button { width: 31px; height: 31px; display: grid; place-items: center; cursor: pointer; color: var(--hsk-learn-deep); border: 1px solid #cce2dd; border-radius: 50%; background: #fff; }
 .hsk-character-detail > p { margin: 8px 0 18px; color: #5d716b; font-size: 12px; }
+.hsk-character-detail.is-locked { align-content: center; color: #8d671e; border-color: #ead9b9; background: #fff8e8; }
+.hsk-character-detail.is-locked > strong { margin-block: 10px 3px; font-family: inherit; font-size: 24px; }
 .hsk-character-nav { width: 100%; padding-top: 14px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #e0e9e6; }
 .hsk-character-nav span { color: #6b7c77; font-size: 10px; font-weight: 720; }
 

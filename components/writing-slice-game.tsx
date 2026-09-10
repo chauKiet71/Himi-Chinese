@@ -110,12 +110,15 @@ export function WritingSliceGame(props: WritingSliceGameProps = {}) {
     setError("");
     try {
       const response = await fetch(`/api/games/slice?level=${level}`, { signal: controller.signal });
-      if (!response.ok) throw new Error("Không thể tải từ vựng.");
+      if (!response.ok) {
+        const problem = await response.json().catch(() => null) as { error?: string } | null;
+        throw new Error(problem?.error ?? "Không thể tải từ vựng.");
+      }
       const data = await response.json();
       if (!Array.isArray(data.words) || data.words.length < TARGET_ROUNDS) throw new Error("Chưa đủ từ vựng.");
       if (!controller.signal.aborted) setSession({ level, words: createSliceDeck(data.words) });
-    } catch {
-      if (!controller.signal.aborted) setError("Chưa tải được từ vựng. Bạn hãy chọn lại khóa để thử lại nhé.");
+    } catch (problem) {
+      if (!controller.signal.aborted) setError(problem instanceof Error ? problem.message : "Chưa tải được từ vựng. Bạn hãy chọn lại khóa để thử lại nhé.");
     } finally {
       if (!controller.signal.aborted) setLoading(null);
     }

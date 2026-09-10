@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import {
   BookOpen,
   Check,
@@ -15,6 +18,7 @@ import {
 import type { CourseRoadmap as CourseRoadmapModel, RoadmapLesson, RoadmapModule } from "@/lib/course-roadmap";
 import type { Course } from "@/lib/content-types";
 import { getCourseVisual } from "@/lib/course-visuals";
+import { VipUpgradeDialog, type VipUpgradeTarget } from "@/components/vip-upgrade-prompt";
 
 function formatMinutes(minutes: number) {
   const hours = Math.floor(minutes / 60);
@@ -33,9 +37,11 @@ function LessonStateIcon({ lesson }: { lesson: RoadmapLesson }) {
 function RoadmapLessonRow({
   lesson,
   lessonNumber,
+  onVipLocked,
 }: {
   lesson: RoadmapLesson;
   lessonNumber: number;
+  onVipLocked: (target: VipUpgradeTarget) => void;
 }) {
   const copy = <>
     <span className="roadmap-lesson-state"><LessonStateIcon lesson={lesson} /></span>
@@ -57,12 +63,12 @@ function RoadmapLessonRow({
     </div>;
   }
 
-  if (lesson.status === "vip_locked") {
-    return <div className="roadmap-lesson-row is-vip-locked">
+  if (lesson.vipLocked) {
+    return <button className="roadmap-lesson-row is-vip-locked" onClick={() => onVipLocked({ kind: "Bài học", title: lesson.title })} type="button">
       {copy}
-      <Link className="roadmap-lesson-vip" href="/vip"><Crown aria-hidden="true" size={15} /> Mở khóa VIP</Link>
+      <span className="roadmap-lesson-vip"><Crown aria-hidden="true" size={15} /> Cần nâng cấp</span>
       <ChevronRight aria-hidden="true" className="roadmap-lesson-chevron" size={19} />
-    </div>;
+    </button>;
   }
 
   if (lesson.href) {
@@ -79,6 +85,7 @@ function RoadmapLessonRow({
 }
 
 function StageStatus({ module }: { module: RoadmapModule }) {
+  if (module.vipLocked) return <span className="roadmap-stage-status is-vip"><Crown aria-hidden="true" size={14} /> Cần VIP</span>;
   if (module.status === "completed") return <span className="roadmap-stage-status is-completed"><Check aria-hidden="true" size={14} /> Đã hoàn thành</span>;
   if (module.status === "active") {
     const blocked = module.lessons.some((lesson) => lesson.status === "vip_locked");
@@ -99,10 +106,12 @@ function RoadmapStage({
   course,
   index,
   module,
+  onVipLocked,
 }: {
   course: Course;
   index: number;
   module: RoadmapModule;
+  onVipLocked: (target: VipUpgradeTarget) => void;
 }) {
   const visual = getCourseVisual(course.slug);
   const summary = <div className="roadmap-stage-summary">
@@ -123,15 +132,16 @@ function RoadmapStage({
     <StageStatus module={module} />
   </div>;
 
-  return <div className={`roadmap-stage is-${module.status}`}>
+  return <div className={`roadmap-stage is-${module.status}${module.vipLocked ? " is-vip-locked" : ""}`}>
     <div aria-hidden="true" className="roadmap-stage-rail"><StageMarker index={index} module={module} /></div>
-    {module.status === "locked" ? <article className="roadmap-stage-card">{summary}</article> : <details className="roadmap-stage-card" open={module.status === "active"}>
+    {module.vipLocked ? <button className="roadmap-stage-card roadmap-stage-vip-trigger" onClick={() => onVipLocked({ kind: "Module", title: module.title })} type="button">{summary}<ChevronRight aria-hidden="true" className="roadmap-stage-expand" size={20} /></button> : module.status === "locked" ? <article className="roadmap-stage-card">{summary}</article> : <details className="roadmap-stage-card" open={module.status === "active"}>
       <summary>{summary}<ChevronRight aria-hidden="true" className="roadmap-stage-expand" size={20} /></summary>
       <div className="roadmap-lesson-list">
         {module.lessons.map((lesson) => <RoadmapLessonRow
           key={lesson.slug}
           lesson={lesson}
           lessonNumber={lesson.order + 1}
+          onVipLocked={onVipLocked}
         />)}
       </div>
     </details>}
@@ -147,6 +157,7 @@ export function CourseRoadmap({
   course: Course;
   roadmap: CourseRoadmapModel;
 }) {
+  const [upgradeTarget, setUpgradeTarget] = useState<VipUpgradeTarget | null>(null);
   const complete = roadmap.completedLessons === roadmap.totalLessons && roadmap.totalLessons > 0;
   const coachCopy = complete
     ? "Bạn đã hoàn thành toàn bộ lộ trình. Hãy quay lại ôn những bài cần củng cố."
@@ -178,6 +189,7 @@ export function CourseRoadmap({
             index={index}
             key={module.slug}
             module={module}
+            onVipLocked={setUpgradeTarget}
           />)}
         </section>
 
@@ -219,5 +231,6 @@ export function CourseRoadmap({
         </aside>
       </div>
     </div>
+    <VipUpgradeDialog onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} target={upgradeTarget} />
   </main>;
 }
