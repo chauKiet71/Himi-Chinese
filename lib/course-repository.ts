@@ -5,6 +5,9 @@ import type { Database } from "../db/index.ts";
 import { courses as courseTable } from "../db/schema.ts";
 import { courses as demoCourses, getCourse as getDemoCourse } from "./course-data.ts";
 import type { Course } from "./content-types.ts";
+import { getContentAccessPolicies } from "./content-access-repository.ts";
+import { learningPathTarget, resolveContentAccess } from "./content-access-types.ts";
+import { hasActiveVipAccess } from "./lesson-access.ts";
 
 function mapCourse(row: typeof courseTable.$inferSelect): Course {
   return {
@@ -31,7 +34,7 @@ const getCachedPublishedCourses = unstable_cache(async () => {
     .where(eq(courseTable.status, "published"))
     .orderBy(asc(courseTable.sortOrder)));
 
-  return rows.map(mapCourse);
+  return rows.map((row) => ({ id: row.id, course: mapCourse(row) }));
 }, ["published-courses"], { revalidate: 300, tags: ["published-content"] });
 
 const getCachedPublishedCourse = unstable_cache(async (slug: string) => {
@@ -46,7 +49,21 @@ const getCachedPublishedCourse = unstable_cache(async (slug: string) => {
 
 export async function listPublishedCourses(): Promise<Course[]> {
   if (!process.env.DATABASE_URL) return demoCourses;
-  return getCachedPublishedCourses();
+  return (await getCachedPublishedCourses()).map((entry) => entry.course);
+}
+
+export async function listPublishedCoursesForViewer(userId: string | null): Promise<Course[]> {
+  if (!process.env.DATABASE_URL) return demoCourses;
+  const entries = await getCachedPublishedCourses();
+  const targets = entries.map((entry) => learningPathTarget(entry.id));
+  const [policies, viewerHasVip] = await Promise.all([
+    getContentAccessPolicies(targets),
+    userId ? hasActiveVipAccess(userId) : Promise.resolve(false),
+  ]);
+  return entries.map((entry, index) => {
+    const access = resolveContentAccess({ targets: [targets[index]], policies, viewerHasVip });
+    return { ...entry.course, access, ...(access.allowed ? {} : { freeLessons: 0 }) };
+  });
 }
 
 export async function getPublishedCourse(slug: string, database?: Database): Promise<Course | undefined> {

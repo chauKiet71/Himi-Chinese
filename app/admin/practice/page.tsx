@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AdminLink } from "@/components/admin-link";
 import { AdminConsoleHeader, AdminNotice, PracticeIndustryForm, PracticeReviewQueue, StatusBadge } from "@/components/admin-console";
 import { requirePracticeStaffUser } from "@/lib/admin-auth";
 import { getPracticeReviewDashboard, listAdminPracticeIndustries } from "@/lib/admin-practice-service";
@@ -48,10 +49,10 @@ export default async function AdminPracticePage({ searchParams }: {
       <section className="admin-panel">
         <div className="panel-heading"><h2>{industries.length} nhóm ngành</h2><Link href="/practice" prefetch={false}>Xem trang người học →</Link></div>
         <div className="admin-record-list practice-admin-list">
-          {industries.length ? industries.map((industry) => <Link href={`/admin/practice/industries/${industry.id}`} key={industry.id} prefetch={false}>
+          {industries.length ? industries.map((industry) => <AdminLink href={`/admin/practice/industries/${industry.id}`} intentPrefetch key={industry.id}>
             <span><strong>{industry.label}</strong><small>{industry.slug} · {industry.scenarioCount} ca · {industry.publishedCount} đang xuất bản</small></span>
             <StatusBadge status={industry.status} />
-          </Link>) : <p className="admin-empty">Chưa có nhóm ngành. Tạo nhóm đầu tiên để bắt đầu biên soạn ca luyện.</p>}
+          </AdminLink>) : <p className="admin-empty">Chưa có nhóm ngành. Tạo nhóm đầu tiên để bắt đầu biên soạn ca luyện.</p>}
         </div>
       </section>
     </div>

@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { CourseGridSkeleton } from "@/components/course-catalog-skeleton";
 import { CourseLibraryView, type CourseLibraryViewName } from "@/components/course-library-view";
-import { listPublishedCourses } from "@/lib/course-repository";
-import { HSK_CURRICULUM } from "@/lib/hsk-curriculum";
+import { getCurrentUser } from "@/lib/auth-session";
+import { listPublishedCoursesForViewer } from "@/lib/course-repository";
+import { getHskCurriculumPageData } from "@/lib/hsk-access-repository";
 
 export const metadata: Metadata = {
   title: "Giáo trình HSK & lộ trình chuyên ngành",
@@ -18,9 +19,9 @@ function firstValue(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
 }
 
-async function CourseCatalog() {
-  const courses = await listPublishedCourses();
-  return <CourseLibraryView courses={courses} hskCurriculum={HSK_CURRICULUM} view="catalog" />;
+async function CourseCatalog({ userId }: { userId: string | null }) {
+  const courses = await listPublishedCoursesForViewer(userId);
+  return <CourseLibraryView courses={courses} hskCurriculum={[]} view="catalog" />;
 }
 
 export default async function CoursesPage({
@@ -28,12 +29,13 @@ export default async function CoursesPage({
 }: {
   searchParams?: Promise<CoursesSearchParams>;
 }) {
-  const params = await searchParams;
+  const [params, user] = await Promise.all([searchParams, getCurrentUser()]);
   const view: CourseLibraryViewName = firstValue(params.view) === "hsk" ? "hsk" : "catalog";
+  const hskCurriculum = view === "hsk" ? await getHskCurriculumPageData(user?.id ?? null) : [];
 
   return <main className="course-library-page hsk-curriculum-page">
-    {view === "hsk" ? <CourseLibraryView courses={[]} hskCurriculum={HSK_CURRICULUM} view="hsk" /> : <div id="course-catalog">
-      <Suspense fallback={<CourseGridSkeleton />}><CourseCatalog /></Suspense>
+    {view === "hsk" ? <CourseLibraryView courses={[]} hskCurriculum={hskCurriculum} view="hsk" /> : <div id="course-catalog">
+      <Suspense fallback={<CourseGridSkeleton />}><CourseCatalog userId={user?.id ?? null} /></Suspense>
     </div>}
   </main>;
 }

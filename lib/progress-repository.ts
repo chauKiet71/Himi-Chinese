@@ -11,12 +11,19 @@ import {
   vocabulary,
 } from "../db/schema.ts";
 import type { LearningSummary, LessonProgressState } from "./content-types.ts";
-import { getLessonAccess, hasActiveVipAccess } from "./lesson-access.ts";
+import { getContentAccessPolicies } from "./content-access-repository.ts";
+import {
+  learningLessonTarget,
+  learningModuleTarget,
+  learningPathTarget,
+  resolveContentAccess,
+} from "./content-access-types.ts";
+import { hasActiveVipAccess } from "./lesson-access.ts";
 import { scheduleReview } from "./review-scheduler.ts";
 
 async function findPublishedLesson(db: Database, courseSlug: string, lessonSlug: string) {
   const rows = await db
-    .select({ id: lessons.id, isFree: lessons.isFree })
+    .select({ id: lessons.id, moduleId: modules.id, courseId: courses.id, isFree: lessons.isFree })
     .from(lessons)
     .innerJoin(modules, eq(lessons.moduleId, modules.id))
     .innerJoin(courses, eq(modules.courseId, courses.id))
@@ -28,6 +35,27 @@ async function findPublishedLesson(db: Database, courseSlug: string, lessonSlug:
     ))
     .limit(1);
   return rows[0] ?? null;
+}
+
+function publishedLessonTargets(lesson: { id: string; moduleId: string; courseId: string; isFree: boolean }) {
+  return [
+    learningPathTarget(lesson.courseId),
+    learningModuleTarget(lesson.moduleId),
+    learningLessonTarget(lesson.id, lesson.isFree),
+  ];
+}
+
+async function canAccessPublishedLesson(
+  db: Database,
+  userId: string,
+  lesson: { id: string; moduleId: string; courseId: string; isFree: boolean },
+): Promise<boolean> {
+  const targets = publishedLessonTargets(lesson);
+  const [policies, viewerHasVip] = await Promise.all([
+    getContentAccessPolicies(targets, db),
+    hasActiveVipAccess(userId, db),
+  ]);
+  return resolveContentAccess({ targets, policies, viewerHasVip }).allowed;
 }
 
 export async function getLessonProgress(userId: string, lessonId: string, database?: Database): Promise<LessonProgressState | null> {
@@ -53,8 +81,7 @@ export async function markLessonOpened(userId: string, courseSlug: string, lesso
   return writeDb(async (db) => {
     const lesson = await findPublishedLesson(db, courseSlug, lessonSlug);
     if (!lesson) return false;
-    const access = await getLessonAccess({ isFree: lesson.isFree, userId, database: db });
-    if (!access.allowed) return false;
+    if (!(await canAccessPublishedLesson(db, userId, lesson))) return false;
     const now = new Date();
     await db.insert(lessonProgress).values({ userId, lessonId: lesson.id, lastOpenedAt: now })
       .onConflictDoUpdate({
@@ -69,8 +96,7 @@ export async function completeLesson(userId: string, courseSlug: string, lessonS
   return writeDb(async (db) => {
     const lesson = await findPublishedLesson(db, courseSlug, lessonSlug);
     if (!lesson) return false;
-    const access = await getLessonAccess({ isFree: lesson.isFree, userId, database: db });
-    if (!access.allowed) return false;
+    if (!(await canAccessPublishedLesson(db, userId, lesson))) return false;
     const now = new Date();
     await db.insert(lessonProgress).values({
       userId,
@@ -88,7 +114,13 @@ export async function completeLesson(userId: string, courseSlug: string, lessonS
 
 export async function recordVocabularyReview(userId: string, vocabularySlug: string, remembered: boolean): Promise<boolean> {
   return writeDb(async (db) => {
-    const words = await db.select({ id: vocabulary.id, isFree: lessons.isFree })
+    const words = await db.select({
+      id: vocabulary.id,
+      lessonId: lessons.id,
+      moduleId: modules.id,
+      courseId: courses.id,
+      isFree: lessons.isFree,
+    })
       .from(vocabulary)
       .innerJoin(lessonVocabulary, eq(lessonVocabulary.vocabularyId, vocabulary.id))
       .innerJoin(lessons, eq(lessonVocabulary.lessonId, lessons.id))
@@ -102,7 +134,16 @@ export async function recordVocabularyReview(userId: string, vocabularySlug: str
       .limit(4);
     const word = words[0];
     if (!word) return false;
-    if (!words.some((item) => item.isFree) && !(await hasActiveVipAccess(userId, db))) return false;
+    const targets = words.flatMap(publishedLessonTargets);
+    const [policies, viewerHasVip] = await Promise.all([
+      getContentAccessPolicies(targets, db),
+      hasActiveVipAccess(userId, db),
+    ]);
+    if (!words.some((item) => resolveContentAccess({
+      targets: publishedLessonTargets(item),
+      policies,
+      viewerHasVip,
+    }).allowed)) return false;
 
     const rows = await db.select({
       state: reviewItems.state,

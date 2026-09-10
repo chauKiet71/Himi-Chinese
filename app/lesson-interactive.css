@@ -409,6 +409,142 @@
   background: #fff;
 }
 
+/* Himi brand treatment for the pronunciation lesson card. */
+.lesson-content-card:has(.lesson-pronunciation-coach) {
+  border-color: color-mix(in srgb, var(--himi-red) 18%, var(--himi-line));
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--himi-orange) 12%, transparent), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--himi-red) 4%, var(--himi-white)), var(--himi-white) 240px);
+  box-shadow: 0 18px 48px rgba(34, 34, 34, .07);
+}
+
+.lesson-pronunciation-coach .lesson-interactive-heading h2,
+.lesson-pronunciation-coach .pronunciation-practice-card > strong {
+  color: var(--himi-black);
+}
+
+.lesson-pronunciation-coach .lesson-interactive-heading p,
+.lesson-pronunciation-coach .pronunciation-practice-card > p,
+.lesson-pronunciation-coach .pronunciation-next-row > span {
+  color: var(--himi-muted);
+}
+
+.lesson-pronunciation-coach .lesson-interactive-heading-icon {
+  color: var(--himi-red);
+  border-color: color-mix(in srgb, var(--himi-red) 20%, var(--himi-white));
+  background: var(--himi-red-soft);
+}
+
+.lesson-pronunciation-coach .pronunciation-target-list {
+  border-color: var(--himi-line);
+  background: color-mix(in srgb, var(--himi-orange) 3%, var(--himi-white));
+  scrollbar-color: color-mix(in srgb, var(--himi-red) 30%, var(--himi-white)) transparent;
+}
+
+.lesson-pronunciation-coach .pronunciation-target-list button {
+  color: var(--himi-muted);
+  transition: color .18s ease, background-color .18s ease, box-shadow .18s ease;
+}
+
+.lesson-pronunciation-coach .pronunciation-target-list button:hover {
+  color: var(--himi-black);
+  background: var(--himi-orange-soft);
+}
+
+.lesson-pronunciation-coach .pronunciation-target-list button.is-active {
+  color: var(--himi-black);
+  background: var(--himi-red-soft);
+  box-shadow: inset 3px 0 var(--himi-red);
+}
+
+.lesson-pronunciation-coach .pronunciation-target-list button > span {
+  color: var(--himi-red);
+  border-color: color-mix(in srgb, var(--himi-red) 22%, var(--himi-white));
+  background: var(--himi-white);
+}
+
+.lesson-pronunciation-coach .pronunciation-practice-card {
+  border-color: var(--himi-line);
+  background:
+    radial-gradient(circle at 50% 0, color-mix(in srgb, var(--himi-orange) 12%, var(--himi-white)), var(--himi-white) 48%);
+  box-shadow: 0 18px 42px rgba(34, 34, 34, .08);
+}
+
+.lesson-pronunciation-coach .pronunciation-step-label,
+.lesson-pronunciation-coach .pronunciation-practice-card > small {
+  color: var(--himi-red);
+}
+
+.lesson-pronunciation-coach .pronunciation-actions button,
+.lesson-pronunciation-coach .pronunciation-next-row button {
+  border-color: var(--himi-line);
+}
+
+.lesson-pronunciation-coach .pronunciation-listen {
+  color: var(--himi-black);
+  border-color: color-mix(in srgb, var(--himi-orange) 30%, var(--himi-white));
+  background: var(--himi-orange-soft);
+}
+
+.lesson-pronunciation-coach .pronunciation-listen:hover {
+  border-color: var(--himi-orange);
+  background: color-mix(in srgb, var(--himi-orange) 22%, var(--himi-white));
+}
+
+.lesson-pronunciation-coach .pronunciation-record {
+  color: var(--himi-on-red);
+  border-color: var(--himi-red) !important;
+  background: var(--himi-red);
+  box-shadow: 0 9px 22px color-mix(in srgb, var(--himi-red) 24%, transparent);
+}
+
+.lesson-pronunciation-coach .pronunciation-record:not(:disabled):hover {
+  background: color-mix(in srgb, var(--himi-red) 84%, var(--himi-orange));
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--himi-red) 30%, transparent);
+}
+
+.lesson-pronunciation-coach .pronunciation-record.is-recording {
+  border-color: color-mix(in srgb, var(--himi-red) 78%, var(--himi-black)) !important;
+  background: color-mix(in srgb, var(--himi-red) 78%, var(--himi-black));
+}
+
+.lesson-pronunciation-coach .pronunciation-result {
+  border-color: color-mix(in srgb, var(--himi-orange) 28%, var(--himi-white));
+  background: var(--himi-orange-soft);
+}
+
+.lesson-pronunciation-coach .pronunciation-total {
+  color: var(--himi-on-red);
+  background: var(--himi-red);
+}
+
+.lesson-pronunciation-coach .pronunciation-feedback > strong {
+  color: var(--himi-black);
+}
+
+.lesson-pronunciation-coach .pronunciation-feedback > p,
+.lesson-pronunciation-coach .pronunciation-dimensions small {
+  color: var(--himi-muted);
+}
+
+.lesson-pronunciation-coach .pronunciation-dimensions strong {
+  color: var(--himi-red);
+}
+
+.lesson-pronunciation-coach .pronunciation-next-row {
+  border-color: var(--himi-line);
+}
+
+.lesson-pronunciation-coach .pronunciation-next-row > button {
+  color: var(--himi-red);
+  background: var(--himi-white);
+}
+
+.lesson-pronunciation-coach .pronunciation-next-row > button:not(:disabled):hover {
+  border-color: color-mix(in srgb, var(--himi-red) 30%, var(--himi-white));
+  background: var(--himi-red-soft);
+}
+
 .roleplay-header {
   padding-bottom: 20px;
   border-bottom: 1px solid #e1e8e4;

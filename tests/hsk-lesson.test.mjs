@@ -82,13 +82,15 @@ test("HSK lesson workspace exposes the four requested learning tabs", async (t) 
   });
   t.after(() => server.close());
 
-  const [viewModule, flashcardModule, contentModule] = await Promise.all([
+  const [viewModule, flashcardModule, quizModule, contentModule] = await Promise.all([
     server.ssrLoadModule("/components/hsk-lesson-workspace.tsx").catch(() => null),
     server.ssrLoadModule("/components/hsk-flashcard-session.tsx").catch(() => null),
+    server.ssrLoadModule("/components/hsk-quiz-session.tsx").catch(() => null),
     server.ssrLoadModule("/lib/hsk-lesson-content.ts").catch(() => null),
   ]);
   assert.ok(viewModule, "the HSK lesson workspace should be renderable");
   assert.ok(flashcardModule, "the HSK flashcard session should be renderable");
+  assert.ok(quizModule, "the immersive HSK quiz should be renderable");
   assert.ok(contentModule, "the HSK lesson content should be renderable");
 
   const lesson = contentModule.getHskLessonContent("hsk-1", "hsk1-bai-01-chao-anh");
@@ -117,4 +119,61 @@ test("HSK lesson workspace exposes the four requested learning tabs", async (t) 
   assert.match(flashcardHtml, /Nghe phát âm/);
   assert.match(flashcardHtml, /Cần ôn lại/);
   assert.match(flashcardHtml, /Đã nhớ/);
+
+  const quizHtml = renderToStaticMarkup(React.createElement(quizModule.HskQuizSession, { lesson }));
+  assert.match(quizHtml, /game-immersive-dashboard/);
+  assert.match(quizHtml, />Thoát</);
+  assert.match(quizHtml, /1 \/ 2/);
+  assert.match(quizHtml, />pīn</);
+  assert.match(quizHtml, /1.25×/);
+  assert.match(quizHtml, /Chọn nghĩa đúng/);
+  assert.match(quizHtml, /aria-label="Các lựa chọn"/);
+
+  const firstWord = lesson.vocabulary[0];
+  const lockedLesson = {
+    ...lesson,
+    vocabulary: lesson.vocabulary.map((word, index) => index ? word : {
+      id: word.id,
+      hanzi: "",
+      pinyin: "",
+      meaning: "",
+      wordClass: "",
+      example: "",
+      examplePinyin: "",
+      translation: "",
+      accessTier: "vip",
+      locked: true,
+    }),
+  };
+  const lockedWorkspaceHtml = renderToStaticMarkup(React.createElement(viewModule.HskLessonWorkspace, { lesson: lockedLesson }));
+  const lockedFlashcardHtml = renderToStaticMarkup(React.createElement(flashcardModule.HskFlashcardSession, {
+    backHref: "/hsk/1/hsk1-bai-01-chao-anh",
+    lesson: lockedLesson,
+  }));
+  for (const lockedHtml of [lockedWorkspaceHtml, lockedFlashcardHtml]) {
+    assert.match(lockedHtml, /Từ này cần tài khoản VIP/);
+    assert.match(lockedHtml, /action="\/vip"/);
+    assert.doesNotMatch(lockedHtml, new RegExp(firstWord.examplePinyin));
+  }
+
+  const firstWritingCharacter = lesson.writingCharacters[0];
+  const writingLockedLesson = {
+    ...lesson,
+    writingCharacters: lesson.writingCharacters.map((character, index) => index ? character : {
+      id: character.id,
+      hanzi: "",
+      pinyin: "",
+      word: "",
+      meaning: "",
+      accessTier: "vip",
+      locked: true,
+    }),
+  };
+  const lockedWritingHtml = renderToStaticMarkup(React.createElement(viewModule.HskLessonWorkspace, {
+    initialMode: "hanzi",
+    lesson: writingLockedLesson,
+  }));
+  assert.match(lockedWritingHtml, /Chữ này cần tài khoản VIP/);
+  assert.match(lockedWritingHtml, /action="\/vip"/);
+  assert.doesNotMatch(lockedWritingHtml, new RegExp(`Khu vực viết chữ ${firstWritingCharacter.hanzi}`));
 });

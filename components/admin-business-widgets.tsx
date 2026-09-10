@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { CreditCard, UserPlus } from "lucide-react";
+import { AdminLink } from "@/components/admin-link";
 import type { AdminPeriod, AdminTimeSeriesPoint } from "@/lib/admin-reporting";
 import { formatAdminRelativeTime } from "@/lib/admin-reporting";
 
@@ -39,11 +39,12 @@ export function AdminPeriodFilter({ basePath, period }: { basePath: string; peri
     { label: "Tháng", value: "month" as const },
   ];
   return <nav aria-label="Bộ lọc thời gian" className="admin-period-filter">
-    {options.map((option) => <Link
+    {options.map((option) => <AdminLink
       aria-current={period === option.value ? "page" : undefined}
       href={`${basePath}?period=${option.value}`}
       key={option.value}
-    >{option.label}</Link>)}
+      pendingLabel={`Đang tải dữ liệu theo ${option.label.toLocaleLowerCase("vi-VN")}…`}
+    >{option.label}</AdminLink>)}
   </nav>;
 }
 

@@ -10,7 +10,16 @@ import {
   vocabulary as vocabularyTable,
 } from "../db/schema.ts";
 import { getPublishedCourse } from "./course-repository.ts";
-import { getLessonAccess } from "./lesson-access.ts";
+import { getContentAccessPolicies } from "./content-access-repository.ts";
+import {
+  learningLessonTarget,
+  learningModuleTarget,
+  learningPathTarget,
+  learningQuestionTarget,
+  resolveContentAccess,
+  type ContentAccessTarget,
+} from "./content-access-types.ts";
+import { getLessonAccess, hasActiveVipAccess } from "./lesson-access.ts";
 import { getLessonProgress } from "./progress-repository.ts";
 import { coreWorkplaceLessons, coreWorkplaceModules } from "./core-workplace-course-seed.ts";
 import { ecommerceLessons, ecommerceModules } from "./ecommerce-course-seed.ts";
@@ -92,7 +101,11 @@ function parseLessonContent(value: unknown): LessonContent {
             && value.options.every(isString)
             && typeof value.correctOption === "number"
             && isString(value.explanation);
-        })
+        }).map((question, index) => ({
+          ...question,
+          id: isString(question.id) && question.id.trim() ? question.id.trim() : `question-${index + 1}`,
+          accessTier: question.accessTier === "vip" ? "vip" as const : "free" as const,
+        }))
       : [];
     if (isString(item.title) && isString(item.description) && typeof item.passScore === "number" && questions.length) {
       challenge = { title: item.title, description: item.description, passScore: item.passScore, questions };
@@ -100,6 +113,77 @@ function parseLessonContent(value: unknown): LessonContent {
   }
 
   return { dialogue, ...(phrases.length ? { phrases } : {}), notes, ...(challenge ? { challenge } : {}) };
+}
+
+function toLessonAccess(state: ReturnType<typeof resolveContentAccess>): LessonAccess {
+  return {
+    allowed: state.allowed,
+    source: state.source,
+    requiredTier: state.requiredTier,
+    lockedAt: state.lockedAt ? `${state.lockedAt.type}:${state.lockedAt.key}` : null,
+  };
+}
+
+function lessonTargets(row: {
+  courseId: string;
+  moduleId: string;
+  id: string;
+  isFree: boolean;
+}): ContentAccessTarget[] {
+  return [
+    learningPathTarget(row.courseId),
+    learningModuleTarget(row.moduleId),
+    learningLessonTarget(row.id, row.isFree),
+  ];
+}
+
+async function filterLessonQuestions({
+  content,
+  lessonId,
+  parentTargets,
+  viewerHasVip,
+}: {
+  content: LessonContent;
+  lessonId: string;
+  parentTargets: ContentAccessTarget[];
+  viewerHasVip: boolean;
+}): Promise<LessonContent> {
+  if (!content.challenge?.questions.length) return content;
+  const questions = content.challenge.questions.map((question, index) => ({
+    ...question,
+    id: question.id?.trim() || `question-${index + 1}`,
+  }));
+  const questionTargets = questions.map((question) => learningQuestionTarget(
+    lessonId,
+    question.id!,
+    question.accessTier ?? "free",
+  ));
+  const policies = await getContentAccessPolicies([...parentTargets, ...questionTargets]);
+  const filteredQuestions = questions.map((question, index): ChallengeQuestion => {
+    const access = resolveContentAccess({
+      targets: [...parentTargets, questionTargets[index]],
+      policies,
+      viewerHasVip,
+    });
+    return access.allowed ? question : {
+      id: question.id,
+      prompt: "Câu hỏi dành cho thành viên VIP",
+      options: [],
+      correctOption: -1,
+      explanation: "",
+      accessTier: "vip",
+      locked: true,
+    };
+  });
+  const accessibleCount = filteredQuestions.filter((question) => !question.locked).length;
+  return {
+    ...content,
+    challenge: {
+      ...content.challenge,
+      passScore: accessibleCount ? Math.min(content.challenge.passScore, accessibleCount) : content.challenge.passScore,
+      questions: filteredQuestions,
+    },
+  };
 }
 
 function toSummary(lesson: CourseLessonSeed, order: number, moduleSeeds: CourseModuleSeed[]): LessonSummary {
@@ -125,6 +209,8 @@ function chooseLesson<T extends { slug: string }>(lessons: T[], requestedSlug?: 
 
 const getCachedLessonCatalog = unstable_cache(async (courseSlug: string) => readDb((db) => db.select({
   id: lessonTable.id,
+  moduleId: modules.id,
+  courseId: courseTable.id,
   slug: lessonTable.slug,
   title: lessonTable.title,
   summary: lessonTable.summary,
@@ -201,12 +287,17 @@ async function getDemoLessonPageData(course: Course, requestedSlug?: string): Pr
 
   const access = await getLessonAccess({ isFree: active.isFree, userId: null });
   const summary = toSummary(active, lessonSeeds.indexOf(active), moduleSeeds);
+  const demoTargets = [
+    learningPathTarget(course.slug),
+    learningModuleTarget(active.moduleSlug),
+    learningLessonTarget(active.slug, active.isFree),
+  ];
+  const filteredContent = access.allowed
+    ? await filterLessonQuestions({ content: active.content, lessonId: active.slug, parentTargets: demoTargets, viewerHasVip: false })
+    : { dialogue: [], notes: [] } satisfies LessonContent;
   const lesson: LessonDetail = {
     ...summary,
-    dialogue: access.allowed ? active.content.dialogue : [],
-    ...(access.allowed && active.content.phrases ? { phrases: active.content.phrases } : {}),
-    notes: access.allowed ? active.content.notes : [],
-    ...(access.allowed && active.content.challenge ? { challenge: active.content.challenge } : {}),
+    ...filteredContent,
     vocabulary: access.allowed ? active.vocabulary : [],
   };
 
@@ -233,13 +324,19 @@ export async function getLessonPageData({
   ]);
   if (!course) return null;
 
+  const allTargets = rows.flatMap(lessonTargets);
+  const [policies, viewerHasVip] = await Promise.all([
+    getContentAccessPolicies(allTargets),
+    userId && process.env.DATABASE_URL ? hasActiveVipAccess(userId) : Promise.resolve(false),
+  ]);
+
   const lessons: LessonSummary[] = rows.map((row, order) => ({
     slug: row.slug,
     title: row.title,
     summary: row.summary ?? "",
     situation: row.situation ?? "",
     estimatedMinutes: row.estimatedMinutes,
-    isFree: row.isFree,
+    isFree: resolveContentAccess({ targets: lessonTargets(row), policies, viewerHasVip: false }).requiredTier === "free",
     order,
     moduleSlug: row.moduleSlug,
     moduleTitle: row.moduleTitle,
@@ -248,13 +345,18 @@ export async function getLessonPageData({
   const active = chooseLesson(rows, lessonSlug);
   if (!active) return { course, lessons, lesson: null, access: null, progress: null, invalidLesson: Boolean(lessonSlug) };
 
-  const [access, progress] = await Promise.all([
-    getLessonAccess({ isFree: active.isFree, userId }),
+  const activeTargets = lessonTargets(active);
+  const [accessState, progress] = await Promise.all([
+    Promise.resolve(resolveContentAccess({ targets: activeTargets, policies, viewerHasVip })),
     userId ? getLessonProgress(userId, active.id) : Promise.resolve(null),
   ]);
+  const access = toLessonAccess(accessState);
   const body = access.allowed
     ? await getCachedLessonBody(courseSlug, active.id)
     : { content: { dialogue: [], notes: [] } satisfies LessonContent, vocabulary: [] satisfies Vocabulary[] };
+  const filteredContent = access.allowed
+    ? await filterLessonQuestions({ content: body.content, lessonId: active.id, parentTargets: activeTargets, viewerHasVip })
+    : body.content;
 
   const lesson: LessonDetail = {
     slug: active.slug,
@@ -267,7 +369,7 @@ export async function getLessonPageData({
     moduleSlug: active.moduleSlug,
     moduleTitle: active.moduleTitle,
     moduleOrder: active.moduleOrder,
-    ...body.content,
+    ...filteredContent,
     vocabulary: body.vocabulary,
   };
 
@@ -282,6 +384,10 @@ const practiceVocabularySelection = {
   example: vocabularyTable.exampleZh,
   translation: vocabularyTable.exampleVi,
   audioUrl: vocabularyTable.audioUrl,
+  lessonId: lessonTable.id,
+  moduleId: modules.id,
+  courseId: courseTable.id,
+  isFree: lessonTable.isFree,
 };
 
 function normalizeVocabularyRows(rows: Array<{
@@ -300,25 +406,6 @@ function normalizeVocabularyRows(rows: Array<{
   }));
 }
 
-const getCachedPublishedPracticeVocabulary = unstable_cache(async (limit: number, includeVip: boolean) => {
-  const published = and(eq(courseTable.status, "published"), eq(lessonTable.status, "published"));
-  const publishedAccessible = includeVip ? published : and(published, eq(lessonTable.isFree, true));
-  const rows = await readDb((db) => db.select(practiceVocabularySelection)
-    .from(lessonVocabulary)
-    .innerJoin(vocabularyTable, eq(lessonVocabulary.vocabularyId, vocabularyTable.id))
-    .innerJoin(lessonTable, eq(lessonVocabulary.lessonId, lessonTable.id))
-    .innerJoin(modules, eq(lessonTable.moduleId, modules.id))
-    .innerJoin(courseTable, eq(modules.courseId, courseTable.id))
-    .where(publishedAccessible)
-    .orderBy(asc(modules.sortOrder), asc(lessonTable.sortOrder), asc(lessonVocabulary.sortOrder), asc(courseTable.sortOrder))
-    .limit(limit));
-
-  return normalizeVocabularyRows(rows);
-}, ["published-practice-vocabulary"], {
-  revalidate: 300,
-  tags: ["published-content"],
-});
-
 export async function listPracticeVocabulary(limit = 12, userId: string | null = null, includeVip = false): Promise<Vocabulary[]> {
   if (!process.env.DATABASE_URL) {
     const lessonGroups = [officeLessons, factoryLessons, logisticsLessons, salesLessons, restaurantLessons, ecommerceLessons, coreWorkplaceLessons].map((lessons) => lessons.filter((lesson) => includeVip || lesson.isFree));
@@ -327,25 +414,47 @@ export async function listPracticeVocabulary(limit = 12, userId: string | null =
     return Array.from({ length: maxWords }, (_, index) => vocabularyGroups.flatMap((words) => words[index] ? [words[index]] : [])).flat().slice(0, limit);
   }
 
-  if (!userId) return getCachedPublishedPracticeVocabulary(limit, includeVip);
-
-  const rows = await readDb((db) => {
+  const rows = await readDb(async (db) => {
     const published = and(
       eq(courseTable.status, "published"),
       eq(lessonTable.status, "published"),
     );
-    const publishedAccessible = includeVip ? published : and(published, eq(lessonTable.isFree, true));
-
-    return db.select(practiceVocabularySelection)
+    const candidateLimit = Math.min(Math.max(limit * 20, 100), 2_000);
+    const candidates = userId ? await db.select(practiceVocabularySelection)
       .from(lessonVocabulary)
       .innerJoin(vocabularyTable, eq(lessonVocabulary.vocabularyId, vocabularyTable.id))
       .innerJoin(lessonTable, eq(lessonVocabulary.lessonId, lessonTable.id))
       .innerJoin(modules, eq(lessonTable.moduleId, modules.id))
       .innerJoin(courseTable, eq(modules.courseId, courseTable.id))
       .leftJoin(reviewItems, and(eq(reviewItems.vocabularyId, vocabularyTable.id), eq(reviewItems.userId, userId)))
-      .where(and(publishedAccessible, or(isNull(reviewItems.userId), lte(reviewItems.nextReviewAt, new Date()))))
+      .where(and(published, or(isNull(reviewItems.userId), lte(reviewItems.nextReviewAt, new Date()))))
       .orderBy(desc(reviewItems.wrongCount), asc(reviewItems.easeScore), asc(reviewItems.nextReviewAt), asc(modules.sortOrder), asc(lessonTable.sortOrder), asc(lessonVocabulary.sortOrder), asc(courseTable.sortOrder))
-      .limit(limit);
+      .limit(candidateLimit)
+      : await db.select(practiceVocabularySelection)
+        .from(lessonVocabulary)
+        .innerJoin(vocabularyTable, eq(lessonVocabulary.vocabularyId, vocabularyTable.id))
+        .innerJoin(lessonTable, eq(lessonVocabulary.lessonId, lessonTable.id))
+        .innerJoin(modules, eq(lessonTable.moduleId, modules.id))
+        .innerJoin(courseTable, eq(modules.courseId, courseTable.id))
+        .where(published)
+        .orderBy(asc(modules.sortOrder), asc(lessonTable.sortOrder), asc(lessonVocabulary.sortOrder), asc(courseTable.sortOrder))
+        .limit(candidateLimit);
+    const candidateTargets = (candidate: typeof candidates[number]) => lessonTargets({
+      id: candidate.lessonId,
+      moduleId: candidate.moduleId,
+      courseId: candidate.courseId,
+      isFree: candidate.isFree,
+    });
+    const targets = candidates.flatMap(candidateTargets);
+    const [policies, viewerHasVip] = await Promise.all([
+      getContentAccessPolicies(targets, db),
+      includeVip ? Promise.resolve(true) : userId ? hasActiveVipAccess(userId, db) : Promise.resolve(false),
+    ]);
+    return candidates.filter((candidate) => resolveContentAccess({
+      targets: candidateTargets(candidate),
+      policies,
+      viewerHasVip,
+    }).allowed).slice(0, limit);
   });
 
   return normalizeVocabularyRows(rows);

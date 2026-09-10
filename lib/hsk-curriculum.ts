@@ -38,6 +38,7 @@ import {
 } from "./hsk5-workbook-1-content.ts";
 import { HSK6_VOLUME1_TEXTBOOK_LESSONS } from "./hsk6-volume1-textbook-content.ts";
 import { HSK6_VOLUME2_TEXTBOOK_LESSONS } from "./hsk6-volume2-textbook-content.ts";
+import type { ContentAccessState } from "./content-access-types.ts";
 
 export type HskTopicIcon = "message" | "people" | "clock" | "food" | "travel" | "work" | "book" | "globe";
 
@@ -57,6 +58,7 @@ export type HskCurriculumLesson = {
   minutes: number;
   guidedSteps: number;
   available: boolean;
+  access?: ContentAccessState;
 };
 
 export type HskCurriculumTopic = {
@@ -72,6 +74,7 @@ export type HskCurriculumLevel = {
   symbol: string;
   description: string;
   topics: HskCurriculumTopic[];
+  access?: ContentAccessState;
 };
 
 function toSlug(value: string) {

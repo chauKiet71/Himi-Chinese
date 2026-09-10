@@ -51,6 +51,8 @@ test("course roadmap stops at the first VIP lesson when the viewer has no entitl
   assert.equal(roadmap.modules[0].status, "completed");
   assert.equal(roadmap.modules[1].status, "active");
   assert.equal(roadmap.modules[1].lessons[0].status, "vip_locked");
+  assert.equal(roadmap.modules[1].lessons[0].vipLocked, true);
+  assert.equal(roadmap.modules[1].vipLocked, true);
   assert.equal(roadmap.nextLesson, null);
   assert.equal(roadmap.blockedByVip, true);
 });

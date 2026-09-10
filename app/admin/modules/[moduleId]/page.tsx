@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AdminConsoleHeader, AdminNotice, LessonCreateForm, ModuleForm, StatusBadge } from "@/components/admin-console";
+import { AdminLink } from "@/components/admin-link";
+import { AdminConsoleHeader, AdminNotice, ContentAccessPolicyForm, LessonCreateForm, ModuleForm, StatusBadge } from "@/components/admin-console";
 import { requireAdminUser } from "@/lib/admin-auth";
 import { getAdminModule } from "@/lib/admin-content-service";
-import { createLessonAction, deleteModuleAction, updateModuleAction } from "../../actions";
+import { getContentAccessPolicy } from "@/lib/content-access-repository";
+import { createLessonAction, deleteModuleAction, updateContentAccessPolicyAction, updateModuleAction } from "../../actions";
 
 export const metadata: Metadata = { title: "Quản lý module" };
 
 export default async function AdminModulePage({ params, searchParams }: { params: Promise<{ moduleId: string }>; searchParams: Promise<{ error?: string; success?: string }> }) {
   const [{ moduleId }, query, user] = await Promise.all([params, searchParams, requireAdminUser()]);
-  const data = await getAdminModule(moduleId);
+  const [data, accessTier] = await Promise.all([
+    getAdminModule(moduleId),
+    getContentAccessPolicy("learning_module", moduleId),
+  ]);
   if (!data) notFound();
   const nextOrder = data.lessons.reduce((highest, lesson) => Math.max(highest, lesson.sortOrder), -1) + 1;
   return <main className="admin-page"><div className="section-shell">
@@ -18,11 +22,14 @@ export default async function AdminModulePage({ params, searchParams }: { params
     <AdminNotice error={query.error} success={query.success} />
     <div className="admin-detail-grid">
       <section className="admin-panel"><div className="panel-heading"><h2>Thông tin module</h2><span>{data.lessons.length} bài</span></div><ModuleForm action={updateModuleAction} courseId={data.module.courseId} module={data.module} submitLabel="Lưu module" /></section>
-      <aside className="admin-panel danger-panel"><h2>Xóa cứng</h2><p>Chỉ xóa được module không còn bài học.</p><form action={deleteModuleAction} className="admin-delete-form"><input name="moduleId" type="hidden" value={data.module.id} /><input name="courseId" type="hidden" value={data.module.courseId} /><label><input name="confirmDelete" type="checkbox" value="DELETE" /> Tôi hiểu dữ liệu sẽ bị xóa</label><button className="button button-danger" type="submit">Xóa module</button></form></aside>
+      <aside className="admin-side-stack">
+        <section className="admin-panel"><div className="panel-heading"><h2>Quyền truy cập</h2><span>Cả module</span></div><ContentAccessPolicyForm action={updateContentAccessPolicyAction} currentTier={accessTier} description="Khóa ở đây sẽ áp dụng cho mọi bài học và câu hỏi trong module." returnTo={`/admin/modules/${moduleId}`} targetKey={moduleId} targetType="learning_module" /></section>
+        <section className="admin-panel danger-panel"><h2>Xóa cứng</h2><p>Chỉ xóa được module không còn bài học.</p><form action={deleteModuleAction} className="admin-delete-form"><input name="moduleId" type="hidden" value={data.module.id} /><input name="courseId" type="hidden" value={data.module.courseId} /><label><input name="confirmDelete" type="checkbox" value="DELETE" /> Tôi hiểu dữ liệu sẽ bị xóa</label><button className="button button-danger" type="submit">Xóa module</button></form></section>
+      </aside>
     </div>
     <div className="admin-content-grid modules-section">
       <section className="admin-panel"><div className="panel-heading"><h2>Tạo bài học</h2><span>Soạn chi tiết sau khi tạo</span></div><LessonCreateForm action={createLessonAction} moduleId={data.module.id} nextOrder={nextOrder} /></section>
-      <section className="admin-panel"><div className="panel-heading"><h2>{data.lessons.length} bài học</h2><span>Dữ liệu thật</span></div><div className="admin-record-list">{data.lessons.length ? data.lessons.map((lesson) => <Link href={`/admin/lessons/${lesson.id}`} key={lesson.id} prefetch={false}><span><strong>{lesson.title}</strong><small>{lesson.estimatedMinutes} phút · {lesson.vocabularyCount} từ · {lesson.isFree ? "Miễn phí" : "VIP"}</small></span><StatusBadge status={lesson.status} /></Link>) : <p className="admin-empty">Chưa có bài học trong module.</p>}</div></section>
+      <section className="admin-panel"><div className="panel-heading"><h2>{data.lessons.length} bài học</h2><span>Dữ liệu thật</span></div><div className="admin-record-list">{data.lessons.length ? data.lessons.map((lesson) => <AdminLink href={`/admin/lessons/${lesson.id}`} intentPrefetch key={lesson.id}><span><strong>{lesson.title}</strong><small>{lesson.estimatedMinutes} phút · {lesson.vocabularyCount} từ · {lesson.isFree ? "Miễn phí" : "VIP"}</small></span><StatusBadge status={lesson.status} /></AdminLink>) : <p className="admin-empty">Chưa có bài học trong module.</p>}</div></section>
     </div>
   </div></main>;
 }

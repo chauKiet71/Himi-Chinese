@@ -56,6 +56,18 @@ function buildGeneratedVocabularyExercise(
   word: HskVocabularyItem,
   wordIndex: number,
 ): HskExercise {
+  if (word.locked) {
+    return {
+      id: `guided-practice-${word.id}`,
+      type: "meaning",
+      instruction: "Câu hỏi dành cho thành viên VIP",
+      prompt: "",
+      options: [],
+      answer: null,
+      accessTier: "vip",
+      locked: true,
+    };
+  }
   const useMeaning = word.meaning.trim().length > 0;
   const answer = useMeaning ? word.meaning : word.pinyin;
   const otherAnswers = [
@@ -85,6 +97,7 @@ export function buildHskGuidedExercises(lesson: HskLessonContent): HskExercise[]
   const usedExerciseIds = new Set<string>();
 
   return lesson.vocabulary.map((word, wordIndex) => {
+    if (word.locked) return buildGeneratedVocabularyExercise(lesson, word, wordIndex);
     const sourceExercise = lesson.exercises.find((exercise) => (
       !usedExerciseIds.has(exercise.id) && exerciseMatchesWord(exercise, word)
     ));

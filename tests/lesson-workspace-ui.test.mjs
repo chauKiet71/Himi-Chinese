@@ -7,12 +7,13 @@ import { createServer } from "vite";
 test("lesson views render the learning content without a course sidebar", async (t) => {
   const server = await createServer({
     appType: "custom",
+    cacheDir: "tmp/vite-lesson-workspace-test",
     configFile: false,
     resolve: {
       alias: [{ find: "@", replacement: process.cwd() }],
     },
     root: process.cwd(),
-    server: { middlewareMode: true },
+    server: { hmr: false, middlewareMode: true },
   });
   t.after(() => server.close());
 
@@ -69,4 +70,6 @@ test("lesson views render the learning content without a course sidebar", async 
     assert.doesNotMatch(html, /lesson-shell|lesson-sidebar|lesson-course-navigation|Danh sách bài học/);
   }
   assert.match(loadedHtml, />Bài học mẫu</);
+  assert.match(loadedHtml, /action="\/vip"/);
+  assert.match(loadedHtml, /> Nâng cấp<\/button>/);
 });

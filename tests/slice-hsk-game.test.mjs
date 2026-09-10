@@ -33,6 +33,22 @@ test("vocabulary covers lesson sources, including both HSK4 and HSK6 volumes", (
   }
 });
 
+test("game vocabulary excludes lessons that are not in the access set", () => {
+  const lesson = HSK_LESSONS[0];
+  const words = getSliceHskVocabulary("hsk-1", new Set([lesson.id]));
+  const expectedHanzi = new Set(lesson.vocabulary.map((word) => word.hanzi.trim()).filter(Boolean));
+  assert.deepEqual(new Set(words.map((word) => word.hanzi)), expectedHanzi);
+  assert.deepEqual(getSliceHskVocabulary("hsk-1", new Set()), []);
+});
+
+test("game vocabulary excludes individually locked vocabulary items", () => {
+  const lesson = HSK_LESSONS[0];
+  const allowedKeys = new Set(lesson.vocabulary.slice(1).map((word) => `${lesson.id}:${word.id}`));
+  const words = getSliceHskVocabulary("hsk-1", new Set([lesson.id]), allowedKeys);
+  assert.equal(words.some((word) => word.id === lesson.vocabulary[0].id), false);
+  assert.deepEqual(new Set(words.map((word) => word.id)), new Set(lesson.vocabulary.slice(1).map((word) => word.id)));
+});
+
 test("new runs shuffle the whole course without duplicates or changing source vocabulary", () => {
   const words = getSliceHskVocabulary("hsk-3");
   const before = structuredClone(words);

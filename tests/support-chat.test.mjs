@@ -5,10 +5,10 @@ import { PGlite } from "@electric-sql/pglite";
 import { drizzle } from "drizzle-orm/pglite";
 import { eq } from "drizzle-orm";
 import * as schema from "../db/schema.ts";
-import { submitSupportMessage, getSupportConversation, acceptTelegramUpdate, consumeSupportLimit, ownedSupportImage, SUPPORT_AUTOMATIC_REPLIES } from "../lib/support-service.ts";
+import { submitSupportMessage, getSupportConversation, acceptTelegramUpdate as acceptVerifiedTelegramUpdate, consumeSupportLimit, ownedSupportImage, SUPPORT_AUTOMATIC_REPLIES } from "../lib/support-service.ts";
 import { processSupportJob, processSupportReminder } from "../lib/support-worker.ts";
 import { hiddenAfterCompletion, validateSupportInput, parseSupportCallback, retryDelay } from "../lib/support-domain.ts";
-import { notificationText, supportKeyboard, authorizedTelegramUpdate, verifyTelegramSecret, validTelegramUpdate, telegramGroupIdCommand, TelegramError } from "../lib/support-telegram.ts";
+import { notificationText, supportKeyboard, authorizedTelegramUpdate, verifyTelegramSecret, validTelegramUpdate, telegramConfig, telegramGroupIdCommand, TelegramError } from "../lib/support-telegram.ts";
 import { imageMime, supportImageDeliveryUrl } from "../lib/support-storage.ts";
 
 const user = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
@@ -16,6 +16,8 @@ const other = "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb";
 const config = { chatId: "-100123456", admins: ["111", "222"] };
 let client, db, calls, nextMessageId, sequence;
 let io;
+let membership;
+const acceptTelegramUpdate = (database, update, settings) => acceptVerifiedTelegramUpdate(database, update, settings, io.call);
 before(async () => {
   client = new PGlite();
   db = drizzle(client, { schema });
@@ -28,8 +30,13 @@ after(async () => { await client?.close(); });
 beforeEach(async () => {
   await client.exec("TRUNCATE support_messages, support_images, support_jobs, support_reply_sessions, support_telegram_updates, support_conversations, auth_rate_limits CASCADE");
   calls = []; nextMessageId = 100; sequence = 0;
+  membership = new Map();
   io = {
-    call: async (method, parameters, photo) => { calls.push({ method, parameters, photo }); return { message_id: ++nextMessageId }; },
+    call: async (method, parameters, photo) => {
+      calls.push({ method, parameters, photo });
+      if (method === "getChatMember") return { user: { id: parameters.user_id, is_bot: false }, status: membership.get(parameters.user_id) ?? "member" };
+      return { message_id: ++nextMessageId };
+    },
     readImage: async () => new Uint8Array([255, 216, 255, 1]),
     importPhoto: async (_file, publicId) => publicId,
   };
@@ -52,6 +59,31 @@ function reply(promptId, text = "Đây là phản hồi từ nhân viên.", admi
   return { update_id: ++sequence, message: { message_id: ++nextMessageId, chat: { id: Number(config.chatId) },
     from: { id: admin }, reply_to_message: { message_id: promptId }, ...(photo ? { photo, caption: text } : { text }) } };
 }
+
+test("group migration preserves the pending message and exposes a safe actionable queue error", async () => {
+  const created = await create();
+  const send = io.call;
+  io.call = async () => { throw new TelegramError(400, 0, { migrateToChatId: -1009876543210 }); };
+  assert.equal(await processSupportJob(db, io), true);
+  const [job] = await db.select().from(schema.supportJobs);
+  assert.equal(job.finishedAt, null);
+  assert.equal(job.lastError, "telegram_400_group_migrated");
+  assert.equal(job.attempts, 1);
+  const [message] = await db.select().from(schema.supportMessages).where(eq(schema.supportMessages.id, created.messageId));
+  assert.equal(message.telegramMessageId, null);
+  assert.equal(message.content, "Cần hỗ trợ <b>HSK</b>");
+  // Model coordinated operator recovery of the group configuration and stored destination.
+  await db.update(schema.supportConversations).set({ telegramChatId: "-1009876543210" })
+    .where(eq(schema.supportConversations.id, created.conversationId));
+  await db.update(schema.supportJobs).set({ availableAt: new Date(0) }).where(eq(schema.supportJobs.id, job.id));
+  io.call = send;
+  await drain();
+  assert.equal(calls.filter(c => c.method === "sendMessage").length, 1);
+  assert.equal(calls.find(c => c.method === "sendMessage").parameters.chat_id, "-1009876543210");
+  const [finished] = await db.select().from(schema.supportJobs);
+  assert.ok(finished.finishedAt);
+  assert.equal(finished.lastError, null);
+});
 
 test("create commits conversation, user message and outbox before any Telegram call; duplicate create is idempotent", async () => {
   const value = input();
@@ -198,23 +230,24 @@ test("admin photo and caption persist in existing storage; cross-admin reply to 
   assert.equal(m.content, "Hình hướng dẫn"); assert.match(m.imageUrl, /^\/api\/support\/images\//);
   assert.equal((await db.select().from(schema.supportImages))[0].ownerId, user);
 });
-test("unauthorized admin/chat and wrong secret fail closed", async () => {
+test("former member, wrong chat and wrong secret fail closed", async () => {
   const created = await create(); await drain(); const c = await row(created.conversationId);
+  membership.set(333, "left");
   await assert.rejects(acceptTelegramUpdate(db, callback(c, "reply", 333), config), e => e.status === 403);
   const update = callback(c); update.callback_query.message.chat.id = -999;
-  assert.equal(authorizedTelegramUpdate(update, config), false);
+  assert.equal(await authorizedTelegramUpdate(update, config, io.call), false);
   assert.equal(verifyTelegramSecret("test-secret", "test-secret"), true);
   assert.equal(verifyTelegramSecret("other", "test-secret"), false);
   assert.equal(verifyTelegramSecret(null, ""), false);
   assert.equal((await row(c.id)).status, "OPEN");
 });
 
-test("an authorized admin can discover a Telegram group id without authorizing support actions there", () => {
+test("a bootstrap operator can discover a Telegram group id without authorizing support actions there", async () => {
   const command = { update_id: 1, message: { message_id: 2, chat: { id: -100987654321 }, from: { id: 111 }, text: "/groupid@HimiiaagentBot" } };
   assert.equal(telegramGroupIdCommand(command, config.admins), "-100987654321");
   assert.equal(telegramGroupIdCommand({ ...command, message: { ...command.message, from: { id: 333 } } }, config.admins), null);
   assert.equal(telegramGroupIdCommand({ ...command, message: { ...command.message, chat: { id: 123 } } }, config.admins), null);
-  assert.equal(authorizedTelegramUpdate(command, config), false);
+  assert.equal(await authorizedTelegramUpdate(command, config, io.call), false);
 });
 test("complete is idempotent, clears mappings/reminders, edits Telegram and retains history after 60 seconds/refresh", async () => {
   const c = await claimed();
@@ -336,4 +369,90 @@ test("two concurrent workers do not deliver the same queued notification twice",
   await create();
   await Promise.all([processSupportJob(db, io), processSupportJob(db, io)]);
   assert.equal(calls.filter(c => c.method === "sendMessage").length, 1);
+});
+
+test("any current group member can claim without being listed in bootstrap operator IDs", async () => {
+  const created = await create(); await drain(); const c = await row(created.conversationId);
+  assert.ok(!config.admins.includes("333"));
+  assert.match(await acceptTelegramUpdate(db, callback(c, "reply", 333), config), /Bạn đã tiếp nhận/);
+  await drain();
+  assert.equal((await row(c.id)).claimedByTelegramUserId, "333");
+  const [session] = await db.select().from(schema.supportReplySessions);
+  await acceptTelegramUpdate(db, reply(session.promptMessageId, "Nhân viên mới trả lời", 333), config); await drain();
+  assert.equal((await row(c.id)).status, "WAITING_USER");
+  assert.equal((await getSupportConversation(db, user, c.id)).messages.at(-1).content, "Nhân viên mới trả lời");
+  assert.equal(await acceptTelegramUpdate(db, callback(c, "complete", 333), config), "Đã xử lí");
+});
+
+test("unlisted group members racing to claim retain one owner; only that owner can complete", async () => {
+  const created = await create(); await drain(); let c = await row(created.conversationId);
+  const results = await Promise.all([
+    acceptTelegramUpdate(db, callback(c, "reply", 333), config),
+    acceptTelegramUpdate(db, callback(c, "reply", 444), config),
+  ]);
+  assert.equal(results.filter(text => text.includes("Bạn đã tiếp nhận")).length, 1);
+  c = await row(c.id);
+  const owner = Number(c.claimedByTelegramUserId);
+  const otherMember = owner === 333 ? 444 : 333;
+  assert.match(await acceptTelegramUpdate(db, callback(c, "complete", otherMember), config), /đang xử lý/);
+  assert.equal((await row(c.id)).status, "CLAIMED");
+  await drain();
+  const [session] = await db.select().from(schema.supportReplySessions);
+  await acceptTelegramUpdate(db, reply(session.promptMessageId, "Không được trả lời thay", otherMember), config); await drain();
+  assert.equal((await db.select().from(schema.supportMessages)).filter(m => m.senderType === "ADMIN").length, 0);
+  assert.equal((await row(c.id)).claimedByTelegramUserId, String(owner));
+  assert.equal(await acceptTelegramUpdate(db, callback(c, "complete", owner), config), "Đã xử lí");
+});
+
+test("an unclaimed request cannot be completed before a member takes ownership", async () => {
+  const created = await create(); await drain(); const c = await row(created.conversationId);
+  assert.match(await acceptTelegramUpdate(db, callback(c, "complete", 333), config), /nhận phụ trách/);
+  const pending = await row(c.id);
+  assert.equal(pending.status, "OPEN"); assert.equal(pending.completedAt, null); assert.ok(pending.nextReminderAt);
+});
+
+test("membership lookup admits active statuses only, rejects bots and anonymous senders", async () => {
+  const created = await create(); await drain(); const c = await row(created.conversationId);
+  const update = callback(c, "reply", 333);
+  for (const [status, is_member, allowed] of [
+    ["creator", undefined, true], ["administrator", undefined, true], ["member", undefined, true],
+    ["restricted", true, true], ["restricted", false, false], ["left", undefined, false],
+    ["kicked", undefined, false], ["unknown", undefined, false],
+  ]) {
+    const lookup = async () => ({ status, is_member, user: { id: 333, is_bot: false } });
+    assert.equal(await authorizedTelegramUpdate(update, config, lookup), allowed);
+  }
+  assert.equal(await authorizedTelegramUpdate(update, config, async () => ({ status: "member", user: { id: 444 } })), false);
+  const noLookup = async () => { assert.fail("Invalid actor must be rejected before network lookup"); };
+  update.callback_query.from.is_bot = true;
+  assert.equal(await authorizedTelegramUpdate(update, config, noLookup), false);
+  const anonymousReply = reply(123);
+  anonymousReply.message.sender_chat = { id: Number(config.chatId) };
+  assert.equal(await authorizedTelegramUpdate(anonymousReply, config, noLookup), false);
+});
+
+test("membership API outage does not claim, complete, or consume the webhook update", async () => {
+  const created = await create(); await drain(); const c = await row(created.conversationId);
+  const update = callback(c, "reply", 333);
+  await assert.rejects(acceptVerifiedTelegramUpdate(db, update, config, async () => { throw new TelegramError(503); }));
+  assert.equal((await row(c.id)).status, "OPEN");
+  assert.equal((await db.select().from(schema.supportTelegramUpdates)).length, 0);
+  assert.match(await acceptTelegramUpdate(db, update, config), /Bạn đã tiếp nhận/);
+});
+
+test("a departed owner loses button access and cannot deliver an already queued reply", async () => {
+  const c = await claimed();
+  const [session] = await db.select().from(schema.supportReplySessions);
+  await acceptTelegramUpdate(db, reply(session.promptMessageId), config);
+  membership.set(111, "left");
+  await assert.rejects(acceptTelegramUpdate(db, callback(c, "complete"), config), e => e.status === 403);
+  await drain();
+  assert.equal((await db.select().from(schema.supportMessages)).filter(m => m.senderType === "ADMIN").length, 0);
+  assert.equal((await row(c.id)).status, "CLAIMED");
+});
+
+test("support configuration requires a group but does not require individual staff IDs", () => {
+  const environment = { TELEGRAM_BOT_TOKEN: "fixture-token", TELEGRAM_ADMIN_CHAT_ID: config.chatId, TELEGRAM_WEBHOOK_SECRET: "fixture-secret" };
+  assert.deepEqual(telegramConfig(environment).admins, []);
+  assert.throws(() => telegramConfig({ ...environment, TELEGRAM_ADMIN_CHAT_ID: "12345" }), e => e.status === 503);
 });

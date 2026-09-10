@@ -9,6 +9,7 @@ import {
   Check,
   Footprints,
   Lightbulb,
+  LockKeyhole,
   RotateCcw,
   Sparkles,
   Star,
@@ -19,6 +20,7 @@ import {
 } from "lucide-react";
 import { speakChinese } from "@/lib/game-content";
 import type { HskLessonContent } from "@/lib/hsk-lesson-content";
+import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 import {
   getHskLessonProgressStorageKey,
   parseHskLessonProgress,
@@ -47,7 +49,17 @@ export function HskFlashcardSession({ lesson, backHref }: {
   const [rememberedIds, setRememberedIds] = useState<string[]>([]);
   const [finished, setFinished] = useState(false);
   const word = lesson.vocabulary[index];
+  const accessibleWordCount = lesson.vocabulary.filter((item) => !item.locked).length;
   const score = rememberedIds.length * 160;
+
+  const advance = () => {
+    if (index === lesson.vocabulary.length - 1) {
+      setFinished(true);
+      return;
+    }
+    setIndex((current) => current + 1);
+    setFlipped(false);
+  };
 
   const rate = (remembered: boolean) => {
     if (!flipped) return;
@@ -57,13 +69,7 @@ export function HskFlashcardSession({ lesson, backHref }: {
       setRememberedIds((current) => current.includes(word.id) ? current : [...current, word.id]);
     }
 
-    if (index === lesson.vocabulary.length - 1) {
-      setFinished(true);
-      return;
-    }
-
-    setIndex((current) => current + 1);
-    setFlipped(false);
+    advance();
   };
 
   const restart = () => {
@@ -106,12 +112,18 @@ export function HskFlashcardSession({ lesson, backHref }: {
           {finished ? <div className="game-result" role="status">
             <span><Trophy aria-hidden="true" size={28} /></span>
             <small>HOÀN THÀNH BỘ FLASHCARD</small>
-            <h2>Bạn nhớ chắc {rememberedIds.length}/{lesson.vocabulary.length} từ.</h2>
+            <h2>Bạn nhớ chắc {rememberedIds.length}/{accessibleWordCount} từ có thể học.</h2>
             <strong>{score} điểm</strong>
             <div>
               <button onClick={restart} type="button"><RotateCcw aria-hidden="true" size={16} /> Học lại</button>
               <Link href={backHref}>Về bài học <ArrowRight aria-hidden="true" size={16} /></Link>
             </div>
+          </div> : word.locked ? <div className="game-result flashcard-vip-lock">
+            <span><LockKeyhole aria-hidden="true" size={28} /></span>
+            <small>TỪ VỰNG VIP · {index + 1}/{lesson.vocabulary.length}</small>
+            <h2>Từ này cần tài khoản VIP</h2>
+            <p>Nội dung từ, pinyin, nghĩa và ví dụ chưa được gửi tới trình duyệt.</p>
+            <div><VipUpgradeInlineForm /><button onClick={advance} type="button">{index === lesson.vocabulary.length - 1 ? "Hoàn thành" : "Từ tiếp theo"}<ArrowRight aria-hidden="true" size={16} /></button></div>
           </div> : <>
             <button
               aria-label={flipped ? "Xem mặt Hán tự" : "Lật thẻ xem nghĩa"}

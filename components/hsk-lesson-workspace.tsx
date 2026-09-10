@@ -13,6 +13,7 @@ import {
   Eye,
   GraduationCap,
   Headphones,
+  LockKeyhole,
   PenLine,
   Play,
   RotateCcw,
@@ -27,6 +28,7 @@ import type {
   HskVocabularyItem,
   HskWritingCharacter,
 } from "@/lib/hsk-lesson-content";
+import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 import {
   calculateHskLessonProgress,
   EMPTY_HSK_LESSON_PROGRESS,
@@ -73,6 +75,8 @@ function VocabularyPanel({
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const word = words[index];
+  const accessibleWords = words.filter((item) => !item.locked);
+  const completedCount = accessibleWords.filter((item) => completed.includes(item.id)).length;
 
   const move = useCallback((direction: -1 | 1) => {
     setIndex((current) => (current + direction + words.length) % words.length);
@@ -107,7 +111,7 @@ function VocabularyPanel({
   return <section className="hsk-vocab-mode" aria-label="Flashcard từ vựng">
     <div className="hsk-mode-intro">
       <div><span>Flashcard chủ động</span><h2>Nhớ mặt chữ trước, kiểm tra nghĩa sau</h2><p>Bấm vào thẻ để lật. Sau đó tự đánh giá độ thuộc để lưu tiến độ.</p></div>
-      <strong>{completed.length}/{words.length} đã nhớ</strong>
+      <strong>{completedCount}/{accessibleWords.length} đã nhớ</strong>
     </div>
 
     <div aria-label={`Từ ${index + 1} trên ${words.length}`} aria-valuemax={words.length} aria-valuemin={1} aria-valuenow={index + 1} className="hsk-step-progress" role="progressbar">
@@ -116,7 +120,14 @@ function VocabularyPanel({
 
     <div className="hsk-flashcard-stage">
       <button aria-label="Từ trước" className="hsk-round-nav" onClick={() => move(-1)} type="button"><ChevronLeft aria-hidden="true" size={24} /></button>
-      <article className={`hsk-flashcard${flipped ? " is-flipped" : ""}`}>
+      <article className={`hsk-flashcard${flipped ? " is-flipped" : ""}${word.locked ? " is-locked" : ""}`}>
+        {word.locked ? <div className="hsk-item-vip-lock">
+          <LockKeyhole aria-hidden="true" size={34} />
+          <small>TỪ VỰNG VIP · {index + 1}/{words.length}</small>
+          <h3>Từ này cần tài khoản VIP</h3>
+          <p>Nội dung từ, pinyin, nghĩa và ví dụ chưa được gửi tới trình duyệt.</p>
+          <VipUpgradeInlineForm />
+        </div> : <>
         <button aria-label={flipped ? "Ẩn nghĩa của từ" : "Xem pinyin và nghĩa"} className="hsk-flashcard-flip" onClick={() => setFlipped((value) => !value)} type="button">
           <span className="hsk-flashcard-count">{String(index + 1).padStart(2, "0")} / {String(words.length).padStart(2, "0")}</span>
           <small>{word.wordClass}</small>
@@ -131,6 +142,7 @@ function VocabularyPanel({
           <button onClick={() => rateWord(true)} type="button"><span>3</span>Đã nhớ</button>
           <button onClick={() => rateWord(true)} type="button"><span>4</span>Rất chắc</button>
         </div> : null}
+        </>}
       </article>
       <button aria-label="Từ tiếp theo" className="hsk-round-nav" onClick={() => move(1)} type="button"><ChevronRight aria-hidden="true" size={24} /></button>
     </div>
@@ -165,7 +177,8 @@ function ExercisePanel({
   const [correct, setCorrect] = useState(0);
   const [finished, setFinished] = useState(false);
   const exercise = exercises[index];
-  const scored = exercises.every((item) => item.answer !== null);
+  const accessibleExercises = exercises.filter((item) => !item.locked);
+  const scored = accessibleExercises.length > 0 && accessibleExercises.every((item) => item.answer !== null);
 
   const choose = (option: string) => {
     if (selected) return;
@@ -174,10 +187,10 @@ function ExercisePanel({
   };
 
   const next = () => {
-    if (exercise.answer !== null && exercise.options.length && !selected) return;
-    onReview(exercise.id);
+    if (!exercise.locked && exercise.answer !== null && exercise.options.length && !selected) return;
+    if (!exercise.locked) onReview(exercise.id);
     if (index === exercises.length - 1) {
-      if (scored) onFinished(Math.round((correct / exercises.length) * 100));
+      if (scored) onFinished(Math.round((correct / accessibleExercises.length) * 100));
       setFinished(true);
       return;
     }
@@ -193,11 +206,11 @@ function ExercisePanel({
   };
 
   if (finished) {
-    const percent = Math.round((correct / exercises.length) * 100);
+    const percent = accessibleExercises.length ? Math.round((correct / accessibleExercises.length) * 100) : 0;
     return <section className="hsk-result-card" aria-live="polite">
       <span><Sparkles aria-hidden="true" size={28} /></span>
       <small>{scored ? "Hoàn thành bài tập" : "Hoàn thành lượt ôn tập"}</small>
-      <h2>{scored ? `${correct}/${exercises.length} câu đúng` : `Đã xem ${exercises.length} nội dung`}</h2>
+      <h2>{scored ? `${correct}/${accessibleExercises.length} câu đúng` : `Đã xem ${accessibleExercises.length} nội dung`}</h2>
       <p>{scored ? percent >= 80 ? "Bạn đã nắm khá chắc bài này." : "Ôn lại flashcard rồi thử thêm một lượt nhé." : "Tiến độ đã được lưu. Phần này không chấm đúng sai vì dữ liệu nguồn không có đáp án."}</p>
       <button onClick={restart} type="button"><RotateCcw aria-hidden="true" size={18} /> Làm lại bài tập</button>
     </section>;
@@ -209,6 +222,13 @@ function ExercisePanel({
       <strong>{scored ? `${correct} câu đúng` : `${reviewed.length}/${exercises.length} đã xem`}</strong>
     </div>
     <div aria-label={`Bài tập ${index + 1} trên ${exercises.length}`} aria-valuemax={exercises.length} aria-valuemin={1} aria-valuenow={index + 1} className="hsk-step-progress" role="progressbar"><span style={{ width: `${((index + 1) / exercises.length) * 100}%` }} /></div>
+    {exercise.locked ? <article className="hsk-exercise-card lesson-locked-panel">
+      <span><LockKeyhole aria-hidden="true" size={26} /></span>
+      <h3>Câu hỏi VIP</h3>
+      <p>Nội dung và đáp án của câu này chưa được gửi tới trình duyệt.</p>
+      <VipUpgradeInlineForm />
+      <button className="hsk-primary-action" onClick={next} type="button">{index === exercises.length - 1 ? "Hoàn thành" : "Câu tiếp theo"}<ArrowRight aria-hidden="true" size={18} /></button>
+    </article> :
     <article className="hsk-exercise-card">
       <ExercisePrompt exercise={exercise} speak={speak} />
       {exercise.note ? <p className="hsk-exercise-note">{exercise.note}</p> : null}
@@ -223,7 +243,7 @@ function ExercisePanel({
         <strong>{selected === exercise.answer ? "Chính xác" : `Đáp án đúng: ${exercise.answer}`}</strong>
       </div> : null}
       <button className="hsk-primary-action" disabled={exercise.answer !== null && exercise.options.length > 0 && !selected} onClick={next} type="button">{index === exercises.length - 1 ? scored ? "Xem kết quả" : "Hoàn thành" : "Câu tiếp theo"}<ArrowRight aria-hidden="true" size={18} /></button>
-    </article>
+    </article>}
   </section>;
 }
 
@@ -261,9 +281,16 @@ function PronunciationPanel({
 
     <div className="hsk-pronunciation-layout">
       <nav aria-label="Chọn từ luyện phát âm" className="hsk-pronunciation-list">
-        {words.map((item, wordIndex) => <button aria-current={wordIndex === index ? "true" : undefined} className={wordIndex === index ? "is-active" : ""} key={item.id} onClick={() => setIndex(wordIndex)} type="button"><span lang="zh-CN">{item.hanzi}</span><small>{item.pinyin}</small>{completed.includes(item.id) ? <Check aria-hidden="true" size={15} /> : null}</button>)}
+        {words.map((item, wordIndex) => <button aria-current={wordIndex === index ? "true" : undefined} aria-label={item.locked ? `Từ ${wordIndex + 1} yêu cầu VIP` : undefined} className={`${wordIndex === index ? "is-active" : ""}${item.locked ? " is-locked" : ""}`} key={item.id} onClick={() => setIndex(wordIndex)} type="button">{item.locked ? <LockKeyhole aria-hidden="true" size={18} /> : <><span lang="zh-CN">{item.hanzi}</span><small>{item.pinyin}</small>{completed.includes(item.id) ? <Check aria-hidden="true" size={15} /> : null}</>}</button>)}
       </nav>
       <article className="hsk-pronunciation-card">
+        {word.locked ? <div className="hsk-item-vip-lock">
+          <LockKeyhole aria-hidden="true" size={34} />
+          <small>TỪ PHÁT ÂM VIP · {index + 1}/{words.length}</small>
+          <h3>Từ này cần tài khoản VIP</h3>
+          <p>Nội dung từ và âm đọc chưa được gửi tới trình duyệt.</p>
+          <VipUpgradeInlineForm />
+        </div> : <>
         <small>TỪ {String(index + 1).padStart(2, "0")} / {String(words.length).padStart(2, "0")}</small>
         <strong lang="zh-CN">{word.hanzi}</strong>
         {showPinyin ? <b>{word.pinyin}</b> : null}
@@ -271,6 +298,7 @@ function PronunciationPanel({
         <button aria-label={`Nghe phát âm ${word.hanzi}`} className="hsk-pronunciation-play" onClick={() => speak(word.hanzi, rate)} type="button"><Volume2 aria-hidden="true" size={28} /><span>Nghe mẫu · {rate}×</span></button>
         <div className="hsk-shadowing-example"><span>Đọc trong câu</span><strong lang="zh-CN">{word.example}</strong><small>{showPinyin ? word.examplePinyin : "Pinyin đang ẩn"}</small><p>{word.translation}</p><button onClick={() => speak(word.example, rate)} type="button"><Play aria-hidden="true" fill="currentColor" size={16} /> Nghe cả câu</button></div>
         <button className="hsk-primary-action" onClick={shadow} type="button"><Check aria-hidden="true" size={18} /> Tôi đã đọc theo</button>
+        </>}
       </article>
     </div>
   </section>;
@@ -296,7 +324,7 @@ function HanziPanel({
   const [status, setStatus] = useState("Đang chuẩn bị dữ liệu nét…");
   const character = characters[index];
   const completedCount = characters.filter((item) => (
-    completed.includes(item.id) || completed.includes(item.hanzi)
+    !item.locked && (completed.includes(item.id) || completed.includes(item.hanzi))
   )).length;
 
   useEffect(() => {
@@ -314,6 +342,9 @@ function HanziPanel({
     const board = boardRef.current;
     if (!board) return;
     board.replaceChildren();
+    if (character.locked) {
+      return;
+    }
 
     void import("hanzi-writer").then(({ default: HanziWriterClass }) => {
       if (canceled || !boardRef.current) return;
@@ -374,7 +405,7 @@ function HanziPanel({
       writerRef.current = null;
       board.replaceChildren();
     };
-  }, [boardSize, character.hanzi, character.id, mode, onComplete, resetVersion]);
+  }, [boardSize, character.hanzi, character.id, character.locked, mode, onComplete, resetVersion]);
 
   const chooseCharacter = (nextIndex: number) => {
     setIndex(nextIndex);
@@ -391,12 +422,19 @@ function HanziPanel({
   return <section className="hsk-hanzi-mode" aria-label="Luyện viết chữ Hán">
     <div className="hsk-mode-intro">
       <div><span>Bút thuận tương tác</span><h2>Xem nét, tô theo, rồi tự viết</h2><p>Bàn viết phản hồi ngay sau mỗi nét và lưu chữ đã hoàn thành.</p></div>
-      <strong>{completedCount}/{characters.length} đã luyện</strong>
+      <strong>{completedCount}/{characters.filter((item) => !item.locked).length} đã luyện</strong>
     </div>
 
     <div className="hsk-hanzi-layout">
-      <nav aria-label="Chọn từ luyện viết" className="hsk-hanzi-list">{characters.map((item, itemIndex) => <button aria-current={itemIndex === index ? "true" : undefined} className={itemIndex === index ? "is-active" : ""} key={item.id} onClick={() => chooseCharacter(itemIndex)} type="button"><span lang="zh-CN">{item.hanzi}</span><small>{item.pinyin}</small>{completed.includes(item.id) || completed.includes(item.hanzi) ? <Check aria-hidden="true" size={14} /> : null}</button>)}</nav>
-      <div className="hsk-hanzi-practice">
+      <nav aria-label="Chọn từ luyện viết" className="hsk-hanzi-list">{characters.map((item, itemIndex) => <button aria-current={itemIndex === index ? "true" : undefined} aria-label={item.locked ? `Chữ ${itemIndex + 1} yêu cầu VIP` : undefined} className={`${itemIndex === index ? "is-active" : ""}${item.locked ? " is-locked" : ""}`} key={item.id} onClick={() => chooseCharacter(itemIndex)} type="button">{item.locked ? <LockKeyhole aria-hidden="true" size={18} /> : <><span lang="zh-CN">{item.hanzi}</span><small>{item.pinyin}</small>{completed.includes(item.id) || completed.includes(item.hanzi) ? <Check aria-hidden="true" size={14} /> : null}</>}</button>)}</nav>
+      <div className={`hsk-hanzi-practice${character.locked ? " is-locked" : ""}`}>
+        {character.locked ? <div className="hsk-item-vip-lock">
+          <LockKeyhole aria-hidden="true" size={34} />
+          <small>CHỮ HÁN VIP · {index + 1}/{characters.length}</small>
+          <h3>Chữ này cần tài khoản VIP</h3>
+          <p>Nội dung chữ, pinyin và dữ liệu luyện nét chưa được gửi tới trình duyệt.</p>
+          <VipUpgradeInlineForm />
+        </div> : <>
         <div aria-label="Chế độ luyện viết" className="hsk-writing-modes" role="group">
           <button aria-pressed={mode === "watch"} onClick={() => chooseMode("watch")} type="button"><Eye aria-hidden="true" size={17} /> Xem nét</button>
           <button aria-pressed={mode === "trace"} onClick={() => chooseMode("trace")} type="button"><PenLine aria-hidden="true" size={17} /> Tô theo</button>
@@ -408,8 +446,9 @@ function HanziPanel({
         </div>
         <p aria-live="polite" className="hsk-writing-status">{status}</p>
         <button className="hsk-writing-reset" onClick={() => setResetVersion((value) => value + 1)} type="button"><RotateCcw aria-hidden="true" size={17} /> {mode === "watch" ? "Phát lại" : "Viết lại"}</button>
+        </>}
       </div>
-      <aside className="hsk-character-detail"><small>CHỮ TRONG TỪ {index + 1}/{characters.length}</small><strong lang="zh-CN">{character.hanzi}</strong><div><b>{character.pinyin}</b><button aria-label={`Nghe phát âm ${character.hanzi}`} onClick={() => speak(character.hanzi)} type="button"><Volume2 aria-hidden="true" size={18} /></button></div><p>Từ “{character.word}” · {character.meaning}</p><div className="hsk-character-nav"><button aria-label="Chữ trước" onClick={() => chooseCharacter((index - 1 + characters.length) % characters.length)} type="button"><ChevronLeft aria-hidden="true" size={18} /></button><span>{index + 1}/{characters.length}</span><button aria-label="Chữ tiếp theo" onClick={() => chooseCharacter((index + 1) % characters.length)} type="button"><ChevronRight aria-hidden="true" size={18} /></button></div></aside>
+      {character.locked ? <aside className="hsk-character-detail is-locked"><LockKeyhole aria-hidden="true" size={28} /><strong>VIP</strong><p>Nâng cấp để luyện chữ này.</p><div className="hsk-character-nav"><button aria-label="Chữ trước" onClick={() => chooseCharacter((index - 1 + characters.length) % characters.length)} type="button"><ChevronLeft aria-hidden="true" size={18} /></button><span>{index + 1}/{characters.length}</span><button aria-label="Chữ tiếp theo" onClick={() => chooseCharacter((index + 1) % characters.length)} type="button"><ChevronRight aria-hidden="true" size={18} /></button></div></aside> : <aside className="hsk-character-detail"><small>CHỮ TRONG TỪ {index + 1}/{characters.length}</small><strong lang="zh-CN">{character.hanzi}</strong><div><b>{character.pinyin}</b><button aria-label={`Nghe phát âm ${character.hanzi}`} onClick={() => speak(character.hanzi)} type="button"><Volume2 aria-hidden="true" size={18} /></button></div><p>Từ “{character.word}” · {character.meaning}</p><div className="hsk-character-nav"><button aria-label="Chữ trước" onClick={() => chooseCharacter((index - 1 + characters.length) % characters.length)} type="button"><ChevronLeft aria-hidden="true" size={18} /></button><span>{index + 1}/{characters.length}</span><button aria-label="Chữ tiếp theo" onClick={() => chooseCharacter((index + 1) % characters.length)} type="button"><ChevronRight aria-hidden="true" size={18} /></button></div></aside>}
     </div>
   </section>;
 }
@@ -432,7 +471,8 @@ export function HskLessonWorkspace({ lesson, initialMode = "vocabulary", showLau
   const [progress, setProgress] = useState<HskLessonProgress>(EMPTY_HSK_LESSON_PROGRESS);
   const progressPercent = useMemo(() => calculateHskLessonProgress(lesson, progress), [lesson, progress]);
   const lessonHref = `/hsk/${lesson.levelId.replace(/^hsk-/, "")}/${lesson.id}`;
-  const scoredExercises = lesson.exercises.length > 0 && lesson.exercises.every((exercise) => exercise.answer !== null);
+  const accessibleExercises = lesson.exercises.filter((exercise) => !exercise.locked);
+  const scoredExercises = accessibleExercises.length > 0 && accessibleExercises.every((exercise) => exercise.answer !== null);
 
   useEffect(() => {
     const handle = window.setTimeout(() => {

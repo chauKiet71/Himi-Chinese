@@ -65,15 +65,18 @@ export function HskGameSession({ gameId, title, onExit, children }: {
     setError("");
     try {
       const response = await fetch(`/api/games/vocabulary?level=${level}`, { signal: controller.signal });
-      if (!response.ok) throw new Error("Không thể tải từ vựng.");
+      if (!response.ok) {
+        const problem = await response.json().catch(() => null) as { error?: string } | null;
+        throw new Error(problem?.error ?? "Không thể tải từ vựng.");
+      }
       const data = await response.json() as { words: SliceVocabulary[] };
       const words = createHskGameRound(data.words, gameId);
       if (!controller.signal.aborted) {
         setSession({ level, vocabulary: data.words, words, run: 0 });
         window.scrollTo(0, 0);
       }
-    } catch {
-      if (!controller.signal.aborted) setError("Chưa tải được từ vựng. Bạn hãy chọn lại khóa để thử lại nhé.");
+    } catch (problem) {
+      if (!controller.signal.aborted) setError(problem instanceof Error ? problem.message : "Chưa tải được từ vựng. Bạn hãy chọn lại khóa để thử lại nhé.");
     } finally {
       if (!controller.signal.aborted) setLoading(null);
     }
