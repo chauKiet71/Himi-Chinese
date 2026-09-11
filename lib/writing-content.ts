@@ -1,5 +1,7 @@
 import { HSK_CURRICULUM, type HskCurriculumLesson } from "./hsk-curriculum";
 import { getHskLearningLessonContent } from "./hsk-learning-content";
+import type { HskLessonContent } from "./hsk-lesson-content";
+import type { AccessTier } from "./content-access-types";
 
 export const WRITING_LEVEL_IDS = ["hsk-1", "hsk-2", "hsk-3", "hsk-4", "hsk-5", "hsk-6"] as const;
 
@@ -12,6 +14,8 @@ export type WritingCharacter = {
   pinyin: string;
   meaning: string;
   strokes?: number;
+  accessTier?: AccessTier;
+  locked?: boolean;
 };
 
 export type WritingTopic = {
@@ -118,14 +122,17 @@ export function getWritingLessons(level: string): WritingLessonSummary[] {
   });
 }
 
-export function getWritingTopic(level: string, lessonId: string): WritingTopic | undefined {
+export function getWritingTopicFromLesson(
+  level: string,
+  lessonId: string,
+  lesson: HskLessonContent,
+): WritingTopic | undefined {
   const levelId = normalizeWritingLevelId(level);
   if (!levelId) return undefined;
 
   const curriculumLesson = getAvailableCurriculumLessons(levelId)
     .find(({ lesson }) => lesson.id === lessonId)?.lesson;
-  const lesson = getHskLearningLessonContent(levelId, lessonId);
-  if (!curriculumLesson || !lesson?.writingCharacters.length) return undefined;
+  if (!curriculumLesson || lesson.id !== lessonId || !lesson.writingCharacters.length) return undefined;
 
   return {
     slug: lesson.id,
@@ -146,8 +153,17 @@ export function getWritingTopic(level: string, lessonId: string): WritingTopic |
       hanzi: character.hanzi,
       pinyin: character.pinyin,
       meaning: character.meaning,
+      accessTier: character.accessTier,
+      locked: character.locked,
     })),
   };
+}
+
+export function getWritingTopic(level: string, lessonId: string): WritingTopic | undefined {
+  const levelId = normalizeWritingLevelId(level);
+  if (!levelId) return undefined;
+  const lesson = getHskLearningLessonContent(levelId, lessonId);
+  return lesson ? getWritingTopicFromLesson(levelId, lessonId, lesson) : undefined;
 }
 
 export function getWritingPracticeParams() {

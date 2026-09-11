@@ -587,6 +587,16 @@
 }
 
 .himi-writing-character-grid button.active > svg { color: #fff; }
+.himi-writing-character-grid button.locked > svg {
+  position: static;
+  color: #b97612;
+}
+.himi-writing-character-grid button.locked:not(.active) {
+  color: #94610e;
+  border-color: #ead8b8;
+  background: #fffaf0;
+}
+.himi-writing-character-grid button.locked:not(.active) small { color: #94610e; font-weight: 820; }
 .himi-writing-empty { grid-column: 1 / -1; color: #758782; font-size: 12px; text-align: center; }
 
 .himi-writing-practice {
@@ -594,6 +604,29 @@
   padding: clamp(16px, 2.1vw, 28px);
   border-radius: 28px;
 }
+
+.himi-writing-vip-lock {
+  min-height: min(570px, calc(100dvh - 330px));
+  padding: clamp(28px, 6vw, 64px) 18px;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.himi-writing-vip-lock > span {
+  width: 68px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  color: #a76a0b;
+  border-radius: 22px;
+  background: #fff3d7;
+}
+
+.himi-writing-vip-lock > small { margin-top: 18px; color: #a76a0b; font-size: 10px; font-weight: 850; letter-spacing: .12em; }
+.himi-writing-vip-lock h2 { margin: 8px 0 0; color: var(--writing-ink); font-size: clamp(22px, 3vw, 32px); }
+.himi-writing-vip-lock p { max-width: 470px; margin: 10px 0 20px; color: #60766f; line-height: 1.65; }
 
 .himi-writing-mode-tabs {
   padding: 5px;
@@ -822,6 +855,8 @@
 
 .himi-writing-character-card button:hover { background: #d9f1ea; transform: scale(1.05); }
 .himi-writing-character-card p { margin: 9px 0 0; color: #60766f; font-size: 13px; }
+.himi-writing-character-card.is-locked { display: grid; justify-items: center; color: #a76a0b; }
+.himi-writing-character-card.is-locked > strong { color: #a76a0b; font-family: inherit; font-size: 28px; }
 
 .himi-writing-meta {
   margin-top: 15px;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, AudioLines, BrainCircuit, Check, Mic2, Play } from "lucide-react";
@@ -22,11 +22,18 @@ const HOME_DIALOGUE = [
   { speaker: "woman", hanzi: "好，我们开始吧！", pinyin: "hǎo, wǒmen kāishǐ ba!", translation: "Được, bắt đầu thôi!" },
 ] as const;
 
+const subscribeToHydration = () => () => undefined;
+
+function useHydrated() {
+  return useSyncExternalStore(subscribeToHydration, () => true, () => false);
+}
+
 export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {
   const reduceMotion = useReducedMotion();
+  const hydrated = useHydrated();
   const [activeDialogue, setActiveDialogue] = useState(0);
   const [pageVisible, setPageVisible] = useState(true);
-  const motionEnabled = !reduceMotion && pageVisible;
+  const motionEnabled = hydrated && !reduceMotion && pageVisible;
   const dialogue = HOME_DIALOGUE[activeDialogue];
 
   useEffect(() => {
@@ -101,7 +108,7 @@ export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {
 
         <motion.div
           className="home-portal-copy"
-          initial={reduceMotion ? false : { opacity: 0, x: -18 }}
+          initial={motionEnabled ? { opacity: 0, x: -18 } : false}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: .62, ease: [0.22, 1, 0.36, 1] }}
         >

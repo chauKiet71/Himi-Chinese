@@ -9,6 +9,7 @@ import {
   Check,
   Eye,
   Lightbulb,
+  LockKeyhole,
   PenLine,
   Play,
   RotateCcw,
@@ -16,6 +17,7 @@ import {
   Sparkles,
   Volume2,
 } from "lucide-react";
+import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 import type { WritingCharacter, WritingTopic } from "@/lib/writing-content";
 
 type WritingMode = "watch" | "trace" | "quiz";
@@ -60,7 +62,7 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
   const [loadedStrokeCount, setLoadedStrokeCount] = useState<{ characterId: string; count: number } | null>(null);
 
   const selected = topic.characters[selectedIndex];
-  const totalStrokes = selected.strokes
+  const totalStrokes = selected.locked ? 0 : selected.strokes
     ?? (loadedStrokeCount?.characterId === selected.id ? loadedStrokeCount.count : 0);
   const filteredCharacters = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("vi-VN");
@@ -84,6 +86,7 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
   }, [topic.slug]);
 
   useEffect(() => {
+    if (selected.locked) return;
     const board = boardRef.current;
     if (!board) return;
     const updateSize = () => setCanvasSize(Math.max(250, Math.min(460, Math.floor(board.clientWidth))));
@@ -91,9 +94,10 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
     const observer = new ResizeObserver(updateSize);
     observer.observe(board);
     return () => observer.disconnect();
-  }, []);
+  }, [selected.locked]);
 
   useEffect(() => {
+    if (selected.locked) return;
     let canceled = false;
     const board = boardRef.current;
     if (!board) return;
@@ -219,6 +223,7 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
   };
 
   const replayOrReset = () => {
+    if (selected.locked) return;
     if (mode === "watch" && writerRef.current) {
       setStatus("Đang phát lại thứ tự từng nét…");
       void writerRef.current.animateCharacter({
@@ -236,6 +241,7 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
   };
 
   const speakCharacter = () => {
+    if (selected.locked) return;
     if (!("speechSynthesis" in window)) return;
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(selected.hanzi);
@@ -268,19 +274,23 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
           <div className="himi-writing-character-grid">
             {filteredCharacters.map((character) => {
               const active = character.id === selected.id;
-              const completed = completedCharacters.includes(character.id);
+              const completed = !character.locked && completedCharacters.includes(character.id);
               return (
                 <button
-                  aria-label={`${character.hanzi}, ${character.pinyin}, ${character.meaning}${completed ? ", đã luyện" : ""}`}
+                  aria-label={character.locked
+                    ? "Chữ luyện viết dành cho thành viên VIP"
+                    : `${character.hanzi}, ${character.pinyin}, ${character.meaning}${completed ? ", đã luyện" : ""}`}
                   aria-pressed={active}
-                  className={`${active ? "active" : ""} ${completed ? "completed" : ""}`.trim()}
+                  className={`${active ? "active" : ""} ${completed ? "completed" : ""} ${character.locked ? "locked" : ""}`.trim()}
                   key={character.id}
                   onClick={() => chooseCharacter(character)}
                   type="button"
                 >
-                  <span lang="zh-CN">{character.hanzi}</span>
-                  <small>{character.pinyin}</small>
-                  {completed ? <Check aria-hidden="true" size={12} /> : null}
+                  {character.locked ? <><LockKeyhole aria-hidden="true" size={21} /><small>VIP</small></> : <>
+                    <span lang="zh-CN">{character.hanzi}</span>
+                    <small>{character.pinyin}</small>
+                    {completed ? <Check aria-hidden="true" size={12} /> : null}
+                  </>}
                 </button>
               );
             })}
@@ -289,7 +299,14 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
         </aside>
 
         <section className="himi-writing-practice">
-          <div className="himi-writing-mode-tabs" aria-label="Chế độ luyện viết">
+          {selected.locked ? <div className="himi-writing-vip-lock">
+            <span><LockKeyhole aria-hidden="true" size={34} /></span>
+            <small>LUYỆN VIẾT VIP</small>
+            <h2>Chữ này cần tài khoản VIP</h2>
+            <p>Nội dung chữ, pinyin, nghĩa và dữ liệu luyện nét chưa được gửi tới trình duyệt.</p>
+            <VipUpgradeInlineForm />
+          </div> : <>
+          <div aria-label="Chế độ luyện viết" className="himi-writing-mode-tabs">
             {MODES.map((item) => {
               const Icon = item.icon;
               return (
@@ -322,6 +339,7 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
             <button onClick={replayOrReset} type="button"><RotateCcw aria-hidden="true" size={18} /> {mode === "watch" ? "Phát lại" : "Viết lại"}</button>
             {mode !== "quiz" ? <button className="primary" onClick={() => changeMode(mode === "watch" ? "trace" : "quiz")} type="button"><Play aria-hidden="true" fill="currentColor" size={17} /> {mode === "watch" ? "Bắt đầu tô" : "Thử tự viết"}</button> : null}
           </div>
+          </>}
 
           <div className="himi-writing-navigation">
             <button aria-label="Chữ trước" onClick={() => moveCharacter(-1)} type="button"><ArrowLeft aria-hidden="true" size={18} /></button>
@@ -331,13 +349,17 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
         </section>
 
         <aside className="himi-writing-character-info">
-          <div className="himi-writing-character-card">
+          {selected.locked ? <div className="himi-writing-character-card is-locked">
+            <LockKeyhole aria-hidden="true" size={30} />
+            <strong>VIP</strong>
+            <p>Nâng cấp để xem và luyện chữ này.</p>
+          </div> : <div className="himi-writing-character-card">
             <span className="himi-writing-card-label">Chữ đang luyện</span>
             <strong lang="zh-CN">{selected.hanzi}</strong>
             <div><b>{selected.pinyin}</b><button aria-label={`Nghe phát âm chữ ${selected.hanzi}`} onClick={speakCharacter} type="button"><Volume2 aria-hidden="true" size={19} /></button></div>
             <p>{selected.meaning}</p>
             <div className="himi-writing-meta"><span>{topic.level}</span><span>{totalStrokes ? `${totalStrokes} nét` : "Đang tải số nét"}</span></div>
-          </div>
+          </div>}
 
         </aside>
       </section>

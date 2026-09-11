@@ -1,7 +1,7 @@
 "use client";
 
 import { useLinkStatus } from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   BarChart3,
   BookOpenText,
@@ -14,8 +14,12 @@ import {
   UserCog,
   UsersRound,
 } from "lucide-react";
+import { useCallback, useEffect, useRef } from "react";
 import { AdminLink } from "@/components/admin-link";
 import type { UserRole } from "@/lib/auth-service";
+
+const ADMIN_PREFETCH_STEP_MS = 180;
+const ADMIN_PREFETCH_IDLE_TIMEOUT_MS = 1_500;
 
 const navigationGroups = [
   {
@@ -93,6 +97,12 @@ function canSeeItem(role: UserRole, href: string): boolean {
   return role === "admin" || href === "/admin/practice";
 }
 
+export function getAdminPrefetchHrefs(role: UserRole): string[] {
+  return navigationGroups.flatMap((group) => group.items
+    .filter((item) => canSeeItem(role, item.href))
+    .map((item) => item.href));
+}
+
 function AdminNavigationIcon({ Icon }: { Icon: typeof LayoutDashboard }) {
   const { pending } = useLinkStatus();
   return pending
@@ -102,6 +112,40 @@ function AdminNavigationIcon({ Icon }: { Icon: typeof LayoutDashboard }) {
 
 export function AdminNavigation({ userRole }: { userRole: UserRole }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const initialPathnameRef = useRef(pathname);
+  const prefetchedHrefsRef = useRef(new Set<string>());
+  const prepareRoute = useCallback((href: string) => {
+    if (prefetchedHrefsRef.current.has(href)) return;
+    prefetchedHrefsRef.current.add(href);
+    router.prefetch(href);
+  }, [router]);
+
+  useEffect(() => {
+    const timeoutIds: number[] = [];
+    const prefetchAdminRoutes = () => {
+      getAdminPrefetchHrefs(userRole)
+        .filter((href) => href !== initialPathnameRef.current)
+        .forEach((href, index) => {
+          timeoutIds.push(window.setTimeout(() => prepareRoute(href), index * ADMIN_PREFETCH_STEP_MS));
+        });
+    };
+
+    let idleCallbackId: number | undefined;
+    let fallbackTimeoutId: number | undefined;
+    const scheduleWhenIdle = window.requestIdleCallback?.bind(window);
+    if (scheduleWhenIdle) {
+      idleCallbackId = scheduleWhenIdle(prefetchAdminRoutes, { timeout: ADMIN_PREFETCH_IDLE_TIMEOUT_MS });
+    } else {
+      fallbackTimeoutId = window.setTimeout(prefetchAdminRoutes, ADMIN_PREFETCH_STEP_MS);
+    }
+
+    return () => {
+      if (idleCallbackId !== undefined) window.cancelIdleCallback(idleCallbackId);
+      if (fallbackTimeoutId !== undefined) window.clearTimeout(fallbackTimeoutId);
+      timeoutIds.forEach((timeoutId) => window.clearTimeout(timeoutId));
+    };
+  }, [prepareRoute, userRole]);
 
   return <nav aria-label="Điều hướng Console" className="admin-nav">
     {navigationGroups.map((group) => {
@@ -115,10 +159,12 @@ export function AdminNavigation({ userRole }: { userRole: UserRole }) {
             aria-current={active ? "page" : undefined}
             className={active ? "active" : undefined}
             href={href}
-            intentPrefetch
             key={href}
+            onFocus={() => prepareRoute(href)}
+            onMouseEnter={() => prepareRoute(href)}
             pendingLabel={`Đang mở ${label}…`}
             pendingVisual={false}
+            prefetch={false}
           >
             <AdminNavigationIcon Icon={Icon} />
             <span>{label}</span>
