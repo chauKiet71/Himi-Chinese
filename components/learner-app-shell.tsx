@@ -43,8 +43,8 @@ const learnerRailItems = [
 
 const learnerPracticeItems = [
   { href: "/writing", label: "Luyện viết", icon: PenLine, matches: (pathname: string) => pathname.startsWith("/writing") },
+  { href: "/listening", label: "Luyện nghe", icon: AudioLines, matches: (pathname: string) => pathname.startsWith("/listening") || pathname.startsWith("/practice") },
   { href: "/videos", label: "Video", icon: Clapperboard, matches: (pathname: string) => pathname.startsWith("/videos") },
-  { href: "/listening", label: "Nghe & phản xạ", icon: AudioLines, matches: (pathname: string) => pathname.startsWith("/listening") || pathname.startsWith("/practice") },
 ];
 
 const learnerPrefetchItems = [...learnerRailItems, ...learnerPracticeItems];
