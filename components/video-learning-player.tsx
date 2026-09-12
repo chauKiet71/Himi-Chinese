@@ -37,6 +37,9 @@ export function VideoLearningPlayer({ video, compact = false }: { video: Learnin
 
   if (video.source === "youtube" && video.youtubeId) {
     const watchUrl = `https://www.youtube.com/watch?v=${video.youtubeId}`;
+    const captionParameters = video.youtubeCaptionDefaultLanguage
+      ? `&cc_load_policy=1&cc_lang_pref=${encodeURIComponent(video.youtubeCaptionDefaultLanguage)}&hl=vi`
+      : "";
     return <div className="video-learning-player youtube-learning-player">
       <div className="video-media-frame">
         <iframe
@@ -44,12 +47,12 @@ export function VideoLearningPlayer({ video, compact = false }: { video: Learnin
           allowFullScreen
           loading="lazy"
           referrerPolicy="strict-origin-when-cross-origin"
-          src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}?rel=0&playsinline=1`}
+          src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}?rel=0&playsinline=1${captionParameters}`}
           title={`${video.title} — video từ ${video.authorName ?? "YouTube"}`}
         />
       </div>
       <div className="youtube-source-note">
-        <div><strong>Nguồn video</strong>{video.authorUrl ? <a href={video.authorUrl} rel="noreferrer" target="_blank">{video.authorName}</a> : <span>{video.authorName}</span>}</div>
+        <div><strong>Nguồn video</strong>{video.authorUrl ? <a href={video.authorUrl} rel="noreferrer" target="_blank">{video.authorName}</a> : <span>{video.authorName}</span>}{video.youtubeCaptionLanguages?.length ? <span>Phụ đề chính thức: {video.youtubeCaptionLanguages.join(" · ")}</span> : null}</div>
         <a href={watchUrl} rel="noreferrer" target="_blank">Xem trên YouTube <ExternalLink aria-hidden="true" size={15} /></a>
       </div>
     </div>;

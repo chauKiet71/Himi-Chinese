@@ -92,6 +92,14 @@ export type ListeningCatalogLesson = {
 export const LISTENING_CATALOG_INDEX_URL = "/listening-catalog/index.json";
 export const LISTENING_CATALOG_PROGRESS_KEY = "himi-listening-catalog-progress-v1";
 
+export function listeningSentenceAtTime(
+  sentences: ListeningCatalogSentence[],
+  time: number,
+): ListeningCatalogSentence | undefined {
+  // Keep the current sentence active through gaps and the audio's trailing silence.
+  return sentences.findLast((sentence) => sentence.start <= time) ?? sentences[0];
+}
+
 export function catalogGroupForHskLevel(level: string | undefined): string | undefined {
   const match = level?.match(/^hsk-(\d)/);
   if (!match) return undefined;

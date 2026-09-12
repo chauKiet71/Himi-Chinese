@@ -7,11 +7,24 @@ import {
   formatListeningDuration,
   isListeningCatalogIndex,
   isListeningCatalogLesson,
+  listeningSentenceAtTime,
 } from "../lib/listening-catalog.ts";
 
 const publicRoot = resolve(process.cwd(), "public");
 const catalogRoot = resolve(publicRoot, "listening-catalog");
 const index = JSON.parse(readFileSync(resolve(catalogRoot, "index.json"), "utf8"));
+
+test("active sentence advances from the penultimate line to the final line and survives seeking into the audio tail", () => {
+  const lesson = JSON.parse(readFileSync(resolve(catalogRoot, "lessons/dialogue-beginner-topic-chat-with-chinese-001-daily-001.json"), "utf8"));
+  const penultimate = lesson.sentences.at(-2);
+  const last = lesson.sentences.at(-1);
+  assert.equal(listeningSentenceAtTime(lesson.sentences, penultimate.start).id, penultimate.id);
+  assert.equal(listeningSentenceAtTime(lesson.sentences, last.start - 0.001).id, penultimate.id);
+  assert.equal(listeningSentenceAtTime(lesson.sentences, last.start).id, last.id);
+  assert.equal(listeningSentenceAtTime(lesson.sentences, last.end + 1).id, last.id);
+  assert.equal(listeningSentenceAtTime(lesson.sentences, penultimate.start + 1).id, penultimate.id);
+  assert.equal(listeningSentenceAtTime([], 0), undefined);
+});
 
 test("imported listening catalog exposes every dialogue and monologue lesson", () => {
   assert.equal(isListeningCatalogIndex(index), true);

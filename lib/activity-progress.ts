@@ -1,6 +1,9 @@
+import { isSliceHskLevel, type SliceHskLevel } from "./slice-game.ts";
+
 export const gameIds = ["slice", "memory", "connect", "listen", "write", "flash", "quiz"] as const;
 
 export type GameId = typeof gameIds[number];
+export type GameCourseCompletionKey = `${GameId}:${SliceHskLevel}`;
 
 export type PracticeProgressSnapshot = {
   completedScenarioIds: string[];
@@ -15,6 +18,7 @@ export type PracticeProgressSnapshot = {
 
 export type GameProgressSnapshot = {
   completed: GameId[];
+  completedCourses: GameCourseCompletionKey[];
   totalXp: number;
   bestScore: number;
   attemptCount: number;
@@ -33,6 +37,7 @@ export const emptyPracticeProgress: PracticeProgressSnapshot = {
 
 export const emptyGameProgress: GameProgressSnapshot = {
   completed: [],
+  completedCourses: [],
   totalXp: 0,
   bestScore: 0,
   attemptCount: 0,
@@ -40,6 +45,25 @@ export const emptyGameProgress: GameProgressSnapshot = {
 
 export function isGameId(value: unknown): value is GameId {
   return typeof value === "string" && (gameIds as readonly string[]).includes(value);
+}
+
+export function gameCourseCompletionKey(gameId: GameId, level: SliceHskLevel): GameCourseCompletionKey {
+  return `${gameId}:${level}`;
+}
+
+export function isGameCourseCompletionKey(value: unknown): value is GameCourseCompletionKey {
+  if (typeof value !== "string") return false;
+  const separator = value.indexOf(":");
+  if (separator < 1) return false;
+  return isGameId(value.slice(0, separator)) && isSliceHskLevel(value.slice(separator + 1));
+}
+
+export function hasCompletedGameCourse(
+  completedCourses: readonly GameCourseCompletionKey[],
+  gameId: GameId,
+  level: SliceHskLevel,
+): boolean {
+  return completedCourses.includes(gameCourseCompletionKey(gameId, level));
 }
 
 export function xpForGameScore(score: number): number {

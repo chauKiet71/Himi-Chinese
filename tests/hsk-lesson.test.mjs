@@ -118,8 +118,8 @@ test("HSK lesson workspace exposes the four requested learning tabs", async (t) 
   assert.match(flashcardHtml, /1 \/ 6/);
   assert.match(flashcardHtml, /Lật thẻ xem nghĩa/);
   assert.match(flashcardHtml, /Nghe phát âm/);
-  assert.match(flashcardHtml, /Cần ôn lại/);
-  assert.match(flashcardHtml, /Đã nhớ/);
+  assert.doesNotMatch(flashcardHtml, /Cần ôn lại/);
+  assert.doesNotMatch(flashcardHtml, /Đã nhớ/);
 
   const quizHtml = renderToStaticMarkup(React.createElement(quizModule.HskQuizSession, { lesson }));
   assert.match(quizHtml, /game-immersive-dashboard/);

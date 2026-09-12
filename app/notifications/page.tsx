@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ArrowUpRight, Bell, BellRing, Check, CheckCheck, CircleAlert, Crown } from "lucide-react";
+import {
+  ArrowUpRight,
+  BellRing,
+  Check,
+  CheckCheck,
+  CircleAlert,
+  CreditCard,
+  Crown,
+  ShieldCheck,
+} from "lucide-react";
 import {
   markAllNotificationsReadAction,
   markNotificationReadAction,
@@ -34,9 +43,10 @@ function formatCreatedAt(value: Date): string {
 }
 
 function NotificationIcon({ type }: { type: string }) {
+  if (type === "payment_succeeded") return <CreditCard size={20} />;
   if (type === "vip_request_approved") return <Crown size={20} />;
   if (type === "vip_request_rejected") return <CircleAlert size={20} />;
-  return <Bell size={20} />;
+  return <ShieldCheck size={20} />;
 }
 
 export default async function NotificationsPage({
@@ -59,7 +69,7 @@ export default async function NotificationsPage({
       <header className="notification-hero">
         <div className="notification-hero-copy">
           <h1>Thông báo</h1>
-          <div className="notification-hero-meta" aria-label="Tình trạng hộp thư">
+          <div className="notification-hero-meta">
             <span><BellRing aria-hidden="true" size={19} /><strong>{unreadCount}</strong> chưa đọc</span>
           </div>
         </div>
@@ -71,7 +81,10 @@ export default async function NotificationsPage({
 
       <section className="notification-feed" aria-label="Danh sách thông báo">
         <div className="notification-feed-heading">
-          <div><span>Hộp thư của bạn</span><h2>Mới nhất</h2></div>
+          <div>
+            <h2>Hộp thư của bạn</h2>
+            <p>{items.length ? "Cập nhật mới nhất được xếp ở trên" : "Thông báo mới sẽ xuất hiện tại đây"}</p>
+          </div>
           {unreadCount > 0 ? <form action={markAllNotificationsReadAction}><button type="submit"><CheckCheck size={15} /> Đánh dấu tất cả đã đọc</button></form> : <span className="notification-all-read"><Check size={14} /> Bạn đã xem hết</span>}
         </div>
 
@@ -96,10 +109,32 @@ export default async function NotificationsPage({
             </form> : null}
           </div>
         </article>)}</div> : <div className="notification-empty">
-          <span><Bell size={24} /></span>
-          <h2>Chưa có thông báo nào</h2>
-          <p>Khi quyền VIP hoặc tài khoản có thay đổi, cập nhật sẽ xuất hiện tại đây.</p>
-          <Link href="/courses">Tiếp tục học <ArrowUpRight size={15} /></Link>
+          <div className="notification-empty-copy">
+            <span className="notification-empty-icon"><CheckCheck size={28} /></span>
+            <div>
+              <h2>Hộp thư đang yên</h2>
+              <p>Bạn đã xem hết mọi cập nhật. Himi sẽ giữ những thông tin quan trọng ở đây để bạn không bỏ lỡ thay đổi nào.</p>
+            </div>
+            <Link className="notification-empty-action" href="/courses">Khám phá lộ trình <ArrowUpRight size={17} /></Link>
+          </div>
+
+          <aside className="notification-empty-guide" aria-label="Những cập nhật sẽ xuất hiện trong hộp thư">
+            <h3>Bạn sẽ nhận cập nhật về</h3>
+            <ul>
+              <li>
+                <span><CreditCard aria-hidden="true" size={19} /></span>
+                <div><strong>Thanh toán</strong><small>Xác nhận giao dịch và trạng thái xử lý</small></div>
+              </li>
+              <li>
+                <span><Crown aria-hidden="true" size={19} /></span>
+                <div><strong>Quyền VIP</strong><small>Kết quả yêu cầu và thời hạn sử dụng</small></div>
+              </li>
+              <li>
+                <span><ShieldCheck aria-hidden="true" size={19} /></span>
+                <div><strong>Tài khoản &amp; hệ thống</strong><small>Những thay đổi cần bạn chú ý</small></div>
+              </li>
+            </ul>
+          </aside>
         </div>}
       </section>
     </div>

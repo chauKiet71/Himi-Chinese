@@ -30,6 +30,7 @@ import {
 import { speakChinese, type GameWord } from "@/lib/game-content";
 import { useLearningData } from "@/components/learning-data-provider";
 import { createSliceDeck, normalizeSliceAnswer as normalizeAnswer, SLICE_HSK_COURSES, type SliceHskLevel } from "@/lib/slice-game";
+import { hasCompletedGameCourse, type GameCourseCompletionKey } from "@/lib/activity-progress";
 
 if (typeof window !== "undefined") gsap.registerPlugin(useGSAP);
 
@@ -90,7 +91,8 @@ function GameOverlay({
 
 type WritingSliceGameProps = {
   onExit?: () => void;
-  onComplete?: (score: number) => void;
+  onComplete?: (score: number, level: SliceHskLevel) => void;
+  completedCourses?: readonly GameCourseCompletionKey[];
   completionAction?: ReactNode;
   exitLabel?: string;
 };
@@ -165,24 +167,27 @@ export function WritingSliceGame(props: WritingSliceGameProps = {}) {
             {SLICE_HSK_COURSES.map((course, index) => {
               const featured = index === 0;
               const isLoading = loading === course.id;
+              const completed = hasCompletedGameCourse(props.completedCourses ?? [], "slice", course.id);
 
               return (
                 <button
                   aria-busy={isLoading}
-                  aria-label={`${course.label}: ${course.description}`}
-                  className={`writing-course-card${featured ? " is-featured" : ""}${isLoading ? " is-loading" : ""}`}
+                  aria-label={`${course.label}: ${course.description}${completed ? ", đã hoàn thành một lượt" : ""}`}
+                  className={`writing-course-card${featured ? " is-featured" : ""}${completed ? " is-complete" : ""}${isLoading ? " is-loading" : ""}`}
                   key={course.id}
                   onClick={() => void selectCourse(course.id)}
                   type="button"
                 >
-                  {featured ? <span className="writing-course-recommended"><Sparkles aria-hidden="true" size={14} /> Đề xuất</span> : null}
+                  {completed
+                    ? <span className="writing-course-done"><Check aria-hidden="true" size={15} strokeWidth={3} /> DONE</span>
+                    : featured ? <span className="writing-course-recommended"><Sparkles aria-hidden="true" size={14} /> Đề xuất</span> : null}
                   <span className="writing-course-card-heading">
                     <span className="writing-course-number" aria-hidden="true">{index + 1}</span>
                     <strong>{course.label}</strong>
                   </span>
                   <span className="writing-course-description">{course.description}</span>
                   <small className="writing-course-action">
-                    {isLoading ? "Đang tải…" : featured ? "Chơi ngay" : "Chọn khóa"}
+                    {isLoading ? "Đang tải…" : completed ? "Chơi lại" : featured ? "Chơi ngay" : "Chọn khóa"}
                     <ArrowRight aria-hidden="true" size={featured ? 19 : 21} />
                   </small>
                 </button>
@@ -447,7 +452,7 @@ function SliceSession({
       if (pending.nextCompleted >= TARGET_ROUNDS) {
         setMode("complete");
         setAnswer("");
-        onComplete?.(pending.finalScore);
+        onComplete?.(pending.finalScore, level);
       } else {
         advanceWord();
       }

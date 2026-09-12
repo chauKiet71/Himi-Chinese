@@ -5,14 +5,16 @@ import { readFile } from "node:fs/promises";
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("VIP policy page explains access and keeps the SePay purchase flow available", async () => {
-  const [page, policyStyles, transferFlow, styles, motionStyles, seed, subscriptionService, webhookRoute, orderRoute] = await Promise.all([
+  const [page, policyStyles, transferFlow, styles, brandStyles, motionStyles, seed, subscriptionService, paymentService, webhookRoute, orderRoute] = await Promise.all([
     read("app/vip/page.tsx"),
     read("app/vip/vip-policy.css"),
     read("components/vip-transfer-flow.tsx"),
     read("app/globals.css"),
+    read("app/brand-theme.css"),
     read("app/motion.css"),
     read("db/seed.ts"),
     read("lib/admin-subscription-service.ts"),
+    read("lib/sepay-payment-service.ts"),
     read("app/api/webhooks/sepay/route.ts"),
     read("app/api/payments/sepay/orders/route.ts"),
   ]);
@@ -38,7 +40,13 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(transferFlow, /fetch\("\/api\/payments\/sepay\/orders"/);
   assert.match(transferFlow, /\/api\/payments\/sepay\/orders\/\$\{pollingOrderId\}/);
   assert.match(transferFlow, /Đang chờ SePay xác nhận/);
-  assert.match(transferFlow, /Thanh toán thành công/);
+  assert.match(transferFlow, /Chào mừng thành viên/);
+  assert.match(transferFlow, /Thanh toán hoàn tất/);
+  assert.match(transferFlow, /Khám phá bài học VIP/);
+  assert.match(transferFlow, /himi-celebrate\.webp/);
+  assert.match(transferFlow, /formatVipAccessEnd/);
+  assert.doesNotMatch(transferFlow, /SePay đã xác nhận/);
+  assert.doesNotMatch(transferFlow, /Trạng thái giao dịch/);
   assert.match(transferFlow, /role="dialog"/);
   assert.match(transferFlow, /<Image/);
   assert.match(page, /vipPlanAccessLabel/);
@@ -47,6 +55,8 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(seed, /code: "VIP_1M"[\s\S]*?priceVnd: 11_000/);
   assert.match(subscriptionService, /calculateVipPlanEndsAt/);
   assert.match(subscriptionService, /endsAt: endsAt\?\.toISOString\(\) \?\? null/);
+  assert.match(paymentService, /accessEndsAt: subscriptions\.endsAt/);
+  assert.match(paymentService, /VIP đã được kích hoạt/);
   assert.doesNotMatch(transferFlow, /requestVipActivationAction|name="userNote"/);
   assert.match(webhookRoute, /authenticateSepayWebhook/);
   assert.match(webhookRoute, /processSepayWebhook/);
@@ -55,7 +65,19 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(styles, /\.vip-plan-request-form \.button:hover:not\(:disabled\)[\s\S]*translateY\(-3px\)/);
   assert.match(styles, /\.vip-plan-request-form \.button:active:not\(:disabled\)/);
   assert.match(styles, /prefers-reduced-motion: reduce/);
+  assert.match(styles, /@keyframes vip-success-mascot-idle/);
+  assert.match(styles, /@keyframes vip-success-ticket-in/);
   assert.match(styles, /transform 220ms cubic-bezier\(\.22, 1, \.36, 1\)/);
   assert.match(styles, /transform: translateY\(-2px\)/);
   assert.match(motionStyles, /\.vip-plan-request-form \.button[\s\S]*transition-duration: 220ms, 180ms, 180ms, 180ms !important/);
+  assert.match(brandStyles, /\.vip-plan-card\.featured\s*\{[\s\S]*?background:\s*#ffd0c4/);
+  assert.match(brandStyles, /\.vip-plan-card:hover\s*\{[\s\S]*?transform:\s*translateY\(-7px\) scale\(1\.012\)/);
+  assert.match(brandStyles, /\.vip-plan-card\.featured:hover\s*\{[\s\S]*?background:\s*#ffc3b5/);
+  assert.match(brandStyles, /\.vip-plan-card\.featured:hover\s*\{[\s\S]*?transform:\s*translateY\(-13px\) scale\(1\.012\)/);
+  assert.match(brandStyles, /@keyframes himi-vip-card-sheen/);
+  assert.match(brandStyles, /\.vip-plan-card:hover::before\s*\{[\s\S]*?animation:\s*himi-vip-card-sheen/);
+  assert.match(brandStyles, /\.vip-plan-card:hover::after\s*\{[\s\S]*?transform:\s*scale\(1\.12\)/);
+  assert.match(brandStyles, /\.vip-plan-card:hover \.vip-plan-request-form \.button:not\(:hover\)/);
+  assert.match(brandStyles, /\.vip-plan-card:focus-within/);
+  assert.doesNotMatch(brandStyles, /\.vip-plan-card\.featured\s*\{[\s\S]*?background:\s*var\(--himi-black\)/);
 });

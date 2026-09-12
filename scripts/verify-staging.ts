@@ -236,7 +236,7 @@ async function verifyVipFlow() {
   const notificationPage = await learner.request("/notifications");
   assert(notificationPage.status === 200, `Notifications trả ${notificationPage.status}.`);
   const notificationHtml = await notificationPage.text();
-  assert(notificationHtml.includes("Thanh toán SePay thành công"), "Learner chưa nhận thông báo thanh toán SePay.");
+  assert(notificationHtml.includes("VIP đã được kích hoạt"), "Learner chưa nhận thông báo kích hoạt VIP.");
   assert(notificationHtml.includes("1</strong><span>chưa đọc"), "Unread count của thông báo VIP không đúng.");
 
   const accountPage = await learner.request("/account");

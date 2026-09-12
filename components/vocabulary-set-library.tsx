@@ -165,7 +165,7 @@ export function VocabularySetLibrary({
             {word.example ? <p><span lang="zh">{word.example}</span>{word.translation ? ` — ${word.translation}` : ""}</p> : <p>Ôn lại từ này trong lượt học tiếp theo.</p>}
             <footer><span>{word.sourceTitle}</span><button className="vsets-unsave" type="button" aria-label={`Bỏ lưu ${word.hanzi}`} aria-busy={removingId === word.id} disabled={removingId !== null} onClick={() => void unsave(word)}>{removingId === word.id ? "Đang bỏ lưu…" : "Bỏ lưu"}</button></footer>
           </li>)}</ul>
-          : <div className="vsets-empty"><BookOpen size={36} /><h3>Chưa có từ nào được lưu</h3><p>Trong bài học, nhấn “Lưu từ” hoặc chọn “Đã nhớ” để gom từ vựng HSK và Giao tiếp vào đây.</p><Link className="vsets-primary" href="/courses">Đi tới lộ trình</Link></div>
+          : <div className="vsets-empty"><BookOpen size={36} /><h3>Chưa có từ nào được lưu</h3><p>Trong bài học, nhấn “Lưu từ” hoặc chọn “Cần ôn lại” khi chơi Flashcard để gom từ vào đây.</p><Link className="vsets-primary" href="/courses">Đi tới lộ trình</Link></div>
       : !authenticated
         ? <div className="vsets-empty"><FolderHeart size={36} /><h3>Một nơi riêng cho những từ bạn học</h3><p>Đăng nhập để tạo bộ và lưu từ vựng theo tài khoản.</p><Link className="vsets-primary" href="/login?returnTo=%2Fvocabulary">Đăng nhập</Link></div>
         : mineLoadError

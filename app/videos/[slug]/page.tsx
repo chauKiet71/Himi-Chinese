@@ -7,6 +7,7 @@ import { VideoLearningPlayer } from "@/components/video-learning-player";
 import { findVideoBySlug, learningVideos } from "@/lib/video-library";
 import { curatedYoutubeVideoTranscripts } from "@/lib/youtube-video-transcripts.curated";
 import { youtubeVideoTranscripts } from "@/lib/youtube-video-transcripts.generated";
+import { chinesePodcastStationTranscripts } from "@/lib/youtube-video-transcripts.station";
 
 export function generateStaticParams() {
   return learningVideos.map((video) => ({ slug: video.slug }));
@@ -24,7 +25,9 @@ export default async function VideoDetailPage({ params }: { params: Promise<{ sl
   const video = findVideoBySlug(slug);
   if (!video) notFound();
   const transcript = video.youtubeId
-    ? curatedYoutubeVideoTranscripts[video.youtubeId] ?? youtubeVideoTranscripts[video.youtubeId]
+    ? curatedYoutubeVideoTranscripts[video.youtubeId]
+      ?? chinesePodcastStationTranscripts[video.youtubeId]
+      ?? youtubeVideoTranscripts[video.youtubeId]
     : video.transcript;
   const playableVideo = transcript ? { ...video, transcript } : video;
   const related = learningVideos.filter((item) => item.slug !== video.slug).slice(0, 3);

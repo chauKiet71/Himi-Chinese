@@ -28,6 +28,7 @@ import {
   formatListeningDuration,
   isListeningCatalogIndex,
   isListeningCatalogLesson,
+  listeningSentenceAtTime,
   type ListeningCatalogGroup,
   type ListeningCatalogIndex,
   type ListeningCatalogLesson,
@@ -113,16 +114,17 @@ export function ListeningCatalogStudio({
       const lastRow = rows.at(-1);
       if (!activeRow || !anchorRow || !lastRow) return;
 
-      // Keep the active sentence in the third row's original viewport slot.
-      // On short screens, keep that slot above the fixed audio player.
+      // Follow the third-row slot until the end of the transcript reaches
+      // the player; the final sentences stay in place without an empty tail.
       const naturalAnchor = anchorRow.getBoundingClientRect().top + window.scrollY;
       const headerBottom = (lessonBarRef.current?.offsetHeight ?? 0) + 14;
       const playerTop = playerRef.current?.getBoundingClientRect().top ?? window.innerHeight;
       const anchor = Math.max(headerBottom, Math.min(naturalAnchor, playerTop - activeRow.offsetHeight - 16));
-      const trailingSpace = Math.max(0, window.innerHeight - anchor - lastRow.offsetHeight);
-      transcript.style.paddingBottom = `${trailingSpace}px`;
+      transcript.style.removeProperty("padding-bottom");
+      transcript.closest("main")?.style.setProperty("--listening-player-clearance", `${window.innerHeight - playerTop + 16}px`);
 
-      const top = activeIndex < 2 ? 0 : Math.max(0, activeRow.getBoundingClientRect().top + window.scrollY - anchor);
+      const endOfTranscript = Math.max(0, lastRow.getBoundingClientRect().bottom + window.scrollY - playerTop + 16);
+      const top = activeIndex < 2 ? 0 : Math.min(endOfTranscript, Math.max(0, activeRow.getBoundingClientRect().top + window.scrollY - anchor));
       if (Math.abs(window.scrollY - top) < 1) return;
       window.scrollTo({
         top,
@@ -296,6 +298,7 @@ export function ListeningCatalogStudio({
       audio.pause();
       clipEndRef.current = null;
       setActiveSentenceId(sentence.id);
+      setCurrentTime(sentence.start);
       setAudioError("");
       const sentenceAudio = sentenceAudioRef.current;
       if (!sentenceAudio) return;
@@ -325,7 +328,7 @@ export function ListeningCatalogStudio({
       return;
     }
     setCurrentTime(time);
-    const sentence = lesson.sentences.find((item) => time >= item.start && time < item.end);
+    const sentence = listeningSentenceAtTime(lesson.sentences, time);
     if (sentence) setActiveSentenceId(sentence.id);
   }
 
@@ -336,8 +339,15 @@ export function ListeningCatalogStudio({
     clipEndRef.current = null;
     audio.currentTime = value;
     setCurrentTime(value);
-    const sentence = lesson?.sentences.find((item) => value >= item.start && value < item.end);
+    const sentence = lesson ? listeningSentenceAtTime(lesson.sentences, value) : undefined;
     if (sentence) setActiveSentenceId(sentence.id);
+  }
+
+  function handleSentenceTimeUpdate() {
+    const audio = sentenceAudioRef.current;
+    const sentence = lesson?.sentences.find((item) => item.id === activeSentenceId);
+    if (!audio || !sentence) return;
+    setCurrentTime(Math.min(sentence.end, sentence.start + audio.currentTime));
   }
 
   function skipSentence(direction: -1 | 1) {
@@ -374,14 +384,20 @@ export function ListeningCatalogStudio({
     return (
       <main className="learner-dashboard listening-studio listening-catalog-studio listening-catalog-detail-page">
         <section className="listening-catalog-detail" aria-labelledby="listening-catalog-detail-title">
+          <h1 className="sr-only" id="listening-catalog-detail-title">{lesson.titleVi}</h1>
           <header className="listening-focus-lesson-bar" ref={lessonBarRef}>
-            <h1 id="listening-catalog-detail-title">{lesson.titleVi}</h1>
-            <button aria-label="Đóng bài học" onClick={closeLesson} type="button"><X aria-hidden="true" size={36} strokeWidth={2.5} /></button>
+            <button aria-label="Đóng bài học" onClick={closeLesson} type="button"><X aria-hidden="true" size={20} strokeWidth={2} /></button>
+            <progress aria-label="Tiến trình bài nghe" className="listening-focus-lesson-progress" max={Math.max(safeDuration, 1)} value={Math.min(currentTime, safeDuration)} />
           </header>
 
           <section className="listening-focus-player" aria-label="Trình phát bài nghe" ref={playerRef}>
             <audio
-              onEnded={() => { setIsPlaying(false); rememberCompletion(lesson.id); }}
+              onEnded={(event) => {
+                setIsPlaying(false);
+                setCurrentTime(event.currentTarget.currentTime);
+                setActiveSentenceId(lesson.sentences.at(-1)?.id ?? "");
+                rememberCompletion(lesson.id);
+              }}
               onError={() => setAudioError("Không tải được tệp audio của bài này.")}
               onLoadedMetadata={(event) => setDuration(Number.isFinite(event.currentTarget.duration) ? event.currentTarget.duration : lesson.durationSeconds)}
               onPause={() => setIsPlaying(false)}
@@ -391,7 +407,7 @@ export function ListeningCatalogStudio({
               ref={audioRef}
               src={lesson.mainAudioUrl}
             />
-            <audio onEnded={() => setIsPlaying(false)} onError={() => setAudioError("Không tải được audio của câu này.")} onPause={() => setIsPlaying(false)} onPlay={() => setIsPlaying(true)} preload="none" ref={sentenceAudioRef} />
+            <audio onEnded={() => setIsPlaying(false)} onError={() => setAudioError("Không tải được audio của câu này.")} onPause={() => setIsPlaying(false)} onPlay={() => setIsPlaying(true)} onTimeUpdate={handleSentenceTimeUpdate} preload="none" ref={sentenceAudioRef} />
             <span className="listening-focus-player-logo" aria-hidden="true">
               <Image alt="" height={128} src="/assets/mascot/himi-v2/himi-wave.webp" width={128} />
             </span>

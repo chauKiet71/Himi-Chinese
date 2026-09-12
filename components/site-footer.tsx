@@ -9,6 +9,6 @@ export function SiteFooter() {
       <nav className="footer-column" aria-label="Sản phẩm"><strong>Sản phẩm</strong><Link href="/practice" prefetch={false}>Kho Luyện ca</Link><Link href="/games" prefetch={false}>Trò chơi phản xạ</Link><Link href="/courses" prefetch={false}>Nội dung miễn phí</Link></nav>
       <nav className="footer-column" aria-label="Hỗ trợ"><strong>Hỗ trợ</strong><a href="mailto:giahuy041204@gmail.com">Liên hệ</a><Link href="/terms" prefetch={false}>Điều khoản</Link><Link href="/privacy" prefetch={false}>Bảo mật</Link></nav>
     </div>
-    <div className="footer-bottom"><span>© 2026 Himi Chinese.</span><span>Sản phẩm đang trong giai đoạn beta và chưa mở thanh toán.</span></div>
+    <div className="footer-bottom"><span>© 2026 Himi Chinese.</span><span>Sản phẩm phát hành chính thức · Thanh toán VIP qua VietQR và SePay.</span></div>
   </div></footer>;
 }

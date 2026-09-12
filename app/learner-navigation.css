@@ -75,6 +75,7 @@
 .learner-app-shell .rail-practice-trigger:focus-visible,
 .learner-app-shell .rail-support:focus-visible,
 .learner-app-shell .rail-pro-card:focus-visible,
+.learner-app-shell .rail-membership-card:focus-visible,
 .learner-app-shell .rail-brand:focus-visible {
   outline: 3px solid rgba(15, 145, 128, .32);
   outline-offset: 2px;
@@ -446,6 +447,276 @@
 
 .learner-app-shell.is-rail-collapsed .rail-pro-card {
   display: none;
+}
+
+.learner-app-shell .rail-membership-card {
+  width: 100%;
+  margin-top: auto;
+  flex: 0 0 auto;
+  display: block;
+  overflow: hidden;
+  color: #24211f;
+  border: 1px solid rgba(255, 77, 67, .42);
+  border-radius: 20px;
+  background: #fff9f5;
+  box-shadow: 0 14px 30px rgba(255, 77, 67, .13);
+  text-decoration: none;
+  transform-origin: center bottom;
+  transition:
+    border-color 280ms ease,
+    box-shadow 380ms cubic-bezier(.22, 1, .36, 1),
+    transform 380ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.learner-app-shell .rail-membership-card:hover {
+  border-color: rgba(255, 77, 67, .7);
+  box-shadow: 0 19px 38px rgba(255, 77, 67, .2);
+  transform: translateY(-5px) scale(1.012);
+}
+
+.learner-app-shell .rail-membership-card:active {
+  transform: translateY(0) scale(.985);
+}
+
+.learner-app-shell.is-rail-collapsed .rail-membership-card {
+  display: none;
+}
+
+.learner-app-shell .rail-membership-hero {
+  min-height: 82px;
+  padding: 15px 12px 13px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(118deg, #ff4941 0%, #ff5f42 48%, #ff952e 100%);
+}
+
+.learner-app-shell .rail-membership-watermark {
+  position: absolute;
+  right: -15px;
+  bottom: -25px;
+  color: rgba(255, 255, 255, .11);
+  pointer-events: none;
+  transform: rotate(-9deg);
+}
+
+.learner-app-shell .rail-membership-crown {
+  width: 42px;
+  height: 42px;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  color: #ff4d43;
+  border: 3px solid rgba(255, 255, 255, .45);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 8px 18px rgba(171, 48, 35, .17);
+  transition: transform 420ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.learner-app-shell .rail-membership-check {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: -5px;
+  bottom: -3px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #ff4d43;
+  box-shadow: 0 3px 8px rgba(113, 31, 24, .2);
+}
+
+.learner-app-shell .rail-membership-identity {
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+}
+
+.learner-app-shell .rail-membership-identity > strong {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .025em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.learner-app-shell .rail-membership-identity > span {
+  min-height: 22px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #277c31;
+  border: 1px solid rgba(255, 255, 255, .7);
+  border-radius: 999px;
+  background: rgba(248, 255, 241, .94);
+  box-shadow: 0 4px 10px rgba(73, 46, 22, .08);
+  font-size: 7.5px;
+  font-style: normal;
+  font-weight: 880;
+  letter-spacing: .025em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.learner-app-shell .rail-membership-identity i {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: #2f9a3d;
+  box-shadow: 0 0 0 3px rgba(47, 154, 61, .12);
+}
+
+.learner-app-shell .rail-membership-perforation {
+  height: 1px;
+  position: relative;
+  display: block;
+  border-top: 1px dashed rgba(255, 77, 67, .5);
+}
+
+.learner-app-shell .rail-membership-perforation::before,
+.learner-app-shell .rail-membership-perforation::after {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: -8px;
+  content: "";
+  border: 1px solid rgba(255, 77, 67, .42);
+  border-radius: 50%;
+  background: #fff;
+}
+
+.learner-app-shell .rail-membership-perforation::before {
+  left: -8px;
+}
+
+.learner-app-shell .rail-membership-perforation::after {
+  right: -8px;
+}
+
+.learner-app-shell .rail-membership-body {
+  padding: 12px 13px 13px;
+  display: grid;
+  gap: 8px;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(255, 141, 48, .075), transparent 40%),
+    #fff9f5;
+}
+
+.learner-app-shell .rail-membership-plan {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  color: #24211f;
+  font-size: 17px;
+  font-weight: 920;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.learner-app-shell .rail-membership-plan strong {
+  color: #ff4d43;
+  font-weight: inherit;
+}
+
+.learner-app-shell .rail-membership-progress-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #6c6662;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.learner-app-shell .rail-membership-progress-label strong {
+  color: #302c29;
+  font-size: 8.5px;
+  font-weight: 880;
+  white-space: nowrap;
+}
+
+.learner-app-shell .rail-membership-progress {
+  width: 100%;
+  height: 5px;
+  display: block;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #ffe3dc;
+}
+
+.learner-app-shell .rail-membership-progress > span {
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff4d43, #ff8a2b);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .4);
+  transition: width 520ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.learner-app-shell .rail-membership-expiry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #5c5753;
+  font-size: 9px;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.learner-app-shell .rail-membership-expiry svg {
+  flex: 0 0 auto;
+  color: #67615d;
+}
+
+.learner-app-shell .rail-membership-expiry strong {
+  color: #24211f;
+  font-weight: 880;
+}
+
+.learner-app-shell .rail-membership-action {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #ff493f;
+  font-size: 10px;
+  font-weight: 880;
+  line-height: 1;
+}
+
+.learner-app-shell .rail-membership-action > span {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff4d43, #ff742f);
+  box-shadow: 0 6px 13px rgba(255, 77, 67, .2);
+  transition: transform 360ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.learner-app-shell .rail-membership-card:hover .rail-membership-crown {
+  transform: translateY(-2px) rotate(-5deg) scale(1.045);
+}
+
+.learner-app-shell .rail-membership-card:hover .rail-membership-action > span {
+  transform: translateX(3px);
 }
 
 .learner-app-shell .rail-pro-crown {
@@ -1016,6 +1287,10 @@
   .learner-app-shell .learner-shell-content,
   .learner-app-shell .route-transition-progress,
   .learner-app-shell .rail-pro-card,
+  .learner-app-shell .rail-membership-card,
+  .learner-app-shell .rail-membership-crown,
+  .learner-app-shell .rail-membership-progress > span,
+  .learner-app-shell .rail-membership-action > span,
   .learner-app-shell .rail-pro-crown,
   .learner-app-shell .rail-pro-action,
   .learner-app-shell .rail-pro-arrow {
@@ -1043,6 +1318,15 @@
 
   .learner-app-shell .rail-pro-card:hover {
     transform: translateY(-2px);
+  }
+
+  .learner-app-shell .rail-membership-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .learner-app-shell .rail-membership-card:hover .rail-membership-crown,
+  .learner-app-shell .rail-membership-card:hover .rail-membership-action > span {
+    transform: none;
   }
 
   .learner-app-shell .rail-pro-card:hover .rail-pro-crown,

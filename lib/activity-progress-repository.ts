@@ -6,12 +6,14 @@ import { gameAttempts, practiceAttempts } from "../db/schema.ts";
 import {
   emptyGameProgress,
   emptyPracticeProgress,
+  gameCourseCompletionKey,
   isGameId,
   xpForGameScore,
   type GameId,
   type GameProgressSnapshot,
   type PracticeProgressSnapshot,
 } from "./activity-progress.ts";
+import { isSliceHskLevel, type SliceHskLevel } from "./slice-game.ts";
 import { aggregateListeningAttempts } from "./listening-performance.ts";
 import { summarizePracticePerformance } from "./practice-performance.ts";
 
@@ -49,13 +51,18 @@ export async function recordPracticeAttempt(input: {
 
 export async function getGameProgress(userId: string): Promise<GameProgressSnapshot> {
   const rows = await readDb((db) => db
-    .select({ gameId: gameAttempts.gameId, score: gameAttempts.score, xpEarned: gameAttempts.xpEarned })
+    .select({ gameId: gameAttempts.gameId, hskLevel: gameAttempts.hskLevel, score: gameAttempts.score, xpEarned: gameAttempts.xpEarned })
     .from(gameAttempts)
     .where(eq(gameAttempts.userId, userId)));
 
   if (!rows.length) return emptyGameProgress;
   return {
     completed: Array.from(new Set(rows.map((row) => row.gameId).filter(isGameId))),
+    completedCourses: Array.from(new Set(rows.flatMap((row) => (
+      isGameId(row.gameId) && isSliceHskLevel(row.hskLevel)
+        ? [gameCourseCompletionKey(row.gameId, row.hskLevel)]
+        : []
+    )))),
     totalXp: rows.reduce((total, row) => total + row.xpEarned, 0),
     bestScore: rows.reduce((best, row) => Math.max(best, row.score), 0),
     attemptCount: rows.length,
@@ -65,6 +72,7 @@ export async function getGameProgress(userId: string): Promise<GameProgressSnaps
 export async function recordGameAttempt(input: {
   userId: string;
   gameId: GameId;
+  hskLevel?: SliceHskLevel | null;
   score: number;
 }): Promise<GameProgressSnapshot> {
   await writeDb((db) => db.insert(gameAttempts).values({

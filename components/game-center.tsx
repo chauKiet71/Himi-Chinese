@@ -16,7 +16,6 @@ import {
   Headphones,
   Keyboard,
   Layers3,
-  Lightbulb,
   Link2,
   Play,
   RotateCcw,
@@ -42,15 +41,20 @@ import {
 } from "react";
 import { WritingSliceGame } from "@/components/writing-slice-game";
 import {
+  gameCourseCompletionKey,
   isGameId,
+  isGameCourseCompletionKey,
   xpForGameScore,
   type GameId,
   type GameProgressSnapshot,
 } from "@/lib/activity-progress";
 import { speakChinese } from "@/lib/game-content";
 import { HskGameSession, HskGameCourseContext } from "@/components/hsk-game-session";
+import { GameResultCelebration } from "@/components/game-result-celebration";
 import { shuffleGameItems, hskMeaningOptions, type HskGameId } from "@/lib/hsk-game-round";
-import type { SliceVocabulary } from "@/lib/slice-game";
+import type { SliceHskLevel, SliceVocabulary } from "@/lib/slice-game";
+import { trySaveHskGameVocabularyWord } from "@/lib/saved-vocabulary-client";
+import { VocabularySavedToast, type VocabularySavedNotice } from "@/components/vocabulary-saved-toast";
 
 type HskRoundProps = {
   words: SliceVocabulary[];
@@ -88,8 +92,12 @@ function parseStoredProgress(value: string): GameProgressSnapshot | null {
     if (!parsed || typeof parsed !== "object") return null;
     const data = parsed as Record<string, unknown>;
     const completed = Array.isArray(data.completed) ? data.completed.filter(isGameId) : [];
+    const completedCourses = Array.isArray(data.completedCourses)
+      ? data.completedCourses.filter(isGameCourseCompletionKey)
+      : [];
     return {
       completed,
+      completedCourses,
       totalXp: typeof data.totalXp === "number" && Number.isFinite(data.totalXp) ? Math.max(0, data.totalXp) : 0,
       bestScore: typeof data.bestScore === "number" && Number.isFinite(data.bestScore) ? Math.max(0, data.bestScore) : 0,
       attemptCount: typeof data.attemptCount === "number" && Number.isFinite(data.attemptCount)
@@ -217,7 +225,6 @@ function GameFrame({
           </div>
           <img alt={mascotAlt} className="game-session-mascot" height={640} src={mascotSrc} width={960} />
           {children}
-          <aside className="game-session-tip"><Lightbulb aria-hidden="true" size={18} /><span><strong>Gợi ý:</strong> Bình tĩnh quan sát, mỗi lượt chơi là một bước tiến.</span></aside>
         </section>
       </div>
     </main>
@@ -228,19 +235,17 @@ function GameResult({ score, label, onRestart, onExit }: { score: number; label:
   const course = useContext(HskGameCourseContext);
   const returnsToPreviousPage = course?.exitLabel === "Trở lại";
   return (
-    <div className="game-result" role="status">
-      <span><Trophy size={28} /></span>
-      <small>HOÀN THÀNH LƯỢT CHƠI</small>
-      <h2>{label}</h2>
-      <strong>{score} điểm</strong>
-      <div>
+    <GameResultCelebration
+      actions={<>
         <button onClick={onRestart} type="button"><RotateCcw size={16} /> Chơi lại</button>
         <button onClick={onExit} type="button">
           {returnsToPreviousPage ? <><ArrowLeft size={16} /> Trở lại</> : <>Chọn trò khác <ArrowRight size={16} /></>}
         </button>
         <DailyGameCompletionAction />
-      </div>
-    </div>
+      </>}
+      label={label}
+      score={score}
+    />
   );
 }
 
@@ -517,16 +522,19 @@ function WriteGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
 }
 
 function FlashcardGame({ words, onRestart, onExit, onComplete }: HskRoundProps) {
+  const course = useContext(HskGameCourseContext);
   const [index, setIndex] = useState(0);
   const roundRef = useGameRoundFocus(index);
   const [flipped, setFlipped] = useState(false);
+  const [revealed, setRevealed] = useState(false);
+  const [reviewSaveState, setReviewSaveState] = useState<"idle" | "saving" | "error" | "auth-required">("idle");
+  const [savedNotice, setSavedNotice] = useState<VocabularySavedNotice | null>(null);
   const [known, setKnown] = useState(0);
   const [finished, setFinished] = useState(false);
   const word = words[index];
   const score = known * 160;
 
-  const rate = (remembered: boolean) => {
-    if (!flipped) return;
+  const advance = (remembered: boolean) => {
     const nextKnown = known + (remembered ? 1 : 0);
     if (index === words.length - 1) {
       const finalScore = nextKnown * 160;
@@ -538,6 +546,30 @@ function FlashcardGame({ words, onRestart, onExit, onComplete }: HskRoundProps) 
     setKnown(nextKnown);
     setIndex((value) => value + 1);
     setFlipped(false);
+    setRevealed(false);
+    setReviewSaveState("idle");
+  };
+
+  const rate = async (remembered: boolean) => {
+    if (!revealed || reviewSaveState === "saving") return;
+    if (!remembered) {
+      if (!course?.authenticated) {
+        setReviewSaveState("auth-required");
+        return;
+      }
+      setReviewSaveState("saving");
+      const saved = await trySaveHskGameVocabularyWord(course.level, word);
+      if (!saved) {
+        setReviewSaveState("error");
+        return;
+      }
+      setSavedNotice({
+        hanzi: word.hanzi,
+        id: `${word.id}-${Date.now()}`,
+        meaning: word.meaning,
+      });
+    }
+    advance(remembered);
   };
 
   return (
@@ -545,17 +577,22 @@ function FlashcardGame({ words, onRestart, onExit, onComplete }: HskRoundProps) 
       <section className="game-play-card flash-game-stage" key={index} ref={roundRef}>
         {finished ? <GameResult label={`Bạn nhớ chắc ${known}/${words.length} từ.`} onExit={onExit} onRestart={onRestart} score={known * 160} /> : (
           <>
-            <button aria-label={flipped ? "Xem mặt Hán tự" : "Lật thẻ xem nghĩa"} className={`flashcard-3d ${flipped ? "is-flipped" : ""}`} onClick={() => setFlipped((value) => !value)} type="button">
+            <button aria-label={flipped ? "Xem mặt Hán tự" : "Lật thẻ xem nghĩa"} className={`flashcard-3d ${flipped ? "is-flipped" : ""}`} onClick={() => { setFlipped((value) => !value); setRevealed(true); setReviewSaveState("idle"); }} type="button">
               <span className="flashcard-3d-inner">
                 <span className="flashcard-face flashcard-front"><small>HÁN TỰ</small><strong lang="zh-CN">{word.hanzi}</strong><em>Bấm để lật thẻ</em></span>
                 <span className="flashcard-face flashcard-back"><small>NGHĨA & PHIÊN ÂM</small><strong>{word.meaning}</strong><b>{word.pinyin}</b><em lang="zh-CN">{word.example}</em></span>
               </span>
             </button>
             <div className="flash-audio-row"><button onClick={() => speakChinese(word.hanzi)} type="button"><Volume2 size={18} /> Nghe phát âm</button><span><Sparkles size={15} /> Lật thẻ trước khi tự chấm</span></div>
-            <div className="flash-rating-actions"><button disabled={!flipped} onClick={() => rate(false)} type="button"><X size={17} /> Cần ôn lại</button><button disabled={!flipped} onClick={() => rate(true)} type="button"><Check size={17} /> Đã nhớ</button></div>
+            {revealed ? <div className="flash-rating-actions">
+              <button aria-busy={reviewSaveState === "saving"} disabled={reviewSaveState === "saving"} onClick={() => void rate(false)} type="button"><X size={17} /> {reviewSaveState === "saving" ? "Đang thêm vào kho…" : "Cần ôn lại"}</button>
+              <button disabled={reviewSaveState === "saving"} onClick={() => void rate(true)} type="button"><Check size={17} /> Đã nhớ</button>
+            </div> : null}
+            {reviewSaveState === "auth-required" ? <p className="flash-save-status" role="alert">Đăng nhập để thêm từ này vào Kho từ vựng.</p> : reviewSaveState === "error" ? <p className="flash-save-status" role="alert">Chưa thêm được vào Kho từ vựng. Bạn hãy thử lại nhé.</p> : null}
           </>
         )}
       </section>
+      {savedNotice ? <VocabularySavedToast key={savedNotice.id} notice={savedNotice} onDismiss={() => setSavedNotice(null)} /> : null}
     </GameFrame>
   );
 }
@@ -657,10 +694,14 @@ export function GameCenter({
     window.scrollTo(0, 0);
   }, [activeGame]);
 
-  const completeGame = useCallback((id: GameId, score: number) => {
+  const completeGame = useCallback((id: GameId, score: number, hskLevel?: SliceHskLevel) => {
     setRecord((current) => {
+      const completedCourse = hskLevel ? gameCourseCompletionKey(id, hskLevel) : null;
       const next = {
         completed: current.completed.includes(id) ? current.completed : [...current.completed, id],
+        completedCourses: completedCourse && !current.completedCourses.includes(completedCourse)
+          ? [...current.completedCourses, completedCourse]
+          : current.completedCourses,
         totalXp: current.totalXp + xpForGameScore(score),
         bestScore: Math.max(current.bestScore, score),
         attemptCount: current.attemptCount + 1,
@@ -684,7 +725,7 @@ export function GameCenter({
     void fetch("/api/progress/game", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ gameId: id, score }),
+      body: JSON.stringify({ gameId: id, hskLevel, score }),
       keepalive: true,
     }).then(async (response) => {
       if (!response.ok) throw new Error("Game attempt save failed");
@@ -704,13 +745,13 @@ export function GameCenter({
   }, [initialGameId, router]);
 
   let activeGameView: ReactNode = null;
-  if (activeGame === "slice") activeGameView = <WritingSliceGame completionAction={<DailyGameCompletionAction />} exitLabel={exitLabel} onComplete={(score) => completeGame("slice", score)} onExit={exitGame} />;
+  if (activeGame === "slice") activeGameView = <WritingSliceGame completedCourses={record.completedCourses} completionAction={<DailyGameCompletionAction />} exitLabel={exitLabel} onComplete={(score, level) => completeGame("slice", score, level)} onExit={exitGame} />;
   if (activeGame && activeGame !== "slice") {
     const game = catalogGames.find((item) => item.id === activeGame)!;
     const gameId: HskGameId = activeGame;
     const Game = hskGameComponents[gameId];
-    activeGameView = <HskGameSession exitLabel={exitLabel} gameId={gameId} key={gameId} onExit={exitGame} title={game.title}>
-      {(words, onRestart) => <Game words={words} onRestart={onRestart} onComplete={(score) => completeGame(gameId, score)} onExit={exitGame} />}
+    activeGameView = <HskGameSession authenticated={authenticated} completedCourses={record.completedCourses} exitLabel={exitLabel} gameId={gameId} key={gameId} onExit={exitGame} title={game.title}>
+      {(words, onRestart, level) => <Game words={words} onRestart={onRestart} onComplete={(score) => completeGame(gameId, score, level)} onExit={exitGame} />}
     </HskGameSession>;
   }
   if (activeGameView) return <DailyGameFlowContext.Provider value={{ enabled: dailyFlow, syncState }}>

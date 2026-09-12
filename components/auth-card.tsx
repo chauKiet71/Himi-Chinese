@@ -4,8 +4,8 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
-import { type FormEvent, useEffect, useRef, useState } from "react";
-import { ArrowRight, Home, KeyRound, LockKeyhole, Mail, RotateCcw, ShieldCheck, UserPlus, UserRound } from "lucide-react";
+import { type FormEvent, useEffect, useId, useRef, useState } from "react";
+import { ArrowRight, Eye, EyeOff, Home, KeyRound, LockKeyhole, Mail, RotateCcw, ShieldCheck, UserPlus, UserRound } from "lucide-react";
 import { BrandMark, BrandWordmark } from "@/components/brand-logo";
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from "@/lib/auth-validation";
 
@@ -33,6 +33,50 @@ const errorMessages: Record<string, string> = {
 };
 
 type RegisterState = "idle" | "submitting" | "success";
+
+function PasswordField({
+  autoComplete,
+  confirmation = false,
+  label,
+  name,
+  placeholder,
+}: {
+  autoComplete: "current-password" | "new-password";
+  confirmation?: boolean;
+  label: string;
+  name: "password" | "confirmPassword";
+  placeholder?: string;
+}) {
+  const inputId = useId();
+  const [visible, setVisible] = useState(false);
+  const actionLabel = `${visible ? "Ẩn" : "Hiện"} mật khẩu${confirmation ? " nhập lại" : ""}`;
+
+  return <div className="auth-form-field">
+    <label htmlFor={inputId}>{label}</label>
+    <span className="auth-input-shell auth-password-input-shell">
+      <LockKeyhole aria-hidden="true" size={18} />
+      <input
+        autoComplete={autoComplete}
+        id={inputId}
+        maxLength={MAX_PASSWORD_LENGTH}
+        minLength={MIN_PASSWORD_LENGTH}
+        name={name}
+        placeholder={placeholder}
+        required
+        type={visible ? "text" : "password"}
+      />
+      <button
+        aria-controls={inputId}
+        aria-label={actionLabel}
+        className="auth-password-toggle"
+        onClick={() => setVisible((current) => !current)}
+        type="button"
+      >
+        {visible ? <EyeOff aria-hidden="true" size={19} /> : <Eye aria-hidden="true" size={19} />}
+      </button>
+    </span>
+  </div>;
+}
 
 export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo, sent = false }: { mode: AuthMode; error?: string; initialRegisterSuccess?: boolean; returnTo: string; sent?: boolean }) {
   const [motionRun, setMotionRun] = useState(0);
@@ -209,8 +253,8 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
       {admin ? <input name="mode" type="hidden" value="admin" /> : null}
       {registering ? <label><span>Họ và tên</span><span className="auth-input-shell"><UserRound aria-hidden="true" size={18} /><input autoComplete="name" maxLength={120} minLength={2} name="displayName" placeholder="Nhập họ và tên của bạn" required type="text" /></span></label> : null}
       <label><span>Email</span><span className="auth-input-shell"><Mail aria-hidden="true" size={18} /><input autoCapitalize="none" autoComplete="email" inputMode="email" maxLength={255} name="email" placeholder={learnerAuth ? "Nhập email của bạn" : undefined} required type="email" /></span></label>
-      {!forgotPassword ? <label><span>Mật khẩu</span><span className="auth-input-shell"><LockKeyhole aria-hidden="true" size={18} /><input autoComplete={registering ? "new-password" : "current-password"} maxLength={MAX_PASSWORD_LENGTH} minLength={MIN_PASSWORD_LENGTH} name="password" placeholder={learnerAuth ? "Nhập mật khẩu của bạn" : undefined} required type="password" /></span></label> : null}
-      {registering ? <label><span>Nhập lại mật khẩu</span><span className="auth-input-shell"><LockKeyhole aria-hidden="true" size={18} /><input autoComplete="new-password" maxLength={MAX_PASSWORD_LENGTH} minLength={MIN_PASSWORD_LENGTH} name="confirmPassword" placeholder="Nhập lại mật khẩu" required type="password" /></span></label> : null}
+      {!forgotPassword ? <PasswordField autoComplete={registering ? "new-password" : "current-password"} label="Mật khẩu" name="password" placeholder={learnerAuth ? "Nhập mật khẩu của bạn" : undefined} /> : null}
+      {registering ? <PasswordField autoComplete="new-password" confirmation label="Nhập lại mật khẩu" name="confirmPassword" placeholder="Nhập lại mật khẩu" /> : null}
       <button className="button button-primary button-full" disabled={registerState === "submitting"} type="submit"><span>{registerState === "submitting" ? "Đang tạo tài khoản..." : registering ? "Tạo tài khoản" : forgotPassword ? "Gửi liên kết đặt lại" : "Đăng nhập"}</span>{learnerAuth ? <ArrowRight aria-hidden="true" size={18} /> : null}</button>
     </form>
     <div className="auth-switch">

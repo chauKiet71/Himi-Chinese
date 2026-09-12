@@ -6,6 +6,7 @@ import {
   auditLogs,
   paymentEvents,
   paymentOrders,
+  subscriptions,
   users,
   vipActivationRequests,
   vipPlans,
@@ -43,6 +44,7 @@ export type SepayPaymentOrder = {
   };
   paidAt: string | null;
   expiresAt: string;
+  accessEndsAt: string | null;
 };
 
 type CreatePaymentOrderResult =
@@ -62,6 +64,7 @@ function paymentOrderDto(row: {
   qrContent: string | null;
   paidAt: Date | null;
   expiresAt: Date;
+  accessEndsAt: Date | null;
 }): SepayPaymentOrder {
   const bankAccount = getSepayBankAccount();
   return {
@@ -81,6 +84,7 @@ function paymentOrderDto(row: {
     bankAccount,
     paidAt: row.paidAt?.toISOString() ?? null,
     expiresAt: row.expiresAt.toISOString(),
+    accessEndsAt: row.accessEndsAt?.toISOString() ?? null,
   };
 }
 
@@ -102,8 +106,10 @@ async function readPaymentOrderInTransaction(tx: DbTransaction, orderId: string,
     qrContent: paymentOrders.qrContent,
     paidAt: paymentOrders.paidAt,
     expiresAt: paymentOrders.expiresAt,
+    accessEndsAt: subscriptions.endsAt,
   }).from(paymentOrders)
     .innerJoin(vipPlans, eq(paymentOrders.planId, vipPlans.id))
+    .leftJoin(subscriptions, eq(paymentOrders.subscriptionId, subscriptions.id))
     .where(and(eq(paymentOrders.id, orderId), eq(paymentOrders.userId, userId)))
     .limit(1);
   return rows[0] ?? null;
@@ -157,8 +163,10 @@ export async function createOrReuseSepayPaymentOrder(input: {
       qrContent: paymentOrders.qrContent,
       paidAt: paymentOrders.paidAt,
       expiresAt: paymentOrders.expiresAt,
+      accessEndsAt: subscriptions.endsAt,
     }).from(paymentOrders)
       .innerJoin(vipPlans, eq(paymentOrders.planId, vipPlans.id))
+      .leftJoin(subscriptions, eq(paymentOrders.subscriptionId, subscriptions.id))
       .where(and(
         eq(paymentOrders.userId, user.id),
         eq(paymentOrders.planId, plan.id),
@@ -214,6 +222,7 @@ export async function createOrReuseSepayPaymentOrder(input: {
           qrContent,
           paidAt: null,
           expiresAt,
+          accessEndsAt: null,
         }),
       };
     }
@@ -375,8 +384,8 @@ export async function processSepayWebhook(payload: SepayWebhookPayload): Promise
     await createNotificationInTransaction(tx, {
       userId: order.userId,
       type: "payment_succeeded",
-      title: "Thanh toán SePay thành công",
-      message: "Giao dịch đã được đối soát và quyền học VIP đã được kích hoạt trên tài khoản của bạn.",
+      title: "VIP đã được kích hoạt",
+      message: "Thanh toán hoàn tất. Quyền học VIP đã được mở và sẵn sàng trên tài khoản của bạn.",
       href: "/account",
       entityType: "payment_order",
       entityId: order.id,

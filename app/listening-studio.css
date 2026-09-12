@@ -1976,7 +1976,7 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
 
 .listening-catalog-detail-page {
   min-height: 100dvh;
-  padding: 24px clamp(14px, 3vw, 36px) 172px;
+  padding: 84px clamp(14px, 3vw, 36px) var(--listening-player-clearance, 128px);
   background: #f7f7f8;
 }
 
@@ -1985,33 +1985,40 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
 }
 
 .listening-focus-lesson-bar {
+  width: 100%;
   min-height: 70px;
-  margin-bottom: 14px;
-  padding: 10px 4px;
-  position: sticky;
-  top: 0;
+  margin: 0;
+  padding: 10px max(18px, calc((100% - 872px) / 2));
+  position: fixed;
+  inset: 0 0 auto;
   z-index: 60;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  background: rgba(247, 247, 248, .94);
+  gap: 16px;
+  background: rgba(255, 255, 255, .96);
   backdrop-filter: blur(14px);
 }
 
-.listening-focus-lesson-bar h1 {
+.listening-focus-lesson-progress {
+  flex: 1;
+  width: 100%;
   min-width: 0;
-  margin: 0;
+  height: 8px;
+  display: block;
+  appearance: none;
   overflow: hidden;
-  color: #161616;
-  font-size: clamp(26px, 3vw, 36px);
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -.025em;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  border: 0;
+  border-radius: 999px;
+  background: #eaf0f5;
+  accent-color: #ff4b40;
 }
-
+.listening-focus-lesson-progress::-webkit-progress-bar { border-radius: 999px; background: #eaf0f5; }
+.listening-focus-lesson-progress::-webkit-progress-value { border-radius: 999px; background: #ff4b40; transition: width 180ms linear; }
+.listening-focus-lesson-progress::-moz-progress-bar { border-radius: 999px; background: #ff4b40; }
+@media (prefers-reduced-motion: reduce) {
+  .listening-focus-lesson-progress::-webkit-progress-value { transition: none; }
+}
 .listening-focus-lesson-bar button {
   width: 48px;
   height: 48px;
@@ -2019,7 +2026,7 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
   display: grid;
   place-items: center;
   padding: 0;
-  color: #050505;
+  color: #8293ac;
   border: 0;
   border-radius: 50%;
   background: transparent;
@@ -2074,17 +2081,18 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
 .listening-catalog-detail-page .listening-focus-audio-icon { width: 42px; height: 42px; }
 
 .listening-catalog-detail-page .listening-focus-player {
-  width: min(880px, calc(100vw - 32px));
+  width: 100%;
   min-height: 112px;
   position: fixed;
-  inset: auto auto 18px 50%;
+  inset: auto 0 0;
   z-index: 90;
   grid-template-columns: 70px minmax(0, 1fr);
   column-gap: 14px;
   row-gap: 6px;
-  padding: 13px 18px;
-  border-radius: 16px;
-  transform: translateX(-50%);
+  padding: 13px max(18px, calc((100% - 844px) / 2));
+  padding-bottom: calc(13px + env(safe-area-inset-bottom, 0px));
+  border-radius: 0;
+  transform: none;
   box-shadow: 0 18px 45px rgba(188, 49, 39, .24);
 }
 
@@ -2095,7 +2103,7 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
 }
 
 .listening-catalog-detail-page .listening-focus-player-decoration {
-  right: 14px;
+  right: max(14px, calc((100% - 880px) / 2 + 14px));
   top: 8px;
   width: 48px;
   height: 48px;
@@ -2133,17 +2141,16 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
 @media (max-width: 720px) {
   .listening-catalog-detail-page {
     min-height: 100dvh;
-    padding: 10px 8px 128px;
+    padding: 62px 8px var(--listening-player-clearance, 120px);
   }
 
   .listening-focus-lesson-bar {
     min-height: 54px;
-    margin-bottom: 8px;
-    padding: 5px 4px 7px;
+    padding: 5px 12px 7px;
   }
-  .listening-focus-lesson-bar h1 { font-size: 24px; }
+
   .listening-focus-lesson-bar button { width: 42px; height: 42px; flex-basis: 42px; }
-  .listening-focus-lesson-bar button svg { width: 30px; height: 30px; }
+  .listening-focus-lesson-bar button svg { width: 20px; height: 20px; }
 
   .listening-catalog-detail-page .listening-focus-transcript ol { border-radius: 14px; }
   .listening-catalog-detail-page .listening-focus-transcript li,
@@ -2167,14 +2174,15 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
   .listening-catalog-detail-page .listening-focus-audio-icon svg { width: 18px; height: 18px; }
 
   .listening-catalog-detail-page .listening-focus-player {
-    width: calc(100vw - 16px);
+    width: 100%;
     min-height: 104px;
-    inset: auto auto 8px 50%;
+    inset: auto 0 0;
     grid-template-columns: 48px minmax(0, 1fr);
     column-gap: 8px;
     row-gap: 4px;
     padding: 8px 10px;
-    border-radius: 12px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    border-radius: 0;
   }
   .listening-catalog-detail-page .listening-focus-player-logo { width: 46px; height: 46px; border-width: 3px; }
   .listening-catalog-detail-page .listening-focus-player-controls { gap: 6px; padding-right: 36px; font-size: 9px; }
