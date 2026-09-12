@@ -33,13 +33,15 @@ test("home portal uses the rhythmic Himi headline and Roboto Vietnamese display 
   const page = await read("components/review-home-studio.tsx");
   const layout = await read("app/layout.tsx");
   const css = await read("app/home-portal.css");
+  const globals = await read("app/globals.css");
 
   assert.match(page, /<span>Mỗi ngày một tí,<\/span>/);
   assert.match(page, /<span>tự tin cùng <em>Himi<\/em>\.<\/span>/);
   assert.match(page, /Tình huống thật\. Phản xạ tự nhiên\./);
-  assert.match(layout, /Roboto/);
-  assert.match(layout, /subsets:\s*\["latin", "vietnamese"\]/);
-  assert.match(layout, /weight:\s*\[[^\]]*"800"[^\]]*\]/);
+  assert.doesNotMatch(layout, /next\/font\/google/);
+  assert.match(globals, /font-family:\s*"Himi Roboto"/);
+  assert.match(globals, /roboto-vietnamese\.woff2/);
+  assert.match(globals, /font-weight:\s*100 900/);
   assert.match(css, /font-family:\s*var\(--font-roboto\) !important/);
   assert.match(css, /\.home-portal-copy h1 em[\s\S]*color:\s*#ff4c3b/);
 });
