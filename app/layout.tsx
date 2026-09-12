@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Suspense, type CSSProperties } from "react";
-import { Roboto } from "next/font/google";
 import "./globals.css";
 import "./motion.css";
 import "./responsive.css";
@@ -22,13 +21,6 @@ import { LearnerAppShell } from "@/components/learner-app-shell";
 import { LearningDataProvider } from "@/components/learning-data-provider";
 import { getCurrentUser } from "@/lib/auth-session";
 import { createBrandTheme } from "@/lib/brand";
-
-const roboto = Roboto({
-  subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-roboto",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: { default: "Himi Chinese — Tiếng Trung cho người đi làm", template: "%s | Himi Chinese" },
@@ -62,7 +54,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     unreadNotificationCount: user.unreadNotificationCount,
   } : null;
 
-  return <html lang="vi" className={roboto.variable} style={createBrandTheme() as CSSProperties}><body>
+  return <html lang="vi" style={createBrandTheme() as CSSProperties}><body>
     {process.env.NODE_ENV === "development" ? <Script
       dangerouslySetInnerHTML={{ __html: developmentBrowserErrorGuard }}
       id="development-browser-error-guard"

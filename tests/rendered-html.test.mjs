@@ -315,10 +315,12 @@ test("global UI typography uses Roboto with Vietnamese glyph coverage", async ()
     read("app/globals.css"),
   ]);
 
-  assert.match(layout, /import \{ Roboto \} from "next\/font\/google"/);
-  assert.match(layout, /subsets: \["latin", "vietnamese"\]/);
-  assert.match(layout, /weight: \["400", "500", "600", "700", "800", "900"\]/);
+  assert.doesNotMatch(layout, /next\/font\/google/);
   assert.doesNotMatch(layout, /\bInter\b/);
+  assert.match(globals, /--font-roboto:\s*"Himi Roboto"/);
+  assert.match(globals, /url\("\/fonts\/roboto\/roboto-vietnamese\.woff2"\)/);
+  assert.match(globals, /url\("\/fonts\/roboto\/roboto-latin-ext\.woff2"\)/);
+  assert.match(globals, /url\("\/fonts\/roboto\/roboto-latin\.woff2"\)/);
   assert.match(globals, /font-family: var\(--font-roboto\), "Roboto", "Arial", sans-serif/);
   assert.match(globals, /font-synthesis: none/);
 });
