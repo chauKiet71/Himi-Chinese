@@ -530,15 +530,10 @@ export function HskLessonWorkspace({ lesson, initialMode = "vocabulary", showLau
       <div className="hsk-learning-breadcrumb"><Link href="/courses?view=hsk"><ArrowLeft aria-hidden="true" size={17} /> Lộ trình HSK</Link><span>{lesson.levelLabel} · Bài {lesson.lessonNumber}</span></div>
       <div className="hsk-learning-title-row">
         <div className="hsk-learning-greeting" lang="zh-CN">{lesson.greeting}</div>
-        <div><span>{lesson.levelLabel} · {lesson.minutes} phút</span><h1>Bài {lesson.lessonNumber}: {lesson.title}</h1><p>{lesson.summary}</p></div>
+        <div><span>{lesson.levelLabel} · {lesson.minutes} phút</span><h1>Bài {lesson.lessonNumber}: {lesson.title}</h1></div>
         <div className="hsk-learning-progress-copy"><strong>{progressPercent}%</strong><span>hoàn thành</span></div>
       </div>
       <div aria-label={`Tiến độ bài học ${progressPercent}%`} aria-valuemax={100} aria-valuemin={0} aria-valuenow={progressPercent} className="hsk-learning-progress" role="progressbar"><span style={{ width: `${progressPercent}%` }} /></div>
-      <div className="hsk-learning-meta">
-        {lesson.vocabulary.length ? <span><BookOpen aria-hidden="true" size={16} /> {lesson.vocabulary.length} từ trọng tâm</span> : null}
-        {lesson.exercises.length ? <span><GraduationCap aria-hidden="true" size={16} /> {lesson.exercises.length} bài tập</span> : null}
-        {lesson.writingCharacters.length ? <span><PenLine aria-hidden="true" size={16} /> {lesson.writingCharacters.length} từ luyện viết</span> : null}
-      </div>
       {showLaunchActions ? <nav aria-label="Cách học bài này" className="hsk-lesson-launch-actions">
         <Link className="is-primary" href={`${lessonHref}/play`}><Play aria-hidden="true" fill="currentColor" size={17} /><span>Bắt đầu học</span></Link>
         {lesson.vocabulary.length ? <Link href={`${lessonHref}/flashcard`}><BookOpen aria-hidden="true" size={17} /><span>Flashcard</span></Link> : null}

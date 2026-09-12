@@ -100,7 +100,8 @@ test("HSK lesson workspace exposes the four requested learning tabs", async (t) 
   assert.match(html, />Bài tập</);
   assert.match(html, />Phát âm</);
   assert.match(html, />Chữ Hán</);
-  assert.match(html, /6 từ trọng tâm/);
+  assert.doesNotMatch(html, /hsk-learning-meta/);
+  assert.doesNotMatch(html, /6 từ trọng tâm/);
   assert.match(html, /href="\/hsk\/1\/hsk1-bai-01-chao-anh\/play"/);
   assert.match(html, />Bắt đầu học</);
   assert.match(html, /href="\/hsk\/1\/hsk1-bai-01-chao-anh\/flashcard"/);
