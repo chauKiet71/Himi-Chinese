@@ -18,6 +18,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { MobileNav } from "@/components/mobile-nav";
 import { HimiChatbot } from "@/components/himi-chatbot";
 import { LearnerAppShell } from "@/components/learner-app-shell";
+import { LearningDataProvider } from "@/components/learning-data-provider";
 import { getCurrentUser } from "@/lib/auth-session";
 import { createBrandTheme } from "@/lib/brand";
 
@@ -44,6 +45,7 @@ const developmentBrowserErrorGuard = String.raw`(() => {
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const user = await getCurrentUser();
+  const learningCacheScope = user ? `${user.id}:${user.role}:${user.sessionCreatedAt?.toISOString() ?? "session"}` : "guest";
   const shellUser = user ? {
     displayName: user.displayName,
     email: user.email,
@@ -59,7 +61,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       strategy="beforeInteractive"
     /> : null}
     <Suspense fallback={<SiteHeaderFallback />}><SiteHeader /></Suspense>
-    <Suspense fallback={<div className="standalone-route-shell">{children}</div>}><LearnerAppShell user={shellUser}>{children}</LearnerAppShell></Suspense>
+    <LearningDataProvider key={learningCacheScope} authenticated={Boolean(user)} scope={learningCacheScope}>
+      <Suspense fallback={<div className="standalone-route-shell">{children}</div>}>
+        <LearnerAppShell user={shellUser}>{children}</LearnerAppShell>
+      </Suspense>
+    </LearningDataProvider>
     <SiteFooter />
     <MobileNav />
     <HimiChatbot />

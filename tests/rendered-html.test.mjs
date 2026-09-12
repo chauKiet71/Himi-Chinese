@@ -205,7 +205,7 @@ test("legacy password migration verifies the current password before rehashing",
 });
 
 test("admin can grant, extend and revoke VIP while learners see their live entitlement", async () => {
-  const [page, actions, service, account, access, consoleHeader, consoleNavigation] = await Promise.all([
+  const [page, actions, service, account, access, consoleHeader, consoleNavigation, adminShell] = await Promise.all([
     read("app/admin/subscriptions/page.tsx"),
     read("app/admin/actions.ts"),
     read("lib/admin-subscription-service.ts"),
@@ -213,6 +213,7 @@ test("admin can grant, extend and revoke VIP while learners see their live entit
     read("lib/lesson-access.ts"),
     read("components/admin-console.tsx"),
     read("components/admin-navigation.tsx"),
+    read("components/admin-shell.tsx"),
   ]);
   assert.match(page, /VIP & Thanh toán/);
   assert.match(page, /grantOrExtendVipAction/);
@@ -225,13 +226,14 @@ test("admin can grant, extend and revoke VIP while learners see their live entit
   assert.match(account, /getActiveVipSubscription/);
   assert.match(account, /Quyền VIP có hiệu lực đến/);
   assert.match(access, /getActiveVipSubscription/);
-  assert.match(consoleHeader, /AdminNavigation/);
+  assert.match(adminShell, /AdminNavigation/);
   assert.match(consoleHeader, /prefetch=\{false\}/);
   assert.match(consoleNavigation, /href: "\/admin\/subscriptions"/);
   assert.match(consoleNavigation, /prefetch=\{false\}/);
   assert.match(consoleNavigation, /getAdminPrefetchHrefs/);
   assert.match(consoleNavigation, /requestIdleCallback/);
   assert.match(consoleNavigation, /router\.prefetch\(href\)/);
+  assert.match(consoleNavigation, /prefetchedHrefsRef\.current\.has\(href\)/);
   assert.match(consoleNavigation, /onMouseEnter=\{\(\) => prepareRoute\(href\)\}/);
   assert.match(consoleNavigation, /onFocus=\{\(\) => prepareRoute\(href\)\}/);
 });
@@ -533,7 +535,12 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   assert.match(legacyPractice, /redirect/);
   assert.match(practice, /HimiWritingStudio/);
   assert.match(practice, /notFound/);
+  assert.match(practice, /getCurrentUser/);
+  assert.match(practice, /getHskLessonPageData/);
+  assert.match(practice, /getWritingTopicFromLesson/);
   assert.match(studio, /topic\.characters/);
+  assert.match(studio, /Chữ này cần tài khoản VIP/);
+  assert.match(studio, /VipUpgradeInlineForm/);
   assert.match(studio, /Xem nét/);
   assert.match(studio, /Tô theo/);
   assert.match(studio, /Tự viết/);

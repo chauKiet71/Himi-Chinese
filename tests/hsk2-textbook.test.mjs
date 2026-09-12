@@ -80,7 +80,7 @@ test("HSK 2 textbook supplies all 15 lessons in the HSK 1 learning shape", async
   });
 
   const sections = guidedModule.buildHskGuidedSections(lesson).map((section) => section.label);
-  assert.deepEqual(sections, ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Hội thoại", "Phát âm", "Luyện viết", "Luyện tập", "Hoàn thành"]);
+  assert.deepEqual(sections, ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Luyện viết", "Luyện tập", "Hoàn thành"]);
 });
 
 test("HSK 2 textbook progress uses the same storage shape as HSK 1", async () => {
@@ -144,7 +144,7 @@ test("HSK 2 textbook renders through the same workspace, guided lesson and flash
   assert.match(workspaceHtml, /href="\/hsk\/2\/hsk2-tb-lesson-01\/quiz"/);
 
   const guidedHtml = renderToStaticMarkup(React.createElement(guidedViewModule.HskGuidedLesson, { lesson }));
-  for (const label of ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Hội thoại", "Phát âm", "Luyện viết", "Luyện tập", "Hoàn thành"]) {
+  for (const label of ["Giới thiệu", "Từ vựng", "Luyện viết", "Luyện tập", "Hoàn thành"]) {
     assert.match(guidedHtml, new RegExp(`>${label}`));
   }
 

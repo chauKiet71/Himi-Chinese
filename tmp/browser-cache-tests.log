@@ -1,0 +1,996 @@
+✔ reload uses persistent data and slice shares the vocabulary request (24.327ms)
+✔ expired gated data reauthorizes and 403 evicts instead of serving stale content (2.0366ms)
+✔ cache never crosses account or login-session boundaries (2.3791ms)
+✔ concurrent callers share a request and one caller aborting leaves the others usable (4.6237ms)
+✔ private mode/storage quota failure still permits network and memory caching (0.7905ms)
+✔ malformed persisted JSON and failed network responses are never reused (0.7809ms)
+✔ progress expires after 30 seconds and a successful mutation invalidates disk and memory (1.2175ms)
+✔ an old pending read cannot repopulate cache after mutation invalidation (2.5835ms)
+✔ cache allowlist excludes sensitive APIs, arbitrary query strings and external origins (0.4374ms)
+✖ home page contains the Himi Chinese daily review studio (8.624ms)
+✔ prototype includes learner, VIP and admin routes (3.0172ms)
+✔ VIP activation requests stay single-pending and approve atomically (1.8045ms)
+✔ in-app notifications are user-scoped, readable and linked to VIP decisions (1.0894ms)
+✔ production start uses the Cloudflare runtime with an absolute local env file (0.8717ms)
+✔ health endpoint checks PostgreSQL without exposing configuration details (1.2145ms)
+✔ staging deployment keeps secrets out of source and uses secure auth settings (0.5794ms)
+✔ staging verification covers auth, SePay, notifications, audio and fixture cleanup (0.6643ms)
+✔ password migration audit reports only aggregate algorithm counts (1.1142ms)
+✔ legacy password migration verifies the current password before rehashing (0.8847ms)
+✔ admin can grant, extend and revoke VIP while learners see their live entitlement (1.0804ms)
+✔ admin business console exposes dashboard, users, VIP payments and analytics (0.9581ms)
+✔ account page uses the approved profile-first layout without learning progress (1.0218ms)
+✔ global UI typography uses Roboto with Vietnamese glyph coverage (2.0632ms)
+✔ layout provides Vietnamese metadata (1.0433ms)
+✔ development layout suppresses only the known Urban VPN rejection (0.6348ms)
+✔ learner routes share one responsive application shell (1.1752ms)
+✖ legacy practice route redirects into the combined listening hub (1.2093ms)
+✔ practice content has PostgreSQL schema, seed and authenticated admin CRUD (2.5915ms)
+✔ games route renders the new Himi slice game and six video-inspired activities (3.6353ms)
+✔ slice game flies to the target, splits the word and reveals its Vietnamese meaning (1.7916ms)
+✔ writing route flows from HSK levels to their lessons and the writing studio (1.1042ms)
+✔ practice and game progress persist per authenticated learner (0.9474ms)
+✖ daily session reads today's learner activity and deep-links each next step (1.6641ms)
+✔ public trust pages and current account copy are present (2.4779ms)
+✖ learner navigation prefetches routes and keeps a persistent collapsible desktop rail (1.3071ms)
+✖ practice menu stays open until its Luyện tập trigger is clicked again (2.4699ms)
+✔ opening the practice menu clears active state from primary rail items (0.6743ms)
+✔ navigating to a primary rail item transfers active state without closing the practice menu (0.5311ms)
+✔ expanded learner rail ends with a Pro upgrade card that disappears when collapsed (0.5325ms)
+✔ desktop learner rail uses the Pro card as its only VIP entry point (0.4095ms)
+✖ course library uses eight editorial topic covers and a streamed catalog (1.3254ms)
+✔ lesson vocabulary uses a focused interactive card deck (0.7883ms)
+✔ practice editorial workflow separates authoring, review, publishing, versions, assignments, and role management (1.1442ms)
+ℹ tests 43
+ℹ suites 0
+ℹ pass 37
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 156.3413
+
+✖ failing tests:
+
+test at tests\rendered-html.test.mjs:7:1
+✖ home page contains the Himi Chinese daily review studio (8.624ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Phiên 10 phút hôm nay/. Input:
+  
+  '"use client";\r\n' +
+    '\r\n' +
+    'import { useEffect, useState, useSyncExternalStore } from "react";\n' +
+    'import Link from "next/link";\r\n' +
+    'import Image from "next/image";\r\n' +
+    'import { ArrowRight, AudioLines, BrainCircuit, Check, Mic2, Play } from "lucide-react";\r\n' +
+    'import { AnimatePresence, motion, useReducedMotion } from "motion/react";\r\n' +
+    'import type { Vocabulary } from "@/lib/content-types";\r\n' +
+    'import type { DailySessionSnapshot } from "@/lib/daily-session";\r\n' +
+    '\r\n' +
+    'type ReviewHomeStudioProps = {\r\n' +
+    '  authenticated: boolean;\r\n' +
+    '  dailySession: DailySessionSnapshot;\r\n' +
+    '  verified?: boolean;\r\n' +
+    '  vocabulary: Vocabulary[];\r\n' +
+    '};\r\n' +
+    '\r\n' +
+    'const HOME_DIALOGUE = [\n' +
+    '  { speaker: "man", hanzi: "你今天怎么样？", pinyin: "nǐ jīntiān zěnmeyàng?", translation: "Hôm nay bạn thế nào?" },\r\n' +
+    '  { speaker: "woman", hanzi: "很好，谢谢！", pinyin: "hěn hǎo, xièxie!", translation: "Rất tốt, cảm ơn!" },\r\n' +
+    '  { speaker: "man", hanzi: "一起练习中文吧。", pinyin: "yìqǐ liànxí zhōngwén ba.", translation: "Cùng luyện tiếng Trung nhé." },\r\n' +
+    '  { speaker: "woman", hanzi: "好，我们开始吧！", pinyin: "hǎo, wǒmen kāishǐ ba!", translation: "Được, bắt đầu thôi!" },\r\n' +
+    '] as const;\n' +
+    '\n' +
+    'const subscribeToHydration = () => () => undefined;\n' +
+    '\n' +
+    'function useHydrated() {\n' +
+    '  return useSyncExternalStore(subscribeToHydration, () => true, () => false);\n' +
+    '}\n' +
+    '\n' +
+    'export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {\n' +
+    '  const reduceMotion = useReducedMotion();\n' +
+    '  const hydrated = useHydrated();\n' +
+    '  const [activeDialogue, setActiveDialogue] = useState(0);\n' +
+    '  const [pageVisible, setPageVisible] = useState(true);\n' +
+    '  const motionEnabled = hydrated && !reduceMotion && pageVisible;\n' +
+    '  const dialogue = HOME_DIALOGUE[activeDialogue];\r\n' +
+    '\r\n' +
+    '  useEffect(() => {\r\n' +
+    '    const syncVisibility = () => setPageVisible(document.visibilityState === "visible");\r\n' +
+    '    syncVisibility();\r\n' +
+    '    document.addEventListener("visibilitychange", syncVisibility);\r\n' +
+    '    return () => document.removeEventListener("visibilitychange", syncVisibility);\r\n' +
+    '  }, []);\r\n' +
+    '\r\n' +
+    '  useEffect(() => {\r\n' +
+    '    if (!motionEnabled) return;\r\n' +
+    '    const timer = window.setInterval(() => {\r\n' +
+    '      setActiveDialogue((current) => (current + 1) % HOME_DIALOGUE.length);\r\n' +
+    '    }, 3600);\r\n' +
+    '    return () => window.clearInterval(timer);\r\n' +
+    '  }, [motionEnabled]);\r\n' +
+    '\r\n' +
+    '  return (\r\n' +
+    '    <main className="learner-dashboard home-portal-dashboard">\r\n' +
+    '      <section className={`home-portal-hero${motionEnabled ? " is-motion-active" : " is-motion-paused"}`} aria-labelledby="home-portal-title">\r\n' +
+    '        <div aria-hidden="true" className="home-portal-art">\r\n' +
+    '          <motion.img\r\n' +
+    '            alt=""\r\n' +
+    '            animate={motionEnabled ? { scale: [1.015, 1.04, 1.015], x: [0, -8, 0], y: [0, 4, 0] } : { scale: 1, x: 0, y: 0 }}\r\n' +
+    '            decoding="async"\r\n' +
+    '            fetchPriority="high"\r\n' +
+    '            sizes="(max-width: 720px) 100vw, calc(100vw - 88px)"\r\n' +
+    '            src="/assets/home/himi-language-portal-clean-1536.webp"\r\n' +
+    '            srcSet="/assets/home/himi-language-portal-clean-1536.webp 1536w, /assets/home/himi-language-portal-clean-2k.webp 2560w, /assets/home/himi-language-portal-clean-4k.webp 3840w"\r\n' +
+    '            transition={{ duration: 16, ease: "easeInOut", repeat: motionEnabled ? Infinity : 0 }}\r\n' +
+    '          />\r\n' +
+    '        </div>\r\n' +
+    '\r\n' +
+    '        <div aria-hidden="true" className="home-portal-conversation">\r\n' +
+    '          <AnimatePresence initial={false} mode="wait">\r\n' +
+    '            <motion.div\r\n' +
+    '              animate={{ opacity: 1, scale: 1, y: 0 }}\r\n' +
+    '              className={`home-portal-dialogue is-${dialogue.speaker}`}\r\n' +
+    '              exit={{ opacity: 0, scale: .96, y: -8 }}\r\n' +
+    '              initial={motionEnabled ? { opacity: 0, scale: .96, y: 10 } : false}\r\n' +
+    '              key={`${dialogue.speaker}-${activeDialogue}`}\r\n' +
+    '              transition={{ duration: .38, ease: [0.16, 1, 0.3, 1] }}\r\n' +
+    '            >\r\n' +
+    '              <span>{dialogue.pinyin}</span>\r\n' +
+    '              <strong>{dialogue.hanzi}</strong>\r\n' +
+    '              <small>{dialogue.translation}</small>\r\n' +
+    '              <i className="home-portal-dialogue-wave"><b /><b /><b /></i>\r\n' +
+    '            </motion.div>\r\n' +
+    '          </AnimatePresence>\r\n' +
+    '        </div>\r\n' +
+    '\r\n' +
+    '        <motion.div\r\n' +
+    '          aria-hidden="true"\r\n' +
+    '          animate={motionEnabled ? { y: [0, -4, 0] } : { y: 0 }}\r\n' +
+    '          className="home-portal-himi-stage"\r\n' +
+    '          transition={{ duration: 4.8, ease: "easeInOut", repeat: motionEnabled ? Infinity : 0 }}\r\n' +
+    '        >\r\n' +
+    '          <Image\r\n' +
+    '            alt=""\r\n' +
+    '            height="420"\r\n' +
+    '            src={motionEnabled ? "/assets/mascot/himi-v2/himi-wave.gif?v=fluid-50fps" : "/assets/mascot/himi-v2/himi-wave.webp"}\r\n' +
+    '            unoptimized\r\n' +
+    '            width="420"\r\n' +
+    '          />\r\n' +
+    '        </motion.div>\r\n' +
+    '\r\n' +
+    '        {verified ? (\r\n' +
+    '          <p className="home-portal-success" role="status">\r\n' +
+    '            <Check aria-hidden="true" size={17} /> Email đã xác minh. Chào mừng bạn đến Himi Chinese.\r\n' +
+    '          </p>\r\n' +
+    '        ) : null}\r\n' +
+    '\r\n' +
+    '        <motion.div\r\n' +
+    '          className="home-portal-copy"\r\n' +
+    '          initial={motionEnabled ? { opacity: 0, x: -18 } : false}\n' +
+    '          animate={{ opacity: 1, x: 0 }}\r\n' +
+    '          transition={{ duration: .62, ease: [0.22, 1, 0.36, 1] }}\r\n' +
+    '        >\r\n' +
+    '          <h1 id="home-portal-title">\r\n' +
+    '            <span>Mỗi ngày một tí,</span>\r\n' +
+    '            <span>tự tin cùng <em>Himi</em>.</span>\n' +
+    '          </h1>\r\n' +
+    '          <p>Tình huống thật. Phản xạ tự nhiên.</p>\r\n' +
+    '\r\n' +
+    '          <div className="home-portal-actions">\r\n' +
+    '            <Link className="home-portal-primary" href="/listening?mode=scenario" prefetch>\r\n' +
+    '              Bắt đầu luyện nói <ArrowRight aria-hidden="true" size={23} />\r\n' +
+    '            </Link>\r\n' +
+    '            <Link className="home-portal-secondary" href="/courses" prefetch>\r\n' +
+    '              <span aria-hidden="true"><Play size={18} fill="currentColor" /></span>\r\n' +
+    '              Xem lộ trình\r\n' +
+    '            </Link>\r\n' +
+    '          </div>\r\n' +
+    '\r\n' +
+    '          <nav aria-label="Bắt đầu luyện nhanh" className="home-portal-quick-dock">\r\n' +
+    '            <Link className="home-portal-quick-action is-primary" href="/listening?mode=scenario" prefetch>\r\n' +
+    '              <Mic2 aria-hidden="true" size={26} strokeWidth={2.15} />\r\n' +
+    '              <strong>Luyện nói</strong>\r\n' +
+    '              <small>Tình huống</small>\r\n' +
+    '            </Link>\r\n' +
+    '            <Link className="home-portal-quick-action" href="/listening" prefetch>\r\n' +
+    '              <AudioLines aria-hidden="true" size={27} strokeWidth={2.05} />\r\n' +
+    '              <strong>Nghe phản xạ</strong>\r\n' +
+    '              <small>3 phút</small>\r\n' +
+    '            </Link>\r\n' +
+    '            <Link className="home-portal-quick-action" href="/hsk/1/hsk1-bai-01-chao-anh/flashcard" prefetch>\r\n' +
+    '              <BrainCircuit aria-hidden="true" size={27} strokeWidth={2.05} />\r\n' +
+    '              <strong>Ôn từ</strong>\r\n' +
+    '              <small>5 từ yếu</small>\r\n' +
+    '            </Link>\r\n' +
+    '          </nav>\r\n' +
+    '        </motion.div>\r\n' +
+    '      </section>\r\n' +
+    '    </main>\r\n' +
+    '  );\r\n' +
+    '}\r\n'
+  
+      at TestContext.<anonymous> (file:///D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tests/rendered-html.test.mjs:17:10)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '"use client";\r\n\r\nimport { useEffect, useState, useSyncExternalStore } from "react";\nimport Link from "next/link";\r\nimport Image from "next/image";\r\nimport { ArrowRight, AudioLines, BrainCircuit, Check, Mic2, Play } from "lucide-react";\r\nimport { AnimatePresence, motion, useReducedMotion } from "motion/react";\r\nimport type { Vocabulary } from "@/lib/content-types";\r\nimport type { DailySessionSnapshot } from "@/lib/daily-session";\r\n\r\ntype ReviewHomeStudioProps = {\r\n  authenticated: boolean;\r\n  dailySession: DailySessionSnapshot;\r\n  verified?: boolean;\r\n  vocabulary: Vocabulary[];\r\n};\r\n\r\nconst HOME_DIALOGUE = [\n  { speaker: "man", hanzi: "你今天怎么样？", pinyin: "nǐ jīntiān zěnmeyàng?", translation: "Hôm nay bạn thế nào?" },\r\n  { speaker: "woman", hanzi: "很好，谢谢！", pinyin: "hěn hǎo, xièxie!", translation: "Rất tốt, cảm ơn!" },\r\n  { speaker: "man", hanzi: "一起练习中文吧。", pinyin: "yìqǐ liànxí zhōngwén ba.", translation: "Cùng luyện tiếng Trung nhé." },\r\n  { speaker: "woman", hanzi: "好，我们开始吧！", pinyin: "hǎo, wǒmen kāishǐ ba!", translation: "Được, bắt đầu thôi!" },\r\n] as const;\n\nconst subscribeToHydration = () => () => undefined;\n\nfunction useHydrated() {\n  return useSyncExternalStore(subscribeToHydration, () => true, () => false);\n}\n\nexport function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {\n  const reduceMotion = useReducedMotion();\n  const hydrated = useHydrated();\n  const [activeDialogue, setActiveDialogue] = useState(0);\n  const [pageVisible, setPageVisible] = useState(true);\n  const motionEnabled = hydrated && !reduceMotion && pageVisible;\n  const dialogue = HOME_DIALOGUE[activeDialogue];\r\n\r\n  useEffect(() => {\r\n    const syncVisibility = () => setPageVisible(document.visibilityState === "visible");\r\n    syncVisibility();\r\n    document.addEventListener("visibilitychange", syncVisibility);\r\n    return () => document.removeEventListener("visibilitychange", syncVisibility);\r\n  }, []);\r\n\r\n  useEffect(() => {\r\n    if (!motionEnabled) return;\r\n    const timer = window.setInterval(() => {\r\n      setActiveDialogue((current) => (current + 1) % HOME_DIALOGUE.length);\r\n    }, 3600);\r\n    return () => window.clearInterval(timer);\r\n  }, [motionEnabled]);\r\n\r\n  return (\r\n    <main className="learner-dashboard home-portal-dashboard">\r\n      <section className={`home-portal-hero${motionEnabled ? " is-motion-active" : " is-motion-paused"}`} aria-labelledby="home-portal-title">\r\n        <div aria-hidden="true" className="home-portal-art">\r\n          <motion.img\r\n            alt=""\r\n            animate={motionEnabled ? { scale: [1.015, 1.04, 1.015], x: [0, -8, 0], y: [0, 4, 0] } : { scale: 1, x: 0, y: 0 }}\r\n            decoding="async"\r\n            fetchPriority="high"\r\n            sizes="(max-width: 720px) 100vw, calc(100vw - 88px)"\r\n            src="/assets/home/himi-language-portal-clean-1536.webp"\r\n            srcSet="/assets/home/himi-language-portal-clean-1536.webp 1536w, /assets/home/himi-language-portal-clean-2k.webp 2560w, /assets/home/himi-language-portal-clean-4k.webp 3840w"\r\n            transition={{ duration: 16, ease: "easeInOut", repeat: motionEnabled ? Infinity : 0 }}\r\n          />\r\n        </div>\r\n\r\n        <div aria-hidden="true" className="home-portal-conversation">\r\n          <AnimatePresence initial={false} mode="wait">\r\n            <motion.div\r\n              animate={{ opacity: 1, scale: 1, y: 0 }}\r\n              className={`home-portal-dialogue is-${dialogue.speaker}`}\r\n              exit={{ opacity: 0, scale: .96, y: -8 }}\r\n              initial={motionEnabled ? { opacity: 0, scale: .96, y: 10 } : false}\r\n              key={`${dialogue.speaker}-${activeDialogue}`}\r\n              transition={{ duration: .38, ease: [0.16, 1, 0.3, 1] }}\r\n            >\r\n              <span>{dialogue.pinyin}</span>\r\n              <strong>{dialogue.hanzi}</strong>\r\n              <small>{dialogue.translation}</small>\r\n              <i className="home-portal-dialogue-wave"><b /><b /><b /></i>\r\n            </motion.div>\r\n          </AnimatePresence>\r\n        </div>\r\n\r\n        <motion.div\r\n          aria-hidden="true"\r\n          animate={motionEnabled ? { y: [0, -4, 0] } : { y: 0 }}\r\n          className="home-portal-himi-stage"\r\n          transition={{ duration: 4.8, ease: "easeInOut", repeat: motionEnabled ? Infinity : 0 }}\r\n        >\r\n          <Image\r\n            alt=""\r\n            height="420"\r\n            src={motionEnabled ? "/assets/mascot/himi-v2/himi-wave.gif?v=fluid-50fps" : "/assets/mascot/himi-v2/himi-wave.webp"}\r\n            unoptimized\r\n            width="420"\r\n          />\r\n        </motion.div>\r\n\r\n        {verified ? (\r\n          <p className="home-portal-success" role="status">\r\n            <Check aria-hidden="true" size={17} /> Email đã xác minh. Chào mừng bạn đến Himi Chinese.\r\n          </p>\r\n        ) : null}\r\n\r\n        <motion.div\r\n          className="home-portal-copy"\r\n          initial={motionEnabled ? { opacity: 0, x: -18 } : false}\n          animate={{ opacity: 1, x: 0 }}\r\n          transition={{ duration: .62, ease: [0.22, 1, 0.36, 1] }}\r\n        >\r\n          <h1 id="home-portal-title">\r\n            <span>Mỗi ngày một tí,</span>\r\n            <span>tự tin cùng <em>Himi</em>.</span>\n          </h1>\r\n          <p>Tình huống thật. Phản xạ tự nhiên.</p>\r\n\r\n          <div className="home-portal-actions">\r\n            <Link className="home-portal-primary" href="/listening?mode=scenario" prefetch>\r\n              Bắt đầu luyện nói <ArrowRight aria-hidden="true" size={23} />\r\n            </Link>\r\n            <Link className="home-portal-secondary" href="/courses" prefetch>\r\n              <span aria-hidden="true"><Play size={18} fill="currentColor" /></span>\r\n              Xem lộ trình\r\n            </Link>\r\n          </div>\r\n\r\n          <nav aria-label="Bắt đầu luyện nhanh" className="home-portal-quick-dock">\r\n            <Link className="home-portal-quick-action is-primary" href="/listening?mode=scenario" prefetch>\r\n              <Mic2 aria-hidden="true" size={26} strokeWidth={2.15} />\r\n              <strong>Luyện nói</strong>\r\n              <small>Tình huống</small>\r\n            </Link>\r\n            <Link className="home-portal-quick-action" href="/listening" prefetch>\r\n              <AudioLines aria-hidden="true" size={27} strokeWidth={2.05} />\r\n              <strong>Nghe phản xạ</strong>\r\n              <small>3 phút</small>\r\n            </Link>\r\n            <Link className="home-portal-quick-action" href="/hsk/1/hsk1-bai-01-chao-anh/flashcard" prefetch>\r\n              <BrainCircuit aria-hidden="true" size={27} strokeWidth={2.05} />\r\n              <strong>Ôn từ</strong>\r\n              <small>5 từ yếu</small>\r\n            </Link>\r\n          </nav>\r\n        </motion.div>\r\n      </section>\r\n    </main>\r\n  );\r\n}\r\n',
+    expected: /Phiên 10 phút hôm nay/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests\rendered-html.test.mjs:372:1
+✖ legacy practice route redirects into the combined listening hub (1.2093ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Đáp án mở sau khi audio kết thúc/. Input:
+  
+  '"use client";\r\n' +
+    '\r\n' +
+    'import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";\n' +
+    'import { useLearningData } from "@/components/learning-data-provider";\n' +
+    'import Image from "next/image";\r\n' +
+    'import Link from "next/link";\r\n' +
+    'import {\n' +
+    '  AudioLines,\n' +
+    '  ArrowLeft,\n' +
+    '  ArrowRight,\r\n' +
+    '  BriefcaseBusiness,\r\n' +
+    '  CheckCircle2,\n' +
+    '  ChevronRight,\r\n' +
+    '  Clock3,\r\n' +
+    '  Crown,\r\n' +
+    '  Factory,\r\n' +
+    '  Gauge,\r\n' +
+    '  Headphones,\r\n' +
+    '  LockKeyhole,\r\n' +
+    '  MessagesSquare,\r\n' +
+    '  PackageCheck,\r\n' +
+    '  Play,\r\n' +
+    '  RotateCcw,\n' +
+    '  ShoppingBag,\n' +
+    '  SlidersHorizontal,\n' +
+    '  Store,\n' +
+    '  Trophy,\r\n' +
+    '  UtensilsCrossed,\r\n' +
+    '  Volume2,\r\n' +
+    '  Warehouse,\r\n' +
+    '  X,\r\n' +
+    '} from "lucide-react";\r\n' +
+    'import { PracticeBoard } from "@/components/practice-board";\r\n' +
+    'import { HimiSectionBanner } from "@/components/himi-section-banner";\r\n' +
+    'import type { PracticeProgressSnapshot } from "@/lib/activity-progress";\r\n' +
+    'import type { Vocabulary } from "@/lib/content-types";\r\n' +
+    'import { withDailySessionFlow, type DailyRecommendation } from "@/lib/daily-session";\r\n' +
+    'import type {\r\n' +
+    '  PracticeExercise,\r\n' +
+    '  PracticeIndustry,\r\n' +
+    '  PracticeIndustryId,\r\n' +
+    '  PracticeScenarioDto,\r\n' +
+    '} from "@/lib/practice-content";\r\n' +
+    'import { getPracticeListeningStatement, getPracticeMeaningQuestion } from "@/lib/practice-content";\n' +
+    'import {\n' +
+    '  combineListeningPerformance,\n' +
+    '  emptyListeningPerformance,\n' +
+    '  HSK_LISTENING_PERFORMANCE_KEY,\n' +
+    '  parseListeningPerformance,\n' +
+    '  SCENARIO_LISTENING_PERFORMANCE_KEY,\n' +
+    '  summarizeListeningPerformance,\n' +
+    '  type ListeningPerformanceTotals,\n' +
+    '} from "@/lib/listening-performance";\n' +
+    'import {\n' +
+    '  clampPracticeReactionMs,\n' +
+    '  formatPracticeReactionTime,\n' +
+    '  PRACTICE_ANSWER_WINDOW_MS,\n' +
+    '} from "@/lib/practice-performance";\n' +
+    'import type { WeeklyChallenge } from "@/lib/weekly-challenges";\n' +
+    '\n' +
+    'const COMPLETED_STORAGE_KEY = "hanziwork.practice.completed.v1";\n' +
+    'const EMPTY_EXERCISES: PracticeExercise[] = [];\n' +
+    '\r\n' +
+    'const industryIcons: Record<string, typeof BriefcaseBusiness> = {\r\n' +
+    '  office: BriefcaseBusiness,\r\n' +
+    '  factory: Factory,\r\n' +
+    '  logistics: Warehouse,\r\n' +
+    '  sales: ShoppingBag,\r\n' +
+    '  restaurant: UtensilsCrossed,\r\n' +
+    '  ecommerce: Store,\r\n' +
+    '  core: MessagesSquare,\r\n' +
+    '};\r\n' +
+    '\r\n' +
+    'const industryPhotos: Record<string, string> = {\r\n' +
+    '  office: "/assets/courses/himi-concepts/himi-office-administration.png",\r\n' +
+    '  factory: "/assets/courses/himi-concepts/himi-factory-production.png",\r\n' +
+    '  logistics: "/assets/courses/himi-concepts/himi-warehouse-logistics.png",\r\n' +
+    '  sales: "/assets/courses/himi-concepts/himi-sales-customer-care.png",\r\n' +
+    '  restaurant: "/assets/courses/himi-concepts/himi-restaurant-service.png",\r\n' +
+    '  ecommerce: "/assets/courses/himi-concepts/himi-ecommerce-operations.png",\r\n' +
+    '  core: "/assets/courses/himi-concepts/himi-workplace-communication.png",\r\n' +
+    '};\r\n' +
+    '\r\n' +
+    'type HubMode = "catalog" | "session" | "complete" | "review";\r\n' +
+    'type ListeningPhase = "idle" | "playing" | "ready";\n' +
+    'type SaveState = "idle" | "saving" | "saved" | "error";\n' +
+    'type StoredPracticePerformance = {\n' +
+    '  attemptCount: number;\n' +
+    '  correctAnswers: number;\n' +
+    '  totalQuestions: number;\n' +
+    '  totalReactionMs: number;\n' +
+    '};\n' +
+    '\r\n' +
+    'function readCompletedScenarios(): string[] {\n' +
+    '  try {\r\n' +
+    '    const value = window.localStorage.getItem(COMPLETED_STORAGE_KEY);\r\n' +
+    '    const parsed: unknown = value ? JSON.parse(value) : [];\r\n' +
+    '    return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === "string") : [];\r\n' +
+    '  } catch {\r\n' +
+    '    return [];\r\n' +
+    '  }\r\n' +
+    '}\n' +
+    '\n' +
+    'function readStoredPerformance(): StoredPracticePerformance | null {\n' +
+    '  try {\n' +
+    '    const value = window.localStorage.getItem(SCENARIO_LISTENING_PERFORMANCE_KEY);\n' +
+    '    const parsed: unknown = value ? JSON.parse(value) : null;\n' +
+    '    if (!parsed || typeof parsed !== "object") return null;\n' +
+    '    const record = parsed as Record<string, unknown>;\n' +
+    '    if (![record.attemptCount, record.correctAnswers, record.totalQuestions, record.totalReactionMs]\n' +
+    '      .every((item) => Number.isInteger(item) && Number(item) >= 0)) return null;\n' +
+    '    const storedPerformance = record as StoredPracticePerformance;\n' +
+    '    if (storedPerformance.correctAnswers > storedPerformance.totalQuestions\n' +
+    '      || storedPerformance.totalReactionMs > storedPerformance.totalQuestions * PRACTICE_ANSWER_WINDOW_MS) return null;\n' +
+    '    return storedPerformance;\n' +
+    '  } catch {\n' +
+    '    return null;\n' +
+    '  }\n' +
+    '}\n' +
+    '\r\n' +
+    'export function WorkPracticeHub({\r\n' +
+    '  industries,\r\n' +
+    '  scenarios,\r\n' +
+    '  vocabulary,\r\n' +
+    '  authenticated,\r\n' +
+    '  dailyFlow,\r\n' +
+    '  dailyNextStep,\r\n' +
+    '  initialProgress,\n' +
+    '  initialScenarioId,\n' +
+    '  overviewHeader,\n' +
+    '  hasVip,\n' +
+    '  weeklyChallenge,\r\n' +
+    '}: {\r\n' +
+    '  industries: PracticeIndustry[];\r\n' +
+    '  scenarios: PracticeScenarioDto[];\r\n' +
+    '  vocabulary: Vocabulary[];\r\n' +
+    '  authenticated: boolean;\r\n' +
+    '  dailyFlow: boolean;\r\n' +
+    '  dailyNextStep: DailyRecommendation | null;\r\n' +
+    '  initialProgress: PracticeProgressSnapshot;\n' +
+    '  initialScenarioId: string | null;\n' +
+    '  overviewHeader?: ReactNode;\n' +
+    '  hasVip: boolean;\n' +
+    '  weeklyChallenge: WeeklyChallenge;\r\n' +
+    '}) {\r\n' +
+    '  const initialScenario = scenarios.find((scenario) => scenario.id === initialScenarioId) ?? scenarios[0];\r\n' +
+    '  const learningData = useLearningData();\n' +
+    '  const [activeIndustry, setActiveIndustry] = useState<PracticeIndustryId>(initialScenario?.industry ?? industries[0]?.id ?? "office");\n' +
+    '  const [selectedScenarioId, setSelectedScenarioId] = useState(initialScenario?.id ?? "");\n' +
+    '  const [mode, setMode] = useState<HubMode>("catalog");\n' +
+    '  const [step, setStep] = useState(0);\n' +
+    '  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);\n' +
+    '  const [answerExpired, setAnswerExpired] = useState(false);\n' +
+    '  const [remainingAnswerMs, setRemainingAnswerMs] = useState(PRACTICE_ANSWER_WINDOW_MS);\n' +
+    '  const [reactionTimesMs, setReactionTimesMs] = useState<number[]>([]);\n' +
+    '  const [currentReactionMs, setCurrentReactionMs] = useState<number | null>(null);\n' +
+    '  const [listeningPhase, setListeningPhase] = useState<ListeningPhase>("idle");\n' +
+    '  const [slowPlayback, setSlowPlayback] = useState(false);\n' +
+    '  const [audioUnavailable, setAudioUnavailable] = useState(false);\r\n' +
+    '  const [score, setScore] = useState(0);\n' +
+    '  const [completedScenarios, setCompletedScenarios] = useState<string[]>(initialProgress.completedScenarioIds);\n' +
+    '  const [attemptCount, setAttemptCount] = useState(initialProgress.attemptCount);\n' +
+    '  const [scenarioPerformance, setScenarioPerformance] = useState<ListeningPerformanceTotals>({\n' +
+    '    correctAnswers: initialProgress.correctAnswers ?? 0,\n' +
+    '    totalQuestions: initialProgress.totalQuestions ?? 0,\n' +
+    '    totalReactionMs: initialProgress.totalReactionMs ?? 0,\n' +
+    '    reactionQuestions: initialProgress.reactionQuestions ?? 0,\n' +
+    '  });\n' +
+    '  const [hskPerformance, setHskPerformance] = useState<ListeningPerformanceTotals>(emptyListeningPerformance);\n' +
+    '  const [saveState, setSaveState] = useState<SaveState>("idle");\r\n' +
+    '  const [, setAudioDurationSeconds] = useState<number | null>(null);\n' +
+    '  const [, setAudioSource] = useState<"file" | "device" | null>(null);\n' +
+    '  const [showUpgradeNote, setShowUpgradeNote] = useState(false);\r\n' +
+    '  const [previewPlaying, setPreviewPlaying] = useState(false);\r\n' +
+    '  const audioRef = useRef<HTMLAudioElement | null>(null);\r\n' +
+    '  const preloadAudioRef = useRef<HTMLAudioElement | null>(null);\r\n' +
+    '  const playbackIdRef = useRef(0);\n' +
+    '  const playbackStartedAtRef = useRef(0);\n' +
+    '  const answerStartedAtRef = useRef(0);\n' +
+    '  const answerLockedRef = useRef(true);\n' +
+    '  const selectedAnswerRef = useRef<number | null>(null);\n' +
+    '  const currentReactionRef = useRef<number | null>(null);\n' +
+    '  const sessionRef = useRef<HTMLElement | null>(null);\n' +
+    '\n' +
+    '  useEffect(() => {\n' +
+    '    const timer = window.setTimeout(() => {\n' +
+    '      try {\n' +
+    '        setHskPerformance(parseListeningPerformance(\n' +
+    '          window.localStorage.getItem(HSK_LISTENING_PERFORMANCE_KEY),\n' +
+    '        ));\n' +
+    '      } catch {\n' +
+    '        setHskPerformance(emptyListeningPerformance);\n' +
+    '      }\n' +
+    '      if (authenticated) return;\n' +
+    '      setCompletedScenarios(readCompletedScenarios());\n' +
+    '      const storedPerformance = readStoredPerformance();\n' +
+    '      if (!storedPerformance) return;\n' +
+    '      setAttemptCount(storedPerformance.attemptCount);\n' +
+    '      setScenarioPerformance({\n' +
+    '        correctAnswers: storedPerformance.correctAnswers,\n' +
+    '        totalQuestions: storedPerformance.totalQuestions,\n' +
+    '        totalReactionMs: storedPerformance.totalReactionMs,\n' +
+    '        reactionQuestions: storedPerformance.totalQuestions,\n' +
+    '      });\n' +
+    '    }, 0);\n' +
+    '    return () => window.clearTimeout(timer);\n' +
+    '  }, [authenticated]);\n' +
+    '\r\n' +
+    '  const industryScenarios = useMemo(\r\n' +
+    '    () => scenarios.filter((scenario) => scenario.industry === activeIndustry),\r\n' +
+    '    [activeIndustry, scenarios],\r\n' +
+    '  );\r\n' +
+    '  const selectedScenario = scenarios.find((scenario) => scenario.id === selectedScenarioId)\r\n' +
+    '    ?? industryScenarios[0]\r\n' +
+    '    ?? scenarios[0];\r\n' +
+    '  const exercises = selectedScenario?.exercises ?? EMPTY_EXERCISES;\r\n' +
+    '  const exercise = exercises[step];\n' +
+    '  const meaningQuestion = useMemo(\n' +
+    '    () => exercise ? getPracticeMeaningQuestion(exercise) : null,\n' +
+    '    [exercise],\n' +
+    '  );\n' +
+    '  const listeningStatement = exercise && selectedScenario\n' +
+    '    ? getPracticeListeningStatement(exercise, selectedScenario)\r\n' +
+    '    : null;\r\n' +
+    '  const currentIndustry = industries.find((industry) => industry.id === activeIndustry);\r\n' +
+    '  const currentIndustryPhoto = currentIndustry?.imageUrl\r\n' +
+    '    ?? industryPhotos[activeIndustry]\r\n' +
+    '    ?? industryPhotos.core;\r\n' +
+    '  const answerRevealed = answerExpired;\n' +
+    '  const answerWasCorrect = answerRevealed\n' +
+    '    && selectedAnswer !== null\n' +
+    '    && meaningQuestion !== null\n' +
+    '    && selectedAnswer === meaningQuestion.correctOption;\n' +
+    '  const answerCountdownSeconds = Math.max(0, Math.ceil(remainingAnswerMs / 1_000));\n' +
+    '  const answerCountdownProgress = Math.max(0, Math.min(1, remainingAnswerMs / PRACTICE_ANSWER_WINDOW_MS));\n' +
+    '  const answeredQuestions = reactionTimesMs.length;\n' +
+    '  const sessionPerformance: ListeningPerformanceTotals = {\n' +
+    '    correctAnswers: score,\n' +
+    '    totalQuestions: answeredQuestions,\n' +
+    '    totalReactionMs: reactionTimesMs.reduce((total, milliseconds) => total + milliseconds, 0),\n' +
+    '    reactionQuestions: answeredQuestions,\n' +
+    '  };\n' +
+    '  const {\n' +
+    '    accuracyPercent: sessionAccuracyPercent,\n' +
+    '    averageReactionMs: sessionAverageReactionMs,\n' +
+    '  } = summarizeListeningPerformance(sessionPerformance);\n' +
+    '  const combinedPerformance = combineListeningPerformance(\n' +
+    '    scenarioPerformance,\n' +
+    '    hskPerformance,\n' +
+    '    mode === "se'... 35117 more characters
+  
+      at TestContext.<anonymous> (file:///D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tests/rendered-html.test.mjs:383:10)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '"use client";\r\n\r\nimport { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";\nimport { useLearningData } from "@/components/learning-data-provider";\nimport Image from "next/image";\r\nimport Link from "next/link";\r\nimport {\n  AudioLines,\n  ArrowLeft,\n  ArrowRight,\r\n  BriefcaseBusiness,\r\n  CheckCircle2,\n  ChevronRight,\r\n  Clock3,\r\n  Crown,\r\n  Factory,\r\n  Gauge,\r\n  Headphones,\r\n  LockKeyhole,\r\n  MessagesSquare,\r\n  PackageCheck,\r\n  Play,\r\n  RotateCcw,\n  ShoppingBag,\n  SlidersHorizontal,\n  Store,\n  Trophy,\r\n  UtensilsCrossed,\r\n  Volume2,\r\n  Warehouse,\r\n  X,\r\n} from "lucide-react";\r\nimport { PracticeBoard } from "@/components/practice-board";\r\nimport { HimiSectionBanner } from "@/components/himi-section-banner";\r\nimport type { PracticeProgressSnapshot } from "@/lib/activity-progress";\r\nimport type { Vocabulary } from "@/lib/content-types";\r\nimport { withDailySessionFlow, type DailyRecommendation } from "@/lib/daily-session";\r\nimport type {\r\n  PracticeExercise,\r\n  PracticeIndustry,\r\n  PracticeIndustryId,\r\n  PracticeScenarioDto,\r\n} from "@/lib/practice-content";\r\nimport { getPracticeListeningStatement, getPracticeMeaningQuestion } from "@/lib/practice-content";\nimport {\n  combineListeningPerformance,\n  emptyListeningPerformance,\n  HSK_LISTENING_PERFORMANCE_KEY,\n  parseListeningPerformance,\n  SCENARIO_LISTENING_PERFORMANCE_KEY,\n  summarizeListeningPerformance,\n  type ListeningPerformanceTotals,\n} from "@/lib/listening-performance";\nimport {\n  clampPracticeReactionMs,\n  formatPracticeReactionTime,\n  PRACTICE_ANSWER_WINDOW_MS,\n} from "@/lib/practice-performance";\nimport type { WeeklyChallenge } from "@/lib/weekly-challenges";\n\nconst COMPLETED_STORAGE_KEY = "hanziwork.practice.completed.v1";\nconst EMPTY_EXERCISES: PracticeExercise[] = [];\n\r\nconst industryIcons: Record<string, typeof BriefcaseBusiness> = {\r\n  office: BriefcaseBusiness,\r\n  factory: Factory,\r\n  logistics: Warehouse,\r\n  sales: ShoppingBag,\r\n  restaurant: UtensilsCrossed,\r\n  ecommerce: Store,\r\n  core: MessagesSquare,\r\n};\r\n\r\nconst industryPhotos: Record<string, string> = {\r\n  office: "/assets/courses/himi-concepts/himi-office-administration.png",\r\n  factory: "/assets/courses/himi-concepts/himi-factory-production.png",\r\n  logistics: "/assets/courses/himi-concepts/himi-warehouse-logistics.png",\r\n  sales: "/assets/courses/himi-concepts/himi-sales-customer-care.png",\r\n  restaurant: "/assets/courses/himi-concepts/himi-restaurant-service.png",\r\n  ecommerce: "/assets/courses/himi-concepts/himi-ecommerce-operations.png",\r\n  core: "/assets/courses/himi-concepts/himi-workplace-communication.png",\r\n};\r\n\r\ntype HubMode = "catalog" | "session" | "complete" | "review";\r\ntype ListeningPhase = "idle" | "playing" | "ready";\ntype SaveState = "idle" | "saving" | "saved" | "error";\ntype StoredPracticePerformance = {\n  attemptCount: number;\n  correctAnswers: number;\n  totalQuestions: number;\n  totalReactionMs: number;\n};\n\r\nfunction readCompletedScenarios(): string[] {\n  try {\r\n    const value = window.localStorage.getItem(COMPLETED_STORAGE_KEY);\r\n    const parsed: unknown = value ? JSON.parse(value) : [];\r\n    return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === "string") : [];\r\n  } catch {\r\n    return [];\r\n  }\r\n}\n\nfunction readStoredPerformance(): StoredPracticePerformance | null {\n  try {\n    const value = window.localStorage.getItem(SCENARIO_LISTENING_PERFORMANCE_KEY);\n    const parsed: unknown = value ? JSON.parse(value) : null;\n    if (!parsed || typeof parsed !== "object") return null;\n    const record = parsed as Record<string, unknown>;\n    if (![record.attemptCount, record.correctAnswers, record.totalQuestions, record.totalReactionMs]\n      .every((item) => Number.isInteger(item) && Number(item) >= 0)) return null;\n    const storedPerformance = record as StoredPracticePerformance;\n    if (storedPerformance.correctAnswers > storedPerformance.totalQuestions\n      || storedPerformance.totalReactionMs > storedPerformance.totalQuestions * PRACTICE_ANSWER_WINDOW_MS) return null;\n    return storedPerformance;\n  } catch {\n    return null;\n  }\n}\n\r\nexport function WorkPracticeHub({\r\n  industries,\r\n  scenarios,\r\n  vocabulary,\r\n  authenticated,\r\n  dailyFlow,\r\n  dailyNextStep,\r\n  initialProgress,\n  initialScenarioId,\n  overviewHeader,\n  hasVip,\n  weeklyChallenge,\r\n}: {\r\n  industries: PracticeIndustry[];\r\n  scenarios: PracticeScenarioDto[];\r\n  vocabulary: Vocabulary[];\r\n  authenticated: boolean;\r\n  dailyFlow: boolean;\r\n  dailyNextStep: DailyRecommendation | null;\r\n  initialProgress: PracticeProgressSnapshot;\n  initialScenarioId: string | null;\n  overviewHeader?: ReactNode;\n  hasVip: boolean;\n  weeklyChallenge: WeeklyChallenge;\r\n}) {\r\n  const initialScenario = scenarios.find((scenario) => scenario.id === initialScenarioId) ?? scenarios[0];\r\n  const learningData = useLearningData();\n  const [activeIndustry, setActiveIndustry] = useState<PracticeIndustryId>(initialScenario?.industry ?? industries[0]?.id ?? "office");\n  const [selectedScenarioId, setSelectedScenarioId] = useState(initialScenario?.id ?? "");\n  const [mode, setMode] = useState<HubMode>("catalog");\n  const [step, setStep] = useState(0);\n  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);\n  const [answerExpired, setAnswerExpired] = useState(false);\n  const [remainingAnswerMs, setRemainingAnswerMs] = useState(PRACTICE_ANSWER_WINDOW_MS);\n  const [reactionTimesMs, setReactionTimesMs] = useState<number[]>([]);\n  const [currentReactionMs, setCurrentReactionMs] = useState<number | null>(null);\n  const [listeningPhase, setListeningPhase] = useState<ListeningPhase>("idle");\n  const [slowPlayback, setSlowPlayback] = useState(false);\n  const [audioUnavailable, setAudioUnavailable] = useState(false);\r\n  const [score, setScore] = useState(0);\n  const [completedScenarios, setCompletedScenarios] = useState<string[]>(initialProgress.completedScenarioIds);\n  const [attemptCount, setAttemptCount] = useState(initialProgress.attemptCount);\n  const [scenarioPerformance, setScenarioPerformance] = useState<ListeningPerformanceTotals>({\n    correctAnswers: initialProgress.correctAnswers ?? 0,\n    totalQuestions: initialProgress.totalQuestions ?? 0,\n    totalReactionMs: initialProgress.totalReactionMs ?? 0,\n    reactionQuestions: initialProgress.reactionQuestions ?? 0,\n  });\n  const [hskPerformance, setHskPerformance] = useState<ListeningPerformanceTotals>(emptyListeningPerformance);\n  const [saveState, setSaveState] = useState<SaveState>("idle");\r\n  const [, setAudioDurationSeconds] = useState<number | null>(null);\n  const [, setAudioSource] = useState<"file" | "device" | null>(null);\n  const [showUpgradeNote, setShowUpgradeNote] = useState(false);\r\n  const [previewPlaying, setPreviewPlaying] = useState(false);\r\n  const audioRef = useRef<HTMLAudioElement | null>(null);\r\n  const preloadAudioRef = useRef<HTMLAudioElement | null>(null);\r\n  const playbackIdRef = useRef(0);\n  const playbackStartedAtRef = useRef(0);\n  const answerStartedAtRef = useRef(0);\n  const answerLockedRef = useRef(true);\n  const selectedAnswerRef = useRef<number | null>(null);\n  const currentReactionRef = useRef<number | null>(null);\n  const sessionRef = useRef<HTMLElement | null>(null);\n\n  useEffect(() => {\n    const timer = window.setTimeout(() => {\n      try {\n        setHskPerformance(parseListeningPerformance(\n          window.localStorage.getItem(HSK_LISTENING_PERFORMANCE_KEY),\n        ));\n      } catch {\n        setHskPerformance(emptyListeningPerformance);\n      }\n      if (authenticated) return;\n      setCompletedScenarios(readCompletedScenarios());\n      const storedPerformance = readStoredPerformance();\n      if (!storedPerformance) return;\n      setAttemptCount(storedPerformance.attemptCount);\n      setScenarioPerformance({\n        correctAnswers: storedPerformance.correctAnswers,\n        totalQuestions: storedPerformance.totalQuestions,\n        totalReactionMs: storedPerformance.totalReactionMs,\n        reactionQuestions: storedPerformance.totalQuestions,\n      });\n    }, 0);\n    return () => window.clearTimeout(timer);\n  }, [authenticated]);\n\r\n  const industryScenarios = useMemo(\r\n    () => scenarios.filter((scenario) => scenario.industry === activeIndustry),\r\n    [activeIndustry, scenarios],\r\n  );\r\n  const selectedScenario = scenarios.find((scenario) => scenario.id === selectedScenarioId)\r\n    ?? industryScenarios[0]\r\n    ?? scenarios[0];\r\n  const exercises = selectedScenario?.exercises ?? EMPTY_EXERCISES;\r\n  const exercise = exercises[step];\n  const meaningQuestion = useMemo(\n    () => exercise ? getPracticeMeaningQuestion(exercise) : null,\n    [exercise],\n  );\n  const listeningStatement = exercise && selectedScenario\n    ? getPracticeListeningStatement(exercise, selectedScenario)\r\n    : null;\r\n  const currentIndustry = industries.find((industry) => industry.id === activeIndustry);\r\n  const currentIndustryPhoto = currentIndustry?.imageUrl\r\n    ?? industryPhotos[activeIndustry]\r\n    ?? industryPhotos.core;\r\n  const answerRevealed = answerExpired;\n  const answerWasCorrect = answerRevealed\n    && selectedAnswer !== null\n    && meaningQuestion !== null\n    && selectedAnswer === meaningQuestion.correctOption;\n  const answerCountdownSeconds = Math.max(0, Math.ceil(remainingAnswerMs / 1_000));\n  const answerCountdownProgress = Math.max(0, Math.min(1, remainingAnswerMs / PRACTICE_ANSWER_WINDOW_MS));\n  const answeredQuestions = reactionTimesMs.length;\n  const sessionPerformance: ListeningPerformanceTotals = {\n    correctAnswers: score,\n    totalQuestions: answeredQuestions,\n    totalReactionMs: reactionTimesMs.reduce((total, milliseconds) => total + milliseconds, 0),\n    reactionQuestions: answeredQuestions,\n  };\n  const {\n    accuracyPercent: sessionAccuracyPercent,\n    averageReactionMs: sessionAverageReactionMs,\n  } = summarizeListeningPerformance(sessionPerformance);\n  const combinedPerformance = combineListeningPerformance(\n    scenarioPerformance,\n    hskPerformance,\n    mode === "se'... 35117 more characters,
+    expected: /Đáp án mở sau khi audio kết thúc/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests\rendered-html.test.mjs:581:1
+✖ daily session reads today's learner activity and deep-links each next step (1.6641ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /4\/4 · Phiên hôm nay đã xong/. Input:
+  
+  '"use client";\r\n' +
+    '\r\n' +
+    'import { useEffect, useState, useSyncExternalStore } from "react";\n' +
+    'import Link from "next/link";\r\n' +
+    'import Image from "next/image";\r\n' +
+    'import { ArrowRight, AudioLines, BrainCircuit, Check, Mic2, Play } from "lucide-react";\r\n' +
+    'import { AnimatePresence, motion, useReducedMotion } from "motion/react";\r\n' +
+    'import type { Vocabulary } from "@/lib/content-types";\r\n' +
+    'import type { DailySessionSnapshot } from "@/lib/daily-session";\r\n' +
+    '\r\n' +
+    'type ReviewHomeStudioProps = {\r\n' +
+    '  authenticated: boolean;\r\n' +
+    '  dailySession: DailySessionSnapshot;\r\n' +
+    '  verified?: boolean;\r\n' +
+    '  vocabulary: Vocabulary[];\r\n' +
+    '};\r\n' +
+    '\r\n' +
+    'const HOME_DIALOGUE = [\n' +
+    '  { speaker: "man", hanzi: "你今天怎么样？", pinyin: "nǐ jīntiān zěnmeyàng?", translation: "Hôm nay bạn thế nào?" },\r\n' +
+    '  { speaker: "woman", hanzi: "很好，谢谢！", pinyin: "hěn hǎo, xièxie!", translation: "Rất tốt, cảm ơn!" },\r\n' +
+    '  { speaker: "man", hanzi: "一起练习中文吧。", pinyin: "yìqǐ liànxí zhōngwén ba.", translation: "Cùng luyện tiếng Trung nhé." },\r\n' +
+    '  { speaker: "woman", hanzi: "好，我们开始吧！", pinyin: "hǎo, wǒmen kāishǐ ba!", translation: "Được, bắt đầu thôi!" },\r\n' +
+    '] as const;\n' +
+    '\n' +
+    'const subscribeToHydration = () => () => undefined;\n' +
+    '\n' +
+    'function useHydrated() {\n' +
+    '  return useSyncExternalStore(subscribeToHydration, () => true, () => false);\n' +
+    '}\n' +
+    '\n' +
+    'export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {\n' +
+    '  const reduceMotion = useReducedMotion();\n' +
+    '  const hydrated = useHydrated();\n' +
+    '  const [activeDialogue, setActiveDialogue] = useState(0);\n' +
+    '  const [pageVisible, setPageVisible] = useState(true);\n' +
+    '  const motionEnabled = hydrated && !reduceMotion && pageVisible;\n' +
+    '  const dialogue = HOME_DIALOGUE[activeDialogue];\r\n' +
+    '\r\n' +
+    '  useEffect(() => {\r\n' +
+    '    const syncVisibility = () => setPageVisible(document.visibilityState === "visible");\r\n' +
+    '    syncVisibility();\r\n' +
+    '    document.addEventListener("visibilitychange", syncVisibility);\r\n' +
+    '    return () => document.removeEventListener("visibilitychange", syncVisibility);\r\n' +
+    '  }, []);\r\n' +
+    '\r\n' +
+    '  useEffect(() => {\r\n' +
+    '    if (!motionEnabled) return;\r\n' +
+    '    const timer = window.setInterval(() => {\r\n' +
+    '      setActiveDialogue((current) => (current + 1) % HOME_DIALOGUE.length);\r\n' +
+    '    }, 3600);\r\n' +
+    '    return () => window.clearInterval(timer);\r\n' +
+    '  }, [motionEnabled]);\r\n' +
+    '\r\n' +
+    '  return (\r\n' +
+    '    <main className="learner-dashboard home-portal-dashboard">\r\n' +
+    '      <section className={`home-portal-hero${motionEnabled ? " is-motion-active" : " is-motion-paused"}`} aria-labelledby="home-portal-title">\r\n' +
+    '        <div aria-hidden="true" className="home-portal-art">\r\n' +
+    '          <motion.img\r\n' +
+    '            alt=""\r\n' +
+    '            animate={motionEnabled ? { scale: [1.015, 1.04, 1.015], x: [0, -8, 0], y: [0, 4, 0] } : { scale: 1, x: 0, y: 0 }}\r\n' +
+    '            decoding="async"\r\n' +
+    '            fetchPriority="high"\r\n' +
+    '            sizes="(max-width: 720px) 100vw, calc(100vw - 88px)"\r\n' +
+    '            src="/assets/home/himi-language-portal-clean-1536.webp"\r\n' +
+    '            srcSet="/assets/home/himi-language-portal-clean-1536.webp 1536w, /assets/home/himi-language-portal-clean-2k.webp 2560w, /assets/home/himi-language-portal-clean-4k.webp 3840w"\r\n' +
+    '            transition={{ duration: 16, ease: "easeInOut", repeat: motionEnabled ? Infinity : 0 }}\r\n' +
+    '          />\r\n' +
+    '        </div>\r\n' +
+    '\r\n' +
+    '        <div aria-hidden="true" className="home-portal-conversation">\r\n' +
+    '          <AnimatePresence initial={false} mode="wait">\r\n' +
+    '            <motion.div\r\n' +
+    '              animate={{ opacity: 1, scale: 1, y: 0 }}\r\n' +
+    '              className={`home-portal-dialogue is-${dialogue.speaker}`}\r\n' +
+    '              exit={{ opacity: 0, scale: .96, y: -8 }}\r\n' +
+    '              initial={motionEnabled ? { opacity: 0, scale: .96, y: 10 } : false}\r\n' +
+    '              key={`${dialogue.speaker}-${activeDialogue}`}\r\n' +
+    '              transition={{ duration: .38, ease: [0.16, 1, 0.3, 1] }}\r\n' +
+    '            >\r\n' +
+    '              <span>{dialogue.pinyin}</span>\r\n' +
+    '              <strong>{dialogue.hanzi}</strong>\r\n' +
+    '              <small>{dialogue.translation}</small>\r\n' +
+    '              <i className="home-portal-dialogue-wave"><b /><b /><b /></i>\r\n' +
+    '            </motion.div>\r\n' +
+    '          </AnimatePresence>\r\n' +
+    '        </div>\r\n' +
+    '\r\n' +
+    '        <motion.div\r\n' +
+    '          aria-hidden="true"\r\n' +
+    '          animate={motionEnabled ? { y: [0, -4, 0] } : { y: 0 }}\r\n' +
+    '          className="home-portal-himi-stage"\r\n' +
+    '          transition={{ duration: 4.8, ease: "easeInOut", repeat: motionEnabled ? Infinity : 0 }}\r\n' +
+    '        >\r\n' +
+    '          <Image\r\n' +
+    '            alt=""\r\n' +
+    '            height="420"\r\n' +
+    '            src={motionEnabled ? "/assets/mascot/himi-v2/himi-wave.gif?v=fluid-50fps" : "/assets/mascot/himi-v2/himi-wave.webp"}\r\n' +
+    '            unoptimized\r\n' +
+    '            width="420"\r\n' +
+    '          />\r\n' +
+    '        </motion.div>\r\n' +
+    '\r\n' +
+    '        {verified ? (\r\n' +
+    '          <p className="home-portal-success" role="status">\r\n' +
+    '            <Check aria-hidden="true" size={17} /> Email đã xác minh. Chào mừng bạn đến Himi Chinese.\r\n' +
+    '          </p>\r\n' +
+    '        ) : null}\r\n' +
+    '\r\n' +
+    '        <motion.div\r\n' +
+    '          className="home-portal-copy"\r\n' +
+    '          initial={motionEnabled ? { opacity: 0, x: -18 } : false}\n' +
+    '          animate={{ opacity: 1, x: 0 }}\r\n' +
+    '          transition={{ duration: .62, ease: [0.22, 1, 0.36, 1] }}\r\n' +
+    '        >\r\n' +
+    '          <h1 id="home-portal-title">\r\n' +
+    '            <span>Mỗi ngày một tí,</span>\r\n' +
+    '            <span>tự tin cùng <em>Himi</em>.</span>\n' +
+    '          </h1>\r\n' +
+    '          <p>Tình huống thật. Phản xạ tự nhiên.</p>\r\n' +
+    '\r\n' +
+    '          <div className="home-portal-actions">\r\n' +
+    '            <Link className="home-portal-primary" href="/listening?mode=scenario" prefetch>\r\n' +
+    '              Bắt đầu luyện nói <ArrowRight aria-hidden="true" size={23} />\r\n' +
+    '            </Link>\r\n' +
+    '            <Link className="home-portal-secondary" href="/courses" prefetch>\r\n' +
+    '              <span aria-hidden="true"><Play size={18} fill="currentColor" /></span>\r\n' +
+    '              Xem lộ trình\r\n' +
+    '            </Link>\r\n' +
+    '          </div>\r\n' +
+    '\r\n' +
+    '          <nav aria-label="Bắt đầu luyện nhanh" className="home-portal-quick-dock">\r\n' +
+    '            <Link className="home-portal-quick-action is-primary" href="/listening?mode=scenario" prefetch>\r\n' +
+    '              <Mic2 aria-hidden="true" size={26} strokeWidth={2.15} />\r\n' +
+    '              <strong>Luyện nói</strong>\r\n' +
+    '              <small>Tình huống</small>\r\n' +
+    '            </Link>\r\n' +
+    '            <Link className="home-portal-quick-action" href="/listening" prefetch>\r\n' +
+    '              <AudioLines aria-hidden="true" size={27} strokeWidth={2.05} />\r\n' +
+    '              <strong>Nghe phản xạ</strong>\r\n' +
+    '              <small>3 phút</small>\r\n' +
+    '            </Link>\r\n' +
+    '            <Link className="home-portal-quick-action" href="/hsk/1/hsk1-bai-01-chao-anh/flashcard" prefetch>\r\n' +
+    '              <BrainCircuit aria-hidden="true" size={27} strokeWidth={2.05} />\r\n' +
+    '              <strong>Ôn từ</strong>\r\n' +
+    '              <small>5 từ yếu</small>\r\n' +
+    '            </Link>\r\n' +
+    '          </nav>\r\n' +
+    '        </motion.div>\r\n' +
+    '      </section>\r\n' +
+    '    </main>\r\n' +
+    '  );\r\n' +
+    '}\r\n'
+  
+      at TestContext.<anonymous> (file:///D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tests/rendered-html.test.mjs:610:10)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '"use client";\r\n\r\nimport { useEffect, useState, useSyncExternalStore } from "react";\nimport Link from "next/link";\r\nimport Image from "next/image";\r\nimport { ArrowRight, AudioLines, BrainCircuit, Check, Mic2, Play } from "lucide-react";\r\nimport { AnimatePresence, motion, useReducedMotion } from "motion/react";\r\nimport type { Vocabulary } from "@/lib/content-types";\r\nimport type { DailySessionSnapshot } from "@/lib/daily-session";\r\n\r\ntype ReviewHomeStudioProps = {\r\n  authenticated: boolean;\r\n  dailySession: DailySessionSnapshot;\r\n  verified?: boolean;\r\n  vocabulary: Vocabulary[];\r\n};\r\n\r\nconst HOME_DIALOGUE = [\n  { speaker: "man", hanzi: "你今天怎么样？", pinyin: "nǐ jīntiān zěnmeyàng?", translation: "Hôm nay bạn thế nào?" },\r\n  { speaker: "woman", hanzi: "很好，谢谢！", pinyin: "hěn hǎo, xièxie!", translation: "Rất tốt, cảm ơn!" },\r\n  { speaker: "man", hanzi: "一起练习中文吧。", pinyin: "yìqǐ liànxí zhōngwén ba.", translation: "Cùng luyện tiếng Trung nhé." },\r\n  { speaker: "woman", hanzi: "好，我们开始吧！", pinyin: "hǎo, wǒmen kāishǐ ba!", translation: "Được, bắt đầu thôi!" },\r\n] as const;\n\nconst subscribeToHydration = () => () => undefined;\n\nfunction useHydrated() {\n  return useSyncExternalStore(subscribeToHydration, () => true, () => false);\n}\n\nexport function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {\n  const reduceMotion = useReducedMotion();\n  const hydrated = useHydrated();\n  const [activeDialogue, setActiveDialogue] = useState(0);\n  const [pageVisible, setPageVisible] = useState(true);\n  const motionEnabled = hydrated && !reduceMotion && pageVisible;\n  const dialogue = HOME_DIALOGUE[activeDialogue];\r\n\r\n  useEffect(() => {\r\n    const syncVisibility = () => setPageVisible(document.visibilityState === "visible");\r\n    syncVisibility();\r\n    document.addEventListener("visibilitychange", syncVisibility);\r\n    return () => document.removeEventListener("visibilitychange", syncVisibility);\r\n  }, []);\r\n\r\n  useEffect(() => {\r\n    if (!motionEnabled) return;\r\n    const timer = window.setInterval(() => {\r\n      setActiveDialogue((current) => (current + 1) % HOME_DIALOGUE.length);\r\n    }, 3600);\r\n    return () => window.clearInterval(timer);\r\n  }, [motionEnabled]);\r\n\r\n  return (\r\n    <main className="learner-dashboard home-portal-dashboard">\r\n      <section className={`home-portal-hero${motionEnabled ? " is-motion-active" : " is-motion-paused"}`} aria-labelledby="home-portal-title">\r\n        <div aria-hidden="true" className="home-portal-art">\r\n          <motion.img\r\n            alt=""\r\n            animate={motionEnabled ? { scale: [1.015, 1.04, 1.015], x: [0, -8, 0], y: [0, 4, 0] } : { scale: 1, x: 0, y: 0 }}\r\n            decoding="async"\r\n            fetchPriority="high"\r\n            sizes="(max-width: 720px) 100vw, calc(100vw - 88px)"\r\n            src="/assets/home/himi-language-portal-clean-1536.webp"\r\n            srcSet="/assets/home/himi-language-portal-clean-1536.webp 1536w, /assets/home/himi-language-portal-clean-2k.webp 2560w, /assets/home/himi-language-portal-clean-4k.webp 3840w"\r\n            transition={{ duration: 16, ease: "easeInOut", repeat: motionEnabled ? Infinity : 0 }}\r\n          />\r\n        </div>\r\n\r\n        <div aria-hidden="true" className="home-portal-conversation">\r\n          <AnimatePresence initial={false} mode="wait">\r\n            <motion.div\r\n              animate={{ opacity: 1, scale: 1, y: 0 }}\r\n              className={`home-portal-dialogue is-${dialogue.speaker}`}\r\n              exit={{ opacity: 0, scale: .96, y: -8 }}\r\n              initial={motionEnabled ? { opacity: 0, scale: .96, y: 10 } : false}\r\n              key={`${dialogue.speaker}-${activeDialogue}`}\r\n              transition={{ duration: .38, ease: [0.16, 1, 0.3, 1] }}\r\n            >\r\n              <span>{dialogue.pinyin}</span>\r\n              <strong>{dialogue.hanzi}</strong>\r\n              <small>{dialogue.translation}</small>\r\n              <i className="home-portal-dialogue-wave"><b /><b /><b /></i>\r\n            </motion.div>\r\n          </AnimatePresence>\r\n        </div>\r\n\r\n        <motion.div\r\n          aria-hidden="true"\r\n          animate={motionEnabled ? { y: [0, -4, 0] } : { y: 0 }}\r\n          className="home-portal-himi-stage"\r\n          transition={{ duration: 4.8, ease: "easeInOut", repeat: motionEnabled ? Infinity : 0 }}\r\n        >\r\n          <Image\r\n            alt=""\r\n            height="420"\r\n            src={motionEnabled ? "/assets/mascot/himi-v2/himi-wave.gif?v=fluid-50fps" : "/assets/mascot/himi-v2/himi-wave.webp"}\r\n            unoptimized\r\n            width="420"\r\n          />\r\n        </motion.div>\r\n\r\n        {verified ? (\r\n          <p className="home-portal-success" role="status">\r\n            <Check aria-hidden="true" size={17} /> Email đã xác minh. Chào mừng bạn đến Himi Chinese.\r\n          </p>\r\n        ) : null}\r\n\r\n        <motion.div\r\n          className="home-portal-copy"\r\n          initial={motionEnabled ? { opacity: 0, x: -18 } : false}\n          animate={{ opacity: 1, x: 0 }}\r\n          transition={{ duration: .62, ease: [0.22, 1, 0.36, 1] }}\r\n        >\r\n          <h1 id="home-portal-title">\r\n            <span>Mỗi ngày một tí,</span>\r\n            <span>tự tin cùng <em>Himi</em>.</span>\n          </h1>\r\n          <p>Tình huống thật. Phản xạ tự nhiên.</p>\r\n\r\n          <div className="home-portal-actions">\r\n            <Link className="home-portal-primary" href="/listening?mode=scenario" prefetch>\r\n              Bắt đầu luyện nói <ArrowRight aria-hidden="true" size={23} />\r\n            </Link>\r\n            <Link className="home-portal-secondary" href="/courses" prefetch>\r\n              <span aria-hidden="true"><Play size={18} fill="currentColor" /></span>\r\n              Xem lộ trình\r\n            </Link>\r\n          </div>\r\n\r\n          <nav aria-label="Bắt đầu luyện nhanh" className="home-portal-quick-dock">\r\n            <Link className="home-portal-quick-action is-primary" href="/listening?mode=scenario" prefetch>\r\n              <Mic2 aria-hidden="true" size={26} strokeWidth={2.15} />\r\n              <strong>Luyện nói</strong>\r\n              <small>Tình huống</small>\r\n            </Link>\r\n            <Link className="home-portal-quick-action" href="/listening" prefetch>\r\n              <AudioLines aria-hidden="true" size={27} strokeWidth={2.05} />\r\n              <strong>Nghe phản xạ</strong>\r\n              <small>3 phút</small>\r\n            </Link>\r\n            <Link className="home-portal-quick-action" href="/hsk/1/hsk1-bai-01-chao-anh/flashcard" prefetch>\r\n              <BrainCircuit aria-hidden="true" size={27} strokeWidth={2.05} />\r\n              <strong>Ôn từ</strong>\r\n              <small>5 từ yếu</small>\r\n            </Link>\r\n          </nav>\r\n        </motion.div>\r\n      </section>\r\n    </main>\r\n  );\r\n}\r\n',
+    expected: /4\/4 · Phiên hôm nay đã xong/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests\rendered-html.test.mjs:629:1
+✖ learner navigation prefetches routes and keeps a persistent collapsible desktop rail (1.3071ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /getCachedPublishedPracticeVocabulary/. Input:
+  
+  'import { and, asc, desc, eq, isNull, lte, or } from "drizzle-orm";\r\n' +
+    'import { unstable_cache } from "next/cache.js";\r\n' +
+    'import { readDb } from "../db/index.ts";\r\n' +
+    'import {\r\n' +
+    '  courses as courseTable,\r\n' +
+    '  lessons as lessonTable,\r\n' +
+    '  lessonVocabulary,\r\n' +
+    '  modules,\r\n' +
+    '  reviewItems,\r\n' +
+    '  vocabulary as vocabularyTable,\r\n' +
+    '} from "../db/schema.ts";\r\n' +
+    'import { getPublishedCourse } from "./course-repository.ts";\n' +
+    'import { getContentAccessPolicies } from "./content-access-repository.ts";\n' +
+    'import {\n' +
+    '  learningLessonTarget,\n' +
+    '  learningModuleTarget,\n' +
+    '  learningPathTarget,\n' +
+    '  learningQuestionTarget,\n' +
+    '  resolveContentAccess,\n' +
+    '  type ContentAccessTarget,\n' +
+    '} from "./content-access-types.ts";\n' +
+    'import { getLessonAccess, hasActiveVipAccess } from "./lesson-access.ts";\n' +
+    'import { getLessonProgress } from "./progress-repository.ts";\r\n' +
+    'import { coreWorkplaceLessons, coreWorkplaceModules } from "./core-workplace-course-seed.ts";\r\n' +
+    'import { ecommerceLessons, ecommerceModules } from "./ecommerce-course-seed.ts";\r\n' +
+    'import { factoryLessons, factoryModules } from "./factory-course-seed.ts";\n' +
+    'import { highFrequencyLessons, highFrequencyModules } from "./high-frequency-course-seed.ts";\n' +
+    'import { logisticsLessons, logisticsModules } from "./logistics-course-seed.ts";\r\n' +
+    'import { officeLessons, officeModules } from "./office-course-seed.ts";\r\n' +
+    'import { restaurantLessons, restaurantModules } from "./restaurant-course-seed.ts";\r\n' +
+    'import { salesLessons, salesModules } from "./sales-course-seed.ts";\r\n' +
+    'import type { CourseLessonSeed, CourseModuleSeed, CourseSeedBundle } from "./course-seed-types.ts";\r\n' +
+    'import type {\r\n' +
+    '  ChallengeQuestion,\r\n' +
+    '  Course,\r\n' +
+    '  DialogueLine,\r\n' +
+    '  LessonAccess,\r\n' +
+    '  LessonContent,\r\n' +
+    '  LessonDetail,\r\n' +
+    '  LessonProgressState,\r\n' +
+    '  LessonSummary,\r\n' +
+    '  UsageNote,\r\n' +
+    '  Vocabulary,\r\n' +
+    '} from "./content-types.ts";\r\n' +
+    '\r\n' +
+    'const courseSeedBundles = new Map<string, CourseSeedBundle>([\r\n' +
+    '  ["van-phong-hanh-chinh", { courseSlug: "van-phong-hanh-chinh", modules: officeModules, lessons: officeLessons }],\r\n' +
+    '  ["nha-may-san-xuat", { courseSlug: "nha-may-san-xuat", modules: factoryModules, lessons: factoryLessons }],\r\n' +
+    '  ["kho-van-logistics", { courseSlug: "kho-van-logistics", modules: logisticsModules, lessons: logisticsLessons }],\r\n' +
+    '  ["ban-hang-cham-soc-khach-hang", { courseSlug: "ban-hang-cham-soc-khach-hang", modules: salesModules, lessons: salesLessons }],\r\n' +
+    '  ["nha-hang-dich-vu", { courseSlug: "nha-hang-dich-vu", modules: restaurantModules, lessons: restaurantLessons }],\r\n' +
+    '  ["thuong-mai-dien-tu", { courseSlug: "thuong-mai-dien-tu", modules: ecommerceModules, lessons: ecommerceLessons }],\r\n' +
+    '  ["giao-tiep-cong-so", { courseSlug: "giao-tiep-cong-so", modules: coreWorkplaceModules, lessons: coreWorkplaceLessons }],\n' +
+    '  ["tieng-trung-tan-suat-cao", { courseSlug: "tieng-trung-tan-suat-cao", modules: highFrequencyModules, lessons: highFrequencyLessons }],\n' +
+    ']);\n' +
+    '\r\n' +
+    'export type LessonPageData = {\r\n' +
+    '  course: Course;\r\n' +
+    '  lessons: LessonSummary[];\r\n' +
+    '  lesson: LessonDetail | null;\r\n' +
+    '  access: LessonAccess | null;\r\n' +
+    '  progress: LessonProgressState | null;\r\n' +
+    '  invalidLesson: boolean;\r\n' +
+    '};\r\n' +
+    '\r\n' +
+    'function isString(value: unknown): value is string {\r\n' +
+    '  return typeof value === "string";\r\n' +
+    '}\r\n' +
+    '\r\n' +
+    'function parseLessonContent(value: unknown): LessonContent {\n' +
+    '  if (!value || typeof value !== "object") return { dialogue: [], notes: [] };\n' +
+    '  const raw = value as { dialogue?: unknown; phrases?: unknown; notes?: unknown };\n' +
+    '\n' +
+    '  const parseLines = (lines: unknown) => Array.isArray(lines)\n' +
+    '    ? lines.filter((line): line is DialogueLine => {\n' +
+    '        if (!line || typeof line !== "object") return false;\n' +
+    '        const item = line as Record<string, unknown>;\n' +
+    '        return isString(item.speaker) && isString(item.hanzi) && isString(item.pinyin) && isString(item.translation);\n' +
+    '      })\n' +
+    '    : [];\n' +
+    '  const dialogue = parseLines(raw.dialogue);\n' +
+    '  const phrases = parseLines(raw.phrases);\n' +
+    '\r\n' +
+    '  const notes = Array.isArray(raw.notes)\r\n' +
+    '    ? raw.notes.filter((note): note is UsageNote => {\r\n' +
+    '        if (!note || typeof note !== "object") return false;\r\n' +
+    '        const item = note as Record<string, unknown>;\r\n' +
+    '        return isString(item.title) && isString(item.pattern) && isString(item.explanation);\r\n' +
+    '      })\r\n' +
+    '    : [];\r\n' +
+    '\r\n' +
+    '  let challenge: LessonContent["challenge"];\r\n' +
+    '  if ("challenge" in raw && raw.challenge && typeof raw.challenge === "object") {\r\n' +
+    '    const item = raw.challenge as Record<string, unknown>;\r\n' +
+    '    const questions = Array.isArray(item.questions)\n' +
+    '      ? item.questions.filter((question): question is ChallengeQuestion => {\n' +
+    '          if (!question || typeof question !== "object") return false;\r\n' +
+    '          const value = question as Record<string, unknown>;\r\n' +
+    '          return isString(value.prompt)\r\n' +
+    '            && Array.isArray(value.options)\r\n' +
+    '            && value.options.every(isString)\r\n' +
+    '            && typeof value.correctOption === "number"\r\n' +
+    '            && isString(value.explanation);\n' +
+    '        }).map((question, index) => ({\n' +
+    '          ...question,\n' +
+    '          id: isString(question.id) && question.id.trim() ? question.id.trim() : `question-${index + 1}`,\n' +
+    '          accessTier: question.accessTier === "vip" ? "vip" as const : "free" as const,\n' +
+    '        }))\n' +
+    '      : [];\n' +
+    '    if (isString(item.title) && isString(item.description) && typeof item.passScore === "number" && questions.length) {\r\n' +
+    '      challenge = { title: item.title, description: item.description, passScore: item.passScore, questions };\r\n' +
+    '    }\r\n' +
+    '  }\r\n' +
+    '\r\n' +
+    '  return { dialogue, ...(phrases.length ? { phrases } : {}), notes, ...(challenge ? { challenge } : {}) };\n' +
+    '}\n' +
+    '\n' +
+    'function toLessonAccess(state: ReturnType<typeof resolveContentAccess>): LessonAccess {\n' +
+    '  return {\n' +
+    '    allowed: state.allowed,\n' +
+    '    source: state.source,\n' +
+    '    requiredTier: state.requiredTier,\n' +
+    '    lockedAt: state.lockedAt ? `${state.lockedAt.type}:${state.lockedAt.key}` : null,\n' +
+    '  };\n' +
+    '}\n' +
+    '\n' +
+    'function lessonTargets(row: {\n' +
+    '  courseId: string;\n' +
+    '  moduleId: string;\n' +
+    '  id: string;\n' +
+    '  isFree: boolean;\n' +
+    '}): ContentAccessTarget[] {\n' +
+    '  return [\n' +
+    '    learningPathTarget(row.courseId),\n' +
+    '    learningModuleTarget(row.moduleId),\n' +
+    '    learningLessonTarget(row.id, row.isFree),\n' +
+    '  ];\n' +
+    '}\n' +
+    '\n' +
+    'async function filterLessonQuestions({\n' +
+    '  content,\n' +
+    '  lessonId,\n' +
+    '  parentTargets,\n' +
+    '  viewerHasVip,\n' +
+    '}: {\n' +
+    '  content: LessonContent;\n' +
+    '  lessonId: string;\n' +
+    '  parentTargets: ContentAccessTarget[];\n' +
+    '  viewerHasVip: boolean;\n' +
+    '}): Promise<LessonContent> {\n' +
+    '  if (!content.challenge?.questions.length) return content;\n' +
+    '  const questions = content.challenge.questions.map((question, index) => ({\n' +
+    '    ...question,\n' +
+    '    id: question.id?.trim() || `question-${index + 1}`,\n' +
+    '  }));\n' +
+    '  const questionTargets = questions.map((question) => learningQuestionTarget(\n' +
+    '    lessonId,\n' +
+    '    question.id!,\n' +
+    '    question.accessTier ?? "free",\n' +
+    '  ));\n' +
+    '  const policies = await getContentAccessPolicies([...parentTargets, ...questionTargets]);\n' +
+    '  const filteredQuestions = questions.map((question, index): ChallengeQuestion => {\n' +
+    '    const access = resolveContentAccess({\n' +
+    '      targets: [...parentTargets, questionTargets[index]],\n' +
+    '      policies,\n' +
+    '      viewerHasVip,\n' +
+    '    });\n' +
+    '    return access.allowed ? question : {\n' +
+    '      id: question.id,\n' +
+    '      prompt: "Câu hỏi dành cho thành viên VIP",\n' +
+    '      options: [],\n' +
+    '      correctOption: -1,\n' +
+    '      explanation: "",\n' +
+    '      accessTier: "vip",\n' +
+    '      locked: true,\n' +
+    '    };\n' +
+    '  });\n' +
+    '  const accessibleCount = filteredQuestions.filter((question) => !question.locked).length;\n' +
+    '  return {\n' +
+    '    ...content,\n' +
+    '    challenge: {\n' +
+    '      ...content.challenge,\n' +
+    '      passScore: accessibleCount ? Math.min(content.challenge.passScore, accessibleCount) : content.challenge.passScore,\n' +
+    '      questions: filteredQuestions,\n' +
+    '    },\n' +
+    '  };\n' +
+    '}\n' +
+    '\r\n' +
+    'function toSummary(lesson: CourseLessonSeed, order: number, moduleSeeds: CourseModuleSeed[]): LessonSummary {\r\n' +
+    '  const moduleSeed = moduleSeeds.find((item) => item.slug === lesson.moduleSlug) ?? moduleSeeds[0];\r\n' +
+    '  return {\r\n' +
+    '    slug: lesson.slug,\r\n' +
+    '    title: lesson.title,\r\n' +
+    '    summary: lesson.summary,\r\n' +
+    '    situation: lesson.situation,\r\n' +
+    '    estimatedMinutes: lesson.estimatedMinutes,\r\n' +
+    '    isFree: lesson.isFree,\r\n' +
+    '    order,\r\n' +
+    '    moduleSlug: moduleSeed.slug,\r\n' +
+    '    moduleTitle: moduleSeed.title,\r\n' +
+    '    moduleOrder: moduleSeeds.indexOf(moduleSeed),\r\n' +
+    '  };\r\n' +
+    '}\r\n' +
+    '\r\n' +
+    'function chooseLesson<T extends { slug: string }>(lessons: T[], requestedSlug?: string): T | undefined {\r\n' +
+    '  if (requestedSlug) return lessons.find((lesson) => lesson.slug === requestedSlug);\r\n' +
+    '  return lessons[0];\r\n' +
+    '}\r\n' +
+    '\r\n' +
+    'const getCachedLessonCatalog = unstable_cache(async (courseSlug: string) => readDb((db) => db.select({\n' +
+    '  id: lessonTable.id,\n' +
+    '  moduleId: modules.id,\n' +
+    '  courseId: courseTable.id,\n' +
+    '  slug: lessonTable.slug,\r\n' +
+    '  title: lessonTable.title,\r\n' +
+    '  summary: lessonTable.summary,\r\n' +
+    '  situation: lessonTable.situation,\r\n' +
+    '  estimatedMinutes: lessonTable.estimatedMinutes,\r\n' +
+    '  isFree: lessonTable.isFree,\r\n' +
+    '  lessonOrder: lessonTable.sortOrder,\r\n' +
+    '  moduleSlug: modules.slug,\r\n' +
+    '  moduleTitle: modules.title,\r\n' +
+    '  moduleOrder: modules.sortOrder,\r\n' +
+    '})\r\n' +
+    '  .from(lessonTable)\r\n' +
+    '  .innerJoin(modules, eq(lessonTable.moduleId, modules.id))\r\n' +
+    '  .innerJoin(courseTable, eq(modules.courseId, courseTable.id))\r\n' +
+    '  .where(and(eq(courseTable.slug, courseSlug), eq(courseTable.status, "published"), eq(lessonTable.status, "published")))\r\n' +
+    '  .orderBy(asc(modules.sortOrder), asc(lessonTable.sortOrder))), ["published-lesson-catalog"], {\r\n' +
+    '  revalidate: 300,\r\n' +
+    '  tags: ["published-content"],\r\n' +
+    '});\r\n' +
+    '\r\n' +
+    'const getCachedLessonBody = unstable_cache(async (courseSlug: string, lessonId: string) => readDb(async (db) => {\r\n' +
+    '  const [contentRows, vocabularyRows] = await Promise.all([\r\n' +
+    '    db.select({ content: lessonTable.content })\r\n' +
+    '      .from(lessonTable)\r\n' +
+    '      .innerJoin(modules, eq(lessonTable.moduleId, modules.id))\r\n' +
+    '      .innerJoin(courseTable, eq(modules.courseId, courseTable.id))\r\n' +
+    '      .where(and(\r\n' +
+    '        eq(lessonTable.id, lessonId),\r\n' +
+    '        eq(lessonTable.status, "published"),\r\n' +
+    '        eq(courseTable.slug, courseSlug),\r\n' +
+    '        eq(courseTable.status, "published"),\r\n' +
+    '      ))\r\n' +
+    '      .limit(1),\r\n' +
+    '    db.select({\r\n' +
+    '      slug: vocabularyTable.slug,\r\n' +
+    '      hanzi: vocabularyTable.hanzi,\r\n' +
+    '      pinyin: vocabularyTable.pinyin,\r\n' +
+    '      meaning'... 9065 more characters
+  
+      at TestContext.<anonymous> (file:///D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tests/rendered-html.test.mjs:662:10)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'import { and, asc, desc, eq, isNull, lte, or } from "drizzle-orm";\r\nimport { unstable_cache } from "next/cache.js";\r\nimport { readDb } from "../db/index.ts";\r\nimport {\r\n  courses as courseTable,\r\n  lessons as lessonTable,\r\n  lessonVocabulary,\r\n  modules,\r\n  reviewItems,\r\n  vocabulary as vocabularyTable,\r\n} from "../db/schema.ts";\r\nimport { getPublishedCourse } from "./course-repository.ts";\nimport { getContentAccessPolicies } from "./content-access-repository.ts";\nimport {\n  learningLessonTarget,\n  learningModuleTarget,\n  learningPathTarget,\n  learningQuestionTarget,\n  resolveContentAccess,\n  type ContentAccessTarget,\n} from "./content-access-types.ts";\nimport { getLessonAccess, hasActiveVipAccess } from "./lesson-access.ts";\nimport { getLessonProgress } from "./progress-repository.ts";\r\nimport { coreWorkplaceLessons, coreWorkplaceModules } from "./core-workplace-course-seed.ts";\r\nimport { ecommerceLessons, ecommerceModules } from "./ecommerce-course-seed.ts";\r\nimport { factoryLessons, factoryModules } from "./factory-course-seed.ts";\nimport { highFrequencyLessons, highFrequencyModules } from "./high-frequency-course-seed.ts";\nimport { logisticsLessons, logisticsModules } from "./logistics-course-seed.ts";\r\nimport { officeLessons, officeModules } from "./office-course-seed.ts";\r\nimport { restaurantLessons, restaurantModules } from "./restaurant-course-seed.ts";\r\nimport { salesLessons, salesModules } from "./sales-course-seed.ts";\r\nimport type { CourseLessonSeed, CourseModuleSeed, CourseSeedBundle } from "./course-seed-types.ts";\r\nimport type {\r\n  ChallengeQuestion,\r\n  Course,\r\n  DialogueLine,\r\n  LessonAccess,\r\n  LessonContent,\r\n  LessonDetail,\r\n  LessonProgressState,\r\n  LessonSummary,\r\n  UsageNote,\r\n  Vocabulary,\r\n} from "./content-types.ts";\r\n\r\nconst courseSeedBundles = new Map<string, CourseSeedBundle>([\r\n  ["van-phong-hanh-chinh", { courseSlug: "van-phong-hanh-chinh", modules: officeModules, lessons: officeLessons }],\r\n  ["nha-may-san-xuat", { courseSlug: "nha-may-san-xuat", modules: factoryModules, lessons: factoryLessons }],\r\n  ["kho-van-logistics", { courseSlug: "kho-van-logistics", modules: logisticsModules, lessons: logisticsLessons }],\r\n  ["ban-hang-cham-soc-khach-hang", { courseSlug: "ban-hang-cham-soc-khach-hang", modules: salesModules, lessons: salesLessons }],\r\n  ["nha-hang-dich-vu", { courseSlug: "nha-hang-dich-vu", modules: restaurantModules, lessons: restaurantLessons }],\r\n  ["thuong-mai-dien-tu", { courseSlug: "thuong-mai-dien-tu", modules: ecommerceModules, lessons: ecommerceLessons }],\r\n  ["giao-tiep-cong-so", { courseSlug: "giao-tiep-cong-so", modules: coreWorkplaceModules, lessons: coreWorkplaceLessons }],\n  ["tieng-trung-tan-suat-cao", { courseSlug: "tieng-trung-tan-suat-cao", modules: highFrequencyModules, lessons: highFrequencyLessons }],\n]);\n\r\nexport type LessonPageData = {\r\n  course: Course;\r\n  lessons: LessonSummary[];\r\n  lesson: LessonDetail | null;\r\n  access: LessonAccess | null;\r\n  progress: LessonProgressState | null;\r\n  invalidLesson: boolean;\r\n};\r\n\r\nfunction isString(value: unknown): value is string {\r\n  return typeof value === "string";\r\n}\r\n\r\nfunction parseLessonContent(value: unknown): LessonContent {\n  if (!value || typeof value !== "object") return { dialogue: [], notes: [] };\n  const raw = value as { dialogue?: unknown; phrases?: unknown; notes?: unknown };\n\n  const parseLines = (lines: unknown) => Array.isArray(lines)\n    ? lines.filter((line): line is DialogueLine => {\n        if (!line || typeof line !== "object") return false;\n        const item = line as Record<string, unknown>;\n        return isString(item.speaker) && isString(item.hanzi) && isString(item.pinyin) && isString(item.translation);\n      })\n    : [];\n  const dialogue = parseLines(raw.dialogue);\n  const phrases = parseLines(raw.phrases);\n\r\n  const notes = Array.isArray(raw.notes)\r\n    ? raw.notes.filter((note): note is UsageNote => {\r\n        if (!note || typeof note !== "object") return false;\r\n        const item = note as Record<string, unknown>;\r\n        return isString(item.title) && isString(item.pattern) && isString(item.explanation);\r\n      })\r\n    : [];\r\n\r\n  let challenge: LessonContent["challenge"];\r\n  if ("challenge" in raw && raw.challenge && typeof raw.challenge === "object") {\r\n    const item = raw.challenge as Record<string, unknown>;\r\n    const questions = Array.isArray(item.questions)\n      ? item.questions.filter((question): question is ChallengeQuestion => {\n          if (!question || typeof question !== "object") return false;\r\n          const value = question as Record<string, unknown>;\r\n          return isString(value.prompt)\r\n            && Array.isArray(value.options)\r\n            && value.options.every(isString)\r\n            && typeof value.correctOption === "number"\r\n            && isString(value.explanation);\n        }).map((question, index) => ({\n          ...question,\n          id: isString(question.id) && question.id.trim() ? question.id.trim() : `question-${index + 1}`,\n          accessTier: question.accessTier === "vip" ? "vip" as const : "free" as const,\n        }))\n      : [];\n    if (isString(item.title) && isString(item.description) && typeof item.passScore === "number" && questions.length) {\r\n      challenge = { title: item.title, description: item.description, passScore: item.passScore, questions };\r\n    }\r\n  }\r\n\r\n  return { dialogue, ...(phrases.length ? { phrases } : {}), notes, ...(challenge ? { challenge } : {}) };\n}\n\nfunction toLessonAccess(state: ReturnType<typeof resolveContentAccess>): LessonAccess {\n  return {\n    allowed: state.allowed,\n    source: state.source,\n    requiredTier: state.requiredTier,\n    lockedAt: state.lockedAt ? `${state.lockedAt.type}:${state.lockedAt.key}` : null,\n  };\n}\n\nfunction lessonTargets(row: {\n  courseId: string;\n  moduleId: string;\n  id: string;\n  isFree: boolean;\n}): ContentAccessTarget[] {\n  return [\n    learningPathTarget(row.courseId),\n    learningModuleTarget(row.moduleId),\n    learningLessonTarget(row.id, row.isFree),\n  ];\n}\n\nasync function filterLessonQuestions({\n  content,\n  lessonId,\n  parentTargets,\n  viewerHasVip,\n}: {\n  content: LessonContent;\n  lessonId: string;\n  parentTargets: ContentAccessTarget[];\n  viewerHasVip: boolean;\n}): Promise<LessonContent> {\n  if (!content.challenge?.questions.length) return content;\n  const questions = content.challenge.questions.map((question, index) => ({\n    ...question,\n    id: question.id?.trim() || `question-${index + 1}`,\n  }));\n  const questionTargets = questions.map((question) => learningQuestionTarget(\n    lessonId,\n    question.id!,\n    question.accessTier ?? "free",\n  ));\n  const policies = await getContentAccessPolicies([...parentTargets, ...questionTargets]);\n  const filteredQuestions = questions.map((question, index): ChallengeQuestion => {\n    const access = resolveContentAccess({\n      targets: [...parentTargets, questionTargets[index]],\n      policies,\n      viewerHasVip,\n    });\n    return access.allowed ? question : {\n      id: question.id,\n      prompt: "Câu hỏi dành cho thành viên VIP",\n      options: [],\n      correctOption: -1,\n      explanation: "",\n      accessTier: "vip",\n      locked: true,\n    };\n  });\n  const accessibleCount = filteredQuestions.filter((question) => !question.locked).length;\n  return {\n    ...content,\n    challenge: {\n      ...content.challenge,\n      passScore: accessibleCount ? Math.min(content.challenge.passScore, accessibleCount) : content.challenge.passScore,\n      questions: filteredQuestions,\n    },\n  };\n}\n\r\nfunction toSummary(lesson: CourseLessonSeed, order: number, moduleSeeds: CourseModuleSeed[]): LessonSummary {\r\n  const moduleSeed = moduleSeeds.find((item) => item.slug === lesson.moduleSlug) ?? moduleSeeds[0];\r\n  return {\r\n    slug: lesson.slug,\r\n    title: lesson.title,\r\n    summary: lesson.summary,\r\n    situation: lesson.situation,\r\n    estimatedMinutes: lesson.estimatedMinutes,\r\n    isFree: lesson.isFree,\r\n    order,\r\n    moduleSlug: moduleSeed.slug,\r\n    moduleTitle: moduleSeed.title,\r\n    moduleOrder: moduleSeeds.indexOf(moduleSeed),\r\n  };\r\n}\r\n\r\nfunction chooseLesson<T extends { slug: string }>(lessons: T[], requestedSlug?: string): T | undefined {\r\n  if (requestedSlug) return lessons.find((lesson) => lesson.slug === requestedSlug);\r\n  return lessons[0];\r\n}\r\n\r\nconst getCachedLessonCatalog = unstable_cache(async (courseSlug: string) => readDb((db) => db.select({\n  id: lessonTable.id,\n  moduleId: modules.id,\n  courseId: courseTable.id,\n  slug: lessonTable.slug,\r\n  title: lessonTable.title,\r\n  summary: lessonTable.summary,\r\n  situation: lessonTable.situation,\r\n  estimatedMinutes: lessonTable.estimatedMinutes,\r\n  isFree: lessonTable.isFree,\r\n  lessonOrder: lessonTable.sortOrder,\r\n  moduleSlug: modules.slug,\r\n  moduleTitle: modules.title,\r\n  moduleOrder: modules.sortOrder,\r\n})\r\n  .from(lessonTable)\r\n  .innerJoin(modules, eq(lessonTable.moduleId, modules.id))\r\n  .innerJoin(courseTable, eq(modules.courseId, courseTable.id))\r\n  .where(and(eq(courseTable.slug, courseSlug), eq(courseTable.status, "published"), eq(lessonTable.status, "published")))\r\n  .orderBy(asc(modules.sortOrder), asc(lessonTable.sortOrder))), ["published-lesson-catalog"], {\r\n  revalidate: 300,\r\n  tags: ["published-content"],\r\n});\r\n\r\nconst getCachedLessonBody = unstable_cache(async (courseSlug: string, lessonId: string) => readDb(async (db) => {\r\n  const [contentRows, vocabularyRows] = await Promise.all([\r\n    db.select({ content: lessonTable.content })\r\n      .from(lessonTable)\r\n      .innerJoin(modules, eq(lessonTable.moduleId, modules.id))\r\n      .innerJoin(courseTable, eq(modules.courseId, courseTable.id))\r\n      .where(and(\r\n        eq(lessonTable.id, lessonId),\r\n        eq(lessonTable.status, "published"),\r\n        eq(courseTable.slug, courseSlug),\r\n        eq(courseTable.status, "published"),\r\n      ))\r\n      .limit(1),\r\n    db.select({\r\n      slug: vocabularyTable.slug,\r\n      hanzi: vocabularyTable.hanzi,\r\n      pinyin: vocabularyTable.pinyin,\r\n      meaning'... 9065 more characters,
+    expected: /getCachedPublishedPracticeVocabulary/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests\rendered-html.test.mjs:665:1
+✖ practice menu stays open until its Luyện tập trigger is clicked again (2.4699ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  3 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tests/rendered-html.test.mjs:677:10)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 3,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\rendered-html.test.mjs:719:1
+✖ course library uses eight editorial topic covers and a streamed catalog (1.3254ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Chọn đúng ngành, học đúng việc/. Input:
+  
+  'import type { Metadata } from "next";\n' +
+    'import { Suspense } from "react";\n' +
+    'import { CourseGridSkeleton } from "@/components/course-catalog-skeleton";\n' +
+    'import { CourseLibraryView, type CourseLibraryViewName } from "@/components/course-library-view";\n' +
+    'import { getCurrentUser } from "@/lib/auth-session";\n' +
+    'import { listPublishedCoursesForViewer } from "@/lib/course-repository";\n' +
+    'import { getHskCurriculumPageData } from "@/lib/hsk-access-repository";\n' +
+    '\n' +
+    'export const metadata: Metadata = {\n' +
+    '  title: "Giáo trình HSK & lộ trình chuyên ngành",\n' +
+    '  description: "Học theo cấp độ HSK hoặc chọn lộ trình tiếng Trung phù hợp với công việc của bạn.",\n' +
+    '};\n' +
+    '\n' +
+    'type CoursesSearchParams = {\n' +
+    '  view?: string | string[];\n' +
+    '};\n' +
+    '\n' +
+    'function firstValue(value: string | string[] | undefined) {\n' +
+    '  return Array.isArray(value) ? value[0] : value;\n' +
+    '}\n' +
+    '\n' +
+    'async function CourseCatalog({ userId }: { userId: string | null }) {\n' +
+    '  const courses = await listPublishedCoursesForViewer(userId);\n' +
+    '  return <CourseLibraryView courses={courses} hskCurriculum={[]} view="catalog" />;\n' +
+    '}\n' +
+    '\n' +
+    'export default async function CoursesPage({\n' +
+    '  searchParams = Promise.resolve({}),\n' +
+    '}: {\n' +
+    '  searchParams?: Promise<CoursesSearchParams>;\n' +
+    '}) {\n' +
+    '  const [params, user] = await Promise.all([searchParams, getCurrentUser()]);\n' +
+    '  const view: CourseLibraryViewName = firstValue(params.view) === "hsk" ? "hsk" : "catalog";\n' +
+    '  const hskCurriculum = view === "hsk" ? await getHskCurriculumPageData(user?.id ?? null) : [];\n' +
+    '\n' +
+    '  return <main className="course-library-page hsk-curriculum-page">\n' +
+    '    {view === "hsk" ? <CourseLibraryView courses={[]} hskCurriculum={hskCurriculum} view="hsk" /> : <div id="course-catalog">\n' +
+    '      <Suspense fallback={<CourseGridSkeleton />}><CourseCatalog userId={user?.id ?? null} /></Suspense>\n' +
+    '    </div>}\n' +
+    '  </main>;\n' +
+    '}\n'
+  
+      at TestContext.<anonymous> (file:///D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tests/rendered-html.test.mjs:725:10)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'import type { Metadata } from "next";\nimport { Suspense } from "react";\nimport { CourseGridSkeleton } from "@/components/course-catalog-skeleton";\nimport { CourseLibraryView, type CourseLibraryViewName } from "@/components/course-library-view";\nimport { getCurrentUser } from "@/lib/auth-session";\nimport { listPublishedCoursesForViewer } from "@/lib/course-repository";\nimport { getHskCurriculumPageData } from "@/lib/hsk-access-repository";\n\nexport const metadata: Metadata = {\n  title: "Giáo trình HSK & lộ trình chuyên ngành",\n  description: "Học theo cấp độ HSK hoặc chọn lộ trình tiếng Trung phù hợp với công việc của bạn.",\n};\n\ntype CoursesSearchParams = {\n  view?: string | string[];\n};\n\nfunction firstValue(value: string | string[] | undefined) {\n  return Array.isArray(value) ? value[0] : value;\n}\n\nasync function CourseCatalog({ userId }: { userId: string | null }) {\n  const courses = await listPublishedCoursesForViewer(userId);\n  return <CourseLibraryView courses={courses} hskCurriculum={[]} view="catalog" />;\n}\n\nexport default async function CoursesPage({\n  searchParams = Promise.resolve({}),\n}: {\n  searchParams?: Promise<CoursesSearchParams>;\n}) {\n  const [params, user] = await Promise.all([searchParams, getCurrentUser()]);\n  const view: CourseLibraryViewName = firstValue(params.view) === "hsk" ? "hsk" : "catalog";\n  const hskCurriculum = view === "hsk" ? await getHskCurriculumPageData(user?.id ?? null) : [];\n\n  return <main className="course-library-page hsk-curriculum-page">\n    {view === "hsk" ? <CourseLibraryView courses={[]} hskCurriculum={hskCurriculum} view="hsk" /> : <div id="course-catalog">\n      <Suspense fallback={<CourseGridSkeleton />}><CourseCatalog userId={user?.id ?? null} /></Suspense>\n    </div>}\n  </main>;\n}\n',
+    expected: /Chọn đúng ngành, học đúng việc/,
+    operator: 'match',
+    diff: 'simple'
+  }

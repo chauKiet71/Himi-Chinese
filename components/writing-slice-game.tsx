@@ -28,6 +28,7 @@ import {
   type ReactNode,
 } from "react";
 import { speakChinese, type GameWord } from "@/lib/game-content";
+import { useLearningData } from "@/components/learning-data-provider";
 import { createSliceDeck, normalizeSliceAnswer as normalizeAnswer, SLICE_HSK_COURSES, type SliceHskLevel } from "@/lib/slice-game";
 
 if (typeof window !== "undefined") gsap.registerPlugin(useGSAP);
@@ -95,6 +96,7 @@ type WritingSliceGameProps = {
 };
 
 export function WritingSliceGame(props: WritingSliceGameProps = {}) {
+  const learningData = useLearningData();
   const [session, setSession] = useState<{ level: SliceHskLevel; words: GameWord[] } | null>(null);
   const [loading, setLoading] = useState<SliceHskLevel | null>(null);
   const [error, setError] = useState("");
@@ -109,7 +111,7 @@ export function WritingSliceGame(props: WritingSliceGameProps = {}) {
     setLoading(level);
     setError("");
     try {
-      const response = await fetch(`/api/games/slice?level=${level}`, { signal: controller.signal });
+      const response = await learningData.get(`/api/games/slice?level=${level}`, { signal: controller.signal });
       if (!response.ok) {
         const problem = await response.json().catch(() => null) as { error?: string } | null;
         throw new Error(problem?.error ?? "Không thể tải từ vựng.");

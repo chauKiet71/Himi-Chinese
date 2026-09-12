@@ -86,7 +86,13 @@ function resultRedirect(result: MutationResult, successPath: string, errorPath: 
 }
 
 function invalid(path: string): never {
-  redirect(`${path}?error=invalid_input`);
+  redirect(`${path}${path.includes("?") ? "&" : "?"}error=invalid_input`);
+}
+
+function contentAccessReturnTo(value: string): string {
+  return /^\/admin\/access(?:\?level=[a-z0-9_-]+(?:&lesson=[a-z0-9_-]+)?)?$/iu.test(value)
+    ? value
+    : "/admin/access";
 }
 
 function courseInput(formData: FormData): CourseInput | null {
@@ -459,15 +465,15 @@ export async function updateContentAccessPolicyAction(formData: FormData) {
   const tierValue = valueString(formData, "tier", 10);
   const tier = (["free", "vip"] as AccessTier[]).find((value) => value === tierValue);
   const returnToValue = valueString(formData, "returnTo", 500);
-  const returnTo = /^\/admin(?:\/[a-z0-9_-]+)*$/iu.test(returnToValue) ? returnToValue : "/admin/access";
+  const returnTo = contentAccessReturnTo(returnToValue);
   if (!targetType || !targetKey || !tier) invalid(returnTo);
 
   await setContentAccessPolicy({ targetType, targetKey, tier, actorId: admin.id });
   revalidatePath("/courses");
   revalidatePath("/hsk", "layout");
-  revalidatePath(returnTo);
+  revalidatePath("/admin/access");
   revalidateTag("published-content", "max");
-  redirect(`${returnTo}?success=content_access_updated`);
+  redirect(`${returnTo}${returnTo.includes("?") ? "&" : "?"}success=content_access_updated`);
 }
 
 export async function createVocabularyAction(formData: FormData) {

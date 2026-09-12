@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useLearningData } from "@/components/learning-data-provider";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -143,6 +144,7 @@ export function WorkPracticeHub({
   weeklyChallenge: WeeklyChallenge;
 }) {
   const initialScenario = scenarios.find((scenario) => scenario.id === initialScenarioId) ?? scenarios[0];
+  const learningData = useLearningData();
   const [activeIndustry, setActiveIndustry] = useState<PracticeIndustryId>(initialScenario?.industry ?? industries[0]?.id ?? "office");
   const [selectedScenarioId, setSelectedScenarioId] = useState(initialScenario?.id ?? "");
   const [mode, setMode] = useState<HubMode>("catalog");
@@ -500,6 +502,7 @@ export function WorkPracticeHub({
         keepalive: true,
     }).then(async (response) => {
       if (!response.ok) throw new Error("Practice attempt save failed");
+      await learningData.invalidate("/api/progress/practice");
       const payload = await response.json() as { progress?: PracticeProgressSnapshot };
       if (payload.progress) {
         setCompletedScenarios(payload.progress.completedScenarioIds);

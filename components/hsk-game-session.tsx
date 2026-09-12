@@ -5,8 +5,9 @@ import Image from "next/image";
 import { createContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { createHskGameRound, HSK_GAME_ROUND_SIZE, type HskGameId } from "@/lib/hsk-game-round";
 import { SLICE_HSK_COURSES, type SliceHskLevel, type SliceVocabulary } from "@/lib/slice-game";
+import { useLearningData } from "@/components/learning-data-provider";
 
-export const HskGameCourseContext = createContext<{ exitLabel: string; label: string; onChangeCourse: () => void } | null>(null);
+export const HskGameCourseContext = createContext<{ exitLabel: string; onChangeCourse: () => void } | null>(null);
 
 const GAME_PICKER_DETAILS: Record<HskGameId, { image: string; imageAlt: string; skill: string }> = {
   memory: {
@@ -48,6 +49,7 @@ export function HskGameSession({ gameId, title, exitLabel, onExit, children }: {
   onExit: () => void;
   children: (words: SliceVocabulary[], onRestart: () => void) => ReactNode;
 }) {
+  const learningData = useLearningData();
   const [session, setSession] = useState<{ level: SliceHskLevel; vocabulary: SliceVocabulary[]; words: SliceVocabulary[]; run: number } | null>(null);
   const [loading, setLoading] = useState<SliceHskLevel | null>(null);
   const [error, setError] = useState("");
@@ -65,7 +67,7 @@ export function HskGameSession({ gameId, title, exitLabel, onExit, children }: {
     setLoading(level);
     setError("");
     try {
-      const response = await fetch(`/api/games/vocabulary?level=${level}`, { signal: controller.signal });
+      const response = await learningData.get(`/api/games/vocabulary?level=${level}`, { signal: controller.signal });
       if (!response.ok) {
         const problem = await response.json().catch(() => null) as { error?: string } | null;
         throw new Error(problem?.error ?? "Không thể tải từ vựng.");
@@ -96,8 +98,7 @@ export function HskGameSession({ gameId, title, exitLabel, onExit, children }: {
   };
 
   if (session) {
-    const label = SLICE_HSK_COURSES.find((course) => course.id === session.level)!.label;
-    return <HskGameCourseContext.Provider key={`${session.level}-${session.run}`} value={{ exitLabel, label, onChangeCourse: changeCourse }}>
+    return <HskGameCourseContext.Provider key={`${session.level}-${session.run}`} value={{ exitLabel, onChangeCourse: changeCourse }}>
       {children(session.words, restart)}
     </HskGameCourseContext.Provider>;
   }

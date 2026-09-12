@@ -5,6 +5,50 @@ import * as schema from "./schema.ts";
 let sqlClient: ReturnType<typeof postgres> | undefined;
 let database: ReturnType<typeof drizzle<typeof schema>> | undefined;
 
+const databaseUnavailableCodes = new Set([
+  "EACCES",
+  "ECONNREFUSED",
+  "ECONNRESET",
+  "EHOSTUNREACH",
+  "ENETUNREACH",
+  "ENOTFOUND",
+  "ETIMEDOUT",
+  "EAI_AGAIN",
+]);
+
+const databaseUnavailableMessages = [
+  "cannot connect to the specified address",
+  "connection refused",
+  "connection reset",
+  "connect timeout",
+  "network is unreachable",
+  "temporary failure in name resolution",
+];
+
+export function isDatabaseUnavailableError(error: unknown): boolean {
+  const pending = [error];
+  const visited = new Set<unknown>();
+
+  while (pending.length > 0 && visited.size < 12) {
+    const candidate = pending.shift();
+    if (!candidate || visited.has(candidate)) continue;
+    visited.add(candidate);
+
+    if (typeof candidate !== "object") continue;
+    const value = candidate as { code?: unknown; message?: unknown; cause?: unknown; errors?: unknown };
+    const code = typeof value.code === "string" ? value.code.toUpperCase() : "";
+    const message = typeof value.message === "string" ? value.message.toLowerCase() : "";
+
+    if (databaseUnavailableCodes.has(code)) return true;
+    if (databaseUnavailableMessages.some((fragment) => message.includes(fragment))) return true;
+
+    if (value.cause) pending.push(value.cause);
+    if (Array.isArray(value.errors)) pending.push(...value.errors);
+  }
+
+  return false;
+}
+
 function databaseErrorSummary(error: unknown, depth = 0): Record<string, unknown> {
   const candidate = error instanceof Error ? error : undefined;
   const code =
@@ -62,7 +106,10 @@ export async function withRequestDb<T>(operation: (db: Database) => PromiseLike<
   }
 }
 
-export async function readDb<T>(operation: (db: Database) => PromiseLike<T>): Promise<T> {
+export async function readDb<T>(
+  operation: (db: Database) => PromiseLike<T>,
+  { reportFailure = true }: { reportFailure?: boolean } = {},
+): Promise<T> {
   const retryDelays = [0, 100, 250];
   let lastError: unknown;
 
@@ -75,7 +122,7 @@ export async function readDb<T>(operation: (db: Database) => PromiseLike<T>): Pr
     }
   }
 
-  reportDatabaseError("read", lastError);
+  if (reportFailure) reportDatabaseError("read", lastError);
   throw lastError;
 }
 

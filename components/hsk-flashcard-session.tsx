@@ -25,6 +25,7 @@ import {
   getHskLessonProgressStorageKey,
   parseHskLessonProgress,
 } from "@/lib/hsk-lesson-progress";
+import { saveHskVocabularyWord } from "@/lib/saved-vocabulary-client";
 
 function saveRememberedWord(lessonId: string, wordId: string): void {
   try {
@@ -40,9 +41,10 @@ function saveRememberedWord(lessonId: string, wordId: string): void {
   }
 }
 
-export function HskFlashcardSession({ lesson, backHref }: {
+export function HskFlashcardSession({ lesson, backHref, authenticated = false }: {
   lesson: HskLessonContent;
   backHref: string;
+  authenticated?: boolean;
 }) {
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -66,6 +68,7 @@ export function HskFlashcardSession({ lesson, backHref }: {
 
     if (remembered) {
       saveRememberedWord(lesson.id, word.id);
+      if (authenticated) saveHskVocabularyWord(lesson, word);
       setRememberedIds((current) => current.includes(word.id) ? current : [...current, word.id]);
     }
 

@@ -13,6 +13,7 @@ import {
   type ListeningPerformanceTotals,
 } from "@/lib/listening-performance";
 import { formatPracticeReactionTime } from "@/lib/practice-performance";
+import { useLearningData } from "@/components/learning-data-provider";
 
 export function ListeningPerformanceSummary({
   authenticated,
@@ -21,6 +22,7 @@ export function ListeningPerformanceSummary({
   authenticated?: boolean;
   initialScenarioPerformance?: ListeningPerformanceTotals;
 }) {
+  const learningData = useLearningData();
   const [hskPerformance, setHskPerformance] = useState<ListeningPerformanceTotals>(emptyListeningPerformance);
   const [scenarioPerformance, setScenarioPerformance] = useState<ListeningPerformanceTotals>(
     authenticated ? initialScenarioPerformance : emptyListeningPerformance,
@@ -41,8 +43,7 @@ export function ListeningPerformanceSummary({
           return;
         }
         if (authenticated === undefined) {
-          const response = await fetch("/api/progress/practice", {
-            cache: "no-store",
+          const response = await learningData.get("/api/progress/practice", {
             signal: controller.signal,
           });
           if (!response.ok) {
@@ -74,7 +75,7 @@ export function ListeningPerformanceSummary({
 
     void loadPerformance();
     return () => controller.abort();
-  }, [authenticated]);
+  }, [authenticated, learningData]);
 
   const totals = useMemo(
     () => combineListeningPerformance(scenarioPerformance, hskPerformance),

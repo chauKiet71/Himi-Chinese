@@ -339,6 +339,15 @@ body:has(.hsk-guided-page) > .himi-chatbot-widget {
 
 .hsk-guided-word-glyph > span { color: #f13f2d; font-size: 31px; font-weight: 820; line-height: 1; }
 
+.hsk-guided-word-meta {
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .hsk-guided-audio {
   width: 70px;
   height: 70px;
@@ -357,7 +366,7 @@ body:has(.hsk-guided-page) > .himi-chatbot-widget {
 .hsk-guided-word-class {
   width: fit-content;
   min-height: 30px;
-  margin: 2px auto 0;
+  margin: 0;
   padding: 0 16px;
   display: flex;
   align-items: center;
@@ -367,6 +376,34 @@ body:has(.hsk-guided-page) > .himi-chatbot-widget {
   font-size: 12px;
   font-weight: 720;
 }
+
+.hsk-guided-save-word {
+  min-height: 36px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  cursor: pointer;
+  color: #e74632;
+  border: 1px solid #ffc8bd;
+  border-radius: 999px;
+  background: #fff6f3;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: border-color .18s ease, background .18s ease, color .18s ease, transform .18s ease;
+}
+
+.hsk-guided-save-word:hover:not(:disabled) { border-color: #ff927d; background: #ffece7; transform: translateY(-1px); }
+.hsk-guided-save-word.is-saved { cursor: default; color: #087a57; border-color: #bde6d7; background: #eaf8f2; }
+.hsk-guided-save-word.is-error { color: #b9372a; border-color: #f4afa5; background: #fff0ed; }
+.hsk-guided-save-word:disabled { opacity: .78; }
+.hsk-guided-save-spinner { animation: hsk-guided-save-spin .75s linear infinite; }
+.hsk-guided-save-error { margin: 9px auto 0; color: #b9372a; font-size: 12px; text-align: center; }
+
+@keyframes hsk-guided-save-spin { to { transform: rotate(360deg); } }
 
 .hsk-guided-word-grid {
   margin-top: 50px;

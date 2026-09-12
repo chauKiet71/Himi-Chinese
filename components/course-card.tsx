@@ -35,7 +35,8 @@ export function CourseCard({ course, priority = false }: { course: Course; prior
     return <article className="course-card course-card-coming" aria-label={`${course.title} đang được biên soạn`}>{content}</article>;
   }
 
-  if (!vipLocked) return <Link className="course-card" href={`/courses/${course.slug}`} prefetch>{content}</Link>;
+  // Load the roadmap on click: eager RSC prefetch can leave navigation stuck on the catalog.
+  if (!vipLocked) return <Link className="course-card" href={`/courses/${course.slug}`} prefetch={false}>{content}</Link>;
 
   return <>
     <button className="course-card course-card-trigger is-vip-locked" onClick={() => setUpgradeTarget({ kind: "Lộ trình", title: course.title })} type="button">{content}</button>

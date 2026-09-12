@@ -1,0 +1,1 @@
+ALTER TABLE "review_items" ADD COLUMN "is_saved" boolean DEFAULT true NOT NULL;

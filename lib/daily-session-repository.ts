@@ -1,7 +1,7 @@
 import "server-only";
 
 import { and, asc, desc, eq, gte, lt } from "drizzle-orm";
-import { readDb } from "../db/index.ts";
+import { isDatabaseUnavailableError, readDb } from "../db/index.ts";
 import {
   courses,
   gameAttempts,
@@ -137,12 +137,19 @@ export async function getDailySessionSource(
       practiceRows,
       gameRows,
     };
-  });
+  }, { reportFailure: false });
 
-  const [hasVip, activity] = await Promise.all([
+  const activityResult = await Promise.all([
     userId ? hasActiveVipAccess(userId) : Promise.resolve(false),
     activityPromise,
-  ]);
+  ]).catch((error: unknown) => {
+    if (!isDatabaseUnavailableError(error)) throw error;
+    console.warn("[daily-session] database unavailable; using the default session");
+    return null;
+  });
+  if (!activityResult) return defaultDailySessionSource;
+
+  const [hasVip, activity] = activityResult;
   const completedLessonIds = new Set(activity.lessonRows
     .filter((row) => row.completionPercent >= 100)
     .map((row) => row.lessonId));

@@ -3188,7 +3188,7 @@ body:has(.admin-page) > .mobile-nav {
 .game-journey-featured-card button {
   min-height: 48px;
   margin-top: 17px;
-  padding: 0 18px;
+  padding: 0 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3196,18 +3196,37 @@ body:has(.admin-page) > .mobile-nav {
   cursor: pointer;
   color: #fff;
   border: 0;
-  border-radius: 13px;
+  border-radius: 16px;
   background: #ff5c57;
-  box-shadow: 0 12px 24px rgba(220, 79, 73, .2);
+  box-shadow: 0 4px 12px rgba(220, 79, 73, .16), inset 0 1px 0 rgba(255, 255, 255, .18);
   font: inherit;
-  font-size: 11px;
-  font-weight: 820;
-  transition: transform .2s ease, box-shadow .2s ease;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.2;
+  transition: background-color 220ms ease, transform 320ms cubic-bezier(.22, 1, .36, 1), box-shadow 320ms ease;
 }
 
-.game-journey-featured-card button:hover {
-  box-shadow: 0 15px 28px rgba(220, 79, 73, .25);
-  transform: translateY(-2px);
+.game-journey-featured-card button > svg {
+  flex-shrink: 0;
+}
+
+@media (hover: hover) {
+  .game-journey-featured-card button:hover {
+    background-color: color-mix(in srgb, var(--himi-red, #ff5c57) 92%, #b52b27);
+    transform: translateY(-3px);
+    box-shadow: 0 9px 20px rgba(220, 79, 73, .22), inset 0 1px 0 rgba(255, 255, 255, .18);
+  }
+}
+
+.game-journey-featured-card button:active {
+  transform: scale(.98);
+  box-shadow: 0 2px 6px rgba(220, 79, 73, .14);
+}
+
+.game-journey-featured-card button:focus-visible {
+  outline: 2px solid var(--himi-red, #ff5c57);
+  outline-offset: 3px;
+  box-shadow: 0 4px 12px rgba(220, 79, 73, .16);
 }
 
 .game-journey-guide {
@@ -4718,9 +4737,16 @@ a.roadmap-lesson-row:hover { color: #0b665c; background: #f5faf8; }
 .admin-access-tree details { border: 1px solid var(--line); border-radius: 12px; background: #fcfdfc; }
 .admin-access-tree summary { padding: 14px 16px; cursor: pointer; color: var(--ink); font-weight: 750; }
 .admin-access-tree details > div { padding: 0 16px 16px; display: grid; gap: 14px; }
+.admin-access-list { display: grid; gap: 14px; }
+.admin-access-breadcrumbs { margin-bottom: 14px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 12px; }
+.admin-access-breadcrumbs a { display: inline-flex; align-items: center; gap: 6px; color: var(--forest); font-weight: 750; }
+.admin-access-breadcrumbs strong { color: var(--ink); }
 .admin-access-node { padding: 14px; display: grid; gap: 12px; border-left: 3px solid #d8e8e1; border-radius: 8px; background: #fff; }
 .admin-access-node > header { display: flex; justify-content: space-between; gap: 12px; }
 .admin-access-node > header span { color: var(--muted); font-size: 11px; }
+.admin-access-parent-node { margin-bottom: 16px; border-left-color: var(--forest); background: #fbfdfc; }
+.admin-access-open { min-height: 40px; padding: 9px 12px; display: inline-flex; align-items: center; justify-content: center; justify-self: end; gap: 7px; color: var(--forest); border: 1px solid #d8e8e1; border-radius: 9px; background: #f7fbf9; font-size: 11px; font-weight: 800; }
+.admin-access-open:hover { border-color: var(--forest); background: #eef7f3; }
 .admin-access-group { display: grid; gap: 10px; }
 .admin-access-group h3,
 .admin-access-group-title { margin: 4px 0 0; color: var(--forest); font-size: 13px; font-weight: 800; letter-spacing: .035em; }
@@ -4729,6 +4755,7 @@ a.roadmap-lesson-row:hover { color: #0b665c; background: #f5faf8; }
   .admin-access-form { grid-template-columns: 1fr; align-items: stretch; }
   .admin-access-form .button { justify-self: stretch; }
   .admin-access-node > header { display: grid; }
+  .admin-access-open { justify-self: stretch; }
 }
 .admin-check { width: fit-content; display: flex !important; grid-template-columns: auto 1fr; align-items: center; gap: 8px !important; }
 .admin-check input, .admin-delete-form input, .vocabulary-picker input { accent-color: var(--forest); }
@@ -10824,10 +10851,6 @@ body:has(.learner-app-shell) > .mobile-nav {
 }
 
 /* Writing slice game — bamboo reaction training */
-.game-hsk-course-bar { width: 100%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 10px 14px; margin-bottom: 10px; border-radius: 16px; background: #fffdf5; color: #203f35; font-size: 14px; }
-.game-hsk-course-bar > span { min-width: 0; overflow-wrap: anywhere; }
-.game-hsk-course-bar button { display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1px solid #cee0cd; border-radius: 10px; cursor: pointer; color: #176d59; font-weight: 700; }
-.game-hsk-course-bar button:focus-visible { outline: 3px solid #32866b; outline-offset: 3px; }
 .game-session-world .memory-grid button > span,
 .game-session-world .connect-board button > span,
 .game-session-world .quiz-options button > span,

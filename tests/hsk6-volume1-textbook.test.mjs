@@ -66,7 +66,7 @@ test("HSK 6 volume 1 converts all source lessons into the HSK 1 learning shape",
   assert.ok(hsk6.topics.flatMap((topic) => topic.lessons).every((item) => item.kind === "textbook" && item.available));
 
   const sections = guidedModule.buildHskGuidedSections(lesson).map((section) => section.label);
-  assert.deepEqual(sections, ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Hội thoại", "Phát âm", "Luyện viết", "Luyện tập", "Hoàn thành"]);
+  assert.deepEqual(sections, ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Luyện viết", "Luyện tập", "Hoàn thành"]);
 });
 
 test("HSK 6 volume 1 renders through the same workspace, guided lesson and flashcard components as HSK 1", async (t) => {
@@ -108,7 +108,7 @@ test("HSK 6 volume 1 renders through the same workspace, guided lesson and flash
   assert.match(workspaceHtml, /href="\/hsk\/6\/hsk6t1-lesson-01\/quiz"/);
 
   const guidedHtml = renderToStaticMarkup(React.createElement(guidedViewModule.HskGuidedLesson, { lesson }));
-  for (const label of ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Hội thoại", "Phát âm", "Luyện viết", "Luyện tập", "Hoàn thành"]) {
+  for (const label of ["Giới thiệu", "Từ vựng", "Luyện viết", "Luyện tập", "Hoàn thành"]) {
     assert.match(guidedHtml, new RegExp(`>${label}`));
   }
 

@@ -194,20 +194,21 @@ function GameFrame({
 }) {
   const course = useContext(HskGameCourseContext);
   const exitLabel = course?.exitLabel ?? "Tất cả trò chơi";
+  const backAction = course?.onChangeCourse ?? onExit;
+  const backLabel = course
+    ? "Quay lại chọn khóa HSK"
+    : exitLabel === "Trở lại" ? "Trở về trang trước" : "Quay lại tất cả trò chơi";
+  const backText = course ? "Chọn khóa HSK" : exitLabel;
   return (
     <main className="learner-dashboard game-center-dashboard game-session-dashboard game-immersive-dashboard">
       <div className="game-center-shell game-session-shell">
-        {course ? <div className="game-hsk-course-bar">
-          <span><strong>{course.label}</strong> · {title}</span>
-          <button onClick={course.onChangeCourse} type="button"><ArrowLeft size={16} /> Đổi khóa HSK</button>
-        </div> : null}
         <section aria-label={title} className={`game-session-world is-${gameId}`} data-session-game={gameId}>
           <div className="game-session-sr-copy">
             <h1>{title}</h1>
             <p>{description}</p>
           </div>
           <div className="game-session-hud">
-            <button aria-label={exitLabel === "Trở lại" ? "Trở về trang trước" : "Quay lại tất cả trò chơi"} className="game-back-button" onClick={onExit} type="button"><ArrowLeft size={17} /><span>{exitLabel}</span></button>
+            <button aria-label={backLabel} className="game-back-button" onClick={backAction} type="button"><ArrowLeft size={17} /><span>{backText}</span></button>
             <div className="game-session-metrics" aria-label="Tiến độ trò chơi">
               <span><Target aria-hidden="true" size={22} /><span><small>TIẾN ĐỘ</small><strong>{progress}</strong></span></span>
               <span><Star aria-hidden="true" size={22} /><span><small>ĐIỂM</small><strong>{score}</strong></span></span>

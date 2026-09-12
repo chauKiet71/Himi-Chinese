@@ -36,6 +36,7 @@ import {
   parseHskLessonProgress,
   type HskLessonProgress,
 } from "@/lib/hsk-lesson-progress";
+import { saveHskVocabularyWord } from "@/lib/saved-vocabulary-client";
 
 type SpeechRate = 0.75 | 1 | 1.25;
 type WritingMode = "watch" | "trace" | "quiz";
@@ -63,12 +64,14 @@ function VocabularyPanel({
   words,
   completed,
   onComplete,
+  onSave,
   onContinue,
   speak,
 }: {
   words: HskVocabularyItem[];
   completed: string[];
   onComplete: (wordId: string) => void;
+  onSave: (word: HskVocabularyItem) => void;
   onContinue: () => void;
   speak: (text: string, rate?: SpeechRate) => void;
 }) {
@@ -103,7 +106,10 @@ function VocabularyPanel({
   }, [move]);
 
   const rateWord = (remembered: boolean) => {
-    if (remembered) onComplete(word.id);
+    if (remembered) {
+      onComplete(word.id);
+      onSave(word);
+    }
     if (index === words.length - 1) onContinue();
     else move(1);
   };
@@ -453,10 +459,11 @@ function HanziPanel({
   </section>;
 }
 
-export function HskLessonWorkspace({ lesson, initialMode = "vocabulary", showLaunchActions = true }: {
+export function HskLessonWorkspace({ lesson, initialMode = "vocabulary", showLaunchActions = true, authenticated = false }: {
   lesson: HskLessonContent;
   initialMode?: HskLessonMode;
   showLaunchActions?: boolean;
+  authenticated?: boolean;
 }) {
   const availableTabs = TABS.filter((tab) => {
     if (tab.id === "vocabulary") return lesson.vocabulary.length > 0;
@@ -506,8 +513,12 @@ export function HskLessonWorkspace({ lesson, initialMode = "vocabulary", showLau
     window.speechSynthesis.speak(utterance);
   }, []);
 
+  const saveWord = useCallback((word: HskVocabularyItem) => {
+    if (authenticated) saveHskVocabularyWord(lesson, word);
+  }, [authenticated, lesson]);
+
   const panel = activeTab === "vocabulary"
-    ? <VocabularyPanel completed={progress.vocabulary} onComplete={(id) => commitProgress((current) => ({ ...current, vocabulary: addUnique(current.vocabulary, id) }))} onContinue={() => setActiveTab("exercise")} speak={speak} words={lesson.vocabulary} />
+    ? <VocabularyPanel completed={progress.vocabulary} onComplete={(id) => commitProgress((current) => ({ ...current, vocabulary: addUnique(current.vocabulary, id) }))} onSave={saveWord} onContinue={() => setActiveTab("exercise")} speak={speak} words={lesson.vocabulary} />
     : activeTab === "exercise"
       ? <ExercisePanel bestPercent={progress.exerciseBestPercent} exercises={lesson.exercises} onFinished={(percent) => commitProgress((current) => ({ ...current, exerciseBestPercent: Math.max(current.exerciseBestPercent, percent) }))} onReview={(id) => commitProgress((current) => ({ ...current, reviewedExercises: addUnique(current.reviewedExercises, id) }))} reviewed={progress.reviewedExercises} speak={speak} />
       : activeTab === "pronunciation"

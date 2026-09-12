@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import os from "node:os";
 import path from "node:path";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -22,16 +23,12 @@ test("guided HSK lesson builds its journey from the textbook section counts", as
 
   assert.equal(exercises.length, lesson.vocabulary.length);
   assert.ok(exercises.every((exercise) => exercise.answer && exercise.options.includes(exercise.answer)));
-  assert.equal(steps.length, 19);
+  assert.equal(steps.length, 15);
   assert.deepEqual(
     steps.map((step) => step.kind),
     [
       "introduction",
       ...Array(6).fill("vocabulary"),
-      "dialogue",
-      "dialogue",
-      "dialogue",
-      "pronunciation",
       "writing",
       ...Array(6).fill("practice"),
       "complete",
@@ -42,8 +39,6 @@ test("guided HSK lesson builds its journey from the textbook section counts", as
     [
       ["Giới thiệu", undefined],
       ["Từ vựng", 6],
-      ["Hội thoại", 3],
-      ["Phát âm", undefined],
       ["Luyện viết", undefined],
       ["Luyện tập", 6],
       ["Hoàn thành", undefined],
@@ -138,16 +133,32 @@ test("guided HSK lesson exposes progress, controls, sections and step navigation
 
   assert.match(html, /aria-label="Thoát bài học"/);
   assert.match(html, /aria-valuenow="1"/);
-  assert.match(html, /1 \/ 19/);
+  assert.match(html, /1 \/ 15/);
   assert.match(html, /Ẩn pinyin/);
   assert.match(html, /0\.75×/);
   assert.match(html, /Từ vựng/);
   assert.doesNotMatch(html, /<span>Ngữ pháp<\/span>/);
   assert.doesNotMatch(html, /<span>Hội thoại<\/span>/);
   assert.doesNotMatch(html, /<span>Phát âm<\/span>/);
+  assert.doesNotMatch(html, /hội thoại/);
+  assert.doesNotMatch(html, /Trọng tâm ghép âm và thanh điệu/);
   assert.match(html, /Luyện viết/);
   assert.match(html, /Luyện tập/);
   assert.match(html, /Hoàn thành/);
   assert.match(html, />Trước</);
   assert.match(html, />Tiếp</);
+});
+
+test("guided HSK vocabulary exposes the save-word control and account-aware persistence", async () => {
+  const [component, page, client] = await Promise.all([
+    readFile(new URL("../components/hsk-guided-lesson.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/hsk/[level]/[lesson]/play/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../lib/saved-vocabulary-client.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(component, /"Lưu từ"/);
+  assert.match(component, /"Đã lưu"/);
+  assert.match(component, /trySaveHskVocabularyWord/);
+  assert.match(page, /authenticated=\{Boolean\(user\)\}/);
+  assert.match(client, /return response\.ok/);
 });
