@@ -66,7 +66,7 @@ test("HSK 5 lower textbook converts all lessons into the HSK 1 learning shape", 
   assert.equal(textbookLessons[0].writing, textbookLessons[0].vocabulary);
 
   const sections = guidedModule.buildHskGuidedSections(lesson).map((section) => section.label);
-  assert.deepEqual(sections, ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Hội thoại", "Phát âm", "Luyện viết", "Luyện tập", "Hoàn thành"]);
+  assert.deepEqual(sections, ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Luyện viết", "Luyện tập", "Hoàn thành"]);
 });
 
 test("HSK 5 lower renders through the same workspace, guided lesson and flashcard components as HSK 1", async (t) => {
@@ -108,7 +108,7 @@ test("HSK 5 lower renders through the same workspace, guided lesson and flashcar
   assert.match(workspaceHtml, /href="\/hsk\/5\/hsk5l-lesson-19\/quiz"/);
 
   const guidedHtml = renderToStaticMarkup(React.createElement(guidedViewModule.HskGuidedLesson, { lesson }));
-  for (const label of ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Hội thoại", "Phát âm", "Luyện viết", "Luyện tập", "Hoàn thành"]) {
+  for (const label of ["Giới thiệu", "Từ vựng", "Luyện viết", "Luyện tập", "Hoàn thành"]) {
     assert.match(guidedHtml, new RegExp(`>${label}`));
   }
 

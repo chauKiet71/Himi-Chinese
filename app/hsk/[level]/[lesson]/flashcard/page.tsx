@@ -16,5 +16,5 @@ export default async function HskFlashcardPage({ params }: PageProps) {
   if (!data) notFound();
   if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
   if (!data.lesson.vocabulary.length) notFound();
-  return <HskFlashcardSession backHref={getHskLessonHref(data.lesson.levelId, data.lesson.id)} lesson={data.lesson} />;
+  return <HskFlashcardSession authenticated={Boolean(user)} backHref={getHskLessonHref(data.lesson.levelId, data.lesson.id)} lesson={data.lesson} />;
 }

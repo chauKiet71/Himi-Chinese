@@ -1,0 +1,156 @@
+Test-Path: C:\Program Files\nodejs\npm.ps1:23
+Line |
+  23 |  if (Test-Path $NPM_PREFIX_NPM_CLI_JS) {
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Access to the path 'C:\Users\DELL\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js' is denied.
+
+
+> hanziwork-prototype@0.1.0 build
+> vinext build
+
+
+  vinext build  (Vite 8.0.13)
+
+[1/5] analyze client references...
+[2K
+transforming...✓ 676 modules transformed.
+rendering chunks...
+Using secrets defined in .env
+[PLUGIN_TIMINGS] Your build spent significant time in plugins. Here is a breakdown:
+  - vinext:react-canary (26%)
+  - rsc:virtual-client-package (23%)
+  - vinext:optimize-imports (6%)
+  - vinext:og-font-patch (6%)
+  - vinext:config (5%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+✓ built in 6.15s
+[2/5] analyze server references...
+[2K
+transforming...✓ 765 modules transformed.
+rendering chunks...
+✓ built in 898ms
+[3/5] build rsc environment...
+[2K
+transforming...✓ 930 modules transformed.
+rendering chunks...
+Using secrets defined in .env
+computing gzip size...
+[PLUGIN_TIMINGS] Your build spent significant time in plugins. Here is a breakdown:
+  - rsc:virtual-client-package (67%)
+  - vinext:react-canary (6%)
+  - vinext:rsc-client-reference-loaders (5%)
+  - rsc:use-client (2%)
+  - vinext:optimize-imports (2%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+✓ built in 5.47s
+[4/5] build client environment...
+[2K
+transforming...✓ 2429 modules transformed.
+rendering chunks...
+computing gzip size...
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.79s
+[5/5] build ssr environment...
+[2K
+transforming...✓ 772 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 1.57s
+[0m
+  Route (app)
+  ┌ ? /                                      
+  ├ ? /account                               
+  ├ ? /admin                                 
+  ├ ? /admin/access                          
+  ├ ? /admin/analytics                       
+  ├ ? /admin/courses                         
+  ├ ƒ /admin/courses/:courseId               
+  ├ ƒ /admin/lessons/:lessonId               
+  ├ ? /admin/login                           
+  ├ ? /admin/mfa                             
+  ├ ƒ /admin/modules/:moduleId               
+  ├ ? /admin/practice                        
+  ├ ƒ /admin/practice/industries/:industryId 
+  ├ ƒ /admin/practice/scenarios/:scenarioId  
+  ├ ? /admin/subscriptions                   
+  ├ ? /admin/team                            
+  ├ ? /admin/users                           
+  ├ ? /admin/vocabulary                      
+  ├ ƒ /admin/vocabulary/:vocabularyId        
+  ├ λ /api/account/avatar                    
+  ├ λ /api/admin/practice-audio              
+  ├ λ /api/admin/users/export                
+  ├ λ /api/auth/admin-mfa                    
+  ├ λ /api/auth/change-password              
+  ├ λ /api/auth/forgot-password              
+  ├ λ /api/auth/login                        
+  ├ λ /api/auth/logout                       
+  ├ λ /api/auth/register                     
+  ├ λ /api/auth/resend-verification          
+  ├ λ /api/auth/reset-password               
+  ├ λ /api/auth/verify-email                 
+  ├ λ /api/games/slice                       
+  ├ λ /api/games/vocabulary                  
+  ├ λ /api/health                            
+  ├ λ /api/media/practice-audio/:assetId     
+  ├ λ /api/payments/sepay/orders             
+  ├ λ /api/payments/sepay/orders/:orderId    
+  ├ λ /api/progress/game                     
+  ├ λ /api/progress/lesson/complete          
+  ├ λ /api/progress/lesson/open              
+  ├ λ /api/progress/practice                 
+  ├ λ /api/progress/review                   
+  ├ λ /api/saved-vocabulary                  
+  ├ λ /api/speech/iflytek/authorize          
+  ├ λ /api/support/conversations             
+  ├ λ /api/support/conversations/:id         
+  ├ λ /api/support/conversations/:id/messages
+  ├ λ /api/support/images                    
+  ├ λ /api/support/images/:id                
+  ├ λ /api/telegram/webhook                  
+  ├ λ /api/vocabulary-sets                   
+  ├ λ /api/vocabulary-sets/:setId            
+  ├ λ /api/webhooks/sepay                    
+  ├ ? /courses                               
+  ├ ƒ /courses/:slug                         
+  ├ ? /forgot-password                       
+  ├ ? /games                                 
+  ├ ƒ /hsk/:level/:lesson                    
+  ├ ƒ /hsk/:level/:lesson/flashcard          
+  ├ ƒ /hsk/:level/:lesson/play               
+  ├ ƒ /hsk/:level/:lesson/quiz               
+  ├ ƒ /learn/:slug                           
+  ├ ? /listening                             
+  ├ ? /login                                 
+  ├ ? /notifications                         
+  ├ ? /practice                              
+  ├ ? /privacy                               
+  ├ ? /register                              
+  ├ ? /reset-password                        
+  ├ ? /terms                                 
+  ├ ? /verify-email                          
+  ├ ? /videos                                
+  ├ ƒ /videos/:slug                          
+  ├ ? /vip                                   
+  ├ ? /vocabulary                            
+  ├ ƒ /vocabulary/:setId                     
+  ├ ƒ /vocabulary/:setId/study/:mode         
+  ├ ? /writing                               
+  ├ ƒ /writing/:level                        
+  ├ ƒ /writing/:level/:lesson/practice       
+  └ ƒ /writing/:level/practice               
+
+  λ API  ƒ Dynamic  ? Unknown
+
+  ? Some routes could not be classified. vinext currently uses static analysis
+    and cannot detect dynamic API usage (headers(), cookies(), etc.) at build time.
+    Automatic classification will be improved in a future release.
+
+  Build complete. Run `vinext start` to start the production server.
+

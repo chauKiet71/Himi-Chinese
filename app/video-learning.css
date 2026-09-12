@@ -299,7 +299,7 @@
   margin-top: 25px;
   padding: 10px;
   display: grid;
-  grid-template-columns: minmax(250px, 340px) minmax(0, 1fr);
+  grid-template-columns: minmax(300px, 408px) minmax(0, 1fr);
   gap: 12px;
   border: 1px solid #dfe8e3;
   border-radius: 16px;
@@ -307,18 +307,17 @@
 }
 
 .video-catalog-tools form {
-  min-height: 44px;
   padding: 0 13px;
   display: flex;
   align-items: center;
   gap: 9px;
   color: #6a7d77;
-  border: 1px solid #d6e1db;
+  border: 0;
   border-radius: 11px;
   background: #fff;
 }
 
-.video-catalog-tools input { width: 100%; min-width: 0; border: 0; outline: 0; color: #153f37; background: transparent; font: inherit; font-size: 12px; }
+.video-catalog-tools input { width: 100%; min-width: 0; border: 0; outline: 0; color: #153f37; background: transparent; font: inherit; font-size: 14.4px; }
 .video-category-filters { min-width: 0; display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; }
 .video-category-filters::-webkit-scrollbar { display: none; }
 
@@ -762,7 +761,11 @@
 .himi-learning-player.is-compact .interactive-transcript-heading h2 { font-size: 17px; }
 .lesson-content-card-video .lesson-complete-row { margin-top: 20px; }
 
-.video-catalog-tools input:focus-visible,
+.video-catalog-tools input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .video-category-filters button:focus-visible,
 .learning-video-thumbnail:focus-visible,
 .video-player-options button:focus-visible,

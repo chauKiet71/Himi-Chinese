@@ -6,15 +6,15 @@ import type HanziWriter from "hanzi-writer";
 import {
   ArrowLeft,
   ArrowRight,
+  Bookmark,
   BookOpen,
   Check,
   GraduationCap,
   Headphones,
   Lightbulb,
   LockKeyhole,
-  MessageCircle,
+  LoaderCircle,
   PenLine,
-  Play,
   RotateCcw,
   Sparkles,
   Target,
@@ -24,23 +24,23 @@ import {
 } from "lucide-react";
 import type { HskExercise, HskLessonContent, HskVocabularyItem } from "@/lib/hsk-lesson-content";
 import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
-import { buildHskGuidedExercises, buildHskGuidedLessonSteps, buildHskGuidedSections, type HskGuidedStepKind } from "@/lib/hsk-guided-lesson";
+import { buildHskGuidedExercises, buildHskGuidedLessonSteps, buildHskGuidedNavigationSections, buildHskGuidedSections, type HskGuidedStepKind } from "@/lib/hsk-guided-lesson";
 import {
   EMPTY_HSK_LESSON_PROGRESS,
   getHskLessonProgressStorageKey,
   parseHskLessonProgress,
   type HskLessonProgress,
 } from "@/lib/hsk-lesson-progress";
+import { trySaveHskVocabularyWord } from "@/lib/saved-vocabulary-client";
 
 type SpeechRate = 0.75 | 1 | 1.25;
 type WritingMode = "watch" | "trace" | "quiz";
+type VocabularySaveStatus = "idle" | "saving" | "saved" | "error";
 
 const SECTION_ICONS = {
   introduction: BookOpen,
   vocabulary: Sparkles,
   grammar: GraduationCap,
-  dialogue: MessageCircle,
-  pronunciation: Headphones,
   writing: PenLine,
   practice: Target,
   complete: Trophy,
@@ -58,7 +58,6 @@ function GuidedIntroduction({ lesson, exerciseCount }: { lesson: HskLessonConten
   const stats = [
     lesson.vocabulary.length ? { icon: BookOpen, value: lesson.vocabulary.length, label: "từ vựng" } : null,
     lesson.grammar.length ? { icon: GraduationCap, value: lesson.grammar.length, label: "ngữ pháp" } : null,
-    lesson.dialogues.length ? { icon: MessageCircle, value: lesson.dialogues.length, label: "hội thoại" } : null,
     exerciseCount ? { icon: Target, value: exerciseCount, label: "bài tập" } : null,
     { icon: Target, value: `~${lesson.minutes}`, label: "phút học" },
   ].filter((item): item is NonNullable<typeof item> => item !== null);
@@ -74,22 +73,12 @@ function GuidedIntroduction({ lesson, exerciseCount }: { lesson: HskLessonConten
   </section>;
 }
 
-function GuidedUnavailableSection({ kind }: { kind: "vocabulary" | "dialogue" | "pronunciation" | "writing" }) {
+function GuidedUnavailableSection({ kind }: { kind: "vocabulary" | "writing" }) {
   const copy = {
     vocabulary: {
       kicker: "Từ vựng",
       title: "Ôn từ trong nội dung bài",
       description: "Nguồn workbook không có danh sách từ mới kèm nghĩa tiếng Việt như giáo trình HSK 1. Các từ vẫn xuất hiện trong câu luyện đọc và ngân hàng lựa chọn.",
-    },
-    dialogue: {
-      kicker: "Hội thoại",
-      title: "Luyện mẫu câu theo ngữ cảnh",
-      description: "Nguồn workbook không cung cấp hội thoại có người nói và bản dịch như giáo trình HSK 1. Bạn sẽ luyện các mẫu câu ở phần Luyện tập.",
-    },
-    pronunciation: {
-      kicker: "Phát âm",
-      title: "Luyện trọng âm và ngữ điệu",
-      description: "Phần hướng dẫn phát âm chưa có nội dung chữ đủ rõ để tạo bài luyện riêng.",
     },
     writing: {
       kicker: "Luyện viết",
@@ -201,12 +190,15 @@ function VocabularyStrokeOrder({ hanzi, onStrokeCount }: { hanzi: string; onStro
   </div>;
 }
 
-function GuidedVocabulary({ lesson, itemIndex, showPinyin, speak, onShowWriting }: {
+function GuidedVocabulary({ lesson, itemIndex, showPinyin, speak, onShowWriting, authenticated, saveStatus, onSave }: {
   lesson: HskLessonContent;
   itemIndex: number;
   showPinyin: boolean;
   speak: (text: string) => void;
   onShowWriting: () => void;
+  authenticated: boolean;
+  saveStatus: VocabularySaveStatus;
+  onSave: (word: HskVocabularyItem) => void;
 }) {
   const word = lesson.vocabulary[itemIndex];
   const details = getVocabularyDetail(word);
@@ -227,7 +219,16 @@ function GuidedVocabulary({ lesson, itemIndex, showPinyin, speak, onShowWriting 
       </div>
       <button aria-label={`Phát âm ${word.hanzi}`} className="hsk-guided-audio" onClick={() => speak(word.hanzi)} type="button"><Volume2 aria-hidden="true" size={31} /></button>
     </div>
-    <span className="hsk-guided-word-class">{word.wordClass}</span>
+    <div className="hsk-guided-word-meta">
+      <span className="hsk-guided-word-class">{word.wordClass}</span>
+      {authenticated
+        ? <button aria-pressed={saveStatus === "saved"} className={`hsk-guided-save-word is-${saveStatus}`} disabled={saveStatus === "saving" || saveStatus === "saved"} onClick={() => onSave(word)} type="button">
+          {saveStatus === "saving" ? <LoaderCircle aria-hidden="true" className="hsk-guided-save-spinner" size={17} /> : saveStatus === "saved" ? <Check aria-hidden="true" size={17} /> : <Bookmark aria-hidden="true" size={17} />}
+          {saveStatus === "saving" ? "Đang lưu…" : saveStatus === "saved" ? "Đã lưu" : saveStatus === "error" ? "Thử lưu lại" : "Lưu từ"}
+        </button>
+        : <Link aria-label={`Đăng nhập để lưu từ ${word.hanzi}`} className="hsk-guided-save-word is-idle" href={`/login?returnTo=${encodeURIComponent(`/hsk/${lesson.levelId.replace(/^hsk-/, "")}/${lesson.id}/play`)}`}><Bookmark aria-hidden="true" size={17} /> Lưu từ</Link>}
+    </div>
+    {saveStatus === "error" ? <p className="hsk-guided-save-error" role="alert">Chưa thể lưu từ. Hãy thử lại.</p> : null}
 
     <div className="hsk-guided-word-grid">
       <div className="hsk-guided-word-column">
@@ -281,43 +282,6 @@ function GuidedGrammar({ lesson, itemIndex, showPinyin, speak }: {
         <strong lang="zh-CN">{example.hanzi}</strong>
         {showPinyin ? <span>{example.pinyin}</span> : null}
         <p>{example.translation}</p>
-      </article>)}
-    </div>
-  </section>;
-}
-
-function GuidedDialogue({ lesson, itemIndex, showPinyin, speak }: {
-  lesson: HskLessonContent;
-  itemIndex: number;
-  showPinyin: boolean;
-  speak: (text: string) => void;
-}) {
-  const dialogue = lesson.dialogues[itemIndex];
-  const fullDialogue = dialogue.turns.map((turn) => turn.hanzi).join(" ");
-  return <section className="hsk-guided-dialogue">
-    <span className="hsk-guided-kicker">Hội thoại · {itemIndex + 1}/{lesson.dialogues.length}</span>
-    <div className="hsk-guided-dialogue-title"><div><h1>{dialogue.title}</h1><p>{dialogue.setting}</p></div><button onClick={() => speak(fullDialogue)} type="button"><Play aria-hidden="true" fill="currentColor" size={16} /> Nghe toàn bài</button></div>
-    <div className="hsk-guided-dialogue-list">
-      {dialogue.turns.map((turn, index) => <article className={index % 2 ? "is-peer" : ""} key={`${dialogue.id}-${turn.speaker}-${index}`}>
-        <span>{turn.speaker.slice(0, 1)}</span>
-        <div><small>{turn.speaker}</small><strong lang="zh-CN">{turn.hanzi}</strong>{showPinyin ? <b>{turn.pinyin}</b> : null}<p>{turn.translation}</p></div>
-        <button aria-label={`Phát âm lượt nói của ${turn.speaker}`} onClick={() => speak(turn.hanzi)} type="button"><Volume2 aria-hidden="true" size={18} /></button>
-      </article>)}
-    </div>
-  </section>;
-}
-
-function GuidedPronunciation({ lesson }: { lesson: HskLessonContent }) {
-  return <section className="hsk-guided-grammar hsk-guided-pronunciation">
-    <span className="hsk-guided-kicker">Phát âm</span>
-    <h1>Trọng tâm ghép âm và thanh điệu</h1>
-    <p>{lesson.audioAvailable
-      ? "Nghe mẫu và luyện đọc lần lượt theo từng trọng tâm."
-      : "Audio gốc của giáo trình chưa có; nút phát âm trong bài đang dùng giọng đọc tiếng Trung của thiết bị."}</p>
-    <div className="hsk-guided-grammar-examples">
-      {lesson.pronunciationTopics.map((topic, index) => <article key={topic}>
-        <Headphones aria-hidden="true" size={19} />
-        <strong>{index + 1}. {topic}</strong>
       </article>)}
     </div>
   </section>;
@@ -453,13 +417,15 @@ function GuidedCompletion({ lesson, exerciseCount }: { lesson: HskLessonContent;
   </section>;
 }
 
-export function HskGuidedLesson({ lesson }: { lesson: HskLessonContent }) {
+export function HskGuidedLesson({ lesson, authenticated = false }: { lesson: HskLessonContent; authenticated?: boolean }) {
   const exercises = useMemo(() => buildHskGuidedExercises(lesson), [lesson]);
   const steps = useMemo(() => buildHskGuidedLessonSteps(lesson), [lesson]);
   const sections = useMemo(() => buildHskGuidedSections(lesson), [lesson]);
+  const navigationSections = useMemo(() => buildHskGuidedNavigationSections(lesson), [lesson]);
   const [currentStep, setCurrentStep] = useState(0);
   const [showPinyin, setShowPinyin] = useState(true);
   const [rate, setRate] = useState<SpeechRate>(1);
+  const [wordSaveStatuses, setWordSaveStatuses] = useState<Record<string, VocabularySaveStatus>>({});
   const [, setProgress] = useState<HskLessonProgress>(EMPTY_HSK_LESSON_PROGRESS);
   const step = steps[currentStep];
   const baseHref = `/hsk/${lesson.levelId.replace(/^hsk-/, "")}/${lesson.id}`;
@@ -522,17 +488,18 @@ export function HskGuidedLesson({ lesson }: { lesson: HskLessonContent }) {
     commit((current) => ({ writing: current.writing.includes(writingId) ? current.writing : [...current.writing, writingId] }));
   }, [commit]);
 
+  const saveVocabularyWord = useCallback(async (word: HskVocabularyItem) => {
+    if (!authenticated || ["saving", "saved"].includes(wordSaveStatuses[word.id] ?? "idle")) return;
+    setWordSaveStatuses((current) => ({ ...current, [word.id]: "saving" }));
+    const saved = await trySaveHskVocabularyWord(lesson, word);
+    setWordSaveStatuses((current) => ({ ...current, [word.id]: saved ? "saved" : "error" }));
+  }, [authenticated, lesson, wordSaveStatuses]);
+
   let content = <GuidedIntroduction exerciseCount={exercises.length} lesson={lesson} />;
   if (step.kind === "vocabulary") content = lesson.vocabulary.length
-    ? <GuidedVocabulary itemIndex={step.itemIndex ?? 0} key={lesson.vocabulary[step.itemIndex ?? 0]?.id} lesson={lesson} onShowWriting={() => goToStep(sections.find((section) => section.id === "writing")?.start ?? currentStep)} showPinyin={showPinyin} speak={speak} />
+    ? <GuidedVocabulary authenticated={authenticated} itemIndex={step.itemIndex ?? 0} key={lesson.vocabulary[step.itemIndex ?? 0]?.id} lesson={lesson} onSave={saveVocabularyWord} onShowWriting={() => goToStep(sections.find((section) => section.id === "writing")?.start ?? currentStep)} saveStatus={wordSaveStatuses[lesson.vocabulary[step.itemIndex ?? 0]?.id] ?? "idle"} showPinyin={showPinyin} speak={speak} />
     : <GuidedUnavailableSection kind="vocabulary" />;
   if (step.kind === "grammar") content = <GuidedGrammar itemIndex={step.itemIndex ?? 0} lesson={lesson} showPinyin={showPinyin} speak={speak} />;
-  if (step.kind === "dialogue") content = lesson.dialogues.length
-    ? <GuidedDialogue itemIndex={step.itemIndex ?? 0} lesson={lesson} showPinyin={showPinyin} speak={speak} />
-    : <GuidedUnavailableSection kind="dialogue" />;
-  if (step.kind === "pronunciation") content = lesson.pronunciationTopics.length
-    ? <GuidedPronunciation lesson={lesson} />
-    : <GuidedUnavailableSection kind="pronunciation" />;
   if (step.kind === "writing") content = lesson.writingCharacters.length
     ? <GuidedWriting lesson={lesson} onComplete={completeWriting} speak={speak} />
     : <GuidedUnavailableSection kind="writing" />;
@@ -552,9 +519,7 @@ export function HskGuidedLesson({ lesson }: { lesson: HskLessonContent }) {
         <div aria-label="Tốc độ phát" className="hsk-guided-speed" role="group">{([0.75, 1, 1.25] as SpeechRate[]).map((value) => <button aria-pressed={rate === value} key={value} onClick={() => setRate(value)} type="button">{value}×</button>)}</div>
       </div>
       <nav aria-label="Các chặng trong bài học" className="hsk-guided-sections">
-        {sections
-          .filter((section) => section.id !== "dialogue" && section.id !== "pronunciation")
-          .map((section) => {
+        {navigationSections.map((section) => {
             const Icon = SECTION_ICONS[section.id];
             return <button aria-current={step.kind === section.id ? "step" : undefined} className={step.kind === section.id ? "is-active" : ""} key={section.id} onClick={() => goToStep(section.start)} type="button"><Icon aria-hidden="true" size={17} /><span>{section.label}</span>{section.count ? <b>{section.count}</b> : null}</button>;
           })}

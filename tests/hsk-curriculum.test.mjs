@@ -129,11 +129,16 @@ test("course library opens the HSK curriculum from a dedicated catalog card", as
   });
   t.after(() => server.close());
 
-  const [{ CourseLibraryView }, { courses }, { HSK_CURRICULUM }] = await Promise.all([
+  const [{ CourseLibraryView }, { HskCourseCard }, { courses }, { HSK_CURRICULUM }] = await Promise.all([
     server.ssrLoadModule("/components/course-library-view.tsx"),
+    server.ssrLoadModule("/components/hsk-course-card.tsx"),
     server.ssrLoadModule("/lib/course-data.ts"),
     server.ssrLoadModule("/lib/hsk-curriculum.ts"),
   ]);
+
+  const hskCard = HskCourseCard();
+  assert.equal(hskCard.type, "a", "the same-route HSK switch must use a full document navigation");
+  assert.equal(hskCard.props.href, "/courses?view=hsk");
 
   const catalogHtml = renderToStaticMarkup(React.createElement(CourseLibraryView, { courses, hskCurriculum: HSK_CURRICULUM, view: "catalog" }));
   assert.match(catalogHtml, /href="\/courses\?view=hsk"/);

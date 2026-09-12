@@ -31,6 +31,8 @@ npm run dev
 
 Sau đó mở địa chỉ được in trong terminal. Thường là `http://localhost:3000`; nếu cổng này bận, hệ thống tự chuyển sang cổng tiếp theo.
 
+Trên Windows, `npm run dev` dùng Node.js để tránh lỗi kết nối nội bộ `Miniflare.dispatchFetch` khi tải trang hoặc chuyển lộ trình. Khi cần kiểm tra riêng Cloudflare bindings trong chế độ dev, đặt `HIMI_DEV_RUNTIME=workerd` trong `.env.local` rồi khởi động lại máy chủ. Các hệ điều hành khác mặc định dùng workerd; có thể đặt `HIMI_DEV_RUNTIME=node` để dùng Node.js. Hai runtime dùng cache riêng. `npm run build` luôn tạo bản Cloudflare Worker bất kể tùy chọn dev.
+
 Kiểm tra trước khi đưa code lên môi trường thật:
 
 ```bash

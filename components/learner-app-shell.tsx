@@ -16,13 +16,11 @@ import {
   Crown,
   Flame,
   Gamepad2,
-  Handshake,
   Home,
-  LayoutGrid,
+  Layers3,
   LogOut,
   PenLine,
   Settings,
-  Smartphone,
   Sparkles,
   UserRound,
 } from "lucide-react";
@@ -41,6 +39,7 @@ const learnerRailItems = [
   { href: "/", label: "Học tập", icon: Home, matches: (pathname: string) => pathname === "/" },
   { href: "/courses", label: "Lộ trình", icon: BookOpen, matches: (pathname: string) => pathname.startsWith("/courses") || pathname.startsWith("/learn") || pathname.startsWith("/hsk") },
   { href: "/games", label: "Trò chơi", icon: Gamepad2, matches: (pathname: string) => pathname.startsWith("/games") },
+  { href: "/vocabulary", label: "Bộ từ vựng", icon: Layers3, matches: (pathname: string) => pathname.startsWith("/vocabulary") },
 ];
 
 const learnerPracticeItems = [
@@ -50,6 +49,7 @@ const learnerPracticeItems = [
 ];
 
 const learnerPrefetchItems = [...learnerRailItems, ...learnerPracticeItems];
+const mobilePracticeItems = [...learnerPracticeItems, learnerRailItems[3]];
 const RAIL_STORAGE_KEY = "himi-learner-rail";
 
 const standalonePrefixes = [
@@ -448,21 +448,9 @@ export function LearnerAppShell({ children, user }: { children: ReactNode; user:
                 <span>{user.email}</span>
               </div>
               <nav aria-label="Lối tắt tài khoản" className="account-menu-links">
-                <Link href="/" onClick={(event) => closeAccountMenuAndNavigate(event, "/")} prefetch>
-                  <LayoutGrid aria-hidden="true" size={20} /><span>Bảng học tập</span>
-                </Link>
                 <Link href="/account" onClick={(event) => closeAccountMenuAndNavigate(event, "/account")} prefetch>
                   <UserRound aria-hidden="true" size={20} /><span>Hồ sơ</span>
                 </Link>
-                <button onClick={() => setAccountMenuOpen(false)} type="button">
-                  <Handshake aria-hidden="true" size={20} /><span>Giới thiệu bạn bè</span>
-                </button>
-                <Link href="/account#account-information" onClick={(event) => closeAccountMenuAndNavigate(event, "/account")} prefetch>
-                  <Settings aria-hidden="true" size={20} /><span>Cài đặt</span>
-                </Link>
-                <button onClick={() => setAccountMenuOpen(false)} type="button">
-                  <Smartphone aria-hidden="true" size={20} /><span>Tải ứng dụng</span>
-                </button>
               </nav>
               <form action="/api/auth/logout" className="account-menu-logout" method="post">
                 <input name="returnTo" type="hidden" value="/" />
@@ -494,14 +482,14 @@ export function LearnerAppShell({ children, user }: { children: ReactNode; user:
             aria-controls="mobile-practice-menu"
             aria-expanded={practiceMenuOpen}
             aria-label="Mở các nội dung luyện tập"
-            className={`mobile-practice-trigger ${practiceTriggerActive ? "active" : ""}`.trim()}
+            className={`mobile-practice-trigger ${practiceTriggerActive || visualPathname.startsWith("/vocabulary") ? "active" : ""}`.trim()}
             onClick={toggleMobilePracticeMenu}
             type="button"
           >
             <BrainCircuit aria-hidden="true" size={20} /><span>Luyện tập</span>
           </button>
           <div aria-label="Nội dung luyện tập" className="mobile-practice-menu" id="mobile-practice-menu">
-            {learnerPracticeItems.map(({ href, label, icon: Icon, matches }) => (
+            {mobilePracticeItems.map(({ href, label, icon: Icon, matches }) => (
               <Link
                 aria-current={matches(visualPathname) ? "page" : undefined}
                 className={matches(visualPathname) ? "active" : ""}

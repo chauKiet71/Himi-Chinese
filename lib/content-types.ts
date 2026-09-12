@@ -27,6 +27,12 @@ export type Vocabulary = {
   audioUrl: string | null;
 };
 
+export type SavedVocabulary = Vocabulary & {
+  id: string;
+  sourceTitle: string;
+  sourceType: "course" | "hsk";
+};
+
 export type DialogueLine = {
   speaker: string;
   hanzi: string;

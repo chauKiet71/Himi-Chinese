@@ -4,8 +4,6 @@ export type HskGuidedStepKind =
   | "introduction"
   | "vocabulary"
   | "grammar"
-  | "dialogue"
-  | "pronunciation"
   | "writing"
   | "practice"
   | "complete";
@@ -27,12 +25,18 @@ const SECTION_LABELS: Array<[HskGuidedStepKind, string]> = [
   ["introduction", "Giới thiệu"],
   ["vocabulary", "Từ vựng"],
   ["grammar", "Ngữ pháp"],
-  ["dialogue", "Hội thoại"],
-  ["pronunciation", "Phát âm"],
   ["writing", "Luyện viết"],
   ["practice", "Luyện tập"],
   ["complete", "Hoàn thành"],
 ];
+
+export const HSK_GUIDED_NAVIGATION_SECTION_IDS = [
+  "introduction",
+  "vocabulary",
+  "writing",
+  "practice",
+  "complete",
+] as const satisfies readonly HskGuidedStepKind[];
 
 function normalizeExerciseValue(value: string | null | undefined): string {
   return (value ?? "")
@@ -118,10 +122,6 @@ export function buildHskGuidedLessonSteps(lesson: HskLessonContent): HskGuidedSt
       ? lesson.vocabulary.map((word, itemIndex) => ({ id: `vocabulary-${word.id}`, kind: "vocabulary" as const, itemIndex }))
       : placeholders.has("vocabulary") ? [{ id: "vocabulary-overview", kind: "vocabulary" as const }] : []),
     ...lesson.grammar.map((point, itemIndex) => ({ id: `grammar-${point.id}`, kind: "grammar" as const, itemIndex })),
-    ...(lesson.dialogues.length
-      ? lesson.dialogues.map((dialogue, itemIndex) => ({ id: `dialogue-${dialogue.id}`, kind: "dialogue" as const, itemIndex }))
-      : placeholders.has("dialogue") ? [{ id: "dialogue-overview", kind: "dialogue" as const }] : []),
-    ...(lesson.pronunciationTopics.length || placeholders.has("pronunciation") ? [{ id: "pronunciation", kind: "pronunciation" as const }] : []),
     ...(lesson.writingCharacters.length || placeholders.has("writing") ? [{ id: "writing", kind: "writing" as const }] : []),
     ...exercises.map((exercise, itemIndex) => ({ id: `practice-${exercise.id}`, kind: "practice" as const, itemIndex })),
     { id: "complete", kind: "complete" },
@@ -135,6 +135,16 @@ export function buildHskGuidedSections(lesson: HskLessonContent): HskGuidedSecti
     if (start < 0) return [];
     const count = steps.filter((step) => step.kind === id).length;
     return [{ id, label, start, ...(count > 1 ? { count } : {}) }];
+  });
+}
+
+export function buildHskGuidedNavigationSections(lesson: HskLessonContent): HskGuidedSection[] {
+  const sectionsById = new Map(
+    buildHskGuidedSections(lesson).map((section) => [section.id, section]),
+  );
+  return HSK_GUIDED_NAVIGATION_SECTION_IDS.flatMap((id) => {
+    const section = sectionsById.get(id);
+    return section ? [section] : [];
   });
 }
 

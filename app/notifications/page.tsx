@@ -7,7 +7,6 @@ import {
   markNotificationReadAction,
   openNotificationAction,
 } from "@/app/notifications/actions";
-import { LearnerPageHeader } from "@/components/learner-page-header";
 import { getCurrentUser } from "@/lib/auth-session";
 import { getUnreadNotificationCount, getUserNotifications } from "@/lib/notification-service";
 
@@ -57,14 +56,15 @@ export default async function NotificationsPage({
 
   return <main className="notifications-page">
     <div className="section-shell notifications-page-inner">
-      <LearnerPageHeader
-        aside={<div className="notifications-header-aside"><BellRing size={29} /><strong>{unreadCount}</strong><span>chưa đọc</span></div>}
-        description="Theo dõi thay đổi quan trọng của tài khoản, quyền VIP và nhịp học tại một nơi."
-        eyebrow="Cập nhật dành cho bạn"
-        eyebrowIcon={Bell}
-        meta={<><span><BellRing size={16} /><strong>{items.length}</strong> thông báo gần nhất</span><span><CheckCheck size={16} /><strong>{unreadCount}</strong> cần xem</span></>}
-        title="Thông báo"
-      />
+      <header className="notification-hero">
+        <div className="notification-hero-copy">
+          <h1>Thông báo</h1>
+          <div className="notification-hero-meta" aria-label="Tình trạng hộp thư">
+            <span><BellRing aria-hidden="true" size={19} /><strong>{unreadCount}</strong> chưa đọc</span>
+          </div>
+        </div>
+        <p className="notification-hero-note">Himi sẽ báo bạn<br />ngay khi có tin mới</p>
+      </header>
 
       {params.success && successMessages[params.success] ? <p className="notification-message success" role="status"><Check size={16} />{successMessages[params.success]}</p> : null}
       {params.error && errorMessages[params.error] ? <p className="notification-message error" role="alert"><CircleAlert size={16} />{errorMessages[params.error]}</p> : null}

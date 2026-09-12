@@ -40,7 +40,7 @@ async function deliverEmail(input: {
 }): Promise<"brevo" | "console"> {
   const apiKey = process.env.BREVO_API_KEY?.trim();
   const fromEmail = process.env.BREVO_FROM_EMAIL?.trim();
-  const fromName = process.env.BREVO_FROM_NAME?.trim() || "Himi Chinese";
+  const fromName = process.env.BREVO_FROM_NAME?.trim() || "Himi";
   if (!apiKey || !fromEmail) {
     const partiallyConfigured = Boolean(apiKey || fromEmail);
     if (process.env.NODE_ENV === "production" || partiallyConfigured) {

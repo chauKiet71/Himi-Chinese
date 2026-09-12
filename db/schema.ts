@@ -240,6 +240,45 @@ export const vocabulary = pgTable("vocabulary", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 }, (table) => [uniqueIndex("vocabulary_slug_uq").on(table.slug)]);
 
+export const vocabularySets = pgTable("vocabulary_sets", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  title: varchar("title", { length: 100 }).notNull(),
+  description: text("description").notNull().default(""),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [index("vocabulary_sets_user_idx").on(table.userId, table.updatedAt)]);
+
+export const vocabularySetWords = pgTable("vocabulary_set_words", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  setId: uuid("set_id").notNull().references(() => vocabularySets.id, { onDelete: "cascade" }),
+  hanzi: varchar("hanzi", { length: 40 }).notNull(),
+  pinyin: varchar("pinyin", { length: 160 }).notNull(),
+  meaning: text("meaning").notNull(),
+  example: text("example").notNull().default(""),
+  translation: text("translation").notNull().default(""),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [uniqueIndex("vocabulary_set_words_unique").on(table.setId, table.hanzi, table.pinyin)]);
+
+export const savedVocabularyWords = pgTable("saved_vocabulary_words", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  sourceType: varchar("source_type", { length: 30 }).notNull(),
+  sourceKey: varchar("source_key", { length: 180 }).notNull(),
+  sourceTitle: varchar("source_title", { length: 180 }).notNull(),
+  hanzi: varchar("hanzi", { length: 120 }).notNull(),
+  pinyin: varchar("pinyin", { length: 220 }).notNull(),
+  meaning: text("meaning").notNull(),
+  example: text("example").notNull().default(""),
+  translation: text("translation").notNull().default(""),
+  audioUrl: text("audio_url"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("saved_vocabulary_words_source_uq").on(table.userId, table.sourceType, table.sourceKey),
+  index("saved_vocabulary_words_user_idx").on(table.userId, table.updatedAt),
+]);
+
 export const lessonVocabulary = pgTable("lesson_vocabulary", {
   lessonId: uuid("lesson_id").notNull().references(() => lessons.id, { onDelete: "cascade" }),
   vocabularyId: uuid("vocabulary_id").notNull().references(() => vocabulary.id, { onDelete: "cascade" }),
@@ -257,6 +296,7 @@ export const lessonProgress = pgTable("lesson_progress", {
 export const reviewItems = pgTable("review_items", {
   userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   vocabularyId: uuid("vocabulary_id").notNull().references(() => vocabulary.id, { onDelete: "cascade" }),
+  isSaved: boolean("is_saved").notNull().default(true),
   state: reviewState("state").notNull().default("new"),
   easeScore: integer("ease_score").notNull().default(250),
   intervalDays: integer("interval_days").notNull().default(0),

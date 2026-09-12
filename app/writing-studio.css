@@ -117,10 +117,12 @@
   background: var(--writing-red);
   font-size: 11px;
   font-weight: 800;
-  transition: transform 160ms ease, box-shadow 160ms ease;
+  transition: box-shadow 160ms ease;
 }
 .writing-topic-card-footer a:hover,
-.writing-single-lesson-action a:hover { box-shadow: 0 10px 24px rgba(255,87,77,.22); transform: translateY(-2px); }
+.writing-single-lesson-action a:hover { box-shadow: 0 10px 24px rgba(255,87,77,.22); }
+.writing-single-lesson-action a { transition: transform 160ms ease, box-shadow 160ms ease; }
+.writing-single-lesson-action a:hover { transform: translateY(-2px); }
 
 .writing-breadcrumbs { max-width: 1320px; margin: 0 auto 18px; display: flex; align-items: center; gap: 10px; color: #71837e; font-size: 12px; }
 .writing-breadcrumbs a { display: inline-flex; align-items: center; gap: 6px; }

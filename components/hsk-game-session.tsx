@@ -5,8 +5,9 @@ import Image from "next/image";
 import { createContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { createHskGameRound, HSK_GAME_ROUND_SIZE, type HskGameId } from "@/lib/hsk-game-round";
 import { SLICE_HSK_COURSES, type SliceHskLevel, type SliceVocabulary } from "@/lib/slice-game";
+import { useLearningData } from "@/components/learning-data-provider";
 
-export const HskGameCourseContext = createContext<{ label: string; onChangeCourse: () => void } | null>(null);
+export const HskGameCourseContext = createContext<{ exitLabel: string; onChangeCourse: () => void } | null>(null);
 
 const GAME_PICKER_DETAILS: Record<HskGameId, { image: string; imageAlt: string; skill: string }> = {
   memory: {
@@ -41,12 +42,14 @@ const GAME_PICKER_DETAILS: Record<HskGameId, { image: string; imageAlt: string; 
   },
 };
 
-export function HskGameSession({ gameId, title, onExit, children }: {
+export function HskGameSession({ gameId, title, exitLabel, onExit, children }: {
   gameId: HskGameId;
   title: string;
+  exitLabel: string;
   onExit: () => void;
   children: (words: SliceVocabulary[], onRestart: () => void) => ReactNode;
 }) {
+  const learningData = useLearningData();
   const [session, setSession] = useState<{ level: SliceHskLevel; vocabulary: SliceVocabulary[]; words: SliceVocabulary[]; run: number } | null>(null);
   const [loading, setLoading] = useState<SliceHskLevel | null>(null);
   const [error, setError] = useState("");
@@ -64,7 +67,7 @@ export function HskGameSession({ gameId, title, onExit, children }: {
     setLoading(level);
     setError("");
     try {
-      const response = await fetch(`/api/games/vocabulary?level=${level}`, { signal: controller.signal });
+      const response = await learningData.get(`/api/games/vocabulary?level=${level}`, { signal: controller.signal });
       if (!response.ok) {
         const problem = await response.json().catch(() => null) as { error?: string } | null;
         throw new Error(problem?.error ?? "Không thể tải từ vựng.");
@@ -95,8 +98,7 @@ export function HskGameSession({ gameId, title, onExit, children }: {
   };
 
   if (session) {
-    const label = SLICE_HSK_COURSES.find((course) => course.id === session.level)!.label;
-    return <HskGameCourseContext.Provider key={`${session.level}-${session.run}`} value={{ label, onChangeCourse: changeCourse }}>
+    return <HskGameCourseContext.Provider key={`${session.level}-${session.run}`} value={{ exitLabel, onChangeCourse: changeCourse }}>
       {children(session.words, restart)}
     </HskGameCourseContext.Provider>;
   }
@@ -107,7 +109,7 @@ export function HskGameSession({ gameId, title, onExit, children }: {
   return <main className={`learner-dashboard writing-game-dashboard game-immersive-dashboard writing-course-selection-page game-course-selection-${gameId}`}>
     <div className="writing-course-shell writing-course-shell--split">
       <section className="writing-course-intro" aria-labelledby={pickerTitleId}>
-        <button className="writing-course-back" onClick={onExit} type="button"><ArrowLeft size={19} /> Tất cả trò chơi</button>
+        <button className="writing-course-back" onClick={onExit} type="button"><ArrowLeft size={19} /> {exitLabel}</button>
 
         <div className="writing-course-copy">
           <span className="writing-course-kicker">{title}</span>

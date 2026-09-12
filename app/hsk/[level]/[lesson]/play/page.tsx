@@ -22,5 +22,5 @@ export default async function HskGuidedLessonPage({ params }: PageProps) {
   const data = await getHskLessonPageData({ level, lessonId, userId: user?.id ?? null });
   if (!data) notFound();
   if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
-  return <HskGuidedLesson lesson={data.lesson} />;
+  return <HskGuidedLesson authenticated={Boolean(user)} lesson={data.lesson} />;
 }

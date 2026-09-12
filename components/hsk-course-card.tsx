@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight, BookOpen, Layers3 } from "lucide-react";
 import { HSK_CURRICULUM } from "@/lib/hsk-curriculum";
 
@@ -12,7 +11,10 @@ const hskLessonCount = HSK_CURRICULUM.reduce(
 );
 
 export function HskCourseCard() {
-  return <Link className="course-card hsk-entry-card" href="/courses?view=hsk" prefetch>
+  // Vinext does not reliably commit a client navigation that only changes this
+  // route's search params, so the HSK catalog uses a normal document request.
+  // eslint-disable-next-line @next/next/no-html-link-for-pages -- A Next Link reproduces the stuck navigation this fallback fixes.
+  return <a className="course-card hsk-entry-card" href="/courses?view=hsk">
     <div className="course-cover hsk-entry-cover">
       <Image
         alt="Himi mới học chữ Hán theo giáo trình HSK tại bàn học"
@@ -40,5 +42,5 @@ export function HskCourseCard() {
         <span aria-hidden="true" className="icon-link"><ArrowUpRight size={18} /></span>
       </div>
     </div>
-  </Link>;
+  </a>;
 }

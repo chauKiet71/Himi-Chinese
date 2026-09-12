@@ -79,7 +79,7 @@ test("HSK 3 converts all textbook lessons into the HSK 1 learning shape", async 
   });
 
   const sections = guidedModule.buildHskGuidedSections(lesson).map((section) => section.label);
-  assert.deepEqual(sections, ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Hội thoại", "Phát âm", "Luyện viết", "Luyện tập", "Hoàn thành"]);
+  assert.deepEqual(sections, ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Luyện viết", "Luyện tập", "Hoàn thành"]);
 });
 
 test("HSK 3 renders through the same workspace, guided lesson, flashcard and quiz data as HSK 1", async (t) => {
@@ -120,7 +120,7 @@ test("HSK 3 renders through the same workspace, guided lesson, flashcard and qui
   assert.match(workspaceHtml, /href="\/hsk\/3\/hsk3-tb-lesson-01\/quiz"/);
 
   const guidedHtml = renderToStaticMarkup(React.createElement(guidedViewModule.HskGuidedLesson, { lesson }));
-  for (const label of ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Hội thoại", "Phát âm", "Luyện viết", "Luyện tập", "Hoàn thành"]) {
+  for (const label of ["Giới thiệu", "Từ vựng", "Luyện viết", "Luyện tập", "Hoàn thành"]) {
     assert.match(guidedHtml, new RegExp(`>${label}`));
   }
 

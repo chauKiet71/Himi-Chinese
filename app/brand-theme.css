@@ -1160,8 +1160,7 @@ body {
 }
 
 .writing-course-card,
-.writing-course-current,
-.game-hsk-course-bar {
+.writing-course-current {
   color: var(--himi-black);
   border-color: var(--himi-line);
   background: var(--himi-white);
@@ -1175,8 +1174,7 @@ body {
 }
 
 .writing-course-card:focus-visible,
-.writing-course-back:focus-visible,
-.game-hsk-course-bar button:focus-visible {
+.writing-course-back:focus-visible {
   outline-color: var(--himi-black);
   box-shadow: 0 0 0 5px var(--focus-halo);
 }
@@ -1196,12 +1194,6 @@ body {
 .writing-course-kicker,
 .writing-course-card > small,
 .writing-course-back { color: var(--forest-deep); }
-
-.game-hsk-course-bar button {
-  color: var(--forest-deep);
-  border-color: var(--himi-line);
-  background: var(--himi-red-soft);
-}
 
 .game-journey-station .game-journey-station-icon {
   color: var(--himi-red);
