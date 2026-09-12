@@ -11,7 +11,6 @@ import {
   EyeOff,
   Headphones,
   Languages,
-  Maximize2,
   PenLine,
   Play,
   RotateCcw,
@@ -32,6 +31,7 @@ type LearningMediaController = {
 
 type YouTubePlayer = LearningMediaController;
 type YouTubePlayerEvent = { target: YouTubePlayer };
+type YouTubePlayerErrorEvent = YouTubePlayerEvent & { data: number };
 
 declare global {
   interface Window {
@@ -41,7 +41,10 @@ declare global {
         options: {
           videoId: string;
           playerVars: Record<string, number | string>;
-          events: { onReady: (event: YouTubePlayerEvent) => void };
+          events: {
+            onReady: (event: YouTubePlayerEvent) => void;
+            onError?: (event: YouTubePlayerErrorEvent) => void;
+          };
         },
       ) => YouTubePlayer;
     };
@@ -50,6 +53,8 @@ declare global {
 }
 
 let youtubeApiPromise: Promise<void> | null = null;
+const youtubeApiSource = "https://www.youtube.com/iframe_api";
+const youtubeApiTimeoutMs = 12_000;
 
 function loadYouTubeApi() {
   if (typeof window === "undefined") return Promise.reject(new Error("YouTube API chỉ chạy trong trình duyệt."));
@@ -58,22 +63,63 @@ function loadYouTubeApi() {
 
   youtubeApiPromise = new Promise<void>((resolve, reject) => {
     const previousReady = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {
-      previousReady?.();
-      resolve();
-    };
+    let settled = false;
+    let script = document.querySelector<HTMLScriptElement>(`script[src="${youtubeApiSource}"]`);
+    let timeoutId = 0;
 
-    const existing = document.querySelector<HTMLScriptElement>('script[src="https://www.youtube.com/iframe_api"]');
-    if (existing) {
-      existing.addEventListener("error", () => reject(new Error("Không tải được YouTube Player API.")), { once: true });
-      return;
+    function cleanup() {
+      window.clearTimeout(timeoutId);
+      script?.removeEventListener("load", handleLoad);
+      script?.removeEventListener("error", handleError);
+      if (window.onYouTubeIframeAPIReady === handleReady) window.onYouTubeIframeAPIReady = previousReady;
     }
 
-    const script = document.createElement("script");
-    script.src = "https://www.youtube.com/iframe_api";
-    script.async = true;
-    script.addEventListener("error", () => reject(new Error("Không tải được YouTube Player API.")), { once: true });
-    document.head.appendChild(script);
+    function succeed() {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      resolve();
+    }
+
+    function fail(error: Error) {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      script?.remove();
+      youtubeApiPromise = null;
+      reject(error);
+    }
+
+    function handleReady() {
+      try {
+        previousReady?.();
+      } finally {
+        if (window.YT?.Player) succeed();
+        else fail(new Error("YouTube Player API không khởi tạo được."));
+      }
+    }
+
+    function handleLoad() {
+      if (window.YT?.Player) succeed();
+    }
+
+    function handleError() {
+      fail(new Error("Không tải được YouTube Player API."));
+    }
+
+    window.onYouTubeIframeAPIReady = handleReady;
+
+    const shouldAppendScript = !script;
+    if (!script) {
+      script = document.createElement("script");
+      script.src = youtubeApiSource;
+      script.async = true;
+    }
+
+    script.addEventListener("load", handleLoad);
+    script.addEventListener("error", handleError);
+    timeoutId = window.setTimeout(() => fail(new Error("YouTube Player API phản hồi quá chậm.")), youtubeApiTimeoutMs);
+    if (shouldAppendScript) document.head.appendChild(script);
   });
 
   return youtubeApiPromise;
@@ -129,6 +175,7 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
 
   const [playerReady, setPlayerReady] = useState(false);
   const [playerError, setPlayerError] = useState(false);
+  const [playerAttempt, setPlayerAttempt] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [showPinyin, setShowPinyin] = useState(true);
@@ -137,7 +184,6 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
   const [coverVideo, setCoverVideo] = useState(false);
   const [repeatIndex, setRepeatIndex] = useState<number | null>(null);
   const [autoPause, setAutoPause] = useState(false);
-  const [largeVideo, setLargeVideo] = useState(false);
   const [typingMode, setTypingMode] = useState(false);
   const [typingIndex, setTypingIndex] = useState(0);
   const [difficulty, setDifficulty] = useState<"easy" | "normal" | "hard">("easy");
@@ -269,16 +315,43 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
         media.removeEventListener("error", handleError);
       };
     } else {
-      void loadYouTubeApi()
-        .then(() => {
-          if (cancelled || !window.YT?.Player || !video.youtubeId) return;
-          localPlayer = new window.YT.Player(mountId, {
-            videoId: video.youtubeId,
-            playerVars: { autoplay: 0, controls: 1, playsinline: 1, rel: 0, modestbranding: 1 },
-            events: { onReady: (event) => beginSync(event.target) },
-          });
-        })
-        .catch(() => setPlayerError(true));
+      const initializeYouTubePlayer = async () => {
+        try {
+          await loadYouTubeApi();
+        } catch {
+          if (cancelled) return;
+          await new Promise<void>((resolve) => window.setTimeout(resolve, 700));
+          if (cancelled) return;
+          await loadYouTubeApi();
+        }
+
+        if (cancelled || !window.YT?.Player || !video.youtubeId) return;
+        localPlayer = new window.YT.Player(mountId, {
+          videoId: video.youtubeId,
+          playerVars: {
+            autoplay: 0,
+            controls: 1,
+            playsinline: 1,
+            rel: 0,
+            modestbranding: 1,
+            origin: window.location.origin,
+          },
+          events: {
+            onReady: (event) => beginSync(event.target),
+            onError: () => {
+              if (cancelled) return;
+              setPlayerReady(false);
+              setPlayerError(true);
+            },
+          },
+        });
+      };
+
+      void initializeYouTubePlayer().catch(() => {
+        if (cancelled) return;
+        setPlayerReady(false);
+        setPlayerError(true);
+      });
     }
 
     return () => {
@@ -289,7 +362,7 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
       playerRef.current = null;
       localPlayer?.destroy();
     };
-  }, [mountId, transcript, video.slug, video.source, video.videoUrl, video.youtubeId]);
+  }, [mountId, playerAttempt, transcript, video.slug, video.source, video.videoUrl, video.youtubeId]);
 
   useEffect(() => {
     const node = lineRefs.current.get(activeIndex);
@@ -341,14 +414,14 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
     if (correct) setCompleted((current) => current.includes(typingIndex) ? current : [...current, typingIndex]);
   };
 
-  return <section className={`youtube-study-studio${video.source === "himi" ? " is-himi-source" : ""}${typingMode ? " has-dictation" : ""}${showTranscript ? "" : " transcript-is-hidden"}${largeVideo ? " is-large-video" : ""}`}>
+  return <section className={`youtube-study-studio${video.source === "himi" ? " is-himi-source" : ""}${typingMode ? " has-dictation" : ""}${showTranscript ? "" : " transcript-is-hidden"}`}>
     <div className="youtube-study-media-column">
       <div className="youtube-study-frame">
         {video.source === "himi"
-          ? <video aria-label={`Video ${video.title}`} controls controlsList="nodownload" playsInline poster={video.posterUrl} preload="metadata" ref={htmlVideoRef} src={video.videoUrl}>Trình duyệt của bạn chưa hỗ trợ video HTML5.</video>
-          : <div id={mountId} />}
+          ? <video aria-label={`Video ${video.title}`} controls controlsList="nodownload" key={`${video.slug}-${playerAttempt}`} playsInline poster={video.posterUrl} preload="metadata" ref={htmlVideoRef} src={video.videoUrl}>Trình duyệt của bạn chưa hỗ trợ video HTML5.</video>
+          : <div id={mountId} key={`${mountId}-${playerAttempt}`} />}
         {!playerReady && !playerError ? <div className="youtube-player-loading"><span /><p>Đang chuẩn bị phòng luyện nghe…</p></div> : null}
-        {playerError ? <div className="youtube-player-error"><CircleHelp aria-hidden="true" /><strong>Chưa tải được trình phát</strong>{video.youtubeId ? <a href={`https://www.youtube.com/watch?v=${video.youtubeId}`} rel="noreferrer" target="_blank">Mở video trên YouTube</a> : <span>Hãy tải lại trang để thử lại video Himi.</span>}</div> : null}
+        {playerError ? <div className="youtube-player-error" role="alert"><CircleHelp aria-hidden="true" /><strong>Chưa tải được trình phát</strong><span>Kết nối có thể vừa bị gián đoạn. Bạn có thể thử lại ngay.</span><div><button onClick={() => { setPlayerError(false); setPlayerReady(false); setPlayerAttempt((value) => value + 1); }} type="button">Thử lại</button>{video.youtubeId ? <a href={`https://www.youtube.com/watch?v=${video.youtubeId}`} rel="noreferrer" target="_blank">Mở trên YouTube</a> : null}</div></div> : null}
         {coverVideo ? <button className="youtube-video-cover" onClick={() => setCoverVideo(false)} type="button"><Headphones aria-hidden="true" size={31} /><strong>Tập trung vào âm thanh</strong><span>Video đang được che. Chạm để hiện lại.</span></button> : null}
       </div>
 
@@ -363,7 +436,6 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
       <div className="youtube-study-switches">
         <Toggle checked={autoPause} label="Tự động dừng" onChange={() => setAutoPause((value) => !value)} />
         <Toggle checked={repeatIndex !== null} label="Lặp câu" onChange={toggleRepeat} />
-        <Toggle checked={largeVideo} label="Video lớn" onChange={() => setLargeVideo((value) => !value)} />
       </div>
 
       {activeLine ? <section className="youtube-shadow-card" aria-live="polite">
@@ -447,6 +519,5 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
     </aside> : null}
 
     <button className="youtube-mobile-transcript-button" onClick={() => setShowTranscript((value) => !value)} type="button"><Captions aria-hidden="true" /> {showTranscript ? "Ẩn bản chép" : "Mở bản chép"}</button>
-    {largeVideo ? <span className="youtube-large-video-status"><Maximize2 aria-hidden="true" /> Chế độ video lớn</span> : null}
   </section>;
 }

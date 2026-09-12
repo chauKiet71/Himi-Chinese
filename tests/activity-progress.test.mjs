@@ -1,7 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { formatVietnameseWorkDate, vietnamDayRange } from "../lib/date-format.ts";
-import { isGameId, xpForGameScore } from "../lib/activity-progress.ts";
+import {
+  gameCourseCompletionKey,
+  hasCompletedGameCourse,
+  isGameCourseCompletionKey,
+  isGameId,
+  xpForGameScore,
+} from "../lib/activity-progress.ts";
 import { buildDailySession, defaultDailySessionSource, withDailySessionFlow } from "../lib/daily-session.ts";
 
 test("game progress only accepts supported game ids", () => {
@@ -15,6 +21,17 @@ test("game XP has a useful minimum and scales with score", () => {
   assert.equal(xpForGameScore(0), 100);
   assert.equal(xpForGameScore(120), 100);
   assert.equal(xpForGameScore(1_000), 500);
+});
+
+test("game course completion is tracked per game and per HSK level", () => {
+  const completed = [gameCourseCompletionKey("listen", "hsk-1")];
+
+  assert.equal(isGameCourseCompletionKey("listen:hsk-1"), true);
+  assert.equal(isGameCourseCompletionKey("listen:hsk-7"), false);
+  assert.equal(isGameCourseCompletionKey("unknown:hsk-1"), false);
+  assert.equal(hasCompletedGameCourse(completed, "listen", "hsk-1"), true);
+  assert.equal(hasCompletedGameCourse(completed, "listen", "hsk-2"), false);
+  assert.equal(hasCompletedGameCourse(completed, "flash", "hsk-1"), false);
 });
 
 test("practice date is generated in the Vietnam timezone", () => {

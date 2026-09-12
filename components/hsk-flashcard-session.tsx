@@ -8,13 +8,11 @@ import {
   ArrowRight,
   Check,
   Footprints,
-  Lightbulb,
   LockKeyhole,
   RotateCcw,
   Sparkles,
   Star,
   Target,
-  Trophy,
   Volume2,
   X,
 } from "lucide-react";
@@ -25,7 +23,9 @@ import {
   getHskLessonProgressStorageKey,
   parseHskLessonProgress,
 } from "@/lib/hsk-lesson-progress";
-import { saveHskVocabularyWord } from "@/lib/saved-vocabulary-client";
+import { trySaveHskVocabularyWord } from "@/lib/saved-vocabulary-client";
+import { GameResultCelebration } from "@/components/game-result-celebration";
+import { VocabularySavedToast, type VocabularySavedNotice } from "@/components/vocabulary-saved-toast";
 
 function saveRememberedWord(lessonId: string, wordId: string): void {
   try {
@@ -48,6 +48,9 @@ export function HskFlashcardSession({ lesson, backHref, authenticated = false }:
 }) {
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const [revealed, setRevealed] = useState(false);
+  const [reviewSaveState, setReviewSaveState] = useState<"idle" | "saving" | "error" | "auth-required">("idle");
+  const [savedNotice, setSavedNotice] = useState<VocabularySavedNotice | null>(null);
   const [rememberedIds, setRememberedIds] = useState<string[]>([]);
   const [finished, setFinished] = useState(false);
   const word = lesson.vocabulary[index];
@@ -61,14 +64,33 @@ export function HskFlashcardSession({ lesson, backHref, authenticated = false }:
     }
     setIndex((current) => current + 1);
     setFlipped(false);
+    setRevealed(false);
+    setReviewSaveState("idle");
   };
 
-  const rate = (remembered: boolean) => {
-    if (!flipped) return;
+  const rate = async (remembered: boolean) => {
+    if (!revealed || reviewSaveState === "saving") return;
+
+    if (!remembered) {
+      if (!authenticated) {
+        setReviewSaveState("auth-required");
+        return;
+      }
+      setReviewSaveState("saving");
+      const saved = await trySaveHskVocabularyWord(lesson, word);
+      if (!saved) {
+        setReviewSaveState("error");
+        return;
+      }
+      setSavedNotice({
+        hanzi: word.hanzi,
+        id: `${word.id}-${Date.now()}`,
+        meaning: word.meaning,
+      });
+    }
 
     if (remembered) {
       saveRememberedWord(lesson.id, word.id);
-      if (authenticated) saveHskVocabularyWord(lesson, word);
       setRememberedIds((current) => current.includes(word.id) ? current : [...current, word.id]);
     }
 
@@ -78,13 +100,16 @@ export function HskFlashcardSession({ lesson, backHref, authenticated = false }:
   const restart = () => {
     setIndex(0);
     setFlipped(false);
+    setRevealed(false);
+    setReviewSaveState("idle");
+    setSavedNotice(null);
     setRememberedIds([]);
     setFinished(false);
   };
 
   return <main className="learner-dashboard game-center-dashboard game-session-dashboard game-immersive-dashboard hsk-flashcard-session">
     <div className="game-center-shell game-session-shell">
-      <section aria-label={`Flashcard ${lesson.levelLabel}: ${lesson.title}`} className="game-session-world">
+      <section aria-label={`Flashcard ${lesson.levelLabel}: ${lesson.title}`} className="game-session-world is-flash">
         <div className="game-session-sr-copy">
           <h1>Flashcard {lesson.levelLabel}</h1>
           <p>Lật thẻ để xem nghĩa, nghe phát âm rồi tự đánh giá mức nhớ.</p>
@@ -112,16 +137,15 @@ export function HskFlashcardSession({ lesson, backHref, authenticated = false }:
         />
 
         <section className="game-play-card flash-game-stage">
-          {finished ? <div className="game-result" role="status">
-            <span><Trophy aria-hidden="true" size={28} /></span>
-            <small>HOÀN THÀNH BỘ FLASHCARD</small>
-            <h2>Bạn nhớ chắc {rememberedIds.length}/{accessibleWordCount} từ có thể học.</h2>
-            <strong>{score} điểm</strong>
-            <div>
+          {finished ? <GameResultCelebration
+            actions={<>
               <button onClick={restart} type="button"><RotateCcw aria-hidden="true" size={16} /> Học lại</button>
               <Link href={backHref}>Về bài học <ArrowRight aria-hidden="true" size={16} /></Link>
-            </div>
-          </div> : word.locked ? <div className="game-result flashcard-vip-lock">
+            </>}
+            eyebrow="HOÀN THÀNH BỘ FLASHCARD"
+            label={`Bạn nhớ chắc ${rememberedIds.length}/${accessibleWordCount} từ có thể học.`}
+            score={score}
+          /> : word.locked ? <div className="game-result flashcard-vip-lock">
             <span><LockKeyhole aria-hidden="true" size={28} /></span>
             <small>TỪ VỰNG VIP · {index + 1}/{lesson.vocabulary.length}</small>
             <h2>Từ này cần tài khoản VIP</h2>
@@ -131,7 +155,7 @@ export function HskFlashcardSession({ lesson, backHref, authenticated = false }:
             <button
               aria-label={flipped ? "Xem mặt Hán tự" : "Lật thẻ xem nghĩa"}
               className={`flashcard-3d${flipped ? " is-flipped" : ""}`}
-              onClick={() => setFlipped((current) => !current)}
+              onClick={() => { setFlipped((current) => !current); setRevealed(true); setReviewSaveState("idle"); }}
               type="button"
             >
               <span className="flashcard-3d-inner">
@@ -153,17 +177,16 @@ export function HskFlashcardSession({ lesson, backHref, authenticated = false }:
               <button onClick={() => speakChinese(word.hanzi)} type="button"><Volume2 aria-hidden="true" size={18} /> Nghe phát âm</button>
               <span><Sparkles aria-hidden="true" size={15} /> Lật thẻ trước khi tự chấm</span>
             </div>
-            <div className="flash-rating-actions">
-              <button disabled={!flipped} onClick={() => rate(false)} type="button"><X aria-hidden="true" size={17} /> Cần ôn lại</button>
-              <button disabled={!flipped} onClick={() => rate(true)} type="button"><Check aria-hidden="true" size={17} /> Đã nhớ</button>
-            </div>
+            {revealed ? <div className="flash-rating-actions">
+              <button aria-busy={reviewSaveState === "saving"} disabled={reviewSaveState === "saving"} onClick={() => void rate(false)} type="button"><X aria-hidden="true" size={17} /> {reviewSaveState === "saving" ? "Đang thêm vào kho…" : "Cần ôn lại"}</button>
+              <button disabled={reviewSaveState === "saving"} onClick={() => void rate(true)} type="button"><Check aria-hidden="true" size={17} /> Đã nhớ</button>
+            </div> : null}
+            {reviewSaveState === "auth-required" ? <p className="flash-save-status" role="alert">Đăng nhập để thêm từ này vào Kho từ vựng.</p> : reviewSaveState === "error" ? <p className="flash-save-status" role="alert">Chưa thêm được vào Kho từ vựng. Bạn hãy thử lại nhé.</p> : null}
           </>}
         </section>
 
-        <aside className="game-session-tip">
-          <Lightbulb aria-hidden="true" size={18} />
-          <span><strong>Gợi ý:</strong> Bình tĩnh quan sát, mỗi lượt chơi là một bước tiến.</span>
-        </aside>
+        {savedNotice ? <VocabularySavedToast key={savedNotice.id} notice={savedNotice} onDismiss={() => setSavedNotice(null)} /> : null}
+
       </section>
     </div>
   </main>;

@@ -1,13 +1,19 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, BookOpen, Sparkles, Target } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Check, Sparkles, Target } from "lucide-react";
 import Image from "next/image";
 import { createContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { createHskGameRound, HSK_GAME_ROUND_SIZE, type HskGameId } from "@/lib/hsk-game-round";
 import { SLICE_HSK_COURSES, type SliceHskLevel, type SliceVocabulary } from "@/lib/slice-game";
 import { useLearningData } from "@/components/learning-data-provider";
+import { hasCompletedGameCourse, type GameCourseCompletionKey } from "@/lib/activity-progress";
 
-export const HskGameCourseContext = createContext<{ exitLabel: string; onChangeCourse: () => void } | null>(null);
+export const HskGameCourseContext = createContext<{
+  authenticated: boolean;
+  exitLabel: string;
+  level: SliceHskLevel;
+  onChangeCourse: () => void;
+} | null>(null);
 
 const GAME_PICKER_DETAILS: Record<HskGameId, { image: string; imageAlt: string; skill: string }> = {
   memory: {
@@ -42,12 +48,14 @@ const GAME_PICKER_DETAILS: Record<HskGameId, { image: string; imageAlt: string; 
   },
 };
 
-export function HskGameSession({ gameId, title, exitLabel, onExit, children }: {
+export function HskGameSession({ gameId, title, exitLabel, authenticated, completedCourses, onExit, children }: {
   gameId: HskGameId;
   title: string;
   exitLabel: string;
+  authenticated: boolean;
+  completedCourses: readonly GameCourseCompletionKey[];
   onExit: () => void;
-  children: (words: SliceVocabulary[], onRestart: () => void) => ReactNode;
+  children: (words: SliceVocabulary[], onRestart: () => void, level: SliceHskLevel) => ReactNode;
 }) {
   const learningData = useLearningData();
   const [session, setSession] = useState<{ level: SliceHskLevel; vocabulary: SliceVocabulary[]; words: SliceVocabulary[]; run: number } | null>(null);
@@ -98,8 +106,8 @@ export function HskGameSession({ gameId, title, exitLabel, onExit, children }: {
   };
 
   if (session) {
-    return <HskGameCourseContext.Provider key={`${session.level}-${session.run}`} value={{ exitLabel, onChangeCourse: changeCourse }}>
-      {children(session.words, restart)}
+    return <HskGameCourseContext.Provider key={`${session.level}-${session.run}`} value={{ authenticated, exitLabel, level: session.level, onChangeCourse: changeCourse }}>
+      {children(session.words, restart, session.level)}
     </HskGameCourseContext.Provider>;
   }
 
@@ -136,23 +144,26 @@ export function HskGameSession({ gameId, title, exitLabel, onExit, children }: {
           {SLICE_HSK_COURSES.map((course, index) => {
             const featured = index === 0;
             const isLoading = loading === course.id;
+            const completed = hasCompletedGameCourse(completedCourses, gameId, course.id);
 
             return <button
               aria-busy={isLoading}
-              aria-label={`${course.label}: ${course.description}`}
-              className={`writing-course-card${featured ? " is-featured" : ""}${isLoading ? " is-loading" : ""}`}
+              aria-label={`${course.label}: ${course.description}${completed ? ", đã hoàn thành một lượt" : ""}`}
+              className={`writing-course-card${featured ? " is-featured" : ""}${completed ? " is-complete" : ""}${isLoading ? " is-loading" : ""}`}
               key={course.id}
               onClick={() => void selectCourse(course.id)}
               type="button"
             >
-              {featured ? <span className="writing-course-recommended"><Sparkles aria-hidden="true" size={14} /> Đề xuất</span> : null}
+              {completed
+                ? <span className="writing-course-done"><Check aria-hidden="true" size={15} strokeWidth={3} /> DONE</span>
+                : featured ? <span className="writing-course-recommended"><Sparkles aria-hidden="true" size={14} /> Đề xuất</span> : null}
               <span className="writing-course-card-heading">
                 <span className="writing-course-number" aria-hidden="true">{index + 1}</span>
                 <strong>{course.label}</strong>
               </span>
               <span className="writing-course-description">{course.description}</span>
               <small className="writing-course-action">
-                {isLoading ? "Đang tải…" : featured ? "Chơi ngay" : "Chọn khóa"}
+                {isLoading ? "Đang tải…" : completed ? "Chơi lại" : featured ? "Chơi ngay" : "Chọn khóa"}
                 <ArrowRight aria-hidden="true" size={featured ? 19 : 21} />
               </small>
             </button>;

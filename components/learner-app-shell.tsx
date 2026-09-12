@@ -10,6 +10,8 @@ import {
   Bell,
   BookOpen,
   BrainCircuit,
+  CalendarDays,
+  Check,
   ChevronLeft,
   ChevronDown,
   Clapperboard,
@@ -33,6 +35,15 @@ type LearnerShellUser = {
   avatarUrl: string | null;
   role: "learner" | "editor" | "reviewer" | "admin";
   unreadNotificationCount: number;
+} | null;
+
+type LearnerShellMembership = {
+  planName: string;
+  durationDays: number;
+  daysRemaining: number | null;
+  progressPercent: number;
+  expiresAtLabel: string | null;
+  isLifetime: boolean;
 } | null;
 
 const learnerRailItems = [
@@ -90,7 +101,15 @@ function isPlainNavigation(event: MouseEvent<HTMLElement>): boolean {
   return event.button === 0 && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
 }
 
-export function LearnerAppShell({ children, user }: { children: ReactNode; user: LearnerShellUser }) {
+export function LearnerAppShell({
+  children,
+  membership,
+  user,
+}: {
+  children: ReactNode;
+  membership: LearnerShellMembership;
+  user: LearnerShellUser;
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const [pendingHref, setPendingHref] = useState<string | null>(null);
@@ -293,6 +312,7 @@ export function LearnerAppShell({ children, user }: { children: ReactNode; user:
   const mobileGamesActive = !practiceTriggerSelected && visualPathname.startsWith("/games");
   const mobileVipActive = !practiceTriggerSelected && visualPathname.startsWith("/vip");
   const mobileAccountActive = !practiceTriggerSelected && visualPathname.startsWith("/account");
+  const membershipPlanSuffix = membership?.planName.replace(/^VIP\s*/iu, "").trim();
   const renderRailItem = ({ href, label, icon: Icon, matches }: (typeof learnerRailItems)[number]) => {
     const active = !practiceTriggerSelected && matches(visualPathname);
     const pending = pendingHref === href;
@@ -384,7 +404,47 @@ export function LearnerAppShell({ children, user }: { children: ReactNode; user:
             <Settings aria-hidden="true" size={21} /><span>{accountItem.label}</span>
           </Link>
         </nav>
-        <Link
+        {membership ? <Link
+          aria-label={`${membership.planName} đang hoạt động - Quản lý gói`}
+          className="rail-membership-card"
+          href="/vip"
+          onClick={(event) => beginRoute(event, "/vip")}
+          onFocus={() => prepareRoute("/vip")}
+          onPointerEnter={() => prepareRoute("/vip")}
+          prefetch
+        >
+          <span className="rail-membership-hero">
+            <Crown aria-hidden="true" className="rail-membership-watermark" size={86} strokeWidth={1.8} />
+            <span className="rail-membership-crown">
+              <Crown aria-hidden="true" size={25} strokeWidth={2.2} />
+              <span className="rail-membership-check"><Check aria-hidden="true" size={11} strokeWidth={3.2} /></span>
+            </span>
+            <span className="rail-membership-identity">
+              <strong>Thành viên VIP</strong>
+              <span><i aria-hidden="true" />Đang hoạt động</span>
+            </span>
+          </span>
+          <span aria-hidden="true" className="rail-membership-perforation" />
+          <span className="rail-membership-body">
+            <span className="rail-membership-plan"><span>VIP</span>{membershipPlanSuffix ? <strong>{membershipPlanSuffix}</strong> : null}</span>
+            <span className="rail-membership-progress-label">
+              <span>{membership.isLifetime ? "Quyền truy cập" : "Thời hạn còn lại"}</span>
+              <strong>{membership.isLifetime ? "Vĩnh viễn" : `${membership.daysRemaining ?? 0} / ${membership.durationDays} ngày`}</strong>
+            </span>
+            <span
+              aria-label={membership.isLifetime ? "Quyền VIP vĩnh viễn" : `Còn ${membership.daysRemaining ?? 0} trên ${membership.durationDays} ngày`}
+              aria-valuemax={membership.durationDays}
+              aria-valuemin={0}
+              aria-valuenow={membership.isLifetime ? membership.durationDays : membership.daysRemaining ?? 0}
+              className="rail-membership-progress"
+              role="progressbar"
+            >
+              <span style={{ width: `${membership.progressPercent}%` }} />
+            </span>
+            <span className="rail-membership-expiry"><CalendarDays aria-hidden="true" size={15} /><span>{membership.expiresAtLabel ? <>Hết hạn <strong>{membership.expiresAtLabel}</strong></> : <strong>Không có ngày hết hạn</strong>}</span></span>
+            <span className="rail-membership-action">Quản lý gói<span><ArrowRight aria-hidden="true" size={13} strokeWidth={2.6} /></span></span>
+          </span>
+        </Link> : <Link
           aria-label="Nâng cấp Pro - Mở trang VIP"
           className="rail-pro-card"
           href="/vip"
@@ -401,7 +461,7 @@ export function LearnerAppShell({ children, user }: { children: ReactNode; user:
             <span>Nâng cấp ngay</span>
             <span className="rail-pro-arrow"><ArrowRight aria-hidden="true" size={15} strokeWidth={2.5} /></span>
           </span>
-        </Link>
+        </Link>}
       </aside>
 
       <header className="learn-topbar">

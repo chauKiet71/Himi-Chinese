@@ -10,6 +10,7 @@ export type ActiveVipSubscription = {
   planId: string;
   planCode: string;
   planName: string;
+  durationDays: number;
   startsAt: Date | null;
   endsAt: Date | null;
 };
@@ -47,6 +48,7 @@ export async function getActiveVipSubscription(
     planId: subscriptions.planId,
     planCode: vipPlans.code,
     planName: vipPlans.name,
+    durationDays: vipPlans.durationDays,
     startsAt: subscriptions.startsAt,
     endsAt: subscriptions.endsAt,
   }).from(subscriptions)

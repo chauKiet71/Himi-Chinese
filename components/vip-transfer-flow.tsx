@@ -6,8 +6,12 @@ import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import {
   AlertCircle,
-  CheckCircle2,
+  ArrowRight,
+  CalendarDays,
+  Check,
+  Circle,
   Clock3,
+  Crown,
   Landmark,
   LoaderCircle,
   ReceiptText,
@@ -15,6 +19,7 @@ import {
   ScanLine,
   Send,
   ShieldCheck,
+  Sparkles,
   X,
 } from "lucide-react";
 
@@ -35,6 +40,7 @@ type SepayPaymentOrder = {
   };
   paidAt: string | null;
   expiresAt: string;
+  accessEndsAt: string | null;
 };
 
 type VipTransferFlowProps = {
@@ -57,6 +63,15 @@ const paymentErrorMessages: Record<string, string> = {
 
 function formatPrice(value: number): string {
   return new Intl.NumberFormat("vi-VN").format(value) + "đ";
+}
+
+function formatVipAccessEnd(value: string | null): string {
+  if (!value) return "Không thời hạn";
+  return new Intl.DateTimeFormat("vi-VN", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(new Date(value));
 }
 
 export function VipTransferFlow({
@@ -160,6 +175,16 @@ export function VipTransferFlow({
     void createOrder();
   };
 
+  const continueWithVip = () => {
+    setOpen(false);
+    router.push("/courses");
+  };
+
+  const openAccount = () => {
+    setOpen(false);
+    router.push("/account");
+  };
+
   return <>
     <div className="vip-plan-request-form">
       <button
@@ -180,18 +205,52 @@ export function VipTransferFlow({
         aria-describedby={descriptionId}
         aria-labelledby={titleId}
         aria-modal="true"
-        className="vip-transfer-dialog"
+        className={`vip-transfer-dialog ${order?.status === "paid" ? "is-success" : ""}`}
         role="dialog"
       >
         <button aria-label="Đóng thanh toán" autoFocus className="vip-dialog-close" onClick={closeTransfer} type="button"><X size={18} /></button>
 
         {order?.status === "paid" ? <div className="vip-transfer-success">
-          <span className="vip-success-icon"><CheckCircle2 aria-hidden="true" size={31} /></span>
-          <span className="vip-success-eyebrow">SePay đã xác nhận</span>
-          <h2 id={titleId}>Thanh toán thành công</h2>
-          <p id={descriptionId}>Gói {order.planName} đã được kích hoạt tự động trên tài khoản này. Bạn có thể bắt đầu học ngay.</p>
-          <div className="vip-success-status is-paid"><CheckCircle2 aria-hidden="true" size={17} /><span>Trạng thái giao dịch</span><strong>Đã thanh toán</strong></div>
-          <button className="button button-primary button-full" onClick={closeTransfer} type="button">Bắt đầu học VIP</button>
+          <div className="vip-success-mark" aria-hidden="true">
+            <span className="vip-success-sparkle is-left"><Sparkles size={24} /></span>
+            <span className="vip-success-icon"><Check size={36} strokeWidth={3.2} /></span>
+            <span className="vip-success-sparkle is-right"><Sparkles size={20} /></span>
+          </div>
+          <span className="vip-success-eyebrow">Thanh toán hoàn tất</span>
+          <h2 id={titleId}>Chào mừng thành viên <em>VIP!</em></h2>
+          <p id={descriptionId}>Quyền học của bạn đã được mở. Bắt đầu hành trình mới cùng Himi nhé!</p>
+
+          <div className="vip-success-ticket">
+            <span aria-hidden="true" className="vip-ticket-sparkle is-top"><Sparkles size={22} /></span>
+            <span aria-hidden="true" className="vip-ticket-sparkle is-bottom"><Sparkles size={17} /></span>
+            <div className="vip-success-ticket-main">
+              <span className="vip-success-ticket-crown" aria-hidden="true"><Crown size={32} strokeWidth={2.3} /></span>
+              <div className="vip-success-ticket-copy">
+                <strong>{order.planName}</strong>
+                <span><Circle aria-hidden="true" fill="currentColor" size={8} strokeWidth={0} /> Đang hoạt động</span>
+              </div>
+            </div>
+            <div className="vip-success-ticket-expiry">
+              <CalendarDays aria-hidden="true" size={19} />
+              <span>{order.accessEndsAt ? "Hiệu lực đến" : "Hiệu lực"}</span>
+              <strong>{formatVipAccessEnd(order.accessEndsAt)}</strong>
+            </div>
+            <Image
+              alt="Himi vui mừng chào đón thành viên VIP"
+              className="vip-success-mascot"
+              height={240}
+              priority
+              src="/assets/mascot/himi-v2/himi-celebrate.webp"
+              width={240}
+            />
+          </div>
+
+          <div className="vip-success-actions">
+            <button className="button button-primary button-full" onClick={continueWithVip} type="button">
+              Khám phá bài học VIP <ArrowRight aria-hidden="true" size={18} />
+            </button>
+            <button className="vip-success-account-link" onClick={openAccount} type="button">Về trang tài khoản</button>
+          </div>
         </div> : <>
           <header className="vip-dialog-heading">
             <span className="vip-dialog-icon"><Landmark aria-hidden="true" size={22} /></span>

@@ -436,6 +436,7 @@ export const gameAttempts = pgTable("game_attempts", {
   id: uuid("id").defaultRandom().primaryKey(),
   userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   gameId: varchar("game_id", { length: 40 }).notNull(),
+  hskLevel: varchar("hsk_level", { length: 10 }),
   score: integer("score").notNull().default(0),
   xpEarned: integer("xp_earned").notNull().default(0),
   completedAt: timestamp("completed_at", { withTimezone: true }).notNull().defaultNow(),

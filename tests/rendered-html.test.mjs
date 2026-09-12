@@ -167,7 +167,7 @@ test("staging verification covers auth, SePay, notifications, audio and fixture 
   assert.match(verification, /\/api\/auth\/register/);
   assert.match(verification, /\/api\/webhooks\/sepay/);
   assert.match(verification, /sepay_pending_to_paid/);
-  assert.match(verification, /Thanh toán SePay thành công/);
+  assert.match(verification, /VIP đã được kích hoạt/);
   assert.match(verification, /practice-audio/);
   assert.match(verification, /cloudinary\.com/);
   assert.match(verification, /finally \{/);
@@ -570,6 +570,7 @@ test("practice and game progress persist per authenticated learner", async () =>
   ]);
   assert.match(schema, /practice_attempts/);
   assert.match(schema, /game_attempts/);
+  assert.match(schema, /hskLevel: varchar\("hsk_level"/);
   assert.match(repository, /recordPracticeAttempt/);
   assert.match(repository, /recordGameAttempt/);
   assert.match(practiceRoute, /isSameOriginRequest/);
@@ -716,6 +717,29 @@ test("desktop learner rail uses the Pro card as its only VIP entry point", async
 
   assert.doesNotMatch(shell, /\{ href: "\/vip", label: "VIP"/);
   assert.match(shell, /className="rail-pro-card"[\s\S]*?href="\/vip"/);
+});
+
+test("active VIP members receive the approved ticket card with real subscription timing", async () => {
+  const [layout, shell, railStyles, subscription] = await Promise.all([
+    read("app/layout.tsx"),
+    read("components/learner-app-shell.tsx"),
+    read("app/learner-navigation.css"),
+    read("lib/vip-subscription.ts"),
+  ]);
+
+  assert.match(layout, /getActiveVipSubscription\(user\.id\)/);
+  assert.match(layout, /vipDaysRemaining\(activeVip\.endsAt\)/);
+  assert.match(layout, /<LearnerAppShell membership=\{shellMembership\}/);
+  assert.match(subscription, /durationDays: vipPlans\.durationDays/);
+  assert.match(shell, /className="rail-membership-card"/);
+  assert.match(shell, /Thành viên VIP/);
+  assert.match(shell, /Đang hoạt động/);
+  assert.match(shell, /Thời hạn còn lại/);
+  assert.match(shell, /Hết hạn/);
+  assert.match(shell, /Quản lý gói/);
+  assert.doesNotMatch(shell, /className="rail-membership-expiry"[\s\S]{0,180}Còn \{membership\.daysRemaining/);
+  assert.match(railStyles, /\.learner-app-shell \.rail-membership-progress/);
+  assert.match(railStyles, /\.learner-app-shell\.is-rail-collapsed \.rail-membership-card \{[\s\S]*?display: none;/);
 });
 
 test("course library uses eight editorial topic covers and a streamed catalog", async () => {

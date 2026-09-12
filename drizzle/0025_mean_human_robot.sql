@@ -1,0 +1,1 @@
+ALTER TABLE "game_attempts" ADD COLUMN "hsk_level" varchar(10);

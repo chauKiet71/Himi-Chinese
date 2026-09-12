@@ -8,8 +8,10 @@ import "./white-backgrounds.css";
 import "./brand-theme.css";
 import "./chatbot-widget.css";
 import "./game-motion.css";
+import "./game-completion.css";
 import "./account-wallet.css";
 import "./lesson-interactive.css";
+import "./legal.css";
 import "./vip/vip-policy.css";
 import "./learning-journey-responsive.css";
 import "./adaptive-responsive.css";
@@ -21,6 +23,8 @@ import { LearnerAppShell } from "@/components/learner-app-shell";
 import { LearningDataProvider } from "@/components/learning-data-provider";
 import { getCurrentUser } from "@/lib/auth-session";
 import { createBrandTheme } from "@/lib/brand";
+import { isLifetimeVipPlan } from "@/lib/vip-plan";
+import { getActiveVipSubscription, vipDaysRemaining } from "@/lib/vip-subscription";
 
 export const metadata: Metadata = {
   title: { default: "Himi Chinese — Tiếng Trung cho người đi làm", template: "%s | Himi Chinese" },
@@ -43,8 +47,22 @@ const developmentBrowserErrorGuard = String.raw`(() => {
   }, { capture: true });
 })();`;
 
+function formatVipDate(value: Date): string {
+  return value.toLocaleDateString("vi-VN", {
+    day: "2-digit",
+    month: "2-digit",
+    timeZone: "Asia/Ho_Chi_Minh",
+    year: "numeric",
+  });
+}
+
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const user = await getCurrentUser();
+  const activeVip = user ? await getActiveVipSubscription(user.id) : null;
+  const activeVipIsLifetime = activeVip ? isLifetimeVipPlan(activeVip.planCode) : false;
+  const activeVipDaysRemaining = activeVip && !activeVipIsLifetime
+    ? vipDaysRemaining(activeVip.endsAt)
+    : null;
   const learningCacheScope = user ? `${user.id}:${user.role}:${user.sessionCreatedAt?.toISOString() ?? "session"}` : "guest";
   const shellUser = user ? {
     displayName: user.displayName,
@@ -52,6 +70,16 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     avatarUrl: user.avatarUrl,
     role: user.role,
     unreadNotificationCount: user.unreadNotificationCount,
+  } : null;
+  const shellMembership = activeVip ? {
+    planName: activeVip.planName,
+    durationDays: activeVip.durationDays,
+    daysRemaining: activeVipDaysRemaining,
+    progressPercent: activeVipIsLifetime
+      ? 100
+      : Math.min(100, Math.max(0, Math.round(((activeVipDaysRemaining ?? 0) / Math.max(1, activeVip.durationDays)) * 100))),
+    expiresAtLabel: activeVip.endsAt ? formatVipDate(activeVip.endsAt) : null,
+    isLifetime: activeVipIsLifetime,
   } : null;
 
   return <html lang="vi" style={createBrandTheme() as CSSProperties}><body>
@@ -63,7 +91,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <Suspense fallback={<SiteHeaderFallback />}><SiteHeader /></Suspense>
     <LearningDataProvider key={learningCacheScope} authenticated={Boolean(user)} scope={learningCacheScope}>
       <Suspense fallback={<div className="standalone-route-shell">{children}</div>}>
-        <LearnerAppShell user={shellUser}>{children}</LearnerAppShell>
+        <LearnerAppShell membership={shellMembership} user={shellUser}>{children}</LearnerAppShell>
       </Suspense>
     </LearningDataProvider>
     <SiteFooter />

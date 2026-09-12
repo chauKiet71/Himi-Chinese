@@ -1,4 +1,9 @@
-const productionScriptSources = ["'self'", "'unsafe-inline'"];
+const productionScriptSources = [
+  "'self'",
+  "'unsafe-inline'",
+  "https://www.youtube.com",
+  "https://www.youtube-nocookie.com",
+];
 
 export function contentSecurityPolicy(development = false): string {
   const scriptSources = development

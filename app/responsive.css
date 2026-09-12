@@ -853,7 +853,7 @@ video {
     margin: 0 auto;
   }
 
-  .auth-card-login-scene :where(.auth-heading, .auth-form, .auth-form label, .auth-input-shell, .auth-switch, .auth-switch > div, .auth-switch p) {
+  .auth-card-login-scene :where(.auth-heading, .auth-form, .auth-form label, .auth-form-field, .auth-input-shell, .auth-switch, .auth-switch > div, .auth-switch p) {
     min-width: 0;
     max-width: 100%;
   }
@@ -878,7 +878,8 @@ video {
     gap: 13px;
   }
 
-  .auth-card-login-scene .auth-form label {
+  .auth-card-login-scene .auth-form label,
+  .auth-card-login-scene .auth-form-field {
     gap: 7px;
     font-size: 13px;
   }
@@ -1027,7 +1028,7 @@ video {
     padding: 22px 26px;
   }
 
-  .auth-card-login-scene :where(.auth-heading, .auth-form, .auth-form label, .auth-input-shell, .auth-switch, .auth-switch > div, .auth-switch p) {
+  .auth-card-login-scene :where(.auth-heading, .auth-form, .auth-form label, .auth-form-field, .auth-input-shell, .auth-switch, .auth-switch > div, .auth-switch p) {
     min-width: 0;
     max-width: 100%;
   }
@@ -1187,7 +1188,8 @@ video {
     gap: 8px;
   }
 
-  .auth-card-register-scene .auth-form label {
+  .auth-card-register-scene .auth-form label,
+  .auth-card-register-scene .auth-form-field {
     gap: 5px;
     font-size: 11px;
   }
@@ -1304,6 +1306,10 @@ video {
     transform: translateX(-50%);
   }
 
+  .auth-page-login-scene:not(.auth-page-register-scene):not(.auth-page-forgot-scene) .auth-scene-stage {
+    top: 12px;
+  }
+
   .auth-card-login-scene,
   .auth-page-forgot-scene .auth-card-forgot-scene {
     top: 100px;
@@ -1329,7 +1335,8 @@ video {
     gap: 9px;
   }
 
-  .auth-card-login-scene .auth-form label {
+  .auth-card-login-scene .auth-form label,
+  .auth-card-login-scene .auth-form-field {
     gap: 5px;
     font-size: 11px;
   }
@@ -1373,7 +1380,8 @@ video {
     gap: 5px;
   }
 
-  .auth-card-register-scene .auth-form label {
+  .auth-card-register-scene .auth-form label,
+  .auth-card-register-scene .auth-form-field {
     gap: 3px;
     font-size: 10px;
   }
@@ -1383,8 +1391,12 @@ video {
     font-size: 12px;
   }
 
+  .auth-card-register-scene .auth-password-input-shell input {
+    min-height: 44px;
+  }
+
   .auth-card-register-scene .auth-form .button {
-    min-height: 43px;
+    min-height: 44px;
     margin-top: 1px;
   }
 

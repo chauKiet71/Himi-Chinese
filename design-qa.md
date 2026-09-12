@@ -560,3 +560,162 @@ final result: passed
 - P3: repeat the full-page visual comparison at 1159 × 677 if the in-app browser panel is resized back to the annotated viewport.
 
 final result: passed
+
+---
+
+# Design QA — Terms page option 3
+
+## Comparison target
+
+- Source visual truth: `C:\Users\Windows\.codex\generated_images\01a04399-6b54-77d2-8a15-3b97eacdc5ee\exec-14320373-026e-4037-8970-dab499ca0e23.png`
+- Source pixels: 1473 × 1059.
+- Intended desktop viewport: 1440 × 1024 CSS px at device scale factor 1.
+- Intended mobile viewport: 390 × 844 CSS px at device scale factor 1.
+- Implementation: `http://localhost:3000/terms` with the first accordion item open.
+- Implementation screenshot: unavailable in the current Codex Desktop tool context.
+
+## Findings
+
+- [P2] Browser-rendered visual comparison is unavailable.
+  Location: full Terms page at desktop and mobile breakpoints.
+  Evidence: the selected source mockup is available and the route responds successfully, but the current in-app Browser tool cannot capture a screenshot. HTTP health and build output cannot substitute for rendered visual evidence.
+  Impact: exact typography wrapping, spacing, image crop, responsive overflow, and visual fidelity cannot be certified.
+  Fix: capture `/terms` at 1440 × 1024 and 390 × 844, compare both with the source visual in one input, then correct any P0/P1/P2 differences.
+
+## Required fidelity surfaces
+
+- Fonts and typography: implemented with the project-wide Roboto stack; rendered wrapping and optical weight await capture verification.
+- Spacing and layout rhythm: desktop 36/64 split and stacked mobile breakpoints are implemented; rendered spacing awaits capture verification.
+- Colors and visual tokens: Himi red, orange, warm cream, white, and neutral ink tokens are implemented without gradients; rendered contrast awaits capture verification.
+- Image quality and asset fidelity: the existing transparent `himi-cheer.webp` brand asset is used; rendered crop and scale await capture verification.
+- Copy and content: all five existing legal sections and the support email are preserved; accordion labels follow the selected mockup's information structure.
+
+## Focused region comparison
+
+- Not available because no browser-rendered implementation capture could be produced.
+
+## Comparison history
+
+1. Initial pass: blocked before visual comparison because the available in-app Browser tools cannot capture the implementation.
+2. Source-level responsive implementation, lint, focused tests, build, and HTTP route checks passed.
+3. Post-fix visual evidence: unavailable.
+
+## Implementation checklist
+
+- Capture desktop and mobile implementations in the in-app Browser.
+- Compare them with the selected mockup.
+- Fix any P0/P1/P2 differences and repeat the comparison.
+
+## Follow-up polish
+
+- Defer P3 polish until browser-rendered evidence is available.
+
+final result: blocked
+
+---
+
+# Design QA — VIP payment success celebration
+
+## Comparison target
+
+- Source visual truth: `C:\Users\Windows\.codex\generated_images\019fb6fe-431e-7c62-917c-2abef5ccee3c\exec-4aca3106-0059-443f-869b-5ef4267632af.png`.
+- Source pixels: 1448 × 1086. The implementation targets a modal up to 700 CSS px wide inside the existing VIP purchase flow.
+- Implementation: `http://localhost:3001/vip`, authenticated paid-order state in `.vip-transfer-dialog.is-success`.
+- Intended viewports: 1440 × 1000 CSS px desktop and 390 × 844 CSS px mobile at device scale factor 1.
+- Implementation screenshot: unavailable in the current Codex Desktop tool context.
+- State: payment polling has changed the current order from `pending` to `paid` and returned the activated subscription end date.
+
+## Findings
+
+- [P2] Browser-rendered comparison of the paid-order state is unavailable.
+  Location: VIP transfer success dialog on `/vip`.
+  Evidence: the selected mockup was opened and inspected; the implementation builds and focused tests pass, but this tool context cannot capture the authenticated in-app Browser session or safely synthesize a real paid order.
+  Impact: exact desktop/mobile wrapping, final mascot crop, and perceived animation timing cannot be certified from rendered evidence.
+  Fix: complete a test payment (or use a dedicated staging fixture), capture the open success dialog at desktop and mobile sizes, and compare both captures with the source mockup in one visual input.
+
+## Required fidelity surfaces
+
+- Fonts and typography: uses the product-wide Roboto stack with a 29–40 px responsive success headline, compact uppercase success label, and readable 11–15 px supporting text; rendered wrapping awaits capture.
+- Spacing and layout rhythm: implements the centered 700 px modal, 580 px content column, two-row VIP ticket, compact action stack, and mobile bottom-sheet adaptation; rendered geometry awaits capture.
+- Colors and visual tokens: implements Himi coral, white, warm cream, green success, orange sparkle, neutral ink, soft borders, and restrained shadows.
+- Image quality and asset fidelity: uses the existing transparent `himi-celebrate.webp` asset with exactly two flippers and two feet; icons come from the installed icon system.
+- Copy and content: uses “Thanh toán hoàn tất”, “Chào mừng thành viên VIP!”, live plan name, live subscription expiry (or “Không thời hạn”), “Khám phá bài học VIP”, and “Về trang tài khoản”. The requested SePay confirmation/status row is absent.
+
+## Focused region comparison
+
+- Not available because no browser-rendered paid-state capture could be produced. The source mockup itself was inspected at its full 1448 × 1086 resolution.
+
+## Comparison history
+
+1. Approved refinement: option 2 with the SePay confirmation row removed and lower spacing rebalanced.
+2. Implementation: connected the ticket to the real plan name and subscription end date; added staged dialog, check, ticket, mascot, sparkle, CTA, hover, and reduced-motion states.
+3. Post-fix visual evidence: unavailable in the current tool context.
+
+## Primary interactions and verification
+
+- The primary CTA closes the modal and opens `/courses`; the secondary action opens `/account`.
+- Escape, backdrop click, close button, focus-visible styling, and scroll locking are preserved.
+- Production build: passed.
+- Focused ESLint: passed.
+- Focused VIP and staging-verification tests: passed.
+- Full TypeScript check reaches only the pre-existing `lib/admin-analytics-service.ts` query-builder indexing errors; no modified file reports an error.
+- Full repository tests were not used as the build gate because existing unrelated failures remain in listening, home, course-catalog, and learner-navigation assertions.
+
+## Follow-up polish
+
+- Judge the mascot's idle amplitude and final ticket crop from the real paid-state capture before changing the current gentle 3.4-second loop.
+
+final result: blocked
+
+---
+
+# Design QA — Active VIP membership ticket
+
+## Comparison target
+
+- Source visual truth: `C:\Users\Windows\.codex\generated_images\019fb6fe-431e-7c62-917c-2abef5ccee3c\exec-fab760ee-bf7d-4d70-8aff-3afcf555d47b.png`.
+- Source pixels: 1254 × 1254; intended component footprint is approximately 192 × 210 CSS px inside the expanded desktop learner rail.
+- Implementation: `http://localhost:3001/videos`, authenticated learner with an active VIP subscription and expanded rail.
+- Implementation screenshot: unavailable in the current Codex Desktop tool context.
+- Intended viewport: desktop from 721 CSS px upward; the learner rail is hidden by the existing mobile navigation breakpoint at 720 CSS px.
+
+## Findings
+
+- [P2] Browser-rendered comparison of the authenticated VIP state is unavailable.
+  Location: `.rail-membership-card` in the expanded learner rail.
+  Evidence: the selected source mockup is available, the production build passes, and the guest route responds successfully, but this tool context cannot capture the user's authenticated in-app Browser session. The unauthenticated server response correctly renders the existing upgrade card instead.
+  Impact: final optical checks for text wrapping, hover rendering, and exact proportions in the real active-subscription state cannot be certified from a browser screenshot.
+  Fix: open an authenticated active-VIP account at `/videos`, expand the learner rail, capture the membership card, and compare that crop with the selected source image in one visual input.
+
+## Required fidelity surfaces
+
+- Fonts and typography: implemented with the product-wide Roboto stack and compact 8–17 px hierarchy; rendered wrapping awaits authenticated capture.
+- Spacing and layout rhythm: implemented for the current 192 px inner rail width, with an 82 px hero, compact cream body, 20 px radius, ticket notches, and perforated divider; rendered geometry awaits capture.
+- Colors and visual tokens: implemented with Himi coral `#ff4d43`, orange `#ff8a2b`, cream `#fff9f5`, dark ink, and a restrained green active state.
+- Image quality and asset fidelity: no raster asset is required; all icons use the project's existing Lucide icon system and the decorative crown is an installed icon rather than a placeholder.
+- Copy and content: implements `Thành viên VIP`, `Đang hoạt động`, the real plan name, remaining-duration progress, the expiration date, and `Quản lý gói`. The removed duplicate `Còn 128 ngày` row is not rendered.
+
+## Focused region comparison
+
+- Not available because the active-VIP implementation could not be captured from the authenticated in-app Browser session.
+
+## Comparison history
+
+1. Selected mockup: approved ticket card with the redundant `Còn 128 ngày` row removed.
+2. Implementation: connected the shell to the active subscription, added fixed-term and lifetime variants, added responsive collapsed-rail behavior, and preserved the original upgrade card for free users.
+3. Post-fix visual evidence: unavailable in the current tool context.
+
+## Primary interactions and verification
+
+- `Quản lý gói` points to `/vip` and uses the existing navigation-progress behavior.
+- Keyboard focus styling, hover/press motion, and reduced-motion fallbacks are implemented.
+- Production build: passed.
+- Focused ESLint: passed.
+- Learner-rail and VIP-subscription tests: 9/9 passed.
+- Full TypeScript check reaches only the pre-existing `lib/admin-analytics-service.ts` query-builder indexing errors; no modified file reports an error.
+
+## Follow-up polish
+
+- Repeat the authenticated visual comparison when the in-app Browser capture surface is available.
+
+final result: blocked
