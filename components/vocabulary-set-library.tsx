@@ -12,7 +12,6 @@ export type SetSummary = { id: string; title: string; description: string; wordC
 function revealCreateForm(form: HTMLFormElement | null) {
   if (!form) return;
   form.querySelector<HTMLInputElement>('input[name="title"]')?.focus({ preventScroll: true });
-  form.scrollIntoView({ behavior: "instant", block: "center" });
 }
 
 export function VocabularySetLibrary({
@@ -43,7 +42,13 @@ export function VocabularySetLibrary({
   const createFormRef = useRef<HTMLFormElement>(null);
   const createButtonRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
-    if (creating) revealCreateForm(createFormRef.current);
+    if (!creating) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    revealCreateForm(createFormRef.current);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
   }, [creating]);
 
   function openCreateForm() {
@@ -106,7 +111,7 @@ export function VocabularySetLibrary({
   return <main className="vsets-page">
     <header className="vsets-hero">
       <div><span className="vsets-eyebrow"><Layers3 size={17} /> GÓC TỪ VỰNG CỦA BẠN</span><h1>Mỗi bộ từ, một bước tiến.</h1><p>Gom những từ bạn muốn nhớ. Học theo cách bạn yêu thích.</p>
-        <div className="vsets-actions">{authenticated ? <button ref={createButtonRef} className="vsets-primary" aria-expanded={creating} aria-controls={creating ? "vsets-create-form" : undefined} onClick={openCreateForm}><Plus size={18} /> Tạo bộ mới</button> : <Link className="vsets-primary" href="/login?returnTo=%2Fvocabulary"><Plus size={18} /> Đăng nhập để tạo bộ</Link>}<span>{builtins.length} bộ có sẵn · 3 cách học</span></div>
+        <div className="vsets-actions">{authenticated ? <button ref={createButtonRef} className="vsets-primary" aria-expanded={creating} aria-controls="vsets-create-form" onClick={openCreateForm} type="button"><Plus size={18} /> Tạo bộ mới</button> : <Link className="vsets-primary" href="/login?returnTo=%2Fvocabulary"><Plus size={18} /> Đăng nhập để tạo bộ</Link>}<span>{builtins.length} bộ có sẵn · 3 cách học</span></div>
       </div><div className="vsets-hero-art" aria-hidden="true"><span>学</span><span>词</span><small>HỌC MỘT CHÚT, NHỚ THÊM NHIỀU</small></div>
     </header>
 
@@ -118,7 +123,32 @@ export function VocabularySetLibrary({
       {studyHref ? <Link className="vsets-primary vsets-start-learning" href={studyHref}><BookOpen size={18} /> Bắt đầu học <ArrowRight size={18} /></Link> : <button className="vsets-primary vsets-start-learning" type="button" disabled><BookOpen size={18} /> Bắt đầu học</button>}
     </div>
 
-    {creating && authenticated ? <form ref={createFormRef} id="vsets-create-form" className="vsets-panel vsets-form" aria-labelledby="vsets-create-title" onSubmit={create}><h2 id="vsets-create-title">Tạo bộ từ vựng</h2><label>Tên bộ<input name="title" required maxLength={100} placeholder="Ví dụ: Từ mới tuần này" /></label><label>Mô tả<textarea name="description" maxLength={500} placeholder="Bạn muốn học những gì trong bộ này?" rows={2} /></label><div className="vsets-actions"><button className="vsets-primary" disabled={pending}>{pending ? "Đang tạo…" : "Tạo bộ"}</button><button type="button" disabled={pending} onClick={closeCreateForm}>Hủy</button></div>{error ? <p role="alert" className="vsets-error">{error}</p> : null}</form> : null}
+    {creating && authenticated ? <div
+      className="vsets-create-overlay"
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && !pending) closeCreateForm();
+      }}
+      onMouseDown={(event) => {
+        if (event.currentTarget === event.target && !pending) closeCreateForm();
+      }}
+      role="presentation"
+    >
+      <form
+        ref={createFormRef}
+        id="vsets-create-form"
+        className="vsets-form vsets-create-dialog"
+        aria-labelledby="vsets-create-title"
+        aria-modal="true"
+        role="dialog"
+        onSubmit={create}
+      >
+        <h2 id="vsets-create-title">Tạo bộ từ vựng</h2>
+        <label>Tên bộ<input name="title" required maxLength={100} placeholder="Ví dụ: Từ mới tuần này" /></label>
+        <label>Mô tả<textarea name="description" maxLength={500} placeholder="Bạn muốn học những gì trong bộ này?" rows={3} /></label>
+        <div className="vsets-actions"><button className="vsets-primary" disabled={pending}>{pending ? "Đang tạo…" : "Tạo bộ"}</button><button type="button" disabled={pending} onClick={closeCreateForm}>Hủy</button></div>
+        {error ? <p role="alert" className="vsets-error">{error}</p> : null}
+      </form>
+    </div> : null}
 
     <div className="vsets-section-heading"><div><h2>{tab === "saved" ? "Danh sách từ vựng" : "Bộ từ vựng của tôi"}</h2><p>{tab === "saved" ? "Những từ bạn đã lưu khi học HSK và Giao tiếp." : "Những từ cần nhớ, được sắp xếp theo cách của bạn."}</p></div><span>{tab === "saved" ? `${visibleSavedWords.length} từ` : `${mine.length} bộ`}</span></div>
 
@@ -142,6 +172,6 @@ export function VocabularySetLibrary({
           ? <div className="vsets-empty" role="alert"><h3>Chưa tải được bộ của bạn</h3><p>Hãy thử lại sau ít phút. Các từ đã lưu vẫn có thể học bình thường.</p><button onClick={() => router.refresh()}>Thử lại</button></div>
           : mine.length
             ? <div className="vsets-grid">{mine.map((set, index) => <Link className="vsets-card" href={`/vocabulary/${set.id}`} key={set.id}><div className={`vsets-card-cover vsets-tone-${index % 4}`}><span lang="zh">{["学", "词", "记", "习"][index % 4]}</span><span className="vsets-badge">{set.category ?? "Cá nhân"}</span></div><div className="vsets-card-body"><h3>{set.title}</h3><p>{set.description || "Bộ từ vựng do bạn tự xây dựng."}</p><div><span><Layers3 size={16} /> {set.wordCount} từ vựng</span><span>Xem bộ <ArrowRight size={17} /></span></div></div></Link>)}</div>
-            : <div className="vsets-empty"><Layers3 size={36} /><h3>Bộ đầu tiên đang chờ bạn</h3><p>Tạo bộ mới rồi thêm những từ bạn muốn học.</p><button className="vsets-primary" onClick={openCreateForm}><Plus size={18} /> Tạo bộ</button></div>}
+            : <div className="vsets-empty"><Layers3 size={36} /><h3>Bộ đầu tiên đang chờ bạn</h3><p>Tạo bộ mới rồi thêm những từ bạn muốn học.</p><button aria-controls="vsets-create-form" aria-expanded={creating} className="vsets-primary" onClick={openCreateForm} type="button"><Plus size={18} /> Tạo bộ</button></div>}
   </main>;
 }

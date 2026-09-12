@@ -315,8 +315,13 @@ body {
 }
 
 .course-library-page .search-box:focus-within {
-  border-color: var(--himi-red);
-  box-shadow: 0 0 0 4px var(--focus-halo);
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+.course-library-page .search-box input:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .course-library-page .filter-chip {

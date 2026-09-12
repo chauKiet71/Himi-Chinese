@@ -4066,7 +4066,6 @@ body:has(.admin-page) > .mobile-nav {
 @media (prefers-reduced-motion: reduce) {
   .game-catalog-card,
   .game-card-visual img,
-  .game-journey-featured-card button,
   .memory-grid button,
   .flashcard-3d-inner {
     transition: none;

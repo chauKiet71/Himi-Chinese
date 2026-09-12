@@ -447,6 +447,11 @@
     transition-delay: 0ms !important;
   }
 
+  /* Keep the explicitly requested continue-button hover feedback available. */
+  .game-journey-featured-card button {
+    transition-duration: 220ms, 320ms, 320ms !important;
+  }
+
   /* Keep the explicitly requested station hover feedback available. */
   .game-journey-station {
     transition-duration: .48s, .36s !important;
