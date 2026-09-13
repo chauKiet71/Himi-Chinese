@@ -57,9 +57,28 @@ type VipTransferFlowProps = {
 const paymentErrorMessages: Record<string, string> = {
   invalid_input: "Gói VIP chưa hợp lệ. Hãy tải lại trang và thử lại.",
   payment_configuration_invalid: "Kênh thanh toán đang được cấu hình. Vui lòng quay lại sau.",
+  payment_service_unavailable: "Hệ thống thanh toán đang tạm gián đoạn. Vui lòng thử lại sau.",
   vip_plan_inactive: "Gói này vừa ngừng nhận thanh toán.",
   vip_request_ineligible: "Tài khoản hiện chưa đủ điều kiện mua VIP.",
 };
+
+async function readPaymentResponse<T>(response: Response): Promise<T | null> {
+  const text = await response.text();
+  if (!text) return null;
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    return null;
+  }
+}
+
+function paymentRequestError(response: Response, errorCode?: string): string {
+  if (response.status === 401) return "Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại để thanh toán.";
+  return paymentErrorMessages[errorCode ?? ""]
+    ?? (response.status >= 500
+      ? "Hệ thống thanh toán đang tạm gián đoạn. Vui lòng thử lại sau."
+      : "Không thể tạo mã thanh toán. Vui lòng thử lại.");
+}
 
 function formatPrice(value: number): string {
   return new Intl.NumberFormat("vi-VN").format(value) + "đ";
@@ -103,9 +122,9 @@ export function VipTransferFlow({
         headers: { "Content-Type": "application/json" },
         method: "POST",
       });
-      const body = await response.json() as { error?: string; order?: SepayPaymentOrder };
-      if (!response.ok || !body.order) {
-        throw new Error(paymentErrorMessages[body.error ?? ""] ?? "Không thể tạo mã thanh toán. Vui lòng thử lại.");
+      const body = await readPaymentResponse<{ error?: string; order?: SepayPaymentOrder }>(response);
+      if (!response.ok || !body?.order) {
+        throw new Error(paymentRequestError(response, body?.error));
       }
       setOrder(body.order);
     } catch (caught) {
@@ -141,9 +160,9 @@ export function VipTransferFlow({
     const poll = async () => {
       try {
         const response = await fetch(`/api/payments/sepay/orders/${pollingOrderId}`, { cache: "no-store" });
-        const body = await response.json() as { order?: SepayPaymentOrder };
+        const body = await readPaymentResponse<{ error?: string; order?: SepayPaymentOrder }>(response);
         if (cancelled) return;
-        if (!response.ok || !body.order) {
+        if (!response.ok || !body?.order) {
           if (response.status === 401) setError("Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại để xem trạng thái thanh toán.");
           else timeoutId = window.setTimeout(poll, 4_000);
           return;

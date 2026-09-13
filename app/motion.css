@@ -621,6 +621,19 @@
     transition-duration: 240ms, 280ms, 300ms !important;
   }
 
+  /* Keep the typing catalog hover colors smooth without spatial movement. */
+  .typing-level-card {
+    transition-duration: 220ms, 220ms, 220ms !important;
+  }
+
+  .typing-hanzi-preview span {
+    transition-duration: 200ms, 220ms !important;
+  }
+
+  .typing-character-progress > span {
+    transition-duration: 180ms !important;
+  }
+
   .himi-writing-character-grid button {
     transition-duration: 220ms, 220ms, 220ms, 280ms, 280ms !important;
   }

@@ -9,7 +9,13 @@ export async function GET(request: Request) {
     return Response.json({ error: "Vui lòng chọn khóa HSK1 đến HSK6." }, { status: 400 });
   }
   const user = await getCurrentUser();
-  const access = await getHskLevelLessonAccess(level, user?.id ?? null);
+  if (!user) {
+    return Response.json(
+      { error: "Vui lòng đăng nhập để chơi game.", code: "AUTH_REQUIRED" },
+      { status: 401, headers: { "Cache-Control": "private, no-store", Vary: "Cookie" } },
+    );
+  }
+  const access = await getHskLevelLessonAccess(level, user.id);
   if (!access.levelAccess.allowed || access.allowedLessonIds.size === 0 || access.allowedVocabularyKeys.size === 0) {
     return Response.json({ error: "Nội dung từ vựng của khóa HSK này dành cho thành viên VIP.", code: "VIP_REQUIRED" }, { status: 403 });
   }

@@ -46,6 +46,525 @@ final result: passed
 
 ---
 
+## Luyện gõ — đồng bộ box cụm từ trong phần câu — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: Browser Comment 1, ảnh tham chiếu inline 168 × 107 px với box “父母 / fùmǔ”. Ảnh chú thích không cung cấp đường dẫn tệp cục bộ.
+- Browser-rendered implementation: `http://localhost:3001/typing/hsk-5/hsk5-l3/practice?stage=sentence`, chụp trực tiếp trong Codex in-app Browser. Backend chụp ảnh không cung cấp đường dẫn tệp cục bộ.
+- Viewport: kiểm tra toàn màn hình ở ngữ cảnh 1062 × 1053 CSS px của chú thích; kiểm tra tập trung trên từng box ở 116 × 64 CSS px. Thiết bị trình duyệt dùng density do host quản lý; so sánh hình học dựa trên CSS px.
+- State: HSK 5, bài 3, phần câu, gồm cả trạng thái chưa trả lời và trạng thái mở đáp án.
+
+### Findings
+
+- Không còn P0, P1 hoặc P2 có thể hành động.
+- Mỗi box đáp án câu đã dùng đúng ngôn ngữ hình ảnh của mẫu: bo hai góc trên, hai góc dưới vuông, viền đỏ, nền xám nhạt và thanh đỏ chạy kín đáy.
+- Box đang gõ dùng cùng hình học và có thanh tiến trình theo tiền tố pinyin đúng; khi cụm hoàn tất, box đáp án tự co giãn theo nội dung mà không làm xô lệch bố cục câu.
+- Pinyin trong box đáp án dùng màu đen như ảnh mẫu thay vì màu đỏ của giao diện cũ.
+
+### Required fidelity surfaces
+
+- Fonts and typography: giữ font hệ thống/tiếng Trung hiện có; Hanzi vẫn đậm, pinyin nhỏ hơn và chuyển sang màu đen với line-height gọn như mẫu.
+- Spacing and layout rhythm: giữ lưới câu 116 × 64 px và khoảng cách 9px để không làm thay đổi bố cục bài; áp dụng radius `13px 13px 0 0`, padding đáy 12px và thanh đáy 8px.
+- Colors and visual tokens: viền và thanh hoàn tất dùng `#ff4f45`; nền dùng `#f7f7f7`; thanh đang gõ dùng gradient thương hiệu hiện có.
+- Image quality and asset fidelity: mục tiêu chỉ là một control giao diện, không có ảnh minh họa hoặc icon cần tạo/thay thế.
+- Copy and content: Hanzi, pinyin, nghĩa câu, placeholder và nhãn trợ năng không thay đổi.
+
+### Full-view and focused comparison evidence
+
+- Full-view capture cho thấy sáu box vẫn căn giữa, tự xuống hàng và không gây tràn trong question card ở bố cục HSK 5.
+- Focused browser capture cho thấy box đầu tiên đo 116 × 64 CSS px, radius `13px 13px 0 0`, thanh đáy cao xấp xỉ 8px và màu `rgb(255, 79, 69)`.
+- Ảnh tham chiếu và capture tập trung cùng cho thấy Hanzi/pinyin xếp hai dòng, nền xám nhạt, đáy vuông và thanh đỏ chạy hết chiều ngang; kích thước tổng thể được giữ theo lưới hiện có thay vì sao chép kích thước crop độc lập.
+
+### Comparison history
+
+- Trước thay đổi, box câu có radius bốn góc `11px`, nền đỏ nhạt, pinyin đỏ và không có thanh đáy hoàn tất.
+- Lần triển khai đầu đã thêm hình học top-only, thanh đáy đầy đủ, màu pinyin đen và tiến trình động cho input; kiểm tra trực quan sau sửa không phát hiện sai lệch P0/P1/P2.
+
+### Primary interactions and verification
+
+- Kiểm tra trạng thái chưa trả lời xác nhận sáu input đều có thanh tiến trình rộng đúng bằng box; input đầu vẫn nhập được và các input sau vẫn khóa theo thứ tự học.
+- Click “Đáp án” hiển thị đủ sáu box Hanzi/pinyin với cùng kích thước và thanh đáy đầy đủ.
+- Browser console không có lỗi.
+- Bộ hồi quy tập trung đạt 15/15; ESLint đạt; production build hoàn tất thành công.
+
+### Implementation checklist
+
+- [x] Chỉ bo hai góc trên cho input và đáp án câu.
+- [x] Thanh màu chạy kín đáy box.
+- [x] Cho box đáp án tự co giãn theo nội dung trong lưới câu.
+- [x] Đồng bộ typography Hanzi/pinyin với ảnh mẫu.
+- [x] Áp dụng qua component dùng chung cho mọi HSK.
+- [x] Kiểm tra browser, console, regression, lint và build.
+
+### Follow-up polish
+
+- Không còn P3 bắt buộc cho thay đổi giao diện có phạm vi này.
+
+final result: passed
+
+---
+
+## Luyện gõ — đưa nội dung cần nhớ lên trước điều hướng trên mobile — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: Browser Comment 1 at a 507 × 1053 viewport, showing the HSK 1 word-practice screen and requesting that the “NỘI DUNG CẦN NHỚ” card sit above the navigation controls. The conversation capture has no exposed local filesystem path.
+- Browser-rendered implementation: `http://localhost:3001/typing/hsk-1/hsk1-l1/practice?stage=word` in the same live annotated in-app browser tab and viewport.
+- State: HSK 1, lesson 1, word stage, item 8/20, unanswered.
+
+### Findings
+
+- No actionable P0, P1, or P2 findings remain.
+- At widths up to 720px, the vertical sequence is now question card → memory card → navigation/action bar.
+- Desktop ordering is unchanged because the order declarations are scoped to the mobile media query.
+
+### Required fidelity surfaces
+
+- Typography: unchanged throughout the question, memory, and navigation cards.
+- Spacing and layout rhythm: existing card dimensions, gaps, and padding are preserved; only document-flow order changes.
+- Colors and visual tokens: unchanged.
+- Image quality and asset fidelity: no new image or placeholder was introduced.
+- Copy and content: unchanged.
+
+### Full-view and focused comparison evidence
+
+- The post-change mobile viewport shows the complete question card followed immediately by “NỘI DUNG CẦN NHỚ”, with the top edge of the navigation bar beneath it.
+- The full mobile viewport is the relevant comparison surface because this change concerns vertical component order, not the styling of an isolated element.
+
+### Comparison history
+
+- The annotated state placed navigation before the memory card. A single responsive ordering change moved the memory card ahead of navigation while retaining the existing desktop layout and shared practice component.
+
+### Primary interactions and verification
+
+- Browser DOM inspection reports the mobile grid order as question, memory, action.
+- Browser console reports zero errors and no framework error overlay is present.
+- The focused typing-practice regression suite passes 11/11 tests, including a guard for the mobile ordering rule.
+
+### Implementation checklist
+
+- [x] Memory card appears above navigation on mobile.
+- [x] Question card remains first.
+- [x] Desktop layout remains unchanged.
+- [x] Shared styling covers all HSK typing lessons and both practice stages.
+- [x] Browser and regression checks passed.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped responsive layout change.
+
+final result: passed
+
+---
+
+## Luyện gõ — pháo giấy và âm “tinh” khi gõ đúng — 2026-09-13
+
+### Comparison target
+
+- Source reference: `C:\Users\DELL\AppData\Local\Temp\codex-clipboard-79327f39-622f-44d5-a29f-5126ca6f7ca1.png` (640 × 640 px), showing colorful confetti and ribbons bursting outward around a clear center.
+- Implemented motion asset: `public/assets/quiz/correct-confetti.gif`, the existing transparent confetti animation already used by the HSK quiz experience.
+- Browser states checked: HSK 1 lesson 1 word practice after entering `ni`, and HSK 1 lesson 2 sentence practice after completing `xiexie` + `ni`.
+- The supplied reference and browser-rendered correct-answer state were emitted together during the visual comparison pass; the transient effect was additionally verified while its DOM node was active.
+
+### Findings
+
+- No actionable P0, P1, or P2 findings remain. The animation originates from the answer control, preserves a clear center around the Hanzi/pinyin, and is clipped safely inside the exercise card.
+- The shared practice component creates exactly one `.typing-answer-confetti` node when a word/cụm từ becomes correct and exactly one after the final sentence segment becomes correct.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the answer Hanzi, pinyin, and “Chính xác!” treatment remain unchanged and legible beneath the transparent-center animation.
+- Spacing and layout rhythm: the effect is absolutely positioned relative to the adaptive answer stage, so it does not reflow the question card, memory panel, or action bar.
+- Colors and visual tokens: the existing multi-color confetti matches the source’s celebratory mix while retaining the product’s coral/orange correct-answer border and gradient label.
+- Image quality and asset fidelity: a real transparent animated GIF is reused at native aspect ratio with `object-fit: contain`; no placeholder, generated SVG, or extra runtime dependency is introduced.
+- Copy and content: no lesson text or answer content changes. The effect is decorative and hidden from assistive technology.
+
+### Full-view and focused comparison evidence
+
+- The full browser view confirms the adaptive answer box, memory content, and action controls remain stable after the correct-answer transition.
+- Live inspection confirmed the confetti node is present only during the short celebration window and remains pointer-transparent, preventing it from blocking input or navigation.
+
+### Comparison history
+
+- Initial state showed only the answer card and “Chính xác!” status. The implementation added the shared transparent confetti asset centered on the answer stage plus a locally synthesized two-part chime. The first post-change browser pass found no P0/P1/P2 layout or interaction issue.
+
+### Primary interactions and verification
+
+- Correct word/cụm từ: one confetti effect and one chime are triggered on the transition from not-correct to correct.
+- Correct sentence: the effect waits until the last required pinyin segment is correct.
+- “Đáp án”: reveals the answer with zero confetti nodes and does not trigger the chime path.
+- Navigation/restart: clears any active celebration; returning to an already answered item cannot replay it automatically.
+- The one-shot confetti remains visible in every browser motion mode so correct-answer feedback is not silently removed; the existing text status remains available for assistive technology.
+- Browser console returned zero errors. Nine focused typing tests, ESLint, and the production build passed.
+
+### Implementation checklist
+
+- [x] Confetti centered on the adaptive answer box.
+- [x] Short “tinh” chime generated without a downloadable audio dependency.
+- [x] Shared across HSK 1–6 word/cụm từ and sentence practice flows.
+- [x] Reveal, replay prevention, navigation cleanup, accessibility, and cross-browser motion-mode behavior verified.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped celebration interaction.
+
+final result: passed
+
+---
+
+## Luyện gõ — card danh sách bài theo bố cục HSK — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: Browser Comment 1, additional reference image supplied in the current task (1596 × 465 px), backed by the live reference card system at `http://localhost:3001/typing`. The conversation attachment has no exposed local filesystem path.
+- Browser-rendered implementation: `http://localhost:3001/typing/hsk-1`, with long-content validation at `http://localhost:3001/typing/hsk-6`.
+- Implementation screenshot evidence: full-view HSK 1 and post-fix HSK 6 captures are embedded in the current Codex in-app browser output; the capture API did not expose persistent filesystem paths or raw output dimensions.
+- Viewport and normalization: 1121 × 1053 CSS px, device pixel ratio `0.8375`. Source and implementation were compared together in one browser-tool result and component geometry was normalized in CSS pixels.
+- State: authenticated learner, page scrolled to the hero and first card row, no modal open. The HSK 1 grid contains 15 lessons; the HSK 6 grid contains 40 lessons.
+
+### Findings
+
+- No actionable P0, P1, or P2 differences remain. The lesson cards now reproduce the reference hierarchy: compact pill and count, four large Hanzi previews, title and supporting copy, footer divider, item total, and compact coral CTA.
+- The former bordered/shadowed parent section has been removed, so cards sit directly on the page like the source composition.
+- HSK 6 initially exposed a P2 content duplication when `titleVi` and `titleZh` were identical. The supporting Chinese line is now rendered only when it adds distinct information.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the existing Himi type stack is retained. Card titles use the same 1.3125rem hierarchy as the reference cards; Hanzi previews use 1.625rem, and metadata/description copy remains compact and legible.
+- Spacing and layout rhythm: browser-computed styles match the source card system at 24 px padding, 26 px radius, 22 px preview offset, 350 px minimum height, and the same footer divider. The responsive grid uses three columns on wide screens, two at the inspected 1121 px viewport, and one below 720 px.
+- Colors and visual tokens: both layouts use the same Himi coral pill/CTA, warm white surface, neutral border, dark text, muted body copy, and soft coral Hanzi cells.
+- Image quality and asset fidelity: the target card contains no raster illustration or custom art. Existing Lucide metadata/action icons are reused from the product design system; no placeholder, emoji, or handcrafted asset was introduced.
+- Copy and content: every card uses real lesson titles, preview Hanzi, word count, sentence count, and total item count. Preview rows intentionally show four representative entries to match the source density.
+
+### Full-view and focused comparison evidence
+
+- The full-view comparison placed the live `/typing` source page and `/typing/hsk-1` implementation captures in the same tool result. It confirms the same pill-to-preview-to-title-to-footer reading order and removal of the outer parent card.
+- Focused browser geometry compared the first source and implementation cards: both use `rgba(255,255,255,.95)`, 24 px padding, 26 px radius, identical preview margin and footer border. The implementation card was 414.65 × 360.17 CSS px at the compact two-column viewport; the source card was 481.34 × 350 CSS px because its page grid has a wider track.
+- Post-fix HSK 6 evidence measured a 415.84 × 350 CSS-pixel card, a 365 px preview client/scroll width, and page scroll width equal to client width (`1105px`), confirming that long preview terms do not create horizontal overflow.
+
+### Comparison history
+
+1. The original lesson list used a dense two-column grid inside a large bordered, rounded, shadowed parent box, full-width CTAs, small Hanzi chips, and a different information order. This was a P1 mismatch with the supplied reference.
+2. The parent surface was removed; card padding, radius, elevation, responsive tracks, Hanzi sizing, footer anatomy, hover motion, and compact CTA were aligned to the existing HSK card system.
+3. A post-change HSK 6 pass found repeated Chinese titles where both title fields contain the same text. Conditional rendering removed the duplicate without hiding distinct bilingual titles.
+4. The final HSK 1 and HSK 6 captures show no actionable P0/P1/P2 mismatch or horizontal overflow.
+
+### Primary interactions and verification
+
+- The first `Chọn phần luyện` CTA navigated successfully from `/typing/hsk-1` to `/typing/hsk-1/hsk1-l1`.
+- Accessibility output exposes each card as an article-like container with its lesson heading, counts, preview label, and descriptive link.
+- Browser console inspection returned zero warnings or errors on HSK 1 and HSK 6.
+- Eight focused typing tests, focused ESLint, `git diff --check`, and the production build passed.
+
+### Implementation checklist
+
+- [x] Removed the outer list box.
+- [x] Matched source card hierarchy, dimensions, colors, and footer CTA.
+- [x] Added three/two/one-column responsive behavior.
+- [x] Prevented duplicate HSK 6 supporting titles and long-preview overflow.
+- [x] Verified navigation, browser console, tests, lint, diff, and production build.
+
+### Follow-up polish
+
+- P3: confirm the one-column breakpoint on a physical phone; the CSS breakpoint and overflow constraints are present, but this QA host did not apply its temporary viewport override.
+
+final result: passed
+
+---
+
+## Luyện gõ — thẻ đáp án có dải màu đáy — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: Browser Comment 1, additional image 1 supplied in the current conversation (displayed at 232 × 169 px; the answer card itself measures approximately 176 × 116 px). The attachment is conversation-owned and has no exposed local filesystem path.
+- Browser-rendered implementation: `http://localhost:3001/typing/hsk-1/hsk1-l1/practice?stage=word`, captured live in Codex in-app browser tab 8 at a 1121 × 1053 CSS-pixel viewport with device pixel ratio `0.8375`.
+- Implementation screenshot evidence: the full-view and focused answer-state captures are embedded in the current Codex browser-tool output; the capture API did not expose a persistent filesystem path.
+- State: authenticated HSK 1 lesson 1, Việt → Trung word practice, correct answer visible for `好 / hǎo`, with the memory panel and “Chính xác!” status also revealed.
+- Density normalization: component geometry was compared in CSS pixels rather than raw capture pixels. Browser-computed dimensions are 176 × 116 CSS px, matching the source card’s visible geometry.
+
+### Findings
+
+- No actionable P0, P1, or P2 differences remain. The implementation reproduces the source card’s width, height, two rounded top corners, square lower edge, pale gray surface, centered Hanzi/pinyin stack, and full-width red bottom band.
+- Intentional content difference: the source demonstrates `您 / nín`, while the verified live lesson state contains `好 / hǎo`; typography and component anatomy are directly comparable.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the existing Chinese-capable product font stack remains in use. Hanzi renders at 36 px with a compact line height; pinyin renders at 16.8 px in the same dark foreground as the source. Weight, centering, and hierarchy remain legible without truncation.
+- Spacing and layout rhythm: the short-answer card is exactly 176 × 116 CSS px, uses `18px 18px 0 0` corner geometry, 16/24/24 px internal padding, a 5 px row gap, and a 14 px bottom band. Longer answers retain content-aware width up to the existing 360 px input limit.
+- Colors and visual tokens: the surface is `rgb(247, 247, 247)`, border and bottom band are Himi coral `rgb(255, 79, 69)`, and both Hanzi and pinyin use the near-black product ink. The post-fix state has no shadow, matching the flat source treatment.
+- Image quality and asset fidelity: the answer component contains no raster image, logo, illustration, or non-standard icon asset. No placeholder or synthetic image substitute is introduced.
+- Copy and content: Hanzi and accented pinyin come directly from the current HSK lesson data. The existing “Chính xác!” live-status copy remains unchanged and outside the card.
+
+### Full-view and focused comparison evidence
+
+- The full browser capture confirms the enlarged answer card remains centered in the existing question surface and does not move or overlap the memory panel, success status, or action bar.
+- The answer is clearly legible in the full capture, so a separate persisted focused image was not required. Browser-computed measurements provide focused evidence for card size, radii, colors, font sizes, band height, and shadow state.
+
+### Comparison history
+
+1. The first rendered iteration matched the 176 × 116 px geometry but retained a brand-red pinyin, gradient bottom band, and subtle shadow; these were P2 fidelity differences from the flat source card.
+2. Pinyin was changed to product ink, the band was changed to solid Himi coral, and the shadow was removed.
+3. The post-fix browser capture and computed styles confirm the source geometry and treatment. No actionable P0/P1/P2 finding remains.
+
+### Primary interactions and verification
+
+- Entering a correct normalized pinyin value replaces the input with the answer card immediately.
+- The answer card exposes both Hanzi and accented pinyin as accessible text; the existing `role="status"` success message remains present.
+- The card uses `max-width: min(100%, 360px)`, preventing overflow for long answers and narrow layouts.
+- Browser console inspection returned zero warnings or errors. Five focused typing tests and `git diff --check` passed.
+
+### Implementation checklist
+
+- [x] Matched source card geometry and upper-corner silhouette.
+- [x] Added the full-width solid brand band at the lower edge.
+- [x] Matched foreground, surface, and flat elevation treatment.
+- [x] Preserved correct-answer behavior, accessibility text, and responsive width.
+- [x] Verified the live browser state, console, and focused regression tests.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped answer-card state.
+
+final result: passed
+
+---
+
+## Luyện gõ — tiến trình ký tự pinyin — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\vocab-start.png` (1280 × 720 px), captured from the supplied feature video. The source shows the thin bottom-aligned typing track and centered fraction counter; the user's supplemental browser-comment crop shows the active `1/6` state.
+- Browser-rendered implementation: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-character-progress-implementation.png` (1385 × 1206 physical px) at a 928 × 808 CSS-pixel viewport. The in-app browser reported device pixel ratio `0.8375`; the screenshot backend supplied its own higher output density, so geometry was normalized by cropping and visually scaling the control rather than comparing raw pixels 1:1.
+- Focused normalized comparison: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-character-progress-focused-comparison.png` (1040 × 230 px), with both input controls scaled to approximately the same rendered width.
+- Tested state: HSK 3, lesson 1, Việt → Trung, word `cuối tuần` / normalized target `zhoumo`; the implementation capture contains the correct prefix `z` and exposes `1/6`.
+
+### Findings
+
+- No actionable P0, P1, or P2 differences remain. The implementation preserves the source pattern of a thin track attached to the input's lower edge and a centered `matched/total` counter.
+- Intentional brand adaptation: the source uses cyan/green, while the implementation maps the active track, counter, and valid input border to Himi coral `#FF4C3B`. Invalid input remains semantic red and does not increase the matched count.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the project Roboto stack remains unchanged; the `1/6` counter uses a compact 0.72rem/800 treatment and stays optically centered below the input. The typed pinyin retains the established input weight and size.
+- Spacing and layout rhythm: the track is 4 px high, inset 12 px from both input edges, and the counter sits 7 px below the control. The parent retains `min(360px, 76vw)`, so the progress UI shrinks with the existing word field instead of introducing overflow.
+- Colors and visual tokens: computed browser styles confirm the active fill at `rgb(255, 76, 59)` and the counter/input border on the matching Himi coral family. The subdued track uses the existing soft brand token and keeps the current error color separate.
+- Image quality and asset fidelity: this control contains no raster, logo, illustration, or non-standard icon assets; no placeholder or CSS-drawn image replaces a source asset.
+- Copy and content: the counter derives from normalized pinyin length, so spaces, punctuation, tone marks, and letter case do not distort the displayed total. The progressbar label reads `Tiến trình gõ đúng 1 trên 6 ký tự` for assistive technology.
+
+### Full-view and focused comparison evidence
+
+- The full browser capture confirms the new control remains centered in the existing recall card and does not shift the memory panel, lesson header, or six action buttons.
+- The focused side-by-side comparison confirms the same bottom-edge track, fractional counter placement, and restrained vertical footprint. The different source/implementation word lengths (`0/2` versus `1/6`) are content-state differences; the component anatomy is directly comparable, and the supplied annotation verifies the requested active `1/6` state.
+
+### Comparison history
+
+- First comparison found no P0/P1/P2 issue, so no visual-fix iteration was required. The deliberate color deviation is the previously requested Himi brand synchronization rather than design drift.
+
+### Primary interactions and verification
+
+- `z` produced `1/6`; `zh` produced `2/6` with a neutral valid-prefix state.
+- `zhx` kept progress at `2/6`, turned the input/error treatment red, and did not reveal the answer.
+- `ZH OU MO` normalized to the expected pinyin, revealed the answer, and preserved the existing completion behavior.
+- The progress track has `role="progressbar"` with current/min/max values; focused automated tests cover valid prefix, invalid continuation, normalization, and total length.
+- Browser console check returned zero warnings or errors. Focused ESLint, five typing tests, and the production build passed.
+
+### Implementation checklist
+
+- [x] Character-prefix progress added to the word input.
+- [x] Brand, valid-prefix, error, and completed states verified live.
+- [x] Accessibility semantics and responsive field width verified.
+- [x] Console, lint, focused tests, and production build checked.
+
+### Follow-up polish
+
+- No P3 visual follow-up is required for this scoped control.
+
+final result: passed
+
+---
+
+## Luyện gõ — bố cục danh mục theo Luyện viết — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: live `/writing` catalog captured at `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\writing-catalog-same-viewport-reference.jpg` (1282 × 2628 px).
+- Browser-rendered implementation: live `/typing` catalog captured at `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-catalog-writing-layout-final.jpg` (1282 × 2609 px).
+- Both routes were captured in the same Codex in-app browser tab at a measured 875 × 1053 CSS-pixel viewport. Both images share the same 1282 px output width, so no density normalization was applied before comparing layout.
+- Full-view comparison: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-catalog-writing-layout-full-comparison.jpg` (905 × 964 px), with both full pages proportionally fitted to 900 px content height.
+- Focused comparison: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-catalog-writing-layout-focused-comparison.jpg` (2208 × 914 px), using equal 1092 × 850 px crops of the heading and HSK-card region.
+- Responsive evidence: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-catalog-writing-layout-mobile.jpg` (846 × 4330 px), captured from a measured 582 × 1259 CSS-pixel viewport; document scroll width was 567 px, below the viewport width.
+- State: guest catalog, six HSK levels loaded, no card hovered or focused.
+
+### Findings
+
+- No actionable P0, P1, or P2 differences remain for the requested layout scope.
+- The Luyện gõ section now follows the Luyện viết composition: heading and description sit directly on the page, the six cards are direct grid children, and no parent border, fill, radius, padding, or shadow surrounds the catalog.
+- Intentional content difference: Luyện gõ previews whole words and phrases rather than single writing characters, so multi-character chips expand horizontally while preserving the same 49 px height and four-item rhythm.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the section title now uses the same `clamp` scale, dark display treatment, and left/right heading composition as Luyện viết. Card titles, descriptions, metadata, and CTA weights follow the same hierarchy without truncation in the inspected regions.
+- Spacing and layout rhythm: the section uses the same responsive top gap, transparent unboxed surface, three-column desktop/two-column compact/one-column mobile grid, 18 px gaps, 24 px card padding, 26 px radii, 350 px minimum height, footer divider, and card elevation pattern as Luyện viết.
+- Colors and visual tokens: the Luyện gõ-specific Himi coral remains the single accent for HSK pills and CTAs; warm white cards, neutral dividers, dark text, and muted copy preserve the existing brand palette. This is an intentional token difference from Luyện viết's per-level teal/blue/orange pills.
+- Image quality and asset fidelity: the existing Himi banner asset and Lucide metadata/action icons remain unchanged and sharp. No new raster assets, placeholder art, emoji, or handcrafted SVG substitutes were introduced.
+- Copy and content: the heading is now `Bài luyện gõ theo HSK`, mirroring the writing-page information pattern while keeping typing-specific instructions, item totals, lesson counts, and real preview vocabulary.
+- Accessibility and responsiveness: semantic section/heading relationships, article cards, descriptive preview labels, and six lesson links remain intact. The compact capture has one card per row and no horizontal page overflow.
+
+### Full-view and focused comparison evidence
+
+- The full-view comparison shows equivalent banner-to-section spacing, heading placement, direct card grid, two-row desktop arrangement, and open page background on both routes.
+- The focused comparison keeps the title, description, HSK pills, four-item preview rows, card titles, body copy, dividers, metadata, and CTAs readable at once. It confirms that the former large parent box is absent and individual cards retain the intended hierarchy.
+
+### Comparison history
+
+1. Initial evidence found a P1 mismatch with the user's target: the complete Luyện gõ catalog sat inside a large bordered, rounded, shadowed parent card, while Luyện viết places its heading and grid directly on the page.
+2. The parent surface was removed, the heading was aligned to the writing-page structure, the grid/card dimensions were matched, and each preview was reduced to four representative items.
+3. The first post-fix visual pass found a P2 wrapping issue: multi-character typing phrases inherited square character cells and stacked vertically. Preview cells were changed to a fixed 49 px height with content-aware width and `white-space: nowrap`.
+4. The final desktop and compact captures show no parent box, no broken word wrapping, and no horizontal overflow. No P0/P1/P2 finding remains.
+
+### Primary interactions and verification
+
+- All six `Xem bài học` links remain present with their original `/typing/hsk-*` destinations.
+- The accessibility tree exposes all six HSK cards, lesson counts, preview labels, item totals, and links.
+- Focused typing tests passed 4/4, focused ESLint passed, and the production build completed with all typing routes.
+- Browser logs contained no client error. The `:4174` guest preview emitted its existing server-side `database unavailable; rendering the guest shell` warning, which does not affect the catalog render or navigation.
+
+### Implementation checklist
+
+- [x] Removed the parent catalog box only; individual HSK cards remain.
+- [x] Matched Luyện viết heading, grid, card, and responsive rhythm.
+- [x] Preserved typing data, routes, icons, and Himi color tokens.
+- [x] Fixed multi-character preview wrapping.
+- [x] Compared desktop and compact browser renders, checked accessibility, tests, lint, and production build.
+
+### Follow-up polish
+
+- No P3 visual item is required for this scope.
+
+final result: passed
+
+---
+
+## Luyện gõ — phiên luyện tập trung riêng biệt — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-brand-practice-wrong.jpg` (1363 × 1287 px), showing the pre-change typing session inside the shared learner rail and top bar.
+- Browser-rendered implementation: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-immersive-after.jpg` (1385 × 1206 px), captured from a measured 928 × 808 CSS-pixel viewport on `/typing/hsk-3/hsk3-l1/practice?stage=word`.
+- Normalized side-by-side evidence: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-immersive-comparison.jpg` (2231 × 1064 px). Both captures were proportionally fitted to 1000 px height; the comparison is intentionally limited to shell separation and major composition because the source and implementation use different HSK lesson content and interaction states.
+- Responsive implementation: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-immersive-mobile.jpg` (869 × 1879 px), captured from a measured 582 × 1259 CSS-pixel viewport after the browser's device scaling. The temporary viewport override was reset after capture.
+- Tested state: authenticated HSK 3 lesson 1 word recall in Việt → Trung mode, with the answer hidden and the input focused.
+
+### Findings
+
+- No actionable P0, P1, or P2 differences remain. The active practice route now reads as a standalone focused workspace: shared navigation rail, account top bar, mobile learner navigation, route progress, footer, and chatbot are absent; the close control remains the explicit way back to the lesson.
+- Intentional scope: only `.typing-session-page` activates immersive mode. The `/typing` catalog and lesson-choice pages retain the normal Himi shell; browser-computed styles confirmed the desktop rail and top bar remain `display: flex` there.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the existing project font stack and type hierarchy are unchanged. Removing the shell does not alter lesson heading, Vietnamese prompt, pinyin input, memory copy, mode labels, or action labels; no visible truncation occurs in the desktop or narrow capture.
+- Spacing and layout rhythm: the practice page now owns the full viewport (`100dvh`) and starts at the left edge without inherited shell margin or padding. Desktop keeps the two-column question/memory grid; the narrow layout keeps a single content column, places the six actions after the question, and retains a clear gap before the memory card. No horizontal overflow was measured.
+- Colors and visual tokens: the standalone canvas retains the Himi coral `#FF4C3B` accents, warm background, white cards, neutral text, and semantic disabled states. Removing surrounding chrome strengthens focus without introducing another palette.
+- Image quality and asset fidelity: the active exercise contains no raster hero imagery. Existing Lucide control icons remain sharp and stylistically consistent; no replacement emoji, CSS illustration, or placeholder asset was introduced.
+- Copy and content: all existing exercise copy remains intact and coherent in standalone context. The earlier redundant wrong-answer helper sentence remains removed; input border/text still communicates the error state.
+- Accessibility and behavior: the accessibility tree contains the close link, progress indicator, named tab group, lesson heading, labeled pinyin field, hidden submit action, and all six practice controls. Browser console inspection returned zero warnings or errors.
+
+### Full-view and focused comparison evidence
+
+- The combined full-view comparison visibly shows the entire shared navigation column and header removed, while progress, modes, question, memory panel, and controls are preserved and use the reclaimed width.
+- A separate focused crop was not required because shell boundaries, headings, input, memory panel, and action labels are legible in the 2231 × 1064 combined evidence. The implementation-only desktop and narrow captures were additionally inspected at original resolution for input focus, wrapping, and overflow.
+
+### Comparison history
+
+1. The pre-change source had a P1 focus problem relative to the user request: the shared learner rail and account header made the lesson feel like a normal dashboard page rather than a separate practice experience.
+2. The practice-session stylesheet now hides only shared shell chrome while `.typing-session-page` is present, resets the learner content offset/padding, expands the session to `100dvh`, and removes the obsolete mobile-nav bottom reserve.
+3. Post-fix desktop evidence shows a complete standalone practice room with all core controls visible. The narrow capture shows the same isolation and no horizontal overflow. A catalog-route check confirms the shell is still present outside the active session.
+
+### Primary interactions and verification
+
+- The close control retains its lesson-page destination.
+- Progress, Việt → Trung and Nghe viết tabs, pinyin field, answer reveal, Next, audio, slow audio, save, and previous controls remain in the accessibility tree.
+- Desktop and narrow viewport renders were inspected; the temporary responsive viewport override was reset.
+- Codex in-app browser console check returned zero warnings or errors.
+- Focused typing tests passed 4/4, focused ESLint passed, and the production build completed with the typing routes included.
+
+### Implementation checklist
+
+- [x] Practice route isolated from shared desktop and mobile navigation.
+- [x] Catalog and lesson-selection routes retain the normal product shell.
+- [x] Desktop and narrow responsive captures inspected.
+- [x] Accessibility tree and browser console checked.
+- [x] Focused tests, lint, and production build passed.
+
+### Follow-up polish
+
+- No P3 visual item is required for this scope.
+
+final result: passed
+
+---
+
+## Luyện gõ — đồng bộ màu thương hiệu Himi — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: `D:\Code\HiMi\Hanzi-work-lab-nextjs-web-app\design-references\home-language-portal-selected.png` (1487 × 1058 px), supported by the live product token `--himi-red: #ff4c3b` in `app/globals.css`. The source is used for palette and brand treatment only; its screen structure intentionally differs from Luyện gõ.
+- Pre-change evidence: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-word-desktop-1280x620.png` (1280 × 620 px), showing the former green/blue feature accents.
+- Browser-rendered implementation: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-brand-practice-wrong.jpg` (1363 × 1287 px) from `http://localhost:3001/typing/hsk-1/hsk1-l1/practice?stage=word&mode=meaning`.
+- Additional implementation evidence: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-brand-catalog.jpg` (1363 × 2548 px) and `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-brand-choice.jpg`.
+- Combined focused comparison: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-brand-comparison.jpg` (1600 × 900 px), with the Himi brand source on the left and the updated typing session on the right.
+- Browser viewport: 928 × 808 CSS px; browser-reported device scale factor 0.8375. The in-app-browser capture pipeline produced a 1363 px-wide image, so the comparison board scales both screenshots into equal 760 px panels. Geometry was not judged across the intentionally different source screen; color, foreground/background balance, and semantic-state separation were judged from the normalized panels.
+- Tested states: catalog, content choice, word prompt, input focus, wrong answer, correct answer, selected mode, progress, hidden memory panel, primary Next action, and disabled previous action.
+
+### Findings
+
+- No actionable P0, P1, or P2 differences remain for the requested color-alignment scope.
+- Intentional product constraint: green remains only for semantic success feedback (correct answer, success burst, success toast/completion). Darker red remains reserved for wrong-answer and audio-error feedback. All navigation, progress, selection, focus, memory-panel, listening control, card accent, and primary-action colors now derive from the Himi coral token.
+
+### Required fidelity surfaces
+
+- Fonts and typography: no font, weight, size, line-height, wrapping, or hierarchy rules changed. Live catalog and practice captures show the existing Himi type hierarchy intact with no new truncation caused by the color pass.
+- Spacing and layout rhythm: no geometry rules changed. The existing card grid, practice/memory split, six-action bar, radii, and elevation remain unchanged; the earlier responsive desktop/mobile evidence therefore remains valid for structure.
+- Colors and visual tokens: browser-computed styles returned `rgb(255, 76, 59)` for the progress fill, question-kind chip, primary Next action, catalog CTA, lesson-card top accent, and choice-card icon. Selected tabs and secondary actions use the existing pale coral surface `rgb(255, 240, 238)` or a 5% coral wash. Green/blue feature accents were removed except for semantic success green.
+- Image quality and asset fidelity: no imagery or icon assets were changed. The catalog continues to use the existing Himi penguin banner, the shell uses the existing Himi logo/Pro artwork, and controls retain the installed Lucide icon family.
+- Copy and content: no copy or HSK data changed. Vietnamese prompts, Hanzi, pinyin, lesson counts, and audio-backed content remain identical.
+- Accessibility and interaction states: keyboard focus receives a visible coral outline; input focus uses a coral border/halo; wrong and correct states retain separate color, copy, and structural feedback. Existing 43–45 px action targets and reduced-motion behavior are unchanged.
+
+### Full-view and focused comparison evidence
+
+- The full catalog and practice captures show one consistent Himi accent across the feature and the shared learner navigation. White cards, warm-neutral borders, black headings, muted body copy, coral actions, and the pale coral session canvas now read as one product family.
+- The focused side-by-side comparison confirms that the source CTA coral, logo treatment, light surfaces, and dark typography are reflected in the typing session. A separate magnified control crop was unnecessary because the 1600 × 900 board keeps the progress, kind chip, input error, and action treatments legible; exact computed-color checks were also performed live.
+
+### Comparison history
+
+1. Initial evidence found a P2 brand drift: the standalone typing feature used green for primary CTAs/progress/tabs/memory and blue for input/pinyin, while the current Himi product accent is coral `#FF4C3B`.
+2. Added scoped typing tokens backed by the existing Himi globals; replaced non-semantic green/blue/yellow/purple accents with coral, pale coral, warm neutrals, and a darker coral hover tone. Correct and error colors were deliberately preserved as semantic states.
+3. Post-fix captures and browser-computed styles confirm the catalog, choice, and session routes use the same brand token. Wrong-answer red and correct-answer green remain visually distinct, with no new console errors.
+
+### Primary interactions and verification
+
+- Entered an incorrect answer and confirmed the field remains visible with darker red border/text and unlimited-retry copy.
+- Entered the normalized correct answer using uppercase and a space; the input immediately changed to the revealed-answer state, retaining green success feedback while the Next action stayed coral.
+- Verified catalog and content-choice CTAs, selected mode, progress, focus, disabled state, memory panel, and session action colors in the live Codex in-app browser.
+- Browser console contained only Vite connection/HMR and React development information; no warnings or errors.
+- Focused typing tests passed 3/3. Production build completed successfully with all four typing route groups present.
+
+### Implementation checklist
+
+- [x] Catalog, lesson/choice, and active-session accent colors mapped to Himi tokens.
+- [x] Correct and wrong semantic states kept separate from the brand accent.
+- [x] Hover and keyboard-focus treatments aligned with the brand palette.
+- [x] Live browser, console, focused tests, and production build checked.
+
+### Follow-up polish
+
+- P3: recheck the coral palette on a physical phone under outdoor brightness; the color-only change does not alter the previously verified mobile layout, but a physical-display check was outside this pass.
+
+final result: passed
+
+---
+
 ## HSK lesson brand color — 2026-09-13
 
 Source: browser annotation on `http://localhost:3001/hsk/1/hsk1-bai-01-chao-anh`, followed by the explicit direction to use only `#FF4C3B` as the page accent.
@@ -809,5 +1328,527 @@ Game support launcher: the floating Himi support button is hidden whenever one o
 Application input focus: input and textarea elements no longer receive the shared outline or halo when clicked. Known field wrappers for search, account password, chatbot, writing search, vocabulary search, and video dictation also suppress their focus-within halo while retaining their normal component border and caret.
 
 HSK course picker brand treatment: the shared course-selection layout used by all seven games now uses `#FF4C3B` for level badges, the featured card, CTA, arrows, hover states, completion badges, and the `DONE` ribbon. Card surfaces, body copy, and supporting borders use the existing white, black, and muted neutral tokens so the red remains the only accent color.
+
+Mobile keyboard stability: the slice-game session records its stable viewport height and listens to the mobile visual viewport. Opening the software keyboard keeps the arena fixed and moves only the answer bar above the obscured area, preventing the falling word and Himi from being pushed upward with the resized viewport. Closing the keyboard clears the offset and remeasures the available screen height.
+
+final result: passed
+
+---
+
+## Luyện gõ pinyin — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\vocab-start.png` (1280 × 720 px), with the browser chrome cropped to `vocab-start-content.png` (1280 × 620 px). Supporting source states: `vocab-correct.png`, `sentence-start.png`, `sentence-next.png`, and `vocab-summary.png`, each 1280 × 720 px.
+- Browser-rendered desktop implementation: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-word-desktop-1280x620.png` at a 1280 × 620 CSS-pixel viewport, device scale factor 1.
+- Normalized side-by-side evidence: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-word-comparison-final.png` (source left, implementation right; two equal 1280 × 620 regions, no density scaling before composition).
+- Responsive implementation: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-sentence-mobile-612x714.png` at a 612 × 714 CSS-pixel viewport, device scale factor 1.
+- Tested state: HSK 1 lesson 1 word recall in Việt → Trung mode; HSK 1 lesson 4 segmented sentence recall; wrong, correct, revealed-answer, Next, Enter, normal audio, slow audio, saved-item, and listening-mode states.
+
+### Findings
+
+- No actionable P0, P1, or P2 differences remain. The implementation preserves the source hierarchy of progress, two learning modes, centered recall prompt, hidden/revealed memory panel, six practice actions, and completion feedback while integrating the current Himi learner shell.
+- Intentional product adaptation: the desktop learner rail and top bar remain visible so Luyện gõ behaves like the other Himi practice areas. The right memory panel is slightly wider than the source to keep real multi-segment sentence content readable.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the project-wide Roboto Vietnamese stack is retained. Prompt, lesson title, Chinese answer, pinyin, helper copy, and compact button labels preserve the source hierarchy without truncation at the tested desktop and mobile widths.
+- Spacing and layout rhythm: the final short-desktop layout fits the question, memory panel, and all six persistent actions within 1280 × 620. Mobile places the action grid directly after the question and before the memory panel; all six controls fit above the fixed learner navigation at 612 × 714.
+- Colors and visual tokens: the muted green page, white cards, Himi green progress/success state, blue input affordance, red error state, and restrained pastel action surfaces match the source intent and retain readable contrast.
+- Image quality and asset fidelity: the practice workspace itself requires no raster illustration. The surrounding product shell reuses the existing Himi logo and Pro asset; control icons come from the installed Lucide family, with no placeholder glyphs or handcrafted SVG substitutes.
+- Copy and content: prompts explicitly say pinyin without tone marks; real Hanzi, pinyin, Vietnamese meanings, parts of speech, sentence segments, and audio paths come from the imported HSK 1–6 lesson files.
+
+### Full-view and focused comparison evidence
+
+- The normalized full-view comparison shows matching information order, large white recall canvas, right-side memory surface, green active state, and pastel six-button footer. The implementation uses more horizontal space because it is integrated into the existing shell, but the learning hierarchy and control density remain equivalent.
+- A separate focused crop was not needed: at the native 1280 × 620 comparison, prompt typography, input border, memory-header treatment, mode pills, progress, and all action icons remain legible. Correct and wrong answer states were additionally inspected live in the Codex in-app browser against the supporting source captures.
+
+### Comparison history
+
+1. Initial mobile pass found a P1 overlap: the sticky action bar covered the segmented sentence inputs. The footer was moved into the practice grid, placed immediately after the question on mobile, and returned to normal document flow.
+2. The first normalized desktop comparison found a P2 short-viewport issue: the six persistent actions fell below the 1280 × 620 fold and the memory panel was proportionally too wide. A short-desktop breakpoint reduced card height/padding and the memory track was reduced to 250 px.
+3. The next pass found a P2 opening-state drift: autofocus scrolled the session header partly out of view. Input focus now uses `preventScroll: true` for initial and segmented focus changes.
+4. Final responsive evidence found the floating Himi support launcher overlapping core practice actions. The launcher is now hidden only while an active typing session is present; it remains available on the catalog and other learner pages.
+5. Post-fix desktop and mobile captures show the full prompt and all primary controls without overlap. No P0/P1/P2 finding remains.
+
+### Primary interactions and verification
+
+- A wrong pinyin value keeps the input visible with a red border/text and unlimited retries.
+- `N I`, mixed case, spaces, punctuation, and tone-marked equivalents normalize to the same expected pinyin; a correct answer reveals Hanzi, pinyin, meaning, and sentence segments.
+- Enter advances only after a correct answer. Đáp án reveals the answer without advancing; Tiếp skips to the following item.
+- Sentence mode advances focus one segment at a time. Nghe viết switches state and automatically starts the current normal-speed audio; both Nghe and Nghe chậm remain available.
+- Codex in-app browser console check on the clean QA host returned zero warnings or errors. Focused lint and typing tests passed; the production build includes all four typing routes.
+
+### Implementation checklist
+
+- [x] Desktop and mobile visual comparison completed.
+- [x] Wrong, correct, reveal, Enter, Next, segmented sentence, audio, and listening states verified.
+- [x] P1/P2 overlap and short-viewport findings fixed and re-captured.
+- [x] Console, lint, focused tests, and production build checked.
+
+### Follow-up polish
+
+- P3: verify the same mobile composition on a physical device with the software keyboard open; browser viewport and keyboard focus behavior are already guarded, but native keyboard chrome was not available in this pass.
+
+final result: passed
+
+---
+
+## Luyện gõ — ô nhập chỉ bo góc trên — 2026-09-13
+
+### Comparison target
+
+- Source/current-state reference supplied by the user: `C:\Users\DELL\AppData\Local\Temp\codex-clipboard-39a6b97c-2344-4e4b-9187-dfc39f974ac9.png` (533 × 127 px). The explicit requested mutation is to preserve the two rounded top corners and remove both bottom radii.
+- Browser-rendered implementation: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-input-top-corners-implementation.png` (1385 × 1206 physical px) at a measured 928 × 808 CSS-pixel viewport.
+- Focused implementation crop: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-input-top-corners-focus.png` (500 × 150 px).
+- Normalized comparison: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-input-top-corners-comparison.png` (1060 × 205 px). The supplied component image and focused browser crop were scaled to equal visual control widths; raw density was not compared 1:1.
+- State: HSK word practice, correct pinyin prefix entered, progress bar and fraction counter visible.
+
+### Findings
+
+- No actionable P0, P1, or P2 findings remain. Computed browser styles confirm `13px` for both top corners and `0px` for both bottom corners.
+- The progress track remains aligned one pixel above the square bottom edge and does not overflow the input boundary.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the input character and progress fraction retain the existing type family, size, weight, centering, and line height; this radius-only edit introduces no wrapping or optical change.
+- Spacing and layout rhythm: width, 64 px height, progress inset, and counter gap remain unchanged. Only the lower-left and lower-right radii were removed.
+- Colors and visual tokens: the Himi coral border/fill and pale track are unchanged; focus and semantic error states inherit the same new corner geometry.
+- Image quality and asset fidelity: no raster or icon assets belong to this control, and the supplied screenshot is used only as layout evidence.
+- Copy and content: placeholder, typed pinyin, progress count, and accessible labels are unchanged.
+
+### Full-view and focused comparison evidence
+
+- The full browser capture confirms the centered input still fits the recall card and does not alter the neighboring memory panel or action area.
+- The focused comparison makes all four corners and the bottom progress alignment legible. It shows the requested square lower corners while preserving the rounded top silhouette.
+
+### Comparison history
+
+- The supplied reference showed the former four-corner rounding. One scoped CSS change set the input radius to `13px 13px 0 0`; the post-change browser capture verifies the requested geometry. No post-fix P0/P1/P2 issue was found.
+
+### Primary interactions and verification
+
+- Valid-prefix state remains functional with progress visible.
+- The same selector governs focus and error states, so the square bottom corners persist through those states without affecting answer validation.
+- Browser console returned zero warnings or errors. Five focused typing tests passed and `git diff --check` passed for the stylesheet.
+
+### Implementation checklist
+
+- [x] Top-left and top-right corners remain rounded.
+- [x] Bottom-left and bottom-right corners are square.
+- [x] Progress track alignment and surrounding layout verified.
+- [x] Console and focused regression checks passed.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped radius adjustment.
+
+final result: passed
+
+---
+
+## Luyện gõ — gradient cam cho “Chính xác!” — 2026-09-13
+
+### Comparison target
+
+- Source success treatment: `C:\Users\DELL\AppData\Local\Temp\codex-clipboard-ce99fcfd-25f6-4529-8402-893da0674920.png` (218 × 62 px), showing the existing “Chính xác!” label and Sparkles icons.
+- Source gradient palette: `C:\Users\DELL\AppData\Local\Temp\codex-clipboard-c8d1d260-4099-4184-a4d0-fe5c3fdb5205.png` (44 × 94 px). Sampled orange endpoints are approximately `#FF723B` and `#FF8B31`.
+- Browser-rendered implementation: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-success-orange-gradient-implementation.png` (1673 × 1572 physical px) at a measured 1121 × 1053 CSS-pixel viewport; the browser reported device pixel ratio `0.8375`, while the capture backend returned a larger physical canvas.
+- Focused implementation crop: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-success-orange-gradient-focus.png` (280 × 110 px).
+- Combined normalized comparison: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-success-orange-gradient-comparison.png` (880 × 175 px). The source label, supplied gradient swatch, and implementation crop are displayed together at comparable visual sizes.
+- State: HSK 3 lesson 1 word practice after a correct `zhoumo` answer, with the answer card, memory content, and “Chính xác!” confirmation visible.
+
+### Findings
+
+- No actionable P0, P1, or P2 findings remain. The visible label uses the requested orange gradient and the icons use its midpoint color, while the original composition, spacing, and animation remain intact.
+- Browser-computed CSS confirms `linear-gradient(135deg, rgb(255, 114, 59) 0%, rgb(255, 139, 49) 100%)` with text background clipping.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the existing font family, weight, size, and baseline alignment are unchanged; applying the gradient through clipped text preserves the glyph shapes and antialiasing.
+- Spacing and layout rhythm: absolute placement, eight-pixel internal gap, icon sizes, and bottom/right offsets are unchanged, so the success cue occupies the same footprint as before.
+- Colors and visual tokens: the former green was replaced by the exact sampled orange endpoints. Icons use `#FF7B37`, visually centered between both stops for a cohesive cue.
+- Image quality and asset fidelity: no raster image is inserted into the interface. Existing installed Sparkles icons remain vector-sharp; the supplied crop is used only as color evidence.
+- Copy and content: “Chính xác!” and its live status semantics are unchanged.
+
+### Full-view and focused comparison evidence
+
+- The full browser capture shows the orange confirmation remains legible and balanced in the lower-right corner of the recall card without colliding with the answer card or memory panel.
+- The combined focused comparison makes the original green cue, the supplied orange gradient, and the resulting orange cue directly visible in one image. The implementation reproduces the requested palette without changing the component anatomy.
+
+### Comparison history
+
+- The initial state used solid success green. A scoped CSS change applied the sampled two-stop orange gradient to the label and its midpoint to the icons. The first post-change visual comparison found no P0/P1/P2 issue, so no further iteration was needed.
+
+### Primary interactions and verification
+
+- Entering the exact normalized pinyin still reveals the answer and creates the `role="status"` success cue.
+- The success animation and reduced-motion fallback remain unchanged.
+- Browser console returned zero warnings or errors. Five focused typing tests and `git diff --check` passed.
+
+### Implementation checklist
+
+- [x] Sampled orange gradient applied to “Chính xác!”.
+- [x] Sparkles icons synchronized to the gradient midpoint.
+- [x] Correct-answer behavior and layout verified live.
+- [x] Console and regression checks passed.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped color treatment.
+
+final result: passed
+
+---
+
+## Luyện gõ — viền ô nhập gradient cam — 2026-09-13
+
+### Comparison target
+
+- Source input reference: `C:\Users\DELL\AppData\Local\Temp\codex-clipboard-21c4d357-f6c8-485f-b5e0-452ef6744911.png` (499 × 109 px), showing the requested word-input geometry.
+- Source gradient palette: `C:\Users\DELL\AppData\Local\Temp\codex-clipboard-4701a56f-d693-4d14-8ca1-9a550fb161bc.png` (44 × 94 px), with sampled endpoints `#FF723B` and `#FF8B31`.
+- Browser-rendered implementation: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-input-gradient-border-implementation.png` (1673 × 1572 physical px) at a measured 1121 × 1053 CSS-pixel viewport; browser DPR was `0.8375` and the capture backend returned a larger canvas.
+- Focused implementation crop: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-input-gradient-border-focus.png` (520 × 155 px).
+- Combined normalized comparison: `C:\Users\DELL\.codex\visualizations\2026\09\13\01a099ce-333e-7582-a9af-f6f2ead73360\typing-input-gradient-border-comparison.png` (1250 × 205 px), showing the source input, supplied gradient swatch, and rendered input together at comparable visual widths.
+- State: HSK 1 lesson 1, word `tốt; khỏe; ổn`, correct prefix `h`, progress `1/3` visible.
+
+### Findings
+
+- No actionable P0, P1, or P2 findings remain. The full input outline now transitions from `#FF723B` to `#FF8B31` while preserving the top-only radius and square lower corners.
+- Browser-computed styles confirm a transparent physical border over a two-layer background: white padding-box fill plus the requested `135deg` orange gradient in the border box.
+
+### Required fidelity surfaces
+
+- Fonts and typography: placeholder, entered pinyin, and fraction counter retain their existing family, weight, size, line height, and centering.
+- Spacing and layout rhythm: the input remains 360 × 64 CSS px, with the existing progress inset and top-only `13px 13px 0 0` radius unchanged.
+- Colors and visual tokens: the normal/focus border uses the supplied orange gradient. The invalid state was separately verified to replace it with solid `#DC5B5B`, retaining semantic error behavior and red input text.
+- Image quality and asset fidelity: the supplied orange crop is used only as color evidence; no raster image or placeholder was inserted into the control.
+- Copy and content: placeholder, typed value, progress fraction, and accessible labels remain unchanged.
+
+### Full-view and focused comparison evidence
+
+- The full browser capture confirms the gradient border stays centered in the recall card and does not affect the memory panel or action controls.
+- The combined focused comparison makes the original geometry, supplied palette, and rendered border directly comparable. The gradient is intentionally restrained across the two-pixel outline and remains visible on the white surface.
+
+### Comparison history
+
+- The initial implementation used a solid coral border. A scoped two-layer CSS background introduced the supplied gradient while keeping the input fill white. The first post-change comparison found no P0/P1/P2 issue, so no further visual iteration was required.
+
+### Primary interactions and verification
+
+- Valid-prefix state `h` displays the gradient outline and `1/3` progress.
+- Invalid state `hx` reports `aria-invalid="true"`, switches the border layer to solid red, and retains red text.
+- Focus continues to show the existing halo without covering the gradient border.
+- Browser console returned zero warnings or errors. Five focused typing tests and `git diff --check` passed.
+
+### Implementation checklist
+
+- [x] Gradient applied to the complete word-input border.
+- [x] White interior and top-only corner geometry preserved.
+- [x] Focus, valid-prefix, and invalid states verified.
+- [x] Console and focused regression checks passed.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped border treatment.
+
+final result: passed
+
+---
+
+## Luyện gõ — studio phủ toàn bộ viewport desktop — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: `C:\Users\DELL\AppData\Local\Temp\codex-clipboard-3b22899e-f05b-4545-8667-af70be52e80c.png` (1482 × 618 px), supplied as the current desktop practice-region reference with the instruction to make that region fill the screen.
+- Browser-rendered implementation: `http://localhost:3001/typing/hsk-1/hsk1-l1/practice?stage=word`, captured inline by the selected Codex in-app Browser. The capture backend did not expose a local screenshot path.
+- Primary viewport: 1121 × 1053 CSS px. Inline capture canvas: 1673 × 1572 px; layout comparisons use browser-reported CSS geometry to avoid the capture backend's density padding.
+- Additional wide-screen viewport evidence: 1910 × 1074 CSS px.
+- State: HSK 1, lesson 1, word stage, unanswered. The source crop shows a different word, so the comparison is intentionally limited to the stable shell, card, and action-bar geometry.
+
+### Findings
+
+- No actionable P0, P1, or P2 findings remain.
+- The studio now occupies the complete content width instead of stopping at 1120px, and its desktop height equals the viewport minus page padding.
+- The question and memory row absorbs all remaining vertical space while the action bar and keyboard hint remain visible at the bottom.
+- Compact desktop screens use a 320px minimum card row so the full interface fits without introducing avoidable vertical overflow.
+
+### Required fidelity surfaces
+
+- Fonts and typography: family, weights, sizes, wrapping, and hierarchy are unchanged.
+- Spacing and layout rhythm: the existing 24px desktop inset, grid gap, card radii, shadows, action-bar spacing, and centered answer content are preserved. Only the outer studio width and flexible card-row height changed.
+- Colors and visual tokens: unchanged.
+- Image quality and asset fidelity: no image, icon, illustration, or placeholder changed.
+- Copy and content: unchanged.
+
+### Full-view and focused comparison evidence
+
+- At 1121 × 1053 CSS px, the studio measures 1073 × 1005 px at x/y 24px and ends at y 1029px, exactly 24px above the viewport edge. The action bar ends at y 1002px and the keyboard hint ends at y 1029px.
+- At 1910px viewport width, the studio measures 1862px, confirming that the previous 1120px cap is removed while the 24px side insets remain.
+- A separate focused crop is unnecessary for this change because the requested difference is the full-screen outer geometry; browser bounding rectangles provide the precise evidence, while typography and component internals remain unchanged.
+
+### Comparison history
+
+- Before the change, the studio ended at y 701px in a 1053px viewport, leaving roughly 352px of unused space, and width was capped at 1120px on large displays.
+- The first implementation made the desktop studio a full-height flex column and the practice grid a flexible two-row grid. A compact-height refinement then reduced the minimum card row from 440px to 320px under 760px viewport height so the bottom controls remain in view.
+- Post-fix browser evidence shows the studio filling the available viewport with no horizontal overflow and no console or framework errors.
+
+### Primary interactions and verification
+
+- Word input remains focusable and editable.
+- Question, memory, action, and keyboard-hint regions remain visible in the intended order.
+- Mobile remains a natural vertical flow with question → memory → action and retains its existing 390px/260px card heights.
+- Browser console returned zero warnings or errors and no framework overlay was present.
+- The focused regression suite passes 12/12 tests, including viewport-fill and mobile-order guards; ESLint also passes.
+
+### Implementation checklist
+
+- [x] Studio fills the available desktop width.
+- [x] Studio fills the available desktop height.
+- [x] Question and memory cards stretch together.
+- [x] Action bar and keyboard hint remain at the bottom and visible.
+- [x] Compact desktop and mobile behavior remain responsive.
+- [x] Browser, regression, and lint checks passed.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped full-screen layout change.
+
+final result: passed
+
+---
+
+## Luyện gõ — ngăn auto-zoom khi focus input trên mobile — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: Browser Comment 1 at a 481 × 1053 mobile viewport, showing the HSK 1 word-practice input before focus. The browser-comment capture has no exposed local filesystem path.
+- Browser-rendered implementation: `http://localhost:3001/typing/hsk-1/hsk1-l1/practice?stage=word`, inspected in the selected Codex in-app Browser after the responsive stylesheet update. The capture backend did not expose a local screenshot path.
+- State: HSK 1, lesson 1, word stage, unanswered input.
+
+### Findings
+
+- No actionable P0, P1, or P2 findings remain.
+- Every typing input now has a mobile fallback of at least 16px, preventing iOS Safari's focus-triggered page magnification.
+- The existing word-input appearance remains unchanged because its preferred 1.12rem size is retained whenever that value exceeds 16px.
+- Sentence-segment inputs receive the same protection, so the behavior is consistent across both practice stages and all HSK levels.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the word input keeps its existing 1.12rem optical size with a 16px floor; sentence inputs use an explicit 16px mobile size.
+- Spacing and layout rhythm: input width, 64px/58px heights, padding, border geometry, progress strip, and card spacing are unchanged.
+- Colors and visual tokens: unchanged.
+- Image quality and asset fidelity: no images or icons changed.
+- Copy and content: placeholder and entered-answer content are unchanged.
+
+### Full-view and focused comparison evidence
+
+- The post-change browser view preserves the original mobile composition and input geometry from the annotated source.
+- Focused CSS/computed-style inspection is the relevant evidence for this non-visual browser behavior: the word input resolves above 16px and both word and sentence inputs use `touch-action: manipulation` on the mobile breakpoint.
+
+### Comparison history
+
+- The word input already resolved to 17.92px in the available browser, but sentence inputs lacked an explicit minimum-size contract. The responsive rule now establishes a documented 16px fallback for every practice input without disabling user-initiated pinch zoom.
+- No visual correction iteration was required because the preferred word-input size, component dimensions, and surrounding layout remain unchanged.
+
+### Primary interactions and verification
+
+- The viewport metadata remains `width=device-width, initial-scale=1`; no `maximum-scale=1` or `user-scalable=no` accessibility restriction was added.
+- Word and sentence input selectors are both covered by the shared mobile stylesheet.
+- Browser console returned zero warnings or errors and no framework overlay was present.
+- The focused regression suite passes 13/13 tests, including the mobile input zoom guard; ESLint also passes.
+
+### Implementation checklist
+
+- [x] Word input has a 16px minimum mobile font size.
+- [x] Sentence inputs have an explicit 16px mobile font size.
+- [x] Tap handling uses `touch-action: manipulation`.
+- [x] Pinch-to-zoom accessibility remains available.
+- [x] Existing mobile layout and visual styling remain unchanged.
+
+### Follow-up polish
+
+- Physical iPhone Safari verification remains a useful optional device-matrix check, but no P3 code change is required.
+
+final result: passed
+
+---
+
+## Luyện gõ câu — đồng bộ thẻ đáp án với từ vựng — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: Browser Comment 1 at a 1062 × 1053 viewport and the attached 168 × 107 reference card showing `父母` / `fùmǔ`. Neither capture exposes a local filesystem path.
+- Browser-rendered implementation: `http://localhost:3001/typing/hsk-5/hsk5-l3/practice?stage=sentence`, inspected in the selected Codex in-app Browser after the shared-style update.
+- State: HSK 5, lesson 3, sentence stage, answers revealed.
+
+### Findings
+
+- No actionable P0, P1, or P2 findings remain.
+- Sentence segments now reuse the exact vocabulary answer-card class instead of maintaining a second set of visually similar CSS rules.
+- The previous P2 drift risk from separate sentence overrides was removed together with those overrides.
+
+### Required fidelity surfaces
+
+- Fonts and typography: Hanzi resolves to 26.4px; pinyin resolves to 12.8px in the same dark color as the vocabulary card.
+- Spacing and layout rhythm: both variants resolve to 5px 20px 12px padding and the same content-driven width behavior.
+- Colors and visual tokens: both use the same `#f7f7f7` surface and coral border/bottom strip.
+- Image quality and asset fidelity: no raster assets are used in this answer-card treatment.
+- Copy and content: every sentence segment keeps its own Hanzi and tone-marked pinyin unchanged.
+
+### Full-view and focused comparison evidence
+
+- The complete sentence-practice view shows all six revealed segments using the vocabulary card treatment without clipping or overflow.
+- Computed-style comparison between `.typing-word-answer` and `.typing-segment-answer` returned `identical: true` for background, border, top-only 13px radius, shadow, padding, Hanzi size, pinyin size/color, and the approximately 8px full-width bottom strip.
+- Browser viewport was 1062 × 1053 CSS pixels at device pixel ratio 0.8375, matching the annotated desktop context.
+
+### Primary interactions and verification
+
+- Revealing the sentence answer preserves the established answer flow and swaps each completed input to the shared vocabulary answer-card presentation.
+- Browser console returned zero errors.
+- Focused regression suite passes 15/15 tests.
+- ESLint passes for the updated component and regression test.
+- Production build completes successfully.
+
+### Implementation checklist
+
+- [x] Sentence answer cards reuse `typing-word-answer`.
+- [x] Hanzi and pinyin match vocabulary typography.
+- [x] Only the top corners are rounded.
+- [x] The coral progress strip spans the full bottom edge without white gaps.
+- [x] The shared treatment applies to sentence lessons across all HSK levels.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped answer-card unification.
+
+final result: passed
+
+---
+
+## Luyện gõ — khoảng cách hai bên trang thực hành — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: Browser Comment 1 showing the full HSK 5 lesson 5 word-practice page at a reported 1062 × 1053 viewport. The conversation-rendered source image is 890 × 882 pixels and has no exposed local filesystem path.
+- Browser-rendered implementation: `http://localhost:3001/typing/hsk-5/hsk5-l5/practice?stage=word`, captured in the authenticated Chrome session because the isolated in-app browser did not share the learner login.
+- State: HSK 5, lesson 5, word stage, unanswered.
+
+### Findings
+
+- No actionable P0, P1, or P2 findings remain.
+- The desktop practice shell now has an explicit, symmetric 32px inline gutter. It remains full-width while the question, memory, and action surfaces no longer sit too close to either screen edge.
+- Mobile intentionally retains the existing 10px gutter to protect usable typing width.
+
+### Required fidelity surfaces
+
+- Fonts and typography: unchanged; all headings, helper text, answer copy, and button labels retain their existing size and weight.
+- Spacing and layout rhythm: desktop inline padding is 32px on both sides; desktop block padding remains 24px, or 12px on short screens. Mobile remains 10px on both sides.
+- Colors and visual tokens: unchanged.
+- Image quality and asset fidelity: no image, logo, icon, or decorative asset changed.
+- Copy and content: unchanged.
+
+### Full-view and focused comparison evidence
+
+- At the source-matched viewport override, the implementation measured 1062 × 1054 CSS px at DPR 1.0; the one-pixel height difference is browser viewport rounding and does not affect the horizontal comparison.
+- The studio begins at x=32px and ends 31.6px from the right edge, with 998.4px usable width and zero horizontal overflow.
+- The focused evidence is the computed outer geometry itself; no separate crop was needed because the request concerns only the page gutters and the full screenshot keeps both edges visible.
+- A mobile pass at an effective 482 × 1054 CSS px measured x=10px and 10.4px remaining on the right, again with zero horizontal overflow.
+
+### Comparison history
+
+- Before the adjustment, the desktop gutter was 24px per side.
+- The first and final implementation increases only the desktop gutter to 32px. The source-matched and mobile captures show balanced whitespace without changing the full-height practice layout.
+
+### Primary interactions and verification
+
+- The word input, audio controls, reveal action, navigation buttons, memory panel, and progress header remain visible and correctly ordered.
+- Chrome reported three hydration diagnostics whose diffs contain only attributes injected by installed extensions (`bis_*`, `data-extjs-*`, and `cz-shortcut-listen`); no app-owned runtime or layout error was found.
+- Focused regression suite passes 15/15 tests.
+- ESLint and `git diff --check` pass.
+- Production build completes successfully.
+
+### Implementation checklist
+
+- [x] Desktop left gutter is 32px.
+- [x] Desktop right gutter is 32px.
+- [x] Short desktop keeps the same horizontal gutter.
+- [x] Mobile retains 10px gutters.
+- [x] No horizontal overflow at desktop or mobile verification widths.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped spacing update.
+
+final result: passed
+
+---
+
+## Luyện gõ — khoảng cách desktop 100px — 2026-09-13
+
+- Scope: follow-up to the desktop gutter annotation; mobile spacing is intentionally unchanged.
+- Implementation: `http://localhost:3001/typing/hsk-5/hsk5-l5/practice?stage=word`.
+- Browser evidence at 1536 × 647 CSS px: computed left padding 100px, right padding 100px, studio left offset 100px, studio right offset 100px, and horizontal overflow 0px.
+- Short desktop uses the same 100px inline gutter. The breakpoint at 720px and below still switches to 10px per side.
+- Typography, colors, assets, copy, card geometry, and practice interactions are unchanged.
+- Focused regression suite passes 15/15 tests and `git diff --check` passes.
+- No actionable P0, P1, P2, or P3 findings remain.
+
+final result: passed
+
+---
+
+## Điều hướng mobile — ba box luyện tập trên một hàng — 2026-09-13
+
+### Comparison target
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-27a407a9-be86-485c-8b32-17d62b150b79.png`, 357 × 133 pixels, showing “Luyện nghe” and “Video” on one row while “Bộ từ vựng” falls onto a third row.
+- Browser-rendered implementation: `http://localhost:3001/typing/hsk-5/hsk5-l5`, captured in the selected Codex in-app Browser. The browser capture backend did not expose a local screenshot path.
+- State: mobile lesson page with the “Luyện tập” navigation menu expanded.
+
+### Findings
+
+- No actionable P0, P1, or P2 findings remain.
+- The six practice destinations now use a direct three-column grid, producing two balanced rows of three items.
+- “Luyện nghe”, “Video”, and “Bộ từ vựng” share the same second-row y-position instead of leaving “Bộ từ vựng” alone on a third row.
+
+### Required fidelity surfaces
+
+- Fonts and typography: unchanged; labels remain centered, legible, and use the existing mobile navigation weight and size.
+- Spacing and layout rhythm: three equal columns measure approximately 135.1px each at the tested viewport, separated by the existing 8px gap.
+- Colors and visual tokens: the existing pale surface, active coral treatment, and green-gray inactive treatment are unchanged.
+- Image quality and asset fidelity: existing Lucide navigation icons are retained; no image substitution was introduced.
+- Copy and content: all six destination labels and routes are unchanged.
+
+### Full-view and focused comparison evidence
+
+- The browser viewport measured 487 × 808 CSS px at DPR 0.8375; the expanded menu measured about 443.7px wide.
+- Computed item rectangles place “Luyện nghe”, “Video”, and “Bộ từ vựng” at the identical y-position of 643.17px, with x positions 25.19px, 168.26px, and 311.34px.
+- The full browser capture shows the expanded two-row menu in context. Computed rectangles provide the focused evidence because the fixed menu sits at the viewport edge and the browser's cropped screenshot canvas does not expose a stable standalone-image path.
+- Horizontal overflow is non-positive; no content extends past the viewport.
+
+### Comparison history
+
+- Before the fix, a six-track grid combined with special spans for the fourth and fifth links, forcing the sixth link onto a third row.
+- The final implementation replaces that scheme with three equal tracks and removes all per-link column spans.
+
+### Primary interactions and verification
+
+- The expanded menu remains accessible through the existing “Luyện tập” button, and all six links remain present in the accessibility tree.
+- Browser console returned zero errors.
+- Focused responsive test suite passes 4/4 tests.
+- ESLint, `git diff --check`, and the production build pass.
+
+### Implementation checklist
+
+- [x] First three destinations share row one.
+- [x] Luyện nghe, Video, and Bộ từ vựng share row two.
+- [x] All cards have equal width and height.
+- [x] Existing icons, labels, routes, and active state remain intact.
+- [x] No horizontal overflow is introduced.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped menu-grid update.
 
 final result: passed

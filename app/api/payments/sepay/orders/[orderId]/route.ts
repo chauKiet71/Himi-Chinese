@@ -7,12 +7,19 @@ export async function GET(
   _request: Request,
   { params }: { params: Promise<{ orderId: string }> },
 ) {
-  const user = await getCurrentUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  const { orderId } = await params;
-  if (!isUuid(orderId)) return NextResponse.json({ error: "Not found" }, { status: 404 });
+  try {
+    const user = await getCurrentUser();
+    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const { orderId } = await params;
+    if (!isUuid(orderId)) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-  const order = await getSepayPaymentOrder(orderId, user.id);
-  if (!order) return NextResponse.json({ error: "Not found" }, { status: 404 });
-  return NextResponse.json({ order }, { headers: { "Cache-Control": "no-store" } });
+    const order = await getSepayPaymentOrder(orderId, user.id);
+    if (!order) return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return NextResponse.json({ order }, { headers: { "Cache-Control": "no-store" } });
+  } catch {
+    return NextResponse.json(
+      { error: "payment_service_unavailable" },
+      { status: 503, headers: { "Cache-Control": "no-store" } },
+    );
+  }
 }

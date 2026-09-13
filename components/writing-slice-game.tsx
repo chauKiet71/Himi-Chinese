@@ -251,6 +251,7 @@ function SliceSession({
     exitY: -300,
   });
   const arenaRef = useRef<HTMLDivElement>(null);
+  const sessionRef = useRef<HTMLElement>(null);
   const wordRef = useRef<HTMLDivElement>(null);
   const penguinRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -281,6 +282,61 @@ function SliceSession({
     fallTweenRef.current?.kill();
     strikeTimelineRef.current?.kill();
     window.speechSynthesis?.cancel();
+  }, []);
+
+  useEffect(() => {
+    const session = sessionRef.current;
+    const input = inputRef.current;
+    if (!session || !input) return;
+
+    const visualViewport = window.visualViewport;
+    let stableHeight = Math.max(window.innerHeight, document.documentElement.clientHeight);
+    let stableWidth = window.innerWidth;
+    let blurFrame = 0;
+
+    const updateKeyboardViewport = () => {
+      const inputFocused = document.activeElement === input;
+      const layoutHeight = Math.max(window.innerHeight, document.documentElement.clientHeight);
+      const widthChanged = Math.abs(window.innerWidth - stableWidth) > 40;
+
+      if (!inputFocused || widthChanged) {
+        stableHeight = layoutHeight;
+        stableWidth = window.innerWidth;
+      } else {
+        stableHeight = Math.max(stableHeight, layoutHeight);
+      }
+
+      const visibleBottom = visualViewport
+        ? visualViewport.offsetTop + visualViewport.height
+        : window.innerHeight;
+      const obscuredHeight = Math.max(0, stableHeight - visibleBottom);
+      const keyboardOffset = inputFocused && obscuredHeight > 80 ? obscuredHeight : 0;
+
+      session.style.setProperty("--writing-session-height", `${Math.round(stableHeight)}px`);
+      session.style.setProperty("--writing-keyboard-offset", `${Math.round(keyboardOffset)}px`);
+      session.classList.toggle("is-keyboard-open", keyboardOffset > 80);
+    };
+
+    const handleBlur = () => {
+      window.cancelAnimationFrame(blurFrame);
+      blurFrame = window.requestAnimationFrame(updateKeyboardViewport);
+    };
+
+    input.addEventListener("focus", updateKeyboardViewport);
+    input.addEventListener("blur", handleBlur);
+    window.addEventListener("resize", updateKeyboardViewport);
+    visualViewport?.addEventListener("resize", updateKeyboardViewport);
+    visualViewport?.addEventListener("scroll", updateKeyboardViewport);
+    updateKeyboardViewport();
+
+    return () => {
+      window.cancelAnimationFrame(blurFrame);
+      input.removeEventListener("focus", updateKeyboardViewport);
+      input.removeEventListener("blur", handleBlur);
+      window.removeEventListener("resize", updateKeyboardViewport);
+      visualViewport?.removeEventListener("resize", updateKeyboardViewport);
+      visualViewport?.removeEventListener("scroll", updateKeyboardViewport);
+    };
   }, []);
 
   useEffect(() => {
@@ -531,7 +587,7 @@ function SliceSession({
   }, { dependencies: [mode], scope: arenaRef, revertOnUpdate: true });
 
   return (
-    <main className="learner-dashboard writing-game-dashboard game-immersive-dashboard">
+    <main className="learner-dashboard writing-game-dashboard game-immersive-dashboard" ref={sessionRef}>
       <div className="writing-page-shell">
         <h1 className="writing-page-title">Luyện chém từ cùng Himi</h1>
         <div className="writing-game-layout">
@@ -653,6 +709,8 @@ function SliceSession({
                   autoComplete="off"
                   disabled={mode !== "playing"}
                   id="writing-answer"
+                  inputMode="text"
+                  enterKeyHint="send"
                   onChange={(event) => updateAnswer(event.target.value)}
                   placeholder={mode === "playing" ? "Ví dụ: ni hao" : "Bấm bắt đầu để luyện"}
                   ref={inputRef}

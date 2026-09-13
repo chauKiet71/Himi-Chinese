@@ -153,20 +153,9 @@ export async function createOrReuseSepayPaymentOrder(input: {
       lte(paymentOrders.expiresAt, now),
     ));
 
-    const existingRows = await tx.select({
-      id: paymentOrders.id,
-      planId: paymentOrders.planId,
-      planName: vipPlans.name,
-      amountVnd: paymentOrders.amountVnd,
-      referenceCode: paymentOrders.referenceCode,
-      status: paymentOrders.status,
-      qrContent: paymentOrders.qrContent,
-      paidAt: paymentOrders.paidAt,
-      expiresAt: paymentOrders.expiresAt,
-      accessEndsAt: subscriptions.endsAt,
-    }).from(paymentOrders)
-      .innerJoin(vipPlans, eq(paymentOrders.planId, vipPlans.id))
-      .leftJoin(subscriptions, eq(paymentOrders.subscriptionId, subscriptions.id))
+    // Lock only the payment row here. PostgreSQL rejects `FOR UPDATE` when the
+    // query also contains a nullable outer join (subscriptions is optional).
+    const existingRows = await tx.select({ id: paymentOrders.id }).from(paymentOrders)
       .where(and(
         eq(paymentOrders.userId, user.id),
         eq(paymentOrders.planId, plan.id),
@@ -177,7 +166,11 @@ export async function createOrReuseSepayPaymentOrder(input: {
       .orderBy(desc(paymentOrders.createdAt))
       .for("update")
       .limit(1);
-    if (existingRows[0]) return { ok: true, order: paymentOrderDto(existingRows[0]) };
+    const existingOrderId = existingRows[0]?.id;
+    if (existingOrderId) {
+      const existingOrder = await readPaymentOrderInTransaction(tx, existingOrderId, user.id);
+      if (existingOrder) return { ok: true, order: paymentOrderDto(existingOrder) };
+    }
 
     const expiresAt = new Date(now.getTime() + SEPAY_ORDER_TTL_MINUTES * 60_000);
     const bankAccount = getSepayBankAccount();
