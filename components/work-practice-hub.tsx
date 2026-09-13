@@ -72,13 +72,13 @@ const industryIcons: Record<string, typeof BriefcaseBusiness> = {
 };
 
 const industryPhotos: Record<string, string> = {
-  office: "/assets/courses/himi-concepts/himi-office-administration.png",
-  factory: "/assets/courses/himi-concepts/himi-factory-production.png",
-  logistics: "/assets/courses/himi-concepts/himi-warehouse-logistics.png",
-  sales: "/assets/courses/himi-concepts/himi-sales-customer-care.png",
-  restaurant: "/assets/courses/himi-concepts/himi-restaurant-service.png",
-  ecommerce: "/assets/courses/himi-concepts/himi-ecommerce-operations.png",
-  core: "/assets/courses/himi-concepts/himi-workplace-communication.png",
+  office: "/assets/courses/himi-concepts/himi-office-administration.webp",
+  factory: "/assets/courses/himi-concepts/himi-factory-production.webp",
+  logistics: "/assets/courses/himi-concepts/himi-warehouse-logistics.webp",
+  sales: "/assets/courses/himi-concepts/himi-sales-customer-care.webp",
+  restaurant: "/assets/courses/himi-concepts/himi-restaurant-service.webp",
+  ecommerce: "/assets/courses/himi-concepts/himi-ecommerce-operations.webp",
+  core: "/assets/courses/himi-concepts/himi-workplace-communication.webp",
 };
 
 type HubMode = "catalog" | "session" | "complete" | "review";
@@ -849,7 +849,7 @@ export function WorkPracticeHub({
                   ? <button className="primary" disabled type="button">Đang lưu kết quả…</button>
                   : saveState === "error"
                     ? <button className="primary" onClick={syncScenarioProgress} type="button"><RotateCcw size={17} /> Thử đồng bộ lại</button>
-                    : <Link className="primary" href={dailyNextHref} prefetch>
+                    : <Link className="primary" href={dailyNextHref} prefetch={false}>
                       {dailyNextIsSummary ? "Xem tổng kết 4/4" : "03/04 · Phản xạ 1 phút"} <ArrowRight size={17} />
                     </Link>
                 : <button className="primary" onClick={returnToCatalog} type="button">Chọn ca khác <ArrowRight size={17} /></button>}

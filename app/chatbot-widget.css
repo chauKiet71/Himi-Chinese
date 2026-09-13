@@ -842,6 +842,18 @@ body:has(.admin-page) > .himi-chatbot-widget {
 .himi-support-spinner { animation: himi-support-spin 1s linear infinite; }
 @keyframes himi-support-spin { to { transform: rotate(360deg); } }
 
+@media (max-width: 720px) {
+  /* The home page already reserves two bottom docks. Keep chat reachable
+     without covering a learning shortcut. */
+  body:has(.home-portal-dashboard) > .himi-chatbot-widget {
+    bottom: calc(224px + env(safe-area-inset-bottom));
+  }
+
+  body:has(.home-portal-dashboard) > .himi-chatbot-widget .himi-chatbot-panel {
+    bottom: calc(82px + env(safe-area-inset-bottom));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .himi-chatbot-launcher,
   .himi-chatbot-panel,

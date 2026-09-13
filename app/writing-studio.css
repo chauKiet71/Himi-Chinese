@@ -209,6 +209,8 @@
 }
 
 .writing-lesson-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 260px;
   min-width: 0;
   padding: 23px;
   display: flex;

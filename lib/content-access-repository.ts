@@ -1,4 +1,5 @@
 import { and, eq, inArray } from "drizzle-orm";
+import { unstable_cache } from "next/cache.js";
 import { readDb, writeDb, type Database } from "../db/index.ts";
 import { auditLogs, contentAccessPolicies } from "../db/schema.ts";
 import {
@@ -11,6 +12,15 @@ import {
   type ContentAccessTargetType,
 } from "./content-access-types.ts";
 import { getActiveVipSubscription } from "./vip-subscription.ts";
+
+const getCachedContentAccessPolicyRows = unstable_cache(async () => readDb((db) => db.select({
+  targetType: contentAccessPolicies.targetType,
+  targetKey: contentAccessPolicies.targetKey,
+  tier: contentAccessPolicies.tier,
+}).from(contentAccessPolicies)), ["content-access-policies"], {
+  revalidate: 300,
+  tags: ["content-access-policies"],
+});
 
 export async function getContentAccessPolicies(
   targets: ContentAccessTarget[],
@@ -28,7 +38,7 @@ export async function getContentAccessPolicies(
     inArray(contentAccessPolicies.targetType, targetTypes),
     inArray(contentAccessPolicies.targetKey, targetKeys),
   ));
-  const rows = database ? await query(database) : await readDb(query);
+  const rows = database ? await query(database) : await getCachedContentAccessPolicyRows();
   return rows.filter((row) => wanted.has(contentAccessPolicyKey(row.targetType, row.targetKey)));
 }
 
@@ -89,10 +99,14 @@ export async function getContentAccessPolicy(
   database?: Database,
 ): Promise<AccessTier | null> {
   if (!process.env.DATABASE_URL) return null;
+  if (!database) {
+    const rows = await getCachedContentAccessPolicyRows();
+    return rows.find((row) => row.targetType === targetType && row.targetKey === targetKey)?.tier ?? null;
+  }
   const query = (db: Database) => db.select({ tier: contentAccessPolicies.tier })
     .from(contentAccessPolicies)
     .where(and(eq(contentAccessPolicies.targetType, targetType), eq(contentAccessPolicies.targetKey, targetKey)))
     .limit(1);
-  const rows = database ? await query(database) : await readDb(query);
+  const rows = await query(database);
   return rows[0]?.tier ?? null;
 }

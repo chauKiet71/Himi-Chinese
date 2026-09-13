@@ -203,7 +203,7 @@
   bottom: -19px;
   z-index: 4;
   display: block;
-  background: url("/assets/mascot/himi-v2/himi-video.gif?v=fluid-50fps") center / contain no-repeat;
+  background: url("/assets/mascot/himi-v2/himi-video-animated.webp") center / contain no-repeat;
   filter: drop-shadow(0 15px 17px rgba(31, 69, 58, .16));
   animation: video-himi-float 3.4s ease-in-out infinite;
 }
@@ -342,6 +342,8 @@
 .learning-video-grid { margin-top: 15px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 
 .learning-video-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 390px;
   min-width: 0;
   overflow: hidden;
   border: 1px solid #dde6e1;

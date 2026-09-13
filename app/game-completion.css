@@ -67,7 +67,7 @@
   padding: clamp(31px, 5.1vw, 44px) clamp(22px, 5.2vw, 42px) clamp(22px, 4vw, 34px);
   position: absolute;
   right: 6.2%;
-  bottom: 4.4%;
+  bottom: clamp(52px, 9.5%, 68px);
   left: 6.2%;
   z-index: 3;
   display: flex;
@@ -311,7 +311,7 @@
 
   .game-session-world .game-result-celebration__panel {
     right: 3.5%;
-    bottom: 3%;
+    bottom: 6%;
     left: 3.5%;
     min-height: 47%;
     padding: 30px 16px 18px;

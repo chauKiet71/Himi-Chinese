@@ -1,6 +1,6 @@
 import "server-only";
 import { HSK_CURRICULUM, type HskCurriculumLevel } from "./hsk-curriculum.ts";
-import { buildHskGuidedLessonSteps } from "./hsk-guided-lesson.ts";
+import { countHskGuidedLessonSteps } from "./hsk-guided-lesson.ts";
 import { getHskLearningLessonContent } from "./hsk-learning-content.ts";
 import type { HskExercise, HskLessonContent, HskVocabularyItem, HskWritingCharacter } from "./hsk-lesson-content.ts";
 import { getContentAccessPolicies } from "./content-access-repository.ts";
@@ -179,7 +179,7 @@ export async function getHskCurriculumPageData(userId: string | null): Promise<H
           });
           return {
             ...lesson,
-            guidedSteps: content ? buildHskGuidedLessonSteps(content).length : lesson.guidedSteps,
+            guidedSteps: content ? countHskGuidedLessonSteps(content) : lesson.guidedSteps,
             access,
           };
         }),

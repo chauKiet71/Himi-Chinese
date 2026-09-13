@@ -136,7 +136,7 @@ export function LessonWorkspace({
                 : "Bạn đã hoàn tất đủ bốn bước"}</strong>
             <p>{dailyNextStep.title}</p>
           </div>
-          <Link className="button button-primary" href={withDailySessionFlow(dailyNextStep.href)} prefetch>
+          <Link className="button button-primary" href={withDailySessionFlow(dailyNextStep.href)} prefetch={false}>
             <DailyNextIcon size={18} /> {dailyNextKind === "practice"
               ? "Luyện ca tiếp theo"
               : dailyNextKind === "game"

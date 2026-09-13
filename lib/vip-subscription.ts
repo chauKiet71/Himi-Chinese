@@ -1,4 +1,5 @@
 import { and, desc, eq, gt, isNull, lte, or } from "drizzle-orm";
+import { cache } from "react";
 import { readDb, type Database } from "../db/index.ts";
 import { subscriptions, vipPlans } from "../db/schema.ts";
 import { isLifetimeVipPlan } from "./vip-plan.ts";
@@ -37,10 +38,10 @@ export function vipDaysRemaining(endsAt: Date | null, now = new Date()): number 
   return Math.max(0, Math.ceil((endsAt.getTime() - now.getTime()) / dayMilliseconds));
 }
 
-export async function getActiveVipSubscription(
+async function readActiveVipSubscription(
   userId: string,
-  database?: Database,
-  now = new Date(),
+  database: Database | undefined,
+  now: Date,
 ): Promise<ActiveVipSubscription | null> {
   if (!process.env.DATABASE_URL) return null;
   const query = (db: Database) => db.select({
@@ -63,4 +64,17 @@ export async function getActiveVipSubscription(
     .limit(1);
   const rows = database ? await query(database) : await readDb(query);
   return rows[0] ?? null;
+}
+
+const getRequestCachedActiveVipSubscription = cache((userId: string) => (
+  readActiveVipSubscription(userId, undefined, new Date())
+));
+
+export function getActiveVipSubscription(
+  userId: string,
+  database?: Database,
+  now?: Date,
+): Promise<ActiveVipSubscription | null> {
+  if (database || now) return readActiveVipSubscription(userId, database, now ?? new Date());
+  return getRequestCachedActiveVipSubscription(userId);
 }

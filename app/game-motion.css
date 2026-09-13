@@ -110,3 +110,30 @@
   .game-session-world .memory-tile-inner,
   .game-session-world .flashcard-3d-inner { transition: none; }
 }
+/* Route-level fallback while a game engine chunk is loaded on demand. */
+.game-runtime-loading {
+  min-height: min(760px, calc(100dvh - 32px));
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 16px;
+  color: #123f38;
+  background: linear-gradient(145deg, #fff8f3, #effaf5);
+}
+
+.game-runtime-loading > span {
+  width: 48px;
+  aspect-ratio: 1;
+  border: 5px solid rgb(18 63 56 / 14%);
+  border-top-color: #ff574d;
+  border-radius: 50%;
+  animation: game-runtime-spin .72s linear infinite;
+}
+
+@keyframes game-runtime-spin {
+  to { transform: rotate(1turn); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-runtime-loading > span { animation: none; }
+}

@@ -13,10 +13,10 @@ const variants = ["wave", "listen", "cheer", "celebrate", "writing", "video"];
 
 test("Himi v2 ships transparent animated and reduced-motion assets", async () => {
   for (const variant of variants) {
-    const animated = await sharp(assetPath(`himi-${variant}.gif`), { animated: true }).metadata();
+    const animated = await sharp(assetPath(`himi-${variant}-animated.webp`), { animated: true }).metadata();
     const fallback = await sharp(assetPath(`himi-${variant}.webp`)).metadata();
 
-    assert.equal(animated.format, "gif");
+    assert.equal(animated.format, "webp");
     assert.equal(animated.hasAlpha, true);
     assert.equal(animated.pages, 60);
     assert.equal(animated.pageHeight, 512);
@@ -36,12 +36,12 @@ test("UI references only the Himi v2 mascot suite", async () => {
   ]);
   const combined = sources.join("\n");
 
-  assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-wave\.gif/);
-  assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-listen\.gif/);
-  assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-cheer\.gif/);
+  assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-wave-animated\.webp/);
+  assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-listen-animated\.webp/);
+  assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-cheer-animated\.webp/);
   assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-celebrate\.webp/);
-  assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-writing\.gif/);
-  assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-video\.gif/);
+  assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-writing-animated\.webp/);
+  assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-video-animated\.webp/);
   assert.doesNotMatch(combined, /\/assets\/mascot\/penguin|himi-current-wave-fixed|himi-current-static/);
 
   await assert.rejects(access(new URL("public/assets/mascot/penguin", projectUrl)));

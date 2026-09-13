@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache.js";
+import { revalidatePath, revalidateTag, updateTag } from "next/cache.js";
 import { redirect } from "next/navigation";
 import { requireAdminUser, requirePracticeStaffUser, requireRecentAdminUser } from "@/lib/admin-auth";
 import { deactivateAdminUser, updateUserRole } from "@/lib/admin-user-service";
@@ -82,6 +82,7 @@ function resultRedirect(result: MutationResult, successPath: string, errorPath: 
   revalidatePath("/account");
   revalidatePath("/vip");
   revalidateTag("published-content", "max");
+  updateTag("vip-plans");
   redirect(`${successPath}?success=${success}`);
 }
 
@@ -473,6 +474,7 @@ export async function updateContentAccessPolicyAction(formData: FormData) {
   revalidatePath("/hsk", "layout");
   revalidatePath("/admin/access");
   revalidateTag("published-content", "max");
+  updateTag("content-access-policies");
   redirect(`${returnTo}${returnTo.includes("?") ? "&" : "?"}success=content_access_updated`);
 }
 

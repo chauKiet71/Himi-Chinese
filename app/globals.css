@@ -1,14 +1,6 @@
 @import "tailwindcss";
 @import "./himi-section-banner.css";
-@import "./video-learning.css";
 @import "./learner-navigation.css";
-@import "./home-portal.css";
-@import "./writing-studio.css";
-@import "./listening-studio.css";
-@import "./hsk-curriculum.css";
-@import "./hsk-lesson.css";
-@import "./hsk-guided-lesson.css";
-@import "./hsk-quiz.css";
 
 /* Self-host Roboto so Vinext never emits machine-specific C:/... font URLs. */
 @font-face {
@@ -5392,7 +5384,7 @@ body:has(.learner-dashboard) {
   min-height: 100vh;
   color: #092f2a;
   background-color: #fbfaf6;
-  background-image: url("/assets/hanziwork-dashboard-background.png");
+  background-image: url("/assets/hanziwork-dashboard-background.webp");
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -14711,7 +14703,7 @@ body:has(.auth-register-is-success) { overflow: hidden; }
   inset: 0;
   z-index: 1;
   display: block;
-  background: url("/assets/auth/penguin-walk-cycle-v2.png") 0 0 / 800% 100% no-repeat;
+  background: url("/assets/auth/penguin-walk-cycle-v2.webp") 0 0 / 800% 100% no-repeat;
   filter: drop-shadow(0 13px 14px rgba(35, 73, 63, .15));
   transform-origin: 50% 92%;
   will-change: background-position, transform;
@@ -15207,7 +15199,7 @@ body:has(.auth-register-is-success) { overflow: hidden; }
   inset: -76px -80px -22px 42%;
   opacity: .68;
   pointer-events: none;
-  background-image: linear-gradient(90deg, #fbfaf6 0%, rgba(251, 250, 246, .18) 32%), url("/assets/hanziwork-dashboard-background.png");
+  background-image: linear-gradient(90deg, #fbfaf6 0%, rgba(251, 250, 246, .18) 32%), url("/assets/hanziwork-dashboard-background.webp");
   background-position: center, right 19%;
   background-repeat: no-repeat;
   background-size: cover, 980px auto;

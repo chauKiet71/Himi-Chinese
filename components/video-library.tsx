@@ -7,18 +7,18 @@ import { ArrowRight, Captions, CirclePlay, Search } from "lucide-react";
 import { HimiSectionBanner } from "@/components/himi-section-banner";
 import type { LearningVideo } from "@/lib/video-library";
 
-function VideoCard({ video }: { video: LearningVideo }) {
+function VideoCard({ priority, video }: { priority?: boolean; video: LearningVideo }) {
   return <article className="learning-video-card">
-    <Link className="learning-video-thumbnail" href={`/videos/${video.slug}`} aria-label={`Mở video ${video.title}`}>
-      <Image alt="" fill sizes="(max-width: 720px) 100vw, (max-width: 1120px) 50vw, 33vw" src={video.thumbnailUrl} unoptimized={video.source === "youtube"} />
+    <Link className="learning-video-thumbnail" href={`/videos/${video.slug}`} aria-label={`Mở video ${video.title}`} prefetch={false}>
+      <Image alt="" fill priority={priority} sizes="(max-width: 720px) 100vw, (max-width: 1120px) 50vw, 33vw" src={video.thumbnailUrl} unoptimized={video.source === "youtube"} />
       <span className="video-source-badge">{video.source === "himi" ? "Himi Original" : "YouTube tuyển chọn"}</span>
       <span className="video-card-play"><CirclePlay aria-hidden="true" size={25} /></span>
     </Link>
     <div className="learning-video-card-body">
       <div className="video-card-meta"><span>{video.level}</span><span>{video.category}</span>{video.sentenceCount ? <span>{video.sentenceCount} câu</span> : video.durationLabel ? <span>{video.durationLabel}</span> : null}</div>
-      <h3><Link href={`/videos/${video.slug}`}>{video.title}</Link></h3>
+      <h3><Link href={`/videos/${video.slug}`} prefetch={false}>{video.title}</Link></h3>
       <p>{video.summary}</p>
-      <div className="video-card-footer"><span>{video.authorName ?? (video.source === "himi" ? "Himi Chinese" : "")}</span><Link href={`/videos/${video.slug}`}>Học với video <ArrowRight aria-hidden="true" size={15} /></Link></div>
+      <div className="video-card-footer"><span>{video.authorName ?? (video.source === "himi" ? "Himi Chinese" : "")}</span><Link href={`/videos/${video.slug}`} prefetch={false}>Học với video <ArrowRight aria-hidden="true" size={15} /></Link></div>
     </div>
   </article>;
 }
@@ -50,7 +50,7 @@ export function VideoLibrary({ videos }: { videos: LearningVideo[] }) {
           <div className="video-category-filters" aria-label="Lọc theo chủ đề">{categories.map((item) => <button aria-pressed={category === item} className={category === item ? "active" : ""} key={item} onClick={() => setCategory(item)} type="button">{item}</button>)}</div>
         </div>
         <div aria-live="polite" className="video-result-count"><Captions aria-hidden="true" size={15} /><span>{filtered.length} video phù hợp</span></div>
-        {filtered.length ? <div className="learning-video-grid">{filtered.map((video) => <VideoCard key={video.slug} video={video} />)}</div> : <div className="video-empty-state"><Search aria-hidden="true" size={28} /><h3>Chưa tìm thấy video phù hợp</h3><p>Thử từ khóa ngắn hơn hoặc chọn “Tất cả”.</p><button onClick={() => { setCategory("Tất cả"); setQuery(""); }} type="button">Xóa bộ lọc</button></div>}
+        {filtered.length ? <div className="learning-video-grid">{filtered.map((video, index) => <VideoCard key={video.slug} priority={index < 3} video={video} />)}</div> : <div className="video-empty-state"><Search aria-hidden="true" size={28} /><h3>Chưa tìm thấy video phù hợp</h3><p>Thử từ khóa ngắn hơn hoặc chọn “Tất cả”.</p><button onClick={() => { setCategory("Tất cả"); setQuery(""); }} type="button">Xóa bộ lọc</button></div>}
       </section>
     </div>
   </main>;

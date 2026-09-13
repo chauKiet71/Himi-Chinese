@@ -44,7 +44,7 @@ export default function WritingPage() {
             <p>{level.description}</p>
             <div className="writing-topic-card-footer">
               <span><PenLine aria-hidden="true" size={15} /> {level.characterCount} chữ</span>
-              <Link href={`/writing/${level.id}`} prefetch>Xem bài học <ArrowRight aria-hidden="true" size={17} /></Link>
+              <Link href={`/writing/${level.id}`} prefetch={false}>Xem bài học <ArrowRight aria-hidden="true" size={17} /></Link>
             </div>
           </article>
         ))}

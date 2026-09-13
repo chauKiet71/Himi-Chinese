@@ -149,7 +149,7 @@ export function HskCurriculumExplorer({
           className="hsk-curriculum-coach-image"
           height={170}
           priority
-          src="/assets/brand/himi-mascot-icon-transparent.png"
+          src="/assets/brand/himi-mascot-icon-transparent.webp"
           unoptimized
           width={170}
         />
@@ -207,7 +207,7 @@ export function HskCurriculumExplorer({
                 const lessonHref = `/hsk/${activeLevel.id.replace(/^hsk-/, "")}/${lesson.id}`;
                 const savedPercent = lessonProgress[lesson.id] ?? 0;
                 return <article className={`hsk-lesson-row${lessonSelected ? " is-active" : ""}${!accessAllowed ? " is-vip-locked" : ""}`} key={lesson.id}>
-                  {lessonAvailable ? <Link aria-label={`Bài ${lesson.lessonNumber}: ${lesson.title}`} className="hsk-lesson-select" href={lessonHref} prefetch>
+                  {lessonAvailable ? <Link aria-label={`Bài ${lesson.lessonNumber}: ${lesson.title}`} className="hsk-lesson-select" href={lessonHref} prefetch={false}>
                     <span className="hsk-lesson-index">{lessonSelected ? <Play aria-hidden="true" fill="currentColor" size={20} /> : lesson.lessonNumber}</span>
                     <span className="hsk-lesson-copy">
                   <strong>Bài {lesson.lessonNumber}: {lesson.title}</strong>
@@ -229,7 +229,7 @@ export function HskCurriculumExplorer({
                     </span>
                   </button>}
 
-                  {lessonSelected && lessonAvailable ? <Link className="hsk-lesson-start" href={lessonHref} prefetch>
+                  {lessonSelected && lessonAvailable ? <Link className="hsk-lesson-start" href={lessonHref} prefetch={false}>
                     <span>{savedPercent > 0 ? `${savedPercent}% đã học` : "Sẵn sàng"}</span>
                     <strong>{savedPercent > 0 ? "Tiếp tục học" : "Bắt đầu học"}</strong>
                     <ArrowRight aria-hidden="true" size={18} />
@@ -237,7 +237,7 @@ export function HskCurriculumExplorer({
 
                   {lessonSelected && lessonAvailable ? <div className="hsk-lesson-coach-note">
                     <span className="hsk-lesson-coach-avatar">
-                      <Image alt="" aria-hidden="true" height={40} src="/assets/brand/himi-mascot-icon-transparent.png" unoptimized width={40} />
+                      <Image alt="" aria-hidden="true" height={40} src="/assets/brand/himi-mascot-icon-transparent.webp" unoptimized width={40} />
                     </span>
                     <span className="hsk-lesson-coach-copy">
                       <strong>Himi nhắc bạn:</strong>

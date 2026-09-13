@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { readDb } from "@/db";
 import { getCurrentUser } from "@/lib/auth-session";
-import { builtinVocabularySets } from "@/lib/vocabulary-sets";
 import { listMyVocabularySets } from "@/lib/vocabulary-set-service";
 import { listSavedVocabulary } from "@/lib/saved-vocabulary-service";
 import type { SavedVocabulary } from "@/lib/content-types";
@@ -22,5 +21,5 @@ export default async function VocabularyPage() {
     if (mineResult.status === "fulfilled") mine = mineResult.value; else mineLoadError = true;
     if (savedResult.status === "fulfilled") savedWords = savedResult.value; else savedLoadError = true;
   }
-  return <VocabularySetLibrary authenticated={Boolean(user)} mine={mine} savedWords={savedWords} mineLoadError={mineLoadError} savedLoadError={savedLoadError} builtins={builtinVocabularySets.map(({ words, ...set }) => ({ ...set, wordCount: words.length }))} />;
+  return <VocabularySetLibrary authenticated={Boolean(user)} mine={mine} savedWords={savedWords} mineLoadError={mineLoadError} savedLoadError={savedLoadError} />;
 }

@@ -128,6 +128,15 @@ export function buildHskGuidedLessonSteps(lesson: HskLessonContent): HskGuidedSt
   ];
 }
 
+export function countHskGuidedLessonSteps(lesson: HskLessonContent): number {
+  const placeholders = new Set(lesson.guidedPlaceholders ?? []);
+  const vocabularySteps = lesson.vocabulary.length || (placeholders.has("vocabulary") ? 1 : 0);
+  const writingSteps = lesson.writingCharacters.length || placeholders.has("writing") ? 1 : 0;
+  const practiceSteps = lesson.vocabulary.length || lesson.exercises.length;
+
+  return 2 + vocabularySteps + lesson.grammar.length + writingSteps + practiceSteps;
+}
+
 export function buildHskGuidedSections(lesson: HskLessonContent): HskGuidedSection[] {
   const steps = buildHskGuidedLessonSteps(lesson);
   return SECTION_LABELS.flatMap(([id, label]) => {

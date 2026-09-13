@@ -6,19 +6,12 @@ import "./motion.css";
 import "./responsive.css";
 import "./white-backgrounds.css";
 import "./brand-theme.css";
-import "./chatbot-widget.css";
-import "./game-motion.css";
-import "./game-completion.css";
-import "./account-wallet.css";
-import "./lesson-interactive.css";
-import "./legal.css";
-import "./vip/vip-policy.css";
 import "./learning-journey-responsive.css";
 import "./adaptive-responsive.css";
 import { SiteHeader, SiteHeaderFallback } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MobileNav } from "@/components/mobile-nav";
-import { HimiChatbot } from "@/components/himi-chatbot";
+import { DeferredHimiChatbot } from "@/components/deferred-himi-chatbot";
 import { LearnerAppShell } from "@/components/learner-app-shell";
 import { LearningDataProvider } from "@/components/learning-data-provider";
 import { getCurrentUser } from "@/lib/auth-session";
@@ -96,6 +89,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     </LearningDataProvider>
     <SiteFooter />
     <MobileNav />
-    <HimiChatbot />
+    <DeferredHimiChatbot />
   </body></html>;
 }
