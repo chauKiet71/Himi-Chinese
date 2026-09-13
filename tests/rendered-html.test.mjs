@@ -5,9 +5,10 @@ import { readFile } from "node:fs/promises";
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("home page contains the lightweight Himi language portal", async () => {
-  const [page, studio, verifyEmail] = await Promise.all([
+  const [page, studio, portalStyles, verifyEmail] = await Promise.all([
     read("app/page.tsx"),
     read("components/review-home-studio.tsx"),
+    read("app/home-portal.css"),
     read("app/api/auth/verify-email/route.ts"),
   ]);
   assert.match(page, /ReviewHomeStudio/);
@@ -17,8 +18,10 @@ test("home page contains the lightweight Himi language portal", async () => {
   assert.match(verifyEmail, /new URL\("\/\?verified=1"/);
   assert.match(studio, /Mỗi ngày một tí/);
   assert.match(studio, /Tình huống thật\. Phản xạ tự nhiên\./);
-  assert.match(studio, /himi-wave-animated\.webp/);
-  assert.match(studio, /useReducedMotion/);
+  assert.match(portalStyles, /himi-wave-animated\.webp/);
+  assert.match(portalStyles, /max-width: 720px[\s\S]*himi-wave\.webp/);
+  assert.match(studio, /usePrefersReducedMotion/);
+  assert.doesNotMatch(studio, /motion\/react/);
   assert.match(studio, /Bắt đầu luyện nói/);
 });
 

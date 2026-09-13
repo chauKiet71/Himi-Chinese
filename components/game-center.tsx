@@ -1,9 +1,6 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -33,13 +30,14 @@ import {
   createContext,
   useEffect,
   useContext,
+  lazy,
   useMemo,
   useRef,
   useState,
+  Suspense,
   type FormEvent,
   type ReactNode,
 } from "react";
-import { WritingSliceGame } from "@/components/writing-slice-game";
 import {
   gameCourseCompletionKey,
   isGameId,
@@ -63,7 +61,9 @@ type HskRoundProps = {
   onComplete: (score: number) => void;
 };
 
-if (typeof window !== "undefined") gsap.registerPlugin(useGSAP, MotionPathPlugin);
+const WritingSliceGame = lazy(() => import("@/components/writing-slice-game").then((module) => ({
+  default: module.WritingSliceGame,
+})));
 
 type GameSyncState = "idle" | "saving" | "saved" | "error";
 
@@ -121,7 +121,7 @@ const catalogGames: CatalogGame[] = [
 function JourneyTraveler({ targetGameId }: { targetGameId: GameId | null }) {
   const travelerRef = useRef<HTMLImageElement>(null);
 
-  useGSAP(() => {
+  useEffect(() => {
     const traveler = travelerRef.current;
     const stage = traveler?.closest<HTMLElement>(".game-journey-stage");
     const source = stage?.querySelector<HTMLElement>(".game-journey-guide");
@@ -136,43 +136,47 @@ function JourneyTraveler({ targetGameId }: { targetGameId: GameId | null }) {
     const startY = sourceRect.top - stageRect.top + sourceRect.height * .45 - travelerRect.height / 2;
     const endX = targetRect.left - stageRect.left + targetRect.width / 2 - travelerRect.width / 2;
     const endY = targetRect.top - stageRect.top + targetRect.height * .42 - travelerRect.height / 2;
+    const translate = (x: number, y: number, rotation: number, scale: number) => (
+      `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg) scale(${scale})`
+    );
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      traveler.style.opacity = "1";
+      traveler.style.transform = translate(endX, endY, 0, .72);
+      return () => {
+        traveler.style.opacity = "";
+        traveler.style.transform = "";
+      };
+    }
+
     const horizontalDistance = endX - startX;
     const verticalDistance = endY - startY;
-    const media = gsap.matchMedia();
-
-    media.add("(prefers-reduced-motion: reduce)", () => {
-      gsap.set(traveler, { autoAlpha: 1, rotation: 0, scale: .72, x: endX, y: endY });
-    });
-    media.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.set(traveler, { autoAlpha: 0, rotation: -5, scale: .7, x: startX, y: startY });
-      const timeline = gsap.timeline({ delay: .28 });
-      timeline
-        .to(traveler, { autoAlpha: 1, duration: .18, ease: "power2.out", scale: .76 })
-        .to(traveler, {
-          duration: 1.08,
-          ease: "power2.inOut",
-          motionPath: {
-            curviness: 1.35,
-            path: [
-              { x: startX, y: startY },
-              { x: startX + horizontalDistance * .34, y: startY + verticalDistance * .2 - 34 },
-              { x: startX + horizontalDistance * .72, y: startY + verticalDistance * .72 + 18 },
-              { x: endX, y: endY },
-            ],
-          },
-          rotation: 4,
-          scale: .68,
-        })
-        .to(traveler, { duration: .16, ease: "power3.out", rotation: -2, scale: .76, y: endY - 8 })
-        .to(traveler, { duration: .22, ease: "power2.out", rotation: 0, scale: .72, y: endY });
-      return () => timeline.kill();
+    const animation = traveler.animate([
+      { opacity: 0, transform: translate(startX, startY, -5, .7), offset: 0 },
+      { opacity: 1, transform: translate(startX, startY, -3, .76), offset: .12 },
+      { opacity: 1, transform: translate(startX + horizontalDistance * .34, startY + verticalDistance * .2 - 34, 1, .72), offset: .42 },
+      { opacity: 1, transform: translate(startX + horizontalDistance * .72, startY + verticalDistance * .72 + 18, 4, .68), offset: .74 },
+      { opacity: 1, transform: translate(endX, endY - 8, -2, .76), offset: .9 },
+      { opacity: 1, transform: translate(endX, endY, 0, .72), offset: 1 },
+    ], {
+      delay: 280,
+      duration: 1_640,
+      easing: "cubic-bezier(.22, 1, .36, 1)",
+      fill: "forwards",
     });
 
-    return () => media.revert();
-  }, { dependencies: [targetGameId], revertOnUpdate: true });
+    return () => animation.cancel();
+  }, [targetGameId]);
 
   if (!targetGameId) return null;
   return <img alt="" aria-hidden="true" className="game-journey-traveler" height={1016} ref={travelerRef} src="/assets/games/himi-v2-slice.webp" width={966} />;
+}
+
+function GameRuntimeLoading() {
+  return <section aria-live="polite" className="game-runtime-loading" role="status">
+    <span aria-hidden="true" />
+    <strong>Himi đang chuẩn bị trò chơi…</strong>
+  </section>;
 }
 
 function GameFrame({
@@ -745,7 +749,9 @@ export function GameCenter({
   }, [initialGameId, router]);
 
   let activeGameView: ReactNode = null;
-  if (activeGame === "slice") activeGameView = <WritingSliceGame completedCourses={record.completedCourses} completionAction={<DailyGameCompletionAction />} exitLabel={exitLabel} onComplete={(score, level) => completeGame("slice", score, level)} onExit={exitGame} />;
+  if (activeGame === "slice") activeGameView = <Suspense fallback={<GameRuntimeLoading />}>
+    <WritingSliceGame completedCourses={record.completedCourses} completionAction={<DailyGameCompletionAction />} exitLabel={exitLabel} onComplete={(score, level) => completeGame("slice", score, level)} onExit={exitGame} />
+  </Suspense>;
   if (activeGame && activeGame !== "slice") {
     const game = catalogGames.find((item) => item.id === activeGame)!;
     const gameId: HskGameId = activeGame;

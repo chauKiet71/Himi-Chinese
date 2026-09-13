@@ -342,6 +342,8 @@
 .learning-video-grid { margin-top: 15px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 
 .learning-video-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 390px;
   min-width: 0;
   overflow: hidden;
   border: 1px solid #dde6e1;

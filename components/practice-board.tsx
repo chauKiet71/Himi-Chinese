@@ -2,16 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { RotateCcw, Trophy } from "lucide-react";
 import type { Vocabulary } from "@/lib/content-types";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 type Feedback = "hard" | "known" | null;
-
-const enterTransition = {
-  duration: 0.22,
-  ease: [0.22, 1, 0.36, 1],
-} as const;
 
 export function PracticeBoard({ vocabulary, authenticated }: { vocabulary: Vocabulary[]; authenticated: boolean }) {
   const [index, setIndex] = useState(0);
@@ -20,7 +15,7 @@ export function PracticeBoard({ vocabulary, authenticated }: { vocabulary: Vocab
   const [feedback, setFeedback] = useState<Feedback>(null);
   const [saveError, setSaveError] = useState(false);
   const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const finished = index >= vocabulary.length;
   const word = vocabulary[Math.min(index, Math.max(vocabulary.length - 1, 0))];
 
@@ -79,79 +74,51 @@ export function PracticeBoard({ vocabulary, authenticated }: { vocabulary: Vocab
   }
 
   const progress = ((index + 1) / vocabulary.length) * 100;
-  const cardAnimation = reduceMotion
-    ? undefined
-    : feedback === "hard"
-      ? { x: [0, -5, 4, -3, 0] }
-      : feedback === "known"
-        ? { scale: [1, 1.018, 1] }
-        : { x: 0, scale: 1 };
-
   return <section className="practice-board" aria-live="polite">
-    <AnimatePresence mode="wait" initial={false}>
-      {!finished ? <motion.div
-        animate={{ opacity: 1, x: 0 }}
+      {!finished ? <div
         className="practice-round"
-        exit={reduceMotion ? undefined : { opacity: 0, x: -14 }}
-        initial={reduceMotion ? false : { opacity: 0, x: 14 }}
         key={word.slug}
-        transition={enterTransition}
       >
         <div className="practice-top"><span>Ôn tập · Đa chuyên ngành</span><span>{index + 1} / {vocabulary.length}</span></div>
         <div aria-label={`Tiến độ ${index + 1} trên ${vocabulary.length}`} aria-valuemax={vocabulary.length} aria-valuemin={1} aria-valuenow={index + 1} className="practice-progress" role="progressbar">
-          <motion.span animate={{ width: `${progress}%` }} initial={false} transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 150, damping: 24 }} />
+          <span style={{ width: `${progress}%` }} />
         </div>
 
-        <motion.div animate={cardAnimation} className={`flashcard-motion-shell ${feedback ? `is-${feedback}` : ""}`} transition={{ duration: feedback === "hard" ? 0.24 : 0.28 }}>
-          <motion.button
+        <div className={`flashcard-motion-shell ${feedback ? `is-${feedback}` : ""}`}>
+          <button
             aria-pressed={flipped}
             className="flashcard"
             onClick={() => setFlipped((value) => !value)}
             type="button"
-            whileTap={reduceMotion ? undefined : { scale: 0.992 }}
           >
             <span className="flashcard-label">{flipped ? "Đáp án" : "Nhìn từ và nhớ nghĩa"}</span>
             <span className="flashcard-hanzi" lang="zh">{word.hanzi}</span>
             <span className="flashcard-pinyin">{word.pinyin}</span>
             <span className="flashcard-answer-slot">
-              <AnimatePresence initial={false}>
-                {flipped ? <motion.span
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                {flipped ? <span
                   className="flashcard-meaning"
-                  exit={reduceMotion ? undefined : { opacity: 0, y: -4, scale: 0.985 }}
-                  initial={reduceMotion ? false : { opacity: 0, y: 8, scale: 0.985 }}
                   key="meaning"
-                  transition={enterTransition}
-                >{word.meaning}</motion.span> : null}
-              </AnimatePresence>
+                >{word.meaning}</span> : null}
             </span>
             <span className="flashcard-hint">Chạm vào thẻ để {flipped ? "ẩn" : "xem"} nghĩa</span>
-          </motion.button>
-        </motion.div>
+          </button>
+        </div>
 
         <div className="answer-actions">
-          <motion.button className="answer-button hard" disabled={!flipped || Boolean(feedback)} onClick={() => answer(false)} type="button" whileTap={reduceMotion ? undefined : { scale: 0.97 }}>Cần ôn lại</motion.button>
-          <motion.button className="answer-button known" disabled={!flipped || Boolean(feedback)} onClick={() => answer(true)} type="button" whileTap={reduceMotion ? undefined : { scale: 0.97 }}>Tôi đã nhớ</motion.button>
+          <button className="answer-button hard" disabled={!flipped || Boolean(feedback)} onClick={() => answer(false)} type="button">Cần ôn lại</button>
+          <button className="answer-button known" disabled={!flipped || Boolean(feedback)} onClick={() => answer(true)} type="button">Tôi đã nhớ</button>
         </div>
         {saveError ? <p className="practice-save-error" role="alert">Chưa lưu được kết quả. Hãy thử lại.</p> : authenticated ? <p className="practice-save-note">Mỗi lựa chọn sẽ được lưu và dùng để tính lịch ôn tiếp theo.</p> : <p className="practice-save-note">Lượt này chưa được lưu. <Link href="/login?returnTo=/practice">Đăng nhập để lưu lịch ôn</Link>.</p>}
-      </motion.div> : <motion.div
-        animate={{ opacity: 1, y: 0 }}
+      </div> : <div
         className="practice-finish"
-        initial={reduceMotion ? false : { opacity: 0, y: 12 }}
         key="finished"
-        transition={enterTransition}
       >
         <div>
-          <motion.div
-            animate={reduceMotion ? undefined : { rotate: [0, -5, 4, 0], scale: [0.84, 1.08, 1] }}
-            className="practice-finish-icon"
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          ><Trophy size={34} /></motion.div>
+          <div className="practice-finish-icon"><Trophy size={34} /></div>
           <h2>Đã xong lượt ôn!</h2>
           <p>Bạn nhớ chắc {known}/{vocabulary.length} từ. {authenticated ? "Lịch ôn tiếp theo đã được cập nhật." : "Đăng nhập để lưu những từ cần ôn lại."}</p>
-          <motion.button className="button button-primary" onClick={restart} type="button" whileTap={reduceMotion ? undefined : { scale: 0.97 }}><RotateCcw size={17} /> {authenticated ? "Tải lượt ôn tiếp theo" : "Ôn lại từ đầu"}</motion.button>
+          <button className="button button-primary" onClick={restart} type="button"><RotateCcw size={17} /> {authenticated ? "Tải lượt ôn tiếp theo" : "Ôn lại từ đầu"}</button>
         </div>
-      </motion.div>}
-    </AnimatePresence>
+      </div>}
   </section>;
 }

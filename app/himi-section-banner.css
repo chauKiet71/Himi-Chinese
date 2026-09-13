@@ -288,6 +288,15 @@
 }
 
 @media (max-width: 720px) {
+  /* Keep the mascot lively with the lightweight CSS float while avoiding a
+     500–700 KB animated image download on bandwidth-constrained phones. */
+  .himi-section-banner-mascot.himi-courses-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-wave.webp"); }
+  .himi-section-banner-mascot.himi-practice-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-cheer.webp"); }
+  .himi-section-banner-mascot.himi-listening-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-listen.webp"); }
+  .himi-section-banner-mascot.himi-videos-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-video.webp"); }
+  .himi-section-banner-mascot.himi-writing-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-writing.webp"); }
+  .himi-section-banner-mascot.himi-vip-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-celebrate.webp"); }
+
   .himi-banner-shell { padding-top: 20px; }
   .practice-banner-shell { width: calc(100% - 24px); }
   .practice-banner-shell { padding: 0 0 18px; }

@@ -4,7 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, AudioLines, BrainCircuit, Check, Mic2, Play } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 type ReviewHomeStudioProps = {
   verified?: boolean;
@@ -24,7 +24,7 @@ function useHydrated() {
 }
 
 export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const hydrated = useHydrated();
   const [activeDialogue, setActiveDialogue] = useState(0);
   const [pageVisible, setPageVisible] = useState(true);
@@ -50,50 +50,33 @@ export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {
     <main className="learner-dashboard home-portal-dashboard">
       <section className={`home-portal-hero${motionEnabled ? " is-motion-active" : " is-motion-paused"}`} aria-labelledby="home-portal-title">
         <div aria-hidden="true" className="home-portal-art">
-          <motion.img
+          <Image
             alt=""
-            animate={motionEnabled ? { scale: [1.015, 1.04, 1.015], x: [0, -8, 0], y: [0, 4, 0] } : { scale: 1, x: 0, y: 0 }}
-            decoding="async"
-            fetchPriority="high"
+            fill
+            priority
             sizes="(max-width: 720px) 100vw, calc(100vw - 88px)"
             src="/assets/home/himi-language-portal-clean-1536.webp"
-            srcSet="/assets/home/himi-language-portal-clean-1536.webp 1536w, /assets/home/himi-language-portal-clean-2k.webp 2560w, /assets/home/himi-language-portal-clean-4k.webp 3840w"
-            transition={{ duration: 16, ease: "easeInOut", repeat: motionEnabled ? Infinity : 0 }}
           />
         </div>
 
         <div aria-hidden="true" className="home-portal-conversation">
-          <AnimatePresence initial={false} mode="wait">
-            <motion.div
-              animate={{ opacity: 1, scale: 1, y: 0 }}
+            <div
               className={`home-portal-dialogue is-${dialogue.speaker}`}
-              exit={{ opacity: 0, scale: .96, y: -8 }}
-              initial={motionEnabled ? { opacity: 0, scale: .96, y: 10 } : false}
               key={`${dialogue.speaker}-${activeDialogue}`}
-              transition={{ duration: .38, ease: [0.16, 1, 0.3, 1] }}
             >
               <span>{dialogue.pinyin}</span>
               <strong>{dialogue.hanzi}</strong>
               <small>{dialogue.translation}</small>
               <i className="home-portal-dialogue-wave"><b /><b /><b /></i>
-            </motion.div>
-          </AnimatePresence>
+            </div>
         </div>
 
-        <motion.div
+        <div
           aria-hidden="true"
-          animate={motionEnabled ? { y: [0, -4, 0] } : { y: 0 }}
           className="home-portal-himi-stage"
-          transition={{ duration: 4.8, ease: "easeInOut", repeat: motionEnabled ? Infinity : 0 }}
         >
-          <Image
-            alt=""
-            height="420"
-            src={motionEnabled ? "/assets/mascot/himi-v2/himi-wave-animated.webp" : "/assets/mascot/himi-v2/himi-wave.webp"}
-            unoptimized
-            width="420"
-          />
-        </motion.div>
+          <span className="home-portal-himi-image" />
+        </div>
 
         {verified ? (
           <p className="home-portal-success" role="status">
@@ -101,11 +84,8 @@ export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {
           </p>
         ) : null}
 
-        <motion.div
+        <div
           className="home-portal-copy"
-          initial={motionEnabled ? { opacity: 0, x: -18 } : false}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: .62, ease: [0.22, 1, 0.36, 1] }}
         >
           <h1 id="home-portal-title">
             <span>Mỗi ngày một tí,</span>
@@ -140,7 +120,7 @@ export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {
               <small>5 từ yếu</small>
             </Link>
           </nav>
-        </motion.div>
+        </div>
       </section>
     </main>
   );

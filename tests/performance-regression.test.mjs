@@ -53,3 +53,74 @@ test("optimized course and animated mascot assets are substantially smaller", as
     assert.ok(optimizedSize.size < originalSize.size * 0.35, `${optimized} should be at least 65% smaller`);
   }
 });
+
+test("game catalog defers the GSAP-powered slice engine until the learner starts it", async () => {
+  const center = await read("components/game-center.tsx");
+  assert.doesNotMatch(center, /from ["'](?:@gsap\/react|gsap|gsap\/MotionPathPlugin)["']/);
+  assert.doesNotMatch(center, /import \{ WritingSliceGame \}/);
+  assert.match(center, /lazy\(\(\) => import\("@\/components\/writing-slice-game"\)/);
+  assert.match(center, /traveler\.animate\(/);
+  assert.match(center, /<Suspense fallback=\{<GameRuntimeLoading \/>\}>/);
+});
+
+test("media catalogs limit eager assets and automatic route prefetching", async () => {
+  const [courses, videos] = await Promise.all([
+    read("components/course-explorer.tsx"),
+    read("components/video-library.tsx"),
+  ]);
+  assert.match(courses, /index < \(showHskCard \? 2 : 3\)/);
+  assert.match(videos, /priority=\{index < 3\}/);
+  assert.ok((videos.match(/prefetch=\{false\}/g) ?? []).length >= 3);
+});
+
+test("common catalog motion uses CSS instead of shipping a runtime animation library", async () => {
+  const [home, courses, practice, homeStyles, bannerStyles] = await Promise.all([
+    read("components/review-home-studio.tsx"),
+    read("components/course-explorer.tsx"),
+    read("components/practice-board.tsx"),
+    read("app/home-portal.css"),
+    read("app/himi-section-banner.css"),
+  ]);
+
+  for (const component of [home, courses, practice]) {
+    assert.doesNotMatch(component, /motion\/react|AnimatePresence|<motion\./);
+  }
+  assert.match(homeStyles, /home-portal-scene-drift/);
+  assert.match(homeStyles, /max-width: 720px[\s\S]*himi-wave\.webp/);
+  assert.match(bannerStyles, /max-width: 720px[\s\S]*himi-video\.webp/);
+});
+
+test("chatbot code and styles wait for browser idle time", async () => {
+  const [layout, deferred] = await Promise.all([
+    read("app/layout.tsx"),
+    read("components/deferred-himi-chatbot.tsx"),
+  ]);
+  assert.doesNotMatch(layout, /chatbot-widget\.css/);
+  assert.match(deferred, /chatbot-widget\.css\?url/);
+  assert.match(deferred, /requestIdleCallback/);
+  assert.match(deferred, /if \(!ready\) return null/);
+});
+
+test("VIP plan catalog is cached while viewer-specific payment state stays fresh", async () => {
+  const [service, actions] = await Promise.all([
+    read("lib/vip-activation-request-service.ts"),
+    read("app/admin/actions.ts"),
+  ]);
+
+  assert.match(service, /getCachedActiveVipPlans = unstable_cache/);
+  assert.match(service, /tags: \["vip-plans"\]/);
+  assert.match(service, /readDb\(async \(db\) => \{[\s\S]*pendingRows[\s\S]*getActiveVipSubscription\(userId, db\)/);
+  assert.match(actions, /updateTag\("vip-plans"\)/);
+});
+
+test("public content access policy reads are cached and admin changes invalidate them immediately", async () => {
+  const [repository, actions] = await Promise.all([
+    read("lib/content-access-repository.ts"),
+    read("app/admin/actions.ts"),
+  ]);
+
+  assert.match(repository, /getCachedContentAccessPolicyRows = unstable_cache/);
+  assert.match(repository, /tags: \["content-access-policies"\]/);
+  assert.match(repository, /database \? await query\(database\) : await getCachedContentAccessPolicyRows\(\)/);
+  assert.match(actions, /updateTag\("content-access-policies"\)/);
+});

@@ -56,7 +56,7 @@ export default async function VideoDetailPage({ params }: { params: Promise<{ sl
         ? <VideoLearningPlayer video={playableVideo} />
         : <div className="video-detail-layout"><div className="video-detail-main"><VideoLearningPlayer video={playableVideo} />{aboutCard}</div>{studySidebar}</div>}
 
-      <section className="related-video-section" aria-labelledby="related-video-title"><div><span className="section-kicker">Học tiếp</span><h2 id="related-video-title">Video khác dành cho bạn</h2></div><div className="related-video-list">{related.map((item) => <Link href={`/videos/${item.slug}`} key={item.slug}><Image alt="" height={105} src={item.thumbnailUrl} unoptimized width={168} /><span><small>{item.level} · {item.category}</small><strong>{item.title}</strong></span><ArrowRight aria-hidden="true" size={17} /></Link>)}</div></section>
+      <section className="related-video-section" aria-labelledby="related-video-title"><div><span className="section-kicker">Học tiếp</span><h2 id="related-video-title">Video khác dành cho bạn</h2></div><div className="related-video-list">{related.map((item) => <Link href={`/videos/${item.slug}`} key={item.slug} prefetch={false}><Image alt="" height={105} src={item.thumbnailUrl} unoptimized width={168} /><span><small>{item.level} · {item.category}</small><strong>{item.title}</strong></span><ArrowRight aria-hidden="true" size={17} /></Link>)}</div></section>
     </div>
   </main>;
 }

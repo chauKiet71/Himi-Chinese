@@ -1,6 +1,7 @@
 import "server-only";
 
 import { and, asc, desc, eq } from "drizzle-orm";
+import { unstable_cache } from "next/cache.js";
 import { readDb, writeDb } from "../db/index.ts";
 import { auditLogs, users, vipActivationRequests, vipPlans } from "../db/schema.ts";
 import type { MutationResult } from "./admin-content-service.ts";
@@ -13,56 +14,59 @@ function normalizedNote(value?: string | null): string | null {
   return note || null;
 }
 
+const getCachedActiveVipPlans = unstable_cache(async () => readDb((db) => db.select({
+  id: vipPlans.id,
+  code: vipPlans.code,
+  name: vipPlans.name,
+  durationDays: vipPlans.durationDays,
+  priceVnd: vipPlans.priceVnd,
+  benefits: vipPlans.benefits,
+}).from(vipPlans)
+  .where(eq(vipPlans.isActive, true))
+  .orderBy(asc(vipPlans.durationDays), asc(vipPlans.name))), ["active-vip-plans"], {
+  revalidate: 300,
+  tags: ["vip-plans"],
+});
+
 export async function getVipUpgradeOverview(userId?: string | null) {
-  return readDb(async (db) => {
-    const plansPromise = db.select({
-      id: vipPlans.id,
-      code: vipPlans.code,
-      name: vipPlans.name,
-      durationDays: vipPlans.durationDays,
-      priceVnd: vipPlans.priceVnd,
-      benefits: vipPlans.benefits,
-    }).from(vipPlans)
-      .where(eq(vipPlans.isActive, true))
-      .orderBy(asc(vipPlans.durationDays), asc(vipPlans.name));
-
-    if (!userId) {
-      return {
-        plans: await plansPromise,
-        pendingRequest: null,
-        activeSubscription: null,
-      };
-    }
-
-    const [plans, pendingRows, activeSubscription] = await Promise.all([
-      plansPromise,
-      db.select({
-        id: vipActivationRequests.id,
-        planId: vipActivationRequests.planId,
-        planCode: vipPlans.code,
-        planName: vipPlans.name,
-        durationDays: vipPlans.durationDays,
-        priceVnd: vipPlans.priceVnd,
-        userNote: vipActivationRequests.userNote,
-        createdAt: vipActivationRequests.createdAt,
-        updatedAt: vipActivationRequests.updatedAt,
-      }).from(vipActivationRequests)
-        .innerJoin(vipPlans, eq(vipActivationRequests.planId, vipPlans.id))
-        .where(and(
-          eq(vipActivationRequests.userId, userId),
-          eq(vipActivationRequests.status, "pending"),
-        ))
-        .orderBy(desc(vipActivationRequests.updatedAt))
-        .limit(1),
-      getActiveVipSubscription(userId, db),
-    ]);
-
+  const plansPromise = getCachedActiveVipPlans();
+  if (!userId) {
     return {
-      plans,
-      pendingRequest: pendingRows[0] ?? null,
-      activeSubscription,
+      plans: await plansPromise,
+      pendingRequest: null,
+      activeSubscription: null,
     };
-  });
+  }
+
+  const [plans, viewer] = await Promise.all([
+    plansPromise,
+    readDb(async (db) => {
+      const [pendingRows, activeSubscription] = await Promise.all([
+        db.select({
+          id: vipActivationRequests.id,
+          planId: vipActivationRequests.planId,
+          planCode: vipPlans.code,
+          planName: vipPlans.name,
+          durationDays: vipPlans.durationDays,
+          priceVnd: vipPlans.priceVnd,
+          userNote: vipActivationRequests.userNote,
+          createdAt: vipActivationRequests.createdAt,
+          updatedAt: vipActivationRequests.updatedAt,
+        }).from(vipActivationRequests)
+          .innerJoin(vipPlans, eq(vipActivationRequests.planId, vipPlans.id))
+          .where(and(
+            eq(vipActivationRequests.userId, userId),
+            eq(vipActivationRequests.status, "pending"),
+          ))
+          .orderBy(desc(vipActivationRequests.updatedAt))
+          .limit(1),
+        getActiveVipSubscription(userId, db),
+      ]);
+      return { pendingRequest: pendingRows[0] ?? null, activeSubscription };
+    }),
+  ]);
+
+  return { plans, ...viewer };
 }
 
 export async function getPendingVipActivationRequest(userId: string) {

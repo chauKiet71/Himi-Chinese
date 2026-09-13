@@ -375,6 +375,8 @@ button.hsk-lesson-start {
 }
 
 .hsk-lesson-row {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 112px;
   position: relative;
   min-width: 0;
   min-height: 76px;

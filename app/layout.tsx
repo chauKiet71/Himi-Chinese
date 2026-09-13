@@ -6,7 +6,6 @@ import "./motion.css";
 import "./responsive.css";
 import "./white-backgrounds.css";
 import "./brand-theme.css";
-import "./chatbot-widget.css";
 import "./learning-journey-responsive.css";
 import "./adaptive-responsive.css";
 import { SiteHeader, SiteHeaderFallback } from "@/components/site-header";

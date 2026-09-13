@@ -1,6 +1,7 @@
 "use client";
 
 import { lazy, Suspense, useEffect, useState } from "react";
+import chatbotStylesheetHref from "@/app/chatbot-widget.css?url";
 
 const HimiChatbot = lazy(() => import("@/components/himi-chatbot").then((module) => ({
   default: module.HimiChatbot,
@@ -22,5 +23,9 @@ export function DeferredHimiChatbot() {
     return () => window.clearTimeout(handle);
   }, []);
 
-  return ready ? <Suspense fallback={null}><HimiChatbot /></Suspense> : null;
+  if (!ready) return null;
+  return <>
+    <link href={chatbotStylesheetHref} precedence="himi-chatbot" rel="stylesheet" />
+    <Suspense fallback={null}><HimiChatbot /></Suspense>
+  </>;
 }
