@@ -58,7 +58,8 @@ const learnerPracticeItems = [
   { href: "/videos", label: "Video", icon: Clapperboard, matches: (pathname: string) => pathname.startsWith("/videos") },
 ];
 
-const mobilePracticeItems = [...learnerPracticeItems, learnerRailItems[3]];
+const learnerPrefetchItems = [...learnerRailItems, ...learnerPracticeItems];
+const mobilePracticeItems = [learnerRailItems[1], ...learnerPracticeItems, learnerRailItems[3]];
 const RAIL_STORAGE_KEY = "himi-learner-rail";
 
 const standalonePrefixes = [
@@ -147,6 +148,25 @@ export function LearnerAppShell({
     window.addEventListener("himi:avatar-updated", updateTopbarAvatar);
     return () => window.removeEventListener("himi:avatar-updated", updateTopbarAvatar);
   }, []);
+
+  useEffect(() => {
+    if (isStandaloneRoute(pathname)) return;
+    const warmPrimaryRoutes = () => {
+      for (const { href } of learnerPrefetchItems) router.prefetch(href);
+    };
+    const browserWindow = window as typeof window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    if (browserWindow.requestIdleCallback) {
+      const handle = browserWindow.requestIdleCallback(warmPrimaryRoutes, { timeout: 1800 });
+      return () => browserWindow.cancelIdleCallback?.(handle);
+    }
+
+    const handle = window.setTimeout(warmPrimaryRoutes, 500);
+    return () => window.clearTimeout(handle);
+  }, [pathname, router]);
 
   useEffect(() => {
     if (!pendingHref || pendingHref === pathname) return;
@@ -299,11 +319,6 @@ export function LearnerAppShell({
   const practiceTriggerActive = practiceSectionActive || practiceTriggerSelected;
   const mobilePracticeActive = mobilePracticeItems.some(({ matches }) => matches(visualPathname));
   const mobileHomeActive = !practiceTriggerSelected && visualPathname === "/";
-  const mobileCoursesActive = !practiceTriggerSelected && (
-    visualPathname.startsWith("/courses")
-    || visualPathname.startsWith("/learn")
-    || visualPathname.startsWith("/hsk")
-  );
   const mobileGamesActive = !practiceTriggerSelected && visualPathname.startsWith("/games");
   const mobileVipActive = !practiceTriggerSelected && visualPathname.startsWith("/vip");
   const mobileAccountActive = !practiceTriggerSelected && visualPathname.startsWith("/account");
@@ -536,8 +551,7 @@ export function LearnerAppShell({
       <div className="learner-shell-content" id="learner-main-content" tabIndex={-1}>{children}</div>
 
       <nav className="learner-mobile-nav" aria-label="Điều hướng học tập trên điện thoại">
-        <Link aria-current={mobileHomeActive ? "page" : undefined} className={mobileHomeActive ? "active" : ""} href="/" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch={false}><Home aria-hidden="true" size={20} /><span>Hôm nay</span></Link>
-        <Link aria-current={mobileCoursesActive ? "page" : undefined} className={mobileCoursesActive ? "active" : ""} href="/courses" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/courses")} onPointerEnter={() => prepareRoute("/courses")} prefetch={false}><BookOpen aria-hidden="true" size={20} /><span>Lộ trình</span></Link>
+        <Link aria-current={mobileHomeActive ? "page" : undefined} className={mobileHomeActive ? "active" : ""} href="/" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch><Home aria-hidden="true" size={20} /><span>Hôm nay</span></Link>
         <div className={`mobile-practice-group ${practiceMenuOpen ? "is-open" : ""}`.trim()}>
           <button
             aria-controls="mobile-practice-menu"
