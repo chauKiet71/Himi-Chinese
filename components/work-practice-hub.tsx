@@ -467,6 +467,11 @@ export function WorkPracticeHub({
 
   function startScenario() {
     if (!selectedScenario) return;
+    if (!authenticated) {
+      const returnTo = `/listening?mode=scenario&scenario=${encodeURIComponent(selectedScenario.id)}`;
+      window.location.assign(`/login?error=required&returnTo=${encodeURIComponent(returnTo)}`);
+      return;
+    }
     if (selectedScenario.locked || !selectedScenario.exercises) {
       setShowUpgradeNote(true);
       return;

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { HskGuidedLesson } from "@/components/hsk-guided-lesson";
 import { HskVipLocked } from "@/components/hsk-vip-locked";
-import { getCurrentUser } from "@/lib/auth-session";
 import { getHskLessonPageData } from "@/lib/hsk-access-repository";
+import { requireLearnerUser } from "@/lib/learner-auth";
 
 type PageProps = { params: Promise<{ level: string; lesson: string }> };
 
@@ -18,9 +18,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function HskGuidedLessonPage({ params }: PageProps) {
-  const [{ level, lesson: lessonId }, user] = await Promise.all([params, getCurrentUser()]);
-  const data = await getHskLessonPageData({ level, lessonId, userId: user?.id ?? null });
+  const { level, lesson: lessonId } = await params;
+  const user = await requireLearnerUser(`/hsk/${encodeURIComponent(level)}/${encodeURIComponent(lessonId)}/play`);
+  const data = await getHskLessonPageData({ level, lessonId, userId: user.id });
   if (!data) notFound();
   if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
-  return <HskGuidedLesson authenticated={Boolean(user)} lesson={data.lesson} />;
+  return <HskGuidedLesson authenticated lesson={data.lesson} />;
 }

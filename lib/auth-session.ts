@@ -2,7 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { and, eq, gt, isNotNull, lt, sql } from "drizzle-orm";
 import { cookies } from "next/headers";
-import { readDb, writeDb, type Database } from "../db/index.ts";
+import { isDatabaseUnavailableError, readDb, writeDb, type Database } from "../db/index.ts";
 import { authSessions, notifications, users } from "../db/schema.ts";
 import { createSessionToken, hashSessionToken } from "./auth-crypto.ts";
 import type { AuthenticatedUser } from "./auth-service.ts";
@@ -106,7 +106,11 @@ async function readCurrentUser(): Promise<AuthenticatedUser | null> {
       eq(users.isActive, true),
       isNotNull(users.emailVerifiedAt),
     ))
-    .limit(1));
+    .limit(1), { reportFailure: false }).catch((error: unknown) => {
+      if (!isDatabaseUnavailableError(error)) throw error;
+      console.warn("[auth] database unavailable; rendering the guest shell");
+      return [];
+    });
 
   const user = rows[0];
   if (!user) return null;

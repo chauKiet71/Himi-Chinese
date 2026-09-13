@@ -159,6 +159,7 @@ test("guided HSK vocabulary exposes the save-word control and account-aware pers
   assert.match(component, /"Lưu từ"/);
   assert.match(component, /"Đã lưu"/);
   assert.match(component, /trySaveHskVocabularyWord/);
-  assert.match(page, /authenticated=\{Boolean\(user\)\}/);
+  assert.match(page, /requireLearnerUser\(/);
+  assert.match(page, /<HskGuidedLesson authenticated lesson=/);
   assert.match(client, /return response\.ok/);
 });

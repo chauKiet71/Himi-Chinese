@@ -12769,6 +12769,31 @@ body:has(.learner-app-shell) > .mobile-nav {
   background: rgba(251, 247, 237, .98);
 }
 
+@media (max-width: 720px) {
+  body:has(.writing-game-dashboard:not(.writing-course-selection-page)) {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  .writing-game-dashboard:not(.writing-course-selection-page) {
+    height: var(--writing-session-height, 100svh);
+    min-height: 0;
+    position: fixed;
+    inset: 0;
+    overscroll-behavior: none;
+  }
+
+  .writing-game-dashboard:not(.writing-course-selection-page) .writing-page-shell {
+    height: var(--writing-session-height, 100svh);
+  }
+
+  .writing-game-dashboard:not(.writing-course-selection-page) .writing-answer-bar {
+    z-index: 50;
+    transform: translate3d(0, calc(-1 * var(--writing-keyboard-offset, 0px)), 0);
+    will-change: transform;
+  }
+}
+
 /* Selected game direction 2 — friendly mint-island play sessions */
 .game-session-dashboard {
   min-height: 100dvh;

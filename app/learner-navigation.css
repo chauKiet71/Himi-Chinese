@@ -1249,7 +1249,7 @@
     z-index: 95;
     padding: 10px;
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
     opacity: 0;
     visibility: hidden;
@@ -1275,7 +1275,6 @@
   .learner-app-shell .mobile-practice-menu a {
     min-height: 72px;
     padding: 8px 5px;
-    grid-column: span 2;
     display: grid;
     place-items: center;
     align-content: center;
@@ -1287,11 +1286,6 @@
     font-weight: 760;
     text-align: center;
     text-decoration: none;
-  }
-
-  .learner-app-shell .mobile-practice-menu a:nth-child(4),
-  .learner-app-shell .mobile-practice-menu a:nth-child(5) {
-    grid-column: span 3;
   }
 
   .learner-app-shell .mobile-practice-menu a.active {

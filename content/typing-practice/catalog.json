@@ -1,0 +1,2300 @@
+[
+  {
+    "id": "hsk-1",
+    "level": 1,
+    "label": "HSK 1",
+    "lessonCount": 15,
+    "wordCount": 299,
+    "sentenceCount": 140,
+    "previewHanzi": [
+      "你",
+      "好",
+      "您",
+      "你们",
+      "对不起",
+      "谢谢"
+    ],
+    "lessons": [
+      {
+        "id": "hsk1-l1",
+        "number": 1,
+        "titleZh": "你好",
+        "titleVi": "HSK1 第1课 - Chào hỏi cơ bản",
+        "wordCount": 20,
+        "sentenceCount": 0,
+        "previewHanzi": [
+          "你",
+          "好",
+          "您",
+          "你们",
+          "对不起"
+        ]
+      },
+      {
+        "id": "hsk1-l2",
+        "number": 2,
+        "titleZh": "谢谢你",
+        "titleVi": "HSK1 第2课 - Cảm ơn và tạm biệt",
+        "wordCount": 19,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "谢谢",
+          "不",
+          "不客气",
+          "再见",
+          "不用谢"
+        ]
+      },
+      {
+        "id": "hsk1-l3",
+        "number": 3,
+        "titleZh": "你叫什么名字",
+        "titleVi": "HSK1 第3课 - Hỏi tên, thân phận và quốc tịch",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "叫",
+          "什么",
+          "名字",
+          "我",
+          "是"
+        ]
+      },
+      {
+        "id": "hsk1-l4",
+        "number": 4,
+        "titleZh": "她是我的汉语老师",
+        "titleVi": "HSK1 第4课 - Giới thiệu người khác",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "她",
+          "的",
+          "汉语",
+          "谁",
+          "他"
+        ]
+      },
+      {
+        "id": "hsk1-l5",
+        "number": 5,
+        "titleZh": "她女儿今年二十岁",
+        "titleVi": "HSK1 第5课 - Gia đình, số lượng và tuổi",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "家",
+          "有",
+          "口",
+          "女儿",
+          "几"
+        ]
+      },
+      {
+        "id": "hsk1-l6",
+        "number": 6,
+        "titleZh": "我会说汉语",
+        "titleVi": "HSK1 第6课 - Năng lực ngôn ngữ và học tập",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "会",
+          "说",
+          "妈妈",
+          "菜",
+          "好吃"
+        ]
+      },
+      {
+        "id": "hsk1-l7",
+        "number": 7,
+        "titleZh": "今天几号",
+        "titleVi": "HSK1 第7课 - Ngày tháng và lịch học",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "今天",
+          "号",
+          "月",
+          "星期",
+          "星期几"
+        ]
+      },
+      {
+        "id": "hsk1-l8",
+        "number": 8,
+        "titleZh": "我想喝茶",
+        "titleVi": "HSK1 第8课 - Ăn uống và mua đồ",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "想",
+          "喝",
+          "茶",
+          "吃",
+          "米饭"
+        ]
+      },
+      {
+        "id": "hsk1-l9",
+        "number": 9,
+        "titleZh": "你儿子在哪儿工作",
+        "titleVi": "HSK1 第9课 - Nơi làm việc và nghề nghiệp",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "儿子",
+          "哪儿",
+          "工作",
+          "医院",
+          "医生"
+        ]
+      },
+      {
+        "id": "hsk1-l10",
+        "number": 10,
+        "titleZh": "我能坐这儿吗",
+        "titleVi": "HSK1 第10课 - Đồ vật, vị trí và chỗ ngồi",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "能",
+          "坐",
+          "桌子",
+          "椅子",
+          "上"
+        ]
+      },
+      {
+        "id": "hsk1-l11",
+        "number": 11,
+        "titleZh": "现在几点",
+        "titleVi": "HSK1 第11课 - Thời gian trong ngày",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "现在",
+          "几点",
+          "点",
+          "分",
+          "中午"
+        ]
+      },
+      {
+        "id": "hsk1-l12",
+        "number": 12,
+        "titleZh": "明天天气怎么样",
+        "titleVi": "HSK1 第12课 - Thời tiết và sức khỏe cơ bản",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "天气",
+          "怎么样",
+          "太",
+          "热",
+          "冷"
+        ]
+      },
+      {
+        "id": "hsk1-l13",
+        "number": 13,
+        "titleZh": "他在学做中国菜呢",
+        "titleVi": "HSK1 第13课 - Hành động đang diễn ra",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "正在",
+          "呢",
+          "睡觉",
+          "电视",
+          "喜欢"
+        ]
+      },
+      {
+        "id": "hsk1-l14",
+        "number": 14,
+        "titleZh": "她买了不少衣服",
+        "titleVi": "HSK1 第14课 - Mua sắm quần áo và hành động đã xảy ra",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "昨天",
+          "上午",
+          "开车",
+          "一点儿",
+          "苹果"
+        ]
+      },
+      {
+        "id": "hsk1-l15",
+        "number": 15,
+        "titleZh": "我是坐飞机来的",
+        "titleVi": "HSK1 第15课 - Phương tiện và du lịch",
+        "wordCount": 20,
+        "sentenceCount": 10,
+        "previewHanzi": [
+          "来",
+          "坐飞机",
+          "飞机",
+          "出租车",
+          "饭店"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hsk-2",
+    "level": 2,
+    "label": "HSK 2",
+    "lessonCount": 15,
+    "wordCount": 447,
+    "sentenceCount": 374,
+    "previewHanzi": [
+      "旅游",
+      "觉得",
+      "最",
+      "为什么",
+      "也",
+      "每"
+    ],
+    "lessons": [
+      {
+        "id": "hsk2-l1",
+        "number": 1,
+        "titleZh": "九月去北京旅游最好",
+        "titleVi": "Du lịch, thời gian, hoạt động",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "旅游",
+          "觉得",
+          "最",
+          "为什么",
+          "也"
+        ]
+      },
+      {
+        "id": "hsk2-l2",
+        "number": 2,
+        "titleZh": "我每天六点起床",
+        "titleVi": "Thói quen hằng ngày, sức khỏe, chiều cao và thời gian nghỉ ngơi",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "每",
+          "每天",
+          "早上",
+          "起床",
+          "跑步"
+        ]
+      },
+      {
+        "id": "hsk2-l3",
+        "number": 3,
+        "titleZh": "左边那个红色的是我的",
+        "titleVi": "Màu sắc, vị trí, lựa chọn",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "左边",
+          "右边",
+          "红色",
+          "白色",
+          "黑色"
+        ]
+      },
+      {
+        "id": "hsk2-l4",
+        "number": 4,
+        "titleZh": "这个工作是他帮我介绍的",
+        "titleVi": "Công việc, giới thiệu, liên hệ",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "工作",
+          "帮",
+          "介绍",
+          "找工作",
+          "面试"
+        ]
+      },
+      {
+        "id": "hsk2-l5",
+        "number": 5,
+        "titleZh": "就买这件吧",
+        "titleVi": "Mua sắm quần áo",
+        "wordCount": 27,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "就",
+          "件",
+          "吧",
+          "贵",
+          "便宜"
+        ]
+      },
+      {
+        "id": "hsk2-l6",
+        "number": 6,
+        "titleZh": "你怎么不吃了",
+        "titleVi": "Ăn uống, cảm giác, gọi món",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "怎么",
+          "不吃了",
+          "吃饭",
+          "饱",
+          "饿"
+        ]
+      },
+      {
+        "id": "hsk2-l7",
+        "number": 7,
+        "titleZh": "你家离公司远吗",
+        "titleVi": "Khoảng cách, giao thông, đi lại",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "离",
+          "远",
+          "近",
+          "公共汽车",
+          "车站"
+        ]
+      },
+      {
+        "id": "hsk2-l8",
+        "number": 8,
+        "titleZh": "让我想想再告诉你",
+        "titleVi": "Suy nghĩ, trả lời, quyết định",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "让",
+          "想想",
+          "再",
+          "告诉",
+          "问题"
+        ]
+      },
+      {
+        "id": "hsk2-l9",
+        "number": 9,
+        "titleZh": "题太多，我没做完",
+        "titleVi": "Bài tập, thi cử, học tập",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "题",
+          "太",
+          "多",
+          "没",
+          "做完"
+        ]
+      },
+      {
+        "id": "hsk2-l10",
+        "number": 10,
+        "titleZh": "别找了，手机在桌子上呢",
+        "titleVi": "Tìm đồ, đồ vật trong nhà",
+        "wordCount": 30,
+        "sentenceCount": 24,
+        "previewHanzi": [
+          "别",
+          "找",
+          "手机",
+          "桌子",
+          "椅子"
+        ]
+      },
+      {
+        "id": "hsk2-l11",
+        "number": 11,
+        "titleZh": "他比我大三岁",
+        "titleVi": "So sánh, tuổi tác, ngoại hình",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "比",
+          "大",
+          "小",
+          "高",
+          "矮"
+        ]
+      },
+      {
+        "id": "hsk2-l12",
+        "number": 12,
+        "titleZh": "你穿得太少了",
+        "titleVi": "Trang phục, thời tiết, mức độ",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "穿",
+          "得",
+          "少",
+          "天气",
+          "冷"
+        ]
+      },
+      {
+        "id": "hsk2-l13",
+        "number": 13,
+        "titleZh": "门开着呢",
+        "titleVi": "Trạng thái đang tồn tại",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "着",
+          "开着",
+          "关着",
+          "门",
+          "窗户"
+        ]
+      },
+      {
+        "id": "hsk2-l14",
+        "number": 14,
+        "titleZh": "你看过那个电影吗",
+        "titleVi": "Kinh nghiệm, phim ảnh, giải trí",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "过",
+          "看过",
+          "去过",
+          "听过",
+          "见过"
+        ]
+      },
+      {
+        "id": "hsk2-l15",
+        "number": 15,
+        "titleZh": "新年就要到了",
+        "titleVi": "Năm mới, vé tàu, chúc mừng",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "新年",
+          "日",
+          "就要",
+          "到了",
+          "票"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hsk-3",
+    "level": 3,
+    "label": "HSK 3",
+    "lessonCount": 20,
+    "wordCount": 600,
+    "sentenceCount": 499,
+    "previewHanzi": [
+      "周末",
+      "打算",
+      "当然",
+      "跟",
+      "一起",
+      "什么时候"
+    ],
+    "lessons": [
+      {
+        "id": "hsk3-l1",
+        "number": 1,
+        "titleZh": "周末你有什么打算",
+        "titleVi": "Kế hoạch cuối tuần, hẹn gặp, sắp xếp thời gian",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "周末",
+          "打算",
+          "当然",
+          "跟",
+          "一起"
+        ]
+      },
+      {
+        "id": "hsk3-l2",
+        "number": 2,
+        "titleZh": "他什么时候回来",
+        "titleVi": "Thời gian, trở về, liên lạc",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "什么时候",
+          "回来",
+          "刚",
+          "已经",
+          "还"
+        ]
+      },
+      {
+        "id": "hsk3-l3",
+        "number": 3,
+        "titleZh": "桌子上放着很多饮料",
+        "titleVi": "Đồ vật, trạng thái tồn tại, ăn uống",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "放",
+          "放着",
+          "饮料",
+          "还是",
+          "或者"
+        ]
+      },
+      {
+        "id": "hsk3-l4",
+        "number": 4,
+        "titleZh": "她总是笑着跟客人说话",
+        "titleVi": "Phục vụ, thái độ, giao tiếp với khách",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "总是",
+          "笑",
+          "笑着",
+          "客人",
+          "说话"
+        ]
+      },
+      {
+        "id": "hsk3-l5",
+        "number": 5,
+        "titleZh": "我最近越来越胖了",
+        "titleVi": "Thay đổi, sức khỏe, thói quen sống",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "最近",
+          "越来越",
+          "胖",
+          "瘦",
+          "变化"
+        ]
+      },
+      {
+        "id": "hsk3-l6",
+        "number": 6,
+        "titleZh": "怎么突然找不到了",
+        "titleVi": "Tìm đồ, quên đồ, tình huống bất ngờ",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "突然",
+          "找不到",
+          "发现",
+          "记得",
+          "忘记"
+        ]
+      },
+      {
+        "id": "hsk3-l7",
+        "number": 7,
+        "titleZh": "我跟她都认识五年了",
+        "titleVi": "Quan hệ, thời gian quen biết, bạn bè",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "跟",
+          "认识",
+          "年",
+          "五年",
+          "已经"
+        ]
+      },
+      {
+        "id": "hsk3-l8",
+        "number": 8,
+        "titleZh": "你去哪儿了",
+        "titleVi": "Hỏi hành tung, việc vừa xảy ra",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "去哪儿了",
+          "半天",
+          "才",
+          "回来",
+          "打扫"
+        ]
+      },
+      {
+        "id": "hsk3-l9",
+        "number": 9,
+        "titleZh": "她的汉语说得跟中国人一样好",
+        "titleVi": "Năng lực ngôn ngữ, đánh giá trình độ",
+        "wordCount": 30,
+        "sentenceCount": 24,
+        "previewHanzi": [
+          "说得",
+          "一样",
+          "流利",
+          "发音",
+          "语法"
+        ]
+      },
+      {
+        "id": "hsk3-l10",
+        "number": 10,
+        "titleZh": "数学比历史难多了",
+        "titleVi": "Môn học, so sánh, học tập",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "数学",
+          "历史",
+          "比",
+          "难多了",
+          "容易"
+        ]
+      },
+      {
+        "id": "hsk3-l11",
+        "number": 11,
+        "titleZh": "别忘了把空调关了",
+        "titleVi": "Nhắc nhở, đồ điện, hành động trước/sau",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "别",
+          "忘了",
+          "把",
+          "空调",
+          "关"
+        ]
+      },
+      {
+        "id": "hsk3-l12",
+        "number": 12,
+        "titleZh": "把重要的东西放在我这儿吧",
+        "titleVi": "Gửi đồ, đồ quan trọng, bảo quản",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "重要",
+          "东西",
+          "放在",
+          "这儿",
+          "那儿"
+        ]
+      },
+      {
+        "id": "hsk3-l13",
+        "number": 13,
+        "titleZh": "我是走回来的",
+        "titleVi": "Cách thức di chuyển, phương tiện giao thông",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "走",
+          "走回来",
+          "骑车",
+          "坐车",
+          "开车"
+        ]
+      },
+      {
+        "id": "hsk3-l14",
+        "number": 14,
+        "titleZh": "你把水果拿过来",
+        "titleVi": "Phương hướng hành động, đồ ăn, nhà bếp",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "水果",
+          "拿过来",
+          "拿过去",
+          "带过来",
+          "带过去"
+        ]
+      },
+      {
+        "id": "hsk3-l15",
+        "number": 15,
+        "titleZh": "其他都没什么问题",
+        "titleVi": "Kiểm tra, vấn đề, góp ý, chỉnh sửa",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "其他",
+          "都",
+          "没什么",
+          "问题",
+          "主要"
+        ]
+      },
+      {
+        "id": "hsk3-l16",
+        "number": 16,
+        "titleZh": "我现在累得下了班就想睡觉",
+        "titleVi": "Mức độ, mệt mỏi, công việc và nghỉ ngơi",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "累得",
+          "下班",
+          "就",
+          "想睡觉",
+          "压力"
+        ]
+      },
+      {
+        "id": "hsk3-l17",
+        "number": 17,
+        "titleZh": "谁都有办法看好你的病",
+        "titleVi": "Sức khỏe, khám bệnh, chữa bệnh",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "谁都",
+          "办法",
+          "看好病",
+          "医院",
+          "医生"
+        ]
+      },
+      {
+        "id": "hsk3-l18",
+        "number": 18,
+        "titleZh": "我相信他们会同意的",
+        "titleVi": "Tin tưởng, đồng ý, quyết định",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "相信",
+          "他们",
+          "同意",
+          "不同意",
+          "认为"
+        ]
+      },
+      {
+        "id": "hsk3-l19",
+        "number": 19,
+        "titleZh": "你没看出来吗",
+        "titleVi": "Nhận ra, quan sát, thay đổi",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "看出来",
+          "听出来",
+          "发现",
+          "变化",
+          "样子"
+        ]
+      },
+      {
+        "id": "hsk3-l20",
+        "number": 20,
+        "titleZh": "我被他影响了",
+        "titleVi": "Bị ảnh hưởng, cảm xúc, thay đổi bản thân",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "被",
+          "影响",
+          "感动",
+          "帮助",
+          "关心"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hsk-4",
+    "level": 4,
+    "label": "HSK 4",
+    "lessonCount": 20,
+    "wordCount": 778,
+    "sentenceCount": 499,
+    "previewHanzi": [
+      "法律",
+      "俩",
+      "印象",
+      "深",
+      "熟悉",
+      "适应"
+    ],
+    "lessons": [
+      {
+        "id": "hsk4-l1",
+        "number": 1,
+        "titleZh": "简单的爱情",
+        "titleVi": "Tình yêu, tính cách, hôn nhân, cuộc sống",
+        "wordCount": 32,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "法律",
+          "俩",
+          "印象",
+          "深",
+          "熟悉"
+        ]
+      },
+      {
+        "id": "hsk4-l2",
+        "number": 2,
+        "titleZh": "真正的朋友",
+        "titleVi": "Bạn bè, tình bạn, giao tiếp, quan hệ",
+        "wordCount": 30,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "适应",
+          "交",
+          "平时",
+          "逛",
+          "短信"
+        ]
+      },
+      {
+        "id": "hsk4-l3",
+        "number": 3,
+        "titleZh": "经理对我印象不错",
+        "titleVi": "Phỏng vấn, công việc, tuyển dụng",
+        "wordCount": 31,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "挺",
+          "紧张",
+          "信心",
+          "能力",
+          "招聘"
+        ]
+      },
+      {
+        "id": "hsk4-l4",
+        "number": 4,
+        "titleZh": "不要太着急赚钱",
+        "titleVi": "Kiếm tiền, kinh nghiệm, kế hoạch, trách nhiệm",
+        "wordCount": 31,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "提",
+          "以为",
+          "份",
+          "完全",
+          "赚"
+        ]
+      },
+      {
+        "id": "hsk4-l5",
+        "number": 5,
+        "titleZh": "只买对的，不买贵的",
+        "titleVi": "Mua sắm, chất lượng, giá cả, lựa chọn",
+        "wordCount": 37,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "家具",
+          "沙发",
+          "打折",
+          "价格",
+          "质量"
+        ]
+      },
+      {
+        "id": "hsk4-l6",
+        "number": 6,
+        "titleZh": "一分钱，一分货",
+        "titleVi": "Giá cả, chất lượng, dịch vụ, mua hàng",
+        "wordCount": 43,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "果汁",
+          "售货员",
+          "袜子",
+          "打扰",
+          "竟然"
+        ]
+      },
+      {
+        "id": "hsk4-l7",
+        "number": 7,
+        "titleZh": "最好的医生是自己",
+        "titleVi": "Sức khỏe, hút thuốc, vận động",
+        "wordCount": 41,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "流血",
+          "擦",
+          "气候",
+          "估计",
+          "咳嗽"
+        ]
+      },
+      {
+        "id": "hsk4-l8",
+        "number": 8,
+        "titleZh": "生活中不缺少美",
+        "titleVi": "Cảm xúc, thái độ sống, vẻ đẹp cuộc sống",
+        "wordCount": 47,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "关于",
+          "巧克力",
+          "味道",
+          "国外",
+          "礼物"
+        ]
+      },
+      {
+        "id": "hsk4-l9",
+        "number": 9,
+        "titleZh": "阳光总在风雨后",
+        "titleVi": "Giảm cân, kiên trì, cố gắng, thành công",
+        "wordCount": 45,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "减肥",
+          "饼干",
+          "难道",
+          "减",
+          "瘦"
+        ]
+      },
+      {
+        "id": "hsk4-l10",
+        "number": 10,
+        "titleZh": "幸福的标准",
+        "titleVi": "Hạnh phúc, gia đình, công việc, giá trị sống",
+        "wordCount": 47,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "生活",
+          "情况",
+          "礼拜天",
+          "空儿",
+          "陪"
+        ]
+      },
+      {
+        "id": "hsk4-l11",
+        "number": 11,
+        "titleZh": "读书好，读好书，好读书",
+        "titleVi": "Đọc sách, học tập, phương pháp đọc",
+        "wordCount": 36,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "流利",
+          "厉害",
+          "语法",
+          "准确",
+          "词语"
+        ]
+      },
+      {
+        "id": "hsk4-l12",
+        "number": 12,
+        "titleZh": "用心发现世界",
+        "titleVi": "Quy định, kinh nghiệm, phương pháp, giao tiếp",
+        "wordCount": 44,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "规定",
+          "死",
+          "可惜",
+          "全部",
+          "也许"
+        ]
+      },
+      {
+        "id": "hsk4-l13",
+        "number": 13,
+        "titleZh": "喝着茶看京剧",
+        "titleVi": "Kinh kịch, biểu diễn, văn hóa, nghệ thuật",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "京剧",
+          "演员",
+          "观众",
+          "厚",
+          "演出"
+        ]
+      },
+      {
+        "id": "hsk4-l14",
+        "number": 14,
+        "titleZh": "保护地球母亲",
+        "titleVi": "Môi trường, khách sạn, vệ sinh, bảo vệ trái đất",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "出差",
+          "毛巾",
+          "牙膏",
+          "牙刷",
+          "箱子"
+        ]
+      },
+      {
+        "id": "hsk4-l15",
+        "number": 15,
+        "titleZh": "教育孩子的艺术",
+        "titleVi": "Giáo dục trẻ em, phương pháp dạy học, tính cách",
+        "wordCount": 33,
+        "sentenceCount": 24,
+        "previewHanzi": [
+          "左右",
+          "儿童",
+          "普遍",
+          "好动",
+          "年龄"
+        ]
+      },
+      {
+        "id": "hsk4-l16",
+        "number": 16,
+        "titleZh": "生活可以更美好",
+        "titleVi": "Du học, thủ tục, tự tin, thái độ học tập",
+        "wordCount": 39,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "博士",
+          "签证",
+          "报名",
+          "表格",
+          "传真"
+        ]
+      },
+      {
+        "id": "hsk4-l17",
+        "number": 17,
+        "titleZh": "人与自然",
+        "titleVi": "Thiên nhiên, động vật, xã hội, cạnh tranh",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "凉快",
+          "热闹",
+          "云",
+          "广播",
+          "照"
+        ]
+      },
+      {
+        "id": "hsk4-l18",
+        "number": 18,
+        "titleZh": "科技与世界",
+        "titleVi": "Công nghệ, giao thông, thông tin, an toàn",
+        "wordCount": 38,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "降落",
+          "火",
+          "作者",
+          "交通",
+          "技术"
+        ]
+      },
+      {
+        "id": "hsk4-l19",
+        "number": 19,
+        "titleZh": "生活的味道",
+        "titleVi": "Đời sống, hồ sơ, thuê nhà, thể thao, sinh hoạt",
+        "wordCount": 42,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "学期",
+          "出生",
+          "性别",
+          "道歉",
+          "打印"
+        ]
+      },
+      {
+        "id": "hsk4-l20",
+        "number": 20,
+        "titleZh": "路上的风景",
+        "titleVi": "Du lịch, chuyến bay, món ăn, ký ức, hành trình",
+        "wordCount": 42,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "加油站",
+          "航班",
+          "推迟",
+          "高速公路",
+          "登机牌"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hsk-5",
+    "level": 5,
+    "label": "HSK 5",
+    "lessonCount": 36,
+    "wordCount": 1262,
+    "sentenceCount": 900,
+    "previewHanzi": [
+      "细节",
+      "电台",
+      "恩爱",
+      "对比",
+      "入围",
+      "串"
+    ],
+    "lessons": [
+      {
+        "id": "hsk5-l1",
+        "number": 1,
+        "titleZh": "爱的细节",
+        "titleVi": "Tình yêu, hôn nhân, sự quan tâm nhỏ trong cuộc sống",
+        "wordCount": 47,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "细节",
+          "电台",
+          "恩爱",
+          "对比",
+          "入围"
+        ]
+      },
+      {
+        "id": "hsk5-l2",
+        "number": 2,
+        "titleZh": "留串钥匙给父母",
+        "titleVi": "Cha mẹ, gia đình, sự quan tâm",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "串",
+          "钥匙",
+          "父母",
+          "留",
+          "操心"
+        ]
+      },
+      {
+        "id": "hsk5-l3",
+        "number": 3,
+        "titleZh": "人生有选择，一切可改变",
+        "titleVi": "Lựa chọn, thay đổi, cuộc đời",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "人生",
+          "选择",
+          "改变",
+          "命运",
+          "机会"
+        ]
+      },
+      {
+        "id": "hsk5-l4",
+        "number": 4,
+        "titleZh": "子路背米",
+        "titleVi": "Hiếu thảo, câu chuyện truyền thống, đạo đức",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "背",
+          "米",
+          "孝顺",
+          "古代",
+          "贫穷"
+        ]
+      },
+      {
+        "id": "hsk5-l5",
+        "number": 5,
+        "titleZh": "济南的泉水",
+        "titleVi": "Phong cảnh, suối, thành phố, du lịch",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "济南",
+          "泉水",
+          "泉",
+          "著名",
+          "风景"
+        ]
+      },
+      {
+        "id": "hsk5-l6",
+        "number": 6,
+        "titleZh": "除夕的由来",
+        "titleVi": "Lễ Tết, phong tục, truyền thuyết",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "除夕",
+          "由来",
+          "春节",
+          "传说",
+          "怪兽"
+        ]
+      },
+      {
+        "id": "hsk5-l7",
+        "number": 7,
+        "titleZh": "成语故事两则",
+        "titleVi": "Thành ngữ, câu chuyện, bài học",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "成语",
+          "则",
+          "寓言",
+          "道理",
+          "讽刺"
+        ]
+      },
+      {
+        "id": "hsk5-l8",
+        "number": 8,
+        "titleZh": "“朝三暮四”的古今义",
+        "titleVi": "Thành ngữ, nghĩa cổ và nghĩa hiện đại",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "朝三暮四",
+          "古今",
+          "义",
+          "古代",
+          "现代"
+        ]
+      },
+      {
+        "id": "hsk5-l9",
+        "number": 9,
+        "titleZh": "别样鲁迅",
+        "titleVi": "Nhà văn, nhân vật văn hóa, cách nhìn khác",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "鲁迅",
+          "别样",
+          "作家",
+          "文学",
+          "作品"
+        ]
+      },
+      {
+        "id": "hsk5-l10",
+        "number": 10,
+        "titleZh": "争论的奇迹",
+        "titleVi": "Tranh luận, giao tiếp, quan điểm, kỳ tích",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "争论",
+          "奇迹",
+          "观点",
+          "反对",
+          "支持"
+        ]
+      },
+      {
+        "id": "hsk5-l11",
+        "number": 11,
+        "titleZh": "闹钟的危害",
+        "titleVi": "Đồng hồ báo thức, giấc ngủ, sức khỏe",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "闹钟",
+          "危害",
+          "睡眠",
+          "打扰",
+          "突然"
+        ]
+      },
+      {
+        "id": "hsk5-l12",
+        "number": 12,
+        "titleZh": "海外用户玩儿微信",
+        "titleVi": "WeChat, người dùng nước ngoài, mạng xã hội",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "海外",
+          "用户",
+          "微信",
+          "社交",
+          "功能"
+        ]
+      },
+      {
+        "id": "hsk5-l13",
+        "number": 13,
+        "titleZh": "锯掉生活的“筐底”",
+        "titleVi": "Gánh nặng, thói quen, thay đổi cuộc sống",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "锯",
+          "掉",
+          "生活",
+          "筐",
+          "底"
+        ]
+      },
+      {
+        "id": "hsk5-l14",
+        "number": 14,
+        "titleZh": "北京的四合院",
+        "titleVi": "Kiến trúc, Bắc Kinh, nhà truyền thống",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "北京",
+          "四合院",
+          "建筑",
+          "传统",
+          "院子"
+        ]
+      },
+      {
+        "id": "hsk5-l15",
+        "number": 15,
+        "titleZh": "纸上谈兵",
+        "titleVi": "Lý thuyết và thực tế, chiến lược, kinh nghiệm",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "纸上谈兵",
+          "理论",
+          "实践",
+          "经验",
+          "战争"
+        ]
+      },
+      {
+        "id": "hsk5-l16",
+        "number": 16,
+        "titleZh": "体重与节食",
+        "titleVi": "Cân nặng, ăn kiêng, sức khỏe",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "体重",
+          "节食",
+          "减肥",
+          "肥胖",
+          "瘦"
+        ]
+      },
+      {
+        "id": "hsk5-l17",
+        "number": 17,
+        "titleZh": "在最美好的时刻离开",
+        "titleVi": "Rời đi, thời khắc đẹp, lựa chọn",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "时刻",
+          "离开",
+          "美好",
+          "结束",
+          "回忆"
+        ]
+      },
+      {
+        "id": "hsk5-l18",
+        "number": 18,
+        "titleZh": "抽象艺术美不美",
+        "titleVi": "Nghệ thuật trừu tượng, thẩm mỹ, quan điểm",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "抽象",
+          "艺术",
+          "美",
+          "欣赏",
+          "作品"
+        ]
+      },
+      {
+        "id": "hsk5-l19",
+        "number": 19,
+        "titleZh": "家乡的萝卜饼",
+        "titleVi": "Quê hương, món ăn, ký ức",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "家乡",
+          "萝卜",
+          "萝卜饼",
+          "众多",
+          "怀念"
+        ]
+      },
+      {
+        "id": "hsk5-l20",
+        "number": 20,
+        "titleZh": "小人书摊",
+        "titleVi": "Truyện tranh cũ, ký ức tuổi thơ, quầy sách",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "小人书",
+          "摊",
+          "书摊",
+          "连环画",
+          "租"
+        ]
+      },
+      {
+        "id": "hsk5-l21",
+        "number": 21,
+        "titleZh": "汉字叔叔：一个美国人的汉字情缘",
+        "titleVi": "Hán tự, người nước ngoài học chữ Hán, đam mê văn hóa",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "汉字",
+          "叔叔",
+          "美国人",
+          "情缘",
+          "字形"
+        ]
+      },
+      {
+        "id": "hsk5-l22",
+        "number": 22,
+        "titleZh": "阅读与思考",
+        "titleVi": "Đọc hiểu, tư duy, học tập",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "阅读",
+          "思考",
+          "理解",
+          "观点",
+          "作者"
+        ]
+      },
+      {
+        "id": "hsk5-l23",
+        "number": 23,
+        "titleZh": "放手",
+        "titleVi": "Buông tay, giáo dục, trưởng thành, tự lập",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "放手",
+          "成长",
+          "独立",
+          "依赖",
+          "父母"
+        ]
+      },
+      {
+        "id": "hsk5-l24",
+        "number": 24,
+        "titleZh": "支教行动",
+        "titleVi": "Tình nguyện dạy học, vùng khó khăn, giáo dục",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "支教",
+          "行动",
+          "志愿者",
+          "农村",
+          "山区"
+        ]
+      },
+      {
+        "id": "hsk5-l25",
+        "number": 25,
+        "titleZh": "给自己加满水",
+        "titleVi": "Học tập suốt đời, bổ sung năng lượng, phát triển bản thân",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "加满",
+          "知识",
+          "能力",
+          "学习",
+          "成长"
+        ]
+      },
+      {
+        "id": "hsk5-l26",
+        "number": 26,
+        "titleZh": "你属于哪一种“忙”",
+        "titleVi": "Bận rộn, quản lý thời gian, hiệu suất",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "属于",
+          "忙",
+          "种",
+          "效率",
+          "时间"
+        ]
+      },
+      {
+        "id": "hsk5-l27",
+        "number": 27,
+        "titleZh": "下棋",
+        "titleVi": "Cờ, chiến lược, suy nghĩ",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "下棋",
+          "棋",
+          "象棋",
+          "围棋",
+          "棋子"
+        ]
+      },
+      {
+        "id": "hsk5-l28",
+        "number": 28,
+        "titleZh": "最受欢迎的毕业生",
+        "titleVi": "Sinh viên tốt nghiệp, việc làm, năng lực",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "受欢迎",
+          "毕业生",
+          "招聘",
+          "面试",
+          "简历"
+        ]
+      },
+      {
+        "id": "hsk5-l29",
+        "number": 29,
+        "titleZh": "培养对手",
+        "titleVi": "Đối thủ, cạnh tranh, phát triển",
+        "wordCount": 25,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "培养",
+          "对手",
+          "竞争",
+          "进步",
+          "压力"
+        ]
+      },
+      {
+        "id": "hsk5-l30",
+        "number": 30,
+        "titleZh": "竞争让市场更高效",
+        "titleVi": "Thị trường, cạnh tranh, hiệu suất",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "竞争",
+          "市场",
+          "高效",
+          "效率",
+          "企业"
+        ]
+      },
+      {
+        "id": "hsk5-l31",
+        "number": 31,
+        "titleZh": "登门槛效应",
+        "titleVi": "Tâm lý học, hiệu ứng thuyết phục, hành vi",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "登门槛效应",
+          "门槛",
+          "效应",
+          "心理",
+          "请求"
+        ]
+      },
+      {
+        "id": "hsk5-l32",
+        "number": 32,
+        "titleZh": "身边的环保",
+        "titleVi": "Bảo vệ môi trường quanh ta",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "身边",
+          "环保",
+          "环境",
+          "保护",
+          "污染"
+        ]
+      },
+      {
+        "id": "hsk5-l33",
+        "number": 33,
+        "titleZh": "以堵治堵——缓解交通有妙招",
+        "titleVi": "Giao thông, tắc đường, giải pháp",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "以堵治堵",
+          "缓解",
+          "交通",
+          "妙招",
+          "堵车"
+        ]
+      },
+      {
+        "id": "hsk5-l34",
+        "number": 34,
+        "titleZh": "鸟儿的护肤术",
+        "titleVi": "Chim, sinh tồn, lông vũ, tự nhiên",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "鸟儿",
+          "护肤",
+          "术",
+          "羽毛",
+          "皮肤"
+        ]
+      },
+      {
+        "id": "hsk5-l35",
+        "number": 35,
+        "titleZh": "植物会出汗",
+        "titleVi": "Thực vật, tự nhiên, thoát hơi nước",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "植物",
+          "出汗",
+          "蒸发",
+          "水分",
+          "叶子"
+        ]
+      },
+      {
+        "id": "hsk5-l36",
+        "number": 36,
+        "titleZh": "老舍与养花",
+        "titleVi": "Lão Xá, trồng hoa, sở thích, cuộc sống",
+        "wordCount": 35,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "老舍",
+          "养花",
+          "作家",
+          "爱好",
+          "花草"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hsk-6",
+    "level": 6,
+    "label": "HSK 6",
+    "lessonCount": 40,
+    "wordCount": 1615,
+    "sentenceCount": 750,
+    "previewHanzi": [
+      "启示",
+      "照看",
+      "爽快",
+      "独生女",
+      "朝夕相处",
+      "父母之爱"
+    ],
+    "lessons": [
+      {
+        "id": "hsk6-l1",
+        "number": 1,
+        "titleZh": "孩子给我们的启示",
+        "titleVi": "孩子给我们的启示",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "启示",
+          "照看",
+          "爽快",
+          "独生女",
+          "朝夕相处"
+        ]
+      },
+      {
+        "id": "hsk6-l2",
+        "number": 2,
+        "titleZh": "父母之爱",
+        "titleVi": "父母之爱",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "父母之爱",
+          "无私",
+          "奉献",
+          "牺牲",
+          "呵护"
+        ]
+      },
+      {
+        "id": "hsk6-l3",
+        "number": 3,
+        "titleZh": "一盒月饼",
+        "titleVi": "一盒月饼",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "月饼",
+          "中秋节",
+          "团圆",
+          "礼盒",
+          "包装"
+        ]
+      },
+      {
+        "id": "hsk6-l4",
+        "number": 4,
+        "titleZh": "完美的胜利",
+        "titleVi": "完美的胜利",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "完美",
+          "胜利",
+          "比赛",
+          "冠军",
+          "对手"
+        ]
+      },
+      {
+        "id": "hsk6-l5",
+        "number": 5,
+        "titleZh": "学一门外语需要理由吗",
+        "titleVi": "学一门外语需要理由吗",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "外语",
+          "理由",
+          "修养",
+          "接连不断",
+          "发问"
+        ]
+      },
+      {
+        "id": "hsk6-l6",
+        "number": 6,
+        "titleZh": "当好职场插班生",
+        "titleVi": "当好职场插班生",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "职场",
+          "插班生",
+          "领导",
+          "分配",
+          "业务"
+        ]
+      },
+      {
+        "id": "hsk6-l7",
+        "number": 7,
+        "titleZh": "我的人生我做主",
+        "titleVi": "我的人生我做主",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "做主",
+          "伤脑筋",
+          "会计",
+          "打交道",
+          "枯燥"
+        ]
+      },
+      {
+        "id": "hsk6-l8",
+        "number": 8,
+        "titleZh": "遇见原来的我",
+        "titleVi": "遇见原来的我",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "遇见",
+          "原来",
+          "自我",
+          "回忆",
+          "童年"
+        ]
+      },
+      {
+        "id": "hsk6-l9",
+        "number": 9,
+        "titleZh": "不用手机的日子",
+        "titleVi": "不用手机的日子",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "手机",
+          "依赖",
+          "离不开",
+          "断网",
+          "焦虑"
+        ]
+      },
+      {
+        "id": "hsk6-l10",
+        "number": 10,
+        "titleZh": "全球化视野中的中国饮食",
+        "titleVi": "全球化视野中的中国饮食",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "全球化",
+          "视野",
+          "饮食",
+          "中餐",
+          "西餐"
+        ]
+      },
+      {
+        "id": "hsk6-l11",
+        "number": 11,
+        "titleZh": "我不在时，猫在干什么",
+        "titleVi": "我不在时，猫在干什么",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "饲养员",
+          "伺候",
+          "猫舍",
+          "流浪猫",
+          "拜访"
+        ]
+      },
+      {
+        "id": "hsk6-l12",
+        "number": 12,
+        "titleZh": "我们都爱白噪音",
+        "titleVi": "我们都爱白噪音",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "白噪音",
+          "嘈杂",
+          "莫名其妙",
+          "寂静",
+          "自然选择"
+        ]
+      },
+      {
+        "id": "hsk6-l13",
+        "number": 13,
+        "titleZh": "从旅游指南看世事变迁",
+        "titleVi": "从旅游指南看世事变迁",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "旅游指南",
+          "世事",
+          "变迁",
+          "版本",
+          "出版"
+        ]
+      },
+      {
+        "id": "hsk6-l14",
+        "number": 14,
+        "titleZh": "背着电饭锅拍北极",
+        "titleVi": "背着电饭锅拍北极",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "电饭锅",
+          "北极",
+          "摄影",
+          "拍摄",
+          "极地"
+        ]
+      },
+      {
+        "id": "hsk6-l15",
+        "number": 15,
+        "titleZh": "山脉上的雕刻",
+        "titleVi": "山脉上的雕刻",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "山脉",
+          "雕刻",
+          "梯田",
+          "干旱",
+          "耕地"
+        ]
+      },
+      {
+        "id": "hsk6-l16",
+        "number": 16,
+        "titleZh": "徐健和他们的野生动物摄影师们",
+        "titleVi": "徐健和他们的野生动物摄影师们",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "野生动物",
+          "摄影师",
+          "领袖人物",
+          "创始人",
+          "大熊猫"
+        ]
+      },
+      {
+        "id": "hsk6-l17",
+        "number": 17,
+        "titleZh": "小动物眼中的慢世界",
+        "titleVi": "小动物眼中的慢世界",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "小动物",
+          "慢世界",
+          "感知",
+          "时间感",
+          "视觉"
+        ]
+      },
+      {
+        "id": "hsk6-l18",
+        "number": 18,
+        "titleZh": "神奇的丝瓜",
+        "titleVi": "神奇的丝瓜",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "丝瓜",
+          "神奇",
+          "藤",
+          "缠绕",
+          "生长"
+        ]
+      },
+      {
+        "id": "hsk6-l19",
+        "number": 19,
+        "titleZh": "无阳光的深海世界",
+        "titleVi": "无阳光的深海世界",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "阳光",
+          "深海",
+          "海底",
+          "黑暗",
+          "压力"
+        ]
+      },
+      {
+        "id": "hsk6-l20",
+        "number": 20,
+        "titleZh": "金鸡窝",
+        "titleVi": "金鸡窝",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "金鸡窝",
+          "传说",
+          "村庄",
+          "财富",
+          "贪心"
+        ]
+      },
+      {
+        "id": "hsk6-l21",
+        "number": 21,
+        "titleZh": "未来商店",
+        "titleVi": "未来商店",
+        "wordCount": 40,
+        "sentenceCount": 0,
+        "previewHanzi": [
+          "未来商店",
+          "网络购物",
+          "急剧",
+          "川流不息",
+          "登录"
+        ]
+      },
+      {
+        "id": "hsk6-l22",
+        "number": 22,
+        "titleZh": "2050年的汽车什么样",
+        "titleVi": "2050年的汽车什么样",
+        "wordCount": 40,
+        "sentenceCount": 0,
+        "previewHanzi": [
+          "汽车",
+          "干预",
+          "平坦",
+          "高速路",
+          "奔驰"
+        ]
+      },
+      {
+        "id": "hsk6-l23",
+        "number": 23,
+        "titleZh": "大数据时代",
+        "titleVi": "大数据时代",
+        "wordCount": 40,
+        "sentenceCount": 0,
+        "previewHanzi": [
+          "大数据",
+          "时代",
+          "数据",
+          "采集",
+          "分析"
+        ]
+      },
+      {
+        "id": "hsk6-l24",
+        "number": 24,
+        "titleZh": "体育明星们的离奇遭遇",
+        "titleVi": "体育明星们的离奇遭遇",
+        "wordCount": 40,
+        "sentenceCount": 0,
+        "previewHanzi": [
+          "体育明星",
+          "离奇",
+          "遭遇",
+          "运动员",
+          "比赛成绩"
+        ]
+      },
+      {
+        "id": "hsk6-l25",
+        "number": 25,
+        "titleZh": "草船借箭",
+        "titleVi": "草船借箭",
+        "wordCount": 40,
+        "sentenceCount": 0,
+        "previewHanzi": [
+          "草船借箭",
+          "诸葛亮",
+          "周瑜",
+          "曹操",
+          "三国"
+        ]
+      },
+      {
+        "id": "hsk6-l26",
+        "number": 26,
+        "titleZh": "奇异的灯光",
+        "titleVi": "奇异的灯光",
+        "wordCount": 40,
+        "sentenceCount": 0,
+        "previewHanzi": [
+          "奇异",
+          "灯光",
+          "动画片",
+          "破旧",
+          "自行车"
+        ]
+      },
+      {
+        "id": "hsk6-l27",
+        "number": 27,
+        "titleZh": "完璧归赵",
+        "titleVi": "完璧归赵",
+        "wordCount": 40,
+        "sentenceCount": 0,
+        "previewHanzi": [
+          "完璧归赵",
+          "战国",
+          "秦国",
+          "赵国",
+          "秦王"
+        ]
+      },
+      {
+        "id": "hsk6-l28",
+        "number": 28,
+        "titleZh": "高山流水遇知音",
+        "titleVi": "高山流水遇知音",
+        "wordCount": 55,
+        "sentenceCount": 0,
+        "previewHanzi": [
+          "高山流水",
+          "知音",
+          "伯牙",
+          "钟子期",
+          "古琴"
+        ]
+      },
+      {
+        "id": "hsk6-l29",
+        "number": 29,
+        "titleZh": "“笑”的备忘录",
+        "titleVi": "“笑”的备忘录",
+        "wordCount": 40,
+        "sentenceCount": 0,
+        "previewHanzi": [
+          "笑",
+          "备忘录",
+          "预先",
+          "通知",
+          "糊涂"
+        ]
+      },
+      {
+        "id": "hsk6-l30",
+        "number": 30,
+        "titleZh": "你睡好了吗",
+        "titleVi": "你睡好了吗",
+        "wordCount": 40,
+        "sentenceCount": 0,
+        "previewHanzi": [
+          "睡眠",
+          "睡好",
+          "失眠",
+          "做梦",
+          "深睡"
+        ]
+      },
+      {
+        "id": "hsk6-l31",
+        "number": 31,
+        "titleZh": "运动的学问",
+        "titleVi": "运动的学问",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "运动",
+          "学问",
+          "锻炼",
+          "肌肉",
+          "关节"
+        ]
+      },
+      {
+        "id": "hsk6-l32",
+        "number": 32,
+        "titleZh": "有时，不妨悲伤",
+        "titleVi": "有时，不妨悲伤",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "不妨",
+          "悲伤",
+          "情绪",
+          "压抑",
+          "释放"
+        ]
+      },
+      {
+        "id": "hsk6-l33",
+        "number": 33,
+        "titleZh": "怀念慢生活",
+        "titleVi": "怀念慢生活",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "怀念",
+          "慢生活",
+          "节奏",
+          "匆忙",
+          "悠闲"
+        ]
+      },
+      {
+        "id": "hsk6-l34",
+        "number": 34,
+        "titleZh": "为文物而生的人",
+        "titleVi": "为文物而生的人",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "文物",
+          "修复",
+          "保护",
+          "博物馆",
+          "专家"
+        ]
+      },
+      {
+        "id": "hsk6-l35",
+        "number": 35,
+        "titleZh": "走近木版年画",
+        "titleVi": "走近木版年画",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "木版年画",
+          "年画",
+          "木版",
+          "雕版",
+          "印刷"
+        ]
+      },
+      {
+        "id": "hsk6-l36",
+        "number": 36,
+        "titleZh": "中国古代书院",
+        "titleVi": "中国古代书院",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "书院",
+          "古代",
+          "教育",
+          "学者",
+          "讲学"
+        ]
+      },
+      {
+        "id": "hsk6-l37",
+        "number": 37,
+        "titleZh": "警察的故事",
+        "titleVi": "警察的故事",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "警察",
+          "故事",
+          "民警",
+          "任务",
+          "案件"
+        ]
+      },
+      {
+        "id": "hsk6-l38",
+        "number": 38,
+        "titleZh": "慧眼捕捉商机",
+        "titleVi": "慧眼捕捉商机",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "慧眼",
+          "捕捉",
+          "商机",
+          "市场",
+          "创业"
+        ]
+      },
+      {
+        "id": "hsk6-l39",
+        "number": 39,
+        "titleZh": "互联网时代的生活",
+        "titleVi": "互联网时代的生活",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "互联网",
+          "时代",
+          "生活方式",
+          "网络",
+          "信息"
+        ]
+      },
+      {
+        "id": "hsk6-l40",
+        "number": 40,
+        "titleZh": "人类超能力会改变世界纪录吗",
+        "titleVi": "人类超能力会改变世界纪录吗",
+        "wordCount": 40,
+        "sentenceCount": 25,
+        "previewHanzi": [
+          "人类",
+          "超能力",
+          "世界纪录",
+          "打破",
+          "国际田联"
+        ]
+      }
+    ]
+  }
+]

@@ -460,6 +460,9 @@ test("games route renders the new Himi slice game and six video-inspired activit
   assert.match(game, /bamboo-slice-burst\.webp/);
   assert.match(game, /normalizeAnswer/);
   assert.match(game, /handleCorrect/);
+  assert.match(game, /window\.visualViewport/);
+  assert.match(game, /--writing-session-height/);
+  assert.match(game, /--writing-keyboard-offset/);
   assert.match(game, /speechSynthesis/);
   assert.match(game, /writing-game-back/);
   assert.match(hskSession, /writing-course-selection-page/);
@@ -492,6 +495,8 @@ test("games route renders the new Himi slice game and six video-inspired activit
   assert.match(styles, /@keyframes writing-penguin-cape-flutter/);
   assert.match(styles, /@keyframes writing-slice-impact/);
   assert.match(styles, /@keyframes writing-slice-left/);
+  assert.match(styles, /height: var\(--writing-session-height, 100svh\);/);
+  assert.match(styles, /translate3d\(0, calc\(-1 \* var\(--writing-keyboard-offset, 0px\)\), 0\)/);
   assert.equal((content.match(/id: "/g) ?? []).length, 12);
 });
 
@@ -546,7 +551,7 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   assert.match(legacyPractice, /redirect/);
   assert.match(practice, /HimiWritingStudio/);
   assert.match(practice, /notFound/);
-  assert.match(practice, /getCurrentUser/);
+  assert.match(practice, /requireLearnerUser/);
   assert.match(practice, /getHskLessonPageData/);
   assert.match(practice, /getWritingTopicFromLesson/);
   assert.match(studio, /topic\.characters/);

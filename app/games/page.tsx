@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { GameCenter } from "@/components/game-center";
-import { emptyGameProgress, isGameId } from "@/lib/activity-progress";
+import { isGameId } from "@/lib/activity-progress";
 import { getGameProgress } from "@/lib/activity-progress-repository";
-import { getCurrentUser } from "@/lib/auth-session";
+import { requireLearnerUser } from "@/lib/learner-auth";
 
 export const metadata: Metadata = {
   title: "Trò chơi luyện tiếng Trung",
@@ -14,12 +14,17 @@ export default async function GamesPage({
 }: {
   searchParams: Promise<{ game?: string | string[]; session?: string | string[] }>;
 }) {
-  const [{ game, session }, user] = await Promise.all([searchParams, getCurrentUser()]);
+  const { game, session } = await searchParams;
   const requestedGameId = Array.isArray(game) ? game[0] : game;
   const dailyFlow = (Array.isArray(session) ? session[0] : session) === "today";
-  const progress = user ? await getGameProgress(user.id) : emptyGameProgress;
+  const returnParams = new URLSearchParams();
+  if (requestedGameId) returnParams.set("game", requestedGameId);
+  if (dailyFlow) returnParams.set("session", "today");
+  const returnTo = `/games${returnParams.size ? `?${returnParams}` : ""}`;
+  const user = await requireLearnerUser(returnTo);
+  const progress = await getGameProgress(user.id);
   return <GameCenter
-    authenticated={Boolean(user)}
+    authenticated
     dailyFlow={dailyFlow}
     initialGameId={isGameId(requestedGameId) ? requestedGameId : null}
     initialProgress={progress}

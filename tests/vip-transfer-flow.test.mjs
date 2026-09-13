@@ -39,6 +39,9 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(transferFlow, /<h2 id=\{titleId\}>Quét QR chuyển khoản<\/h2>/);
   assert.match(transferFlow, /fetch\("\/api\/payments\/sepay\/orders"/);
   assert.match(transferFlow, /\/api\/payments\/sepay\/orders\/\$\{pollingOrderId\}/);
+  assert.match(transferFlow, /readPaymentResponse/);
+  assert.match(transferFlow, /payment_service_unavailable/);
+  assert.doesNotMatch(transferFlow, /response\.json\(\)/);
   assert.match(transferFlow, /Đang chờ SePay xác nhận/);
   assert.match(transferFlow, /Chào mừng thành viên/);
   assert.match(transferFlow, /Thanh toán hoàn tất/);
@@ -56,12 +59,15 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(subscriptionService, /calculateVipPlanEndsAt/);
   assert.match(subscriptionService, /endsAt: endsAt\?\.toISOString\(\) \?\? null/);
   assert.match(paymentService, /accessEndsAt: subscriptions\.endsAt/);
+  assert.match(paymentService, /select\(\{ id: paymentOrders\.id \}\)\.from\(paymentOrders\)[\s\S]*?\.for\("update"\)/);
+  assert.doesNotMatch(paymentService, /const existingRows = await tx\.select\([\s\S]*?\.leftJoin\(subscriptions[\s\S]*?\.for\("update"\)/);
   assert.match(paymentService, /VIP đã được kích hoạt/);
   assert.doesNotMatch(transferFlow, /requestVipActivationAction|name="userNote"/);
   assert.match(webhookRoute, /authenticateSepayWebhook/);
   assert.match(webhookRoute, /processSepayWebhook/);
   assert.match(webhookRoute, /success: true/);
   assert.match(orderRoute, /createOrReuseSepayPaymentOrder/);
+  assert.match(orderRoute, /payment_service_unavailable/);
   assert.match(styles, /\.vip-plan-request-form \.button:hover:not\(:disabled\)[\s\S]*translateY\(-3px\)/);
   assert.match(styles, /\.vip-plan-request-form \.button:active:not\(:disabled\)/);
   assert.match(styles, /prefers-reduced-motion: reduce/);

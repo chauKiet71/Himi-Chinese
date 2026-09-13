@@ -71,10 +71,12 @@ async function fetchCatalogLesson(lessonId: string, signal?: AbortSignal): Promi
 }
 
 export function ListeningCatalogStudio({
+  authenticated,
   initialGroupId,
   initialLessonId,
   modeSwitcher,
 }: {
+  authenticated: boolean;
   initialGroupId?: string;
   initialLessonId?: string;
   modeSwitcher?: ReactNode;
@@ -277,6 +279,11 @@ export function ListeningCatalogStudio({
   }
 
   async function openLesson(summary: ListeningCatalogLessonSummary) {
+    if (!authenticated) {
+      const returnTo = `/listening?lesson=${encodeURIComponent(summary.id)}`;
+      window.location.assign(`/login?error=required&returnTo=${encodeURIComponent(returnTo)}`);
+      return;
+    }
     setLessonLoadingId(summary.id);
     setLessonError("");
     try {

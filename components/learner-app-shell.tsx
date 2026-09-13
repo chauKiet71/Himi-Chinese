@@ -18,6 +18,7 @@ import {
   Crown,
   Gamepad2,
   Home,
+  Keyboard,
   Layers3,
   LogOut,
   PenLine,
@@ -53,6 +54,7 @@ const learnerRailItems = [
 ];
 
 const learnerPracticeItems = [
+  { href: "/typing", label: "Luyện gõ", icon: Keyboard, matches: (pathname: string) => pathname.startsWith("/typing") },
   { href: "/writing", label: "Luyện viết", icon: PenLine, matches: (pathname: string) => pathname.startsWith("/writing") },
   { href: "/listening", label: "Luyện nghe", icon: AudioLines, matches: (pathname: string) => pathname.startsWith("/listening") || pathname.startsWith("/practice") },
   { href: "/videos", label: "Video", icon: Clapperboard, matches: (pathname: string) => pathname.startsWith("/videos") },

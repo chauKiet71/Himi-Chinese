@@ -2,9 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { LessonWorkspace } from "@/components/lesson-workspace";
-import { getCurrentUser } from "@/lib/auth-session";
 import { listPublishedCourses } from "@/lib/course-repository";
 import { getDailySessionSource } from "@/lib/daily-session-repository";
+import { requireLearnerUser } from "@/lib/learner-auth";
 import { getLessonPageData } from "@/lib/lesson-repository";
 
 export async function generateStaticParams() {
@@ -19,11 +19,16 @@ export default async function LearnPage({
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ lesson?: string; session?: string }>;
 }) {
-  const [{ slug }, { lesson: lessonSlug, session }, user] = await Promise.all([params, searchParams, getCurrentUser()]);
+  const [{ slug }, { lesson: lessonSlug, session }] = await Promise.all([params, searchParams]);
+  const returnParams = new URLSearchParams();
+  if (lessonSlug) returnParams.set("lesson", lessonSlug);
+  if (session) returnParams.set("session", session);
+  const returnTo = `/learn/${encodeURIComponent(slug)}${returnParams.size ? `?${returnParams}` : ""}`;
+  const user = await requireLearnerUser(returnTo);
   const dailyFlow = session === "today";
   const [data, dailySource] = await Promise.all([
-    getLessonPageData({ courseSlug: slug, lessonSlug, userId: user?.id ?? null }),
-    dailyFlow ? getDailySessionSource(user?.id ?? null) : Promise.resolve(null),
+    getLessonPageData({ courseSlug: slug, lessonSlug, userId: user.id }),
+    dailyFlow ? getDailySessionSource(user.id) : Promise.resolve(null),
   ]);
   if (!data || data.invalidLesson) notFound();
   const dailyNextStep = !dailySource
@@ -43,7 +48,7 @@ export default async function LearnPage({
         lesson={data.lesson}
         access={data.access}
         progress={data.progress}
-        authenticated={Boolean(user)}
+        authenticated
         dailyFlow={dailyFlow}
         dailyNextStep={dailyNextStep}
         key={data.lesson.slug}
