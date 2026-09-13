@@ -10,18 +10,23 @@ test("vocabulary library renders saved learning words and a working study CTA", 
   const component = await readFile(componentPath, "utf8");
   const stylesheet = await readFile(stylesheetPath, "utf8");
 
-  assert.match(component, /> Từ đã lưu <span>/);
-  assert.match(component, /Danh sách từ vựng/);
+  assert.match(component, /THƯ VIỆN CỦA BẠN/);
+  assert.match(component, /Từ đã lưu/);
+  assert.match(component, /THEO NGUỒN HỌC/);
+  assert.match(component, /sourceOptions/);
   assert.match(component, /Những từ bạn đã lưu khi học HSK và Giao tiếp/);
-  assert.match(component, /vsets-saved-grid/);
+  assert.match(component, /vsets-saved-table/);
   assert.match(component, /word\.hanzi/);
   assert.match(component, /word\.pinyin/);
   assert.match(component, /word\.meaning/);
   assert.match(component, /> Bắt đầu học /);
   assert.match(component, /\/vocabulary\/saved\/study\/vocabulary/);
-  assert.doesNotMatch(component, /vsets-search|Tìm bộ từ vựng/);
+  assert.match(component, /vsets-search/);
+  assert.match(component, /Tìm theo Hán tự, pinyin hoặc nghĩa/);
+  assert.doesNotMatch(component, /Bộ có sẵn|builtins/);
   assert.match(stylesheet, /\.vsets-page \.vsets-start-learning/);
-  assert.match(stylesheet, /\.vsets-saved-grid/);
+  assert.match(stylesheet, /\.vsets-library-shell/);
+  assert.match(stylesheet, /\.vsets-saved-table/);
   assert.match(stylesheet, /--vs-primary: var\(--himi-red\)/);
   assert.match(stylesheet, /--vs-accent: var\(--himi-orange\)/);
   assert.match(stylesheet, /background: var\(--vs-primary\)/);
