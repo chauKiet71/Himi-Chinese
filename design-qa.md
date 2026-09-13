@@ -46,6 +46,120 @@ final result: passed
 
 ---
 
+## Sân khấu bài học Himi — vòng chỉnh theo phản hồi — 2026-09-13
+
+### Comparison target
+
+- Source visual truth — Từ vựng: `C:\Users\Windows\.codex\generated_images\019fbcdf-0a4e-7e50-b4e5-6afe7348a043\exec-49b0ef62-9fd5-4c74-967b-65afb3b6a731.png` (1487 × 1058 px).
+- Source visual truth — Cụm từ: `C:\Users\Windows\.codex\generated_images\019fbcdf-0a4e-7e50-b4e5-6afe7348a043\exec-32c578d6-d2ed-48f9-99a5-ce4a81befc2c.png` (1487 × 1058 px).
+- Source visual truth — Nghe & nói: `C:\Users\Windows\.codex\generated_images\019fbcdf-0a4e-7e50-b4e5-6afe7348a043\exec-77258402-7f6b-4a42-ba70-4fb610f42127.png` (1487 × 1058 px).
+- Latest negative constraint: `C:\Users\Windows\AppData\Local\Temp\codex-clipboard-685b405b-862b-425e-9a91-69337c53bbcb.png`; remove the `Chưa rõ / Cần ôn / Đã hiểu` rating controls even though they remain visible in the older source boards.
+- Implementation route: `http://localhost:3001/learn/van-phong-hanh-chinh?lesson=nhan-va-giao-nhiem-vu`.
+- Browser screenshots: `qa-artifacts/lesson-stage-final-vocab-1200.png`, `qa-artifacts/lesson-stage-final-phrases-1200.png`, and `qa-artifacts/lesson-stage-final-pronunciation-1200.png` (each 1440 × 1200 px, CSS viewport 1440 × 1200, device scale factor 1).
+- Normalized implementation crops: 1224 × 1058 px from the live content area at x=216, y=88. No density resampling was needed; source and implementation crops share the same 1058 px comparison height.
+- Combined full-view evidence: `qa-artifacts/lesson-stage-comparison-vocab-final.png`, `qa-artifacts/lesson-stage-comparison-phrases-final.png`, and `qa-artifacts/lesson-stage-comparison-pronunciation-final.png` (source on the left, implementation on the right).
+- Responsive evidence: `qa-artifacts/lesson-stage-viewport-934x698.png` and `qa-artifacts/lesson-stage-mobile-390x844.png`.
+- State: first vocabulary item, first phrase, and first pronunciation target. The pronunciation reference shows a scored/recording result while the implementation capture intentionally shows the pre-recording state because microphone scoring needs user permission.
+
+### Findings
+
+- No actionable P0/P1/P2 findings remain after the latest iteration.
+- The mock-only self-rating row is intentionally absent from Từ vựng and Cụm từ per the newest user direction. The real completion control remains in the document for authored lessons with a mandatory quiz, but is hidden until `Nghe & nói` or `Kiểm tra`, preserving the existing progress rules without adding visual clutter.
+- The implementation keeps the existing learner rail, top bar, live lesson content, and current animated Himi assets. Those product constraints account for the narrower stage compared with the standalone 1487 px boards.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the live Roboto/product stack retains the mock's black display hierarchy, coral pinyin, compact uppercase progress labels, and readable neutral supporting text. Long pronunciation content wraps deliberately inside the narrower application shell.
+- Spacing and layout rhythm: progress, learning content, coach area, navigation arrows, dividers, and the right-aligned primary action follow the source composition. The rating row and keyboard hint were removed; the remaining CTA is offset from the fixed support launcher so the two controls do not overlap.
+- Colors and visual tokens: Himi coral/red, warm coach surfaces, muted green-gray progress tracks, black Hanzi, and orange supporting icons map to existing app tokens. Automated WCAG 2A/2AA checking found zero violations.
+- Image quality and asset fidelity: current transparent animated Himi GIFs are used for cheer, writing, and listening states. No CSS-drawn mascot or replacement illustration was introduced. Lucide supplies the pen, sparkle, lightbulb, audio, bookmark, and navigation icons.
+- Copy and content: live lesson titles, vocabulary, examples, translations, dialogue, saved-word actions, and iFlytek flow remain data-driven. Coach copy was adapted to the active term or phrase; no mock placeholder content replaced authored course data.
+- States and interactions: previous/next buttons, ArrowLeft/ArrowRight navigation, tab switching, audio, save controls, and pronunciation recording entry point remain operable. Reduced-motion fallbacks remain in place.
+
+### Focused region comparison
+
+- The source and live bottom-action regions were inspected in the combined images. The three rating pills from the supplied negative reference are absent, while `Đã hiểu · Tiếp tục` remains visible and clear of the support launcher.
+- The vocabulary focus region confirms the stroke note now sits beside, rather than on top of, the Hanzi. The phrase focus region confirms the first semantic segment is coral/underlined and the structure line remains readable. The pronunciation focus region confirms the live prompt, pinyin, sample-audio button, recording CTA, waveforms, Himi coach, and next action preserve the intended hierarchy.
+
+### Comparison history
+
+1. Earlier P2 — the self-rating group and keyboard hint added visual density that conflicted with the latest request. Fix: removed their component markup and all dedicated confidence-control CSS.
+2. Earlier P2 — the stroke annotation overlapped the large Hanzi and Himi read too small beside the learning content. Fix: gave the Hanzi stage a full-width annotation anchor and increased the desktop coach/mascot proportions while retaining responsive breakpoints.
+3. Earlier P1 — the fixed support launcher overlapped the lower-right primary CTA. Fix: reserved 84 px of action-bar space for the launcher at every width.
+4. Post-fix evidence — combined source/live comparisons show the final hierarchy; 934 × 698 and 390 × 844 captures show no horizontal overflow. The 36-lesson curriculum regression test, focused interactive-lesson test, ESLint, production build, browser overlay check, console check, and WCAG scan all pass.
+
+### Primary interactions tested
+
+- Clicked the next vocabulary arrow: progress changed from `01 / 06` to `02 / 06` and the Hanzi changed from `任务` to `安排`.
+- Pressed ArrowLeft: progress and Hanzi returned to the first item.
+- Switched through Từ vựng, Cụm từ, and Nghe & nói; each dedicated stage rendered and the removed rating control count stayed zero.
+- Checked 1440 × 1200, 934 × 698, and 390 × 844 viewports; no horizontal overflow or framework error overlay was present, and browser console errors were empty.
+
+### Follow-up polish
+
+- The source board's scored pronunciation result should be compared again after granting microphone access and completing a live iFlytek attempt; the default pre-recording state is already visually and functionally valid.
+
+final result: passed
+
+---
+
+# Design QA — Sân khấu bài học Himi — 2026-09-13
+
+## Comparison target
+
+- Source visual truth — Từ vựng: `C:\Users\Windows\.codex\generated_images\019fbcdf-0a4e-7e50-b4e5-6afe7348a043\exec-49b0ef62-9fd5-4c74-967b-65afb3b6a731.png` (1487 × 1058 px).
+- Source visual truth — Cụm từ: `C:\Users\Windows\.codex\generated_images\019fbcdf-0a4e-7e50-b4e5-6afe7348a043\exec-32c578d6-d2ed-48f9-99a5-ce4a81befc2c.png` (1487 × 1058 px).
+- Source visual truth — Nghe & nói: `C:\Users\Windows\.codex\generated_images\019fbcdf-0a4e-7e50-b4e5-6afe7348a043\exec-77258402-7f6b-4a42-ba70-4fb610f42127.png` (1487 × 1058 px).
+- Implementation route: `http://localhost:3001/learn/van-phong-hanh-chinh?lesson=nhan-va-giao-nhiem-vu`.
+- Final implementation screenshots: `qa-artifacts/lesson-stage-vocabulary-final-1440.png`, `qa-artifacts/lesson-stage-phrases-final-1440.png`, and `qa-artifacts/lesson-stage-pronunciation-final-1440.png` (1440 × 1381 px full-page captures).
+- Responsive evidence: `qa-artifacts/lesson-stage-vocabulary-mobile.png`, `qa-artifacts/lesson-stage-phrases-mobile.png`, and `qa-artifacts/lesson-stage-pronunciation-mobile-v2-viewport.png`.
+- Viewports: desktop 1440 × 1000 CSS px; mobile 390 × 844 CSS px; device scale factor 1.
+- State: unauthenticated free lesson, first item active in each tab, pronunciation has not yet been recorded.
+
+## Normalization and comparison evidence
+
+The generated references are content-only designs while the running product includes the existing 215 px learner navigation rail and 88 px top bar. Each desktop implementation was therefore cropped to `(x: 215, y: 88, width: 1225, height: 1058)` and placed beside its 1487 × 1058 source at native density. No density resampling was applied.
+
+- Từ vựng comparison: `qa-artifacts/lesson-stage-qa-vocabulary-final.png` (2712 × 1058 px).
+- Cụm từ comparison: `qa-artifacts/lesson-stage-qa-phrases-final.png` (2712 × 1058 px).
+- Nghe & nói comparison: `qa-artifacts/lesson-stage-qa-pronunciation-final.png` (2712 × 1058 px).
+
+The full-view comparisons are also the focused-region comparisons: the source itself contains only the lesson workspace, and the normalized side-by-side images preserve readable typography, controls, Himi assets, and spacing without browser chrome. A second crop was not needed.
+
+## Required fidelity surfaces
+
+- Fonts and typography: the product's existing Vietnamese/Chinese-capable stack is retained. Heading hierarchy, oversized Hanzi, Pinyin, translation, section labels, and compact control copy match the reference intent without introducing a new font dependency. Long real phrases stay on one line on desktop and wrap intentionally below the 820 px container breakpoint.
+- Spacing and layout rhythm: the old stacked-card box was removed. All three tabs now use one continuous stage, a centered segmented progress rail, edge navigation, one main learning plane, a restrained Himi coach area, and a low action rail. The narrower desktop proportions are an intentional constraint of the existing learner shell.
+- Colors and visual tokens: white remains the dominant surface; Himi coral, warm ivory, pale mint, near-black, and neutral gray provide the same bright product mood. Text-sized coral accents and filled action controls use the accessible `#BF3027` variant while decorative fills retain `#FF4C3B`.
+- Image quality and asset fidelity: the implementation uses the current transparent animated Himi assets (`himi-cheer.gif`, `himi-writing.gif`, and `himi-listen.gif`) rather than placeholders or generated CSS mascots. The animation is served at intrinsic square proportions with `background-size: contain` to avoid distortion.
+- Copy and content: all lesson titles, Chinese, Pinyin, meanings, examples, dialogue lines, progress counts, saved-word behavior, and iFlytek scoring remain backed by the current curriculum and application logic. The phrase structure helper uses only known glossary tokens; it does not invent lesson Pinyin or translations.
+
+## Interaction, responsive, and accessibility evidence
+
+- Tab switching, next/previous navigation, keyboard navigation, phrase save action, audio actions, and iFlytek evaluator remain wired to the existing handlers.
+- Browser interaction advanced the live vocabulary from `任务` to `安排`; changing the self-rating updated the pressed state to `Cần ôn`; switching tabs exposed the real first phrase `截止日期是什么时候？`.
+- At 390 px the document reported `scrollWidth === clientWidth === 390`, so none of the three tabs creates horizontal page overflow.
+- The mobile pronunciation CTA ends at y=754 while the persistent learner navigation begins at y=771, leaving the primary recording action fully visible and operable.
+- Axe WCAG 2 A/AA checks of Từ vựng, Cụm từ, and Nghe & nói reported zero violations. Remaining incomplete checks are limited to contrast that Axe cannot infer through decorative pseudo-elements/gradients and non-text arrow key glyphs; no application console or page errors were reported.
+
+## Comparison history
+
+1. Initial desktop phrase capture had a P2 hierarchy issue: the real first phrase wrapped across two lines. The desktop type scale was reduced and wrapping disabled for wide containers; the final phrase comparison shows the complete phrase on one line. Responsive wrapping remains enabled below 820 px.
+2. Initial mobile pronunciation capture had a P2 usability issue: the fixed learner navigation partially covered the record action. Mobile stage spacing and evaluator margins were tightened. The post-fix 390 × 844 viewport capture and measured bounds show the button fully above the navigation.
+3. Initial accessibility pass found P1 ARIA and contrast problems in the new phrase character animation and coral UI text. The phrase now exposes one screen-reader string while visual characters remain animation-only, the structure row has a valid group role, and text/action coral uses `#BF3027`. Post-fix Axe checks report zero violations in all three tabs.
+
+## Findings
+
+No actionable P0, P1, or P2 differences remain. The visible scale reduction relative to the content-only references is an expected product constraint caused by preserving the current desktop navigation rail and top bar. The initial pronunciation state intentionally omits a fabricated score; its score bars and feedback appear only after a real iFlytek evaluation.
+
+## Follow-up polish
+
+- P3: verify microphone permission copy and the scored pronunciation state on a physical mobile device when device testing is available.
+
+final result: passed
+
+---
+
 ## HSK lesson brand color — 2026-09-13
 
 Source: browser annotation on `http://localhost:3001/hsk/1/hsk1-bai-01-chao-anh`, followed by the explicit direction to use only `#FF4C3B` as the page accent.

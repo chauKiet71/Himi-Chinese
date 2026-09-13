@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Bookmark, Check, ChevronLeft, ChevronRight, LoaderCircle, Volume2 } from "lucide-react";
+import { Bookmark, Check, ChevronLeft, ChevronRight, Lightbulb, LoaderCircle, MoveDownRight, PenLine, Sparkles, Volume2 } from "lucide-react";
 import type { Vocabulary } from "@/lib/content-types";
 
 type MoveDirection = "back" | "forward";
@@ -166,23 +166,24 @@ export function LessonVocabularyDeck({
     return <div className="lesson-vocab-empty"><h2>Bài này chưa có từ vựng</h2><p>Hãy chuyển sang Cụm từ hoặc Nghe & nói để tiếp tục học.</p></div>;
   }
 
-  return <section aria-label="Bộ thẻ từ vựng" className="lesson-vocab-deck" data-testid="lesson-vocabulary-deck">
+  return <section aria-label="Bộ thẻ từ vựng" className={`lesson-vocab-deck lesson-live-stage${isSpeaking ? " is-speaking" : ""}`} data-testid="lesson-vocabulary-deck">
     <div aria-label={`Tiến độ từ ${index + 1} trên ${words.length}`} className="lesson-vocab-progress" role="progressbar" aria-valuemax={words.length} aria-valuemin={1} aria-valuenow={index + 1}>
       <strong>{String(index + 1).padStart(2, "0")} / {String(words.length).padStart(2, "0")}</strong>
       <div className="lesson-vocab-progress-segments" aria-hidden="true">{words.map((word, wordIndex) => <span className={wordIndex <= index ? "filled" : ""} key={word.slug} />)}</div>
     </div>
 
-    <div className="lesson-vocab-carousel">
+    <div className="lesson-vocab-carousel lesson-live-stage-grid">
       <button aria-label="Từ trước" className="lesson-vocab-nav lesson-vocab-nav-prev" disabled={atStart} onClick={moveBack} type="button">
         <span><ChevronLeft size={24} /></span><small>Trước</small>
       </button>
 
-      <div className="lesson-vocab-stack">
-        <span aria-hidden="true" className="lesson-vocab-card-back lesson-vocab-card-back-two" />
-        <span aria-hidden="true" className="lesson-vocab-card-back lesson-vocab-card-back-one" />
-        <article aria-label={`Từ ${index + 1} trên ${words.length}: ${currentWord.hanzi}`} className={`lesson-vocab-card move-${direction}`} data-word-index={index + 1} key={currentWord.slug} tabIndex={0}>
+      <div className="lesson-vocab-stack lesson-live-stage-main">
+        <article aria-label={`Từ ${index + 1} trên ${words.length}: ${currentWord.hanzi}`} className={`lesson-vocab-card lesson-live-stage-content move-${direction}`} data-word-index={index + 1} key={currentWord.slug} tabIndex={0}>
           <span className="lesson-vocab-order">Từ {String(index + 1).padStart(2, "0")} / {String(words.length).padStart(2, "0")}</span>
-          <strong className="lesson-vocab-hanzi" lang="zh">{currentWord.hanzi}</strong>
+          <div className="lesson-live-hanzi-wrap">
+            <span aria-hidden="true" className="lesson-live-stroke-note"><PenLine size={14} /> Nét đang được viết… <MoveDownRight className="lesson-live-stroke-arrow" size={21} /></span>
+            <strong className="lesson-vocab-hanzi" lang="zh">{currentWord.hanzi}</strong>
+          </div>
           <span className="lesson-vocab-pinyin">{currentWord.pinyin}</span>
           <span className="lesson-vocab-meaning">{currentWord.meaning}</span>
 
@@ -202,15 +203,23 @@ export function LessonVocabularyDeck({
         </article>
       </div>
 
+      <aside className="lesson-live-coach" aria-label="Mẹo ghi nhớ cùng Himi">
+        <span aria-hidden="true" className="lesson-live-coach-decor"><Sparkles size={25} /><Lightbulb size={38} /></span>
+        <p><strong>Mẹo ghi nhớ cùng Himi!</strong><span><b lang="zh">{currentWord.hanzi}</b> gắn với “{currentWord.meaning}” — thử đọc lại trong câu bên cạnh.</span></p>
+        <span aria-label="Himi cổ vũ bạn học từ mới" className="lesson-live-coach-mascot is-cheer" role="img" />
+        <small>Cùng học tốt hơn nhé!</small>
+      </aside>
+
       <button aria-label={atEnd ? "Chuyển sang Cụm từ" : "Từ tiếp theo"} className="lesson-vocab-nav lesson-vocab-nav-next" onClick={moveForward} type="button">
         <span><ChevronRight size={24} /></span><small>{atEnd ? "Cụm từ" : "Tiếp theo"}</small>
       </button>
     </div>
 
-    <button className="lesson-vocab-continue" onClick={moveForward} type="button">
-      {atEnd ? "Tiếp tục với Cụm từ" : "Đã hiểu · Tiếp tục"}<ChevronRight size={19} />
-    </button>
-    <p className="lesson-vocab-keyboard">Nhấn <kbd>Enter</kbd> hoặc dùng <kbd>←</kbd> <kbd>→</kbd> để chuyển từ</p>
+    <div className="lesson-stage-actionbar">
+      <button className="lesson-vocab-continue" onClick={moveForward} type="button">
+        {atEnd ? "Tiếp tục với Cụm từ" : "Đã hiểu · Tiếp tục"}<ChevronRight size={19} />
+      </button>
+    </div>
     <p aria-live="polite" className="sr-only">{audioMessage} {saveMessage}</p>
   </section>;
 }

@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import type { CourseRoadmap as CourseRoadmapModel, RoadmapLesson, RoadmapModule } from "@/lib/course-roadmap";
 import type { Course } from "@/lib/content-types";
-import { getCourseVisual } from "@/lib/course-visuals";
+import { getCourseModuleVisual } from "@/lib/course-visuals";
 import { VipUpgradeDialog, type VipUpgradeTarget } from "@/components/vip-upgrade-prompt";
 
 function formatMinutes(minutes: number) {
@@ -113,15 +113,15 @@ function RoadmapStage({
   module: RoadmapModule;
   onVipLocked: (target: VipUpgradeTarget) => void;
 }) {
-  const visual = getCourseVisual(course.slug);
+  const visual = getCourseModuleVisual(course.slug, module.slug);
   const summary = <div className="roadmap-stage-summary">
     <div className="roadmap-stage-image">
       <Image
-        alt=""
+        alt={visual.alt}
         fill
         sizes="176px"
         src={visual.src}
-        style={{ objectPosition: `${18 + (index * 21)}% center` }}
+        style={{ objectPosition: visual.position }}
         unoptimized
       />
     </div>

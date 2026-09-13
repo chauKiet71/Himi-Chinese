@@ -293,7 +293,7 @@
 }
 
 .video-catalog { margin-top: 24px; }
-.related-video-section h2 { margin: 7px 0 0; font-size: clamp(27px, 3vw, 39px); letter-spacing: -.045em; }
+.related-video-section h2 { margin: 7px 0 0; font-size: clamp(28px, 3vw, 42px); line-height: 1.08; letter-spacing: -.045em; }
 
 .video-catalog-tools {
   margin-top: 25px;
@@ -492,14 +492,37 @@
 .video-rights-note p { margin: 3px 0 7px; font-size: 10px; line-height: 1.55; }
 .video-rights-note a { display: inline-flex; align-items: center; gap: 5px; color: #93641c; font-size: 9px; font-weight: 780; }
 
-.related-video-section { margin-top: 54px; }
-.related-video-list { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
-.related-video-list > a { min-width: 0; padding: 10px; display: grid; grid-template-columns: 105px minmax(0, 1fr) auto; align-items: center; gap: 12px; border: 1px solid #dfe7e3; border-radius: 15px; background: #fff; }
-.related-video-list img { width: 105px; aspect-ratio: 16 / 10; display: block; object-fit: cover; border-radius: 10px; }
-.related-video-list span { min-width: 0; display: grid; gap: 5px; }
-.related-video-list small { color: #087d70; font-size: 8px; font-weight: 790; }
-.related-video-list strong { overflow: hidden; font-size: 11px; line-height: 1.35; text-overflow: ellipsis; }
-.related-video-list > a > svg { color: #7f918b; }
+.related-video-section { margin-top: 58px; padding-top: 34px; border-top: 1px solid #e2e9e5; }
+.related-video-heading { max-width: 760px; }
+.related-video-list { margin-top: 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.related-video-list > a {
+  min-width: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  color: #173f38;
+  border: 1px solid #dfe7e3;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .94);
+  box-shadow: 0 13px 34px rgba(21, 71, 61, .07);
+  transition: transform .24s cubic-bezier(.22, 1, .36, 1), border-color .24s ease, box-shadow .24s ease;
+}
+.related-video-thumbnail { position: relative; overflow: hidden; display: block; aspect-ratio: 16 / 9; background: #f4f7f5; }
+.related-video-thumbnail::after { position: absolute; inset: auto 0 0; height: 42%; content: ""; background: linear-gradient(transparent, rgba(12, 54, 47, .2)); pointer-events: none; }
+.related-video-thumbnail img { width: 100% !important; height: 100% !important; display: block; object-fit: cover; transition: transform .36s cubic-bezier(.22, 1, .36, 1); }
+.related-video-thumbnail > span { position: absolute; z-index: 1; left: 12px; bottom: 11px; min-height: 25px; padding: 0 9px; display: inline-flex; align-items: center; color: #174f45; border-radius: 999px; background: rgba(255, 255, 255, .92); box-shadow: 0 5px 14px rgba(14, 56, 49, .1); font-size: 9px; font-weight: 800; backdrop-filter: blur(8px); }
+.related-video-card-body { min-width: 0; padding: 16px 16px 17px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 14px; }
+.related-video-copy { min-width: 0; display: grid; gap: 7px; }
+.related-video-list small { overflow: hidden; color: #087d70; font-size: 10px; font-weight: 800; letter-spacing: .015em; text-overflow: ellipsis; white-space: nowrap; }
+.related-video-list strong { overflow: hidden; display: -webkit-box; min-height: 42px; color: #153c35; font-size: 15px; line-height: 1.38; letter-spacing: -.012em; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.related-video-arrow { width: 38px; height: 38px; display: inline-grid; place-items: center; color: #176b5b; border: 1px solid #d9e5e0; border-radius: 50%; background: #f5faf7; transition: color .2s ease, border-color .2s ease, background-color .2s ease, transform .2s ease; }
+.related-video-list > a:focus-visible { outline: 3px solid rgba(8, 127, 114, .28); outline-offset: 4px; }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .related-video-list > a:hover { border-color: #b9d7cd; box-shadow: 0 20px 44px rgba(21, 71, 61, .13); transform: translateY(-5px); }
+  .related-video-list > a:hover .related-video-thumbnail img { transform: scale(1.035); }
+  .related-video-list > a:hover .related-video-arrow { color: #fff; border-color: #087f72; background: #087f72; transform: translateX(2px); }
+}
 
 /* Synchronized YouTube listening studio */
 .video-detail-page.is-study-studio .video-detail-shell { width: min(1510px, calc(100% - 50px)); }
@@ -794,7 +817,7 @@
   .video-radio-spark { left: 230px; }
   .learning-video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .video-detail-layout { grid-template-columns: minmax(0, 1fr) 270px; }
-  .related-video-list { grid-template-columns: 1fr; }
+  .related-video-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 860px) {
@@ -819,6 +842,9 @@
   .video-detail-layout { grid-template-columns: 1fr; }
   .video-study-sidebar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .video-study-sidebar .video-lesson-link { grid-column: 1 / -1; }
+  .related-video-list { grid-template-columns: 1fr; }
+  .related-video-list > a { grid-template-columns: 176px minmax(0, 1fr); grid-template-rows: none; }
+  .related-video-thumbnail { height: 100%; min-height: 112px; aspect-ratio: auto; }
 }
 
 @media (max-width: 720px) {
@@ -862,8 +888,14 @@
   .video-study-sidebar { grid-template-columns: 1fr; }
   .video-study-sidebar .video-lesson-link { grid-column: auto; }
   .related-video-section { margin-top: 40px; }
-  .related-video-list > a { grid-template-columns: 88px minmax(0, 1fr) auto; }
-  .related-video-list img { width: 88px; }
+  .related-video-list { gap: 12px; }
+  .related-video-list > a { grid-template-columns: 118px minmax(0, 1fr); min-height: 104px; border-radius: 16px; }
+  .related-video-thumbnail { min-height: 104px; }
+  .related-video-thumbnail > span { display: none; }
+  .related-video-card-body { padding: 13px 12px; gap: 9px; }
+  .related-video-list small { font-size: 9px; }
+  .related-video-list strong { min-height: auto; font-size: 13px; }
+  .related-video-arrow { width: 34px; height: 34px; }
   .lesson-content-card-video { padding: 16px 12px; }
 }
 

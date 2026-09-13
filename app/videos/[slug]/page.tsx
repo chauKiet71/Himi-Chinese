@@ -30,7 +30,16 @@ export default async function VideoDetailPage({ params }: { params: Promise<{ sl
       ?? youtubeVideoTranscripts[video.youtubeId]
     : video.transcript;
   const playableVideo = transcript ? { ...video, transcript } : video;
-  const related = learningVideos.filter((item) => item.slug !== video.slug).slice(0, 3);
+  const related = learningVideos
+    .filter((item) => item.slug !== video.slug)
+    .map((item, index) => ({
+      index,
+      item,
+      relevance: Number(item.category === video.category) * 2 + Number(item.level === video.level),
+    }))
+    .sort((left, right) => right.relevance - left.relevance || left.index - right.index)
+    .slice(0, 3)
+    .map(({ item }) => item);
   const sourceUrl = video.youtubeId ? `https://www.youtube.com/watch?v=${video.youtubeId}` : null;
   const hasInteractiveTranscript = Boolean(transcript?.length);
 
@@ -56,7 +65,27 @@ export default async function VideoDetailPage({ params }: { params: Promise<{ sl
         ? <VideoLearningPlayer video={playableVideo} />
         : <div className="video-detail-layout"><div className="video-detail-main"><VideoLearningPlayer video={playableVideo} />{aboutCard}</div>{studySidebar}</div>}
 
-      <section className="related-video-section" aria-labelledby="related-video-title"><div><span className="section-kicker">Học tiếp</span><h2 id="related-video-title">Video khác dành cho bạn</h2></div><div className="related-video-list">{related.map((item) => <Link href={`/videos/${item.slug}`} key={item.slug} prefetch={false}><Image alt="" height={105} src={item.thumbnailUrl} unoptimized width={168} /><span><small>{item.level} · {item.category}</small><strong>{item.title}</strong></span><ArrowRight aria-hidden="true" size={17} /></Link>)}</div></section>
+      <section className="related-video-section" aria-labelledby="related-video-title">
+        <header className="related-video-heading">
+          <span className="section-kicker">Học tiếp</span>
+          <h2 id="related-video-title">Video khác dành cho bạn</h2>
+        </header>
+        <div className="related-video-list">
+          {related.map((item) => <Link aria-label={`Học video: ${item.title}`} href={`/videos/${item.slug}`} key={item.slug} prefetch={false}>
+            <span className="related-video-thumbnail">
+              <Image alt="" fill sizes="(max-width: 720px) 118px, (max-width: 1120px) 42vw, 30vw" src={item.thumbnailUrl} unoptimized={item.source === "youtube"} />
+              <span>{item.source === "himi" ? "Himi Original" : "YouTube tuyển chọn"}</span>
+            </span>
+            <span className="related-video-card-body">
+              <span className="related-video-copy">
+                <small>{item.level} · {item.category}</small>
+                <strong>{item.title}</strong>
+              </span>
+              <span aria-hidden="true" className="related-video-arrow"><ArrowRight size={18} /></span>
+            </span>
+          </Link>)}
+        </div>
+      </section>
     </div>
   </main>;
 }

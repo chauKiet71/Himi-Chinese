@@ -60,6 +60,8 @@ export function LessonWorkspace({
   const DailyNextIcon = dailyNextKind === "practice" ? Headphones : dailyNextKind === "game" ? Gamepad2 : Award;
   const continueToPhrases = useCallback(() => setTab("Cụm từ"), []);
   const continueToPronunciation = useCallback(() => setTab("Nghe & nói"), []);
+  const stageTab = tab === "Từ vựng" || tab === "Cụm từ" || tab === "Nghe & nói";
+  const showCompletion = tab === "Nghe & nói" || tab === "Kiểm tra";
 
   useEffect(() => {
     if (!authenticated || !access.allowed) return;
@@ -74,7 +76,7 @@ export function LessonWorkspace({
     return () => window.clearTimeout(timer);
   }, [access.allowed, authenticated, course.slug, lesson.slug]);
 
-  return <section className="lesson-main">
+  return <section className="lesson-main lesson-stage-workspace" data-active-tab={tab}>
       <div className="lesson-header-card">
         <div className="lesson-heading-row"><div><span className="section-kicker">Bài {String(lessonNumber).padStart(2, "0")} · {lesson.estimatedMinutes} phút · {lesson.situation}</span><h1>{lesson.title}</h1><p>{lesson.summary}</p></div><div className="lesson-progress-badge"><strong>{lessonNumber} / {lessons.length}</strong><span>Trong lộ trình</span></div></div>
         {access.allowed ? <div className="lesson-tabs" role="tablist" aria-label="Nội dung bài học">{tabs.map((item, index) => <button
@@ -98,7 +100,7 @@ export function LessonWorkspace({
         <h2>Mở khóa bài học này</h2>
         <p>Nâng cấp VIP để học từ vựng, cụm từ và luyện nghe & nói trong bài học này.</p>
         <VipUpgradeInlineForm />
-      </div> : <div className={`lesson-content-card${tab === "Từ vựng" || tab === "Cụm từ" ? " lesson-content-card-vocabulary" : ""}${tab === "Tình huống" ? " lesson-content-card-video" : ""}`}>
+      </div> : <div className={`lesson-content-card${stageTab ? " lesson-content-card-stage" : ""}${tab === "Từ vựng" || tab === "Cụm từ" ? " lesson-content-card-vocabulary" : ""}${tab === "Tình huống" ? " lesson-content-card-video" : ""}`}>
         <div className="lesson-tab-panel-viewport">
           <div
               aria-labelledby={`lesson-tab-${tabIndex}`}
@@ -118,7 +120,7 @@ export function LessonWorkspace({
             </div>
         </div>
 
-        <div className="lesson-complete-row">
+        <div className="lesson-complete-row" hidden={!showCompletion}>
           <div className="lesson-complete-message"><p>{completed ? "Tốt lắm! Tiến độ hoàn thành đã được lưu vào tài khoản." : authenticated ? "Lần mở bài đã được ghi nhận. Hoàn thành để cập nhật tiến độ." : "Bạn vẫn có thể học thử; hãy đăng nhập để lưu tiến độ."}</p></div>
           {completed ? <button className="button button-secondary" disabled type="button"><CheckCircle2 size={18} /> Đã hoàn thành</button> : authenticated ? <form action="/api/progress/lesson/complete" method="post">
             <input name="courseSlug" type="hidden" value={course.slug} /><input name="lessonSlug" type="hidden" value={lesson.slug} /><input name="returnTo" type="hidden" value={completionReturnTo} />

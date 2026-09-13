@@ -73,6 +73,19 @@ test("media catalogs limit eager assets and automatic route prefetching", async 
   assert.ok((videos.match(/prefetch=\{false\}/g) ?? []).length >= 3);
 });
 
+test("related videos use readable responsive cards and relevance ordering", async () => {
+  const [page, styles] = await Promise.all([
+    read("app/videos/[slug]/page.tsx"),
+    read("app/video-learning.css"),
+  ]);
+
+  assert.match(page, /relevance: Number\(item\.category === video\.category\) \* 2/);
+  assert.match(page, /className="related-video-thumbnail"/);
+  assert.match(page, /className="related-video-card-body"/);
+  assert.match(styles, /\.related-video-list > a[\s\S]*grid-template-rows: auto 1fr/);
+  assert.match(styles, /@media \(max-width: 720px\)[\s\S]*\.related-video-list > a \{ grid-template-columns: 118px minmax\(0, 1fr\)/);
+});
+
 test("common catalog motion uses CSS instead of shipping a runtime animation library", async () => {
   const [home, courses, practice, homeStyles, bannerStyles] = await Promise.all([
     read("components/review-home-studio.tsx"),

@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type MutableRefObject } from "react";
-import { CircleStop, LoaderCircle, Mic, RotateCcw, Volume2 } from "lucide-react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type MutableRefObject } from "react";
+import { AudioLines, CircleStop, LoaderCircle, Mic, RotateCcw, Volume2 } from "lucide-react";
 import { speakMandarin } from "@/lib/client-mandarin-audio";
 
 export type PronunciationResult = {
@@ -326,12 +326,16 @@ export function PronunciationEvaluator({
       {showListen ? <button className="pronunciation-listen" onClick={() => speakMandarin(targetText)} type="button">
         <Volume2 size={18} /> Nghe mẫu
       </button> : null}
-      {status === "recording" ? <button className="pronunciation-record is-recording" onClick={stopRecording} type="button">
-        <CircleStop size={19} /> Dừng · {seconds}s
-      </button> : <button className="pronunciation-record" disabled={status === "evaluating"} onClick={startRecording} type="button">
-        {status === "evaluating" ? <LoaderCircle className="lesson-vocab-spinner" size={19} /> : <Mic size={19} />}
-        {status === "evaluating" ? "iFlytek đang chấm…" : result ? "Đọc lại" : "Đọc và chấm"}
-      </button>}
+      <div className="pronunciation-record-stage">
+        <span aria-hidden="true" className="pronunciation-waveform"><AudioLines size={88} strokeWidth={1.6} /></span>
+        {status === "recording" ? <button className="pronunciation-record is-recording" onClick={stopRecording} type="button">
+          <CircleStop size={19} /> Dừng · {seconds}s
+        </button> : <button className="pronunciation-record" disabled={status === "evaluating"} onClick={startRecording} type="button">
+          {status === "evaluating" ? <LoaderCircle className="lesson-vocab-spinner" size={19} /> : <Mic size={19} />}
+          {status === "evaluating" ? "iFlytek đang chấm…" : result ? "Đọc lại" : "Đọc và chấm"}
+        </button>}
+        <span aria-hidden="true" className="pronunciation-waveform pronunciation-waveform-end"><AudioLines size={88} strokeWidth={1.6} /></span>
+      </div>
     </div>
 
     {error ? <div className="pronunciation-error" role="alert"><span>{error}</span><button onClick={() => setError("")} type="button"><RotateCcw size={15} /> Thử lại</button></div> : null}
@@ -342,7 +346,7 @@ export function PronunciationEvaluator({
       </div>
       {!compact ? <div className="pronunciation-dimensions">
         {[["Độ chính xác", result.accuracyScore], ["Độ trôi chảy", result.fluencyScore], ["Độ đầy đủ", result.integrityScore], ["Thanh điệu", result.toneScore]].map(([label, score]) => score !== null
-          ? <span key={String(label)}><small>{label}</small><strong>{score}</strong></span>
+          ? <span key={String(label)}><small>{label}</small><i aria-hidden="true"><b style={{ "--pronunciation-score": `${score}%` } as CSSProperties} /></i><strong>{score}</strong></span>
           : null)}
       </div> : null}
     </div> : null}
