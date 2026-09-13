@@ -16,7 +16,6 @@ import {
   ChevronDown,
   Clapperboard,
   Crown,
-  Flame,
   Gamepad2,
   Home,
   Layers3,
@@ -26,7 +25,7 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
-import { BrandLogoImage, BrandMark, BrandWordmark } from "@/components/brand-logo";
+import { BrandMark, BrandWordmark } from "@/components/brand-logo";
 import { getInternalNavigationHref } from "@/lib/navigation-progress";
 
 type LearnerShellUser = {
@@ -55,8 +54,8 @@ const learnerRailItems = [
 
 const learnerPracticeItems = [
   { href: "/writing", label: "Luyện viết", icon: PenLine, matches: (pathname: string) => pathname.startsWith("/writing") },
+  { href: "/listening", label: "Luyện nghe", icon: AudioLines, matches: (pathname: string) => pathname.startsWith("/listening") || pathname.startsWith("/practice") },
   { href: "/videos", label: "Video", icon: Clapperboard, matches: (pathname: string) => pathname.startsWith("/videos") },
-  { href: "/listening", label: "Nghe & phản xạ", icon: AudioLines, matches: (pathname: string) => pathname.startsWith("/listening") || pathname.startsWith("/practice") },
 ];
 
 const learnerPrefetchItems = [...learnerRailItems, ...learnerPracticeItems];
@@ -348,7 +347,7 @@ export function LearnerAppShell({
           <ChevronLeft aria-hidden="true" className="rail-toggle-icon" size={18} strokeWidth={3} />
         </button>
         <Link className="rail-brand" href="/" aria-label="Himi Chinese - Trang chủ" onClick={(event) => beginRoute(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch>
-          <span className="rail-logo"><BrandLogoImage priority size={60} /></span>
+          <span className="rail-logo"><Image alt="" aria-hidden="true" draggable={false} height={60} priority sizes="60px" src="/assets/brand/himi-sidebar-logo-transparent.png" unoptimized width={60} /></span>
           <BrandWordmark />
         </Link>
         <nav className="rail-nav">
@@ -467,7 +466,6 @@ export function LearnerAppShell({
       <header className="learn-topbar">
         <Link aria-label="Himi Chinese - Trang chủ" className="brand" href="/" onClick={(event) => beginRoute(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch><BrandMark priority /><BrandWordmark /></Link>
         <div className="topbar-actions">
-          <span className="streak-chip"><Flame aria-hidden="true" size={17} /> {user ? "Tiếp tục nhịp học hôm nay" : "Đăng nhập để lưu nhịp học"}</span>
           <Link
             aria-label={user?.unreadNotificationCount ? `${user.unreadNotificationCount} thông báo chưa đọc` : "Thông báo"}
             className={`topbar-icon ${user?.unreadNotificationCount ? "has-notifications" : ""}`.trim()}

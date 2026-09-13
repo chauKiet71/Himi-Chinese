@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { Headphones, MessagesSquare } from "lucide-react";
 
-type ListeningMode = "levels" | "scenario";
+type ListeningMode = "catalog" | "scenario";
 
 const modes = [
   {
-    description: "Nghe từ và câu theo HSK",
+    description: "Đối thoại và độc thoại theo chủ đề",
     href: "/listening",
     icon: Headphones,
-    id: "levels" as const,
-    label: "Theo cấp độ HSK",
+    id: "catalog" as const,
+    label: "Kho bài nghe",
   },
   {
     description: "Phản xạ hội thoại công việc",
@@ -22,7 +22,7 @@ const modes = [
 
 export function ListeningModeSwitcher({ activeMode }: { activeMode: ListeningMode }) {
   return (
-    <nav aria-label="Chế độ Nghe và phản xạ" className="listening-mode-switcher">
+    <nav aria-label="Chế độ luyện nghe" className="listening-mode-switcher">
       {modes.map(({ description, href, icon: Icon, id, label }) => {
         const active = activeMode === id;
         return (

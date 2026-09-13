@@ -107,7 +107,7 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  border: 1px solid #e6ebe8;
+  border: 0;
   border-radius: 15px;
   background: #fff;
   box-shadow: 0 8px 18px rgba(25, 78, 68, .07);

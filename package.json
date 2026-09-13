@@ -22,6 +22,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "node --experimental-strip-types db/seed.ts",
     "content:high-frequency:import": "node --experimental-strip-types scripts/import-high-frequency-topics.ts",
+    "content:listening:import": "node --experimental-strip-types scripts/import-listening-catalog.ts",
     "content:industry:validate": "node --experimental-strip-types scripts/validate-industry-curriculum.ts",
     "content:industry:import": "node --experimental-strip-types scripts/import-industry-curriculum.ts",
     "practice:audio:generate": "node --experimental-strip-types scripts/generate-practice-audio.ts",

@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import { ListeningModeSwitcher } from "@/components/listening-mode-switcher";
-import { ListeningPerformanceSummary } from "@/components/listening-performance-summary";
-import { ListeningStudio } from "@/components/listening-studio";
-import { getListeningLevel } from "@/lib/listening-content";
+import { ListeningCatalogStudio } from "@/components/listening-catalog-studio";
+import { catalogGroupForHskLevel } from "@/lib/listening-catalog";
 
 export const metadata: Metadata = {
-  title: "Nghe & phản xạ",
+  title: "Luyện nghe",
   description: "Luyện nghe và phản xạ tiếng Trung chủ động cùng Himi Chinese.",
 };
 
@@ -14,6 +12,7 @@ type ListeningSearchParams = {
   scenario?: string | string[];
   session?: string | string[];
   level?: string | string[];
+  lesson?: string | string[];
 };
 
 function firstValue(value: string | string[] | undefined): string | undefined {
@@ -31,16 +30,10 @@ export default async function ListeningPage({
     return <ScenarioPractice {...params} />;
   }
 
-  const requestedLevel = firstValue(params.level);
-  const initialLevelId = requestedLevel && getListeningLevel(requestedLevel) ? requestedLevel : undefined;
+  const initialGroupId = catalogGroupForHskLevel(firstValue(params.level));
 
-  return <ListeningStudio
-    initialLevelId={initialLevelId}
-    modeSwitcher={
-      <>
-        <ListeningModeSwitcher activeMode="levels" />
-        <ListeningPerformanceSummary />
-      </>
-    }
+  return <ListeningCatalogStudio
+    initialGroupId={initialGroupId}
+    initialLessonId={firstValue(params.lesson)}
   />;
 }

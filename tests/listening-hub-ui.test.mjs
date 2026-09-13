@@ -4,7 +4,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 
-test("listening hub presents HSK and scenario practice as two accessible modes", async (t) => {
+test("listening hub presents the audio catalog without the mode switcher", async (t) => {
   const server = await createServer({
     appType: "custom",
     configFile: false,
@@ -18,19 +18,14 @@ test("listening hub presents HSK and scenario practice as two accessible modes",
   const page = await ListeningPage({ searchParams: Promise.resolve({}) });
   const html = renderToStaticMarkup(React.createElement(React.Fragment, null, page));
 
-  assert.match(html, /aria-label="Chế độ Nghe và phản xạ"/);
-  assert.match(html, /(?:aria-current="page"[^>]*href="\/listening"|href="\/listening"[^>]*aria-current="page")/);
-  assert.match(html, /href="\/listening\?mode=scenario"/);
-  assert.match(html, />Theo cấp độ HSK</);
-  assert.match(html, />Theo tình huống</);
-  assert.match(html, />Báo cáo luyện nghe</);
-  assert.match(html, />Tổng số câu</);
-  assert.match(html, />Độ chính xác</);
-  assert.match(html, />Phản xạ trung bình</);
-  assert.doesNotMatch(html, /HSK 7–9: Nghe chuyên sâu/);
+  assert.doesNotMatch(html, /aria-label="Chế độ luyện nghe"/);
+  assert.doesNotMatch(html, /listening-mode-shell/);
+  assert.match(html, /Đang tải kho bài nghe…/);
+  assert.match(html, /Nghe để nói/);
+  assert.match(html, /listening-redesign-hero/);
 });
 
-test("listening hub opens the HSK level selected from the curriculum", async (t) => {
+test("listening hub maps HSK curriculum links to a matching catalog group", async (t) => {
   const server = await createServer({
     appType: "custom",
     configFile: false,
@@ -44,6 +39,5 @@ test("listening hub opens the HSK level selected from the curriculum", async (t)
   const page = await ListeningPage({ searchParams: Promise.resolve({ level: "hsk-4" }) });
   const html = renderToStaticMarkup(React.createElement(React.Fragment, null, page));
 
-  assert.match(html, /aria-label="HSK 4:[^"]*" aria-pressed="true"/);
-  assert.match(html, />HSK 4 · 4 bài học</);
+  assert.match(html, /data-initial-group="intermediate"/);
 });
