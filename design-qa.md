@@ -118,6 +118,56 @@ final result: blocked
 
 ---
 
+# Design QA — Vocabulary library, option 2
+
+## Comparison target
+
+- Source visual truth: `C:\Users\Windows\.codex\generated_images\019fb6fe-431e-7c62-917c-2abef5ccee3c\exec-2a0e2c15-aeed-4d3d-87b2-bacc300354b4.png`.
+- Source pixels: 1487 × 1058.
+- Desktop implementation capture: `C:\Users\Windows\Documents\INDIVIDUAL PROJECT\Himi-Chinese\qa-artifacts\vocabulary-desktop.png` at 1440 × 1024.
+- Mobile implementation capture: `C:\Users\Windows\Documents\INDIVIDUAL PROJECT\Himi-Chinese\qa-artifacts\vocabulary-mobile.png` at a true 430 × 932 CSS-pixel viewport with DPR 1.
+- Tested state: three saved words, zero personal sets, HSK and Giao tiếp sources.
+
+## Findings
+
+- No actionable P0, P1, or P2 visual defects remain.
+- The implementation preserves the approved hierarchy: compact vocabulary hero, primary learning action, secondary create action, personal-library navigation, search, source filters, and a scan-friendly word table.
+- Intentional product deviation: the shared learner shell remains visible, and the unavailable Video source filter is omitted because the saved-vocabulary data model currently exposes only HSK and course sources. This avoids presenting a filter with no functional data behind it.
+
+## Required fidelity surfaces
+
+- Fonts and typography: the application font stack is preserved; headline, section, metadata, and Chinese-character scales match the reference hierarchy without introducing another display font.
+- Spacing and layout rhythm: desktop uses a two-column library shell; mobile collapses to a single flow, stacks hero actions, and keeps all interactive controls within the viewport.
+- Colors and visual tokens: Himi coral, warm cream, dark ink, quiet borders, and restrained orange accents match the approved direction.
+- Image quality and asset fidelity: the 学/词 art is CSS-rendered at device resolution; no low-resolution placeholder or unrelated stock image is used.
+- Copy and content: replaces misleading built-in collections with real saved-word and personal-set states, plus source filters backed by the current data model.
+
+## Focused region comparison
+
+- Hero: title, count, primary and secondary actions, and 学/词 art were compared side-by-side with the source mockup.
+- Library navigation: active saved state, personal-set count, source choices, and empty helper were checked at desktop and mobile widths.
+- Search and list: query input, filter chips, table headers, pronunciation actions, remove actions, and example copy were verified in the populated state.
+
+## Comparison history
+
+1. Initial mobile Chromium capture reported a 504 px inner viewport despite a 430 px requested window and was discarded as invalid evidence.
+2. A CDP device-metrics override produced a true 430 × 932 viewport. The hero actions were stacked below 520 px to remove button compression.
+3. Post-fix capture reported no horizontal overflow, no overlay, no runtime errors, and all content boxes within the viewport.
+
+## Primary interactions and verification
+
+- Search filters Hanzi, pinyin, Vietnamese meaning, examples, translations, and source titles with diacritic-insensitive matching.
+- HSK filtering reduced the fixture from three rows to two; switching to “Bộ của tôi” and back restored the saved-word heading and state.
+- Pronunciation, remove-from-saved, create-set, and start-learning actions remain available.
+- Focused ESLint: passed.
+- Focused vocabulary UI tests: 2/2 passed.
+- Production build: passed.
+- Runtime inspection: zero console/runtime errors and no horizontal overflow at 430 × 932.
+
+final result: passed
+
+---
+
 # Design QA — VIP payment success celebration
 
 ## Comparison target

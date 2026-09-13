@@ -31,7 +31,7 @@ export function ListeningModeSwitcher({ activeMode }: { activeMode: ListeningMod
             className={active ? "is-active" : undefined}
             href={href}
             key={id}
-            prefetch
+            prefetch={false}
           >
             <span className="listening-mode-icon"><Icon aria-hidden="true" size={21} /></span>
             <span className="listening-mode-copy">

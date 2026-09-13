@@ -91,7 +91,7 @@
   width: clamp(315px, 27vw, 380px);
   right: clamp(10px, 2.3vw, 34px);
   bottom: -68px;
-  background-image: url("/assets/mascot/himi-v2/himi-wave.gif?v=fluid-50fps");
+  background-image: url("/assets/mascot/himi-v2/himi-wave-animated.webp");
   filter: drop-shadow(0 18px 22px rgba(21, 69, 60, .17));
 }
 
@@ -105,14 +105,14 @@
   width: clamp(292px, 24vw, 348px);
   right: clamp(18px, 3vw, 48px);
   bottom: -48px;
-  background-image: url("/assets/mascot/himi-v2/himi-writing.gif?v=fluid-50fps");
+  background-image: url("/assets/mascot/himi-v2/himi-writing-animated.webp");
 }
 
-.himi-section-banner-mascot.himi-courses-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-wave.gif?v=fluid-50fps"); }
-.himi-section-banner-mascot.himi-practice-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-cheer.gif?v=fluid-50fps"); }
-.himi-section-banner-mascot.himi-listening-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-listen.gif?v=fluid-50fps"); }
-.himi-section-banner-mascot.himi-videos-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-video.gif?v=fluid-50fps"); }
-.himi-section-banner-mascot.himi-vip-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-celebrate.gif?v=fluid-50fps"); }
+.himi-section-banner-mascot.himi-courses-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-wave-animated.webp"); }
+.himi-section-banner-mascot.himi-practice-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-cheer-animated.webp"); }
+.himi-section-banner-mascot.himi-listening-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-listen-animated.webp"); }
+.himi-section-banner-mascot.himi-videos-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-video-animated.webp"); }
+.himi-section-banner-mascot.himi-vip-banner-mascot { background-image: url("/assets/mascot/himi-v2/himi-celebrate-animated.webp"); }
 
 .himi-section-banner-copy {
   min-width: 0;
@@ -191,7 +191,7 @@
   right: -2px;
   bottom: -19px;
   z-index: 4;
-  background: url("/assets/mascot/himi-v2/himi-listen.gif?v=fluid-50fps") center / contain no-repeat;
+  background: url("/assets/mascot/himi-v2/himi-listen-animated.webp") center / contain no-repeat;
   filter: drop-shadow(0 15px 17px rgba(31, 69, 58, .16));
   animation: himi-banner-mascot-float 3.5s ease-in-out infinite;
 }

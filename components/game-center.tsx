@@ -258,7 +258,7 @@ function DailyGameCompletionAction() {
   return <NextLink
     className={`daily-game-flow-action${syncState === "error" ? " is-secondary" : ""}`}
     href="/?session=today#today-summary"
-    prefetch
+    prefetch={false}
   >
     {syncState === "error" ? "Về phiên hôm nay" : "Xem tổng kết 4/4"} <ArrowRight size={16} />
   </NextLink>;

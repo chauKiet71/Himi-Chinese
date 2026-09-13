@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type MouseEvent, type ReactNode, type SyntheticEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -58,7 +58,6 @@ const learnerPracticeItems = [
   { href: "/videos", label: "Video", icon: Clapperboard, matches: (pathname: string) => pathname.startsWith("/videos") },
 ];
 
-const learnerPrefetchItems = [...learnerRailItems, ...learnerPracticeItems];
 const mobilePracticeItems = [...learnerPracticeItems, learnerRailItems[3]];
 const RAIL_STORAGE_KEY = "himi-learner-rail";
 
@@ -122,6 +121,7 @@ export function LearnerAppShell({
   const routeProgressStartedAtRef = useRef<number | null>(null);
   const accountMenuRef = useRef<HTMLDivElement>(null);
   const accountMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const prefetchedHrefsRef = useRef(new Set<string>());
 
   useEffect(() => {
     let handle: number | undefined;
@@ -149,25 +149,6 @@ export function LearnerAppShell({
   }, []);
 
   useEffect(() => {
-    if (isStandaloneRoute(pathname)) return;
-    const warmPrimaryRoutes = () => {
-      for (const { href } of learnerPrefetchItems) router.prefetch(href);
-    };
-    const browserWindow = window as typeof window & {
-      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
-      cancelIdleCallback?: (handle: number) => void;
-    };
-
-    if (browserWindow.requestIdleCallback) {
-      const handle = browserWindow.requestIdleCallback(warmPrimaryRoutes, { timeout: 1800 });
-      return () => browserWindow.cancelIdleCallback?.(handle);
-    }
-
-    const handle = window.setTimeout(warmPrimaryRoutes, 500);
-    return () => window.clearTimeout(handle);
-  }, [pathname, router]);
-
-  useEffect(() => {
     if (!pendingHref || pendingHref === pathname) return;
     const handle = window.setTimeout(() => {
       setPendingHref(null);
@@ -181,7 +162,7 @@ export function LearnerAppShell({
     if (!pendingHref || pendingHref !== pathname) return;
 
     const elapsed = performance.now() - (routeProgressStartedAtRef.current ?? performance.now());
-    const completeDelay = Math.max(0, 760 - elapsed);
+    const completeDelay = Math.max(0, 160 - elapsed);
     let hideHandle: number | undefined;
     const completeHandle = window.setTimeout(() => {
       setRouteProgressCompleting(true);
@@ -189,7 +170,7 @@ export function LearnerAppShell({
         setPendingHref(null);
         setRouteProgressCompleting(false);
         routeProgressStartedAtRef.current = null;
-      }, 420);
+      }, 180);
     }, completeDelay);
 
     return () => {
@@ -218,7 +199,12 @@ export function LearnerAppShell({
     };
   }, [accountMenuOpen]);
 
-  const prepareRoute = (href: string) => router.prefetch(href);
+  const prepareRoute = useCallback((href: string) => {
+    if (isStandaloneRoute(pathname)) return;
+    if (prefetchedHrefsRef.current.has(href)) return;
+    prefetchedHrefsRef.current.add(href);
+    router.prefetch(href);
+  }, [pathname, router]);
   const beginRoute = (event: MouseEvent<HTMLElement>, href: string) => {
     if (!isPlainNavigation(event)) return;
     setPracticeTriggerSelected(false);
@@ -230,6 +216,15 @@ export function LearnerAppShell({
   const captureContentNavigation = (event: MouseEvent<HTMLDivElement>) => {
     const href = getInternalNavigationHref(event);
     if (href) beginRoute(event, href);
+  };
+  const prepareContentNavigation = (event: SyntheticEvent<HTMLDivElement>) => {
+    if (!(event.target instanceof Element)) return;
+    const anchor = event.target.closest<HTMLAnchorElement>("a[href]");
+    if (!anchor || anchor.hasAttribute("download")) return;
+    const target = anchor.getAttribute("target");
+    const href = anchor.getAttribute("href");
+    if ((target && target.toLowerCase() !== "_self") || !href?.startsWith("/") || href.startsWith("//")) return;
+    prepareRoute(href);
   };
   const restoreAutoCollapsedRail = () => {
     if (!practiceAutoExpandedRef.current) return;
@@ -324,7 +319,7 @@ export function LearnerAppShell({
         onClick={(event) => beginRoute(event, href)}
         onFocus={() => prepareRoute(href)}
         onPointerEnter={() => prepareRoute(href)}
-        prefetch
+        prefetch={false}
         title={!railExpanded ? label : undefined}
       >
         <Icon aria-hidden="true" size={21} /><span>{label}</span>
@@ -332,7 +327,14 @@ export function LearnerAppShell({
     );
   };
   return (
-    <div aria-busy={navigating} className={`learner-app-shell ${pathname === "/" ? "is-home-route" : ""} ${railExpanded ? "is-rail-expanded" : "is-rail-collapsed"}`.trim()} onClickCapture={captureContentNavigation}>
+    <div
+      aria-busy={navigating}
+      className={`learner-app-shell ${pathname === "/" ? "is-home-route" : ""} ${railExpanded ? "is-rail-expanded" : "is-rail-collapsed"}`.trim()}
+      onClickCapture={captureContentNavigation}
+      onFocusCapture={prepareContentNavigation}
+      onPointerOverCapture={prepareContentNavigation}
+      onTouchStartCapture={prepareContentNavigation}
+    >
       <a className="skip-link" href="#learner-main-content">Bỏ qua điều hướng</a>
       <aside className="learn-rail" id="learner-navigation-rail" aria-label="Điều hướng học tập">
         <button
@@ -346,8 +348,8 @@ export function LearnerAppShell({
         >
           <ChevronLeft aria-hidden="true" className="rail-toggle-icon" size={18} strokeWidth={3} />
         </button>
-        <Link className="rail-brand" href="/" aria-label="Himi Chinese - Trang chủ" onClick={(event) => beginRoute(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch>
-          <span className="rail-logo"><Image alt="" aria-hidden="true" draggable={false} height={60} priority sizes="60px" src="/assets/brand/himi-sidebar-logo-transparent.png" unoptimized width={60} /></span>
+        <Link className="rail-brand" href="/" aria-label="Himi Chinese - Trang chủ" onClick={(event) => beginRoute(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch={false}>
+          <span className="rail-logo"><Image alt="" aria-hidden="true" draggable={false} height={60} priority sizes="60px" src="/assets/brand/himi-sidebar-logo-transparent.webp" unoptimized width={60} /></span>
           <BrandWordmark />
         </Link>
         <nav className="rail-nav">
@@ -380,7 +382,7 @@ export function LearnerAppShell({
                       onClick={(event) => beginRoute(event, href)}
                       onFocus={() => prepareRoute(href)}
                       onPointerEnter={() => prepareRoute(href)}
-                      prefetch
+                      prefetch={false}
                     >
                       <Icon aria-hidden="true" size={18} /><span>{label}</span>
                     </Link>
@@ -397,7 +399,7 @@ export function LearnerAppShell({
             onClick={(event) => beginRoute(event, accountItem.href)}
             onFocus={() => prepareRoute(accountItem.href)}
             onPointerEnter={() => prepareRoute(accountItem.href)}
-            prefetch
+            prefetch={false}
             title={!railExpanded ? accountItem.label : undefined}
           >
             <Settings aria-hidden="true" size={21} /><span>{accountItem.label}</span>
@@ -410,7 +412,7 @@ export function LearnerAppShell({
           onClick={(event) => beginRoute(event, "/vip")}
           onFocus={() => prepareRoute("/vip")}
           onPointerEnter={() => prepareRoute("/vip")}
-          prefetch
+          prefetch={false}
         >
           <span className="rail-membership-hero">
             <Crown aria-hidden="true" className="rail-membership-watermark" size={86} strokeWidth={1.8} />
@@ -450,7 +452,7 @@ export function LearnerAppShell({
           onClick={(event) => beginRoute(event, "/vip")}
           onFocus={() => prepareRoute("/vip")}
           onPointerEnter={() => prepareRoute("/vip")}
-          prefetch
+          prefetch={false}
         >
           <span className="rail-pro-crown"><Crown aria-hidden="true" size={25} strokeWidth={2.3} /></span>
           <span className="rail-pro-title">Nâng cấp <strong>Pro</strong></span>
@@ -464,7 +466,7 @@ export function LearnerAppShell({
       </aside>
 
       <header className="learn-topbar">
-        <Link aria-label="Himi Chinese - Trang chủ" className="brand" href="/" onClick={(event) => beginRoute(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch><BrandMark priority /><BrandWordmark /></Link>
+        <Link aria-label="Himi Chinese - Trang chủ" className="brand" href="/" onClick={(event) => beginRoute(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch={false}><BrandMark priority /><BrandWordmark /></Link>
         <div className="topbar-actions">
           <Link
             aria-label={user?.unreadNotificationCount ? `${user.unreadNotificationCount} thông báo chưa đọc` : "Thông báo"}
@@ -472,7 +474,7 @@ export function LearnerAppShell({
             href={notificationsHref}
             onClick={(event) => beginRoute(event, notificationsHref)}
             onPointerEnter={() => prepareRoute(notificationsHref)}
-            prefetch
+            prefetch={false}
             title="Thông báo"
           >
             <Bell aria-hidden="true" size={19} />
@@ -506,7 +508,7 @@ export function LearnerAppShell({
                 <span>{user.email}</span>
               </div>
               <nav aria-label="Lối tắt tài khoản" className="account-menu-links">
-                <Link href="/account" onClick={(event) => closeAccountMenuAndNavigate(event, "/account")} prefetch>
+                <Link href="/account" onClick={(event) => closeAccountMenuAndNavigate(event, "/account")} onFocus={() => prepareRoute("/account")} onPointerEnter={() => prepareRoute("/account")} prefetch={false}>
                   <UserRound aria-hidden="true" size={20} /><span>Hồ sơ</span>
                 </Link>
               </nav>
@@ -515,7 +517,7 @@ export function LearnerAppShell({
                 <button type="submit"><LogOut aria-hidden="true" size={20} /><span>Đăng xuất</span></button>
               </form>
             </div>
-          </div> : <Link aria-label="Đăng nhập" className="user-chip" href={profileHref} onClick={(event) => beginRoute(event, profileHref)} onPointerEnter={() => prepareRoute(profileHref)} prefetch>
+          </div> : <Link aria-label="Đăng nhập" className="user-chip" href={profileHref} onClick={(event) => beginRoute(event, profileHref)} onPointerEnter={() => prepareRoute(profileHref)} prefetch={false}>
             <UserChipAvatar avatarUrl={null} displayName={displayName} />
             <strong>{displayName}</strong>
           </Link>}
@@ -533,8 +535,8 @@ export function LearnerAppShell({
       <div className="learner-shell-content" id="learner-main-content" tabIndex={-1}>{children}</div>
 
       <nav className="learner-mobile-nav" aria-label="Điều hướng học tập trên điện thoại">
-        <Link aria-current={mobileHomeActive ? "page" : undefined} className={mobileHomeActive ? "active" : ""} href="/" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch><Home aria-hidden="true" size={20} /><span>Hôm nay</span></Link>
-        <Link aria-current={mobileCoursesActive ? "page" : undefined} className={mobileCoursesActive ? "active" : ""} href="/courses" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/courses")} onPointerEnter={() => prepareRoute("/courses")} prefetch><BookOpen aria-hidden="true" size={20} /><span>Lộ trình</span></Link>
+        <Link aria-current={mobileHomeActive ? "page" : undefined} className={mobileHomeActive ? "active" : ""} href="/" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch={false}><Home aria-hidden="true" size={20} /><span>Hôm nay</span></Link>
+        <Link aria-current={mobileCoursesActive ? "page" : undefined} className={mobileCoursesActive ? "active" : ""} href="/courses" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/courses")} onPointerEnter={() => prepareRoute("/courses")} prefetch={false}><BookOpen aria-hidden="true" size={20} /><span>Lộ trình</span></Link>
         <div className={`mobile-practice-group ${practiceMenuOpen ? "is-open" : ""}`.trim()}>
           <button
             aria-controls="mobile-practice-menu"
@@ -555,16 +557,16 @@ export function LearnerAppShell({
                 key={href}
                 onClick={(event) => closeMobilePracticeMenuAndNavigate(event, href)}
                 onPointerEnter={() => prepareRoute(href)}
-                prefetch
+                prefetch={false}
               >
                 <Icon aria-hidden="true" size={20} /><span>{label}</span>
               </Link>
             ))}
           </div>
         </div>
-        <Link aria-current={mobileGamesActive ? "page" : undefined} className={mobileGamesActive ? "active" : ""} href="/games" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/games")} onPointerEnter={() => prepareRoute("/games")} prefetch><Gamepad2 aria-hidden="true" size={20} /><span>Trò chơi</span></Link>
-        <Link aria-current={mobileVipActive ? "page" : undefined} className={mobileVipActive ? "active" : ""} href="/vip" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/vip")} onPointerEnter={() => prepareRoute("/vip")} prefetch><Crown aria-hidden="true" size={20} /><span>VIP</span></Link>
-        <Link aria-current={mobileAccountActive ? "page" : undefined} className={mobileAccountActive ? "active" : ""} href={profileHref} onClick={(event) => closeMobilePracticeMenuAndNavigate(event, profileHref)} onPointerEnter={() => prepareRoute(profileHref)} prefetch><UserRound aria-hidden="true" size={20} /><span>Tài khoản</span></Link>
+        <Link aria-current={mobileGamesActive ? "page" : undefined} className={mobileGamesActive ? "active" : ""} href="/games" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/games")} onPointerEnter={() => prepareRoute("/games")} prefetch={false}><Gamepad2 aria-hidden="true" size={20} /><span>Trò chơi</span></Link>
+        <Link aria-current={mobileVipActive ? "page" : undefined} className={mobileVipActive ? "active" : ""} href="/vip" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/vip")} onPointerEnter={() => prepareRoute("/vip")} prefetch={false}><Crown aria-hidden="true" size={20} /><span>VIP</span></Link>
+        <Link aria-current={mobileAccountActive ? "page" : undefined} className={mobileAccountActive ? "active" : ""} href={profileHref} onClick={(event) => closeMobilePracticeMenuAndNavigate(event, profileHref)} onPointerEnter={() => prepareRoute(profileHref)} prefetch={false}><UserRound aria-hidden="true" size={20} /><span>Tài khoản</span></Link>
       </nav>
     </div>
   );

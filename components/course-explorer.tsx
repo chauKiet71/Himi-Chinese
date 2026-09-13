@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ChevronRight, Search } from "lucide-react";
 import { CourseCard } from "@/components/course-card";
-import { HskCourseCard } from "@/components/hsk-course-card";
+import { HskCourseCard, type HskCourseSummary } from "@/components/hsk-course-card";
 import type { Course } from "@/lib/content-types";
 
 const filters = ["Tất cả", "Nền tảng", "Văn phòng", "Nhà máy", "Logistics", "Kinh doanh", "Dịch vụ"];
@@ -12,9 +12,11 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export function CourseExplorer({
   courses,
+  hskSummary,
   includeHskCard = false,
 }: {
   courses: Course[];
+  hskSummary: HskCourseSummary;
   includeHskCard?: boolean;
 }) {
   const [query, setQuery] = useState("");
@@ -60,7 +62,7 @@ export function CourseExplorer({
         key="hsk-curriculum"
         layout
         transition={{ duration: 0.2, ease }}
-      ><HskCourseCard /></motion.div> : null}{visibleCourses.map((course, index) => <motion.div
+      ><HskCourseCard {...hskSummary} /></motion.div> : null}{visibleCourses.map((course, index) => <motion.div
         animate={{ opacity: 1, scale: 1, y: 0 }}
         className="course-motion-item"
         exit={reduceMotion ? undefined : { opacity: 0, scale: 0.985, y: -6 }}

@@ -69,7 +69,7 @@ export default async function WritingLevelPage({ params }: WritingLevelPageProps
                 <span><Clock3 aria-hidden="true" size={15} /> {lesson.minutes} phút</span>
                 <span><PenLine aria-hidden="true" size={15} /> {lesson.characterCount} chữ</span>
               </div>
-              <Link href={`/writing/${level.id}/${lesson.id}/practice`} prefetch>
+              <Link href={`/writing/${level.id}/${lesson.id}/practice`} prefetch={false}>
                 Luyện viết <ArrowRight aria-hidden="true" size={17} />
               </Link>
             </div>

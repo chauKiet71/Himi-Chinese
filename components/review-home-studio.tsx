@@ -5,14 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, AudioLines, BrainCircuit, Check, Mic2, Play } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import type { Vocabulary } from "@/lib/content-types";
-import type { DailySessionSnapshot } from "@/lib/daily-session";
 
 type ReviewHomeStudioProps = {
-  authenticated: boolean;
-  dailySession: DailySessionSnapshot;
   verified?: boolean;
-  vocabulary: Vocabulary[];
 };
 
 const HOME_DIALOGUE = [
@@ -94,7 +89,7 @@ export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {
           <Image
             alt=""
             height="420"
-            src={motionEnabled ? "/assets/mascot/himi-v2/himi-wave.gif?v=fluid-50fps" : "/assets/mascot/himi-v2/himi-wave.webp"}
+            src={motionEnabled ? "/assets/mascot/himi-v2/himi-wave-animated.webp" : "/assets/mascot/himi-v2/himi-wave.webp"}
             unoptimized
             width="420"
           />
@@ -119,27 +114,27 @@ export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {
           <p>Tình huống thật. Phản xạ tự nhiên.</p>
 
           <div className="home-portal-actions">
-            <Link className="home-portal-primary" href="/listening?mode=scenario" prefetch>
+            <Link className="home-portal-primary" href="/listening?mode=scenario" prefetch={false}>
               Bắt đầu luyện nói <ArrowRight aria-hidden="true" size={23} />
             </Link>
-            <Link className="home-portal-secondary" href="/courses" prefetch>
+            <Link className="home-portal-secondary" href="/courses" prefetch={false}>
               <span aria-hidden="true"><Play size={18} fill="currentColor" /></span>
               Xem lộ trình
             </Link>
           </div>
 
           <nav aria-label="Bắt đầu luyện nhanh" className="home-portal-quick-dock">
-            <Link className="home-portal-quick-action is-primary" href="/listening?mode=scenario" prefetch>
+            <Link className="home-portal-quick-action is-primary" href="/listening?mode=scenario" prefetch={false}>
               <Mic2 aria-hidden="true" size={26} strokeWidth={2.15} />
               <strong>Luyện nói</strong>
               <small>Tình huống</small>
             </Link>
-            <Link className="home-portal-quick-action" href="/listening" prefetch>
+            <Link className="home-portal-quick-action" href="/listening" prefetch={false}>
               <AudioLines aria-hidden="true" size={27} strokeWidth={2.05} />
               <strong>Nghe phản xạ</strong>
               <small>3 phút</small>
             </Link>
-            <Link className="home-portal-quick-action" href="/hsk/1/hsk1-bai-01-chao-anh/flashcard" prefetch>
+            <Link className="home-portal-quick-action" href="/hsk/1/hsk1-bai-01-chao-anh/flashcard" prefetch={false}>
               <BrainCircuit aria-hidden="true" size={27} strokeWidth={2.05} />
               <strong>Ôn từ</strong>
               <small>5 từ yếu</small>

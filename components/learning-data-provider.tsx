@@ -7,6 +7,14 @@ import { createBrowserApiCache, type BrowserApiCache } from "@/lib/browser-api-c
 const LearningDataContext = createContext<BrowserApiCache | null>(null);
 const backgroundExcluded = /^\/(?:admin|login|register|forgot-password|reset-password|verify-email|terms|privacy)(?:\/|$)/;
 
+function learningWarmupUrls(pathname: string, authenticated: boolean): string[] {
+  if (pathname === "/games") return ["/api/games/vocabulary?level=hsk-1"];
+  if (authenticated && (pathname === "/" || pathname.startsWith("/practice"))) {
+    return ["/api/progress/practice"];
+  }
+  return [];
+}
+
 export function LearningDataProvider({ scope, authenticated, children }: { scope: string; authenticated: boolean; children: ReactNode }) {
   const cache = useMemo(() => createBrowserApiCache({ scope }), [scope]);
   useEffect(() => { void cache.removeOtherScopes(); }, [cache]);
@@ -23,10 +31,8 @@ function LearningDataWarmup({ cache, authenticated }: { cache: BrowserApiCache; 
   useEffect(() => {
     if (!enabled) return;
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
-    const urls = [
-      ...(authenticated ? ["/api/progress/practice"] : []),
-      ...Array.from({ length: 6 }, (_, index) => `/api/games/vocabulary?level=hsk-${index + 1}`),
-    ];
+    const urls = learningWarmupUrls(pathname, authenticated);
+    if (!urls.length) return;
     let cancelled = false;
     let running = false;
     let index = 0;
@@ -48,8 +54,8 @@ function LearningDataWarmup({ cache, authenticated }: { cache: BrowserApiCache; 
       if (!canWarm() || running || index >= urls.length) return;
       if (timer !== undefined) window.clearTimeout(timer);
       if (idle !== undefined) window.cancelIdleCallback?.(idle);
-      if (window.requestIdleCallback) idle = window.requestIdleCallback(() => { void run(); }, { timeout: 5_000 });
-      else timer = window.setTimeout(() => { void run(); }, 1_000);
+      if (window.requestIdleCallback) idle = window.requestIdleCallback(() => { void run(); }, { timeout: 4_000 });
+      else timer = window.setTimeout(() => { void run(); }, 1_500);
     };
     schedule();
     window.addEventListener("online", schedule);
@@ -61,7 +67,7 @@ function LearningDataWarmup({ cache, authenticated }: { cache: BrowserApiCache; 
       window.removeEventListener("online", schedule);
       document.removeEventListener("visibilitychange", schedule);
     };
-  }, [cache, authenticated, enabled]);
+  }, [cache, authenticated, enabled, pathname]);
 
   return null;
 }

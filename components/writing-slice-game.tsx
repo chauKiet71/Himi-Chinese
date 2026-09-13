@@ -590,7 +590,7 @@ function SliceSession({
                 aria-hidden="true"
                 className="writing-slice-impact"
                 height="1254"
-                src="/assets/writing/bamboo-slice-burst.png"
+                src="/assets/writing/bamboo-slice-burst.webp"
                 width="1254"
               />
               <span aria-live="polite" className="writing-hit-score" role="status">

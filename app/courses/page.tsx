@@ -5,6 +5,7 @@ import { CourseLibraryView, type CourseLibraryViewName } from "@/components/cour
 import { getCurrentUser } from "@/lib/auth-session";
 import { listPublishedCoursesForViewer } from "@/lib/course-repository";
 import { getHskCurriculumPageData } from "@/lib/hsk-access-repository";
+import { HSK_CURRICULUM } from "@/lib/hsk-curriculum";
 
 export const metadata: Metadata = {
   title: "Giáo trình HSK & lộ trình chuyên ngành",
@@ -15,13 +16,24 @@ type CoursesSearchParams = {
   view?: string | string[];
 };
 
+const hskSummary = {
+  lessonCount: HSK_CURRICULUM.reduce(
+    (levelTotal, level) => levelTotal + level.topics.reduce(
+      (topicTotal, topic) => topicTotal + topic.lessons.length,
+      0,
+    ),
+    0,
+  ),
+  levelCount: HSK_CURRICULUM.length,
+};
+
 function firstValue(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
 }
 
 async function CourseCatalog({ userId }: { userId: string | null }) {
   const courses = await listPublishedCoursesForViewer(userId);
-  return <CourseLibraryView courses={courses} hskCurriculum={[]} view="catalog" />;
+  return <CourseLibraryView courses={courses} hskCurriculum={[]} hskSummary={hskSummary} view="catalog" />;
 }
 
 export default async function CoursesPage({
@@ -34,7 +46,7 @@ export default async function CoursesPage({
   const hskCurriculum = view === "hsk" ? await getHskCurriculumPageData(user?.id ?? null) : [];
 
   return <main className="course-library-page hsk-curriculum-page">
-    {view === "hsk" ? <CourseLibraryView courses={[]} hskCurriculum={hskCurriculum} view="hsk" /> : <div id="course-catalog">
+    {view === "hsk" ? <CourseLibraryView courses={[]} hskCurriculum={hskCurriculum} hskSummary={hskSummary} view="hsk" /> : <div id="course-catalog">
       <Suspense fallback={<CourseGridSkeleton />}><CourseCatalog userId={user?.id ?? null} /></Suspense>
     </div>}
   </main>;

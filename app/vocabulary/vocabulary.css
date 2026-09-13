@@ -247,7 +247,7 @@ body:has(.vsets-immersive-session) > .himi-chatbot-widget { display: none; }
   .vsets-hero { min-height: 0; grid-template-columns: 1fr; padding: 25px 21px; border-radius: 20px 20px 0 0; }
   .vsets-hero-art { display: none; }
   .vsets-hero p { font-size: 14px; }
-  .vsets-hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .vsets-hero-actions { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .vsets-page .vsets-start-learning, .vsets-hero-actions .vsets-secondary { min-width: 0; width: 100%; min-height: 48px; padding-inline: 12px; font-size: 13px; }
   .vsets-library-shell { border-radius: 0 0 20px 20px; }
   .vsets-library-nav { padding: 16px 14px; }
@@ -307,6 +307,9 @@ body:has(.vsets-immersive-session) > .himi-chatbot-widget { display: none; }
   .vsets-library-main { padding-inline: 13px; }
   .vsets-saved-table li { grid-template-columns: 64px minmax(0, 1fr) auto; gap: 10px; }
   .vsets-list-hanzi { width: 64px; min-height: 66px; font-size: 32px; }
+}
+@media (max-width: 520px) {
+  .vsets-hero-actions { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   .vsets-page button, .vsets-actions > a, .vsets-card, .vsets-search, .vsets-saved-table li, .vsets-create-overlay, .vsets-create-dialog { transition: none; animation: none; }

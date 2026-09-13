@@ -8,7 +8,7 @@ test("terms page uses the selected Himi split layout and accessible accordions",
   const [page, css, layout, footer] = await Promise.all([
     read("app/terms/page.tsx"),
     read("app/legal.css"),
-    read("app/layout.tsx"),
+    read("app/terms/layout.tsx"),
     read("components/site-footer.tsx"),
   ]);
 
@@ -37,7 +37,7 @@ test("terms page uses the selected Himi split layout and accessible accordions",
   assert.match(css, /@media \(max-width: 920px\)/);
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
-  assert.match(layout, /import "\.\/legal\.css"/);
+  assert.match(layout, /import stylesheetHref from "\.\.\/legal\.css\?url"/);
   assert.doesNotMatch(footer, /giai đoạn beta|chưa mở thanh toán/i);
   assert.match(footer, /Sản phẩm phát hành chính thức/);
   assert.match(footer, /Thanh toán VIP qua VietQR và SePay/);

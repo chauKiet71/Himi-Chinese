@@ -207,7 +207,7 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
   useEffect(() => {
     if (!registering) return;
     const successImage = new window.Image();
-    successImage.src = "/assets/auth/penguin-register-success.png";
+    successImage.src = "/assets/auth/penguin-register-success.webp";
   }, [registering]);
 
   useEffect(() => () => {
@@ -278,7 +278,7 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
     </> : null}
     {registerState === "success" ? <section aria-live="polite" className="auth-registration-success" role="status">
       <div className="auth-registration-success-inner">
-        <Image alt="Cánh Cụt Himi vui vẻ bật nhảy giữa những mảnh giấy chúc mừng" height={1254} src="/assets/auth/penguin-register-success.png" unoptimized width={1254} />
+        <Image alt="Cánh Cụt Himi vui vẻ bật nhảy giữa những mảnh giấy chúc mừng" height={1254} src="/assets/auth/penguin-register-success.webp" unoptimized width={1254} />
         <div className="auth-registration-success-copy">
           <span>Tài khoản đã sẵn sàng</span>
           <h1>Đăng ký thành công!</h1>
