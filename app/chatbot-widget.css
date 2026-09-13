@@ -18,6 +18,10 @@ body:has(.admin-page) > .himi-chatbot-widget {
   display: none;
 }
 
+body:has(.game-immersive-dashboard) > .himi-chatbot-widget {
+  display: none;
+}
+
 .himi-chatbot-widget button,
 .himi-chatbot-widget input,
 .himi-chatbot-widget label {

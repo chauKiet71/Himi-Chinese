@@ -8,14 +8,12 @@ import {
   ArrowRight,
   BookOpen,
   Check,
-  ChevronDown,
   Heart,
   Keyboard,
   Pause,
   Play,
   RotateCcw,
   Sparkles,
-  Volume2,
   X,
 } from "lucide-react";
 import {
@@ -27,7 +25,7 @@ import {
   type FormEvent,
   type ReactNode,
 } from "react";
-import { speakChinese, type GameWord } from "@/lib/game-content";
+import { type GameWord } from "@/lib/game-content";
 import { useLearningData } from "@/components/learning-data-provider";
 import { createSliceDeck, normalizeSliceAnswer as normalizeAnswer, SLICE_HSK_COURSES, type SliceHskLevel } from "@/lib/slice-game";
 import { hasCompletedGameCourse, type GameCourseCompletionKey } from "@/lib/activity-progress";
@@ -53,11 +51,15 @@ function GameOverlay({
   mode,
   score,
   onStart,
+  onChangeCourse,
+  onExit,
   completionAction,
 }: {
   mode: GameMode;
   score: number;
   onStart: () => void;
+  onChangeCourse: () => void;
+  onExit?: () => void;
   completionAction?: ReactNode;
 }) {
   if (!(["ready", "complete", "gameover"] as GameMode[]).includes(mode)) return null;
@@ -80,9 +82,25 @@ function GameOverlay({
             ? "Ba từ đã chạm đất. Lượt mới sẽ bắt đầu lại từ đầu."
             : "Nhìn Hán tự đang rơi, gõ pinyin không dấu hoặc có dấu. Đúng từ là Himi sẽ lao lên cắt ngay."}
       </p>
-      <button className="writing-primary-action" onClick={onStart} type="button">
-        <Play fill="currentColor" size={16} /> {mode === "ready" ? "Bắt đầu chém từ" : "Chơi lại"}
-      </button>
+      {complete ? (
+        <div className="writing-completion-actions" aria-label="Hành động sau khi hoàn tất">
+          <button className="writing-primary-action" onClick={onStart} type="button">
+            <Play fill="currentColor" size={16} /> Tiếp tục
+          </button>
+          <button className="writing-completion-action" onClick={onChangeCourse} type="button">
+            <BookOpen size={16} /> Đổi khóa HSK
+          </button>
+          {onExit ? (
+            <button className="writing-completion-action" onClick={onExit} type="button">
+              <ArrowLeft size={16} /> Đổi trò chơi
+            </button>
+          ) : null}
+        </div>
+      ) : (
+        <button className="writing-primary-action" onClick={onStart} type="button">
+          <Play fill="currentColor" size={16} /> {mode === "ready" ? "Bắt đầu chém từ" : "Chơi lại"}
+        </button>
+      )}
       {complete ? completionAction : null}
       {mode === "ready" ? <small>Enter để chốt · Không cần gõ dấu thanh</small> : null}
     </div>
@@ -377,10 +395,6 @@ function SliceSession({
     }
   };
 
-  const speakWord = () => {
-    speakChinese(word.hanzi);
-  };
-
   const togglePause = () => {
     if (mode === "playing") {
       fallTweenRef.current?.pause();
@@ -471,18 +485,32 @@ function SliceSession({
 
     if (reducedMotion) {
       timeline
-        // Keep the timed falling target, but replace decorative flight with a fade.
-        .set(hitScore, { scale: 1, x: 38, y: -18 })
-        .to(face, { autoAlpha: 0, duration: .16 }, 0)
-        .to(hitScore, { autoAlpha: 1, duration: .16 }, 0)
-        .to(hitScore, { autoAlpha: 0, duration: .16 }, .64);
+        // Keep the flight compact, but slow it enough for the strike to read clearly.
+        .to(penguin, {
+          autoAlpha: 1,
+          duration: .5,
+          ease: "power1.inOut",
+          rotation: 8,
+          scale: .94,
+          x: strikePoint.impactX,
+          y: strikePoint.impactY,
+        }, 0)
+        .set(face, { autoAlpha: 0 }, .5)
+        .set([leftHalf, rightHalf], { autoAlpha: 1 }, .5)
+        .set(impact, { autoAlpha: 1, rotation: -1, scale: .9 }, .5)
+        .set(hitScore, { autoAlpha: 1, scale: 1, x: 38, y: -18 }, .5)
+        .to(leftHalf, { autoAlpha: 0, duration: .34, rotation: -10, x: -24, y: 36 }, .5)
+        .to(rightHalf, { autoAlpha: 0, duration: .34, rotation: 10, x: 24, y: 34 }, .5)
+        .to(impact, { autoAlpha: 0, duration: .3, rotation: 2, scale: 1.08 }, .6)
+        .to(penguin, { autoAlpha: 0, duration: .26, rotation: 12, x: strikePoint.impactX + 24, y: strikePoint.impactY - 28 }, .84)
+        .to(hitScore, { autoAlpha: 0, duration: .18, y: -36 }, 1.04);
     } else {
       timeline
         .to(penguin, { duration: .16, ease: "power2.out", rotation: -8, scale: 1.02, x: -12, y: 8 }, 0)
         .to(cape, { autoAlpha: .72, duration: .16, ease: "power2.out", rotation: 4, scaleX: .72, skewY: -3 }, .04)
-        .to(penguin, { duration: .42, ease: "power2.in", rotation: 9, scale: .94, x: strikePoint.impactX, y: strikePoint.impactY }, .16)
-        .to(cape, { autoAlpha: 1, duration: .42, ease: "sine.inOut", rotation: -3, scaleX: 1.04, skewY: 3 }, .16)
-        .addLabel("impact", .58)
+        .to(penguin, { duration: .5, ease: "power2.in", rotation: 9, scale: .94, x: strikePoint.impactX, y: strikePoint.impactY }, .16)
+        .to(cape, { autoAlpha: 1, duration: .5, ease: "sine.inOut", rotation: -3, scaleX: 1.04, skewY: 3 }, .16)
+        .addLabel("impact", .66)
         .set(face, { autoAlpha: 0 }, "impact")
         .set([leftHalf, rightHalf], { autoAlpha: 1 }, "impact")
         .to(impact, { autoAlpha: 1, duration: .16, ease: "power3.out", rotation: -1, scale: .96 }, "impact")
@@ -604,7 +632,14 @@ function SliceSession({
                 {combo >= 2 && mode !== "ready" ? <><Sparkles size={15} /> Combo x{combo}</> : null}
               </div>
 
-              <GameOverlay completionAction={completionAction} mode={mode} onStart={startGame} score={score} />
+              <GameOverlay
+                completionAction={completionAction}
+                mode={mode}
+                onChangeCourse={onChangeCourse}
+                onExit={onExit}
+                onStart={startGame}
+                score={score}
+              />
               {mode === "paused" && !missed ? (
                 <button className="writing-pause-overlay" onClick={togglePause} type="button"><Play fill="currentColor" size={18} /> Tiếp tục</button>
               ) : null}
@@ -631,54 +666,6 @@ function SliceSession({
               </span>
             </form>
           </section>
-
-          <aside className="writing-session-aside" aria-label="Thông tin lượt chơi">
-            <div className="writing-course-current">
-              <strong>{SLICE_HSK_COURSES.find((course) => course.id === level)?.label} · {words.length} từ vựng</strong>
-              <span>Ngẫu nhiên từ các bài học trong khóa</span>
-              <button className="writing-course-back" onClick={onChangeCourse} type="button"><ArrowLeft size={16} /> Đổi khóa HSK</button>
-            </div>
-            <details className="writing-session-details">
-              <summary className="writing-session-summary">
-                <span aria-hidden="true" className="writing-session-summary-icon">
-                  <Sparkles size={18} />
-                </span>
-                <span className="writing-session-summary-copy">
-                  <small>Thông tin lượt chơi</small>
-                  <strong><span lang="zh-CN">{word.hanzi}</span> · {word.pinyin}</strong>
-                </span>
-                <span className="writing-session-summary-action">
-                  Chi tiết <ChevronDown aria-hidden="true" size={17} />
-                </span>
-              </summary>
-
-              <div className="writing-session-details-content">
-                <section className="writing-current-word">
-                  <span>TỪ HIỆN TẠI</span>
-                  <div>
-                    <strong lang="zh-CN">{word.hanzi}</strong>
-                    <button aria-label="Nghe phát âm" onClick={speakWord} type="button"><Volume2 size={18} /></button>
-                  </div>
-                  <b>{word.pinyin}</b>
-                  <p>{word.example}</p>
-                </section>
-
-                <section className="writing-howto">
-                  <span>NHỊP CHƠI</span>
-                  <ol>
-                    <li><b>01</b><span>Nhìn Hán tự và nghĩa gợi ý.</span></li>
-                    <li><b>02</b><span>Gõ pinyin trước khi từ chạm đất.</span></li>
-                    <li><b>03</b><span>Đúng từ để Himi chém và giữ combo.</span></li>
-                  </ol>
-                </section>
-
-                <section className="writing-session-note">
-                  <span><Sparkles size={16} /> Mẹo lượt này</span>
-                  <p>Ưu tiên đúng âm trước. Dấu thanh sẽ được luyện lại ở lượt nâng cao.</p>
-                </section>
-              </div>
-            </details>
-          </aside>
         </div>
       </div>
     </main>

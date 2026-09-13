@@ -46,6 +46,25 @@ final result: passed
 
 ---
 
+## HSK lesson brand color — 2026-09-13
+
+Source: browser annotation on `http://localhost:3001/hsk/1/hsk1-bai-01-chao-anh`, followed by the explicit direction to use only `#FF4C3B` as the page accent.
+
+Scope: the HSK lesson workspace, including its header, launch actions, progress bars, four learning tabs, vocabulary cards, exercise controls, pronunciation panel, Hanzi panel, focus states, scrollbars, borders, and page backdrop.
+
+- Accent color: all product accents use exactly `#FF4C3B`; the earlier orange endpoints and red-to-orange gradients were removed.
+- Supporting palette: white, black, neutral gray, and pale red tints provide surfaces, readable text, borders, tracks, and shadows without introducing another accent hue.
+- Semantic states: success, error, and VIP lock colors remain semantic so feedback is still distinguishable.
+- Hanzi canvas: strokes use black and radicals, hints, and drawing feedback use `#FF4C3B`.
+
+Browser verification covered Từ vựng, Bài tập, Phát âm, and Chữ Hán. Each active tab computed to `rgb(255, 76, 59)`; vocabulary and exercise progress fills computed to the same value. The active vocabulary label and count both compute to white, with a translucent white count badge. No old teal highlight was found in computed page styles, and the browser console reported no errors.
+
+Focused verification: `tests/hsk-lesson.test.mjs` passed 3/3. Focused ESLint for `components/hsk-lesson-workspace.tsx` passed.
+
+final result: passed
+
+---
+
 # Design QA — Reference-aligned mobile listening player — 2026-09-13
 
 ## Comparison target
@@ -758,5 +777,37 @@ Comparison history: initial capture exposed the global select minimum height pus
 Interaction checks: speed selection to 1.25x, Pinyin toggle, play/pause state, and audio progress passed. Desktop viewport restores the original toolbar and hides the mobile speed field. Browser console: no errors. ESLint passed; six listening tests passed.
 
 No remaining actionable P0/P1/P2 findings. Native device safe-area behavior was not tested on hardware.
+
+final result: passed
+
+---
+
+## Luyện chém từ — reduced-motion slash feedback — 2026-09-13
+
+Source: user report that the slash animation disappeared after a correct pinyin answer on `http://localhost:3001/games`.
+
+Root cause: the active browser reports `prefers-reduced-motion: reduce`. That branch hid the falling word and showed the score, but skipped the slash burst, split word halves, and Himi's strike pose, making a correct answer look as if it had no slash animation.
+
+Fix: the reduced-motion path now flies Himi to the measured strike point, flashes the installed bamboo slash asset, separates both word halves with short low-distance motion, and then shows the score. The flight-to-impact duration is `0.50s` in both motion paths, increased from `0.42s` in the full-motion path so the approach reads more clearly.
+
+Browser verification: reproduced with `prefers-reduced-motion: reduce`, entered the exact live pinyin, and sampled the strike frames at the start, `250ms`, and after impact. Himi's transform advanced gradually while the word remained visible through the approach; the impact then became visible and the word split. Progress advanced from 0 to 2 correct words with the expected score. Browser console: no errors.
+
+Focused verification: slash regression test passed 1/1; slice deck and HSK game-round tests passed 9/9; focused ESLint passed.
+
+Completion screen: the finished round now presents three centered actions. `Tiếp tục` starts a fresh round with the current HSK course, `Đổi khóa HSK` returns to course selection, and `Đổi trò chơi` returns to the games hub. On narrow screens the primary action spans the row above the two secondary actions so the labels remain readable.
+
+Completion verification: completed live 12-word HSK 1 rounds and confirmed all three actions were present. `Tiếp tục` reset progress to `0 / 12`, retained HSK 1, and enabled the answer field for the new round. `Đổi khóa HSK` opened the six-course selector, while `Đổi trò chơi` returned to `Trung tâm trò chơi Himi`. Browser console: no errors.
+
+Brand refinement: the three completion actions now use the `#FF4C3B` brand accent for their filled or outlined states. Browser-computed styles confirmed `rgb(255, 76, 59)` for the primary background and both secondary labels. The separate current-course card beside the arena was removed and its DOM count verified as zero because the completion screen already provides the course-change action.
+
+Fullscreen refinement: the active slice session now occupies the complete viewport. The former desktop information column was removed, the arena expands across the available width and remaining height, and the answer field stays in its own bottom row inside the same viewport.
+
+Mobile character placement: Himi's resting strike position is anchored to the lower-left corner of the fullscreen arena, with the image center aligned close to the annotated point above the answer bar. Strike motion continues to use the live target coordinates from this new origin.
+
+Game support launcher: the floating Himi support button is hidden whenever one of the seven game interfaces or its HSK course picker is active. It remains available on the main games hub and elsewhere in the learner experience.
+
+Application input focus: input and textarea elements no longer receive the shared outline or halo when clicked. Known field wrappers for search, account password, chatbot, writing search, vocabulary search, and video dictation also suppress their focus-within halo while retaining their normal component border and caret.
+
+HSK course picker brand treatment: the shared course-selection layout used by all seven games now uses `#FF4C3B` for level badges, the featured card, CTA, arrows, hover states, completion badges, and the `DONE` ribbon. Card surfaces, body copy, and supporting borders use the existing white, black, and muted neutral tokens so the red remains the only accent color.
 
 final result: passed

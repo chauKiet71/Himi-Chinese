@@ -48,3 +48,10 @@ test("uses the Himi red tone for the learner rail Pro card", async () => {
   assert.match(css, /\.rail-pro-crown\s*\{[\s\S]*?background:\s*var\(--himi-red\)/);
   assert.match(css, /\.rail-pro-action\s*\{[\s\S]*?background:\s*var\(--himi-red\)/);
 });
+
+test("does not add a border-like focus frame to application inputs", async () => {
+  const css = await readFile(new URL("../app/brand-theme.css", import.meta.url), "utf8");
+
+  assert.match(css, /:where\(input, textarea\):is\(:focus, :focus-visible\)\s*\{[\s\S]*?outline: none !important;[\s\S]*?box-shadow: none !important;/);
+  assert.match(css, /:where\([\s\S]*?\.search-box,[\s\S]*?\.account-password-input-shell,[\s\S]*?\.himi-chatbot-input-shell,[\s\S]*?\.himi-writing-search,[\s\S]*?\.vsets-search,[\s\S]*?\.dictation-input[\s\S]*?\):focus-within\s*\{[\s\S]*?box-shadow: none !important;/);
+});

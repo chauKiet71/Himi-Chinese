@@ -550,28 +550,28 @@
 }
 
 .writing-course-picker .writing-course-card.is-complete {
-  border-color: #92cfc4;
-  background: linear-gradient(145deg, #fffdf8 18%, #f0faf7 100%);
-  box-shadow: 0 5px 0 #cfe8e2, 0 18px 34px rgba(8, 122, 114, .1);
+  border-color: color-mix(in srgb, var(--himi-red) 48%, var(--himi-line));
+  background: linear-gradient(145deg, var(--himi-white) 18%, var(--himi-red-soft) 100%);
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--himi-red) 22%, var(--himi-white)), 0 18px 34px rgba(255, 76, 59, .1);
 }
 
 .writing-course-picker .writing-course-card.is-featured.is-complete {
-  border-color: #159f96;
+  border-color: var(--himi-red);
 }
 
 .writing-course-picker .writing-course-card.is-complete:hover {
-  border-color: #159f96;
-  background: linear-gradient(145deg, #fffdf8 8%, #e9f8f4 100%);
-  box-shadow: 0 7px 0 #c4e3dc, 0 22px 38px rgba(8, 122, 114, .14);
+  border-color: var(--himi-red);
+  background: var(--himi-red-soft);
+  box-shadow: 0 7px 0 color-mix(in srgb, var(--himi-red) 28%, var(--himi-white)), 0 22px 38px rgba(255, 76, 59, .14);
 }
 
 .writing-course-picker .writing-course-card.is-complete .writing-course-number {
   color: #fff;
-  background: #159f96;
-  box-shadow: 0 8px 16px rgba(21, 159, 150, .2);
+  background: var(--himi-red);
+  box-shadow: 0 8px 16px rgba(255, 76, 59, .2);
 }
 
-.writing-course-done {
+.writing-course-picker .writing-course-card > .writing-course-done {
   min-height: 32px;
   padding: 0 14px;
   position: absolute;
@@ -582,30 +582,30 @@
   gap: 6px;
   color: #fff;
   border-radius: 0 18px 0 14px;
-  background: #159f96;
-  box-shadow: 0 6px 15px rgba(21, 159, 150, .17);
+  background: var(--himi-red);
+  box-shadow: 0 6px 15px rgba(255, 76, 59, .17);
   font-size: 11px;
   font-weight: 900;
   letter-spacing: .08em;
 }
 
 .writing-course-picker .writing-course-card.is-complete .writing-course-action {
-  color: #087a72;
+  color: var(--himi-red);
 }
 
 .writing-course-picker .writing-course-card.is-featured.is-complete .writing-course-action {
   color: #fff;
-  background: #159f96;
-  box-shadow: 0 9px 18px rgba(21, 159, 150, .2);
+  background: var(--himi-red);
+  box-shadow: 0 9px 18px rgba(255, 76, 59, .2);
 }
 
 .writing-course-picker .writing-course-card.is-featured.is-complete:hover .writing-course-action {
   color: #fff;
-  background: #087f77;
+  background: color-mix(in srgb, var(--himi-red) 84%, var(--himi-black));
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .writing-course-done {
+  .writing-course-picker .writing-course-card > .writing-course-done {
     animation: himi-course-done-enter 360ms cubic-bezier(.2, 1.35, .3, 1) both;
   }
 }
@@ -616,7 +616,7 @@
 }
 
 @media (max-width: 700px) {
-  .writing-course-done {
+  .writing-course-picker .writing-course-card > .writing-course-done {
     min-height: 29px;
     padding-inline: 11px;
     border-radius: 0 16px 0 12px;

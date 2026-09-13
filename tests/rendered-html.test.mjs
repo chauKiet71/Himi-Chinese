@@ -422,13 +422,15 @@ test("practice content has PostgreSQL schema, seed and authenticated admin CRUD"
 });
 
 test("games route renders the new Himi slice game and six video-inspired activities", async () => {
-  const [page, center, game, hskSession, shell, styles, content] = await Promise.all([
+  const [page, center, game, hskSession, shell, styles, completionStyles, chatbotStyles, content] = await Promise.all([
     read("app/games/page.tsx"),
     read("components/game-center.tsx"),
     read("components/writing-slice-game.tsx"),
     read("components/hsk-game-session.tsx"),
     read("components/learner-app-shell.tsx"),
     read("app/globals.css"),
+    read("app/game-completion.css"),
+    read("app/chatbot-widget.css"),
     read("lib/game-content.ts"),
   ]);
   assert.match(page, /GameCenter/);
@@ -477,7 +479,13 @@ test("games route renders the new Himi slice game and six video-inspired activit
   assert.match(styles, /\.game-journey-station/);
   assert.match(styles, /\.memory-grid/);
   assert.match(styles, /\.flashcard-3d/);
+  assert.match(styles, /\.writing-course-picker \.writing-course-number \{[\s\S]*background: var\(--himi-red-soft\);[\s\S]*color: var\(--himi-red\);/);
+  assert.match(styles, /\.writing-course-picker \.is-featured \.writing-course-number \{[\s\S]*background: var\(--himi-red\);/);
+  assert.match(styles, /\.writing-course-picker \.writing-course-action \{[\s\S]*color: var\(--himi-red\);/);
+  assert.match(completionStyles, /\.writing-course-picker \.writing-course-card > \.writing-course-done \{[\s\S]*color: #fff;[\s\S]*background: var\(--himi-red\);/);
+  assert.match(completionStyles, /\.writing-course-picker \.writing-course-card\.is-complete \{[\s\S]*var\(--himi-red\)/);
   assert.match(styles, /:has\(\.game-immersive-dashboard\) \.learn-rail/);
+  assert.match(chatbotStyles, /body:has\(\.game-immersive-dashboard\) > \.himi-chatbot-widget/);
   assert.doesNotMatch(styles, /\.learner-app-shell\.is-navigation-hidden \.learn-rail/);
   assert.match(styles, /@keyframes writing-word-fall/);
   assert.match(styles, /@keyframes writing-penguin-strike/);
@@ -495,12 +503,24 @@ test("slice game flies to the target, splits the word and reveals its Vietnamese
 
   assert.match(game, /setMode\("slicing"\)/);
   assert.match(game, /\.to\(penguin,[\s\S]*strikePoint\.impactX/);
-  assert.match(game, /if \(reducedMotion\)[\s\S]*?\.to\(face, \{ autoAlpha: 0[\s\S]*?\.to\(hitScore, \{ autoAlpha: 1/);
+  assert.match(game, /if \(reducedMotion\)[\s\S]*?\.set\(face, \{ autoAlpha: 0 \}[\s\S]*?\.set\(\[leftHalf, rightHalf\], \{ autoAlpha: 1 \}[\s\S]*?\.set\(impact, \{ autoAlpha: 1[\s\S]*?\.set\(hitScore, \{ autoAlpha: 1/);
   assert.match(game, /if \(penguin\) \{[\s\S]*?gsap\.set\(penguin, \{[\s\S]*?autoAlpha: 0,[\s\S]*?x: 0,[\s\S]*?y: 0,[\s\S]*?gsap\.to\(penguin, \{ autoAlpha: 1/);
   assert.match(game, /\.set\(\[leftHalf, rightHalf\], \{ autoAlpha: 1 \}, "impact"\)/);
   assert.match(game, /aria-live="polite" className="writing-hit-score" role="status"/);
   assert.match(game, /mode === "slicing"[\s\S]*\{word\.meaning\}/);
+  assert.match(game, /className="writing-completion-actions"/);
+  assert.match(game, /onClick=\{onStart\}[\s\S]*?> Tiếp tục/);
+  assert.match(game, /onClick=\{onChangeCourse\}[\s\S]*?> Đổi khóa HSK/);
+  assert.match(game, /onClick=\{onExit\}[\s\S]*?> Đổi trò chơi/);
+  assert.doesNotMatch(game, /className="writing-course-current"/);
+  assert.doesNotMatch(game, /className="writing-session-aside"/);
   assert.match(styles, /\.writing-hit-score small/);
+  assert.match(styles, /\.writing-completion-actions/);
+  assert.match(styles, /\.writing-completion-actions \.writing-primary-action \{[\s\S]*background: #FF4C3B/);
+  assert.match(styles, /\.writing-completion-action \{[\s\S]*color: #FF4C3B/);
+  assert.match(styles, /\.writing-game-dashboard:not\(\.writing-course-selection-page\) \.writing-arena-column \{[\s\S]*height: 100%/);
+  assert.match(styles, /\.writing-game-dashboard:not\(\.writing-course-selection-page\) \.writing-arena \{[\s\S]*height: auto/);
+  assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*?\.writing-penguin \{[\s\S]*?left: -44px;[\s\S]*?top: auto;[\s\S]*?bottom: -42px;/);
 });
 
 test("writing route flows from HSK levels to their lessons and the writing studio", async () => {

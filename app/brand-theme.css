@@ -206,6 +206,25 @@ body {
   }
 }
 
+/* Text fields keep their component border without adding a click/focus frame. */
+:where(input, textarea):is(:focus, :focus-visible) {
+  outline: none !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+}
+
+:where(
+  .search-box,
+  .account-password-input-shell,
+  .himi-chatbot-input-shell,
+  .himi-writing-search,
+  .vsets-search,
+  .dictation-input
+):focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 /* Home */
 .home-portal-art::after {
   position: absolute;
