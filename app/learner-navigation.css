@@ -1167,47 +1167,77 @@
   }
 
   .learner-app-shell .learner-mobile-nav {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-height: 72px;
+    padding: 9px max(12px, env(safe-area-inset-right)) max(9px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+    gap: 2px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    border: 0;
+    border-top: 1px solid rgba(29, 34, 48, .08);
+    border-radius: 22px 22px 0 0;
+    background: #fff;
+    box-shadow: 0 -8px 30px rgba(25, 31, 46, .09);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .learner-app-shell .learner-mobile-nav > a,
   .learner-app-shell .mobile-practice-trigger {
     min-width: 0;
-    min-height: 48px;
+    min-height: 54px;
+    padding: 4px 2px 3px;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 4px;
+    color: #858994;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    line-height: 1.1;
+    text-decoration: none;
+    transition: color 180ms ease, transform 180ms ease;
+  }
+
+  .learner-app-shell .learner-mobile-nav > a > svg,
+  .learner-app-shell .mobile-practice-trigger > svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2.15;
+    transition: color 180ms ease, transform 180ms ease;
+  }
+
+  .learner-app-shell .learner-mobile-nav > a.active > svg,
+  .learner-app-shell .mobile-practice-trigger.active > svg,
+  .learner-app-shell .mobile-practice-trigger[aria-expanded="true"] > svg {
+    transform: translateY(-1px);
   }
 
   .learner-app-shell .mobile-practice-group {
     min-width: 0;
     display: grid;
+    align-items: stretch;
   }
 
   .learner-app-shell .mobile-practice-trigger {
-    padding: 4px 2px;
-    display: grid;
-    place-items: center;
-    align-content: center;
-    gap: 3px;
     cursor: pointer;
-    color: #667a74;
-    border: 0;
-    border-radius: 12px;
-    background: transparent;
-    font-family: inherit;
-    font-size: 8px;
-    font-weight: 750;
-    line-height: 1.15;
     touch-action: manipulation;
   }
 
   .learner-app-shell .mobile-practice-trigger.active,
   .learner-app-shell .mobile-practice-trigger[aria-expanded="true"] {
-    color: #176b5b;
-    background: #e5f0ea;
+    color: var(--himi-red);
+    background: transparent;
   }
 
   .learner-app-shell .mobile-practice-trigger:focus-visible,
   .learner-app-shell .mobile-practice-menu a:focus-visible {
-    outline: 3px solid rgba(15, 145, 128, .32);
+    outline: 3px solid color-mix(in srgb, var(--himi-red) 24%, transparent);
     outline-offset: 2px;
   }
 
@@ -1219,7 +1249,7 @@
     z-index: 95;
     padding: 10px;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 8px;
     opacity: 0;
     visibility: hidden;
@@ -1243,8 +1273,9 @@
   }
 
   .learner-app-shell .mobile-practice-menu a {
-    min-height: 66px;
+    min-height: 72px;
     padding: 8px 5px;
+    grid-column: span 2;
     display: grid;
     place-items: center;
     align-content: center;
@@ -1256,6 +1287,11 @@
     font-weight: 760;
     text-align: center;
     text-decoration: none;
+  }
+
+  .learner-app-shell .mobile-practice-menu a:nth-child(4),
+  .learner-app-shell .mobile-practice-menu a:nth-child(5) {
+    grid-column: span 3;
   }
 
   .learner-app-shell .mobile-practice-menu a.active {

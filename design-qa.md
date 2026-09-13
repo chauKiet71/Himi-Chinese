@@ -44,6 +44,52 @@ No actionable P0, P1, or P2 visual differences remain. The missing secondary pau
 
 final result: passed
 
+---
+
+# Design QA — Reference-aligned mobile listening player — 2026-09-13
+
+## Comparison target
+
+- Source visual truth: the red-to-orange landscape player attached to the latest browser comment; the implementation is adapted to the annotated 686 × 1053 mobile viewport.
+- Implementation: `http://localhost:3001/listening?lesson=dialogue-beginner-topic-chat-with-chinese-001-daily-001`.
+- Implementation screenshot: captured from the current in-app browser during this verification pass.
+- Verification viewport: 686 × 1053 CSS px.
+
+## Findings
+
+- No remaining actionable P0/P1/P2 visual findings in the requested player region.
+
+## Required fidelity surfaces
+
+- Typography: the compact two-line speed and display labels remain readable inside 44 px controls.
+- Spacing and layout: the fixed player measures 671 × 96 px within the browser content width; the 62 px avatar and 56 px play button sit on the left, the timeline runs above the two 118 px controls, and the waveform remains at the far right.
+- Colors: retained the red-to-orange player gradient; speed and display controls now use the translucent surface, soft white border, and white text shown in the reference.
+- Assets: reused the existing Himi mascot and Lucide icons without substitute imagery.
+- Copy: current time, total duration, speed, display mode, and Vietnamese labels remain connected to the existing player state.
+
+## Interaction and responsive checks
+
+- No horizontal overflow at the verification viewport.
+- The compact fallback was also verified at 558 CSS px; both 44 px controls stay inside the player and the decorative waveform hides as intended.
+- Speed selection, display menu toggles, play/pause, and progress updates work in the browser.
+- Browser console reported no errors during the focused interaction pass.
+- `git diff --check -- app/listening-studio.css` passed; the only output is Git's existing LF-to-CRLF notice.
+- Four focused catalog tests pass. Two existing SSR hub tests still report an invalid React element type outside this CSS-only change.
+
+final result: passed
+
+## Full-width mobile progress follow-up — 2026-09-13
+
+- Source: latest browser annotation selecting the `0:15 / 0:41` progress row at a 549 × 1053 viewport.
+- Result: the progress row now spans the full inner width of the player, with the avatar, transport, speed, and display controls placed on the second row.
+- Measured at the annotated viewport: player 533.7 × 100.3 px; progress row x 10.2–523.5 px and 513.4 px wide; range track 449.7 px wide; horizontal overflow 0 px.
+- Responsive check: the full-width row is shared by all mobile breakpoints. The compact grid was tightened below 400 px and verified at the browser's 358 px minimum test width with 0 px overflow.
+- Transport centering follow-up: at the annotated 549 px viewport, the available transport region is x 68.2–285.6 px (center 176.9 px) and the previous/play/next cluster is x 128.5–226.5 px (center 177.5 px), a 0.6 px optical difference.
+- Divider follow-up: removed both mobile vertical separators; computed transport border is 0 px and the former speed-control pseudo-element no longer renders.
+- Existing player state and interactions remain unchanged.
+
+final result: passed
+
 ## Listening player update — 2026-09-12
 
 Source visual truth: the second image attached to the user's latest browser annotation (2171 × 724 original, 2048 × 683 displayed). Scope is the red/orange player, with the language controls moved inside it. The source is an isolated component on a white canvas, not a full-page viewport.
@@ -642,3 +688,25 @@ final result: blocked
 - Repeat the authenticated visual comparison when the in-app Browser capture surface is available.
 
 final result: blocked
+
+## Listening mobile player — 2026-09-13
+
+Source: user-attached mobile player reference in this conversation (477 × 151 px).
+Implementation: artifacts/listening-player-mobile-redesign.png, localhost:3001/listening.
+Scope: mobile audio player only. Existing mascot, icons, colors, and audio behavior reused.
+
+Visual verification: inspected the full-page browser capture and its player region at a measured 477 × 821 CSS viewport; also inspected the compact layout at 358 CSS px. The browser capture scales and pads its output, so comparison uses the visible player region rather than screenshot canvas dimensions. Reference is a standalone player crop; surrounding transcript is outside this comparison.
+
+- Typography: clear two-line speed label/value; readable language pills without the previous toolbar scale transform.
+- Layout: avatar left, timeline above, transport in the middle, language controls on their own centered bottom row, rounded white border. No horizontal overflow at the narrow viewport.
+- Colors: retained the existing red/orange player background and cream selected controls, consistent with the reference.
+- Assets: existing Himi mascot and library icons retained; decorative waveform omitted only on very narrow screens to leave room for controls.
+- Content: Vietnamese, Chinese, Pinyin, current speed, and actual audio timestamps preserved.
+
+Comparison history: initial capture exposed the global select minimum height pushing the speed label outside its border. Added a scoped 18px select height/min-height reset; the subsequent capture confirms label and value fit inside the speed control.
+
+Interaction checks: speed selection to 1.25x, Pinyin toggle, play/pause state, and audio progress passed. Desktop viewport restores the original toolbar and hides the mobile speed field. Browser console: no errors. ESLint passed; six listening tests passed.
+
+No remaining actionable P0/P1/P2 findings. Native device safe-area behavior was not tested on hardware.
+
+final result: passed

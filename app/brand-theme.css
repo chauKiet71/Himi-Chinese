@@ -197,6 +197,15 @@ body {
   background: var(--himi-red);
 }
 
+@media (max-width: 720px) {
+  .learner-app-shell .learner-mobile-nav a.active,
+  .learner-app-shell .mobile-practice-trigger.active,
+  .learner-app-shell .mobile-practice-trigger[aria-expanded="true"] {
+    color: var(--himi-red);
+    background: transparent;
+  }
+}
+
 /* Home */
 .home-portal-art::after {
   position: absolute;

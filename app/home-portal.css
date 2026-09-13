@@ -709,21 +709,22 @@
 
   .learner-app-shell.is-home-route .learner-mobile-nav {
     min-height: var(--home-landscape-nav-height);
-    padding: 4px 6px max(4px, env(safe-area-inset-bottom));
+    padding: 4px max(12px, env(safe-area-inset-right)) max(4px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
     position: fixed;
-    right: max(8px, env(safe-area-inset-right));
-    bottom: max(6px, env(safe-area-inset-bottom));
-    left: max(8px, env(safe-area-inset-left));
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: 90;
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 3px;
-    border: 1px solid rgba(210, 223, 215, .92);
-    border-radius: 16px;
-    background: rgba(255, 255, 255, .94);
-    box-shadow: 0 12px 30px rgba(19, 67, 58, .17);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
+    border: 0;
+    border-top: 1px solid rgba(29, 34, 48, .08);
+    border-radius: 20px 20px 0 0;
+    background: #fff;
+    box-shadow: 0 -8px 30px rgba(25, 31, 46, .09);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .learner-app-shell.is-home-route .learner-mobile-nav > a,
@@ -738,7 +739,7 @@
     overflow: hidden;
     color: #667a74;
     border: 0;
-    border-radius: 11px;
+    border-radius: 0;
     background: transparent;
     font-family: inherit;
     font-size: 9px;

@@ -5,21 +5,28 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode }
 import {
   ArrowRight,
   AudioLines,
+  BookOpen,
   Check,
+  ChevronDown,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
   CircleCheck,
+  Clock3,
+  Gauge,
   Headphones,
   Languages,
   LoaderCircle,
-  Mic2,
+  MessageCircle,
+  Monitor,
   Pause,
   Play,
   Search,
   SkipBack,
   SkipForward,
+  Sun,
   Volume2,
+  UserRound,
   X,
 } from "lucide-react";
 import {
@@ -41,6 +48,12 @@ import {
 function normalizeSearch(value: string): string {
   return value.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase().trim();
 }
+
+function listeningLevelLabel(group: ListeningCatalogGroup): string {
+  return group.labelVi.replace(/^(?:Đối thoại|Độc thoại)\s*/i, "").trim() || group.labelVi;
+}
+
+const listeningPreviewWaveHeights = [22, 34, 48, 64, 76, 55, 47, 70, 92, 80, 57, 46, 65, 74, 61, 48, 34, 24];
 
 function firstSelection(catalog: ListeningCatalogIndex, initialGroupId?: string) {
   const track = catalog.tracks.find((candidate) => candidate.groups.some((group) => group.id === initialGroupId))
@@ -82,6 +95,7 @@ export function ListeningCatalogStudio({
   const [duration, setDuration] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [speedPickerOpen, setSpeedPickerOpen] = useState(false);
+  const [levelPickerOpen, setLevelPickerOpen] = useState(false);
   const [activeSentenceId, setActiveSentenceId] = useState("");
   const [showChinese, setShowChinese] = useState(true);
   const [showPinyin, setShowPinyin] = useState(true);
@@ -94,6 +108,7 @@ export function ListeningCatalogStudio({
   const transcriptRef = useRef<HTMLElement>(null);
   const lessonBarRef = useRef<HTMLElement>(null);
   const playerRef = useRef<HTMLElement>(null);
+  const levelPickerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     if (lesson) window.scrollTo({ top: 0, behavior: "instant" });
@@ -200,6 +215,27 @@ export function ListeningCatalogStudio({
     return () => window.clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (!levelPickerOpen) return;
+
+    function closeOnOutsidePress(event: PointerEvent) {
+      if (!levelPickerRef.current?.contains(event.target as Node)) setLevelPickerOpen(false);
+    }
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      setLevelPickerOpen(false);
+      levelPickerRef.current?.querySelector<HTMLButtonElement>(".listening-catalog-group-trigger")?.focus();
+    }
+
+    document.addEventListener("pointerdown", closeOnOutsidePress);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePress);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [levelPickerOpen]);
+
   const activeTrack = catalog?.tracks.find((track) => track.id === activeTrackId) ?? catalog?.tracks[0];
   const activeGroup = activeTrack?.groups.find((group) => group.id === activeGroupId) ?? activeTrack?.groups[0];
   const activeTopic = activeGroup?.topics.find((topic) => topic.id === activeTopicId) ?? activeGroup?.topics[0];
@@ -218,6 +254,7 @@ export function ListeningCatalogStudio({
 
   function selectTrack(track: ListeningCatalogTrack) {
     const group = track.groups[0];
+    setLevelPickerOpen(false);
     setActiveTrackId(track.id);
     setActiveGroupId(group.id);
     setActiveTopicId(group.topics[0]?.id ?? "");
@@ -226,6 +263,7 @@ export function ListeningCatalogStudio({
   }
 
   function selectGroup(group: ListeningCatalogGroup) {
+    setLevelPickerOpen(false);
     setActiveGroupId(group.id);
     setActiveTopicId(group.topics[0]?.id ?? "");
     setQuery("");
@@ -418,6 +456,14 @@ export function ListeningCatalogStudio({
               <span>{formatListeningDuration(safeDuration)}</span>
             </div>
             <div className="listening-focus-player-toolbar">
+            <label className="listening-focus-mobile-speed">
+              <Gauge className="listening-focus-select-icon" aria-hidden="true" size={24} />
+              <span>Tốc độ</span>
+              <select aria-label="Tốc độ phát" value={playbackRate} onChange={(event) => changePlaybackRate(Number(event.target.value))}>
+                {[0.75, 1, 1.25].map((rate) => <option key={rate} value={rate}>{rate === 1 ? "1.0" : rate}x</option>)}
+              </select>
+              <ChevronDown aria-hidden="true" size={18} />
+            </label>
             <div className={`listening-focus-speed ${speedPickerOpen ? "is-expanded" : "is-collapsed"}`} aria-label="Tốc độ phát" role="group">
               {speedPickerOpen ? <>
                 <span className="listening-focus-speed-label">Tốc độ</span>
@@ -434,6 +480,26 @@ export function ListeningCatalogStudio({
               </button>
               <button aria-label="Câu tiếp theo" disabled={activeSentenceId === lesson.sentences.at(-1)?.id} onClick={() => skipSentence(1)} type="button"><SkipForward aria-hidden="true" fill="currentColor" size={23} /></button>
             </div>
+            <details className="listening-focus-mobile-display" onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false;
+            }} onKeyDown={(event) => {
+              if (event.key === "Escape") {
+                event.currentTarget.open = false;
+                event.currentTarget.querySelector("summary")?.focus();
+              }
+            }}>
+              <summary aria-label="Hiển thị nội dung">
+                <Monitor className="listening-focus-select-icon" aria-hidden="true" size={24} />
+                <span>Hiển thị</span>
+                <strong>{visibleTranscriptLines === 3 ? "Tất cả" : visibleTranscriptLines === 0 ? "Ẩn tất cả" : [showTranslation && "Việt", showChinese && "中文", showPinyin && "Pinyin"].filter(Boolean).join(" · ")}</strong>
+                <ChevronDown aria-hidden="true" size={18} />
+              </summary>
+              <div className="listening-focus-display-options" role="group" aria-label="Ngôn ngữ hiển thị">
+                <label><input type="checkbox" checked={showTranslation} onChange={(event) => setShowTranslation(event.target.checked)} />Tiếng Việt</label>
+                <label><input type="checkbox" checked={showChinese} onChange={(event) => setShowChinese(event.target.checked)} />中文</label>
+                <label><input type="checkbox" checked={showPinyin} onChange={(event) => setShowPinyin(event.target.checked)} />Pinyin</label>
+              </div>
+            </details>
             <nav className="listening-focus-language-tools" aria-label="Hiển thị nội dung">
               <button aria-pressed={showTranslation} onClick={() => setShowTranslation((value) => !value)} type="button"><Languages aria-hidden="true" size={18} /> Tiếng Việt</button>
               <button aria-pressed={showChinese} onClick={() => setShowChinese((value) => !value)} type="button"><Check aria-hidden="true" size={18} /> 中文</button>
@@ -487,38 +553,35 @@ export function ListeningCatalogStudio({
         </div>
 
         <div className="listening-redesign-now-playing" aria-label="Bài nghe đang chọn">
+          <Image alt="" aria-hidden="true" className="listening-redesign-player-mascot" height={360} src="/assets/mascot/himi-v2/himi-celebrate.webp" width={360} />
           <div className="listening-redesign-player-heading">
-            <span>Bài đang chọn · {previewLesson ? `Bài ${Math.max(1, visibleLessons.indexOf(previewLesson) + 1)}` : "Đang tải"}</span>
-            <b>{previewLesson && completedLessonIds.has(previewLesson.id) ? "Đã học" : "Sẵn sàng"}</b>
+            <span><BookOpen aria-hidden="true" size={17} /> Bài đang chọn · {previewLesson ? `Bài ${Math.max(1, visibleLessons.indexOf(previewLesson) + 1)}` : "Đang tải"}</span>
+            <b>{previewLesson && completedLessonIds.has(previewLesson.id) ? <CircleCheck aria-hidden="true" size={17} /> : <Sun aria-hidden="true" size={17} />}{previewLesson && completedLessonIds.has(previewLesson.id) ? "Đã học" : "Sẵn sàng"}</b>
           </div>
           <strong>{previewLesson?.titleVi ?? "Đang chuẩn bị kho bài nghe…"}</strong>
           <div className="listening-redesign-wave-row">
-            <button aria-label="Mở bài nghe đang chọn" disabled={!previewLesson || Boolean(lessonLoadingId)} onClick={() => previewLesson && void openLesson(previewLesson)} type="button"><Play aria-hidden="true" fill="currentColor" size={25} /></button>
-            <AudioLines aria-hidden="true" className="listening-redesign-wave-icon" size={210} strokeWidth={1.7} />
+            <button aria-label="Mở bài nghe đang chọn" disabled={!previewLesson || Boolean(lessonLoadingId)} onClick={() => previewLesson && void openLesson(previewLesson)} type="button">
+              {lessonLoadingId === previewLesson?.id ? <LoaderCircle aria-hidden="true" className="is-spinning" size={28} /> : <Play aria-hidden="true" fill="currentColor" size={32} />}
+            </button>
+            <div aria-hidden="true" className="listening-redesign-wave-bars">
+              {listeningPreviewWaveHeights.map((height, index) => <i key={`${height}-${index}`} style={{ height: `${height}%` }} />)}
+            </div>
           </div>
-          <div className="listening-redesign-player-time"><span>0:00</span><span>{previewLesson ? formatListeningDuration(previewLesson.durationSeconds) : "0:00"}</span></div>
-          <progress aria-label="Tiến độ bài đang chọn" max={100} value={previewLesson && completedLessonIds.has(previewLesson.id) ? 100 : 0} />
-          <div className="listening-redesign-player-footer"><span>{activeGroup?.labelVi ?? "Kho luyện nghe"} · {activeTopic?.labelVi ?? "Chọn chủ đề"}</span><span>{previewLesson && completedLessonIds.has(previewLesson.id) ? "100% đã hoàn thành" : "Chưa bắt đầu"}</span></div>
+          <div className="listening-redesign-player-progress">
+            <span>0:00</span>
+            <progress aria-label="Tiến độ bài đang chọn" max={100} value={previewLesson && completedLessonIds.has(previewLesson.id) ? 100 : 0} />
+            <span>{previewLesson ? formatListeningDuration(previewLesson.durationSeconds) : "0:00"}</span>
+          </div>
+          <div className="listening-redesign-player-footer">
+            <span><Headphones aria-hidden="true" size={17} />{activeGroup?.labelVi ?? "Kho luyện nghe"} · {activeTopic?.labelVi ?? "Chọn chủ đề"}</span>
+            <span><Clock3 aria-hidden="true" size={17} />{previewLesson && completedLessonIds.has(previewLesson.id) ? "Đã hoàn thành" : "Chưa bắt đầu"}</span>
+          </div>
         </div>
       </section>
 
-      {catalog ? <section className="listening-redesign-stats" aria-label="Thống kê kho bài nghe">
-        {catalog.tracks.map((track) => <article key={track.id}>
-          <span>{track.id === "dialogue" ? <Headphones aria-hidden="true" size={21} /> : <Mic2 aria-hidden="true" size={21} />}</span>
-          <div><strong>{track.lessonCount}</strong><small>{track.id === "dialogue" ? "bài đối thoại" : "bài độc thoại"}</small></div>
-        </article>)}
-        <article>
-          <span><CircleCheck aria-hidden="true" size={21} /></span>
-          <div><strong>{completedLessonIds.size}</strong><small>bài đã hoàn thành</small></div>
-        </article>
-      </section> : null}
-
       <section className="listening-catalog-browser" aria-labelledby="listening-catalog-title" ref={browserSectionRef}>
         <div className="listening-redesign-heading">
-          <div><span className="listening-section-kicker">BÀI HỌC HÔM NAY</span><h2 id="listening-catalog-title">Chọn bài nghe</h2></div>
-          {catalog && activeTrack ? <div className="listening-catalog-track-tabs" role="tablist" aria-label="Loại bài nghe">
-            {catalog.tracks.map((track) => <button aria-selected={track.id === activeTrack.id} key={track.id} onClick={() => selectTrack(track)} role="tab" type="button">{track.id === "dialogue" ? "Đối thoại" : "Độc thoại"}</button>)}
-          </div> : null}
+          <div><h2 id="listening-catalog-title">Khám phá bài nghe</h2></div>
         </div>
 
         {catalogError ? <div className="listening-catalog-empty" role="alert"><Headphones aria-hidden="true" size={28} /><strong>{catalogError}</strong></div> : null}
@@ -526,9 +589,44 @@ export function ListeningCatalogStudio({
 
         {catalog && activeTrack && activeGroup && activeTopic ? <>
           <div className="listening-redesign-filter-surface">
-          {activeTrack.groups.length > 1 ? <div className="listening-catalog-group-picker" aria-label="Cấp độ bài nghe">
-            {activeTrack.groups.map((group) => <button aria-pressed={group.id === activeGroup.id} key={group.id} onClick={() => selectGroup(group)} type="button"><strong>{group.labelVi}</strong><span lang="zh-CN">{group.labelZh}</span></button>)}
-          </div> : null}
+          <div className="listening-redesign-primary-filters">
+            <div className="listening-catalog-track-tabs" role="tablist" aria-label="Loại bài nghe">
+              {catalog.tracks.map((track) => <button aria-selected={track.id === activeTrack.id} key={track.id} onClick={() => selectTrack(track)} role="tab" type="button">
+                {track.id === "dialogue" ? <MessageCircle aria-hidden="true" size={18} /> : <UserRound aria-hidden="true" size={18} />}
+                {track.id === "dialogue" ? "Đối thoại" : "Độc thoại"}
+              </button>)}
+            </div>
+
+            {activeTrack.groups.length > 1 ? <div className={`listening-catalog-group-picker ${levelPickerOpen ? "is-open" : ""}`.trim()} ref={levelPickerRef}>
+              <button
+                aria-expanded={levelPickerOpen}
+                aria-haspopup="menu"
+                aria-label={`Cấp độ bài nghe: ${listeningLevelLabel(activeGroup)}`}
+                className="listening-catalog-group-trigger"
+                onClick={() => setLevelPickerOpen((open) => !open)}
+                type="button"
+              >
+                <span aria-hidden="true" className={`listening-level-icon ${activeTrack.groups.findIndex((group) => group.id === activeGroup.id) === 1 ? "is-orange" : ""}`.trim()}><i /><i /><i /></span>
+                <span className="listening-catalog-group-trigger-copy"><small>Trình độ:</small><strong>{listeningLevelLabel(activeGroup)}</strong></span>
+                <ChevronDown aria-hidden="true" size={18} />
+              </button>
+
+              {levelPickerOpen ? <div aria-label="Chọn cấp độ bài nghe" className="listening-catalog-group-menu" role="menu">
+                {activeTrack.groups.map((group, index) => {
+                  const selected = group.id === activeGroup.id;
+                  return <button aria-checked={selected} key={group.id} onClick={() => selectGroup(group)} role="menuitemradio" type="button">
+                    <span aria-hidden="true" className={`listening-level-icon ${index === 1 ? "is-orange" : ""}`.trim()}><i /><i /><i /></span>
+                    <span className="listening-catalog-group-option-copy"><strong>{listeningLevelLabel(group)}</strong><small lang="zh-CN">{group.labelZh}</small></span>
+                    {selected ? <span className="listening-catalog-group-check"><Check aria-hidden="true" size={18} /></span> : <span aria-hidden="true" />}
+                  </button>;
+                })}
+              </div> : null}
+            </div> : null}
+
+            <p className="listening-redesign-catalog-counts">
+              {catalog.tracks.map((track, index) => <span key={track.id}>{index ? " · " : ""}{track.lessonCount} bài {track.id === "dialogue" ? "đối thoại" : "độc thoại"}</span>)}
+            </p>
+          </div>
 
           <div className="listening-catalog-topic-bar">
             <div className="listening-catalog-topics" aria-label="Chủ đề bài nghe">
