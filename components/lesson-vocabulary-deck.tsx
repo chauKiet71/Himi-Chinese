@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, AudioLines, BookOpenText, Bookmark, Check, ChevronDown, Lightbulb, LoaderCircle, PenLine, Play, Volume2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpenText, Bookmark, Check, ChevronDown, Lightbulb, LoaderCircle, PenLine, Play } from "lucide-react";
 import type { Vocabulary } from "@/lib/content-types";
 
 type MoveDirection = "back" | "forward";
@@ -141,7 +141,7 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
 
   if (!currentWord) return <div className="lesson-vocab-empty"><h2>Bài này chưa có từ vựng</h2><p>Hãy chuyển sang Cụm từ hoặc Nghe & nói để tiếp tục học.</p></div>;
 
-  return <section aria-label="Bộ thẻ từ vựng" className={`lesson-vocab-deck lesson-live-stage${isSpeaking ? " is-speaking" : ""}`} data-testid="lesson-vocabulary-deck">
+  return <section aria-label="Bộ thẻ từ vựng" className={`lesson-vocab-deck lesson-reading-deck lesson-live-stage${isSpeaking ? " is-speaking" : ""}`} data-testid="lesson-vocabulary-deck">
     <div className="lesson-stage-layout">
       <article aria-label={`Từ ${index + 1} trên ${words.length}: ${currentWord.hanzi}`} className={`lesson-study-panel lesson-vocab-card move-${direction}`} data-word-index={index + 1} key={currentWord.slug} tabIndex={0}>
         <div className="lesson-study-surface">
@@ -153,7 +153,6 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
         <div className="lesson-study-content lesson-vocabulary-content">
           <div className="lesson-word-heading">
             <strong className="lesson-vocab-hanzi" lang="zh-CN">{currentWord.hanzi}</strong>
-            <button aria-label={`Nghe nhanh từ ${currentWord.hanzi}`} className="lesson-inline-sound" onClick={playPronunciation} type="button"><Volume2 size={24} /></button>
           </div>
           <div className="lesson-vocab-meta">
             <div><span className="lesson-vocab-pinyin">{currentWord.pinyin}</span><span className="lesson-vocab-meaning">{currentWord.meaning}</span></div>
@@ -163,7 +162,6 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
           <button aria-label={`Phát âm từ ${currentWord.hanzi}`} aria-pressed={isSpeaking} className={`lesson-audio-bar${isSpeaking ? " playing" : ""}`} onClick={playPronunciation} type="button">
             <span className="lesson-audio-icon"><Play fill="currentColor" size={22} /></span>
             <span><strong>{isSpeaking ? "Đang phát âm…" : "Nghe phát âm"}</strong></span>
-            <AudioLines aria-hidden="true" size={46} strokeWidth={1.6} />
           </button>
 
           {currentWord.example ? <div className="lesson-example-card">
