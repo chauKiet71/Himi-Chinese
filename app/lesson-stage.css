@@ -1,4 +1,4 @@
-/* Lesson stage — faithful implementation of the selected Himi mockups. */
+/* Lesson stages, with a quiet reading treatment for vocabulary and phrases. */
 
 .lesson-page:has(.lesson-stage-workspace) {
   padding-block: 18px 72px;
@@ -177,12 +177,14 @@
 
 .lesson-study-content {
   width: 100%;
+  min-width: 0;
   margin: auto;
   padding: clamp(28px, 4.4vh, 50px) clamp(6px, 1.8vw, 28px) clamp(24px, 3vh, 36px);
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .lesson-vocabulary-content,
@@ -196,18 +198,24 @@
 .lesson-phrase-heading-row,
 .pronunciation-heading-row {
   max-width: 100%;
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 22px;
 }
 
 .lesson-vocab-hanzi {
+  min-width: 0;
+  max-width: calc(100% - 74px);
+  flex: 0 1 auto;
   color: #060606;
   font-family: Inter, "Microsoft YaHei", "Noto Sans SC", sans-serif;
   font-size: clamp(74px, 6.5vw, 104px);
   font-weight: 780;
   line-height: .98;
   letter-spacing: -.06em;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .lesson-inline-sound {
@@ -231,20 +239,28 @@
 }
 
 .lesson-vocab-meta {
+  min-width: 0;
+  max-width: 100%;
   margin-top: 8px;
   display: flex;
   align-items: flex-end;
   gap: 26px;
+  flex-wrap: wrap;
 }
 
 .lesson-vocab-meta > div {
+  min-width: 0;
+  max-width: 100%;
   display: grid;
   gap: 6px;
 }
 
 .lesson-vocab-pinyin,
 .lesson-vocab-meaning {
+  min-width: 0;
+  max-width: 100%;
   display: block;
+  overflow-wrap: anywhere;
 }
 
 .lesson-vocab-pinyin {
@@ -353,6 +369,7 @@
   color: #111;
   font-size: clamp(22px, 2vw, 31px);
   line-height: 1.3;
+  overflow-wrap: anywhere;
 }
 
 .lesson-example-card p {
@@ -360,6 +377,7 @@
   color: var(--stage-muted);
   font-size: clamp(15px, 1.3vw, 19px);
   line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .lesson-study-tools {
@@ -410,6 +428,7 @@
   color: var(--stage-muted);
   font-size: 14px;
   line-height: 1.55;
+  overflow-wrap: anywhere;
 }
 
 .lesson-disclosure-body p {
@@ -418,6 +437,7 @@
 
 .lesson-character-list {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -425,6 +445,7 @@
   width: 42px;
   height: 42px;
   display: grid;
+  flex: 0 0 auto;
   place-items: center;
   border: 1px solid #ffd1d4;
   border-radius: 10px;
@@ -620,13 +641,16 @@
 }
 
 .lesson-phrase-hanzi {
+  min-width: 0;
   max-width: calc(100% - 76px);
+  flex: 1 1 auto;
   color: #050505;
   font-family: Inter, "Microsoft YaHei", "Noto Sans SC", sans-serif;
   font-size: clamp(44px, 4.35vw, 68px);
   font-weight: 780;
   line-height: 1.16;
   letter-spacing: -.045em;
+  white-space: normal;
   overflow-wrap: anywhere;
 }
 
@@ -638,11 +662,12 @@
 }
 
 .lesson-phrase-meaning {
-  max-width: 760px;
+  max-width: min(760px, 100%);
   margin: 8px 0 0;
   color: #737987;
   font-size: clamp(24px, 2.2vw, 35px);
   line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .lesson-phrase-structure {
@@ -651,36 +676,46 @@
   margin-top: 28px;
   padding-bottom: 4px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 14px;
-  overflow-x: auto;
-  scrollbar-width: thin;
+  overflow: visible;
 }
 
 .lesson-phrase-structure-part {
   min-width: 0;
-  display: contents;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  flex: 0 1 auto;
+  gap: 8px;
 }
 
 .lesson-phrase-structure-part > i {
+  flex: 0 0 auto;
   color: #9ca1aa;
   font-size: 18px;
   font-style: normal;
 }
 
 .lesson-phrase-structure-part > b {
+  min-width: 0;
+  max-width: 100%;
   min-height: 92px;
   padding: 12px 22px;
   display: grid;
   place-items: center;
-  flex: 1 1 0;
+  flex: 0 1 auto;
   color: #17181a;
   border: 1px solid #ffd4ad;
   border-radius: 15px;
   background: #fff8ee;
   font-size: clamp(22px, 2vw, 31px);
   font-weight: 760;
-  white-space: nowrap;
+  line-height: 1.35;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .lesson-phrase-structure-part:first-child > b {
@@ -1273,7 +1308,7 @@
   .lesson-vocab-progress-segments > i {
     width: auto;
     height: 4px;
-    min-width: 10px;
+    min-width: 0;
     flex: 1 1 0;
     border-radius: 999px;
   }
@@ -1289,6 +1324,7 @@
   }
 
   .lesson-vocab-hanzi {
+    max-width: calc(100% - 58px);
     font-size: clamp(62px, 21vw, 82px);
   }
 
@@ -1463,6 +1499,10 @@
     overflow-x: visible;
   }
 
+  .lesson-phrase-structure-part {
+    gap: 4px;
+  }
+
   .lesson-phrase-structure-part > i {
     font-size: 12px;
   }
@@ -1583,5 +1623,262 @@
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
+  }
+}
+
+/* Reading decks: use typography and spacing instead of nested boxes. */
+.lesson-reading-deck .lesson-stage-layout {
+  align-items: start;
+}
+
+.lesson-reading-deck .lesson-study-panel {
+  min-height: 0;
+}
+
+.lesson-reading-deck .lesson-stage-progress > span {
+  color: var(--stage-red-dark);
+}
+
+.lesson-reading-deck .lesson-study-surface {
+  padding: 24px clamp(4px, 1.2vw, 18px) 0;
+  flex: 0 1 auto;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.lesson-reading-deck .lesson-study-content {
+  margin: 0;
+  padding: 28px 0 20px;
+  flex: 0 1 auto;
+  justify-content: flex-start;
+}
+
+.lesson-reading-deck :is(.lesson-vocab-hanzi, .lesson-phrase-hanzi) {
+  max-width: 100%;
+  line-height: 1.2;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+}
+
+.lesson-reading-deck .lesson-vocab-hanzi {
+  font-size: clamp(52px, 7vw, 88px);
+}
+
+.lesson-reading-deck .lesson-phrase-hanzi {
+  font-size: clamp(32px, 4.2vw, 58px);
+}
+
+.lesson-reading-deck .lesson-vocab-meta {
+  margin-top: 16px;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.lesson-reading-deck .lesson-vocab-pinyin {
+  max-width: min(70ch, 100%);
+  color: #5f6670;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.lesson-reading-deck .lesson-phrase-pinyin {
+  margin-top: 16px;
+}
+
+.lesson-reading-deck :is(.lesson-vocab-meaning, .lesson-phrase-meaning) {
+  max-width: min(70ch, 100%);
+  color: #5f6670;
+  font-size: clamp(18px, 1.7vw, 23px);
+  line-height: 1.55;
+}
+
+.lesson-reading-deck .lesson-word-type {
+  margin: 0;
+  padding: 0;
+  color: #5f6670;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 13px;
+}
+
+.lesson-reading-deck .lesson-phrase-structure {
+  margin-top: 20px;
+  padding: 0;
+  gap: 4px 12px;
+}
+
+.lesson-reading-deck .lesson-phrase-structure-part {
+  gap: 8px;
+}
+
+.lesson-reading-deck .lesson-phrase-structure-part > i {
+  color: #747985;
+  font-size: 14px;
+}
+
+.lesson-reading-deck .lesson-phrase-structure-part > b {
+  min-height: 0;
+  padding: 0;
+  display: block;
+  color: var(--stage-ink);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: clamp(18px, 1.7vw, 24px);
+  font-weight: 650;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.lesson-reading-deck .lesson-phrase-structure-part:first-child > b {
+  color: var(--stage-red-dark);
+}
+
+.lesson-reading-deck .lesson-audio-bar {
+  width: fit-content;
+  max-width: 100%;
+  min-height: 48px;
+  margin: 20px 0 0;
+  padding: 0 8px 0 0;
+  display: inline-flex;
+  gap: 12px;
+  color: var(--stage-ink);
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.lesson-reading-deck .lesson-audio-icon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+}
+
+.lesson-reading-deck .lesson-audio-bar strong {
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.lesson-reading-deck .lesson-audio-bar:hover {
+  color: var(--stage-red-dark);
+  background: transparent;
+  transform: none;
+}
+
+.lesson-reading-deck .lesson-example-card {
+  margin-top: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.lesson-reading-deck .lesson-example-card p {
+  color: #5f6670;
+}
+
+.lesson-reading-deck .lesson-study-tools {
+  width: 100%;
+  margin: 20px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--stage-line);
+  gap: 8px 16px;
+}
+
+.lesson-reading-deck :is(.lesson-disclosure, .lesson-save-button) {
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.lesson-reading-deck .lesson-disclosure > summary {
+  min-height: 44px;
+  padding: 0;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.lesson-reading-deck .lesson-disclosure-body {
+  padding: 8px 0 12px;
+  color: #5f6670;
+}
+
+.lesson-reading-deck .lesson-character-list span {
+  color: var(--stage-ink);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.lesson-reading-deck .lesson-save-button {
+  width: 44px;
+  min-height: 44px;
+  color: var(--stage-red-dark);
+}
+
+.lesson-reading-deck .lesson-save-button:hover:not(:disabled),
+.lesson-reading-deck .lesson-save-button.saved {
+  background: var(--stage-soft);
+}
+
+.lesson-reading-deck .lesson-stage-nav {
+  margin-top: 0;
+  padding-top: 8px;
+}
+
+.lesson-reading-deck .lesson-stage-nav-button.is-back {
+  border: 0;
+  background: transparent;
+}
+
+.lesson-reading-deck :is(.lesson-audio-bar, .lesson-save-button, .lesson-disclosure > summary):focus-visible {
+  outline: 2px solid var(--stage-ink);
+  outline-offset: 4px;
+}
+
+.lesson-reading-deck ::selection {
+  color: var(--stage-ink);
+  background: #ffdfda;
+}
+
+@media (max-width: 640px) {
+  .lesson-reading-deck .lesson-study-surface {
+    padding: 18px 4px 0;
+  }
+
+  .lesson-reading-deck .lesson-study-content {
+    padding: 24px 0 12px;
+  }
+
+  .lesson-reading-deck .lesson-vocab-hanzi {
+    font-size: clamp(48px, 16.5vw, 64px);
+  }
+
+  .lesson-reading-deck .lesson-phrase-hanzi {
+    font-size: clamp(32px, 9vw, 40px);
+  }
+
+  .lesson-reading-deck .lesson-vocab-meta {
+    align-items: flex-start;
+  }
+
+  .lesson-reading-deck .lesson-phrase-structure {
+    gap: 4px 8px;
+  }
+
+  .lesson-reading-deck .lesson-phrase-structure-part {
+    gap: 6px;
+  }
+
+  .lesson-reading-deck .lesson-study-tools {
+    grid-template-columns: minmax(0, 1fr) 44px;
   }
 }

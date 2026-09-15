@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, AudioLines, Bookmark, Check, ChevronDown, Lightbulb, Volume2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bookmark, Check, ChevronDown, Lightbulb, Volume2 } from "lucide-react";
 import type { DialogueLine, UsageNote, Vocabulary } from "@/lib/content-types";
 import { speakMandarin } from "@/lib/client-mandarin-audio";
 
@@ -25,7 +25,7 @@ const phraseGlossary: Record<string, string> = {
 const phraseSplitExpression = new RegExp(`(${Object.keys(phraseGlossary).sort((left, right) => right.length - left.length).join("|")}|[，。！？、,.!?])`, "g");
 
 function splitPhraseForStudy(hanzi: string) {
-  const parts = hanzi.split(phraseSplitExpression).filter(Boolean);
+  const parts = hanzi.split(phraseSplitExpression).filter((part) => part && !/^[，。！？、,.!?]+$/u.test(part));
   return parts.length > 1 ? parts : [hanzi];
 }
 
@@ -118,7 +118,7 @@ export function LessonPhrasebook({ words, dialogue, notes, onFinished }: { words
 
   if (!currentPhrase) return <div className="lesson-vocab-empty"><h2>Bài này chưa có cụm từ</h2><p>Hãy chuyển sang Từ vựng hoặc Nghe & nói để tiếp tục học.</p></div>;
 
-  return <section aria-label="Bộ thẻ cụm từ" className={`lesson-vocab-deck lesson-phrase-deck lesson-live-stage${isSpeaking ? " is-speaking" : ""}`} data-testid="lesson-phrase-deck">
+  return <section aria-label="Bộ thẻ cụm từ" className={`lesson-vocab-deck lesson-phrase-deck lesson-reading-deck lesson-live-stage${isSpeaking ? " is-speaking" : ""}`} data-testid="lesson-phrase-deck">
     <div className="lesson-stage-layout">
       <article aria-label={`Cụm ${index + 1} trên ${phrases.length}: ${currentPhrase.hanzi}`} className={`lesson-study-panel lesson-vocab-card lesson-phrase-study-card move-${direction}`} data-phrase-index={index + 1} key={currentPhrase.id} tabIndex={0}>
         <div className="lesson-study-surface">
@@ -130,7 +130,6 @@ export function LessonPhrasebook({ words, dialogue, notes, onFinished }: { words
         <div className="lesson-study-content lesson-phrase-content">
           <div className="lesson-phrase-heading-row">
             <strong className="lesson-phrase-hanzi" lang="zh-CN">{currentPhrase.hanzi}</strong>
-            <button aria-label={`Nghe nhanh cụm ${currentPhrase.hanzi}`} className="lesson-inline-sound" onClick={playPronunciation} type="button"><Volume2 size={24} /></button>
           </div>
           {currentPhrase.pinyin ? <span className="lesson-vocab-pinyin lesson-phrase-pinyin">{currentPhrase.pinyin}</span> : null}
           <p className="lesson-phrase-meaning">{currentPhrase.translation}</p>
@@ -142,7 +141,6 @@ export function LessonPhrasebook({ words, dialogue, notes, onFinished }: { words
           <button aria-label={`Phát âm cụm ${currentPhrase.hanzi}`} aria-pressed={isSpeaking} className={`lesson-audio-bar${isSpeaking ? " playing" : ""}`} onClick={playPronunciation} type="button">
             <span className="lesson-audio-icon"><Volume2 size={22} /></span>
             <span><strong>{isSpeaking ? "Đang phát âm…" : "Nghe cụm từ"}</strong></span>
-            <AudioLines aria-hidden="true" size={46} strokeWidth={1.6} />
           </button>
 
           <div className="lesson-study-tools">
