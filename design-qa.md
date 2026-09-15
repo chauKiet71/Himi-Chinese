@@ -1956,3 +1956,86 @@ final result: passed
 - No P3 follow-up is required for this scoped menu-grid update.
 
 final result: passed
+
+---
+
+## Lesson learning stage — mockup-fidelity correction — 2026-09-15
+
+### Comparison target and final captures
+
+- Visual truth: the three selected 1536×1096 vocabulary, phrase, and pronunciation mockups in `D:/CodexData/.codex/generated_images/01a09d9a-586f-78a1-b543-9d2b6678428f/`.
+- Final desktop captures: `qa-artifacts/lesson-stage/fidelity-vocabulary-final.png`, `qa-artifacts/lesson-stage/fidelity-phrase-final.png`, and `qa-artifacts/lesson-stage/fidelity-pronunciation-final.png` at 1536×1096.
+- Responsive evidence: `fidelity-laptop-short-pronunciation-final.png` at 1440×800, `fidelity-tablet-pronunciation-final.png` at 834×1112, `fidelity-mobile-vocabulary-final.png` and `fidelity-mobile-phrase-final.png` at 390×844, plus `fidelity-320-pronunciation-final.png` at 320×800.
+
+### Findings and resolution
+
+1. P1 — The previous implementation looked like a reduced generic card rather than the selected mockup. All three modes now share the mockup's large white study surface, separated bottom navigation, dot progress, dominant Chinese type, and contextual right-side coach rail.
+2. P1 — The attached phone capture showed the Himi rail as a nearly full-screen empty column. Viewport and container breakpoints now convert it to a 190px tablet strip and a 154px phone strip with a horizontal tip/mascot composition.
+3. P2 — The coach rail lacked the warm office scene. A clean local office background is now used consistently, paired with writing, waving, and listening Himi assets for the three learning modes.
+4. P2 — Mobile phrase segments clipped the final token and the save label created extra copy. Token spacing now fits at 390px, the save action is icon-only visually, and secondary explanation copy remains collapsed by default.
+5. P2 — The floating chatbot covered lesson controls at tablet and phone widths. It is hidden below 981px on this stage because the contextual Himi coach is already present.
+6. The persistent product navigation rail is intentionally retained from the real application shell; removing it to imitate the isolated mockup would regress navigation elsewhere.
+
+### Full-view and focused comparison evidence
+
+- Source and implementation were inspected together for all three desktop states. The hierarchy, 3.35:1 study/coach split, coral active states, warm coach background, main typography, audio controls, and detached previous/next bar align with the source direction.
+- At 1440×800 the pronunciation navigation ends at 744px and the full coach rail is 510px high, so all primary controls remain above the fold.
+- At 320×800, document width equals viewport width (320px), horizontal overflow is zero, tab widths are balanced at 97px, and the coach rail remains 154px high.
+- At 390×844, the phrase row displays all four structural tokens and separators without horizontal clipping; the mobile coach strip renders at 154px with a 118px mascot.
+- Browser console and page errors are empty apart from normal Vite development messages.
+
+### Verification
+
+- Three-tab selection, disabled previous state, next navigation, pinyin toggle, audio controls, save actions, and semantic progress labels remain available.
+- Focus styles, reduced-motion behavior, descriptive mascot alt text, and 44px coarse-pointer targets are present.
+- Focused lesson/responsive tests: 5 passed, 0 failed.
+- ESLint passed for the edited layouts and all three React components.
+- `git diff --check` passed.
+- Production build passed.
+- No actionable P0, P1, P2, or P3 findings remain.
+
+final result: passed
+
+---
+
+## Lesson learning stage — compact responsive redesign — 2026-09-15
+
+### Comparison target
+
+- Vocabulary: `D:/CodexData/.codex/generated_images/01a09d9a-586f-78a1-b543-9d2b6678428f/exec-6fe635e4-b8ec-4730-b3ff-f6706814e932.png`.
+- Phrase: `D:/CodexData/.codex/generated_images/01a09d9a-586f-78a1-b543-9d2b6678428f/exec-bebe7636-02fc-41f1-9b4a-ea6028c89fc5.png`.
+- Pronunciation: `D:/CodexData/.codex/generated_images/01a09d9a-586f-78a1-b543-9d2b6678428f/exec-586e770f-3ec3-436b-ae58-cf0efb1b59f5.png`.
+- Implemented surfaces: `components/lesson-vocabulary-deck.tsx`, `components/lesson-phrasebook.tsx`, `components/lesson-pronunciation-coach.tsx`, and `app/lesson-stage.css`.
+
+### Final captures
+
+- Desktop phrase, 1440×1024 at DPR 1: `qa-artifacts/lesson-stage/desktop-phrase-pass2.png`.
+- Desktop pronunciation, 1440×1024 at DPR 1: `qa-artifacts/lesson-stage/desktop-pronunciation-pass2.png`.
+- Laptop vocabulary, 1366×768 at DPR 1: `qa-artifacts/lesson-stage/laptop-1366x768-vocabulary-pass2.png`.
+- Laptop pronunciation, 1366×768 at DPR 1: `qa-artifacts/lesson-stage/laptop-1366x768-pronunciation-pass2.png`.
+- Tablet phrase, 834×1112 at DPR 1: `qa-artifacts/lesson-stage/tablet-phrase.png`.
+- Mobile vocabulary, 390×844 at DPR 1: `qa-artifacts/lesson-stage/mobile-vocabulary-pass2.png`.
+- Mobile pronunciation, 390×844 at DPR 1: `qa-artifacts/lesson-stage/mobile-pronunciation-pass2.png`.
+- Narrow-phone DOM pass, 320×800 at DPR 1: no horizontal overflow and no rendered button or summary below 44px in either dimension.
+
+### Findings and comparison history
+
+1. The initial desktop comparison confirmed the intended 80/20 learning/coach split. The inherited green tab underline and dark pronunciation border were corrected to the Himi red and neutral-line tokens.
+2. The initial phrase order surfaced a note without pinyin. Dialogue phrases now lead the sequence so the main phrase retains its authored pinyin and Vietnamese translation; notes remain available later in the deck.
+3. The first isolated mobile harness omitted the app's global container-query stylesheet. Retesting with the same stylesheet loaded by `app/layout.tsx` produced the intended single-column lesson and horizontal Himi coach strip.
+4. At 1366×768, vocabulary and pronunciation initially extended 32–61px below the viewport. The short-screen density treatment now ends those panels at 747px and 737px while preserving readable type and a 160–190px Himi treatment.
+5. No actionable P0, P1, P2, or P3 findings remain. Secondary explanation and writing content stays closed by default, reducing copy density without removing functionality.
+
+### States and verification
+
+- Từ vựng, Cụm từ, and Nghe & nói tab selection passed.
+- Disabled previous and enabled next states passed.
+- Phrase explanation opened successfully; phrase save changed to its saved state.
+- Pinyin is hidden by default and revealed successfully.
+- Audio and pronunciation actions retain accessible labels; semantic progress, mascot alt text, focus styles, reduced motion, and coarse-pointer 44px targets are present.
+- Relevant test suite: 5 passed, 0 failed.
+- ESLint on the three edited TSX components passed.
+- Production build (`npm run build`) passed.
+- The repository-wide suite separately exposes an existing home-page landscape assertion in `tests/home-responsive.test.mjs`; the failing assertion does not reference this change's files.
+
+final result: passed

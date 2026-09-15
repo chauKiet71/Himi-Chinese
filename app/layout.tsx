@@ -8,6 +8,8 @@ import "./white-backgrounds.css";
 import "./brand-theme.css";
 import "./learning-journey-responsive.css";
 import "./adaptive-responsive.css";
+import "./lesson-interactive.css";
+import "./lesson-stage.css";
 import { SiteHeader, SiteHeaderFallback } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MobileNav } from "@/components/mobile-nav";
