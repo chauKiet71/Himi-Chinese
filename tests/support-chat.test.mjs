@@ -8,7 +8,7 @@ import * as schema from "../db/schema.ts";
 import { submitSupportMessage, getSupportConversation, acceptTelegramUpdate as acceptVerifiedTelegramUpdate, consumeSupportLimit, ownedSupportImage, SUPPORT_AUTOMATIC_REPLIES } from "../lib/support-service.ts";
 import { processSupportJob, processSupportReminder } from "../lib/support-worker.ts";
 import { hiddenAfterCompletion, validateSupportInput, parseSupportCallback, retryDelay } from "../lib/support-domain.ts";
-import { notificationText, supportKeyboard, authorizedTelegramUpdate, verifyTelegramSecret, validTelegramUpdate, telegramConfig, telegramGroupIdCommand, TelegramError } from "../lib/support-telegram.ts";
+import { supportKeyboard, authorizedTelegramUpdate, verifyTelegramSecret, validTelegramUpdate, telegramConfig, telegramGroupIdCommand, TelegramError } from "../lib/support-telegram.ts";
 import { imageMime, supportImageDeliveryUrl } from "../lib/support-storage.ts";
 
 const user = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
@@ -149,7 +149,8 @@ test("text and private photo are delivered with actions for the current conversa
   const created = await create(input({ imageId })); await drain();
   const c = await row(created.conversationId);
   const text = calls.find(c => c.method === "sendMessage");
-  assert.equal(text.parameters.text, notificationText(c, "Cần hỗ trợ <b>HSK</b>"));
+  assert.equal(text.parameters.text, "📩 HIMI · Yêu cầu hỗ trợ\n\n👤 Tên: Học viên thử nghiệm\n📧 Email: learner@example.test\n💬 Tin nhắn: Cần hỗ trợ <b>HSK</b>");
+  assert.deepEqual(text.parameters.entities, [{ type: "bold", offset: 0, length: "📩 HIMI · Yêu cầu hỗ trợ".length }]);
   assert.ok(!text.parameters.text.includes(c.id));
   assert.equal(text.parameters.parse_mode, undefined);
   assert.deepEqual(text.parameters.reply_markup, supportKeyboard(c.id, c.generation));

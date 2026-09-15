@@ -90,7 +90,17 @@ test("authenticated SePay webhook commits VIP and notification before Telegram d
   assert.equal(calls[0].method, "sendMessage");
   assert.equal(calls[0].parameters.chat_id, "-100123456");
   const { text, parse_mode, reply_markup } = calls[0].parameters;
-  for (const value of ["Thanh toán thành công", "11.000 đ", payload.code, String(payload.id), orderId, "learner@example.test", "Học viên thử nghiệm", "VIP 1 tháng"]) assert.ok(text.includes(value), value);
+  assert.equal(text, [
+    "🔔 HIMI · SePay báo giao dịch",
+    "",
+    "✅ Kết quả: Thanh toán thành công 🎉",
+    "💰 Số tiền: 11.000 đ",
+    "⏰ Thời gian: 2026-09-15 11:08:33",
+    "🧾 Mã thanh toán: HIMI23456789ABCD",
+    "👨‍🎓 Học viên: Học viên thử nghiệm",
+    "📧 Email: learner@example.test",
+    "💎 Gói VIP: VIP 1 tháng ⭐",
+  ].join("\n"));
   assert.equal(parse_mode, undefined);
   assert.equal(reply_markup, undefined);
   assert.ok((await jobs())[0].finishedAt);
@@ -130,7 +140,6 @@ for (const reason of ["amount_mismatch", "order_expired"]) {
     assert.equal((await db.select().from(schema.subscriptions)).length, 0);
     await processSupportJob(db, io);
     assert.ok(calls[0].parameters.text.includes("Cần đối soát thủ công"));
-    assert.ok(calls[0].parameters.text.includes(reason === "amount_mismatch" ? "Số tiền không khớp đơn" : "Đơn đã hết hạn"));
   });
 }
 

@@ -110,7 +110,8 @@ export function supportKeyboard(id: string, generation: number) {
   return { inline_keyboard: [[{ text: "Trả lời", callback_data: `support_reply:${id}:${generation}` },
     { text: "Hoàn thành", callback_data: `support_complete:${id}:${generation}` }]] };
 }
+export const SUPPORT_NOTIFICATION_TITLE = "📩 HIMI · Yêu cầu hỗ trợ";
 export function notificationText(c: { userName: string; userEmail: string }, content: string) {
   // Plain text deliberately: user-controlled markup is never parsed by Telegram.
-  return `HIMI · Yêu cầu hỗ trợ\nTên: ${c.userName}\nEmail: ${c.userEmail}\n\n${content || "[Hình ảnh đính kèm]"}`;
+  return `${SUPPORT_NOTIFICATION_TITLE}\n\n👤 Tên: ${c.userName}\n📧 Email: ${c.userEmail}\n💬 Tin nhắn: ${content || "[Hình ảnh đính kèm]"}`;
 }

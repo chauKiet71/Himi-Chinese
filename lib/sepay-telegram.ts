@@ -15,30 +15,23 @@ type Notification = {
 
 export function sepayNotificationText(input: Notification & { userName?: string; userEmail?: string; planName?: string }) {
   const status = {
-    paid: "Thanh toán thành công · VIP đã được kích hoạt/gia hạn",
-    manual_review: "Cần đối soát thủ công · Chưa kích hoạt VIP",
-    unmatched: "Không tìm thấy đơn thanh toán · Cần kiểm tra giao dịch",
-    ignored: "Giao dịch không đủ điều kiện xử lý · Không thay đổi quyền VIP",
-    duplicate: "Đơn đã thanh toán trước đó · Cần kiểm tra khoản chuyển thêm",
+    paid: "✅ Kết quả: Thanh toán thành công 🎉",
+    manual_review: "⚠️ Kết quả: Cần đối soát thủ công",
+    unmatched: "⚠️ Kết quả: Không tìm thấy đơn thanh toán",
+    ignored: "⚠️ Kết quả: Giao dịch không đủ điều kiện xử lý",
+    duplicate: "⚠️ Kết quả: Đơn đã thanh toán trước đó · Cần kiểm tra khoản chuyển thêm",
   }[input.outcome];
   const amount = (value: number) => `${value.toLocaleString("vi-VN")} đ`;
   return [
-    "HIMI · SePay báo giao dịch",
-    `Kết quả: ${status}`,
-    ...(input.reason ? [`Lý do: ${input.reason === "amount_mismatch" ? "Số tiền không khớp đơn" : "Đơn đã hết hạn"}`] : []),
-    `Số tiền: ${amount(input.payload.transferAmount)}`,
-    ...(input.order ? [`Số tiền đơn: ${amount(input.order.amountVnd)}`] : []),
-    `Loại giao dịch: ${input.payload.transferType === "in" ? "Tiền vào" : "Tiền ra"}`,
-    `Ngân hàng: ${input.payload.gateway}`,
-    `Thời gian: ${input.payload.transactionDate}`,
-    `ID giao dịch SePay: ${input.payload.id}`,
-    `Mã thanh toán: ${extractSepayPaymentCode(input.payload) ?? "Không có"}`,
-    ...(input.order ? [`ID đơn: ${input.order.id}`] : []),
-    ...(input.userName ? [`Học viên: ${input.userName.slice(0, 120)}`] : []),
-    ...(input.userEmail ? [`Email: ${input.userEmail.slice(0, 255)}`] : []),
-    ...(input.planName ? [`Gói VIP: ${input.planName.slice(0, 120)}`] : []),
-    `Mã tham chiếu ngân hàng: ${input.payload.referenceCode || "Không có"}`,
-    `Nội dung: ${input.payload.content}`,
+    "🔔 HIMI · SePay báo giao dịch",
+    "",
+    status,
+    `💰 Số tiền: ${amount(input.payload.transferAmount)}`,
+    `⏰ Thời gian: ${input.payload.transactionDate}`,
+    `🧾 Mã thanh toán: ${extractSepayPaymentCode(input.payload) ?? "Không có"}`,
+    `👨‍🎓 Học viên: ${input.userName?.slice(0, 120) || "Không xác định"}`,
+    `📧 Email: ${input.userEmail?.slice(0, 255) || "Không xác định"}`,
+    `💎 Gói VIP: ${input.planName?.slice(0, 120) || "Không xác định"} ⭐`,
   ].join("\n");
 }
 

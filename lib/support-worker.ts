@@ -5,7 +5,7 @@ import { supportConversations as conversations, supportMessages as messages, sup
 import { reminderDue, retryDelay, SUPPORT_REMINDER_MS } from "./support-domain.ts";
 import { enqueue, type SupportConversation, type SupportTx } from "./support-service.ts";
 import { importTelegramPhoto, readSupportImage } from "./support-storage.ts";
-import { authorizedTelegramUpdate, notificationText, supportKeyboard, telegramCall, TelegramError, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
+import { authorizedTelegramUpdate, notificationText, SUPPORT_NOTIFICATION_TITLE, supportKeyboard, telegramCall, TelegramError, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
 import { sendSepayNotification } from "./sepay-telegram.ts";
 
 export type SupportTransport = {
@@ -78,6 +78,7 @@ async function processJob(tx: SupportTx, job: Job, io: SupportTransport) {
     if (!m) return;
     const primary = !c.telegramNotificationMessageId;
     const result = await io.call("sendMessage", { ...base, text: notificationText(c, m.content),
+      entities: [{ type: "bold", offset: 0, length: SUPPORT_NOTIFICATION_TITLE.length }],
       reply_markup: c.status === "COMPLETED" ? { inline_keyboard: [] } : supportKeyboard(c.id, c.generation),
       ...(!primary ? { reply_parameters: { message_id: c.telegramNotificationMessageId, allow_sending_without_reply: true } } : {}),
     });
