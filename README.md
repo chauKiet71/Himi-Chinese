@@ -93,11 +93,14 @@ Sáu bài đầu của mỗi lộ trình đang mở là miễn phí; 18 bài chu
 
 ## Thanh toán SePay
 
-- Trang `/vip` tạo một `payment_order` có mã `HIMI…` duy nhất, hiển thị QR VietQR ACB theo đúng số tiền và tự kiểm tra trạng thái qua `GET /api/payments/sepay/orders/[orderId]`.
+- Trang `/vip` tạo một `payment_order` có mã `HIMI…` duy nhất, hiển thị QR VietQR MBBank theo đúng số tiền và tự kiểm tra trạng thái qua `GET /api/payments/sepay/orders/[orderId]`.
 - Endpoint nhận webhook là `POST /api/webhooks/sepay`. Trên SePay Dashboard, đặt URL production thành `https://<domain>/api/webhooks/sepay`, loại giao dịch **Tiền vào**, content type **JSON**, mục đích **Xác thực thanh toán** và lọc mã có tiền tố `HIMI`.
 - Chọn xác thực **HMAC-SHA256** trên SePay, lưu cùng secret vào `SEPAY_WEBHOOK_SECRET`. Endpoint kiểm tra chữ ký trên raw body, timestamp ±5 phút, tài khoản nhận, mã đơn và số tiền. Nếu chỉ dùng API Key, để HMAC secret trống và cấu hình `SEPAY_API_KEY`; không chạy production khi cả hai đều trống.
-- Cấu hình tài khoản bằng `SEPAY_BANK_CODE`, `SEPAY_BANK_ACCOUNT_NUMBER`, `SEPAY_BANK_ACCOUNT_NAME`. Mặc định hiện tại khớp QR ACB `12897891` — `LE CHAU KIET`; các biến `VIP_BANK_*` cũ vẫn được đọc làm fallback.
+- Cấu hình tài khoản bằng `SEPAY_BANK_CODE`, `SEPAY_BANK_ACCOUNT_NUMBER`, `SEPAY_BANK_ACCOUNT_NAME`. Mặc định hiện tại khớp QR MBBank `054611111` — `TRAN NGUYEN GIA HUY`; các biến `VIP_BANK_*` cũ vẫn được đọc làm fallback. QR của đơn đang chờ được tạo lại theo tài khoản hiện hành khi đọc đơn.
 - Webhook là idempotent theo ID giao dịch SePay. Giao dịch đúng sẽ đánh dấu đơn `paid`, kích hoạt/gia hạn VIP và tạo thông báo cho client; sai số tiền hoặc đến sau khi đơn hết hạn được chuyển sang `manual_review` thay vì tự cấp quyền.
+- Mỗi webhook hợp lệ với ID giao dịch mới cũng lưu một thông báo Telegram trong hàng đợi `support_jobs`. Bot báo số tiền, mã đơn, học viên, gói VIP và kết quả (thành công, cần đối soát, không khớp đơn hoặc bị bỏ qua). Webhook gửi lại cùng ID không tạo thêm thông báo; khoản chuyển thêm với ID mới vào đơn đã thanh toán vẫn được báo để kiểm tra.
+- Chạy worker thường trực bằng `npm run support:worker` và cấu hình `TELEGRAM_BOT_TOKEN`, `TELEGRAM_ADMIN_CHAT_ID`, `TELEGRAM_WEBHOOK_SECRET` như [hướng dẫn Telegram](docs/SUPPORT_TELEGRAM.md). Thông báo SePay mặc định gửi vào nhóm hiện có; đặt `TELEGRAM_PAYMENT_CHAT_ID` nếu muốn gửi tới nhóm riêng hoặc chat cá nhân (cần bấm Start với bot trước). Web và worker dùng cùng database; nên đặt cùng chat ID ở cả hai môi trường. Nếu web chưa có chat ID, worker lấy cấu hình của mình khi gửi. Telegram lỗi sẽ được retry với backoff, không ảnh hưởng thanh toán/VIP. Kiểm tra bằng `npm run support:status`. Cần khởi động lại/redeploy web và worker để dùng code mới; không cần migration mới nếu đã có các bảng support.
+- Nếu chỉ cần thông báo thanh toán, chạy `npm run support:worker -- --payments-only`. Chế độ này chỉ xử lý hàng đợi SePay, cần `DATABASE_URL`, `TELEGRAM_BOT_TOKEN` và `TELEGRAM_PAYMENT_CHAT_ID` (hoặc `TELEGRAM_ADMIN_CHAT_ID`); không cần đăng ký webhook nhận tin Telegram hay cấu hình hỗ trợ.
 - Dùng SePay Test mode để gửi payload mô phỏng trước, sau đó thử một giao dịch thật giá trị nhỏ. SePay chỉ coi webhook thành công khi nhận HTTP 200 cùng JSON `{"success":true}`.
 
 ## Tài khoản và quyền quản trị

@@ -84,7 +84,8 @@ export class TelegramError extends Error {
 }
 export type TelegramCall = (method: string, parameters: Record<string, unknown>, photo?: Uint8Array) => Promise<Record<string, unknown>>;
 export const telegramCall: TelegramCall = async (method, parameters, photo) => {
-  const { token } = telegramConfig();
+  const token = process.env.TELEGRAM_BOT_TOKEN?.trim();
+  if (!token) throw new SupportError("Bot Telegram chưa được cấu hình.", 503);
   const form = photo ? new FormData() : null;
   if (form) {
     for (const [key, value] of Object.entries(parameters)) form.set(key, typeof value === "object" ? JSON.stringify(value) : String(value));

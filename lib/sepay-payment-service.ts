@@ -13,11 +13,11 @@ import {
 } from "../db/schema.ts";
 import { grantOrExtendVipAccessInTransaction } from "./admin-subscription-service.ts";
 import { createNotificationInTransaction } from "./notification-service.ts";
+import { enqueueSepayNotification } from "./sepay-telegram.ts";
 import {
   accountNumberMatchesSepayConfig,
   buildSepayVietQrUrl,
   createSepayPaymentCode,
-  ensureVietQrTransferDescription,
   extractSepayPaymentCode,
   getSepayBankAccount,
   parseSepayTransactionDate,
@@ -61,7 +61,6 @@ function paymentOrderDto(row: {
   amountVnd: number;
   referenceCode: string;
   status: PaymentStatus;
-  qrContent: string | null;
   paidAt: Date | null;
   expiresAt: Date;
   accessEndsAt: Date | null;
@@ -74,13 +73,12 @@ function paymentOrderDto(row: {
     amountVnd: row.amountVnd,
     referenceCode: row.referenceCode,
     status: row.status,
-    qrImageUrl: row.qrContent
-      ? ensureVietQrTransferDescription(row.qrContent, row.referenceCode)
-      : buildSepayVietQrUrl({
-        amountVnd: row.amountVnd,
-        bankAccount,
-        paymentCode: row.referenceCode,
-      }),
+    // Rebuild with the current account so reused orders cannot show an old bank QR.
+    qrImageUrl: buildSepayVietQrUrl({
+      amountVnd: row.amountVnd,
+      bankAccount,
+      paymentCode: row.referenceCode,
+    }),
     bankAccount,
     paidAt: row.paidAt?.toISOString() ?? null,
     expiresAt: row.expiresAt.toISOString(),
@@ -103,7 +101,6 @@ async function readPaymentOrderInTransaction(tx: DbTransaction, orderId: string,
     amountVnd: paymentOrders.amountVnd,
     referenceCode: paymentOrders.referenceCode,
     status: paymentOrders.status,
-    qrContent: paymentOrders.qrContent,
     paidAt: paymentOrders.paidAt,
     expiresAt: paymentOrders.expiresAt,
     accessEndsAt: subscriptions.endsAt,
@@ -212,7 +209,6 @@ export async function createOrReuseSepayPaymentOrder(input: {
           amountVnd: plan.priceVnd,
           referenceCode,
           status: "pending",
-          qrContent,
           paidAt: null,
           expiresAt,
           accessEndsAt: null,
@@ -314,28 +310,32 @@ export async function processSepayWebhook(payload: SepayWebhookPayload): Promise
     }).onConflictDoNothing({ target: paymentEvents.providerEventId }).returning({ id: paymentEvents.id });
     const eventId = insertedEvents[0]?.id;
     if (!eventId) return { outcome: "duplicate", ...(order ? { orderId: order.id } : {}) };
+    const complete = async (result: SepayWebhookProcessingResult, reason?: "amount_mismatch" | "order_expired") => {
+      await enqueueSepayNotification(tx, { payload, outcome: result.outcome, order, reason });
+      return result;
+    };
     if (!order) {
       await markEventProcessed(tx, eventId, now);
-      return { outcome: "unmatched" };
+      return complete({ outcome: "unmatched" });
     }
 
     const bankAccount = getSepayBankAccount();
     if (payload.transferType !== "in"
       || !accountNumberMatchesSepayConfig(payload.accountNumber, bankAccount.accountNumber)) {
       await markEventProcessed(tx, eventId, now);
-      return { outcome: "ignored", orderId: order.id };
+      return complete({ outcome: "ignored", orderId: order.id });
     }
     if (order.status !== "pending") {
       await markEventProcessed(tx, eventId, now);
-      return { outcome: order.status === "paid" ? "duplicate" : "ignored", orderId: order.id };
+      return complete({ outcome: order.status === "paid" ? "duplicate" : "ignored", orderId: order.id });
     }
     if (order.expiresAt.getTime() <= now.getTime()) {
       await flagPaymentForReview(tx, { eventId, now, order, payload, reason: "order_expired" });
-      return { outcome: "manual_review", orderId: order.id };
+      return complete({ outcome: "manual_review", orderId: order.id }, "order_expired");
     }
     if (payload.transferAmount !== order.amountVnd) {
       await flagPaymentForReview(tx, { eventId, now, order, payload, reason: "amount_mismatch" });
-      return { outcome: "manual_review", orderId: order.id };
+      return complete({ outcome: "manual_review", orderId: order.id }, "amount_mismatch");
     }
 
     const activation = await grantOrExtendVipAccessInTransaction(tx, {
@@ -398,6 +398,6 @@ export async function processSepayWebhook(payload: SepayWebhookPayload): Promise
       },
     });
     await markEventProcessed(tx, eventId, now);
-    return { outcome: "paid", orderId: order.id };
+    return complete({ outcome: "paid", orderId: order.id });
   }));
 }

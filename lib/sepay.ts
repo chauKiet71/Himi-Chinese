@@ -3,9 +3,9 @@ export const SEPAY_PAYMENT_CODE_PREFIX = "HIMI";
 export const SEPAY_ORDER_TTL_MINUTES = 30;
 
 const defaultBankAccount = {
-  bankCode: "ACB",
-  accountNumber: "12897891",
-  accountName: "LE CHAU KIET",
+  bankCode: "MBBANK",
+  accountNumber: "054611111",
+  accountName: "TRAN NGUYEN GIA HUY",
 } as const;
 
 export type SepayBankAccount = {

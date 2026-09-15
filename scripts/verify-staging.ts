@@ -188,7 +188,7 @@ async function verifyVipFlow() {
     id: string;
     amountVnd: number;
     referenceCode: string;
-    bankAccount: { accountNumber: string };
+    bankAccount: { bankCode: string; accountNumber: string };
   } };
   const order = orderBody.order;
   assert(order, "API không trả đơn thanh toán SePay.");
@@ -196,7 +196,7 @@ async function verifyVipFlow() {
   const timestamp = String(Math.floor(Date.now() / 1_000));
   const webhookPayload = JSON.stringify({
     id: Number(`${Date.now()}`.slice(-10)),
-    gateway: process.env.SEPAY_BANK_CODE?.trim() || "ACB",
+    gateway: order.bankAccount.bankCode,
     transactionDate: new Date().toLocaleString("sv-SE", { timeZone: "Asia/Ho_Chi_Minh" }),
     accountNumber: order.bankAccount.accountNumber,
     subAccount: "",

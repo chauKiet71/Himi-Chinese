@@ -6,6 +6,7 @@ import { reminderDue, retryDelay, SUPPORT_REMINDER_MS } from "./support-domain.t
 import { enqueue, type SupportConversation, type SupportTx } from "./support-service.ts";
 import { importTelegramPhoto, readSupportImage } from "./support-storage.ts";
 import { authorizedTelegramUpdate, notificationText, supportKeyboard, telegramCall, TelegramError, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
+import { sendSepayNotification } from "./sepay-telegram.ts";
 
 export type SupportTransport = {
   call: TelegramCall;
@@ -20,6 +21,10 @@ function messageId(result: Record<string, unknown>) {
 }
 
 async function processJob(tx: SupportTx, job: Job, io: SupportTransport) {
+  if (job.kind === "sepay-notify") {
+    await sendSepayNotification(job.payload, io.call);
+    return;
+  }
   if (job.kind === "admin-reply") {
     const u = job.payload.update as TelegramUpdate;
     const m = u.message!; const adminId = String(m.from!.id); const chatId = String(m.chat.id);
@@ -124,9 +129,10 @@ async function processJob(tx: SupportTx, job: Job, io: SupportTransport) {
   throw new Error("unknown_support_job");
 }
 
-export async function processSupportJob(db: Database, io: SupportTransport = transport) {
+export async function processSupportJob(db: Database, io: SupportTransport = transport, kind?: string) {
   return db.transaction(async tx => {
-    const [job] = await tx.select().from(jobs).where(and(isNull(jobs.finishedAt), lte(jobs.availableAt, new Date())))
+    const [job] = await tx.select().from(jobs).where(and(isNull(jobs.finishedAt), lte(jobs.availableAt, new Date()),
+      ...(kind ? [eq(jobs.kind, kind)] : [])))
       .orderBy(asc(jobs.availableAt), asc(jobs.createdAt)).limit(1).for("update", { skipLocked: true });
     if (!job) return false;
     try {

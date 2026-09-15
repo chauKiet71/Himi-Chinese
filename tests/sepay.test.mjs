@@ -5,6 +5,7 @@ import {
   buildSepayVietQrUrl,
   ensureVietQrTransferDescription,
   extractSepayPaymentCode,
+  getSepayBankAccount,
   parseSepayTransactionDate,
   parseSepayWebhookPayload,
 } from "../lib/sepay.ts";
@@ -40,19 +41,21 @@ async function hmac(secret, message) {
   return bytesToHex(new Uint8Array(digest));
 }
 
-test("VietQR contains the configured ACB account, exact amount and payment code", () => {
+test("VietQR contains the default MBBank account, exact amount and payment code", () => {
   const result = new URL(buildSepayVietQrUrl({
     amountVnd: 329000,
-    bankAccount: { bankCode: "ACB", accountNumber: "12897891", accountName: "LE CHAU KIET" },
+    bankAccount: getSepayBankAccount({}),
     paymentCode: "HIMI23456789ABCD",
   }));
   assert.equal(result.origin + result.pathname, "https://vietqr.app/img");
-  assert.equal(result.searchParams.get("bank"), "ACB");
-  assert.equal(result.searchParams.get("acc"), "12897891");
+  assert.equal(result.searchParams.get("bank"), "MBBANK");
+  assert.equal(result.searchParams.get("acc"), "054611111");
+  assert.equal(result.searchParams.get("template"), "compact");
+  assert.equal(result.searchParams.get("showinfo"), "true");
   assert.equal(result.searchParams.get("amount"), "329000");
   assert.equal(result.searchParams.get("des"), "HIMI23456789ABCD");
   assert.equal(result.searchParams.has("addInfo"), false);
-  assert.equal(result.searchParams.get("holder"), "LE CHAU KIET");
+  assert.equal(result.searchParams.get("holder"), "TRAN NGUYEN GIA HUY");
 });
 
 test("stored VietQR links are upgraded to embed the payment code", () => {
