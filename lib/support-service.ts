@@ -3,7 +3,7 @@ import type { Database } from "../db/index.ts";
 import { authRateLimits, supportConversations as conversations, supportMessages as messages, supportImages as images,
   supportJobs as jobs, supportReplySessions as sessions, supportTelegramUpdates as updates, users } from "../db/schema.ts";
 import { parseSupportCallback, requireUuid, SUPPORT_REMINDER_MS, SupportError, validateSupportInput } from "./support-domain.ts";
-import { authorizedTelegramUpdate, telegramCall, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
+import { authorizedTelegramUpdate, SUPPORT_REPLY_RECEIPT_TEXT, telegramCall, telegramUserDisplayName, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
 
 export type SupportTx = Parameters<Parameters<Database["transaction"]>[0]>[0];
 export type SupportConversation = typeof conversations.$inferSelect;
@@ -154,7 +154,7 @@ export async function acceptTelegramUpdate(db: Database, u: TelegramUpdate, conf
       await tx.update(conversations).set({ status: "CLAIMED", claimedByTelegramUserId: adminId,
         claimedAt: c.claimedAt ?? now, nextReminderAt: null, updatedAt: now }).where(eq(conversations.id, c.id));
       await enqueue(tx, "prompt", `prompt:${u.update_id}`, c.id, {
-        adminId, generation: c.generation, sourceMessageId,
+        adminId, adminName: telegramUserDisplayName(cb.from), generation: c.generation, sourceMessageId,
       });
       return "Bạn đã tiếp nhận. Hãy trả lời tin nhắn hướng dẫn của bot.";
     }
@@ -163,7 +163,10 @@ export async function acceptTelegramUpdate(db: Database, u: TelegramUpdate, conf
     await tx.delete(sessions).where(eq(sessions.conversationId, c.id));
     await tx.insert(messages).values({ conversationId: c.id, senderType: "SYSTEM", senderId: adminId,
       content: "Cảm ơn anh/chị đã dành thời gian liên hệ!" });
-    await enqueue(tx, "complete", `complete:${c.id}:${c.generation}`, c.id, { generation: c.generation });
+    await enqueue(tx, "complete", `complete:${c.id}:${c.generation}`, c.id, {
+      generation: c.generation,
+      ...(cb.message!.text === SUPPORT_REPLY_RECEIPT_TEXT ? { receiptMessageId: cb.message!.message_id } : {}),
+    });
     return "Đã xử lí";
   });
 }

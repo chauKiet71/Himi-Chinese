@@ -8,7 +8,7 @@ import * as schema from "../db/schema.ts";
 import { submitSupportMessage, getSupportConversation, acceptTelegramUpdate as acceptVerifiedTelegramUpdate, consumeSupportLimit, ownedSupportImage, SUPPORT_AUTOMATIC_REPLIES } from "../lib/support-service.ts";
 import { processSupportJob, processSupportReminder } from "../lib/support-worker.ts";
 import { hiddenAfterCompletion, validateSupportInput, parseSupportCallback, retryDelay } from "../lib/support-domain.ts";
-import { supportKeyboard, authorizedTelegramUpdate, verifyTelegramSecret, validTelegramUpdate, telegramConfig, telegramGroupIdCommand, TelegramError } from "../lib/support-telegram.ts";
+import { supportKeyboard, SUPPORT_REPLY_RECEIPT_TEXT, authorizedTelegramUpdate, verifyTelegramSecret, validTelegramUpdate, telegramConfig, telegramGroupIdCommand, TelegramError } from "../lib/support-telegram.ts";
 import { imageMime, supportImageDeliveryUrl } from "../lib/support-storage.ts";
 
 const user = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
@@ -46,7 +46,7 @@ const create = (value = input()) => submitSupportMessage(db, user, value, config
 async function row(id) { return (await db.select().from(schema.supportConversations).where(eq(schema.supportConversations.id, id)))[0]; }
 async function drain() { for (let i = 0; i < 30 && await processSupportJob(db, io); i++); }
 function callback(c, action = "reply", admin = 111, messageId = c.telegramNotificationMessageId) {
-  return { update_id: ++sequence, callback_query: { id: String(sequence), from: { id: admin },
+  return { update_id: ++sequence, callback_query: { id: String(sequence), from: { id: admin, first_name: "Lê Châu", last_name: "Kiệt", username: "kle995301" },
     data: "support_" + action + ":" + c.id + ":" + c.generation,
     message: { message_id: messageId, chat: { id: Number(config.chatId) } } } };
 }
@@ -197,6 +197,7 @@ test("every user notification has working actions and Reply targets the clicked 
   await drain();
   const prompt = calls.find(call => call.method === "sendMessage" && call.parameters.reply_markup?.force_reply);
   assert.equal(prompt.parameters.reply_parameters.message_id, second.telegramMessageId);
+  assert.equal(prompt.parameters.text, "Admin Lê Châu Kiệt: Nhập phản hồi cho học viên. Hãy Reply trực tiếp vào tin nhắn này (hiệu lực 24 giờ).");
 });
 test("two simultaneous admin claims retain exactly one owner and stop reminders", async () => {
   const created = await create(); await drain(); let c = await row(created.conversationId);
@@ -250,7 +251,7 @@ test("a bootstrap operator can discover a Telegram group id without authorizing 
   assert.equal(telegramGroupIdCommand({ ...command, message: { ...command.message, chat: { id: 123 } } }, config.admins), null);
   assert.equal(await authorizedTelegramUpdate(command, config, io.call), false);
 });
-test("complete is idempotent, clears mappings/reminders, edits Telegram and retains history after 60 seconds/refresh", async () => {
+test("complete is idempotent, clears mappings/reminders, preserves the original notification and retains history after 60 seconds/refresh", async () => {
   const c = await claimed();
   const update = callback(c, "complete");
   assert.equal(await acceptTelegramUpdate(db, update, config), "Đã xử lí");
@@ -271,13 +272,86 @@ test("complete is idempotent, clears mappings/reminders, edits Telegram and reta
   assert.equal(hiddenAfterCompletion(completedAt, first.completedAt.getTime() + 60_000), true);
   assert.equal(hiddenAfterCompletion(completedAt, first.completedAt.getTime() + 120_000), true);
   assert.equal(fresh.messages.length, 3);
-  assert.deepEqual(calls.at(-1).parameters.reply_markup, { inline_keyboard: [] });
-  assert.equal(calls.at(-1).parameters.text, "Đã xử lí");
+  assert.deepEqual(calls.at(-1), { method: "sendMessage", parameters: { chat_id: config.chatId, text: "Đã xử lí" }, photo: undefined });
+  assert.equal(calls.filter(call => call.method === "sendMessage" && call.parameters.text === "Đã xử lí").length, 1);
+  assert.equal(calls.filter(call => call.method === "editMessageText" || call.method === "deleteMessages").length, 0);
+  assert.deepEqual(calls.find(call => call.method === "editMessageReplyMarkup").parameters,
+    { chat_id: config.chatId, message_id: c.telegramNotificationMessageId, reply_markup: { inline_keyboard: [] } });
   for (const call of calls) {
     assert.ok(!String(call.parameters.text ?? "").includes(c.id));
     assert.ok(!String(call.parameters.caption ?? "").includes(c.id));
   }
 });
+test("complete from the reply receipt deletes that receipt and sends a new status without overwriting the original or reminder", async () => {
+  const created = await create(); await drain();
+  await processSupportReminder(db, io, new Date(Date.now() + 31_000));
+  let c = await row(created.conversationId);
+  await acceptTelegramUpdate(db, callback(c), config); await drain();
+  c = await row(c.id);
+  const [session] = await db.select().from(schema.supportReplySessions);
+  await acceptTelegramUpdate(db, reply(session.promptMessageId), config); await drain();
+  const receiptId = nextMessageId;
+  assert.equal(calls.at(-1).parameters.text, SUPPORT_REPLY_RECEIPT_TEXT);
+  const update = callback(c, "complete", 111, receiptId);
+  update.callback_query.message.text = SUPPORT_REPLY_RECEIPT_TEXT;
+  calls = [];
+  assert.equal(await acceptTelegramUpdate(db, update, config), "Đã xử lí");
+  await acceptTelegramUpdate(db, update, config);
+  await acceptTelegramUpdate(db, callback(c, "complete", 111, receiptId), config);
+  const [job] = (await db.select().from(schema.supportJobs)).filter(job => job.kind === "complete");
+  assert.equal(job.payload.receiptMessageId, receiptId);
+  await drain();
+  const deliveries = calls.filter(call => call.method !== "getChatMember");
+  assert.deepEqual(deliveries.map(call => call.method),
+    ["deleteMessages", "editMessageReplyMarkup", "editMessageReplyMarkup", "sendMessage"]);
+  assert.deepEqual(deliveries[0].parameters, { chat_id: config.chatId, message_ids: [receiptId] });
+  assert.deepEqual(deliveries.slice(1, 3).map(call => call.parameters.message_id),
+    [c.telegramNotificationMessageId, c.telegramReminderMessageId]);
+  assert.deepEqual(deliveries.at(-1).parameters, { chat_id: config.chatId, text: "Đã xử lí" });
+  const detail = await getSupportConversation(db, user, c.id);
+  assert.equal(detail.messages.filter(m => m.content === "Cảm ơn anh/chị đã dành thời gian liên hệ!").length, 1);
+  assert.equal(detail.messages.filter(m => m.senderType === "ADMIN").length, 1);
+});
+
+test("completion retries after a deleted receipt and failed status delivery, without deleting the original", async () => {
+  const c = await claimed();
+  const [session] = await db.select().from(schema.supportReplySessions);
+  await acceptTelegramUpdate(db, reply(session.promptMessageId), config); await drain();
+  const receiptId = nextMessageId;
+  const update = callback(c, "complete", 111, receiptId);
+  update.callback_query.message.text = SUPPORT_REPLY_RECEIPT_TEXT;
+  await acceptTelegramUpdate(db, update, config);
+  const send = io.call;
+  let deleted = false, missingSkipped = false, failStatus = true;
+  io.call = async (method, parameters, photo) => {
+    if (method === "deleteMessages") {
+      assert.deepEqual(parameters.message_ids, [receiptId]);
+      missingSkipped = deleted;
+      deleted = true;
+      return true;
+    }
+    if (method === "sendMessage" && parameters.text === "Đã xử lí" && failStatus) {
+      failStatus = false;
+      throw new TelegramError(503);
+    }
+    return send(method, parameters, photo);
+  };
+  await processSupportJob(db, io);
+  let [job] = (await db.select().from(schema.supportJobs)).filter(job => job.kind === "complete");
+  assert.equal(deleted, true);
+  assert.equal(job.finishedAt, null);
+  assert.equal(job.attempts, 1);
+  assert.equal(job.payload.receiptMessageId, receiptId);
+  assert.equal(calls.filter(call => call.method === "sendMessage" && call.parameters.text === "Đã xử lí").length, 0);
+  await db.update(schema.supportJobs).set({ availableAt: new Date(0) }).where(eq(schema.supportJobs.id, job.id));
+  await drain();
+  [job] = (await db.select().from(schema.supportJobs)).filter(job => job.kind === "complete");
+  assert.equal(missingSkipped, true);
+  assert.ok(job.finishedAt);
+  assert.deepEqual(job.payload, {});
+  assert.equal(calls.filter(call => call.method === "sendMessage" && call.parameters.text === "Đã xử lí").length, 1);
+});
+
 test("new user message reopens COMPLETED and old Telegram callbacks cannot complete the new generation", async () => {
   const c = await claimed(); await acceptTelegramUpdate(db, callback(c, "complete"), config); await drain();
   await submitSupportMessage(db, user, input({ content: "Tôi cần hỏi thêm" }), config.chatId, c.id);

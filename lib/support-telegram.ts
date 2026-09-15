@@ -1,7 +1,14 @@
 import { timingSafeEqual } from "node:crypto";
 import { parseSupportCallback, SupportError } from "./support-domain.ts";
 
-type TelegramUser = { id: number; first_name?: string; is_bot?: boolean };
+type TelegramUser = { id: number; first_name?: string; last_name?: string; username?: string; is_bot?: boolean };
+export function telegramUserDisplayName(user: TelegramUser) {
+  const name = [user.first_name, user.last_name].filter(value => typeof value === "string")
+    .join(" ").replace(/\s+/gu, " ").trim().slice(0, 128);
+  if (name) return name;
+  const username = typeof user.username === "string" ? user.username.trim().slice(0, 32) : "";
+  return username ? `@${username}` : null;
+}
 export type TelegramMessage = {
   message_id: number; chat: { id: number; type?: string }; from?: TelegramUser;
   sender_chat?: { id: number };
@@ -111,6 +118,7 @@ export function supportKeyboard(id: string, generation: number) {
     { text: "Hoàn thành", callback_data: `support_complete:${id}:${generation}` }]] };
 }
 export const SUPPORT_NOTIFICATION_TITLE = "📩 HIMI · Yêu cầu hỗ trợ";
+export const SUPPORT_REPLY_RECEIPT_TEXT = "Đã gửi phản hồi cho học viên.";
 export function notificationText(c: { userName: string; userEmail: string }, content: string) {
   // Plain text deliberately: user-controlled markup is never parsed by Telegram.
   return `${SUPPORT_NOTIFICATION_TITLE}\n\n👤 Tên: ${c.userName}\n📧 Email: ${c.userEmail}\n💬 Tin nhắn: ${content || "[Hình ảnh đính kèm]"}`;

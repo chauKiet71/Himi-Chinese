@@ -21,6 +21,7 @@ Luồng: client có session → API cùng origin → transaction PostgreSQL lưu
 - Polling 5 giây khi widget mở và tab hiện, backoff tối đa 30 giây lúc lỗi; không chồng request. Ẩn dựa trên `completedAt + 60 giây`, có bù lệch đồng hồ từ `serverNow`. Không xóa hội thoại/tin nhắn. Danh sách lấy 50 hội thoại gần nhất, lịch sử tin phân trang 100 mục với cursor ID.
 - State: `OPEN → CLAIMED → WAITING_USER → CLAIMED` (người dùng hỏi tiếp); complete từ trạng thái chưa hoàn thành; tin mới trên `COMPLETED → OPEN` xóa claim/completion, tăng generation và tạo thông báo Telegram mới. Nút trên mọi thông báo active mang conversation ID + generation, vì vậy callback từ generation cũ không tác động lần mở lại mới.
 - Mọi thông báo văn bản, ảnh, reminder và biên nhận đang còn xử lý đều có `Trả lời` / `Hoàn thành`. Một admin sở hữu conversation sau claim; admin khác được báo ID người đang xử lý, không ghi đè và không complete thay. Khi bấm `Trả lời`, bot tạo một ForceReply trả lời đúng thông báo vừa bấm; prompt này dùng bàn phím ForceReply thay cho inline keyboard theo mô hình `reply_markup` của Telegram. ForceReply có hiệu lực 24 giờ, mapping chính xác theo chat ID + admin ID + prompt message ID. Reply thường không trả lời đúng prompt sẽ bị bỏ qua/từ chối, không tự đoán hội thoại.
+- Khi người phụ trách bấm `Hoàn thành` trên biên nhận `Đã gửi phản hồi cho học viên.`, bot xóa đúng biên nhận đó và gửi tin mới `Đã xử lí` không có nút. Nội dung thông báo gốc và reminder được giữ, chỉ bỏ nút; học viên nhận `Cảm ơn anh/chị đã dành thời gian liên hệ!`. Nếu bấm hoàn thành trên thông báo khác, bot vẫn gửi tin trạng thái mới và không xóa thông báo vừa bấm. Xóa qua [deleteMessages](https://core.telegram.org/bots/api#deletemessages) bỏ qua tin đã mất khi retry; Telegram chỉ cho xóa tin dưới 48 giờ, lỗi xóa vẫn giữ job để vận hành kiểm tra.
 
 ## Migration và file chính
 
@@ -112,7 +113,7 @@ Rate limit bền vững theo tài khoản: 10 mutation/phút, 5 upload/phút, 90
 
 ### Giới hạn exactly-once
 
-DB mutation/webhook được dedup, row locks ngăn hai worker gửi cùng lượt bình thường. Tuy nhiên Telegram `sendMessage/sendPhoto` không hỗ trợ idempotency key: nếu Telegram đã nhận nhưng kết nối mất/worker chết **trước khi DB commit**, retry có thể tạo thêm một notification/photo/prompt/reminder đầu. Không thể đảm bảo exactly-once giữa DB và Telegram bằng transaction DB. Edit reminder/complete là idempotent; mọi prompt không có mapping đã commit đều không thể chuyển nhầm phản hồi. Khi gặp notification trùng, dùng thông báo có nút còn hợp lệ; đối chiếu conversation ID. Đây là giới hạn cần chấp nhận trước production, không tuyên bố gửi Telegram exactly-once.
+DB mutation/webhook được dedup, row locks ngăn hai worker gửi cùng lượt bình thường. Tuy nhiên Telegram `sendMessage/sendPhoto` không hỗ trợ idempotency key: nếu Telegram đã nhận nhưng kết nối mất/worker chết **trước khi DB commit**, retry có thể tạo thêm một notification/photo/prompt/reminder đầu hoặc tin trạng thái hoàn thành. Không thể đảm bảo exactly-once giữa DB và Telegram bằng transaction DB. Edit reminder/bỏ nút và xóa biên nhận đã mất có thể retry; mọi prompt không có mapping đã commit đều không thể chuyển nhầm phản hồi. Khi gặp notification trùng, dùng thông báo có nút còn hợp lệ; đối chiếu conversation ID. Đây là giới hạn cần chấp nhận trước production, không tuyên bố gửi Telegram exactly-once.
 
 ## Kiểm thử và nghiệm thu thật
 
@@ -133,7 +134,7 @@ Checklist bắt buộc với bot + DB + Cloudinary thật (chưa được tự x
 3. Hai thành viên nhóm (không cần có trong `TELEGRAM_ADMIN_USER_IDS`) bấm Trả lời gần đồng thời, chỉ một người claim. Người còn lại không trả lời hoặc hoàn thành thay được. Chờ 35 giây: count không tăng. Người ngoài nhóm/đã rời nhóm không làm đổi DB; lỗi `getChatMember` không tự cấp quyền.
 4. Tạo thêm hội thoại B, bấm Trả lời B rồi Reply vào prompt A bằng text và ảnh có caption: chỉ A nhận, status WAITING_USER.
 5. Gửi lại cùng webhook update (giữ secret trong công cụ server): không thêm message. Mở A bằng session learner khác: 404.
-6. Admin sở hữu bấm Hoàn thành hai lần: chỉ một completedAt và system message; nút gốc bị bỏ. Refresh client sau 30 giây: còn khoảng 30 giây; đủ 60 giây ẩn. Query DB vẫn còn lịch sử.
+6. Admin sở hữu bấm Hoàn thành trên biên nhận `Đã gửi phản hồi cho học viên.` hai lần: chỉ một completedAt và lời cảm ơn cho học viên; biên nhận bị xóa, một tin mới `Đã xử lí` không có nút được gửi. Nội dung yêu cầu gốc/reminder không đổi, nút gốc bị bỏ. Refresh client sau 30 giây: còn khoảng 30 giây; đủ 60 giây ẩn. Query DB vẫn còn lịch sử. Thử lỗi gửi trạng thái sau khi xóa: retry bỏ qua biên nhận đã mất và gửi tiếp.
 7. Gửi tin mới từ ô chat sau khi ẩn: A mở lại, deadline mới, completedAt null, thông báo gốc cũ không complete được A.
 8. Tạm dừng worker, gửi tin, refresh: tin vẫn có. Chạy lại worker: gửi tiếp. Thử lỗi mạng Telegram rồi khôi phục; kiểm tra backlog được giải phóng. Chạy hai worker để kiểm tra khóa trên PostgreSQL thật.
 

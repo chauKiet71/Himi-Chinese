@@ -5,7 +5,7 @@ import { supportConversations as conversations, supportMessages as messages, sup
 import { reminderDue, retryDelay, SUPPORT_REMINDER_MS } from "./support-domain.ts";
 import { enqueue, type SupportConversation, type SupportTx } from "./support-service.ts";
 import { importTelegramPhoto, readSupportImage } from "./support-storage.ts";
-import { authorizedTelegramUpdate, notificationText, SUPPORT_NOTIFICATION_TITLE, supportKeyboard, telegramCall, TelegramError, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
+import { authorizedTelegramUpdate, notificationText, SUPPORT_NOTIFICATION_TITLE, SUPPORT_REPLY_RECEIPT_TEXT, supportKeyboard, telegramCall, TelegramError, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
 import { sendSepayNotification } from "./sepay-telegram.ts";
 
 export type SupportTransport = {
@@ -56,7 +56,7 @@ async function processJob(tx: SupportTx, job: Job, io: SupportTransport) {
       content: m.text ?? m.caption ?? "", imageId, imageUrl: imageId ? `/api/support/images/${imageId}` : null, telegramMessageId: m.message_id });
     await tx.update(conversations).set({ status: "WAITING_USER", nextReminderAt: null, updatedAt: new Date() }).where(eq(conversations.id, c.id));
     await enqueue(tx, "receipt", `receipt:${u.update_id}`, c.id, {
-      chatId, text: "Đã gửi phản hồi cho học viên.", generation: c.generation,
+      chatId, text: SUPPORT_REPLY_RECEIPT_TEXT, generation: c.generation,
     });
     return;
   }
@@ -100,8 +100,10 @@ async function processJob(tx: SupportTx, job: Job, io: SupportTransport) {
   }
   if (job.kind === "prompt") {
     if (c.status === "COMPLETED" || c.claimedByTelegramUserId !== job.payload.adminId) return;
+    const adminLabel = typeof job.payload.adminName === "string" && job.payload.adminName
+      ? `Admin ${job.payload.adminName}` : "Nhân viên hỗ trợ";
     const result = await io.call("sendMessage", { ...base,
-      text: `Admin ${job.payload.adminId}: Nhập phản hồi cho học viên. Hãy Reply trực tiếp vào tin nhắn này (hiệu lực 24 giờ).`,
+      text: `${adminLabel}: Nhập phản hồi cho học viên. Hãy Reply trực tiếp vào tin nhắn này (hiệu lực 24 giờ).`,
       reply_markup: { force_reply: true, input_field_placeholder: "Nhập phản hồi cho học viên…" },
       ...(Number.isSafeInteger(job.payload.sourceMessageId) ? {
         reply_parameters: { message_id: job.payload.sourceMessageId, allow_sending_without_reply: true },
@@ -120,11 +122,18 @@ async function processJob(tx: SupportTx, job: Job, io: SupportTransport) {
     return;
   }
   if (job.kind === "complete") {
-    if (c.status !== "COMPLETED" || !c.telegramNotificationMessageId) return;
-    await io.call("editMessageText", { ...base, message_id: c.telegramNotificationMessageId,
-      text: "Đã xử lí", reply_markup: { inline_keyboard: [] } });
-    if (c.telegramReminderMessageId) await io.call("editMessageText", { ...base, message_id: c.telegramReminderMessageId,
-      text: "Đã xử lí", reply_markup: { inline_keyboard: [] } });
+    if (c.status !== "COMPLETED") return;
+    const receiptId = job.payload.receiptMessageId;
+    if (Number.isSafeInteger(receiptId) && Number(receiptId) > 0 &&
+      receiptId !== c.telegramNotificationMessageId && receiptId !== c.telegramReminderMessageId) {
+      // deleteMessages skips already-missing messages, so a retry can continue after deletion succeeded.
+      await io.call("deleteMessages", { ...base, message_ids: [receiptId] });
+    }
+    for (const id of [c.telegramNotificationMessageId, c.telegramReminderMessageId]) {
+      if (id) await io.call("editMessageReplyMarkup", { ...base, message_id: id,
+        reply_markup: { inline_keyboard: [] } });
+    }
+    await io.call("sendMessage", { ...base, text: "Đã xử lí" });
     return;
   }
   throw new Error("unknown_support_job");
