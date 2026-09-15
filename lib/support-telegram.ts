@@ -113,13 +113,22 @@ export const telegramCall: TelegramCall = async (method, parameters, photo) => {
   });
   return data.result;
 };
+export async function telegramMemberDisplayName(chatId: string, adminId: string, call: TelegramCall = telegramCall) {
+  const id = Number(adminId);
+  if (!Number.isSafeInteger(id) || id <= 0) return null;
+  const member = await call("getChatMember", { chat_id: chatId, user_id: id });
+  const user = member.user as TelegramUser | undefined;
+  if (!user || user.id !== id || user.is_bot) return null;
+  return telegramUserDisplayName(user);
+}
 export function supportKeyboard(id: string, generation: number) {
   return { inline_keyboard: [[{ text: "Trả lời", callback_data: `support_reply:${id}:${generation}` },
     { text: "Hoàn thành", callback_data: `support_complete:${id}:${generation}` }]] };
 }
 export const SUPPORT_NOTIFICATION_TITLE = "📩 HIMI · Yêu cầu hỗ trợ";
 export const SUPPORT_REPLY_RECEIPT_TEXT = "Đã gửi phản hồi cho học viên.";
-export function notificationText(c: { userName: string; userEmail: string }, content: string) {
+export function notificationText(c: { userName: string; userEmail: string }, content: string, replyOnly = false) {
   // Plain text deliberately: user-controlled markup is never parsed by Telegram.
-  return `${SUPPORT_NOTIFICATION_TITLE}\n\n👤 Tên: ${c.userName}\n📧 Email: ${c.userEmail}\n💬 Tin nhắn: ${content || "[Hình ảnh đính kèm]"}`;
+  const text = `💬 Tin nhắn: ${content || "[Hình ảnh đính kèm]"}`;
+  return replyOnly ? text : `${SUPPORT_NOTIFICATION_TITLE}\n\n👤 Tên: ${c.userName}\n📧 Email: ${c.userEmail}\n${text}`;
 }

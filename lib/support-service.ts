@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, gt, isNull, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gt, gte, isNotNull, isNull, lte, sql } from "drizzle-orm";
 import type { Database } from "../db/index.ts";
 import { authRateLimits, supportConversations as conversations, supportMessages as messages, supportImages as images,
   supportJobs as jobs, supportReplySessions as sessions, supportTelegramUpdates as updates, users } from "../db/schema.ts";
@@ -8,6 +8,20 @@ import { authorizedTelegramUpdate, SUPPORT_REPLY_RECEIPT_TEXT, telegramCall, tel
 export type SupportTx = Parameters<Parameters<Database["transaction"]>[0]>[0];
 export type SupportConversation = typeof conversations.$inferSelect;
 export type SupportMessage = typeof messages.$inferSelect;
+export async function latestTelegramAdminReply(tx: SupportTx, c: SupportConversation, before?: Date) {
+  if (!c.telegramNotificationMessageId) return null;
+  // Only replies after the current group's primary notification belong to this Telegram generation.
+  const [primary] = await tx.select({ createdAt: messages.createdAt }).from(messages).where(and(
+    eq(messages.conversationId, c.id), eq(messages.senderType, "USER"),
+    eq(messages.telegramMessageId, c.telegramNotificationMessageId),
+  )).orderBy(desc(messages.createdAt)).limit(1);
+  if (!primary) return null;
+  const [reply] = await tx.select({ messageId: messages.telegramMessageId }).from(messages).where(and(
+    eq(messages.conversationId, c.id), eq(messages.senderType, "ADMIN"), isNotNull(messages.telegramMessageId),
+    gte(messages.createdAt, primary.createdAt), ...(before ? [lte(messages.createdAt, before)] : []),
+  )).orderBy(desc(messages.createdAt), desc(messages.telegramMessageId)).limit(1);
+  return reply?.messageId ?? null;
+}
 export const SUPPORT_AUTOMATIC_REPLIES = [
   "Himi có thể giúp gì cho Anh/Chị ạ!",
   "Himi đã tiếp nhận thông tin và đang kết nối với nhân viên hỗ trợ, Anh/chị vui lòng chờ trong giây lát.",
@@ -32,9 +46,15 @@ export async function submitSupportMessage(db: Database, userId: string, value: 
   return db.transaction(async tx => {
     // Serialize account mutations, including retries of the initial create request.
     await tx.select({ id: users.id }).from(users).where(eq(users.id, userId)).for("update");
+    let existing: SupportConversation | undefined;
+    if (conversationId) {
+      [existing] = await tx.select().from(conversations).where(and(eq(conversations.id, conversationId), eq(conversations.userId, userId))).for("update");
+      if (!existing) throw new SupportError("Không tìm thấy hội thoại.", 404);
+    }
     const [duplicate] = await tx.select().from(messages).where(and(eq(messages.senderId, userId), eq(messages.requestId, input.requestId)));
     if (duplicate) {
-      if (conversationId && duplicate.conversationId !== conversationId) throw new SupportError("Mã gửi đã được sử dụng.", 409);
+      // A retry through a completed conversation's URL must return the new conversation it already created.
+      if (existing && existing.status !== "COMPLETED" && duplicate.conversationId !== existing.id) throw new SupportError("Mã gửi đã được sử dụng.", 409);
       if (duplicate.content !== input.content || duplicate.imageId !== input.imageId) throw new SupportError("Mã gửi đã được dùng cho nội dung khác.", 409);
       return { conversationId: duplicate.conversationId, messageId: duplicate.id };
     }
@@ -45,24 +65,18 @@ export async function submitSupportMessage(db: Database, userId: string, value: 
     }
     let c: SupportConversation;
     const now = new Date();
-    if (conversationId) {
-      const [existing] = await tx.select().from(conversations).where(and(eq(conversations.id, conversationId), eq(conversations.userId, userId))).for("update");
-      if (!existing) throw new SupportError("Không tìm thấy hội thoại.", 404);
+    if (existing && existing.status !== "COMPLETED") {
       c = existing;
-      const reopen = c.status === "COMPLETED";
       const telegramChatChanged = c.telegramChatId !== chatId;
       [c] = await tx.update(conversations).set({
         updatedAt: now, userName: input.userName, userEmail: input.userEmail, telegramChatId: chatId,
-        status: reopen ? "OPEN" : c.claimedAt ? "CLAIMED" : "OPEN",
-        ...(telegramChatChanged || reopen ? {
+        status: c.claimedAt ? "CLAIMED" : "OPEN",
+        ...(telegramChatChanged ? {
           telegramNotificationMessageId: null, telegramReminderMessageId: null, generation: c.generation + 1,
         } : {}),
-        ...(telegramChatChanged && !reopen && c.status === "OPEN" && !c.claimedAt ? {
+        ...(telegramChatChanged && c.status === "OPEN" && !c.claimedAt ? {
           nextReminderAt: new Date(now.getTime() + SUPPORT_REMINDER_MS), reminderCount: 0,
           reminderFailures: 0, lastReminderError: null,
-        } : {}),
-        ...(reopen ? { completedAt: null, completedBy: null, claimedAt: null, claimedByTelegramUserId: null,
-          nextReminderAt: new Date(now.getTime() + SUPPORT_REMINDER_MS), reminderCount: 0, reminderFailures: 0, lastReminderError: null,
         } : {}),
       }).where(eq(conversations.id, c.id)).returning();
       if (telegramChatChanged) await tx.delete(sessions).where(eq(sessions.conversationId, c.id));
@@ -83,14 +97,15 @@ export async function submitSupportMessage(db: Database, userId: string, value: 
       content: automaticReply,
       createdAt: new Date(now.getTime() + 1),
     });
-    await enqueue(tx, "notify", `notify:${message.id}`, c.id, { messageId: message.id, generation: c.generation });
+    const replyToMessageId = await latestTelegramAdminReply(tx, c);
+    await enqueue(tx, "notify", `notify:${message.id}`, c.id, { messageId: message.id, generation: c.generation, replyToMessageId });
     if (image) await enqueue(tx, "photo", `photo:${message.id}`, c.id, { messageId: message.id, generation: c.generation });
     return { conversationId: c.id, messageId: message.id };
   });
 }
 export async function getSupportConversation(db: Database, userId: string, id: string, before?: string) {
   requireUuid(id);
-  // Repeatable snapshot prevents a COMPLETED header being paired with reopened messages.
+  // Read the status and its message history from the same snapshot.
   return db.transaction(async tx => {
     const [c] = await tx.select().from(conversations).where(and(eq(conversations.id, id), eq(conversations.userId, userId)));
     if (!c) throw new SupportError("Không tìm thấy hội thoại.", 404);

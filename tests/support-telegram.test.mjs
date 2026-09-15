@@ -1,6 +1,17 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { telegramCall, TelegramError } from "../lib/support-telegram.ts";
+import { telegramCall, telegramMemberDisplayName, TelegramError } from "../lib/support-telegram.ts";
+
+test("profile lookup uses the clicker's ID and never uses another user's or bot's display name", async () => {
+  const lookup = user => async (method, parameters) => {
+    assert.equal(method, "getChatMember");
+    assert.deepEqual(parameters, { chat_id: "-10012345", user_id: 111 });
+    return { status: "member", user };
+  };
+  assert.equal(await telegramMemberDisplayName("-10012345", "111", lookup({ id: 111, first_name: "Lê Châu", last_name: "Kiệt" })), "Lê Châu Kiệt");
+  assert.equal(await telegramMemberDisplayName("-10012345", "111", lookup({ id: 222, first_name: "Người khác" })), null);
+  assert.equal(await telegramMemberDisplayName("-10012345", "111", lookup({ id: 111, is_bot: true, first_name: "Bot Himi" })), null);
+});
 
 test("Telegram migration response retains destination and a safe diagnostic without resending blindly", async () => {
   const previousFetch = globalThis.fetch;

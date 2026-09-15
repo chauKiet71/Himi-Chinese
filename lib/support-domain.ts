@@ -32,8 +32,8 @@ export function reminderDue(c: { status: string; claimedAt: Date | null; nextRem
 }
 export function parseSupportCallback(data: unknown) {
   if (typeof data !== "string") return null;
-  // Generation makes buttons on every Telegram message safe: actions from a
-  // previous, completed generation cannot mutate a reopened conversation.
+  // Generation invalidates buttons when the Telegram destination changes.
+  // Separate conversation IDs keep completed requests apart from new ones.
   // The optional form keeps already-sent primary notification buttons working.
   const match = /^(support_reply|support_complete):([0-9a-f-]{36})(?::([1-9]\d*))?$/i.exec(data);
   if (!match) return null;

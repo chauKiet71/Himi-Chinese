@@ -199,6 +199,67 @@ test("every user notification has working actions and Reply targets the clicked 
   assert.equal(prompt.parameters.reply_parameters.message_id, second.telegramMessageId);
   assert.equal(prompt.parameters.text, "Admin Lê Châu Kiệt: Nhập phản hồi cho học viên. Hãy Reply trực tiếp vào tin nhắn này (hiệu lực 24 giờ).");
 });
+for (const [label, profile, expected] of [
+  ["full name", { first_name: "Tên", last_name: "Telegram" }, "Tên Telegram"],
+  ["username", { username: "support_staff" }, "@support_staff"],
+]) {
+  test(`a prompt from an older webhook without adminName resolves the clicker's Telegram ${label}`, async () => {
+    const created = await create(); await drain();
+    const c = await row(created.conversationId);
+    await acceptTelegramUpdate(db, callback(c), config);
+    const [job] = (await db.select().from(schema.supportJobs)).filter(j => j.kind === "prompt");
+    // This is the exact payload shape written by the webhook before it saved display names.
+    await db.update(schema.supportJobs).set({ payload: {
+      adminId: "111", generation: c.generation, sourceMessageId: c.telegramNotificationMessageId,
+    } }).where(eq(schema.supportJobs.id, job.id));
+    const send = io.call;
+    io.call = async (method, parameters, photo) => {
+      if (method === "getChatMember") {
+        assert.deepEqual(parameters, { chat_id: config.chatId, user_id: 111 });
+        return { status: "member", user: { id: 111, ...profile } };
+      }
+      return send(method, parameters, photo);
+    };
+    await drain();
+    const prompt = calls.find(call => call.method === "sendMessage" && call.parameters.reply_markup?.force_reply);
+    assert.equal(prompt.parameters.text, `Admin ${expected}: Nhập phản hồi cho học viên. Hãy Reply trực tiếp vào tin nhắn này (hiệu lực 24 giờ).`);
+    assert.equal(prompt.parameters.reply_parameters.message_id, c.telegramNotificationMessageId);
+    const [session] = await db.select().from(schema.supportReplySessions);
+    assert.equal(session.telegramAdminUserId, "111");
+    assert.equal(session.conversationId, c.id);
+  });
+}
+
+test("a missing prompt name retries a failed profile lookup before sending instead of using the generic staff label", async () => {
+  const created = await create(); await drain();
+  const c = await row(created.conversationId);
+  const update = callback(c);
+  update.callback_query.from = { id: 111 };
+  await acceptTelegramUpdate(db, update, config);
+  const send = io.call;
+  io.call = async (method, parameters, photo) => {
+    if (method === "getChatMember") throw new TelegramError(503);
+    return send(method, parameters, photo);
+  };
+  await processSupportJob(db, io);
+  let [job] = (await db.select().from(schema.supportJobs)).filter(j => j.kind === "prompt");
+  assert.equal(job.finishedAt, null);
+  assert.equal(job.attempts, 1);
+  assert.equal(calls.filter(call => call.parameters.reply_markup?.force_reply).length, 0);
+  assert.equal((await db.select().from(schema.supportReplySessions)).length, 0);
+  io.call = async (method, parameters, photo) => method === "getChatMember"
+    ? { status: "member", user: { id: 111, first_name: "Tên Telegram" } }
+    : send(method, parameters, photo);
+  await db.update(schema.supportJobs).set({ availableAt: new Date(0) }).where(eq(schema.supportJobs.id, job.id));
+  await drain();
+  [job] = (await db.select().from(schema.supportJobs)).filter(j => j.kind === "prompt");
+  assert.ok(job.finishedAt);
+  const prompts = calls.filter(call => call.parameters.reply_markup?.force_reply);
+  assert.equal(prompts.length, 1);
+  assert.ok(prompts[0].parameters.text.startsWith("Admin Tên Telegram:"));
+  assert.equal((await db.select().from(schema.supportReplySessions)).length, 1);
+});
+
 test("two simultaneous admin claims retain exactly one owner and stop reminders", async () => {
   const created = await create(); await drain(); let c = await row(created.conversationId);
   const results = await Promise.all([acceptTelegramUpdate(db, callback(c, "reply", 111), config), acceptTelegramUpdate(db, callback(c, "reply", 222), config)]);
@@ -222,6 +283,86 @@ test("ForceReply mapping routes to exact conversation, not last active conversat
   const receipt = calls.find(call => call.method === "sendMessage" && call.parameters.text.startsWith("Đã gửi phản hồi"));
   assert.deepEqual(receipt.parameters.reply_markup, supportKeyboard(a.id, a.generation));
 });
+test("a learner follow-up contains only its message and replies to the employee's Telegram message in the correct conversation", async () => {
+  const c = await claimed();
+  const [session] = await db.select().from(schema.supportReplySessions);
+  const employeeReply = reply(session.promptMessageId, "Alo");
+  await acceptTelegramUpdate(db, employeeReply, config); await drain();
+  const another = await claimed();
+  const otherSession = (await db.select().from(schema.supportReplySessions)).find(s => s.conversationId === another.id);
+  await acceptTelegramUpdate(db, reply(otherSession.promptMessageId, "Phản hồi cho hội thoại khác"), config); await drain();
+  calls = [];
+  const sent = await submitSupportMessage(db, user, input({ content: "tôi không đăng nhập đc" }), config.chatId, c.id);
+  await drain();
+  const notification = calls.find(call => call.method === "sendMessage");
+  assert.equal(notification.parameters.text, "💬 Tin nhắn: tôi không đăng nhập đc");
+  assert.deepEqual(notification.parameters.reply_parameters,
+    { message_id: employeeReply.message.message_id, allow_sending_without_reply: true });
+  assert.equal(notification.parameters.entities, undefined);
+  assert.equal(notification.parameters.parse_mode, undefined);
+  assert.deepEqual(notification.parameters.reply_markup, supportKeyboard(c.id, c.generation));
+  const message = (await db.select().from(schema.supportMessages)).find(m => m.id === sent.messageId);
+  await acceptTelegramUpdate(db, callback(c, "reply", 111, message.telegramMessageId), config); await drain();
+  const prompt = calls.find(call => call.parameters.reply_markup?.force_reply);
+  assert.equal(prompt.parameters.reply_parameters.message_id, message.telegramMessageId);
+});
+
+test("a queued learner follow-up keeps the employee reply it followed, then later messages target the newer employee reply", async () => {
+  const c = await claimed(); const [session] = await db.select().from(schema.supportReplySessions);
+  const first = reply(session.promptMessageId, "Hướng dẫn đầu tiên");
+  await acceptTelegramUpdate(db, first, config); await drain();
+  const value = input({ content: "Phản hồi <b>nguyên văn</b>" });
+  await submitSupportMessage(db, user, value, config.chatId, c.id);
+  await submitSupportMessage(db, user, value, config.chatId, c.id);
+  const second = reply(session.promptMessageId, "Hướng dẫn tiếp theo");
+  await acceptTelegramUpdate(db, second, config);
+  await processSupportJob(db, io, "admin-reply");
+  await drain();
+  const firstFollowup = calls.filter(call => call.method === "sendMessage" && call.parameters.text === "💬 Tin nhắn: " + value.content);
+  assert.equal(firstFollowup.length, 1);
+  assert.equal(firstFollowup[0].parameters.reply_parameters.message_id, first.message.message_id);
+  await submitSupportMessage(db, user, input({ content: "Phản hồi lần nữa" }), config.chatId, c.id); await drain();
+  const next = calls.find(call => call.method === "sendMessage" && call.parameters.text === "💬 Tin nhắn: Phản hồi lần nữa");
+  assert.equal(next.parameters.reply_parameters.message_id, second.message.message_id);
+});
+
+test("a follow-up queued by an older webhook replies to the employee message preceding it, even if another reply arrives before delivery", async () => {
+  const c = await claimed(); const [session] = await db.select().from(schema.supportReplySessions);
+  const first = reply(session.promptMessageId, "Hướng dẫn đầu tiên");
+  await acceptTelegramUpdate(db, first, config); await drain();
+  const sent = await submitSupportMessage(db, user, input({ content: "Phản hồi từ web cũ" }), config.chatId, c.id);
+  const [job] = (await db.select().from(schema.supportJobs)).filter(j => j.kind === "notify" && !j.finishedAt);
+  const payload = { ...job.payload }; delete payload.replyToMessageId;
+  await db.update(schema.supportJobs).set({ payload }).where(eq(schema.supportJobs.id, job.id));
+  const second = reply(session.promptMessageId, "Hướng dẫn gửi sau phản hồi học viên");
+  await acceptTelegramUpdate(db, second, config);
+  await processSupportJob(db, io, "admin-reply");
+  const studentMessage = (await db.select().from(schema.supportMessages)).find(m => m.id === sent.messageId);
+  // Keep the chronological order explicit even on clocks with coarse millisecond resolution.
+  const laterMessage = (await db.select().from(schema.supportMessages)).find(m => m.telegramMessageId === second.message.message_id);
+  await db.update(schema.supportMessages).set({ createdAt: new Date(studentMessage.createdAt.getTime() + 1000) })
+    .where(eq(schema.supportMessages.id, laterMessage.id));
+  await drain();
+  const notification = calls.find(call => call.method === "sendMessage" && call.parameters.text === "💬 Tin nhắn: Phản hồi từ web cũ");
+  assert.equal(notification.parameters.reply_parameters.message_id, first.message.message_id);
+});
+
+test("a learner photo follow-up replies to the employee via its compact text notification", async () => {
+  const c = await claimed(); const [session] = await db.select().from(schema.supportReplySessions);
+  const employeeReply = reply(session.promptMessageId, "Gửi ảnh lỗi cho tôi");
+  await acceptTelegramUpdate(db, employeeReply, config); await drain();
+  const imageId = crypto.randomUUID();
+  await db.insert(schema.supportImages).values({ id: imageId, ownerId: user, publicId: "test/followup" });
+  calls = [];
+  const sent = await submitSupportMessage(db, user, input({ content: "", imageId }), config.chatId, c.id); await drain();
+  const notification = calls.find(call => call.method === "sendMessage");
+  assert.equal(notification.parameters.text, "💬 Tin nhắn: [Hình ảnh đính kèm]");
+  assert.equal(notification.parameters.reply_parameters.message_id, employeeReply.message.message_id);
+  const photo = calls.find(call => call.method === "sendPhoto");
+  const message = (await db.select().from(schema.supportMessages)).find(m => m.id === sent.messageId);
+  assert.equal(photo.parameters.reply_parameters.message_id, message.telegramMessageId);
+});
+
 test("admin photo and caption persist in existing storage; cross-admin reply to a prompt is not routed", async () => {
   const c = await claimed(); const [session] = await db.select().from(schema.supportReplySessions);
   await acceptTelegramUpdate(db, reply(session.promptMessageId, "Sai người", 222), config); await drain();
@@ -352,16 +493,33 @@ test("completion retries after a deleted receipt and failed status delivery, wit
   assert.equal(calls.filter(call => call.method === "sendMessage" && call.parameters.text === "Đã xử lí").length, 1);
 });
 
-test("new user message reopens COMPLETED and old Telegram callbacks cannot complete the new generation", async () => {
+test("sending through a completed conversation starts a fresh conversation, preserves old history and deduplicates retries", async () => {
   const c = await claimed(); await acceptTelegramUpdate(db, callback(c, "complete"), config); await drain();
-  await submitSupportMessage(db, user, input({ content: "Tôi cần hỏi thêm" }), config.chatId, c.id);
-  const reopened = await row(c.id);
-  assert.equal(reopened.status, "OPEN"); assert.equal(reopened.completedAt, null);
-  assert.equal(reopened.claimedAt, null); assert.equal(reopened.generation, 2); assert.ok(reopened.nextReminderAt);
+  const previous = await getSupportConversation(db, user, c.id);
+  const value = input({ content: "Tôi cần hỏi thêm" });
+  const [created, retry] = await Promise.all([
+    submitSupportMessage(db, user, value, config.chatId, c.id),
+    submitSupportMessage(db, user, value, config.chatId, c.id),
+  ]);
+  assert.notEqual(created.conversationId, c.id);
+  assert.deepEqual(created, retry);
+  const fresh = await row(created.conversationId);
+  assert.equal(fresh.status, "OPEN"); assert.equal(fresh.completedAt, null);
+  assert.equal(fresh.claimedAt, null); assert.equal(fresh.claimedByTelegramUserId, null); assert.ok(fresh.nextReminderAt);
+  const detail = await getSupportConversation(db, user, fresh.id);
+  assert.deepEqual(detail.messages.map(m => [m.senderType, m.content]), [
+    ["USER", value.content], ["SYSTEM", SUPPORT_AUTOMATIC_REPLIES[0]],
+  ]);
+  const retained = await getSupportConversation(db, user, c.id);
+  assert.deepEqual(retained.conversation, previous.conversation);
+  assert.deepEqual(retained.messages, previous.messages);
   await drain();
   const result = await acceptTelegramUpdate(db, callback(c, "complete"), config);
-  assert.match(result, /Thông báo đã cũ/);
-  assert.equal((await row(c.id)).status, "OPEN");
+  assert.equal(result, "Yêu cầu đã hoàn thành.");
+  assert.equal((await row(fresh.id)).status, "OPEN");
+  const notification = calls.find(call => call.method === "sendMessage" && call.parameters.text.includes(value.content));
+  assert.equal(notification.parameters.reply_parameters, undefined);
+  assert.deepEqual(notification.parameters.reply_markup, supportKeyboard(fresh.id, fresh.generation));
 });
 test("conversation and image ownership prevents cross-user reads and writes", async () => {
   const created = await create();

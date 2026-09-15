@@ -19,8 +19,10 @@ Luồng: client có session → API cùng origin → transaction PostgreSQL lưu
 - Next/Vinext tiếp tục chạy Cloudflare như hiện tại. **Worker support là tiến trình Node riêng, thường trực**, triển khai trên VM/container/Railway worker hoặc máy vận hành có kết nối PostgreSQL. Không chạy script này trong request Cloudflare, Vercel Function hay Next.js. Không cần Redis/WebSocket.
 - Dữ liệu/lịch nhắc/backoff nằm trong PostgreSQL. Worker dùng transaction, row lock và `FOR UPDATE SKIP LOCKED`; có thể chạy nhiều replica. Khóa conversation được giữ qua lượt gửi nhắc để claim/complete không chạy xen giữa kiểm tra và gửi.
 - Polling 5 giây khi widget mở và tab hiện, backoff tối đa 30 giây lúc lỗi; không chồng request. Ẩn dựa trên `completedAt + 60 giây`, có bù lệch đồng hồ từ `serverNow`. Không xóa hội thoại/tin nhắn. Danh sách lấy 50 hội thoại gần nhất, lịch sử tin phân trang 100 mục với cursor ID.
-- State: `OPEN → CLAIMED → WAITING_USER → CLAIMED` (người dùng hỏi tiếp); complete từ trạng thái chưa hoàn thành; tin mới trên `COMPLETED → OPEN` xóa claim/completion, tăng generation và tạo thông báo Telegram mới. Nút trên mọi thông báo active mang conversation ID + generation, vì vậy callback từ generation cũ không tác động lần mở lại mới.
+- State: `OPEN → CLAIMED → WAITING_USER → CLAIMED` (người dùng hỏi tiếp); complete từ trạng thái chưa hoàn thành. Tin mới sau `COMPLETED` tạo hội thoại `OPEN` riêng, giữ nguyên trạng thái/lịch sử đã hoàn thành và tạo thông báo Telegram mới. Widget không chọn hội thoại đã hết 60 giây hiển thị; khi chuyển sang hội thoại mới, xóa lịch sử phân trang đang giữ trong giao diện. Nút trên mọi thông báo active mang conversation ID + generation, vì vậy nút cũ không tác động yêu cầu mới.
 - Mọi thông báo văn bản, ảnh, reminder và biên nhận đang còn xử lý đều có `Trả lời` / `Hoàn thành`. Một admin sở hữu conversation sau claim; admin khác được báo ID người đang xử lý, không ghi đè và không complete thay. Khi bấm `Trả lời`, bot tạo một ForceReply trả lời đúng thông báo vừa bấm; prompt này dùng bàn phím ForceReply thay cho inline keyboard theo mô hình `reply_markup` của Telegram. ForceReply có hiệu lực 24 giờ, mapping chính xác theo chat ID + admin ID + prompt message ID. Reply thường không trả lời đúng prompt sẽ bị bỏ qua/từ chối, không tự đoán hội thoại.
+- Khi học viên phản hồi sau tin nhắn nhân viên, Telegram chỉ hiển thị `💬 Tin nhắn: <nội dung>` và reply trực tiếp vào tin nhân viên gần nhất của đúng hội thoại; không lặp tiêu đề/tên/email. Đích reply được lưu vào job lúc học viên gửi, nên nhân viên gửi thêm trong lúc job đang chờ không đổi đích. Job từ web cũ thiếu đích thì worker tìm tin nhân viên trước thời điểm học viên gửi. Tin đầu, hội thoại mới và các tin trước khi nhân viên phản hồi vẫn dùng thông báo đầy đủ. Ảnh đính kèm tiếp tục reply vào thông báo văn bản tương ứng.
+- Prompt hiển thị tên Telegram của người bấm `Trả lời` từ `callback_query.from` (họ/tên, dự phòng `@username`). Nếu job cũ thiếu tên, worker gọi `getChatMember` bằng đúng chat ID + ID người bấm để lấy tên; lỗi API giữ job để retry, không gửi prompt chung khi chưa tra được. Chỉ dùng `Nhân viên hỗ trợ` nếu phản hồi tra cứu thành công cũng không có tên dùng được. Cần redeploy/restart worker để áp dụng; webhook đang trỏ tới production thì thay code web local không tác động bot production.
 - Khi người phụ trách bấm `Hoàn thành` trên biên nhận `Đã gửi phản hồi cho học viên.`, bot xóa đúng biên nhận đó và gửi tin mới `Đã xử lí` không có nút. Nội dung thông báo gốc và reminder được giữ, chỉ bỏ nút; học viên nhận `Cảm ơn anh/chị đã dành thời gian liên hệ!`. Nếu bấm hoàn thành trên thông báo khác, bot vẫn gửi tin trạng thái mới và không xóa thông báo vừa bấm. Xóa qua [deleteMessages](https://core.telegram.org/bots/api#deletemessages) bỏ qua tin đã mất khi retry; Telegram chỉ cho xóa tin dưới 48 giờ, lỗi xóa vẫn giữ job để vận hành kiểm tra.
 
 ## Migration và file chính
@@ -94,7 +96,7 @@ Client cần cookie session thật; mutation bắt buộc Origin trùng website.
 - `GET /api/support/conversations`: profile và 50 hội thoại gần nhất.
 - `POST /api/support/conversations`: `{ requestId: UUID, userName, userEmail, content, imageId?: UUID }`.
 - `GET /api/support/conversations/:id?before=<messageUUID>`: status, completedAt, serverNow, messages, nextBefore.
-- `POST /api/support/conversations/:id/messages`: body như create; mở lại nếu đã hoàn thành.
+- `POST /api/support/conversations/:id/messages`: body như create; nếu đã hoàn thành, tạo hội thoại riêng và trả `conversationId` mới. Retry cùng request ID qua URL cũ trả đúng hội thoại đã tạo, không tạo thêm.
 - `POST /api/support/images`: body binary JPG/PNG/WebP, Content-Type đúng MIME, header `Idempotency-Key: UUID`.
 - `GET /api/support/images/:id`: kiểm tra session/owner trước khi lấy ảnh private từ Cloudinary.
 
@@ -104,7 +106,7 @@ Rate limit bền vững theo tài khoản: 10 mutation/phút, 5 upload/phút, 90
 
 ## Reminder, retry và vận hành
 
-- Hạn nhắc đầu = thời điểm tạo/mở lại + 30 giây; các lần tiếp = +30 giây khi vẫn OPEN/chưa claim. Độ trễ thực tế phụ thuộc poll worker, backlog, mạng và Telegram rate limit; không phải cam kết chính xác tuyệt đối từng mili giây.
+- Hạn nhắc đầu = thời điểm tạo hội thoại + 30 giây; các lần tiếp = +30 giây khi vẫn OPEN/chưa claim. Độ trễ thực tế phụ thuộc poll worker, backlog, mạng và Telegram rate limit; không phải cam kết chính xác tuyệt đối từng mili giây.
 - Nếu thông báo đầu chưa gửi được, outbox tiếp tục retry và nhắc chờ thông báo gốc tồn tại.
 - Chỉ tạo **một message nhắc** mỗi generation, sau đó edit số lần nhắc và liên kết thông báo gốc. **Telegram không phát push mới cho mỗi lần edit**; đây là lựa chọn chống spam group. Nếu nghiệp vụ cần âm thanh/push mỗi 30 giây, cần đổi chính sách gửi tin mới và kiểm soát giới hạn Telegram.
 - Claim/complete xóa deadline ngay trong transaction. Worker đọc lại DB mỗi lượt, không có scheduler trong API. Backoff outbox 2 giây → tối đa 5 phút; reminder lỗi backoff tối đa 5 phút; tôn trọng `retry_after` của Telegram. Không mất message user khi Telegram hỏng.
@@ -125,7 +127,7 @@ npm test
 npm run build
 ```
 
-Test support dùng PGlite (PostgreSQL nhúng) chạy migration thật, service và transaction thật, chỉ thay transport Telegram/Cloudinary. Bao phủ tạo/idempotency, payload text/ảnh, 30 giây/repeat/stop, hai claim đồng thời, hai worker, mapping đúng, update trùng, allowlist, complete, hide60s/refresh, mở lại, ownership, lỗi Telegram/restart/backoff và phân trang. PGlite serialize transaction trên một kết nối: **cần kiểm tra nhiều kết nối PostgreSQL/replica thật** trước production, không coi test này là load test distributed.
+Test support dùng PGlite (PostgreSQL nhúng) chạy migration thật, service và transaction thật, chỉ thay transport Telegram/Cloudinary. Bao phủ tạo/idempotency, payload text/ảnh, 30 giây/repeat/stop, hai claim đồng thời, hai worker, mapping đúng, update trùng, allowlist, complete, hide60s/refresh, hội thoại mới sau hoàn thành, ownership, lỗi Telegram/restart/backoff và phân trang. PGlite serialize transaction trên một kết nối: **cần kiểm tra nhiều kết nối PostgreSQL/replica thật** trước production, không coi test này là load test distributed.
 
 Checklist bắt buộc với bot + DB + Cloudinary thật (chưa được tự xác nhận trong phiên code):
 
@@ -135,7 +137,7 @@ Checklist bắt buộc với bot + DB + Cloudinary thật (chưa được tự x
 4. Tạo thêm hội thoại B, bấm Trả lời B rồi Reply vào prompt A bằng text và ảnh có caption: chỉ A nhận, status WAITING_USER.
 5. Gửi lại cùng webhook update (giữ secret trong công cụ server): không thêm message. Mở A bằng session learner khác: 404.
 6. Admin sở hữu bấm Hoàn thành trên biên nhận `Đã gửi phản hồi cho học viên.` hai lần: chỉ một completedAt và lời cảm ơn cho học viên; biên nhận bị xóa, một tin mới `Đã xử lí` không có nút được gửi. Nội dung yêu cầu gốc/reminder không đổi, nút gốc bị bỏ. Refresh client sau 30 giây: còn khoảng 30 giây; đủ 60 giây ẩn. Query DB vẫn còn lịch sử. Thử lỗi gửi trạng thái sau khi xóa: retry bỏ qua biên nhận đã mất và gửi tiếp.
-7. Gửi tin mới từ ô chat sau khi ẩn: A mở lại, deadline mới, completedAt null, thông báo gốc cũ không complete được A.
+7. Gửi tin mới từ ô chat sau khi ẩn: tạo hội thoại B riêng, chỉ có tin mới và lời chào tự động đầu tiên; A vẫn hoàn thành và giữ nguyên lịch sử. Deadline mới, completedAt của B null; nút Telegram trên A không tác động B. Tải lịch sử A trước khi hoàn thành rồi gửi tin mới: lịch sử phân trang A không xuất hiện trong B.
 8. Tạm dừng worker, gửi tin, refresh: tin vẫn có. Chạy lại worker: gửi tiếp. Thử lỗi mạng Telegram rồi khôi phục; kiểm tra backlog được giải phóng. Chạy hai worker để kiểm tra khóa trên PostgreSQL thật.
 
 Không dùng thông tin cá nhân/ảnh nhạy cảm thật cho fixture; xóa fixture chỉ sau khi đã xác định đúng IDs và được phép. Không tự gọi webhook bot thật hoặc migrate DB thật chỉ để làm xanh test.

@@ -3,9 +3,9 @@ import type { Database } from "../db/index.ts";
 import { supportConversations as conversations, supportMessages as messages, supportImages as images,
   supportJobs as jobs, supportReplySessions as sessions } from "../db/schema.ts";
 import { reminderDue, retryDelay, SUPPORT_REMINDER_MS } from "./support-domain.ts";
-import { enqueue, type SupportConversation, type SupportTx } from "./support-service.ts";
+import { enqueue, latestTelegramAdminReply, type SupportConversation, type SupportTx } from "./support-service.ts";
 import { importTelegramPhoto, readSupportImage } from "./support-storage.ts";
-import { authorizedTelegramUpdate, notificationText, SUPPORT_NOTIFICATION_TITLE, SUPPORT_REPLY_RECEIPT_TEXT, supportKeyboard, telegramCall, TelegramError, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
+import { authorizedTelegramUpdate, notificationText, SUPPORT_NOTIFICATION_TITLE, SUPPORT_REPLY_RECEIPT_TEXT, supportKeyboard, telegramCall, telegramMemberDisplayName, TelegramError, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
 import { sendSepayNotification } from "./sepay-telegram.ts";
 
 export type SupportTransport = {
@@ -77,10 +77,13 @@ async function processJob(tx: SupportTx, job: Job, io: SupportTransport) {
     const [m] = await tx.select().from(messages).where(eq(messages.id, String(job.payload.messageId)));
     if (!m) return;
     const primary = !c.telegramNotificationMessageId;
-    const result = await io.call("sendMessage", { ...base, text: notificationText(c, m.content),
-      entities: [{ type: "bold", offset: 0, length: SUPPORT_NOTIFICATION_TITLE.length }],
+    // Preserve the reply target selected when the learner sent the message. Older web versions omit it.
+    const replyId = "replyToMessageId" in job.payload ? job.payload.replyToMessageId : await latestTelegramAdminReply(tx, c, m.createdAt);
+    const followup = !primary && Number.isSafeInteger(replyId) && Number(replyId) > 0;
+    const result = await io.call("sendMessage", { ...base, text: notificationText(c, m.content, followup),
+      ...(!followup ? { entities: [{ type: "bold", offset: 0, length: SUPPORT_NOTIFICATION_TITLE.length }] } : {}),
       reply_markup: c.status === "COMPLETED" ? { inline_keyboard: [] } : supportKeyboard(c.id, c.generation),
-      ...(!primary ? { reply_parameters: { message_id: c.telegramNotificationMessageId, allow_sending_without_reply: true } } : {}),
+      ...(!primary ? { reply_parameters: { message_id: followup ? replyId : c.telegramNotificationMessageId, allow_sending_without_reply: true } } : {}),
     });
     const id = messageId(result);
     await tx.update(messages).set({ telegramMessageId: id }).where(eq(messages.id, m.id));
@@ -100,8 +103,10 @@ async function processJob(tx: SupportTx, job: Job, io: SupportTransport) {
   }
   if (job.kind === "prompt") {
     if (c.status === "COMPLETED" || c.claimedByTelegramUserId !== job.payload.adminId) return;
-    const adminLabel = typeof job.payload.adminName === "string" && job.payload.adminName
-      ? `Admin ${job.payload.adminName}` : "Nhân viên hỗ trợ";
+    const savedName = typeof job.payload.adminName === "string" ? job.payload.adminName.trim() : "";
+    // Older webhook versions queued only the actor ID; resolve that person's profile in the worker.
+    const adminName = savedName || await telegramMemberDisplayName(c.telegramChatId, String(job.payload.adminId), io.call);
+    const adminLabel = adminName ? `Admin ${adminName}` : "Nhân viên hỗ trợ";
     const result = await io.call("sendMessage", { ...base,
       text: `${adminLabel}: Nhập phản hồi cho học viên. Hãy Reply trực tiếp vào tin nhắn này (hiệu lực 24 giờ).`,
       reply_markup: { force_reply: true, input_field_placeholder: "Nhập phản hồi cho học viên…" },

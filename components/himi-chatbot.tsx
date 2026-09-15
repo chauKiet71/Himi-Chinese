@@ -87,7 +87,8 @@ export function HimiChatbot() {
         if (!initialized.current) {
           initialized.current = true;
           setUserName(result.profile.userName); setUserEmail(result.profile.userEmail);
-          if (!selectedId && result.conversations[0]) { setSelectedId(result.conversations[0].id); return; }
+          const latestVisible = result.conversations.find(c => !hiddenAfterCompletion(c.completedAt, new Date(result.serverNow).getTime()));
+          if (!selectedId && latestVisible) { setSelectedId(latestVisible.id); return; }
         }
         if (selectedId) {
           const next = await api<Detail>("/api/support/conversations/" + selectedId, { signal: controller.signal });
@@ -132,7 +133,8 @@ export function HimiChatbot() {
     event.preventDefault();
     if (busyRef.current || (!draft.trim() && !attachment)) return;
     busyRef.current = true; setBusy(true); setError(""); setNotice("");
-    const signature = JSON.stringify([selectedId, draft, userName, userEmail, attachment?.name, attachment?.size, attachment?.lastModified]);
+    const targetId = active?.conversation.status === "COMPLETED" ? null : selectedId;
+    const signature = JSON.stringify([targetId, draft, userName, userEmail, attachment?.name, attachment?.size, attachment?.lastModified]);
     if (requestRef.current?.signature !== signature) requestRef.current = {
       signature, requestId: crypto.randomUUID(), imageId: crypto.randomUUID(), uploaded: false,
     };
@@ -144,11 +146,14 @@ export function HimiChatbot() {
         pending.uploaded = true;
       }
       setNotice("Đang gửi yêu cầu…");
-      const result = await api<{ conversationId: string }>(selectedId ? "/api/support/conversations/" + selectedId + "/messages" : "/api/support/conversations", {
+      const result = await api<{ conversationId: string }>(targetId ? "/api/support/conversations/" + targetId + "/messages" : "/api/support/conversations", {
         method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
           userName, userEmail, content: draft, imageId: attachment ? pending.imageId : null, requestId: pending.requestId,
         }),
       });
+      if (result.conversationId !== selectedId) {
+        setDetail(null); setOlderMessages([]); setOlderCursor(undefined);
+      }
       setSelectedId(result.conversationId); setDraft(""); setAttachment(null); setPreview(null); requestRef.current = null;
       setNotice("Đã lưu tin nhắn và chuyển vào hàng đợi hỗ trợ.");
       nearBottom.current = true; setRevision(v => v + 1);
