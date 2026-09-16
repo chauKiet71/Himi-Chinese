@@ -1,5 +1,5 @@
 import "server-only";
-import { eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 import { readDb, writeDb, type Database } from "../db/index.ts";
 import { users } from "../db/schema.ts";
 import { hashPassword, passwordNeedsRehash, verifyPassword } from "./auth-crypto.ts";
@@ -89,4 +89,38 @@ export async function findActiveUserByEmail(email: string): Promise<Authenticate
   const rows = await readDb((db) => db.select().from(users).where(eq(users.email, email)).limit(1));
   const user = rows[0];
   return user?.isActive ? toAuthenticatedUser(user) : null;
+}
+
+export async function changeUnverifiedUserEmail(
+  userId: string,
+  currentEmail: string,
+  nextEmail: string,
+  database?: Database,
+): Promise<{ user: AuthenticatedUser } | { error: "email_in_use" | "not_allowed" }> {
+  const change = (db: Database) => db.transaction(async (tx) => {
+    const currentRows = await tx.select().from(users).where(eq(users.id, userId)).for("update").limit(1);
+    const currentUser = currentRows[0];
+    if (!currentUser?.isActive || currentUser.emailVerifiedAt || currentUser.email !== currentEmail) {
+      return { error: "not_allowed" as const };
+    }
+
+    const existingRows = await tx.select({ id: users.id }).from(users).where(eq(users.email, nextEmail)).limit(1);
+    if (existingRows[0] && existingRows[0].id !== userId) return { error: "email_in_use" as const };
+
+    const updatedRows = await tx.update(users).set({ email: nextEmail, updatedAt: new Date() }).where(and(
+      eq(users.id, userId),
+      eq(users.email, currentEmail),
+      isNull(users.emailVerifiedAt),
+    )).returning();
+    const updated = updatedRows[0];
+    return updated ? { user: toAuthenticatedUser(updated) } : { error: "not_allowed" as const };
+  });
+
+  try {
+    return await (database ? change(database) : writeDb(change));
+  } catch (error) {
+    const code = typeof error === "object" && error !== null && "code" in error ? String(error.code) : "";
+    if (code === "23505") return { error: "email_in_use" };
+    throw error;
+  }
 }

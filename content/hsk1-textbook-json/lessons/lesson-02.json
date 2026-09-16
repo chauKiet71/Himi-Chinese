@@ -9,7 +9,7 @@
     "courseId": "course-hsk-standard-1",
     "levelId": "hsk-1",
     "lessonNumber": 2,
-    "titleVi": "Cảm ơn anh!",
+    "titleVi": "Cảm ơn bạn!",
     "titleZh": "谢谢你！",
     "heroHanzi": "谢谢你！",
     "summaryVi": "Dữ liệu bài 2 được chuyển đổi từ Giáo trình chuẩn HSK 1.",
@@ -66,7 +66,7 @@
       "content": {
         "kickerVi": "Bài 2 · HSK 1",
         "heroHanzi": "谢谢你！",
-        "summaryVi": "Cảm ơn anh!",
+        "summaryVi": "Cảm ơn bạn!",
         "sourcePrintedPages": [
           20,
           25

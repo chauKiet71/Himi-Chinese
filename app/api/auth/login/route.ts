@@ -11,7 +11,14 @@ import {
   invalidateAdminMfaChallenge,
   issueAdminMfaChallenge,
 } from "@/lib/admin-mfa";
-import { sendAuthLink } from "@/lib/auth-workflows";
+import { sendEmailVerificationCode } from "@/lib/auth-workflows";
+import {
+  createPendingEmailChangeToken,
+  pendingEmailChangeCookieName,
+  pendingEmailChangeCookieOptions,
+  pendingEmailVerificationCookieName,
+  pendingEmailVerificationCookieOptions,
+} from "@/lib/pending-email-verification";
 import { normalizeEmail, safeAdminReturnTo, safeReturnTo, validateEmail, validatePassword } from "@/lib/auth-validation";
 import { authRedirectUrl, formString, isSameOriginRequest } from "@/lib/request-security";
 import { isPracticeStaffRole } from "@/lib/practice-workflow";
@@ -49,7 +56,7 @@ export async function POST(request: Request) {
     if (!user.emailVerified) {
       let delivery: "brevo" | "console" | "failed" = "failed";
       try {
-        delivery = await sendAuthLink(user, "verify_email", database);
+        delivery = await sendEmailVerificationCode(user, database);
       } catch (error) {
         console.error("Không thể gửi email xác minh.", error instanceof Error ? error.message : "unknown");
       }
@@ -57,7 +64,11 @@ export async function POST(request: Request) {
       const url = authRedirectUrl(request, "/verify-email");
       url.searchParams.set("required", "1");
       if (delivery === "failed") url.searchParams.set("error", "delivery_failed");
-      return NextResponse.redirect(url, 303);
+      const response = NextResponse.redirect(url, 303);
+      response.cookies.set(pendingEmailVerificationCookieName(), email, pendingEmailVerificationCookieOptions());
+      const changeToken = await createPendingEmailChangeToken(user.id, email);
+      response.cookies.set(pendingEmailChangeCookieName(), changeToken, pendingEmailChangeCookieOptions());
+      return response;
     }
 
     if (isPracticeStaffRole(user.role)) {

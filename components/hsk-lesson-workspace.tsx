@@ -25,9 +25,11 @@ import type {
   HskExercise,
   HskLessonContent,
   HskLessonMode,
+  HskVocabularyAudio,
   HskVocabularyItem,
   HskWritingCharacter,
 } from "@/lib/hsk-lesson-content";
+import { cancelHskPronunciation, playHskPronunciation } from "@/lib/hsk-audio";
 import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 import {
   calculateHskLessonProgress,
@@ -40,6 +42,7 @@ import { saveHskVocabularyWord } from "@/lib/saved-vocabulary-client";
 
 type SpeechRate = 0.75 | 1 | 1.25;
 type WritingMode = "watch" | "trace" | "quiz";
+type Speak = (text: string, rate?: SpeechRate, audio?: HskVocabularyAudio) => void;
 
 const TABS: Array<{ id: HskLessonMode; label: string; icon: typeof BookOpen }> = [
   { id: "vocabulary", label: "Từ vựng", icon: BookOpen },
@@ -73,7 +76,7 @@ function VocabularyPanel({
   onComplete: (wordId: string) => void;
   onSave: (word: HskVocabularyItem) => void;
   onContinue: () => void;
-  speak: (text: string, rate?: SpeechRate) => void;
+  speak: Speak;
 }) {
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -140,7 +143,7 @@ function VocabularyPanel({
           <strong lang="zh-CN">{word.hanzi}</strong>
           {flipped ? <span className="hsk-flashcard-answer"><b>{word.pinyin}</b><em>{word.meaning}</em></span> : <span className="hsk-flashcard-hint">Bấm để xem pinyin và nghĩa</span>}
         </button>
-        <button aria-label={`Nghe phát âm ${word.hanzi}`} className="hsk-audio-orb" onClick={() => speak(word.hanzi)} type="button"><Volume2 aria-hidden="true" size={22} /></button>
+        <button aria-label={`Nghe phát âm ${word.hanzi}`} className="hsk-audio-orb" onClick={() => speak(word.hanzi, 1, word.audio)} type="button"><Volume2 aria-hidden="true" size={22} /></button>
         {flipped ? <div className="hsk-flashcard-example"><span>Ví dụ</span><strong lang="zh-CN">{word.example}</strong><small>{word.examplePinyin}</small><p>{word.translation}</p></div> : null}
         {flipped ? <div className="hsk-flashcard-rating" aria-label="Tự đánh giá độ thuộc">
           <button onClick={() => rateWord(false)} type="button"><span>1</span>Quên</button>
@@ -156,7 +159,7 @@ function VocabularyPanel({
   </section>;
 }
 
-function ExercisePrompt({ exercise, speak }: { exercise: HskExercise; speak: (text: string, rate?: SpeechRate) => void }) {
+function ExercisePrompt({ exercise, speak }: { exercise: HskExercise; speak: Speak }) {
   if (exercise.type === "listening") {
     return <button aria-label="Nghe câu hỏi" className="hsk-exercise-listen" onClick={() => speak(exercise.speakText ?? exercise.answer ?? "")} type="button"><Volume2 aria-hidden="true" size={30} /><span>Nghe lại</span></button>;
   }
@@ -176,7 +179,7 @@ function ExercisePanel({
   reviewed: string[];
   onFinished: (percent: number) => void;
   onReview: (exerciseId: string) => void;
-  speak: (text: string, rate?: SpeechRate) => void;
+  speak: Speak;
 }) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -262,7 +265,7 @@ function PronunciationPanel({
   words: HskVocabularyItem[];
   completed: string[];
   onComplete: (wordId: string) => void;
-  speak: (text: string, rate?: SpeechRate) => void;
+  speak: Speak;
 }) {
   const [index, setIndex] = useState(0);
   const [rate, setRate] = useState<SpeechRate>(1);
@@ -301,7 +304,7 @@ function PronunciationPanel({
         <strong lang="zh-CN">{word.hanzi}</strong>
         {showPinyin ? <b>{word.pinyin}</b> : null}
         <p>{word.meaning}</p>
-        <button aria-label={`Nghe phát âm ${word.hanzi}`} className="hsk-pronunciation-play" onClick={() => speak(word.hanzi, rate)} type="button"><Volume2 aria-hidden="true" size={28} /><span>Nghe mẫu · {rate}×</span></button>
+        <button aria-label={`Nghe phát âm ${word.hanzi}`} className="hsk-pronunciation-play" onClick={() => speak(word.hanzi, rate, word.audio)} type="button"><Volume2 aria-hidden="true" size={28} /><span>Nghe mẫu · {rate}×</span></button>
         <div className="hsk-shadowing-example"><span>Đọc trong câu</span><strong lang="zh-CN">{word.example}</strong><small>{showPinyin ? word.examplePinyin : "Pinyin đang ẩn"}</small><p>{word.translation}</p><button onClick={() => speak(word.example, rate)} type="button"><Play aria-hidden="true" fill="currentColor" size={16} /> Nghe cả câu</button></div>
         <button className="hsk-primary-action" onClick={shadow} type="button"><Check aria-hidden="true" size={18} /> Tôi đã đọc theo</button>
         </>}
@@ -319,7 +322,7 @@ function HanziPanel({
   characters: HskWritingCharacter[];
   completed: string[];
   onComplete: (writingId: string) => void;
-  speak: (text: string, rate?: SpeechRate) => void;
+  speak: Speak;
 }) {
   const boardRef = useRef<HTMLDivElement>(null);
   const writerRef = useRef<HanziWriter | null>(null);
@@ -492,7 +495,7 @@ export function HskLessonWorkspace({ lesson, initialMode = "vocabulary", showLau
     return () => window.clearTimeout(handle);
   }, [lesson.id]);
 
-  useEffect(() => () => window.speechSynthesis?.cancel(), []);
+  useEffect(() => () => cancelHskPronunciation(), []);
 
   const commitProgress = useCallback((updater: (current: HskLessonProgress) => HskLessonProgress) => {
     setProgress((current) => {
@@ -502,15 +505,8 @@ export function HskLessonWorkspace({ lesson, initialMode = "vocabulary", showLau
     });
   }, [lesson.id]);
 
-  const speak = useCallback((text: string, rate: SpeechRate = 1) => {
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "zh-CN";
-    utterance.rate = rate;
-    const voice = window.speechSynthesis.getVoices().find((item) => item.lang.toLocaleLowerCase().startsWith("zh"));
-    if (voice) utterance.voice = voice;
-    window.speechSynthesis.speak(utterance);
+  const speak = useCallback((text: string, rate: SpeechRate = 1, audio?: HskVocabularyAudio) => {
+    void playHskPronunciation({ audio, rate, text });
   }, []);
 
   const saveWord = useCallback((word: HskVocabularyItem) => {

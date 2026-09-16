@@ -562,9 +562,9 @@
     {
       "moduleSlug": "san-pham-va-gian-hang",
       "slug": "kiem-tra-san-pham-va-gian-hang",
-      "title": "Kiểm tra: Sản phẩm & gian hàng",
+      "title": "Tình huống tổng hợp: Sản phẩm & gian hàng",
       "summary": "Ôn danh mục, SKU, tiêu đề, mô tả, hình ảnh và quy tắc đăng bán.",
-      "situation": "Đánh giá cuối module 1",
+      "situation": "Ôn tập và ứng dụng cuối module 1",
       "estimatedMinutes": 14,
       "isFree": true,
       "vocabulary": [
@@ -1249,9 +1249,9 @@
     {
       "moduleSlug": "nha-cung-cap-va-gia",
       "slug": "kiem-tra-nha-cung-cap-va-gia",
-      "title": "Kiểm tra: Nhà cung cấp & giá",
+      "title": "Tình huống tổng hợp: Nhà cung cấp & giá",
       "summary": "Ôn sàng lọc đối tác, MOQ, mẫu, báo giá, lead time và điều kiện thanh toán.",
-      "situation": "Đánh giá cuối module 2",
+      "situation": "Ôn tập và ứng dụng cuối module 2",
       "estimatedMinutes": 15,
       "isFree": false,
       "vocabulary": [
@@ -1398,8 +1398,8 @@
               "prompt": "Trước khi đặt cọc, cần làm gì?",
               "options": [
                 "Xác minh đối tác, hợp đồng và quy trình phê duyệt",
-                "Chuyển tiền theo tin nhắn cá nhân",
-                "Bỏ qua thông tin tài khoản"
+                "Chỉ đối chiếu tên tài khoản với tin nhắn của đối tác",
+                "Đặt cọc một phần nhỏ trước rồi hoàn thiện phê duyệt sau"
               ],
               "correctOption": 0,
               "explanation": "Khóa học ngôn ngữ không thay thế quy trình pháp lý, tài chính và kiểm soát nhà cung cấp."
@@ -1936,9 +1936,9 @@
     {
       "moduleSlug": "van-hanh-don-va-ton",
       "slug": "kiem-tra-van-hanh-don-va-ton",
-      "title": "Kiểm tra: Vận hành đơn & tồn",
+      "title": "Tình huống tổng hợp: Vận hành đơn & tồn",
       "summary": "Ôn trạng thái đơn, tồn kho, soạn đóng gói, vận đơn và thay đổi sau đặt hàng.",
-      "situation": "Đánh giá cuối module 3",
+      "situation": "Ôn tập và ứng dụng cuối module 3",
       "estimatedMinutes": 15,
       "isFree": false,
       "vocabulary": [
@@ -2019,9 +2019,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "我会查明漏单环节，补发并记录闭环。",
-            "pinyin": "Wǒ huì chámíng lòudān huánjié, bǔfā bìng jìlù bìhuán.",
-            "translation": "Tôi sẽ xác định khâu bỏ sót, gửi bổ sung và ghi lại việc khép kín xử lý."
+            "hanzi": "我会查明漏单环节，补发并记录处理结果，形成闭环。",
+            "pinyin": "Wǒ huì chámíng lòudān huánjié, bǔfā bìng jìlù chǔlǐ jiéguǒ, xíngchéng bìhuán.",
+            "translation": "Tôi sẽ xác định khâu bỏ sót, gửi bổ sung, ghi lại kết quả xử lý và hoàn tất quy trình khép kín."
           }
         ],
         "notes": [
@@ -2085,8 +2085,8 @@
               "prompt": "Khách xin đổi địa chỉ sau khi đã xuất kho. Cách xử lý đúng là gì?",
               "options": [
                 "Kiểm tra trạng thái và khả năng can thiệp theo quy trình",
-                "Tự sửa mà không báo kho",
-                "Luôn khẳng định đổi được"
+                "Cập nhật trên hệ thống bán hàng trước rồi báo kho sau",
+                "Cam kết đổi địa chỉ nếu đơn chưa giao đến khách"
               ],
               "correctOption": 0,
               "explanation": "Khả năng đổi địa chỉ phụ thuộc trạng thái thực tế và chính sách vận chuyển."
@@ -2214,8 +2214,8 @@
           "hanzi": "缺件",
           "pinyin": "quējiàn",
           "meaning": "thiếu món trong kiện",
-          "example": "买家说包裹里缺了一件。",
-          "translation": "Người mua nói kiện thiếu một món.",
+          "example": "买家反馈包裹缺件。",
+          "translation": "Người mua phản hồi kiện hàng bị thiếu món.",
           "audioUrl": null
         },
         {
@@ -2527,7 +2527,7 @@
         {
           "slug": "ecommerce-l23-puguang",
           "hanzi": "曝光量",
-          "pinyin": "pùguāng liàng",
+          "pinyin": "bàoguāngliàng",
           "meaning": "lượt hiển thị",
           "example": "这个商品的曝光量下降了。",
           "translation": "Lượt hiển thị sản phẩm này đã giảm.",
@@ -2574,8 +2574,8 @@
           "hanzi": "对照测试",
           "pinyin": "duìzhào cèshì",
           "meaning": "thử nghiệm đối chứng",
-          "example": "我们只测试一个主要变量。",
-          "translation": "Chúng ta chỉ kiểm thử một biến chính.",
+          "example": "我们做对照测试，只测试一个主要变量。",
+          "translation": "Chúng ta làm thử nghiệm đối chứng và chỉ kiểm thử một biến chính.",
           "audioUrl": null
         }
       ],
@@ -2590,7 +2590,7 @@
           {
             "speaker": "B",
             "hanzi": "商品有很多曝光，但点击率比较低。",
-            "pinyin": "Shāngpǐn yǒu hěn duō pùguāng, dàn diǎnjīlǜ bǐjiào dī.",
+            "pinyin": "Shāngpǐn yǒu hěn duō bàoguāng, dàn diǎnjīlǜ bǐjiào dī.",
             "translation": "Sản phẩm có nhiều hiển thị nhưng tỷ lệ nhấp khá thấp."
           },
           {
@@ -2623,9 +2623,9 @@
     {
       "moduleSlug": "hau-mai-va-toi-uu",
       "slug": "kiem-tra-tong-hop-thuong-mai-dien-tu",
-      "title": "Kiểm tra tổng hợp: Thương mại điện tử",
-      "summary": "Tổng hợp gian hàng, nguồn hàng, thực hiện đơn, hậu mãi, dữ liệu và khuyến mãi.",
-      "situation": "Đánh giá cuối lộ trình",
+      "title": "Tình huống tổng hợp: Thương mại điện tử",
+      "summary": "Tổng hợp gian hàng, nguồn hàng, thực hiện đơn, hậu mãi và dữ liệu.",
+      "situation": "Ôn tập và ứng dụng cuối lộ trình",
       "estimatedMinutes": 16,
       "isFree": false,
       "vocabulary": [
@@ -2641,7 +2641,7 @@
         {
           "slug": "ecommerce-l24-hegui",
           "hanzi": "合规",
-          "pinyin": "hégé",
+          "pinyin": "héguī",
           "meaning": "tuân thủ",
           "example": "商品信息必须合规。",
           "translation": "Thông tin sản phẩm phải tuân thủ.",
@@ -2779,14 +2779,14 @@
               "explanation": "Tỷ lệ chuyển đổi phải được đọc cùng định nghĩa sự kiện và khoảng thời gian."
             },
             {
-              "prompt": "Khi chạy khuyến mãi, nguyên tắc nào quan trọng?",
+              "prompt": "Thông tin sản phẩm cần đáp ứng nguyên tắc nào?",
               "options": [
-                "Giá, điều kiện và tồn kho phải đúng; tuân thủ quy định nền tảng",
-                "Có thể tạo khan hiếm giả",
-                "Có thể bỏ điều kiện áp dụng"
+                "Chính xác, minh bạch và tuân thủ quy định nền tảng",
+                "Có thể dùng mô tả của nhà cung cấp nếu chưa tự xác minh",
+                "Có thể lược bỏ điều kiện áp dụng nếu trang sản phẩm quá dài"
               ],
               "correctOption": 0,
-              "explanation": "Thông tin minh bạch và tuân thủ giúp giảm khiếu nại và rủi ro vận hành."
+              "explanation": "合规 yêu cầu thông tin chính xác, minh bạch và tuân thủ quy định nền tảng."
             }
           ]
         }
@@ -2804,9 +2804,9 @@
         "dialogue": [
           {
             "speaker": "A",
-            "hanzi": "这个规格的尺码还有库存吗？",
-            "pinyin": "Zhè ge guīgé de chǐmǎ hái yǒu kùcún ma?",
-            "translation": "Cỡ thuộc phân loại này còn hàng không?"
+            "hanzi": "蓝色中号这个规格还有库存吗？",
+            "pinyin": "Lánsè zhōng hào zhè ge guīgé hái yǒu kùcún ma?",
+            "translation": "Phân loại màu xanh cỡ vừa này còn hàng không?"
           },
           {
             "speaker": "B",
@@ -2816,23 +2816,23 @@
           },
           {
             "speaker": "A",
-            "hanzi": "页面上蓝色的选项是中号，对吗？",
-            "pinyin": "Yèmiàn shàng lánsè de xuǎnxiàng shì zhōng hào, duì ma?",
-            "translation": "Tùy chọn màu xanh trên trang là cỡ vừa, đúng không?"
+            "hanzi": "页面上的选项是蓝色、中号，对吗？",
+            "pinyin": "Yèmiàn shàng de xuǎnxiàng shì lánsè, zhōng hào, duì ma?",
+            "translation": "Tùy chọn trên trang là màu xanh, cỡ vừa, đúng không?"
           },
           {
             "speaker": "B",
             "hanzi": "对，请确认选项无误后再下单。",
-            "pinyin": "Duì, qǐng quèrèn xuǎnxiàng wúwù hòu zài xià dān.",
+            "pinyin": "Duì, qǐng quèrèn xuǎnxiàng wúwù hòu zài xiàdān.",
             "translation": "Đúng, vui lòng xác nhận tùy chọn chính xác rồi đặt hàng."
           }
         ],
         "phrases": [
           {
             "speaker": "A",
-            "hanzi": "这个规格的尺码还有库存吗？",
-            "pinyin": "Zhè ge guīgé de chǐmǎ hái yǒu kùcún ma?",
-            "translation": "Cỡ thuộc phân loại này còn hàng không?"
+            "hanzi": "蓝色中号这个规格还有库存吗？",
+            "pinyin": "Lánsè zhōng hào zhè ge guīgé hái yǒu kùcún ma?",
+            "translation": "Phân loại màu xanh cỡ vừa này còn hàng không?"
           },
           {
             "speaker": "B",
@@ -2842,14 +2842,14 @@
           },
           {
             "speaker": "A",
-            "hanzi": "页面上蓝色的选项是中号，对吗？",
-            "pinyin": "Yèmiàn shàng lánsè de xuǎnxiàng shì zhōng hào, duì ma?",
-            "translation": "Tùy chọn màu xanh trên trang là cỡ vừa, đúng không?"
+            "hanzi": "页面上的选项是蓝色、中号，对吗？",
+            "pinyin": "Yèmiàn shàng de xuǎnxiàng shì lánsè, zhōng hào, duì ma?",
+            "translation": "Tùy chọn trên trang là màu xanh, cỡ vừa, đúng không?"
           },
           {
             "speaker": "B",
             "hanzi": "对，请确认选项无误后再下单。",
-            "pinyin": "Duì, qǐng quèrèn xuǎnxiàng wúwù hòu zài xià dān.",
+            "pinyin": "Duì, qǐng quèrèn xuǎnxiàng wúwù hòu zài xiàdān.",
             "translation": "Đúng, vui lòng xác nhận tùy chọn chính xác rồi đặt hàng."
           }
         ],
@@ -2882,8 +2882,8 @@
             {
               "prompt": "Câu “对，请确认选项无误后再下单。” truyền đạt điều gì?",
               "options": [
-                "Cỡ thuộc phân loại này còn hàng không?",
-                "Tùy chọn màu xanh trên trang là cỡ vừa, đúng không?",
+                "Phân loại màu xanh cỡ vừa này còn hàng không?",
+                "Tùy chọn trên trang là màu xanh, cỡ vừa, đúng không?",
                 "Đúng, vui lòng xác nhận tùy chọn chính xác rồi đặt hàng."
               ],
               "correctOption": 2,
@@ -2898,8 +2898,8 @@
           "hanzi": "规格",
           "pinyin": "guīgé",
           "meaning": "quy cách; phân loại",
-          "example": "这个规格的尺码还有库存吗？",
-          "translation": "Cỡ thuộc phân loại này còn hàng không?",
+          "example": "蓝色中号这个规格还有库存吗？",
+          "translation": "Phân loại màu xanh cỡ vừa này còn hàng không?",
           "audioUrl": null
         },
         {
@@ -2907,8 +2907,8 @@
           "hanzi": "尺码",
           "pinyin": "chǐmǎ",
           "meaning": "cỡ; size",
-          "example": "这个规格的尺码还有库存吗？",
-          "translation": "Cỡ thuộc phân loại này còn hàng không?",
+          "example": "请告诉我颜色和尺码，我帮您查询。",
+          "translation": "Vui lòng cho tôi biết màu và cỡ, tôi kiểm tra giúp anh/chị.",
           "audioUrl": null
         },
         {
@@ -2916,8 +2916,8 @@
           "hanzi": "库存",
           "pinyin": "kùcún",
           "meaning": "tồn kho",
-          "example": "这个规格的尺码还有库存吗？",
-          "translation": "Cỡ thuộc phân loại này còn hàng không?",
+          "example": "蓝色中号这个规格还有库存吗？",
+          "translation": "Phân loại màu xanh cỡ vừa này còn hàng không?",
           "audioUrl": null
         },
         {
@@ -2925,8 +2925,8 @@
           "hanzi": "页面",
           "pinyin": "yèmiàn",
           "meaning": "trang hiển thị",
-          "example": "页面上蓝色的选项是中号，对吗？",
-          "translation": "Tùy chọn màu xanh trên trang là cỡ vừa, đúng không?",
+          "example": "页面上的选项是蓝色、中号，对吗？",
+          "translation": "Tùy chọn trên trang là màu xanh, cỡ vừa, đúng không?",
           "audioUrl": null
         },
         {
@@ -2934,14 +2934,14 @@
           "hanzi": "选项",
           "pinyin": "xuǎnxiàng",
           "meaning": "tùy chọn",
-          "example": "页面上蓝色的选项是中号，对吗？",
-          "translation": "Tùy chọn màu xanh trên trang là cỡ vừa, đúng không?",
+          "example": "页面上的选项是蓝色、中号，对吗？",
+          "translation": "Tùy chọn trên trang là màu xanh, cỡ vừa, đúng không?",
           "audioUrl": null
         },
         {
           "slug": "thuong-mai-dien-tu-ung-dung-xac-nhan-phan-loai-truoc-khi-dat-6",
           "hanzi": "下单",
-          "pinyin": "xià dān",
+          "pinyin": "xiàdān",
           "meaning": "đặt hàng",
           "example": "对，请确认选项无误后再下单。",
           "translation": "Đúng, vui lòng xác nhận tùy chọn chính xác rồi đặt hàng.",
@@ -3136,9 +3136,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "好的，您可以分别查询两个包裹的物流。",
-            "pinyin": "Hǎo de, nín kěyǐ fēnbié cháxún liǎng ge bāoguǒ de wùliú.",
-            "translation": "Được, anh/chị có thể tra cứu vận chuyển của hai kiện riêng biệt."
+            "hanzi": "好的，您可以分别查询两个包裹的物流状态。",
+            "pinyin": "Hǎo de, nín kěyǐ fēnbié cháxún liǎng ge bāoguǒ de wùliú zhuàngtài.",
+            "translation": "Được, anh/chị có thể tra cứu riêng trạng thái vận chuyển của từng kiện."
           }
         ],
         "phrases": [
@@ -3162,9 +3162,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "好的，您可以分别查询两个包裹的物流。",
-            "pinyin": "Hǎo de, nín kěyǐ fēnbié cháxún liǎng ge bāoguǒ de wùliú.",
-            "translation": "Được, anh/chị có thể tra cứu vận chuyển của hai kiện riêng biệt."
+            "hanzi": "好的，您可以分别查询两个包裹的物流状态。",
+            "pinyin": "Hǎo de, nín kěyǐ fēnbié cháxún liǎng ge bāoguǒ de wùliú zhuàngtài.",
+            "translation": "Được, anh/chị có thể tra cứu riêng trạng thái vận chuyển của từng kiện."
           }
         ],
         "notes": [],
@@ -3194,10 +3194,10 @@
               "explanation": "分开 (fēnkāi) nghĩa là tách riêng."
             },
             {
-              "prompt": "Câu “好的，您可以分别查询两个包裹的物流。” truyền đạt điều gì?",
+              "prompt": "Câu “好的，您可以分别查询两个包裹的物流状态。” truyền đạt điều gì?",
               "options": [
                 "Tôi chỉ nhận một kiện, còn một sản phẩm nữa đâu?",
-                "Được, anh/chị có thể tra cứu vận chuyển của hai kiện riêng biệt.",
+                "Được, anh/chị có thể tra cứu riêng trạng thái vận chuyển của từng kiện.",
                 "Vui lòng gửi mã vận đơn còn lại cho tôi."
               ],
               "correctOption": 1,
@@ -3248,8 +3248,8 @@
           "hanzi": "查询",
           "pinyin": "cháxún",
           "meaning": "tra cứu",
-          "example": "好的，您可以分别查询两个包裹的物流。",
-          "translation": "Được, anh/chị có thể tra cứu vận chuyển của hai kiện riêng biệt.",
+          "example": "好的，您可以分别查询两个包裹的物流状态。",
+          "translation": "Được, anh/chị có thể tra cứu riêng trạng thái vận chuyển của từng kiện.",
           "audioUrl": null
         },
         {
@@ -3257,8 +3257,8 @@
           "hanzi": "物流",
           "pinyin": "wùliú",
           "meaning": "logistics; vận chuyển hàng",
-          "example": "好的，您可以分别查询两个包裹的物流。",
-          "translation": "Được, anh/chị có thể tra cứu vận chuyển của hai kiện riêng biệt.",
+          "example": "好的，您可以分别查询两个包裹的物流状态。",
+          "translation": "Được, anh/chị có thể tra cứu riêng trạng thái vận chuyển của từng kiện.",
           "audioUrl": null
         }
       ]
@@ -3275,15 +3275,15 @@
         "dialogue": [
           {
             "speaker": "A",
-            "hanzi": "配件清单上有一根线，盒子里没有。",
-            "pinyin": "Pèijiàn qīngdān shàng yǒu yì gēn xiàn, hézi lǐ méiyǒu.",
-            "translation": "Danh sách phụ kiện có một sợi dây, trong hộp không có."
+            "hanzi": "配件清单上有一根充电线，盒子里没有。",
+            "pinyin": "Pèijiàn qīngdān shàng yǒu yì gēn chōngdiànxiàn, hézi lǐ méiyǒu.",
+            "translation": "Danh sách phụ kiện có một cáp sạc nhưng trong hộp không có."
           },
           {
             "speaker": "B",
-            "hanzi": "您是说缺少一根线，其他数量都对吗？",
-            "pinyin": "Nín shì shuō quēshǎo yì gēn xiàn, qítā shùliàng dōu duì ma?",
-            "translation": "Ý anh/chị là thiếu một sợi dây, số lượng các món khác đều đúng phải không?"
+            "hanzi": "您是说缺少一根充电线，其他数量都对吗？",
+            "pinyin": "Nín shì shuō quēshǎo yì gēn chōngdiànxiàn, qítā shùliàng dōu duì ma?",
+            "translation": "Ý anh/chị là thiếu một cáp sạc, số lượng các món khác đều đúng phải không?"
           },
           {
             "speaker": "A",
@@ -3301,15 +3301,15 @@
         "phrases": [
           {
             "speaker": "A",
-            "hanzi": "配件清单上有一根线，盒子里没有。",
-            "pinyin": "Pèijiàn qīngdān shàng yǒu yì gēn xiàn, hézi lǐ méiyǒu.",
-            "translation": "Danh sách phụ kiện có một sợi dây, trong hộp không có."
+            "hanzi": "配件清单上有一根充电线，盒子里没有。",
+            "pinyin": "Pèijiàn qīngdān shàng yǒu yì gēn chōngdiànxiàn, hézi lǐ méiyǒu.",
+            "translation": "Danh sách phụ kiện có một cáp sạc nhưng trong hộp không có."
           },
           {
             "speaker": "B",
-            "hanzi": "您是说缺少一根线，其他数量都对吗？",
-            "pinyin": "Nín shì shuō quēshǎo yì gēn xiàn, qítā shùliàng dōu duì ma?",
-            "translation": "Ý anh/chị là thiếu một sợi dây, số lượng các món khác đều đúng phải không?"
+            "hanzi": "您是说缺少一根充电线，其他数量都对吗？",
+            "pinyin": "Nín shì shuō quēshǎo yì gēn chōngdiànxiàn, qítā shùliàng dōu duì ma?",
+            "translation": "Ý anh/chị là thiếu một cáp sạc, số lượng các món khác đều đúng phải không?"
           },
           {
             "speaker": "A",
@@ -3338,7 +3338,7 @@
                 "Hai chiếc hộp rỗng."
               ],
               "correctOption": 0,
-              "explanation": "一根线 là một sợi dây; khách đã xác nhận số lượng các món khác đúng."
+              "explanation": "一根充电线 là một cáp sạc; khách đã xác nhận số lượng các món khác đúng."
             },
             {
               "prompt": "Trong bài này, “清单” có nghĩa là gì?",
@@ -3353,7 +3353,7 @@
             {
               "prompt": "Câu “谢谢，核对后我们会联系您确认补寄安排。” truyền đạt điều gì?",
               "options": [
-                "Danh sách phụ kiện có một sợi dây, trong hộp không có.",
+                "Danh sách phụ kiện có một cáp sạc nhưng trong hộp không có.",
                 "Đúng, tôi có thể cung cấp ảnh hộp và danh sách.",
                 "Cảm ơn, sau khi đối chiếu chúng tôi sẽ liên hệ xác nhận việc gửi bổ sung."
               ],
@@ -3369,8 +3369,8 @@
           "hanzi": "配件",
           "pinyin": "pèijiàn",
           "meaning": "phụ kiện",
-          "example": "配件清单上有一根线，盒子里没有。",
-          "translation": "Danh sách phụ kiện có một sợi dây, trong hộp không có.",
+          "example": "配件清单上有一根充电线，盒子里没有。",
+          "translation": "Danh sách phụ kiện có một cáp sạc nhưng trong hộp không có.",
           "audioUrl": null
         },
         {
@@ -3378,8 +3378,8 @@
           "hanzi": "清单",
           "pinyin": "qīngdān",
           "meaning": "danh sách",
-          "example": "配件清单上有一根线，盒子里没有。",
-          "translation": "Danh sách phụ kiện có một sợi dây, trong hộp không có.",
+          "example": "配件清单上有一根充电线，盒子里没有。",
+          "translation": "Danh sách phụ kiện có một cáp sạc nhưng trong hộp không có.",
           "audioUrl": null
         },
         {
@@ -3387,8 +3387,8 @@
           "hanzi": "缺少",
           "pinyin": "quēshǎo",
           "meaning": "thiếu",
-          "example": "您是说缺少一根线，其他数量都对吗？",
-          "translation": "Ý anh/chị là thiếu một sợi dây, số lượng các món khác đều đúng phải không?",
+          "example": "您是说缺少一根充电线，其他数量都对吗？",
+          "translation": "Ý anh/chị là thiếu một cáp sạc, số lượng các món khác đều đúng phải không?",
           "audioUrl": null
         },
         {
@@ -3396,8 +3396,8 @@
           "hanzi": "数量",
           "pinyin": "shùliàng",
           "meaning": "số lượng",
-          "example": "您是说缺少一根线，其他数量都对吗？",
-          "translation": "Ý anh/chị là thiếu một sợi dây, số lượng các món khác đều đúng phải không?",
+          "example": "您是说缺少一根充电线，其他数量都对吗？",
+          "translation": "Ý anh/chị là thiếu một cáp sạc, số lượng các món khác đều đúng phải không?",
           "audioUrl": null
         },
         {

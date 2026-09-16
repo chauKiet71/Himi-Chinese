@@ -29,7 +29,7 @@ test("HSK curriculum exposes 15 HSK 1 lessons and 15 HSK 2 textbook lessons", as
   assert.deepEqual(HSK_CURRICULUM[0].topics[0].lessons[0], {
     id: "hsk1-bai-01-chao-anh",
     lessonNumber: 1,
-    title: "Chào anh!",
+    title: "Xin chào!",
     kind: "textbook",
     vocabulary: 6,
     grammar: 0,
@@ -91,7 +91,7 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   assert.match(html, /class="hsk-topic-section is-active"/);
   assert.match(html, /aria-expanded="true"/);
   assert.match(html, /aria-expanded="false"/);
-  assert.match(html, />Bài 1: Chào anh!</);
+  assert.match(html, />Bài 1: Xin chào!</);
   assert.match(html, />Bắt đầu học</);
   assert.match(html, />Himi nhắc bạn:</);
   assert.match(html, /6 từ vựng/);

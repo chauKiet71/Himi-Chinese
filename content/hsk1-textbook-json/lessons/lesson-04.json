@@ -9,7 +9,7 @@
     "courseId": "course-hsk-standard-1",
     "levelId": "hsk-1",
     "lessonNumber": 4,
-    "titleVi": "Cô ấy là cô giáo dạy tôi tiếng Trung Quốc.",
+    "titleVi": "Cô ấy là giáo viên tiếng Trung của tôi.",
     "titleZh": "她是我的汉语老师。",
     "heroHanzi": "她是我的汉语老师。",
     "summaryVi": "Dữ liệu bài 4 được chuyển đổi từ Giáo trình chuẩn HSK 1.",
@@ -66,7 +66,7 @@
       "content": {
         "kickerVi": "Bài 4 · HSK 1",
         "heroHanzi": "她是我的汉语老师。",
-        "summaryVi": "Cô ấy là cô giáo dạy tôi tiếng Trung Quốc.",
+        "summaryVi": "Cô ấy là giáo viên tiếng Trung của tôi.",
         "sourcePrintedPages": [
           34,
           41

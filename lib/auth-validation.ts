@@ -23,6 +23,10 @@ export function validateAuthToken(value: string): boolean {
   return value.length === 43 && /^[A-Za-z0-9_-]+$/u.test(value);
 }
 
+export function validateEmailVerificationCode(value: string): boolean {
+  return /^[0-9]{6}$/u.test(value);
+}
+
 export function parseRegistrationInput(values: {
   displayName: string;
   email: string;

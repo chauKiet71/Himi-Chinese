@@ -1,5 +1,5 @@
 import "server-only";
-import type { AuthTokenPurpose, IssuedAuthToken } from "./auth-token-service.ts";
+import type { AuthTokenPurpose, IssuedAuthToken, IssuedEmailVerificationCode } from "./auth-token-service.ts";
 import { hashPrivateIdentifier } from "./auth-crypto.ts";
 
 type AuthEmailUser = { email: string; displayName: string };
@@ -105,6 +105,23 @@ export async function sendPasswordChangedEmail(user: AuthEmailUser): Promise<"br
     text: `Xin chào ${user.displayName},\n\nMật khẩu Himi Chinese của bạn vừa được thay đổi. Mọi phiên đăng nhập cũ đã bị thu hồi. Nếu đây không phải là bạn, hãy liên hệ hỗ trợ ngay.`,
     html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;color:#173c33"><h1 style="font-size:24px">${subject}</h1><p>Xin chào ${escapeHtml(user.displayName)},</p><p style="line-height:1.6">Mật khẩu của bạn vừa được thay đổi. Mọi phiên đăng nhập cũ đã bị thu hồi.</p><p style="line-height:1.6">Nếu đây không phải là bạn, hãy liên hệ hỗ trợ ngay.</p></div>`,
     idempotencyKey: `password-changed/${emailKey}/${Date.now()}`,
+  });
+}
+
+export async function sendEmailVerificationCodeEmail(
+  user: AuthEmailUser,
+  issued: IssuedEmailVerificationCode,
+): Promise<"brevo" | "console"> {
+  const subject = "Mã xác minh email Himi Chinese";
+  const safeName = escapeHtml(user.displayName);
+  const safeCode = escapeHtml(issued.code);
+  return deliverEmail({
+    to: user.email,
+    subject,
+    text: `Xin chào ${user.displayName},\n\nMã xác minh tài khoản Himi Chinese của bạn là: ${issued.code}\n\nMã hết hạn sau 10 phút và chỉ dùng được một lần. Nếu bạn không đăng ký tài khoản, hãy bỏ qua email này.`,
+    html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;color:#173c33"><h1 style="font-size:24px">${subject}</h1><p>Xin chào ${safeName},</p><p style="line-height:1.6">Nhập mã sau để xác minh email và kích hoạt tài khoản:</p><p style="margin:24px 0;padding:16px;border-radius:10px;background:#f1f6f3;font-size:30px;font-weight:800;letter-spacing:.22em;text-align:center">${safeCode}</p><p style="font-size:13px;color:#65766f">Mã hết hạn sau 10 phút và chỉ dùng được một lần. Nếu bạn không đăng ký tài khoản, hãy bỏ qua email này.</p></div>`,
+    idempotencyKey: `verify-email/${issued.id}`,
+    developmentLink: `code=${issued.code}`,
   });
 }
 

@@ -6,6 +6,7 @@ import { adminLoginChallenges, users } from "../db/schema.ts";
 import {
   constantTimeTextEqual,
   createAuthToken,
+  createSixDigitCode,
   hashAuthToken,
   hashPrivateIdentifier,
 } from "./auth-crypto.ts";
@@ -21,14 +22,6 @@ export type AdminMfaChallenge = {
   code: string;
   expiresAt: Date;
 };
-
-function createSixDigitCode(): string {
-  const range = 1_000_000;
-  const maximum = Math.floor(0x1_0000_0000 / range) * range;
-  const values = new Uint32Array(1);
-  do crypto.getRandomValues(values); while (values[0] >= maximum);
-  return String(values[0] % range).padStart(6, "0");
-}
 
 export function adminMfaCookieName(): string {
   return secureAuthCookiesEnabled() ? "__Host-hanziwork-admin-challenge" : "hanziwork_admin_challenge";

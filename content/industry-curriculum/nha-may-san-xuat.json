@@ -562,9 +562,9 @@
     {
       "moduleSlug": "an-toan-va-bat-dau-ca",
       "slug": "kiem-tra-an-toan-dau-ca",
-      "title": "Kiểm tra: An toàn đầu ca",
+      "title": "Tình huống tổng hợp: An toàn đầu ca",
       "summary": "Ôn trang bị bảo hộ, trình tự vận hành và cách báo bất thường trước khi vào nội dung sản xuất.",
-      "situation": "Đánh giá cuối module 1",
+      "situation": "Ôn tập và ứng dụng cuối module 1",
       "estimatedMinutes": 13,
       "isFree": true,
       "vocabulary": [
@@ -691,8 +691,8 @@
               "prompt": "Câu nào xác nhận cần kiểm tra áp suất trước khi mở van?",
               "options": [
                 "开阀门之前，要先检查压力，对吗？",
-                "压力不用检查。",
-                "先开阀门再说。"
+                "先确认阀门状态，再补记压力。",
+                "开阀门后再观察压力是否正常。"
               ],
               "correctOption": 0,
               "explanation": "之前 là trước khi; mẫu câu nhắc lại thao tác và xin xác nhận."
@@ -952,10 +952,10 @@
         {
           "slug": "factory-zhuansu",
           "hanzi": "转速",
-          "pinyin": "zhuǎnsù",
+          "pinyin": "zhuànsù",
           "meaning": "tốc độ quay",
-          "example": "当前转速是一千转。",
-          "translation": "Tốc độ quay hiện tại là 1.000 vòng.",
+          "example": "当前转速是每分钟一千转。",
+          "translation": "Tốc độ quay hiện tại là 1.000 vòng/phút.",
           "audioUrl": null
         },
         {
@@ -1249,9 +1249,9 @@
     {
       "moduleSlug": "van-hanh-va-san-luong",
       "slug": "kiem-tra-van-hanh-va-san-luong",
-      "title": "Kiểm tra: Vận hành & sản lượng",
+      "title": "Tình huống tổng hợp: Vận hành & sản lượng",
       "summary": "Ôn kế hoạch, vật liệu, thông số, sản lượng và điều kiện đổi mã an toàn.",
-      "situation": "Đánh giá cuối module 2",
+      "situation": "Ôn tập và ứng dụng cuối module 2",
       "estimatedMinutes": 14,
       "isFree": false,
       "vocabulary": [
@@ -1378,8 +1378,8 @@
               "prompt": "Thông số vượt phạm vi tiêu chuẩn. Câu nào phù hợp?",
               "options": [
                 "参数超出标准范围。",
-                "参数不用记录。",
-                "产量已经包装。"
+                "参数接近上限，可以继续观察。",
+                "参数稍有波动，先记录到交班表。"
               ],
               "correctOption": 0,
               "explanation": "超出标准范围 nghĩa là vượt ngoài phạm vi tiêu chuẩn."
@@ -1936,9 +1936,9 @@
     {
       "moduleSlug": "chat-luong-va-su-co",
       "slug": "kiem-tra-chat-luong-va-xu-ly-su-co",
-      "title": "Kiểm tra: Chất lượng & xử lý sự cố",
+      "title": "Tình huống tổng hợp: Chất lượng & xử lý sự cố",
       "summary": "Ôn kiểm tra, cách ly, truy xuất nguyên nhân và phối hợp hành động khắc phục.",
-      "situation": "Đánh giá cuối module 3",
+      "situation": "Ôn tập và ứng dụng cuối module 3",
       "estimatedMinutes": 15,
       "isFree": false,
       "vocabulary": [
@@ -2379,9 +2379,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "今天废品比例是百分之二，比昨天高零点五。",
-            "pinyin": "Jīntiān fèipǐn bǐlì shì bǎifēnzhī èr, bǐ zuótiān gāo líng diǎn wǔ.",
-            "translation": "Tỷ lệ phế phẩm hôm nay là 2%, cao hơn hôm qua 0,5 điểm."
+            "hanzi": "今天废品比例是百分之二，比昨天高零点五个百分点。",
+            "pinyin": "Jīntiān fèipǐn bǐlì shì bǎifēnzhī èr, bǐ zuótiān gāo líng diǎn wǔ gè bǎifēndiǎn.",
+            "translation": "Tỷ lệ phế phẩm hôm nay là 2%, cao hơn hôm qua 0,5 điểm phần trăm."
           },
           {
             "speaker": "A",
@@ -2623,9 +2623,9 @@
     {
       "moduleSlug": "ban-giao-va-cai-tien",
       "slug": "kiem-tra-tong-hop-nha-may-san-xuat",
-      "title": "Kiểm tra tổng hợp: Nhà máy & sản xuất",
+      "title": "Tình huống tổng hợp: Nhà máy & sản xuất",
       "summary": "Tổng hợp giao tiếp an toàn, vận hành, chất lượng, bàn giao và cải tiến tại xưởng.",
-      "situation": "Đánh giá cuối lộ trình",
+      "situation": "Ôn tập và ứng dụng cuối lộ trình",
       "estimatedMinutes": 16,
       "isFree": false,
       "vocabulary": [
@@ -2658,11 +2658,11 @@
         },
         {
           "slug": "factory-shengji-baogao",
-          "hanzi": "升级报告",
-          "pinyin": "shēngjí bàogào",
-          "meaning": "báo cáo nâng cấp",
-          "example": "风险扩大时需要升级报告。",
-          "translation": "Khi rủi ro mở rộng cần báo cáo lên cấp cao hơn.",
+          "hanzi": "升级上报",
+          "pinyin": "shēngjí shàngbào",
+          "meaning": "báo cáo lên cấp trên",
+          "example": "风险范围扩大时需要升级上报。",
+          "translation": "Khi phạm vi rủi ro mở rộng, cần báo cáo lên cấp trên.",
           "audioUrl": null
         },
         {
@@ -2696,7 +2696,7 @@
             "speaker": "B",
             "hanzi": "异常已经控制，但质量风险和受影响批次还要继续确认。",
             "pinyin": "Yìcháng yǐjīng kòngzhì, dàn zhìliàng fēngxiǎn hé shòu yǐngxiǎng pīcì hái yào jìxù quèrèn.",
-            "translation": "Bất thường đã được kiểm soát nhưng rủi ro chất lượng và các lô ảnh hưởng còn cần xác nhận."
+            "translation": "Bất thường đã được kiểm soát nhưng rủi ro chất lượng và các lô bị ảnh hưởng vẫn cần được xác nhận."
           },
           {
             "speaker": "A",
@@ -2706,9 +2706,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "我会升级报告，安排下一班跟进，问题关闭后再复盘。",
-            "pinyin": "Wǒ huì shēngjí bàogào, ānpái xià yì bān gēnjìn, wèntí guānbì hòu zài fùpán.",
-            "translation": "Tôi sẽ báo cáo nâng cấp, sắp xếp ca sau theo dõi và tổng kết sau khi đóng vấn đề."
+            "hanzi": "我会升级上报，安排下一班跟进，问题关闭后再复盘。",
+            "pinyin": "Wǒ huì shēngjí shàngbào, ānpái xià yì bān gēnjìn, wèntí guānbì hòu zài fùpán.",
+            "translation": "Tôi sẽ báo cáo lên cấp trên, sắp xếp ca sau theo dõi và tổng kết sau khi đóng vấn đề."
           }
         ],
         "notes": [
@@ -2752,8 +2752,8 @@
               "prompt": "Câu nào báo lô đang chờ kiểm tra chất lượng?",
               "options": [
                 "这批产品还在等质检。",
-                "这批产品已经出货。",
-                "不用检查这批产品。"
+                "这批产品正在做出货前复核。",
+                "这批产品的质检记录还没归档。"
               ],
               "correctOption": 0,
               "explanation": "还在等质检 nghĩa là vẫn đang chờ kiểm tra chất lượng."
@@ -2772,8 +2772,8 @@
               "prompt": "改善建议 nên được triển khai thế nào?",
               "options": [
                 "试行并确认效果",
-                "Áp dụng tùy ý trên toàn xưởng",
-                "Không cần ghi nhận"
+                "Sau khi quản lý đồng ý thì áp dụng ngay cho toàn bộ chuyền",
+                "Thử đồng thời nhiều thay đổi để rút ngắn thời gian"
               ],
               "correctOption": 0,
               "explanation": "Nên thử nghiệm có kiểm soát và đánh giá hiệu quả trước khi chuẩn hóa."

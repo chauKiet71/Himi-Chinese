@@ -62,7 +62,7 @@ test("HSK 3 converts all textbook lessons into the HSK 1 learning shape", async 
   assert.ok(hsk3);
   assert.equal(hsk3.topics.length, 4);
   assert.equal(hsk3.topics.flatMap((topic) => topic.lessons).length, 20);
-  assert.ok(hsk3.topics.flatMap((topic) => topic.lessons).every((item) => item.kind === "textbook" && item.available));
+  assert.ok(hsk3.topics.flatMap((topic) => topic.lessons).every((item) => item.kind === "textbook" && !item.available && item.availabilityLabel === "Đang biên tập"));
   assert.deepEqual(hsk3.topics[0].lessons[0], {
     id: "hsk3-tb-lesson-01",
     lessonNumber: 1,
@@ -75,7 +75,8 @@ test("HSK 3 converts all textbook lessons into the HSK 1 learning shape", async 
     exercises: 4,
     minutes: 25,
     guidedSteps: 28,
-    available: true,
+    available: false,
+    availabilityLabel: "Đang biên tập",
   });
 
   const sections = guidedModule.buildHskGuidedSections(lesson).map((section) => section.label);

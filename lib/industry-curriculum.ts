@@ -4,9 +4,14 @@ import logistics from "../content/industry-curriculum/kho-van-logistics.json" wi
 import sales from "../content/industry-curriculum/ban-hang-cham-soc-khach-hang.json" with { type: "json" };
 import restaurant from "../content/industry-curriculum/nha-hang-dich-vu.json" with { type: "json" };
 import ecommerce from "../content/industry-curriculum/thuong-mai-dien-tu.json" with { type: "json" };
-import { validateIndustryCurriculum } from "./industry-curriculum-validation.ts";
+import terminology from "../content/industry-curriculum/terminology.zh-CN.json" with { type: "json" };
+import { validateIndustryCurriculum, validateIndustryCurriculumCollection, validateIndustryTerminology } from "./industry-curriculum-validation.ts";
 
-export const industryCurricula = [office, factory, logistics, sales, restaurant, ecommerce].map(validateIndustryCurriculum);
+export const industryCurriculumTerminology = validateIndustryTerminology(terminology);
+export const industryCurricula = validateIndustryCurriculumCollection(
+  [office, factory, logistics, sales, restaurant, ecommerce].map(validateIndustryCurriculum),
+  industryCurriculumTerminology,
+);
 
 export function getIndustryCurriculum(courseSlug: string) {
   const curriculum = industryCurricula.find(course => course.courseSlug === courseSlug);

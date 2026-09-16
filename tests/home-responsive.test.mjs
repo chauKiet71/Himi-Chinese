@@ -54,3 +54,13 @@ test("home portal treats short landscape viewports as phones instead of desktop 
   assert.match(css, /grid-template-columns:\s*repeat\(6, minmax\(0, 1fr\)\)/);
   assert.match(css, /\.home-portal-copy\s*\{\s*\n\s*width:\s*52%;\s*\n\s*padding:\s*max\(22px, env\(safe-area-inset-top\)\)/);
 });
+
+test("welcome offer stays compact on desktop and phone viewports", async () => {
+  const css = await read("app/home-portal.css");
+
+  assert.match(css, /\.home-welcome-offer-dialog\s*\{[\s\S]*width:\s*min\(560px, calc\(100vw - 48px\)\);[\s\S]*max-height:\s*calc\(100dvh - 40px\)/);
+  assert.match(css, /\.home-welcome-offer-card\s*\{[\s\S]*min-height:\s*0;[\s\S]*padding:\s*32px 30px 24px/);
+  assert.match(css, /\.home-welcome-offer-hero\s*\{\s*\n\s*min-height:\s*270px/);
+  assert.match(css, /@media \(max-width: 720px\)[\s\S]*width:\s*min\(100% - 28px, 500px\);[\s\S]*min-height:\s*260px/);
+  assert.match(css, /@media \(max-width: 390px\)[\s\S]*\.home-welcome-offer-hero \{ min-height: 255px; \}/);
+});

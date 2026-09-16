@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createSessionToken, hashPassword, hashPrivateIdentifier, hashSessionToken, passwordNeedsRehash, verifyPassword } from "../lib/auth-crypto.ts";
-import { normalizeEmail, parseRegistrationInput, safeAdminReturnTo, safeReturnTo, validateAuthToken } from "../lib/auth-validation.ts";
+import { createSessionToken, createSixDigitCode, hashPassword, hashPrivateIdentifier, hashSessionToken, passwordNeedsRehash, verifyPassword } from "../lib/auth-crypto.ts";
+import { normalizeEmail, parseRegistrationInput, safeAdminReturnTo, safeReturnTo, validateAuthToken, validateEmailVerificationCode } from "../lib/auth-validation.ts";
 import { authRedirectUrl, clientAddress, isSameOriginRequest } from "../lib/request-security.ts";
 import { scheduleReview } from "../lib/review-scheduler.ts";
 import { adminSecurityHeaders, applicationSecurityHeaders, contentSecurityPolicy, secureResponse } from "../lib/security-headers.ts";
@@ -68,6 +68,15 @@ test("return targets reject cross-origin redirects", () => {
   assert.equal(safeAdminReturnTo("/admin/users?q=test"), "/admin/users?q=test");
   assert.equal(safeAdminReturnTo("/account"), "/admin");
   assert.equal(safeAdminReturnTo("https://example.com/admin"), "/admin");
+});
+
+test("email verification codes contain exactly six digits", () => {
+  for (let index = 0; index < 25; index += 1) {
+    const code = createSixDigitCode();
+    assert.equal(validateEmailVerificationCode(code), true);
+  }
+  assert.equal(validateEmailVerificationCode("12345"), false);
+  assert.equal(validateEmailVerificationCode("12345a"), false);
 });
 
 test("security headers prevent framing and harden admin responses", async () => {

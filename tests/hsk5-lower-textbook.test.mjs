@@ -61,7 +61,7 @@ test("HSK 5 lower textbook converts all lessons into the HSK 1 learning shape", 
   assert.ok(hsk5.description.includes("Giáo trình chuẩn HSK 5 - Tập 2"));
   const textbookLessons = hsk5.topics.flatMap((topic) => topic.lessons).filter((item) => item.kind === "textbook");
   assert.equal(textbookLessons.length, 18);
-  assert.ok(textbookLessons.every((item) => item.available));
+  assert.ok(textbookLessons.every((item) => !item.available && item.availabilityLabel === "Đang biên tập"));
   assert.equal(textbookLessons[0].id, lesson.id);
   assert.equal(textbookLessons[0].writing, textbookLessons[0].vocabulary);
 

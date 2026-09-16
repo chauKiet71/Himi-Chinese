@@ -9,7 +9,7 @@
     "courseId": "course-hsk-standard-1",
     "levelId": "hsk-1",
     "lessonNumber": 3,
-    "titleVi": "Cô tên gì?",
+    "titleVi": "Bạn tên gì?",
     "titleZh": "你叫什么名字？",
     "heroHanzi": "你叫什么名字？",
     "summaryVi": "Dữ liệu bài 3 được chuyển đổi từ Giáo trình chuẩn HSK 1.",
@@ -66,7 +66,7 @@
       "content": {
         "kickerVi": "Bài 3 · HSK 1",
         "heroHanzi": "你叫什么名字？",
-        "summaryVi": "Cô tên gì?",
+        "summaryVi": "Bạn tên gì?",
         "sourcePrintedPages": [
           26,
           33

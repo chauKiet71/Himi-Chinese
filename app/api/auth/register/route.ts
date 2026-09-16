@@ -3,7 +3,14 @@ import { recordAuthEvent } from "@/lib/auth-audit";
 import { consumeAuthRateLimit } from "@/lib/auth-rate-limit";
 import { findActiveUserByEmail, registerLearner } from "@/lib/auth-service";
 import { parseRegistrationInput, safeReturnTo } from "@/lib/auth-validation";
-import { sendAuthLink } from "@/lib/auth-workflows";
+import { sendEmailVerificationCode } from "@/lib/auth-workflows";
+import {
+  createPendingEmailChangeToken,
+  pendingEmailChangeCookieName,
+  pendingEmailChangeCookieOptions,
+  pendingEmailVerificationCookieName,
+  pendingEmailVerificationCookieOptions,
+} from "@/lib/pending-email-verification";
 import { authRedirectUrl, formString, isSameOriginRequest } from "@/lib/request-security";
 
 export async function POST(request: Request) {
@@ -39,10 +46,27 @@ export async function POST(request: Request) {
 
   const result = await registerLearner(parsed.data);
   const user = result.user ?? await findActiveUserByEmail(parsed.data.email);
+
+  if (result.duplicate && (!user || user.emailVerified)) {
+    await recordAuthEvent({
+      action: "auth.register.existing_email",
+      request,
+      identifier: parsed.data.email,
+      userId: user?.id,
+      metadata: { delivery: "not_needed" },
+    });
+    const response = wantsJson
+      ? NextResponse.json({ error: "email_in_use", ok: false }, { status: 409 })
+      : NextResponse.redirect(authRedirectUrl(request, "/register", { error: "email_in_use", returnTo }), 303);
+    response.cookies.delete(pendingEmailVerificationCookieName());
+    response.cookies.delete(pendingEmailChangeCookieName());
+    return response;
+  }
+
   let delivery: "brevo" | "console" | "failed" | "not_needed" = "not_needed";
   if (user && !user.emailVerified) {
     try {
-      delivery = await sendAuthLink(user, "verify_email");
+      delivery = await sendEmailVerificationCode(user);
     } catch (error) {
       delivery = "failed";
       console.error("Không thể gửi email xác minh.", error instanceof Error ? error.message : "unknown");
@@ -56,9 +80,18 @@ export async function POST(request: Request) {
     userId: user?.id,
     metadata: { delivery },
   });
-  const url = new URL("/verify-email", request.url);
+  const url = authRedirectUrl(request, "/verify-email");
   url.searchParams.set("sent", "1");
   if (delivery === "failed") url.searchParams.set("error", "delivery_failed");
-  if (wantsJson) return NextResponse.json({ ok: true, redirectTo: `${url.pathname}${url.search}` });
-  return NextResponse.redirect(url, 303);
+  const response = wantsJson && delivery === "failed"
+    ? NextResponse.json({ error: "delivery_failed", ok: false }, { status: 502 })
+    : wantsJson
+      ? NextResponse.json({ ok: true, redirectTo: `${url.pathname}${url.search}` })
+    : NextResponse.redirect(url, 303);
+  response.cookies.set(pendingEmailVerificationCookieName(), parsed.data.email, pendingEmailVerificationCookieOptions());
+  if (result.user) {
+    const changeToken = await createPendingEmailChangeToken(result.user.id, result.user.email);
+    response.cookies.set(pendingEmailChangeCookieName(), changeToken, pendingEmailChangeCookieOptions());
+  }
+  return response;
 }

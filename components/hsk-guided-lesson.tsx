@@ -22,7 +22,8 @@ import {
   Volume2,
   X,
 } from "lucide-react";
-import type { HskExercise, HskLessonContent, HskVocabularyItem } from "@/lib/hsk-lesson-content";
+import type { HskExercise, HskLessonContent, HskVocabularyAudio, HskVocabularyItem } from "@/lib/hsk-lesson-content";
+import { cancelHskPronunciation, playHskPronunciation } from "@/lib/hsk-audio";
 import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 import { buildHskGuidedExercises, buildHskGuidedLessonSteps, buildHskGuidedNavigationSections, buildHskGuidedSections, type HskGuidedStepKind } from "@/lib/hsk-guided-lesson";
 import {
@@ -36,6 +37,7 @@ import { trySaveHskVocabularyWord } from "@/lib/saved-vocabulary-client";
 type SpeechRate = 0.75 | 1 | 1.25;
 type WritingMode = "watch" | "trace" | "quiz";
 type VocabularySaveStatus = "idle" | "saving" | "saved" | "error";
+type GuidedSpeak = (text: string, audio?: HskVocabularyAudio) => void;
 
 const SECTION_ICONS = {
   introduction: BookOpen,
@@ -194,7 +196,7 @@ function GuidedVocabulary({ lesson, itemIndex, showPinyin, speak, onShowWriting,
   lesson: HskLessonContent;
   itemIndex: number;
   showPinyin: boolean;
-  speak: (text: string) => void;
+  speak: GuidedSpeak;
   onShowWriting: () => void;
   authenticated: boolean;
   saveStatus: VocabularySaveStatus;
@@ -217,7 +219,7 @@ function GuidedVocabulary({ lesson, itemIndex, showPinyin, speak, onShowWriting,
         <strong lang="zh-CN">{word.hanzi}</strong>
         {showPinyin ? <span>{word.pinyin}</span> : null}
       </div>
-      <button aria-label={`Phát âm ${word.hanzi}`} className="hsk-guided-audio" onClick={() => speak(word.hanzi)} type="button"><Volume2 aria-hidden="true" size={31} /></button>
+      <button aria-label={`Phát âm ${word.hanzi}`} className="hsk-guided-audio" onClick={() => speak(word.hanzi, word.audio)} type="button"><Volume2 aria-hidden="true" size={31} /></button>
     </div>
     <div className="hsk-guided-word-meta">
       <span className="hsk-guided-word-class">{word.wordClass}</span>
@@ -268,7 +270,7 @@ function GuidedGrammar({ lesson, itemIndex, showPinyin, speak }: {
   lesson: HskLessonContent;
   itemIndex: number;
   showPinyin: boolean;
-  speak: (text: string) => void;
+  speak: GuidedSpeak;
 }) {
   const point = lesson.grammar[itemIndex];
   return <section className="hsk-guided-grammar">
@@ -289,7 +291,7 @@ function GuidedGrammar({ lesson, itemIndex, showPinyin, speak }: {
 
 function GuidedWriting({ lesson, speak, onComplete }: {
   lesson: HskLessonContent;
-  speak: (text: string) => void;
+  speak: GuidedSpeak;
   onComplete: (writingId: string) => void;
 }) {
   const boardRef = useRef<HTMLDivElement>(null);
@@ -381,7 +383,7 @@ function GuidedWriting({ lesson, speak, onComplete }: {
   </section>;
 }
 
-function GuidedPractice({ exercise, showPinyin, speak }: { exercise: HskExercise; showPinyin: boolean; speak: (text: string) => void }) {
+function GuidedPractice({ exercise, showPinyin, speak }: { exercise: HskExercise; showPinyin: boolean; speak: GuidedSpeak }) {
   const [selected, setSelected] = useState<string | null>(null);
   if (exercise.locked) return <section className="hsk-guided-practice is-locked">
     <span className="hsk-guided-kicker">Luyện tập VIP</span>
@@ -471,17 +473,10 @@ export function HskGuidedLesson({ lesson, authenticated = false }: { lesson: Hsk
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [currentStep, goToStep]);
 
-  useEffect(() => () => window.speechSynthesis?.cancel(), []);
+  useEffect(() => () => cancelHskPronunciation(), []);
 
-  const speak = useCallback((text: string) => {
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "zh-CN";
-    utterance.rate = rate;
-    const voice = window.speechSynthesis.getVoices().find((candidate) => candidate.lang.toLowerCase().startsWith("zh"));
-    if (voice) utterance.voice = voice;
-    window.speechSynthesis.speak(utterance);
+  const speak = useCallback((text: string, audio?: HskVocabularyAudio) => {
+    void playHskPronunciation({ audio, rate, text });
   }, [rate]);
 
   const completeWriting = useCallback((writingId: string) => {

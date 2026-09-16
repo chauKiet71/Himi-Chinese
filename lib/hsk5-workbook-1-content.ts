@@ -2,11 +2,9 @@ import enrichmentData from "../content/hsk5-workbook-1-json/learning-enrichment.
 import curriculumData from "../content/hsk5-workbook-1-json/curriculum.json" with { type: "json" };
 import exerciseData from "../content/hsk5-workbook-1-json/exercises.json" with { type: "json" };
 import listeningBlockData from "../content/hsk5-workbook-1-json/blocks/listening-blocks.json" with { type: "json" };
-import readingBlockData from "../content/hsk5-workbook-1-json/blocks/reading-blocks.json" with { type: "json" };
 import writingBlockData from "../content/hsk5-workbook-1-json/blocks/writing-blocks.json" with { type: "json" };
 import {
   buildHskWritingCharacters,
-  type HskDialogue,
   type HskExercise,
   type HskGrammarPoint,
   type HskLessonContent,
@@ -69,15 +67,11 @@ type Enrichment = {
 const RAW_LESSONS = (curriculumData as unknown as { lessons: RawLesson[] }).lessons;
 const RAW_EXERCISES = (exerciseData as unknown as { exercises: RawExercise[] }).exercises;
 const RAW_LISTENING_BLOCKS = (listeningBlockData as unknown as { blocks: RawSectionBlock[] }).blocks;
-const RAW_READING_BLOCKS = (readingBlockData as unknown as { blocks: RawSectionBlock[] }).blocks;
 const RAW_WRITING_BLOCKS = (writingBlockData as unknown as { blocks: RawSectionBlock[] }).blocks;
 const ENRICHMENT = enrichmentData as unknown as Enrichment;
 const EXERCISES = new Map(RAW_EXERCISES.map((item) => [item.id, item]));
 const LISTENING_BLOCKS = new Map(RAW_LISTENING_BLOCKS.map((item) => [item.lessonId, item]));
-const READING_BLOCKS = new Map(RAW_READING_BLOCKS.map((item) => [item.lessonId, item]));
 const WRITING_BLOCKS = new Map(RAW_WRITING_BLOCKS.map((item) => [item.lessonId, item]));
-
-const SOURCE_NOISE = /(?:HSK|标准教程5|练习册|第\d+[-—]\d+题|请选出|第一部分|第二部分|第三部分)/u;
 
 function requireEntity<T>(entities: Map<string, T>, id: string, owner: string): T {
   const entity = entities.get(id);
@@ -124,53 +118,6 @@ function toVocabulary(
         : "Cụm từ hoặc câu mẫu xuất hiện trong bài tập workbook.",
     };
   });
-}
-
-function cleanReadingPrompt(prompt: string): string {
-  return prompt
-    .split("\n")
-    .filter((line) => !/^[A-DＡ-Ｄ]\s*/u.test(line.trim()))
-    .join("")
-    .replace(/^\d+[.、]?\s*/u, "")
-    .replace(/\s+/gu, "")
-    .trim();
-}
-
-function buildDialogues(raw: RawLesson, exercises: RawExercise[]): HskDialogue[] {
-  const readingExercises = exercises.filter((exercise) => exercise.sectionType === "reading");
-  if (readingExercises.length) {
-    return readingExercises.map((exercise) => {
-      const prompt = cleanReadingPrompt(exercise.promptOcr) || exercise.promptOcr.replace(/\s+/gu, " ").trim();
-      const options = exercise.optionsOcr.map((option) => `${option.label}. ${option.textOcr}`).join(" · ");
-      return {
-        id: `${exercise.id}-reading`,
-        title: `Đọc hiểu · Câu ${exercise.numberInSource}`,
-        setting: `Phần ${exercise.part} của mục Đọc hiểu trong workbook Bài ${raw.number}.`,
-        turns: [{
-          speaker: `Câu ${exercise.numberInSource}`,
-          hanzi: [prompt, options].filter(Boolean).join("\n"),
-          pinyin: "",
-          translation: "Câu đọc hiểu tiếng Trung nguyên bản; đáp án không có trong PDF nguồn.",
-        }],
-      };
-    });
-  }
-
-  const readingBlock = requireEntity(READING_BLOCKS, raw.id, raw.id);
-  const fallbackLines = readingBlock.contentOcrLines
-    .filter((line) => line.length >= 24 && !SOURCE_NOISE.test(line))
-    .slice(0, 4);
-  return [{
-    id: `${raw.id}-reading`,
-    title: "Bài đọc luyện tập",
-    setting: `Các đoạn đọc thuộc phần Đọc hiểu của workbook Bài ${raw.number}.`,
-    turns: fallbackLines.map((line, index) => ({
-      speaker: `Đoạn ${index + 1}`,
-      hanzi: line,
-      pinyin: "",
-      translation: "Đoạn đọc tiếng Trung nguyên bản; bản dịch tiếng Việt đang được biên tập.",
-    })),
-  }];
 }
 
 function writingPrompt(exercise: RawExercise): string {
@@ -224,10 +171,10 @@ function buildExercises(vocabulary: HskVocabularyItem[]): HskExercise[] {
     return {
       id: `${word.id}-${meaningQuestion ? "meaning" : "pinyin"}`,
       type: meaningQuestion ? "meaning" : "pinyin",
-      instruction: meaningQuestion ? "Chọn nghĩa đúng của từ khóa" : "Chọn pinyin đúng của từ khóa",
+      instruction: meaningQuestion ? "Tự đối chiếu nghĩa của từ khóa" : "Tự đối chiếu pinyin của từ khóa",
       prompt: word.hanzi,
       options: uniqueOptions(vocabulary, index, select),
-      answer: select(word),
+      answer: null,
     };
   });
 }
@@ -259,7 +206,7 @@ function composeLesson(raw: RawLesson): HskLessonContent {
   const sourceExercises = lessonExercises(raw);
   const vocabulary = toVocabulary(raw.id, enriched.vocabulary, sourceExercises);
   const grammar = buildGrammar(raw, sourceExercises);
-  const dialogues = buildDialogues(raw, sourceExercises);
+  const dialogues: HskLessonContent["dialogues"] = [];
   const exercises = buildExercises(vocabulary);
   const writingBlock = requireEntity(WRITING_BLOCKS, raw.id, raw.id);
   if (!writingBlock.contentOcr.trim()) throw new Error(`Bài HSK 5 workbook thiếu phần viết: ${raw.id}`);
@@ -272,7 +219,7 @@ function composeLesson(raw: RawLesson): HskLessonContent {
     lessonNumber: raw.number,
     title: enriched.titleVi,
     greeting: raw.titleZh,
-    summary: `${raw.exerciseCount} câu luyện Nghe – Đọc – Viết từ Sách bài tập HSK 5 - Tập 1, cùng ${vocabulary.length} từ khóa viết trọng tâm.`,
+    summary: `${raw.exerciseCount} câu Nghe – Đọc – Viết từ Sách bài tập HSK 5 - Tập 1. Phần này chưa chấm điểm vì nguồn hiện không có đáp án và transcript.`,
     minutes: 40,
     modes: ["vocabulary", "exercise", "pronunciation", "hanzi"],
     vocabulary,

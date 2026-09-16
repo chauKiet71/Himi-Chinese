@@ -137,6 +137,29 @@ function lessonTargets(row: {
   ];
 }
 
+/** Keep the correct answer text intact while distributing its visible position. */
+export function balanceChallengeOptions(questions: ChallengeQuestion[], seed = ""): ChallengeQuestion[] {
+  let seedHash = 2166136261;
+  for (const character of seed) {
+    seedHash ^= character.codePointAt(0) ?? 0;
+    seedHash = Math.imul(seedHash, 16777619);
+  }
+
+  return questions.map((question, index) => {
+    if (question.locked || question.options.length < 2) return question;
+    if (question.correctOption < 0 || question.correctOption >= question.options.length) return question;
+
+    const rotation = seed ? (seedHash >>> 0) % question.options.length : 0;
+    const targetIndex = (index + rotation) % question.options.length;
+    if (targetIndex === question.correctOption) return question;
+
+    const correctAnswer = question.options[question.correctOption];
+    const options = question.options.filter((_, optionIndex) => optionIndex !== question.correctOption);
+    options.splice(targetIndex, 0, correctAnswer);
+    return { ...question, options, correctOption: targetIndex };
+  });
+}
+
 async function filterLessonQuestions({
   content,
   lessonId,
@@ -149,10 +172,10 @@ async function filterLessonQuestions({
   viewerHasVip: boolean;
 }): Promise<LessonContent> {
   if (!content.challenge?.questions.length) return content;
-  const questions = content.challenge.questions.map((question, index) => ({
+  const questions = balanceChallengeOptions(content.challenge.questions.map((question, index) => ({
     ...question,
     id: question.id?.trim() || `question-${index + 1}`,
-  }));
+  })), lessonId);
   const questionTargets = questions.map((question) => learningQuestionTarget(
     lessonId,
     question.id!,

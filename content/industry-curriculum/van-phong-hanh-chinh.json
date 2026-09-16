@@ -434,9 +434,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "没问题，我会把文件放在附件里。",
-            "pinyin": "Méi wèntí, wǒ huì bǎ wénjiàn fàng zài fùjiàn lǐ.",
-            "translation": "Không vấn đề, tôi sẽ để tài liệu trong tệp đính kèm."
+            "hanzi": "没问题，我会把文件作为附件发送。",
+            "pinyin": "Méi wèntí, wǒ huì bǎ wénjiàn zuòwéi fùjiàn fāsòng.",
+            "translation": "Được, tôi sẽ gửi tài liệu dưới dạng tệp đính kèm."
           }
         ],
         "notes": [
@@ -541,7 +541,7 @@
             "speaker": "B",
             "hanzi": "没问题，明天下午向您汇报。",
             "pinyin": "Méi wèntí, míngtiān xiàwǔ xiàng nín huìbào.",
-            "translation": "Không vấn đề, chiều mai tôi sẽ báo cáo anh/chị."
+            "translation": "Không vấn đề gì, chiều mai tôi sẽ cập nhật cho anh/chị."
           }
         ],
         "notes": [
@@ -561,9 +561,9 @@
     },
     {
       "slug": "xin-ho-tro-tu-dong-nghiep",
-      "title": "Xin hỗ trợ từ đồng nghiệp",
+      "title": "Tình huống tổng hợp: Giao tiếp văn phòng cơ bản",
       "summary": "Mô tả vấn đề, nhờ hỗ trợ và phản hồi lịch sự khi phối hợp công việc.",
-      "situation": "Gặp vướng mắc khi xử lý việc",
+      "situation": "Ôn tập và ứng dụng cuối module 1",
       "estimatedMinutes": 11,
       "isFree": true,
       "vocabulary": [
@@ -581,8 +581,8 @@
           "hanzi": "帮忙",
           "pinyin": "bāngmáng",
           "meaning": "giúp đỡ",
-          "example": "你可以帮我一个忙吗？",
-          "translation": "Bạn có thể giúp tôi một việc không?",
+          "example": "你现在可以帮忙吗？",
+          "translation": "Bây giờ bạn có thể giúp một tay không?",
           "audioUrl": null
         },
         {
@@ -646,7 +646,7 @@
             "speaker": "B",
             "hanzi": "没问题，我们一起解决。",
             "pinyin": "Méi wèntí, wǒmen yìqǐ jiějué.",
-            "translation": "Không vấn đề, chúng ta cùng giải quyết."
+            "translation": "Không vấn đề gì, chúng ta cùng giải quyết."
           }
         ],
         "notes": [
@@ -670,8 +670,8 @@
               "prompt": "Bạn muốn hỏi lịch sự hạn chót của nhiệm vụ. Câu nào phù hợp nhất?",
               "options": [
                 "请问，截止日期是什么时候？",
-                "你为什么还没做？",
-                "这个工作不重要。"
+                "这项任务需要今天完成吗？",
+                "你预计什么时候可以开始？"
               ],
               "correctOption": 0,
               "explanation": "请问 làm câu hỏi mềm và lịch sự hơn; 截止日期 là hạn chót."
@@ -1112,9 +1112,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "预计明天下午完成，我们会尽快补救。",
-            "pinyin": "Yùjì míngtiān xiàwǔ wánchéng, wǒmen huì jǐnkuài bǔjiù.",
-            "translation": "Dự kiến chiều mai hoàn thành; chúng tôi sẽ khắc phục sớm nhất có thể."
+            "hanzi": "预计明天下午完成，我们会尽快处理。",
+            "pinyin": "Yùjì míngtiān xiàwǔ wánchéng, wǒmen huì jǐnkuài chǔlǐ.",
+            "translation": "Dự kiến hoàn thành vào chiều mai; chúng tôi sẽ xử lý sớm nhất có thể."
           }
         ],
         "notes": [
@@ -1239,7 +1239,7 @@
     {
       "moduleSlug": "phoi-hop-va-giai-quyet-cong-viec",
       "slug": "kiem-tra-phoi-hop-cong-viec",
-      "title": "Kiểm tra: Phối hợp công việc",
+      "title": "Tình huống tổng hợp: Phối hợp công việc",
       "summary": "Xử lý một tình huống tổng hợp gồm thay đổi ưu tiên, trễ hạn và phối hợp giữa nhiều người.",
       "situation": "Thực hành cuối module 2",
       "estimatedMinutes": 15,
@@ -1357,9 +1357,9 @@
             {
               "prompt": "Câu nào báo trễ có trách nhiệm nhất?",
               "options": [
-                "我做不完。",
+                "目前进度有点慢，我会继续处理。",
                 "因为数据有问题，预计明天下午完成。",
-                "以后再说。"
+                "数据还没准备好，完成后我再通知您。"
               ],
               "correctOption": 1,
               "explanation": "Câu này có nguyên nhân và thời gian dự kiến mới."
@@ -1525,8 +1525,8 @@
           "hanzi": "不同意",
           "pinyin": "bù tóngyì",
           "meaning": "không đồng ý",
-          "example": "我不完全同意这个观点。",
-          "translation": "Tôi không hoàn toàn đồng ý với quan điểm này.",
+          "example": "我不同意这个观点。",
+          "translation": "Tôi không đồng ý với quan điểm này.",
           "audioUrl": null
         },
         {
@@ -1638,9 +1638,9 @@
           "slug": "xingdong-xiang",
           "hanzi": "行动项",
           "pinyin": "xíngdòng xiàng",
-          "meaning": "hạng mục hành động",
+          "meaning": "đầu việc",
           "example": "每个行动项都要有负责人。",
-          "translation": "Mỗi hạng mục hành động đều phải có người phụ trách.",
+          "translation": "Mỗi đầu việc đều phải có người phụ trách.",
           "audioUrl": null
         },
         {
@@ -1680,7 +1680,7 @@
             "speaker": "A",
             "hanzi": "请确认行动项、负责人和期限。",
             "pinyin": "Qǐng quèrèn xíngdòng xiàng, fùzérén hé qīxiàn.",
-            "translation": "Hãy xác nhận hạng mục hành động, người phụ trách và thời hạn."
+            "translation": "Hãy xác nhận đầu việc, người phụ trách và thời hạn."
           },
           {
             "speaker": "B",
@@ -1916,7 +1916,7 @@
     {
       "moduleSlug": "hop-bao-cao-va-du-an",
       "slug": "kiem-tra-hop-bao-cao-du-an",
-      "title": "Kiểm tra: Họp, báo cáo & dự án",
+      "title": "Tình huống tổng hợp: Họp, báo cáo & dự án",
       "summary": "Thực hành chuẩn bị họp, trình bày xu hướng và chốt trách nhiệm sau cuộc họp.",
       "situation": "Thực hành cuối module 3",
       "estimatedMinutes": 16,
@@ -2079,7 +2079,7 @@
           "hanzi": "请假",
           "pinyin": "qǐngjià",
           "meaning": "xin nghỉ",
-          "example": "我想请一天假。",
+          "example": "我想请假一天。",
           "translation": "Tôi muốn xin nghỉ một ngày.",
           "audioUrl": null
         },
@@ -2151,9 +2151,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "可以，申请批准以后好好休息。",
-            "pinyin": "Kěyǐ, shēnqǐng pīzhǔn yǐhòu hǎohāo xiūxi.",
-            "translation": "Được, sau khi đơn được duyệt thì hãy nghỉ ngơi cho tốt."
+            "hanzi": "可以，我批准了。你明天好好休息。",
+            "pinyin": "Kěyǐ, wǒ pīzhǔn le. Nǐ míngtiān hǎohāo xiūxi.",
+            "translation": "Được, tôi phê duyệt rồi. Ngày mai hãy nghỉ ngơi cho tốt."
           }
         ],
         "notes": [
@@ -2571,9 +2571,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "我们把要求再确认一次，避免再次误会。",
-            "pinyin": "Wǒmen bǎ yāoqiú zài quèrèn yí cì, bìmiǎn zàicì wùhuì.",
-            "translation": "Chúng ta hãy xác nhận lại yêu cầu để tránh hiểu lầm lần nữa."
+            "hanzi": "我先报告负责人并确认是否需要撤回，再重新确认发送范围。",
+            "pinyin": "Wǒ xiān bàogào fùzérén bìng quèrèn shìfǒu xūyào chèhuí, zài chóngxīn quèrèn fāsòng fànwéi.",
+            "translation": "Tôi sẽ báo người phụ trách và xác nhận có cần thu hồi hay không trước, rồi xác nhận lại phạm vi gửi."
           }
         ],
         "notes": [
@@ -2584,8 +2584,8 @@
           },
           {
             "title": "Xác nhận lại",
-            "pattern": "把要求再确认一次",
-            "explanation": "把 đưa 要求 lên trước hành động 确认, nhấn mạnh đối tượng cần xác nhận lại."
+            "pattern": "先报告并确认是否需要撤回",
+            "explanation": "Khi đã gửi nhầm tài liệu, cần báo người phụ trách và kiểm tra khả năng thu hồi trước khi xác nhận lại phạm vi gửi."
           }
         ]
       }
@@ -2593,9 +2593,9 @@
     {
       "moduleSlug": "hanh-chinh-va-giao-tiep-nang-cao",
       "slug": "kiem-tra-tong-hop-van-phong",
-      "title": "Kiểm tra tổng hợp: Văn phòng & hành chính",
+      "title": "Tình huống tổng hợp: Văn phòng & hành chính",
       "summary": "Tổng hợp các kỹ năng nhận việc, phối hợp, họp, báo cáo và xử lý tình huống hành chính.",
-      "situation": "Bài kiểm tra cuối lộ trình",
+      "situation": "Ôn tập và ứng dụng cuối lộ trình",
       "estimatedMinutes": 18,
       "isFree": false,
       "vocabulary": [
@@ -2613,7 +2613,7 @@
           "hanzi": "沟通目标",
           "pinyin": "gōutōng mùbiāo",
           "meaning": "mục tiêu giao tiếp",
-          "example": "先确认这次沟通的目标。",
+          "example": "先确认这次的沟通目标。",
           "translation": "Trước tiên xác nhận mục tiêu giao tiếp lần này.",
           "audioUrl": null
         },
@@ -2731,9 +2731,9 @@
             {
               "prompt": "Khi phát hiện hiểu lầm, câu nào hợp tác nhất?",
               "options": [
-                "你完全错了。",
+                "我理解的要求和您说的不一样，请您重新说明。",
                 "可能是我表达得不够清楚，我们再确认一次。",
-                "以后不要再问。"
+                "我们先按我的理解处理，有问题再调整。"
               ],
               "correctOption": 1,
               "explanation": "Câu này giảm đổ lỗi và đưa cuộc trao đổi về việc xác nhận lại."

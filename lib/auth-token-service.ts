@@ -2,7 +2,8 @@ import "server-only";
 import { and, eq, gt, isNotNull, isNull, lt, or } from "drizzle-orm";
 import { writeDb, type Database } from "../db/index.ts";
 import { adminLoginChallenges, authRateLimits, authSessions, authTokens, users } from "../db/schema.ts";
-import { createAuthToken, hashAuthToken, hashPassword } from "./auth-crypto.ts";
+import { createAuthToken, createSixDigitCode, hashAuthToken, hashPassword, hashPrivateIdentifier } from "./auth-crypto.ts";
+import { normalizeEmail } from "./auth-validation.ts";
 
 export type AuthTokenPurpose = typeof authTokens.$inferSelect.purpose;
 
@@ -16,6 +17,14 @@ export type IssuedAuthToken = {
   token: string;
   expiresAt: Date;
 };
+
+export type IssuedEmailVerificationCode = {
+  id: string;
+  code: string;
+  expiresAt: Date;
+};
+
+const EMAIL_VERIFICATION_CODE_TTL_MINUTES = 10;
 
 export async function issueAuthToken(
   userId: string,
@@ -40,7 +49,74 @@ export async function issueAuthToken(
   return { id: inserted[0].id, token, expiresAt };
 }
 
-export async function verifyEmailToken(token: string): Promise<{ id: string; email: string; displayName: string } | null> {
+export async function issueEmailVerificationCode(
+  userId: string,
+  email: string,
+  database?: Database,
+): Promise<IssuedEmailVerificationCode> {
+  const normalizedEmail = normalizeEmail(email);
+  const code = createSixDigitCode();
+  const tokenHash = await hashPrivateIdentifier(`email-verification:${normalizedEmail}:${code}`);
+  const now = new Date();
+  const expiresAt = new Date(now.getTime() + EMAIL_VERIFICATION_CODE_TTL_MINUTES * 60_000);
+
+  const issue = (db: Database) => db.transaction(async (tx) => {
+    await tx.update(authTokens).set({ usedAt: now }).where(and(
+      eq(authTokens.userId, userId),
+      eq(authTokens.purpose, "verify_email"),
+      isNull(authTokens.usedAt),
+    ));
+    return tx.insert(authTokens).values({ userId, purpose: "verify_email", tokenHash, expiresAt }).returning({ id: authTokens.id });
+  });
+  const inserted = database ? await issue(database) : await writeDb(issue);
+
+  return { id: inserted[0].id, code, expiresAt };
+}
+
+type VerifiedEmailUser = { id: string; email: string; displayName: string };
+
+export async function verifyEmailCode(
+  email: string,
+  code: string,
+  database?: Database,
+): Promise<VerifiedEmailUser | null> {
+  const normalizedEmail = normalizeEmail(email);
+  const tokenHash = await hashPrivateIdentifier(`email-verification:${normalizedEmail}:${code}`);
+  const now = new Date();
+  const verify = (db: Database) => db.transaction(async (tx) => {
+    const rows = await tx.select({
+      tokenId: authTokens.id,
+      userId: users.id,
+      email: users.email,
+      displayName: users.displayName,
+      isActive: users.isActive,
+    }).from(authTokens)
+      .innerJoin(users, eq(authTokens.userId, users.id))
+      .where(and(
+        eq(authTokens.tokenHash, tokenHash),
+        eq(authTokens.purpose, "verify_email"),
+        eq(users.email, normalizedEmail),
+        isNull(authTokens.usedAt),
+        gt(authTokens.expiresAt, now),
+      ))
+      .limit(1);
+    const row = rows[0];
+    if (!row?.isActive) return null;
+
+    const consumed = await tx.update(authTokens).set({ usedAt: now }).where(and(
+      eq(authTokens.id, row.tokenId),
+      isNull(authTokens.usedAt),
+    )).returning({ id: authTokens.id });
+    if (!consumed[0]) return null;
+
+    await tx.update(users).set({ emailVerifiedAt: now, updatedAt: now }).where(eq(users.id, row.userId));
+    return { id: row.userId, email: row.email, displayName: row.displayName ?? row.email };
+  });
+
+  return database ? verify(database) : writeDb(verify);
+}
+
+export async function verifyEmailToken(token: string): Promise<VerifiedEmailUser | null> {
   const tokenHash = await hashAuthToken(token);
   const now = new Date();
   return writeDb((db) => db.transaction(async (tx) => {

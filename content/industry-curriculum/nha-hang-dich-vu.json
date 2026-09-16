@@ -562,9 +562,9 @@
     {
       "moduleSlug": "don-khach-va-xep-ban",
       "slug": "kiem-tra-don-khach-va-xep-ban",
-      "title": "Kiểm tra: Đón khách & xếp bàn",
+      "title": "Tình huống tổng hợp: Đón khách & xếp bàn",
       "summary": "Ôn số khách, đặt bàn, yêu cầu chỗ ngồi, thời gian chờ và hướng dẫn khu vực.",
-      "situation": "Đánh giá cuối module 1",
+      "situation": "Ôn tập và ứng dụng cuối module 1",
       "estimatedMinutes": 14,
       "isFree": true,
       "vocabulary": [
@@ -1076,9 +1076,9 @@
           "slug": "restaurant-l10-zhushi",
           "hanzi": "主食",
           "pinyin": "zhǔshí",
-          "meaning": "món chính/tinh bột chính",
+          "meaning": "món tinh bột chính",
           "example": "主食您想点米饭还是面？",
-          "translation": "Món chính anh/chị muốn cơm hay mì?",
+          "translation": "Món tinh bột chính, anh/chị muốn dùng cơm hay mì?",
           "audioUrl": null
         },
         {
@@ -1164,8 +1164,8 @@
           "hanzi": "暂停供应",
           "pinyin": "zàntíng gōngyìng",
           "meaning": "tạm ngừng phục vụ",
-          "example": "海鲜汤暂时停止供应。",
-          "translation": "Súp hải sản tạm ngừng phục vụ.",
+          "example": "海鲜汤今天暂停供应。",
+          "translation": "Hôm nay súp hải sản tạm ngừng phục vụ.",
           "audioUrl": null
         },
         {
@@ -1249,9 +1249,9 @@
     {
       "moduleSlug": "goi-mon-va-yeu-cau-an-uong",
       "slug": "kiem-tra-goi-mon-va-yeu-cau-an-uong",
-      "title": "Kiểm tra: Gọi món & yêu cầu ăn uống",
+      "title": "Tình huống tổng hợp: Gọi món & yêu cầu ăn uống",
       "summary": "Ôn thực đơn, khẩu vị, dị ứng, nguyên liệu, số lượng và món thay thế.",
-      "situation": "Đánh giá cuối module 2",
+      "situation": "Ôn tập và ứng dụng cuối module 2",
       "estimatedMinutes": 15,
       "isFree": false,
       "vocabulary": [
@@ -1269,8 +1269,8 @@
           "hanzi": "加菜",
           "pinyin": "jiācài",
           "meaning": "gọi thêm món",
-          "example": "客人想再加一道菜。",
-          "translation": "Khách muốn gọi thêm một món.",
+          "example": "客人想加菜，再点一道。",
+          "translation": "Khách muốn gọi thêm một món nữa.",
           "audioUrl": null
         },
         {
@@ -1368,8 +1368,8 @@
               "prompt": "Khách nói 对花生过敏. Nhân viên nên làm gì?",
               "options": [
                 "Ghi nhận và xác minh với bếp theo quy trình",
-                "Tự đảm bảo món hoàn toàn an toàn",
-                "Bỏ qua nếu món không nhìn thấy lạc"
+                "Chỉ ghi chú trên đơn và tiếp tục phục vụ nếu khách đồng ý",
+                "Khuyên khách tự kiểm tra thành phần sau khi món được mang ra"
               ],
               "correctOption": 0,
               "explanation": "Dị ứng cần được chuyển xác minh theo quy trình an toàn thực phẩm thực tế."
@@ -1842,8 +1842,8 @@
           "hanzi": "洒了",
           "pinyin": "sǎ le",
           "meaning": "bị đổ",
-          "example": "水洒在地上了。",
-          "translation": "Nước bị đổ ra sàn.",
+          "example": "水洒了，地上很滑。",
+          "translation": "Nước bị đổ, sàn rất trơn.",
           "audioUrl": null
         },
         {
@@ -1936,9 +1936,9 @@
     {
       "moduleSlug": "phuc-vu-tai-ban",
       "slug": "kiem-tra-phuc-vu-tai-ban",
-      "title": "Kiểm tra: Phục vụ tại bàn",
+      "title": "Tình huống tổng hợp: Phục vụ tại bàn",
       "summary": "Ôn lên món, hỗ trợ thêm, thiếu món, báo chậm và xử lý sự cố an toàn.",
-      "situation": "Đánh giá cuối module 3",
+      "situation": "Ôn tập và ứng dụng cuối module 3",
       "estimatedMinutes": 15,
       "isFree": false,
       "vocabulary": [
@@ -2249,7 +2249,7 @@
           "slug": "restaurant-l20-fapiao",
           "hanzi": "发票",
           "pinyin": "fāpiào",
-          "meaning": "hóa đơn",
+          "meaning": "hóa đơn tài chính (VAT)",
           "example": "需要开具发票吗？",
           "translation": "Có cần xuất hóa đơn không?",
           "audioUrl": null
@@ -2623,9 +2623,9 @@
     {
       "moduleSlug": "thanh-toan-va-phan-hoi",
       "slug": "kiem-tra-tong-hop-nha-hang-dich-vu",
-      "title": "Kiểm tra tổng hợp: Nhà hàng & dịch vụ",
+      "title": "Tình huống tổng hợp: Nhà hàng & dịch vụ",
       "summary": "Tổng hợp đón khách, gọi món, phục vụ, thanh toán và xử lý phản hồi an toàn.",
-      "situation": "Đánh giá cuối lộ trình",
+      "situation": "Ôn tập và ứng dụng cuối lộ trình",
       "estimatedMinutes": 16,
       "isFree": false,
       "vocabulary": [
@@ -2752,8 +2752,8 @@
               "prompt": "优惠券 sử dụng thế nào?",
               "options": [
                 "Theo điều kiện áp dụng được công bố",
-                "Luôn cộng với mọi khuyến mãi",
-                "Nhân viên tự quyết định"
+                "Áp dụng cùng mọi ưu đãi nếu hệ thống chưa cảnh báo",
+                "Linh hoạt áp dụng theo đề nghị của khách quen"
               ],
               "correctOption": 0,
               "explanation": "Phiếu ưu đãi phải theo điều kiện và quyền phê duyệt thực tế."
@@ -2815,13 +2815,13 @@
             "translation": "Nếu hai người thì khoảng hai mươi phút sẽ có chỗ."
           },
           {
-            "speaker": "A",
+            "speaker": "B",
             "hanzi": "这是您的号码，我们会叫号。",
-            "pinyin": "Zhè shì nín de hàomǎ, wǒmen huì jiào hào.",
+            "pinyin": "Zhè shì nín de hàomǎ, wǒmen huì jiàohào.",
             "translation": "Đây là số của anh/chị, chúng tôi sẽ gọi số."
           },
           {
-            "speaker": "B",
+            "speaker": "A",
             "hanzi": "好的，轮到我们时请提醒一下。",
             "pinyin": "Hǎo de, lún dào wǒmen shí qǐng tíxǐng yíxià.",
             "translation": "Được, khi đến lượt chúng tôi vui lòng nhắc một chút."
@@ -2841,13 +2841,13 @@
             "translation": "Nếu hai người thì khoảng hai mươi phút sẽ có chỗ."
           },
           {
-            "speaker": "A",
+            "speaker": "B",
             "hanzi": "这是您的号码，我们会叫号。",
-            "pinyin": "Zhè shì nín de hàomǎ, wǒmen huì jiào hào.",
+            "pinyin": "Zhè shì nín de hàomǎ, wǒmen huì jiàohào.",
             "translation": "Đây là số của anh/chị, chúng tôi sẽ gọi số."
           },
           {
-            "speaker": "B",
+            "speaker": "A",
             "hanzi": "好的，轮到我们时请提醒一下。",
             "pinyin": "Hǎo de, lún dào wǒmen shí qǐng tíxǐng yíxià.",
             "translation": "Được, khi đến lượt chúng tôi vui lòng nhắc một chút."
@@ -2932,7 +2932,7 @@
         {
           "slug": "nha-hang-dich-vu-ung-dung-thong-bao-thoi-gian-cho-ban-5",
           "hanzi": "叫号",
-          "pinyin": "jiào hào",
+          "pinyin": "jiàohào",
           "meaning": "gọi số",
           "example": "这是您的号码，我们会叫号。",
           "translation": "Đây là số của anh/chị, chúng tôi sẽ gọi số.",
@@ -2972,13 +2972,13 @@
             "translation": "Tôi hỏi bếp trước xem có điều chỉnh khẩu vị được không."
           },
           {
-            "speaker": "A",
+            "speaker": "B",
             "hanzi": "您是要少辣，还是完全不放辣椒？",
             "pinyin": "Nín shì yào shǎo là, háishi wánquán bú fàng làjiāo?",
             "translation": "Anh/chị muốn ít cay hay hoàn toàn không cho ớt?"
           },
           {
-            "speaker": "B",
+            "speaker": "A",
             "hanzi": "少辣就好，请帮我备注。",
             "pinyin": "Shǎo là jiù hǎo, qǐng bāng wǒ bèizhù.",
             "translation": "Ít cay là được, vui lòng ghi chú giúp tôi."
@@ -2998,13 +2998,13 @@
             "translation": "Tôi hỏi bếp trước xem có điều chỉnh khẩu vị được không."
           },
           {
-            "speaker": "A",
+            "speaker": "B",
             "hanzi": "您是要少辣，还是完全不放辣椒？",
             "pinyin": "Nín shì yào shǎo là, háishi wánquán bú fàng làjiāo?",
             "translation": "Anh/chị muốn ít cay hay hoàn toàn không cho ớt?"
           },
           {
-            "speaker": "B",
+            "speaker": "A",
             "hanzi": "少辣就好，请帮我备注。",
             "pinyin": "Shǎo là jiù hǎo, qǐng bāng wǒ bèizhù.",
             "translation": "Ít cay là được, vui lòng ghi chú giúp tôi."
@@ -3275,14 +3275,14 @@
         "dialogue": [
           {
             "speaker": "A",
-            "hanzi": "我们点的汤还没上菜，是不是漏单了？",
-            "pinyin": "Wǒmen diǎn de tāng hái méi shàng cài, shì bu shì lòudān le?",
-            "translation": "Món canh chúng tôi gọi vẫn chưa lên, có phải bị sót đơn không?"
+            "hanzi": "我们点的汤还没上，是不是漏单了？",
+            "pinyin": "Wǒmen diǎn de tāng hái méi shàng, shì bu shì lòudān le?",
+            "translation": "Món canh chúng tôi gọi vẫn chưa được mang lên, có phải bị sót đơn không?"
           },
           {
             "speaker": "B",
             "hanzi": "请稍等，我马上核实。",
-            "pinyin": "Qǐng shāo děng, wǒ mǎshàng héshí.",
+            "pinyin": "Qǐng shāoděng, wǒ mǎshàng héshí.",
             "translation": "Vui lòng chờ một chút, tôi xác minh ngay."
           },
           {
@@ -3301,14 +3301,14 @@
         "phrases": [
           {
             "speaker": "A",
-            "hanzi": "我们点的汤还没上菜，是不是漏单了？",
-            "pinyin": "Wǒmen diǎn de tāng hái méi shàng cài, shì bu shì lòudān le?",
-            "translation": "Món canh chúng tôi gọi vẫn chưa lên, có phải bị sót đơn không?"
+            "hanzi": "我们点的汤还没上，是不是漏单了？",
+            "pinyin": "Wǒmen diǎn de tāng hái méi shàng, shì bu shì lòudān le?",
+            "translation": "Món canh chúng tôi gọi vẫn chưa được mang lên, có phải bị sót đơn không?"
           },
           {
             "speaker": "B",
             "hanzi": "请稍等，我马上核实。",
-            "pinyin": "Qǐng shāo děng, wǒ mǎshàng héshí.",
+            "pinyin": "Qǐng shāoděng, wǒ mǎshàng héshí.",
             "translation": "Vui lòng chờ một chút, tôi xác minh ngay."
           },
           {
@@ -3367,10 +3367,10 @@
         {
           "slug": "nha-hang-dich-vu-ung-dung-hoi-tien-do-mon-chua-len-1",
           "hanzi": "上菜",
-          "pinyin": "shàng cài",
+          "pinyin": "shàngcài",
           "meaning": "mang món lên",
-          "example": "我们点的汤还没上菜，是不是漏单了？",
-          "translation": "Món canh chúng tôi gọi vẫn chưa lên, có phải bị sót đơn không?",
+          "example": "这桌还没上菜，请帮我查一下。",
+          "translation": "Bàn này vẫn chưa được lên món, vui lòng kiểm tra giúp tôi.",
           "audioUrl": null
         },
         {
@@ -3378,8 +3378,8 @@
           "hanzi": "漏单",
           "pinyin": "lòudān",
           "meaning": "bỏ sót đơn; sót món trong đơn",
-          "example": "我们点的汤还没上菜，是不是漏单了？",
-          "translation": "Món canh chúng tôi gọi vẫn chưa lên, có phải bị sót đơn không?",
+          "example": "我们点的汤还没上，是不是漏单了？",
+          "translation": "Món canh chúng tôi gọi vẫn chưa được mang lên, có phải bị sót đơn không?",
           "audioUrl": null
         },
         {
@@ -3403,7 +3403,7 @@
         {
           "slug": "nha-hang-dich-vu-ung-dung-hoi-tien-do-mon-chua-len-5",
           "hanzi": "稍等",
-          "pinyin": "shāo děng",
+          "pinyin": "shāoděng",
           "meaning": "chờ một chút",
           "example": "请稍等，我马上核实。",
           "translation": "Vui lòng chờ một chút, tôi xác minh ngay.",
@@ -3601,9 +3601,9 @@
           },
           {
             "speaker": "A",
-            "hanzi": "黑色的，我坐在靠窗的桌子。",
-            "pinyin": "Hēisè de, wǒ zuò zài kào chuāng de zhuōzi.",
-            "translation": "Màu đen, tôi ngồi bàn cạnh cửa sổ."
+            "hanzi": "黑色的，我坐在靠窗的座位上。",
+            "pinyin": "Hēisè de, wǒ zuò zài kào chuāng de zuòwèi shàng.",
+            "translation": "Màu đen, tôi ngồi ở chỗ cạnh cửa sổ."
           },
           {
             "speaker": "B",
@@ -3627,9 +3627,9 @@
           },
           {
             "speaker": "A",
-            "hanzi": "黑色的，我坐在靠窗的桌子。",
-            "pinyin": "Hēisè de, wǒ zuò zài kào chuāng de zhuōzi.",
-            "translation": "Màu đen, tôi ngồi bàn cạnh cửa sổ."
+            "hanzi": "黑色的，我坐在靠窗的座位上。",
+            "pinyin": "Hēisè de, wǒ zuò zài kào chuāng de zuòwèi shàng.",
+            "translation": "Màu đen, tôi ngồi ở chỗ cạnh cửa sổ."
           },
           {
             "speaker": "B",

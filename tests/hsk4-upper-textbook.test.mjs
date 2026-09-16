@@ -70,7 +70,7 @@ test("HSK 4 upper textbook converts all lessons into the HSK 1 learning shape", 
   assert.equal(hsk4.topics.length, 4);
   assert.equal(hsk4.topics.flatMap((topic) => topic.lessons).length, 20);
   assert.ok(hsk4.description.includes("Tập 1 và Tập 2"));
-  assert.ok(hsk4.topics.flatMap((topic) => topic.lessons).every((item) => item.kind === "textbook" && item.available));
+  assert.ok(hsk4.topics.flatMap((topic) => topic.lessons).every((item) => item.kind === "textbook" && !item.available && item.availabilityLabel === "Đang biên tập"));
   assert.deepEqual(hsk4.topics[0].lessons[0], {
     id: "hsk4u-tb-lesson-01",
     lessonNumber: 1,
@@ -83,7 +83,8 @@ test("HSK 4 upper textbook converts all lessons into the HSK 1 learning shape", 
     exercises: 4,
     minutes: 36,
     guidedSteps: 50,
-    available: true,
+    available: false,
+    availabilityLabel: "Đang biên tập",
   });
 
   const sections = guidedModule.buildHskGuidedSections(lesson).map((section) => section.label);

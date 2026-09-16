@@ -111,6 +111,14 @@ export function createAuthToken(): string {
   return createSessionToken();
 }
 
+export function createSixDigitCode(): string {
+  const range = 1_000_000;
+  const maximum = Math.floor(0x1_0000_0000 / range) * range;
+  const values = new Uint32Array(1);
+  do crypto.getRandomValues(values); while (values[0] >= maximum);
+  return String(values[0] % range).padStart(6, "0");
+}
+
 export async function hashSessionToken(token: string): Promise<string> {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(token));
   return bytesToHex(new Uint8Array(digest));

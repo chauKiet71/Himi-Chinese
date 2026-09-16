@@ -562,9 +562,9 @@
     {
       "moduleSlug": "nhap-kho-va-kiem-dem",
       "slug": "kiem-tra-nhap-kho-va-kiem-dem",
-      "title": "Kiểm tra: Nhập kho & kiểm đếm",
+      "title": "Tình huống tổng hợp: Nhập kho & kiểm đếm",
       "summary": "Ôn lịch xe, chứng từ, số lượng, bao bì và quy trình hoàn tất nhập kho.",
-      "situation": "Đánh giá cuối module 1",
+      "situation": "Ôn tập và ứng dụng cuối module 1",
       "estimatedMinutes": 14,
       "isFree": true,
       "vocabulary": [
@@ -963,8 +963,8 @@
           "hanzi": "冻结库存",
           "pinyin": "dòngjié kùcún",
           "meaning": "tồn bị khóa",
-          "example": "二十件库存正在冻结。",
-          "translation": "20 sản phẩm tồn đang bị khóa.",
+          "example": "系统里有二十件冻结库存。",
+          "translation": "Trong hệ thống có 20 sản phẩm tồn đang bị khóa.",
           "audioUrl": null
         },
         {
@@ -1164,7 +1164,7 @@
           "hanzi": "多货",
           "pinyin": "duōhuò",
           "meaning": "thừa hàng",
-          "example": "A货位多了一箱。",
+          "example": "A货位有一箱多货。",
           "translation": "Vị trí A thừa một thùng.",
           "audioUrl": null
         },
@@ -1173,7 +1173,7 @@
           "hanzi": "少货",
           "pinyin": "shǎohuò",
           "meaning": "thiếu hàng",
-          "example": "B货位少了两件。",
+          "example": "B货位有两件少货。",
           "translation": "Vị trí B thiếu hai sản phẩm.",
           "audioUrl": null
         },
@@ -1249,9 +1249,9 @@
     {
       "moduleSlug": "ton-kho-va-vi-tri",
       "slug": "kiem-tra-ton-kho-va-vi-tri",
-      "title": "Kiểm tra: Tồn kho & vị trí",
+      "title": "Tình huống tổng hợp: Tồn kho & vị trí",
       "summary": "Ôn vị trí, sức chứa, tồn khả dụng, kiểm kê và xử lý chênh lệch.",
-      "situation": "Đánh giá cuối module 2",
+      "situation": "Ôn tập và ứng dụng cuối module 2",
       "estimatedMinutes": 14,
       "isFree": false,
       "vocabulary": [
@@ -1398,8 +1398,8 @@
               "prompt": "发现错位货物后 nên làm gì?",
               "options": [
                 "记录并移到正确货位",
-                "Bỏ qua",
-                "Đưa thẳng ra cửa xuất"
+                "Đánh dấu tạm nhưng giữ nguyên tại vị trí cũ",
+                "Chuyển sang vị trí còn trống gần nhất rồi cập nhật sau"
               ],
               "correctOption": 0,
               "explanation": "Cần ghi nhận và chuyển theo quy trình đến đúng vị trí để tránh sai tồn."
@@ -1936,9 +1936,9 @@
     {
       "moduleSlug": "soan-hang-va-xuat-kho",
       "slug": "kiem-tra-soan-hang-va-xuat-kho",
-      "title": "Kiểm tra: Soạn hàng & xuất kho",
+      "title": "Tình huống tổng hợp: Soạn hàng & xuất kho",
       "summary": "Ôn lệnh soạn, nguyên tắc chọn lô, kiểm tra, đóng gói và bàn giao xuất kho.",
-      "situation": "Đánh giá cuối module 3",
+      "situation": "Ôn tập và ứng dụng cuối module 3",
       "estimatedMinutes": 14,
       "isFree": false,
       "vocabulary": [
@@ -2085,8 +2085,8 @@
               "prompt": "Câu nào xác nhận đúng cửa xuất?",
               "options": [
                 "这批货从三号门出库，对吗？",
-                "这批货不用复核。",
-                "三号门已经盘点。"
+                "这批货复核后从最近的门出库，对吗？",
+                "这批货到现场后再确定出库门，对吗？"
               ],
               "correctOption": 0,
               "explanation": "Nhắc lại lô và cửa rồi dùng 对吗 để xác nhận."
@@ -2232,8 +2232,8 @@
           "hanzi": "预计到达",
           "pinyin": "yùjì dàodá",
           "meaning": "dự kiến đến",
-          "example": "预计下午五点到达。",
-          "translation": "Dự kiến đến lúc 5 giờ chiều.",
+          "example": "预计到达时间是下午五点。",
+          "translation": "Thời gian dự kiến đến là 5 giờ chiều.",
           "audioUrl": null
         },
         {
@@ -2259,8 +2259,8 @@
           "hanzi": "状态更新",
           "pinyin": "zhuàngtài gēngxīn",
           "meaning": "cập nhật trạng thái",
-          "example": "有新信息后马上更新状态。",
-          "translation": "Khi có thông tin mới sẽ cập nhật trạng thái ngay.",
+          "example": "有新信息后马上做状态更新。",
+          "translation": "Khi có thông tin mới sẽ thực hiện cập nhật trạng thái ngay.",
           "audioUrl": null
         }
       ],
@@ -2274,9 +2274,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "货物还在途中，预计到达时间延迟一个小时。",
-            "pinyin": "Huòwù hái zài túzhōng, yùjì dàodá shíjiān yánchí yí ge xiǎoshí.",
-            "translation": "Hàng vẫn đang trên đường, thời gian dự kiến đến chậm một giờ."
+            "hanzi": "货物还在途中，预计会晚到一个小时。",
+            "pinyin": "Huòwù hái zài túzhōng, yùjì huì wǎn dào yí ge xiǎoshí.",
+            "translation": "Hàng vẫn đang trên đường, dự kiến sẽ đến muộn một giờ."
           },
           {
             "speaker": "A",
@@ -2424,8 +2424,8 @@
           "hanzi": "退货",
           "pinyin": "tuìhuò",
           "meaning": "trả hàng",
-          "example": "客户退回了三箱货。",
-          "translation": "Khách trả lại ba thùng hàng.",
+          "example": "客户退回了三箱退货商品。",
+          "translation": "Khách đã trả lại ba thùng hàng hoàn.",
           "audioUrl": null
         },
         {
@@ -2469,7 +2469,7 @@
           "hanzi": "退货检验",
           "pinyin": "tuìhuò jiǎnyàn",
           "meaning": "kiểm tra hàng trả",
-          "example": "退货入库前需要检验。",
+          "example": "退货入库前需要做退货检验。",
           "translation": "Hàng trả cần kiểm tra trước khi nhập lại.",
           "audioUrl": null
         }
@@ -2601,9 +2601,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "我会记录运单号、现场情况和照片，并按程序升级报告。",
-            "pinyin": "Wǒ huì jìlù yùndān hào, xiànchǎng qíngkuàng hé zhàopiàn, bìng àn chéngxù shēngjí bàogào.",
-            "translation": "Tôi sẽ ghi mã vận đơn, tình trạng hiện trường, ảnh và báo cáo nâng cấp theo quy trình."
+            "hanzi": "我会记录运单号、现场情况和照片，并按程序上报，申请升级处理。",
+            "pinyin": "Wǒ huì jìlù yùndān hào, xiànchǎng qíngkuàng hé zhàopiàn, bìng àn chéngxù shàngbào, shēnqǐng shēngjí chǔlǐ.",
+            "translation": "Tôi sẽ ghi mã vận đơn, tình trạng hiện trường và ảnh, sau đó báo cáo theo quy trình để đề nghị chuyển cấp xử lý."
           }
         ],
         "notes": [
@@ -2623,9 +2623,9 @@
     {
       "moduleSlug": "van-chuyen-va-bat-thuong",
       "slug": "kiem-tra-tong-hop-kho-van-logistics",
-      "title": "Kiểm tra tổng hợp: Kho vận & logistics",
+      "title": "Tình huống tổng hợp: Kho vận & logistics",
       "summary": "Tổng hợp giao tiếp từ nhập kho, tồn kho, soạn xuất đến giao nhận và xử lý bất thường.",
-      "situation": "Đánh giá cuối lộ trình",
+      "situation": "Ôn tập và ứng dụng cuối lộ trình",
       "estimatedMinutes": 16,
       "isFree": false,
       "vocabulary": [
@@ -2649,11 +2649,11 @@
         },
         {
           "slug": "logistics-yichang-shengji",
-          "hanzi": "异常升级",
-          "pinyin": "yìcháng shēngjí",
-          "meaning": "nâng cấp bất thường",
-          "example": "影响扩大时要进行异常升级。",
-          "translation": "Khi ảnh hưởng mở rộng cần nâng cấp bất thường.",
+          "hanzi": "升级处理",
+          "pinyin": "shēngjí chǔlǐ",
+          "meaning": "chuyển cấp xử lý",
+          "example": "影响扩大时要申请升级处理。",
+          "translation": "Khi phạm vi ảnh hưởng mở rộng, cần đề nghị chuyển cấp xử lý.",
           "audioUrl": null
         },
         {
@@ -2732,8 +2732,8 @@
               "prompt": "Khi chứng từ và hàng thực tế lệch nhau, nên làm gì trước?",
               "options": [
                 "停止入库并核对",
-                "Sửa số liệu cho khớp",
-                "Bỏ qua nếu chênh ít"
+                "Nhập kho trước rồi điều chỉnh chứng từ cuối ca",
+                "Dùng số liệu hệ thống làm chuẩn mà không kiểm đếm lại"
               ],
               "correctOption": 0,
               "explanation": "Tạm dừng hoàn tất nhập kho và đối chiếu trước khi điều chỉnh theo thẩm quyền."
@@ -2782,8 +2782,8 @@
               "prompt": "Khi vận hành xe nâng hoặc xử lý hàng đặc biệt, khóa học này yêu cầu gì?",
               "options": [
                 "Tuân thủ chứng chỉ và SOP tại kho",
-                "Tự làm theo đoạn hội thoại",
-                "Bỏ qua biển cảnh báo"
+                "Chỉ cần người có kinh nghiệm hướng dẫn tại chỗ",
+                "Có thể thao tác nếu đã xem hướng dẫn trong bài"
               ],
               "correctOption": 0,
               "explanation": "Nội dung chỉ hỗ trợ ngôn ngữ, không thay thế đào tạo, chứng chỉ hoặc quy trình an toàn."
@@ -2979,9 +2979,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "确认后我会发文字消息，避免听错。",
-            "pinyin": "Quèrèn hòu wǒ huì fā wénzì xiāoxi, bìmiǎn tīng cuò.",
-            "translation": "Sau khi xác nhận tôi sẽ gửi tin nhắn chữ để tránh nghe nhầm."
+            "hanzi": "确认后我会用文字再次确认，避免听错。",
+            "pinyin": "Quèrèn hòu wǒ huì yòng wénzì zàicì quèrèn, bìmiǎn tīng cuò.",
+            "translation": "Sau khi xác nhận, tôi sẽ nhắn lại bằng văn bản để tránh nghe nhầm."
           }
         ],
         "phrases": [
@@ -3005,9 +3005,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "确认后我会发文字消息，避免听错。",
-            "pinyin": "Quèrèn hòu wǒ huì fā wénzì xiāoxi, bìmiǎn tīng cuò.",
-            "translation": "Sau khi xác nhận tôi sẽ gửi tin nhắn chữ để tránh nghe nhầm."
+            "hanzi": "确认后我会用文字再次确认，避免听错。",
+            "pinyin": "Quèrèn hòu wǒ huì yòng wénzì zàicì quèrèn, bìmiǎn tīng cuò.",
+            "translation": "Sau khi xác nhận, tôi sẽ nhắn lại bằng văn bản để tránh nghe nhầm."
           }
         ],
         "notes": [],
@@ -3037,14 +3037,14 @@
               "explanation": "订单 (dìngdān) nghĩa là đơn hàng."
             },
             {
-              "prompt": "Câu “确认后我会发文字消息，避免听错。” truyền đạt điều gì?",
+              "prompt": "Câu “确认后我会用文字再次确认，避免听错。” truyền đạt điều gì?",
               "options": [
-                "Sau khi xác nhận tôi sẽ gửi tin nhắn chữ để tránh nghe nhầm.",
+                "Sau khi xác nhận, tôi sẽ nhắn lại bằng văn bản để tránh nghe nhầm.",
                 "Địa chỉ này khác địa chỉ trên đơn hàng.",
                 "Đúng, vui lòng xác minh địa chỉ đầy đủ với người nhận hàng."
               ],
               "correctOption": 0,
-              "explanation": "Câu này dùng để kết thúc bước trao đổi: Sau khi xác nhận tôi sẽ gửi tin nhắn chữ để tránh nghe nhầm."
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Sau khi xác nhận, tôi sẽ nhắn lại bằng văn bản để tránh nghe nhầm."
             }
           ]
         }
@@ -3137,7 +3137,7 @@
           {
             "speaker": "B",
             "hanzi": "请在签收单的备注栏写明外箱情况。",
-            "pinyin": "Qǐng zài qiānshōu dān de bèizhù lán xiě míng wàixiāng qíngkuàng.",
+            "pinyin": "Qǐng zài qiānshōudān de bèizhù lán xiě míng wàixiāng qíngkuàng.",
             "translation": "Vui lòng ghi rõ tình trạng thùng ngoài vào ô ghi chú trên phiếu ký nhận."
           }
         ],
@@ -3163,7 +3163,7 @@
           {
             "speaker": "B",
             "hanzi": "请在签收单的备注栏写明外箱情况。",
-            "pinyin": "Qǐng zài qiānshōu dān de bèizhù lán xiě míng wàixiāng qíngkuàng.",
+            "pinyin": "Qǐng zài qiānshōudān de bèizhù lán xiě míng wàixiāng qíngkuàng.",
             "translation": "Vui lòng ghi rõ tình trạng thùng ngoài vào ô ghi chú trên phiếu ký nhận."
           }
         ],
@@ -3255,7 +3255,7 @@
         {
           "slug": "kho-van-logistics-ung-dung-ghi-nhan-thung-hang-bi-mop-6",
           "hanzi": "签收单",
-          "pinyin": "qiānshōu dān",
+          "pinyin": "qiānshōudān",
           "meaning": "phiếu ký nhận",
           "example": "请在签收单的备注栏写明外箱情况。",
           "translation": "Vui lòng ghi rõ tình trạng thùng ngoài vào ô ghi chú trên phiếu ký nhận.",
@@ -3281,9 +3281,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "盘点只有四十八箱，有两箱差异。",
-            "pinyin": "Pándiǎn zhǐ yǒu sì shí bā xiāng, yǒu liǎng xiāng chāyì.",
-            "translation": "Kiểm kê chỉ có bốn mươi tám thùng, chênh lệch hai thùng."
+            "hanzi": "实盘只有四十八箱，与系统相差两箱。",
+            "pinyin": "Shípán zhǐ yǒu sì shí bā xiāng, yǔ xìtǒng xiāngchà liǎng xiāng.",
+            "translation": "Thực đếm chỉ có bốn mươi tám thùng, ít hơn hệ thống hai thùng."
           },
           {
             "speaker": "A",
@@ -3293,9 +3293,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "好的，核对后我再报告原因。",
-            "pinyin": "Hǎo de, héduì hòu wǒ zài bàogào yuányīn.",
-            "translation": "Được, sau khi đối chiếu tôi sẽ báo lại nguyên nhân."
+            "hanzi": "好的，核对后我再报告复查结果。",
+            "pinyin": "Hǎo de, héduì hòu wǒ zài bàogào fùchá jiéguǒ.",
+            "translation": "Được, sau khi đối chiếu tôi sẽ báo lại kết quả kiểm tra."
           }
         ],
         "phrases": [
@@ -3307,9 +3307,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "盘点只有四十八箱，有两箱差异。",
-            "pinyin": "Pándiǎn zhǐ yǒu sì shí bā xiāng, yǒu liǎng xiāng chāyì.",
-            "translation": "Kiểm kê chỉ có bốn mươi tám thùng, chênh lệch hai thùng."
+            "hanzi": "实盘只有四十八箱，与系统相差两箱。",
+            "pinyin": "Shípán zhǐ yǒu sì shí bā xiāng, yǔ xìtǒng xiāngchà liǎng xiāng.",
+            "translation": "Thực đếm chỉ có bốn mươi tám thùng, ít hơn hệ thống hai thùng."
           },
           {
             "speaker": "A",
@@ -3319,9 +3319,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "好的，核对后我再报告原因。",
-            "pinyin": "Hǎo de, héduì hòu wǒ zài bàogào yuányīn.",
-            "translation": "Được, sau khi đối chiếu tôi sẽ báo lại nguyên nhân."
+            "hanzi": "好的，核对后我再报告复查结果。",
+            "pinyin": "Hǎo de, héduì hòu wǒ zài bàogào fùchá jiéguǒ.",
+            "translation": "Được, sau khi đối chiếu tôi sẽ báo lại kết quả kiểm tra."
           }
         ],
         "notes": [],
@@ -3351,14 +3351,14 @@
               "explanation": "库存 (kùcún) nghĩa là tồn kho."
             },
             {
-              "prompt": "Câu “好的，核对后我再报告原因。” truyền đạt điều gì?",
+              "prompt": "Câu “好的，核对后我再报告复查结果。” truyền đạt điều gì?",
               "options": [
                 "Hệ thống hiển thị tồn kho có năm mươi thùng.",
                 "Vui lòng kiểm tra lại vị trí lưu hàng này và bản ghi xuất kho hôm nay.",
-                "Được, sau khi đối chiếu tôi sẽ báo lại nguyên nhân."
+                "Được, sau khi đối chiếu tôi sẽ báo lại kết quả kiểm tra."
               ],
               "correctOption": 2,
-              "explanation": "Câu này dùng để kết thúc bước trao đổi: Được, sau khi đối chiếu tôi sẽ báo lại nguyên nhân."
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Được, sau khi đối chiếu tôi sẽ báo lại kết quả kiểm tra."
             }
           ]
         }
@@ -3387,8 +3387,8 @@
           "hanzi": "盘点",
           "pinyin": "pándiǎn",
           "meaning": "kiểm kê",
-          "example": "盘点只有四十八箱，有两箱差异。",
-          "translation": "Kiểm kê chỉ có bốn mươi tám thùng, chênh lệch hai thùng.",
+          "example": "盘点结果只有四十八箱，比系统少两箱。",
+          "translation": "Kết quả kiểm kê chỉ có bốn mươi tám thùng, ít hơn hệ thống hai thùng.",
           "audioUrl": null
         },
         {
@@ -3396,8 +3396,8 @@
           "hanzi": "差异",
           "pinyin": "chāyì",
           "meaning": "chênh lệch",
-          "example": "盘点只有四十八箱，有两箱差异。",
-          "translation": "Kiểm kê chỉ có bốn mươi tám thùng, chênh lệch hai thùng.",
+          "example": "盘点结果与系统有两箱差异。",
+          "translation": "Kết quả kiểm kê chênh lệch hai thùng so với hệ thống.",
           "audioUrl": null
         },
         {
@@ -3450,9 +3450,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "有新消息请及时更新，下午四点再联系一次。",
-            "pinyin": "Yǒu xīn xiāoxi qǐng jíshí gēngxīn, xiàwǔ sì diǎn zài liánxì yí cì.",
-            "translation": "Có tin mới vui lòng cập nhật kịp thời, bốn giờ chiều liên hệ lại một lần."
+            "hanzi": "有新消息请及时更新；如果还没有，请下午四点再更新一次。",
+            "pinyin": "Yǒu xīn xiāoxi qǐng jíshí gēngxīn; rúguǒ hái méiyǒu, qǐng xiàwǔ sì diǎn zài gēngxīn yí cì.",
+            "translation": "Nếu có tin mới, vui lòng cập nhật ngay; nếu chưa có, hãy cập nhật lại lúc bốn giờ chiều."
           }
         ],
         "phrases": [
@@ -3476,9 +3476,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "有新消息请及时更新，下午四点再联系一次。",
-            "pinyin": "Yǒu xīn xiāoxi qǐng jíshí gēngxīn, xiàwǔ sì diǎn zài liánxì yí cì.",
-            "translation": "Có tin mới vui lòng cập nhật kịp thời, bốn giờ chiều liên hệ lại một lần."
+            "hanzi": "有新消息请及时更新；如果还没有，请下午四点再更新一次。",
+            "pinyin": "Yǒu xīn xiāoxi qǐng jíshí gēngxīn; rúguǒ hái méiyǒu, qǐng xiàwǔ sì diǎn zài gēngxīn yí cì.",
+            "translation": "Nếu có tin mới, vui lòng cập nhật ngay; nếu chưa có, hãy cập nhật lại lúc bốn giờ chiều."
           }
         ],
         "notes": [],
@@ -3508,14 +3508,14 @@
               "explanation": "运输 (yùnshū) nghĩa là vận chuyển."
             },
             {
-              "prompt": "Câu “有新消息请及时更新，下午四点再联系一次。” truyền đạt điều gì?",
+              "prompt": "Câu “有新消息请及时更新；如果还没有，请下午四点再更新一次。” truyền đạt điều gì?",
               "options": [
-                "Có tin mới vui lòng cập nhật kịp thời, bốn giờ chiều liên hệ lại một lần.",
+                "Nếu có tin mới, vui lòng cập nhật ngay; nếu chưa có, hãy cập nhật lại lúc bốn giờ chiều.",
                 "Lô hàng này bị chậm trong quá trình vận chuyển.",
                 "Hiện chưa thể xác định, tôi đang liên hệ bên vận chuyển."
               ],
               "correctOption": 0,
-              "explanation": "Câu này dùng để kết thúc bước trao đổi: Có tin mới vui lòng cập nhật kịp thời, bốn giờ chiều liên hệ lại một lần."
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Nếu có tin mới, vui lòng cập nhật ngay; nếu chưa có, hãy cập nhật lại lúc bốn giờ chiều."
             }
           ]
         }
@@ -3562,8 +3562,8 @@
           "hanzi": "更新",
           "pinyin": "gēngxīn",
           "meaning": "cập nhật",
-          "example": "有新消息请及时更新，下午四点再联系一次。",
-          "translation": "Có tin mới vui lòng cập nhật kịp thời, bốn giờ chiều liên hệ lại một lần.",
+          "example": "有新消息请及时更新；如果还没有，请下午四点再更新一次。",
+          "translation": "Nếu có tin mới, vui lòng cập nhật ngay; nếu chưa có, hãy cập nhật lại lúc bốn giờ chiều.",
           "audioUrl": null
         },
         {
@@ -3571,8 +3571,8 @@
           "hanzi": "消息",
           "pinyin": "xiāoxi",
           "meaning": "tin tức; tin nhắn",
-          "example": "有新消息请及时更新，下午四点再联系一次。",
-          "translation": "Có tin mới vui lòng cập nhật kịp thời, bốn giờ chiều liên hệ lại một lần.",
+          "example": "有新消息请及时更新；如果还没有，请下午四点再更新一次。",
+          "translation": "Nếu có tin mới, vui lòng cập nhật ngay; nếu chưa có, hãy cập nhật lại lúc bốn giờ chiều.",
           "audioUrl": null
         }
       ]
@@ -3603,13 +3603,13 @@
             "speaker": "A",
             "hanzi": "请补发回单，写明收货日期和收货人姓名。",
             "pinyin": "Qǐng bǔ fā huídān, xiě míng shōuhuò rìqī hé shōuhuòrén xìngmíng.",
-            "translation": "Vui lòng gửi bổ sung phiếu xác nhận, ghi rõ ngày nhận và họ tên người nhận."
+            "translation": "Vui lòng gửi bổ sung phiếu giao hàng có ký nhận, ghi rõ ngày nhận và họ tên người nhận."
           },
           {
             "speaker": "B",
             "hanzi": "好的，收到清楚的回单后我会存档。",
             "pinyin": "Hǎo de, shōudào qīngchu de huídān hòu wǒ huì cúndàng.",
-            "translation": "Được, sau khi nhận phiếu xác nhận rõ ràng tôi sẽ lưu hồ sơ."
+            "translation": "Được, sau khi nhận phiếu giao hàng có ký nhận rõ ràng, tôi sẽ lưu hồ sơ."
           }
         ],
         "phrases": [
@@ -3629,13 +3629,13 @@
             "speaker": "A",
             "hanzi": "请补发回单，写明收货日期和收货人姓名。",
             "pinyin": "Qǐng bǔ fā huídān, xiě míng shōuhuò rìqī hé shōuhuòrén xìngmíng.",
-            "translation": "Vui lòng gửi bổ sung phiếu xác nhận, ghi rõ ngày nhận và họ tên người nhận."
+            "translation": "Vui lòng gửi bổ sung phiếu giao hàng có ký nhận, ghi rõ ngày nhận và họ tên người nhận."
           },
           {
             "speaker": "B",
             "hanzi": "好的，收到清楚的回单后我会存档。",
             "pinyin": "Hǎo de, shōudào qīngchu de huídān hòu wǒ huì cúndàng.",
-            "translation": "Được, sau khi nhận phiếu xác nhận rõ ràng tôi sẽ lưu hồ sơ."
+            "translation": "Được, sau khi nhận phiếu giao hàng có ký nhận rõ ràng, tôi sẽ lưu hồ sơ."
           }
         ],
         "notes": [],
@@ -3658,7 +3658,7 @@
               "prompt": "Trong bài này, “签名” có nghĩa là gì?",
               "options": [
                 "chữ ký; ký tên",
-                "phiếu xác nhận gửi lại",
+                "phiếu giao hàng có ký nhận",
                 "lưu hồ sơ"
               ],
               "correctOption": 0,
@@ -3668,11 +3668,11 @@
               "prompt": "Câu “好的，收到清楚的回单后我会存档。” truyền đạt điều gì?",
               "options": [
                 "Hàng đã được giao đến nơi chưa?",
-                "Được, sau khi nhận phiếu xác nhận rõ ràng tôi sẽ lưu hồ sơ.",
-                "Vui lòng gửi bổ sung phiếu xác nhận, ghi rõ ngày nhận và họ tên người nhận."
+                "Được, sau khi nhận phiếu giao hàng có ký nhận rõ ràng, tôi sẽ lưu hồ sơ.",
+                "Vui lòng gửi bổ sung phiếu giao hàng có ký nhận, ghi rõ ngày nhận và họ tên người nhận."
               ],
               "correctOption": 1,
-              "explanation": "Câu này dùng để kết thúc bước trao đổi: Được, sau khi nhận phiếu xác nhận rõ ràng tôi sẽ lưu hồ sơ."
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Được, sau khi nhận phiếu giao hàng có ký nhận rõ ràng, tôi sẽ lưu hồ sơ."
             }
           ]
         }
@@ -3709,9 +3709,9 @@
           "slug": "kho-van-logistics-ung-dung-xac-nhan-bang-chung-giao-hang-4",
           "hanzi": "回单",
           "pinyin": "huídān",
-          "meaning": "phiếu xác nhận gửi lại",
+          "meaning": "phiếu giao hàng có ký nhận",
           "example": "请补发回单，写明收货日期和收货人姓名。",
-          "translation": "Vui lòng gửi bổ sung phiếu xác nhận, ghi rõ ngày nhận và họ tên người nhận.",
+          "translation": "Vui lòng gửi bổ sung phiếu giao hàng có ký nhận, ghi rõ ngày nhận và họ tên người nhận.",
           "audioUrl": null
         },
         {
@@ -3720,7 +3720,7 @@
           "pinyin": "rìqī",
           "meaning": "ngày tháng",
           "example": "请补发回单，写明收货日期和收货人姓名。",
-          "translation": "Vui lòng gửi bổ sung phiếu xác nhận, ghi rõ ngày nhận và họ tên người nhận.",
+          "translation": "Vui lòng gửi bổ sung phiếu giao hàng có ký nhận, ghi rõ ngày nhận và họ tên người nhận.",
           "audioUrl": null
         },
         {
@@ -3729,7 +3729,7 @@
           "pinyin": "cúndàng",
           "meaning": "lưu hồ sơ",
           "example": "好的，收到清楚的回单后我会存档。",
-          "translation": "Được, sau khi nhận phiếu xác nhận rõ ràng tôi sẽ lưu hồ sơ.",
+          "translation": "Được, sau khi nhận phiếu giao hàng có ký nhận rõ ràng, tôi sẽ lưu hồ sơ.",
           "audioUrl": null
         }
       ]

@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "vocabulary": {
+    "hsk3-tb-l02-v07": { "pinyin": "tài tai", "meaning": "bà; vợ; phu nhân" },
+    "hsk3-tb-l05-v13": { "pinyin": "yuè", "meaning": "càng; vượt qua" },
+    "hsk3-tb-l06-v15": { "pinyin": "gèng", "meaning": "càng; hơn nữa" },
+    "hsk3-tb-l07-v10": { "pinyin": "jiē", "meaning": "đón; tiếp; nhận" },
+    "hsk3-tb-l10-v01": { "pinyin": "gè zi", "meaning": "vóc dáng; chiều cao" },
+    "hsk3-tb-l16-v06": { "pinyin": "zhǎng", "meaning": "lớn lên; trông có vẻ" },
+    "hsk3-tb-l18-v02": { "pinyin": "wàn", "meaning": "mười nghìn" },
+    "hsk3-tb-l18-v03": { "pinyin": "zhī", "meaning": "lượng từ: con, chiếc" },
+    "hsk3-tb-l18-v11": { "pinyin": "guānyú", "meaning": "về; liên quan đến" },
+    "hsk3-tb-l18-v15": { "pinyin": "tèdiǎn", "meaning": "đặc điểm" },
+    "hsk3-tb-l18-v17": { "pinyin": "de", "meaning": "trợ từ kết cấu đứng trước động từ hoặc tính từ" },
+    "hsk4u-tb-l01-v25": { "pinyin": "liàng", "meaning": "sáng; phát sáng" },
+    "hsk4u-tb-l01-v32": { "pinyin": "píqi", "meaning": "tính khí; tính tình" },
+    "hsk4u-tb-l02-v18": { "pinyin": "fēngfù", "meaning": "phong phú; làm phong phú" },
+    "hsk4u-tb-l04-v26": { "pinyin": "gōngzī", "meaning": "tiền lương" },
+    "hsk4u-tb-l05-v07": { "pinyin": "liúxíng", "meaning": "thịnh hành; phổ biến" },
+    "hsk4u-tb-l05-v14": { "pinyin": "xiànjīn", "meaning": "tiền mặt" },
+    "hsk4u-tb-l06-v20": { "pinyin": "jǔxíng", "meaning": "tổ chức; tiến hành" },
+    "hsk4u-tb-l07-v22": { "pinyin": "jīngshén", "meaning": "tinh thần; trạng thái tinh thần" },
+    "hsk4u-tb-l08-v04": { "pinyin": "shǐ", "meaning": "khiến; làm cho" },
+    "hsk4u-tb-l08-v07": { "pinyin": "jǐngsè", "meaning": "cảnh sắc; phong cảnh" },
+    "hsk4u-tb-l08-v29": { "pinyin": "tèdiǎn", "meaning": "đặc điểm" },
+    "hsk4u-tb-l09-v03": { "pinyin": "děi", "meaning": "phải; cần" },
+    "hsk4l-tb-l14-v30": { "pinyin": "diū", "meaning": "mất; làm mất" },
+    "hsk4l-tb-l15-v17": { "pinyin": "qiānwàn", "meaning": "nhất định; tuyệt đối" },
+    "hsk4l-tb-l15-v25": { "pinyin": "jiǎ", "meaning": "giả; không thật" },
+    "hsk4l-tb-l16-v01": { "hanzi": "博士", "pinyin": "bóshì", "meaning": "tiến sĩ" }
+  },
+  "grammar": {
+    "hsk3-tb-l09-grammar-01": {
+      "title": "Cấu trúc 越……越……",
+      "formula": "Chủ ngữ + 越 + động từ/tính từ + 越 + tính từ",
+      "explanation": "Dùng để diễn tả một trạng thái thay đổi tăng dần theo một trạng thái khác: càng… càng…."
+    },
+    "hsk3-tb-l16-grammar-01": {
+      "title": "Câu điều kiện 如果……（的话），就……",
+      "formula": "如果 + điều kiện +（的话），chủ ngữ + 就 + kết quả",
+      "explanation": "Mệnh đề sau 如果 nêu điều kiện giả định; mệnh đề có 就 nêu kết quả sẽ xảy ra khi điều kiện đó được đáp ứng."
+    },
+    "hsk3-tb-l18-grammar-01": {
+      "title": "Câu điều kiện 只要……，就……",
+      "formula": "只要 + điều kiện，chủ ngữ + 就 + kết quả",
+      "explanation": "Dùng để nhấn mạnh rằng chỉ cần điều kiện phía trước được đáp ứng thì kết quả phía sau sẽ xảy ra."
+    },
+    "hsk4l-tb-l11-grammar-01": {
+      "title": "Cấu trúc nhấn mạnh 连……都/也……",
+      "formula": "连 + thành phần được nhấn mạnh + 都/也 + vị ngữ",
+      "explanation": "连 đưa ra trường hợp nổi bật hoặc bất ngờ; 都 hoặc 也 đứng trước vị ngữ để nhấn mạnh rằng ngay cả trường hợp đó cũng đúng."
+    },
+    "hsk4l-tb-l13-grammar-05": {
+      "title": "Giới từ 随着",
+      "formula": "随着 + sự thay đổi A，B……",
+      "explanation": "随着 nêu một sự thay đổi làm điều kiện hoặc bối cảnh cho sự thay đổi khác, tương đương ‘cùng với/theo’."
+    },
+    "hsk4l-tb-l15-grammar-03": {
+      "title": "Phó từ 千万",
+      "formula": "千万 + 要/别/不要 + động từ",
+      "explanation": "千万 dùng để nhấn mạnh lời dặn hoặc cảnh báo, mang nghĩa ‘nhất định’ hoặc ‘tuyệt đối’."
+    },
+    "hsk4l-tb-l18-grammar-02": {
+      "title": "Bổ ngữ khả năng 受不了",
+      "formula": "受 + 不了 + danh từ/tình huống",
+      "explanation": "受不了 diễn tả việc không thể chịu đựng một cảm giác, áp lực, hoàn cảnh hoặc cách cư xử nào đó."
+    },
+    "hsk4l-tb-l20-grammar-02": {
+      "title": "Cấu trúc 一……就……",
+      "formula": "一 + hành động 1 + 就 + hành động 2",
+      "explanation": "Diễn tả hành động hoặc trạng thái thứ hai xảy ra ngay sau khi hành động thứ nhất bắt đầu hoặc hoàn thành."
+    }
+  }
+}

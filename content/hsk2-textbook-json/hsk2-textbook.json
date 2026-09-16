@@ -130,7 +130,7 @@
         "lessonNumber": 3,
         "lessonRef": "lessons/lesson-03.json",
         "titleZh": "左边那个红色的是我的。",
-        "titleVi": "Ly màu đỏ ở bên trái là của tôi.",
+        "titleVi": "Cái màu đỏ bên trái là của tôi.",
         "pdfPages": [
           31,
           38
@@ -144,7 +144,7 @@
         "lessonNumber": 4,
         "lessonRef": "lessons/lesson-04.json",
         "titleZh": "这个工作是他帮我介绍的。",
-        "titleVi": "Ông ấy đã giới thiệu giúp tôi công việc này.",
+        "titleVi": "Công việc này là do anh ấy giới thiệu cho tôi.",
         "pdfPages": [
           39,
           46
@@ -574,7 +574,7 @@
       "title": {
         "zh": "左边那个红色的是我的。",
         "pinyin": "zuǒ biān nà ge hóng sè de shì wǒ de。",
-        "vi": "Ly màu đỏ ở bên trái là của tôi."
+        "vi": "Cái màu đỏ bên trái là của tôi."
       },
       "source": {
         "pdfPages": [
@@ -699,7 +699,7 @@
       "title": {
         "zh": "这个工作是他帮我介绍的。",
         "pinyin": "zhè ge gōng zuò shì tā bāng wǒ jiè shào de。",
-        "vi": "Ông ấy đã giới thiệu giúp tôi công việc này."
+        "vi": "Công việc này là do anh ấy giới thiệu cho tôi."
       },
       "source": {
         "pdfPages": [

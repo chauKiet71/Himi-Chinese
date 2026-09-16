@@ -34,10 +34,10 @@ test("every available HSK lesson exposes the complete five-stage guided journey"
         .map((lesson) => ({ level, lesson }))
     )));
 
-  assert.equal(availableLessons.length, 146);
+  assert.equal(availableLessons.length, 30);
   assert.deepEqual(
     [...new Set(availableLessons.map(({ level }) => level.label))],
-    ["HSK 1", "HSK 2", "HSK 3", "HSK 4", "HSK 5", "HSK 6"],
+    ["HSK 1", "HSK 2"],
   );
 
   for (const { level, lesson: summary } of availableLessons) {

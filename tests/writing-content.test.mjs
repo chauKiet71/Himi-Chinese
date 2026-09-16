@@ -4,7 +4,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 
-test("writing catalog exposes every available HSK 1–6 lesson", async (t) => {
+test("writing catalog exposes only HSK lessons approved for learning", async (t) => {
   const server = await createServer({
     appType: "custom",
     configFile: false,
@@ -21,12 +21,13 @@ test("writing catalog exposes every available HSK 1–6 lesson", async (t) => {
   ]);
   const levels = writing.getWritingLevels();
 
-  assert.deepEqual(levels.map((level) => level.lessonCount), [15, 15, 20, 20, 36, 40]);
-  assert.equal(levels.reduce((total, level) => total + level.lessonCount, 0), 146);
+  assert.deepEqual(levels.map((level) => level.lessonCount), [15, 15, 0, 0, 0, 0]);
+  assert.equal(levels.reduce((total, level) => total + level.lessonCount, 0), 30);
 
   for (const level of levels) {
     const lessons = writing.getWritingLessons(level.id);
     assert.equal(lessons.length, level.lessonCount);
+    if (!lessons.length) continue;
     assert.ok(lessons.every((lesson) => lesson.characterCount > 0));
 
     const firstLesson = lessons[0];

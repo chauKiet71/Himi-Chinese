@@ -1957,8 +1957,6 @@ final result: passed
 
 final result: passed
 
----
-
 ## Shared game and typing completion celebration — 2026-09-15
 
 ### Comparison target
@@ -2097,3 +2095,43 @@ final result: passed
 - The repository-wide suite separately exposes an existing home-page landscape assertion in `tests/home-responsive.test.mjs`; the failing assertion does not reference this change's files.
 
 final result: passed
+
+---
+
+## Ưu đãi chào mừng — thu gọn responsive — 2026-09-16
+
+### Comparison target
+
+- Source visual truth: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-e381466f-4645-4f84-9925-8f751d5223af.png` (847 × 911 px), trạng thái modal ưu đãi đang mở.
+- Implementation route: `http://localhost:4173/?welcomeOffer=1`.
+- Intended responsive checks: desktop 1366 × 768 CSS px and mobile 390 × 844 CSS px.
+- Implementation screenshot: unavailable. The Codex in-app Browser bootstrap failed because its runtime requested a browser-service package version that is not installed in this environment.
+
+### Findings
+
+- [P2] Chưa có bằng chứng render trực tiếp để xác nhận mascot, nội dung và nút chính nằm gọn ở cả hai viewport. Source image was opened at original resolution, and code dimensions were reduced, but a code-only comparison cannot replace browser-rendered visual evidence.
+
+### Required fidelity surfaces
+
+- Fonts and typography: existing product font, weights and copy remain unchanged; display sizes are reduced proportionally in CSS.
+- Spacing and layout rhythm: dialog width changes from 642px to 560px; the fixed 790px card minimum is removed; desktop and mobile padding, hero height, benefit rows and CTA height are compacted.
+- Colors and visual tokens: unchanged.
+- Image quality and asset fidelity: the existing `himi-vip-offer-mascot.png` asset remains in use; no substitute asset was introduced.
+- Copy and content: unchanged.
+
+### Verification completed
+
+- The focused responsive assertion for the welcome offer passes.
+- Industry curriculum validation and its five focused tests pass.
+- ESLint and `git diff --check` pass for the edited code.
+- The local development route returns HTTP 200 after warm-up.
+- The repository-wide suite is not green because of an existing short-landscape assertion and process-level out-of-memory failures in unrelated parallel tests.
+
+### Implementation checklist
+
+- [x] Reduce desktop dialog width and vertical footprint.
+- [x] Reduce phone dialog width, hero height, benefits and CTA while preserving usable close and action controls.
+- [x] Keep original branding, content and mascot asset.
+- [ ] Capture and compare the rendered desktop and mobile states after browser tooling is available.
+
+final result: blocked

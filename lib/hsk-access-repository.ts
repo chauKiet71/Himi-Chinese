@@ -1,5 +1,5 @@
 import "server-only";
-import { HSK_CURRICULUM, type HskCurriculumLevel } from "./hsk-curriculum.ts";
+import { getHskCurriculumLesson, HSK_CURRICULUM, type HskCurriculumLevel } from "./hsk-curriculum.ts";
 import { countHskGuidedLessonSteps } from "./hsk-guided-lesson.ts";
 import { getHskLearningLessonContent } from "./hsk-learning-content.ts";
 import type { HskExercise, HskLessonContent, HskVocabularyItem, HskWritingCharacter } from "./hsk-lesson-content.ts";
@@ -97,6 +97,7 @@ export async function getHskLessonPageData({
 }): Promise<HskLessonPageData | null> {
   const lesson = getHskLearningLessonContent(level, lessonId);
   if (!lesson) return null;
+  if (!getHskCurriculumLesson(lesson.levelId, lesson.id)?.available) return null;
   const parentTargets = lessonTargets(lesson);
   const questionTargets = lesson.exercises.map((exercise) => hskQuestionTarget(
     lesson.levelId,
@@ -207,7 +208,7 @@ export async function getHskLevelLessonAccess(
 ): Promise<{ levelAccess: ContentAccessState; allowedLessonIds: Set<string>; allowedVocabularyKeys: Set<string> }> {
   const level = HSK_CURRICULUM.find((candidate) => candidate.id === levelId);
   const levelTarget = hskLevelTarget(levelId);
-  const curriculumLessons = level?.topics.flatMap((topic) => topic.lessons) ?? [];
+  const curriculumLessons = level?.topics.flatMap((topic) => topic.lessons).filter((lesson) => lesson.available) ?? [];
   const lessonEntries = curriculumLessons.map((lesson) => {
     const content = getHskLearningLessonContent(levelId, lesson.id);
     return {

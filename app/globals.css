@@ -5006,6 +5006,25 @@ a.roadmap-lesson-row:hover { color: #0b665c; background: #f5faf8; }
 .auth-form > label input:focus,
 .auth-form-field input:focus { border-color: var(--forest); box-shadow: 0 0 0 3px rgba(23,107,91,.12); }
 .auth-form .button { margin-top: 4px; }
+.auth-code-form { margin-top: 16px; gap: 11px; }
+.auth-code-form > label input { text-align: center; font-size: 24px; font-weight: 800; letter-spacing: .28em; font-variant-numeric: tabular-nums; }
+.auth-code-form > label input::placeholder { color: #b8c0bd; }
+.auth-code-help { margin: -2px 0 0; color: var(--ink-soft); font-size: 11px; line-height: 1.5; }
+.auth-code-auto-status { margin: 0; color: var(--forest); font-size: 12px; font-weight: 700; line-height: 1.45; text-align: center; }
+.auth-code-auto-status.is-submitting { color: var(--himi-red); }
+.auth-resend-form { margin-top: 10px; }
+.auth-change-email { margin-top: 10px; overflow: hidden; border: 1px solid var(--line); border-radius: 11px; background: #fff; }
+.auth-change-email summary { min-height: 46px; padding: 0 14px; display: flex; align-items: center; justify-content: center; color: var(--forest); font-size: 13px; font-weight: 750; cursor: pointer; list-style: none; touch-action: manipulation; }
+.auth-change-email summary::-webkit-details-marker { display: none; }
+.auth-change-email summary:hover { background: #faf9f7; }
+.auth-change-email summary:focus-visible { outline: 3px solid rgba(23,107,91,.18); outline-offset: -3px; }
+.auth-change-email[open] summary { border-bottom: 1px solid var(--line); }
+.auth-change-email-form { padding: 14px; display: grid; gap: 10px; }
+.auth-change-email-form > p { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.5; }
+.auth-change-email-form > label { display: grid; gap: 7px; color: var(--ink); font-size: 12px; font-weight: 750; }
+.auth-change-email-form input { width: 100%; min-height: 48px; padding: 0 13px; color: var(--ink); border: 1px solid #d5dfda; border-radius: 11px; outline: none; background: #fff; font-size: 16px; }
+.auth-change-email-form input:focus { border-color: var(--forest); box-shadow: 0 0 0 3px rgba(23,107,91,.12); }
+.auth-field-error { margin: -2px 0 0 !important; color: #8b3f35 !important; font-size: 12px !important; }
 .auth-switch { margin-top: 20px; display: flex; justify-content: center; gap: 8px; color: var(--ink-soft); font-size: 13px; text-align: center; }
 .auth-switch > div { display: grid; gap: 9px; }
 .auth-switch p { margin: 0; }

@@ -62,7 +62,7 @@ test("HSK 6 volume 2 converts all lessons into the HSK 1 learning shape", async 
   assert.equal(hsk6.topics.length, 10);
   assert.equal(hsk6.topics.flatMap((topic) => topic.lessons).length, 40);
   assert.ok(hsk6.description.includes("Tập 1 và Tập 2"));
-  assert.ok(hsk6.topics.flatMap((topic) => topic.lessons).every((item) => item.kind === "textbook" && item.available));
+  assert.ok(hsk6.topics.flatMap((topic) => topic.lessons).every((item) => item.kind === "textbook" && !item.available && item.availabilityLabel === "Đang biên tập"));
   const volume2Lesson = hsk6.topics.flatMap((topic) => topic.lessons).find((item) => item.id === lesson.id);
   assert.ok(volume2Lesson);
   assert.equal(volume2Lesson.writing, volume2Lesson.vocabulary);

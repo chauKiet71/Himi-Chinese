@@ -562,9 +562,9 @@
     {
       "moduleSlug": "tu-van-nhu-cau",
       "slug": "kiem-tra-tu-van-nhu-cau",
-      "title": "Kiểm tra: Tư vấn nhu cầu",
+      "title": "Tình huống tổng hợp: Tư vấn nhu cầu",
       "summary": "Ôn cách hỏi bối cảnh, ngân sách, tiêu chí và đưa đề xuất có căn cứ.",
-      "situation": "Đánh giá cuối module 1",
+      "situation": "Ôn tập và ứng dụng cuối module 1",
       "estimatedMinutes": 14,
       "isFree": true,
       "vocabulary": [
@@ -691,8 +691,8 @@
               "prompt": "Khách cần dùng ngoài trời. Câu xác nhận nào phù hợp?",
               "options": [
                 "您需要适合户外使用的，对吗？",
-                "这个一定最便宜。",
-                "您不用考虑环境。"
+                "这款主要用于室内，您看可以吗？",
+                "户外款和室内款价格一样，对吗？"
               ],
               "correctOption": 0,
               "explanation": "Nhắc lại nhu cầu rồi dùng 对吗 giúp xác nhận trước khi đề xuất."
@@ -711,8 +711,8 @@
               "prompt": "Khi chưa chắc sản phẩm có sẵn, nên nói gì?",
               "options": [
                 "我先确认库存再回复您。",
-                "肯定有货。",
-                "不用确认。"
+                "这款通常有货，我直接为您下单。",
+                "库存昨天刚更新，我按昨天的数据回复您。"
               ],
               "correctOption": 0,
               "explanation": "Xác minh tồn kho trước khi cam kết giúp tránh cung cấp thông tin sai."
@@ -1123,7 +1123,7 @@
           {
             "speaker": "B",
             "hanzi": "我会按合同条款逐项确认。",
-            "pinyin": "Wǒ huì àn hétóng tiáokuǎn zhúxiàng quèrèn.",
+            "pinyin": "Wǒ huì àn hétong tiáokuǎn zhúxiàng quèrèn.",
             "translation": "Tôi sẽ xác nhận từng mục theo điều khoản hợp đồng."
           }
         ],
@@ -1249,9 +1249,9 @@
     {
       "moduleSlug": "bao-gia-va-chot-don",
       "slug": "kiem-tra-bao-gia-va-chot-don",
-      "title": "Kiểm tra: Báo giá & chốt đơn",
+      "title": "Tình huống tổng hợp: Báo giá & chốt đơn",
       "summary": "Ôn phạm vi báo giá, điều kiện chiết khấu, thanh toán và xác nhận đơn.",
-      "situation": "Đánh giá cuối module 2",
+      "situation": "Ôn tập và ứng dụng cuối module 2",
       "estimatedMinutes": 15,
       "isFree": false,
       "vocabulary": [
@@ -1285,7 +1285,7 @@
         {
           "slug": "sales-l12-hetong",
           "hanzi": "合同",
-          "pinyin": "hétóng",
+          "pinyin": "hétong",
           "meaning": "hợp đồng",
           "example": "合同正在双方确认。",
           "translation": "Hợp đồng đang được hai bên xác nhận.",
@@ -1333,7 +1333,7 @@
           {
             "speaker": "B",
             "hanzi": "我会按正式报价和合同逐项核对。",
-            "pinyin": "Wǒ huì àn zhèngshì bàojià hé hétóng zhúxiàng héduì.",
+            "pinyin": "Wǒ huì àn zhèngshì bàojià hé hétong zhúxiàng héduì.",
             "translation": "Tôi sẽ đối chiếu từng mục theo báo giá và hợp đồng chính thức."
           }
         ],
@@ -1936,9 +1936,9 @@
     {
       "moduleSlug": "theo-doi-don-va-giao-hang",
       "slug": "kiem-tra-theo-doi-don-va-giao-hang",
-      "title": "Kiểm tra: Theo dõi đơn & giao hàng",
+      "title": "Tình huống tổng hợp: Theo dõi đơn & giao hàng",
       "summary": "Ôn mã đơn, cập nhật tiến độ, thiếu hàng, thay đổi đơn và ký nhận.",
-      "situation": "Đánh giá cuối module 3",
+      "situation": "Ôn tập và ứng dụng cuối module 3",
       "estimatedMinutes": 15,
       "isFree": false,
       "vocabulary": [
@@ -2364,7 +2364,7 @@
           "hanzi": "符合条件",
           "pinyin": "fúhé tiáojiàn",
           "meaning": "đáp ứng điều kiện",
-          "example": "这个订单符合换货条件。",
+          "example": "这个订单符合条件，可以换货。",
           "translation": "Đơn này đáp ứng điều kiện đổi hàng.",
           "audioUrl": null
         }
@@ -2623,9 +2623,9 @@
     {
       "moduleSlug": "cham-soc-va-khieu-nai",
       "slug": "kiem-tra-tong-hop-ban-hang-cham-soc-khach",
-      "title": "Kiểm tra tổng hợp: Bán hàng & chăm sóc khách",
+      "title": "Tình huống tổng hợp: Bán hàng & chăm sóc khách",
       "summary": "Tổng hợp tư vấn, báo giá, theo dõi đơn, đổi trả và xử lý khiếu nại chuyên nghiệp.",
-      "situation": "Đánh giá cuối lộ trình",
+      "situation": "Ôn tập và ứng dụng cuối lộ trình",
       "estimatedMinutes": 16,
       "isFree": false,
       "vocabulary": [
@@ -2782,8 +2782,8 @@
               "prompt": "Khi xử lý đổi trả, bảo hành hoặc hoàn tiền, khóa học yêu cầu gì?",
               "options": [
                 "Theo chính sách đã duyệt và thẩm quyền thực tế",
-                "Tự cam kết bất kỳ phương án nào",
-                "Bỏ qua chứng từ"
+                "Tham khảo chính sách rồi tự quyết định ngoài thẩm quyền",
+                "Ưu tiên lời hứa với khách trước, bổ sung chứng từ sau"
               ],
               "correctOption": 0,
               "explanation": "Nội dung hỗ trợ ngôn ngữ, không thay thế chính sách bán hàng hoặc phê duyệt của doanh nghiệp."
@@ -3124,9 +3124,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "我可以帮您申请，但需要经理批准。",
-            "pinyin": "Wǒ kěyǐ bāng nín shēnqǐng, dàn xūyào jīnglǐ pīzhǔn.",
-            "translation": "Tôi có thể giúp anh/chị đề nghị, nhưng cần quản lý phê duyệt."
+            "hanzi": "我可以帮您申请优惠，但需要经理批准。",
+            "pinyin": "Wǒ kěyǐ bāng nín shēnqǐng yōuhuì, dàn xūyào jīnglǐ pīzhǔn.",
+            "translation": "Tôi có thể giúp anh/chị xin mức ưu đãi, nhưng cần quản lý phê duyệt."
           },
           {
             "speaker": "A",
@@ -3150,9 +3150,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "我可以帮您申请，但需要经理批准。",
-            "pinyin": "Wǒ kěyǐ bāng nín shēnqǐng, dàn xūyào jīnglǐ pīzhǔn.",
-            "translation": "Tôi có thể giúp anh/chị đề nghị, nhưng cần quản lý phê duyệt."
+            "hanzi": "我可以帮您申请优惠，但需要经理批准。",
+            "pinyin": "Wǒ kěyǐ bāng nín shēnqǐng yōuhuì, dàn xūyào jīnglǐ pīzhǔn.",
+            "translation": "Tôi có thể giúp anh/chị xin mức ưu đãi, nhưng cần quản lý phê duyệt."
           },
           {
             "speaker": "A",
@@ -3230,8 +3230,8 @@
           "hanzi": "申请",
           "pinyin": "shēnqǐng",
           "meaning": "đề nghị; xin phê duyệt",
-          "example": "我可以帮您申请，但需要经理批准。",
-          "translation": "Tôi có thể giúp anh/chị đề nghị, nhưng cần quản lý phê duyệt.",
+          "example": "我可以帮您申请优惠，但需要经理批准。",
+          "translation": "Tôi có thể giúp anh/chị xin mức ưu đãi, nhưng cần quản lý phê duyệt.",
           "audioUrl": null
         },
         {
@@ -3239,8 +3239,8 @@
           "hanzi": "批准",
           "pinyin": "pīzhǔn",
           "meaning": "phê duyệt",
-          "example": "我可以帮您申请，但需要经理批准。",
-          "translation": "Tôi có thể giúp anh/chị đề nghị, nhưng cần quản lý phê duyệt.",
+          "example": "我可以帮您申请优惠，但需要经理批准。",
+          "translation": "Tôi có thể giúp anh/chị xin mức ưu đãi, nhưng cần quản lý phê duyệt.",
           "audioUrl": null
         },
         {
@@ -3439,7 +3439,7 @@
           {
             "speaker": "B",
             "hanzi": "很抱歉，请提供订单号，并描述一下具体问题。",
-            "pinyin": "Hěn bàoqiàn, qǐng tígōng dìngdān hào, bìng miáoshù yíxià jùtǐ wèntí.",
+            "pinyin": "Hěn bàoqiàn, qǐng tígōng dìngdānhào, bìng miáoshù yíxià jùtǐ wèntí.",
             "translation": "Rất xin lỗi, vui lòng cung cấp mã đơn và mô tả vấn đề cụ thể."
           },
           {
@@ -3465,7 +3465,7 @@
           {
             "speaker": "B",
             "hanzi": "很抱歉，请提供订单号，并描述一下具体问题。",
-            "pinyin": "Hěn bàoqiàn, qǐng tígōng dìngdān hào, bìng miáoshù yíxià jùtǐ wèntí.",
+            "pinyin": "Hěn bàoqiàn, qǐng tígōng dìngdānhào, bìng miáoshù yíxià jùtǐ wèntí.",
             "translation": "Rất xin lỗi, vui lòng cung cấp mã đơn và mô tả vấn đề cụ thể."
           },
           {
@@ -3542,7 +3542,7 @@
         {
           "slug": "ban-hang-cham-soc-khach-hang-ung-dung-tiep-nhan-phan-hoi-chua-hai-long-3",
           "hanzi": "订单号",
-          "pinyin": "dìngdān hào",
+          "pinyin": "dìngdānhào",
           "meaning": "mã đơn hàng",
           "example": "很抱歉，请提供订单号，并描述一下具体问题。",
           "translation": "Rất xin lỗi, vui lòng cung cấp mã đơn và mô tả vấn đề cụ thể.",
@@ -3589,9 +3589,9 @@
         "dialogue": [
           {
             "speaker": "A",
-            "hanzi": "上次的方案您考虑得怎么样了？",
-            "pinyin": "Shàng cì de fāngàn nín kǎolǜ de zěnmeyàng le?",
-            "translation": "Anh/chị đã cân nhắc phương án lần trước đến đâu rồi?"
+            "hanzi": "想跟进一下，请问您对上次的方案考虑得怎么样了？",
+            "pinyin": "Xiǎng gēnjìn yíxià, qǐngwèn nín duì shàng cì de fāngàn kǎolǜ de zěnmeyàng le?",
+            "translation": "Tôi muốn hỏi thăm tiến độ một chút; anh/chị đã cân nhắc phương án lần trước đến đâu rồi?"
           },
           {
             "speaker": "B",
@@ -3601,9 +3601,9 @@
           },
           {
             "speaker": "A",
-            "hanzi": "不想打扰您，下周二跟进方便吗？",
-            "pinyin": "Bù xiǎng dǎrǎo nín, xià zhōu èr gēnjìn fāngbiàn ma?",
-            "translation": "Tôi không muốn làm phiền, thứ Ba tuần sau liên hệ theo dõi có tiện không?"
+            "hanzi": "想继续跟进这个方案，又不想频繁打扰您。请问下周二再联系方便吗？",
+            "pinyin": "Xiǎng jìxù gēnjìn zhège fāngàn, yòu bù xiǎng pínfán dǎrǎo nín. Qǐngwèn xià zhōu èr zài liánxì fāngbiàn ma?",
+            "translation": "Tôi muốn tiếp tục theo dõi phương án này nhưng không muốn làm phiền anh/chị quá thường xuyên. Xin hỏi liên hệ lại vào thứ Ba tuần sau có tiện không?"
           },
           {
             "speaker": "B",
@@ -3615,9 +3615,9 @@
         "phrases": [
           {
             "speaker": "A",
-            "hanzi": "上次的方案您考虑得怎么样了？",
-            "pinyin": "Shàng cì de fāngàn nín kǎolǜ de zěnmeyàng le?",
-            "translation": "Anh/chị đã cân nhắc phương án lần trước đến đâu rồi?"
+            "hanzi": "想跟进一下，请问您对上次的方案考虑得怎么样了？",
+            "pinyin": "Xiǎng gēnjìn yíxià, qǐngwèn nín duì shàng cì de fāngàn kǎolǜ de zěnmeyàng le?",
+            "translation": "Tôi muốn hỏi thăm tiến độ một chút; anh/chị đã cân nhắc phương án lần trước đến đâu rồi?"
           },
           {
             "speaker": "B",
@@ -3627,9 +3627,9 @@
           },
           {
             "speaker": "A",
-            "hanzi": "不想打扰您，下周二跟进方便吗？",
-            "pinyin": "Bù xiǎng dǎrǎo nín, xià zhōu èr gēnjìn fāngbiàn ma?",
-            "translation": "Tôi không muốn làm phiền, thứ Ba tuần sau liên hệ theo dõi có tiện không?"
+            "hanzi": "想继续跟进这个方案，又不想频繁打扰您。请问下周二再联系方便吗？",
+            "pinyin": "Xiǎng jìxù gēnjìn zhège fāngàn, yòu bù xiǎng pínfán dǎrǎo nín. Qǐngwèn xià zhōu èr zài liánxì fāngbiàn ma?",
+            "translation": "Tôi muốn tiếp tục theo dõi phương án này nhưng không muốn làm phiền anh/chị quá thường xuyên. Xin hỏi liên hệ lại vào thứ Ba tuần sau có tiện không?"
           },
           {
             "speaker": "B",
@@ -3667,9 +3667,9 @@
             {
               "prompt": "Câu “可以，请下周二下午联系我。” truyền đạt điều gì?",
               "options": [
-                "Anh/chị đã cân nhắc phương án lần trước đến đâu rồi?",
+                "Tôi muốn hỏi thăm tiến độ một chút; anh/chị đã cân nhắc phương án lần trước đến đâu rồi?",
                 "Được, vui lòng liên hệ tôi vào chiều thứ Ba tuần sau.",
-                "Tôi không muốn làm phiền, thứ Ba tuần sau liên hệ theo dõi có tiện không?"
+                "Tôi muốn tiếp tục theo dõi phương án này nhưng không muốn làm phiền anh/chị quá thường xuyên. Xin hỏi liên hệ lại vào thứ Ba tuần sau có tiện không?"
               ],
               "correctOption": 1,
               "explanation": "Câu này dùng để kết thúc bước trao đổi: Được, vui lòng liên hệ tôi vào chiều thứ Ba tuần sau."
@@ -3683,8 +3683,8 @@
           "hanzi": "考虑",
           "pinyin": "kǎolǜ",
           "meaning": "cân nhắc",
-          "example": "上次的方案您考虑得怎么样了？",
-          "translation": "Anh/chị đã cân nhắc phương án lần trước đến đâu rồi?",
+          "example": "想跟进一下，请问您对上次的方案考虑得怎么样了？",
+          "translation": "Tôi muốn hỏi thăm tiến độ một chút; anh/chị đã cân nhắc phương án lần trước đến đâu rồi?",
           "audioUrl": null
         },
         {
@@ -3710,8 +3710,8 @@
           "hanzi": "打扰",
           "pinyin": "dǎrǎo",
           "meaning": "làm phiền",
-          "example": "不想打扰您，下周二跟进方便吗？",
-          "translation": "Tôi không muốn làm phiền, thứ Ba tuần sau liên hệ theo dõi có tiện không?",
+          "example": "想继续跟进这个方案，又不想频繁打扰您。请问下周二再联系方便吗？",
+          "translation": "Tôi muốn tiếp tục theo dõi phương án này nhưng không muốn làm phiền anh/chị quá thường xuyên. Xin hỏi liên hệ lại vào thứ Ba tuần sau có tiện không?",
           "audioUrl": null
         },
         {
@@ -3719,8 +3719,8 @@
           "hanzi": "跟进",
           "pinyin": "gēnjìn",
           "meaning": "theo dõi tiếp",
-          "example": "不想打扰您，下周二跟进方便吗？",
-          "translation": "Tôi không muốn làm phiền, thứ Ba tuần sau liên hệ theo dõi có tiện không?",
+          "example": "想继续跟进这个方案，又不想频繁打扰您。请问下周二再联系方便吗？",
+          "translation": "Tôi muốn tiếp tục theo dõi phương án này nhưng không muốn làm phiền anh/chị quá thường xuyên. Xin hỏi liên hệ lại vào thứ Ba tuần sau có tiện không?",
           "audioUrl": null
         },
         {
@@ -3728,8 +3728,8 @@
           "hanzi": "方便",
           "pinyin": "fāngbiàn",
           "meaning": "thuận tiện",
-          "example": "不想打扰您，下周二跟进方便吗？",
-          "translation": "Tôi không muốn làm phiền, thứ Ba tuần sau liên hệ theo dõi có tiện không?",
+          "example": "想继续跟进这个方案，又不想频繁打扰您。请问下周二再联系方便吗？",
+          "translation": "Tôi muốn tiếp tục theo dõi phương án này nhưng không muốn làm phiền anh/chị quá thường xuyên. Xin hỏi liên hệ lại vào thứ Ba tuần sau có tiện không?",
           "audioUrl": null
         }
       ]

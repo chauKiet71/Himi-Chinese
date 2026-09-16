@@ -58,6 +58,7 @@ export type HskCurriculumLesson = {
   minutes: number;
   guidedSteps: number;
   available: boolean;
+  availabilityLabel?: "Đang biên tập" | "Đang xây dựng";
   access?: ContentAccessState;
 };
 
@@ -91,19 +92,19 @@ function toSlug(value: string) {
 function makeLessons(
   levelId: string,
   titles: string[],
-  baseVocabulary: number,
 ): HskCurriculumLesson[] {
   return titles.map((title, index) => ({
     id: `${levelId}-${toSlug(title)}`,
     lessonNumber: index + 1,
     title,
-    vocabulary: baseVocabulary + (index % 3),
-    grammar: 2 + (index % 2),
-    dialogues: 1 + (index % 2),
-    writing: baseVocabulary + (index % 3),
-    minutes: 12 + (index % 3),
+    vocabulary: 0,
+    grammar: 0,
+    dialogues: 0,
+    writing: 0,
+    minutes: 0,
     guidedSteps: 0,
     available: false,
+    availabilityLabel: "Đang xây dựng",
   }));
 }
 
@@ -113,13 +114,12 @@ function makeTopic(
   title: string,
   icon: HskTopicIcon,
   lessonTitles: string[],
-  baseVocabulary: number,
 ): HskCurriculumTopic {
   return {
     id,
     title,
     icon,
-    lessons: makeLessons(levelId, lessonTitles, baseVocabulary),
+    lessons: makeLessons(levelId, lessonTitles),
   };
 }
 
@@ -263,7 +263,8 @@ const HSK_3_TEXTBOOK_LESSONS: HskCurriculumLesson[] = RAW_HSK_3_CURRICULUM.lesso
     exercises,
     minutes: Math.max(25, Math.min(35, 20 + Math.ceil(vocabulary / 3))),
     guidedSteps: vocabulary + grammar + guidedDialogueSteps + exercises + 4,
-    available: true,
+    available: false,
+    availabilityLabel: "Đang biên tập" as const,
   };
 });
 
@@ -299,7 +300,8 @@ function buildHsk4TextbookLessons(
       exercises,
       minutes: Math.max(35, Math.min(45, 25 + Math.ceil(vocabulary / 3))),
       guidedSteps: vocabulary + grammar + dialogues + exercises + 4,
-      available: true,
+      available: false,
+      availabilityLabel: "Đang biên tập",
     };
   });
 }
@@ -363,7 +365,8 @@ const HSK_5_TEXTBOOK_TOPICS: HskCurriculumTopic[] = RAW_HSK_5_CURRICULUM.units.m
         + lesson.dialogues.length
         + lesson.exercises.length
         + 4,
-      available: true,
+      available: false,
+      availabilityLabel: "Đang biên tập",
     };
   }),
 }));
@@ -400,14 +403,15 @@ const HSK_5_WORKBOOK_1_TOPICS: HskCurriculumTopic[] = RAW_HSK_5_WORKBOOK_1_CURRI
       listening: 14,
       reading: 14,
       exercises: lesson.exercises.length,
-      scoredExercises: true,
+      scoredExercises: false,
       minutes: lesson.minutes,
       guidedSteps: lesson.vocabulary.length
         + lesson.grammar.length
         + lesson.dialogues.length
         + lesson.exercises.length
         + 4,
-      available: true,
+      available: false,
+      availabilityLabel: "Đang biên tập",
     };
   }),
 }));
@@ -455,7 +459,8 @@ function hsk6CurriculumLesson(lesson: (typeof HSK6_VOLUME1_TEXTBOOK_LESSONS)[num
       + lesson.dialogues.length
       + lesson.exercises.length
       + 4,
-    available: true,
+    available: false,
+    availabilityLabel: "Đang biên tập" as const,
   };
 }
 
@@ -568,7 +573,7 @@ export const HSK_CURRICULUM: HskCurriculumLevel[] = [
     id: "hsk-3",
     label: "HSK 3",
     symbol: "叁",
-    description: "20 bài từ Giáo trình chuẩn HSK 3, có từ vựng, bài khóa, ngữ pháp, phát âm, luyện viết và bài tập tương tác.",
+    description: "20 bài Giáo trình chuẩn HSK 3 đang được đối chiếu bài khóa, pinyin và bản dịch trước khi mở học.",
     topics: [
       hsk3TextbookTopic("ke-hoach-sinh-hoat", "Kế hoạch & Sinh hoạt", "clock", 0, 5),
       hsk3TextbookTopic("di-chuyen-so-sanh", "Di chuyển & So sánh", "travel", 5, 10),
@@ -580,7 +585,7 @@ export const HSK_CURRICULUM: HskCurriculumLevel[] = [
     id: "hsk-4",
     label: "HSK 4",
     symbol: "肆",
-    description: "20 bài từ Giáo trình chuẩn HSK 4 - Tập 1 và Tập 2, có từ vựng, bài khóa, ngữ pháp, phát âm, luyện viết và bài tập tương tác.",
+    description: "20 bài Giáo trình chuẩn HSK 4 - Tập 1 và Tập 2 đang được biên tập lại dữ liệu OCR, pinyin và nghĩa tiếng Việt.",
     topics: [
       hsk4TextbookTopic("tinh-cam-cong-viec-lua-chon", "Tình cảm, công việc & lựa chọn", "people", 0, 5),
       hsk4TextbookTopic("suc-khoe-cuoc-song-hanh-phuc", "Sức khỏe, cuộc sống & hạnh phúc", "globe", 5, 10),
@@ -592,30 +597,39 @@ export const HSK_CURRICULUM: HskCurriculumLevel[] = [
     id: "hsk-5",
     label: "HSK 5",
     symbol: "伍",
-    description: "18 bài Sách bài tập HSK 5 - Tập 1 và 18 bài Giáo trình chuẩn HSK 5 - Tập 2, có đầy đủ các chế độ học tương tác.",
-    topics: [...HSK_5_WORKBOOK_1_TOPICS, ...HSK_5_TEXTBOOK_TOPICS],
+    description: "Nguồn hiện có gồm 18 bài Sách bài tập HSK 5 - Tập 1 và 18 bài Giáo trình chuẩn HSK 5 - Tập 2. Lộ trình đang chờ bổ sung hai tập còn thiếu và duyệt lại nội dung trước khi mở học.",
+    topics: [
+      ...HSK_5_WORKBOOK_1_TOPICS.map((topic) => ({ ...topic, title: `Sách bài tập Tập 1 · ${topic.title}` })),
+      ...HSK_5_TEXTBOOK_TOPICS.map((topic) => ({ ...topic, title: `Giáo trình Tập 2 · ${topic.title}` })),
+    ],
   },
   {
     id: "hsk-6",
     label: "HSK 6",
     symbol: "陆",
-    description: "40 bài từ Giáo trình chuẩn HSK 6 - Tập 1 và Tập 2, có từ vựng, bài khóa, điểm ngôn ngữ, phát âm, luyện viết và bài tập tương tác.",
+    description: "40 bài Giáo trình chuẩn HSK 6 - Tập 1 và Tập 2 đang được đối chiếu bản dịch tiếng Việt và dữ liệu OCR trước khi mở học.",
     topics: [...HSK_6_VOLUME_1_TOPICS, ...HSK_6_VOLUME_2_TOPICS],
   },
   {
     id: "hsk-7-9",
     label: "HSK 7–9",
     symbol: "柒",
-    description: "Vận dụng tiếng Trung trong nghiên cứu và bối cảnh chuyên môn phức tạp.",
+    description: "Cấp độ HSK 7–9 đang được xây dựng. Các chủ đề bên dưới chỉ là định hướng, chưa phải nội dung học chính thức.",
     topics: [
-      makeTopic("hsk-7-9", "nghien-cuu-chuyen-sau", "Nghiên cứu chuyên sâu", "book", ["Đặt câu hỏi nghiên cứu", "Đọc tài liệu chuyên ngành", "Phân tích phương pháp", "Trình bày phát hiện"], 28),
-      makeTopic("hsk-7-9", "dam-phan-ngoai-giao", "Đàm phán & Ngoại giao", "people", ["Xác lập lợi ích", "Đọc hàm ý", "Xử lý bế tắc", "Soạn thỏa thuận"], 27),
-      makeTopic("hsk-7-9", "kinh-te-vi-mo", "Kinh tế vĩ mô", "work", ["Đọc chỉ báo kinh tế", "Phân tích chu kỳ", "Đánh giá chính sách", "Dự báo kịch bản"], 28),
-      makeTopic("hsk-7-9", "khoa-hoc-cong-nghe", "Khoa học & Công nghệ", "globe", ["Mô tả đổi mới", "Phân tích tác động", "Tranh luận đạo đức", "Viết báo cáo chuyên môn"], 29),
+      makeTopic("hsk-7-9", "nghien-cuu-chuyen-sau", "Nghiên cứu chuyên sâu", "book", ["Đặt câu hỏi nghiên cứu", "Đọc tài liệu chuyên ngành", "Phân tích phương pháp", "Trình bày phát hiện"]),
+      makeTopic("hsk-7-9", "dam-phan-ngoai-giao", "Đàm phán & Ngoại giao", "people", ["Xác lập lợi ích", "Đọc hàm ý", "Xử lý bế tắc", "Soạn thỏa thuận"]),
+      makeTopic("hsk-7-9", "kinh-te-vi-mo", "Kinh tế vĩ mô", "work", ["Đọc chỉ báo kinh tế", "Phân tích chu kỳ", "Đánh giá chính sách", "Dự báo kịch bản"]),
+      makeTopic("hsk-7-9", "khoa-hoc-cong-nghe", "Khoa học & Công nghệ", "globe", ["Mô tả đổi mới", "Phân tích tác động", "Tranh luận đạo đức", "Viết báo cáo chuyên môn"]),
     ],
   },
 ];
 
 export function getHskCurriculumLevel(levelId: string) {
   return HSK_CURRICULUM.find((level) => level.id === levelId);
+}
+
+export function getHskCurriculumLesson(levelId: string, lessonId: string) {
+  return getHskCurriculumLevel(levelId)?.topics
+    .flatMap((topic) => topic.lessons)
+    .find((lesson) => lesson.id === lessonId);
 }

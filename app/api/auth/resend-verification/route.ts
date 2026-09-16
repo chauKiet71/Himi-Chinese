@@ -3,8 +3,20 @@ import { recordAuthEvent } from "@/lib/auth-audit";
 import { consumeAuthRateLimit } from "@/lib/auth-rate-limit";
 import { findActiveUserByEmail } from "@/lib/auth-service";
 import { normalizeEmail, validateEmail } from "@/lib/auth-validation";
-import { sendAuthLink } from "@/lib/auth-workflows";
-import { formString, isSameOriginRequest } from "@/lib/request-security";
+import { sendEmailVerificationCode } from "@/lib/auth-workflows";
+import { pendingEmailVerificationCookieName, pendingEmailVerificationCookieOptions } from "@/lib/pending-email-verification";
+import { authRedirectUrl, formString, isSameOriginRequest } from "@/lib/request-security";
+
+function verificationResponse(request: Request, email: string, error?: string) {
+  const url = authRedirectUrl(request, "/verify-email");
+  url.searchParams.set("sent", "1");
+  if (error) url.searchParams.set("error", error);
+  const response = NextResponse.redirect(url, 303);
+  if (validateEmail(email)) {
+    response.cookies.set(pendingEmailVerificationCookieName(), email, pendingEmailVerificationCookieOptions());
+  }
+  return response;
+}
 
 export async function POST(request: Request) {
   if (!isSameOriginRequest(request)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
@@ -13,7 +25,7 @@ export async function POST(request: Request) {
   const rateLimit = await consumeAuthRateLimit(request, "resend_verification", email || "invalid");
   if (!rateLimit.allowed) {
     await recordAuthEvent({ action: "auth.email_verification.rate_limited", request, identifier: email });
-    const response = NextResponse.redirect(new URL("/verify-email?sent=1", request.url), 303);
+    const response = verificationResponse(request, email, "rate_limited");
     response.headers.set("Retry-After", String(rateLimit.retryAfterSeconds));
     return response;
   }
@@ -25,7 +37,7 @@ export async function POST(request: Request) {
     userId = user?.id;
     if (user && !user.emailVerified) {
       try {
-        delivery = await sendAuthLink(user, "verify_email");
+        delivery = await sendEmailVerificationCode(user);
       } catch (error) {
         delivery = "failed";
         console.error("Không thể gửi lại email xác minh.", error instanceof Error ? error.message : "unknown");
@@ -34,5 +46,5 @@ export async function POST(request: Request) {
   }
 
   await recordAuthEvent({ action: "auth.email_verification.requested", request, identifier: email, userId, metadata: { delivery } });
-  return NextResponse.redirect(new URL("/verify-email?sent=1", request.url), 303);
+  return verificationResponse(request, email, delivery === "failed" ? "delivery_failed" : undefined);
 }

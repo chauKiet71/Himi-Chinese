@@ -1,0 +1,61 @@
+{
+  "language": "zh-CN",
+  "script": "simplified",
+  "terms": [
+    {
+      "hanzi": "合规",
+      "pinyin": "héguī",
+      "note": "tuân thủ quy định"
+    },
+    {
+      "hanzi": "合同",
+      "pinyin": "hétong",
+      "note": "hợp đồng"
+    },
+    {
+      "hanzi": "转速",
+      "pinyin": "zhuànsù",
+      "note": "tốc độ quay; chuẩn phát âm zh-CN dùng trong khóa học"
+    },
+    {
+      "hanzi": "曝光",
+      "pinyin": "bàoguāng",
+      "note": "lượt hiển thị trong ngữ cảnh thương mại điện tử"
+    },
+    {
+      "hanzi": "曝光量",
+      "pinyin": "bàoguāngliàng",
+      "note": "lượng hiển thị"
+    },
+    {
+      "hanzi": "下单",
+      "pinyin": "xiàdān",
+      "note": "đặt đơn"
+    },
+    {
+      "hanzi": "订单号",
+      "pinyin": "dìngdānhào",
+      "note": "mã đơn hàng"
+    },
+    {
+      "hanzi": "签收单",
+      "pinyin": "qiānshōudān",
+      "note": "phiếu giao hàng có ký nhận"
+    },
+    {
+      "hanzi": "叫号",
+      "pinyin": "jiàohào",
+      "note": "gọi số"
+    },
+    {
+      "hanzi": "上菜",
+      "pinyin": "shàngcài",
+      "note": "lên món"
+    },
+    {
+      "hanzi": "稍等",
+      "pinyin": "shāoděng",
+      "note": "vui lòng chờ một chút"
+    }
+  ]
+}

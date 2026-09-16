@@ -15,6 +15,28 @@ export type IndustryCurriculum = CourseSeedBundle & {
   };
 };
 
+export type IndustryTerminology = ReadonlyMap<string, string>;
+
+/** Parse the shared zh-CN terminology table before applying it to curricula. */
+export function validateIndustryTerminology(value: unknown): IndustryTerminology {
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Industry terminology: expected an object");
+  const root = value as Record<string, unknown>;
+  if (root.language !== "zh-CN" || root.script !== "simplified") throw new Error("Industry terminology: expected simplified zh-CN");
+  if (!Array.isArray(root.terms) || !root.terms.length) throw new Error("Industry terminology: expected at least one term");
+
+  const terminology = new Map<string, string>();
+  root.terms.forEach((term, index) => {
+    if (!term || typeof term !== "object" || Array.isArray(term)) throw new Error(`Industry terminology terms[${index}]: expected an object`);
+    const item = term as Record<string, unknown>;
+    if (typeof item.hanzi !== "string" || !item.hanzi.trim()) throw new Error(`Industry terminology terms[${index}].hanzi: expected non-empty text`);
+    if (typeof item.pinyin !== "string" || !item.pinyin.trim()) throw new Error(`Industry terminology terms[${index}].pinyin: expected non-empty text`);
+    if (terminology.has(item.hanzi)) throw new Error(`Industry terminology: duplicate term ${item.hanzi}`);
+    terminology.set(item.hanzi, item.pinyin);
+  });
+
+  return terminology;
+}
+
 /** Validate JSON before it reaches either the web or a database import. */
 export function validateIndustryCurriculum(value: unknown): IndustryCurriculum {
   function fail(path: string, reason: string): never {
@@ -87,6 +109,7 @@ export function validateIndustryCurriculum(value: unknown): IndustryCurriculum {
     const wordSlugs = array(item.vocabulary, `${path}.vocabulary`, 1).map((word, i) => {
       const w = object(word, `${path}.vocabulary[${i}]`);
       for (const [field, max] of [["hanzi", 120], ["pinyin", 220], ["meaning", 5000], ["example", 5000], ["translation", 5000]] as const) string(w[field], `${path}.vocabulary[${i}].${field}`, max);
+      if (!(w.example as string).includes(w.hanzi as string)) fail(`${path}.vocabulary[${i}].example`, `must contain the vocabulary term ${w.hanzi as string}`);
       if (w.audioUrl !== null && (typeof w.audioUrl !== "string" || !/^(?:\/(?!\/)|https:\/\/)/.test(w.audioUrl))) fail(path, "audioUrl must be null, a local path or HTTPS URL");
       return slug(w.slug, `${path}.vocabulary[${i}].slug`, 180);
     });
@@ -117,6 +140,47 @@ export function validateIndustryCurriculum(value: unknown): IndustryCurriculum {
   unique(lessonSlugs, `${courseSlug}.lessons`);
   if (usedModules.size !== moduleSlugs.length) fail(courseSlug, "empty module");
   return value as IndustryCurriculum;
+}
+
+/** Validate constraints that span more than one industry curriculum. */
+export function validateIndustryCurriculumCollection(courses: IndustryCurriculum[], terminology: IndustryTerminology = new Map()) {
+  const courseSlugs = courses.map(course => course.courseSlug);
+  if (new Set(courseSlugs).size !== courseSlugs.length) throw new Error("Industry curriculum collection: duplicate course slugs");
+
+  const pronunciations = new Map<string, { pinyin: string; source: string }>();
+  const sentences = new Map<string, { pinyin: string; translation: string; source: string }>();
+  for (const course of courses) {
+    for (const lesson of course.lessons) {
+      for (const word of lesson.vocabulary) {
+        const source = `${course.courseSlug}.${lesson.slug}.${word.slug}`;
+        const canonicalPinyin = terminology.get(word.hanzi);
+        if (canonicalPinyin && canonicalPinyin !== word.pinyin) {
+          throw new Error(`Industry curriculum collection: ${word.hanzi} must use canonical pinyin ${canonicalPinyin}, received ${word.pinyin} (${source})`);
+        }
+        const previous = pronunciations.get(word.hanzi);
+        if (previous && previous.pinyin !== word.pinyin) {
+          throw new Error(`Industry curriculum collection: inconsistent pinyin for ${word.hanzi}: ${previous.pinyin} (${previous.source}) vs ${word.pinyin} (${source})`);
+        }
+        pronunciations.set(word.hanzi, { pinyin: word.pinyin, source });
+      }
+
+      for (const [collectionName, lines] of [
+        ["dialogue", lesson.content.dialogue],
+        ["phrases", lesson.content.phrases ?? []],
+      ] as const) {
+        for (const [lineIndex, line] of lines.entries()) {
+          const source = `${course.courseSlug}.${lesson.slug}.${collectionName}[${lineIndex}]`;
+          const previous = sentences.get(line.hanzi);
+          if (previous && (previous.pinyin !== line.pinyin || previous.translation !== line.translation)) {
+            throw new Error(`Industry curriculum collection: inconsistent repeated sentence ${line.hanzi} (${previous.source} vs ${source})`);
+          }
+          sentences.set(line.hanzi, { pinyin: line.pinyin, translation: line.translation, source });
+        }
+      }
+    }
+  }
+
+  return courses;
 }
 
 export function industryCourseStats(course: CourseSeedBundle) {

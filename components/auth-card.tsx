@@ -16,6 +16,7 @@ type AuthMode = "login" | "register" | "forgot-password" | "admin";
 const errorMessages: Record<string, string> = {
   duplicate: "Email này đã được sử dụng.",
   email_in_use: "Email này đã được sử dụng. Hãy đăng nhập hoặc dùng email khác.",
+  delivery_failed: "Chưa gửi được mã xác minh. Hãy thử lại sau ít phút.",
   invalid_credentials: "Email hoặc mật khẩu không đúng. Với Console, tài khoản cũng phải có quyền editor, reviewer hoặc admin.",
   invalid_email: "Địa chỉ email chưa đúng định dạng.",
   invalid_name: "Tên hiển thị cần từ 2 đến 120 ký tự.",
@@ -282,7 +283,7 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
         <div className="auth-registration-success-copy">
           <span>Tài khoản đã sẵn sàng</span>
           <h1>Đăng ký thành công!</h1>
-          <p>Đang đưa bạn tới bước xác minh email...</p>
+          <p>Mã 6 số đã được gửi. Đang mở bước xác minh...</p>
         </div>
       </div>
     </section> : null}

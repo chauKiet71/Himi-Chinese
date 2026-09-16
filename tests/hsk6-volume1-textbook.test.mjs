@@ -63,7 +63,7 @@ test("HSK 6 volume 1 converts all source lessons into the HSK 1 learning shape",
   assert.equal(hsk6.topics[0].id, "hsk6t1-unit-01");
   assert.equal(hsk6.topics[0].lessons[0].id, lesson.id);
   assert.equal(hsk6.topics[0].lessons[0].writing, hsk6.topics[0].lessons[0].vocabulary);
-  assert.ok(hsk6.topics.flatMap((topic) => topic.lessons).every((item) => item.kind === "textbook" && item.available));
+  assert.ok(hsk6.topics.flatMap((topic) => topic.lessons).every((item) => item.kind === "textbook" && !item.available && item.availabilityLabel === "Đang biên tập"));
 
   const sections = guidedModule.buildHskGuidedSections(lesson).map((section) => section.label);
   assert.deepEqual(sections, ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Luyện viết", "Luyện tập", "Hoàn thành"]);

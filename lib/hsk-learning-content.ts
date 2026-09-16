@@ -7,10 +7,11 @@ import { getHsk5LowerTextbookLessonContent } from "./hsk5-lower-textbook-content
 import { getHsk5Workbook1LessonContent } from "./hsk5-workbook-1-content";
 import { getHsk6Volume1TextbookLessonContent } from "./hsk6-volume1-textbook-content";
 import { getHsk6Volume2TextbookLessonContent } from "./hsk6-volume2-textbook-content";
+import { applyCuratedHskLessonData } from "./hsk-curated-content";
 
 export function getHskLearningLessonContent(level: string, lessonId: string) {
   const levelId = normalizeHskLevelParam(level);
-  return getHskLessonContent(levelId, lessonId)
+  const lesson = getHskLessonContent(levelId, lessonId)
     ?? getHsk2TextbookLessonContent(levelId, lessonId)
     ?? getHsk3TextbookLessonContent(levelId, lessonId)
     ?? getHsk4UpperTextbookLessonContent(levelId, lessonId)
@@ -19,4 +20,5 @@ export function getHskLearningLessonContent(level: string, lessonId: string) {
     ?? getHsk5Workbook1LessonContent(levelId, lessonId)
     ?? getHsk6Volume1TextbookLessonContent(levelId, lessonId)
     ?? getHsk6Volume2TextbookLessonContent(levelId, lessonId);
+  return lesson ? applyCuratedHskLessonData(lesson) : undefined;
 }

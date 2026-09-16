@@ -9,7 +9,7 @@
     "courseId": "course-hsk-standard-1",
     "levelId": "hsk-1",
     "lessonNumber": 1,
-    "titleVi": "Chào anh!",
+    "titleVi": "Xin chào!",
     "titleZh": "你好！",
     "heroHanzi": "你好！",
     "summaryVi": "Dữ liệu bài 1 được chuyển đổi từ Giáo trình chuẩn HSK 1.",
@@ -64,7 +64,7 @@
       "content": {
         "kickerVi": "Bài 1 · HSK 1",
         "heroHanzi": "你好！",
-        "summaryVi": "Chào anh!",
+        "summaryVi": "Xin chào!",
         "sourcePrintedPages": [
           14,
           19

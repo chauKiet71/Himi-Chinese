@@ -24,7 +24,7 @@ test("the textbook bundle supplies all 15 HSK 1 lessons for the four learning mo
 
   const lesson = contentModule.getHskLessonContent("hsk-1", "hsk1-bai-01-chao-anh");
   assert.ok(lesson, "the selected HSK 1 lesson should have learning content");
-  assert.equal(lesson.title, "Chào anh!");
+  assert.equal(lesson.title, "Xin chào!");
   assert.equal(lesson.vocabulary.length, 6);
   assert.deepEqual(lesson.modes, ["vocabulary", "exercise", "pronunciation", "hanzi"]);
   assert.equal(lesson.dialogues.length, 3);

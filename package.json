@@ -26,6 +26,8 @@
     "content:typing:import": "node --experimental-strip-types scripts/import-typing-practice-content.ts",
     "content:industry:validate": "node --experimental-strip-types scripts/validate-industry-curriculum.ts",
     "content:industry:import": "node --experimental-strip-types scripts/import-industry-curriculum.ts",
+    "content:hsk:build": "node --experimental-strip-types scripts/build-hsk-curated-lexicon.ts",
+    "content:hsk:validate": "node --experimental-strip-types scripts/validate-hsk-content.ts",
     "practice:audio:generate": "node --experimental-strip-types scripts/generate-practice-audio.ts",
     "practice:audio:seed": "node --experimental-strip-types scripts/seed-practice-audio.ts",
     "practice:audio:migrate-cloudinary": "node --experimental-strip-types scripts/migrate-practice-audio-cloudinary.ts",

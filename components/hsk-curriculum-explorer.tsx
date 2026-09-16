@@ -233,7 +233,7 @@ export function HskCurriculumExplorer({
                     <span>{savedPercent > 0 ? `${savedPercent}% đã học` : "Sẵn sàng"}</span>
                     <strong>{savedPercent > 0 ? "Tiếp tục học" : "Bắt đầu học"}</strong>
                     <ArrowRight aria-hidden="true" size={18} />
-                  </Link> : !accessAllowed ? <button className="hsk-lesson-start hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Bài học", title: lesson.title })} type="button"><span>Quyền truy cập</span><strong>VIP</strong><Crown aria-hidden="true" size={16} /></button> : <span className="hsk-lesson-duration">{lessonAvailable ? "Mở bài" : "Sắp ra mắt"} <ChevronRight aria-hidden="true" size={19} /></span>}
+                  </Link> : !accessAllowed ? <button className="hsk-lesson-start hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Bài học", title: lesson.title })} type="button"><span>Quyền truy cập</span><strong>VIP</strong><Crown aria-hidden="true" size={16} /></button> : <span className="hsk-lesson-duration">{lessonAvailable ? "Mở bài" : lesson.availabilityLabel ?? "Sắp ra mắt"} <ChevronRight aria-hidden="true" size={19} /></span>}
 
                   {lessonSelected && lessonAvailable ? <div className="hsk-lesson-coach-note">
                     <span className="hsk-lesson-coach-avatar">

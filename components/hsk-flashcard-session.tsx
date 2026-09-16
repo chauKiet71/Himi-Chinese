@@ -16,7 +16,7 @@ import {
   Volume2,
   X,
 } from "lucide-react";
-import { speakChinese } from "@/lib/game-content";
+import { playHskPronunciation } from "@/lib/hsk-audio";
 import type { HskLessonContent } from "@/lib/hsk-lesson-content";
 import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 import {
@@ -174,7 +174,7 @@ export function HskFlashcardSession({ lesson, backHref, authenticated = false }:
             </button>
 
             <div className="flash-audio-row">
-              <button onClick={() => speakChinese(word.hanzi)} type="button"><Volume2 aria-hidden="true" size={18} /> Nghe phát âm</button>
+              <button onClick={() => void playHskPronunciation({ audio: word.audio, text: word.hanzi })} type="button"><Volume2 aria-hidden="true" size={18} /> Nghe phát âm</button>
               <span><Sparkles aria-hidden="true" size={15} /> Lật thẻ trước khi tự chấm</span>
             </div>
             {revealed ? <div className="flash-rating-actions">

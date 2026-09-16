@@ -22,6 +22,11 @@ import type { AccessTier } from "./content-access-types.ts";
 
 export type HskLessonMode = "vocabulary" | "exercise" | "pronunciation" | "hanzi";
 
+export type HskVocabularyAudio = {
+  normal?: string;
+  slow?: string;
+};
+
 export type HskVocabularyItem = {
   id: string;
   hanzi: string;
@@ -31,6 +36,7 @@ export type HskVocabularyItem = {
   example: string;
   examplePinyin: string;
   translation: string;
+  audio?: HskVocabularyAudio;
   radicals?: Array<{
     glyph: string;
     name: string;
@@ -58,6 +64,7 @@ export type HskDialogueTurn = {
   hanzi: string;
   pinyin: string;
   translation: string;
+  audio?: HskVocabularyAudio;
 };
 
 export type HskDialogue = {
