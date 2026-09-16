@@ -501,8 +501,8 @@ export function ListeningCatalogStudio({
               <button aria-label="Câu tiếp theo" disabled={activeSentenceId === lesson.sentences.at(-1)?.id} onClick={() => skipSentence(1)} type="button"><SkipForward aria-hidden="true" fill="currentColor" size={23} /></button>
             </div>
             <details className="listening-focus-mobile-display" ref={displayPickerRef} onBlur={(event) => {
-              // A label tap can blur the summary with no relatedTarget before
-              // its checkbox receives the click. Keep the menu mounted then.
+              // Keep the menu mounted while focus moves from the summary to
+              // one of its visibility controls.
               if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false;
             }} onKeyDown={(event) => {
               if (event.key === "Escape") {
@@ -517,9 +517,9 @@ export function ListeningCatalogStudio({
                 <ChevronDown aria-hidden="true" size={18} />
               </summary>
               <div className="listening-focus-display-options" role="group" aria-label="Ngôn ngữ hiển thị">
-                <label><input type="checkbox" checked={showTranslation} onChange={(event) => setShowTranslation(event.target.checked)} />Tiếng Việt</label>
-                <label><input type="checkbox" checked={showChinese} onChange={(event) => setShowChinese(event.target.checked)} />中文</label>
-                <label><input type="checkbox" checked={showPinyin} onChange={(event) => setShowPinyin(event.target.checked)} />Pinyin</label>
+                <button aria-pressed={showTranslation} onClick={() => setShowTranslation((value) => !value)} type="button"><span aria-hidden="true"><Check size={17} strokeWidth={3} /></span>Tiếng Việt</button>
+                <button aria-pressed={showChinese} onClick={() => setShowChinese((value) => !value)} type="button"><span aria-hidden="true"><Check size={17} strokeWidth={3} /></span>中文</button>
+                <button aria-pressed={showPinyin} onClick={() => setShowPinyin((value) => !value)} type="button"><span aria-hidden="true"><Check size={17} strokeWidth={3} /></span>Pinyin</button>
               </div>
             </details>
             <nav className="listening-focus-language-tools" aria-label="Hiển thị nội dung">

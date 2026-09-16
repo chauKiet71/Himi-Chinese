@@ -1451,7 +1451,10 @@ body:has(.typing-session-page) .himi-chatbot-widget {
   .typing-lesson-character-strip span { width: 40px; height: 40px; }
   .typing-choice-audio-note { display: none; }
 
-  .typing-session-page { min-height: 100dvh; padding: 12px 10px 24px; }
+  .typing-session-page {
+    min-height: 100dvh;
+    padding: 12px 10px calc(126px + env(safe-area-inset-bottom, 0px));
+  }
   .typing-session-header { grid-template-columns: 36px 1fr; gap: 9px; }
   .typing-mode-tabs { grid-column: 1 / -1; justify-self: center; }
   .typing-session-titlebar { align-items: center; margin-top: 11px; }
@@ -1480,8 +1483,18 @@ body:has(.typing-session-page) .himi-chatbot-widget {
   }
   .typing-action-bar {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    position: fixed;
+    right: 10px;
+    bottom: calc(max(8px, env(safe-area-inset-bottom, 0px)) + var(--typing-keyboard-offset, 0px));
+    left: 10px;
+    z-index: 100;
+    width: auto;
+    margin: 0;
+    box-shadow: 0 12px 34px rgba(63, 43, 36, .16);
   }
   .typing-action-bar button { min-height: 45px; font-size: .75rem; }
+  .typing-word-input input,
+  .typing-segment-field input { scroll-margin-bottom: calc(132px + env(safe-area-inset-bottom, 0px)); }
   .typing-keyboard-hint { display: none; }
   .typing-toast { top: 68px; max-width: calc(100% - 24px); text-align: center; }
   .typing-load-state,

@@ -80,7 +80,7 @@ try {
         assert.notEqual(await page.locator("details").getAttribute("open"), null);
       }
       const control = compact
-        ? page.locator(".listening-focus-display-options label").filter({ hasText: name })
+        ? page.locator(".listening-focus-display-options").getByRole("button", { name, exact: true })
         : page.locator(".listening-focus-language-tools").getByRole("button", { name, exact: true });
       if (touch) await control.tap(); else await control.click();
       const hidden = await page.locator(selector).count() === 0;

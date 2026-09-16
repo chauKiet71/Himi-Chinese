@@ -101,6 +101,18 @@ test("mobile typing inputs keep iOS focus at the current zoom level", async () =
   assert.match(stylesheet, /@media \(max-width: 720px\)\s*\{[\s\S]*?\.typing-segment-field input\s*\{[^}]*font-size:\s*16px;[^}]*touch-action:\s*manipulation;[^}]*\}/);
 });
 
+test("mobile typing actions remain fixed above scrolling content and the virtual keyboard", async () => {
+  const studio = await readFile(path.join(root, "components", "typing-practice-studio.tsx"), "utf8");
+  const stylesheet = await readFile(path.join(root, "app", "typing-practice.css"), "utf8");
+
+  assert.match(studio, /const viewport = window\.visualViewport;/);
+  assert.match(studio, /window\.innerHeight - viewport\.height - viewport\.offsetTop/);
+  assert.match(studio, /--typing-keyboard-offset/);
+  assert.match(stylesheet, /@media \(max-width: 720px\)\s*\{[\s\S]*?\.typing-session-page\s*\{[^}]*padding:[^;]*126px[^;]*safe-area-inset-bottom/);
+  assert.match(stylesheet, /\.typing-action-bar\s*\{[^}]*position:\s*fixed;[^}]*bottom:[^;]*safe-area-inset-bottom[^;]*--typing-keyboard-offset[^;]*;[^}]*z-index:\s*100;/s);
+  assert.match(stylesheet, /\.typing-word-input input,[\s\S]*?\.typing-segment-field input\s*\{[^}]*scroll-margin-bottom:[^;]*safe-area-inset-bottom/);
+});
+
 test("revealed typing answers omit the redundant segmented memory box", async () => {
   const studio = await readFile(path.join(root, "components", "typing-practice-studio.tsx"), "utf8");
   const stylesheet = await readFile(path.join(root, "app", "typing-practice.css"), "utf8");
@@ -131,7 +143,7 @@ test("desktop typing practice fills the available viewport", async () => {
   assert.match(stylesheet, /\.typing-studio\s*\{[^}]*width:\s*100%;/s);
   assert.match(stylesheet, /@media \(min-width: 721px\)\s*\{[\s\S]*?\.typing-studio\s*\{[^}]*min-height:\s*calc\(100dvh - 48px\);[^}]*flex-direction:\s*column;[^}]*\}[\s\S]*?\.typing-practice-grid\s*\{[^}]*flex:\s*1;[^}]*grid-template-rows:\s*minmax\(440px, 1fr\) auto;/);
   assert.match(stylesheet, /@media \(min-width: 721px\) and \(max-height: 760px\)\s*\{[\s\S]*?\.typing-session-page\s*\{\s*padding:\s*12px 100px;\s*\}[\s\S]*?\.typing-studio\s*\{\s*min-height:\s*calc\(100dvh - 24px\);\s*\}[\s\S]*?\.typing-practice-grid\s*\{\s*grid-template-rows:\s*minmax\(320px, 1fr\) auto;\s*\}/);
-  assert.match(stylesheet, /@media \(max-width: 720px\)\s*\{[\s\S]*?\.typing-session-page\s*\{[^}]*padding:\s*12px 10px 24px;/);
+  assert.match(stylesheet, /@media \(max-width: 720px\)\s*\{[\s\S]*?\.typing-session-page\s*\{[^}]*padding:\s*12px 10px calc\(126px \+ env\(safe-area-inset-bottom, 0px\)\);/);
 });
 
 test("correct typing celebrates once with shared confetti and a generated chime", async () => {

@@ -196,6 +196,7 @@ export function TypingPracticeStudio({
   const [celebratingItemId, setCelebratingItemId] = useState<string | null>(null);
   const [celebrationKey, setCelebrationKey] = useState(0);
   const startedAtRef = useRef<number | null>(null);
+  const studioRef = useRef<HTMLElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const wordInputRef = useRef<HTMLInputElement>(null);
   const segmentInputRefs = useRef<Array<HTMLInputElement | null>>([]);
@@ -239,6 +240,24 @@ export function TypingPracticeStudio({
     }
     return () => {
       if (storageTimer) clearTimeout(storageTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+
+    function syncKeyboardOffset() {
+      const bottomInset = Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop);
+      studioRef.current?.style.setProperty("--typing-keyboard-offset", `${Math.round(bottomInset)}px`);
+    }
+
+    syncKeyboardOffset();
+    viewport.addEventListener("resize", syncKeyboardOffset);
+    viewport.addEventListener("scroll", syncKeyboardOffset, { passive: true });
+    return () => {
+      viewport.removeEventListener("resize", syncKeyboardOffset);
+      viewport.removeEventListener("scroll", syncKeyboardOffset);
     };
   }, []);
 
@@ -534,7 +553,7 @@ export function TypingPracticeStudio({
   const wordWrong = wordProgress.hasInput && !wordProgress.isValidPrefix && !currentAnswer.correct;
   const answerVisible = currentAnswer.revealed || currentAnswer.correct;
 
-  return <section className="typing-studio" aria-label="Phiên luyện gõ pinyin">
+  return <section className="typing-studio" aria-label="Phiên luyện gõ pinyin" ref={studioRef}>
     <header className="typing-session-header">
       <Link aria-label="Đóng phiên luyện" href={`/typing/${level.id}/${lessonSummary.id}`}><X aria-hidden="true" size={18} /></Link>
       <div aria-label={`Tiến độ ${index + 1} trên ${items.length}`} aria-valuemax={items.length} aria-valuemin={1} aria-valuenow={index + 1} className="typing-session-progress" role="progressbar">

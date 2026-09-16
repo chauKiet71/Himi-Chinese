@@ -13,6 +13,7 @@ import {
 const publicRoot = resolve(process.cwd(), "public");
 const catalogRoot = resolve(publicRoot, "listening-catalog");
 const index = JSON.parse(readFileSync(resolve(catalogRoot, "index.json"), "utf8"));
+const studioSource = readFileSync(resolve(process.cwd(), "components/listening-catalog-studio.tsx"), "utf8");
 
 test("active sentence advances from the penultimate line to the final line and survives seeking into the audio tail", () => {
   const lesson = JSON.parse(readFileSync(resolve(catalogRoot, "lessons/dialogue-beginner-topic-chat-with-chinese-001-daily-001.json"), "utf8"));
@@ -63,4 +64,12 @@ test("HSK deep links map to the closest listening catalog group", () => {
   assert.equal(catalogGroupForHskLevel("hsk-6"), "advanced");
   assert.equal(catalogGroupForHskLevel("unknown"), undefined);
   assert.equal(formatListeningDuration(95), "1:35");
+});
+
+test("mobile transcript visibility controls use explicit state buttons", () => {
+  const mobileControls = studioSource.match(/<div className="listening-focus-display-options"[\s\S]*?<\/div>/)?.[0] ?? "";
+  assert.match(mobileControls, /aria-pressed=\{showTranslation\}[\s\S]*setShowTranslation\(\(value\) => !value\)/);
+  assert.match(mobileControls, /aria-pressed=\{showChinese\}[\s\S]*setShowChinese\(\(value\) => !value\)/);
+  assert.match(mobileControls, /aria-pressed=\{showPinyin\}[\s\S]*setShowPinyin\(\(value\) => !value\)/);
+  assert.doesNotMatch(mobileControls, /type="checkbox"/);
 });

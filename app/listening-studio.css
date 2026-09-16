@@ -2496,6 +2496,7 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
   .listening-focus-mobile-display[open] summary .lucide-chevron-down { transform: rotate(180deg); }
   .listening-focus-display-options {
     position: absolute;
+    z-index: 2;
     bottom: calc(100% + 8px);
     right: 0;
     width: 180px;
@@ -2506,10 +2507,27 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
     color: #253044;
     box-shadow: 0 8px 28px #702b2426;
   }
-  .listening-focus-display-options label { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 10px; border-radius: 10px; font-size: 14px; cursor: pointer; }
-  .listening-focus-display-options label:hover { background: #fff1ec; }
-  .listening-focus-display-options input[type="checkbox"] { width: 18px; height: 18px; min-height: 0; margin: 0; accent-color: #ff503e; }
-  .listening-focus-display-options input:focus-visible { outline-color: #ff503e; outline-offset: 2px; }
+  .listening-focus-display-options button {
+    width: 100%;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 10px;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    touch-action: manipulation;
+  }
+  .listening-focus-display-options button:hover { background: #fff1ec; }
+  .listening-focus-display-options button > span { width: 20px; height: 20px; display: grid; flex: 0 0 20px; place-items: center; color: #fff; border: 1px solid #efbbb3; border-radius: 6px; background: #fff; }
+  .listening-focus-display-options button[aria-pressed="true"] > span { border-color: #ff503e; background: #ff503e; }
+  .listening-focus-display-options button[aria-pressed="false"] > span svg { opacity: 0; }
+  .listening-focus-display-options button:focus-visible { outline: 3px solid #ff503e; outline-offset: 1px; }
 }
 
 @media (max-width: 580px) {
