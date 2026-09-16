@@ -1353,6 +1353,47 @@ body:has(.typing-session-page) .himi-chatbot-widget {
   padding: 0 18px;
 }
 
+.typing-completion-stage {
+  width: 100%;
+  min-height: calc(100dvh - 48px);
+  padding: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.typing-completion-stage .game-result-celebration {
+  width: min(700px, 100%);
+  min-height: 760px;
+  aspect-ratio: auto;
+}
+
+.typing-completion-stage .game-result-celebration__panel {
+  right: 5%;
+  bottom: 4%;
+  left: 5%;
+  min-height: 53%;
+  padding: 32px 30px 25px;
+}
+
+.typing-complete-summary {
+  margin: 0;
+  color: var(--typing-muted);
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.typing-completion-stage .typing-complete-stats {
+  margin: 12px 0 0;
+}
+
+.typing-completion-stage .typing-complete-stats > div {
+  min-height: 66px;
+}
+
+.typing-completion-stage .typing-complete-stats strong {
+  font-size: 1rem;
+}
+
 @media (max-width: 1220px) {
   .typing-level-grid,
   .typing-lesson-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1445,6 +1486,35 @@ body:has(.typing-session-page) .himi-chatbot-widget {
   .typing-toast { top: 68px; max-width: calc(100% - 24px); text-align: center; }
   .typing-load-state,
   .typing-complete-card { margin-top: 4vh; padding: 28px 18px; }
+
+  .typing-completion-stage {
+    min-height: 100dvh;
+    padding: 12px 0 84px;
+    align-items: start;
+  }
+
+  .typing-completion-stage .game-result-celebration {
+    min-height: 720px;
+  }
+
+  .typing-completion-stage .game-result-celebration__panel {
+    right: 3%;
+    bottom: 3%;
+    left: 3%;
+    min-height: 55%;
+    padding: 28px 14px 18px;
+  }
+
+  .typing-completion-stage .typing-complete-stats {
+    margin-top: 9px;
+    gap: 7px;
+  }
+
+  .typing-completion-stage .typing-complete-stats > div {
+    min-height: 59px;
+    gap: 6px;
+    padding-inline: 6px;
+  }
 }
 
 @media (max-width: 720px) and (max-height: 760px) {

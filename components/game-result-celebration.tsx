@@ -6,14 +6,18 @@ import { useEffect, useRef, type ReactNode } from "react";
 
 export function GameResultCelebration({
   actions,
+  details,
   eyebrow = "HOÀN THÀNH LƯỢT CHƠI",
   label,
   score,
+  titleId,
 }: {
   actions: ReactNode;
+  details?: ReactNode;
   eyebrow?: string;
   label: string;
   score: number;
+  titleId?: string;
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const scoreRef = useRef<HTMLSpanElement>(null);
@@ -41,16 +45,18 @@ export function GameResultCelebration({
 
   return (
     <div aria-live="polite" className="game-result game-result-celebration" ref={rootRef} role="status">
-      <Image
-        alt=""
-        aria-hidden="true"
-        className="game-result-celebration__background"
-        data-celebration-part="background"
-        fill
-        priority
-        sizes="(max-width: 560px) 100vw, 680px"
-        src="/assets/games/results/celebration-fireworks.webp"
-      />
+      <picture>
+        <source media="(prefers-reduced-motion: reduce)" srcSet="/assets/games/results/celebration-fireworks.webp" />
+        <img
+          alt=""
+          aria-hidden="true"
+          className="game-result-celebration__background"
+          data-celebration-part="background"
+          data-static-fallback="/assets/games/results/celebration-fireworks.webp"
+          fetchPriority="high"
+          src="/assets/games/results/celebration-fireworks.gif"
+        />
+      </picture>
       <Image
         alt=""
         aria-hidden="true"
@@ -69,24 +75,28 @@ export function GameResultCelebration({
         src="/assets/quiz/correct-confetti.gif"
       />
       <div className="game-result-celebration__mascot-stage" data-celebration-part="mascot">
-        <Image
-          alt="Himi nâng cúp chúc mừng bạn"
-          className="game-result-celebration__mascot"
-          height={900}
-          priority
-          sizes="(max-width: 560px) 70vw, 390px"
-          src="/assets/games/results/himi-trophy-celebration.webp"
-          width={900}
-        />
+        <picture>
+          <source media="(prefers-reduced-motion: reduce)" srcSet="/assets/games/results/himi-trophy-celebration.webp" />
+          <img
+            alt="Himi nâng cúp chúc mừng bạn"
+            className="game-result-celebration__mascot"
+            data-static-fallback="/assets/games/results/himi-trophy-celebration.webp"
+            fetchPriority="high"
+            height={580}
+            src="/assets/games/results/himi-trophy-celebration.gif"
+            width={512}
+          />
+        </picture>
       </div>
 
       <div className="game-result-celebration__panel" data-celebration-part="panel">
         <small data-celebration-copy>{eyebrow}</small>
-        <h2 data-celebration-copy>{label}</h2>
+        <h2 data-celebration-copy id={titleId}>{label}</h2>
         <strong className="game-result-celebration__score" data-celebration-copy>
           <Star aria-hidden="true" fill="currentColor" size={22} />
           <span ref={scoreRef}>{score.toLocaleString("vi-VN")} điểm</span>
         </strong>
+        {details ? <div className="game-result-celebration__details" data-celebration-copy>{details}</div> : null}
         <div className="game-result-celebration__actions" data-celebration-actions>
           {actions}
         </div>

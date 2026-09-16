@@ -4,10 +4,12 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, AudioLines, BrainCircuit, Check, Mic2, Play } from "lucide-react";
+import { HomeVipWelcomeOffer, type HomeVipWelcomeOfferPlan } from "@/components/home-vip-welcome-offer";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 type ReviewHomeStudioProps = {
   verified?: boolean;
+  welcomeOffer?: HomeVipWelcomeOfferPlan | null;
 };
 
 const HOME_DIALOGUE = [
@@ -23,7 +25,7 @@ function useHydrated() {
   return useSyncExternalStore(subscribeToHydration, () => true, () => false);
 }
 
-export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {
+export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: ReviewHomeStudioProps) {
   const reduceMotion = usePrefersReducedMotion();
   const hydrated = useHydrated();
   const [activeDialogue, setActiveDialogue] = useState(0);
@@ -122,6 +124,7 @@ export function ReviewHomeStudio({ verified = false }: ReviewHomeStudioProps) {
           </nav>
         </div>
       </section>
+      {welcomeOffer ? <HomeVipWelcomeOffer plan={welcomeOffer} /> : null}
     </main>
   );
 }

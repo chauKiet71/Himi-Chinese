@@ -110,6 +110,7 @@ export function ListeningCatalogStudio({
   const transcriptRef = useRef<HTMLElement>(null);
   const lessonBarRef = useRef<HTMLElement>(null);
   const playerRef = useRef<HTMLElement>(null);
+  const displayPickerRef = useRef<HTMLDetailsElement>(null);
   const levelPickerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -216,6 +217,18 @@ export function ListeningCatalogStudio({
     }, 0);
     return () => window.clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!lesson) return;
+
+    function closeDisplayOnOutsidePress(event: PointerEvent) {
+      const picker = displayPickerRef.current;
+      if (picker && !picker.contains(event.target as Node)) picker.open = false;
+    }
+
+    document.addEventListener("pointerdown", closeDisplayOnOutsidePress);
+    return () => document.removeEventListener("pointerdown", closeDisplayOnOutsidePress);
+  }, [lesson]);
 
   useEffect(() => {
     if (!levelPickerOpen) return;
@@ -487,8 +500,10 @@ export function ListeningCatalogStudio({
               </button>
               <button aria-label="Câu tiếp theo" disabled={activeSentenceId === lesson.sentences.at(-1)?.id} onClick={() => skipSentence(1)} type="button"><SkipForward aria-hidden="true" fill="currentColor" size={23} /></button>
             </div>
-            <details className="listening-focus-mobile-display" onBlur={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false;
+            <details className="listening-focus-mobile-display" ref={displayPickerRef} onBlur={(event) => {
+              // A label tap can blur the summary with no relatedTarget before
+              // its checkbox receives the click. Keep the menu mounted then.
+              if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false;
             }} onKeyDown={(event) => {
               if (event.key === "Escape") {
                 event.currentTarget.open = false;

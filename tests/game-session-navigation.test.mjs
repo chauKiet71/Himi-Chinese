@@ -68,12 +68,19 @@ test("an HSK course shows DONE only after its random game round is completed", (
 test("completed games use the animated Himi celebration with a reduced-motion fallback", () => {
   const gameCenter = read("components/game-center.tsx");
   const flashcardSession = read("components/hsk-flashcard-session.tsx");
+  const sliceGame = read("components/writing-slice-game.tsx");
+  const typingStudio = read("components/typing-practice-studio.tsx");
   const celebration = read("components/game-result-celebration.tsx");
   const celebrationStyles = read("app/game-completion.css");
+  const rootLayout = read("app/layout.tsx");
 
   assert.match(gameCenter, /<GameResultCelebration/);
   assert.match(flashcardSession, /<GameResultCelebration/);
+  assert.match(sliceGame, /<GameResultCelebration/);
+  assert.match(typingStudio, /<GameResultCelebration/);
+  assert.match(celebration, /himi-trophy-celebration\.gif/);
   assert.match(celebration, /himi-trophy-celebration\.webp/);
+  assert.match(celebration, /celebration-fireworks\.gif/);
   assert.match(celebration, /celebration-fireworks\.webp/);
   assert.match(celebration, /correct-confetti\.gif/);
   assert.match(celebration, /requestAnimationFrame\(tick\)/);
@@ -81,6 +88,9 @@ test("completed games use the animated Himi celebration with a reduced-motion fa
   assert.match(celebrationStyles, /\.game-result-celebration__actions/);
   assert.match(celebrationStyles, /@media \(max-width: 700px\)/);
   assert.match(celebrationStyles, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(rootLayout, /import "\.\/game-completion\.css"/);
+  assert.equal(fs.statSync(path.join(root, "public/assets/games/results/celebration-fireworks.gif")).size > 0, true);
+  assert.equal(fs.statSync(path.join(root, "public/assets/games/results/himi-trophy-celebration.gif")).size > 0, true);
   assert.doesNotMatch(gameCenter, /game-session-tip/);
   assert.doesNotMatch(flashcardSession, /game-session-tip/);
 });

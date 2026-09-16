@@ -6,7 +6,6 @@ import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import {
   AlertCircle,
-  ArrowRight,
   CalendarDays,
   Check,
   Circle,
@@ -194,11 +193,6 @@ export function VipTransferFlow({
     void createOrder();
   };
 
-  const continueWithVip = () => {
-    setOpen(false);
-    router.push("/courses");
-  };
-
   const openAccount = () => {
     setOpen(false);
     router.push("/account");
@@ -265,9 +259,6 @@ export function VipTransferFlow({
           </div>
 
           <div className="vip-success-actions">
-            <button className="button button-primary button-full" onClick={continueWithVip} type="button">
-              Khám phá bài học VIP <ArrowRight aria-hidden="true" size={18} />
-            </button>
             <button className="vip-success-account-link" onClick={openAccount} type="button">Về trang tài khoản</button>
           </div>
         </div> : <>

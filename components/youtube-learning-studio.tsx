@@ -55,6 +55,7 @@ declare global {
 let youtubeApiPromise: Promise<void> | null = null;
 const youtubeApiSource = "https://www.youtube.com/iframe_api";
 const youtubeApiTimeoutMs = 12_000;
+const phoneStudyMediaQuery = "(max-width: 720px), (orientation: landscape) and (max-height: 500px) and (max-width: 980px)";
 
 function loadYouTubeApi() {
   if (typeof window === "undefined") return Promise.reject(new Error("YouTube API chỉ chạy trong trình duyệt."));
@@ -170,6 +171,7 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
   const lineRefs = useRef(new Map<number, HTMLButtonElement>());
   const repeatIndexRef = useRef<number | null>(null);
   const autoPauseRef = useRef(false);
+  const phoneStudyRef = useRef(false);
   const pausedLineRef = useRef<number | null>(null);
   const pendingScrollRef = useRef<number | null>(null);
 
@@ -196,6 +198,14 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
   const activeLine = transcript[activeIndex] ?? transcript[0];
   const typingLine = transcript[typingIndex] ?? transcript[0];
   const completion = transcript.length ? Math.round((completed.length / transcript.length) * 100) : 0;
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(phoneStudyMediaQuery);
+    const syncPhoneLayout = () => { phoneStudyRef.current = mediaQuery.matches; };
+    syncPhoneLayout();
+    mediaQuery.addEventListener("change", syncPhoneLayout);
+    return () => mediaQuery.removeEventListener("change", syncPhoneLayout);
+  }, []);
 
   useEffect(() => {
     repeatIndexRef.current = repeatIndex;
@@ -260,13 +270,13 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
         setActiveIndex((current) => current === nextIndex ? current : nextIndex);
 
         const repeating = repeatIndexRef.current;
-        if (repeating !== null) {
+        if (!phoneStudyRef.current && repeating !== null) {
           const line = transcript[repeating];
           if (line && currentMs >= line.endMs - 80) {
             currentPlayer.seekTo(line.startMs / 1000, true);
             currentPlayer.playVideo();
           }
-        } else if (autoPauseRef.current) {
+        } else if (!phoneStudyRef.current && autoPauseRef.current) {
           const line = transcript[nextIndex];
           if (line && pausedLineRef.current !== nextIndex && currentMs >= line.endMs - 90) {
             pausedLineRef.current = nextIndex;
@@ -427,7 +437,7 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
 
       <div className="youtube-study-toolstrip" aria-label="Công cụ luyện nghe">
         <button aria-label={showTranslation ? "Ẩn bản dịch" : "Hiện bản dịch"} aria-pressed={showTranslation} onClick={() => setShowTranslation((value) => !value)} type="button"><Languages aria-hidden="true" /><span>Dịch</span></button>
-        <button aria-label={showTranscript ? "Ẩn bản chép" : "Hiện bản chép"} aria-pressed={showTranscript} onClick={() => setShowTranscript((value) => !value)} type="button"><ScrollText aria-hidden="true" /><span>Bản chép</span></button>
+        <button aria-controls={`${mountId}-transcript`} aria-expanded={showTranscript} aria-label={showTranscript ? "Ẩn bản chép" : "Hiện bản chép"} aria-pressed={showTranscript} onClick={() => setShowTranscript((value) => !value)} type="button"><ScrollText aria-hidden="true" /><span>Bản chép</span></button>
         <button aria-label="Phát lại câu hiện tại" onClick={() => playLine(activeIndex)} type="button"><RotateCcw aria-hidden="true" /><span>Phát lại</span></button>
         <button aria-label={coverVideo ? "Hiện video" : "Che video"} aria-pressed={coverVideo} onClick={() => setCoverVideo((value) => !value)} type="button">{coverVideo ? <Eye aria-hidden="true" /> : <EyeOff aria-hidden="true" />}<span>Che video</span></button>
         <button aria-label="Luyện gõ nghe" aria-pressed={typingMode} className="is-accent" onClick={toggleTypingMode} type="button"><PenLine aria-hidden="true" /><span>Luyện gõ</span></button>
@@ -491,7 +501,7 @@ export function YouTubeLearningStudio({ video }: { video: LearningVideo }) {
       <div className="dictation-progress"><span>Tiến độ luyện gõ</span><strong>{completed.length}/{transcript.length} · {completion}%</strong></div>
     </section> : null}
 
-    {showTranscript ? <aside className={`youtube-transcript-panel${typingMode ? " is-masked" : ""}`} aria-label="Bản chép đồng bộ">
+    {showTranscript ? <aside className={`youtube-transcript-panel${typingMode ? " is-masked" : ""}`} aria-label="Bản chép đồng bộ" id={`${mountId}-transcript`}>
       <header>
         <div><span>Bản chép</span><strong>{activeIndex + 1} / {transcript.length}</strong></div>
         <div className="youtube-transcript-toggles">

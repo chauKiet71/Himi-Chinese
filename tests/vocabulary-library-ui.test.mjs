@@ -59,3 +59,19 @@ test("vocabulary review uses a standalone guided-study interface", async () => {
   assert.match(stylesheet, /body:has\(\.vsets-immersive-session\) > \.himi-chatbot-widget/);
   assert.match(stylesheet, /\.vsets-immersive-progress/);
 });
+
+test("saved words use horizontal Hanzi and full-width examples on phones", async () => {
+  const stylesheet = await readFile(stylesheetPath, "utf8");
+  const mobileStart = stylesheet.lastIndexOf("@media (max-width: 680px)");
+  const mobileEnd = stylesheet.indexOf("@media (max-width: 410px)", mobileStart);
+  const mobile = stylesheet.slice(mobileStart, mobileEnd);
+
+  assert.match(mobile, /grid-template-columns: minmax\(0, 1fr\) auto/);
+  assert.match(mobile, /grid-template-areas: "hanzi actions" "reading reading" "example example"/);
+  assert.match(mobile, /\.vsets-list-hanzi\s*\{[^}]*width: auto;[^}]*display: block;[^}]*background: transparent;/s);
+  assert.match(mobile, /\.vsets-list-reading\s*\{ grid-area: reading;/);
+  assert.match(mobile, /\.vsets-list-example\s*\{ grid-area: example;/);
+  assert.match(mobile, /\.vsets-list-actions\s*\{[^}]*flex-direction: row;/s);
+  assert.match(mobile, /\.vsets-page \.vsets-pronounce, \.vsets-page \.vsets-unsave\s*\{ width: 44px; height: 44px; min-height: 44px;/);
+  assert.doesNotMatch(stylesheet, /\.vsets-list-hanzi\s*\{ width: (64|72)px;/);
+});

@@ -18,7 +18,6 @@ import {
   RotateCcw,
   Snail,
   Sparkles,
-  Trophy,
   Volume2,
   X,
 } from "lucide-react";
@@ -34,6 +33,7 @@ import {
   type MutableRefObject,
 } from "react";
 import { getTypingPinyinProgress, isTypingPinyinCorrect } from "@/lib/typing-answer";
+import { GameResultCelebration } from "@/components/game-result-celebration";
 import type {
   TypingLessonPayload,
   TypingLessonSummary,
@@ -500,27 +500,33 @@ export function TypingPracticeStudio({
   const correctCount = Object.values(answers).filter((answer) => answer.correct && !answer.usedAnswer).length;
   const assistedCount = Object.values(answers).filter((answer) => answer.usedAnswer).length;
   const skippedCount = Object.values(answers).filter((answer) => answer.skipped && !answer.correct && !answer.usedAnswer).length;
+  const completionScore = items.length ? Math.round((correctCount / items.length) * 1000) : 0;
   const lessonIndex = level.lessons.findIndex((item) => item.id === lessonSummary.id);
   const nextLesson = level.lessons[lessonIndex + 1];
 
   if (complete) {
-    return <section className="typing-complete-card" aria-labelledby="typing-complete-title">
-      <span className="typing-complete-icon"><Trophy aria-hidden="true" size={34} /></span>
-      <small>{level.label} · Bài {lessonSummary.number} đã hoàn thành</small>
-      <h1 id="typing-complete-title">Một lượt gõ rất tập trung!</h1>
-      <p>Bạn đã đi hết {items.length} {stage === "word" ? "từ và cụm từ" : "câu"} trong phiên này.</p>
-      <div className="typing-complete-stats">
-        <div><CheckCircle2 aria-hidden="true" size={21} /><span><strong>{correctCount}</strong><small>Tự gõ đúng</small></span></div>
-        <div><Eye aria-hidden="true" size={21} /><span><strong>{assistedCount}</strong><small>Có xem đáp án</small></span></div>
-        <div><ChevronRight aria-hidden="true" size={21} /><span><strong>{skippedCount}</strong><small>Đã bỏ qua</small></span></div>
-        <div><Clock3 aria-hidden="true" size={21} /><span><strong>{formatDuration(durationSeconds)}</strong><small>Thời gian</small></span></div>
-      </div>
-      <div className="typing-complete-actions">
-        <button onClick={restartSession} type="button"><RotateCcw aria-hidden="true" size={17} /> Luyện lại</button>
-        <Link href={nextLesson ? `/typing/${level.id}/${nextLesson.id}` : `/typing/${level.id}`}>
-          {nextLesson ? "Bài tiếp theo" : `Về ${level.label}`} <ArrowRight aria-hidden="true" size={17} />
-        </Link>
-      </div>
+    return <section aria-labelledby="typing-complete-title" className="typing-completion-stage game-session-world">
+      <GameResultCelebration
+        actions={<>
+          <button onClick={restartSession} type="button"><RotateCcw aria-hidden="true" size={17} /> Luyện lại</button>
+          <Link href={nextLesson ? `/typing/${level.id}/${nextLesson.id}` : `/typing/${level.id}`}>
+            {nextLesson ? "Bài tiếp theo" : `Về ${level.label}`} <ArrowRight aria-hidden="true" size={17} />
+          </Link>
+        </>}
+        details={<>
+          <p className="typing-complete-summary">Bạn đã đi hết {items.length} {stage === "word" ? "từ và cụm từ" : "câu"} trong phiên này.</p>
+          <div className="typing-complete-stats">
+            <div><CheckCircle2 aria-hidden="true" size={21} /><span><strong>{correctCount}</strong><small>Tự gõ đúng</small></span></div>
+            <div><Eye aria-hidden="true" size={21} /><span><strong>{assistedCount}</strong><small>Có xem đáp án</small></span></div>
+            <div><ChevronRight aria-hidden="true" size={21} /><span><strong>{skippedCount}</strong><small>Đã bỏ qua</small></span></div>
+            <div><Clock3 aria-hidden="true" size={21} /><span><strong>{formatDuration(durationSeconds)}</strong><small>Thời gian</small></span></div>
+          </div>
+        </>}
+        eyebrow={`${level.label} · BÀI ${lessonSummary.number} ĐÃ HOÀN THÀNH`}
+        label="Một lượt gõ rất tập trung!"
+        score={completionScore}
+        titleId="typing-complete-title"
+      />
     </section>;
   }
 

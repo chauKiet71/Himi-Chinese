@@ -62,4 +62,13 @@ test("writing catalog exposes every available HSK 1–6 lesson", async (t) => {
   assert.match(html, /action="\/vip"/);
   assert.doesNotMatch(html, new RegExp(`Khu vực viết chữ ${sourceCharacter.hanzi}`));
   assert.doesNotMatch(html, new RegExp(sourceCharacter.pinyin));
+
+  const practiceHtml = renderToStaticMarkup(React.createElement(studio.HimiWritingStudio, {
+    topic: writing.getWritingTopicFromLesson(lesson.levelId, lesson.id, lesson),
+  }));
+  assert.doesNotMatch(practiceHtml, /himi-writing-feedback-copy|nét đúng|lần cần sửa/);
+  assert.match(practiceHtml, /class="sr-only" role="status"/);
+  assert.match(practiceHtml, /role="progressbar"/);
+  assert.match(practiceHtml, /Phát lại/);
+  assert.match(practiceHtml, /Bắt đầu tô/);
 });

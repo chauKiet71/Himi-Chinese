@@ -223,12 +223,6 @@
     line-height: 1.15;
   }
 
-  .youtube-study-switches {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
-  }
-
   .youtube-study-switch {
     width: 100%;
     justify-content: center;
@@ -284,10 +278,6 @@
   .youtube-study-toolstrip button {
     padding-inline: 2px;
     font-size: 9px;
-  }
-
-  .youtube-study-switches {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -345,6 +335,49 @@
     min-width: 44px;
     min-height: 44px;
   }
+}
+
+/* Keep the transcript next to the player in the phone learning flow. */
+@media (max-width: 720px), (orientation: landscape) and (max-height: 500px) and (max-width: 980px) {
+  .youtube-study-studio,
+  .youtube-study-studio.has-dictation,
+  .youtube-study-studio.has-dictation.transcript-is-hidden {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .youtube-study-media-column { display: contents; }
+  .youtube-study-frame { order: 0; }
+  .youtube-study-studio .youtube-study-toolstrip { order: 1; margin-top: 0; }
+  .youtube-study-studio .youtube-study-toolstrip button { min-height: 52px; font-size: 10px; }
+  .youtube-dictation-panel { order: 2; }
+  .youtube-transcript-panel { order: 3; }
+  .youtube-source-row { order: 4; }
+
+  .youtube-study-studio .youtube-study-switches,
+  .youtube-study-studio .youtube-shadow-card { display: none; }
+
+  .youtube-study-studio .youtube-transcript-panel,
+  .youtube-study-studio.has-dictation .youtube-transcript-panel {
+    height: clamp(320px, 60dvh, 480px);
+    min-height: 0;
+    max-height: none;
+    grid-column: auto;
+  }
+
+  .youtube-study-studio .youtube-transcript-panel > header {
+    padding: 12px;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .youtube-study-studio .youtube-transcript-toggles { width: auto; gap: 6px; }
+  .youtube-study-studio .youtube-transcript-toggles button { min-height: 44px; padding-inline: 10px; font-size: 11px; }
+  .youtube-study-studio .youtube-transcript-scroll { min-height: 0; }
+  .youtube-study-studio .youtube-transcript-line > strong { font-size: 20px; }
+  .youtube-study-studio .youtube-transcript-line > small,
+  .youtube-study-studio .youtube-transcript-line > p { font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

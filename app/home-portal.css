@@ -409,6 +409,417 @@
   font-weight: 720;
 }
 
+/* First-visit VIP offer. Its proportions intentionally follow the selected
+ * promotional mock-up while every commercial value comes from the active
+ * monthly plan on the server. */
+.home-welcome-offer-dialog {
+  width: min(642px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 24px);
+  margin: auto;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 0;
+  border-radius: 22px;
+  color: #173630;
+  background: transparent;
+  box-shadow: 0 30px 90px rgba(7, 24, 29, .28);
+  scrollbar-width: thin;
+}
+
+.home-welcome-offer-dialog::backdrop {
+  background: rgba(13, 25, 30, .68);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.home-welcome-offer-dialog:focus {
+  outline: none;
+}
+
+.home-welcome-offer-dialog[open] {
+  animation: home-welcome-offer-in 360ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+@keyframes home-welcome-offer-in {
+  from { opacity: 0; transform: translateY(18px) scale(.975); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.home-welcome-offer-card {
+  min-height: 790px;
+  padding: 42px 34px 30px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid rgba(114, 97, 66, .12);
+  border-radius: 22px;
+  background: #fffdf8;
+}
+
+.home-welcome-offer-close {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  position: absolute;
+  z-index: 5;
+  top: 21px;
+  right: 20px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border: 0;
+  border-radius: 50%;
+  color: #273b3c;
+  background: transparent;
+  transition: color 170ms ease, background-color 170ms ease, transform 170ms ease;
+}
+
+.home-welcome-offer-close:hover {
+  color: #d94137;
+  background: #f6eee7;
+  transform: rotate(4deg);
+}
+
+.home-welcome-offer-close:focus-visible,
+.home-welcome-offer-primary:focus-visible,
+.home-welcome-offer-secondary:focus-visible {
+  outline: 3px solid rgba(23, 107, 91, .32);
+  outline-offset: 3px;
+}
+
+.home-welcome-offer-kicker {
+  min-height: 48px;
+  padding: 0 21px;
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #f4bd53;
+  border-radius: 999px;
+  color: #b65d13;
+  background: #fff5da;
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: .025em;
+  text-transform: uppercase;
+  margin-left: 5px;
+}
+
+.home-welcome-offer-hero {
+  min-height: 320px;
+  position: relative;
+}
+
+.home-welcome-offer-copy {
+  width: 62%;
+  padding-top: 25px;
+  position: relative;
+  z-index: 3;
+  margin-left: 5px;
+}
+
+.home-welcome-offer-copy h2 {
+  width: 450px;
+  margin: 0;
+  color: #173630;
+  font-family: var(--font-roboto) !important;
+  font-size: 34px;
+  font-weight: 850;
+  line-height: 1.13;
+  letter-spacing: -.035em;
+}
+
+.home-welcome-offer-price {
+  margin-top: 24px;
+  display: block;
+  color: #e73631;
+  font-size: 58px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+.home-welcome-offer-meta {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #7e898a;
+  white-space: nowrap;
+}
+
+.home-welcome-offer-meta span {
+  font-size: 15px;
+  font-weight: 720;
+}
+
+.home-welcome-offer-meta b {
+  min-height: 34px;
+  padding: 0 13px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  color: #fff;
+  background: #ff524a;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .015em;
+  text-transform: uppercase;
+}
+
+.home-welcome-offer-copy > p {
+  width: 330px;
+  margin: 40px 0 0;
+  color: #536a67;
+  font-size: 17px;
+  font-weight: 560;
+  line-height: 1.55;
+  letter-spacing: -.012em;
+}
+
+.home-welcome-offer-mascot {
+  width: 260px;
+  height: auto;
+  position: absolute;
+  z-index: 2;
+  top: 48px;
+  right: -4px;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 17px 18px rgba(53, 47, 37, .13));
+  pointer-events: none;
+}
+
+.home-welcome-offer-benefits {
+  margin: 0;
+  padding: 15px 20px;
+  position: relative;
+  z-index: 4;
+  display: grid;
+  gap: 2px;
+  list-style: none;
+  border: 1px solid rgba(43, 148, 127, .08);
+  border-radius: 24px;
+  background: #eff9f5;
+}
+
+.home-welcome-offer-benefits li {
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #193b36;
+  font-size: 17px;
+  font-weight: 760;
+  line-height: 1.35;
+}
+
+.home-welcome-offer-benefits li > span {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  color: #118879;
+  background: #d5f4ea;
+}
+
+.home-welcome-offer-primary {
+  min-height: 70px;
+  margin-top: 17px;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: #ff4f48;
+  box-shadow: 0 6px 0 #d9312c, 0 17px 34px rgba(255, 79, 72, .22);
+  font-size: 22px;
+  font-weight: 850;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 170ms ease, box-shadow 170ms ease, transform 170ms ease;
+}
+
+.home-welcome-offer-primary:hover {
+  background: #f6423d;
+  box-shadow: 0 5px 0 #c92825, 0 20px 38px rgba(255, 79, 72, .28);
+  transform: translateY(-1px);
+}
+
+.home-welcome-offer-primary:active {
+  box-shadow: 0 2px 0 #c92825, 0 10px 22px rgba(255, 79, 72, .2);
+  transform: translateY(3px);
+}
+
+.home-welcome-offer-secondary {
+  width: fit-content;
+  margin: 21px auto 0;
+  display: block;
+  color: #087a72;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.home-welcome-offer-footnote {
+  margin: 25px 0 0;
+  color: #82908f;
+  font-size: 12px;
+  font-weight: 560;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .home-welcome-offer-dialog {
+    width: min(100% - 16px, 540px);
+    max-height: calc(100dvh - 16px);
+    border-radius: 20px;
+    transform: none;
+  }
+
+  .home-welcome-offer-dialog[open] {
+    animation: none;
+  }
+
+  .home-welcome-offer-card {
+    min-height: 0;
+    padding: 25px 22px 23px;
+    border-radius: 20px;
+  }
+
+  .home-welcome-offer-kicker,
+  .home-welcome-offer-copy {
+    margin-left: 0;
+  }
+
+  .home-welcome-offer-close {
+    width: 40px;
+    height: 40px;
+    top: 14px;
+    right: 13px;
+  }
+
+  .home-welcome-offer-kicker {
+    min-height: 39px;
+    padding: 0 15px;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .home-welcome-offer-kicker svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .home-welcome-offer-hero {
+    min-height: 315px;
+  }
+
+  .home-welcome-offer-copy {
+    width: 68%;
+    padding-top: 20px;
+  }
+
+  .home-welcome-offer-copy h2 {
+    width: min(380px, 132%);
+    font-size: clamp(25px, 7.4vw, 32px);
+  }
+
+  .home-welcome-offer-price {
+    margin-top: 8px;
+    font-size: clamp(42px, 13.5vw, 58px);
+  }
+
+  .home-welcome-offer-meta {
+    margin-top: 11px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .home-welcome-offer-meta span {
+    font-size: 13px;
+  }
+
+  .home-welcome-offer-meta b {
+    min-height: 29px;
+    padding-inline: 10px;
+    font-size: 9px;
+  }
+
+  .home-welcome-offer-copy > p {
+    width: 100%;
+    margin-top: 13px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .home-welcome-offer-mascot {
+    width: clamp(185px, 52vw, 255px);
+    top: 72px;
+    right: clamp(-80px, -13vw, -44px);
+  }
+
+  .home-welcome-offer-benefits {
+    padding: 12px 13px;
+    gap: 1px;
+    border-radius: 19px;
+  }
+
+  .home-welcome-offer-benefits li {
+    min-height: 42px;
+    gap: 10px;
+    font-size: 13px;
+  }
+
+  .home-welcome-offer-benefits li > span {
+    width: 29px;
+    height: 29px;
+  }
+
+  .home-welcome-offer-primary {
+    min-height: 58px;
+    margin-top: 14px;
+    padding-inline: 18px;
+    gap: 10px;
+    font-size: 16px;
+    box-shadow: 0 5px 0 #d9312c, 0 14px 28px rgba(255, 79, 72, .2);
+  }
+
+  .home-welcome-offer-secondary {
+    margin-top: 18px;
+    font-size: 14px;
+  }
+
+  .home-welcome-offer-footnote {
+    margin-top: 19px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 390px) {
+  .home-welcome-offer-hero { min-height: 305px; }
+  .home-welcome-offer-copy { width: 72%; }
+  .home-welcome-offer-copy h2 { font-size: 24px; }
+  .home-welcome-offer-copy > p { width: 100%; }
+  .home-welcome-offer-mascot { width: 190px; top: 79px; right: -73px; }
+  .home-welcome-offer-benefits li { font-size: 12px; }
+}
+
 @keyframes home-portal-speaking {
   from { transform: scaleY(.65); }
   to { transform: scaleY(1.15); }
@@ -984,7 +1395,13 @@
 
   .home-portal-primary,
   .home-portal-secondary,
-  .home-portal-quick-action {
+  .home-portal-quick-action,
+  .home-welcome-offer-close,
+  .home-welcome-offer-primary {
     transition: none;
+  }
+
+  .home-welcome-offer-dialog[open] {
+    animation: none;
   }
 }

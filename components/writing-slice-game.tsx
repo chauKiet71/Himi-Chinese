@@ -27,6 +27,7 @@ import {
 } from "react";
 import { type GameWord } from "@/lib/game-content";
 import { useLearningData } from "@/components/learning-data-provider";
+import { GameResultCelebration } from "@/components/game-result-celebration";
 import { createSliceDeck, normalizeSliceAnswer as normalizeAnswer, SLICE_HSK_COURSES, type SliceHskLevel } from "@/lib/slice-game";
 import { hasCompletedGameCourse, type GameCourseCompletionKey } from "@/lib/activity-progress";
 
@@ -66,42 +67,39 @@ function GameOverlay({
 
   const complete = mode === "complete";
   const gameover = mode === "gameover";
+  if (complete) {
+    return <div className="writing-game-overlay writing-game-completion-overlay game-session-world">
+      <GameResultCelebration
+        actions={<>
+          <button onClick={onStart} type="button"><RotateCcw aria-hidden="true" size={16} /> Chơi lại</button>
+          <button onClick={onChangeCourse} type="button"><BookOpen aria-hidden="true" size={16} /> Đổi khóa HSK</button>
+          {onExit ? <button onClick={onExit} type="button"><ArrowLeft aria-hidden="true" size={16} /> Đổi trò chơi</button> : null}
+          {completionAction}
+        </>}
+        eyebrow="HOÀN THÀNH LƯỢT CHÉM TỪ"
+        label="Bạn đã xử lý đủ 12 từ của lượt hôm nay!"
+        score={score}
+      />
+    </div>;
+  }
+
   return (
     <div className="writing-game-overlay">
       <span className="writing-overlay-mark" aria-hidden="true">
-        {complete ? <Check size={28} /> : gameover ? <RotateCcw size={26} /> : <Keyboard size={28} />}
+        {gameover ? <RotateCcw size={26} /> : <Keyboard size={28} />}
       </span>
       <span className="writing-overlay-kicker">
-        {complete ? "Lượt luyện hoàn tất" : gameover ? "Himi cần nghỉ một nhịp" : "Phản xạ pinyin"}
+        {gameover ? "Himi cần nghỉ một nhịp" : "Phản xạ pinyin"}
       </span>
-      <h2>{complete ? `${score} điểm — rất gọn!` : gameover ? "Mình thử lại chậm hơn nhé." : "Gõ đúng. Himi chém gọn."}</h2>
+      <h2>{gameover ? "Mình thử lại chậm hơn nhé." : "Gõ đúng. Himi chém gọn."}</h2>
       <p>
-        {complete
-          ? "Bạn đã xử lý đủ 12 từ của lượt hôm nay."
-          : gameover
-            ? "Ba từ đã chạm đất. Lượt mới sẽ bắt đầu lại từ đầu."
-            : "Nhìn Hán tự đang rơi, gõ pinyin không dấu hoặc có dấu. Đúng từ là Himi sẽ lao lên cắt ngay."}
+        {gameover
+          ? "Ba từ đã chạm đất. Lượt mới sẽ bắt đầu lại từ đầu."
+          : "Nhìn Hán tự đang rơi, gõ pinyin không dấu hoặc có dấu. Đúng từ là Himi sẽ lao lên cắt ngay."}
       </p>
-      {complete ? (
-        <div className="writing-completion-actions" aria-label="Hành động sau khi hoàn tất">
-          <button className="writing-primary-action" onClick={onStart} type="button">
-            <Play fill="currentColor" size={16} /> Tiếp tục
-          </button>
-          <button className="writing-completion-action" onClick={onChangeCourse} type="button">
-            <BookOpen size={16} /> Đổi khóa HSK
-          </button>
-          {onExit ? (
-            <button className="writing-completion-action" onClick={onExit} type="button">
-              <ArrowLeft size={16} /> Đổi trò chơi
-            </button>
-          ) : null}
-        </div>
-      ) : (
-        <button className="writing-primary-action" onClick={onStart} type="button">
-          <Play fill="currentColor" size={16} /> {mode === "ready" ? "Bắt đầu chém từ" : "Chơi lại"}
-        </button>
-      )}
-      {complete ? completionAction : null}
+      <button className="writing-primary-action" onClick={onStart} type="button">
+        <Play fill="currentColor" size={16} /> {mode === "ready" ? "Bắt đầu chém từ" : "Chơi lại"}
+      </button>
       {mode === "ready" ? <small>Enter để chốt · Không cần gõ dấu thanh</small> : null}
     </div>
   );

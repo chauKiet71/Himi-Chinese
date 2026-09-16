@@ -8,7 +8,6 @@ import {
   ArrowRight,
   Check,
   Eye,
-  Lightbulb,
   LockKeyhole,
   PenLine,
   Play,
@@ -56,7 +55,6 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
   const [query, setQuery] = useState("");
   const [resetVersion, setResetVersion] = useState(0);
   const [status, setStatus] = useState("Đang chuẩn bị dữ liệu nét…");
-  const [mistakes, setMistakes] = useState(0);
   const [correctStrokes, setCorrectStrokes] = useState(0);
   const [completedCharacters, setCompletedCharacters] = useState<string[]>([]);
   const [loadedStrokeCount, setLoadedStrokeCount] = useState<{ characterId: string; count: number } | null>(null);
@@ -161,9 +159,8 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
             setCorrectStrokes(Math.max(0, strokeCountRef.current - strokesRemaining));
             setStatus(strokesRemaining ? `Đúng rồi! Còn ${strokesRemaining} nét nữa.` : "Hoàn thành chữ rồi!");
           },
-          onMistake: ({ totalMistakes }) => {
+          onMistake: () => {
             if (canceled) return;
-            setMistakes(totalMistakes);
             setStatus(mode === "trace" ? "Chậm lại một chút và đi theo nét sáng nhé." : "Nét này chưa đúng. Thử lại từ điểm bắt đầu nhé.");
           },
           onComplete: () => {
@@ -196,7 +193,6 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
   }, [canvasSize, mode, resetVersion, selected, topic.slug]);
 
   const prepareSession = (nextMode: WritingMode) => {
-    setMistakes(0);
     setCorrectStrokes(0);
     setStatus(nextMode === "watch" ? "Himi đang chuẩn bị thứ tự nét…" : getModeMessage(nextMode));
   };
@@ -327,11 +323,8 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
             <span className="himi-writing-mode-badge">{mode === "watch" ? "Đang xem" : mode === "trace" ? "Đang tô" : "Tự viết"}</span>
           </div>
 
-          <div className="himi-writing-feedback" aria-live="polite">
-            <div className="himi-writing-feedback-copy">
-              <span className={mistakes ? "has-mistake" : ""}><Lightbulb aria-hidden="true" size={17} /></span>
-              <div><strong>{status}</strong><small>{mode === "watch" ? `${totalStrokes || "Đang tải số"} nét · xem từ đầu đến cuối` : `${correctStrokes}/${totalStrokes || "…"} nét đúng · ${mistakes} lần cần sửa`}</small></div>
-            </div>
+          <div className="himi-writing-feedback">
+            <span className="sr-only" role="status">{status}</span>
             <div className="himi-writing-progress" aria-label={`Hoàn thành ${progressPercent}%`} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progressPercent}><span style={{ width: `${progressPercent}%` }} /></div>
           </div>
 

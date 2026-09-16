@@ -122,7 +122,11 @@ export default async function VipPage({
                 ? "Yêu cầu gia hạn"
                 : "Nâng cấp";
 
-          return <article className={`price-card vip-plan-card ${featured ? "featured" : ""}`} key={plan.id}>
+          return <article
+            className={`price-card vip-plan-card ${featured ? "featured" : ""}`}
+            id={`vip-plan-${plan.code.toLocaleLowerCase("vi-VN").replaceAll("_", "-")}`}
+            key={plan.id}
+          >
             {featured ? <span className="price-badge">Được chọn nhiều</span> : null}
             <span className="price-name">{plan.name}</span>
             <div className="price"><strong>{formatPrice(plan.priceVnd)}</strong><span>/ {vipPlanDurationLabel(plan.code, plan.durationDays).toLocaleLowerCase("vi-VN")}</span></div>

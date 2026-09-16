@@ -45,7 +45,7 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(transferFlow, /Đang chờ SePay xác nhận/);
   assert.match(transferFlow, /Chào mừng thành viên/);
   assert.match(transferFlow, /Thanh toán hoàn tất/);
-  assert.match(transferFlow, /Khám phá bài học VIP/);
+  assert.doesNotMatch(transferFlow, /Khám phá bài học VIP/);
   assert.match(transferFlow, /himi-celebrate\.webp/);
   assert.match(transferFlow, /formatVipAccessEnd/);
   assert.doesNotMatch(transferFlow, /SePay đã xác nhận/);

@@ -1280,7 +1280,7 @@ video {
 /* Compact and mid-size laptops: keep the live form centered inside the paper,
  * move the satchel seam below the controls, and avoid a page-level scrollbar
  * on standard 720/768/800/864/900px-tall laptop displays. */
-@media (min-width: 901px) and (max-width: 1600px) and (max-height: 900px) {
+@media (min-width: 901px) and (max-height: 900px) {
   body:has(.auth-page-login-scene),
   body:has(.auth-page-login-scene) > .standalone-route-shell {
     min-height: max(100dvh, 560px);
@@ -1404,5 +1404,138 @@ video {
     margin-top: 7px;
     padding-top: 7px;
     font-size: 10px;
+  }
+}
+
+/* Above the laptop-width range, preserve the roomier desktop form but anchor
+ * the oversized 3:2 artwork to the top. Otherwise ultra-wide, short screens
+ * center the stage with the first part of the form outside the viewport. */
+@media (min-width: 1601px) and (max-height: 900px) {
+  body:has(.auth-page-login-scene),
+  body:has(.auth-page-login-scene) > .standalone-route-shell,
+  .auth-page-login-scene,
+  .auth-page-forgot-scene {
+    min-height: max(100dvh, 680px);
+  }
+
+  .auth-page-login-scene,
+  .auth-page-forgot-scene {
+    overflow-y: auto;
+  }
+
+  .auth-scene-stage {
+    top: 0;
+    width: min(max(100vw, 150dvh, 1275px), 2560px);
+    transform: translateX(-50%);
+  }
+
+  .auth-card-login-scene,
+  .auth-page-forgot-scene .auth-card-forgot-scene {
+    top: clamp(100px, 7.7vw, 197px);
+  }
+}
+
+@media (min-width: 1601px) and (min-height: 821px) and (max-height: 900px) {
+  .auth-card-login-scene {
+    left: calc(39.775% - clamp(195px, calc(37.5vw - 405px), 315px));
+    width: clamp(390px, calc(75vw - 810px), 630px);
+    max-width: 630px;
+  }
+}
+
+/* Wide displays are often shorter than their 3:2 scene artwork. Keep the
+ * useful top of the scene in view instead of vertically centering it above
+ * the viewport. The compact-height rules above still take precedence up to
+ * 900px and preserve comfortable control sizes. */
+@media (min-width: 901px) and (min-height: 901px) and (min-aspect-ratio: 3 / 2) {
+  .auth-scene-stage {
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  .auth-card-login-scene {
+    left: max(23.35%, calc(39.775% - 315px));
+    width: min(32.85%, 630px);
+  }
+}
+
+/* Portrait tablets need the same composition as phones. At 901-1100px the
+ * desktop 3:2 artwork otherwise pushes the paper and form off the left edge. */
+@media (min-width: 901px) and (max-width: 1100px) and (orientation: portrait) {
+  body:has(.auth-page-login-scene),
+  body:has(.auth-page-login-scene) > .standalone-route-shell {
+    min-height: max(100dvh, var(--auth-scene-min-height));
+    overflow-x: clip;
+  }
+
+  .auth-page-login-scene,
+  .auth-page-forgot-scene {
+    width: 100%;
+    min-height: max(100dvh, var(--auth-scene-min-height));
+    overflow-x: clip;
+    overflow-y: auto;
+  }
+
+  .auth-page-login-scene { --auth-scene-min-height: 760px; }
+  .auth-page-register-scene { --auth-scene-min-height: 844px; }
+  .auth-page-forgot-scene { --auth-scene-min-height: 700px; }
+
+  .auth-scene-stage {
+    top: 0;
+    left: 50%;
+    width: auto;
+    height: max(100dvh, var(--auth-scene-min-height));
+    aspect-ratio: 2 / 3;
+    transform: translateX(-50%);
+  }
+
+  .auth-login-scene-art {
+    background-image: url("/assets/auth/login-paper-scene-mobile-v2.webp");
+  }
+
+  .auth-card-login-scene,
+  .auth-page-forgot-scene .auth-card-forgot-scene {
+    top: 13.7%;
+    left: 18%;
+    width: 64%;
+    max-width: none;
+    margin: 0;
+    padding: 22px 24px;
+  }
+
+  .auth-card-register-scene {
+    top: 12.2%;
+    padding: 19px 23px;
+  }
+
+  .auth-page-forgot-scene .auth-card-forgot-scene {
+    top: 15.5%;
+  }
+}
+
+/* Very small phones crop the 2:3 art horizontally. Clamp the live card to the
+ * viewport while leaving it centered over the paper inside the wider stage. */
+@media (max-width: 359px) {
+  .auth-card-login-scene,
+  .auth-page-forgot-scene .auth-card-forgot-scene {
+    left: max(18%, calc((100% - 100vw) / 2 + 12px));
+    width: min(64%, calc(100vw - 24px));
+    padding-inline: 17px;
+  }
+
+  .auth-card-login-scene .auth-heading h1 {
+    font-size: clamp(25px, 8vw, 27px);
+  }
+}
+
+/* The support launcher is fixed to the viewport and can cover the primary
+ * action while a short phone is scrolled to the top of this full-height art. */
+@media (max-width: 720px) {
+  .auth-card-register-scene .auth-input-shell input {
+    font-size: 16px;
+  }
+
+  body:has(.auth-page-login-scene) > .himi-chatbot-widget {
+    display: none;
   }
 }

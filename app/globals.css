@@ -14025,20 +14025,6 @@ body:has(.learner-app-shell) > .mobile-nav {
 .vip-ticket-sparkle.is-bottom { bottom: 48px; right: -8px; animation: vip-success-sparkle-idle 2.8s .8s ease-in-out infinite; }
 
 .vip-success-actions { width: min(470px, 100%); margin-top: 22px; display: grid; justify-items: center; gap: 8px; }
-.vip-success-actions .button {
-  min-height: 50px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  border-radius: 15px;
-  box-shadow: 0 14px 28px rgba(231, 96, 67, .2);
-  transition: transform .22s cubic-bezier(.2, .8, .3, 1), box-shadow .22s ease, background-color .22s ease;
-}
-
-.vip-success-actions .button:hover { transform: translateY(-2px); box-shadow: 0 18px 34px rgba(231, 96, 67, .26); }
-.vip-success-actions .button svg { transition: transform .22s cubic-bezier(.2, .8, .3, 1); }
-.vip-success-actions .button:hover svg { transform: translateX(3px); }
 .vip-success-account-link {
   min-height: 34px;
   padding: 7px 12px;
@@ -14166,7 +14152,6 @@ body:has(.learner-app-shell) > .mobile-nav {
   .vip-success-ticket-expiry strong { font-size: 12px; }
   .vip-success-mascot { right: -14px; width: 142px; }
   .vip-success-actions { margin-top: 18px; }
-  .vip-success-actions .button { min-height: 46px; }
   .account-vip-status { grid-template-columns: auto minmax(0, 1fr); }
   .account-vip-status > a { grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid rgba(19, 87, 74, .12); }
   .account-vip-request { grid-template-columns: auto minmax(0, 1fr); }

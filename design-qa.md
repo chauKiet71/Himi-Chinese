@@ -1959,6 +1959,64 @@ final result: passed
 
 ---
 
+## Shared game and typing completion celebration — 2026-09-15
+
+### Comparison target
+
+- Source visual truth: the existing Flashcard 3D completion state, browser-captured from the shared component at `D:/CodexData/.codex/visualizations/2026/09/14/01a09d9a-586f-78a1-b543-9d2b6678428f/celebration-source-desktop-v2.png` and `celebration-source-mobile.png`.
+- Final typing implementation: `celebration-typing-desktop-v2.png` at 1440 × 900 and `celebration-typing-mobile-v2.png` at 390 × 844.
+- Final slice-game implementation: `celebration-slice-desktop-v3.png` at 1440 × 900 and `celebration-slice-mobile.png` at 390 × 844.
+- CSS viewport and density: desktop 1440 × 900 at DPR 1; mobile 390 × 844 at DPR 1. Captures use matching CSS and pixel dimensions, so no density normalization was needed.
+- State: completed Flashcard 3D round compared with completed typing and completed slice-game states. The temporary unauthenticated component harness used for capture was removed after QA.
+
+### Findings and comparison history
+
+1. P2 — The first typing pass constrained the trophy Himi to 48%, making it visibly smaller than the Flashcard 3D source at both desktop and mobile widths. The typing-only width override was removed; the revised captures now use the same 56% desktop and 70% mobile mascot sizing as the shared source.
+2. P2 — The slice-game completion had to fit a 300–440px-high arena rather than a full-page square. A responsive split layout keeps Himi and fireworks visible on the left and places the concise result panel on the right; at 390px it has no horizontal overflow and the three actions remain fully visible.
+3. P2 — Static WebP celebration art would not animate in production. The component now serves real looping GIFs for fireworks and trophy Himi, with the original WebPs selected through `prefers-reduced-motion: reduce`.
+4. No actionable P0, P1, or P2 findings remain after the revised visual pass.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the existing Himi navy display hierarchy, coral uppercase eyebrow, balanced wrapping, and compact supporting text are preserved. Typing statistics use the existing smaller UI scale and remain readable at 390px.
+- Spacing and layout rhythm: desktop keeps the centered 680–700px celebration frame and layered lower panel. Mobile uses a 374px frame without horizontal overflow; the slice arena uses a proportional two-column composition with practical 42px action targets.
+- Colors and visual tokens: warm ivory surfaces, coral actions, navy display text, teal sky, gold trophy, and soft tan elevation match the Flashcard 3D source treatment.
+- Image quality and asset fidelity: both animated assets are generated from the original production WebPs, retain transparent mascot edges, and render at native 640 × 640 and 512 × 580 dimensions. No CSS, emoji, or SVG substitute was introduced.
+- Copy and content: game-specific outcomes remain concise. Typing keeps its four useful performance metrics without adding explanatory clutter; slice keeps the existing score and next actions.
+
+### Full-view and focused comparison evidence
+
+- Source and final typing captures were opened together at desktop and mobile sizes. Frame treatment, fireworks crop, Himi scale, panel radius/elevation, score pill, and primary/secondary action hierarchy remain visibly consistent.
+- Slice desktop and mobile captures confirm that the alternate shallow layout preserves the same imagery and token system while fitting the real game arena.
+- Focused region evidence is supplied by the 390 × 844 mobile captures, where all result copy, four typing metrics, and actions are legible. No separate crop was needed because these details are readable at original size.
+- Browser-computed desktop horizontal overflow is false; mobile document width equals the 390px viewport. The slice mobile document also equals 390px.
+
+### Verification
+
+- Browser `currentSrc` resolves to `/assets/games/results/celebration-fireworks.gif` and `/assets/games/results/himi-trophy-celebration.gif`; natural dimensions are 640 × 640 and 512 × 580.
+- Production runtime returned HTTP 200 with `Content-Type: image/gif` and immutable one-year caching for both assets.
+- Reduced-motion sources remain the original static WebPs, and the separate confetti GIF remains available.
+- Browser console returned zero errors during the final typing capture.
+- Flashcard, all Game Center modes, HSK flashcard, slice game, and typing completion use `GameResultCelebration`.
+- Focused tests: 20 passed, 0 failed. ESLint, `git diff --check`, and `npm run build` passed.
+
+### Implementation checklist
+
+- [x] Reuse the Flashcard 3D completion component for typing.
+- [x] Reuse it for slice game and all existing Game Center results.
+- [x] Serve real animated Himi and fireworks assets in production.
+- [x] Preserve static reduced-motion fallbacks.
+- [x] Verify desktop and 390px mobile layouts without horizontal overflow.
+- [x] Keep typing metrics and post-completion actions functional.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped completion-state rollout.
+
+final result: passed
+
+---
+
 ## Lesson learning stage — mockup-fidelity correction — 2026-09-15
 
 ### Comparison target and final captures

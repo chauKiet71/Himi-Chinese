@@ -19,6 +19,11 @@
 
 .game-result-celebration__background,
 .game-result-celebration__firework-pulse {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  display: block;
   z-index: -3;
   object-fit: cover;
   object-position: center;
@@ -50,6 +55,11 @@
   z-index: 1;
   transform: translateX(-50%);
   transform-origin: center 78%;
+}
+
+.game-result-celebration__mascot-stage > picture {
+  width: 100%;
+  display: block;
 }
 
 .game-result-celebration__mascot {
@@ -116,6 +126,11 @@
   font-size: clamp(19px, 3vw, 28px);
   font-weight: 850;
   line-height: 1;
+}
+
+.game-session-world .game-result-celebration__details {
+  width: 100%;
+  margin-top: 14px;
 }
 
 .game-result-celebration__score > svg {
@@ -225,6 +240,7 @@
   .game-result-celebration__panel > small,
   .game-result-celebration__panel > h2,
   .game-result-celebration__score,
+  .game-result-celebration__details,
   .game-result-celebration__actions > * {
     animation: himi-result-copy-enter 420ms cubic-bezier(.22, 1, .36, 1) both;
   }
@@ -232,6 +248,7 @@
   .game-result-celebration__panel > small { animation-delay: 620ms; }
   .game-result-celebration__panel > h2 { animation-delay: 720ms; }
   .game-result-celebration__score { animation: himi-result-score-enter 520ms cubic-bezier(.18, 1.45, .3, 1) 840ms both; }
+  .game-result-celebration__details { animation-delay: 920ms; }
   .game-result-celebration__actions > :nth-child(1) { animation-delay: 980ms; }
   .game-result-celebration__actions > :nth-child(2) { animation-delay: 1060ms; }
   .game-result-celebration__actions > :nth-child(3) { animation-delay: 1140ms; }
@@ -398,6 +415,125 @@
   }
 }
 
+/* The slice game renders its result inside a shallow arena instead of a full page. */
+.writing-game-completion-overlay {
+  padding: 10px;
+  background: rgba(255, 253, 248, .96);
+}
+
+.writing-game-completion-overlay .game-result-celebration {
+  width: min(660px, 100%);
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+  border-width: 5px;
+  border-radius: 26px;
+}
+
+.writing-game-completion-overlay .game-result-celebration__background,
+.writing-game-completion-overlay .game-result-celebration__firework-pulse {
+  object-position: center 20%;
+}
+
+.writing-game-completion-overlay .game-result-celebration__mascot-stage {
+  width: 43%;
+  top: 4%;
+  left: 26%;
+}
+
+.writing-game-completion-overlay .game-result-celebration__panel {
+  top: 4%;
+  right: 2.5%;
+  bottom: 4%;
+  left: 46%;
+  min-height: 0;
+  padding: 13px;
+  border-radius: 21px;
+}
+
+.writing-game-completion-overlay .game-result-celebration__panel > small {
+  font-size: clamp(8px, 1.1vw, 10px);
+}
+
+.writing-game-completion-overlay .game-result-celebration__panel > h2 {
+  margin: 6px 0 8px;
+  font-size: clamp(18px, 2.1vw, 24px);
+}
+
+.writing-game-completion-overlay .game-result-celebration__score {
+  min-height: 38px;
+  padding-inline: 13px;
+  font-size: 17px;
+}
+
+.writing-game-completion-overlay .game-result-celebration__actions {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.writing-game-completion-overlay .game-result-celebration__actions > button,
+.writing-game-completion-overlay .game-result-celebration__actions > a {
+  min-height: 40px;
+  padding-inline: 7px;
+  font-size: 10px;
+}
+
+.writing-game-completion-overlay .game-result-celebration__actions > .daily-game-flow-action {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 520px) {
+  .writing-game-completion-overlay {
+    padding: 6px;
+  }
+
+  .writing-game-completion-overlay .game-result-celebration {
+    border-width: 4px;
+    border-radius: 21px;
+  }
+
+  .writing-game-completion-overlay .game-result-celebration__mascot-stage {
+    width: 47%;
+    top: 7%;
+    left: 24%;
+  }
+
+  .writing-game-completion-overlay .game-result-celebration__panel {
+    top: 3%;
+    right: 2%;
+    bottom: 3%;
+    left: 42%;
+    padding: 9px 7px;
+    border-radius: 17px;
+  }
+
+  .writing-game-completion-overlay .game-result-celebration__panel > h2 {
+    margin: 4px 0 6px;
+    font-size: clamp(15px, 5vw, 19px);
+    line-height: 1.05;
+  }
+
+  .writing-game-completion-overlay .game-result-celebration__score {
+    min-height: 34px;
+    padding-inline: 9px;
+    font-size: 14px;
+  }
+
+  .writing-game-completion-overlay .game-result-celebration__actions {
+    margin-top: 7px;
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .writing-game-completion-overlay .game-result-celebration__actions > button,
+  .writing-game-completion-overlay .game-result-celebration__actions > a {
+    min-height: 42px;
+    font-size: 9px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .game-result-celebration__confetti {
     display: none;
@@ -408,6 +544,7 @@
   .game-result-celebration__mascot-stage,
   .game-result-celebration__mascot,
   .game-session-world .game-result-celebration__panel,
+  .game-result-celebration__details,
   .game-session-world .game-result-celebration__actions > * {
     animation: none;
     transition: none;
