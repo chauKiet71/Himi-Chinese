@@ -9,7 +9,7 @@ import { ArrowRight, Eye, EyeOff, Home, KeyRound, LockKeyhole, Mail, RotateCcw, 
 import { BrandMark, BrandWordmark } from "@/components/brand-logo";
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from "@/lib/auth-validation";
 
-gsap.registerPlugin(useGSAP);
+if (typeof window !== "undefined") gsap.registerPlugin(useGSAP);
 
 type AuthMode = "login" | "register" | "forgot-password" | "admin";
 

@@ -17,4 +17,5 @@ test("forgot-password reuses the learner authentication scene", async () => {
   assert.match(authCard, /Quay lại đăng nhập/);
   assert.match(authCard, /auth-page-forgot-scene/);
   assert.match(authCard, /auth-card-forgot-scene/);
+  assert.match(authCard, /if \(typeof window !== "undefined"\) gsap\.registerPlugin\(useGSAP\);/);
 });
