@@ -779,10 +779,14 @@ test("lesson vocabulary uses a focused interactive card deck", async () => {
   assert.match(workspace, /LessonVocabularyDeck/);
   assert.doesNotMatch(workspace, /className="word-list"/);
   assert.match(deck, /speechSynthesis/);
-  assert.match(deck, /Đã hiểu · Tiếp tục/);
+  assert.doesNotMatch(deck, />Tiếp tục|Xem cách viết|Xem thêm ví dụ|lesson-example-card|lesson-word-type/);
+  assert.match(deck, /lesson-card-edge-nav is-back/);
+  assert.match(deck, /lesson-card-edge-nav is-next/);
   assert.match(deck, /ArrowLeft/);
   assert.match(deck, /ArrowRight/);
-  assert.match(deck, /remembered: false/);
+  assert.match(deck, /saved: nextSaved/);
+  assert.match(deck, /aria-pressed=\{saved\}/);
+  assert.match(deck, /Bỏ lưu từ khỏi bộ từ của bạn/);
 });
 
 test("practice editorial workflow separates authoring, review, publishing, versions, assignments, and role management", async () => {

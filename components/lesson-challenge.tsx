@@ -8,9 +8,11 @@ import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 export function LessonChallengePanel({
   challenge,
   onPassed,
+  onComplete,
 }: {
   challenge: LessonChallenge;
   onPassed: (passed: boolean) => void;
+  onComplete?: () => void;
 }) {
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [score, setScore] = useState<number | null>(null);
@@ -79,6 +81,7 @@ export function LessonChallengePanel({
         ? <VipUpgradeInlineForm />
         : score === null
         ? <button className="button button-primary" disabled={answered !== accessibleQuestionIndexes.length} onClick={grade} type="button">Chấm kết quả</button>
+        : passed && onComplete ? <div className="challenge-result-actions"><button className="button button-secondary" onClick={retry} type="button"><RotateCcw size={17} /> Làm lại</button><button className="button button-primary" onClick={onComplete} type="button"><CheckCircle2 size={17} /> Hoàn thành bài</button></div>
         : <button className="button button-secondary" onClick={retry} type="button"><RotateCcw size={17} /> Làm lại</button>}
     </div>
   </section>;

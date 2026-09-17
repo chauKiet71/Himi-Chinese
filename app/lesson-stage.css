@@ -1882,3 +1882,839 @@
     grid-template-columns: minmax(0, 1fr) 44px;
   }
 }
+
+
+/* Shared reference-card treatment for vocabulary, phrases, listening and speaking. */
+.lesson-reference-deck .lesson-study-panel {
+  min-height: clamp(560px, 66svh, 720px);
+}
+
+.lesson-reference-deck .lesson-study-surface {
+  position: relative;
+  padding: clamp(26px, 2.5vw, 38px);
+  overflow: hidden;
+  border: 1px solid #e7dfdc;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 12px 34px rgba(45, 32, 27, .045);
+}
+
+.lesson-reference-deck .lesson-stage-progress {
+  padding-bottom: 22px;
+  border-bottom: 1px solid #ececef;
+}
+
+.lesson-reference-deck .lesson-stage-progress > span {
+  padding: 8px 12px;
+  color: var(--stage-red);
+  border-radius: 999px;
+  background: #fff0ef;
+  font-size: 13px;
+  letter-spacing: .035em;
+}
+
+.lesson-reference-deck .lesson-vocab-progress-segments {
+  width: auto;
+  max-width: 240px;
+  margin-left: auto;
+  flex: 0 1 240px;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.lesson-reference-deck .lesson-vocab-progress-segments > i {
+  width: 9px;
+  height: 9px;
+  min-width: 9px;
+  flex: 0 0 9px;
+  background: #e1e4e9;
+}
+
+.lesson-reference-deck .lesson-vocab-progress-segments > i.filled {
+  width: 26px;
+  min-width: 26px;
+  flex-basis: 26px;
+  border-radius: 999px;
+  background: #ff4f48;
+}
+
+.lesson-reference-deck .lesson-study-content {
+  width: min(920px, 100%);
+  margin: auto;
+  padding: clamp(32px, 5vh, 58px) 0 clamp(26px, 3.5vh, 42px);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.lesson-reference-deck :is(.lesson-word-heading, .lesson-phrase-heading-row, .pronunciation-heading-row) {
+  width: fit-content;
+  max-width: 100%;
+  min-height: 150px;
+  padding: 20px clamp(28px, 4vw, 54px);
+  justify-content: center;
+  border: 1px solid #ffe0c7;
+  border-radius: 22px;
+  background: #fffdfa;
+}
+
+.lesson-reference-deck .lesson-vocab-hanzi {
+  max-width: 100%;
+  color: #202020;
+  font-size: clamp(76px, 8vw, 112px);
+  line-height: 1.05;
+  letter-spacing: -.055em;
+  text-align: center;
+}
+
+.lesson-reference-deck .lesson-phrase-hanzi,
+.lesson-reference-deck .pronunciation-heading-row > strong {
+  max-width: 100%;
+  color: #202020;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 1.28;
+  letter-spacing: -.035em;
+  text-align: center;
+}
+
+.lesson-reference-deck .lesson-vocab-meta {
+  margin-top: 16px;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lesson-reference-deck .lesson-vocab-pinyin {
+  color: #f27a20;
+  font-size: clamp(21px, 2vw, 27px);
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.lesson-reference-deck .lesson-vocabulary-content .lesson-vocab-pinyin {
+  padding: 8px 18px;
+  display: inline-flex;
+  border: 1px solid #ffe0cc;
+  border-radius: 999px;
+  background: #fff6ed;
+  box-shadow: 0 5px 14px rgba(237, 116, 31, .06);
+}
+
+.lesson-reference-deck :is(.lesson-vocab-meaning, .lesson-phrase-meaning) {
+  max-width: min(760px, 100%);
+  margin: 0;
+  color: #17191d;
+  font-size: clamp(21px, 2vw, 28px);
+  font-weight: 720;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.lesson-reference-deck .lesson-phrase-pinyin {
+  max-width: min(760px, 100%);
+  margin-top: 18px;
+  color: #f27a20;
+  font-size: clamp(20px, 1.9vw, 27px);
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.lesson-reference-deck .lesson-phrase-structure {
+  width: min(780px, 100%);
+  justify-content: center;
+}
+
+.lesson-audio-actions {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.lesson-reference-deck .lesson-audio-actions .lesson-save-button {
+  width: 54px;
+  min-width: 54px;
+  min-height: 54px;
+  margin: 0;
+  color: var(--stage-red);
+  border: 1px solid #e8e9ed;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.lesson-reference-deck .lesson-audio-actions .lesson-save-button:hover:not(:disabled),
+.lesson-reference-deck .lesson-audio-actions .lesson-save-button.saved {
+  color: #fff;
+  border-color: #ff554e;
+  background: #ff554e;
+  box-shadow: 0 7px 16px rgba(255, 78, 72, .2);
+}
+
+.lesson-reference-deck .lesson-audio-actions .lesson-save-button.saved:hover:not(:disabled) {
+  border-color: #e94641;
+  background: #e94641;
+}
+
+.lesson-reference-deck .lesson-audio-actions .lesson-save-button.is-toggling {
+  opacity: 1;
+  animation: lesson-save-toggle-pop .32s ease-out;
+}
+
+@keyframes lesson-save-toggle-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(.88); }
+  75% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.lesson-reference-deck .lesson-audio-bar {
+  width: auto;
+  min-width: min(250px, 100%);
+  min-height: 54px;
+  margin: 0;
+  padding: 0 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  border: 1px solid #ff554e;
+  border-radius: 16px;
+  background: #ff554e;
+  box-shadow: 0 10px 22px rgba(255, 78, 72, .2);
+}
+
+.lesson-reference-deck .lesson-audio-bar:hover {
+  color: #fff;
+  border-color: #e94641;
+  background: #e94641;
+  transform: translateY(-1px);
+}
+
+.lesson-reference-deck .lesson-audio-icon {
+  width: auto;
+  height: auto;
+  color: currentColor;
+  background: transparent;
+}
+
+.lesson-reference-deck .lesson-audio-bar strong {
+  font-size: 16px;
+  font-weight: 760;
+}
+
+.lesson-audio-speed {
+  min-width: 82px;
+  min-height: 54px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #5f6570;
+  border-radius: 16px;
+  background: #f4f5f7;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.lesson-reference-deck .lesson-example-card {
+  width: 100%;
+  margin-top: 26px;
+  padding: 22px 0;
+  border: 0;
+  border-top: 1px solid var(--stage-line);
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.lesson-reference-deck .lesson-study-tools-compact {
+  width: auto;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  border: 0;
+}
+
+.lesson-reference-deck .lesson-study-tools-compact .lesson-save-button {
+  width: 44px;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+}
+
+.lesson-card-edge-nav {
+  position: absolute;
+  top: 52%;
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  color: #6d727b;
+  border: 1px solid #e4e1df;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 7px 18px rgba(45, 32, 27, .08);
+  transform: translateY(-50%);
+  transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.lesson-card-edge-nav.is-back {
+  left: 18px;
+}
+
+.lesson-card-edge-nav.is-next {
+  right: 18px;
+}
+
+.lesson-card-edge-nav:hover:not(:disabled) {
+  color: #fff;
+  border-color: var(--stage-red);
+  background: var(--stage-red);
+  transform: translateY(-50%) scale(1.04);
+}
+
+.lesson-card-edge-nav:disabled {
+  cursor: default;
+  opacity: .28;
+}
+
+.lesson-card-edge-nav:focus-visible {
+  outline: 3px solid rgba(255, 36, 56, .24);
+  outline-offset: 2px;
+}
+
+.lesson-reference-deck .lesson-pronunciation-completion {
+  padding-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #ececef;
+}
+
+.lesson-reference-deck .pronunciation-pinyin {
+  max-width: min(760px, 100%);
+  margin-top: 18px;
+  display: block;
+  color: #f27a20;
+  font-size: clamp(19px, 1.8vw, 25px);
+  font-weight: 680;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.lesson-reference-deck .pronunciation-study-content > p {
+  max-width: min(760px, 100%);
+  margin-top: 7px;
+  color: #17191d;
+  font-size: clamp(20px, 1.8vw, 27px);
+  font-weight: 650;
+  text-align: center;
+}
+
+.lesson-reference-deck .lesson-pronunciation-action,
+.lesson-reference-deck .pronunciation-status-row {
+  width: min(820px, 100%);
+}
+
+.challenge-result-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .lesson-reference-deck .lesson-study-surface {
+    padding: 16px 14px 14px;
+    border-radius: 18px;
+  }
+
+  .lesson-reference-deck .lesson-stage-progress {
+    padding-bottom: 14px;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .lesson-reference-deck .lesson-stage-progress > span {
+    font-size: 11px;
+  }
+
+  .lesson-reference-deck .lesson-vocab-progress-segments {
+    width: auto;
+    max-width: 150px;
+    flex: 0 1 150px;
+    gap: 6px;
+  }
+
+  .lesson-reference-deck .lesson-vocab-progress-segments > i {
+    width: 7px;
+    height: 7px;
+    min-width: 7px;
+    flex: 0 0 7px;
+  }
+
+  .lesson-reference-deck .lesson-vocab-progress-segments > i.filled {
+    width: 20px;
+    min-width: 20px;
+    flex-basis: 20px;
+  }
+
+  .lesson-reference-deck .lesson-study-content {
+    padding: 26px 0 20px;
+  }
+
+  .lesson-reference-deck :is(.lesson-word-heading, .lesson-phrase-heading-row, .pronunciation-heading-row) {
+    min-height: 116px;
+    padding: 16px 18px;
+    border-radius: 18px;
+  }
+
+  .lesson-reference-deck .lesson-vocab-hanzi {
+    font-size: clamp(56px, 19vw, 76px);
+  }
+
+  .lesson-reference-deck .lesson-phrase-hanzi,
+  .lesson-reference-deck .pronunciation-heading-row > strong {
+    font-size: clamp(28px, 8.5vw, 38px);
+  }
+
+  .lesson-reference-deck .lesson-vocab-tags {
+    padding-left: 12px;
+  }
+
+  .lesson-reference-deck .lesson-vocab-pinyin {
+    font-size: 20px;
+  }
+
+  .lesson-reference-deck :is(.lesson-vocab-meaning, .lesson-phrase-meaning) {
+    font-size: 20px;
+  }
+
+  .lesson-audio-actions {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .lesson-reference-deck .lesson-audio-bar {
+    min-width: 0;
+    flex: 1 1 auto;
+    padding-inline: 18px;
+  }
+
+  .lesson-audio-speed {
+    min-width: 68px;
+    padding-inline: 12px;
+  }
+
+  .lesson-reference-deck .lesson-audio-actions .lesson-save-button {
+    width: 50px;
+    min-width: 50px;
+  }
+
+  .lesson-card-edge-nav {
+    top: 48%;
+    width: 40px;
+    height: 40px;
+  }
+
+  .lesson-card-edge-nav.is-back {
+    left: 7px;
+  }
+
+  .lesson-card-edge-nav.is-next {
+    right: 7px;
+  }
+
+  .lesson-reference-deck .lesson-pronunciation-completion .lesson-stage-nav-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .lesson-reference-deck .lesson-phrase-structure {
+    justify-content: flex-start;
+  }
+
+  .lesson-reference-deck .lesson-example-card {
+    margin-top: 22px;
+  }
+
+  .challenge-result-actions {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+}
+
+/* Cross-device hardening for the three lesson study modes. */
+.lesson-reference-deck,
+.lesson-reference-deck .lesson-stage-layout,
+.lesson-reference-deck .lesson-study-panel,
+.lesson-reference-deck .lesson-study-surface,
+.lesson-reference-deck .lesson-study-content {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.lesson-reference-deck :is(.lesson-vocab-hanzi, .lesson-phrase-hanzi, .pronunciation-heading-row > strong, .lesson-vocab-pinyin, .lesson-vocab-meaning, .lesson-phrase-pinyin, .lesson-phrase-meaning, .pronunciation-pinyin, .pronunciation-study-content > p) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.lesson-reference-deck .pronunciation-heading-row > strong {
+  min-width: 0;
+  max-width: calc(100% - 54px);
+}
+
+.lesson-reference-deck .lesson-audio-actions {
+  max-width: 100%;
+}
+
+.lesson-reference-deck .lesson-vocab-progress-segments {
+  overflow: hidden;
+}
+
+.lesson-reference-deck .lesson-vocab-progress-segments > i,
+.lesson-reference-deck .lesson-vocab-progress-segments > i.filled {
+  width: auto;
+  min-width: 5px;
+  max-width: 26px;
+  flex: 1 1 0;
+}
+
+@media (min-width: 641px) and (max-width: 980px) {
+  .lesson-reference-deck .lesson-study-panel {
+    min-height: 520px;
+  }
+
+  .lesson-reference-deck .lesson-study-surface {
+    padding: 24px;
+  }
+
+  .lesson-reference-deck .lesson-study-content {
+    padding-block: 32px;
+  }
+
+  .lesson-reference-deck :is(.lesson-word-heading, .lesson-phrase-heading-row, .pronunciation-heading-row) {
+    min-height: 132px;
+  }
+}
+
+@media (min-width: 981px) and (max-height: 800px) {
+  .lesson-reference-deck .lesson-study-panel,
+  .lesson-reference-deck .lesson-coach-rail {
+    min-height: 480px;
+  }
+
+  .lesson-reference-deck .lesson-study-surface {
+    padding: 16px 22px;
+  }
+
+  .lesson-reference-deck .lesson-stage-progress {
+    padding-bottom: 12px;
+  }
+
+  .lesson-reference-deck .lesson-study-content {
+    padding-block: 16px;
+  }
+
+  .lesson-reference-deck :is(.lesson-word-heading, .lesson-phrase-heading-row, .pronunciation-heading-row) {
+    min-height: 108px;
+    padding-block: 14px;
+  }
+
+  .lesson-reference-deck .lesson-vocab-hanzi {
+    font-size: clamp(58px, 6vw, 76px);
+  }
+
+  .lesson-reference-deck .lesson-phrase-hanzi,
+  .lesson-reference-deck .pronunciation-heading-row > strong {
+    font-size: clamp(30px, 3.25vw, 42px);
+  }
+
+  .lesson-reference-deck .lesson-audio-actions {
+    margin-top: 16px;
+  }
+
+  .lesson-reference-deck .lesson-phrase-structure {
+    margin-top: 12px;
+  }
+
+  .lesson-reference-deck .lesson-pronunciation-action {
+    margin-top: 10px;
+  }
+
+  .lesson-reference-deck .pronunciation-status-row {
+    min-height: 54px;
+    margin-top: 8px;
+  }
+
+  .lesson-card-edge-nav {
+    top: clamp(142px, 31%, 178px);
+  }
+}
+
+@media (max-width: 640px) {
+  .lesson-stage-workspace .lesson-tabs {
+    padding-bottom: 1px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+  }
+
+  .lesson-stage-workspace .lesson-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lesson-stage-workspace .lesson-tab {
+    min-width: max-content;
+    padding-inline: 14px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .lesson-reference-deck .lesson-study-panel {
+    min-height: 0;
+  }
+
+  .lesson-reference-deck .lesson-study-surface {
+    padding: 14px 12px 16px;
+  }
+
+  .lesson-reference-deck .lesson-stage-progress {
+    min-width: 0;
+    gap: 10px;
+  }
+
+  .lesson-reference-deck .lesson-stage-progress > span {
+    padding: 7px 9px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .lesson-reference-deck .lesson-vocab-progress-segments {
+    width: min(46vw, 170px);
+    max-width: min(46vw, 170px);
+    gap: 4px;
+    flex: 0 1 auto;
+  }
+
+  .lesson-reference-deck .lesson-vocab-progress-segments > i,
+  .lesson-reference-deck .lesson-vocab-progress-segments > i.filled {
+    width: auto;
+    min-width: 3px;
+    height: 6px;
+    flex: 1 1 0;
+  }
+
+  .lesson-reference-deck .lesson-study-content {
+    padding: 24px 0 18px;
+  }
+
+  .lesson-reference-deck :is(.lesson-word-heading, .lesson-phrase-heading-row, .pronunciation-heading-row) {
+    max-width: calc(100% - 68px);
+    min-height: 108px;
+    padding: 14px 12px;
+  }
+
+  .lesson-reference-deck .lesson-vocab-hanzi {
+    font-size: clamp(50px, 18vw, 68px);
+  }
+
+  .lesson-reference-deck .lesson-phrase-hanzi,
+  .lesson-reference-deck .pronunciation-heading-row > strong {
+    font-size: clamp(25px, 7.8vw, 34px);
+  }
+
+  .lesson-reference-deck .lesson-inline-sound {
+    width: 44px;
+    height: 44px;
+  }
+
+  .lesson-reference-deck .lesson-vocab-meta {
+    width: 100%;
+  }
+
+  .lesson-reference-deck .lesson-vocabulary-content .lesson-vocab-pinyin {
+    max-width: 100%;
+    padding: 7px 14px;
+  }
+
+  .lesson-reference-deck :is(.lesson-vocab-meaning, .lesson-phrase-meaning) {
+    font-size: clamp(18px, 5.2vw, 20px);
+  }
+
+  .lesson-reference-deck .lesson-phrase-pinyin,
+  .lesson-reference-deck .pronunciation-pinyin {
+    font-size: clamp(17px, 4.8vw, 20px);
+  }
+
+  .lesson-reference-deck .pronunciation-study-content > p {
+    font-size: clamp(17px, 4.8vw, 20px);
+  }
+
+  .lesson-reference-deck .lesson-phrase-structure {
+    width: 100%;
+    margin-top: 14px;
+  }
+
+  .lesson-reference-deck .lesson-phrase-structure-part > b {
+    font-size: clamp(15px, 4.4vw, 18px);
+    line-height: 1.5;
+  }
+
+  .lesson-reference-deck .lesson-audio-actions {
+    min-width: 0;
+    margin-top: 18px;
+  }
+
+  .lesson-reference-deck .lesson-audio-bar {
+    min-width: 0;
+    min-height: 50px;
+    padding-inline: 14px;
+  }
+
+  .lesson-reference-deck .lesson-audio-bar strong {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  .lesson-reference-deck .lesson-audio-speed {
+    min-width: 60px;
+    min-height: 50px;
+    padding-inline: 9px;
+  }
+
+  .lesson-reference-deck .lesson-audio-actions .lesson-save-button {
+    width: 50px;
+    min-width: 50px;
+    min-height: 50px;
+  }
+
+  .lesson-card-edge-nav {
+    top: 142px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .lesson-card-edge-nav.is-back {
+    left: 6px;
+  }
+
+  .lesson-card-edge-nav.is-next {
+    right: 6px;
+  }
+
+  .lesson-reference-deck .lesson-pronunciation-action,
+  .lesson-reference-deck .pronunciation-status-row {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .lesson-reference-deck .lesson-pronunciation-action {
+    padding-inline: 8px;
+  }
+
+  .lesson-reference-deck .lesson-pronunciation-action .pronunciation-record-stage {
+    width: 100%;
+    grid-template-columns: 34px minmax(126px, 1fr) 34px;
+    gap: 6px;
+  }
+
+  .lesson-reference-deck .lesson-pronunciation-action .pronunciation-waveform svg {
+    width: 54px;
+    max-width: 100%;
+  }
+
+  .lesson-reference-deck .pronunciation-status-row {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .lesson-page .lesson-responsive-shell {
+    width: calc(100% - 16px);
+  }
+
+  .lesson-reference-deck .lesson-study-surface {
+    padding-inline: 10px;
+  }
+
+  .lesson-reference-deck .lesson-audio-actions {
+    flex-wrap: wrap;
+  }
+
+  .lesson-reference-deck .lesson-audio-bar {
+    width: 100%;
+    flex: 1 0 100%;
+  }
+
+  .lesson-reference-deck .lesson-audio-speed {
+    margin-left: auto;
+  }
+
+  .lesson-reference-deck .lesson-audio-actions .lesson-save-button {
+    margin-right: auto;
+  }
+
+  .lesson-reference-deck .pronunciation-status-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .lesson-reference-deck .pronunciation-status-row button {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 980px) and (max-height: 500px) and (orientation: landscape) {
+  .lesson-page:has(.lesson-stage-workspace) {
+    padding-block: 8px 24px;
+  }
+
+  .lesson-stage-workspace .lesson-heading-row h1 {
+    font-size: 28px;
+  }
+
+  .lesson-stage-workspace .lesson-tabs,
+  .lesson-stage-workspace .lesson-tab {
+    min-height: 44px;
+  }
+
+  .lesson-reference-deck .lesson-study-panel {
+    min-height: 0;
+  }
+
+  .lesson-reference-deck .lesson-study-surface {
+    padding: 12px 18px;
+  }
+
+  .lesson-reference-deck .lesson-study-content {
+    padding-block: 14px;
+  }
+
+  .lesson-reference-deck :is(.lesson-word-heading, .lesson-phrase-heading-row, .pronunciation-heading-row) {
+    min-height: 92px;
+  }
+
+  .lesson-reference-deck .lesson-coach-rail {
+    display: none;
+  }
+
+  .lesson-card-edge-nav {
+    top: 124px;
+  }
+}
+
+@media (pointer: coarse) {
+  .lesson-card-edge-nav,
+  .lesson-reference-deck .lesson-audio-actions .lesson-save-button,
+  .lesson-reference-deck .lesson-audio-speed {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}

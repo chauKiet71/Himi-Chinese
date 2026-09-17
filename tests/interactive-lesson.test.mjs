@@ -104,5 +104,7 @@ test("an unlocked workplace lesson exposes vocabulary, phrase and pronunciation 
   assert.match(phraseHtml, /Cụm 01 \/ 03/);
   assert.doesNotMatch(phraseHtml, /lesson-inline-sound/);
   assert.doesNotMatch(phraseHtml, /<b[^>]*>[，。！？、,.!?]+<\/b>/u);
-  for (const label of ["Nghe cụm từ", "Lưu cụm", "Đã hiểu · Tiếp tục", "Cụm tiếp theo"]) assert.match(phraseHtml, new RegExp(label));
+  for (const label of ["Nghe cụm từ", "Lưu cụm", "Cụm tiếp theo"]) assert.match(phraseHtml, new RegExp(label));
+  assert.doesNotMatch(phraseHtml, /<span>Tiếp tục<\/span>|class="lesson-stage-nav"/);
+  assert.doesNotMatch(phraseHtml, /Xem giải thích/);
 });

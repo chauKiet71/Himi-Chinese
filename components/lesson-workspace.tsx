@@ -48,7 +48,6 @@ export function LessonWorkspace({
   const lessonNumber = lesson.order + 1;
   const tabIndex = tabs.indexOf(tab);
   const completed = progress?.completionPercent === 100;
-  const requiresChallengePass = Boolean(lesson.challenge) && !challengePassed;
   const lessonHref = `/learn/${course.slug}?lesson=${lesson.slug}`;
   const returnTo = dailyFlow ? withDailySessionFlow(lessonHref) : lessonHref;
   const completionReturnTo = dailyFlow ? `${returnTo}#daily-next` : returnTo;
@@ -61,7 +60,25 @@ export function LessonWorkspace({
   const continueToPhrases = useCallback(() => setTab("Cụm từ"), []);
   const continueToPronunciation = useCallback(() => setTab("Nghe & nói"), []);
   const stageTab = tab === "Từ vựng" || tab === "Cụm từ" || tab === "Nghe & nói";
-  const showCompletion = tab === "Nghe & nói" || tab === "Kiểm tra";
+  const completionFormId = `lesson-completion-${lesson.slug}`;
+  const completionLoginId = `lesson-completion-login-${lesson.slug}`;
+
+  const finishLesson = useCallback(() => {
+    if (lesson.challenge && !challengePassed) {
+      setTab("Kiểm tra");
+      return;
+    }
+    if (completed) {
+      document.getElementById("daily-next")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    if (!authenticated) {
+      document.getElementById(completionLoginId)?.click();
+      return;
+    }
+    const form = document.getElementById(completionFormId);
+    if (form instanceof HTMLFormElement) form.requestSubmit();
+  }, [authenticated, challengePassed, completed, completionFormId, completionLoginId, lesson.challenge]);
 
   useEffect(() => {
     if (!authenticated || !access.allowed) return;
@@ -115,18 +132,15 @@ export function LessonWorkspace({
               </section> : null}
               {tab === "Từ vựng" ? <LessonVocabularyDeck authenticated={authenticated} onFinished={continueToPhrases} words={lesson.vocabulary} /> : null}
               {tab === "Cụm từ" ? <LessonPhrasebook dialogue={practiceLines} notes={lesson.notes} onFinished={continueToPronunciation} words={lesson.vocabulary} /> : null}
-              {tab === "Nghe & nói" ? <LessonPronunciationCoach dialogue={practiceLines} words={lesson.vocabulary} /> : null}
-              {tab === "Kiểm tra" && lesson.challenge ? <LessonChallengePanel challenge={lesson.challenge} onPassed={setChallengePassed} /> : null}
+              {tab === "Nghe & nói" ? <LessonPronunciationCoach dialogue={practiceLines} onFinished={finishLesson} words={lesson.vocabulary} /> : null}
+              {tab === "Kiểm tra" && lesson.challenge ? <LessonChallengePanel challenge={lesson.challenge} onComplete={finishLesson} onPassed={setChallengePassed} /> : null}
             </div>
         </div>
 
-        <div className="lesson-complete-row" hidden={!showCompletion}>
-          <div className="lesson-complete-message"><p>{completed ? "Tốt lắm! Tiến độ hoàn thành đã được lưu vào tài khoản." : authenticated ? "Lần mở bài đã được ghi nhận. Hoàn thành để cập nhật tiến độ." : "Bạn vẫn có thể học thử; hãy đăng nhập để lưu tiến độ."}</p></div>
-          {completed ? <button className="button button-secondary" disabled type="button"><CheckCircle2 size={18} /> Đã hoàn thành</button> : authenticated ? <form action="/api/progress/lesson/complete" method="post">
-            <input name="courseSlug" type="hidden" value={course.slug} /><input name="lessonSlug" type="hidden" value={lesson.slug} /><input name="returnTo" type="hidden" value={completionReturnTo} />
-            <button className="button button-primary" disabled={requiresChallengePass} type="submit"><CheckCircle2 size={18} /> {requiresChallengePass ? "Hoàn thành kiểm tra trước" : "Hoàn thành bài"}</button>
-          </form> : requiresChallengePass ? <button className="button button-primary" disabled type="button"><CheckCircle2 size={18} /> Hoàn thành kiểm tra trước</button> : <Link className="button button-primary" href={`/login?returnTo=${encodeURIComponent(returnTo)}`}><CheckCircle2 size={18} /> Đăng nhập để lưu</Link>}
-        </div>
+        {authenticated && !completed ? <form action="/api/progress/lesson/complete" hidden id={completionFormId} method="post">
+          <input name="courseSlug" type="hidden" value={course.slug} /><input name="lessonSlug" type="hidden" value={lesson.slug} /><input name="returnTo" type="hidden" value={completionReturnTo} />
+        </form> : null}
+        {!authenticated ? <Link hidden href={`/login?returnTo=${encodeURIComponent(returnTo)}`} id={completionLoginId}>Đăng nhập để hoàn thành</Link> : null}
         {completed && dailyFlow && dailyNextStep ? <section className="daily-flow-next-step" id="daily-next" aria-label="Bước tiếp theo trong phiên 10 phút">
           <span className="daily-flow-next-mark"><CheckCircle2 size={20} /></span>
           <div>

@@ -45,6 +45,7 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+/.codex-tmp/
 
 # Isolated output from the Telegram support build verification.
 /tmp/support-build-20260907/

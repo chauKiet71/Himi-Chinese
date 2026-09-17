@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, BookOpenText, Bookmark, Check, ChevronDown, Lightbulb, LoaderCircle, PenLine, Play } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bookmark, Lightbulb, Play } from "lucide-react";
 import type { Vocabulary } from "@/lib/content-types";
 
 type MoveDirection = "back" | "forward";
@@ -15,6 +15,7 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
   const [saveMessage, setSaveMessage] = useState("");
   const [savedSlugs, setSavedSlugs] = useState<Set<string>>(() => new Set());
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const saveMutationVersionRef = useRef(0);
 
   const currentWord = words[index];
   const atStart = index === 0;
@@ -69,6 +70,21 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
   }, []);
 
+  useEffect(() => {
+    if (!authenticated || !words.length) return;
+    const controller = new AbortController();
+    const mutationVersion = saveMutationVersionRef.current;
+    const slugs = words.map((word) => word.slug).join(",");
+    void fetch(`/api/progress/review?slugs=${encodeURIComponent(slugs)}`, { signal: controller.signal })
+      .then((response) => response.ok ? response.json() as Promise<{ savedSlugs?: string[] }> : null)
+      .then((data) => {
+        if (!data || saveMutationVersionRef.current !== mutationVersion) return;
+        setSavedSlugs(new Set(data.savedSlugs ?? []));
+      })
+      .catch(() => undefined);
+    return () => controller.abort();
+  }, [authenticated, words]);
+
   const playPronunciation = async () => {
     if (!currentWord || isSpeaking) return;
     stopAudio();
@@ -78,6 +94,7 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
     if (currentWord.audioUrl) {
       try {
         const audio = new Audio(currentWord.audioUrl);
+        audio.playbackRate = 0.8;
         audioRef.current = audio;
         audio.addEventListener("ended", () => {
           audioRef.current = null;
@@ -118,22 +135,38 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
   };
 
   const saveForReview = async () => {
-    if (!currentWord || saved || savePending) return;
+    if (!currentWord || savePending) return;
+    const nextSaved = !saved;
+    const wordSlug = currentWord.slug;
+    saveMutationVersionRef.current += 1;
     setSavePending(true);
     setSaveMessage("");
+    setSavedSlugs((current) => {
+      const next = new Set(current);
+      if (nextSaved) next.add(wordSlug);
+      else next.delete(wordSlug);
+      return next;
+    });
     try {
       if (authenticated) {
         const response = await fetch("/api/progress/review", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ vocabularySlug: currentWord.slug, remembered: false }),
+          body: JSON.stringify({ vocabularySlug: wordSlug, saved: nextSaved }),
         });
         if (!response.ok) throw new Error("save_failed");
       }
-      setSavedSlugs((current) => new Set(current).add(currentWord.slug));
-      setSaveMessage(authenticated ? "Đã thêm vào lịch ôn." : "Đã đánh dấu trong phiên học này.");
+      setSaveMessage(nextSaved
+        ? authenticated ? "Đã thêm vào bộ từ của bạn." : "Đã đánh dấu trong phiên học này."
+        : authenticated ? "Đã bỏ khỏi bộ từ của bạn." : "Đã bỏ đánh dấu trong phiên học này.");
     } catch {
-      setSaveMessage("Chưa thể lưu từ. Hãy thử lại.");
+      setSavedSlugs((current) => {
+        const next = new Set(current);
+        if (saved) next.add(wordSlug);
+        else next.delete(wordSlug);
+        return next;
+      });
+      setSaveMessage(nextSaved ? "Chưa thể lưu từ. Hãy thử lại." : "Chưa thể bỏ lưu từ. Hãy thử lại.");
     } finally {
       setSavePending(false);
     }
@@ -141,10 +174,12 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
 
   if (!currentWord) return <div className="lesson-vocab-empty"><h2>Bài này chưa có từ vựng</h2><p>Hãy chuyển sang Cụm từ hoặc Nghe & nói để tiếp tục học.</p></div>;
 
-  return <section aria-label="Bộ thẻ từ vựng" className={`lesson-vocab-deck lesson-reading-deck lesson-live-stage${isSpeaking ? " is-speaking" : ""}`} data-testid="lesson-vocabulary-deck">
+  return <section aria-label="Bộ thẻ từ vựng" className={`lesson-vocab-deck lesson-reading-deck lesson-reference-deck lesson-live-stage${isSpeaking ? " is-speaking" : ""}`} data-testid="lesson-vocabulary-deck">
     <div className="lesson-stage-layout">
       <article aria-label={`Từ ${index + 1} trên ${words.length}: ${currentWord.hanzi}`} className={`lesson-study-panel lesson-vocab-card move-${direction}`} data-word-index={index + 1} key={currentWord.slug} tabIndex={0}>
         <div className="lesson-study-surface">
+        <button aria-label="Từ trước" className="lesson-card-edge-nav is-back" disabled={atStart} onClick={moveBack} type="button"><ArrowLeft size={20} /></button>
+        <button aria-label={atEnd ? "Chuyển sang Cụm từ" : "Từ tiếp theo"} className="lesson-card-edge-nav is-next" onClick={moveForward} type="button"><ArrowRight size={20} /></button>
         <div aria-label={`Tiến độ từ ${index + 1} trên ${words.length}`} aria-valuemax={words.length} aria-valuemin={1} aria-valuenow={index + 1} className="lesson-vocab-progress lesson-stage-progress" role="progressbar">
           <span>Từ {String(index + 1).padStart(2, "0")} / {String(words.length).padStart(2, "0")}</span>
           <div aria-hidden="true" className="lesson-vocab-progress-segments">{words.map((word, wordIndex) => <i className={wordIndex <= index ? "filled" : ""} key={word.slug} />)}</div>
@@ -155,45 +190,23 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
             <strong className="lesson-vocab-hanzi" lang="zh-CN">{currentWord.hanzi}</strong>
           </div>
           <div className="lesson-vocab-meta">
-            <div><span className="lesson-vocab-pinyin">{currentWord.pinyin}</span><span className="lesson-vocab-meaning">{currentWord.meaning}</span></div>
-            <span className="lesson-word-type">Danh từ</span>
+            <span className="lesson-vocab-pinyin">{currentWord.pinyin}</span>
+            <span className="lesson-vocab-meaning">{currentWord.meaning}</span>
           </div>
 
-          <button aria-label={`Phát âm từ ${currentWord.hanzi}`} aria-pressed={isSpeaking} className={`lesson-audio-bar${isSpeaking ? " playing" : ""}`} onClick={playPronunciation} type="button">
-            <span className="lesson-audio-icon"><Play fill="currentColor" size={22} /></span>
-            <span><strong>{isSpeaking ? "Đang phát âm…" : "Nghe phát âm"}</strong></span>
-          </button>
-
-          {currentWord.example ? <div className="lesson-example-card">
-            <small>Ví dụ</small>
-            <strong lang="zh-CN">{currentWord.example}</strong>
-            <p>{currentWord.translation}</p>
-          </div> : null}
-
-          <div className="lesson-study-tools">
-            <details className="lesson-disclosure">
-              <summary><PenLine size={17} /> Xem cách viết <ChevronDown size={17} /></summary>
-              <div className="lesson-disclosure-body">
-                <div aria-label="Các chữ Hán trong từ" className="lesson-character-list">{Array.from(currentWord.hanzi).map((character, characterIndex) => <span lang="zh-CN" key={`${character}-${characterIndex}`}>{character}</span>)}</div>
-                <p>Quan sát từng chữ, đọc thành tiếng rồi viết lại theo đúng thứ tự nét đã học.</p>
-              </div>
-            </details>
-            <details className="lesson-disclosure is-secondary">
-              <summary><BookOpenText size={17} /> Xem thêm ví dụ <ChevronDown size={17} /></summary>
-              <div className="lesson-disclosure-body"><p>Đổi chủ ngữ hoặc thời gian trong câu mẫu, sau đó đọc lại cả câu thành tiếng.</p></div>
-            </details>
-            <button aria-label={saved ? "Từ đã được lưu" : "Lưu từ để ôn tập"} aria-pressed={saved} className={`lesson-save-button lesson-save-button-icon${saved ? " saved" : ""}`} disabled={savePending || saved} onClick={saveForReview} title={saved ? "Đã lưu" : "Lưu từ"} type="button">
-              {savePending ? <LoaderCircle className="lesson-vocab-spinner" size={17} /> : saved ? <Check size={17} /> : <Bookmark size={17} />}{saved ? "Đã lưu" : "Lưu từ"}
+          <div className="lesson-audio-actions">
+            <button aria-label={`Phát âm từ ${currentWord.hanzi}`} aria-pressed={isSpeaking} className={`lesson-audio-bar${isSpeaking ? " playing" : ""}`} onClick={playPronunciation} type="button">
+              <span className="lesson-audio-icon"><Play fill="currentColor" size={18} /></span>
+              <span><strong>{isSpeaking ? "Đang phát âm…" : "Nghe phát âm chuẩn"}</strong></span>
+            </button>
+            <span aria-label="Tốc độ phát âm 0.8 lần" className="lesson-audio-speed">0.8×</span>
+            <button aria-busy={savePending} aria-label={saved ? "Bỏ lưu từ khỏi bộ từ của bạn" : "Lưu từ vào bộ từ của bạn"} aria-pressed={saved} className={`lesson-save-button lesson-save-button-icon${saved ? " saved" : ""}${savePending ? " is-toggling" : ""}`} disabled={savePending} onClick={saveForReview} title={saved ? "Bỏ lưu từ" : "Lưu từ"} type="button">
+              <Bookmark fill={saved ? "currentColor" : "none"} size={17} />{saved ? "Đã lưu" : "Lưu từ"}
             </button>
           </div>
         </div>
         </div>
 
-        <nav aria-label="Điều hướng từ vựng" className="lesson-stage-nav">
-          <button aria-label="Từ trước" className="lesson-stage-nav-button is-back" disabled={atStart} onClick={moveBack} type="button"><ArrowLeft size={19} /> <span>Trước</span></button>
-          <span>{index + 1} / {words.length}</span>
-          <button aria-label={atEnd ? "Chuyển sang Cụm từ" : "Từ tiếp theo"} className="lesson-stage-nav-button is-next" onClick={moveForward} type="button"><span>{atEnd ? "Cụm từ" : "Đã hiểu · Tiếp tục"}</span> <ArrowRight size={19} /></button>
-        </nav>
       </article>
 
       <aside className="lesson-coach-rail is-vocabulary" aria-label="Mẹo ghi nhớ cùng Himi">

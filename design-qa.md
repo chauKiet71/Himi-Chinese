@@ -2135,3 +2135,142 @@ final result: passed
 - [ ] Capture and compare the rendered desktop and mobile states after browser tooling is available.
 
 final result: blocked
+
+---
+
+## Tinh chỉnh điều hướng thẻ học — 2026-09-17
+
+### Comparison target
+
+- Source visual truth — thanh điều hướng: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-2201d536-81cf-4860-bfac-b9aa77a02fc8.png` (1222 × 105 px).
+- Source visual truth — thẻ từ vựng: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-552262a2-8a39-4dd6-a0ee-4686a97f7d76.png` (1186 × 665 px).
+- Source visual truth — dãy câu cần thay bằng chấm nhỏ: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-e2aef05b-e469-463d-af99-e14238938c96.png` (536 × 82 px).
+- Implementation route: `http://localhost:4173/learn/van-phong-hanh-chinh?lesson=chao-hoi-tai-noi-lam-viec`.
+- Intended viewports: desktop 1440 × 1024 CSS px and mobile 390 × 844 CSS px at device scale factor 1.
+- States: first and last vocabulary/phrase cards; listening-and-speaking targets 1 and 10.
+- Implementation screenshot: unavailable. The in-app Browser object is not exposed in this Codex session (`agent` is undefined), so pixel dimensions, CSS crop, density normalization, console state and interaction capture could not be recorded.
+
+### Findings
+
+- [P2] Browser-rendered fidelity remains unverified. The three source images were opened at original resolution, but without a browser capture it is not possible to confirm exact edge-button placement, narrow-mobile wrapping of the audio/speed/save row, or the visual transition from dots to the final completion action.
+
+### Required fidelity surfaces
+
+- Fonts and typography: existing product fonts and weights remain; the vocabulary pinyin is simplified to one warm pill without the redundant “Từ vựng” badge.
+- Spacing and layout rhythm: bottom Previous/Continue navigation is removed from vocabulary and phrases; compact circular arrow controls sit at the two card edges. The save control now shares the pronunciation row with the 0.8× control.
+- Colors and visual tokens: existing Himi coral, warm pinyin surface and neutral progress colors are reused.
+- Image quality and asset fidelity: existing mascot assets and installed Lucide navigation/bookmark icons remain; no replacement image asset was introduced.
+- Copy and content: the vocabulary example and “Từ vựng” badge are removed. Listening and speaking no longer displays numbered target boxes or an intermediate “Tiếp tục” action; only target 10 exposes “Hoàn thành”.
+
+### Interaction and code verification
+
+- Vocabulary and phrase arrow controls move backward/forward; the final right arrow invokes the existing transition to the next learning stage.
+- All 36 authored lessons render ten accessible listening-and-speaking target buttons with visual dots and no visible target numbers.
+- Nine focused responsive, interactive and curriculum tests pass.
+- The focused rendered-card assertion passes.
+- ESLint passes for all edited components and tests.
+- Production build passes and the local route returns HTTP 200.
+
+### Implementation checklist
+
+- [x] Replace the bottom text navigation with card-edge arrow controls.
+- [x] Remove the vocabulary type badge and example block.
+- [x] Move save beside 0.8× for vocabulary and phrases.
+- [x] Replace numbered listening targets with compact dots.
+- [x] Show “Hoàn thành” only on target 10.
+- [ ] Capture and compare desktop/mobile implementations when the in-app Browser is available.
+
+final result: blocked
+
+---
+
+## Thẻ học Từ vựng, Cụm từ và Nghe & nói — 2026-09-17
+
+### Comparison target
+
+- Source visual truth — thẻ từ vựng: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-498088df-a0bb-4cc4-a986-f62bfdb44f27.png` (943 × 502 px).
+- Source visual truth — các hành động cần loại bỏ: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-ae03ebe2-2f18-45de-a85f-ccb3cdce2aa1.png` (963 × 217 px).
+- Source visual truth — khối hoàn thành cần loại bỏ: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-77e06a34-a5d5-4990-b221-8755d7c277b2.png` (559 × 223 px).
+- Implementation route: `http://localhost:4173/learn/van-phong-hanh-chinh?lesson=chao-hoi-tai-noi-lam-viec`.
+- Intended viewports: desktop 1440 × 1024 CSS px and mobile 390 × 844 CSS px at device scale factor 1.
+- State: first item of Từ vựng, Cụm từ and Nghe & nói; sentence 10 CTA also requires capture.
+- Implementation screenshot: unavailable because this Codex session does not expose the in-app Browser service. Pixel dimensions, CSS crop and density normalization therefore could not be recorded.
+
+### Findings
+
+- [P2] Browser-rendered fidelity remains unverified. The source images were opened at original resolution and the production route returns HTTP 200, but code and server output cannot confirm the final crop, vertical fit, fixed support-widget overlap or mobile wrapping.
+
+### Required fidelity surfaces
+
+- Fonts and typography: the implementation retains the product type stack, uses a centered oversized Hanzi treatment, orange pinyin pill, compact uppercase type label and strong Vietnamese meaning hierarchy.
+- Spacing and layout rhythm: all three learning modes share the same bordered white study card, segmented progress header, centered study content and single bottom navigation. Responsive CSS keeps the audio action and speed badge on one row where space permits.
+- Colors and visual tokens: the Himi coral primary action, warm pinyin surface, neutral progress dots and white card match the reference palette without introducing new gradients.
+- Image quality and asset fidelity: existing Himi mascot assets and installed Lucide icons remain unchanged; no replacement imagery or CSS-drawn asset was introduced.
+- Copy and content: “Xem cách viết”, “Xem thêm ví dụ”, “Xem giải thích”, the pinyin toggle and the separate completion row were removed. Pinyin is always visible in Nghe & nói, and the tenth CTA reads “Hoàn thành”.
+
+### Interaction and code verification
+
+- All 36 authored industry lessons render exactly ten Nghe & nói targets.
+- Từ vựng and Cụm từ continue into the next stage with one “Tiếp tục” CTA.
+- The final Nghe & nói CTA submits lesson completion or advances to the required quiz; passed quizzes expose their own integrated completion action.
+- Focused responsive and curriculum UI tests pass: 6 passed, 0 failed.
+- Focused rendered-card assertion passes: 1 passed, 0 failed.
+- ESLint, `git diff --check`, the live route HTTP check and the production build pass.
+- The broader `rendered-html.test.mjs` still has three unrelated pre-existing assertions in learner navigation, slice game and course-cover counts; its lesson-card assertion passes independently.
+
+### Comparison history
+
+- No browser comparison iteration could be completed because the required in-app Browser surface is unavailable. The implementation remains ready for desktop/mobile capture when that service is restored.
+
+### Implementation checklist
+
+- [x] Apply the reference-card visual hierarchy to Từ vựng, Cụm từ and Nghe & nói.
+- [x] Remove the three optional disclosure actions requested by the user.
+- [x] Show pinyin by default and remove its toggle in Nghe & nói.
+- [x] Limit Nghe & nói to ten targets and change the last CTA to “Hoàn thành”.
+- [x] Remove the separate completion row while preserving progress submission.
+- [ ] Capture and compare desktop/mobile implementations in the in-app Browser.
+
+final result: blocked
+
+---
+
+## Nghe & nói dùng điều hướng cạnh thẻ — 2026-09-17
+
+### Comparison target
+
+- Source visual truth — cụm chỉ báo cần loại bỏ: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-75f07fc1-06ac-4094-a782-2bce4cc0809f.png` (466 × 87 px).
+- Existing product reference: nút mũi tên cạnh thẻ đang dùng ở Từ vựng và Cụm từ.
+- Implementation route: `http://localhost:4173/learn/van-phong-hanh-chinh?lesson=chao-hoi-tai-noi-lam-viec`.
+- Intended viewports: desktop 1440 × 1024 and mobile 390 × 844 CSS px at device scale factor 1.
+- States: Nghe & nói câu 1, câu giữa và câu 10.
+- Implementation screenshot: unavailable because the in-app Browser surface is not exposed in this session; rendered dimensions, console state and side-by-side comparison therefore remain unavailable.
+
+### Findings
+
+- [P2] Exact rendered placement of the side controls cannot be visually verified without the required browser capture. The implementation reuses the same component class and CSS positioning already applied to the other two tabs, but code evidence is not a visual comparison.
+
+### Required fidelity surfaces
+
+- Fonts and typography: unchanged.
+- Spacing and layout rhythm: the numbered/dotted target strip is removed; previous and next controls now occupy the same two card-edge positions as Từ vựng and Cụm từ.
+- Colors and visual tokens: unchanged Himi coral and neutral control treatment.
+- Image quality and asset fidelity: no image changes; the existing Lucide arrow icons are reused.
+- Copy and content: no visible target numbers or dots remain. The right arrow is disabled on sentence 10 and the existing “Hoàn thành” action remains visible only there.
+
+### Verification
+
+- All 36 authored lessons retain ten listening-and-speaking targets.
+- Six focused curriculum and responsive tests pass.
+- ESLint and `git diff --check` pass.
+- Production build passes.
+
+### Implementation checklist
+
+- [x] Remove the target dot/box strip.
+- [x] Add previous/next card-edge controls to Nghe & nói.
+- [x] Disable backward navigation on the first sentence and forward navigation on the tenth.
+- [x] Preserve “Hoàn thành” on sentence 10.
+- [ ] Capture desktop/mobile states when the in-app Browser is available.
+
+final result: blocked

@@ -1,12 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, Bookmark, Check, ChevronDown, Lightbulb, Volume2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bookmark, Check, Lightbulb, Volume2 } from "lucide-react";
 import type { DialogueLine, UsageNote, Vocabulary } from "@/lib/content-types";
 import { speakMandarin } from "@/lib/client-mandarin-audio";
 
 type MoveDirection = "back" | "forward";
-type Phrase = { id: string; hanzi: string; pinyin?: string; translation: string; purpose: string };
+type Phrase = { id: string; hanzi: string; pinyin?: string; translation: string };
 
 const phraseGlossary: Record<string, string> = {
   "截止日期": "hạn chót",
@@ -31,9 +31,9 @@ function splitPhraseForStudy(hanzi: string) {
 
 function buildPhrases(words: Vocabulary[], dialogue: DialogueLine[], notes: UsageNote[]) {
   const phrases: Phrase[] = [
-    ...dialogue.map((line, index) => ({ id: `dialogue-${index}-${line.hanzi}`, hanzi: line.hanzi, pinyin: line.pinyin, translation: line.translation, purpose: "Câu dùng trong tình huống" })),
-    ...notes.map((note, index) => ({ id: `note-${index}-${note.pattern}`, hanzi: note.pattern, translation: note.explanation, purpose: note.title })),
-    ...words.filter((word) => word.example.trim()).slice(0, 3).map((word) => ({ id: `word-${word.slug}`, hanzi: word.example, translation: word.translation, purpose: `Mẫu câu với “${word.hanzi}”` })),
+    ...dialogue.map((line, index) => ({ id: `dialogue-${index}-${line.hanzi}`, hanzi: line.hanzi, pinyin: line.pinyin, translation: line.translation })),
+    ...notes.map((note, index) => ({ id: `note-${index}-${note.pattern}`, hanzi: note.pattern, translation: note.explanation })),
+    ...words.filter((word) => word.example.trim()).slice(0, 3).map((word) => ({ id: `word-${word.slug}`, hanzi: word.example, translation: word.translation })),
   ];
   return phrases.filter((phrase, index) => phrases.findIndex((item) => item.hanzi === phrase.hanzi) === index);
 }
@@ -118,10 +118,12 @@ export function LessonPhrasebook({ words, dialogue, notes, onFinished }: { words
 
   if (!currentPhrase) return <div className="lesson-vocab-empty"><h2>Bài này chưa có cụm từ</h2><p>Hãy chuyển sang Từ vựng hoặc Nghe & nói để tiếp tục học.</p></div>;
 
-  return <section aria-label="Bộ thẻ cụm từ" className={`lesson-vocab-deck lesson-phrase-deck lesson-reading-deck lesson-live-stage${isSpeaking ? " is-speaking" : ""}`} data-testid="lesson-phrase-deck">
+  return <section aria-label="Bộ thẻ cụm từ" className={`lesson-vocab-deck lesson-phrase-deck lesson-reading-deck lesson-reference-deck lesson-live-stage${isSpeaking ? " is-speaking" : ""}`} data-testid="lesson-phrase-deck">
     <div className="lesson-stage-layout">
       <article aria-label={`Cụm ${index + 1} trên ${phrases.length}: ${currentPhrase.hanzi}`} className={`lesson-study-panel lesson-vocab-card lesson-phrase-study-card move-${direction}`} data-phrase-index={index + 1} key={currentPhrase.id} tabIndex={0}>
         <div className="lesson-study-surface">
+        <button aria-label="Cụm trước" className="lesson-card-edge-nav is-back" disabled={atStart} onClick={moveBack} type="button"><ArrowLeft size={20} /></button>
+        <button aria-label={atEnd ? "Chuyển sang Nghe và nói" : "Cụm tiếp theo"} className="lesson-card-edge-nav is-next" onClick={moveForward} type="button"><ArrowRight size={20} /></button>
         <div aria-label={`Tiến độ cụm ${index + 1} trên ${phrases.length}`} aria-valuemax={phrases.length} aria-valuemin={1} aria-valuenow={index + 1} className="lesson-vocab-progress lesson-stage-progress" role="progressbar">
           <span>Cụm {String(index + 1).padStart(2, "0")} / {String(phrases.length).padStart(2, "0")}</span>
           <div aria-hidden="true" className="lesson-vocab-progress-segments">{phrases.map((phrase, phraseIndex) => <i className={phraseIndex <= index ? "filled" : ""} key={phrase.id} />)}</div>
@@ -138,29 +140,17 @@ export function LessonPhrasebook({ words, dialogue, notes, onFinished }: { words
             {segmentIndex > 0 ? <i aria-hidden="true">+</i> : null}<b lang="zh-CN">{segment}</b>
           </span>)}</div>
 
-          <button aria-label={`Phát âm cụm ${currentPhrase.hanzi}`} aria-pressed={isSpeaking} className={`lesson-audio-bar${isSpeaking ? " playing" : ""}`} onClick={playPronunciation} type="button">
-            <span className="lesson-audio-icon"><Volume2 size={22} /></span>
-            <span><strong>{isSpeaking ? "Đang phát âm…" : "Nghe cụm từ"}</strong></span>
-          </button>
-
-          <div className="lesson-study-tools">
-            <details className="lesson-disclosure">
-              <summary>Xem giải thích <ChevronDown size={17} /></summary>
-              <div className="lesson-disclosure-body">
-                <strong>{currentPhrase.purpose}</strong>
-                {studySegments.some((segment) => phraseGlossary[segment]) ? <p>{studySegments.filter((segment) => phraseGlossary[segment]).map((segment) => `${segment}: ${phraseGlossary[segment]}`).join(" · ")}</p> : <p>Dùng cả cụm như một đơn vị khi nói để giữ nhịp tự nhiên.</p>}
-              </div>
-            </details>
+          <div className="lesson-audio-actions">
+            <button aria-label={`Phát âm cụm ${currentPhrase.hanzi}`} aria-pressed={isSpeaking} className={`lesson-audio-bar${isSpeaking ? " playing" : ""}`} onClick={playPronunciation} type="button">
+              <span className="lesson-audio-icon"><Volume2 size={18} /></span>
+              <span><strong>{isSpeaking ? "Đang phát âm…" : "Nghe cụm từ"}</strong></span>
+            </button>
+            <span aria-label="Tốc độ phát âm 0.8 lần" className="lesson-audio-speed">0.8×</span>
             <button aria-label={saved ? "Cụm đã được lưu" : "Lưu cụm để ôn tập"} aria-pressed={saved} className={`lesson-save-button lesson-save-button-icon${saved ? " saved" : ""}`} disabled={saved} onClick={saveForReview} title={saved ? "Đã lưu" : "Lưu cụm"} type="button">{saved ? <Check size={17} /> : <Bookmark size={17} />}{saved ? "Đã lưu" : "Lưu cụm"}</button>
           </div>
         </div>
         </div>
 
-        <nav aria-label="Điều hướng cụm từ" className="lesson-stage-nav">
-          <button aria-label="Cụm trước" className="lesson-stage-nav-button is-back" disabled={atStart} onClick={moveBack} type="button"><ArrowLeft size={19} /> <span>Trước</span></button>
-          <span>{index + 1} / {phrases.length}</span>
-          <button aria-label={atEnd ? "Chuyển sang Nghe và nói" : "Cụm tiếp theo"} className="lesson-stage-nav-button is-next" onClick={moveForward} type="button"><span>{atEnd ? "Nghe & nói" : "Đã hiểu · Tiếp tục"}</span> <ArrowRight size={19} /></button>
-        </nav>
       </article>
 
       <aside className="lesson-coach-rail is-phrase" aria-label="Himi hướng dẫn cấu trúc câu">

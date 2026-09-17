@@ -1,4 +1,4 @@
-import { and, eq } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
 import { readDb, writeDb } from "../db/index.ts";
 import type { Database } from "../db/index.ts";
 import {
@@ -162,6 +162,62 @@ export async function recordVocabularyReview(userId: string, vocabularySlug: str
       });
     return true;
   });
+}
+
+export async function setVocabularySaved(userId: string, vocabularySlug: string, saved: boolean): Promise<boolean> {
+  return writeDb(async (db) => {
+    const words = await db.select({
+      id: vocabulary.id,
+      lessonId: lessons.id,
+      moduleId: modules.id,
+      courseId: courses.id,
+      isFree: lessons.isFree,
+    })
+      .from(vocabulary)
+      .innerJoin(lessonVocabulary, eq(lessonVocabulary.vocabularyId, vocabulary.id))
+      .innerJoin(lessons, eq(lessonVocabulary.lessonId, lessons.id))
+      .innerJoin(modules, eq(lessons.moduleId, modules.id))
+      .innerJoin(courses, eq(modules.courseId, courses.id))
+      .where(and(
+        eq(vocabulary.slug, vocabularySlug),
+        eq(courses.status, "published"),
+        eq(lessons.status, "published"),
+      ))
+      .limit(4);
+    if (!words.length) return false;
+
+    const targets = words.flatMap(publishedLessonTargets);
+    const [policies, viewerHasVip] = await Promise.all([
+      getContentAccessPolicies(targets, db),
+      hasActiveVipAccess(userId, db),
+    ]);
+    const word = words.find((item) => resolveContentAccess({
+      targets: publishedLessonTargets(item),
+      policies,
+      viewerHasVip,
+    }).allowed);
+    if (!word) return false;
+
+    await db.insert(reviewItems).values({ userId, vocabularyId: word.id, isSaved: saved })
+      .onConflictDoUpdate({
+        target: [reviewItems.userId, reviewItems.vocabularyId],
+        set: { isSaved: saved },
+      });
+    return true;
+  });
+}
+
+export async function getSavedVocabularySlugs(userId: string, vocabularySlugs: string[]): Promise<string[]> {
+  if (!vocabularySlugs.length) return [];
+  const rows = await readDb((db) => db.select({ slug: vocabulary.slug })
+    .from(reviewItems)
+    .innerJoin(vocabulary, eq(reviewItems.vocabularyId, vocabulary.id))
+    .where(and(
+      eq(reviewItems.userId, userId),
+      eq(reviewItems.isSaved, true),
+      inArray(vocabulary.slug, vocabularySlugs),
+    )));
+  return [...new Set(rows.map((row) => row.slug))];
 }
 
 export async function getLearningSummary(userId: string): Promise<LearningSummary> {

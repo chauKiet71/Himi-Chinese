@@ -20,7 +20,9 @@ test("home portal reserves mobile navigation space and keeps phone controls touc
   assert.match(responsive, /grid-template-columns:\s*repeat\(6, minmax\(0, 1fr\)\)/);
   assert.match(shell, /<UserRound aria-hidden="true" size=\{20\} \/><span>Tài khoản<\/span>/);
   assert.match(shell, /<span>Luyện tập<\/span>/);
-  assert.match(await read("components/review-home-studio.tsx"), /aria-label="Bắt đầu luyện nhanh"[\s\S]*Luyện nói[\s\S]*Nghe phản xạ[\s\S]*Ôn từ/);
+  const homeStudio = await read("components/review-home-studio.tsx");
+  assert.match(homeStudio, /aria-label="Bắt đầu luyện nhanh"[\s\S]*href="\/typing"[\s\S]*Luyện gõ[\s\S]*href="\/listening"[\s\S]*Nghe phản xạ[\s\S]*href="\/vocabulary"[\s\S]*Ôn từ/);
+  assert.doesNotMatch(homeStudio, /href="\/hsk\/1\/hsk1-bai-01-chao-anh\/flashcard"/);
   assert.match(css, /\.home-portal-quick-dock\s*\{[\s\S]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(css, /\.home-portal-actions\s*\{\s*\n\s*display:\s*none/);
   assert.match(brand, /\.home-portal-art::before\s*\{[\s\S]*--home-portal-curve-height:[\s\S]*border-radius:\s*50%/);

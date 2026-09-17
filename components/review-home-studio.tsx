@@ -3,7 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, AudioLines, BrainCircuit, Check, Mic2, Play } from "lucide-react";
+import { ArrowRight, AudioLines, BrainCircuit, Check, Keyboard, Play } from "lucide-react";
 import { HomeVipWelcomeOffer, type HomeVipWelcomeOfferPlan } from "@/components/home-vip-welcome-offer";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
@@ -106,17 +106,17 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
           </div>
 
           <nav aria-label="Bắt đầu luyện nhanh" className="home-portal-quick-dock">
-            <Link className="home-portal-quick-action is-primary" href="/listening?mode=scenario" prefetch={false}>
-              <Mic2 aria-hidden="true" size={26} strokeWidth={2.15} />
-              <strong>Luyện nói</strong>
-              <small>Tình huống</small>
+            <Link className="home-portal-quick-action is-primary" href="/typing" prefetch={false}>
+              <Keyboard aria-hidden="true" size={26} strokeWidth={2.15} />
+              <strong>Luyện gõ</strong>
+              <small>Gõ Pinyin</small>
             </Link>
             <Link className="home-portal-quick-action" href="/listening" prefetch={false}>
               <AudioLines aria-hidden="true" size={27} strokeWidth={2.05} />
               <strong>Nghe phản xạ</strong>
               <small>3 phút</small>
             </Link>
-            <Link className="home-portal-quick-action" href="/hsk/1/hsk1-bai-01-chao-anh/flashcard" prefetch={false}>
+            <Link className="home-portal-quick-action" href="/vocabulary" prefetch={false}>
               <BrainCircuit aria-hidden="true" size={27} strokeWidth={2.05} />
               <strong>Ôn từ</strong>
               <small>5 từ yếu</small>
