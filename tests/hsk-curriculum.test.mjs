@@ -98,6 +98,7 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   assert.doesNotMatch(html, /0 ngữ pháp/);
   assert.match(html, /3 hội thoại/);
   assert.match(html, /href="\/hsk\/1\/hsk1-bai-01-chao-anh"/);
+  assert.match(html, /class="hsk-lesson-start" href="\/hsk\/1\/hsk1-bai-01-chao-anh\/play"/);
   assert.doesNotMatch(html, />HSK 7–9</);
 
   const lockedCurriculum = curriculumModule.HSK_CURRICULUM.map((level, levelIndex) => levelIndex ? level : {
