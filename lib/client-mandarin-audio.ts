@@ -1,6 +1,6 @@
 "use client";
 
-export function speakMandarin(text: string, onDone?: () => void) {
+export function speakMandarin(text: string, onDone?: () => void, rate = 1) {
   if (!("speechSynthesis" in window)) {
     onDone?.();
     return false;
@@ -9,7 +9,7 @@ export function speakMandarin(text: string, onDone?: () => void) {
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "zh-CN";
-  utterance.rate = 0.82;
+  utterance.rate = rate;
   utterance.pitch = 1;
   utterance.onend = () => onDone?.();
   utterance.onerror = () => onDone?.();

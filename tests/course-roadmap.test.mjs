@@ -86,6 +86,24 @@ test("roadmap repository returns a complete public course overview without a dat
   }
 });
 
+test("course roadmap marks an opened unfinished lesson for continue learning", async () => {
+  const { buildCourseRoadmap } = await import("../lib/course-roadmap.ts");
+  const firstLesson = officeLessons[0];
+  const roadmap = buildCourseRoadmap({
+    courseSlug: "van-phong-hanh-chinh",
+    lessons: officeLessons.map((lesson, order) => ({
+      ...lesson,
+      order,
+      moduleTitle: officeModules.find((module) => module.slug === lesson.moduleSlug)?.title ?? "",
+      moduleOrder: officeModules.findIndex((module) => module.slug === lesson.moduleSlug),
+    })),
+    completedLessonSlugs: [],
+    openedLessonSlugs: [firstLesson.slug],
+    viewerHasVip: true,
+  });
+  assert.equal(roadmap.nextLesson?.started, true);
+});
+
 test("office roadmap stages use distinct module artwork", async () => {
   const visuals = await import("../lib/course-visuals.ts").catch(() => null);
   assert.ok(visuals, "course visuals should be available");

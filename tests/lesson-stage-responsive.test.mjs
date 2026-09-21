@@ -106,7 +106,10 @@ test("listening and speaking shows pinyin by default and completes on the tenth 
   assert.match(source, /className="lesson-card-edge-nav is-next" disabled=\{atEnd\}/);
   assert.doesNotMatch(source, /pronunciation-target-list|pronunciation-target-dot|String\(targetIndex \+ 1\)\.padStart|<span>Tiếp tục<\/span>|aria-label="Điều hướng câu luyện nói"/);
   assert.match(source, /atEnd \? <div className="lesson-pronunciation-completion">/);
-  assert.match(source, /onClick=\{onFinished\}/);
+  assert.match(source, /disabled=\{!allAttempted\}/);
+  assert.match(source, /onClick=\{\(\) => onFinished\(\{ score: averageScore, completed: results\.size, total: targets\.length \}\)\}/);
+  assert.match(source, /\[0\.75, 1, 1\.25\]/);
+  assert.match(source, /pronunciation-character is-/);
 });
 
 test("the three study modes cover narrow phones, landscape phones, tablets and short laptops", () => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type MutableRefObject } from "react";
-import { AudioLines, CircleStop, LoaderCircle, Mic, RotateCcw, Volume2 } from "lucide-react";
+import { AudioLines, Award, CircleStop, LoaderCircle, Mic, RotateCcw, Volume2 } from "lucide-react";
 import { speakMandarin } from "@/lib/client-mandarin-audio";
 
 export type PronunciationResult = {
@@ -12,6 +12,7 @@ export type PronunciationResult = {
   toneScore: number | null;
   weakSyllables: string[];
   feedback: string;
+  characterFeedback: Array<"correct" | "incorrect" | "unscored">;
 };
 
 type RecorderSession = {
@@ -80,7 +81,7 @@ function numberAttribute(element: Element, name: string) {
   return Math.max(0, Math.min(100, raw <= 10 ? raw * 10 : raw));
 }
 
-export function parseIflytekPronunciationResult(xml: string): PronunciationResult {
+export function parseIflytekPronunciationResult(xml: string, targetText = ""): PronunciationResult {
   const document = new DOMParser().parseFromString(xml, "application/xml");
   if (document.querySelector("parsererror")) throw new Error("iFlytek trả về kết quả không hợp lệ.");
   // iFLYTEK Global wraps the scored node in another element with the same
@@ -109,6 +110,17 @@ export function parseIflytekPronunciationResult(xml: string): PronunciationResul
       : totalScore >= 50
         ? "Đã đúng phần chính. Nói chậm hơn và tách rõ từng cụm từ."
         : "Hãy nghe lại câu mẫu, đọc từng cụm ngắn rồi thử lại.";
+  const hanzi = Array.from(targetText).filter((character) => /\p{Script=Han}/u.test(character));
+  const scoredCharacters = Array.from(document.querySelectorAll("word[content], char[content]"))
+    .flatMap((node) => {
+      const content = node.getAttribute("content") ?? "";
+      const detail = Number(node.getAttribute("dp_message") ?? node.getAttribute("perr_msg") ?? "0");
+      const score = numberAttribute(node, "total_score") ?? numberAttribute(node, "phone_score");
+      const state: "correct" | "incorrect" = (Number.isFinite(detail) && detail !== 0) || (score !== null && score < 60) ? "incorrect" : "correct";
+      return Array.from(content).filter((character) => /\p{Script=Han}/u.test(character)).map(() => state);
+    });
+  const characterFeedback = hanzi.map((_, index) => scoredCharacters[index]
+    ?? (totalScore >= 85 ? "correct" : totalScore < 50 ? "incorrect" : "unscored"));
 
   return {
     totalScore: Math.round(totalScore),
@@ -118,6 +130,7 @@ export function parseIflytekPronunciationResult(xml: string): PronunciationResul
     toneScore: numberAttribute(scoreNode, "tone_score"),
     weakSyllables,
     feedback,
+    characterFeedback,
   };
 }
 
@@ -160,7 +173,7 @@ async function evaluateWithIflytek(pcm: Uint8Array, targetText: string, webSocke
           return;
         }
         if (response.data?.status === 2 && response.data.data) {
-          finish(undefined, parseIflytekPronunciationResult(decodeBase64Utf8(response.data.data)));
+          finish(undefined, parseIflytekPronunciationResult(decodeBase64Utf8(response.data.data), targetText));
         }
       } catch (error) {
         finish(error instanceof Error ? error : new Error("Không đọc được kết quả iFlytek."));
@@ -221,18 +234,22 @@ export function PronunciationEvaluator({
   compact = false,
   showListen = true,
   onEvaluated,
+  previewResult = null,
 }: {
   targetText: string;
   compact?: boolean;
   showListen?: boolean;
   onEvaluated?: (result: PronunciationResult) => void;
+  previewResult?: PronunciationResult | null;
 }) {
   const [status, setStatus] = useState<"idle" | "recording" | "evaluating">("idle");
   const [seconds, setSeconds] = useState(0);
   const [error, setError] = useState("");
-  const [result, setResult] = useState<PronunciationResult | null>(null);
+  const [result, setResult] = useState<PronunciationResult | null>(previewResult);
   const recorderRef = useRef<RecorderSession | null>(null);
   const timerRef = useRef<number | null>(null);
+  const autoStopRef = useRef<number | null>(null);
+  const stopRecordingRef = useRef<() => void>(() => undefined);
   const webSocketRef = useRef<WebSocket | null>(null);
 
   const releaseRecorder = useCallback(async () => {
@@ -252,6 +269,8 @@ export function PronunciationEvaluator({
     if (status !== "recording") return;
     if (timerRef.current !== null) window.clearInterval(timerRef.current);
     timerRef.current = null;
+    if (autoStopRef.current !== null) window.clearTimeout(autoStopRef.current);
+    autoStopRef.current = null;
     setStatus("evaluating");
     setError("");
     const recorder = await releaseRecorder();
@@ -277,6 +296,9 @@ export function PronunciationEvaluator({
       setStatus("idle");
     }
   }, [onEvaluated, releaseRecorder, status, targetText]);
+  useEffect(() => {
+    stopRecordingRef.current = () => { void stopRecording(); };
+  }, [stopRecording]);
 
   const startRecording = async () => {
     setError("");
@@ -307,6 +329,7 @@ export function PronunciationEvaluator({
       recorderRef.current = { context, source, processor, silentGain, stream, chunks, sampleRate: context.sampleRate };
       setStatus("recording");
       timerRef.current = window.setInterval(() => setSeconds((current) => current + 1), 1000);
+      autoStopRef.current = window.setTimeout(() => stopRecordingRef.current(), 30_000);
     } catch (caught) {
       setError(caught instanceof Error && caught.name === "NotAllowedError"
         ? "Bạn cần cho phép dùng micro để chấm phát âm."
@@ -316,10 +339,24 @@ export function PronunciationEvaluator({
 
   useEffect(() => () => {
     if (timerRef.current !== null) window.clearInterval(timerRef.current);
+    if (autoStopRef.current !== null) window.clearTimeout(autoStopRef.current);
     webSocketRef.current?.close(1000, "leave");
     void releaseRecorder();
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
   }, [releaseRecorder]);
+
+  const resultLabel = result
+    ? result.totalScore >= 90 ? "Tốt"
+      : result.totalScore >= 75 ? "Khá tốt"
+        : result.totalScore >= 50 ? "Trung bình"
+          : "Cần luyện thêm"
+    : "";
+  const resultTone = result
+    ? result.totalScore >= 90 ? "excellent"
+      : result.totalScore >= 75 ? "good"
+        : result.totalScore >= 50 ? "average"
+          : "practice"
+    : "";
 
   return <div className={`pronunciation-evaluator${compact ? " is-compact" : ""}`}>
     <div className="pronunciation-actions">
@@ -328,21 +365,21 @@ export function PronunciationEvaluator({
       </button> : null}
       <div className="pronunciation-record-stage">
         <span aria-hidden="true" className="pronunciation-waveform"><AudioLines size={88} strokeWidth={1.6} /></span>
-        {status === "recording" ? <button className="pronunciation-record is-recording" onClick={stopRecording} type="button">
-          <CircleStop size={19} /> Dừng · {seconds}s
+        {status === "recording" ? <button aria-label="Dừng ghi âm" className="pronunciation-record is-recording" onClick={stopRecording} type="button">
+          <CircleStop size={19} /> {String(Math.floor(seconds / 60)).padStart(2, "0")}:{String(seconds % 60).padStart(2, "0")}
         </button> : <button className="pronunciation-record" disabled={status === "evaluating"} onClick={startRecording} type="button">
           {status === "evaluating" ? <LoaderCircle className="lesson-vocab-spinner" size={19} /> : <Mic size={19} />}
-          {status === "evaluating" ? "iFlytek đang chấm…" : result ? "Đọc lại" : "Đọc và chấm"}
+          {status === "evaluating" ? "Đang chấm điểm…" : "Đọc"}
         </button>}
         <span aria-hidden="true" className="pronunciation-waveform pronunciation-waveform-end"><AudioLines size={88} strokeWidth={1.6} /></span>
       </div>
     </div>
 
     {error ? <div className="pronunciation-error" role="alert"><span>{error}</span><button onClick={() => setError("")} type="button"><RotateCcw size={15} /> Thử lại</button></div> : null}
-    {result ? <div className="pronunciation-result" aria-live="polite">
-      <div className="pronunciation-total"><strong>{result.totalScore}</strong><span>/100</span></div>
-      <div className="pronunciation-feedback"><strong>{result.totalScore >= 70 ? "Đạt lượt này" : "Thử lại một lần nữa"}</strong><p>{result.feedback}</p>
-        {result.weakSyllables.length ? <small>Âm cần chú ý: {result.weakSyllables.join(" · ")}</small> : null}
+    {result ? <div className={`pronunciation-result is-${resultTone}`} aria-live="polite">
+      <div className="pronunciation-total"><span className="pronunciation-score-label"><Award aria-hidden="true" size={15} /> Điểm phát âm</span><span className="pronunciation-score-value"><strong>{result.totalScore}</strong><small>/100</small></span></div>
+      <div className="pronunciation-feedback"><span className="pronunciation-rating">{resultLabel}</span><p>{result.feedback}</p>
+        {result.weakSyllables.length ? <div className="pronunciation-weakness"><small>Âm cần chú ý</small><span>{result.weakSyllables.map((syllable) => <i key={syllable}>{syllable}</i>)}</span></div> : null}
       </div>
       {!compact ? <div className="pronunciation-dimensions">
         {[["Độ chính xác", result.accuracyScore], ["Độ trôi chảy", result.fluencyScore], ["Độ đầy đủ", result.integrityScore], ["Thanh điệu", result.toneScore]].map(([label, score]) => score !== null

@@ -858,38 +858,157 @@
 
 .lesson-pronunciation-action .pronunciation-result {
   width: 100%;
-  margin-top: 14px;
-  padding: 14px;
+  margin-top: 18px;
+  padding: 18px;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  gap: 16px;
-  border: 1px solid #dce7e1;
-  border-radius: 14px;
-  background: #f7fbf8;
+  grid-template-columns: 158px minmax(0, 1fr);
+  align-items: stretch;
+  gap: 20px;
+  border: 1px solid #dfe6e3;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 34px rgba(27, 58, 52, .08);
 }
 
 .lesson-pronunciation-action .pronunciation-total {
+  width: auto;
+  height: auto;
+  min-height: 118px;
+  padding: 16px;
   display: flex;
-  align-items: baseline;
-  gap: 4px;
-  color: #16864a;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  color: #116f5e;
+  border: 1px solid #cfe5df;
+  border-radius: 16px;
+  background: #eef8f5;
 }
 
 .lesson-pronunciation-action .pronunciation-total strong {
-  font-size: 34px;
+  color: inherit;
+  font-size: clamp(42px, 5vw, 58px);
+  font-weight: 820;
+  letter-spacing: -.06em;
+  line-height: .9;
 }
 
-.lesson-pronunciation-action .pronunciation-feedback strong {
-  color: var(--stage-ink);
-  font-size: 13px;
+.lesson-pronunciation-action .pronunciation-score-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #477069;
+  font-size: 11px;
+  font-weight: 780;
+  letter-spacing: .025em;
+  text-transform: uppercase;
 }
 
-.lesson-pronunciation-action .pronunciation-feedback p,
-.lesson-pronunciation-action .pronunciation-feedback small {
-  margin: 3px 0 0;
-  color: var(--stage-muted);
+.lesson-pronunciation-action .pronunciation-score-value {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.lesson-pronunciation-action .pronunciation-score-value small {
+  padding-bottom: 4px;
+  color: #71847f;
   font-size: 12px;
+  font-weight: 720;
+}
+
+.lesson-pronunciation-action .pronunciation-feedback {
+  min-width: 0;
+  padding: 7px 4px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.lesson-pronunciation-action .pronunciation-rating {
+  min-height: 30px;
+  padding: 0 13px;
+  display: inline-flex;
+  align-items: center;
+  color: #116f5e;
+  border: 1px solid #bcded5;
+  border-radius: 999px;
+  background: #edf8f4;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.lesson-pronunciation-action .pronunciation-feedback p {
+  max-width: 680px;
+  margin: 11px 0 0;
+  color: var(--stage-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.lesson-pronunciation-action .pronunciation-weakness {
+  margin-top: 13px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+
+.lesson-pronunciation-action .pronunciation-weakness > small {
+  color: #7a827f;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.lesson-pronunciation-action .pronunciation-weakness > span {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lesson-pronunciation-action .pronunciation-weakness i {
+  min-height: 28px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  color: #c54b3d;
+  border: 1px solid #f1cfc9;
+  border-radius: 9px;
+  background: #fff5f2;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 760;
+}
+
+.lesson-pronunciation-action .pronunciation-result.is-excellent .pronunciation-total,
+.lesson-pronunciation-action .pronunciation-result.is-good .pronunciation-total {
+  color: #08786a;
+}
+
+.lesson-pronunciation-action .pronunciation-result.is-average .pronunciation-total {
+  color: #aa6415;
+  border-color: #efd9b7;
+  background: #fff8ec;
+}
+
+.lesson-pronunciation-action .pronunciation-result.is-average .pronunciation-rating {
+  color: #965712;
+  border-color: #efd3a7;
+  background: #fff5e3;
+}
+
+.lesson-pronunciation-action .pronunciation-result.is-practice .pronunciation-total {
+  color: #c1473f;
+  border-color: #efd0cc;
+  background: #fff3f1;
+}
+
+.lesson-pronunciation-action .pronunciation-result.is-practice .pronunciation-rating {
+  color: #ad3d37;
+  border-color: #efcbc7;
+  background: #fff1ef;
 }
 
 .lesson-pronunciation-action .pronunciation-error {
@@ -1551,6 +1670,45 @@
     font-size: 14px;
   }
 
+  .lesson-pronunciation-action .pronunciation-result {
+    padding: 12px;
+    grid-template-columns: 102px minmax(0, 1fr);
+    gap: 12px;
+    border-radius: 16px;
+  }
+
+  .lesson-pronunciation-action .pronunciation-total {
+    min-height: 104px;
+    padding: 12px;
+    border-radius: 13px;
+  }
+
+  .lesson-pronunciation-action .pronunciation-total strong {
+    font-size: 42px;
+  }
+
+  .lesson-pronunciation-action .pronunciation-score-label {
+    align-items: flex-start;
+    font-size: 9px;
+    line-height: 1.25;
+  }
+
+  .lesson-pronunciation-action .pronunciation-feedback {
+    padding: 3px 0;
+  }
+
+  .lesson-pronunciation-action .pronunciation-feedback p {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .lesson-pronunciation-action .pronunciation-weakness {
+    margin-top: 9px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .pronunciation-status-row {
     min-height: 68px;
     margin-top: 12px;
@@ -2194,6 +2352,21 @@
   display: flex;
   justify-content: flex-end;
   border-top: 1px solid #ececef;
+}
+
+.pronunciation-character { transition: color 180ms ease, text-decoration-color 180ms ease; }
+.pronunciation-character.is-correct { color: #138a68; text-decoration: underline 3px rgba(19, 138, 104, .28); text-underline-offset: .14em; }
+.pronunciation-character.is-incorrect { color: #e54848; text-decoration: underline wavy 2px rgba(229, 72, 72, .55); text-underline-offset: .13em; }
+.pronunciation-speed { margin: 14px auto 0; padding: 4px; display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; background: #f2f4f3; }
+.pronunciation-speed button { min-width: 58px; min-height: 38px; padding: 0 12px; color: #61716d; border: 0; border-radius: 999px; background: transparent; font-weight: 760; }
+.pronunciation-speed button[aria-pressed="true"] { color: #fff; background: #08796d; box-shadow: 0 4px 10px rgba(8, 121, 109, .2); }
+.lesson-pronunciation-completion { align-items: center; flex-wrap: wrap; gap: 8px 12px; }
+.lesson-pronunciation-completion small { color: #74837f; font-size: 12px; }
+.lesson-pronunciation-completion .lesson-stage-nav-button:disabled { cursor: not-allowed; opacity: .48; box-shadow: none; }
+
+@media (max-width: 480px) {
+  .pronunciation-speed { width: 100%; justify-content: center; }
+  .pronunciation-speed button { min-width: 0; flex: 1; }
 }
 
 .lesson-reference-deck .pronunciation-pinyin {

@@ -6,6 +6,7 @@ export type RoadmapLesson = LessonSummary & {
   status: RoadmapLessonStatus;
   href: string | null;
   vipLocked: boolean;
+  started: boolean;
 };
 
 export type RoadmapModule = {
@@ -36,14 +37,17 @@ export function buildCourseRoadmap({
   courseSlug,
   lessons,
   completedLessonSlugs,
+  openedLessonSlugs = [],
   viewerHasVip,
 }: {
   courseSlug: string;
   lessons: LessonSummary[];
   completedLessonSlugs: string[];
+  openedLessonSlugs?: string[];
   viewerHasVip: boolean;
 }): CourseRoadmap {
   const completed = new Set(completedLessonSlugs);
+  const opened = new Set(openedLessonSlugs);
   const sortedLessons = [...lessons].sort((a, b) => a.order - b.order);
   const nextIncompleteIndex = sortedLessons.findIndex((lesson) => !completed.has(lesson.slug));
   const currentLesson = nextIncompleteIndex >= 0 ? sortedLessons[nextIncompleteIndex] : null;
@@ -61,6 +65,7 @@ export function buildCourseRoadmap({
       ...lesson,
       status,
       vipLocked: !lesson.isFree && !viewerHasVip,
+      started: opened.has(lesson.slug) && !isCompleted,
       href: (status === "completed" || status === "current") && (lesson.isFree || viewerHasVip)
         ? `/learn/${courseSlug}?lesson=${lesson.slug}`
         : null,

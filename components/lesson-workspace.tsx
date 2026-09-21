@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { ArrowRight, Award, CheckCircle2, Crown, Gamepad2, Headphones } from "lucide-react";
+import { ArrowRight, Award, CheckCircle2, Crown, Gamepad2, Headphones, RotateCcw, X } from "lucide-react";
+import { GameResultCelebration } from "@/components/game-result-celebration";
 import { LessonChallengePanel } from "@/components/lesson-challenge";
 import { LessonPhrasebook } from "@/components/lesson-phrasebook";
-import { LessonPronunciationCoach } from "@/components/lesson-pronunciation-coach";
+import { LessonPronunciationCoach, type LessonPronunciationSummary } from "@/components/lesson-pronunciation-coach";
 import { LessonVocabularyDeck } from "@/components/lesson-vocabulary-deck";
 import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 import { VideoLearningPlayer } from "@/components/video-learning-player";
@@ -14,6 +15,7 @@ import { withDailySessionFlow, type DailyRecommendation } from "@/lib/daily-sess
 import { getLessonScenarioVideo } from "@/lib/video-library";
 
 type LessonTab = "Tình huống" | "Từ vựng" | "Cụm từ" | "Nghe & nói" | "Kiểm tra";
+type LessonCompletionView = LessonPronunciationSummary & { bestScore: number; attemptCount: number };
 
 export function LessonWorkspace({
   course,
@@ -44,6 +46,9 @@ export function LessonWorkspace({
   const baseTabs: LessonTab[] = scenarioVideo ? ["Tình huống", ...learningTabs] : learningTabs;
   const [tab, setTab] = useState<LessonTab>(scenarioVideo ? "Tình huống" : "Từ vựng");
   const [challengePassed, setChallengePassed] = useState(!lesson.challenge);
+  const [studyAttempt, setStudyAttempt] = useState(0);
+  const [completionSummary, setCompletionSummary] = useState<LessonCompletionView | null>(null);
+  const [pendingSummary, setPendingSummary] = useState<LessonPronunciationSummary | null>(null);
   const tabs = lesson.challenge ? [...baseTabs, "Kiểm tra" as const] : baseTabs;
   const lessonNumber = lesson.order + 1;
   const tabIndex = tabs.indexOf(tab);
@@ -62,23 +67,53 @@ export function LessonWorkspace({
   const stageTab = tab === "Từ vựng" || tab === "Cụm từ" || tab === "Nghe & nói";
   const completionFormId = `lesson-completion-${lesson.slug}`;
   const completionLoginId = `lesson-completion-login-${lesson.slug}`;
+  const nextLesson = lessons.find((item) => item.order === lesson.order + 1);
+  const nextLessonHref = nextLesson ? `/learn/${course.slug}?lesson=${nextLesson.slug}` : `/courses/${course.slug}`;
 
-  const finishLesson = useCallback(() => {
-    if (lesson.challenge && !challengePassed) {
-      setTab("Kiểm tra");
-      return;
-    }
-    if (completed) {
-      document.getElementById("daily-next")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
+  const saveCompletion = useCallback(() => {
+    if (!authenticated || completed) return;
+    const body = new FormData();
+    body.set("courseSlug", course.slug);
+    body.set("lessonSlug", lesson.slug);
+    body.set("returnTo", returnTo);
+    void fetch("/api/progress/lesson/complete", { method: "POST", body, redirect: "manual" });
+  }, [authenticated, completed, course.slug, lesson.slug, returnTo]);
+
+  const showCompletion = useCallback((summary: LessonPronunciationSummary) => {
     if (!authenticated) {
       document.getElementById(completionLoginId)?.click();
       return;
     }
-    const form = document.getElementById(completionFormId);
-    if (form instanceof HTMLFormElement) form.requestSubmit();
-  }, [authenticated, challengePassed, completed, completionFormId, completionLoginId, lesson.challenge]);
+    saveCompletion();
+    const storageKey = `himi:lesson-attempts:${course.slug}:${lesson.slug}`;
+    let scores: number[] = [];
+    try {
+      const savedScores = JSON.parse(window.localStorage.getItem(storageKey) ?? "[]") as unknown;
+      if (Array.isArray(savedScores)) scores = savedScores.filter((score): score is number => typeof score === "number" && Number.isFinite(score));
+      scores = [...scores, summary.score].slice(-20);
+      window.localStorage.setItem(storageKey, JSON.stringify(scores));
+    } catch {
+      scores = [summary.score];
+    }
+    setCompletionSummary({ ...summary, bestScore: Math.max(...scores), attemptCount: scores.length });
+  }, [authenticated, completionLoginId, course.slug, lesson.slug, saveCompletion]);
+
+  const finishLesson = useCallback((summary: LessonPronunciationSummary) => {
+    setPendingSummary(summary);
+    if (lesson.challenge && !challengePassed) {
+      setTab("Kiểm tra");
+      return;
+    }
+    showCompletion(summary);
+  }, [challengePassed, lesson.challenge, showCompletion]);
+
+  const replayLesson = useCallback(() => {
+    setCompletionSummary(null);
+    setPendingSummary(null);
+    setChallengePassed(!lesson.challenge);
+    setStudyAttempt((attempt) => attempt + 1);
+    setTab(scenarioVideo ? "Tình huống" : "Từ vựng");
+  }, [lesson.challenge, scenarioVideo]);
 
   useEffect(() => {
     if (!authenticated || !access.allowed) return;
@@ -132,8 +167,8 @@ export function LessonWorkspace({
               </section> : null}
               {tab === "Từ vựng" ? <LessonVocabularyDeck authenticated={authenticated} onFinished={continueToPhrases} words={lesson.vocabulary} /> : null}
               {tab === "Cụm từ" ? <LessonPhrasebook dialogue={practiceLines} notes={lesson.notes} onFinished={continueToPronunciation} words={lesson.vocabulary} /> : null}
-              {tab === "Nghe & nói" ? <LessonPronunciationCoach dialogue={practiceLines} onFinished={finishLesson} words={lesson.vocabulary} /> : null}
-              {tab === "Kiểm tra" && lesson.challenge ? <LessonChallengePanel challenge={lesson.challenge} onComplete={finishLesson} onPassed={setChallengePassed} /> : null}
+              {tab === "Nghe & nói" ? <LessonPronunciationCoach dialogue={practiceLines} key={`pronunciation-${studyAttempt}`} onFinished={finishLesson} words={lesson.vocabulary} /> : null}
+              {tab === "Kiểm tra" && lesson.challenge ? <LessonChallengePanel challenge={lesson.challenge} onComplete={() => pendingSummary && showCompletion(pendingSummary)} onPassed={setChallengePassed} /> : null}
             </div>
         </div>
 
@@ -141,6 +176,19 @@ export function LessonWorkspace({
           <input name="courseSlug" type="hidden" value={course.slug} /><input name="lessonSlug" type="hidden" value={lesson.slug} /><input name="returnTo" type="hidden" value={completionReturnTo} />
         </form> : null}
         {!authenticated ? <Link hidden href={`/login?returnTo=${encodeURIComponent(returnTo)}`} id={completionLoginId}>Đăng nhập để hoàn thành</Link> : null}
+        {completionSummary ? <div aria-labelledby="lesson-completion-title" aria-modal="true" className="lesson-completion-dialog" role="dialog">
+          <button aria-label="Đóng form chúc mừng" className="lesson-completion-close" onClick={() => setCompletionSummary(null)} type="button"><X size={22} /></button>
+          <div className="lesson-completion-celebration game-session-world">
+            <GameResultCelebration
+              actions={<><button onClick={replayLesson} type="button"><RotateCcw size={17} /> Học lại</button><Link href={nextLessonHref} prefetch={false}>{nextLesson ? "Bài tiếp theo" : "Về lộ trình"} <ArrowRight size={17} /></Link></>}
+              details={<p>Bạn đã luyện đủ {completionSummary.completed}/{completionSummary.total} câu. Điểm cao nhất: <strong>{completionSummary.bestScore}/100</strong> · {completionSummary.attemptCount} lượt học được lưu trên thiết bị này.</p>}
+              eyebrow="HOÀN THÀNH BÀI HỌC"
+              label={`Chúc mừng! Bạn đã hoàn thành bài ${lessonNumber}`}
+              score={completionSummary.score}
+              titleId="lesson-completion-title"
+            />
+          </div>
+        </div> : null}
         {completed && dailyFlow && dailyNextStep ? <section className="daily-flow-next-step" id="daily-next" aria-label="Bước tiếp theo trong phiên 10 phút">
           <span className="daily-flow-next-mark"><CheckCircle2 size={20} /></span>
           <div>

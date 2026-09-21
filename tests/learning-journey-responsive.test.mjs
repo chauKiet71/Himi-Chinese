@@ -16,6 +16,9 @@ test("learning journeys respond to the usable learner content width", async () =
   assert.match(responsiveCss, /@container learner-content \(max-width: 820px\)/);
   assert.match(responsiveCss, /@container learner-content \(max-width: 680px\)/);
   assert.match(responsiveCss, /@container learner-content \(max-width: 420px\)/);
+  assert.match(responsiveCss, /@container learner-content \(max-width: 360px\)/);
+  assert.match(responsiveCss, /@media \(min-width: 721px\) and \(max-height: 760px\)/);
+  assert.match(responsiveCss, /@media \(max-width: 900px\) and \(max-height: 520px\) and \(orientation: landscape\)/);
   assert.match(responsiveCss, /\.course-roadmap-layout\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\)/);
   assert.match(responsiveCss, /\.pronunciation-practice-layout\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\)/);
   assert.match(responsiveCss, /\.challenge-options\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\)/);
@@ -35,5 +38,6 @@ test("lesson routes expose a scoped shell and mobile-safe navigation", async () 
   assert.match(responsiveCss, /env\(safe-area-inset-bottom\)/);
   assert.match(responsiveCss, /@media \(pointer: coarse\)/);
   assert.match(responsiveCss, /min-height:\s*44px/);
+  assert.match(responsiveCss, /overflow-wrap:\s*anywhere/);
   assert.match(responsiveCss, /prefers-reduced-motion:\s*reduce/);
 });

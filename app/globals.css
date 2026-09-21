@@ -4362,6 +4362,20 @@ a.roadmap-lesson-row:hover { color: #0b665c; background: #f5faf8; }
 .roadmap-lesson-minutes { color: #697974; text-align: right; white-space: nowrap; }
 .roadmap-lesson-cta { min-height: 40px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: center; color: #fff; border-radius: 9px; background: #08796d; font-size: 12px; font-weight: 760; white-space: nowrap; box-shadow: 0 6px 15px rgba(8, 109, 97, .16); }
 .roadmap-lesson-cta:hover { background: #065f57; }
+.roadmap-lesson-cta.is-replay { color: #08796d; border: 1px solid #b9ddd8; background: #f3fbf9; box-shadow: none; }
+.roadmap-lesson-cta.is-replay:hover { background: #e7f7f3; }
+
+.lesson-completion-dialog { position: fixed; inset: 0; z-index: 140; padding: 24px; display: grid; place-items: center; overflow-y: auto; background: rgba(9, 31, 29, .68); backdrop-filter: blur(8px); }
+.lesson-completion-celebration { width: min(680px, 100%); position: relative; }
+.lesson-completion-close { width: 44px; height: 44px; position: fixed; top: max(18px, env(safe-area-inset-top)); right: max(18px, env(safe-area-inset-right)); z-index: 142; display: grid; place-items: center; color: #173f38; border: 1px solid #e7d8c7; border-radius: 50%; background: #fffdf8; box-shadow: 0 8px 24px rgba(7, 36, 32, .2); }
+.lesson-completion-dialog .game-result-celebration__details p { margin: 0; color: #52635f; font-size: 14px; line-height: 1.45; }
+.lesson-completion-dialog .game-result-celebration__actions > * { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+
+@media (max-width: 700px) {
+  .lesson-completion-dialog { padding: 10px; }
+  .lesson-completion-celebration { width: min(100%, 540px); }
+  .lesson-completion-close { top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); }
+}
 .roadmap-lesson-vip { min-height: 36px; padding: 0 13px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; color: #8d611e; border: 1px solid #edcf98; border-radius: 9px; background: #fff; font-size: 11px; font-weight: 760; white-space: nowrap; }
 .roadmap-lesson-chevron { color: #78908a; }
 .course-roadmap-aside { min-width: 0; position: sticky; top: 100px; display: grid; gap: 24px; }

@@ -57,7 +57,7 @@ function RoadmapLessonRow({
     return <div className="roadmap-lesson-row is-current">
       {copy}
       <Link aria-current="step" className="roadmap-lesson-cta" href={lesson.href} prefetch={false}>
-        Bắt đầu bài học
+        {lesson.started ? "Tiếp tục học" : "Bắt đầu bài học"}
       </Link>
       <ChevronRight aria-hidden="true" className="roadmap-lesson-chevron" size={19} />
     </div>;
@@ -74,6 +74,7 @@ function RoadmapLessonRow({
   if (lesson.href) {
     return <Link className={`roadmap-lesson-row is-${lesson.status}`} href={lesson.href} prefetch={false}>
       {copy}
+      {lesson.status === "completed" ? <span className="roadmap-lesson-cta is-replay">Học lại</span> : null}
       <ChevronRight aria-hidden="true" className="roadmap-lesson-chevron" size={19} />
     </Link>;
   }

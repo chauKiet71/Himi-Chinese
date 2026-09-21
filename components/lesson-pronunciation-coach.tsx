@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, BarChart3, CheckCircle2, ChevronRight, Lightbulb, Volume2 } from "lucide-react";
-import { PronunciationEvaluator } from "@/components/pronunciation-evaluator";
+import { ArrowLeft, ArrowRight, BarChart3, Lightbulb, Volume2 } from "lucide-react";
+import { PronunciationEvaluator, type PronunciationResult } from "@/components/pronunciation-evaluator";
 import { speakMandarin } from "@/lib/client-mandarin-audio";
 import type { DialogueLine, Vocabulary } from "@/lib/content-types";
 
@@ -10,7 +10,9 @@ type PracticeTarget = { id: string; hanzi: string; pinyin: string; translation: 
 
 const PRACTICE_TARGET_LIMIT = 10;
 
-export function LessonPronunciationCoach({ words, dialogue, onFinished = () => undefined }: { words: Vocabulary[]; dialogue: DialogueLine[]; onFinished?: () => void }) {
+export type LessonPronunciationSummary = { score: number; completed: number; total: number };
+
+export function LessonPronunciationCoach({ words, dialogue, onFinished = () => undefined }: { words: Vocabulary[]; dialogue: DialogueLine[]; onFinished?: (summary: LessonPronunciationSummary) => void }) {
   const targets = useMemo<PracticeTarget[]>(() => {
     const candidates = [
       ...dialogue.map((line, index) => ({ id: `dialogue-${index}`, hanzi: line.hanzi, pinyin: line.pinyin, translation: line.translation })).sort((left, right) => right.hanzi.length - left.hanzi.length),
@@ -22,10 +24,25 @@ export function LessonPronunciationCoach({ words, dialogue, onFinished = () => u
       .slice(0, PRACTICE_TARGET_LIMIT);
   }, [dialogue, words]);
   const [index, setIndex] = useState(0);
-  const [passed, setPassed] = useState<Set<string>>(() => new Set());
+  const [results, setResults] = useState<Map<string, PronunciationResult>>(() => new Map());
+  const [playbackRate, setPlaybackRate] = useState(1);
   const current = targets[index];
   const atStart = index === 0;
   const atEnd = index === targets.length - 1;
+  const currentResult = results.get(current?.id ?? "");
+  const allAttempted = results.size === targets.length;
+  const averageScore = results.size
+    ? Math.round(Array.from(results.values()).reduce((total, result) => total + result.totalScore, 0) / results.size)
+    : 0;
+
+  const renderScoredHanzi = () => {
+    let hanziIndex = 0;
+    return Array.from(current.hanzi).map((character, characterIndex) => {
+      if (!/\p{Script=Han}/u.test(character)) return <span key={`${character}-${characterIndex}`}>{character}</span>;
+      const state = currentResult?.characterFeedback[hanziIndex++] ?? "unscored";
+      return <span className={`pronunciation-character is-${state}`} key={`${character}-${characterIndex}`}>{character}</span>;
+    });
+  };
 
   const moveTo = (nextIndex: number) => {
     setIndex(Math.max(0, Math.min(targets.length - 1, nextIndex)));
@@ -45,20 +62,23 @@ export function LessonPronunciationCoach({ words, dialogue, onFinished = () => u
         </div>
 
         <div className="lesson-study-content pronunciation-study-content">
-          <div className="pronunciation-heading-row"><strong lang="zh-CN">{current.hanzi}</strong><button aria-label={`Nghe nhanh câu ${current.hanzi}`} className="lesson-inline-sound" onClick={() => speakMandarin(current.hanzi)} type="button"><Volume2 size={24} /></button></div>
+          <div className="pronunciation-heading-row"><strong aria-label={current.hanzi} lang="zh-CN">{renderScoredHanzi()}</strong><button aria-label={`Nghe câu ${current.hanzi}`} className="lesson-inline-sound" onClick={() => speakMandarin(current.hanzi, undefined, playbackRate)} type="button"><Volume2 size={24} /></button></div>
           <small className="pronunciation-pinyin">{current.pinyin}</small>
           <p>{current.translation}</p>
 
+          <div aria-label="Tốc độ phát" className="pronunciation-speed" role="group">
+            {[0.75, 1, 1.25].map((rate) => <button aria-pressed={playbackRate === rate} key={rate} onClick={() => setPlaybackRate(rate)} type="button">{rate}×</button>)}
+          </div>
+
           <div className="lesson-pronunciation-action">
             <PronunciationEvaluator compact key={current.id} onEvaluated={(result) => {
-              if (result.totalScore < 70) return;
-              setPassed((items) => new Set(items).add(current.id));
+              setResults((items) => new Map(items).set(current.id, result));
             }} targetText={current.hanzi} />
           </div>
 
-          <div className="pronunciation-status-row"><span><BarChart3 size={22} />{passed.has(current.id) ? <><CheckCircle2 size={16} /> Đã đạt câu này</> : "Chưa có kết quả"}</span><button type="button">Xem phản hồi <ChevronRight size={17} /></button></div>
+          {!currentResult ? <div className="pronunciation-status-row"><span><BarChart3 size={22} />Chưa có kết quả</span></div> : null}
         </div>
-        {atEnd ? <div className="lesson-pronunciation-completion"><button aria-label="Hoàn thành phần Nghe và nói" className="lesson-stage-nav-button is-next" onClick={onFinished} type="button"><span>Hoàn thành</span> <ArrowRight size={19} /></button></div> : null}
+        {atEnd ? <div className="lesson-pronunciation-completion"><button aria-label="Hoàn thành phần Nghe và nói" className="lesson-stage-nav-button is-next" disabled={!allAttempted} onClick={() => onFinished({ score: averageScore, completed: results.size, total: targets.length })} type="button"><span>Hoàn thành</span> <ArrowRight size={19} /></button>{!allAttempted ? <small>Hãy đọc đủ {targets.length} câu để hoàn thành.</small> : null}</div> : null}
         </div>
       </article>
 

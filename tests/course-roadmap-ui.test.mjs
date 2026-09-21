@@ -67,6 +67,21 @@ test("an available course opens an overview that leads to the learner's next les
   assert.match(overviewHtml, /href="\/learn\/van-phong-hanh-chinh\?lesson=xu-ly-thay-doi-uu-tien"/);
   assert.match(overviewHtml, />Bắt đầu bài học</);
 
+  const continuedRoadmap = buildCourseRoadmap({
+    courseSlug: course.slug,
+    lessons: officeLessons.map((lesson, order) => ({
+      ...lesson,
+      order,
+      moduleTitle: officeModules.find((module) => module.slug === lesson.moduleSlug)?.title ?? "",
+      moduleOrder: officeModules.findIndex((module) => module.slug === lesson.moduleSlug),
+    })),
+    completedLessonSlugs: officeLessons.slice(0, 8).map((lesson) => lesson.slug),
+    openedLessonSlugs: [officeLessons[8].slug],
+    viewerHasVip: true,
+  });
+  const continuedHtml = renderToStaticMarkup(React.createElement(viewModule.CourseRoadmap, { authenticated: true, course, roadmap: continuedRoadmap }));
+  assert.match(continuedHtml, />Tiếp tục học</);
+
   const vipRoadmap = buildCourseRoadmap({
     courseSlug: course.slug,
     lessons: officeLessons.map((lesson, order) => ({
