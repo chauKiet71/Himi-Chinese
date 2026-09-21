@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { MailCheck } from "lucide-react";
-import { BrandMark, BrandWordmark } from "@/components/brand-logo";
+import { AuthBrandMark, BrandWordmark } from "@/components/brand-logo";
 import { EmailVerificationCodeForm } from "@/components/email-verification-code-form";
 import { normalizeEmail, validateAuthToken, validateEmail } from "@/lib/auth-validation";
 import {
@@ -46,7 +46,7 @@ export default async function VerifyEmailPage({ searchParams }: { searchParams: 
   const passwordError = emailChangeErrorKey === "invalid_change_credentials" ? emailChangeError : undefined;
   const heading = hasToken ? "Xác nhận email" : hasPendingEmail ? "Nhập mã xác minh" : "Gửi mã xác minh";
   return <main className="auth-page"><section className="auth-card">
-    <div className="auth-brand"><BrandMark priority /><BrandWordmark /></div>
+    <div className="auth-brand"><AuthBrandMark priority /><BrandWordmark /></div>
     <div className="auth-icon"><MailCheck size={24} /></div>
     <div className="auth-heading"><h1>{heading}</h1><p>{hasToken ? "Bấm xác nhận để kích hoạt tài khoản. Liên kết này chỉ dùng được một lần." : hasPendingEmail ? "Nhập đủ 6 số để hệ thống tự xác minh và đăng nhập ngay." : "Nhập email tài khoản để nhận một mã xác minh mới."}</p></div>
     {params.error && errors[params.error] ? <p className="auth-error" role="alert">{errors[params.error]}</p> : null}

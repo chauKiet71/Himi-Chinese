@@ -46,3 +46,50 @@
 - P3: animate the score count only if a later iteration needs stronger celebration feedback.
 
 final result: passed
+
+---
+
+**Design QA — Verify-email brand icon**
+
+- Source visual truth: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-9084af4f-20f3-4f09-9b01-73f844794c34.png`
+- Implementation: `http://localhost:4173/verify-email`
+- Browser evidence: Codex in-app Browser tab 3; screenshot captured in-tool at the default desktop viewport. The browser tool does not expose a filesystem path for captures.
+- Source pixels: 212 × 92 px.
+- Implementation viewport: default desktop viewport, device scale factor 1.
+- State: verification-email form without a pending verification cookie.
+
+**Full-view comparison evidence**
+
+- The verification card now uses the same head-only penguin brand icon as the other authentication screens while retaining the existing Himi Chinese wordmark.
+- The card hierarchy, spacing, mail icon, heading, input, and actions are unchanged.
+
+**Focused region comparison evidence**
+
+- Typography: wordmark size and weight remain consistent with the reference lockup.
+- Spacing/layout: the icon and wordmark remain vertically centered without changing the card rhythm.
+- Colors/tokens: existing coral Himi wordmark and dark Chinese wordmark are preserved.
+- Image quality: the approved transparent repository asset is used directly; no CSS or placeholder icon was introduced.
+- Copy/content: no authentication copy changed.
+
+**Findings**
+
+- No actionable P0/P1/P2 mismatch remains in the checked brand region.
+
+**Comparison history**
+
+- Initial P2: the verification page used the generic brand mark instead of the head-only authentication icon.
+- Fix: switched the page to the shared `AuthBrandMark` component.
+- Post-fix evidence: browser capture shows the head-only penguin icon beside the unchanged Himi Chinese wordmark.
+
+**Implementation Checklist**
+
+- [x] Shared authentication brand icon
+- [x] Existing wordmark preserved
+- [x] No layout regression
+- [x] Approved image asset retained
+
+**Follow-up Polish**
+
+- None required for this scoped change.
+
+final result: passed
