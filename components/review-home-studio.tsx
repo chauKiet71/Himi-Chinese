@@ -99,7 +99,7 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
             <Link className="home-portal-primary" href="/listening?mode=scenario" prefetch={false}>
               Bắt đầu luyện nói <ArrowRight aria-hidden="true" size={23} />
             </Link>
-            <Link className="home-portal-secondary" href="/courses" prefetch={false}>
+            <Link className="home-portal-secondary" href="/courses#course-catalog" prefetch={false}>
               <span aria-hidden="true"><Play size={18} fill="currentColor" /></span>
               Xem lộ trình
             </Link>

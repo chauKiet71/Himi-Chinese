@@ -21,6 +21,7 @@ test("home portal reserves mobile navigation space and keeps phone controls touc
   assert.match(shell, /<UserRound aria-hidden="true" size=\{20\} \/><span>Tài khoản<\/span>/);
   assert.match(shell, /<span>Luyện tập<\/span>/);
   const homeStudio = await read("components/review-home-studio.tsx");
+  assert.match(homeStudio, /className="home-portal-secondary" href="\/courses#course-catalog"[\s\S]*Xem lộ trình/);
   assert.match(homeStudio, /aria-label="Bắt đầu luyện nhanh"[\s\S]*href="\/typing"[\s\S]*Luyện gõ[\s\S]*href="\/listening"[\s\S]*Nghe phản xạ[\s\S]*href="\/vocabulary"[\s\S]*Ôn từ/);
   assert.doesNotMatch(homeStudio, /href="\/hsk\/1\/hsk1-bai-01-chao-anh\/flashcard"/);
   assert.match(css, /\.home-portal-quick-dock\s*\{[\s\S]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);

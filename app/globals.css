@@ -16333,6 +16333,13 @@ textarea {
   height: 60px;
 }
 
+.auth-scene-brand .auth-brand-mark {
+  border-color: transparent;
+  border-radius: 50%;
+  background: transparent;
+  filter: drop-shadow(0 8px 12px rgba(34, 34, 34, 0.12));
+}
+
 @media (max-width: 700px) {
   .brand-wordmark {
     gap: 0.22em;

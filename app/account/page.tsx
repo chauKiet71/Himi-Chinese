@@ -20,6 +20,7 @@ import { AccountAvatarUploader } from "@/components/account-avatar-uploader";
 import { AccountPasswordSheet } from "@/components/account-password-sheet";
 import { cancelVipActivationRequestAction } from "@/app/vip/actions";
 import { getCurrentUser } from "@/lib/auth-session";
+import { LogoutForm } from "@/components/logout-form";
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from "@/lib/auth-validation";
 import { getPendingVipActivationRequest } from "@/lib/vip-activation-request-service";
 import { vipPlanDurationLabel } from "@/lib/vip-plan";
@@ -207,14 +208,13 @@ export default async function AccountPage({
               minLength={MIN_PASSWORD_LENGTH}
               openOnMount={showPasswordEditor}
             />
-            <form action="/api/auth/logout" className="account-logout-form" method="post">
-              <input name="returnTo" type="hidden" value="/" />
+            <LogoutForm className="account-logout-form">
               <button className="account-security-row" type="submit">
                 <LogOut size={22} />
                 <span><strong>Đăng xuất</strong><small>Đăng xuất khỏi tài khoản trên thiết bị này</small></span>
                 <ChevronRight size={20} />
               </button>
-            </form>
+            </LogoutForm>
           </div>
         </section>
 

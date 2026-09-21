@@ -5,9 +5,10 @@ import test from "node:test";
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("forgot-password reuses the learner authentication scene", async () => {
-  const [page, authCard] = await Promise.all([
+  const [page, authCard, brandLogo] = await Promise.all([
     read("app/forgot-password/page.tsx"),
     read("components/auth-card.tsx"),
+    read("components/brand-logo.tsx"),
   ]);
 
   assert.match(page, /mode="forgot-password"/);
@@ -18,4 +19,6 @@ test("forgot-password reuses the learner authentication scene", async () => {
   assert.match(authCard, /auth-page-forgot-scene/);
   assert.match(authCard, /auth-card-forgot-scene/);
   assert.match(authCard, /if \(typeof window !== "undefined"\) gsap\.registerPlugin\(useGSAP\);/);
+  assert.match(authCard, /<AuthBrandMark priority \/><BrandWordmark \/>/);
+  assert.match(brandLogo, /himi-sidebar-logo-transparent\.webp/);
 });

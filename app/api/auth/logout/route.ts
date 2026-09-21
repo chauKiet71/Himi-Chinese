@@ -19,7 +19,10 @@ export async function POST(request: Request) {
 
   const formData = await request.formData();
   const returnTo = safeReturnTo(formString(formData, "returnTo"));
-  const response = NextResponse.redirect(new URL(returnTo, request.url), 303);
+  const response = formString(formData, "responseMode") === "json"
+    ? NextResponse.json({ ok: true, redirectTo: returnTo })
+    : NextResponse.redirect(new URL(returnTo, request.url), 303);
+  response.headers.set("Cache-Control", "no-store");
   response.cookies.set(cookieName, "", { httpOnly: true, sameSite: "lax", secure: secureAuthCookiesEnabled(), path: "/", maxAge: 0 });
   return response;
 }

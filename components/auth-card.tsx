@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { type FormEvent, useEffect, useId, useRef, useState } from "react";
 import { ArrowRight, Eye, EyeOff, Home, KeyRound, LockKeyhole, Mail, RotateCcw, ShieldCheck, UserPlus, UserRound } from "lucide-react";
-import { BrandMark, BrandWordmark } from "@/components/brand-logo";
+import { AuthBrandMark, BrandMark, BrandWordmark } from "@/components/brand-logo";
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from "@/lib/auth-validation";
 
 if (typeof window !== "undefined") gsap.registerPlugin(useGSAP);
@@ -272,7 +272,7 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
   return <main className={`auth-page auth-gsap-motion ${learnerAuth ? "auth-page-login-scene" : ""} ${registering ? "auth-page-register-scene" : ""} ${forgotPassword ? "auth-page-forgot-scene" : ""} ${registerState === "success" ? "auth-register-is-success" : ""}`.trim()} ref={authRootRef}>
     {learnerAuth ? <>
       <div className="auth-scene-stage"><div aria-hidden="true" className="auth-login-scene-art" />{authPanel}</div>
-      <Link aria-label="Himi Chinese - Về trang chủ" className="auth-scene-brand" href="/"><BrandMark priority /><BrandWordmark /></Link>
+      <Link aria-label="Himi Chinese - Về trang chủ" className="auth-scene-brand" href="/"><AuthBrandMark priority /><BrandWordmark /></Link>
       <Link className="auth-scene-home" href="/"><Home aria-hidden="true" size={17} />Về trang chủ</Link>
       <button aria-label="Phát lại chuyển động" className="auth-scene-replay" onClick={() => setMotionRun((run) => run + 1)} title="Xem lại chuyển động" type="button"><RotateCcw aria-hidden="true" size={17} /></button>
       <span aria-hidden="true" className="auth-motion-walker"><span className="auth-motion-walker-shadow" /><span className="auth-motion-walker-sprite" /></span>

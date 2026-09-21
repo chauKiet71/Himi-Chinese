@@ -27,6 +27,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { BrandMark, BrandWordmark } from "@/components/brand-logo";
+import { LogoutForm } from "@/components/logout-form";
 import { getInternalNavigationHref } from "@/lib/navigation-progress";
 
 type LearnerShellUser = {
@@ -530,10 +531,9 @@ export function LearnerAppShell({
                   <UserRound aria-hidden="true" size={20} /><span>Hồ sơ</span>
                 </Link>
               </nav>
-              <form action="/api/auth/logout" className="account-menu-logout" method="post">
-                <input name="returnTo" type="hidden" value="/" />
+              <LogoutForm className="account-menu-logout">
                 <button type="submit"><LogOut aria-hidden="true" size={20} /><span>Đăng xuất</span></button>
-              </form>
+              </LogoutForm>
             </div>
           </div> : <Link aria-label="Đăng nhập" className="user-chip" href={profileHref} onClick={(event) => beginRoute(event, profileHref)} onPointerEnter={() => prepareRoute(profileHref)} prefetch={false}>
             <UserChipAvatar avatarUrl={null} displayName={displayName} />
