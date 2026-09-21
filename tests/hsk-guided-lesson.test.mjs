@@ -131,7 +131,7 @@ test("guided HSK lesson exposes progress, controls, sections and step navigation
   const lesson = contentModule.getHskLessonContent("hsk-1", "hsk1-bai-01-chao-anh");
   const html = renderToStaticMarkup(React.createElement(viewModule.HskGuidedLesson, { lesson }));
 
-  assert.match(html, /aria-label="Thoát bài học"/);
+  assert.match(html, /aria-label="Thoát bài học" href="\/courses\?view=hsk"/);
   assert.match(html, /aria-valuenow="1"/);
   assert.match(html, /1 \/ 15/);
   assert.match(html, /Ẩn pinyin/);

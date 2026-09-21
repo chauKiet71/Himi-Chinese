@@ -430,7 +430,6 @@ export function HskGuidedLesson({ lesson, authenticated = false }: { lesson: Hsk
   const [wordSaveStatuses, setWordSaveStatuses] = useState<Record<string, VocabularySaveStatus>>({});
   const [, setProgress] = useState<HskLessonProgress>(EMPTY_HSK_LESSON_PROGRESS);
   const step = steps[currentStep];
-  const baseHref = `/hsk/${lesson.levelId.replace(/^hsk-/, "")}/${lesson.id}`;
 
   useEffect(() => {
     const handle = window.setTimeout(() => {
@@ -507,7 +506,7 @@ export function HskGuidedLesson({ lesson, authenticated = false }: { lesson: Hsk
   return <div className="hsk-guided-page">
     <header className="hsk-guided-header">
       <div className="hsk-guided-toolbar">
-        <Link aria-label="Thoát bài học" href={baseHref}><X aria-hidden="true" size={22} /></Link>
+        <Link aria-label="Thoát bài học" href="/courses?view=hsk"><X aria-hidden="true" size={22} /></Link>
         <div aria-label={`Bước ${currentStep + 1} trên ${steps.length}`} aria-valuemax={steps.length} aria-valuemin={1} aria-valuenow={currentStep + 1} className="hsk-guided-progress" role="progressbar"><span style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }} /></div>
         <strong>{currentStep + 1} / {steps.length}</strong>
         <button aria-label={showPinyin ? "Ẩn pinyin" : "Hiện pinyin"} aria-pressed={showPinyin} className="hsk-guided-pinyin" onClick={() => setShowPinyin((current) => !current)} type="button"><b aria-hidden="true">pīn</b></button>

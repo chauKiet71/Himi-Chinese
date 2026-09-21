@@ -46,6 +46,51 @@ final result: passed
 
 ---
 
+## HSK curriculum CTA → guided lesson — 2026-09-16
+
+### Comparison target
+
+- Source visual truth: Browser Comment 1 target attachment, 1272 × 689 pixels. The conversation attachment does not expose a local filesystem path.
+- Browser-rendered implementation: `http://localhost:3001/hsk/1/hsk1-bai-01-chao-anh/play`, captured inline in the selected Codex in-app Browser. The capture backend did not expose a local screenshot path.
+- Browser capture: 1194 × 1399 pixels at the host-managed density; DOM viewport 800 × 937 CSS px after the temporary reference-size override was reset.
+- State: `Bước 1 trên 15`, “Giới thiệu” active, lesson `Bài 1 · HSK 1`, title `Chào anh!`, three summary cards visible, footer navigation present.
+
+### Findings
+
+- No actionable P0, P1, or P2 findings remain for this scoped navigation change.
+- The selected curriculum CTA now resolves directly to the guided learning route instead of stopping at the lesson overview.
+- The rendered destination preserves the reference's learning shell: exit action, progress rail, section tabs, lesson hero, summary cards, keyboard hint, and persistent previous/next footer.
+
+### Required fidelity surfaces
+
+- Fonts and typography: existing Vietnamese and Chinese font stacks, display hierarchy, weights, and compact progress labels are unchanged.
+- Spacing and layout rhythm: the guided lesson layout is unchanged; the reference and live screen retain the same centered hero and fixed header/footer structure. The live Browser viewport was taller than the source crop, so the additional lower whitespace is expected rather than design drift.
+- Colors and visual tokens: Himi coral, cool gray page surface, white cards, muted supporting copy, borders, and shadows match the supplied target.
+- Image quality and asset fidelity: this state uses installed Lucide icons and text content only; no source illustration or image asset was replaced.
+- Copy and content: `你好!`, `Chào anh!`, 6 từ vựng, 6 bài tập, approximately 25 minutes, and 15 guided steps match the supplied lesson target.
+
+### Full-view and focused comparison evidence
+
+- The source attachment and the live Browser capture were opened and compared in the same task. Both show the same introduction state and information hierarchy.
+- A separate focused crop was unnecessary because the only changed surface is the curriculum CTA destination; its accessible URL was inspected directly before click and the complete destination state was visible after navigation.
+- The page reports no horizontal overflow, and the Browser console contains no warnings or errors.
+
+### Comparison history and verification
+
+1. Before the fix, `100% đã học · Tiếp tục học` pointed to `/hsk/1/hsk1-bai-01-chao-anh`, the overview screen.
+2. The CTA was updated to `/hsk/1/hsk1-bai-01-chao-anh/play`; the lesson-title link intentionally remains on the overview route.
+3. Browser verification clicked the exact annotated CTA and confirmed the guided lesson route and `Bước 1 trên 15` introduction state.
+4. Focused HSK regression tests pass 9/9, and ESLint passes for the changed component and test.
+5. The production bundle transformed 744 modules successfully, then the existing Sites plugin could not replace the already locked `dist/.openai/hosting.json`; this output-file lock is unrelated to the CTA change.
+
+### Follow-up polish
+
+- No P3 follow-up is required for this scoped navigation update.
+
+final result: passed
+
+---
+
 ## Sân khấu bài học Himi — vòng chỉnh theo phản hồi — 2026-09-13
 
 ### Comparison target

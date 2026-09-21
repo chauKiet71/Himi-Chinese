@@ -229,7 +229,7 @@ export function HskCurriculumExplorer({
                     </span>
                   </button>}
 
-                  {lessonSelected && lessonAvailable ? <Link className="hsk-lesson-start" href={lessonHref} prefetch={false}>
+                  {lessonSelected && lessonAvailable ? <Link className="hsk-lesson-start" href={`${lessonHref}/play`} prefetch={false}>
                     <span>{savedPercent > 0 ? `${savedPercent}% đã học` : "Sẵn sàng"}</span>
                     <strong>{savedPercent > 0 ? "Tiếp tục học" : "Bắt đầu học"}</strong>
                     <ArrowRight aria-hidden="true" size={18} />
