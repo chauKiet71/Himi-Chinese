@@ -3,11 +3,12 @@ import "server-only";
 import { and, asc, desc, eq } from "drizzle-orm";
 import { unstable_cache } from "next/cache.js";
 import { readDb, writeDb } from "../db/index.ts";
-import { auditLogs, users, vipActivationRequests, vipPlans } from "../db/schema.ts";
+import { auditLogs, paymentOrders, users, vipActivationRequests, vipPlans } from "../db/schema.ts";
 import type { MutationResult } from "./admin-content-service.ts";
 import { grantOrExtendVipAccessInTransaction } from "./admin-subscription-service.ts";
 import { getActiveVipSubscription } from "./vip-subscription.ts";
 import { createNotificationInTransaction } from "./notification-service.ts";
+import { isTrialVipPlan } from "./vip-plan.ts";
 
 function normalizedNote(value?: string | null): string | null {
   const note = value?.trim().slice(0, 500) ?? "";
@@ -20,6 +21,8 @@ const getCachedActiveVipPlans = unstable_cache(async () => readDb((db) => db.sel
   name: vipPlans.name,
   durationDays: vipPlans.durationDays,
   priceVnd: vipPlans.priceVnd,
+  discountPercent: vipPlans.discountPercent,
+  promotionLabel: vipPlans.promotionLabel,
   benefits: vipPlans.benefits,
 }).from(vipPlans)
   .where(eq(vipPlans.isActive, true))
@@ -35,13 +38,14 @@ export async function getVipUpgradeOverview(userId?: string | null) {
       plans: await plansPromise,
       pendingRequest: null,
       activeSubscription: null,
+      hasPurchasedTrial: false,
     };
   }
 
   const [plans, viewer] = await Promise.all([
     plansPromise,
     readDb(async (db) => {
-      const [pendingRows, activeSubscription] = await Promise.all([
+      const [pendingRows, activeSubscription, paidPlanRows] = await Promise.all([
         db.select({
           id: vipActivationRequests.id,
           planId: vipActivationRequests.planId,
@@ -61,8 +65,21 @@ export async function getVipUpgradeOverview(userId?: string | null) {
           .orderBy(desc(vipActivationRequests.updatedAt))
           .limit(1),
         getActiveVipSubscription(userId, db),
+        db.select({
+          planCode: vipPlans.code,
+          durationDays: vipPlans.durationDays,
+        }).from(paymentOrders)
+          .innerJoin(vipPlans, eq(paymentOrders.planId, vipPlans.id))
+          .where(and(
+            eq(paymentOrders.userId, userId),
+            eq(paymentOrders.status, "paid"),
+          )),
       ]);
-      return { pendingRequest: pendingRows[0] ?? null, activeSubscription };
+      return {
+        pendingRequest: pendingRows[0] ?? null,
+        activeSubscription,
+        hasPurchasedTrial: paidPlanRows.some((plan) => isTrialVipPlan(plan.planCode, plan.durationDays)),
+      };
     }),
   ]);
 

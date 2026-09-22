@@ -24,7 +24,7 @@ test("learning journeys respond to the usable learner content width", async () =
   assert.match(responsiveCss, /\.challenge-options\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\)/);
 });
 
-test("lesson routes expose a scoped shell and mobile-safe navigation", async () => {
+test("lesson routes expose a scoped shell without the redundant page heading", async () => {
   const [page, loading, responsiveCss] = await Promise.all([
     read("app/learn/[slug]/page.tsx"),
     read("app/learn/[slug]/loading.tsx"),
@@ -33,8 +33,8 @@ test("lesson routes expose a scoped shell and mobile-safe navigation", async () 
 
   assert.match(page, /className="section-shell lesson-responsive-shell"/);
   assert.match(loading, /className="section-shell lesson-responsive-shell"/);
-  assert.match(page, /<nav aria-label="Điều hướng bài học" className="lesson-breadcrumb">/);
-  assert.match(page, /aria-current="page"/);
+  assert.doesNotMatch(page, /<nav aria-label="Điều hướng bài học" className="lesson-breadcrumb">/);
+  assert.doesNotMatch(page, /aria-current="page"/);
   assert.match(responsiveCss, /env\(safe-area-inset-bottom\)/);
   assert.match(responsiveCss, /@media \(pointer: coarse\)/);
   assert.match(responsiveCss, /min-height:\s*44px/);

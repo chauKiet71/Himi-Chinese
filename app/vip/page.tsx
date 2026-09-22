@@ -12,7 +12,7 @@ import { HimiSectionBanner } from "@/components/himi-section-banner";
 import { VipTransferFlow } from "@/components/vip-transfer-flow";
 import { getCurrentUser } from "@/lib/auth-session";
 import { getVipUpgradeOverview } from "@/lib/vip-activation-request-service";
-import { isLifetimeVipPlan, vipPlanAccessLabel, vipPlanDurationLabel } from "@/lib/vip-plan";
+import { isLifetimeVipPlan, isTrialVipPlan, vipPlanAccessLabel, vipPlanDurationLabel } from "@/lib/vip-plan";
 import { vipDaysRemaining } from "@/lib/vip-subscription";
 
 export const metadata: Metadata = {
@@ -54,6 +54,15 @@ function formatPrice(value: number): string {
   return new Intl.NumberFormat("vi-VN").format(value) + "đ";
 }
 
+function planSalePercent(code: string, durationDays: number, configuredDiscount: number): number | null {
+  if (configuredDiscount > 0) return configuredDiscount;
+  const normalizedCode = code.trim().toUpperCase();
+  if (normalizedCode === "VIP_1M" || durationDays === 30) return 10;
+  if (normalizedCode === "VIP_3M" || durationDays === 90) return 18;
+  if (normalizedCode === "VIP_6M" || durationDays === 180) return 25;
+  return null;
+}
+
 export default async function VipPage({
   searchParams,
 }: {
@@ -67,8 +76,8 @@ export default async function VipPage({
   const notice = params.success ? noticeMessages[params.success] : null;
   const error = params.error ? errorMessages[params.error] : null;
   const hasAccountStatus = Boolean(notice || error || active || pending);
-  const featuredPlanId = overview.plans.find((plan) => plan.code === "VIP_6M")?.id
-    ?? overview.plans.find((plan) => !isLifetimeVipPlan(plan.code) && plan.durationDays >= 180)?.id
+  const featuredPlanId = overview.plans.find((plan) => plan.code.trim().toUpperCase() === "VIP_1M")?.id
+    ?? overview.plans.find((plan) => plan.durationDays === 30)?.id
     ?? overview.plans[0]?.id;
   const displayPlans = [...overview.plans].sort((left, right) => {
     const leftLifetime = isLifetimeVipPlan(left.code);
@@ -113,8 +122,13 @@ export default async function VipPage({
         {displayPlans.map((plan) => {
           const featured = plan.id === featuredPlanId;
           const lifetime = isLifetimeVipPlan(plan.code);
+          const trial = isTrialVipPlan(plan.code, plan.durationDays);
+          const trialAlreadyUsed = trial && overview.hasPurchasedTrial;
+          const salePercent = planSalePercent(plan.code, plan.durationDays, plan.discountPercent);
           const isPendingPlan = pending?.planId === plan.id;
-          const buttonText = isPendingPlan
+          const buttonText = trialAlreadyUsed
+            ? "Đã dùng gói trải nghiệm"
+            : isPendingPlan
             ? "Đang chờ duyệt"
             : pending
               ? "Đổi sang gói này"
@@ -127,18 +141,28 @@ export default async function VipPage({
             id={`vip-plan-${plan.code.toLocaleLowerCase("vi-VN").replaceAll("_", "-")}`}
             key={plan.id}
           >
-            {featured ? <span className="price-badge">Được chọn nhiều</span> : null}
+            <div className="vip-plan-badges">
+              {featured ? <span className="price-badge">Được chọn nhiều</span> : null}
+              {salePercent ? <span className="vip-sale-tag">
+                <i aria-hidden="true" className="vip-sale-cord" />
+                <span className="vip-sale-badge"><span>Sale</span><strong>-{salePercent}%</strong></span>
+              </span> : null}
+            </div>
             <span className="price-name">{plan.name}</span>
             <div className="price"><strong>{formatPrice(plan.priceVnd)}</strong><span>/ {vipPlanDurationLabel(plan.code, plan.durationDays).toLocaleLowerCase("vi-VN")}</span></div>
             <p className="price-description">{lifetime
               ? "Đầy đủ quyền VIP, không cần gia hạn."
               : `Đầy đủ quyền VIP trong ${plan.durationDays} ngày.`}</p>
             <ul className="feature-list">{purchaseBenefits.map((feature) => <li key={feature}><Check size={15} />{feature}</li>)}</ul>
+            {trialAlreadyUsed ? <p className="vip-trial-used-note" role="status"><Check size={16} />
+              <span><strong>Bạn đã dùng gói 3 ngày.</strong> Cảm ơn bạn đã trải nghiệm! Gói 1 tháng sẽ phù hợp để tiếp tục học.</span>
+            </p> : null}
             {user ? <VipTransferFlow
               buttonText={buttonText}
               durationLabel={vipPlanAccessLabel(plan.code, plan.durationDays)}
               featured={featured}
               isPendingPlan={isPendingPlan}
+              purchaseDisabled={trialAlreadyUsed}
               planCode={plan.code}
               planId={plan.id}
               planName={plan.name}

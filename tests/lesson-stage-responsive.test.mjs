@@ -75,7 +75,7 @@ test("both reading decks keep a single pronunciation action and remove optional 
   }
   const vocabulary = await readFile(new URL("../components/lesson-vocabulary-deck.tsx", import.meta.url), "utf8");
   assert.doesNotMatch(vocabulary, /lesson-word-type|lesson-example-card|>Từ vựng<|>Ví dụ</);
-  assert.match(vocabulary, /lesson-audio-speed[\s\S]*onClick=\{saveForReview\}/);
+  assert.match(vocabulary, /LessonSpeedMenu[\s\S]*onClick=\{saveForReview\}/);
   assert.match(vocabulary, /const nextSaved = !saved/);
   assert.match(vocabulary, /saved: nextSaved/);
   assert.match(vocabulary, /disabled=\{savePending\}/);
@@ -108,8 +108,26 @@ test("listening and speaking shows pinyin by default and completes on the tenth 
   assert.match(source, /atEnd \? <div className="lesson-pronunciation-completion">/);
   assert.match(source, /disabled=\{!allAttempted\}/);
   assert.match(source, /onClick=\{\(\) => onFinished\(\{ score: averageScore, completed: results\.size, total: targets\.length \}\)\}/);
-  assert.match(source, /\[0\.75, 1, 1\.25\]/);
+  assert.match(source, /<LessonSpeedMenu onChange=\{setPlaybackRate\} rate=\{playbackRate\} \/>/);
   assert.match(source, /pronunciation-character is-/);
+});
+
+test("all three study modes share a compact expandable speed control", async () => {
+  const [speedMenu, vocabulary, phrasebook, pronunciation] = await Promise.all([
+    readFile(new URL("../components/lesson-speed-menu.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/lesson-vocabulary-deck.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/lesson-phrasebook.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/lesson-pronunciation-coach.tsx", import.meta.url), "utf8"),
+  ]);
+  assert.match(speedMenu, /LESSON_PLAYBACK_RATES = \[0\.75, 1, 1\.25\]/);
+  assert.match(speedMenu, /<details className="lesson-speed-menu"/);
+  assert.match(speedMenu, /className="lesson-speed-options"/);
+  for (const source of [vocabulary, phrasebook, pronunciation]) {
+    assert.match(source, /LessonSpeedMenu/);
+    assert.match(source, /playbackRate/);
+  }
+  assert.match(vocabulary, /audio\.playbackRate = playbackRate/);
+  assert.match(phrasebook, /playbackRate\);/);
 });
 
 test("the three study modes cover narrow phones, landscape phones, tablets and short laptops", () => {

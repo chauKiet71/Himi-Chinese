@@ -32,6 +32,10 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(page, /Xem nội dung VIP/);
   assert.match(page, /Đọc điều khoản đầy đủ/);
   assert.match(page, /Chọn gói VIP phù hợp/);
+  assert.match(page, /code\.trim\(\)\.toUpperCase\(\) === "VIP_1M"/);
+  assert.match(page, /vip-sale-cord/);
+  assert.match(page, /vip-sale-badge[\s\S]*?<span>Sale<\/span><strong>-\{salePercent\}%<\/strong>/);
+  assert.match(page, /Bạn đã dùng gói 3 ngày/);
   assert.doesNotMatch(page, /Chọn quyền truy cập/);
   assert.match(policyStyles, /\.vip-purchase-section/);
   assert.match(policyStyles, /@media \(max-width: 720px\)/);
@@ -62,6 +66,10 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(paymentService, /select\(\{ id: paymentOrders\.id \}\)\.from\(paymentOrders\)[\s\S]*?\.for\("update"\)/);
   assert.doesNotMatch(paymentService, /const existingRows = await tx\.select\([\s\S]*?\.leftJoin\(subscriptions[\s\S]*?\.for\("update"\)/);
   assert.match(paymentService, /VIP đã được kích hoạt/);
+  assert.match(paymentService, /trial_plan_already_used/);
+  assert.match(paymentService, /eq\(paymentOrders\.status, "paid"\)/);
+  assert.match(transferFlow, /purchaseDisabled/);
+  assert.match(transferFlow, /Bạn đã trải nghiệm gói VIP 3 ngày rồi/);
   assert.doesNotMatch(transferFlow, /requestVipActivationAction|name="userNote"/);
   assert.match(webhookRoute, /authenticateSepayWebhook/);
   assert.match(webhookRoute, /processSepayWebhook/);

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { and, desc, eq, gt, lte } from "drizzle-orm";
+import { and, desc, eq, gt, lte, or } from "drizzle-orm";
 import { writeDb, type Database } from "../db/index.ts";
 import {
   auditLogs,
@@ -25,6 +25,7 @@ import {
   SEPAY_PROVIDER,
   type SepayWebhookPayload,
 } from "./sepay.ts";
+import { isTrialVipPlan } from "./vip-plan.ts";
 
 type DbTransaction = Parameters<Parameters<Database["transaction"]>[0]>[0];
 type PaymentStatus = "expired" | "failed" | "manual_review" | "paid" | "pending" | "refunded";
@@ -49,7 +50,7 @@ export type SepayPaymentOrder = {
 
 type CreatePaymentOrderResult =
   | { ok: true; order: SepayPaymentOrder }
-  | { ok: false; error: "payment_configuration_invalid" | "vip_plan_inactive" | "vip_request_ineligible" };
+  | { ok: false; error: "payment_configuration_invalid" | "trial_plan_already_used" | "vip_plan_inactive" | "vip_request_ineligible" };
 
 export type SepayWebhookProcessingResult =
   | { outcome: "duplicate" | "ignored" | "manual_review" | "paid" | "unmatched"; orderId?: string };
@@ -133,7 +134,9 @@ export async function createOrReuseSepayPaymentOrder(input: {
 
     const planRows = await tx.select({
       id: vipPlans.id,
+      code: vipPlans.code,
       name: vipPlans.name,
+      durationDays: vipPlans.durationDays,
       priceVnd: vipPlans.priceVnd,
     }).from(vipPlans)
       .where(and(eq(vipPlans.id, input.planId), eq(vipPlans.isActive, true)))
@@ -141,6 +144,22 @@ export async function createOrReuseSepayPaymentOrder(input: {
     const plan = planRows[0];
     if (!plan || !Number.isSafeInteger(plan.priceVnd) || plan.priceVnd < 1) {
       return { ok: false, error: "vip_plan_inactive" };
+    }
+
+    if (isTrialVipPlan(plan.code, plan.durationDays)) {
+      const previousTrialRows = await tx.select({ id: paymentOrders.id })
+        .from(paymentOrders)
+        .innerJoin(vipPlans, eq(paymentOrders.planId, vipPlans.id))
+        .where(and(
+          eq(paymentOrders.userId, user.id),
+          eq(paymentOrders.status, "paid"),
+          or(
+            eq(vipPlans.code, "VIP_3D"),
+            eq(vipPlans.durationDays, 3),
+          ),
+        ))
+        .limit(1);
+      if (previousTrialRows.length > 0) return { ok: false, error: "trial_plan_already_used" };
     }
 
     await tx.update(paymentOrders).set({ status: "expired", updatedAt: now }).where(and(

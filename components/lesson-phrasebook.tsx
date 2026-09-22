@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Bookmark, Check, Lightbulb, Volume2 } from "lucide-react";
+import { LessonSpeedMenu, type LessonPlaybackRate } from "@/components/lesson-speed-menu";
 import type { DialogueLine, UsageNote, Vocabulary } from "@/lib/content-types";
 import { speakMandarin } from "@/lib/client-mandarin-audio";
 
@@ -43,6 +44,7 @@ export function LessonPhrasebook({ words, dialogue, notes, onFinished }: { words
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState<MoveDirection>("forward");
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [playbackRate, setPlaybackRate] = useState<LessonPlaybackRate>(1);
   const [audioMessage, setAudioMessage] = useState("");
   const [saveMessage, setSaveMessage] = useState("");
   const [savedIds, setSavedIds] = useState<Set<string>>(() => new Set());
@@ -103,7 +105,7 @@ export function LessonPhrasebook({ words, dialogue, notes, onFinished }: { words
     const started = speakMandarin(currentPhrase.hanzi, () => {
       setIsSpeaking(false);
       setAudioMessage("Đã phát âm xong.");
-    });
+    }, playbackRate);
     if (!started) {
       setIsSpeaking(false);
       setAudioMessage("Trình duyệt chưa hỗ trợ phát âm.");
@@ -145,7 +147,7 @@ export function LessonPhrasebook({ words, dialogue, notes, onFinished }: { words
               <span className="lesson-audio-icon"><Volume2 size={18} /></span>
               <span><strong>{isSpeaking ? "Đang phát âm…" : "Nghe cụm từ"}</strong></span>
             </button>
-            <span aria-label="Tốc độ phát âm 0.8 lần" className="lesson-audio-speed">0.8×</span>
+            <LessonSpeedMenu onChange={setPlaybackRate} rate={playbackRate} />
             <button aria-label={saved ? "Cụm đã được lưu" : "Lưu cụm để ôn tập"} aria-pressed={saved} className={`lesson-save-button lesson-save-button-icon${saved ? " saved" : ""}`} disabled={saved} onClick={saveForReview} title={saved ? "Đã lưu" : "Lưu cụm"} type="button">{saved ? <Check size={17} /> : <Bookmark size={17} />}{saved ? "Đã lưu" : "Lưu cụm"}</button>
           </div>
         </div>
