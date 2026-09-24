@@ -25,6 +25,7 @@ const errorMessages: Record<string, string> = {
   password_changed: "Mật khẩu đã được đổi. Hãy đăng nhập lại bằng mật khẩu mới.",
   password_reset: "Mật khẩu đã được đặt lại và các phiên cũ đã bị thu hồi. Hãy đăng nhập lại.",
   rate_limited: "Có quá nhiều yêu cầu trong thời gian ngắn. Hãy đợi một lúc rồi thử lại.",
+  service_unavailable: "Hệ thống tài khoản đang tạm gián đoạn. Vui lòng thử lại sau.",
   required: "Hãy đăng nhập để tiếp tục.",
   forbidden: "Tài khoản hiện tại không có quyền truy cập khu vực quản trị.",
   mfa_delivery_failed: "Chưa thể gửi mã xác minh quản trị. Hãy thử lại sau ít phút.",

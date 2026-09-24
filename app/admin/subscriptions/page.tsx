@@ -61,6 +61,13 @@ type VipPlanEditorValue = {
   promotionLabel: string | null;
 };
 
+function HiddenFormValue({ name, value }: { name: string; value: string }) {
+  // Vinext currently drops the value attribute from input[type="hidden"] during
+  // hydration. A visually hidden, read-only text input is still submitted by the
+  // browser and keeps the server action identifiers intact.
+  return <input aria-hidden="true" name={name} readOnly style={{ display: "none" }} tabIndex={-1} type="text" value={value} />;
+}
+
 function VipPlanFields({ plan }: { plan?: VipPlanEditorValue }) {
   return <>
     <div className="admin-form-grid two">
@@ -114,9 +121,9 @@ export default async function AdminSubscriptionsPage({ searchParams }: {
           <div className="admin-vip-plan-price"><strong>{formatAdminCurrency(plan.priceVnd)}</strong><span>{plan.discountPercent > 0 ? `Giảm ${plan.discountPercent}%` : "Giá tiêu chuẩn"}</span></div>
           <div className="admin-vip-plan-buyers"><strong>{plan.subscriberCount}</strong><span>người đã đăng ký</span></div>
           <div className="admin-vip-plan-actions">
-            <form action={toggleVipPlanAction}><input name="planId" type="hidden" value={plan.id} /><input name="isActive" type="hidden" value={plan.isActive ? "false" : "true"} /><button className="button button-secondary" type="submit">{plan.isActive ? <PauseCircle size={13} /> : <PlayCircle size={13} />}{plan.isActive ? "Ẩn / tạm ngưng" : "Kích hoạt"}</button></form>
-            <details><summary>Chỉnh sửa</summary><form action={updateVipPlanAction} className="admin-form admin-vip-plan-edit"><input name="planId" type="hidden" value={plan.id} /><VipPlanFields plan={plan} /><button className="button button-primary" type="submit">Lưu thay đổi</button></form></details>
-            <form action={deleteVipPlanAction} className="admin-vip-plan-delete"><input name="planId" type="hidden" value={plan.id} /><label><input name="confirmDelete" required type="checkbox" value="DELETE" /> Xác nhận</label><button className="button button-danger" type="submit"><Trash2 size={13} /> Xóa</button></form>
+            <form action={toggleVipPlanAction}><HiddenFormValue name="planId" value={plan.id} /><HiddenFormValue name="isActive" value={plan.isActive ? "false" : "true"} /><button className="button button-secondary" type="submit">{plan.isActive ? <PauseCircle size={13} /> : <PlayCircle size={13} />}{plan.isActive ? "Ẩn / tạm ngưng" : "Kích hoạt"}</button></form>
+            <details><summary>Chỉnh sửa</summary><form action={updateVipPlanAction} className="admin-form admin-vip-plan-edit"><HiddenFormValue name="planId" value={plan.id} /><VipPlanFields plan={plan} /><button className="button button-primary" type="submit">Lưu thay đổi</button></form></details>
+            <form action={deleteVipPlanAction} className="admin-vip-plan-delete"><HiddenFormValue name="planId" value={plan.id} /><label><input name="confirmDelete" required type="checkbox" value="DELETE" /> Xác nhận</label><button className="button button-danger" type="submit"><Trash2 size={13} /> Xóa</button></form>
           </div>
         </article>) : <p className="admin-empty">Chưa có gói VIP nào.</p>}</div>
       </article>
@@ -132,8 +139,8 @@ export default async function AdminSubscriptionsPage({ searchParams }: {
           <div className="admin-vip-request-plan"><span>Gói yêu cầu</span><strong>{request.planName}</strong><small>{vipPlanDurationLabel(request.planCode, request.durationDays)} · {formatAdminCurrency(request.priceVnd)}</small></div>
           <div className="admin-vip-request-note"><span>Ghi chú người học</span><p>{request.userNote || "Không có ghi chú."}</p></div>
           <div className="admin-vip-request-actions">
-            <form action={approveVipActivationRequestAction}><input name="requestId" type="hidden" value={request.id} /><input aria-label="Ghi chú khi duyệt" name="adminNote" placeholder="Ghi chú nội bộ" /><button className="button button-primary" disabled={!eligible} type="submit"><ShieldCheck size={15} /> Duyệt & kích hoạt</button></form>
-            <form action={rejectVipActivationRequestAction}><input name="requestId" type="hidden" value={request.id} /><input aria-label="Lý do từ chối" name="adminNote" placeholder="Lý do từ chối" required /><button className="button button-secondary" type="submit">Từ chối</button></form>
+            <form action={approveVipActivationRequestAction}><HiddenFormValue name="requestId" value={request.id} /><input aria-label="Ghi chú khi duyệt" name="adminNote" placeholder="Ghi chú nội bộ" /><button className="button button-primary" disabled={!eligible} type="submit"><ShieldCheck size={15} /> Duyệt & kích hoạt</button></form>
+            <form action={rejectVipActivationRequestAction}><HiddenFormValue name="requestId" value={request.id} /><input aria-label="Lý do từ chối" name="adminNote" placeholder="Lý do từ chối" required /><button className="button button-secondary" type="submit">Từ chối</button></form>
             {!eligible ? <small className="admin-vip-ineligible">Tài khoản hoặc gói VIP không còn đủ điều kiện kích hoạt.</small> : null}
           </div>
         </article>;
@@ -160,8 +167,8 @@ export default async function AdminSubscriptionsPage({ searchParams }: {
         return <article className="admin-vip-member" key={learner.id}>
           <div className="admin-vip-identity"><span className="admin-vip-avatar">{(learner.displayName || learner.email).trim().slice(0, 1).toUpperCase()}</span><div><strong>{learner.displayName || "Chưa đặt tên"}</strong><span>{learner.email}</span><small>{learner.emailVerifiedAt ? "Email đã xác minh" : "Chưa xác minh email"} · {learner.isActive ? "Đang hoạt động" : "Đã khóa"}</small></div></div>
           <div className={`admin-vip-status ${subscription ? "is-active" : ""}`}><span>{subscription ? "VIP đang mở" : "Gói miễn phí"}</span><strong>{subscription?.planName ?? "Chưa kích hoạt"}</strong><small>{subscription ? `Đến ${formatDate(subscription.endsAt)}${daysRemaining === null ? "" : ` · còn ${daysRemaining} ngày`}` : "Nội dung VIP vẫn đang khóa"}</small></div>
-          <div className="admin-vip-actions"><form action={grantOrExtendVipAction} className="admin-vip-grant-form"><input name="userId" type="hidden" value={learner.id} /><label>Gói muốn {subscription ? "gia hạn" : "cấp"}<select defaultValue={subscription?.planId ?? data.activePlans[0]?.id} disabled={!eligible} name="planId" required>{data.activePlans.map((plan) => <option key={plan.id} value={plan.id}>{plan.name} · {vipPlanDurationLabel(plan.code, plan.durationDays)} · {formatAdminCurrency(plan.priceVnd)}</option>)}</select></label><button className="button button-primary" disabled={!eligible} type="submit"><ShieldCheck size={15} /> {subscription ? "Gia hạn VIP" : "Cấp VIP"}</button></form>
-            {subscription ? <form action={revokeVipAction} className="admin-vip-revoke-form"><input name="userId" type="hidden" value={learner.id} /><label><input name="confirmRevoke" required type="checkbox" value="REVOKE" /> Xác nhận thu hồi ngay</label><button className="button button-danger" type="submit">Thu hồi</button></form> : null}
+          <div className="admin-vip-actions"><form action={grantOrExtendVipAction} className="admin-vip-grant-form"><HiddenFormValue name="userId" value={learner.id} /><label>Gói muốn {subscription ? "gia hạn" : "cấp"}<select defaultValue={subscription?.planId ?? data.activePlans[0]?.id} disabled={!eligible} name="planId" required>{data.activePlans.map((plan) => <option key={plan.id} value={plan.id}>{plan.name} · {vipPlanDurationLabel(plan.code, plan.durationDays)} · {formatAdminCurrency(plan.priceVnd)}</option>)}</select></label><button className="button button-primary" disabled={!eligible} type="submit"><ShieldCheck size={15} /> {subscription ? "Gia hạn VIP" : "Cấp VIP"}</button></form>
+            {subscription ? <form action={revokeVipAction} className="admin-vip-revoke-form"><HiddenFormValue name="userId" value={learner.id} /><label><input name="confirmRevoke" required type="checkbox" value="REVOKE" /> Xác nhận thu hồi ngay</label><button className="button button-danger" type="submit">Thu hồi</button></form> : null}
             {!eligible ? <small className="admin-vip-ineligible">Cần tài khoản đang hoạt động, email đã xác minh và ít nhất một gói đang mở.</small> : null}</div>
         </article>;
       }) : <p className="admin-empty">Không tìm thấy học viên phù hợp.</p>}</div>

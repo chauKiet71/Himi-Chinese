@@ -84,7 +84,8 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   assert.match(html, /aria-label="Chọn cấp độ HSK"/);
   assert.match(html, /aria-pressed="true"[^>]*>[^<]*<span[^>]*>壹/);
   assert.match(html, />Lộ trình bài học HSK 1</);
-  assert.match(html, />Himi Modern Curriculum Desk</);
+  assert.match(html, />Himi Chinese</);
+  assert.doesNotMatch(html, />Himi Modern Curriculum Desk</);
   assert.match(html, /aria-label="Lời nhắn từ Himi"/);
   assert.match(html, /aria-label="Đã hoàn thành 0 trên 15 bài"/);
   assert.match(html, />Nền tảng &amp; Làm quen</);

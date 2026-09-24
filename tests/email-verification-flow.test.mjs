@@ -36,6 +36,10 @@ test("registration verification sends and accepts a fixed-email six digit code",
   assert.match(verifyRoute, /verifyEmailCode\(email, code\)/u);
   assert.match(verifyRoute, /verifyEmailToken\(token\)/u);
   assert.match(verifyPage, /<summary>Đổi email<\/summary>/u);
+  assert.match(verifyPage, /auth-page-verify-scene/u);
+  assert.match(verifyPage, /auth-login-scene-art/u);
+  assert.match(verifyPage, /auth-card-verify-scene/u);
+  assert.match(verifyPage, /Himi Chinese - Về trang chủ/u);
   assert.match(verifyPage, /Mật khẩu hiện tại/u);
   assert.match(changeEmailRoute, /verifyPendingEmailChangeToken/u);
   assert.match(changeEmailRoute, /verifiedAuthorization\?\.email === currentEmail/u);

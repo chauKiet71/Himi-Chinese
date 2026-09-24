@@ -86,7 +86,7 @@ export async function getAdminVipConsole(search = "") {
         benefits: vipPlans.benefits,
         isActive: vipPlans.isActive,
         subscriberCount: sql<number>`(select count(distinct ${subscriptions.userId})::int from ${subscriptions} where ${subscriptions.planId} = ${vipPlans.id})`,
-      }).from(vipPlans).orderBy(asc(vipPlans.durationDays), asc(vipPlans.name)),
+      }).from(vipPlans).orderBy(asc(vipPlans.durationDays), asc(vipPlans.name), asc(vipPlans.code)),
       db.select({ value: countDistinct(subscriptions.userId) }).from(subscriptions).where(and(
         eq(subscriptions.status, "active"),
         or(isNull(subscriptions.startsAt), lte(subscriptions.startsAt, now)),

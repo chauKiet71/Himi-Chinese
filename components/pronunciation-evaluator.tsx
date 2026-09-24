@@ -81,6 +81,15 @@ function numberAttribute(element: Element, name: string) {
   return Math.max(0, Math.min(100, raw <= 10 ? raw * 10 : raw));
 }
 
+function pronunciationNodeHasIssue(element: Element) {
+  const nodes = [element, ...Array.from(element.querySelectorAll("syll, phone, char"))];
+  return nodes.some((node) => {
+    const detail = Number(node.getAttribute("dp_message") ?? node.getAttribute("perr_msg") ?? "0");
+    const score = numberAttribute(node, "total_score") ?? numberAttribute(node, "phone_score");
+    return (Number.isFinite(detail) && detail !== 0) || (score !== null && score < 60);
+  });
+}
+
 export function parseIflytekPronunciationResult(xml: string, targetText = ""): PronunciationResult {
   const document = new DOMParser().parseFromString(xml, "application/xml");
   if (document.querySelector("parsererror")) throw new Error("iFlytek trả về kết quả không hợp lệ.");
@@ -114,13 +123,13 @@ export function parseIflytekPronunciationResult(xml: string, targetText = ""): P
   const scoredCharacters = Array.from(document.querySelectorAll("word[content], char[content]"))
     .flatMap((node) => {
       const content = node.getAttribute("content") ?? "";
-      const detail = Number(node.getAttribute("dp_message") ?? node.getAttribute("perr_msg") ?? "0");
-      const score = numberAttribute(node, "total_score") ?? numberAttribute(node, "phone_score");
-      const state: "correct" | "incorrect" = (Number.isFinite(detail) && detail !== 0) || (score !== null && score < 60) ? "incorrect" : "correct";
+      const state: "correct" | "incorrect" = pronunciationNodeHasIssue(node) ? "incorrect" : "correct";
       return Array.from(content).filter((character) => /\p{Script=Han}/u.test(character)).map(() => state);
     });
-  const characterFeedback = hanzi.map((_, index) => scoredCharacters[index]
-    ?? (totalScore >= 85 ? "correct" : totalScore < 50 ? "incorrect" : "unscored"));
+  const weakHanzi = new Set(weakSyllables.flatMap((content) => Array.from(content).filter((character) => /\p{Script=Han}/u.test(character))));
+  const characterFeedback = hanzi.map((character, index) => weakHanzi.has(character)
+    ? "incorrect"
+    : scoredCharacters[index] ?? (totalScore >= 85 ? "correct" : totalScore < 50 ? "incorrect" : "unscored"));
 
   return {
     totalScore: Math.round(totalScore),

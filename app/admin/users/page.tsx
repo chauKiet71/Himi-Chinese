@@ -16,6 +16,13 @@ const roleLabels = {
   reviewer: "Kiểm duyệt viên",
 } as const;
 
+function HiddenFormValue({ name, value }: { name: string; value: string }) {
+  // Vinext can drop the value attribute from input[type="hidden"] after
+  // hydration. A visually hidden read-only text control remains successful
+  // form data, so server actions receive the intended identifier.
+  return <input aria-hidden="true" name={name} readOnly style={{ display: "none" }} tabIndex={-1} type="text" value={value} />;
+}
+
 export default async function AdminUsersPage({ searchParams }: {
   searchParams: Promise<{ error?: string; period?: string; q?: string; success?: string }>;
 }) {
@@ -58,14 +65,14 @@ export default async function AdminUsersPage({ searchParams }: {
             <td><span className={`admin-account-status ${vip ? "is-vip" : "is-free"}`}>{vip ? <Crown size={12} /> : <UserRoundCheck size={12} />}{vip ? "VIP" : "Free"}</span>{!member.isActive ? <small className="admin-account-locked">Đã khóa</small> : null}</td>
             <td><time dateTime={member.createdAt.toISOString()}>{formatAdminDateTime(member.createdAt)}</time></td>
             <td>{member.role === "learner" ? <form action={grantOrExtendVipAction} className="admin-inline-upgrade">
-              <input name="returnTo" type="hidden" value="/admin/users" /><input name="userId" type="hidden" value={member.id} />
+              <HiddenFormValue name="returnTo" value="/admin/users" /><HiddenFormValue name="userId" value={member.id} />
               <select aria-label={`Gói VIP cho ${member.email}`} defaultValue={vip?.planId ?? data.plans[0]?.id} disabled={!eligible} name="planId" required>
                 {data.plans.map((plan) => <option key={plan.id} value={plan.id}>{plan.name} · {formatAdminCurrency(plan.priceVnd)}</option>)}
               </select>
               <button className="button button-primary" disabled={!eligible} type="submit">{vip ? "Gia hạn" : "Nâng cấp"}</button>
             </form> : <span className="admin-muted-cell">Quản lý tại Đội nội dung</span>}</td>
             <td>{member.role === "learner" && member.isActive ? <form action={deleteAdminUserAction} className="admin-inline-delete">
-              <input name="userId" type="hidden" value={member.id} />
+              <HiddenFormValue name="userId" value={member.id} />
               <label title="Khóa tài khoản nhưng giữ lịch sử"><input name="confirmDelete" required type="checkbox" value="DELETE" /><span className="sr-only">Xác nhận khóa {member.email}</span></label>
               <button className="button button-danger" type="submit"><Trash2 size={13} /> Xóa</button>
             </form> : <span className="admin-muted-cell">Không khả dụng</span>}</td>

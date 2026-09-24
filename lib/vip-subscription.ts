@@ -1,5 +1,4 @@
 import { and, desc, eq, gt, isNull, lte, or } from "drizzle-orm";
-import { cache } from "react";
 import { readDb, type Database } from "../db/index.ts";
 import { subscriptions, vipPlans } from "../db/schema.ts";
 import { isLifetimeVipPlan } from "./vip-plan.ts";
@@ -66,15 +65,14 @@ async function readActiveVipSubscription(
   return rows[0] ?? null;
 }
 
-const getRequestCachedActiveVipSubscription = cache((userId: string) => (
-  readActiveVipSubscription(userId, undefined, new Date())
-));
-
 export function getActiveVipSubscription(
   userId: string,
   database?: Database,
   now?: Date,
 ): Promise<ActiveVipSubscription | null> {
   if (database || now) return readActiveVipSubscription(userId, database, now ?? new Date());
-  return getRequestCachedActiveVipSubscription(userId);
+  // Subscription access can change at any time (for example, immediately after
+  // an admin grant). Always read the current row instead of memoizing a stale
+  // VIP/non-VIP result for this user in the application process.
+  return readActiveVipSubscription(userId, undefined, new Date());
 }

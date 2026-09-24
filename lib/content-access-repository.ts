@@ -1,6 +1,6 @@
 import { and, eq, inArray } from "drizzle-orm";
 import { unstable_cache } from "next/cache.js";
-import { readDb, writeDb, type Database } from "../db/index.ts";
+import { isDatabaseUnavailableError, readDb, writeDb, type Database } from "../db/index.ts";
 import { auditLogs, contentAccessPolicies } from "../db/schema.ts";
 import {
   contentAccessPolicyKey,
@@ -38,7 +38,18 @@ export async function getContentAccessPolicies(
     inArray(contentAccessPolicies.targetType, targetTypes),
     inArray(contentAccessPolicies.targetKey, targetKeys),
   ));
-  const rows = database ? await query(database) : await getCachedContentAccessPolicyRows();
+  let rows: ContentAccessPolicy[];
+  if (database) {
+    rows = await query(database);
+  } else {
+    try {
+      rows = await getCachedContentAccessPolicyRows();
+    } catch (error) {
+      if (!isDatabaseUnavailableError(error)) throw error;
+      console.warn("[content-access] database unavailable; using default access tiers");
+      return [];
+    }
+  }
   return rows.filter((row) => wanted.has(contentAccessPolicyKey(row.targetType, row.targetKey)));
 }
 
@@ -100,8 +111,14 @@ export async function getContentAccessPolicy(
 ): Promise<AccessTier | null> {
   if (!process.env.DATABASE_URL) return null;
   if (!database) {
-    const rows = await getCachedContentAccessPolicyRows();
-    return rows.find((row) => row.targetType === targetType && row.targetKey === targetKey)?.tier ?? null;
+    try {
+      const rows = await getCachedContentAccessPolicyRows();
+      return rows.find((row) => row.targetType === targetType && row.targetKey === targetKey)?.tier ?? null;
+    } catch (error) {
+      if (!isDatabaseUnavailableError(error)) throw error;
+      console.warn("[content-access] database unavailable; using the default access tier");
+      return null;
+    }
   }
   const query = (db: Database) => db.select({ tier: contentAccessPolicies.tier })
     .from(contentAccessPolicies)

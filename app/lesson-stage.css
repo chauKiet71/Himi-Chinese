@@ -2357,6 +2357,7 @@
 .pronunciation-character { transition: color 180ms ease, text-decoration-color 180ms ease; }
 .pronunciation-character.is-correct { color: #138a68; text-decoration: underline 3px rgba(19, 138, 104, .28); text-underline-offset: .14em; }
 .pronunciation-character.is-incorrect { color: #e54848; text-decoration: underline wavy 2px rgba(229, 72, 72, .55); text-underline-offset: .13em; }
+.pronunciation-character.is-unscored { color: #334155; text-decoration: none; }
 .pronunciation-speed { margin: 14px auto 0; padding: 4px; display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; background: #f2f4f3; }
 .pronunciation-speed button { min-width: 58px; min-height: 38px; padding: 0 12px; color: #61716d; border: 0; border-radius: 999px; background: transparent; font-weight: 760; }
 .pronunciation-speed button[aria-pressed="true"] { color: #fff; background: #08796d; box-shadow: 0 4px 10px rgba(8, 121, 109, .2); }

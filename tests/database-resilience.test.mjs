@@ -38,5 +38,29 @@ test("public VIP reads degrade safely during a database outage", async () => {
   const service = await readFile(new URL("../lib/vip-activation-request-service.ts", import.meta.url), "utf8");
 
   assert.match(service, /if \(!isDatabaseUnavailableError\(error\)\) throw error/);
-  assert.match(service, /return \{ plans: \[\], pendingRequest: null, activeSubscription: null \}/);
+  assert.match(service, /plans: \[\],[\s\S]*?pendingRequest: null,[\s\S]*?activeSubscription: null,[\s\S]*?hasPurchasedTrial: false/);
+});
+
+test("public course reads use bundled content during a database outage", async () => {
+  const [courses, lessons, access] = await Promise.all([
+    readFile(new URL("../lib/course-repository.ts", import.meta.url), "utf8"),
+    readFile(new URL("../lib/lesson-repository.ts", import.meta.url), "utf8"),
+    readFile(new URL("../lib/content-access-repository.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(courses, /if \(!isDatabaseUnavailableError\(error\)\) throw error[\s\S]*?return demoCourses/);
+  assert.match(courses, /database unavailable; using the bundled course/);
+  assert.match(lessons, /database unavailable; using bundled lesson content/);
+  assert.match(access, /database unavailable; using default access tiers/);
+});
+
+test("login redirects to a service message when the database is unavailable", async () => {
+  const [route, card] = await Promise.all([
+    readFile(new URL("../app/api/auth/login/route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../components/auth-card.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(route, /if \(!isDatabaseUnavailableError\(error\)\) throw error/);
+  assert.match(route, /error: "service_unavailable"/);
+  assert.match(card, /service_unavailable: "Hệ thống tài khoản đang tạm gián đoạn/);
 });

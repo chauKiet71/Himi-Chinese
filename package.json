@@ -6,10 +6,12 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "predev": "npm run db:migrate:auto",
     "dev": "vinext dev",
     "build": "vinext build",
+    "prestart": "npm run db:migrate:auto",
     "start": "node --experimental-strip-types scripts/start-production.ts",
-    "deploy:staging": "npm run build && wrangler deploy --name hanziwork-staging",
+    "deploy:staging": "npm run db:migrate:auto && npm run build && wrangler deploy --name hanziwork-staging",
     "staging:secrets": "node --env-file=.env.local --experimental-strip-types scripts/configure-staging-secrets.ts",
     "verify:staging": "node --env-file=.env.local --experimental-strip-types scripts/verify-staging.ts",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
@@ -19,6 +21,7 @@
     "support:webhook": "node --env-file=.env --experimental-strip-types scripts/support-webhook.ts",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .wrangler",
     "db:generate": "drizzle-kit generate",
+    "db:migrate:auto": "node --experimental-strip-types scripts/auto-migrate-database.ts",
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "node --experimental-strip-types db/seed.ts",
     "content:high-frequency:import": "node --experimental-strip-types scripts/import-high-frequency-topics.ts",

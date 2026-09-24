@@ -145,7 +145,7 @@ export function HskCurriculumExplorer({
   return <section className="section-shell hsk-curriculum" aria-labelledby="hsk-curriculum-title">
     <header className="hsk-curriculum-heading">
       <div className="hsk-curriculum-heading-copy">
-        <span>Himi Modern Curriculum Desk</span>
+        <span>Himi Chinese</span>
         <h1 id="hsk-curriculum-title">Lộ trình bài học {activeLevel.label}</h1>
         <p>{activeLevel.description}</p>
       </div>

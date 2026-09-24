@@ -1,6 +1,15 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFile } from "node:fs/promises";
 import { calculateVipEndsAt, calculateVipPlanEndsAt, vipDaysRemaining } from "../lib/vip-subscription.ts";
+
+test("active VIP lookup is not memoized across subscription changes", async () => {
+  const source = await readFile(new URL("../lib/vip-subscription.ts", import.meta.url), "utf8");
+
+  assert.doesNotMatch(source, /from ["']react["']/u);
+  assert.doesNotMatch(source, /cache\(/u);
+  assert.match(source, /return readActiveVipSubscription\(userId, undefined, new Date\(\)\)/u);
+});
 import { LIFETIME_VIP_PLAN_CODE, vipPlanAccessLabel, vipPlanDurationLabel } from "../lib/vip-plan.ts";
 
 const day = 24 * 60 * 60 * 1_000;

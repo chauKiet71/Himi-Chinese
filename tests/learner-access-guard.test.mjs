@@ -56,3 +56,10 @@ test("game vocabulary APIs reject anonymous requests before returning content", 
     assert.doesNotMatch(route, /user\?\.id \?\? null/);
   }
 });
+
+test("VIP games can use curated vocabulary from lessons still being edited", async () => {
+  const repository = await read("lib/hsk-access-repository.ts");
+
+  assert.match(repository, /level\?\.topics\.flatMap\(\(topic\) => topic\.lessons\) \?\? \[\]/);
+  assert.doesNotMatch(repository, /flatMap\(\(topic\) => topic\.lessons\)\.filter\(\(lesson\) => lesson\.available\)/);
+});
