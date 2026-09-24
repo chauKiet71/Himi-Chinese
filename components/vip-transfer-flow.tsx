@@ -47,6 +47,7 @@ type VipTransferFlowProps = {
   durationLabel: string;
   featured: boolean;
   isPendingPlan: boolean;
+  purchaseDisabled?: boolean;
   planCode: string;
   planId: string;
   planName: string;
@@ -59,6 +60,7 @@ const paymentErrorMessages: Record<string, string> = {
   payment_service_unavailable: "Hệ thống thanh toán đang tạm gián đoạn. Vui lòng thử lại sau.",
   vip_plan_inactive: "Gói này vừa ngừng nhận thanh toán.",
   vip_request_ineligible: "Tài khoản hiện chưa đủ điều kiện mua VIP.",
+  trial_plan_already_used: "Bạn đã trải nghiệm gói VIP 3 ngày rồi. Hãy chọn gói 1 tháng để tiếp tục học liền mạch nhé!",
 };
 
 async function readPaymentResponse<T>(response: Response): Promise<T | null> {
@@ -97,6 +99,7 @@ export function VipTransferFlow({
   durationLabel,
   featured,
   isPendingPlan,
+  purchaseDisabled = false,
   planCode,
   planId,
   planName,
@@ -202,7 +205,7 @@ export function VipTransferFlow({
     <div className="vip-plan-request-form">
       <button
         className={`button button-full ${featured ? "button-light" : "button-primary"}`}
-        disabled={isPendingPlan}
+        disabled={isPendingPlan || purchaseDisabled}
         onClick={openTransfer}
         ref={triggerRef}
         type="button"

@@ -2886,8 +2886,306 @@
 @media (pointer: coarse) {
   .lesson-card-edge-nav,
   .lesson-reference-deck .lesson-audio-actions .lesson-save-button,
-  .lesson-reference-deck .lesson-audio-speed {
+  .lesson-reference-deck .lesson-speed-menu > summary {
     min-width: 44px;
     min-height: 44px;
+  }
+}
+
+/* Polished navigation motion and compact playback controls. */
+.lesson-page:has(.lesson-stage-workspace) {
+  padding-top: 16px;
+}
+
+.lesson-stage-workspace .lesson-header-card {
+  padding-top: 0;
+}
+
+.lesson-stage-workspace .lesson-tabs {
+  margin-top: 0;
+}
+
+.lesson-tab-panel.tab-forward {
+  animation: lesson-tab-enter-forward 340ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.lesson-tab-panel.tab-back {
+  animation: lesson-tab-enter-back 340ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.lesson-vocab-card.move-forward {
+  animation: lesson-card-enter-forward 360ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.lesson-vocab-card.move-back {
+  animation: lesson-card-enter-back 360ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.lesson-stage-progress,
+.lesson-study-content,
+.lesson-pronunciation-completion {
+  animation: lesson-content-settle 420ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.lesson-study-content {
+  animation-delay: 35ms;
+}
+
+.lesson-tab-indicator {
+  transform-origin: center;
+  animation: lesson-tab-indicator-in 260ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes lesson-tab-enter-forward {
+  from { opacity: 0; transform: translate3d(24px, 0, 0) scale(.992); filter: blur(3px); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); filter: blur(0); }
+}
+
+@keyframes lesson-tab-enter-back {
+  from { opacity: 0; transform: translate3d(-24px, 0, 0) scale(.992); filter: blur(3px); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); filter: blur(0); }
+}
+
+@keyframes lesson-card-enter-forward {
+  from { opacity: .1; transform: translate3d(28px, 0, 0) scale(.988); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes lesson-card-enter-back {
+  from { opacity: .1; transform: translate3d(-28px, 0, 0) scale(.988); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes lesson-content-settle {
+  from { opacity: .35; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lesson-tab-indicator-in {
+  from { opacity: 0; transform: scaleX(.35); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+.lesson-speed-menu {
+  position: relative;
+  z-index: 8;
+  flex: 0 0 auto;
+}
+
+.lesson-speed-menu > summary {
+  min-width: 84px;
+  min-height: 54px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  list-style: none;
+  color: #52645f;
+  border: 1px solid #e6e9e7;
+  border-radius: 16px;
+  background: #f5f7f6;
+  font-size: 14px;
+  font-weight: 780;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.lesson-speed-menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.lesson-speed-menu > summary:hover,
+.lesson-speed-menu[open] > summary {
+  color: #08796d;
+  border-color: rgba(8, 121, 109, .24);
+  background: #edf8f5;
+  box-shadow: 0 8px 22px rgba(16, 74, 65, .1);
+}
+
+.lesson-speed-menu > summary:active {
+  transform: scale(.97);
+}
+
+.lesson-speed-menu > summary:focus-visible {
+  outline: 3px solid rgba(8, 121, 109, .2);
+  outline-offset: 2px;
+}
+
+.lesson-speed-chevron {
+  transition: transform 180ms ease;
+}
+
+.lesson-speed-menu[open] .lesson-speed-chevron {
+  transform: rotate(180deg);
+}
+
+.lesson-speed-options {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 9px);
+  width: max-content;
+  padding: 5px;
+  display: flex;
+  gap: 3px;
+  border: 1px solid rgba(8, 121, 109, .14);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .97);
+  box-shadow: 0 16px 38px rgba(24, 57, 50, .16);
+  backdrop-filter: blur(14px);
+  animation: lesson-speed-options-in 180ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.lesson-speed-options button {
+  min-width: 58px;
+  min-height: 38px;
+  padding: 0 10px;
+  cursor: pointer;
+  color: #647570;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 780;
+  transition: color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.lesson-speed-options button:hover {
+  color: #075f56;
+  background: #edf8f5;
+}
+
+.lesson-speed-options button[aria-pressed="true"] {
+  color: #fff;
+  background: #08796d;
+  box-shadow: 0 5px 12px rgba(8, 121, 109, .2);
+}
+
+.lesson-speed-options button:active {
+  transform: scale(.95);
+}
+
+.lesson-speed-options button:focus-visible {
+  outline: 3px solid rgba(8, 121, 109, .2);
+  outline-offset: 1px;
+}
+
+.lesson-pronunciation-action {
+  margin-top: 16px;
+  padding: 10px 14px;
+}
+
+.lesson-pronunciation-action .pronunciation-actions {
+  width: min(560px, 100%);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(128px, 1fr) auto minmax(128px, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.lesson-pronunciation-action .pronunciation-actions > button,
+.lesson-pronunciation-action .pronunciation-record {
+  width: 100%;
+  min-height: 48px;
+  padding-inline: 14px;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.lesson-pronunciation-action .pronunciation-record-stage {
+  width: 100%;
+  display: block;
+}
+
+.lesson-pronunciation-action .pronunciation-waveform {
+  display: none;
+}
+
+.pronunciation-action-middle {
+  display: grid;
+  place-items: center;
+}
+
+.pronunciation-action-middle .lesson-speed-menu > summary {
+  min-width: 78px;
+  min-height: 48px;
+  border-radius: 14px;
+}
+
+@keyframes lesson-speed-options-in {
+  from { opacity: 0; transform: translateY(7px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 640px) {
+  .lesson-page:has(.lesson-stage-workspace) {
+    padding-top: 8px;
+  }
+
+  .lesson-reference-deck .lesson-coach-rail {
+    display: none;
+  }
+
+  .lesson-speed-menu > summary {
+    min-width: 76px;
+    min-height: 48px;
+    border-radius: 14px;
+  }
+
+  .lesson-speed-options {
+    position: fixed;
+    right: 14px;
+    bottom: calc(88px + env(safe-area-inset-bottom));
+    z-index: 30;
+  }
+
+  .lesson-pronunciation-action {
+    margin-top: 12px;
+    padding: 8px;
+  }
+
+  .lesson-pronunciation-action .pronunciation-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 6px;
+  }
+
+  .lesson-pronunciation-action .pronunciation-actions > button,
+  .lesson-pronunciation-action .pronunciation-record {
+    min-width: 0;
+    min-height: 46px;
+    padding-inline: 8px;
+    gap: 5px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .pronunciation-action-middle .lesson-speed-menu > summary {
+    min-width: 68px;
+    min-height: 46px;
+    padding-inline: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lesson-tab-panel.tab-forward,
+  .lesson-tab-panel.tab-back,
+  .lesson-vocab-card.move-forward,
+  .lesson-vocab-card.move-back,
+  .lesson-stage-progress,
+  .lesson-study-content,
+  .lesson-pronunciation-completion,
+  .lesson-tab-indicator,
+  .lesson-speed-options {
+    animation: none !important;
+  }
+
+  .lesson-speed-menu *,
+  .lesson-speed-menu *::before,
+  .lesson-speed-menu *::after {
+    transition: none !important;
   }
 }

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Bookmark, Lightbulb, Play } from "lucide-react";
+import { LessonSpeedMenu, type LessonPlaybackRate } from "@/components/lesson-speed-menu";
 import type { Vocabulary } from "@/lib/content-types";
 
 type MoveDirection = "back" | "forward";
@@ -10,6 +11,7 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState<MoveDirection>("forward");
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [playbackRate, setPlaybackRate] = useState<LessonPlaybackRate>(1);
   const [audioMessage, setAudioMessage] = useState("");
   const [savePending, setSavePending] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
@@ -94,7 +96,7 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
     if (currentWord.audioUrl) {
       try {
         const audio = new Audio(currentWord.audioUrl);
-        audio.playbackRate = 0.8;
+        audio.playbackRate = playbackRate;
         audioRef.current = audio;
         audio.addEventListener("ended", () => {
           audioRef.current = null;
@@ -121,7 +123,7 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
 
     const utterance = new SpeechSynthesisUtterance(currentWord.hanzi);
     utterance.lang = "zh-CN";
-    utterance.rate = 0.82;
+    utterance.rate = playbackRate;
     utterance.pitch = 1;
     utterance.onend = () => {
       setIsSpeaking(false);
@@ -199,7 +201,7 @@ export function LessonVocabularyDeck({ words, authenticated, onFinished }: { wor
               <span className="lesson-audio-icon"><Play fill="currentColor" size={18} /></span>
               <span><strong>{isSpeaking ? "Đang phát âm…" : "Nghe phát âm chuẩn"}</strong></span>
             </button>
-            <span aria-label="Tốc độ phát âm 0.8 lần" className="lesson-audio-speed">0.8×</span>
+            <LessonSpeedMenu onChange={setPlaybackRate} rate={playbackRate} />
             <button aria-busy={savePending} aria-label={saved ? "Bỏ lưu từ khỏi bộ từ của bạn" : "Lưu từ vào bộ từ của bạn"} aria-pressed={saved} className={`lesson-save-button lesson-save-button-icon${saved ? " saved" : ""}${savePending ? " is-toggling" : ""}`} disabled={savePending} onClick={saveForReview} title={saved ? "Bỏ lưu từ" : "Lưu từ"} type="button">
               <Bookmark fill={saved ? "currentColor" : "none"} size={17} />{saved ? "Đã lưu" : "Lưu từ"}
             </button>

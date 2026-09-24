@@ -1,0 +1,20 @@
+{
+  "format": "Facebook square post",
+  "dimensions": "1080x1080",
+  "sourceContent": {
+    "file": "lib/youtube-video-transcripts.curated.ts",
+    "line": 466,
+    "hanzi": "你想看到高楼 还是看到山",
+    "pinyin": "nǐ xiǎng kàn dào gāo lóu hái shì kàn dào shān",
+    "translation": "Bạn muốn nhìn thấy tòa nhà cao chọc trời hay nhìn thấy núi?"
+  },
+  "brand": {
+    "primary": "#FF4C3B",
+    "secondary": "#FF8E2D",
+    "ink": "#222222",
+    "surface": "#FFFFFF",
+    "mascot": "public/assets/games/quiz-penguin-cutout.png"
+  },
+  "referencePattern": "Short Chinese quiz with one prompt, three choices, and a compact grammar explanation in the Facebook caption.",
+  "note": "The composition is original to Himi Chinese; only the educational quiz mechanic was adapted from the reference post."
+}

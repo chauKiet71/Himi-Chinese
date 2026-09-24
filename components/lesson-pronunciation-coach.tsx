@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, BarChart3, Lightbulb, Volume2 } from "lucide-react";
 import { PronunciationEvaluator, type PronunciationResult } from "@/components/pronunciation-evaluator";
+import { LessonSpeedMenu, type LessonPlaybackRate } from "@/components/lesson-speed-menu";
 import { speakMandarin } from "@/lib/client-mandarin-audio";
 import type { DialogueLine, Vocabulary } from "@/lib/content-types";
 
@@ -25,7 +26,7 @@ export function LessonPronunciationCoach({ words, dialogue, onFinished = () => u
   }, [dialogue, words]);
   const [index, setIndex] = useState(0);
   const [results, setResults] = useState<Map<string, PronunciationResult>>(() => new Map());
-  const [playbackRate, setPlaybackRate] = useState(1);
+  const [playbackRate, setPlaybackRate] = useState<LessonPlaybackRate>(1);
   const current = targets[index];
   const atStart = index === 0;
   const atEnd = index === targets.length - 1;
@@ -66,12 +67,8 @@ export function LessonPronunciationCoach({ words, dialogue, onFinished = () => u
           <small className="pronunciation-pinyin">{current.pinyin}</small>
           <p>{current.translation}</p>
 
-          <div aria-label="Tốc độ phát" className="pronunciation-speed" role="group">
-            {[0.75, 1, 1.25].map((rate) => <button aria-pressed={playbackRate === rate} key={rate} onClick={() => setPlaybackRate(rate)} type="button">{rate}×</button>)}
-          </div>
-
           <div className="lesson-pronunciation-action">
-            <PronunciationEvaluator compact key={current.id} onEvaluated={(result) => {
+            <PronunciationEvaluator actionMiddle={<LessonSpeedMenu onChange={setPlaybackRate} rate={playbackRate} />} compact key={current.id} listenRate={playbackRate} onEvaluated={(result) => {
               setResults((items) => new Map(items).set(current.id, result));
             }} targetText={current.hanzi} />
           </div>

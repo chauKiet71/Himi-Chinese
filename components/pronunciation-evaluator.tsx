@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type CSSProperties, type MutableRefObject } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type MutableRefObject, type ReactNode } from "react";
 import { AudioLines, Award, CircleStop, LoaderCircle, Mic, RotateCcw, Volume2 } from "lucide-react";
 import { speakMandarin } from "@/lib/client-mandarin-audio";
 
@@ -233,12 +233,16 @@ export function PronunciationEvaluator({
   targetText,
   compact = false,
   showListen = true,
+  listenRate = 1,
+  actionMiddle = null,
   onEvaluated,
   previewResult = null,
 }: {
   targetText: string;
   compact?: boolean;
   showListen?: boolean;
+  listenRate?: number;
+  actionMiddle?: ReactNode;
   onEvaluated?: (result: PronunciationResult) => void;
   previewResult?: PronunciationResult | null;
 }) {
@@ -360,9 +364,10 @@ export function PronunciationEvaluator({
 
   return <div className={`pronunciation-evaluator${compact ? " is-compact" : ""}`}>
     <div className="pronunciation-actions">
-      {showListen ? <button className="pronunciation-listen" onClick={() => speakMandarin(targetText)} type="button">
+      {showListen ? <button className="pronunciation-listen" onClick={() => speakMandarin(targetText, undefined, listenRate)} type="button">
         <Volume2 size={18} /> Nghe mẫu
       </button> : null}
+      {actionMiddle ? <div className="pronunciation-action-middle">{actionMiddle}</div> : null}
       <div className="pronunciation-record-stage">
         <span aria-hidden="true" className="pronunciation-waveform"><AudioLines size={88} strokeWidth={1.6} /></span>
         {status === "recording" ? <button aria-label="Dừng ghi âm" className="pronunciation-record is-recording" onClick={stopRecording} type="button">

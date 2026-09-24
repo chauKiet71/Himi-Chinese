@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight } from "lucide-react";
 import { LessonWorkspace } from "@/components/lesson-workspace";
 import { listPublishedCourses } from "@/lib/course-repository";
 import { getDailySessionSource } from "@/lib/daily-session-repository";
@@ -40,7 +39,6 @@ export default async function LearnPage({
         : { href: "/#today-summary", title: "Tổng kết phiên 10 phút" };
 
   return <main className="lesson-page"><div className="section-shell lesson-responsive-shell">
-    <nav aria-label="Điều hướng bài học" className="lesson-breadcrumb"><Link href="/courses">Lộ trình</Link><ChevronRight aria-hidden="true" size={13} /><Link href={`/courses/${data.course.slug}`}>{data.course.title}</Link>{data.lesson ? <><ChevronRight aria-hidden="true" size={13} /><span aria-current="page">{data.lesson.title}</span></> : null}</nav>
     {data.lesson && data.access
       ? <LessonWorkspace
         course={data.course}

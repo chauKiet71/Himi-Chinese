@@ -45,6 +45,7 @@ export function LessonWorkspace({
   ];
   const baseTabs: LessonTab[] = scenarioVideo ? ["Tình huống", ...learningTabs] : learningTabs;
   const [tab, setTab] = useState<LessonTab>(scenarioVideo ? "Tình huống" : "Từ vựng");
+  const [tabDirection, setTabDirection] = useState<"back" | "forward">("forward");
   const [challengePassed, setChallengePassed] = useState(!lesson.challenge);
   const [studyAttempt, setStudyAttempt] = useState(0);
   const [completionSummary, setCompletionSummary] = useState<LessonCompletionView | null>(null);
@@ -62,8 +63,14 @@ export function LessonWorkspace({
       ? "game"
       : "summary";
   const DailyNextIcon = dailyNextKind === "practice" ? Headphones : dailyNextKind === "game" ? Gamepad2 : Award;
-  const continueToPhrases = useCallback(() => setTab("Cụm từ"), []);
-  const continueToPronunciation = useCallback(() => setTab("Nghe & nói"), []);
+  const continueToPhrases = useCallback(() => {
+    setTabDirection("forward");
+    setTab("Cụm từ");
+  }, []);
+  const continueToPronunciation = useCallback(() => {
+    setTabDirection("forward");
+    setTab("Nghe & nói");
+  }, []);
   const stageTab = tab === "Từ vựng" || tab === "Cụm từ" || tab === "Nghe & nói";
   const completionFormId = `lesson-completion-${lesson.slug}`;
   const completionLoginId = `lesson-completion-login-${lesson.slug}`;
@@ -101,6 +108,7 @@ export function LessonWorkspace({
   const finishLesson = useCallback((summary: LessonPronunciationSummary) => {
     setPendingSummary(summary);
     if (lesson.challenge && !challengePassed) {
+      setTabDirection("forward");
       setTab("Kiểm tra");
       return;
     }
@@ -112,6 +120,7 @@ export function LessonWorkspace({
     setPendingSummary(null);
     setChallengePassed(!lesson.challenge);
     setStudyAttempt((attempt) => attempt + 1);
+    setTabDirection("back");
     setTab(scenarioVideo ? "Tình huống" : "Từ vựng");
   }, [lesson.challenge, scenarioVideo]);
 
@@ -129,22 +138,24 @@ export function LessonWorkspace({
   }, [access.allowed, authenticated, course.slug, lesson.slug]);
 
   return <section className="lesson-main lesson-stage-workspace" data-active-tab={tab}>
-      <div className="lesson-header-card">
-        <div className="lesson-heading-row"><div><span className="section-kicker">Bài {String(lessonNumber).padStart(2, "0")} · {lesson.estimatedMinutes} phút · {lesson.situation}</span><h1>{lesson.title}</h1><p>{lesson.summary}</p></div><div className="lesson-progress-badge"><strong>{lessonNumber} / {lessons.length}</strong><span>Trong lộ trình</span></div></div>
-        {access.allowed ? <div className="lesson-tabs" role="tablist" aria-label="Nội dung bài học">{tabs.map((item, index) => <button
+      {access.allowed ? <div className="lesson-header-card">
+        <div className="lesson-tabs" role="tablist" aria-label="Nội dung bài học">{tabs.map((item, index) => <button
           aria-controls={`lesson-panel-${index}`}
           aria-selected={tab === item}
           className={`lesson-tab ${tab === item ? "active" : ""}`}
           id={`lesson-tab-${index}`}
           key={item}
-          onClick={() => setTab(item)}
+          onClick={() => {
+            setTabDirection(index < tabIndex ? "back" : "forward");
+            setTab(item);
+          }}
           role="tab"
           type="button"
         >
           <span>{item}</span>
           {tab === item ? <span className="lesson-tab-indicator" /> : null}
-        </button>)}</div> : null}
-      </div>
+        </button>)}</div>
+      </div> : null}
 
       {!access.allowed ? <div className="lesson-content-card lesson-locked-panel">
         <span className="lesson-locked-icon"><Crown size={28} /></span>
@@ -156,7 +167,7 @@ export function LessonWorkspace({
         <div className="lesson-tab-panel-viewport">
           <div
               aria-labelledby={`lesson-tab-${tabIndex}`}
-              className="lesson-tab-panel"
+              className={`lesson-tab-panel tab-${tabDirection}`}
               id={`lesson-panel-${tabIndex}`}
               key={tab}
               role="tabpanel"

@@ -26,6 +26,7 @@ export async function POST(request: Request) {
     const result = await createOrReuseSepayPaymentOrder({ planId, userId: user.id });
     if (!result.ok) {
       const status = result.error === "vip_plan_inactive" ? 409
+        : result.error === "trial_plan_already_used" ? 409
         : result.error === "vip_request_ineligible" ? 403
           : 503;
       return NextResponse.json({ error: result.error }, { status });
