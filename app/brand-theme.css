@@ -995,7 +995,6 @@ body {
 }
 
 .hsk-guided-sections button:not(.is-active):hover,
-.hsk-guided-pinyin[aria-pressed="true"],
 .hsk-guided-writing-modes button[aria-pressed="true"] {
   color: var(--himi-black);
   background: var(--himi-red-soft);

@@ -33,6 +33,7 @@ type RawLexeme = {
 
 type RawText = {
   id: string;
+  audioUrl?: string;
   lessonId: string;
   lessonNumber: number;
   titleZh: string;
@@ -144,6 +145,7 @@ function articleParagraphs(text: RawText): string[] {
 function toDialogue(text: RawText): HskDialogue {
   return {
     id: text.id,
+    audioUrl: text.audioUrl,
     title: `Bài khóa · ${text.titleVi}`,
     setting: `Bài đọc nguyên bản, track ${text.audioTrack} trong Giáo trình chuẩn HSK 5 - Tập 2.`,
     turns: articleParagraphs(text).map((paragraph, index) => ({

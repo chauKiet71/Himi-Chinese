@@ -44,7 +44,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l11-text-1"
+      "audioRef": "hsk4l-tb-audio-l11-text-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816328/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l11-text-1.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-11-text-2",
@@ -102,7 +103,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l11-text-2"
+      "audioRef": "hsk4l-tb-audio-l11-text-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816350/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l11-text-2.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-11-text-3",
@@ -163,7 +165,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l11-text-3"
+      "audioRef": "hsk4l-tb-audio-l11-text-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816372/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l11-text-3.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-11-text-4",
@@ -301,7 +304,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l12-text-1"
+      "audioRef": "hsk4l-tb-audio-l12-text-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816391/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l12-text-1.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-12-text-2",
@@ -362,7 +366,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l12-text-2"
+      "audioRef": "hsk4l-tb-audio-l12-text-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816457/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l12-text-2.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-12-text-3",
@@ -424,7 +429,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l12-text-3"
+      "audioRef": "hsk4l-tb-audio-l12-text-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816481/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l12-text-3.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-12-text-4",
@@ -459,7 +465,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l12-text-4"
+      "audioRef": "hsk4l-tb-audio-l12-text-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816501/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l12-text-4.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-12-text-5",
@@ -557,7 +564,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l13-text-1"
+      "audioRef": "hsk4l-tb-audio-l13-text-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816522/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l13-text-1.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-13-text-2",
@@ -727,7 +735,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l14-text-1"
+      "audioRef": "hsk4l-tb-audio-l14-text-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816658/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l14-text-1.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-14-text-2",
@@ -785,7 +794,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l14-text-2"
+      "audioRef": "hsk4l-tb-audio-l14-text-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816679/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l14-text-2.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-14-text-3",
@@ -843,7 +853,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l14-text-3"
+      "audioRef": "hsk4l-tb-audio-l14-text-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816705/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l14-text-3.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-14-text-4",
@@ -1087,7 +1098,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l15-text-3"
+      "audioRef": "hsk4l-tb-audio-l15-text-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816736/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l15-text-3.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-15-text-4",
@@ -1121,7 +1133,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l15-text-4"
+      "audioRef": "hsk4l-tb-audio-l15-text-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816756/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l15-text-4.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-15-text-5",
@@ -1157,7 +1170,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l15-text-5"
+      "audioRef": "hsk4l-tb-audio-l15-text-5",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816784/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l15-text-5.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-16-text-1",
@@ -1219,7 +1233,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l16-text-1"
+      "audioRef": "hsk4l-tb-audio-l16-text-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816802/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l16-text-1.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-16-text-2",
@@ -1284,7 +1299,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l16-text-2"
+      "audioRef": "hsk4l-tb-audio-l16-text-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816835/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l16-text-2.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-16-text-3",
@@ -1343,7 +1359,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l16-text-3"
+      "audioRef": "hsk4l-tb-audio-l16-text-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816866/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l16-text-3.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-16-text-4",
@@ -1461,7 +1478,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l17-text-1"
+      "audioRef": "hsk4l-tb-audio-l17-text-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816884/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l17-text-1.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-17-text-2",
@@ -1520,7 +1538,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l17-text-2"
+      "audioRef": "hsk4l-tb-audio-l17-text-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816908/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l17-text-2.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-17-text-3",
@@ -1567,7 +1586,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l17-text-3"
+      "audioRef": "hsk4l-tb-audio-l17-text-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816927/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l17-text-3.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-17-text-4",
@@ -1601,7 +1621,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l17-text-4"
+      "audioRef": "hsk4l-tb-audio-l17-text-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816946/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l17-text-4.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-17-text-5",
@@ -1749,7 +1770,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l18-text-2"
+      "audioRef": "hsk4l-tb-audio-l18-text-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816983/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l18-text-2.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-18-text-3",
@@ -1814,7 +1836,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l18-text-3"
+      "audioRef": "hsk4l-tb-audio-l18-text-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817022/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l18-text-3.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-18-text-4",
@@ -1848,7 +1871,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l18-text-4"
+      "audioRef": "hsk4l-tb-audio-l18-text-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817038/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l18-text-4.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-18-text-5",
@@ -1883,7 +1907,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l18-text-5"
+      "audioRef": "hsk4l-tb-audio-l18-text-5",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817064/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l18-text-5.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-19-text-1",
@@ -1944,7 +1969,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l19-text-1"
+      "audioRef": "hsk4l-tb-audio-l19-text-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817087/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l19-text-1.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-19-text-2",
@@ -2001,7 +2027,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l19-text-2"
+      "audioRef": "hsk4l-tb-audio-l19-text-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817109/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l19-text-2.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-19-text-3",
@@ -2066,7 +2093,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l19-text-3"
+      "audioRef": "hsk4l-tb-audio-l19-text-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817138/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l19-text-3.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-19-text-4",
@@ -2102,7 +2130,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l19-text-4"
+      "audioRef": "hsk4l-tb-audio-l19-text-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817157/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l19-text-4.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-19-text-5",
@@ -2251,7 +2280,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l20-text-2"
+      "audioRef": "hsk4l-tb-audio-l20-text-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817194/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l20-text-2.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-20-text-3",
@@ -2314,7 +2344,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l20-text-3"
+      "audioRef": "hsk4l-tb-audio-l20-text-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817222/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l20-text-3.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-20-text-4",
@@ -2353,7 +2384,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l20-text-4"
+      "audioRef": "hsk4l-tb-audio-l20-text-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817251/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l20-text-4.mp3"
     },
     {
       "id": "hsk4l-tb-lesson-20-text-5",
@@ -2389,7 +2421,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk4l-tb-audio-l20-text-5"
+      "audioRef": "hsk4l-tb-audio-l20-text-5",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817271/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l20-text-5.mp3"
     }
   ]
 }

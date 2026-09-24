@@ -36,8 +36,15 @@
     "lessonRef": "hsk6-v2-lesson-23",
     "trackCode": "23-1",
     "kind": "article-audio",
-    "availability": "placeholder-only",
-    "note": "Audio được nhắc trong sách nhưng không được nhúng trong PDF nguồn."
+    "availability": "generated",
+    "note": "Audio được nhắc trong sách nhưng không được nhúng trong PDF nguồn.",
+    "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817117/hanziwork/hsk6/volume2-articles/hsk6-v2-track-23-1.mp3",
+    "reviewStatus": "pending-audio-review",
+    "generation": {
+      "provider": "elevenlabs",
+      "modelId": "eleven_v3",
+      "voiceId": "9lHjugDhwqoxA5MhX0az"
+    }
   },
   {
     "id": "hsk6-v2-track-23-2",
@@ -68,8 +75,15 @@
     "lessonRef": "hsk6-v2-lesson-25",
     "trackCode": "25-1",
     "kind": "article-audio",
-    "availability": "placeholder-only",
-    "note": "Audio được nhắc trong sách nhưng không được nhúng trong PDF nguồn."
+    "availability": "generated",
+    "note": "Audio được nhắc trong sách nhưng không được nhúng trong PDF nguồn.",
+    "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817252/hanziwork/hsk6/volume2-articles/hsk6-v2-track-25-1.mp3",
+    "reviewStatus": "pending-audio-review",
+    "generation": {
+      "provider": "elevenlabs",
+      "modelId": "eleven_v3",
+      "voiceId": "9lHjugDhwqoxA5MhX0az"
+    }
   },
   {
     "id": "hsk6-v2-track-25-2",
@@ -116,8 +130,15 @@
     "lessonRef": "hsk6-v2-lesson-28",
     "trackCode": "28-1",
     "kind": "article-audio",
-    "availability": "placeholder-only",
-    "note": "Audio được nhắc trong sách nhưng không được nhúng trong PDF nguồn."
+    "availability": "generated",
+    "note": "Audio được nhắc trong sách nhưng không được nhúng trong PDF nguồn.",
+    "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817370/hanziwork/hsk6/volume2-articles/hsk6-v2-track-28-1.mp3",
+    "reviewStatus": "pending-audio-review",
+    "generation": {
+      "provider": "elevenlabs",
+      "modelId": "eleven_v3",
+      "voiceId": "9lHjugDhwqoxA5MhX0az"
+    }
   },
   {
     "id": "hsk6-v2-track-28-2",
@@ -164,8 +185,15 @@
     "lessonRef": "hsk6-v2-lesson-31",
     "trackCode": "31-1",
     "kind": "article-audio",
-    "availability": "placeholder-only",
-    "note": "Audio được nhắc trong sách nhưng không được nhúng trong PDF nguồn."
+    "availability": "generated",
+    "note": "Audio được nhắc trong sách nhưng không được nhúng trong PDF nguồn.",
+    "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817495/hanziwork/hsk6/volume2-articles/hsk6-v2-track-31-1.mp3",
+    "reviewStatus": "pending-audio-review",
+    "generation": {
+      "provider": "elevenlabs",
+      "modelId": "eleven_v3",
+      "voiceId": "9lHjugDhwqoxA5MhX0az"
+    }
   },
   {
     "id": "hsk6-v2-track-31-2",
@@ -228,8 +256,15 @@
     "lessonRef": "hsk6-v2-lesson-35",
     "trackCode": "35-1",
     "kind": "article-audio",
-    "availability": "placeholder-only",
-    "note": "Audio được nhắc trong sách nhưng không được nhúng trong PDF nguồn."
+    "availability": "generated",
+    "note": "Audio được nhắc trong sách nhưng không được nhúng trong PDF nguồn.",
+    "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817664/hanziwork/hsk6/volume2-articles/hsk6-v2-track-35-1.mp3",
+    "reviewStatus": "pending-audio-review",
+    "generation": {
+      "provider": "elevenlabs",
+      "modelId": "eleven_v3",
+      "voiceId": "9lHjugDhwqoxA5MhX0az"
+    }
   },
   {
     "id": "hsk6-v2-track-35-2",

@@ -91,8 +91,7 @@
       "presentation": {
         "showPinyinByDefault": true,
         "showTranslationByDefault": true,
-        "allowPlayAll": false,
-        "audioUnavailableReason": "missing-source-audio"
+        "allowPlayAll": false
       }
     },
     {
@@ -242,7 +241,7 @@
   "editorial": {
     "contentVersion": 1,
     "languageReviewStatus": "pending",
-    "audioReviewStatus": "blocked-missing-file",
+    "audioReviewStatus": "pending-audio-review",
     "reviewerIds": [],
     "sourceNotes": [
       "Dữ liệu được chuyển đổi từ bản PDF scan do người dùng cung cấp.",
