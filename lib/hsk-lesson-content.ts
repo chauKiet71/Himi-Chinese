@@ -71,6 +71,7 @@ export type HskDialogue = {
   id: string;
   title: string;
   setting: string;
+  audioUrl?: string;
   turns: HskDialogueTurn[];
 };
 
@@ -190,6 +191,7 @@ type RawDialogue = {
   id: string;
   titleVi: string;
   settingVi: string;
+  audioUrl?: string;
   speakers: Array<{ id: string; displayName: string }>;
   turns: Array<{
     speakerId: string;
@@ -331,6 +333,7 @@ function toDialogue(raw: RawDialogue): HskDialogue {
     id: raw.id,
     title: raw.titleVi,
     setting: raw.settingVi,
+    audioUrl: raw.audioUrl,
     turns: raw.turns.map((turn) => ({
       speaker: speakers.get(turn.speakerId) ?? turn.speakerId,
       hanzi: turn.hanzi,

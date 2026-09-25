@@ -48,7 +48,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l01-scene-1"
+      "audioRef": "hsk2-tb-audio-l01-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815694/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l01-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-01-scene-2",
@@ -96,7 +97,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l01-scene-2"
+      "audioRef": "hsk2-tb-audio-l01-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815703/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l01-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-01-scene-3",
@@ -145,7 +147,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l01-scene-3"
+      "audioRef": "hsk2-tb-audio-l01-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815711/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l01-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-01-scene-4",
@@ -207,7 +210,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l01-scene-4"
+      "audioRef": "hsk2-tb-audio-l01-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815721/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l01-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-02-scene-1",
@@ -255,7 +259,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l02-scene-1"
+      "audioRef": "hsk2-tb-audio-l02-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815730/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l02-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-02-scene-2",
@@ -303,7 +308,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l02-scene-2"
+      "audioRef": "hsk2-tb-audio-l02-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815738/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l02-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-02-scene-3",
@@ -365,7 +371,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l02-scene-3"
+      "audioRef": "hsk2-tb-audio-l02-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815746/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l02-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-02-scene-4",
@@ -414,7 +421,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l02-scene-4"
+      "audioRef": "hsk2-tb-audio-l02-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815761/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l02-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-03-scene-1",
@@ -462,7 +470,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l03-scene-1"
+      "audioRef": "hsk2-tb-audio-l03-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815770/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l03-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-03-scene-2",
@@ -506,7 +515,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l03-scene-2"
+      "audioRef": "hsk2-tb-audio-l03-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815781/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l03-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-03-scene-3",
@@ -555,7 +565,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l03-scene-3"
+      "audioRef": "hsk2-tb-audio-l03-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815793/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l03-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-03-scene-4",
@@ -603,7 +614,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l03-scene-4"
+      "audioRef": "hsk2-tb-audio-l03-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815803/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l03-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-04-scene-1",
@@ -651,7 +663,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l04-scene-1"
+      "audioRef": "hsk2-tb-audio-l04-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815813/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l04-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-04-scene-2",
@@ -699,7 +712,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l04-scene-2"
+      "audioRef": "hsk2-tb-audio-l04-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815822/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l04-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-04-scene-3",
@@ -747,7 +761,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l04-scene-3"
+      "audioRef": "hsk2-tb-audio-l04-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815832/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l04-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-04-scene-4",
@@ -796,7 +811,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l04-scene-4"
+      "audioRef": "hsk2-tb-audio-l04-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815852/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l04-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-05-scene-1",
@@ -844,7 +860,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l05-scene-1"
+      "audioRef": "hsk2-tb-audio-l05-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815864/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l05-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-05-scene-2",
@@ -892,7 +909,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l05-scene-2"
+      "audioRef": "hsk2-tb-audio-l05-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815874/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l05-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-05-scene-3",
@@ -942,7 +960,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l05-scene-3"
+      "audioRef": "hsk2-tb-audio-l05-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815890/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l05-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-05-scene-4",
@@ -990,7 +1009,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l05-scene-4"
+      "audioRef": "hsk2-tb-audio-l05-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815903/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l05-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-06-scene-1",
@@ -1038,7 +1058,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l06-scene-1"
+      "audioRef": "hsk2-tb-audio-l06-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815912/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l06-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-06-scene-2",
@@ -1086,7 +1107,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l06-scene-2"
+      "audioRef": "hsk2-tb-audio-l06-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815928/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l06-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-06-scene-3",
@@ -1135,7 +1157,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l06-scene-3"
+      "audioRef": "hsk2-tb-audio-l06-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815938/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l06-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-06-scene-4",
@@ -1183,7 +1206,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l06-scene-4"
+      "audioRef": "hsk2-tb-audio-l06-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815947/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l06-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-07-scene-1",
@@ -1231,7 +1255,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l07-scene-1"
+      "audioRef": "hsk2-tb-audio-l07-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815957/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l07-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-07-scene-2",
@@ -1276,7 +1301,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l07-scene-2"
+      "audioRef": "hsk2-tb-audio-l07-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815967/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l07-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-07-scene-3",
@@ -1324,7 +1350,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l07-scene-3"
+      "audioRef": "hsk2-tb-audio-l07-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815977/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l07-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-07-scene-4",
@@ -1373,7 +1400,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l07-scene-4"
+      "audioRef": "hsk2-tb-audio-l07-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815994/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l07-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-08-scene-1",
@@ -1422,7 +1450,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l08-scene-1"
+      "audioRef": "hsk2-tb-audio-l08-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816002/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l08-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-08-scene-2",
@@ -1471,7 +1500,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l08-scene-2"
+      "audioRef": "hsk2-tb-audio-l08-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816013/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l08-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-08-scene-3",
@@ -1512,7 +1542,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l08-scene-3"
+      "audioRef": "hsk2-tb-audio-l08-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816019/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l08-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-08-scene-4",
@@ -1560,7 +1591,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l08-scene-4"
+      "audioRef": "hsk2-tb-audio-l08-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816033/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l08-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-09-scene-1",
@@ -1602,7 +1634,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l09-scene-1"
+      "audioRef": "hsk2-tb-audio-l09-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816041/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l09-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-09-scene-2",
@@ -1651,7 +1684,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l09-scene-2"
+      "audioRef": "hsk2-tb-audio-l09-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816051/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l09-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-09-scene-3",
@@ -1694,7 +1728,8 @@
         }
       ],
       "transcriptionStatus": "visually-verified-recovery",
-      "audioRef": "hsk2-tb-audio-l09-scene-3"
+      "audioRef": "hsk2-tb-audio-l09-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816061/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l09-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-09-scene-4",
@@ -1743,7 +1778,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l09-scene-4"
+      "audioRef": "hsk2-tb-audio-l09-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816068/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l09-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-10-scene-1",
@@ -1792,7 +1828,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l10-scene-1"
+      "audioRef": "hsk2-tb-audio-l10-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816076/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l10-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-10-scene-2",
@@ -1847,7 +1884,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l10-scene-2"
+      "audioRef": "hsk2-tb-audio-l10-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816089/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l10-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-10-scene-3",
@@ -1896,7 +1934,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l10-scene-3"
+      "audioRef": "hsk2-tb-audio-l10-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816098/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l10-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-10-scene-4",
@@ -1952,7 +1991,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l10-scene-4"
+      "audioRef": "hsk2-tb-audio-l10-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816112/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l10-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-11-scene-1",
@@ -2001,7 +2041,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l11-scene-1"
+      "audioRef": "hsk2-tb-audio-l11-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816122/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l11-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-11-scene-2",
@@ -2050,7 +2091,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l11-scene-2"
+      "audioRef": "hsk2-tb-audio-l11-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816131/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l11-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-11-scene-3",
@@ -2098,7 +2140,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l11-scene-3"
+      "audioRef": "hsk2-tb-audio-l11-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816139/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l11-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-11-scene-4",
@@ -2147,7 +2190,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l11-scene-4"
+      "audioRef": "hsk2-tb-audio-l11-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816151/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l11-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-12-scene-1",
@@ -2195,7 +2239,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l12-scene-1"
+      "audioRef": "hsk2-tb-audio-l12-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816164/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l12-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-12-scene-2",
@@ -2243,7 +2288,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l12-scene-2"
+      "audioRef": "hsk2-tb-audio-l12-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816173/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l12-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-12-scene-3",
@@ -2292,7 +2338,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l12-scene-3"
+      "audioRef": "hsk2-tb-audio-l12-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816182/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l12-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-12-scene-4",
@@ -2341,7 +2388,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l12-scene-4"
+      "audioRef": "hsk2-tb-audio-l12-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816193/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l12-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-13-scene-1",
@@ -2389,7 +2437,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l13-scene-1"
+      "audioRef": "hsk2-tb-audio-l13-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816201/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l13-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-13-scene-2",
@@ -2438,7 +2487,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l13-scene-2"
+      "audioRef": "hsk2-tb-audio-l13-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816210/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l13-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-13-scene-3",
@@ -2487,7 +2537,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l13-scene-3"
+      "audioRef": "hsk2-tb-audio-l13-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816220/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l13-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-13-scene-4",
@@ -2536,7 +2587,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l13-scene-4"
+      "audioRef": "hsk2-tb-audio-l13-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816230/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l13-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-14-scene-1",
@@ -2584,7 +2636,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l14-scene-1"
+      "audioRef": "hsk2-tb-audio-l14-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816239/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l14-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-14-scene-2",
@@ -2633,7 +2686,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l14-scene-2"
+      "audioRef": "hsk2-tb-audio-l14-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816247/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l14-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-14-scene-3",
@@ -2681,7 +2735,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l14-scene-3"
+      "audioRef": "hsk2-tb-audio-l14-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816255/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l14-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-14-scene-4",
@@ -2730,7 +2785,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l14-scene-4"
+      "audioRef": "hsk2-tb-audio-l14-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816265/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l14-scene-4.mp3"
     },
     {
       "id": "hsk2-tb-lesson-15-scene-1",
@@ -2786,7 +2842,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l15-scene-1"
+      "audioRef": "hsk2-tb-audio-l15-scene-1",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816276/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l15-scene-1.mp3"
     },
     {
       "id": "hsk2-tb-lesson-15-scene-2",
@@ -2827,7 +2884,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l15-scene-2"
+      "audioRef": "hsk2-tb-audio-l15-scene-2",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816285/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l15-scene-2.mp3"
     },
     {
       "id": "hsk2-tb-lesson-15-scene-3",
@@ -2876,7 +2934,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l15-scene-3"
+      "audioRef": "hsk2-tb-audio-l15-scene-3",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816293/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l15-scene-3.mp3"
     },
     {
       "id": "hsk2-tb-lesson-15-scene-4",
@@ -2920,7 +2979,8 @@
         }
       ],
       "transcriptionStatus": "ocr-needs-editorial-review",
-      "audioRef": "hsk2-tb-audio-l15-scene-4"
+      "audioRef": "hsk2-tb-audio-l15-scene-4",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816302/hanziwork/hsk2/textbook-scenes/hsk2-tb-audio-l15-scene-4.mp3"
     }
   ]
 }

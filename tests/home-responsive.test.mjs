@@ -22,10 +22,14 @@ test("home portal reserves mobile navigation space and keeps phone controls touc
   assert.match(shell, /<span>Luyện tập<\/span>/);
   const homeStudio = await read("components/review-home-studio.tsx");
   assert.match(homeStudio, /className="home-portal-secondary" href="\/courses#course-catalog"[\s\S]*Xem lộ trình/);
-  assert.match(homeStudio, /aria-label="Bắt đầu luyện nhanh"[\s\S]*href="\/typing"[\s\S]*Luyện gõ[\s\S]*href="\/listening"[\s\S]*Nghe phản xạ[\s\S]*href="\/vocabulary"[\s\S]*Ôn từ/);
+  assert.match(homeStudio, /aria-label="Bắt đầu luyện nhanh"[\s\S]*href="\/typing"[\s\S]*Luyện gõ[\s\S]*href="\/listening"[\s\S]*Luyện nghe[\s\S]*href="\/vocabulary"[\s\S]*Ôn từ vựng/);
   assert.doesNotMatch(homeStudio, /href="\/hsk\/1\/hsk1-bai-01-chao-anh\/flashcard"/);
   assert.match(css, /\.home-portal-quick-dock\s*\{[\s\S]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(css, /\.home-portal-actions\s*\{\s*\n\s*display:\s*none/);
+  assert.match(css, /transition:\s*transform 220ms ease/);
+  assert.match(css, /\.home-portal-primary:hover,\s*\.home-portal-secondary:hover\s*\{\s*transform:\s*translateY\(-3px\)/);
+  assert.doesNotMatch(css, /\.home-portal-primary:hover svg/);
+  assert.doesNotMatch(css, /\.home-portal-secondary:hover > span/);
   assert.match(brand, /\.home-portal-art::before\s*\{[\s\S]*--home-portal-curve-height:[\s\S]*border-radius:\s*50%/);
   assert.match(brand, /top:\s*calc\(260px - var\(--home-portal-curve-height\)\)/);
   assert.match(brand, /@media \(max-width: 720px\)[\s\S]*\.home-portal-art::after[\s\S]*linear-gradient\(180deg/);

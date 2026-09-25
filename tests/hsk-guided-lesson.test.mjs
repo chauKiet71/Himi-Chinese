@@ -129,20 +129,26 @@ test("guided HSK lesson exposes progress, controls, sections and step navigation
   ]);
   assert.ok(viewModule, "the guided lesson workspace should be renderable");
   const lesson = contentModule.getHskLessonContent("hsk-1", "hsk1-bai-01-chao-anh");
-  const html = renderToStaticMarkup(React.createElement(viewModule.HskGuidedLesson, { lesson }));
+  const html = renderToStaticMarkup(React.createElement(viewModule.HskGuidedLesson, {
+    lesson,
+    nextLessonHref: "/hsk/1/hsk1-bai-02-cam-on-anh/play",
+  }));
 
-  assert.match(html, /aria-label="Thoát bài học" href="\/courses\?view=hsk"/);
+  assert.match(html, /hsk-guided-toolbar/);
+  assert.match(html, /aria-label="Thoát bài học"/);
   assert.match(html, /aria-valuenow="1"/);
   assert.match(html, /1 \/ 15/);
-  assert.match(html, /Ẩn pinyin/);
-  assert.match(html, /0\.75×/);
+  assert.doesNotMatch(html, /Ẩn pinyin/);
+  assert.doesNotMatch(html, /0\.75×/);
   assert.match(html, /Từ vựng/);
+  assert.doesNotMatch(html, /<span>ngữ pháp<\/span>/);
   assert.doesNotMatch(html, /<span>Ngữ pháp<\/span>/);
   assert.doesNotMatch(html, /<span>Hội thoại<\/span>/);
   assert.doesNotMatch(html, /<span>Phát âm<\/span>/);
   assert.doesNotMatch(html, /hội thoại/);
   assert.doesNotMatch(html, /Trọng tâm ghép âm và thanh điệu/);
   assert.match(html, /Luyện viết/);
+  assert.doesNotMatch(html, /Xem hoạt họa nét/);
   assert.match(html, /Luyện tập/);
   assert.match(html, /Hoàn thành/);
   assert.match(html, />Trước</);
@@ -159,7 +165,10 @@ test("guided HSK vocabulary exposes the save-word control and account-aware pers
   assert.match(component, /"Lưu từ"/);
   assert.match(component, /"Đã lưu"/);
   assert.match(component, /trySaveHskVocabularyWord/);
+  assert.match(component, /disabled=\{selected !== null\}/);
+  assert.match(component, /nextLessonHref \? "Bài tiếp theo" : "Về lộ trình"/);
   assert.match(page, /requireLearnerUser\(/);
+  assert.match(page, /getHskLessonHref\(data\.lesson\.levelId, nextLesson\.id\)/);
   assert.match(page, /<HskGuidedLesson authenticated lesson=/);
   assert.match(client, /return response\.ok/);
 });

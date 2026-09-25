@@ -83,11 +83,11 @@ npm run verify:staging
 
 1. Sao chép `.env.example` thành `.env.local`.
 2. Điền `DATABASE_URL` của cơ sở dữ liệu PostgreSQL.
-3. Chạy `npm run db:migrate` để áp dụng các migration trong `drizzle/`.
+3. Chạy `npm run dev`. Ứng dụng tự áp dụng các migration còn thiếu trong `drizzle/` trước khi khởi động.
 4. Chạy `npm run db:seed` để seed idempotent 7 lộ trình MVP, 3 gói VIP, 28 module thuộc bảy chuyên ngành đang mở, 168 bài cùng 1.008 từ vựng mẫu.
 5. Khởi động lại ứng dụng. `/courses`, `/learn/[slug]` và `/practice` sẽ đọc dữ liệu đã xuất bản từ PostgreSQL.
 
-Khi chưa có `DATABASE_URL`, ứng dụng tự dùng catalog demo để frontend vẫn chạy được. Sau mỗi lần sửa `db/schema.ts`, chạy `npm run db:generate` để tạo migration mới rồi kiểm tra SQL trước khi migrate.
+Khi chưa có `DATABASE_URL`, ứng dụng tự dùng catalog demo để frontend vẫn chạy được. `npm run dev`, `npm start` và `npm run deploy:staging` tự chạy migration trước khi phục vụ request; có thể tắt khẩn cấp bằng `DATABASE_AUTO_MIGRATE=false`. Sau mỗi lần sửa `db/schema.ts`, chạy `npm run db:generate` để tạo migration mới và kiểm tra SQL trước khi commit.
 
 Sáu bài đầu của mỗi lộ trình đang mở là miễn phí; 18 bài chuyên sâu còn lại yêu cầu VIP. Việc kiểm tra quyền diễn ra ở server và nội dung bài VIP không được gửi xuống client ẩn danh. Tiến độ, lịch ôn và đơn thanh toán SePay được lưu theo người dùng. Không đưa khóa API vào Git và không bật nhận tiền thật trước khi hoàn thành thông tin chủ thể kinh doanh, điều khoản sử dụng, bảo mật và hoàn tiền.
 

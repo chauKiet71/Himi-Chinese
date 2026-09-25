@@ -50,6 +50,7 @@ type RawLexeme = {
 
 type RawScene = {
   id: string;
+  audioUrl?: string;
   lessonRef: string;
   sceneNumber: number;
   title: { zh: string | null; pinyin: string | null; viOcrRaw: string | null };
@@ -207,6 +208,7 @@ function toDialogue(scene: RawScene, lessonNumber: number): HskDialogue {
   const title = ENRICHMENT.sceneTitles[scene.id]?.translationVi || `Hội thoại ${scene.sceneNumber}`;
   return {
     id: scene.id,
+    audioUrl: scene.audioUrl,
     title,
     setting: `Tình huống giao tiếp ${scene.sceneNumber} trong Bài ${lessonNumber}.`,
     turns: scene.lines.map((line, index) => {

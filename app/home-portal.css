@@ -341,7 +341,7 @@
   font-size: 16px;
   font-weight: 780;
   text-decoration: none;
-  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  transition: transform 220ms ease;
 }
 
 .home-portal-primary {
@@ -350,12 +350,6 @@
   color: #fff;
   background: #ff5b55;
   box-shadow: 0 15px 36px rgba(255, 91, 85, .22);
-}
-
-.home-portal-primary:hover {
-  background: #f44e4a;
-  box-shadow: 0 20px 42px rgba(255, 91, 85, .3);
-  transform: translateY(-2px);
 }
 
 .home-portal-secondary {
@@ -377,9 +371,15 @@
   box-shadow: 0 12px 30px rgba(25, 83, 77, .09);
 }
 
-.home-portal-secondary:hover {
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .home-portal-primary:hover,
+  .home-portal-secondary:hover {
+    transform: translateY(-3px);
+  }
 }
+
+.home-portal-primary:active,
+.home-portal-secondary:active { transform: translateY(-1px) scale(.985); }
 
 .home-portal-primary:focus-visible,
 .home-portal-secondary:focus-visible {
@@ -1395,10 +1395,19 @@
 
   .home-portal-primary,
   .home-portal-secondary,
+  .home-portal-primary svg,
+  .home-portal-secondary > span,
   .home-portal-quick-action,
   .home-welcome-offer-close,
   .home-welcome-offer-primary {
     transition: none;
+  }
+
+  .home-portal-primary:hover,
+  .home-portal-secondary:hover,
+  .home-portal-primary:active,
+  .home-portal-secondary:active {
+    transform: none;
   }
 
   .home-welcome-offer-dialog[open] {

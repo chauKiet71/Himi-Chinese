@@ -22,8 +22,15 @@
       "lessonNumber": 2,
       "type": "audio",
       "trackLabel": "02-1",
-      "availability": "referenced-in-book-not-embedded-in-source-pdf",
-      "file": null
+      "availability": "generated",
+      "file": null,
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817300/hanziwork/hsk6/volume1-articles/hsk6t1-audio-02-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk6t1-audio-02-2",
@@ -54,8 +61,15 @@
       "lessonNumber": 4,
       "type": "audio",
       "trackLabel": "04-1",
-      "availability": "referenced-in-book-not-embedded-in-source-pdf",
-      "file": null
+      "availability": "generated",
+      "file": null,
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817382/hanziwork/hsk6/volume1-articles/hsk6t1-audio-04-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk6t1-audio-04-2",
@@ -86,8 +100,15 @@
       "lessonNumber": 6,
       "type": "audio",
       "trackLabel": "06-1",
-      "availability": "referenced-in-book-not-embedded-in-source-pdf",
-      "file": null
+      "availability": "generated",
+      "file": null,
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817497/hanziwork/hsk6/volume1-articles/hsk6t1-audio-06-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk6t1-audio-06-2",
@@ -102,8 +123,15 @@
       "lessonNumber": 7,
       "type": "audio",
       "trackLabel": "07-1",
-      "availability": "referenced-in-book-not-embedded-in-source-pdf",
-      "file": null
+      "availability": "generated",
+      "file": null,
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817567/hanziwork/hsk6/volume1-articles/hsk6t1-audio-07-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk6t1-audio-07-2",
@@ -134,8 +162,15 @@
       "lessonNumber": 9,
       "type": "audio",
       "trackLabel": "09-1",
-      "availability": "referenced-in-book-not-embedded-in-source-pdf",
-      "file": null
+      "availability": "generated",
+      "file": null,
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817655/hanziwork/hsk6/volume1-articles/hsk6t1-audio-09-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk6t1-audio-09-2",
@@ -150,8 +185,15 @@
       "lessonNumber": 10,
       "type": "audio",
       "trackLabel": "10-1",
-      "availability": "referenced-in-book-not-embedded-in-source-pdf",
-      "file": null
+      "availability": "generated",
+      "file": null,
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817760/hanziwork/hsk6/volume1-articles/hsk6t1-audio-10-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk6t1-audio-10-2",
@@ -198,8 +240,15 @@
       "lessonNumber": 13,
       "type": "audio",
       "trackLabel": "13-1",
-      "availability": "referenced-in-book-not-embedded-in-source-pdf",
-      "file": null
+      "availability": "generated",
+      "file": null,
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817843/hanziwork/hsk6/volume1-articles/hsk6t1-audio-13-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk6t1-audio-13-2",
@@ -214,8 +263,15 @@
       "lessonNumber": 14,
       "type": "audio",
       "trackLabel": "14-1",
-      "availability": "referenced-in-book-not-embedded-in-source-pdf",
-      "file": null
+      "availability": "generated",
+      "file": null,
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817941/hanziwork/hsk6/volume1-articles/hsk6t1-audio-14-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk6t1-audio-14-2",
@@ -230,8 +286,15 @@
       "lessonNumber": 15,
       "type": "audio",
       "trackLabel": "15-1",
-      "availability": "referenced-in-book-not-embedded-in-source-pdf",
-      "file": null
+      "availability": "generated",
+      "file": null,
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789818065/hanziwork/hsk6/volume1-articles/hsk6t1-audio-15-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk6t1-audio-15-2",
@@ -278,8 +341,15 @@
       "lessonNumber": 18,
       "type": "audio",
       "trackLabel": "18-1",
-      "availability": "referenced-in-book-not-embedded-in-source-pdf",
-      "file": null
+      "availability": "generated",
+      "file": null,
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789818162/hanziwork/hsk6/volume1-articles/hsk6t1-audio-18-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk6t1-audio-18-2",
@@ -310,8 +380,15 @@
       "lessonNumber": 20,
       "type": "audio",
       "trackLabel": "20-1",
-      "availability": "referenced-in-book-not-embedded-in-source-pdf",
-      "file": null
+      "availability": "generated",
+      "file": null,
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789818253/hanziwork/hsk6/volume1-articles/hsk6t1-audio-20-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk6t1-audio-20-2",

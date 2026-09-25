@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { HskGuidedLesson } from "@/components/hsk-guided-lesson";
 import { HskVipLocked } from "@/components/hsk-vip-locked";
 import { getHskLessonPageData } from "@/lib/hsk-access-repository";
+import { HSK_CURRICULUM } from "@/lib/hsk-curriculum";
+import { getHskLessonHref } from "@/lib/hsk-lesson-content";
 import { requireLearnerUser } from "@/lib/learner-auth";
 
 type PageProps = { params: Promise<{ level: string; lesson: string }> };
@@ -23,5 +25,13 @@ export default async function HskGuidedLessonPage({ params }: PageProps) {
   const data = await getHskLessonPageData({ level, lessonId, userId: user.id });
   if (!data) notFound();
   if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
-  return <HskGuidedLesson authenticated lesson={data.lesson} />;
+  const levelLessons = HSK_CURRICULUM
+    .find((curriculumLevel) => curriculumLevel.id === data.lesson.levelId)
+    ?.topics.flatMap((topic) => topic.lessons) ?? [];
+  const lessonIndex = levelLessons.findIndex((lesson) => lesson.id === data.lesson.id);
+  const nextLesson = lessonIndex >= 0 ? levelLessons[lessonIndex + 1] : undefined;
+  const nextLessonHref = nextLesson?.available
+    ? `${getHskLessonHref(data.lesson.levelId, nextLesson.id)}/play`
+    : null;
+  return <HskGuidedLesson authenticated lesson={data.lesson} nextLessonHref={nextLessonHref} />;
 }

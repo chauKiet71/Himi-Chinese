@@ -21,7 +21,9 @@ const databaseUnavailableMessages = [
   "connection refused",
   "connection reset",
   "connect timeout",
+  "exceeded the quota",
   "network is unreachable",
+  "quota exceeded",
   "temporary failure in name resolution",
 ];
 

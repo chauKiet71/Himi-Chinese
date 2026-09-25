@@ -46,6 +46,7 @@ type RawLexeme = {
 
 type RawScene = {
   id: string;
+  audioUrl?: string;
   lessonRef: string;
   sceneNumber: number;
   title: { zh: string | null; pinyin: string | null; vi: string | null };
@@ -189,6 +190,7 @@ function toVocabulary(lexeme: RawLexeme, scenes: RawScene[]): HskVocabularyItem 
 function toDialogue(scene: RawScene, lessonNumber: number): HskDialogue {
   return {
     id: scene.id,
+    audioUrl: scene.audioUrl,
     title: scene.title.vi || scene.title.zh || `Hội thoại ${scene.sceneNumber}`,
     setting: `Tình huống giao tiếp ${scene.sceneNumber} trong Bài ${lessonNumber}.`,
     turns: scene.lines.map((line, index) => {

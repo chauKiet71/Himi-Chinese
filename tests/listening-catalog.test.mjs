@@ -14,6 +14,7 @@ const publicRoot = resolve(process.cwd(), "public");
 const catalogRoot = resolve(publicRoot, "listening-catalog");
 const index = JSON.parse(readFileSync(resolve(catalogRoot, "index.json"), "utf8"));
 const studioSource = readFileSync(resolve(process.cwd(), "components/listening-catalog-studio.tsx"), "utf8");
+const studioStyles = readFileSync(resolve(process.cwd(), "app/listening-studio.css"), "utf8");
 
 test("active sentence advances from the penultimate line to the final line and survives seeking into the audio tail", () => {
   const lesson = JSON.parse(readFileSync(resolve(catalogRoot, "lessons/dialogue-beginner-topic-chat-with-chinese-001-daily-001.json"), "utf8"));
@@ -72,4 +73,10 @@ test("mobile transcript visibility controls use explicit state buttons", () => {
   assert.match(mobileControls, /aria-pressed=\{showChinese\}[\s\S]*setShowChinese\(\(value\) => !value\)/);
   assert.match(mobileControls, /aria-pressed=\{showPinyin\}[\s\S]*setShowPinyin\(\(value\) => !value\)/);
   assert.doesNotMatch(mobileControls, /type="checkbox"/);
+});
+
+test("lesson transport keeps the reference-style play hierarchy", () => {
+  assert.match(studioStyles, /\.listening-catalog-detail-page \.listening-focus-transport \{[\s\S]*?width: 200px;[\s\S]*?min-height: 72px;/);
+  assert.match(studioStyles, /\.listening-catalog-detail-page \.listening-focus-transport \.listening-focus-play \{[\s\S]*?width: 50px;[\s\S]*?height: 50px;/);
+  assert.match(studioStyles, /\.listening-catalog-detail-page \.listening-focus-transport button > svg \{[\s\S]*?width: 34px;[\s\S]*?height: 34px;/);
 });

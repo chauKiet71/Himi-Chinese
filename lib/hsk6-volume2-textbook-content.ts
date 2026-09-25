@@ -37,6 +37,7 @@ type RawArticleParagraph = {
 
 type RawArticle = {
   id: string;
+  audioUrl?: string;
   lessonRef: string;
   titleZh: string;
   titlePinyin: string;
@@ -150,6 +151,7 @@ function toVocabulary(lexeme: RawLexeme, article: RawArticle): HskVocabularyItem
 function toDialogue(article: RawArticle, lesson: RawLesson): HskDialogue {
   return {
     id: article.id,
+    audioUrl: article.audioUrl,
     title: `Bài khóa · ${lesson.titleVi}`,
     setting: `Bài đọc nguyên bản trong Giáo trình chuẩn HSK 6 - Tập 2, Bài ${lesson.number}.`,
     turns: article.paragraphs.map((paragraph, index) => ({

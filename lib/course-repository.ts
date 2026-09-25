@@ -1,6 +1,6 @@
 import { asc, and, eq } from "drizzle-orm";
 import { unstable_cache } from "next/cache.js";
-import { readDb } from "../db/index.ts";
+import { isDatabaseUnavailableError, readDb } from "../db/index.ts";
 import type { Database } from "../db/index.ts";
 import { courses as courseTable } from "../db/schema.ts";
 import { courses as demoCourses, getCourse as getDemoCourse } from "./course-data.ts";
@@ -49,27 +49,47 @@ const getCachedPublishedCourse = unstable_cache(async (slug: string) => {
 
 export async function listPublishedCourses(): Promise<Course[]> {
   if (!process.env.DATABASE_URL) return demoCourses;
-  return (await getCachedPublishedCourses()).map((entry) => entry.course);
+  try {
+    return (await getCachedPublishedCourses()).map((entry) => entry.course);
+  } catch (error) {
+    if (!isDatabaseUnavailableError(error)) throw error;
+    console.warn("[courses] database unavailable; using the bundled catalog");
+    return demoCourses;
+  }
 }
 
 export async function listPublishedCoursesForViewer(userId: string | null): Promise<Course[]> {
   if (!process.env.DATABASE_URL) return demoCourses;
-  const entries = await getCachedPublishedCourses();
-  const targets = entries.map((entry) => learningPathTarget(entry.id));
-  const [policies, viewerHasVip] = await Promise.all([
-    getContentAccessPolicies(targets),
-    userId ? hasActiveVipAccess(userId) : Promise.resolve(false),
-  ]);
-  return entries.map((entry, index) => {
-    const access = resolveContentAccess({ targets: [targets[index]], policies, viewerHasVip });
-    return { ...entry.course, access, ...(access.allowed ? {} : { freeLessons: 0 }) };
-  });
+  try {
+    const entries = await getCachedPublishedCourses();
+    const targets = entries.map((entry) => learningPathTarget(entry.id));
+    const [policies, viewerHasVip] = await Promise.all([
+      getContentAccessPolicies(targets),
+      userId ? hasActiveVipAccess(userId) : Promise.resolve(false),
+    ]);
+    return entries.map((entry, index) => {
+      const access = resolveContentAccess({ targets: [targets[index]], policies, viewerHasVip });
+      return { ...entry.course, access, ...(access.allowed ? {} : { freeLessons: 0 }) };
+    });
+  } catch (error) {
+    if (!isDatabaseUnavailableError(error)) throw error;
+    console.warn("[courses] database unavailable; using the bundled catalog");
+    return demoCourses;
+  }
 }
 
 export async function getPublishedCourse(slug: string, database?: Database): Promise<Course | undefined> {
   if (!process.env.DATABASE_URL) return getDemoCourse(slug);
 
-  if (!database) return getCachedPublishedCourse(slug);
+  if (!database) {
+    try {
+      return await getCachedPublishedCourse(slug);
+    } catch (error) {
+      if (!isDatabaseUnavailableError(error)) throw error;
+      console.warn("[courses] database unavailable; using the bundled course");
+      return getDemoCourse(slug);
+    }
+  }
 
   const query = (db: Database) => db
     .select()

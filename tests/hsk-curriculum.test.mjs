@@ -84,7 +84,8 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   assert.match(html, /aria-label="Chọn cấp độ HSK"/);
   assert.match(html, /aria-pressed="true"[^>]*>[^<]*<span[^>]*>壹/);
   assert.match(html, />Lộ trình bài học HSK 1</);
-  assert.match(html, />Himi Modern Curriculum Desk</);
+  assert.match(html, />Himi Chinese</);
+  assert.doesNotMatch(html, />Himi Modern Curriculum Desk</);
   assert.match(html, /aria-label="Lời nhắn từ Himi"/);
   assert.match(html, /aria-label="Đã hoàn thành 0 trên 15 bài"/);
   assert.match(html, />Nền tảng &amp; Làm quen</);
@@ -93,12 +94,22 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   assert.match(html, /aria-expanded="false"/);
   assert.match(html, />Bài 1: Xin chào!</);
   assert.match(html, />Bắt đầu học</);
+  assert.match(html, /Hoàn thành bài trước/);
+  assert.equal((html.match(/class="hsk-lesson-start"/g) ?? []).length, 1);
   assert.match(html, />Himi nhắc bạn:</);
   assert.match(html, /6 từ vựng/);
-  assert.doesNotMatch(html, /0 ngữ pháp/);
+  assert.doesNotMatch(html, /ngữ pháp/);
   assert.match(html, /3 hội thoại/);
   assert.match(html, /href="\/hsk\/1\/hsk1-bai-01-chao-anh"/);
   assert.match(html, /class="hsk-lesson-start" href="\/hsk\/1\/hsk1-bai-01-chao-anh\/play"/);
+  assert.equal(
+    viewModule.getHskCurriculumLessonDestination("hsk-1", "hsk1-bai-02-cam-on-anh", true),
+    "/hsk/1/hsk1-bai-02-cam-on-anh/play",
+  );
+  assert.equal(
+    viewModule.getHskCurriculumLessonDestination("hsk-1", "hsk1-bai-02-cam-on-anh", false),
+    "/hsk/1/hsk1-bai-02-cam-on-anh",
+  );
   assert.doesNotMatch(html, />HSK 7–9</);
 
   const lockedCurriculum = curriculumModule.HSK_CURRICULUM.map((level, levelIndex) => levelIndex ? level : {

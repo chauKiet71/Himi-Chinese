@@ -62,11 +62,11 @@ export function HimiChatbot() {
 
   useEffect(() => {
     if (!open) return;
-    const timer = window.setTimeout(() => inputRef.current?.focus(), 220);
+    const timer = loaded ? window.setTimeout(() => inputRef.current?.focus(), 220) : null;
     const escape = (event: KeyboardEvent) => { if (event.key === "Escape") closeChat(); };
     window.addEventListener("keydown", escape);
-    return () => { window.clearTimeout(timer); window.removeEventListener("keydown", escape); };
-  }, [open, closeChat]);
+    return () => { if (timer !== null) window.clearTimeout(timer); window.removeEventListener("keydown", escape); };
+  }, [open, loaded, closeChat]);
   useEffect(() => {
     return () => { if (preview) URL.revokeObjectURL(preview); };
   }, [preview]);
@@ -131,7 +131,7 @@ export function HimiChatbot() {
     .sort((a, b) => a.createdAt.localeCompare(b.createdAt) || a.id.localeCompare(b.id)) : [];
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (busyRef.current || (!draft.trim() && !attachment)) return;
+    if (authenticated !== true || busyRef.current || (!draft.trim() && !attachment)) return;
     busyRef.current = true; setBusy(true); setError(""); setNotice("");
     const targetId = active?.conversation.status === "COMPLETED" ? null : selectedId;
     const signature = JSON.stringify([targetId, draft, userName, userEmail, attachment?.name, attachment?.size, attachment?.lastModified]);
@@ -177,7 +177,7 @@ export function HimiChatbot() {
         id="himi-support-panel"
         aria-label="Hỗ trợ Himi qua nhân viên"
         aria-hidden={!open}
-        className={`himi-chatbot-panel${authenticated === true ? "" : " is-compact"}`}
+        className={`himi-chatbot-panel${authenticated === false ? " is-compact" : ""}`}
         role="dialog"
       >
         <header className="himi-chatbot-header">
@@ -195,7 +195,7 @@ export function HimiChatbot() {
           const el = listRef.current; if (el) nearBottom.current = el.scrollHeight - el.scrollTop - el.clientHeight < 80;
         }}>
           {connectionError ? <p className="himi-support-error" role="status">Đang mất kết nối. Himi sẽ tự thử lại; tin đã lưu không bị mất.</p> : null}
-          {!loaded ? <p role="status">Đang tải hỗ trợ…</p> : authenticated === false ?
+          {!loaded ? <p className="sr-only" role="status">Đang tải hỗ trợ…</p> : authenticated === false ?
             <p>Đăng nhập để gửi yêu cầu và lưu lịch sử trao đổi của bạn. <a href="/login">Đăng nhập</a></p> : <>
               {active && !hidden ? <p className="himi-support-status" role="status">{labels[active.conversation.status]}
                 {active.conversation.completedAt ? " · Ẩn sau " + Math.max(0, Math.ceil((new Date(active.conversation.completedAt).getTime() + 60_000 - now) / 1000)) + " giây" : ""}</p> : null}
@@ -217,7 +217,7 @@ export function HimiChatbot() {
               })}
             </>}
         </div>
-        {authenticated ? <form className="himi-chatbot-composer" onSubmit={submit}>
+        {authenticated !== false ? <form aria-busy={!loaded} className="himi-chatbot-composer" onSubmit={submit}>
           {attachment ? <div className="himi-chatbot-attachment">
             {preview ? <Image src={preview} alt="Ảnh chuẩn bị gửi" width={40} height={40} unoptimized /> : null}
             <span>{attachment.name}</span><button aria-label="Bỏ ảnh đính kèm" disabled={busy} onClick={() => { setAttachment(null); setPreview(null); }} type="button"><X size={16} /></button>
@@ -225,15 +225,15 @@ export function HimiChatbot() {
           {error ? <p className="himi-support-error" role="alert">{error}</p> : null}
           <p className="himi-support-notice" aria-live="polite">{notice}</p>
           <div className="himi-chatbot-input-shell">
-            <input type="text" aria-label="Nhập tin nhắn" placeholder="Nhập nội dung cần hỗ trợ…" ref={inputRef} maxLength={3000} value={draft} onChange={e => setDraft(e.target.value)} disabled={busy} />
-            <button aria-label="Đính kèm ảnh (tối đa 5 MB)" className="himi-chatbot-icon-button" disabled={busy} onClick={() => fileRef.current?.click()} type="button"><Paperclip size={19} /></button>
-            <input accept="image/jpeg,image/png,image/webp" className="himi-chatbot-file-input" ref={fileRef} tabIndex={-1} type="file" onChange={e => {
+            <input type="text" aria-label="Nhập tin nhắn" placeholder="Nhập nội dung cần hỗ trợ…" ref={inputRef} maxLength={3000} value={draft} onChange={e => setDraft(e.target.value)} disabled={!loaded || busy} />
+            <button aria-label="Đính kèm ảnh (tối đa 5 MB)" className="himi-chatbot-icon-button" disabled={!loaded || busy} onClick={() => fileRef.current?.click()} type="button"><Paperclip size={19} /></button>
+            <input accept="image/jpeg,image/png,image/webp" className="himi-chatbot-file-input" disabled={!loaded || busy} ref={fileRef} tabIndex={-1} type="file" onChange={e => {
               const file = e.target.files?.[0]; e.target.value = "";
               if (!file) return;
               if (file.size > SUPPORT_IMAGE_BYTES || !["image/jpeg", "image/png", "image/webp"].includes(file.type)) { setError("Chọn ảnh JPG, PNG hoặc WebP tối đa 5 MB."); return; }
               setAttachment(file); setPreview(URL.createObjectURL(file)); setError("");
             }} />
-            <button aria-label="Gửi tin nhắn" className="himi-chatbot-send" disabled={busy || (!draft.trim() && !attachment)} type="submit">
+            <button aria-label="Gửi tin nhắn" className="himi-chatbot-send" disabled={!loaded || busy || (!draft.trim() && !attachment)} type="submit">
               {busy ? <LoaderCircle className="himi-support-spinner" size={18} /> : <Send size={18} />}
             </button>
           </div>

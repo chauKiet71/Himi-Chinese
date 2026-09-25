@@ -96,8 +96,8 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
           <p>Tình huống thật. Phản xạ tự nhiên.</p>
 
           <div className="home-portal-actions">
-            <Link className="home-portal-primary" href="/listening?mode=scenario" prefetch={false}>
-              Bắt đầu luyện nói <ArrowRight aria-hidden="true" size={23} />
+            <Link className="home-portal-primary" href="/courses?view=hsk" prefetch={false}>
+              Bắt đầu học ngay <ArrowRight aria-hidden="true" size={23} />
             </Link>
             <Link className="home-portal-secondary" href="/courses#course-catalog" prefetch={false}>
               <span aria-hidden="true"><Play size={18} fill="currentColor" /></span>
@@ -113,12 +113,12 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
             </Link>
             <Link className="home-portal-quick-action" href="/listening" prefetch={false}>
               <AudioLines aria-hidden="true" size={27} strokeWidth={2.05} />
-              <strong>Nghe phản xạ</strong>
+              <strong>Luyện nghe</strong>
               <small>3 phút</small>
             </Link>
             <Link className="home-portal-quick-action" href="/vocabulary" prefetch={false}>
               <BrainCircuit aria-hidden="true" size={27} strokeWidth={2.05} />
-              <strong>Ôn từ</strong>
+              <strong>Ôn từ vựng</strong>
               <small>5 từ yếu</small>
             </Link>
           </nav>

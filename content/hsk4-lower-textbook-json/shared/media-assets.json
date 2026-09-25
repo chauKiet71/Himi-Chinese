@@ -5,22 +5,43 @@
       "id": "hsk4l-tb-audio-l11-text-1",
       "kind": "audio",
       "sourceTrackCode": "11-1",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-11-text-1"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-11-text-1",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816328/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l11-text-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l11-text-2",
       "kind": "audio",
       "sourceTrackCode": "11-2",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-11-text-2"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-11-text-2",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816350/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l11-text-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l11-text-3",
       "kind": "audio",
       "sourceTrackCode": "11-3",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-11-text-3"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-11-text-3",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816372/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l11-text-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l11-text-4",
@@ -40,29 +61,57 @@
       "id": "hsk4l-tb-audio-l12-text-1",
       "kind": "audio",
       "sourceTrackCode": "12-1",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-12-text-1"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-12-text-1",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816391/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l12-text-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l12-text-2",
       "kind": "audio",
       "sourceTrackCode": "12-2",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-12-text-2"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-12-text-2",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816457/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l12-text-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l12-text-3",
       "kind": "audio",
       "sourceTrackCode": "12-3",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-12-text-3"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-12-text-3",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816481/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l12-text-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l12-text-4",
       "kind": "audio",
       "sourceTrackCode": "12-4",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-12-text-4"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-12-text-4",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816501/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l12-text-4.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l12-text-5",
@@ -75,8 +124,15 @@
       "id": "hsk4l-tb-audio-l13-text-1",
       "kind": "audio",
       "sourceTrackCode": "13-1",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-13-text-1"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-13-text-1",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816522/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l13-text-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l13-text-2",
@@ -110,22 +166,43 @@
       "id": "hsk4l-tb-audio-l14-text-1",
       "kind": "audio",
       "sourceTrackCode": "14-1",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-14-text-1"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-14-text-1",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816658/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l14-text-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l14-text-2",
       "kind": "audio",
       "sourceTrackCode": "14-2",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-14-text-2"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-14-text-2",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816679/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l14-text-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l14-text-3",
       "kind": "audio",
       "sourceTrackCode": "14-3",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-14-text-3"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-14-text-3",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816705/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l14-text-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l14-text-4",
@@ -159,43 +236,85 @@
       "id": "hsk4l-tb-audio-l15-text-3",
       "kind": "audio",
       "sourceTrackCode": "15-3",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-15-text-3"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-15-text-3",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816736/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l15-text-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l15-text-4",
       "kind": "audio",
       "sourceTrackCode": "15-4",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-15-text-4"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-15-text-4",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816756/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l15-text-4.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l15-text-5",
       "kind": "audio",
       "sourceTrackCode": "15-5",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-15-text-5"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-15-text-5",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816784/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l15-text-5.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l16-text-1",
       "kind": "audio",
       "sourceTrackCode": "16-1",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-16-text-1"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-16-text-1",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816802/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l16-text-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l16-text-2",
       "kind": "audio",
       "sourceTrackCode": "16-2",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-16-text-2"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-16-text-2",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816835/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l16-text-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l16-text-3",
       "kind": "audio",
       "sourceTrackCode": "16-3",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-16-text-3"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-16-text-3",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816866/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l16-text-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l16-text-4",
@@ -215,29 +334,57 @@
       "id": "hsk4l-tb-audio-l17-text-1",
       "kind": "audio",
       "sourceTrackCode": "17-1",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-17-text-1"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-17-text-1",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816884/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l17-text-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l17-text-2",
       "kind": "audio",
       "sourceTrackCode": "17-2",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-17-text-2"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-17-text-2",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816908/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l17-text-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l17-text-3",
       "kind": "audio",
       "sourceTrackCode": "17-3",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-17-text-3"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-17-text-3",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816927/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l17-text-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l17-text-4",
       "kind": "audio",
       "sourceTrackCode": "17-4",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-17-text-4"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-17-text-4",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816946/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l17-text-4.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l17-text-5",
@@ -257,57 +404,113 @@
       "id": "hsk4l-tb-audio-l18-text-2",
       "kind": "audio",
       "sourceTrackCode": "18-2",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-18-text-2"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-18-text-2",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789816983/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l18-text-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l18-text-3",
       "kind": "audio",
       "sourceTrackCode": "18-3",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-18-text-3"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-18-text-3",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817022/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l18-text-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l18-text-4",
       "kind": "audio",
       "sourceTrackCode": "18-4",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-18-text-4"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-18-text-4",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817038/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l18-text-4.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l18-text-5",
       "kind": "audio",
       "sourceTrackCode": "18-5",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-18-text-5"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-18-text-5",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817064/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l18-text-5.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l19-text-1",
       "kind": "audio",
       "sourceTrackCode": "19-1",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-19-text-1"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-19-text-1",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817087/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l19-text-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l19-text-2",
       "kind": "audio",
       "sourceTrackCode": "19-2",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-19-text-2"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-19-text-2",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817109/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l19-text-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l19-text-3",
       "kind": "audio",
       "sourceTrackCode": "19-3",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-19-text-3"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-19-text-3",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817138/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l19-text-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l19-text-4",
       "kind": "audio",
       "sourceTrackCode": "19-4",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-19-text-4"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-19-text-4",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817157/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l19-text-4.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l19-text-5",
@@ -327,29 +530,57 @@
       "id": "hsk4l-tb-audio-l20-text-2",
       "kind": "audio",
       "sourceTrackCode": "20-2",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-20-text-2"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-20-text-2",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817194/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l20-text-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l20-text-3",
       "kind": "audio",
       "sourceTrackCode": "20-3",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-20-text-3"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-20-text-3",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817222/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l20-text-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l20-text-4",
       "kind": "audio",
       "sourceTrackCode": "20-4",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-20-text-4"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-20-text-4",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817251/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l20-text-4.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     },
     {
       "id": "hsk4l-tb-audio-l20-text-5",
       "kind": "audio",
       "sourceTrackCode": "20-5",
-      "availability": "not-in-supplied-pdf",
-      "requiredBy": "hsk4l-tb-lesson-20-text-5"
+      "availability": "generated",
+      "requiredBy": "hsk4l-tb-lesson-20-text-5",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817271/hanziwork/hsk4/lower-scenes/hsk4l-tb-audio-l20-text-5.mp3",
+      "reviewStatus": "pending-audio-review",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
     }
   ]
 }

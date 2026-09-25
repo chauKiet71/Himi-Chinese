@@ -22,7 +22,9 @@ test("home page contains the lightweight Himi language portal", async () => {
   assert.match(portalStyles, /max-width: 720px[\s\S]*himi-wave\.webp/);
   assert.match(studio, /usePrefersReducedMotion/);
   assert.doesNotMatch(studio, /motion\/react/);
-  assert.match(studio, /Bắt đầu luyện nói/);
+  assert.match(studio, /href="\/courses\?view=hsk"/);
+  assert.match(studio, /Bắt đầu học ngay/);
+  assert.doesNotMatch(studio, /Bắt đầu luyện nói/);
 });
 
 test("prototype includes learner, VIP and admin routes", async () => {

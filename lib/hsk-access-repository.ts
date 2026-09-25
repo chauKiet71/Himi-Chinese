@@ -208,7 +208,10 @@ export async function getHskLevelLessonAccess(
 ): Promise<{ levelAccess: ContentAccessState; allowedLessonIds: Set<string>; allowedVocabularyKeys: Set<string> }> {
   const level = HSK_CURRICULUM.find((candidate) => candidate.id === levelId);
   const levelTarget = hskLevelTarget(levelId);
-  const curriculumLessons = level?.topics.flatMap((topic) => topic.lessons).filter((lesson) => lesson.available) ?? [];
+  // Games use the curated vocabulary that already exists for every HSK level.
+  // A lesson's `available` flag controls whether its full learning page is
+  // published; it must not hide that lesson's vocabulary from VIP games.
+  const curriculumLessons = level?.topics.flatMap((topic) => topic.lessons) ?? [];
   const lessonEntries = curriculumLessons.map((lesson) => {
     const content = getHskLearningLessonContent(levelId, lesson.id);
     return {

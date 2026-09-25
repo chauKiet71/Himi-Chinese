@@ -9,11 +9,11 @@ import {
   BriefcaseBusiness,
   ChevronDown,
   ChevronRight,
+  CircleCheck,
   Clock3,
   Crown,
   FileText,
   Globe2,
-  GraduationCap,
   Heart,
   LockKeyhole,
   MapPin,
@@ -57,10 +57,14 @@ const topicDescriptions: Record<HskTopicIcon, string> = {
   globe: "Vận dụng tiếng Trung trong bối cảnh rộng hơn.",
 };
 
+export function getHskCurriculumLessonDestination(levelId: string, lessonId: string, completed: boolean) {
+  const lessonHref = `/hsk/${levelId.replace(/^hsk-/, "")}/${lessonId}`;
+  return completed ? `${lessonHref}/play` : lessonHref;
+}
+
 function LessonMeta({ lesson }: { lesson: HskCurriculumLesson }) {
   return <span className="hsk-lesson-meta">
     {lesson.vocabulary ? <span><BookOpen aria-hidden="true" size={14} /> {lesson.vocabulary} từ vựng</span> : null}
-    {lesson.grammar ? <span><GraduationCap aria-hidden="true" size={14} /> {lesson.grammar} ngữ pháp</span> : null}
     {lesson.dialogues ? <span><MessageCircle aria-hidden="true" size={14} /> {lesson.dialogues} hội thoại</span> : null}
     {lesson.exercises ? <span><FileText aria-hidden="true" size={14} /> {lesson.exercises} bài tập</span> : null}
     <span><Clock3 aria-hidden="true" size={14} /> {lesson.minutes} phút</span>
@@ -79,7 +83,6 @@ export function HskCurriculumExplorer({
   const activeLevel = curriculum.find((level) => level.id === activeLevelId) ?? curriculum[0];
   const [activeTopicId, setActiveTopicId] = useState(activeLevel.topics[0].id);
   const activeTopic = activeLevel.topics.find((topic) => topic.id === activeTopicId) ?? activeLevel.topics[0];
-  const [activeLessonId, setActiveLessonId] = useState(activeTopic.lessons[0].id);
   const [lessonProgress, setLessonProgress] = useState<Record<string, number>>({});
   const [upgradeTarget, setUpgradeTarget] = useState<VipUpgradeTarget | null>(null);
   const levelLessons = activeLevel.topics.flatMap((topic) => topic.lessons);
@@ -111,6 +114,10 @@ export function HskCurriculumExplorer({
         }
       }
       setLessonProgress(next);
+      const nextLesson = activeLevel.topics
+        .flatMap((topic) => topic.lessons.map((lesson) => ({ lesson, topicId: topic.id })))
+        .find(({ lesson }) => (next[lesson.id] ?? 0) < 100);
+      if (nextLesson) setActiveTopicId(nextLesson.topicId);
     }, 0);
     return () => window.clearTimeout(handle);
   }, [activeLevel]);
@@ -124,20 +131,21 @@ export function HskCurriculumExplorer({
     }
     setActiveLevelId(nextLevel.id);
     setActiveTopicId(nextLevel.topics[0].id);
-    setActiveLessonId(nextLevel.topics[0].lessons[0].id);
   };
 
   const selectTopic = (topicId: string) => {
     const nextTopic = activeLevel.topics.find((topic) => topic.id === topicId);
     if (!nextTopic) return;
     setActiveTopicId(nextTopic.id);
-    setActiveLessonId(nextTopic.lessons[0].id);
   };
+
+  const nextLessonIndex = levelLessons.findIndex((lesson) => (lessonProgress[lesson.id] ?? 0) < 100);
+  const nextLessonId = nextLessonIndex >= 0 ? levelLessons[nextLessonIndex].id : null;
 
   return <section className="section-shell hsk-curriculum" aria-labelledby="hsk-curriculum-title">
     <header className="hsk-curriculum-heading">
       <div className="hsk-curriculum-heading-copy">
-        <span>Himi Modern Curriculum Desk</span>
+        <span>Himi Chinese</span>
         <h1 id="hsk-curriculum-title">Lộ trình bài học {activeLevel.label}</h1>
         <p>{activeLevel.description}</p>
       </div>
@@ -201,14 +209,18 @@ export function HskCurriculumExplorer({
 
             {selected ? <div className="hsk-lesson-list">
               {topic.lessons.map((lesson) => {
-                const lessonSelected = lesson.id === activeLessonId;
+                const levelLessonIndex = levelLessons.findIndex((item) => item.id === lesson.id);
+                const lessonCompleted = lessonProgress[lesson.id] === 100;
+                const lessonSelected = lesson.id === nextLessonId;
+                const sequenceLocked = nextLessonIndex >= 0 && levelLessonIndex > nextLessonIndex;
                 const accessAllowed = lesson.access?.allowed ?? true;
-                const lessonAvailable = lesson.available && accessAllowed;
+                const lessonAvailable = lesson.available && accessAllowed && !sequenceLocked;
                 const lessonHref = `/hsk/${activeLevel.id.replace(/^hsk-/, "")}/${lesson.id}`;
+                const lessonDestination = getHskCurriculumLessonDestination(activeLevel.id, lesson.id, lessonCompleted);
                 const savedPercent = lessonProgress[lesson.id] ?? 0;
-                return <article className={`hsk-lesson-row${lessonSelected ? " is-active" : ""}${!accessAllowed ? " is-vip-locked" : ""}`} key={lesson.id}>
-                  {lessonAvailable ? <Link aria-label={`Bài ${lesson.lessonNumber}: ${lesson.title}`} className="hsk-lesson-select" href={lessonHref} prefetch={false}>
-                    <span className="hsk-lesson-index">{lessonSelected ? <Play aria-hidden="true" fill="currentColor" size={20} /> : lesson.lessonNumber}</span>
+                return <article className={`hsk-lesson-row${lessonSelected ? " is-active" : ""}${!accessAllowed ? " is-vip-locked" : ""}${sequenceLocked ? " is-sequence-locked" : ""}${lessonCompleted ? " is-completed" : ""}`} key={lesson.id}>
+                  {lessonAvailable ? <Link aria-label={`Bài ${lesson.lessonNumber}: ${lesson.title}`} className="hsk-lesson-select" href={lessonDestination} prefetch={false}>
+                    <span className="hsk-lesson-index">{lessonCompleted ? <CircleCheck aria-hidden="true" size={20} /> : lessonSelected ? <Play aria-hidden="true" fill="currentColor" size={20} /> : lesson.lessonNumber}</span>
                     <span className="hsk-lesson-copy">
                   <strong>Bài {lesson.lessonNumber}: {lesson.title}</strong>
                       <LessonMeta lesson={lesson} />
@@ -217,12 +229,11 @@ export function HskCurriculumExplorer({
                     aria-label={`Bài ${lesson.lessonNumber}: ${lesson.title}`}
                     aria-pressed={lessonSelected}
                     className="hsk-lesson-select"
-                    onClick={() => accessAllowed
-                      ? setActiveLessonId(lesson.id)
-                      : setUpgradeTarget({ kind: "Bài học", title: lesson.title })}
+                    disabled={sequenceLocked && accessAllowed}
+                    onClick={() => !accessAllowed && setUpgradeTarget({ kind: "Bài học", title: lesson.title })}
                     type="button"
                   >
-                    <span className="hsk-lesson-index">{accessAllowed ? lesson.lessonNumber : <LockKeyhole aria-hidden="true" size={17} />}</span>
+                    <span className="hsk-lesson-index">{sequenceLocked || !accessAllowed ? <LockKeyhole aria-hidden="true" size={17} /> : lesson.lessonNumber}</span>
                     <span className="hsk-lesson-copy">
                       <strong>Bài {lesson.lessonNumber}: {lesson.title}</strong>
                       <LessonMeta lesson={lesson} />
@@ -233,7 +244,7 @@ export function HskCurriculumExplorer({
                     <span>{savedPercent > 0 ? `${savedPercent}% đã học` : "Sẵn sàng"}</span>
                     <strong>{savedPercent > 0 ? "Tiếp tục học" : "Bắt đầu học"}</strong>
                     <ArrowRight aria-hidden="true" size={18} />
-                  </Link> : !accessAllowed ? <button className="hsk-lesson-start hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Bài học", title: lesson.title })} type="button"><span>Quyền truy cập</span><strong>VIP</strong><Crown aria-hidden="true" size={16} /></button> : <span className="hsk-lesson-duration">{lessonAvailable ? "Mở bài" : lesson.availabilityLabel ?? "Sắp ra mắt"} <ChevronRight aria-hidden="true" size={19} /></span>}
+                  </Link> : !accessAllowed ? <button className="hsk-lesson-start hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Bài học", title: lesson.title })} type="button"><span>Quyền truy cập</span><strong>VIP</strong><Crown aria-hidden="true" size={16} /></button> : <span className="hsk-lesson-duration">{lessonCompleted ? <><CircleCheck aria-hidden="true" size={17} /> Đã hoàn thành</> : sequenceLocked ? <><LockKeyhole aria-hidden="true" size={16} /> Hoàn thành bài trước</> : <>{lessonAvailable ? "Mở bài" : lesson.availabilityLabel ?? "Sắp ra mắt"} <ChevronRight aria-hidden="true" size={19} /></>}</span>}
 
                   {lessonSelected && lessonAvailable ? <div className="hsk-lesson-coach-note">
                     <span className="hsk-lesson-coach-avatar">

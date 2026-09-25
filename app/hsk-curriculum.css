@@ -259,6 +259,27 @@
   background: #f8fffd;
 }
 
+.hsk-curriculum-controls > a.hsk-industry-link {
+  color: var(--hsk-red-deep);
+  border-color: #ffc5bd;
+  background: linear-gradient(135deg, #fff6f3 0%, #ffebe6 100%);
+  box-shadow: 0 4px 10px rgba(255, 76, 59, .1);
+  transition: color .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.hsk-curriculum-controls > a.hsk-industry-link:hover {
+  color: #fff;
+  border-color: var(--hsk-red);
+  background: linear-gradient(135deg, var(--hsk-red) 0%, var(--hsk-orange) 100%);
+  box-shadow: 0 7px 16px rgba(255, 76, 59, .22);
+  transform: translateY(-1px);
+}
+
+.hsk-curriculum-controls > a.hsk-industry-link:active {
+  box-shadow: 0 3px 8px rgba(255, 76, 59, .18);
+  transform: translateY(0);
+}
+
 .hsk-vip-trigger { cursor: pointer; font: inherit; }
 
 button.hsk-lesson-start {
@@ -401,6 +422,39 @@ button.hsk-lesson-start {
 
 .hsk-lesson-row.is-vip-locked {
   background: #fff8ec;
+}
+
+.hsk-lesson-row.is-sequence-locked {
+  opacity: .62;
+}
+
+.hsk-lesson-row.is-sequence-locked .hsk-lesson-select {
+  cursor: not-allowed;
+}
+
+.hsk-lesson-row.is-completed .hsk-lesson-index {
+  color: #23836f;
+  background: #e5f7f1;
+  box-shadow: none;
+}
+
+.hsk-lesson-row.is-completed {
+  cursor: pointer;
+}
+
+.hsk-lesson-row.is-completed .hsk-lesson-select {
+  position: static;
+}
+
+.hsk-lesson-row.is-completed .hsk-lesson-select::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hsk-lesson-row.is-completed:hover {
+  background: #f5fbf9;
 }
 
 .hsk-lesson-select {

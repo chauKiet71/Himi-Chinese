@@ -549,7 +549,8 @@
           "rowIndex": 59
         }
       ],
-      "transcriptionStatus": "machine-transcribed-needs-editorial-review"
+      "transcriptionStatus": "machine-transcribed-needs-editorial-review",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817300/hanziwork/hsk6/volume1-articles/hsk6t1-audio-02-1.mp3"
     },
     {
       "id": "hsk6t1-text-03-01",
@@ -1119,7 +1120,8 @@
           "rowIndex": 56
         }
       ],
-      "transcriptionStatus": "machine-transcribed-needs-editorial-review"
+      "transcriptionStatus": "machine-transcribed-needs-editorial-review",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817382/hanziwork/hsk6/volume1-articles/hsk6t1-audio-04-1.mp3"
     },
     {
       "id": "hsk6t1-text-05-01",
@@ -1749,7 +1751,8 @@
           "rowIndex": 1
         }
       ],
-      "transcriptionStatus": "machine-transcribed-needs-editorial-review"
+      "transcriptionStatus": "machine-transcribed-needs-editorial-review",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817497/hanziwork/hsk6/volume1-articles/hsk6t1-audio-06-1.mp3"
     },
     {
       "id": "hsk6t1-text-07-01",
@@ -2039,7 +2042,8 @@
           "rowIndex": 35
         }
       ],
-      "transcriptionStatus": "machine-transcribed-needs-editorial-review"
+      "transcriptionStatus": "machine-transcribed-needs-editorial-review",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817567/hanziwork/hsk6/volume1-articles/hsk6t1-audio-07-1.mp3"
     },
     {
       "id": "hsk6t1-text-08-01",
@@ -2744,7 +2748,8 @@
           "rowIndex": 1
         }
       ],
-      "transcriptionStatus": "machine-transcribed-needs-editorial-review"
+      "transcriptionStatus": "machine-transcribed-needs-editorial-review",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817655/hanziwork/hsk6/volume1-articles/hsk6t1-audio-09-1.mp3"
     },
     {
       "id": "hsk6t1-text-10-01",
@@ -3074,7 +3079,8 @@
           "rowIndex": 19
         }
       ],
-      "transcriptionStatus": "machine-transcribed-needs-editorial-review"
+      "transcriptionStatus": "machine-transcribed-needs-editorial-review",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817760/hanziwork/hsk6/volume1-articles/hsk6t1-audio-10-1.mp3"
     },
     {
       "id": "hsk6t1-text-11-01",
@@ -4064,7 +4070,8 @@
           "rowIndex": 25
         }
       ],
-      "transcriptionStatus": "machine-transcribed-needs-editorial-review"
+      "transcriptionStatus": "machine-transcribed-needs-editorial-review",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817843/hanziwork/hsk6/volume1-articles/hsk6t1-audio-13-1.mp3"
     },
     {
       "id": "hsk6t1-text-14-01",
@@ -4374,7 +4381,8 @@
           "rowIndex": 30
         }
       ],
-      "transcriptionStatus": "machine-transcribed-needs-editorial-review"
+      "transcriptionStatus": "machine-transcribed-needs-editorial-review",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789817941/hanziwork/hsk6/volume1-articles/hsk6t1-audio-14-1.mp3"
     },
     {
       "id": "hsk6t1-text-15-01",
@@ -4689,7 +4697,8 @@
           "rowIndex": 24
         }
       ],
-      "transcriptionStatus": "machine-transcribed-needs-editorial-review"
+      "transcriptionStatus": "machine-transcribed-needs-editorial-review",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789818065/hanziwork/hsk6/volume1-articles/hsk6t1-audio-15-1.mp3"
     },
     {
       "id": "hsk6t1-text-16-01",
@@ -5684,7 +5693,8 @@
           "rowIndex": 17
         }
       ],
-      "transcriptionStatus": "machine-transcribed-needs-editorial-review"
+      "transcriptionStatus": "machine-transcribed-needs-editorial-review",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789818162/hanziwork/hsk6/volume1-articles/hsk6t1-audio-18-1.mp3"
     },
     {
       "id": "hsk6t1-text-19-01",
@@ -6414,7 +6424,8 @@
           "rowIndex": 16
         }
       ],
-      "transcriptionStatus": "machine-transcribed-needs-editorial-review"
+      "transcriptionStatus": "machine-transcribed-needs-editorial-review",
+      "audioUrl": "https://res.cloudinary.com/db0om4ius/video/upload/v1789818253/hanziwork/hsk6/volume1-articles/hsk6t1-audio-20-1.mp3"
     }
   ]
 }

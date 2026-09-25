@@ -38,6 +38,7 @@ type RawLexeme = {
 
 type RawText = {
   id: string;
+  audioUrl?: string;
   lessonRef: string;
   textNumber: number;
   textType: "dialogue" | "short-passage";
@@ -160,6 +161,7 @@ function toDialogue(text: RawText, lessonNumber: number): HskDialogue {
     || (text.textType === "short-passage" ? `Bài đọc ${text.textNumber}` : `Hội thoại ${text.textNumber}`);
   return {
     id: text.id,
+    audioUrl: text.audioUrl,
     title,
     setting: text.textType === "short-passage"
       ? `Đoạn đọc ${text.textNumber} trong Bài ${lessonNumber}.`

@@ -1,6 +1,6 @@
 import { and, asc, desc, eq, isNull, lte, or } from "drizzle-orm";
 import { unstable_cache } from "next/cache.js";
-import { readDb } from "../db/index.ts";
+import { isDatabaseUnavailableError, readDb } from "../db/index.ts";
 import {
   courses as courseTable,
   lessons as lessonTable,
@@ -327,7 +327,7 @@ async function getDemoLessonPageData(course: Course, requestedSlug?: string): Pr
   return { course, lessons, lesson, access, progress: null, invalidLesson: false };
 }
 
-export async function getLessonPageData({
+async function readLessonPageData({
   courseSlug,
   lessonSlug,
   userId = null,
@@ -397,6 +397,21 @@ export async function getLessonPageData({
   };
 
   return { course, lessons, lesson, access, progress, invalidLesson: false };
+}
+
+export async function getLessonPageData(input: {
+  courseSlug: string;
+  lessonSlug?: string;
+  userId?: string | null;
+}): Promise<LessonPageData | null> {
+  try {
+    return await readLessonPageData(input);
+  } catch (error) {
+    if (!isDatabaseUnavailableError(error)) throw error;
+    console.warn("[lessons] database unavailable; using bundled lesson content");
+    const course = await getPublishedCourse(input.courseSlug);
+    return course ? getDemoLessonPageData(course, input.lessonSlug) : null;
+  }
 }
 
 const practiceVocabularySelection = {
