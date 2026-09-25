@@ -4,7 +4,13 @@ import { consumeAuthRateLimit } from "@/lib/auth-rate-limit";
 import { findActiveUserByEmail } from "@/lib/auth-service";
 import { normalizeEmail, validateEmail } from "@/lib/auth-validation";
 import { sendAuthLink } from "@/lib/auth-workflows";
-import { formString, isSameOriginRequest } from "@/lib/request-security";
+import { authRedirectUrl, formString, isSameOriginRequest } from "@/lib/request-security";
+
+function sentRedirectUrl(request: Request): URL {
+  const url = authRedirectUrl(request, "/forgot-password");
+  url.searchParams.set("sent", "1");
+  return url;
+}
 
 export async function POST(request: Request) {
   if (!isSameOriginRequest(request)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
@@ -13,7 +19,7 @@ export async function POST(request: Request) {
   const rateLimit = await consumeAuthRateLimit(request, "forgot_password", email || "invalid");
   if (!rateLimit.allowed) {
     await recordAuthEvent({ action: "auth.password_reset.rate_limited", request, identifier: email });
-    const response = NextResponse.redirect(new URL("/forgot-password?sent=1", request.url), 303);
+    const response = NextResponse.redirect(sentRedirectUrl(request), 303);
     response.headers.set("Retry-After", String(rateLimit.retryAfterSeconds));
     return response;
   }
@@ -34,5 +40,5 @@ export async function POST(request: Request) {
   }
 
   await recordAuthEvent({ action: "auth.password_reset.requested", request, identifier: email, userId, metadata: { delivery } });
-  return NextResponse.redirect(new URL("/forgot-password?sent=1", request.url), 303);
+  return NextResponse.redirect(sentRedirectUrl(request), 303);
 }

@@ -28,3 +28,11 @@ test("forgot-password reuses the learner authentication scene", async () => {
   assert.match(authCard, /<AuthBrandMark priority \/><BrandWordmark \/>/);
   assert.match(brandLogo, /himi-sidebar-logo-transparent\.webp/);
 });
+
+test("forgot-password redirects through the trusted public Railway origin", async () => {
+  const route = await read("app/api/auth/forgot-password/route.ts");
+
+  assert.match(route, /const url = authRedirectUrl\(request, "\/forgot-password"\)/);
+  assert.match(route, /url\.searchParams\.set\("sent", "1"\)/);
+  assert.doesNotMatch(route, /new URL\("\/forgot-password\?sent=1", request\.url\)/);
+});
