@@ -5,11 +5,12 @@ import test from "node:test";
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("terms page uses the selected Himi split layout and accessible accordions", async () => {
-  const [page, css, layout, footer] = await Promise.all([
+  const [page, css, layout, footer, globals] = await Promise.all([
     read("app/terms/page.tsx"),
     read("app/legal.css"),
     read("app/terms/layout.tsx"),
     read("components/site-footer.tsx"),
+    read("app/globals.css"),
   ]);
 
   assert.match(page, /className="terms-page-v3"/);
@@ -34,6 +35,8 @@ test("terms page uses the selected Himi split layout and accessible accordions",
   assert.match(page, /Hủy giao dịch và hoàn tiền/);
   assert.match(page, /mã đơn cùng biên lai/);
   assert.match(css, /grid-template-columns:\s*minmax\(360px, 36%\) minmax\(0, 1fr\)/);
+  assert.match(css, /min-height:\s*100svh/);
+  assert.match(globals, /body:has\(\.terms-page-v3\) > \.site-header\s*\{[\s\S]*?display:\s*none/);
   assert.match(css, /@media \(max-width: 920px\)/);
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);

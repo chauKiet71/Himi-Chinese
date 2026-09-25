@@ -1,0 +1,17 @@
+{
+  "format": "Facebook square post",
+  "dimensions": "1080x1080",
+  "sourceContent": {
+    "file": "public/listening-catalog/index.json",
+    "id": "hsk4_l13_sentence_017",
+    "hanzi": "我们一起讨论一下这个问题。",
+    "pinyin": "Wǒmen yìqǐ tǎolùn yíxià zhège wèntí.",
+    "translation": "Chúng ta cùng thảo luận vấn đề này một chút."
+  },
+  "brand": {
+    "primary": "#FF4C3B",
+    "secondary": "#FF8E2D",
+    "logo": "public/assets/brand/himi-mascot-icon-transparent.png",
+    "mascot": "public/assets/games/quiz-penguin-cutout.png"
+  }
+}

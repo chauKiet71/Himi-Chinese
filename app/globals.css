@@ -60,6 +60,12 @@ body:has(.admin-page) > .mobile-nav {
   display: none;
 }
 
+/* The terms page is a focused reading surface; its split layout already
+ * carries the Himi identity and does not need the global marketing header. */
+body:has(.terms-page-v3) > .site-header {
+  display: none;
+}
+
 .standalone-route-shell:has(.admin-page) {
   min-height: 100vh;
 }

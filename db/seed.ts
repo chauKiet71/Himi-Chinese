@@ -58,6 +58,7 @@ const practiceAudioByExercise = new Map(
 );
 
 const planSeeds = [
+  { code: "VIP_3N", name: "VIP 3 ngày", durationDays: 3, priceVnd: 29_000, discountPercent: 10, promotionLabel: "Trải nghiệm một lần" },
   { code: LIFETIME_VIP_PLAN_CODE, name: "VIP vĩnh viễn", durationDays: LIFETIME_VIP_STORAGE_DAYS, priceVnd: 1_090_000, discountPercent: 0, promotionLabel: null },
   { code: "VIP_1M", name: "VIP 1 tháng", durationDays: 30, priceVnd: 11_000, discountPercent: 10, promotionLabel: "Được chọn nhiều" },
   { code: "VIP_6M", name: "VIP 6 tháng", durationDays: 180, priceVnd: 329_000, discountPercent: 15, promotionLabel: "Tiết kiệm hơn theo kỳ 6 tháng" },

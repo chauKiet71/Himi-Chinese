@@ -21,7 +21,7 @@ type MutationError = "duplicate_slug" | "not_found" | "unsafe_delete" | "invalid
   | "workflow_forbidden" | "invalid_transition" | "review_not_ready" | "role_change_forbidden" | "invalid_version"
   | "invalid_reviewer" | "review_assignment_forbidden" | "review_assignment_required" | "invalid_input"
   | "vip_target_ineligible" | "vip_plan_inactive" | "vip_not_active" | "vip_request_not_pending"
-  | "vip_request_ineligible" | "duplicate_code" | "vip_plan_in_use" | "user_delete_forbidden";
+  | "vip_request_ineligible" | "trial_plan_already_used" | "duplicate_code" | "vip_plan_in_use" | "user_delete_forbidden";
 export type MutationResult = { ok: true; id: string } | { ok: false; error: MutationError };
 
 export type CourseInput = {

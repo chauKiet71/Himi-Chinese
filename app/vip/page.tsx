@@ -37,6 +37,7 @@ const errorMessages: Record<string, string> = {
   not_found: "Không tìm thấy yêu cầu này hoặc yêu cầu không còn thuộc tài khoản của bạn.",
   vip_plan_inactive: "Quyền truy cập này vừa ngừng nhận yêu cầu. Hãy thử lại sau.",
   vip_request_ineligible: "Tài khoản hiện chưa đủ điều kiện gửi yêu cầu VIP.",
+  trial_plan_already_used: "Bạn đã dùng gói VIP 3 ngày một lần rồi. Hãy chọn gói 1 tháng để tiếp tục học cùng Himi nhé!",
   vip_request_not_pending: "Yêu cầu đã được xử lý trước đó. Trạng thái mới nhất đã được cập nhật bên dưới.",
 };
 
@@ -80,6 +81,9 @@ export default async function VipPage({
     ?? overview.plans.find((plan) => plan.durationDays === 30)?.id
     ?? overview.plans[0]?.id;
   const displayPlans = [...overview.plans].sort((left, right) => {
+    const leftTrial = isTrialVipPlan(left.code, left.durationDays);
+    const rightTrial = isTrialVipPlan(right.code, right.durationDays);
+    if (leftTrial !== rightTrial) return leftTrial ? -1 : 1;
     const leftLifetime = isLifetimeVipPlan(left.code);
     const rightLifetime = isLifetimeVipPlan(right.code);
     if (leftLifetime !== rightLifetime) return leftLifetime ? 1 : -1;
@@ -127,7 +131,7 @@ export default async function VipPage({
           const salePercent = planSalePercent(plan.code, plan.durationDays, plan.discountPercent);
           const isPendingPlan = pending?.planId === plan.id;
           const buttonText = trialAlreadyUsed
-            ? "Đã dùng gói trải nghiệm"
+            ? "Gói trải nghiệm đã dùng"
             : isPendingPlan
             ? "Đang chờ duyệt"
             : pending
@@ -155,7 +159,7 @@ export default async function VipPage({
               : `Đầy đủ quyền VIP trong ${plan.durationDays} ngày.`}</p>
             <ul className="feature-list">{purchaseBenefits.map((feature) => <li key={feature}><Check size={15} />{feature}</li>)}</ul>
             {trialAlreadyUsed ? <p className="vip-trial-used-note" role="status"><Check size={16} />
-              <span><strong>Bạn đã dùng gói 3 ngày.</strong> Cảm ơn bạn đã trải nghiệm! Gói 1 tháng sẽ phù hợp để tiếp tục học.</span>
+              <span><strong>Bạn đã dùng gói 3 ngày một lần rồi.</strong> Đây là ưu đãi trải nghiệm dành cho mỗi tài khoản. Bạn có thể chọn gói 1 tháng để tiếp tục học cùng Himi nhé!</span>
             </p> : null}
             {user ? <VipTransferFlow
               buttonText={buttonText}

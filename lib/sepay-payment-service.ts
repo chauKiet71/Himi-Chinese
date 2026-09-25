@@ -147,19 +147,28 @@ export async function createOrReuseSepayPaymentOrder(input: {
     }
 
     if (isTrialVipPlan(plan.code, plan.durationDays)) {
-      const previousTrialRows = await tx.select({ id: paymentOrders.id })
-        .from(paymentOrders)
-        .innerJoin(vipPlans, eq(paymentOrders.planId, vipPlans.id))
-        .where(and(
-          eq(paymentOrders.userId, user.id),
-          eq(paymentOrders.status, "paid"),
-          or(
-            eq(vipPlans.code, "VIP_3D"),
-            eq(vipPlans.durationDays, 3),
-          ),
-        ))
-        .limit(1);
-      if (previousTrialRows.length > 0) return { ok: false, error: "trial_plan_already_used" };
+      const [previousTrialPayments, previousTrialSubscriptions] = await Promise.all([
+        tx.select({ id: paymentOrders.id })
+          .from(paymentOrders)
+          .innerJoin(vipPlans, eq(paymentOrders.planId, vipPlans.id))
+          .where(and(
+            eq(paymentOrders.userId, user.id),
+            eq(paymentOrders.status, "paid"),
+            or(eq(vipPlans.code, "VIP_3D"), eq(vipPlans.durationDays, 3)),
+          ))
+          .limit(1),
+        tx.select({ id: subscriptions.id })
+          .from(subscriptions)
+          .innerJoin(vipPlans, eq(subscriptions.planId, vipPlans.id))
+          .where(and(
+            eq(subscriptions.userId, user.id),
+            or(eq(vipPlans.code, "VIP_3D"), eq(vipPlans.durationDays, 3)),
+          ))
+          .limit(1),
+      ]);
+      if (previousTrialPayments.length > 0 || previousTrialSubscriptions.length > 0) {
+        return { ok: false, error: "trial_plan_already_used" };
+      }
     }
 
     await tx.update(paymentOrders).set({ status: "expired", updatedAt: now }).where(and(

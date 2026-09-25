@@ -1,9 +1,9 @@
 import "server-only";
 
-import { and, asc, desc, eq } from "drizzle-orm";
+import { and, asc, desc, eq, or } from "drizzle-orm";
 import { unstable_cache } from "next/cache.js";
 import { isDatabaseUnavailableError, readDb, writeDb } from "../db/index.ts";
-import { auditLogs, paymentOrders, users, vipActivationRequests, vipPlans } from "../db/schema.ts";
+import { auditLogs, paymentOrders, subscriptions, users, vipActivationRequests, vipPlans } from "../db/schema.ts";
 import type { MutationResult } from "./admin-content-service.ts";
 import { grantOrExtendVipAccessInTransaction } from "./admin-subscription-service.ts";
 import { getActiveVipSubscription } from "./vip-subscription.ts";
@@ -46,7 +46,7 @@ export async function getVipUpgradeOverview(userId?: string | null) {
     const [plans, viewer] = await Promise.all([
       plansPromise,
       readDb(async (db) => {
-        const [pendingRows, activeSubscription, paidPlanRows] = await Promise.all([
+        const [pendingRows, activeSubscription, paidPlanRows, subscriptionPlanRows] = await Promise.all([
           db.select({
             id: vipActivationRequests.id,
             planId: vipActivationRequests.planId,
@@ -75,11 +75,18 @@ export async function getVipUpgradeOverview(userId?: string | null) {
               eq(paymentOrders.userId, userId),
               eq(paymentOrders.status, "paid"),
             )),
+          db.select({
+            planCode: vipPlans.code,
+            durationDays: vipPlans.durationDays,
+          }).from(subscriptions)
+            .innerJoin(vipPlans, eq(subscriptions.planId, vipPlans.id))
+            .where(eq(subscriptions.userId, userId)),
         ]);
         return {
           pendingRequest: pendingRows[0] ?? null,
           activeSubscription,
-          hasPurchasedTrial: paidPlanRows.some((plan) => isTrialVipPlan(plan.planCode, plan.durationDays)),
+          hasPurchasedTrial: [...paidPlanRows, ...subscriptionPlanRows]
+            .some((plan) => isTrialVipPlan(plan.planCode, plan.durationDays)),
         };
       }),
     ]);
@@ -151,6 +158,31 @@ export async function requestVipActivation(input: {
       .limit(1);
     const plan = planRows[0];
     if (!plan) return { ok: false, error: "vip_plan_inactive" };
+
+    if (isTrialVipPlan(plan.code, plan.durationDays)) {
+      const [previousTrialPayments, previousTrialSubscriptions] = await Promise.all([
+        tx.select({ id: paymentOrders.id })
+          .from(paymentOrders)
+          .innerJoin(vipPlans, eq(paymentOrders.planId, vipPlans.id))
+          .where(and(
+            eq(paymentOrders.userId, learner.id),
+            eq(paymentOrders.status, "paid"),
+            or(eq(vipPlans.code, "VIP_3D"), eq(vipPlans.durationDays, 3)),
+          ))
+          .limit(1),
+        tx.select({ id: subscriptions.id })
+          .from(subscriptions)
+          .innerJoin(vipPlans, eq(subscriptions.planId, vipPlans.id))
+          .where(and(
+            eq(subscriptions.userId, learner.id),
+            or(eq(vipPlans.code, "VIP_3D"), eq(vipPlans.durationDays, 3)),
+          ))
+          .limit(1),
+      ]);
+      if (previousTrialPayments.length > 0 || previousTrialSubscriptions.length > 0) {
+        return { ok: false, error: "trial_plan_already_used" };
+      }
+    }
 
     const pendingRows = await tx.select({ id: vipActivationRequests.id })
       .from(vipActivationRequests)
