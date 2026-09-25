@@ -15,6 +15,12 @@ test("forgot-password reuses the learner authentication scene", async () => {
   assert.match(authCard, /learnerLogin \|\| registering \|\| forgotPassword/);
   assert.match(authCard, /forgotPassword \? "\/api\/auth\/forgot-password"/);
   assert.match(authCard, /forgotPassword \? "Gửi liên kết đặt lại"/);
+  assert.match(authCard, /handleForgotPasswordSubmit/);
+  assert.match(authCard, /Đang gửi liên kết/);
+  assert.match(authCard, /auth-forgot-toast/);
+  assert.match(authCard, /<strong>Yêu cầu đã được ghi nhận<\/strong>/);
+  assert.doesNotMatch(authCard, /Nếu email khớp với một tài khoản, liên kết đặt lại đã được gửi/);
+  assert.match(authCard, /aria-live="polite"/);
   assert.match(authCard, /Quay lại đăng nhập/);
   assert.match(authCard, /auth-page-forgot-scene/);
   assert.match(authCard, /auth-card-forgot-scene/);

@@ -19,3 +19,12 @@ test("reset password uses the shared paper scene without changing the reset flow
   assert.match(page, /name="confirmPassword"/u);
   assert.match(styles, /\.auth-card-reset-scene/u);
 });
+
+test("successful password reset returns to login with a success notice", async () => {
+  const [route, loginPage] = await Promise.all([
+    read("app/api/auth/reset-password/route.ts"),
+    read("app/login/page.tsx"),
+  ]);
+  assert.match(route, /\/login\?success=password_reset/);
+  assert.match(loginPage, /params\.success \?\? params\.error/);
+});

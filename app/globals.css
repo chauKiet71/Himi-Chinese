@@ -5015,6 +5015,32 @@ a.roadmap-lesson-row:hover { color: #0b665c; background: #f5faf8; }
 .auth-heading p { margin: 0; color: var(--ink-soft); line-height: 1.65; font-size: 14px; }
 .auth-error { margin: 20px 0 0; padding: 12px 14px; color: #8b3f35; border: 1px solid #efc5bd; border-radius: 11px; background: #fff2ef; font-size: 13px; line-height: 1.5; }
 .auth-notice { margin: 20px 0 0; padding: 12px 14px; color: var(--forest-deep); border: 1px solid #bdd9ce; border-radius: 11px; background: #eef8f3; font-size: 13px; line-height: 1.5; }
+.auth-forgot-toast {
+  width: min(390px, calc(100vw - 32px));
+  min-height: 64px;
+  padding: 14px 46px 14px 16px;
+  position: fixed;
+  top: max(20px, env(safe-area-inset-top));
+  left: 50%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #0f6254;
+  border: 1px solid #b7ddd2;
+  border-radius: 16px;
+  background: #f2fbf7;
+  box-shadow: 0 18px 46px rgba(15, 98, 84, .2);
+  transform: translateX(-50%);
+  animation: auth-forgot-toast-in 280ms cubic-bezier(.2, 1.2, .3, 1) both;
+}
+.auth-forgot-toast > svg { flex: 0 0 auto; color: #17836f; }
+.auth-forgot-toast > strong { font-size: 14px; line-height: 1.4; }
+.auth-forgot-toast > button { width: 34px; height: 34px; padding: 0; position: absolute; top: 50%; right: 8px; display: grid; place-items: center; color: #52766e; border: 0; border-radius: 50%; background: transparent; cursor: pointer; transform: translateY(-50%); }
+.auth-forgot-toast > button:hover { color: #123f37; background: rgba(23, 131, 111, .1); }
+.auth-forgot-toast > button:focus-visible { outline: 2px solid #17836f; outline-offset: 2px; }
+@keyframes auth-forgot-toast-in { from { opacity: 0; transform: translateX(-50%) translateY(-16px) scale(.96); } to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); } }
+@media (prefers-reduced-motion: reduce) { .auth-forgot-toast { animation: none; } }
 .home-auth-success { margin: 0 0 18px; padding: 11px 14px; display: flex; align-items: center; gap: 8px; color: var(--forest-deep); border: 1px solid #bdd9ce; border-radius: 12px; background: #eef8f3; font-size: 13px; font-weight: 700; line-height: 1.45; }
 .auth-form { margin-top: 24px; display: grid; gap: 16px; }
 .auth-form > input[type="hidden"] { display: none; }
