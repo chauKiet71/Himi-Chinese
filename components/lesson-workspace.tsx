@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { ArrowRight, Award, CheckCircle2, Crown, Gamepad2, Headphones, RotateCcw, X } from "lucide-react";
+import { ArrowRight, Award, CheckCircle2, Gamepad2, Headphones, RotateCcw, X } from "lucide-react";
 import { GameResultCelebration } from "@/components/game-result-celebration";
 import { LessonChallengePanel } from "@/components/lesson-challenge";
 import { LessonPhrasebook } from "@/components/lesson-phrasebook";
 import { LessonPronunciationCoach, type LessonPronunciationSummary } from "@/components/lesson-pronunciation-coach";
 import { LessonVocabularyDeck } from "@/components/lesson-vocabulary-deck";
-import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
+import { VipContentGate } from "@/components/vip-upgrade-prompt";
 import { VideoLearningPlayer } from "@/components/video-learning-player";
 import type { Course, LessonAccess, LessonDetail, LessonProgressState, LessonSummary } from "@/lib/content-types";
 import { withDailySessionFlow, type DailyRecommendation } from "@/lib/daily-session";
@@ -157,13 +157,11 @@ export function LessonWorkspace({
         </button>)}</div>
       </div> : null}
 
-      {!access.allowed ? <div className="lesson-content-card lesson-locked-panel">
-        <span className="lesson-locked-icon"><Crown size={28} /></span>
-        <span className="section-kicker">Nội dung VIP</span>
-        <h2>Mở khóa bài học này</h2>
-        <p>Nâng cấp VIP để học từ vựng, cụm từ và luyện nghe & nói trong bài học này.</p>
-        <VipUpgradeInlineForm />
-      </div> : <div className={`lesson-content-card${stageTab ? " lesson-content-card-stage" : ""}${tab === "Từ vựng" || tab === "Cụm từ" ? " lesson-content-card-vocabulary" : ""}${tab === "Tình huống" ? " lesson-content-card-video" : ""}`}>
+      {!access.allowed ? <VipContentGate
+        className="lesson-content-card"
+        description="Mở khóa từ vựng, cụm từ, luyện nghe và luyện nói trong phần này."
+        title="Mở khóa phần học này"
+      /> : <div className={`lesson-content-card${stageTab ? " lesson-content-card-stage" : ""}${tab === "Từ vựng" || tab === "Cụm từ" ? " lesson-content-card-vocabulary" : ""}${tab === "Tình huống" ? " lesson-content-card-video" : ""}`}>
         <div className="lesson-tab-panel-viewport">
           <div
               aria-labelledby={`lesson-tab-${tabIndex}`}

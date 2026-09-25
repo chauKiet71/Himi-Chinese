@@ -17047,6 +17047,61 @@ textarea {
 html[data-vip-prompt-open="true"] { overflow: hidden; }
 .vip-upgrade-inline-form { margin: 0; display: inline-flex; }
 .vip-upgrade-inline-form .button { border-style: solid; cursor: pointer; }
+.vip-content-gate {
+  min-height: 430px;
+  padding: 0;
+  position: relative;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  border: 1px solid #eadfce;
+  border-radius: 28px;
+  background: #fffdf8;
+  box-shadow: 0 20px 55px rgba(48, 67, 63, .10);
+}
+.vip-content-preview {
+  min-height: 290px;
+  padding: clamp(28px, 5vw, 56px);
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  opacity: .48;
+  filter: blur(3px);
+  pointer-events: none;
+  background: linear-gradient(145deg, #fff 0%, #f7fbfa 58%, #fff8ed 100%);
+}
+.vip-content-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 132px;
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,253,248,.88));
+}
+.vip-preview-pill { width: max-content; padding: 7px 11px; display: inline-flex; align-items: center; gap: 6px; color: #ff4d3f; border-radius: 999px; background: #ffe9e5; font-size: 12px; font-weight: 800; }
+.vip-preview-heading { width: min(380px, 62%); height: 34px; border-radius: 10px; background: #214c45; }
+.vip-preview-line { width: min(430px, 72%); height: 12px; border-radius: 999px; background: #9aaca8; }
+.vip-preview-line.is-long { width: min(620px, 88%); }
+.vip-preview-choice { width: min(540px, 80%); height: 46px; margin-top: 3px; border: 1px solid #b9cbc7; border-radius: 14px; background: #fff; }
+.vip-content-gate-panel {
+  min-height: 132px;
+  padding: 22px clamp(22px, 4vw, 40px);
+  position: absolute;
+  inset: auto 0 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  border-top: 1px solid #efd7b2;
+  background: rgba(255, 250, 239, .96);
+  box-shadow: 0 -12px 38px rgba(67, 48, 21, .10);
+  backdrop-filter: blur(16px);
+}
+.vip-content-gate-icon { width: 52px; height: 52px; display: grid; place-items: center; color: #9b6813; border-radius: 17px; background: #ffedc9; }
+.vip-content-gate-copy small { color: #a06a12; font-size: 10px; font-weight: 850; letter-spacing: .11em; text-transform: uppercase; }
+.vip-content-gate-copy h2 { margin: 4px 0 3px; color: #173f38; font-size: clamp(20px, 2.4vw, 27px); line-height: 1.18; }
+.vip-content-gate-copy p { margin: 0; color: #667873; font-size: 13px; line-height: 1.5; }
+.vip-content-gate-actions { display: grid; justify-items: stretch; gap: 7px; }
+.vip-content-gate-actions .button { min-width: 150px; }
+.vip-content-gate-link { color: #8b651d; font-size: 12px; font-weight: 750; text-align: center; text-decoration: none; }
 .vip-upgrade-dialog {
   width: 100%;
   max-width: none;
@@ -17110,7 +17165,14 @@ html[data-vip-prompt-open="true"] { overflow: hidden; }
 .vip-upgrade-actions .button { width: 100%; cursor: pointer; border-style: solid; }
 
 @media (max-width: 520px) {
-  .vip-upgrade-dialog { padding: 16px; align-items: end; }
-  .vip-upgrade-sheet { width: 100%; max-height: calc(100dvh - 24px); padding: 30px 22px 22px; border-radius: 24px; }
+  .vip-content-gate { min-height: 410px; border-radius: 22px; }
+  .vip-content-preview { min-height: 410px; padding: 28px 22px; }
+  .vip-content-preview::after { inset: 0 0 235px; }
+  .vip-content-gate-panel { min-height: 235px; padding: 26px 22px calc(20px + env(safe-area-inset-bottom)); grid-template-columns: 1fr; justify-items: center; gap: 10px; border-radius: 26px 26px 0 0; text-align: center; }
+  .vip-content-gate-copy h2 { font-size: 23px; }
+  .vip-content-gate-actions, .vip-content-gate-actions .vip-upgrade-inline-form, .vip-content-gate-actions .button { width: 100%; }
+  .vip-upgrade-dialog { padding: 0; align-items: end; }
+  .vip-upgrade-sheet { width: 100%; max-height: calc(100dvh - 12px); padding: 32px 22px calc(22px + env(safe-area-inset-bottom)); border-radius: 28px 28px 0 0; }
+  .vip-upgrade-sheet::before { content: ""; width: 42px; height: 4px; margin: -18px auto 18px; display: block; border-radius: 999px; background: #d8ddd9; }
   .vip-upgrade-actions { grid-template-columns: 1fr; }
 }
