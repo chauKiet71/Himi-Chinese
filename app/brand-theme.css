@@ -1706,79 +1706,57 @@ body {
 .vip-sale-tag {
   position: relative;
   width: fit-content;
-  padding-top: 5px;
   display: inline-flex;
   align-items: center;
-  transform: rotate(-2deg);
+  transform: rotate(15deg);
   transform-origin: center;
+  margin: 2px 4px 4px 2px;
 }
 
 .vip-sale-badge {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
-  min-width: 87px;
-  min-height: 31px;
-  padding: 6px 20px 6px 10px;
+  min-width: auto;
+  min-height: auto;
+  padding: 4px 12px 4px 15px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 3px;
   color: #fff;
-  background: linear-gradient(145deg, #ff302b 0%, #ee1818 58%, #d90f16 100%);
-  clip-path: polygon(0 0, 77% 0, 100% 50%, 77% 100%, 0 100%);
-  filter: drop-shadow(0 7px 8px rgba(182, 25, 25, .24));
-  font-size: 9px;
-  font-weight: 850;
-  letter-spacing: .11em;
-  text-transform: uppercase;
+  background: linear-gradient(135deg, #ff4c3b 0%, #ee1818 58%, #d90f16 100%);
+  clip-path: polygon(9px 0%, 100% 0%, 100% 100%, 9px 100%, 0% 50%);
+  border-radius: 0 7px 7px 0;
+  filter: drop-shadow(0 4px 8px rgba(224, 40, 40, 0.36));
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  line-height: 1.25;
 }
 
-.vip-sale-badge::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  right: 10px;
-  border: 2px solid rgba(255, 255, 255, .82);
-  border-radius: 50%;
-  background: #fff4ec;
-  box-shadow: inset 0 1px 2px rgba(80, 20, 18, .25), 0 1px 2px rgba(80, 20, 18, .18);
-  transform: translateY(-50%);
-}
-
+.vip-sale-badge::before,
 .vip-sale-badge::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 3px 15px 3px 3px;
-  opacity: .72;
-  border: 1px dashed rgba(255, 255, 255, .78);
-  clip-path: polygon(0 0, 87% 0, 100% 50%, 87% 100%, 0 100%);
+  display: none;
+}
+
+.vip-sale-badge span {
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
 }
 
 .vip-sale-badge strong {
-  color: #fff6c7;
-  font-size: 10px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
   line-height: 1;
-  letter-spacing: 0;
-  text-shadow: 0 1px 2px rgba(111, 16, 16, .35);
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 2px rgba(111, 16, 16, .25);
 }
 
 .vip-sale-cord {
-  width: 23px;
-  height: 14px;
-  position: absolute;
-  z-index: 0;
-  top: -4px;
-  right: -4px;
-  border: 1.5px solid #3c3c3c;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  border-radius: 50%;
-  transform: rotate(-21deg);
+  display: none;
 }
 
 .vip-plan-card :is(.price-badge, .vip-sale-tag, .price-name, .price, .feature-list li, .feature-list svg) {
@@ -1849,7 +1827,7 @@ body {
   }
 
   .vip-plan-card:hover .vip-sale-tag {
-    transform: translateY(-3px) rotate(2deg);
+    transform: translateY(-3px) rotate(11deg) scale(1.05);
   }
 
   .vip-plan-card:hover :is(.price-name, .price) {

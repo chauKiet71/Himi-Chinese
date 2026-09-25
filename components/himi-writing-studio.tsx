@@ -16,7 +16,7 @@ import {
   Sparkles,
   Volume2,
 } from "lucide-react";
-import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
+import { VipContentGate } from "@/components/vip-upgrade-prompt";
 import type { WritingCharacter, WritingTopic } from "@/lib/writing-content";
 
 type WritingMode = "watch" | "trace" | "quiz";
@@ -295,13 +295,12 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
         </aside>
 
         <section className="himi-writing-practice">
-          {selected.locked ? <div className="himi-writing-vip-lock">
-            <span><LockKeyhole aria-hidden="true" size={34} /></span>
-            <small>LUYỆN VIẾT VIP</small>
-            <h2>Chữ này cần tài khoản VIP</h2>
-            <p>Nội dung chữ, pinyin, nghĩa và dữ liệu luyện nét chưa được gửi tới trình duyệt.</p>
-            <VipUpgradeInlineForm />
-          </div> : <>
+          {selected.locked ? <VipContentGate
+            className="himi-writing-vip-lock"
+            description="Mở khóa chữ, pinyin, nghĩa và dữ liệu luyện nét của phần này."
+            eyebrow="Luyện viết VIP"
+            title="Mở khóa chữ Hán này"
+          /> : <>
           <div aria-label="Chế độ luyện viết" className="himi-writing-mode-tabs">
             {MODES.map((item) => {
               const Icon = item.icon;

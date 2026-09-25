@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
 import { type FormEvent, useEffect, useId, useRef, useState } from "react";
-import { ArrowRight, Eye, EyeOff, Home, KeyRound, LockKeyhole, Mail, RotateCcw, ShieldCheck, UserPlus, UserRound } from "lucide-react";
+import { ArrowRight, CheckCircle2, Eye, EyeOff, Home, KeyRound, LockKeyhole, Mail, RotateCcw, ShieldCheck, UserPlus, UserRound, X } from "lucide-react";
 import { AuthBrandMark, BrandMark, BrandWordmark } from "@/components/brand-logo";
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from "@/lib/auth-validation";
 
@@ -32,9 +32,11 @@ const errorMessages: Record<string, string> = {
   mfa_expired: "Phiên xác minh đã hết hạn. Hãy đăng nhập lại để nhận mã mới.",
   reauth_required: "Để bảo vệ thao tác nhạy cảm, hãy xác minh lại tài khoản quản trị.",
   register_failed: "Chưa thể tạo tài khoản lúc này. Hãy thử lại sau ít phút.",
+  forgot_password_failed: "Chưa thể gửi yêu cầu lúc này. Vui lòng kiểm tra kết nối và thử lại.",
 };
 
 type RegisterState = "idle" | "submitting" | "success";
+type ForgotPasswordState = "idle" | "submitting" | "sent";
 
 function PasswordField({
   autoComplete,
@@ -84,6 +86,8 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
   const [motionRun, setMotionRun] = useState(0);
   const [registerState, setRegisterState] = useState<RegisterState>(initialRegisterSuccess ? "success" : "idle");
   const [registerError, setRegisterError] = useState<string>();
+  const [forgotPasswordState, setForgotPasswordState] = useState<ForgotPasswordState>(sent ? "sent" : "idle");
+  const [forgotPasswordError, setForgotPasswordError] = useState<string>();
   const authRootRef = useRef<HTMLElement>(null);
   const redirectTimer = useRef<number | null>(null);
   const registering = mode === "register";
@@ -108,7 +112,8 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
   const Icon = registering ? UserPlus : admin ? ShieldCheck : KeyRound;
   const action = registering ? "/api/auth/register" : forgotPassword ? "/api/auth/forgot-password" : "/api/auth/login";
   const notice = error === "password_changed" || error === "password_reset";
-  const visibleError = registerError ?? error;
+  const visibleError = registerError ?? forgotPasswordError ?? error;
+  const forgotPasswordSent = sent || forgotPasswordState === "sent";
 
   useGSAP(() => {
     const root = authRootRef.current;
@@ -244,20 +249,41 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
     }
   };
 
+  const handleForgotPasswordSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    if (!forgotPassword) return;
+    event.preventDefault();
+    if (forgotPasswordState === "submitting") return;
+
+    setForgotPasswordError(undefined);
+    setForgotPasswordState("submitting");
+    try {
+      const response = await fetch(action, { body: new FormData(event.currentTarget), method: "POST" });
+      if (!response.ok) {
+        setForgotPasswordError("forgot_password_failed");
+        setForgotPasswordState("idle");
+        return;
+      }
+      setForgotPasswordState("sent");
+    } catch {
+      setForgotPasswordError("forgot_password_failed");
+      setForgotPasswordState("idle");
+    }
+  };
+
   const authPanel = <section className={`auth-card ${admin ? "auth-card-admin" : ""} ${learnerAuth ? "auth-card-login-scene" : ""} ${registering ? "auth-card-register-scene" : ""} ${forgotPassword ? "auth-card-forgot-scene" : ""}`.trim()}>
     {!learnerAuth ? <div className="auth-brand"><BrandMark priority /><BrandWordmark /></div> : null}
     {!learnerAuth ? <div className="auth-icon"><Icon size={24} /></div> : null}
     <div className="auth-heading"><span>{admin ? "Himi Chinese Console" : "Tài khoản Himi Chinese"}</span><h1>{title}</h1><p>{description}</p></div>
     {visibleError && errorMessages[visibleError] ? <p className={notice ? "auth-notice" : "auth-error"} role="status">{errorMessages[visibleError]}</p> : null}
-    {sent ? <p className="auth-notice" role="status">Nếu email khớp với một tài khoản, liên kết đặt lại mật khẩu đã được gửi. Hãy kiểm tra cả thư rác.</p> : null}
-    <form action={action} className="auth-form" method="post" onSubmit={handleRegisterSubmit}>
+    {forgotPasswordSent ? <aside aria-atomic="true" aria-live="polite" className="auth-forgot-toast" role="status"><CheckCircle2 aria-hidden="true" size={21} /><strong>Yêu cầu đã được ghi nhận</strong><button aria-label="Đóng thông báo" onClick={() => setForgotPasswordState("idle")} type="button"><X aria-hidden="true" size={17} /></button></aside> : null}
+    <form action={action} aria-busy={forgotPasswordState === "submitting"} className="auth-form" method="post" onSubmit={forgotPassword ? handleForgotPasswordSubmit : handleRegisterSubmit}>
       {!forgotPassword ? <input name="returnTo" type="hidden" value={returnTo} /> : null}
       {admin ? <input name="mode" type="hidden" value="admin" /> : null}
       {registering ? <label><span>Họ và tên</span><span className="auth-input-shell"><UserRound aria-hidden="true" size={18} /><input autoComplete="name" maxLength={120} minLength={2} name="displayName" placeholder="Nhập họ và tên của bạn" required type="text" /></span></label> : null}
       <label><span>Email</span><span className="auth-input-shell"><Mail aria-hidden="true" size={18} /><input autoCapitalize="none" autoComplete="email" inputMode="email" maxLength={255} name="email" placeholder={learnerAuth ? "Nhập email của bạn" : undefined} required type="email" /></span></label>
       {!forgotPassword ? <PasswordField autoComplete={registering ? "new-password" : "current-password"} label="Mật khẩu" name="password" placeholder={learnerAuth ? "Nhập mật khẩu của bạn" : undefined} /> : null}
       {registering ? <PasswordField autoComplete="new-password" confirmation label="Nhập lại mật khẩu" name="confirmPassword" placeholder="Nhập lại mật khẩu" /> : null}
-      <button className="button button-primary button-full" disabled={registerState === "submitting"} type="submit"><span>{registerState === "submitting" ? "Đang tạo tài khoản..." : registering ? "Tạo tài khoản" : forgotPassword ? "Gửi liên kết đặt lại" : "Đăng nhập"}</span>{learnerAuth ? <ArrowRight aria-hidden="true" size={18} /> : null}</button>
+      <button className="button button-primary button-full" disabled={registerState === "submitting" || forgotPasswordState === "submitting"} type="submit"><span>{registerState === "submitting" ? "Đang tạo tài khoản..." : forgotPasswordState === "submitting" ? "Đang gửi liên kết..." : registering ? "Tạo tài khoản" : forgotPasswordSent ? "Gửi lại liên kết" : forgotPassword ? "Gửi liên kết đặt lại" : "Đăng nhập"}</span>{learnerAuth ? <ArrowRight aria-hidden="true" size={18} /> : null}</button>
     </form>
     <div className="auth-switch">
       {admin

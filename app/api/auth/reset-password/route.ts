@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     console.error("Không thể gửi email báo đổi mật khẩu.", error instanceof Error ? error.message : "unknown");
   }
   await recordAuthEvent({ action: "auth.password_reset.succeeded", request, userId: user.id, metadata: { notification } });
-  const response = NextResponse.redirect(new URL("/login?error=password_reset", request.url), 303);
+  const response = NextResponse.redirect(new URL("/login?success=password_reset", request.url), 303);
   response.cookies.set(sessionCookieName(), "", { httpOnly: true, sameSite: "lax", secure: secureAuthCookiesEnabled(), path: "/", maxAge: 0 });
   return response;
 }

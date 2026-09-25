@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import type { HskExercise, HskLessonContent, HskVocabularyAudio, HskVocabularyItem } from "@/lib/hsk-lesson-content";
 import { cancelHskPronunciation, playHskPronunciation } from "@/lib/hsk-audio";
-import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
+import { VipContentGate } from "@/components/vip-upgrade-prompt";
 import { buildHskGuidedExercises, buildHskGuidedLessonSteps, buildHskGuidedNavigationSections, type HskGuidedStepKind } from "@/lib/hsk-guided-lesson";
 import {
   EMPTY_HSK_LESSON_PROGRESS,
@@ -202,13 +202,12 @@ function GuidedVocabulary({ lesson, itemIndex, showPinyin, speak, authenticated,
   const word = lesson.vocabulary[itemIndex];
   const details = getVocabularyDetail(word);
   const [strokeCount, setStrokeCount] = useState<number | null>(details.totalStrokes ?? null);
-  if (word.locked) return <section className="hsk-guided-practice is-locked">
-    <span className="hsk-guided-kicker">Từ vựng VIP · {String(itemIndex + 1).padStart(2, "0")}/{lesson.vocabulary.length}</span>
-    <LockKeyhole aria-hidden="true" size={42} />
-    <h1>Từ vựng này dành cho thành viên VIP</h1>
-    <p>Nội dung từ, pinyin, nghĩa và ví dụ chưa được gửi tới trình duyệt.</p>
-    <VipUpgradeInlineForm />
-  </section>;
+  if (word.locked) return <VipContentGate
+    className="hsk-guided-practice"
+    description="Mở khóa từ, pinyin, nghĩa và ví dụ để tiếp tục phần từ vựng."
+    eyebrow={`Từ vựng VIP · ${String(itemIndex + 1).padStart(2, "0")}/${lesson.vocabulary.length}`}
+    title="Mở khóa từ vựng này"
+  />;
   return <section className="hsk-guided-vocabulary">
     <span className="hsk-guided-kicker">Từ mới · {String(itemIndex + 1).padStart(2, "0")} / {lesson.vocabulary.length}</span>
     <div className="hsk-guided-word-heading">
@@ -362,12 +361,12 @@ function GuidedWriting({ lesson, speak, onComplete }: {
     <span className="hsk-guided-kicker">Luyện viết</span>
     <h1>Luyện viết chữ Hán</h1>
     <div className="hsk-guided-writing-picker" aria-label="Chọn từ luyện viết">{lesson.writingCharacters.map((item, itemIndex) => <button aria-label={item.locked ? `Chữ ${itemIndex + 1} yêu cầu VIP` : undefined} aria-pressed={itemIndex === index} className={item.locked ? "is-locked" : ""} key={item.id} onClick={() => chooseCharacter(itemIndex)} type="button">{item.locked ? <LockKeyhole aria-hidden="true" size={20} /> : <span lang="zh-CN">{item.hanzi}</span>}<small>{itemIndex + 1}/{lesson.writingCharacters.length}</small></button>)}</div>
-    {character.locked ? <div className="hsk-guided-writing-locked hsk-guided-practice is-locked">
-      <LockKeyhole aria-hidden="true" size={42} />
-      <h2>Chữ Hán này dành cho thành viên VIP</h2>
-      <p>Nội dung chữ, pinyin và dữ liệu luyện nét chưa được gửi tới trình duyệt.</p>
-      <VipUpgradeInlineForm />
-    </div> : <div className="hsk-guided-writing-layout">
+    {character.locked ? <VipContentGate
+      className="hsk-guided-writing-locked hsk-guided-practice"
+      description="Mở khóa chữ, pinyin và dữ liệu luyện nét của phần này."
+      eyebrow="Luyện viết VIP"
+      title="Mở khóa chữ Hán này"
+    /> : <div className="hsk-guided-writing-layout">
       <div>
         <div aria-label="Chế độ luyện viết" className="hsk-guided-writing-modes" role="group">
           {([ ["watch", "Xem"], ["trace", "Tô lại"], ["quiz", "Kiểm tra"] ] as Array<[WritingMode, string]>).map(([value, label]) => <button aria-pressed={mode === value} key={value} onClick={() => { setMode(value); setVersion((current) => current + 1); }} type="button">{label}</button>)}
@@ -382,13 +381,12 @@ function GuidedWriting({ lesson, speak, onComplete }: {
 
 function GuidedPractice({ exercise, showPinyin, speak }: { exercise: HskExercise; showPinyin: boolean; speak: GuidedSpeak }) {
   const [selected, setSelected] = useState<string | null>(null);
-  if (exercise.locked) return <section className="hsk-guided-practice is-locked">
-    <span className="hsk-guided-kicker">Luyện tập VIP</span>
-    <LockKeyhole aria-hidden="true" size={42} />
-    <h1>Câu hỏi này dành cho thành viên VIP</h1>
-    <p>Nội dung, lựa chọn và đáp án không được gửi xuống trình duyệt khi tài khoản chưa có quyền.</p>
-    <VipUpgradeInlineForm />
-  </section>;
+  if (exercise.locked) return <VipContentGate
+    className="hsk-guided-practice"
+    description="Mở khóa câu hỏi và đáp án để tiếp tục phần luyện tập."
+    eyebrow="Luyện tập VIP"
+    title="Mở khóa câu hỏi này"
+  />;
   const scored = exercise.answer !== null;
   const correct = scored && selected === exercise.answer;
   return <section className="hsk-guided-practice">

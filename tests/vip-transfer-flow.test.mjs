@@ -23,6 +23,7 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(page, /formatPrice/);
   assert.match(page, /displayPlans\.map/);
   assert.match(page, /leftLifetime !== rightLifetime\) return leftLifetime \? 1 : -1/);
+  assert.match(page, /leftTrial !== rightTrial\) return leftTrial \? -1 : 1/);
   assert.match(page, /Đăng nhập để thanh toán/);
   assert.match(page, /quét QR/);
   assert.doesNotMatch(page, /Quyền lợi của bạn|Điều kiện áp dụng/);
@@ -35,7 +36,7 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(page, /code\.trim\(\)\.toUpperCase\(\) === "VIP_1M"/);
   assert.match(page, /vip-sale-cord/);
   assert.match(page, /vip-sale-badge[\s\S]*?<span>Sale<\/span><strong>-\{salePercent\}%<\/strong>/);
-  assert.match(page, /Bạn đã dùng gói 3 ngày/);
+  assert.match(page, /Bạn đã dùng gói 3 ngày một lần rồi/);
   assert.doesNotMatch(page, /Chọn quyền truy cập/);
   assert.match(policyStyles, /\.vip-purchase-section/);
   assert.match(policyStyles, /@media \(max-width: 720px\)/);
@@ -59,6 +60,7 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(page, /vipPlanAccessLabel/);
   assert.doesNotMatch(page, /Học miễn phí|Tiếp tục học miễn phí|is-free/);
   assert.match(seed, /name: "VIP vĩnh viễn"[\s\S]*priceVnd: 1_090_000/);
+  assert.match(seed, /code: "VIP_3N"[\s\S]*?durationDays: 3[\s\S]*?priceVnd: 29_000/);
   assert.match(seed, /code: "VIP_1M"[\s\S]*?priceVnd: 11_000/);
   assert.match(subscriptionService, /calculateVipPlanEndsAt/);
   assert.match(subscriptionService, /endsAt: endsAt\?\.toISOString\(\) \?\? null/);
@@ -68,6 +70,7 @@ test("VIP policy page explains access and keeps the SePay purchase flow availabl
   assert.match(paymentService, /VIP đã được kích hoạt/);
   assert.match(paymentService, /trial_plan_already_used/);
   assert.match(paymentService, /eq\(paymentOrders\.status, "paid"\)/);
+  assert.match(paymentService, /previousTrialSubscriptions/);
   assert.match(transferFlow, /purchaseDisabled/);
   assert.match(transferFlow, /Bạn đã trải nghiệm gói VIP 3 ngày rồi/);
   assert.doesNotMatch(transferFlow, /requestVipActivationAction|name="userNote"/);

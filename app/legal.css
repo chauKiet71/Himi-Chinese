@@ -7,7 +7,7 @@
   --terms-line: #dfe5eb;
   display: grid;
   grid-template-columns: minmax(360px, 36%) minmax(0, 1fr);
-  min-height: calc(100svh - 74px);
+  min-height: 100svh;
   color: var(--terms-ink);
   background: #fff;
 }

@@ -84,4 +84,17 @@ const svg = `
 
 await sharp(Buffer.from(svg)).png({ compressionLevel: 9, palette: false }).toFile(outputPath);
 await writeFile(path.join(outputDirectory, "himi-mini-quiz-gaolou-haishi-shan.svg"), svg.trimStart(), "utf8");
+
+const discussQuizSvg = svg
+  .replace("MINI QUIZ • HSK 2", "MINI QUIZ • HSK 4")
+  .replace("你想看到高楼，还是看到山？", "我们一起讨论一下这个问题。")
+  .replace("Nǐ xiǎng kàn dào gāolóu, háishì kàn dào shān?", "Wǒmen yìqǐ tǎolùn yíxià zhège wèntí.")
+  .replace("Bạn muốn thấy những tòa nhà cao tầng hay ngọn núi?", "Chúng ta cùng thảo luận vấn đề này một chút.")
+  .replace("Bạn muốn sống ở tầng cao hay dưới chân núi?", "Chúng ta hãy giải quyết vấn đề này ngay lập tức.")
+  .replace("Bạn đang nhìn thấy tòa nhà và ngọn núi?", "Tôi muốn hỏi bạn thêm một vấn đề.");
+
+const discussQuizOutputPath = path.join(outputDirectory, "himi-mini-quiz-thao-luan-van-de-1080.png");
+await sharp(Buffer.from(discussQuizSvg)).png({ compressionLevel: 9, palette: false }).toFile(discussQuizOutputPath);
+await writeFile(path.join(outputDirectory, "himi-mini-quiz-thao-luan-van-de.svg"), discussQuizSvg.trimStart(), "utf8");
 console.log(outputPath);
+console.log(discussQuizOutputPath);
