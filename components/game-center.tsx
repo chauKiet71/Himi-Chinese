@@ -750,7 +750,7 @@ export function GameCenter({
 
   let activeGameView: ReactNode = null;
   if (activeGame === "slice") activeGameView = <Suspense fallback={<GameRuntimeLoading />}>
-    <WritingSliceGame completedCourses={record.completedCourses} completionAction={<DailyGameCompletionAction />} exitLabel={exitLabel} onComplete={(score, level) => completeGame("slice", score, level)} onExit={exitGame} />
+    <WritingSliceGame completedCourses={record.completedCourses} exitLabel={exitLabel} onComplete={(score, level) => completeGame("slice", score, level)} onExit={exitGame} />
   </Suspense>;
   if (activeGame && activeGame !== "slice") {
     const game = catalogGames.find((item) => item.id === activeGame)!;

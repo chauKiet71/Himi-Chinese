@@ -88,7 +88,9 @@ test("an unlocked workplace lesson exposes vocabulary, phrase and pronunciation 
   for (const label of ["Từ vựng", "Cụm từ", "Nghe &amp; nói"]) assert.match(html, new RegExp(`>${label}<`));
   for (const label of ["Hội thoại", "Ghi chú"]) assert.doesNotMatch(html, new RegExp(`>${label}<`));
 
-  const { LessonPhrasebook } = await server.ssrLoadModule("/components/lesson-phrasebook.tsx");
+  const { LessonPhrasebook, normalizePhrasePattern } = await server.ssrLoadModule("/components/lesson-phrasebook.tsx");
+  assert.equal(normalizePhrasePattern("我负责……"), "我负责…");
+  assert.equal(normalizePhrasePattern("我负责......"), "我负责…");
   const phraseHtml = renderToStaticMarkup(React.createElement(LessonPhrasebook, {
     words: [{ slug: "shirt", hanzi: "衬衫", pinyin: "chènshān", meaning: "áo sơ mi", example: "我想买一件衬衫。", translation: "Tôi muốn mua một chiếc áo sơ mi.", audioUrl: null }],
     dialogue: [

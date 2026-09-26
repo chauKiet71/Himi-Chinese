@@ -51,6 +51,58 @@ final result: passed
 
 ---
 
+# Design QA — Mobile support launcher position
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-26cf276f-da9e-4a5c-81db-83c9e513ee2d.png`.
+- Source pixels: 277 × 105 px.
+- Implementation screenshot: Codex in-app Browser capture of `http://localhost:4173/` (tab 1, inline capture from this task).
+- CSS viewport and implementation pixels: 390 × 844 at device scale 1.
+- State: authenticated mobile homepage, welcome offer dismissed, bottom navigation and closed support launcher visible.
+- Density normalization: the source is a cropped/downscaled mobile reference; comparison focused on the launcher-to-navigation relationship rather than full-page content.
+
+## Findings
+
+- No actionable P0/P1/P2 mismatch remains for the requested launcher placement.
+- The launcher now sits immediately above the bottom navigation instead of being displaced high above the homepage controls.
+- Browser measurements show the 58 × 58 px launcher ending at y=762 and the navigation beginning at y=771.2, leaving a 9.2 px visual gap that matches the reference composition.
+
+## Required fidelity surfaces
+
+- Fonts and typography: unchanged; the request affects positioning only.
+- Spacing and layout rhythm: launcher bottom offset is now 82 px plus the device safe-area inset, consistent with the 72.8 px mobile navigation and a roughly 9 px gap.
+- Colors and visual tokens: unchanged; existing Himi red, orange badge, white ring, and elevation are preserved.
+- Image quality and asset fidelity: no raster assets were added or modified; the existing icon-library chat mark remains sharp.
+- Copy and content: unchanged.
+
+## Full-view comparison evidence
+
+The 390 × 844 browser capture shows the launcher anchored at the lower-right corner directly above the five-item mobile navigation, matching the supplied reference's visual relationship.
+
+## Focused region comparison evidence
+
+The bottom-right region was inspected at native browser scale. Measured rectangles confirm a 9.2 px gap between launcher and navigation and a 9.6 px right inset, with no overlap of persistent controls.
+
+## Comparison history
+
+1. Initial implementation used a homepage-only 224 px bottom offset, placing the launcher substantially too high.
+2. Fix: aligned the homepage launcher with the standard mobile offset of 82 px plus the safe-area inset.
+3. Post-fix browser evidence at 390 × 844 shows the requested lower-right placement with no navigation overlap.
+
+## Verification
+
+- Browser-rendered mobile homepage inspected at 390 × 844.
+- Welcome offer dismissal tested so the persistent controls could be inspected unobstructed.
+- Browser console reported no errors.
+- Existing automated test suite passed.
+
+## Follow-up polish
+
+- None required for the requested scope.
+
+final result: passed
+
+---
+
 # Design QA — Homepage supplied background artwork
 
 - Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-4cdef440-862b-470c-9d89-5734c98685fd.png`.

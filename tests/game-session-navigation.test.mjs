@@ -76,7 +76,9 @@ test("completed games use the animated Himi celebration with a reduced-motion fa
 
   assert.match(gameCenter, /<GameResultCelebration/);
   assert.match(flashcardSession, /<GameResultCelebration/);
-  assert.match(sliceGame, /<GameResultCelebration/);
+  assert.doesNotMatch(sliceGame, /<GameResultCelebration/);
+  assert.match(sliceGame, /Chém từ không giới hạn/);
+  assert.match(sliceGame, /Ba từ liên tiếp đã chạm đất/);
   assert.match(typingStudio, /<GameResultCelebration/);
   assert.match(celebration, /himi-trophy-celebration\.gif/);
   assert.match(celebration, /himi-trophy-celebration\.webp/);

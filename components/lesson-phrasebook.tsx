@@ -9,6 +9,10 @@ import { speakMandarin } from "@/lib/client-mandarin-audio";
 type MoveDirection = "back" | "forward";
 type Phrase = { id: string; hanzi: string; pinyin?: string; translation: string };
 
+export function normalizePhrasePattern(pattern: string) {
+  return pattern.replace(/(?:…{2,}|\.{3,})/gu, "…");
+}
+
 const phraseGlossary: Record<string, string> = {
   "截止日期": "hạn chót",
   "什么时候": "khi nào",
@@ -33,7 +37,7 @@ function splitPhraseForStudy(hanzi: string) {
 function buildPhrases(words: Vocabulary[], dialogue: DialogueLine[], notes: UsageNote[]) {
   const phrases: Phrase[] = [
     ...dialogue.map((line, index) => ({ id: `dialogue-${index}-${line.hanzi}`, hanzi: line.hanzi, pinyin: line.pinyin, translation: line.translation })),
-    ...notes.map((note, index) => ({ id: `note-${index}-${note.pattern}`, hanzi: note.pattern, translation: note.explanation })),
+    ...notes.map((note, index) => ({ id: `note-${index}-${note.pattern}`, hanzi: normalizePhrasePattern(note.pattern), translation: note.explanation })),
     ...words.filter((word) => word.example.trim()).slice(0, 3).map((word) => ({ id: `word-${word.slug}`, hanzi: word.example, translation: word.translation })),
   ];
   return phrases.filter((phrase, index) => phrases.findIndex((item) => item.hanzi === phrase.hanzi) === index);

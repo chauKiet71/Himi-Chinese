@@ -23,17 +23,15 @@ import {
   useState,
   type CSSProperties,
   type FormEvent,
-  type ReactNode,
 } from "react";
 import { type GameWord } from "@/lib/game-content";
 import { useLearningData } from "@/components/learning-data-provider";
-import { GameResultCelebration } from "@/components/game-result-celebration";
 import { createSliceDeck, normalizeSliceAnswer as normalizeAnswer, SLICE_HSK_COURSES, type SliceHskLevel } from "@/lib/slice-game";
 import { hasCompletedGameCourse, type GameCourseCompletionKey } from "@/lib/activity-progress";
 
 if (typeof window !== "undefined") gsap.registerPlugin(useGSAP);
 
-type GameMode = "ready" | "playing" | "paused" | "slicing" | "complete" | "gameover";
+type GameMode = "ready" | "playing" | "paused" | "slicing" | "gameover";
 
 type StrikeMotion = {
   x: number;
@@ -46,42 +44,19 @@ type StrikeMotion = {
   exitY: number;
 };
 
-const TARGET_ROUNDS = 12;
+const MINIMUM_WORDS = 12;
+const CONSECUTIVE_MISSES_TO_END = 3;
 
 function GameOverlay({
   mode,
-  score,
   onStart,
-  onChangeCourse,
-  onExit,
-  completionAction,
 }: {
   mode: GameMode;
-  score: number;
   onStart: () => void;
-  onChangeCourse: () => void;
-  onExit?: () => void;
-  completionAction?: ReactNode;
 }) {
-  if (!(["ready", "complete", "gameover"] as GameMode[]).includes(mode)) return null;
+  if (!(["ready", "gameover"] as GameMode[]).includes(mode)) return null;
 
-  const complete = mode === "complete";
   const gameover = mode === "gameover";
-  if (complete) {
-    return <div className="writing-game-overlay writing-game-completion-overlay game-session-world">
-      <GameResultCelebration
-        actions={<>
-          <button onClick={onStart} type="button"><RotateCcw aria-hidden="true" size={16} /> Chơi lại</button>
-          <button onClick={onChangeCourse} type="button"><BookOpen aria-hidden="true" size={16} /> Đổi khóa HSK</button>
-          {onExit ? <button onClick={onExit} type="button"><ArrowLeft aria-hidden="true" size={16} /> Đổi trò chơi</button> : null}
-          {completionAction}
-        </>}
-        eyebrow="HOÀN THÀNH LƯỢT CHÉM TỪ"
-        label="Bạn đã xử lý đủ 12 từ của lượt hôm nay!"
-        score={score}
-      />
-    </div>;
-  }
 
   return (
     <div className="writing-game-overlay">
@@ -94,7 +69,7 @@ function GameOverlay({
       <h2>{gameover ? "Mình thử lại chậm hơn nhé." : "Gõ đúng. Himi chém gọn."}</h2>
       <p>
         {gameover
-          ? "Ba từ đã chạm đất. Lượt mới sẽ bắt đầu lại từ đầu."
+          ? "Ba từ liên tiếp đã chạm đất. Lượt mới sẽ bắt đầu lại từ đầu."
           : "Nhìn Hán tự đang rơi, gõ pinyin không dấu hoặc có dấu. Đúng từ là Himi sẽ lao lên cắt ngay."}
       </p>
       <button className="writing-primary-action" onClick={onStart} type="button">
@@ -109,7 +84,6 @@ type WritingSliceGameProps = {
   onExit?: () => void;
   onComplete?: (score: number, level: SliceHskLevel) => void;
   completedCourses?: readonly GameCourseCompletionKey[];
-  completionAction?: ReactNode;
   exitLabel?: string;
 };
 
@@ -135,7 +109,7 @@ export function WritingSliceGame(props: WritingSliceGameProps = {}) {
         throw new Error(problem?.error ?? "Không thể tải từ vựng.");
       }
       const data = await response.json();
-      if (!Array.isArray(data.words) || data.words.length < TARGET_ROUNDS) throw new Error("Chưa đủ từ vựng.");
+      if (!Array.isArray(data.words) || data.words.length < MINIMUM_WORDS) throw new Error("Chưa đủ từ vựng.");
       if (!controller.signal.aborted) setSession({ level, words: createSliceDeck(data.words) });
     } catch (problem) {
       if (!controller.signal.aborted) setError(problem instanceof Error ? problem.message : "Chưa tải được từ vựng. Bạn hãy chọn lại khóa để thử lại nhé.");
@@ -145,7 +119,7 @@ export function WritingSliceGame(props: WritingSliceGameProps = {}) {
   };
 
   if (session) {
-    return <SliceSession {...props} initialWords={session.words} level={session.level} onChangeCourse={() => setSession(null)} />;
+    return <SliceSession {...props} initialWords={session.words} level={session.level} />;
   }
 
   return (
@@ -172,8 +146,8 @@ export function WritingSliceGame(props: WritingSliceGameProps = {}) {
           />
 
           <div className="writing-course-facts" aria-label="Thể lệ mỗi lượt chơi">
-            <span><BookOpen aria-hidden="true" size={25} /><strong>12 từ</strong></span>
-            <span><Heart aria-hidden="true" size={25} /><strong>3 lượt bỏ lỡ</strong></span>
+            <span><BookOpen aria-hidden="true" size={25} /><strong>Không giới hạn</strong></span>
+            <span><Heart aria-hidden="true" size={25} /><strong>3 lần trượt liên tiếp</strong></span>
             <span><Keyboard aria-hidden="true" size={25} /><strong>Gõ pinyin</strong></span>
           </div>
         </section>
@@ -211,7 +185,7 @@ export function WritingSliceGame(props: WritingSliceGameProps = {}) {
             })}
           </div>
           <p className="writing-course-status" role={error ? "alert" : "status"}>
-            {error || (loading ? "Đang chuẩn bị từ vựng cho lượt chơi…" : "Chém đúng 12 từ · 3 lượt bỏ lỡ · Gõ pinyin có dấu hoặc không dấu")}
+            {error || (loading ? "Đang chuẩn bị từ vựng cho lượt chơi…" : "Chém từ không giới hạn · Kết thúc khi 3 từ liên tiếp chạm đất")}
           </p>
         </section>
       </div>
@@ -222,12 +196,10 @@ export function WritingSliceGame(props: WritingSliceGameProps = {}) {
 function SliceSession({
   onExit,
   onComplete,
-  completionAction,
   exitLabel,
   initialWords,
   level,
-  onChangeCourse,
-}: WritingSliceGameProps & { initialWords: GameWord[]; level: SliceHskLevel; onChangeCourse: () => void }) {
+}: WritingSliceGameProps & { initialWords: GameWord[]; level: SliceHskLevel }) {
   const [words, setWords] = useState(initialWords);
   const [mode, setMode] = useState<GameMode>("playing");
   const [wordIndex, setWordIndex] = useState(0);
@@ -236,7 +208,7 @@ function SliceSession({
   const [score, setScore] = useState(0);
   const [combo, setCombo] = useState(0);
   const [completed, setCompleted] = useState(0);
-  const [hearts, setHearts] = useState(3);
+  const [consecutiveMisses, setConsecutiveMisses] = useState(0);
   const [missed, setMissed] = useState(false);
   const [strikePoint, setStrikePoint] = useState<StrikeMotion>({
     x: 50,
@@ -258,6 +230,7 @@ function SliceSession({
   const fallTweenRef = useRef<gsap.core.Tween | null>(null);
   const strikeTimelineRef = useRef<gsap.core.Timeline | null>(null);
   const pendingStrikeRef = useRef<{ finalScore: number; nextCompleted: number } | null>(null);
+  const completionReportedRef = useRef(false);
 
   const word = words[wordIndex];
   const normalizedTarget = useMemo(() => normalizeAnswer(word.pinyin), [word.pinyin]);
@@ -362,7 +335,8 @@ function SliceSession({
     setScore(0);
     setCombo(0);
     setCompleted(0);
-    setHearts(3);
+    setConsecutiveMisses(0);
+    completionReportedRef.current = false;
     setMissed(false);
   };
 
@@ -414,6 +388,7 @@ function SliceSession({
     const nextCompleted = completed + 1;
     const earnedScore = 100 + Math.min(nextCombo - 1, 5) * 20;
     const finalScore = score + earnedScore;
+    setConsecutiveMisses(0);
     setCombo(nextCombo);
     setCompleted(nextCompleted);
     setScore(finalScore);
@@ -424,12 +399,12 @@ function SliceSession({
 
   const handleMiss = () => {
     if (mode !== "playing") return;
-    const nextHearts = hearts - 1;
-    setHearts(nextHearts);
+    const nextConsecutiveMisses = consecutiveMisses + 1;
+    setConsecutiveMisses(nextConsecutiveMisses);
     setCombo(0);
     setMissed(true);
-    setMode(nextHearts <= 0 ? "gameover" : "paused");
-    if (nextHearts <= 0) return;
+    setMode(nextConsecutiveMisses >= CONSECUTIVE_MISSES_TO_END ? "gameover" : "paused");
+    if (nextConsecutiveMisses >= CONSECUTIVE_MISSES_TO_END) return;
     clearNextTimer();
     nextTimerRef.current = window.setTimeout(() => advanceWord(), 700);
   };
@@ -517,13 +492,11 @@ function SliceSession({
       const pending = pendingStrikeRef.current;
       pendingStrikeRef.current = null;
       if (!pending) return;
-      if (pending.nextCompleted >= TARGET_ROUNDS) {
-        setMode("complete");
-        setAnswer("");
+      if (pending.nextCompleted >= MINIMUM_WORDS && !completionReportedRef.current) {
+        completionReportedRef.current = true;
         onComplete?.(pending.finalScore, level);
-      } else {
-        advanceWord();
       }
+      advanceWord();
     };
 
     gsap.set(face, { autoAlpha: 1 });
@@ -609,7 +582,7 @@ function SliceSession({
 
               <div className="writing-arena-metrics" aria-label="Tiến độ lượt luyện">
                 <span>
-                  <strong>{completed}<em> / {TARGET_ROUNDS}</em></strong>
+                  <strong>{completed}</strong>
                   <small>ĐÃ CHÉM</small>
                 </span>
                 <span>
@@ -620,13 +593,13 @@ function SliceSession({
 
               <div className="writing-arena-topline">
                 <div className="writing-arena-controls">
-                  <button aria-label={mode === "paused" ? "Tiếp tục" : "Tạm dừng"} disabled={mode === "ready" || mode === "slicing" || mode === "complete" || mode === "gameover"} onClick={togglePause} type="button">
+                  <button aria-label={mode === "paused" ? "Tiếp tục" : "Tạm dừng"} disabled={mode === "ready" || mode === "slicing" || mode === "gameover"} onClick={togglePause} type="button">
                     {mode === "paused" ? <Play fill="currentColor" size={15} /> : <Pause fill="currentColor" size={15} />}
                   </button>
                 </div>
-                <span>LƯỢT {Math.min(completed + 1, TARGET_ROUNDS)} / {TARGET_ROUNDS}</span>
-                <span className="writing-hearts" aria-label={`${hearts} lượt còn lại`}>
-                  {[0, 1, 2].map((index) => <Heart fill={index < hearts ? "currentColor" : "none"} key={index} size={17} />)}
+                <span>LƯỢT {completed + 1}</span>
+                <span className="writing-hearts" aria-label={`${CONSECUTIVE_MISSES_TO_END - consecutiveMisses} lượt bỏ lỡ liên tiếp còn lại`}>
+                  {[0, 1, 2].map((index) => <Heart fill={index < CONSECUTIVE_MISSES_TO_END - consecutiveMisses ? "currentColor" : "none"} key={index} size={17} />)}
                 </span>
               </div>
 
@@ -687,12 +660,8 @@ function SliceSession({
               </div>
 
               <GameOverlay
-                completionAction={completionAction}
-                mode={mode}
-                onChangeCourse={onChangeCourse}
-                onExit={onExit}
                 onStart={startGame}
-                score={score}
+                mode={mode}
               />
               {mode === "paused" && !missed ? (
                 <button className="writing-pause-overlay" onClick={togglePause} type="button"><Play fill="currentColor" size={18} /> Tiếp tục</button>

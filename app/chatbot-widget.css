@@ -847,10 +847,10 @@ body:has(.game-immersive-dashboard) > .himi-chatbot-widget {
 @keyframes himi-support-spin { to { transform: rotate(360deg); } }
 
 @media (max-width: 720px) {
-  /* The home page already reserves two bottom docks. Keep chat reachable
-     without covering a learning shortcut. */
+  /* Keep the launcher tucked directly above the mobile navigation, matching
+     its position on the rest of the learner experience. */
   body:has(.home-portal-dashboard) > .himi-chatbot-widget {
-    bottom: calc(224px + env(safe-area-inset-bottom));
+    bottom: calc(82px + env(safe-area-inset-bottom));
   }
 
   body:has(.home-portal-dashboard) > .himi-chatbot-widget .himi-chatbot-panel {

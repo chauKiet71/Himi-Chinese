@@ -10,7 +10,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     const code = plan.code.trim().toUpperCase();
     return code === "VIP_1TH" || code === "VIP_1M";
   }) ?? vipOverview.plans.find((plan) => plan.durationDays === 30) ?? null;
-  const canShowWelcomeOffer = Boolean(monthlyPlan && !vipOverview.activeSubscription && !vipOverview.pendingRequest);
+  const canShowWelcomeOffer = Boolean(
+    user && monthlyPlan && !vipOverview.activeSubscription && !vipOverview.pendingRequest,
+  );
   const monthlyPlanAnchor = monthlyPlan
     ? `/vip#vip-plan-${monthlyPlan.code.trim().toLocaleLowerCase("vi-VN").replaceAll("_", "-")}`
     : "/vip";
