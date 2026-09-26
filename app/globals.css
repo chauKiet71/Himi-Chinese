@@ -17176,3 +17176,155 @@ html[data-vip-prompt-open="true"] { overflow: hidden; }
   .vip-upgrade-sheet::before { content: ""; width: 42px; height: 4px; margin: -18px auto 18px; display: block; border-radius: 999px; background: #d8ddd9; }
   .vip-upgrade-actions { grid-template-columns: 1fr; }
 }
+
+/* Himi VIP upgrade dialog — shared premium gate. */
+.vip-upgrade-dialog::backdrop {
+  background: rgba(34, 34, 34, .46);
+  backdrop-filter: blur(7px);
+}
+
+.vip-upgrade-sheet {
+  width: min(760px, calc(100vw - 38px));
+  min-height: 500px;
+  max-height: calc(100dvh - 38px);
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(280px, .92fr) minmax(350px, 1.08fr);
+  align-items: center;
+  overflow: hidden;
+  color: var(--himi-black);
+  border: 1px solid color-mix(in srgb, var(--himi-red) 10%, var(--himi-white));
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 8% 12%, color-mix(in srgb, var(--himi-red) 7%, transparent), transparent 30%),
+    radial-gradient(circle at 92% 88%, color-mix(in srgb, var(--himi-orange) 9%, transparent), transparent 32%),
+    var(--himi-white);
+  box-shadow: 0 34px 100px rgba(34, 34, 34, .28);
+  text-align: left;
+}
+
+.vip-upgrade-close {
+  top: 14px;
+  right: 14px;
+  z-index: 5;
+  color: #8b8b91;
+  background: #f1f1f2;
+  transition: color .18s ease, background-color .18s ease, transform .18s ease;
+}
+
+.vip-upgrade-close:hover { color: var(--himi-black); background: #e5e5e7; transform: rotate(4deg); }
+
+.vip-upgrade-visual {
+  min-height: 500px;
+  position: relative;
+  align-self: stretch;
+  overflow: hidden;
+}
+
+.vip-upgrade-mascot {
+  width: 330px;
+  height: auto;
+  position: absolute;
+  left: 4px;
+  bottom: -12px;
+  z-index: 2;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 22px rgba(34, 34, 34, .14));
+}
+
+.vip-upgrade-content {
+  padding: 58px 38px 42px 18px;
+  position: relative;
+  z-index: 3;
+}
+
+.vip-upgrade-content h2 {
+  margin: 0;
+  color: #29292f;
+  font-size: clamp(27px, 3.2vw, 38px);
+  font-weight: 850;
+  line-height: 1.14;
+  letter-spacing: -.04em;
+}
+
+.vip-upgrade-content h2 strong {
+  display: block;
+  color: var(--himi-red);
+  font-size: 1.25em;
+  font-weight: 900;
+  text-shadow: 0 5px 16px color-mix(in srgb, var(--himi-red) 14%, transparent);
+}
+
+.vip-upgrade-benefits {
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  list-style: none;
+}
+
+.vip-upgrade-benefits li {
+  min-height: 66px;
+  padding: 10px 15px;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  border-radius: 17px;
+  background: linear-gradient(90deg, var(--himi-red-soft), color-mix(in srgb, var(--himi-orange) 7%, var(--himi-white)));
+}
+
+.vip-upgrade-benefits li > span { display: grid; place-items: center; color: var(--himi-red); }
+.vip-upgrade-benefits li > span svg { width: 28px; height: 28px; stroke-width: 2.2; }
+.vip-upgrade-benefits li > div { display: grid; gap: 3px; }
+.vip-upgrade-benefits li strong { color: #3a3a40; font-size: 14px; font-weight: 820; }
+.vip-upgrade-benefits li small { color: var(--himi-muted); font-size: 11px; }
+
+.vip-upgrade-primary {
+  min-height: 58px;
+  margin-top: 22px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 24px 1fr 24px;
+  place-items: center;
+  gap: 10px;
+  color: var(--himi-on-red);
+  border-radius: 18px;
+  background: linear-gradient(100deg, var(--himi-red), var(--himi-orange));
+  box-shadow: 0 15px 32px color-mix(in srgb, var(--himi-red) 28%, transparent);
+  font-size: 17px;
+  font-weight: 850;
+  text-decoration: none;
+  transition: box-shadow .18s ease, transform .18s ease;
+}
+
+.vip-upgrade-primary svg { width: 22px; height: 22px; }
+.vip-upgrade-primary:hover { color: var(--himi-on-red); box-shadow: 0 19px 38px color-mix(in srgb, var(--himi-red) 34%, transparent); transform: translateY(-2px); }
+
+@media (max-width: 700px) {
+  .vip-upgrade-dialog { padding: 12px; align-items: center; }
+  .vip-upgrade-sheet {
+    width: min(440px, calc(100vw - 24px));
+    min-height: 0;
+    max-height: calc(100dvh - 24px);
+    grid-template-columns: 1fr;
+    border-radius: 26px;
+  }
+  .vip-upgrade-sheet::before { display: none; }
+  .vip-upgrade-visual { min-height: 205px; }
+  .vip-upgrade-mascot { width: 218px; left: 50%; bottom: -31px; transform: translateX(-50%); }
+  .vip-upgrade-content { padding: 8px 20px 22px; text-align: center; }
+  .vip-upgrade-content h2 { font-size: 25px; }
+  .vip-upgrade-benefits { margin-top: 15px; text-align: left; }
+  .vip-upgrade-benefits li { min-height: 58px; padding-block: 8px; }
+  .vip-upgrade-primary { min-height: 54px; margin-top: 16px; }
+}
+
+@media (max-height: 660px) and (min-width: 701px) {
+  .vip-upgrade-sheet { min-height: 440px; }
+  .vip-upgrade-visual { min-height: 440px; }
+  .vip-upgrade-mascot { width: 285px; }
+  .vip-upgrade-content { padding-block: 42px 28px; }
+  .vip-upgrade-benefits li { min-height: 58px; }
+}

@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import type { HskExercise, HskLessonContent, HskVocabularyAudio, HskVocabularyItem } from "@/lib/hsk-lesson-content";
 import { cancelHskPronunciation, playHskPronunciation } from "@/lib/hsk-audio";
-import { VipContentGate } from "@/components/vip-upgrade-prompt";
+import { VipContentGate, VipUpgradeDialog, type VipUpgradeTarget } from "@/components/vip-upgrade-prompt";
 import { buildHskGuidedExercises, buildHskGuidedLessonSteps, buildHskGuidedNavigationSections, type HskGuidedStepKind } from "@/lib/hsk-guided-lesson";
 import {
   EMPTY_HSK_LESSON_PROGRESS,
@@ -296,6 +296,7 @@ function GuidedWriting({ lesson, speak, onComplete }: {
   const [mode, setMode] = useState<WritingMode>("watch");
   const [version, setVersion] = useState(0);
   const [status, setStatus] = useState("Quan sát thứ tự từng nét.");
+  const [upgradeTarget, setUpgradeTarget] = useState<VipUpgradeTarget | null>(null);
   const character = lesson.writingCharacters[index];
 
   useEffect(() => {
@@ -352,6 +353,11 @@ function GuidedWriting({ lesson, speak, onComplete }: {
   }, [character.hanzi, character.id, character.locked, mode, onComplete, version]);
 
   const chooseCharacter = (next: number) => {
+    const nextCharacter = lesson.writingCharacters[next];
+    if (nextCharacter?.locked) {
+      setUpgradeTarget({ kind: "Chữ Hán", title: nextCharacter.word || `Chữ ${next + 1}` });
+      return;
+    }
     setIndex(next);
     setMode("watch");
     setVersion((current) => current + 1);
@@ -361,6 +367,7 @@ function GuidedWriting({ lesson, speak, onComplete }: {
     <span className="hsk-guided-kicker">Luyện viết</span>
     <h1>Luyện viết chữ Hán</h1>
     <div className="hsk-guided-writing-picker" aria-label="Chọn từ luyện viết">{lesson.writingCharacters.map((item, itemIndex) => <button aria-label={item.locked ? `Chữ ${itemIndex + 1} yêu cầu VIP` : undefined} aria-pressed={itemIndex === index} className={item.locked ? "is-locked" : ""} key={item.id} onClick={() => chooseCharacter(itemIndex)} type="button">{item.locked ? <LockKeyhole aria-hidden="true" size={20} /> : <span lang="zh-CN">{item.hanzi}</span>}<small>{itemIndex + 1}/{lesson.writingCharacters.length}</small></button>)}</div>
+    <VipUpgradeDialog onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} target={upgradeTarget} />
     {character.locked ? <VipContentGate
       className="hsk-guided-writing-locked hsk-guided-practice"
       description="Mở khóa chữ, pinyin và dữ liệu luyện nét của phần này."
@@ -408,7 +415,7 @@ function GuidedCompletion({ lesson, exerciseCount, nextLessonHref }: { lesson: H
     <small>Hoàn thành</small>
     <h1>Hoàn thành bài học!</h1>
     <p>Bạn vừa học xong <strong>Bài {lesson.lessonNumber}: {lesson.title}</strong>.</p>
-    <div>{lesson.vocabulary.length ? <article><strong>{lesson.vocabulary.length}</strong><span>từ vựng</span></article> : null}{lesson.grammar.length ? <article><strong>{lesson.grammar.length}</strong><span>điểm ngữ pháp</span></article> : null}{exerciseCount ? <article><strong>{exerciseCount}</strong><span>bài tập</span></article> : null}{lesson.writingCharacters.length ? <article><strong>{lesson.writingCharacters.length}</strong><span>từ luyện viết</span></article> : null}</div>
+    <div>{lesson.vocabulary.length ? <article><strong>{lesson.vocabulary.length}</strong><span>từ vựng</span></article> : null}{exerciseCount ? <article><strong>{exerciseCount}</strong><span>bài tập</span></article> : null}{lesson.writingCharacters.length ? <article><strong>{lesson.writingCharacters.length}</strong><span>từ luyện viết</span></article> : null}</div>
     <nav><Link href="/courses?view=hsk">Danh sách bài học</Link><Link href={nextLessonHref ?? "/courses?view=hsk"}>{nextLessonHref ? "Bài tiếp theo" : "Về lộ trình"}</Link></nav>
   </section>;
 }

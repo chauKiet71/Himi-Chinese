@@ -50,16 +50,30 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
 
   return (
     <main className="learner-dashboard home-portal-dashboard">
-      <section className={`home-portal-hero${motionEnabled ? " is-motion-active" : " is-motion-paused"}`} aria-labelledby="home-portal-title">
+      <section className={`home-portal-hero${motionEnabled ? " is-motion-active" : " is-motion-paused"}`} aria-label="Học tiếng Trung mở ra thế giới">
         <div aria-hidden="true" className="home-portal-art">
           <Image
             alt=""
+            className="home-portal-art-desktop"
             fill
             priority
             sizes="(max-width: 720px) 100vw, calc(100vw - 88px)"
-            src="/assets/home/himi-language-portal-clean-1536.webp"
+            src="/assets/home/himi-homepage-background.png"
+          />
+          <Image
+            alt=""
+            className="home-portal-art-mobile"
+            fill
+            priority
+            sizes="100vw"
+            src="/assets/home/himi-homepage-mobile-background.png"
           />
         </div>
+
+        <Link className="home-portal-background-cta" href="/courses?view=hsk" prefetch={false}>
+          <span>Bắt đầu học ngay</span>
+          <ArrowRight aria-hidden="true" size={22} strokeWidth={2.4} />
+        </Link>
 
         <div aria-hidden="true" className="home-portal-conversation">
             <div

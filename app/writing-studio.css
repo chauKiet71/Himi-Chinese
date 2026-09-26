@@ -1041,3 +1041,247 @@
   .himi-writing-board-actions button,
   .himi-writing-progress span { transition: none; }
 }
+
+/* Himi brand palette -------------------------------------------------------
+ * Keep every writing surface on the product's red/orange/black/white system.
+ * These overrides stay in the route stylesheet so its late loading cannot
+ * reintroduce the former teal palette. Gold remains meaningful for VIP locks.
+ */
+.writing-catalog-page,
+.writing-lesson-page,
+.himi-writing-studio {
+  --writing-red: var(--himi-red);
+  --writing-red-deep: color-mix(in srgb, var(--himi-red) 72%, var(--himi-black));
+  --writing-teal: var(--himi-red);
+  --writing-ink: var(--himi-black);
+  --writing-muted: var(--himi-muted);
+  --writing-cream: var(--himi-orange-soft);
+  --writing-line: var(--himi-line);
+  color: var(--himi-black);
+  background:
+    radial-gradient(circle at 7% 2%, color-mix(in srgb, var(--himi-red) 7%, transparent), transparent 27%),
+    radial-gradient(circle at 94% 4%, color-mix(in srgb, var(--himi-orange) 14%, transparent), transparent 24%),
+    var(--himi-white);
+}
+
+.writing-topic-heading > div > span,
+.writing-lesson-hero > div:first-child > span,
+.writing-lesson-list-heading > div > span,
+.writing-single-lesson-copy > span,
+.writing-lesson-card-header > span,
+.himi-writing-session-header > div span,
+.himi-writing-library-heading > div strong,
+.himi-writing-card-label {
+  color: var(--himi-red);
+}
+
+.writing-topic-card,
+.writing-lesson-card,
+.writing-single-lesson,
+.himi-writing-session-header,
+.himi-writing-library,
+.himi-writing-practice,
+.himi-writing-character-info > * {
+  border-color: var(--himi-line);
+  background-color: var(--himi-white);
+  box-shadow: 0 16px 42px rgba(34, 34, 34, .07);
+}
+
+.writing-topic-card-topline > span,
+.writing-topic-card.is-level-2 .writing-topic-card-topline > span,
+.writing-topic-card.is-level-5 .writing-topic-card-topline > span {
+  color: var(--himi-on-red);
+  background: var(--himi-red);
+}
+
+.writing-topic-card.is-level-3 .writing-topic-card-topline > span,
+.writing-topic-card.is-level-6 .writing-topic-card-topline > span {
+  color: var(--himi-on-orange);
+  background: var(--himi-orange);
+}
+
+.writing-topic-characters span,
+.writing-lesson-card-characters span {
+  background: var(--himi-red-soft);
+}
+
+.writing-topic-card-footer a,
+.writing-single-lesson-action a,
+.writing-lesson-card-footer a,
+.himi-writing-board-actions button.primary {
+  color: var(--himi-on-red);
+  background: var(--himi-red);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--himi-red) 22%, transparent);
+}
+
+.writing-topic-card-footer a:hover,
+.writing-single-lesson-action a:hover,
+.writing-lesson-card-footer a:hover {
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--himi-red) 28%, transparent);
+}
+
+.writing-breadcrumbs a:hover,
+.writing-single-lesson-copy li svg,
+.himi-writing-session-header > a:hover {
+  color: var(--himi-red);
+}
+
+.writing-lesson-hero {
+  background: linear-gradient(125deg, var(--himi-red-soft), var(--himi-orange-soft));
+  box-shadow: 0 22px 60px rgba(34, 34, 34, .08);
+}
+
+.writing-lesson-character-strip span {
+  border-color: color-mix(in srgb, var(--himi-red) 16%, var(--himi-white));
+  background: color-mix(in srgb, var(--himi-white) 88%, transparent);
+  box-shadow: 0 9px 24px rgba(34, 34, 34, .06);
+}
+
+.writing-single-lesson-index,
+.himi-writing-session-header > strong {
+  color: var(--himi-red);
+  background: var(--himi-red-soft);
+}
+
+.himi-writing-search {
+  color: var(--himi-muted);
+  border-color: var(--himi-line);
+  background: color-mix(in srgb, var(--himi-black) 2%, var(--himi-white));
+}
+
+.himi-writing-search:focus-within {
+  border-color: color-mix(in srgb, var(--himi-red) 55%, var(--himi-white));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--himi-red) 10%, transparent);
+}
+
+.himi-writing-groups button { color: var(--himi-muted); background: color-mix(in srgb, var(--himi-black) 5%, var(--himi-white)); }
+.himi-writing-groups button.active { color: var(--himi-on-orange); background: var(--himi-orange); }
+
+.himi-writing-character-grid button {
+  border-color: var(--himi-line);
+  background: var(--himi-white);
+}
+
+.himi-writing-character-grid button.active {
+  color: var(--himi-on-red);
+  border-color: var(--himi-red);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--himi-red) 84%, var(--himi-orange)), var(--himi-red));
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--himi-red) 25%, transparent);
+}
+
+.himi-writing-character-grid button.active > span,
+.himi-writing-character-grid button.active small { color: var(--himi-on-red); }
+.himi-writing-character-grid button.active > svg { color: var(--himi-black); }
+
+/* Completed is a semantic success state and intentionally remains green. */
+.himi-writing-character-grid button.completed:not(.active) {
+  border-color: color-mix(in srgb, #168467 38%, var(--himi-white));
+  background: color-mix(in srgb, #168467 8%, var(--himi-white));
+}
+
+.himi-writing-mode-tabs { background: color-mix(in srgb, var(--himi-black) 5%, var(--himi-white)); }
+.himi-writing-mode-tabs button { color: var(--himi-muted); }
+.himi-writing-mode-tabs button.active { color: var(--himi-red); background: var(--himi-white); }
+
+.himi-writing-board-shell {
+  border-color: var(--himi-orange-soft);
+  background: color-mix(in srgb, var(--himi-orange) 3%, var(--himi-white));
+  box-shadow: 0 20px 50px rgba(34, 34, 34, .11), inset 0 0 0 1px color-mix(in srgb, var(--himi-red) 25%, var(--himi-white));
+}
+
+.himi-writing-board-shell::after,
+.himi-writing-grid-line { border-color: color-mix(in srgb, var(--himi-red) 20%, transparent); }
+
+.himi-writing-mode-badge {
+  color: var(--himi-red);
+  border-color: color-mix(in srgb, var(--himi-red) 18%, var(--himi-white));
+  background: color-mix(in srgb, var(--himi-red-soft) 92%, transparent);
+}
+
+.himi-writing-progress { background: color-mix(in srgb, var(--himi-black) 8%, var(--himi-white)); }
+.himi-writing-progress span { background: linear-gradient(90deg, var(--himi-red), var(--himi-orange)); }
+
+.himi-writing-character-card button {
+  color: var(--himi-red);
+  background: var(--himi-red-soft);
+}
+.himi-writing-character-card button:hover { background: color-mix(in srgb, var(--himi-red) 16%, var(--himi-white)); }
+.himi-writing-meta span { color: var(--himi-black); background: var(--himi-red-soft); }
+
+.himi-writing-navigation button { color: var(--himi-black); background: color-mix(in srgb, var(--himi-black) 5%, var(--himi-white)); }
+.himi-writing-navigation button:hover { color: var(--himi-on-orange); background: var(--himi-orange); }
+
+.himi-writing-studio button:focus-visible,
+.himi-writing-studio input:not([type="search"]):focus-visible {
+  outline-color: color-mix(in srgb, var(--himi-red) 30%, transparent);
+}
+
+/* Writing lesson list — explicit brand treatment for /writing/[level]. */
+.writing-lesson-page {
+  background:
+    radial-gradient(circle at 92% 3%, color-mix(in srgb, var(--himi-orange) 13%, transparent), transparent 28%),
+    radial-gradient(circle at 5% 16%, color-mix(in srgb, var(--himi-red) 6%, transparent), transparent 24%),
+    var(--himi-white);
+}
+
+.writing-lesson-page .writing-breadcrumbs { color: var(--himi-muted); }
+.writing-lesson-page .writing-breadcrumbs strong { color: var(--himi-black); }
+.writing-lesson-page .writing-breadcrumbs a:hover { color: var(--himi-red); }
+
+.writing-lesson-page .writing-lesson-hero {
+  border: 1px solid color-mix(in srgb, var(--himi-orange) 24%, var(--himi-white));
+  background:
+    radial-gradient(circle at 88% 24%, color-mix(in srgb, var(--himi-orange) 18%, transparent), transparent 28%),
+    linear-gradient(128deg, var(--himi-white), var(--himi-orange-soft) 58%, var(--himi-red-soft));
+}
+
+.writing-lesson-page .writing-lesson-hero > div:first-child > span { color: var(--himi-red); }
+.writing-lesson-page .writing-lesson-hero h1 { color: var(--himi-black); }
+.writing-lesson-page .writing-lesson-hero p { color: var(--himi-muted); }
+
+.writing-lesson-page .writing-lesson-character-strip span {
+  color: var(--himi-black);
+  border-color: color-mix(in srgb, var(--himi-red) 18%, var(--himi-white));
+  background: var(--himi-white);
+  box-shadow: 0 9px 24px color-mix(in srgb, var(--himi-red) 8%, transparent);
+}
+
+.writing-lesson-page .writing-lesson-character-strip span:nth-child(3n + 2) {
+  border-color: color-mix(in srgb, var(--himi-orange) 26%, var(--himi-white));
+  background: var(--himi-orange-soft);
+}
+
+.writing-lesson-page .writing-lesson-card {
+  border-color: var(--himi-line);
+  background: var(--himi-white);
+  box-shadow: 0 14px 38px rgba(34, 34, 34, .065);
+}
+
+.writing-lesson-page .writing-lesson-card-header > span { color: var(--himi-red); }
+.writing-lesson-page .writing-lesson-card-header small,
+.writing-lesson-page .writing-lesson-card > p,
+.writing-lesson-page .writing-lesson-card-footer > div span { color: var(--himi-muted); }
+.writing-lesson-page .writing-lesson-card h3 { color: var(--himi-black); }
+.writing-lesson-page .writing-lesson-card-footer { border-top-color: var(--himi-line); }
+
+.writing-lesson-page .writing-lesson-card-characters span {
+  color: var(--himi-black);
+  background: var(--himi-red-soft);
+}
+
+.writing-lesson-page .writing-lesson-card-characters span:nth-child(even) {
+  background: var(--himi-orange-soft);
+}
+
+.writing-lesson-page .writing-lesson-card-footer a {
+  color: var(--himi-on-red);
+  background: var(--himi-red);
+  box-shadow: 0 9px 22px color-mix(in srgb, var(--himi-red) 23%, transparent);
+}
+
+@media (hover: hover) {
+  .writing-lesson-page .writing-lesson-card:hover {
+    border-color: color-mix(in srgb, var(--himi-red) 30%, var(--himi-white));
+    box-shadow: 0 24px 54px color-mix(in srgb, var(--himi-red) 11%, transparent);
+  }
+}

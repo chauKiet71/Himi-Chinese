@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { useEffect, useId, useRef } from "react";
-import { Crown, LockKeyhole, Sparkles, X } from "lucide-react";
+import { ArrowRight, BookOpen, Crown, LockKeyhole, Mic2, Sparkles, X } from "lucide-react";
 
 export type VipUpgradeTarget = {
-  kind: "Lộ trình" | "Module" | "Bài học" | "Câu hỏi";
+  kind: "Lộ trình" | "Module" | "Bài học" | "Câu hỏi" | "Chữ Hán";
   title: string;
 };
 
@@ -107,16 +108,19 @@ export function VipUpgradeDialog({
   >
     <section className="vip-upgrade-sheet">
       <button aria-label="Đóng yêu cầu nâng cấp" className="vip-upgrade-close" onClick={closeDialog} type="button"><X aria-hidden="true" size={21} /></button>
-      <span className="vip-upgrade-icon"><LockKeyhole aria-hidden="true" size={28} /></span>
-      <span className="vip-upgrade-kicker">Himi Chinese VIP</span>
-      <h2 id={titleId}>Mở khóa để học tiếp</h2>
-      <p id={descriptionId}>
-        <strong>{target?.kind ?? "Nội dung"}{target?.title ? ` “${target.title}”` : ""}</strong> chỉ dành cho thành viên VIP. Nâng cấp để mở nội dung này và tiếp tục lộ trình.
-      </p>
-      <form action="/vip" className="vip-upgrade-actions" method="get">
-        <button className="button button-primary" type="submit"><Crown aria-hidden="true" size={17} /> Xem các gói VIP</button>
-        <button className="button button-secondary" onClick={closeDialog} type="button">Tiếp tục học miễn phí</button>
-      </form>
+      <div className="vip-upgrade-visual" aria-hidden="true">
+        <Image alt="" className="vip-upgrade-mascot" height={440} src="/assets/home/himi-vip-offer-mascot.png" width={356} />
+      </div>
+      <div className="vip-upgrade-content">
+        <h2 id={titleId}>Bài học này chỉ có ở <strong>Himi VIP</strong></h2>
+        <p className="sr-only" id={descriptionId}>{target?.kind ?? "Nội dung"}{target?.title ? ` “${target.title}”` : ""} chỉ dành cho thành viên VIP.</p>
+        <ul className="vip-upgrade-benefits">
+          <li><span><BookOpen aria-hidden="true" /></span><div><strong>Mở khóa toàn bộ bài học</strong><small>Học không giới hạn</small></div></li>
+          <li><span><Mic2 aria-hidden="true" /></span><div><strong>Luyện phát âm AI chuẩn</strong><small>Nhận phản hồi chi tiết</small></div></li>
+          <li><span><Crown aria-hidden="true" /></span><div><strong>Nhiều tính năng cao cấp khác</strong><small>Trải nghiệm học trọn vẹn hơn</small></div></li>
+        </ul>
+        <Link className="vip-upgrade-primary" href="/vip"><Crown aria-hidden="true" /> Nâng cấp ngay <ArrowRight aria-hidden="true" /></Link>
+      </div>
     </section>
   </dialog>;
 }

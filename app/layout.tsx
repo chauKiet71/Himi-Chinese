@@ -29,6 +29,57 @@ export const metadata: Metadata = {
 
 const developmentBrowserErrorGuard = String.raw`(() => {
   const extensionOrigin = "chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/";
+  const injectedAttributeNames = new Set(["bis_register", "bis_skin_checked", "cz-shortcut-listen"]);
+  const isInjectedAttribute = (name) =>
+    injectedAttributeNames.has(name) ||
+    name.startsWith("data-extjs-debug-") ||
+    name.startsWith("__processed_");
+
+  const cleanElement = (element) => {
+    if (!(element instanceof Element)) return;
+
+    for (const attribute of Array.from(element.attributes)) {
+      if (isInjectedAttribute(attribute.name)) element.removeAttribute(attribute.name);
+    }
+
+    if (
+      element.tagName === "DIV" &&
+      !element.id &&
+      !element.className &&
+      element.parentElement?.classList.contains("home-portal-art") &&
+      element.style.position === "absolute" &&
+      element.style.top === "8px" &&
+      element.style.left === "8px" &&
+      element.style.zIndex === "1000"
+    ) {
+      element.remove();
+      return;
+    }
+
+    for (const descendant of element.querySelectorAll("*")) {
+      for (const attribute of Array.from(descendant.attributes)) {
+        if (isInjectedAttribute(attribute.name)) descendant.removeAttribute(attribute.name);
+      }
+    }
+  };
+
+  cleanElement(document.documentElement);
+  const extensionMutationGuard = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === "attributes") {
+        const name = mutation.attributeName;
+        if (name && isInjectedAttribute(name)) mutation.target.removeAttribute(name);
+        continue;
+      }
+      for (const node of mutation.addedNodes) cleanElement(node);
+    }
+  });
+  extensionMutationGuard.observe(document.documentElement, {
+    attributes: true,
+    childList: true,
+    subtree: true,
+  });
+
   const isUrbanVpnRejection = (reason) => {
     const details = [reason?.message, reason?.stack, reason?.cause?.stack]
       .filter(Boolean)

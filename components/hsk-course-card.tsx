@@ -22,7 +22,7 @@ export function HskCourseCard({ lessonCount = 0, levelCount = 0 }: Partial<HskCo
         unoptimized
       />
       <span className="course-cover-shade" aria-hidden="true" />
-      <span className="course-tag">HSK 1–9</span>
+      <span className="course-tag">HSK 1–6</span>
       <span className="course-hanzi hsk-entry-hanzi" lang="zh-CN">汉</span>
     </div>
     <div className="course-body">

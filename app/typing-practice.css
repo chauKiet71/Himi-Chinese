@@ -434,7 +434,7 @@
 }
 
 .typing-choice-page {
-  max-width: 1040px;
+  width: min(1480px, calc(100% - 40px));
 }
 
 .typing-choice-audio-note {

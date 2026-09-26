@@ -421,8 +421,15 @@ button.hsk-lesson-start {
 }
 
 .hsk-lesson-row.is-vip-locked {
-  background: #fff8ec;
+  min-height: 94px;
+  border: 1px solid #f0e2c9;
+  border-radius: 14px;
+  background: #fffaf2;
 }
+
+.hsk-lesson-row.is-vip-locked .hsk-lesson-copy > strong { color: #686b70; }
+.hsk-lesson-row.is-vip-locked .hsk-lesson-meta > span,
+.hsk-lesson-row.is-vip-locked .hsk-lesson-meta svg { color: #9aa0a7; }
 
 .hsk-lesson-row.is-sequence-locked {
   opacity: .62;
@@ -567,10 +574,34 @@ button.hsk-lesson-start {
 }
 
 .hsk-curriculum .hsk-lesson-start.hsk-vip-trigger {
-  color: #80511e;
-  border-color: #edc17e;
-  background: #fff3d9;
+  width: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0;
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  place-items: center;
+  align-self: center;
+  justify-self: end;
+  color: #a77c3b;
+  border-color: transparent;
+  border-radius: 12px;
+  background: #fff6e5;
   box-shadow: none;
+  transition: color .18s ease, border-color .18s ease, background-color .18s ease, transform .18s ease;
+}
+
+.hsk-curriculum .hsk-lesson-start.hsk-vip-trigger > svg {
+  grid-column: auto;
+  grid-row: auto;
+}
+
+.hsk-curriculum .hsk-lesson-start.hsk-vip-trigger:hover {
+  color: var(--hsk-red);
+  border-color: color-mix(in srgb, var(--hsk-red) 18%, transparent);
+  background: var(--himi-red-soft);
+  transform: translateY(-1px);
 }
 
 .hsk-lesson-duration {

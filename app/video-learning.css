@@ -939,3 +939,179 @@
   .youtube-player-error a:hover { transform: none; }
   .youtube-transcript-line[aria-current="true"] { transform: none; }
 }
+
+/* Himi brand palette -------------------------------------------------------
+ * Keep the video catalog and the interactive study room on the same visual
+ * system as the rest of the learner product. This lives in the route sheet
+ * (instead of relying only on brand-theme.css) so route-level CSS ordering
+ * cannot bring the legacy teal palette back. Green remains reserved for
+ * semantic success feedback in dictation.
+ */
+.video-library-page,
+.video-detail-page {
+  --video-coral: var(--himi-red);
+  --video-mint: var(--himi-red-soft);
+  --video-cream: var(--himi-orange-soft);
+  color: var(--himi-black);
+  background:
+    radial-gradient(circle at 86% 2%, color-mix(in srgb, var(--himi-orange) 14%, transparent), transparent 24%),
+    radial-gradient(circle at 5% 25%, color-mix(in srgb, var(--himi-red) 7%, transparent), transparent 23%),
+    var(--himi-white);
+}
+
+.video-library-header {
+  border-color: color-mix(in srgb, var(--himi-orange) 30%, var(--himi-white));
+  background: linear-gradient(128deg, var(--himi-white), var(--himi-orange-soft) 58%, var(--himi-red-soft));
+  box-shadow: 0 18px 48px rgba(34, 34, 34, .08);
+}
+
+.video-library-header::before {
+  background: color-mix(in srgb, var(--himi-red) 12%, transparent);
+  box-shadow: 0 0 0 24px rgba(255, 255, 255, .34), 0 0 0 50px color-mix(in srgb, var(--himi-orange) 10%, transparent);
+}
+
+.video-radio-play,
+.video-card-play {
+  background: linear-gradient(145deg, var(--himi-red), color-mix(in srgb, var(--himi-red) 80%, var(--himi-orange)));
+  box-shadow: 0 9px 24px color-mix(in srgb, var(--himi-red) 28%, transparent);
+}
+
+.video-radio-wave > i {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--himi-red) 64%, var(--himi-white)), var(--himi-red));
+}
+
+.video-radio-wave > i:nth-child(3),
+.video-radio-wave > i:nth-child(7) {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--himi-orange) 60%, var(--himi-white)), var(--himi-orange));
+}
+
+.video-radio-wave > i:nth-child(5) {
+  background: linear-gradient(180deg, var(--himi-orange), var(--himi-red));
+}
+
+.video-detail-eyebrow,
+.learning-video-card h3 a:hover,
+.video-card-footer > a,
+.video-empty-state button,
+.youtube-source-note > div > a:hover,
+.youtube-source-note > a,
+.video-progress-copy strong,
+.interactive-transcript-heading > div > span,
+.transcript-copy small,
+.transcript-copy > span,
+.transcript-repeat,
+.related-video-list small {
+  color: var(--himi-red);
+}
+
+.video-detail-meta span,
+.video-card-meta span {
+  color: color-mix(in srgb, var(--himi-red) 78%, var(--himi-black));
+  background: var(--himi-red-soft);
+}
+
+.video-category-filters button.active,
+.transcript-repeat[aria-pressed="true"] {
+  color: var(--himi-on-red);
+  border-color: var(--himi-red);
+  background: var(--himi-red);
+}
+
+.video-detail-back {
+  color: var(--himi-red);
+  border-color: var(--himi-line);
+}
+
+.video-detail-back:hover {
+  color: var(--himi-on-red);
+  border-color: var(--himi-red);
+  background: var(--himi-red);
+}
+
+.learning-video-card,
+.video-learning-player,
+.transcript-line,
+.video-study-sidebar > section,
+.video-about-card,
+.related-video-list > a,
+.video-catalog-tools {
+  border-color: var(--himi-line);
+}
+
+.learning-video-thumbnail { background: var(--himi-red-soft); }
+.video-sidebar-icon { color: var(--himi-red); background: var(--himi-red-soft); }
+.video-study-sidebar ul li::before { background: var(--himi-red); }
+.video-study-sidebar .video-lesson-link { color: var(--himi-white); border-color: var(--himi-black); background: var(--himi-black); }
+.video-lesson-link .section-kicker { color: color-mix(in srgb, var(--himi-orange) 76%, var(--himi-white)); }
+
+.youtube-study-studio {
+  --studio-ink: var(--himi-black);
+  --studio-teal: var(--himi-red);
+  --studio-teal-dark: color-mix(in srgb, var(--himi-red) 72%, var(--himi-black));
+  --studio-coral: var(--himi-red);
+  --studio-cream: var(--himi-orange-soft);
+  --studio-line: var(--himi-line);
+}
+
+.youtube-study-frame {
+  border-color: color-mix(in srgb, var(--himi-black) 20%, transparent);
+  box-shadow: 0 20px 48px rgba(34, 34, 34, .13);
+}
+
+.youtube-player-loading,
+.youtube-player-error { background: var(--himi-black); }
+
+.youtube-video-cover {
+  background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--himi-red) 62%, var(--himi-black)), var(--himi-black) 72%);
+}
+
+.youtube-study-toolstrip button:hover,
+.youtube-shadow-card > button,
+.dictation-actions button[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--himi-red) 32%, var(--himi-white));
+}
+
+.youtube-shadow-card {
+  border-color: var(--himi-line);
+  background: linear-gradient(135deg, var(--himi-white), var(--himi-red-soft));
+}
+
+.youtube-shadow-card::after { color: color-mix(in srgb, var(--himi-red) 6%, transparent); }
+
+.youtube-transcript-toggles button {
+  color: color-mix(in srgb, var(--himi-red) 74%, var(--himi-black));
+  border-color: color-mix(in srgb, var(--himi-red) 24%, var(--himi-white));
+  background: var(--himi-red-soft);
+}
+
+.youtube-transcript-progress span { background: linear-gradient(90deg, var(--himi-red), var(--himi-orange)); }
+
+.youtube-transcript-line[aria-current="true"],
+.dictation-reveal {
+  border-color: color-mix(in srgb, var(--himi-red) 28%, var(--himi-white));
+  background: linear-gradient(135deg, var(--himi-red-soft), var(--himi-orange-soft));
+  box-shadow: 0 9px 22px color-mix(in srgb, var(--himi-red) 10%, transparent);
+}
+
+.dictation-level-tabs button[aria-selected="true"],
+.dictation-input button {
+  color: var(--himi-on-red);
+  background: var(--himi-red);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--himi-red) 22%, transparent);
+}
+
+.dictation-prompt button { color: var(--himi-red); background: var(--himi-red-soft); }
+.dictation-input:focus-within { border-color: var(--himi-red); box-shadow: 0 0 0 4px color-mix(in srgb, var(--himi-red) 12%, transparent); }
+
+.youtube-study-toolstrip button:focus-visible,
+.youtube-study-switch:focus-visible,
+.youtube-transcript-toggles button:focus-visible,
+.youtube-transcript-line:focus-visible,
+.dictation-level-tabs button:focus-visible,
+.dictation-navigation button:focus-visible,
+.dictation-prompt button:focus-visible,
+.dictation-actions button:focus-visible,
+.youtube-shadow-card > button:focus-visible,
+.youtube-video-cover:focus-visible {
+  outline-color: color-mix(in srgb, var(--himi-red) 30%, transparent);
+}

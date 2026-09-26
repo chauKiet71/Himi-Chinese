@@ -1414,3 +1414,185 @@
     animation: none;
   }
 }
+
+/* User-selected homepage artwork. It owns the full visible viewport; cover is
+ * intentional so the page never needs vertical scrolling to reveal the hero.
+ */
+html:has(.home-portal-dashboard),
+body:has(.home-portal-dashboard) {
+  height: 100%;
+  overflow: hidden;
+}
+
+.learner-app-shell.is-home-route,
+.learner-app-shell.is-home-route .learner-shell-content {
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+.home-portal-dashboard {
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh !important;
+  overflow: hidden;
+  background: #fdfbf8;
+}
+
+.home-portal-hero {
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  aspect-ratio: auto;
+  background: #fdfbf8;
+}
+
+.home-portal-art { transform: none; }
+
+/* The supplied artwork already contains its own lighting treatment. Remove
+ * the legacy white brand overlays so its original contrast stays intact. */
+.home-portal-dashboard .home-portal-art::before,
+.home-portal-dashboard .home-portal-art::after {
+  content: none;
+  background: none;
+  box-shadow: none;
+}
+
+.home-portal-art img {
+  object-fit: cover;
+  object-position: center;
+  transform: none;
+}
+
+.home-portal-art-mobile { display: none !important; }
+
+.home-portal-hero.is-motion-active .home-portal-art img { animation: none; }
+
+.home-portal-conversation,
+.home-portal-himi-stage,
+.home-portal-copy { display: none; }
+
+.home-portal-background-cta {
+  width: clamp(190px, 27%, 300px);
+  min-height: clamp(50px, 8.5%, 64px);
+  padding: 0 clamp(20px, 2vw, 30px);
+  position: absolute;
+  left: 5.4%;
+  bottom: 11.6%;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  box-sizing: border-box;
+  color: var(--himi-white);
+  border: 1px solid color-mix(in srgb, var(--himi-red) 82%, var(--himi-orange));
+  border-radius: 999px;
+  background: linear-gradient(105deg, var(--himi-red) 0%, color-mix(in srgb, var(--himi-red) 58%, var(--himi-orange)) 100%);
+  box-shadow: 0 14px 30px color-mix(in srgb, var(--himi-red) 28%, transparent);
+  font-size: clamp(14px, 1.25vw, 18px);
+  font-weight: 820;
+  letter-spacing: .015em;
+  text-decoration: none;
+  text-transform: uppercase;
+  animation: home-portal-cta-wiggle 3s ease-in-out infinite;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+@keyframes home-portal-cta-wiggle {
+  0%, 72%, 100% { translate: 0 0; }
+  77% { translate: -5px 0; }
+  82% { translate: 5px 0; }
+  87% { translate: -4px 0; }
+  92% { translate: 4px 0; }
+  96% { translate: -2px 0; }
+}
+
+/* This CTA is intentionally animated by product request, even when the
+ * global reduced-motion fallback shortens other decorative animations. */
+@media (prefers-reduced-motion: reduce) {
+  .home-portal-background-cta {
+    animation-duration: 3s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
+.home-portal-background-cta:hover {
+  filter: saturate(1.08) brightness(1.02);
+  box-shadow: 0 18px 36px color-mix(in srgb, var(--himi-red) 36%, transparent);
+  transform: translateY(-2px);
+}
+
+.home-portal-background-cta:active {
+  box-shadow: 0 9px 20px color-mix(in srgb, var(--himi-red) 24%, transparent);
+  transform: translateY(1px);
+}
+
+.home-portal-background-cta svg {
+  flex: 0 0 auto;
+  transition: transform 180ms ease;
+}
+
+.home-portal-background-cta:hover svg {
+  transform: translateX(3px);
+}
+
+.home-portal-background-cta:focus-visible {
+  outline: 4px solid var(--himi-black);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--himi-orange) 34%, transparent);
+}
+
+.home-portal-success {
+  top: 18px;
+  right: 18px;
+  left: auto;
+  z-index: 7;
+}
+
+@media (max-width: 720px) {
+  .learner-app-shell.is-home-route .learn-topbar {
+    display: none;
+  }
+
+  .home-portal-dashboard,
+  .home-portal-hero {
+    height: 100dvh;
+    min-height: 100dvh !important;
+  }
+
+  .home-portal-dashboard {
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+
+  .home-portal-art {
+    height: 100%;
+    inset: 0;
+  }
+
+  .home-portal-art-desktop { display: none !important; }
+
+  .home-portal-art-mobile {
+    display: block !important;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .home-portal-background-cta {
+    width: 59%;
+    min-height: clamp(48px, 5.5dvh, 66px);
+    left: 50%;
+    bottom: calc(10.1% + env(safe-area-inset-bottom));
+    font-size: clamp(13px, 3.5vw, 17px);
+    transform: translateX(-50%);
+  }
+
+  .home-portal-background-cta:hover {
+    transform: translate(-50%, -2px);
+  }
+
+  .home-portal-background-cta:active {
+    transform: translate(-50%, 1px);
+  }
+}
