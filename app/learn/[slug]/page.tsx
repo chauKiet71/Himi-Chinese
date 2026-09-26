@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { LessonWorkspace } from "@/components/lesson-workspace";
 import { listPublishedCourses } from "@/lib/course-repository";
 import { getDailySessionSource } from "@/lib/daily-session-repository";
-import { requireLearnerUser } from "@/lib/learner-auth";
+import { getCurrentUser } from "@/lib/auth-session";
+import { learnerLoginPath } from "@/lib/learner-auth";
 import { getLessonPageData } from "@/lib/lesson-repository";
 
 export async function generateStaticParams() {
@@ -23,13 +24,14 @@ export default async function LearnPage({
   if (lessonSlug) returnParams.set("lesson", lessonSlug);
   if (session) returnParams.set("session", session);
   const returnTo = `/learn/${encodeURIComponent(slug)}${returnParams.size ? `?${returnParams}` : ""}`;
-  const user = await requireLearnerUser(returnTo);
-  const dailyFlow = session === "today";
+  const user = await getCurrentUser();
+  const dailyFlow = Boolean(user) && session === "today";
   const [data, dailySource] = await Promise.all([
-    getLessonPageData({ courseSlug: slug, lessonSlug, userId: user.id }),
-    dailyFlow ? getDailySessionSource(user.id) : Promise.resolve(null),
+    getLessonPageData({ courseSlug: slug, lessonSlug, userId: user?.id ?? null }),
+    dailyFlow && user ? getDailySessionSource(user.id) : Promise.resolve(null),
   ]);
   if (!data || data.invalidLesson) notFound();
+  if (!user && data.access?.source !== "guest") redirect(learnerLoginPath(returnTo));
   const dailyNextStep = !dailySource
     ? null
     : !dailySource.practiceCompletedToday
@@ -46,7 +48,7 @@ export default async function LearnPage({
         lesson={data.lesson}
         access={data.access}
         progress={data.progress}
-        authenticated
+        authenticated={Boolean(user)}
         dailyFlow={dailyFlow}
         dailyNextStep={dailyNextStep}
         key={data.lesson.slug}

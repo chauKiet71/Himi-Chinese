@@ -16,6 +16,7 @@ import {
   Globe2,
   Heart,
   LockKeyhole,
+  LogIn,
   MapPin,
   MessageCircle,
   Play,
@@ -183,7 +184,7 @@ export function HskCurriculumExplorer({
 
         <Link className="hsk-industry-link" href={catalogHref}>Lộ trình theo ngành <ArrowRight aria-hidden="true" size={17} /></Link>
 
-        {activeLevel.access && !activeLevel.access.allowed ? <button className="hsk-industry-link hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Lộ trình", title: activeLevel.label })} type="button"><Crown aria-hidden="true" size={17} /> Cần nâng cấp</button> : null}
+        {activeLevel.access && !activeLevel.access.allowed ? <button className="hsk-industry-link hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Lộ trình", title: activeLevel.label })} type="button">{activeLevel.access.source === "login_required" ? <><LogIn aria-hidden="true" size={17} /> Cần đăng nhập</> : <><Crown aria-hidden="true" size={17} /> Cần nâng cấp</>}</button> : null}
       </div>
     </header>
 
@@ -216,11 +217,12 @@ export function HskCurriculumExplorer({
                 const lessonSelected = lesson.id === nextLessonId;
                 const sequenceLocked = nextLessonIndex >= 0 && levelLessonIndex > nextLessonIndex;
                 const accessAllowed = lesson.access?.allowed ?? true;
+                const loginLocked = lesson.access?.source === "login_required";
                 const lessonAvailable = lesson.available && accessAllowed && !sequenceLocked;
                 const lessonHref = `/hsk/${activeLevel.id.replace(/^hsk-/, "")}/${lesson.id}`;
                 const lessonDestination = getHskCurriculumLessonDestination(activeLevel.id, lesson.id, lessonCompleted);
                 const savedPercent = lessonProgress[lesson.id] ?? 0;
-                return <article className={`hsk-lesson-row${lessonSelected ? " is-active" : ""}${!accessAllowed ? " is-vip-locked" : ""}${sequenceLocked ? " is-sequence-locked" : ""}${lessonCompleted ? " is-completed" : ""}`} key={lesson.id}>
+                return <article className={`hsk-lesson-row${lessonSelected ? " is-active" : ""}${!accessAllowed ? ` is-vip-locked${loginLocked ? " is-login-locked" : ""}` : ""}${sequenceLocked ? " is-sequence-locked" : ""}${lessonCompleted ? " is-completed" : ""}`} key={lesson.id}>
                   {lessonAvailable ? <Link aria-label={`Bài ${lesson.lessonNumber}: ${lesson.title}`} className="hsk-lesson-select" href={lessonDestination} prefetch={false}>
                     <span className="hsk-lesson-index">{lessonCompleted ? <CircleCheck aria-hidden="true" size={20} /> : lessonSelected ? <Play aria-hidden="true" fill="currentColor" size={20} /> : lesson.lessonNumber}</span>
                     <span className="hsk-lesson-copy">
@@ -246,7 +248,7 @@ export function HskCurriculumExplorer({
                     <span>{savedPercent > 0 ? `${savedPercent}% đã học` : "Sẵn sàng"}</span>
                     <strong>{savedPercent > 0 ? "Tiếp tục học" : "Bắt đầu học"}</strong>
                     <ArrowRight aria-hidden="true" size={18} />
-                  </Link> : !accessAllowed ? <button aria-label={`Mở quyền lợi VIP cho bài ${lesson.lessonNumber}`} className="hsk-lesson-start hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Bài học", title: lesson.title })} type="button"><Crown aria-hidden="true" size={21} /></button> : <span className="hsk-lesson-duration">{lessonCompleted ? <><CircleCheck aria-hidden="true" size={17} /> Đã hoàn thành</> : sequenceLocked ? <><LockKeyhole aria-hidden="true" size={16} /> Hoàn thành bài trước</> : <>{lessonAvailable ? "Mở bài" : lesson.availabilityLabel ?? "Sắp ra mắt"} <ChevronRight aria-hidden="true" size={19} /></>}</span>}
+                  </Link> : !accessAllowed ? <button aria-label={loginLocked ? `Đăng nhập để học bài ${lesson.lessonNumber}` : `Mở quyền lợi VIP cho bài ${lesson.lessonNumber}`} className="hsk-lesson-start hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Bài học", title: lesson.title })} type="button">{loginLocked ? <LogIn aria-hidden="true" size={21} /> : <Crown aria-hidden="true" size={21} />}</button> : <span className="hsk-lesson-duration">{lessonCompleted ? <><CircleCheck aria-hidden="true" size={17} /> Đã hoàn thành</> : sequenceLocked ? <><LockKeyhole aria-hidden="true" size={16} /> Hoàn thành bài trước</> : <>{lessonAvailable ? "Mở bài" : lesson.availabilityLabel ?? "Sắp ra mắt"} <ChevronRight aria-hidden="true" size={19} /></>}</span>}
 
                   {lessonSelected && lessonAvailable ? <div className="hsk-lesson-coach-note">
                     <span className="hsk-lesson-coach-avatar">

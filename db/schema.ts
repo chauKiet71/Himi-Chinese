@@ -30,7 +30,7 @@ export const paymentStatus = pgEnum("payment_status", ["pending", "paid", "faile
 export const reviewState = pgEnum("review_state", ["new", "learning", "reviewing", "mastered"]);
 export const authTokenPurpose = pgEnum("auth_token_purpose", ["verify_email", "reset_password"]);
 export const practiceAudioReviewStatus = pgEnum("practice_audio_review_status", ["pending", "approved", "re_record"]);
-export const accessTier = pgEnum("access_tier", ["free", "vip"]);
+export const accessTier = pgEnum("access_tier", ["guest", "free", "vip"]);
 export const contentAccessTargetType = pgEnum("content_access_target_type", [
   "learning_path",
   "learning_module",

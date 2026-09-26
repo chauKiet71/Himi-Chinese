@@ -11,7 +11,7 @@ export const CONTENT_ACCESS_TARGET_TYPES = [
 ] as const;
 
 export type ContentAccessTargetType = typeof CONTENT_ACCESS_TARGET_TYPES[number];
-export type AccessTier = "free" | "vip";
+export type AccessTier = "guest" | "free" | "vip";
 
 export type ContentAccessTarget = {
   type: ContentAccessTargetType;
@@ -28,7 +28,7 @@ export type ContentAccessPolicy = {
 export type ContentAccessState = {
   allowed: boolean;
   requiredTier: AccessTier;
-  source: "free" | "vip" | "vip_required";
+  source: "guest" | "free" | "login_required" | "vip" | "vip_required";
   lockedAt: ContentAccessTarget | null;
 };
 
@@ -39,25 +39,48 @@ export function contentAccessPolicyKey(type: ContentAccessTargetType, key: strin
 export function resolveContentAccess({
   targets,
   policies,
+  viewerAuthenticated = true,
   viewerHasVip,
 }: {
   targets: ContentAccessTarget[];
   policies: Iterable<ContentAccessPolicy>;
+  viewerAuthenticated?: boolean;
   viewerHasVip: boolean;
 }): ContentAccessState {
   const policyMap = new Map(
     [...policies].map((policy) => [contentAccessPolicyKey(policy.targetType, policy.targetKey), policy.tier]),
   );
-  const lockedAt = targets.find((target) => {
-    const tier = policyMap.get(contentAccessPolicyKey(target.type, target.key)) ?? target.defaultTier ?? "free";
-    return tier === "vip";
-  }) ?? null;
-  const requiredTier: AccessTier = lockedAt ? "vip" : "free";
+  const resolvedTargets = targets.map((target) => {
+    const policyKey = contentAccessPolicyKey(target.type, target.key);
+    return {
+      explicit: policyMap.has(policyKey),
+      target,
+      tier: policyMap.get(policyKey) ?? target.defaultTier ?? "free",
+    };
+  });
+  const vipTarget = resolvedTargets.find(({ tier }) => tier === "vip")?.target ?? null;
+  if (vipTarget) {
+    return viewerHasVip
+      ? { allowed: true, requiredTier: "vip", source: "vip", lockedAt: vipTarget }
+      : { allowed: false, requiredTier: "vip", source: "vip_required", lockedAt: vipTarget };
+  }
 
-  if (requiredTier === "free") return { allowed: true, requiredTier, source: "free", lockedAt: null };
-  return viewerHasVip
-    ? { allowed: true, requiredTier, source: "vip", lockedAt }
-    : { allowed: false, requiredTier, source: "vip_required", lockedAt };
+  // A direct rule on the closest node wins between guest and free. This lets
+  // an administrator expose one lesson/item to visitors without a default
+  // free rule on its parent accidentally overriding that choice.
+  const directRule = [...resolvedTargets].reverse().find(({ explicit }) => explicit);
+  const fallbackRule = resolvedTargets.at(-1);
+  const requiredTier = (directRule ?? fallbackRule)?.tier === "guest" ? "guest" : "free";
+  if (requiredTier === "guest") {
+    return { allowed: true, requiredTier, source: "guest", lockedAt: null };
+  }
+
+  const authenticated = viewerAuthenticated || viewerHasVip;
+  if (authenticated) {
+    return { allowed: true, requiredTier, source: "free", lockedAt: null };
+  }
+  const lockedAt = (directRule ?? fallbackRule)?.target ?? targets.at(-1) ?? null;
+  return { allowed: false, requiredTier, source: "login_required", lockedAt };
 }
 
 export function learningPathTarget(courseId: string): ContentAccessTarget {

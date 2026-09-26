@@ -121,7 +121,8 @@ export async function getHskLessonPageData({
     getContentAccessPolicies([...parentTargets, ...vocabularyTargets, ...writingTargets, ...questionTargets]),
     viewerVip(userId),
   ]);
-  const access = resolveContentAccess({ targets: parentTargets, policies, viewerHasVip: hasVip });
+  const viewerAuthenticated = Boolean(userId);
+  const access = resolveContentAccess({ targets: parentTargets, policies, viewerAuthenticated, viewerHasVip: hasVip });
   if (!access.allowed) return { lesson: redactLesson(lesson), access };
 
   return {
@@ -130,16 +131,19 @@ export async function getHskLessonPageData({
       vocabulary: lesson.vocabulary.map((item, index) => resolveContentAccess({
         targets: [...parentTargets, vocabularyTargets[index]],
         policies,
+        viewerAuthenticated,
         viewerHasVip: hasVip,
       }).allowed ? item : lockedVocabulary(item)),
       writingCharacters: lesson.writingCharacters.map((character, index) => resolveContentAccess({
         targets: [...parentTargets, writingTargets[index]],
         policies,
+        viewerAuthenticated,
         viewerHasVip: hasVip,
       }).allowed ? character : lockedWriting(character)),
       exercises: lesson.exercises.map((exercise, index) => resolveContentAccess({
         targets: [...parentTargets, questionTargets[index]],
         policies,
+        viewerAuthenticated,
         viewerHasVip: hasVip,
       }).allowed ? exercise : lockedExercise(exercise)),
     },
@@ -163,9 +167,10 @@ export async function getHskCurriculumPageData(userId: string | null): Promise<H
     getContentAccessPolicies(targets),
     viewerVip(userId),
   ]);
+  const viewerAuthenticated = Boolean(userId);
   return HSK_CURRICULUM.map((level) => {
     const levelTarget = hskLevelTarget(level.id);
-    const levelAccess = resolveContentAccess({ targets: [levelTarget], policies, viewerHasVip: hasVip });
+    const levelAccess = resolveContentAccess({ targets: [levelTarget], policies, viewerAuthenticated, viewerHasVip: hasVip });
     return {
       ...level,
       access: levelAccess,
@@ -176,6 +181,7 @@ export async function getHskCurriculumPageData(userId: string | null): Promise<H
           const access = resolveContentAccess({
             targets: [levelTarget, hskLessonTarget(level.id, lesson.id, content?.accessTier ?? "free")],
             policies,
+            viewerAuthenticated,
             viewerHasVip: hasVip,
           });
           return {
@@ -199,7 +205,12 @@ export async function getHskLevelAccess(
     policies ?? getContentAccessPolicies([target]),
     viewerVip(userId),
   ]);
-  return resolveContentAccess({ targets: [target], policies: resolvedPolicies, viewerHasVip: hasVip });
+  return resolveContentAccess({
+    targets: [target],
+    policies: resolvedPolicies,
+    viewerAuthenticated: Boolean(userId),
+    viewerHasVip: hasVip,
+  });
 }
 
 export async function getHskLevelLessonAccess(
@@ -231,17 +242,18 @@ export async function getHskLevelLessonAccess(
     getContentAccessPolicies([levelTarget, ...lessonTargets, ...vocabularyTargets]),
     viewerVip(userId),
   ]);
-  const levelAccess = resolveContentAccess({ targets: [levelTarget], policies, viewerHasVip: hasVip });
+  const viewerAuthenticated = Boolean(userId);
+  const levelAccess = resolveContentAccess({ targets: [levelTarget], policies, viewerAuthenticated, viewerHasVip: hasVip });
   const allowedLessonIds = new Set<string>();
   const allowedVocabularyKeys = new Set<string>();
   if (levelAccess.allowed) {
     lessonEntries.forEach((entry) => {
-      const lessonAllowed = resolveContentAccess({ targets: [levelTarget, entry.target], policies, viewerHasVip: hasVip }).allowed;
+      const lessonAllowed = resolveContentAccess({ targets: [levelTarget, entry.target], policies, viewerAuthenticated, viewerHasVip: hasVip }).allowed;
       if (!lessonAllowed) return;
       allowedLessonIds.add(entry.lesson.id);
       (entry.content?.vocabulary ?? []).forEach((item) => {
         const target = hskVocabularyTarget(levelId, entry.lesson.id, item.id, item.accessTier ?? "free");
-        if (resolveContentAccess({ targets: [levelTarget, entry.target, target], policies, viewerHasVip: hasVip }).allowed) {
+        if (resolveContentAccess({ targets: [levelTarget, entry.target, target], policies, viewerAuthenticated, viewerHasVip: hasVip }).allowed) {
           allowedVocabularyKeys.add(`${entry.lesson.id}:${item.id}`);
         }
       });

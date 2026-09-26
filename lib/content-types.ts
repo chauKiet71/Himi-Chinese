@@ -52,7 +52,7 @@ export type ChallengeQuestion = {
   options: string[];
   correctOption: number;
   explanation: string;
-  accessTier?: "free" | "vip";
+  accessTier?: "guest" | "free" | "vip";
   locked?: boolean;
 };
 
@@ -89,8 +89,8 @@ export type LessonDetail = LessonSummary & LessonContent & {
 
 export type LessonAccess = {
   allowed: boolean;
-  source: "free" | "vip" | "vip_required";
-  requiredTier?: "free" | "vip";
+  source: "guest" | "free" | "login_required" | "vip" | "vip_required";
+  requiredTier?: "guest" | "free" | "vip";
   lockedAt?: string | null;
 };
 

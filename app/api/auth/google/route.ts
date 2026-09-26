@@ -15,7 +15,8 @@ export async function GET(request: Request) {
     response.cookies.set(GOOGLE_VERIFIER_COOKIE, verifier, options);
     response.cookies.set(GOOGLE_RETURN_TO_COOKIE, returnTo, options);
     return response;
-  } catch {
+  } catch (error) {
+    console.error("Không thể khởi tạo Google OAuth.", error instanceof Error ? error.message : "unknown");
     return NextResponse.redirect(new URL("/login?error=google_unavailable", requestOrigin(request)), 303);
   }
 }

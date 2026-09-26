@@ -145,6 +145,7 @@ export function ContentAccessPolicyForm({
     <label>
       <span className="sr-only">Quyền truy cập</span>
       <select defaultValue={currentTier ?? defaultTier} name="tier">
+        <option value="guest">Chưa đăng nhập</option>
         <option value="free">Miễn phí</option>
         <option value="vip">VIP</option>
       </select>

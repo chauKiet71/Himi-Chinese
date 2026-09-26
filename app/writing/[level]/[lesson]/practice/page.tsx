@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { HimiWritingStudio } from "@/components/himi-writing-studio";
 import { HskVipLocked } from "@/components/hsk-vip-locked";
 import { getHskLessonPageData } from "@/lib/hsk-access-repository";
-import { requireLearnerUser } from "@/lib/learner-auth";
+import { getCurrentUser } from "@/lib/auth-session";
+import { learnerLoginPath } from "@/lib/learner-auth";
 import { getWritingPracticeParams, getWritingTopic, getWritingTopicFromLesson } from "@/lib/writing-content";
 
 type WritingPracticePageProps = {
@@ -26,9 +27,11 @@ export async function generateMetadata({ params }: WritingPracticePageProps): Pr
 
 export default async function WritingPracticePage({ params }: WritingPracticePageProps) {
   const { level, lesson } = await params;
-  const user = await requireLearnerUser(`/writing/${encodeURIComponent(level)}/${encodeURIComponent(lesson)}/practice`);
-  const data = await getHskLessonPageData({ level, lessonId: lesson, userId: user.id });
+  const returnTo = `/writing/${encodeURIComponent(level)}/${encodeURIComponent(lesson)}/practice`;
+  const user = await getCurrentUser();
+  const data = await getHskLessonPageData({ level, lessonId: lesson, userId: user?.id ?? null });
   if (!data) notFound();
+  if (!user && data.access.source !== "guest") redirect(learnerLoginPath(returnTo));
   if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
 
   const topic = getWritingTopicFromLesson(level, lesson, data.lesson);

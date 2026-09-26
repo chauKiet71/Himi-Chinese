@@ -104,7 +104,11 @@ function parseLessonContent(value: unknown): LessonContent {
         }).map((question, index) => ({
           ...question,
           id: isString(question.id) && question.id.trim() ? question.id.trim() : `question-${index + 1}`,
-          accessTier: question.accessTier === "vip" ? "vip" as const : "free" as const,
+          accessTier: question.accessTier === "vip"
+            ? "vip" as const
+            : question.accessTier === "guest"
+              ? "guest" as const
+              : "free" as const,
         }))
       : [];
     if (isString(item.title) && isString(item.description) && typeof item.passScore === "number" && questions.length) {
@@ -164,11 +168,13 @@ async function filterLessonQuestions({
   content,
   lessonId,
   parentTargets,
+  viewerAuthenticated = true,
   viewerHasVip,
 }: {
   content: LessonContent;
   lessonId: string;
   parentTargets: ContentAccessTarget[];
+  viewerAuthenticated?: boolean;
   viewerHasVip: boolean;
 }): Promise<LessonContent> {
   if (!content.challenge?.questions.length) return content;
@@ -186,15 +192,16 @@ async function filterLessonQuestions({
     const access = resolveContentAccess({
       targets: [...parentTargets, questionTargets[index]],
       policies,
+      viewerAuthenticated,
       viewerHasVip,
     });
     return access.allowed ? question : {
       id: question.id,
-      prompt: "Câu hỏi dành cho thành viên VIP",
+      prompt: access.source === "login_required" ? "Đăng nhập để học câu hỏi này" : "Câu hỏi dành cho thành viên VIP",
       options: [],
       correctOption: -1,
       explanation: "",
-      accessTier: "vip",
+      accessTier: access.requiredTier,
       locked: true,
     };
   });
@@ -359,7 +366,7 @@ async function readLessonPageData({
     summary: row.summary ?? "",
     situation: row.situation ?? "",
     estimatedMinutes: row.estimatedMinutes,
-    isFree: resolveContentAccess({ targets: lessonTargets(row), policies, viewerHasVip: false }).requiredTier === "free",
+    isFree: resolveContentAccess({ targets: lessonTargets(row), policies, viewerHasVip: false }).requiredTier !== "vip",
     order,
     moduleSlug: row.moduleSlug,
     moduleTitle: row.moduleTitle,
@@ -370,7 +377,12 @@ async function readLessonPageData({
 
   const activeTargets = lessonTargets(active);
   const [accessState, progress] = await Promise.all([
-    Promise.resolve(resolveContentAccess({ targets: activeTargets, policies, viewerHasVip })),
+    Promise.resolve(resolveContentAccess({
+      targets: activeTargets,
+      policies,
+      viewerAuthenticated: Boolean(userId),
+      viewerHasVip,
+    })),
     userId ? getLessonProgress(userId, active.id) : Promise.resolve(null),
   ]);
   const access = toLessonAccess(accessState);
@@ -378,7 +390,13 @@ async function readLessonPageData({
     ? await getCachedLessonBody(courseSlug, active.id)
     : { content: { dialogue: [], notes: [] } satisfies LessonContent, vocabulary: [] satisfies Vocabulary[] };
   const filteredContent = access.allowed
-    ? await filterLessonQuestions({ content: body.content, lessonId: active.id, parentTargets: activeTargets, viewerHasVip })
+    ? await filterLessonQuestions({
+      content: body.content,
+      lessonId: active.id,
+      parentTargets: activeTargets,
+      viewerAuthenticated: Boolean(userId),
+      viewerHasVip,
+    })
     : body.content;
 
   const lesson: LessonDetail = {

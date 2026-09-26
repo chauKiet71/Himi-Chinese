@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { HskGuidedLesson } from "@/components/hsk-guided-lesson";
 import { HskVipLocked } from "@/components/hsk-vip-locked";
 import { getHskLessonPageData } from "@/lib/hsk-access-repository";
 import { HSK_CURRICULUM } from "@/lib/hsk-curriculum";
 import { getHskLessonHref } from "@/lib/hsk-lesson-content";
-import { requireLearnerUser } from "@/lib/learner-auth";
+import { getCurrentUser } from "@/lib/auth-session";
+import { learnerLoginPath } from "@/lib/learner-auth";
 
 type PageProps = { params: Promise<{ level: string; lesson: string }> };
 
@@ -21,9 +22,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function HskGuidedLessonPage({ params }: PageProps) {
   const { level, lesson: lessonId } = await params;
-  const user = await requireLearnerUser(`/hsk/${encodeURIComponent(level)}/${encodeURIComponent(lessonId)}/play`);
-  const data = await getHskLessonPageData({ level, lessonId, userId: user.id });
+  const returnTo = `/hsk/${encodeURIComponent(level)}/${encodeURIComponent(lessonId)}/play`;
+  const user = await getCurrentUser();
+  const data = await getHskLessonPageData({ level, lessonId, userId: user?.id ?? null });
   if (!data) notFound();
+  if (!user && data.access.source !== "guest") redirect(learnerLoginPath(returnTo));
   if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
   const levelLessons = HSK_CURRICULUM
     .find((curriculumLevel) => curriculumLevel.id === data.lesson.levelId)
@@ -33,5 +36,5 @@ export default async function HskGuidedLessonPage({ params }: PageProps) {
   const nextLessonHref = nextLesson?.available
     ? `${getHskLessonHref(data.lesson.levelId, nextLesson.id)}/play`
     : null;
-  return <HskGuidedLesson authenticated lesson={data.lesson} nextLessonHref={nextLessonHref} />;
+  return <HskGuidedLesson authenticated={Boolean(user)} lesson={data.lesson} nextLessonHref={nextLessonHref} />;
 }

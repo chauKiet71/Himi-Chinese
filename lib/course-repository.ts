@@ -68,7 +68,12 @@ export async function listPublishedCoursesForViewer(userId: string | null): Prom
       userId ? hasActiveVipAccess(userId) : Promise.resolve(false),
     ]);
     return entries.map((entry, index) => {
-      const access = resolveContentAccess({ targets: [targets[index]], policies, viewerHasVip });
+      const access = resolveContentAccess({
+        targets: [targets[index]],
+        policies,
+        viewerAuthenticated: Boolean(userId),
+        viewerHasVip,
+      });
       return { ...entry.course, access, ...(access.allowed ? {} : { freeLessons: 0 }) };
     });
   } catch (error) {

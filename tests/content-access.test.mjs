@@ -75,3 +75,54 @@ test("a child free rule never bypasses a VIP parent", () => {
   assert.equal(access.allowed, false);
   assert.deepEqual(access.lockedAt, hskLevelTarget("hsk-3"));
 });
+
+test("guest content remains available without an account while free content still requires login", () => {
+  const target = hskLessonTarget("hsk-1", "lesson-1");
+  const guestPolicy = [{ targetType: target.type, targetKey: target.key, tier: "guest" }];
+
+  const guest = resolveContentAccess({
+    targets: [hskLevelTarget("hsk-1"), target],
+    policies: guestPolicy,
+    viewerAuthenticated: false,
+    viewerHasVip: false,
+  });
+  assert.equal(guest.allowed, true);
+  assert.equal(guest.requiredTier, "guest");
+  assert.equal(guest.source, "guest");
+
+  const anonymousFree = resolveContentAccess({
+    targets: [hskLevelTarget("hsk-1"), target],
+    policies: [],
+    viewerAuthenticated: false,
+    viewerHasVip: false,
+  });
+  assert.equal(anonymousFree.allowed, false);
+  assert.equal(anonymousFree.requiredTier, "free");
+  assert.equal(anonymousFree.source, "login_required");
+
+  const signedInFree = resolveContentAccess({
+    targets: [hskLevelTarget("hsk-1"), target],
+    policies: [],
+    viewerAuthenticated: true,
+    viewerHasVip: false,
+  });
+  assert.equal(signedInFree.allowed, true);
+  assert.equal(signedInFree.source, "free");
+});
+
+test("a VIP parent still overrides a guest child rule", () => {
+  const level = hskLevelTarget("hsk-2");
+  const lesson = hskLessonTarget("hsk-2", "lesson-1");
+  const access = resolveContentAccess({
+    targets: [level, lesson],
+    policies: [
+      { targetType: level.type, targetKey: level.key, tier: "vip" },
+      { targetType: lesson.type, targetKey: lesson.key, tier: "guest" },
+    ],
+    viewerAuthenticated: false,
+    viewerHasVip: false,
+  });
+  assert.equal(access.allowed, false);
+  assert.equal(access.source, "vip_required");
+  assert.deepEqual(access.lockedAt, level);
+});

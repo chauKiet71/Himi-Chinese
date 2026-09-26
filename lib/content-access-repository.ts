@@ -74,7 +74,12 @@ export async function getContentAccessState({
         : Promise.resolve(false)
       : Promise.resolve(viewerHasVip),
   ]);
-  return resolveContentAccess({ targets, policies: resolvedPolicies, viewerHasVip: hasVip });
+  return resolveContentAccess({
+    targets,
+    policies: resolvedPolicies,
+    viewerAuthenticated: Boolean(userId),
+    viewerHasVip: hasVip,
+  });
 }
 
 export async function setContentAccessPolicy(input: {

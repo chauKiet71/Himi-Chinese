@@ -197,6 +197,13 @@
       "when": 1790440091691,
       "tag": "0027_light_fat_cobra",
       "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1790445176378,
+      "tag": "0028_numerous_red_shift",
+      "breakpoints": true
     }
   ]
 }

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { ArrowUpRight, BookOpen, CalendarClock, Clock3, Crown, LockKeyhole } from "lucide-react";
+import { ArrowUpRight, BookOpen, CalendarClock, Clock3, Crown, LockKeyhole, LogIn } from "lucide-react";
 import type { Course } from "@/lib/content-types";
 import { getCourseVisual } from "@/lib/course-visuals";
 import { VipUpgradeDialog, type VipUpgradeTarget } from "@/components/vip-upgrade-prompt";
@@ -11,7 +11,8 @@ import { VipUpgradeDialog, type VipUpgradeTarget } from "@/components/vip-upgrad
 export function CourseCard({ authenticated = true, course, priority = false }: { authenticated?: boolean; course: Course; priority?: boolean }) {
   const [upgradeTarget, setUpgradeTarget] = useState<VipUpgradeTarget | null>(null);
   const visual = getCourseVisual(course.slug);
-  const vipLocked = Boolean(course.access && !course.access.allowed);
+  const accessLocked = Boolean(course.access && !course.access.allowed);
+  const loginLocked = course.access?.source === "login_required";
   const content = <>
     <div className="course-cover" style={{ "--course-bg": course.color, "--course-ink": course.ink } as React.CSSProperties}>
       <Image
@@ -25,10 +26,10 @@ export function CourseCard({ authenticated = true, course, priority = false }: {
         unoptimized
       />
       <span className="course-cover-shade" aria-hidden="true" />
-      <span className="course-tag">{vipLocked ? <><LockKeyhole aria-hidden="true" size={13} /> VIP</> : course.level}</span>
+      <span className="course-tag">{accessLocked ? <><LockKeyhole aria-hidden="true" size={13} /> {loginLocked ? "Đăng nhập" : "VIP"}</> : course.level}</span>
       <span className="course-hanzi" lang="zh-CN">{course.hanzi}</span>
     </div>
-    <div className="course-body"><h2>{course.title}</h2><span className="course-chinese" lang="zh-CN">{course.chineseTitle}</span><p className="course-description">{course.description}</p>{course.availability === "available" ? <><div className="course-meta"><span><BookOpen aria-hidden="true" size={14} /> {course.lessons} bài</span><span><Clock3 aria-hidden="true" size={14} /> {course.minutes} phút</span></div><div className="course-card-footer">{vipLocked ? <span className="free-label"><Crown aria-hidden="true" size={14} /> Yêu cầu VIP</span> : <span className="free-label">{course.freeLessons} bài học thử</span>}<span aria-hidden="true" className="icon-link"><ArrowUpRight size={18} /></span></div></> : <><div className="course-meta course-coming-meta"><span><CalendarClock aria-hidden="true" size={14} /> Đang biên soạn theo lộ trình</span></div><div className="course-card-footer"><span className="coming-soon-label">Sắp ra mắt</span></div></>}</div>
+    <div className="course-body"><h2>{course.title}</h2><span className="course-chinese" lang="zh-CN">{course.chineseTitle}</span><p className="course-description">{course.description}</p>{course.availability === "available" ? <><div className="course-meta"><span><BookOpen aria-hidden="true" size={14} /> {course.lessons} bài</span><span><Clock3 aria-hidden="true" size={14} /> {course.minutes} phút</span></div><div className="course-card-footer">{accessLocked ? <span className="free-label">{loginLocked ? <><LogIn aria-hidden="true" size={14} /> Đăng nhập để học</> : <><Crown aria-hidden="true" size={14} /> Yêu cầu VIP</>}</span> : <span className="free-label">{course.freeLessons} bài học thử</span>}<span aria-hidden="true" className="icon-link"><ArrowUpRight size={18} /></span></div></> : <><div className="course-meta course-coming-meta"><span><CalendarClock aria-hidden="true" size={14} /> Đang biên soạn theo lộ trình</span></div><div className="course-card-footer"><span className="coming-soon-label">Sắp ra mắt</span></div></>}</div>
   </>;
 
   if (course.availability !== "available") {
@@ -36,10 +37,10 @@ export function CourseCard({ authenticated = true, course, priority = false }: {
   }
 
   // Load the roadmap on click: eager RSC prefetch can leave navigation stuck on the catalog.
-  if (!vipLocked) return <Link className="course-card" href={`/courses/${course.slug}`} prefetch={false}>{content}</Link>;
+  if (!accessLocked) return <Link className="course-card" href={`/courses/${course.slug}`} prefetch={false}>{content}</Link>;
 
   return <>
-    <button className="course-card course-card-trigger is-vip-locked" onClick={() => setUpgradeTarget({ kind: "Lộ trình", title: course.title })} type="button">{content}</button>
+    <button className={`course-card course-card-trigger is-vip-locked${loginLocked ? " is-login-locked" : ""}`} onClick={() => setUpgradeTarget({ kind: "Lộ trình", title: course.title })} type="button">{content}</button>
     <VipUpgradeDialog authenticated={authenticated} onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} returnTo="/courses" target={upgradeTarget} />
   </>;
 }

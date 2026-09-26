@@ -464,7 +464,7 @@ export async function updateContentAccessPolicyAction(formData: FormData) {
   const targetType = CONTENT_ACCESS_TARGET_TYPES.find((value) => value === targetTypeValue);
   const targetKey = valueString(formData, "targetKey", 500);
   const tierValue = valueString(formData, "tier", 10);
-  const tier = (["free", "vip"] as AccessTier[]).find((value) => value === tierValue);
+  const tier = (["guest", "free", "vip"] as AccessTier[]).find((value) => value === tierValue);
   const returnToValue = valueString(formData, "returnTo", 500);
   const returnTo = contentAccessReturnTo(returnToValue);
   if (!targetType || !targetKey || !tier) invalid(returnTo);
