@@ -15,8 +15,9 @@ test("development and production startup migrate the configured database", async
 test("automatic migrations are serialized and use the committed Drizzle history", async () => {
   const script = await read("scripts/auto-migrate-database.ts");
 
-  assert.match(script, /pg_advisory_lock/);
-  assert.match(script, /await migrate\(drizzle\(client\), \{ migrationsFolder \}\)/);
+  assert.match(script, /pg_advisory_xact_lock/);
+  assert.match(script, /readMigrationFiles\(\{ migrationsFolder \}\)/);
+  assert.match(script, /__drizzle_migrations/);
   assert.match(script, /DATABASE_AUTO_MIGRATE/);
   assert.doesNotMatch(script, /DATABASE_URL[^\n]*console/u);
 });

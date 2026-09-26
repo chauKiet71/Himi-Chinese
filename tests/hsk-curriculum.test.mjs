@@ -128,8 +128,8 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   }));
   assert.match(lockedHtml, /hsk-level-tabs[\s\S]*is-vip-locked/);
   assert.match(lockedHtml, /hsk-lesson-row is-active is-vip-locked/);
-  assert.match(lockedHtml, />Cần nâng cấp để tiếp tục học</);
-  assert.match(lockedHtml, /action="\/vip"/);
+  assert.match(lockedHtml, /Cần nâng cấp</);
+  assert.match(lockedHtml, /class="hsk-lesson-start hsk-vip-trigger"/);
   assert.doesNotMatch(lockedHtml, /href="\/hsk\/1\/hsk1-bai-01-chao-anh"/);
 });
 

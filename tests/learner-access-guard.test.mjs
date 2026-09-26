@@ -4,9 +4,8 @@ import test from "node:test";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
-test("lesson and game entry pages require an authenticated learner", async () => {
-  const guardedPages = [
-    "app/games/page.tsx",
+test("guest lesson pages allow anonymous learning while protected content still requires login", async () => {
+  const guestCapablePages = [
     "app/hsk/[level]/[lesson]/page.tsx",
     "app/hsk/[level]/[lesson]/play/page.tsx",
     "app/hsk/[level]/[lesson]/quiz/page.tsx",
@@ -14,16 +13,20 @@ test("lesson and game entry pages require an authenticated learner", async () =>
     "app/writing/[level]/[lesson]/practice/page.tsx",
     "app/learn/[slug]/page.tsx",
   ];
-  const [guard, ...pages] = await Promise.all([
+  const [guard, gamesPage, ...pages] = await Promise.all([
     read("lib/learner-auth.ts"),
-    ...guardedPages.map(read),
+    read("app/games/page.tsx"),
+    ...guestCapablePages.map(read),
   ]);
 
   assert.match(guard, /safeReturnTo\(returnTo, "\/"\)/);
   assert.match(guard, /\/login\?error=required&returnTo=/);
   assert.match(guard, /if \(!user\) redirect\(learnerLoginPath\(returnTo\)\)/);
+  assert.match(gamesPage, /requireLearnerUser\(/, "the game catalog must still enforce the learner session");
   for (const [index, page] of pages.entries()) {
-    assert.match(page, /requireLearnerUser\(/, `${guardedPages[index]} must enforce the learner session`);
+    assert.match(page, /getCurrentUser\(\)/, `${guestCapablePages[index]} must resolve the optional learner session`);
+    assert.match(page, /data\.access\??\.source !== "guest"/, `${guestCapablePages[index]} must only admit anonymous guest content`);
+    assert.match(page, /redirect\(learnerLoginPath\(returnTo\)\)/, `${guestCapablePages[index]} must redirect anonymous protected content`);
   }
 });
 

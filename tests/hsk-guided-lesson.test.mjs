@@ -168,8 +168,10 @@ test("guided HSK vocabulary exposes the save-word control and account-aware pers
   assert.match(component, /disabled=\{selected !== null\}/);
   assert.doesNotMatch(component, /<span>điểm ngữ pháp<\/span>/);
   assert.match(component, /nextLessonHref \? "Bài tiếp theo" : "Về lộ trình"/);
-  assert.match(page, /requireLearnerUser\(/);
+  assert.match(page, /getCurrentUser\(\)/);
+  assert.match(page, /data\.access\.source !== "guest"/);
+  assert.match(page, /redirect\(learnerLoginPath\(returnTo\)\)/);
   assert.match(page, /getHskLessonHref\(data\.lesson\.levelId, nextLesson\.id\)/);
-  assert.match(page, /<HskGuidedLesson authenticated lesson=/);
+  assert.match(page, /<HskGuidedLesson authenticated=\{Boolean\(user\)\} lesson=/);
   assert.match(client, /return response\.ok/);
 });

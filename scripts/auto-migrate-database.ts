@@ -1,8 +1,9 @@
 import { existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { sql } from "drizzle-orm";
+import { readMigrationFiles } from "drizzle-orm/migrator";
 import { drizzle } from "drizzle-orm/postgres-js";
-import { migrate } from "drizzle-orm/postgres-js/migrator";
 import postgres from "postgres";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -44,16 +45,40 @@ if (!migrationsEnabled()) {
       max: 1,
       prepare: false,
     });
+    const database = drizzle(client);
+    const migrations = readMigrationFiles({ migrationsFolder });
 
     try {
       console.log("Checking database migrations...");
-      await client.unsafe(`select pg_advisory_lock(${migrationLockNamespace}, ${migrationLockId})`);
-      await migrate(drizzle(client), { migrationsFolder });
+      await database.transaction(async (transaction) => {
+        await transaction.execute(sql.raw(`select pg_advisory_xact_lock(${migrationLockNamespace}, ${migrationLockId})`));
+        await transaction.execute(sql`create schema if not exists "drizzle"`);
+        await transaction.execute(sql`
+          create table if not exists "drizzle"."__drizzle_migrations" (
+            id serial primary key,
+            hash text not null,
+            created_at bigint
+          )
+        `);
+        const applied = await transaction.execute<{ created_at: string }>(sql`
+          select created_at
+          from "drizzle"."__drizzle_migrations"
+          order by created_at desc
+          limit 1
+        `);
+        const lastAppliedAt = applied[0] ? Number(applied[0].created_at) : undefined;
+
+        for (const migration of migrations) {
+          if (lastAppliedAt !== undefined && lastAppliedAt >= migration.folderMillis) continue;
+          for (const statement of migration.sql) await transaction.execute(sql.raw(statement));
+          await transaction.execute(sql`
+            insert into "drizzle"."__drizzle_migrations" (hash, created_at)
+            values (${migration.hash}, ${migration.folderMillis})
+          `);
+        }
+      });
       console.log("Database migrations are up to date.");
     } finally {
-      await client
-        .unsafe(`select pg_advisory_unlock(${migrationLockNamespace}, ${migrationLockId})`)
-        .catch(() => undefined);
       await client.end({ timeout: 5 }).catch(() => undefined);
     }
   }
