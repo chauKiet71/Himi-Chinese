@@ -57,6 +57,7 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
             className="home-portal-art-desktop"
             fill
             priority
+            unoptimized
             sizes="(max-width: 720px) 100vw, calc(100vw - 88px)"
             src="/assets/home/himi-homepage-background.png"
           />
@@ -65,6 +66,7 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
             className="home-portal-art-mobile"
             fill
             priority
+            unoptimized
             sizes="100vw"
             src="/assets/home/himi-homepage-mobile-background.png"
           />
