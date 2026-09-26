@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { useEffect, useId, useRef } from "react";
-import { ArrowRight, BookOpen, Crown, LockKeyhole, Mic2, Sparkles, X } from "lucide-react";
+import { ArrowRight, BookOpen, Crown, LockKeyhole, LogIn, Mic2, Sparkles, UserPlus, X } from "lucide-react";
 
 export type VipUpgradeTarget = {
   kind: "Lộ trình" | "Module" | "Bài học" | "Câu hỏi" | "Chữ Hán";
@@ -61,12 +61,16 @@ export function VipContentGate({
 }
 
 export function VipUpgradeDialog({
+  authenticated = true,
   onClose,
   open,
+  returnTo = "/courses",
   target,
 }: {
+  authenticated?: boolean;
   onClose: () => void;
   open: boolean;
+  returnTo?: string;
   target: VipUpgradeTarget | null;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -93,6 +97,8 @@ export function VipUpgradeDialog({
     onClose();
   }
 
+  const encodedReturnTo = encodeURIComponent(returnTo);
+
   return <dialog
     aria-describedby={descriptionId}
     aria-labelledby={titleId}
@@ -112,14 +118,21 @@ export function VipUpgradeDialog({
         <Image alt="" className="vip-upgrade-mascot" height={440} src="/assets/home/himi-vip-offer-mascot.png" width={356} />
       </div>
       <div className="vip-upgrade-content">
-        <h2 id={titleId}>Bài học này chỉ có ở <strong>Himi VIP</strong></h2>
-        <p className="sr-only" id={descriptionId}>{target?.kind ?? "Nội dung"}{target?.title ? ` “${target.title}”` : ""} chỉ dành cho thành viên VIP.</p>
+        <h2 id={titleId}>{authenticated ? <>Bài học này chỉ có ở <strong>Himi VIP</strong></> : <>Đăng nhập để <strong>mở khóa bài học</strong></>}</h2>
+        <p className="sr-only" id={descriptionId}>{authenticated
+          ? `${target?.kind ?? "Nội dung"}${target?.title ? ` “${target.title}”` : ""} chỉ dành cho thành viên VIP.`
+          : `Đăng nhập hoặc tạo tài khoản để tiếp tục mở khóa ${target?.kind?.toLowerCase() ?? "nội dung"}${target?.title ? ` “${target.title}”` : ""}.`}</p>
         <ul className="vip-upgrade-benefits">
           <li><span><BookOpen aria-hidden="true" /></span><div><strong>Mở khóa toàn bộ bài học</strong><small>Học không giới hạn</small></div></li>
           <li><span><Mic2 aria-hidden="true" /></span><div><strong>Luyện phát âm AI chuẩn</strong><small>Nhận phản hồi chi tiết</small></div></li>
           <li><span><Crown aria-hidden="true" /></span><div><strong>Nhiều tính năng cao cấp khác</strong><small>Trải nghiệm học trọn vẹn hơn</small></div></li>
         </ul>
-        <Link className="vip-upgrade-primary" href="/vip"><Crown aria-hidden="true" /> Nâng cấp ngay <ArrowRight aria-hidden="true" /></Link>
+        {authenticated ? <Link className="vip-upgrade-primary" href="/vip"><Crown aria-hidden="true" /> Nâng cấp ngay <ArrowRight aria-hidden="true" /></Link> : <div className="vip-upgrade-guest-actions">
+          <p>Bạn chưa đăng nhập. Hãy dùng tài khoản hiện có hoặc tạo tài khoản miễn phí trước khi chọn gói VIP.</p>
+          <Link className="vip-upgrade-primary" href={`/login?returnTo=${encodedReturnTo}`}><LogIn aria-hidden="true" /> Đăng nhập để mở khóa <ArrowRight aria-hidden="true" /></Link>
+          <Link className="vip-upgrade-secondary" href={`/register?returnTo=${encodedReturnTo}`}><UserPlus aria-hidden="true" /> Chưa có tài khoản? Đăng ký miễn phí</Link>
+          <Link className="vip-upgrade-benefits-link" href="/vip">Xem quyền lợi VIP</Link>
+        </div>}
       </div>
     </section>
   </dialog>;

@@ -232,6 +232,6 @@ export function CourseRoadmap({
         </aside>
       </div>
     </div>
-    <VipUpgradeDialog onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} target={upgradeTarget} />
+    <VipUpgradeDialog authenticated={authenticated} onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} returnTo={`/courses/${course.slug}`} target={upgradeTarget} />
   </main>;
 }

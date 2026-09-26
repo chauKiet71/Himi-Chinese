@@ -37,8 +37,19 @@ test("an available course opens an overview that leads to the learner's next les
     course: { ...course, access: { allowed: false } },
   }));
   assert.match(lockedCardHtml, /course-card-trigger is-vip-locked/);
-  assert.match(lockedCardHtml, />Cần nâng cấp để tiếp tục học</);
+  assert.match(lockedCardHtml, /Bài học này chỉ có ở [\s\S]*Himi VIP/);
+  assert.match(lockedCardHtml, /Nâng cấp ngay/);
   assert.doesNotMatch(lockedCardHtml, /href="\/courses\/van-phong-hanh-chinh"/);
+
+  const guestLockedCardHtml = renderToStaticMarkup(React.createElement(CourseCard, {
+    authenticated: false,
+    course: { ...course, access: { allowed: false } },
+  }));
+  assert.match(guestLockedCardHtml, /Đăng nhập để mở khóa/);
+  assert.match(guestLockedCardHtml, /href="\/login\?returnTo=%2Fcourses"/);
+  assert.match(guestLockedCardHtml, /href="\/register\?returnTo=%2Fcourses"/);
+  assert.match(guestLockedCardHtml, /Xem quyền lợi VIP/);
+  assert.doesNotMatch(guestLockedCardHtml, /Nâng cấp ngay/);
 
   const viewModule = await server.ssrLoadModule("/components/course-roadmap.tsx").catch(() => null);
   assert.ok(viewModule, "the roadmap overview should be renderable");
@@ -99,8 +110,8 @@ test("an available course opens an overview that leads to the learner's next les
     roadmap: vipRoadmap,
   }));
   assert.match(vipOverviewHtml, /roadmap-stage-vip-trigger/);
-  assert.match(vipOverviewHtml, />Cần nâng cấp để tiếp tục học</);
-  assert.match(vipOverviewHtml, /action="\/vip"/);
+  assert.match(vipOverviewHtml, /Bài học này chỉ có ở [\s\S]*Himi VIP/);
+  assert.match(vipOverviewHtml, /href="\/vip"/);
 
   const routeModule = await server.ssrLoadModule("/app/courses/[slug]/page.tsx").catch(() => null);
   assert.ok(routeModule, "the dynamic course roadmap route should be available");

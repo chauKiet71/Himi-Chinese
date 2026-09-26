@@ -4,7 +4,7 @@ function firstForwardedValue(value: string | null): string | undefined {
   return value?.split(",", 1)[0]?.trim() || undefined;
 }
 
-function requestOrigin(request: Request): string {
+export function requestOrigin(request: Request): string {
   const directOrigin = new URL(request.url).origin;
   const trustForwardedOrigin =
     Boolean(process.env.RAILWAY_SERVICE_ID) ||

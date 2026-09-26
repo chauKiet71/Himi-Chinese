@@ -10,18 +10,20 @@ export type CourseLibraryViewName = "catalog" | "hsk";
 const emptyHskSummary: HskCourseSummary = { lessonCount: 0, levelCount: 0 };
 
 export function CourseLibraryView({
+  authenticated,
   courses,
   hskCurriculum,
   hskSummary = emptyHskSummary,
   view,
 }: {
+  authenticated: boolean;
   courses: Course[];
   hskCurriculum: HskCurriculumLevel[];
   hskSummary?: HskCourseSummary;
   view: CourseLibraryViewName;
 }) {
   if (view === "hsk") {
-    return <HskCurriculumExplorer catalogHref="/courses" curriculum={hskCurriculum} />;
+    return <HskCurriculumExplorer authenticated={authenticated} catalogHref="/courses" curriculum={hskCurriculum} />;
   }
 
   return <>
@@ -30,6 +32,6 @@ export function CourseLibraryView({
       <h1>Chọn chủ đề bạn muốn học</h1>
       <p>Học theo chuẩn HSK hoặc chọn tình huống nghề nghiệp sát với mục tiêu sử dụng tiếng Trung của bạn.</p>
     </header>
-    <CourseExplorer courses={courses} hskSummary={hskSummary} includeHskCard />
+    <CourseExplorer authenticated={authenticated} courses={courses} hskSummary={hskSummary} includeHskCard />
   </>;
 }

@@ -29,7 +29,7 @@
     },
     {
       "slug": "thuc-hanh-giao-tiep-doc-lap",
-      "title": "Thực hành phối hợp công việc",
+      "title": "Thực hành giao tiếp độc lập",
       "description": "Xử lý lịch trùng, tài liệu thiếu, ưu tiên, làm việc từ xa và bàn giao bằng lời xác nhận rõ ràng."
     }
   ],
@@ -127,8 +127,8 @@
         "notes": [
           {
             "title": "Giới thiệu vai trò",
-            "pattern": "我负责……",
-            "explanation": "Dùng để nói ngắn gọn phần việc mình phụ trách. Có thể đặt tên khách hàng, dự án hoặc nghiệp vụ sau 负责."
+            "pattern": "我负责客户服务。",
+            "explanation": "Mẫu 我负责 + danh từ hoặc cụm danh từ dùng để nói phần việc mình phụ trách, ví dụ khách hàng, dự án hoặc nghiệp vụ."
           },
           {
             "title": "Lời chào khi mới vào nhóm",
@@ -638,8 +638,8 @@
           },
           {
             "speaker": "A",
-            "hanzi": "我不能导出这个文件，你可以帮忙看看吗？",
-            "pinyin": "Wǒ bù néng dǎochū zhège wénjiàn, nǐ kěyǐ bāngmáng kànkan ma?",
+            "hanzi": "我无法导出这个文件，你可以帮忙看看吗？",
+            "pinyin": "Wǒ wúfǎ dǎochū zhège wénjiàn, nǐ kěyǐ bāngmáng kànkan ma?",
             "translation": "Tôi không thể xuất tệp này, bạn có thể giúp xem không?"
           },
           {
@@ -779,8 +779,8 @@
         "dialogue": [
           {
             "speaker": "A",
-            "hanzi": "这份客户资料今天整理一下。",
-            "pinyin": "Zhè fèn kèhù zīliào jīntiān zhěnglǐ yíxià.",
+            "hanzi": "请今天整理一下这份客户资料。",
+            "pinyin": "Qǐng jīntiān zhěnglǐ yíxià zhè fèn kèhù zīliào.",
             "translation": "Hôm nay hãy sắp xếp lại bộ tài liệu khách hàng này."
           },
           {
@@ -1186,11 +1186,11 @@
           "audioUrl": null
         },
         {
-          "slug": "fangan-fengxian",
-          "hanzi": "方案风险",
-          "pinyin": "fāng'àn fēngxiǎn",
-          "meaning": "rủi ro của phương án",
-          "example": "我们需要评估方案风险。",
+          "slug": "fengxian",
+          "hanzi": "风险",
+          "pinyin": "fēngxiǎn",
+          "meaning": "rủi ro",
+          "example": "我们需要评估这个方案的风险。",
           "translation": "Chúng ta cần đánh giá rủi ro của phương án.",
           "audioUrl": null
         }
@@ -1205,8 +1205,8 @@
           },
           {
             "speaker": "B",
-            "hanzi": "优点是速度快，但方案风险还没有评估。",
-            "pinyin": "Yōudiǎn shì sùdù kuài, dàn fāng'àn fēngxiǎn hái méiyǒu pínggū.",
+            "hanzi": "优点是速度快，但这个方案的风险还没有评估。",
+            "pinyin": "Yōudiǎn shì sùdù kuài, dàn zhège fāng'àn de fēngxiǎn hái méiyǒu pínggū.",
             "translation": "Ưu điểm là nhanh, nhưng rủi ro phương án chưa được đánh giá."
           },
           {
@@ -1310,9 +1310,9 @@
           },
           {
             "speaker": "B",
-            "hanzi": "我来协调负责人，重新确认优先级。",
-            "pinyin": "Wǒ lái xiétiáo fùzérén, chóngxīn quèrèn yōuxiānjí.",
-            "translation": "Tôi sẽ điều phối người phụ trách và xác nhận lại mức ưu tiên."
+            "hanzi": "我来跟负责人协调，重新确认优先级。",
+            "pinyin": "Wǒ lái gēn fùzérén xiétiáo, chóngxīn quèrèn yōuxiānjí.",
+            "translation": "Tôi sẽ phối hợp với người phụ trách và xác nhận lại mức ưu tiên."
           },
           {
             "speaker": "A",
@@ -1330,8 +1330,8 @@
         "notes": [
           {
             "title": "Điều phối khi có xung đột",
-            "pattern": "我来协调……",
-            "explanation": "我来 thể hiện bạn chủ động nhận trách nhiệm điều phối, sau đó cần nói rõ người hoặc nguồn lực liên quan."
+            "pattern": "我来跟……协调",
+            "explanation": "我来 thể hiện bạn chủ động nhận trách nhiệm; 跟……协调 nêu rõ người hoặc bộ phận cần phối hợp."
           },
           {
             "title": "Chốt vòng phối hợp",
@@ -2124,8 +2124,8 @@
           "hanzi": "考勤",
           "pinyin": "kǎoqín",
           "meaning": "chấm công",
-          "example": "请在系统里更新考勤。",
-          "translation": "Vui lòng cập nhật chấm công trong hệ thống.",
+          "example": "请在系统里更新考勤记录。",
+          "translation": "Vui lòng cập nhật thông tin chấm công trong hệ thống.",
           "audioUrl": null
         }
       ],
@@ -2145,9 +2145,9 @@
           },
           {
             "speaker": "A",
-            "hanzi": "已经交接给小李了，我也会更新考勤。",
-            "pinyin": "Yǐjīng jiāojiē gěi Xiǎo Lǐ le, wǒ yě huì gēngxīn kǎoqín.",
-            "translation": "Tôi đã bàn giao cho Tiểu Lý và cũng sẽ cập nhật chấm công."
+            "hanzi": "已经交接给小李了，我也会更新考勤记录。",
+            "pinyin": "Yǐjīng jiāojiē gěi Xiǎo Lǐ le, wǒ yě huì gēngxīn kǎoqín jìlù.",
+            "translation": "Tôi đã bàn giao cho Tiểu Lý và cũng sẽ cập nhật thông tin chấm công."
           },
           {
             "speaker": "B",
@@ -2192,7 +2192,7 @@
           "slug": "shenqing",
           "hanzi": "申请",
           "pinyin": "shēnqǐng",
-          "meaning": "đề nghị, đơn đăng ký",
+          "meaning": "đơn đề nghị, đơn xin",
           "example": "请先提交采购申请。",
           "translation": "Vui lòng nộp đề nghị mua hàng trước.",
           "audioUrl": null
@@ -2230,7 +2230,7 @@
           "pinyin": "liúchéng",
           "meaning": "quy trình",
           "example": "我不太清楚报销流程。",
-          "translation": "Tôi chưa rõ quy trình hoàn ứng.",
+          "translation": "Tôi chưa rõ quy trình hoàn trả chi phí.",
           "audioUrl": null
         }
       ],
@@ -3412,7 +3412,7 @@
             "speaker": "B",
             "hanzi": "这两天由小林负责，我已经告诉他了。",
             "pinyin": "Zhè liǎng tiān yóu Xiǎo Lín fùzé, wǒ yǐjīng gàosu tā le.",
-            "translation": "Hai ngày này Tiểu Lâm phụ trách, tôi đã báo cho anh ấy rồi."
+            "translation": "Trong hai ngày này, Tiểu Lâm phụ trách; tôi đã báo cho anh ấy rồi."
           }
         ],
         "phrases": [
@@ -3438,7 +3438,7 @@
             "speaker": "B",
             "hanzi": "这两天由小林负责，我已经告诉他了。",
             "pinyin": "Zhè liǎng tiān yóu Xiǎo Lín fùzé, wǒ yǐjīng gàosu tā le.",
-            "translation": "Hai ngày này Tiểu Lâm phụ trách, tôi đã báo cho anh ấy rồi."
+            "translation": "Trong hai ngày này, Tiểu Lâm phụ trách; tôi đã báo cho anh ấy rồi."
           }
         ],
         "notes": [],
@@ -3470,12 +3470,12 @@
             {
               "prompt": "Câu “这两天由小林负责，我已经告诉他了。” truyền đạt điều gì?",
               "options": [
-                "Hai ngày này Tiểu Lâm phụ trách, tôi đã báo cho anh ấy rồi.",
+                "Trong hai ngày này, Tiểu Lâm phụ trách; tôi đã báo cho anh ấy rồi.",
                 "Ngày mai tôi nghỉ phép, hôm nay tôi bàn giao trước.",
                 "Khi khách hàng có câu hỏi thì liên hệ với ai?"
               ],
               "correctOption": 0,
-              "explanation": "Câu này dùng để kết thúc bước trao đổi: Hai ngày này Tiểu Lâm phụ trách, tôi đã báo cho anh ấy rồi."
+              "explanation": "Câu này dùng để kết thúc bước trao đổi: Trong hai ngày này, Tiểu Lâm phụ trách; tôi đã báo cho anh ấy rồi."
             }
           ]
         }
@@ -3532,7 +3532,7 @@
           "pinyin": "fùzé",
           "meaning": "phụ trách",
           "example": "这两天由小林负责，我已经告诉他了。",
-          "translation": "Hai ngày này Tiểu Lâm phụ trách, tôi đã báo cho anh ấy rồi.",
+          "translation": "Trong hai ngày này, Tiểu Lâm phụ trách; tôi đã báo cho anh ấy rồi.",
           "audioUrl": null
         }
       ]

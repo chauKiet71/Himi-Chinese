@@ -8,10 +8,12 @@ import type { Course } from "@/lib/content-types";
 
 const filters = ["Tất cả", "Nền tảng", "Văn phòng", "Nhà máy", "Logistics", "Kinh doanh", "Dịch vụ"];
 export function CourseExplorer({
+  authenticated,
   courses,
   hskSummary,
   includeHskCard = false,
 }: {
+  authenticated: boolean;
   courses: Course[];
   hskSummary: HskCourseSummary;
   includeHskCard?: boolean;
@@ -55,7 +57,7 @@ export function CourseExplorer({
       ><HskCourseCard {...hskSummary} /></div> : null}{visibleCourses.map((course, index) => <div
         className="course-motion-item"
         key={course.slug}
-      ><CourseCard course={course} priority={index < (showHskCard ? 2 : 3)} /></div>)}</div> : <div
+      ><CourseCard authenticated={authenticated} course={course} priority={index < (showHskCard ? 2 : 3)} /></div>)}</div> : <div
         className="empty-state"
       ><h2>Chưa tìm thấy lộ trình</h2><p>Thử một từ khóa khác hoặc chọn “Tất cả”.</p></div>}
   </section>;

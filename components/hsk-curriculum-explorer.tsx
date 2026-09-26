@@ -72,9 +72,11 @@ function LessonMeta({ lesson }: { lesson: HskCurriculumLesson }) {
 }
 
 export function HskCurriculumExplorer({
+  authenticated,
   catalogHref = "#course-catalog",
   curriculum,
 }: {
+  authenticated: boolean;
   catalogHref?: string;
   curriculum: HskCurriculumLevel[];
 }) {
@@ -263,6 +265,6 @@ export function HskCurriculumExplorer({
         })}
       </div>
     </div>
-    <VipUpgradeDialog onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} target={upgradeTarget} />
+    <VipUpgradeDialog authenticated={authenticated} onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} returnTo="/courses?view=hsk" target={upgradeTarget} />
   </section>;
 }

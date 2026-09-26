@@ -33,7 +33,7 @@ function firstValue(value: string | string[] | undefined) {
 
 async function CourseCatalog({ userId }: { userId: string | null }) {
   const courses = await listPublishedCoursesForViewer(userId);
-  return <CourseLibraryView courses={courses} hskCurriculum={[]} hskSummary={hskSummary} view="catalog" />;
+  return <CourseLibraryView authenticated={Boolean(userId)} courses={courses} hskCurriculum={[]} hskSummary={hskSummary} view="catalog" />;
 }
 
 export default async function CoursesPage({
@@ -46,7 +46,7 @@ export default async function CoursesPage({
   const hskCurriculum = view === "hsk" ? await getHskCurriculumPageData(user?.id ?? null) : [];
 
   return <main className="course-library-page hsk-curriculum-page">
-    {view === "hsk" ? <CourseLibraryView courses={[]} hskCurriculum={hskCurriculum} hskSummary={hskSummary} view="hsk" /> : <div id="course-catalog">
+    {view === "hsk" ? <CourseLibraryView authenticated={Boolean(user)} courses={[]} hskCurriculum={hskCurriculum} hskSummary={hskSummary} view="hsk" /> : <div id="course-catalog">
       <Suspense fallback={<CourseGridSkeleton />}><CourseCatalog userId={user?.id ?? null} /></Suspense>
     </div>}
   </main>;

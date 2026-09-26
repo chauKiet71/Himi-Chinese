@@ -8,7 +8,7 @@ import type { Course } from "@/lib/content-types";
 import { getCourseVisual } from "@/lib/course-visuals";
 import { VipUpgradeDialog, type VipUpgradeTarget } from "@/components/vip-upgrade-prompt";
 
-export function CourseCard({ course, priority = false }: { course: Course; priority?: boolean }) {
+export function CourseCard({ authenticated = true, course, priority = false }: { authenticated?: boolean; course: Course; priority?: boolean }) {
   const [upgradeTarget, setUpgradeTarget] = useState<VipUpgradeTarget | null>(null);
   const visual = getCourseVisual(course.slug);
   const vipLocked = Boolean(course.access && !course.access.allowed);
@@ -40,6 +40,6 @@ export function CourseCard({ course, priority = false }: { course: Course; prior
 
   return <>
     <button className="course-card course-card-trigger is-vip-locked" onClick={() => setUpgradeTarget({ kind: "Lộ trình", title: course.title })} type="button">{content}</button>
-    <VipUpgradeDialog onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} target={upgradeTarget} />
+    <VipUpgradeDialog authenticated={authenticated} onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} returnTo="/courses" target={upgradeTarget} />
   </>;
 }

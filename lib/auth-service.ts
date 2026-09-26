@@ -1,7 +1,7 @@
 import "server-only";
 import { and, eq, isNull } from "drizzle-orm";
 import { readDb, writeDb, type Database } from "../db/index.ts";
-import { users } from "../db/schema.ts";
+import { oauthAccounts, users } from "../db/schema.ts";
 import { hashPassword, passwordNeedsRehash, verifyPassword } from "./auth-crypto.ts";
 import type { RegistrationInput } from "./auth-validation.ts";
 
@@ -89,6 +89,55 @@ export async function findActiveUserByEmail(email: string): Promise<Authenticate
   const rows = await readDb((db) => db.select().from(users).where(eq(users.email, email)).limit(1));
   const user = rows[0];
   return user?.isActive ? toAuthenticatedUser(user) : null;
+}
+
+export async function authenticateWithGoogle(profile: {
+  subject: string;
+  email: string;
+  displayName: string;
+  avatarUrl?: string;
+}, database?: Database): Promise<AuthenticatedUser | null> {
+  const authenticate = (db: Database) => db.transaction(async (tx) => {
+    const linked = await tx.select({ user: users })
+      .from(oauthAccounts)
+      .innerJoin(users, eq(oauthAccounts.userId, users.id))
+      .where(and(eq(oauthAccounts.provider, "google"), eq(oauthAccounts.providerAccountId, profile.subject)))
+      .limit(1);
+
+    let user = linked[0]?.user;
+    if (!user) {
+      const existing = await tx.select().from(users).where(eq(users.email, profile.email)).for("update").limit(1);
+      user = existing[0];
+      if (user && user.role !== "learner") return null;
+      if (!user) {
+        const inserted = await tx.insert(users).values({
+          email: profile.email,
+          displayName: profile.displayName,
+          avatarUrl: profile.avatarUrl,
+          emailVerifiedAt: new Date(),
+          role: "learner",
+        }).returning();
+        user = inserted[0];
+      } else {
+        const updated = await tx.update(users).set({
+          displayName: user.displayName || profile.displayName,
+          avatarUrl: user.avatarUrl || profile.avatarUrl,
+          emailVerifiedAt: user.emailVerifiedAt || new Date(),
+          updatedAt: new Date(),
+        }).where(eq(users.id, user.id)).returning();
+        user = updated[0];
+      }
+      await tx.insert(oauthAccounts).values({
+        userId: user.id,
+        provider: "google",
+        providerAccountId: profile.subject,
+      });
+    }
+
+    return user.isActive && user.role === "learner" ? toAuthenticatedUser(user) : null;
+  });
+
+  return database ? authenticate(database) : writeDb(authenticate);
 }
 
 export async function changeUnverifiedUserEmail(
