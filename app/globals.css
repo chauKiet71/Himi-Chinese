@@ -5516,7 +5516,7 @@ body:has(.learner-dashboard) {
   border-bottom: 1px solid rgba(5, 89, 78, .07);
   background: rgba(255, 253, 248, .72);
   box-shadow: 0 8px 30px rgba(66, 94, 83, .04);
-  backdrop-filter: blur(20px) saturate(118%);
+  backdrop-filter: var(--learn-topbar-backdrop-filter, blur(20px) saturate(118%));
 }
 
 .learn-topbar .brand {
