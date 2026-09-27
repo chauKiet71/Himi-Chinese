@@ -1,0 +1,40 @@
+name: Deploy production VPS
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: production-vps
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+
+    steps:
+      - name: Configure pinned SSH access
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          set -Eeuo pipefail
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/hanziwork-vps
+          chmod 600 ~/.ssh/hanziwork-vps
+          printf '%s\n' '160.30.159.52 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZMT7YHsS5qRX/ciXTbLxKZVCgpJS7m/L9Nwgr3RNZS' > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Deploy and verify
+        run: |
+          ssh \
+            -i ~/.ssh/hanziwork-vps \
+            -o BatchMode=yes \
+            -o IdentitiesOnly=yes \
+            root@160.30.159.52 \
+            'set -Eeuo pipefail; cd /opt/hanziwork; git fetch origin master; git reset --hard origin/master; bash scripts/deploy-vps.sh'
