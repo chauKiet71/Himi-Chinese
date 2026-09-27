@@ -58,7 +58,7 @@ export type HskCurriculumLesson = {
   minutes: number;
   guidedSteps: number;
   available: boolean;
-  availabilityLabel?: "Đang biên tập" | "Đang xây dựng";
+  availabilityLabel?: "Đang xây dựng";
   access?: ContentAccessState;
 };
 
@@ -263,8 +263,7 @@ const HSK_3_TEXTBOOK_LESSONS: HskCurriculumLesson[] = RAW_HSK_3_CURRICULUM.lesso
     exercises,
     minutes: Math.max(25, Math.min(35, 20 + Math.ceil(vocabulary / 3))),
     guidedSteps: vocabulary + grammar + guidedDialogueSteps + exercises + 4,
-    available: false,
-    availabilityLabel: "Đang biên tập" as const,
+    available: true,
   };
 });
 
@@ -300,8 +299,7 @@ function buildHsk4TextbookLessons(
       exercises,
       minutes: Math.max(35, Math.min(45, 25 + Math.ceil(vocabulary / 3))),
       guidedSteps: vocabulary + grammar + dialogues + exercises + 4,
-      available: false,
-      availabilityLabel: "Đang biên tập",
+      available: true,
     };
   });
 }
@@ -365,8 +363,7 @@ const HSK_5_TEXTBOOK_TOPICS: HskCurriculumTopic[] = RAW_HSK_5_CURRICULUM.units.m
         + lesson.dialogues.length
         + lesson.exercises.length
         + 4,
-      available: false,
-      availabilityLabel: "Đang biên tập",
+      available: true,
     };
   }),
 }));
@@ -410,8 +407,7 @@ const HSK_5_WORKBOOK_1_TOPICS: HskCurriculumTopic[] = RAW_HSK_5_WORKBOOK_1_CURRI
         + lesson.dialogues.length
         + lesson.exercises.length
         + 4,
-      available: false,
-      availabilityLabel: "Đang biên tập",
+      available: true,
     };
   }),
 }));
@@ -459,8 +455,7 @@ function hsk6CurriculumLesson(lesson: (typeof HSK6_VOLUME1_TEXTBOOK_LESSONS)[num
       + lesson.dialogues.length
       + lesson.exercises.length
       + 4,
-    available: false,
-    availabilityLabel: "Đang biên tập" as const,
+    available: true,
   };
 }
 
@@ -573,7 +568,7 @@ export const HSK_CURRICULUM: HskCurriculumLevel[] = [
     id: "hsk-3",
     label: "HSK 3",
     symbol: "叁",
-    description: "20 bài Giáo trình chuẩn HSK 3 đang được đối chiếu bài khóa, pinyin và bản dịch trước khi mở học.",
+    description: "20 bài Giáo trình chuẩn HSK 3 với bài khóa, pinyin, bản dịch và bài tập thực hành.",
     topics: [
       hsk3TextbookTopic("ke-hoach-sinh-hoat", "Kế hoạch & Sinh hoạt", "clock", 0, 5),
       hsk3TextbookTopic("di-chuyen-so-sanh", "Di chuyển & So sánh", "travel", 5, 10),
@@ -585,7 +580,7 @@ export const HSK_CURRICULUM: HskCurriculumLevel[] = [
     id: "hsk-4",
     label: "HSK 4",
     symbol: "肆",
-    description: "20 bài Giáo trình chuẩn HSK 4 - Tập 1 và Tập 2 đang được biên tập lại dữ liệu OCR, pinyin và nghĩa tiếng Việt.",
+    description: "20 bài Giáo trình chuẩn HSK 4 - Tập 1 và Tập 2 với từ vựng, pinyin và nghĩa tiếng Việt.",
     topics: [
       hsk4TextbookTopic("tinh-cam-cong-viec-lua-chon", "Tình cảm, công việc & lựa chọn", "people", 0, 5),
       hsk4TextbookTopic("suc-khoe-cuoc-song-hanh-phuc", "Sức khỏe, cuộc sống & hạnh phúc", "globe", 5, 10),
@@ -597,7 +592,7 @@ export const HSK_CURRICULUM: HskCurriculumLevel[] = [
     id: "hsk-5",
     label: "HSK 5",
     symbol: "伍",
-    description: "Nguồn hiện có gồm 18 bài Sách bài tập HSK 5 - Tập 1 và 18 bài Giáo trình chuẩn HSK 5 - Tập 2. Lộ trình đang chờ bổ sung hai tập còn thiếu và duyệt lại nội dung trước khi mở học.",
+    description: "36 bài HSK 5 từ Sách bài tập Tập 1 và Giáo trình chuẩn Tập 2, được tổ chức thành lộ trình học và luyện tập.",
     topics: [
       ...HSK_5_WORKBOOK_1_TOPICS.map((topic) => ({ ...topic, title: `Sách bài tập Tập 1 · ${topic.title}` })),
       ...HSK_5_TEXTBOOK_TOPICS.map((topic) => ({ ...topic, title: `Giáo trình Tập 2 · ${topic.title}` })),
@@ -607,7 +602,7 @@ export const HSK_CURRICULUM: HskCurriculumLevel[] = [
     id: "hsk-6",
     label: "HSK 6",
     symbol: "陆",
-    description: "40 bài Giáo trình chuẩn HSK 6 - Tập 1 và Tập 2 đang được đối chiếu bản dịch tiếng Việt và dữ liệu OCR trước khi mở học.",
+    description: "40 bài Giáo trình chuẩn HSK 6 - Tập 1 và Tập 2 với từ vựng, bài đọc và nội dung luyện tập.",
     topics: [...HSK_6_VOLUME_1_TOPICS, ...HSK_6_VOLUME_2_TOPICS],
   },
   {

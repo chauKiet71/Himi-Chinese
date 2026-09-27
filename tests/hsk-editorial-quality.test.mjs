@@ -23,9 +23,8 @@ test("HSK publication gates, curated Vietnamese, pinyin and audio stay consisten
   ]);
   const levels = curriculum.HSK_CURRICULUM;
 
-  assert.ok(levels.slice(0, 2).every((level) => level.topics.flatMap((topic) => topic.lessons).every((lesson) => lesson.available)));
-  assert.ok(levels.slice(2, 6).every((level) => level.topics.flatMap((topic) => topic.lessons).every((lesson) => (
-    !lesson.available && lesson.availabilityLabel === "Đang biên tập"
+  assert.ok(levels.slice(0, 6).every((level) => level.topics.flatMap((topic) => topic.lessons).every((lesson) => (
+    lesson.available && lesson.availabilityLabel === undefined
   ))));
   assert.ok(levels[6].topics.flatMap((topic) => topic.lessons).every((lesson) => (
     !lesson.available
