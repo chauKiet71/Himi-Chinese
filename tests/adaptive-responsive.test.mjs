@@ -42,6 +42,20 @@ test("mobile practice menu keeps both sets of three destinations on one row", as
   assert.doesNotMatch(css, /\.mobile-practice-menu a\s*\{[^}]*grid-column:/s);
 });
 
+test("practice sessions expose the learning task before requiring page scroll", async () => {
+  const [writingCss, listeningCss, videoCss] = await Promise.all([
+    readFile(new URL("app/writing-studio.css", root), "utf8"),
+    readFile(new URL("app/listening-studio.css", root), "utf8"),
+    readFile(new URL("app/video-learning.css", root), "utf8"),
+  ]);
+
+  assert.match(writingCss, /\.himi-writing-studio\s*\{[^}]*height:\s*calc\(100dvh - 88px\)[^}]*overflow:\s*hidden/s);
+  assert.match(writingCss, /\.himi-writing-character-grid\s*\{[^}]*flex:\s*1[^}]*overscroll-behavior:\s*contain/s);
+  assert.match(writingCss, /@media \(max-width: 920px\)[\s\S]*\.himi-writing-practice\s*\{\s*order:\s*1;/);
+  assert.match(listeningCss, /\.listening-session-page\s*\{[^}]*height:\s*calc\(100dvh - 88px\)[^}]*overflow:\s*hidden/s);
+  assert.match(videoCss, /\.video-detail-page\.is-study-studio \.video-detail-shell\s*\{[^}]*height:\s*calc\(100dvh - 88px\)[^}]*overflow:\s*hidden/s);
+});
+
 test("phone video learning shows the transcript before attribution and hides duplicate sentence tools", async () => {
   const [css, studio] = await Promise.all([
     readFile(new URL("app/adaptive-responsive.css", root), "utf8"),

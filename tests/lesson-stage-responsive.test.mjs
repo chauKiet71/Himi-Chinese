@@ -105,7 +105,7 @@ test("listening and speaking shows pinyin by default and completes on the tenth 
   assert.match(source, /aria-label="Câu trước" className="lesson-card-edge-nav is-back"/);
   assert.match(source, /className="lesson-card-edge-nav is-next" disabled=\{atEnd\}/);
   assert.doesNotMatch(source, /pronunciation-target-list|pronunciation-target-dot|String\(targetIndex \+ 1\)\.padStart|<span>Tiếp tục<\/span>|aria-label="Điều hướng câu luyện nói"/);
-  assert.match(source, /atEnd \? <div className="lesson-pronunciation-completion">/);
+  assert.match(source, /lesson-pronunciation-completion\$\{atEnd \? "" : " is-placeholder"\}/);
   assert.match(source, /disabled=\{!allAttempted\}/);
   assert.match(source, /onClick=\{\(\) => onFinished\(\{ score: averageScore, completed: results\.size, total: targets\.length \}\)\}/);
   assert.match(source, /<LessonSpeedMenu onChange=\{setPlaybackRate\} rate=\{playbackRate\} \/>/);

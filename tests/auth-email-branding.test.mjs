@@ -17,3 +17,14 @@ test("authentication emails consistently use the Himi Chinese sender identity", 
   assert.match(environmentExample, /^BREVO_FROM_NAME=Himi Chinese$/m);
   assert.doesNotMatch(emailSource, /HanziWork/);
 });
+
+test("authentication emails use the approved Himi visual identity", async () => {
+  const emailSource = await readFile(new URL("lib/auth-email.ts", root), "utf8");
+
+  assert.match(emailSource, /#FF4C3B/);
+  assert.match(emailSource, /#FF8E2D/);
+  assert.match(emailSource, /#222222/);
+  assert.match(emailSource, /\/assets\/brand\/himi-mascot-icon\.png/);
+  assert.match(emailSource, /renderBrandedAuthEmail/);
+  assert.doesNotMatch(emailSource, /background:#176b5b/);
+});

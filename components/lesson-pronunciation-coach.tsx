@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, BarChart3, Lightbulb, Volume2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, BarChart3, Volume2 } from "lucide-react";
 import { PronunciationEvaluator, type PronunciationResult } from "@/components/pronunciation-evaluator";
 import { LessonSpeedMenu, type LessonPlaybackRate } from "@/components/lesson-speed-menu";
 import { speakMandarin } from "@/lib/client-mandarin-audio";
@@ -51,7 +51,16 @@ export function LessonPronunciationCoach({ words, dialogue, onFinished = () => u
 
   if (!current) return <div className="lesson-vocab-empty"><h2>Bài này chưa có câu luyện nghe</h2><p>Hãy chuyển sang Từ vựng hoặc Cụm từ để tiếp tục học.</p></div>;
 
-  return <section className="lesson-pronunciation-coach lesson-reference-deck lesson-pronunciation-live-stage" aria-labelledby="lesson-pronunciation-title">
+  const hanziCharacterCount = Array.from(current.hanzi).filter((character) => /\p{Script=Han}/u.test(character)).length;
+  const sentenceLengthClass = hanziCharacterCount >= 27
+    ? " is-extra-long-sentence"
+    : hanziCharacterCount >= 19
+      ? " is-very-long-sentence"
+      : hanziCharacterCount >= 13
+        ? " is-long-sentence"
+        : "";
+
+  return <section className={`lesson-pronunciation-coach lesson-reference-deck lesson-pronunciation-live-stage${sentenceLengthClass}`} aria-labelledby="lesson-pronunciation-title">
     <h2 className="sr-only" id="lesson-pronunciation-title">Luyện nghe và phát âm với iFlytek</h2>
     <div className="lesson-stage-layout">
       <article className="lesson-study-panel pronunciation-practice-card">
@@ -60,6 +69,7 @@ export function LessonPronunciationCoach({ words, dialogue, onFinished = () => u
         <button aria-label={atEnd ? "Đã đến câu cuối" : "Câu tiếp theo"} className="lesson-card-edge-nav is-next" disabled={atEnd} onClick={() => moveTo(index + 1)} type="button"><ArrowRight size={20} /></button>
         <div aria-label={`Tiến độ câu ${index + 1} trên ${targets.length}`} aria-valuemax={targets.length} aria-valuemin={1} aria-valuenow={index + 1} className="lesson-vocab-progress lesson-stage-progress" role="progressbar">
           <span>Câu {String(index + 1).padStart(2, "0")} / {String(targets.length).padStart(2, "0")}</span>
+          <span aria-hidden="true" className="pronunciation-progress-track"><i style={{ width: `${((index + 1) / targets.length) * 100}%` }} /></span>
         </div>
 
         <div className="lesson-study-content pronunciation-study-content">
@@ -75,12 +85,13 @@ export function LessonPronunciationCoach({ words, dialogue, onFinished = () => u
 
           {!currentResult ? <div className="pronunciation-status-row"><span><BarChart3 size={22} />Chưa có kết quả</span></div> : null}
         </div>
-        {atEnd ? <div className="lesson-pronunciation-completion"><button aria-label="Hoàn thành phần Nghe và nói" className="lesson-stage-nav-button is-next" disabled={!allAttempted} onClick={() => onFinished({ score: averageScore, completed: results.size, total: targets.length })} type="button"><span>Hoàn thành</span> <ArrowRight size={19} /></button>{!allAttempted ? <small>Hãy đọc đủ {targets.length} câu để hoàn thành.</small> : null}</div> : null}
+        <div aria-hidden={!atEnd} className={`lesson-pronunciation-completion${atEnd ? "" : " is-placeholder"}`}>
+          {atEnd ? <><button aria-label="Hoàn thành phần Nghe và nói" className="lesson-stage-nav-button is-next" disabled={!allAttempted} onClick={() => onFinished({ score: averageScore, completed: results.size, total: targets.length })} type="button"><span>Hoàn thành</span> <ArrowRight size={19} /></button>{!allAttempted ? <small>Hãy đọc đủ {targets.length} câu để hoàn thành.</small> : null}</> : <span />}
+        </div>
         </div>
       </article>
 
       <aside className="lesson-coach-rail is-pronunciation" aria-label="Himi đồng hành luyện phát âm">
-        <div className="lesson-coach-tip"><Lightbulb aria-hidden="true" size={28} /><p><strong>Đọc trọn câu</strong><span>Giữ nhịp đều.</span></p></div>
         {/* Static local asset keeps this client component compatible with the SSR lesson tests. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img alt="Himi đeo tai nghe đồng hành luyện phát âm" className="lesson-coach-mascot" height={320} src="/assets/mascot/himi-v2/himi-listen.webp" width={320} />

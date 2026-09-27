@@ -1,6 +1,7 @@
 .game-session-world .game-result-celebration {
-  width: min(680px, 100%);
+  width: min(640px, 100%, calc(100dvh - 116px));
   min-height: 0;
+  max-height: calc(100dvh - 116px);
   aspect-ratio: 1 / 1;
   margin: 0 auto;
   padding: 0;
@@ -48,7 +49,7 @@
 }
 
 .game-result-celebration__mascot-stage {
-  width: 56%;
+  width: 52%;
   position: absolute;
   top: 1.5%;
   left: 50%;
@@ -72,9 +73,9 @@
 }
 
 .game-session-world .game-result-celebration__panel {
-  min-height: 44%;
+  min-height: 42%;
   margin: 0;
-  padding: clamp(31px, 5.1vw, 44px) clamp(22px, 5.2vw, 42px) clamp(22px, 4vw, 34px);
+  padding: clamp(22px, 3.8vw, 34px) clamp(20px, 4.2vw, 34px) clamp(18px, 3vw, 26px);
   position: absolute;
   right: 6.2%;
   bottom: clamp(52px, 9.5%, 68px);
@@ -104,7 +105,7 @@
   max-width: 100%;
   margin: 10px 0 13px;
   color: #071a35;
-  font-size: clamp(26px, 4.2vw, 39px);
+  font-size: clamp(24px, 3.5vw, 34px);
   font-weight: 820;
   letter-spacing: -.045em;
   line-height: 1.08;
@@ -112,7 +113,7 @@
 }
 
 .game-session-world .game-result-celebration__score {
-  min-height: 50px;
+  min-height: 44px;
   padding: 0 22px;
   display: inline-flex;
   align-items: center;
@@ -123,14 +124,14 @@
   border-radius: 999px;
   background: #fff4e8;
   box-shadow: 0 5px 13px rgba(255, 91, 85, .1);
-  font-size: clamp(19px, 3vw, 28px);
+  font-size: clamp(18px, 2.5vw, 24px);
   font-weight: 850;
   line-height: 1;
 }
 
 .game-session-world .game-result-celebration__details {
   width: 100%;
-  margin-top: 14px;
+  margin-top: 10px;
 }
 
 .game-result-celebration__score > svg {
@@ -141,7 +142,7 @@
 
 .game-session-world .game-result-celebration__actions {
   width: min(100%, 490px);
-  margin: 20px 0 0;
+  margin: 14px 0 0;
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -152,7 +153,7 @@
 .game-session-world .game-result-celebration__actions > button,
 .game-session-world .game-result-celebration__actions > a {
   min-width: 0;
-  min-height: 54px;
+  min-height: 46px;
   margin: 0;
   padding: 0 21px;
   flex: 1 1 0;
@@ -314,7 +315,8 @@
 
   .game-session-world .game-result-celebration {
     width: 100%;
-    min-height: 540px;
+    min-height: min(520px, calc(100dvh - 96px));
+    max-height: calc(100dvh - 96px);
     aspect-ratio: auto;
     border-width: 5px;
     border-radius: 31px;
@@ -322,7 +324,7 @@
   }
 
   .game-result-celebration__mascot-stage {
-    width: min(70%, 310px);
+    width: min(62%, 260px);
     top: 1%;
   }
 
@@ -330,8 +332,8 @@
     right: 3.5%;
     bottom: 6%;
     left: 3.5%;
-    min-height: 47%;
-    padding: 30px 16px 18px;
+    min-height: 44%;
+    padding: 22px 14px 14px;
     border-radius: 25px;
   }
 
@@ -346,13 +348,13 @@
   }
 
   .game-session-world .game-result-celebration__actions {
-    margin-top: 16px;
+    margin-top: 11px;
     gap: 9px;
   }
 
   .game-session-world .game-result-celebration__actions > button,
   .game-session-world .game-result-celebration__actions > a {
-    min-height: 49px;
+    min-height: 44px;
     padding-inline: 10px;
     font-size: 12px;
   }
@@ -412,6 +414,55 @@
     min-height: 40px;
     padding-inline: 8px;
     font-size: 10px;
+  }
+}
+
+/* Short desktop screens use a landscape result card so Himi remains fully visible. */
+@media (min-width: 721px) and (max-height: 700px) {
+  .game-session-world .game-result-celebration {
+    width: min(780px, 100%);
+    height: min(524px, calc(100dvh - 116px));
+    min-height: 0;
+    max-height: calc(100dvh - 116px);
+    aspect-ratio: auto;
+  }
+
+  .game-result-celebration__background,
+  .game-result-celebration__firework-pulse {
+    object-position: center 28%;
+  }
+
+  .game-result-celebration__mascot-stage {
+    width: 42%;
+    top: 8%;
+    left: 23%;
+  }
+
+  .game-session-world .game-result-celebration__panel {
+    top: 4%;
+    right: 3%;
+    bottom: 4%;
+    left: 45%;
+    min-height: 0;
+    padding: 16px 14px;
+    border-radius: 25px;
+  }
+
+  .game-session-world .game-result-celebration__panel > h2 {
+    margin: 7px 0 9px;
+    font-size: clamp(22px, 2.5vw, 30px);
+  }
+
+  .game-session-world .game-result-celebration__actions {
+    margin-top: 10px;
+    gap: 7px;
+  }
+
+  .game-session-world .game-result-celebration__actions > button,
+  .game-session-world .game-result-celebration__actions > a {
+    min-height: 42px;
+    padding-inline: 9px;
+    font-size: 11px;
   }
 }
 

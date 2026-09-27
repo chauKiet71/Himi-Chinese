@@ -29,6 +29,15 @@ const MODES: { value: WritingMode; label: string; hint: string; icon: typeof Eye
 
 const STORAGE_KEY = "himi-writing-completed";
 
+export function normalizeWritingSearch(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/đ/giu, "d")
+    .trim()
+    .toLocaleLowerCase("vi-VN");
+}
+
 function getDailyStorageKey(topicSlug: string): string {
   const date = new Intl.DateTimeFormat("en-CA", {
     timeZone: "Asia/Bangkok",
@@ -63,9 +72,9 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
   const totalStrokes = selected.locked ? 0 : selected.strokes
     ?? (loadedStrokeCount?.characterId === selected.id ? loadedStrokeCount.count : 0);
   const filteredCharacters = useMemo(() => {
-    const normalizedQuery = query.trim().toLocaleLowerCase("vi-VN");
+    const normalizedQuery = normalizeWritingSearch(query);
     return topic.characters.filter((character) => !normalizedQuery
-      || `${character.hanzi} ${character.pinyin} ${character.meaning}`.toLocaleLowerCase("vi-VN").includes(normalizedQuery));
+      || normalizeWritingSearch(`${character.hanzi} ${character.pinyin} ${character.meaning}`).includes(normalizedQuery));
   }, [query, topic.characters]);
 
   useEffect(() => {

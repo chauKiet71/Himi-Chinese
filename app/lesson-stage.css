@@ -1784,6 +1784,185 @@
   }
 }
 
+/* Keep the listening and speaking stage stable while sentence lengths change. */
+.lesson-pronunciation-live-stage {
+  --pronunciation-stage-height: clamp(560px, 66svh, 720px);
+  --pronunciation-heading-height: 126px;
+}
+
+.lesson-pronunciation-live-stage :is(.lesson-study-panel, .lesson-coach-rail) {
+  height: var(--pronunciation-stage-height);
+  min-height: var(--pronunciation-stage-height);
+  max-height: var(--pronunciation-stage-height);
+}
+
+.lesson-pronunciation-live-stage .lesson-study-surface {
+  height: 100%;
+}
+
+.lesson-pronunciation-live-stage .pronunciation-study-content {
+  min-height: 0;
+  padding-block: clamp(20px, 3.2vh, 34px) 18px;
+  justify-content: flex-start;
+}
+
+.lesson-pronunciation-live-stage .pronunciation-heading-row {
+  width: min(820px, calc(100% - 72px));
+  height: var(--pronunciation-heading-height);
+  min-height: var(--pronunciation-heading-height);
+  max-height: var(--pronunciation-heading-height);
+  margin-inline: auto;
+  padding: 16px 22px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.lesson-pronunciation-live-stage .pronunciation-heading-row > strong {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.lesson-pronunciation-live-stage .pronunciation-pinyin {
+  width: min(760px, 100%);
+  min-height: 37px;
+  max-height: 72px;
+  margin-inline: auto;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.lesson-pronunciation-live-stage .pronunciation-study-content > p {
+  width: min(760px, 100%);
+  min-height: 64px;
+  max-height: 76px;
+  margin-inline: auto;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  line-height: 1.4;
+}
+
+.lesson-pronunciation-live-stage .lesson-pronunciation-completion {
+  min-height: 60px;
+  flex: 0 0 60px;
+}
+
+.lesson-pronunciation-live-stage .lesson-pronunciation-completion.is-placeholder {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (min-width: 981px) and (max-height: 800px) {
+  .lesson-pronunciation-live-stage {
+    --pronunciation-stage-height: 510px;
+    --pronunciation-heading-height: 108px;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-study-content {
+    padding-block: 14px 10px;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-pinyin {
+    min-height: 38px;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-study-content > p {
+    min-height: 76px;
+    max-height: 76px;
+  }
+}
+
+@media (max-width: 640px) {
+  .lesson-pronunciation-live-stage {
+    --pronunciation-stage-height: 702px;
+    --pronunciation-heading-height: 182px;
+  }
+
+  .lesson-pronunciation-live-stage :is(.lesson-study-panel, .lesson-coach-rail) {
+    height: auto;
+    min-height: var(--pronunciation-stage-height);
+    max-height: none;
+  }
+
+  .lesson-pronunciation-live-stage .lesson-study-surface {
+    min-height: var(--pronunciation-stage-height);
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-study-content {
+    padding: 20px 0 12px;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-heading-row {
+    width: calc(100% - 68px);
+    padding: 12px 10px;
+    position: relative;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-heading-row > strong {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    padding-right: 48px;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: clamp(22px, 6vw, 25px);
+    line-height: 1.22;
+    scrollbar-width: none;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-heading-row .lesson-inline-sound {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-heading-row > strong::-webkit-scrollbar,
+  .lesson-pronunciation-live-stage .pronunciation-pinyin::-webkit-scrollbar,
+  .lesson-pronunciation-live-stage .pronunciation-study-content > p::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-pinyin {
+    min-height: 50px;
+    max-height: 54px;
+    margin-top: 12px;
+    padding-inline: 4px;
+    display: block;
+    overflow-y: auto;
+    line-height: 1.35;
+    scrollbar-width: none;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-study-content > p {
+    min-height: 80px;
+    max-height: 80px;
+    margin-top: 4px;
+    padding-inline: 4px;
+    display: block;
+    overflow-y: auto;
+    line-height: 1.35;
+    scrollbar-width: none;
+  }
+
+  .lesson-pronunciation-live-stage .lesson-pronunciation-completion {
+    min-height: 70px;
+    flex-basis: 70px;
+    align-content: center;
+  }
+}
+
 /* Reading decks: use typography and spacing instead of nested boxes. */
 .lesson-reading-deck .lesson-stage-layout {
   align-items: start;
@@ -3188,5 +3367,472 @@
   .lesson-speed-menu *::before,
   .lesson-speed-menu *::after {
     transition: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .lesson-reference-deck.lesson-pronunciation-live-stage .pronunciation-heading-row > strong {
+    font-size: clamp(22px, 6vw, 25px);
+  }
+}
+
+/* Immersive pronunciation stage: one continuous learning canvas. */
+.lesson-pronunciation-live-stage {
+  --pronunciation-stage-height: clamp(590px, 70svh, 760px);
+  --pronunciation-ink: #18324b;
+  --pronunciation-coral: #ff4f43;
+  --pronunciation-orange: #f47a24;
+}
+
+.lesson-pronunciation-live-stage .lesson-stage-layout {
+  position: relative;
+  display: block;
+  min-height: var(--pronunciation-stage-height);
+  overflow: hidden;
+  border: 1px solid rgba(223, 213, 205, .72);
+  border-radius: 26px;
+  background: #fffdfa url("/assets/backgrounds/lesson-coach-office.png") center bottom / cover no-repeat;
+  box-shadow: 0 18px 50px rgba(71, 52, 40, .07);
+}
+
+.lesson-pronunciation-live-stage .lesson-study-panel,
+.lesson-pronunciation-live-stage .lesson-study-surface {
+  height: var(--pronunciation-stage-height);
+  min-height: var(--pronunciation-stage-height);
+  max-height: var(--pronunciation-stage-height);
+}
+
+.lesson-pronunciation-live-stage .lesson-study-panel {
+  position: relative;
+  z-index: 2;
+}
+
+.lesson-pronunciation-live-stage .lesson-study-surface {
+  padding: clamp(24px, 2.5vw, 38px) clamp(28px, 6.5vw, 112px) 24px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: rgba(255, 253, 250, .82);
+  box-shadow: none;
+}
+
+.lesson-pronunciation-live-stage .lesson-stage-progress {
+  width: min(520px, calc(100% - 220px));
+  margin-inline: auto;
+  padding: 0;
+  gap: 24px;
+  border: 0;
+}
+
+.lesson-pronunciation-live-stage .lesson-stage-progress > span:first-child {
+  padding: 0;
+  color: var(--pronunciation-coral);
+  background: transparent;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.lesson-pronunciation-live-stage .pronunciation-progress-track {
+  position: relative;
+  height: 7px;
+  padding: 0;
+  overflow: hidden;
+  flex: 1 1 auto;
+  border-radius: 999px;
+  background: rgba(24, 50, 75, .1);
+}
+
+.lesson-pronunciation-live-stage .pronunciation-progress-track > i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: block;
+  border-radius: inherit;
+  background: var(--pronunciation-coral);
+  transition: width 260ms ease;
+}
+
+.lesson-pronunciation-live-stage .pronunciation-study-content {
+  width: min(1040px, 100%);
+  padding: clamp(28px, 4.5vh, 46px) 0 0;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.lesson-pronunciation-live-stage .pronunciation-heading-row {
+  width: min(980px, calc(100% - 96px));
+  height: 162px;
+  min-height: 162px;
+  max-height: 162px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.lesson-pronunciation-live-stage .pronunciation-heading-row > strong {
+  color: var(--pronunciation-ink);
+  font-size: clamp(38px, 4.1vw, 60px);
+}
+
+.lesson-pronunciation-live-stage .pronunciation-heading-row .lesson-inline-sound {
+  color: var(--pronunciation-ink);
+  border: 0;
+  background: rgba(255, 255, 255, .72);
+}
+
+.lesson-pronunciation-live-stage .pronunciation-pinyin {
+  min-height: 38px;
+  margin-top: 8px;
+  color: var(--pronunciation-orange);
+  font-size: clamp(20px, 1.85vw, 27px);
+}
+
+.lesson-pronunciation-live-stage .pronunciation-study-content > p {
+  min-height: 52px;
+  max-height: 72px;
+  margin-top: 5px;
+  color: #111c28;
+  font-size: clamp(20px, 1.8vw, 27px);
+}
+
+.lesson-pronunciation-live-stage .pronunciation-status-row {
+  order: 5;
+  width: min(640px, 100%);
+  min-height: 54px;
+  margin-top: auto;
+  padding: 14px 22px;
+  justify-content: center;
+  border: 0;
+  border-top: 1px solid rgba(24, 50, 75, .13);
+  border-radius: 0;
+  background: transparent;
+  font-size: 15px;
+}
+
+.lesson-pronunciation-live-stage .lesson-pronunciation-action {
+  order: 6;
+  width: min(620px, 100%);
+  margin-top: 18px;
+  padding: 10px 14px;
+  border: 1px solid rgba(232, 221, 213, .84);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .88);
+  box-shadow: 0 12px 30px rgba(72, 47, 34, .08);
+  backdrop-filter: blur(10px);
+}
+
+.lesson-pronunciation-live-stage .lesson-pronunciation-action .pronunciation-actions {
+  width: 100%;
+  grid-template-columns: minmax(140px, 1fr) auto minmax(170px, 1.25fr);
+  gap: 0;
+}
+
+.lesson-pronunciation-live-stage .lesson-pronunciation-action .pronunciation-actions > button,
+.lesson-pronunciation-live-stage .pronunciation-action-middle {
+  border-right: 1px solid rgba(24, 50, 75, .1);
+}
+
+.lesson-pronunciation-live-stage .lesson-pronunciation-action .pronunciation-actions > button {
+  border-color: transparent;
+  background: transparent;
+}
+
+.lesson-pronunciation-live-stage .lesson-pronunciation-action .pronunciation-record {
+  min-height: 54px;
+  color: #fff;
+  border-radius: 999px;
+  background: var(--pronunciation-coral);
+  box-shadow: 0 8px 22px rgba(255, 79, 67, .24);
+}
+
+.lesson-pronunciation-live-stage .pronunciation-action-middle .lesson-speed-menu > summary {
+  min-width: 88px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+}
+
+.lesson-pronunciation-live-stage .lesson-speed-menu > summary:focus-visible {
+  outline-color: rgba(255, 79, 67, .28);
+}
+
+.lesson-pronunciation-live-stage .lesson-speed-menu > summary:hover,
+.lesson-pronunciation-live-stage .lesson-speed-menu[open] > summary {
+  color: var(--pronunciation-coral);
+  background: #fff5f2;
+  box-shadow: none;
+}
+
+.lesson-pronunciation-live-stage .lesson-speed-options button:hover {
+  color: #c43d34;
+  background: #fff3f0;
+}
+
+.lesson-pronunciation-live-stage .lesson-speed-options button[aria-pressed="true"] {
+  color: #fff;
+  background: var(--pronunciation-coral);
+  box-shadow: 0 5px 12px rgba(255, 79, 67, .2);
+}
+
+.lesson-pronunciation-live-stage .lesson-pronunciation-completion {
+  position: absolute;
+  right: 30px;
+  bottom: 24px;
+  z-index: 5;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+}
+
+.lesson-pronunciation-live-stage .lesson-coach-rail.is-pronunciation {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: var(--pronunciation-stage-height);
+  min-height: var(--pronunciation-stage-height);
+  max-height: var(--pronunciation-stage-height);
+  padding: 0;
+  display: block;
+  pointer-events: none;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.lesson-pronunciation-live-stage .lesson-coach-rail.is-pronunciation .lesson-coach-mascot {
+  position: absolute;
+  left: 16px;
+  bottom: -8px;
+  width: clamp(136px, 13vw, 190px);
+  margin: 0;
+}
+
+@media (min-width: 981px) and (max-height: 800px) {
+  .lesson-pronunciation-live-stage {
+    --pronunciation-stage-height: 540px;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-study-content {
+    padding-top: 32px;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-heading-row {
+    height: 138px;
+    min-height: 138px;
+    max-height: 138px;
+  }
+}
+
+@media (max-width: 980px) {
+  .lesson-pronunciation-live-stage .lesson-study-surface {
+    padding-inline: clamp(24px, 7vw, 68px);
+  }
+
+  .lesson-pronunciation-live-stage .lesson-stage-progress {
+    width: min(460px, calc(100% - 150px));
+  }
+
+  .lesson-pronunciation-live-stage .lesson-coach-rail.is-pronunciation .lesson-coach-mascot {
+    width: 136px;
+  }
+}
+
+@media (max-width: 640px) {
+  .lesson-pronunciation-live-stage {
+    --pronunciation-stage-height: 520px;
+    --pronunciation-heading-height: 160px;
+  }
+
+  .lesson-pronunciation-live-stage .lesson-stage-layout {
+    border-radius: 20px;
+    background-position: 56% bottom;
+  }
+
+  .lesson-pronunciation-live-stage .lesson-study-panel,
+  .lesson-pronunciation-live-stage .lesson-study-surface,
+  .lesson-pronunciation-live-stage .lesson-coach-rail.is-pronunciation {
+    height: var(--pronunciation-stage-height);
+    min-height: var(--pronunciation-stage-height);
+    max-height: var(--pronunciation-stage-height);
+  }
+
+  .lesson-pronunciation-live-stage .lesson-study-surface {
+    padding: 18px 12px 12px;
+    background: rgba(255, 253, 250, .88);
+  }
+
+  .lesson-pronunciation-live-stage .lesson-stage-progress {
+    width: calc(100% - 8px);
+    gap: 14px;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-study-content {
+    padding: 18px 0 0;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-heading-row {
+    width: calc(100% - 70px);
+    height: var(--pronunciation-heading-height);
+    min-height: var(--pronunciation-heading-height);
+    max-height: var(--pronunciation-heading-height);
+    padding: 0;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-heading-row > strong {
+    padding-right: 40px;
+    font-size: clamp(25px, 7.3vw, 34px);
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-pinyin {
+    min-height: 44px;
+    max-height: 50px;
+    margin-top: 6px;
+    font-size: clamp(16px, 4.8vw, 20px);
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-study-content > p {
+    min-height: 56px;
+    max-height: 62px;
+    font-size: clamp(16px, 4.8vw, 20px);
+  }
+
+  .lesson-pronunciation-live-stage .lesson-coach-rail.is-pronunciation .lesson-coach-mascot {
+    display: none;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-status-row {
+    width: calc(100% - 18px);
+    min-height: 42px;
+    margin-top: auto;
+    padding: 9px 6px;
+    font-size: 12px;
+  }
+
+  .lesson-pronunciation-live-stage .lesson-pronunciation-action {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    margin-top: 8px;
+    padding: 6px;
+    border-radius: 20px;
+  }
+
+  .lesson-pronunciation-live-stage .lesson-pronunciation-action .pronunciation-actions {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+
+  .lesson-pronunciation-live-stage .lesson-pronunciation-action .pronunciation-actions > button,
+  .lesson-pronunciation-live-stage .lesson-pronunciation-action .pronunciation-record {
+    min-height: 50px;
+    font-size: 12px;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-action-middle .lesson-speed-menu > summary {
+    min-width: 66px;
+    min-height: 50px;
+  }
+
+  .lesson-pronunciation-live-stage .lesson-pronunciation-completion {
+    right: 12px;
+    bottom: 82px;
+  }
+}
+
+@media (max-width: 380px) {
+  .lesson-pronunciation-live-stage {
+    --pronunciation-stage-height: 520px;
+  }
+
+  .lesson-pronunciation-live-stage .pronunciation-study-content {
+    padding-top: 16px;
+  }
+}
+
+/* Preserve legibility while fitting long lesson sentences into the stable stage. */
+.lesson-pronunciation-live-stage.is-long-sentence .pronunciation-heading-row > strong {
+  font-size: clamp(36px, 3.55vw, 52px);
+  letter-spacing: -.025em;
+}
+
+.lesson-pronunciation-live-stage.is-very-long-sentence .pronunciation-heading-row > strong {
+  font-size: clamp(32px, 3.15vw, 46px);
+  letter-spacing: -.018em;
+}
+
+.lesson-pronunciation-live-stage.is-extra-long-sentence .pronunciation-heading-row > strong {
+  font-size: clamp(29px, 2.75vw, 40px);
+  letter-spacing: -.01em;
+}
+
+.lesson-pronunciation-live-stage.is-long-sentence .pronunciation-pinyin {
+  font-size: clamp(19px, 1.6vw, 23px);
+}
+
+.lesson-pronunciation-live-stage.is-very-long-sentence .pronunciation-pinyin {
+  font-size: clamp(18px, 1.45vw, 21px);
+}
+
+.lesson-pronunciation-live-stage.is-extra-long-sentence .pronunciation-pinyin {
+  font-size: clamp(17px, 1.35vw, 20px);
+}
+
+.lesson-pronunciation-live-stage.is-long-sentence .pronunciation-study-content > p {
+  font-size: clamp(19px, 1.65vw, 24px);
+}
+
+.lesson-pronunciation-live-stage.is-very-long-sentence .pronunciation-study-content > p {
+  font-size: clamp(18px, 1.5vw, 22px);
+}
+
+.lesson-pronunciation-live-stage.is-extra-long-sentence .pronunciation-study-content > p {
+  font-size: clamp(17px, 1.4vw, 21px);
+}
+
+@media (min-width: 981px) and (max-height: 800px) {
+  .lesson-pronunciation-live-stage.is-long-sentence .pronunciation-heading-row > strong {
+    font-size: clamp(34px, 3.1vw, 44px);
+  }
+
+  .lesson-pronunciation-live-stage.is-very-long-sentence .pronunciation-heading-row > strong {
+    font-size: clamp(30px, 2.75vw, 39px);
+  }
+
+  .lesson-pronunciation-live-stage.is-extra-long-sentence .pronunciation-heading-row > strong {
+    font-size: clamp(27px, 2.45vw, 35px);
+  }
+}
+
+@media (max-width: 640px) {
+  .lesson-reference-deck.lesson-pronunciation-live-stage.is-long-sentence .pronunciation-heading-row > strong {
+    font-size: clamp(23px, 6.6vw, 30px);
+  }
+
+  .lesson-reference-deck.lesson-pronunciation-live-stage.is-very-long-sentence .pronunciation-heading-row > strong {
+    font-size: clamp(20px, 5.7vw, 25px);
+  }
+
+  .lesson-reference-deck.lesson-pronunciation-live-stage.is-extra-long-sentence .pronunciation-heading-row > strong {
+    font-size: clamp(19px, 5.25vw, 23px);
+  }
+
+  .lesson-pronunciation-live-stage.is-extra-long-sentence .pronunciation-heading-row {
+    height: 176px;
+    min-height: 176px;
+    max-height: 176px;
+  }
+
+  .lesson-pronunciation-live-stage.is-long-sentence .pronunciation-pinyin,
+  .lesson-pronunciation-live-stage.is-very-long-sentence .pronunciation-pinyin,
+  .lesson-pronunciation-live-stage.is-extra-long-sentence .pronunciation-pinyin {
+    font-size: clamp(15px, 4.25vw, 18px);
+  }
+
+  .lesson-pronunciation-live-stage.is-long-sentence .pronunciation-study-content > p,
+  .lesson-pronunciation-live-stage.is-very-long-sentence .pronunciation-study-content > p,
+  .lesson-pronunciation-live-stage.is-extra-long-sentence .pronunciation-study-content > p {
+    font-size: clamp(16px, 4.45vw, 19px);
   }
 }
