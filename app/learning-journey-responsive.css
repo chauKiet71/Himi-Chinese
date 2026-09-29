@@ -382,6 +382,7 @@
   }
 
   .roadmap-lesson-row.is-current,
+  .roadmap-lesson-row.is-available,
   .roadmap-lesson-row.is-vip-locked {
     grid-template-rows: auto auto auto;
   }

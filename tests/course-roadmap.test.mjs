@@ -35,11 +35,13 @@ test("course roadmap groups 30 lessons into five stages and identifies the next 
   assert.equal(roadmap.modules[1].status, "active");
   assert.equal(roadmap.modules[1].lessons[2].status, "current");
   assert.equal(roadmap.modules[1].lessons[2].slug, officeLessons[8].slug);
-  assert.equal(roadmap.modules[2].status, "locked");
+  assert.equal(roadmap.modules[2].status, "available");
+  assert.equal(roadmap.modules[2].lessons[0].status, "available");
+  assert.equal(roadmap.modules[2].lessons[0].href, `/learn/van-phong-hanh-chinh?lesson=${officeLessons[12].slug}`);
   assert.equal(roadmap.remainingLessonsInActiveModule, 4);
 });
 
-test("course roadmap stops at the first VIP lesson when the viewer has no entitlement", async () => {
+test("course roadmap keeps VIP restrictions without sequentially locking accessible lessons", async () => {
   const roadmapModule = await import("../lib/course-roadmap.ts").catch(() => null);
   assert.ok(roadmapModule, "the course roadmap builder should be available");
 
@@ -56,12 +58,33 @@ test("course roadmap stops at the first VIP lesson when the viewer has no entitl
   });
 
   assert.equal(roadmap.modules[0].status, "completed");
-  assert.equal(roadmap.modules[1].status, "active");
+  assert.equal(roadmap.modules[1].status, "locked");
   assert.equal(roadmap.modules[1].lessons[0].status, "vip_locked");
   assert.equal(roadmap.modules[1].lessons[0].vipLocked, true);
   assert.equal(roadmap.modules[1].vipLocked, true);
   assert.equal(roadmap.nextLesson, null);
   assert.equal(roadmap.blockedByVip, true);
+});
+
+test("every entitled unfinished lesson can be opened without completing earlier lessons", async () => {
+  const { buildCourseRoadmap } = await import("../lib/course-roadmap.ts");
+  const roadmap = buildCourseRoadmap({
+    courseSlug: "van-phong-hanh-chinh",
+    lessons: officeLessons.map((lesson, order) => ({
+      ...lesson,
+      order,
+      moduleTitle: officeModules.find((module) => module.slug === lesson.moduleSlug)?.title ?? "",
+      moduleOrder: officeModules.findIndex((module) => module.slug === lesson.moduleSlug),
+    })),
+    completedLessonSlugs: [],
+    viewerHasVip: true,
+  });
+
+  const lessons = roadmap.modules.flatMap((module) => module.lessons);
+  assert.ok(lessons.every((lesson) => lesson.href !== null));
+  assert.ok(lessons.every((lesson) => lesson.status !== "locked"));
+  assert.equal(lessons[0].status, "current");
+  assert.ok(lessons.slice(1).every((lesson) => lesson.status === "available"));
 });
 
 test("roadmap repository returns a complete public course overview without a database", async () => {

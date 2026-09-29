@@ -46,7 +46,6 @@
 - No further visual correction is required for this scoped issue.
 
 final result: passed
-
 ---
 
 **Design QA — Visible Himi in compact celebrations**
@@ -95,7 +94,6 @@ final result: passed
 - No further visual correction is required for this scoped issue.
 
 final result: passed
-
 ---
 
 **Design QA — Responsive completion celebrations**
@@ -766,3 +764,55 @@ An additional crop was unnecessary because the combined 844 px-tall comparison k
 - P3: devices substantially narrower than the 1:2 source will crop a little more from the horizontal edges; the focal content remains within the safe center region.
 
 final result: passed
+
+---
+
+# Design QA — Shared client breadcrumb
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-74888cc3-244f-45f4-b602-86a3846dc459.png`
+- Implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/design-qa-breadcrumb-mobile.png`
+- Normalized comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/design-qa-breadcrumb-comparison.png`
+- Route and state: `/writing/1`, anonymous learner, breadcrumb at rest
+- Browser viewport: 439 × 900 CSS px, device scale factor 1
+- Source pixels: 439 × 91
+- Implementation capture pixels: 429 × 879 (content viewport excludes the browser scrollbar gutter)
+- Density normalization: the top 429 × 91 implementation region was resized to 439 × 91 for an equal-size comparison
+
+## Full-view comparison evidence
+
+The browser-rendered `/writing/1` page shows the breadcrumb above the page content without overlap, horizontal overflow, duplicate route breadcrumbs, or interference with the fixed mobile navigation. The parent link successfully navigates from `/writing/1` to `/writing`.
+
+## Focused region comparison evidence
+
+The normalized comparison places the 439 × 91 source crop above the implementation crop. A focused comparison was required because the visual target contains only the breadcrumb region. The final implementation matches the source hierarchy: left arrow, bold black parent, muted separator, bold Himi-red current page, white background, and the same compact vertical rhythm.
+
+## Required fidelity surfaces
+
+- Fonts and typography: matched with the existing self-hosted Himi Roboto family at 16px and a strong 760 weight; hierarchy and truncation remain readable on narrow screens.
+- Spacing and layout rhythm: mobile top spacing, link/icon gap, separator spacing, and the transition into the following content were tuned against the source crop.
+- Colors and visual tokens: parent uses the existing Himi black token, current page uses Himi red, separator uses neutral gray, and the bar uses Himi white.
+- Image quality and asset fidelity: the target contains no raster assets. The arrow uses the project’s existing Lucide icon system and renders sharply at device scale factor 1.
+- Copy and content: the reference route renders exactly `Các cấp độ / HSK 1`; other learner routes use route-specific Vietnamese parent and current labels.
+
+## Comparison history
+
+1. Initial implementation: the shared structure and colors matched, but the mobile text/icon alignment and whitespace before the following card differed visibly (P2).
+2. First correction: increased the mobile vertical whitespace, which moved the following card too far down (P2).
+3. Final correction: retained the aligned text baseline while reducing bottom padding and balancing the arrow/text gap. The normalized comparison has no actionable P0/P1/P2 differences.
+
+## Primary interactions and console
+
+- Tested the parent breadcrumb link from `/writing/1` to `/writing`: passed.
+- Confirmed the route updates to the correct breadcrumb labels: passed.
+- Browser console errors after navigation: none.
+
+## Findings
+
+No actionable P0, P1, or P2 findings remain.
+
+## Follow-up polish
+
+No P3 follow-up is required for the supplied reference state.
+
+final result: passed
+<!-- end breadcrumb QA -->

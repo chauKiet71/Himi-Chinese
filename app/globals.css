@@ -4342,6 +4342,7 @@ details.roadmap-stage-card > summary:focus-visible { outline-offset: -4px; }
 .roadmap-stage-status { min-height: 31px; margin-right: 16px; padding: 0 13px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid transparent; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; }
 .roadmap-stage-status.is-completed { color: #488276; border-color: #d8ebe5; background: #eff7f4; }
 .roadmap-stage-status.is-active { color: #08796d; background: #e4f4ef; }
+.roadmap-stage-status.is-available { color: #08796d; border-color: #d8ebe5; background: #f3faf7; }
 .roadmap-stage-status.is-vip { color: #8b5f1d; border-color: #f2d59e; background: #fff7e8; }
 .roadmap-stage-status.is-locked { color: #707a77; border-color: #e1e4e2; background: #f5f6f5; }
 .roadmap-stage-expand { color: #6f817c; transition: transform .2s ease; }
@@ -4357,6 +4358,7 @@ a.roadmap-lesson-row:hover { color: #0b665c; background: #f5faf8; }
 .roadmap-lesson-row.is-current { min-height: 57px; color: #0a7066; background: #eaf7f3; }
 .roadmap-lesson-row.is-current .roadmap-lesson-state { color: #08796d; }
 .roadmap-lesson-row.is-current .roadmap-lesson-state svg { stroke-width: 2.4; }
+.roadmap-lesson-row.is-available .roadmap-lesson-state { color: #438b80; }
 .roadmap-lesson-row.is-vip-locked { color: #77684c; background: #fffaf0; }
 .roadmap-lesson-row.is-vip-locked .roadmap-lesson-state { color: #ad7b28; }
 .roadmap-lesson-row.is-locked { color: #78837f; background: #fcfcfb; }
@@ -4451,6 +4453,7 @@ a.roadmap-lesson-row:hover { color: #0b665c; background: #f5faf8; }
   .roadmap-lesson-vip { min-height: 44px; width: 100%; margin-top: 6px; padding-inline: 12px; grid-column: 2 / 4; grid-row: 3; justify-self: stretch; }
   .roadmap-lesson-chevron { grid-column: 3; grid-row: 1 / span 2; }
   .roadmap-lesson-row.is-current,
+  .roadmap-lesson-row.is-available,
   .roadmap-lesson-row.is-vip-locked { grid-template-rows: auto auto auto; }
   .course-roadmap-aside { grid-template-columns: 1fr; gap: 16px; }
   .course-roadmap-overview { padding: 18px 18px 8px; border-radius: 14px; }

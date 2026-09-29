@@ -1,6 +1,6 @@
 import type { LessonSummary } from "./content-types.ts";
 
-export type RoadmapLessonStatus = "completed" | "current" | "locked" | "vip_locked";
+export type RoadmapLessonStatus = "completed" | "current" | "available" | "vip_locked";
 
 export type RoadmapLesson = LessonSummary & {
   status: RoadmapLessonStatus;
@@ -13,7 +13,7 @@ export type RoadmapModule = {
   slug: string;
   title: string;
   order: number;
-  status: "completed" | "active" | "locked";
+  status: "completed" | "active" | "available" | "locked";
   completedLessons: number;
   totalMinutes: number;
   lessons: RoadmapLesson[];
@@ -49,24 +49,29 @@ export function buildCourseRoadmap({
   const completed = new Set(completedLessonSlugs);
   const opened = new Set(openedLessonSlugs);
   const sortedLessons = [...lessons].sort((a, b) => a.order - b.order);
-  const nextIncompleteIndex = sortedLessons.findIndex((lesson) => !completed.has(lesson.slug));
+  const nextIncompleteIndex = sortedLessons.findIndex((lesson) => (
+    !completed.has(lesson.slug) && (lesson.isFree || viewerHasVip)
+  ));
   const currentLesson = nextIncompleteIndex >= 0 ? sortedLessons[nextIncompleteIndex] : null;
-  const blockedByVip = Boolean(currentLesson && !currentLesson.isFree && !viewerHasVip);
+  const blockedByVip = !currentLesson && sortedLessons.some((lesson) => (
+    !completed.has(lesson.slug) && !lesson.isFree && !viewerHasVip
+  ));
 
   const roadmapLessons: RoadmapLesson[] = sortedLessons.map((lesson, index) => {
     const isCompleted = completed.has(lesson.slug);
     const isCurrent = index === nextIncompleteIndex;
+    const vipLocked = !lesson.isFree && !viewerHasVip;
     const status: RoadmapLessonStatus = isCompleted
       ? "completed"
-      : isCurrent
-        ? blockedByVip ? "vip_locked" : "current"
-        : "locked";
+      : vipLocked
+        ? "vip_locked"
+        : isCurrent ? "current" : "available";
     return {
       ...lesson,
       status,
-      vipLocked: !lesson.isFree && !viewerHasVip,
+      vipLocked,
       started: opened.has(lesson.slug) && !isCompleted,
-      href: (status === "completed" || status === "current") && (lesson.isFree || viewerHasVip)
+      href: !vipLocked
         ? `/learn/${courseSlug}?lesson=${lesson.slug}`
         : null,
     };
@@ -97,9 +102,11 @@ export function buildCourseRoadmap({
       vipLocked: !viewerHasVip && module.lessons.length > 0 && module.lessons.every((lesson) => !lesson.isFree),
       status: module.completedLessons === module.lessons.length
         ? "completed"
-        : module.lessons.some((lesson) => lesson.status === "current" || lesson.status === "vip_locked")
+        : module.lessons.some((lesson) => lesson.status === "current")
           ? "active"
-          : "locked",
+          : module.lessons.some((lesson) => lesson.status === "available")
+            ? "available"
+            : "locked",
     }));
   const completedLessons = roadmapLessons.filter((lesson) => lesson.status === "completed").length;
   const totalMinutes = roadmapLessons.reduce((total, lesson) => total + lesson.estimatedMinutes, 0);

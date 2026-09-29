@@ -94,7 +94,8 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   assert.match(html, /aria-expanded="false"/);
   assert.match(html, />Bài 1: Xin chào!</);
   assert.match(html, />Bắt đầu học</);
-  assert.match(html, /Hoàn thành bài trước/);
+  assert.doesNotMatch(html, /Hoàn thành bài trước/);
+  assert.match(html, /href="\/hsk\/1\/hsk1-bai-02-cam-on-anh"/);
   assert.equal((html.match(/class="hsk-lesson-start"/g) ?? []).length, 1);
   assert.match(html, />Himi nhắc bạn:</);
   assert.match(html, /6 từ vựng/);

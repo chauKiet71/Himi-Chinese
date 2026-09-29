@@ -1,0 +1,39 @@
+{
+  "page": 15,
+  "image": "page-015.png",
+  "imageWidth": 1074,
+  "imageHeight": 1459,
+  "ocrWidth": 1074,
+  "ocrHeight": 1459,
+  "ocrScale": 1.0,
+  "elapsedSeconds": [
+    2.6081634999973176,
+    0.0025663375854492188,
+    0.5613532066345215
+  ],
+  "wallSeconds": 3.283,
+  "lines": [
+    {
+      "box": [
+        [
+          301.0,
+          58.0
+        ],
+        [
+          713.0,
+          56.0
+        ],
+        [
+          713.0,
+          86.0
+        ],
+        [
+          301.0,
+          87.0
+        ]
+      ],
+      "text": "Scaned by TIENG TRUNG HANU DAI HOC HA NOI",
+      "confidence": 0.9754852594398871
+    }
+  ]
+}

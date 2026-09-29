@@ -30,7 +30,7 @@ function formatMinutes(minutes: number) {
 
 function LessonStateIcon({ lesson }: { lesson: RoadmapLesson }) {
   if (lesson.status === "completed") return <Check aria-hidden="true" size={14} strokeWidth={3} />;
-  if (lesson.status === "current") return <Circle aria-hidden="true" size={19} />;
+  if (lesson.status === "current" || lesson.status === "available") return <Circle aria-hidden="true" size={19} />;
   return <LockKeyhole aria-hidden="true" size={16} />;
 }
 
@@ -75,6 +75,7 @@ function RoadmapLessonRow({
     return <Link className={`roadmap-lesson-row is-${lesson.status}`} href={lesson.href} prefetch={false}>
       {copy}
       {lesson.status === "completed" ? <span className="roadmap-lesson-cta is-replay">Học lại</span> : null}
+      {lesson.status === "available" ? <span className="roadmap-lesson-cta">Bắt đầu bài học</span> : null}
       <ChevronRight aria-hidden="true" className="roadmap-lesson-chevron" size={19} />
     </Link>;
   }
@@ -94,6 +95,7 @@ function StageStatus({ module }: { module: RoadmapModule }) {
       ? <span className="roadmap-stage-status is-vip"><Crown aria-hidden="true" size={14} /> Cần VIP</span>
       : <span className="roadmap-stage-status is-active">Đang học</span>;
   }
+  if (module.status === "available") return <span className="roadmap-stage-status is-available">Sẵn sàng</span>;
   return <span className="roadmap-stage-status is-locked"><LockKeyhole aria-hidden="true" size={14} /> Khóa</span>;
 }
 
@@ -164,7 +166,7 @@ export function CourseRoadmap({
     ? "Bạn đã hoàn thành toàn bộ lộ trình. Hãy quay lại ôn những bài cần củng cố."
     : roadmap.blockedByVip
       ? "Mở khóa VIP để tiếp tục chặng chuyên sâu và lưu trọn tiến độ học."
-      : `Hoàn thành ${roadmap.remainingLessonsInActiveModule} bài nữa để mở chặng tiếp theo`;
+      : "Bạn có thể chọn bất kỳ bài học đang mở để học theo nhu cầu của mình.";
 
   return <main aria-label={`Chi tiết lộ trình ${course.title}`} className="course-roadmap-page">
     <div className="section-shell course-roadmap-shell">

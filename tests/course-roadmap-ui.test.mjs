@@ -74,8 +74,9 @@ test("an available course opens an overview that leads to the learner's next les
   assert.match(overviewHtml, />Tổng quan lộ trình</);
   assert.match(overviewHtml, />8 \/ 30 bài</);
   assert.match(overviewHtml, />1 \/ 5 chặng</);
-  assert.match(overviewHtml, />Hoàn thành 4 bài nữa/);
+  assert.match(overviewHtml, /Bạn có thể chọn bất kỳ bài học đang mở/);
   assert.match(overviewHtml, /href="\/learn\/van-phong-hanh-chinh\?lesson=xu-ly-thay-doi-uu-tien"/);
+  assert.match(overviewHtml, new RegExp(`href="/learn/van-phong-hanh-chinh\\?lesson=${officeLessons[29].slug}"`));
   assert.match(overviewHtml, />Bắt đầu bài học</);
 
   const continuedRoadmap = buildCourseRoadmap({

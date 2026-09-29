@@ -980,6 +980,103 @@
   transition: margin-left var(--learner-rail-duration) var(--learner-rail-ease);
 }
 
+/* Shared client breadcrumb. Every non-home learner route gets the same compact
+ * parent/current navigation treatment instead of inventing its own styling. */
+.client-breadcrumb-bar {
+  width: 100%;
+  padding: 26px clamp(18px, 3vw, 42px) 20px;
+  position: relative;
+  z-index: 5;
+  box-sizing: border-box;
+  color: var(--himi-black, #242424);
+  background: var(--himi-white, #fff);
+}
+
+.client-breadcrumb {
+  width: min(1320px, 100%);
+  min-height: 32px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.client-breadcrumb a {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 1 auto;
+  color: var(--himi-black, #242424);
+  font-weight: 760;
+  text-decoration: none;
+}
+
+.client-breadcrumb a:hover {
+  color: var(--himi-red, #ff4c3b);
+}
+
+.client-breadcrumb a:focus-visible {
+  border-radius: 6px;
+  outline: 3px solid color-mix(in srgb, var(--himi-red, #ff4c3b) 28%, transparent);
+  outline-offset: 4px;
+}
+
+.client-breadcrumb a span,
+.client-breadcrumb-current {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.client-breadcrumb-separator {
+  color: #9b9b9b;
+  font-weight: 500;
+}
+
+.client-breadcrumb-current {
+  min-width: 0;
+  color: var(--himi-red, #ff4c3b);
+  font-weight: 760;
+}
+
+/* The shared breadcrumb replaces older route-specific breadcrumb rows. */
+.learner-app-shell :is(.writing-breadcrumbs, .typing-breadcrumbs, .hsk-learning-breadcrumb, .vsets-back, .video-detail-back) {
+  display: none;
+}
+
+/* Focused learning sessions already own a full-screen exit control. */
+.learner-app-shell:has(.game-immersive-dashboard) .client-breadcrumb-bar,
+.learner-app-shell:has(.hsk-guided-page) .client-breadcrumb-bar,
+.learner-app-shell:has(.hsk-quiz-session) .client-breadcrumb-bar,
+.learner-app-shell:has(.typing-session-page) .client-breadcrumb-bar {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .client-breadcrumb-bar {
+    padding: 27px 5px 13px;
+  }
+
+  .client-breadcrumb {
+    min-height: 30px;
+    gap: 17px;
+    font-size: 16px;
+  }
+
+  .client-breadcrumb a {
+    gap: 10px;
+  }
+
+  .client-breadcrumb-current {
+    margin-left: -3px;
+  }
+}
+
 .learner-app-shell .route-transition-progress {
   left: 0;
   transition: left var(--learner-rail-duration) var(--learner-rail-ease), opacity 120ms ease;

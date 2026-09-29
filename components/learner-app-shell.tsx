@@ -27,6 +27,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { BrandMark, BrandWordmark } from "@/components/brand-logo";
+import { ClientBreadcrumb } from "@/components/client-breadcrumb";
 import { LogoutForm } from "@/components/logout-form";
 import { getInternalNavigationHref } from "@/lib/navigation-progress";
 
@@ -305,7 +306,10 @@ export function LearnerAppShell({
     beginRoute(event, href);
   };
   if (isStandaloneRoute(pathname)) {
-    return <div className="standalone-route-shell">{children}</div>;
+    const standaloneBreadcrumb = pathname.startsWith("/admin") || pathname.startsWith("/_not-found")
+      ? null
+      : <ClientBreadcrumb />;
+    return <div className="standalone-route-shell">{standaloneBreadcrumb}{children}</div>;
   }
 
   const accountItem = user?.role === "admin"
@@ -550,7 +554,10 @@ export function LearnerAppShell({
       </div>
       <span aria-live="polite" className="sr-only" role="status">{navigating ? "Đang mở nội dung…" : ""}</span>
 
-      <div className="learner-shell-content" id="learner-main-content" tabIndex={-1}>{children}</div>
+      <div className="learner-shell-content" id="learner-main-content" tabIndex={-1}>
+        <ClientBreadcrumb />
+        {children}
+      </div>
 
       <nav className="learner-mobile-nav" aria-label="Điều hướng học tập trên điện thoại">
         <Link aria-current={mobileHomeActive ? "page" : undefined} className={mobileHomeActive ? "active" : ""} href="/" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch><Home aria-hidden="true" size={20} /><span>Hôm nay</span></Link>
