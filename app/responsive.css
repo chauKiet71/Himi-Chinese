@@ -1118,7 +1118,22 @@ video {
   .auth-login-scene-art {
     position: absolute;
     inset: 0;
-    background: url("/assets/auth/login-paper-scene-mobile-v2.webp") center / 100% 100% no-repeat;
+    background: url("/assets/auth/login-paper-scene-mobile-himi-v2.png") center / 100% 100% no-repeat;
+  }
+
+  .auth-login-scene-art::after {
+    left: 77%;
+    top: clamp(170px, 34vh, 290px);
+    bottom: auto;
+    width: 18%;
+    transform: none;
+  }
+
+  .auth-password-mascot img {
+    left: 80%;
+    top: clamp(170px, 34vh, 290px);
+    bottom: auto;
+    width: 12%;
   }
 
   .auth-card-login-scene,
@@ -1253,7 +1268,7 @@ video {
   .auth-page-register-scene .auth-scene-stage { height: max(100dvh, 760px); }
 
   .auth-login-scene-art {
-    background: url("/assets/auth/login-paper-scene-desktop-v2.webp") center / 100% 100% no-repeat;
+    background: url("/assets/auth/login-paper-scene-desktop-himi-v2.png") center / 100% 100% no-repeat;
   }
 
   .auth-card-login-scene,
@@ -1304,6 +1319,19 @@ video {
     height: auto;
     aspect-ratio: 3 / 2;
     transform: translateX(-50%);
+  }
+
+  .auth-login-scene-art::after {
+    top: calc(68vh - min(9.25vw, 21vh));
+    bottom: auto;
+    width: min(18.5vw, 42vh);
+    transform: none;
+  }
+
+  .auth-password-mascot img {
+    top: calc(68vh - min(9.25vw, 21vh));
+    bottom: auto;
+    width: min(12.3vw, 28vh);
   }
 
   .auth-page-login-scene:not(.auth-page-register-scene):not(.auth-page-forgot-scene) .auth-scene-stage {
@@ -1490,7 +1518,7 @@ video {
   }
 
   .auth-login-scene-art {
-    background-image: url("/assets/auth/login-paper-scene-mobile-v2.webp");
+    background-image: url("/assets/auth/login-paper-scene-mobile-himi-v2.png");
   }
 
   .auth-card-login-scene,

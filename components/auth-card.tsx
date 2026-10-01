@@ -48,12 +48,14 @@ function PasswordField({
   confirmation = false,
   label,
   name,
+  onFocusChange,
   placeholder,
 }: {
   autoComplete: "current-password" | "new-password";
   confirmation?: boolean;
   label: string;
   name: "password" | "confirmPassword";
+  onFocusChange?: (focused: boolean) => void;
   placeholder?: string;
 }) {
   const inputId = useId();
@@ -70,6 +72,8 @@ function PasswordField({
         maxLength={MAX_PASSWORD_LENGTH}
         minLength={MIN_PASSWORD_LENGTH}
         name={name}
+        onBlur={() => onFocusChange?.(false)}
+        onFocus={() => onFocusChange?.(true)}
         placeholder={placeholder}
         required
         type={visible ? "text" : "password"}
@@ -89,6 +93,7 @@ function PasswordField({
 
 export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo, sent = false }: { mode: AuthMode; error?: string; initialRegisterSuccess?: boolean; returnTo: string; sent?: boolean }) {
   const [motionRun, setMotionRun] = useState(0);
+  const [passwordFocused, setPasswordFocused] = useState(false);
   const [registerState, setRegisterState] = useState<RegisterState>(initialRegisterSuccess ? "success" : "idle");
   const [registerError, setRegisterError] = useState<string>();
   const [forgotPasswordState, setForgotPasswordState] = useState<ForgotPasswordState>(sent ? "sent" : "idle");
@@ -145,7 +150,7 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
       gsap.set(sceneArt, { autoAlpha: 0, scale: 1.012, y: 14 });
       gsap.set(interfaceElements, { autoAlpha: 0, y: -7 });
       gsap.set(walker, { autoAlpha: 0, scale: .92, xPercent: -130, y: 0 });
-      gsap.set(sprite, { backgroundPosition: "0% 0%", rotation: -.65, y: 0 });
+      gsap.set(sprite, { rotation: -.65, y: 0 });
       gsap.set(shadow, { autoAlpha: .42, scaleX: 1 });
       gsap.set(card, {
         autoAlpha: 0,
@@ -162,7 +167,6 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
         .to(walker, { duration: 1.45, ease: "none", scale: 1.18, x: walkerMidX, xPercent: 0 }, .12)
         .to(walker, { duration: .42, ease: "power2.in", rotation: -5, scale: 1.72, x: walkerPointX, y: -2 }, 1.57)
         .to(walker, { autoAlpha: 0, duration: .28, ease: "power2.in", scale: 2.16, x: walkerExitX, y: 0 }, 1.99)
-        .to(sprite, { backgroundPosition: "100% 0%", duration: .77, ease: "steps(7)", repeat: 2 }, 0)
         .to(sprite, { duration: .1925, ease: "sine.inOut", repeat: 11, rotation: .65, y: -3, yoyo: true }, 0)
         .to(shadow, { autoAlpha: .27, duration: .1925, ease: "sine.inOut", repeat: 11, scaleX: .84, yoyo: true }, 0)
         .to(sceneArt, { autoAlpha: 1, duration: .42, scale: 1, y: 0 }, 1.82)
@@ -219,7 +223,7 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
   useEffect(() => {
     if (!registering) return;
     const successImage = new window.Image();
-    successImage.src = "/assets/auth/penguin-register-success.webp";
+    successImage.src = "/assets/mascot/himi-v2/himi-celebrate.webp";
   }, [registering]);
 
   useEffect(() => () => {
@@ -286,8 +290,8 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
       {admin ? <input name="mode" type="hidden" value="admin" /> : null}
       {registering ? <label><span>Họ và tên</span><span className="auth-input-shell"><UserRound aria-hidden="true" size={18} /><input autoComplete="name" maxLength={120} minLength={2} name="displayName" placeholder="Nhập họ và tên của bạn" required type="text" /></span></label> : null}
       <label><span>Email</span><span className="auth-input-shell"><Mail aria-hidden="true" size={18} /><input autoCapitalize="none" autoComplete="email" inputMode="email" maxLength={255} name="email" placeholder={learnerAuth ? "Nhập email của bạn" : undefined} required type="email" /></span></label>
-      {!forgotPassword ? <PasswordField autoComplete={registering ? "new-password" : "current-password"} label="Mật khẩu" name="password" placeholder={learnerAuth ? "Nhập mật khẩu của bạn" : undefined} /> : null}
-      {registering ? <PasswordField autoComplete="new-password" confirmation label="Nhập lại mật khẩu" name="confirmPassword" placeholder="Nhập lại mật khẩu" /> : null}
+      {!forgotPassword ? <PasswordField autoComplete={registering ? "new-password" : "current-password"} label="Mật khẩu" name="password" onFocusChange={setPasswordFocused} placeholder={learnerAuth ? "Nhập mật khẩu của bạn" : undefined} /> : null}
+      {registering ? <PasswordField autoComplete="new-password" confirmation label="Nhập lại mật khẩu" name="confirmPassword" onFocusChange={setPasswordFocused} placeholder="Nhập lại mật khẩu" /> : null}
       <button className="button button-primary button-full" disabled={registerState === "submitting" || forgotPasswordState === "submitting"} type="submit"><span>{registerState === "submitting" ? "Đang tạo tài khoản..." : forgotPasswordState === "submitting" ? "Đang gửi liên kết..." : registering ? "Tạo tài khoản" : forgotPasswordSent ? "Gửi lại liên kết" : forgotPassword ? "Gửi liên kết đặt lại" : "Đăng nhập"}</span>{learnerAuth ? <ArrowRight aria-hidden="true" size={18} /> : null}</button>
     </form>
     {learnerLogin || registering ? <>
@@ -308,9 +312,13 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
     </div>
   </section>;
 
-  return <main className={`auth-page auth-gsap-motion ${learnerAuth ? "auth-page-login-scene" : ""} ${registering ? "auth-page-register-scene" : ""} ${forgotPassword ? "auth-page-forgot-scene" : ""} ${registerState === "success" ? "auth-register-is-success" : ""}`.trim()} ref={authRootRef}>
+  return <main className={`auth-page auth-gsap-motion ${learnerAuth ? "auth-page-login-scene" : ""} ${registering ? "auth-page-register-scene" : ""} ${forgotPassword ? "auth-page-forgot-scene" : ""} ${passwordFocused ? "auth-password-is-active" : ""} ${registerState === "success" ? "auth-register-is-success" : ""}`.trim()} ref={authRootRef}>
     {learnerAuth ? <>
-      <div className="auth-scene-stage"><div aria-hidden="true" className="auth-login-scene-art" />{authPanel}</div>
+      <div className="auth-scene-stage">
+        <div aria-hidden="true" className="auth-login-scene-art" />
+        <div aria-hidden="true" className="auth-password-mascot"><Image alt="" height={1536} src="/assets/auth/himi-v2-cover-eyes.png" unoptimized width={1024} /></div>
+        {authPanel}
+      </div>
       <Link aria-label="Himi Chinese - Về trang chủ" className="auth-scene-brand" href="/"><AuthBrandMark priority /><BrandWordmark /></Link>
       <Link className="auth-scene-home" href="/"><Home aria-hidden="true" size={17} />Về trang chủ</Link>
       <button aria-label="Phát lại chuyển động" className="auth-scene-replay" onClick={() => setMotionRun((run) => run + 1)} title="Xem lại chuyển động" type="button"><RotateCcw aria-hidden="true" size={17} /></button>
@@ -318,7 +326,7 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
     </> : null}
     {registerState === "success" ? <section aria-live="polite" className="auth-registration-success" role="status">
       <div className="auth-registration-success-inner">
-        <Image alt="Cánh Cụt Himi vui vẻ bật nhảy giữa những mảnh giấy chúc mừng" height={1254} src="/assets/auth/penguin-register-success.webp" unoptimized width={1254} />
+        <Image alt="Himi mới vui vẻ chúc mừng bạn đăng ký thành công" height={1024} src="/assets/mascot/himi-v2/himi-celebrate.webp" unoptimized width={1024} />
         <div className="auth-registration-success-copy">
           <span>Tài khoản đã sẵn sàng</span>
           <h1>Đăng ký thành công!</h1>

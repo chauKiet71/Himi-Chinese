@@ -816,3 +816,50 @@ No P3 follow-up is required for the supplied reference state.
 
 final result: passed
 <!-- end breadcrumb QA -->
+# Design QA — Authentication Himi v2 brand sync
+
+- Source visual truth paths: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-ed3501aa-5c2c-4dba-910a-32669ee87a63.png`, `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-900c232d-601e-417a-950a-819f990230bb.png`, `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-5d4f00a4-4676-4adc-b152-0079a049abcc.png`, `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-913bcd07-fc22-4e5e-b38e-0e3ecd826014.png`, and the approved Himi v2 reference `public/assets/mascot/himi-v2/himi-wave.webp`.
+- Implementation: `http://127.0.0.1:3002/login`, `/register`, and `/forgot-password`.
+- Implementation screenshot path: Codex in-app Browser captures in this task; the browser capture API does not expose a filesystem path.
+- Source pixels: 1097 × 627, 986 × 542, 913 × 583, and 940 × 558. Implementation capture: 1238 × 878 CSS px at device scale factor 1.
+- State: unauthenticated learner login, registration, forgot-password, and entrance animation.
+
+**Full-view comparison evidence**
+
+- The paper, coral satchel, mint ground, decorative stars, table, cup, and form positions remain consistent with the supplied screens.
+- The embedded green-scarf mascot was removed from both desktop and portrait scene artwork. The approved black Himi with red scarf now occupies the same companion area beside the paper on all three verified desktop routes.
+- Registration and forgot-password retain their original form density, hierarchy, button treatment, and empty-paper space.
+
+**Focused region comparison evidence**
+
+- Mascot region: Himi v2 is sharp, transparent, correctly grounded, and has no visible halo against the cream/mint scene.
+- Entrance animation: the blue legacy walk-cycle reference is gone; the animation now consumes `himi-cheer-animated.webp` and preserves the existing travel/bob motion.
+- Registration-success state now consumes `himi-celebrate.webp`, keeping the same accessible status copy and redirect behavior.
+
+**Findings**
+
+- No actionable P0/P1/P2 mismatch remains for the requested mascot-brand synchronization.
+- Typography, spacing, colors, and copy were intentionally preserved because the request only changes brand imagery.
+
+**Implementation Checklist**
+
+- [x] Desktop and portrait auth art contain no legacy mascot
+- [x] Login, registration, and forgot-password use the shared Himi v2 scene
+- [x] Entrance and registration-success mascot assets use the Himi v2 suite
+- [x] Production build succeeds
+- [x] Targeted authentication and mascot tests pass (8/8)
+- [x] Browser console has no warnings or errors
+
+**Follow-up Polish**
+
+- None required for this scope.
+
+**Comparison History**
+
+- P2 found after the first pass: on short desktop viewports the static Himi overlay was positioned relative to the oversized 3:2 scene, leaving only the top of the mascot visible below the fold. The entrance asset also waved while its container translated, which did not read as walking.
+- Fix: compact-height layouts now position the static mascot from the live viewport (`top: 68vh`) and cap its size by viewport height. The entrance now uses a purpose-built 8-pose Himi v2 walk cycle rendered as a 16 fps animated WebP instead of the waving animation.
+- Post-fix evidence: targeted asset tests confirm at least eight transparent animation frames with frame delays no greater than 63 ms; the refreshed browser capture shows the static Himi fully inside the viewport.
+
+final result: passed
+
+---

@@ -31,6 +31,9 @@ test("UI references only the Himi v2 mascot suite", async () => {
     read("components/review-home-studio.tsx"),
     read("components/listening-studio.tsx"),
     read("components/course-roadmap.tsx"),
+    read("components/auth-card.tsx"),
+    read("app/globals.css"),
+    read("app/responsive.css"),
     read("app/himi-section-banner.css"),
     read("app/video-learning.css"),
   ]);
@@ -42,9 +45,42 @@ test("UI references only the Himi v2 mascot suite", async () => {
   assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-celebrate\.webp/);
   assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-writing-animated\.webp/);
   assert.match(combined, /\/assets\/mascot\/himi-v2\/himi-video-animated\.webp/);
-  assert.doesNotMatch(combined, /\/assets\/mascot\/penguin|himi-current-wave-fixed|himi-current-static/);
+  assert.match(combined, /login-paper-scene-desktop-himi-v2\.png/);
+  assert.match(combined, /login-paper-scene-mobile-himi-v2\.png/);
+  assert.doesNotMatch(combined, /\/assets\/mascot\/penguin|himi-current-wave-fixed|himi-current-static|penguin-walk-cycle-v2|penguin-register-success|login-paper-scene-(?:desktop|mobile)-v2/);
 
   await assert.rejects(access(new URL("public/assets/mascot/penguin", projectUrl)));
   await assert.rejects(access(new URL("public/assets/home/himi-current-wave-fixed.gif", projectUrl)));
   await assert.rejects(access(new URL("public/assets/home/himi-current-static.webp", projectUrl)));
+});
+
+test("authentication scenes use the clean Himi v2-ready artwork", async () => {
+  const desktop = await sharp(fileURLToPath(new URL("public/assets/auth/login-paper-scene-desktop-himi-v2.png", projectUrl))).metadata();
+  const mobile = await sharp(fileURLToPath(new URL("public/assets/auth/login-paper-scene-mobile-himi-v2.png", projectUrl))).metadata();
+  const walker = await sharp(fileURLToPath(new URL("public/assets/auth/himi-walk-animated.webp", projectUrl)), { animated: true }).metadata();
+  const coverEyes = await sharp(fileURLToPath(new URL("public/assets/auth/himi-v2-cover-eyes.png", projectUrl))).metadata();
+
+  assert.equal(desktop.width, 1536);
+  assert.equal(desktop.height, 1024);
+  assert.equal(mobile.width, 1024);
+  assert.equal(mobile.height, 1536);
+  assert.equal(walker.hasAlpha, true);
+  assert.ok((walker.pages ?? 0) >= 8);
+  assert.ok(walker.delay?.every((delay) => delay <= 63));
+  assert.equal(coverEyes.hasAlpha, true);
+});
+
+test("password focus makes Himi cover his eyes", async () => {
+  const [authCard, styles] = await Promise.all([
+    read("components/auth-card.tsx"),
+    read("app/globals.css"),
+  ]);
+
+  assert.match(authCard, /onFocusChange\?\:\s*\(focused: boolean\) => void/);
+  assert.match(authCard, /onFocus=\{\(\) => onFocusChange\?\.\(true\)\}/);
+  assert.match(authCard, /onBlur=\{\(\) => onFocusChange\?\.\(false\)\}/);
+  assert.match(authCard, /passwordFocused \? "auth-password-is-active"/);
+  assert.match(authCard, /himi-v2-cover-eyes\.png/);
+  assert.match(styles, /\.auth-password-is-active \.auth-login-scene-art::after/);
+  assert.match(styles, /\.auth-password-is-active \.auth-password-mascot/);
 });
