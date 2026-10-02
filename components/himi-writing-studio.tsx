@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
 import HanziWriter from "hanzi-writer";
 import {
   ArrowLeft,
@@ -261,11 +260,6 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
 
   return (
     <main className="learner-dashboard himi-writing-studio">
-      <header className="himi-writing-session-header">
-        <Link href={`/writing/${topic.levelId}`}><ArrowLeft aria-hidden="true" size={16} /> Danh sách bài học</Link>
-        <div><span>{topic.level} · {topic.sourceLabel} · Bài {String(topic.lessonNumber).padStart(2, "0")}</span><h1>{topic.title}</h1></div>
-        <strong>{topic.characters.length} chữ trọng tâm</strong>
-      </header>
       <section className="himi-writing-workspace" aria-label="Bàn luyện viết Hán tự">
         <aside className="himi-writing-library">
           <div className="himi-writing-library-heading">

@@ -64,6 +64,8 @@ test("HSK lesson progress reaches completion only after all four modes are compl
   };
   assert.equal(progressModule.calculateHskLessonProgress(lesson, complete), 100);
   assert.deepEqual(progressModule.parseHskLessonProgress("not-json"), progressModule.EMPTY_HSK_LESSON_PROGRESS);
+  assert.equal(progressModule.hasHskLessonProgress(progressModule.EMPTY_HSK_LESSON_PROGRESS), false);
+  assert.equal(progressModule.hasHskLessonProgress({ ...progressModule.EMPTY_HSK_LESSON_PROGRESS, guidedStep: 0 }), true);
 });
 
 test("HSK lesson workspace exposes the four requested learning tabs", async (t) => {

@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 type CoursesSearchParams = {
+  level?: string | string[];
   view?: string | string[];
 };
 
@@ -44,9 +45,13 @@ export default async function CoursesPage({
   const [params, user] = await Promise.all([searchParams, getCurrentUser()]);
   const view: CourseLibraryViewName = firstValue(params.view) === "hsk" ? "hsk" : "catalog";
   const hskCurriculum = view === "hsk" ? await getHskCurriculumPageData(user?.id ?? null) : [];
+  const requestedLevelId = firstValue(params.level);
+  const initialHskLevelId = hskCurriculum.some((level) => level.id === requestedLevelId)
+    ? requestedLevelId
+    : undefined;
 
   return <main className="course-library-page hsk-curriculum-page">
-    {view === "hsk" ? <CourseLibraryView authenticated={Boolean(user)} courses={[]} hskCurriculum={hskCurriculum} hskSummary={hskSummary} view="hsk" /> : <div id="course-catalog">
+    {view === "hsk" ? <CourseLibraryView authenticated={Boolean(user)} courses={[]} hskCurriculum={hskCurriculum} hskSummary={hskSummary} initialHskLevelId={initialHskLevelId} view="hsk" /> : <div id="course-catalog">
       <Suspense fallback={<CourseGridSkeleton />}><CourseCatalog userId={user?.id ?? null} /></Suspense>
     </div>}
   </main>;

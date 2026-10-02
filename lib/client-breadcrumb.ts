@@ -36,6 +36,13 @@ function studyModeLabel(value: string): string {
   return "Học bộ từ";
 }
 
+function writingLessonLabel(value: string): string {
+  const sourceLabel = /(?:workbook|sach[-_]bai[-_]tap)/iu.test(value) ? "Sách bài tập" : "Giáo trình";
+  const lessonNumber = value.match(/(?:bai|lesson)[-_]?(\d+)/iu)?.[1];
+  if (!lessonNumber) return sourceLabel;
+  return `${sourceLabel} - Bài ${String(Number(lessonNumber)).padStart(2, "0")}`;
+}
+
 export function getClientBreadcrumb(pathname: string, courseView?: string | null): ClientBreadcrumbModel | null {
   if (pathname === "/" || pathname.startsWith("/dev/")) return null;
 
@@ -68,7 +75,11 @@ export function getClientBreadcrumb(pathname: string, courseView?: string | null
     const sectionLabel = section === "writing" ? "Luyện viết" : "Luyện gõ";
     const levelHref = `/${section}/${encodeURIComponent(first)}`;
     if (second && third === "practice") {
-      return { parentHref: levelHref, parentLabel: levelLabel(first), currentLabel: sectionLabel };
+      return {
+        parentHref: levelHref,
+        parentLabel: levelLabel(first),
+        currentLabel: section === "writing" ? writingLessonLabel(second) : sectionLabel,
+      };
     }
     if (second === "practice") {
       return { parentHref: levelHref, parentLabel: levelLabel(first), currentLabel: sectionLabel };

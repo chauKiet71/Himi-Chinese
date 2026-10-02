@@ -7,6 +7,7 @@ export type RoadmapLesson = LessonSummary & {
   href: string | null;
   vipLocked: boolean;
   started: boolean;
+  completionPercent: number;
 };
 
 export type RoadmapModule = {
@@ -38,12 +39,14 @@ export function buildCourseRoadmap({
   lessons,
   completedLessonSlugs,
   openedLessonSlugs = [],
+  lessonProgressBySlug = {},
   viewerHasVip,
 }: {
   courseSlug: string;
   lessons: LessonSummary[];
   completedLessonSlugs: string[];
   openedLessonSlugs?: string[];
+  lessonProgressBySlug?: Record<string, number>;
   viewerHasVip: boolean;
 }): CourseRoadmap {
   const completed = new Set(completedLessonSlugs);
@@ -59,6 +62,9 @@ export function buildCourseRoadmap({
 
   const roadmapLessons: RoadmapLesson[] = sortedLessons.map((lesson, index) => {
     const isCompleted = completed.has(lesson.slug);
+    const completionPercent = isCompleted
+      ? 100
+      : Math.max(0, Math.min(99, Math.round(lessonProgressBySlug[lesson.slug] ?? 0)));
     const isCurrent = index === nextIncompleteIndex;
     const vipLocked = !lesson.isFree && !viewerHasVip;
     const status: RoadmapLessonStatus = isCompleted
@@ -71,6 +77,7 @@ export function buildCourseRoadmap({
       status,
       vipLocked,
       started: opened.has(lesson.slug) && !isCompleted,
+      completionPercent,
       href: !vipLocked
         ? `/learn/${courseSlug}?lesson=${lesson.slug}`
         : null,

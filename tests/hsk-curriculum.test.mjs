@@ -7,8 +7,13 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 
 test("HSK curriculum exposes 15 HSK 1 lessons and 15 HSK 2 textbook lessons", async () => {
-  const curriculumModule = await import("../lib/hsk-curriculum.ts").catch(() => null);
+  const [curriculumModule, contentModule] = await Promise.all([
+    import("../lib/hsk-curriculum.ts").catch(() => null),
+    import("../lib/hsk-lesson-content.ts").catch(() => null),
+  ]);
   assert.ok(curriculumModule, "the HSK curriculum should be available");
+  assert.ok(contentModule, "the HSK lesson URL helpers should be available");
+  assert.equal(contentModule.getHskCurriculumHref("hsk-4"), "/courses?view=hsk&level=hsk-4");
 
   const { HSK_CURRICULUM } = curriculumModule;
   assert.deepEqual(
@@ -36,7 +41,7 @@ test("HSK curriculum exposes 15 HSK 1 lessons and 15 HSK 2 textbook lessons", as
     dialogues: 3,
     writing: 6,
     minutes: 25,
-    guidedSteps: 15,
+    guidedSteps: 14,
     available: true,
   });
   assert.deepEqual(HSK_CURRICULUM[1].topics[0].lessons[0], {
@@ -50,7 +55,7 @@ test("HSK curriculum exposes 15 HSK 1 lessons and 15 HSK 2 textbook lessons", as
     writing: 12,
     exercises: 4,
     minutes: 27,
-    guidedSteps: 27,
+    guidedSteps: 26,
     available: true,
   });
 });
@@ -93,25 +98,28 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   assert.match(html, /aria-expanded="true"/);
   assert.match(html, /aria-expanded="false"/);
   assert.match(html, />Bài 1: Xin chào!</);
-  assert.match(html, />Bắt đầu học</);
+  assert.doesNotMatch(html, /class="hsk-circular-progress"/);
+  assert.match(html, />Mở bài/);
   assert.doesNotMatch(html, /Hoàn thành bài trước/);
-  assert.match(html, /href="\/hsk\/1\/hsk1-bai-02-cam-on-anh"/);
-  assert.equal((html.match(/class="hsk-lesson-start"/g) ?? []).length, 1);
-  assert.match(html, />Himi nhắc bạn:</);
+  assert.match(html, /href="\/hsk\/1\/hsk1-bai-02-cam-on-anh\/play"/);
+  assert.equal((html.match(/class="hsk-lesson-start hsk-progress-link"/g) ?? []).length, 0);
+  assert.doesNotMatch(html, />Himi nhắc bạn:</);
   assert.match(html, /6 từ vựng/);
   assert.doesNotMatch(html, /ngữ pháp/);
   assert.match(html, /3 hội thoại/);
-  assert.match(html, /href="\/hsk\/1\/hsk1-bai-01-chao-anh"/);
-  assert.match(html, /class="hsk-lesson-start" href="\/hsk\/1\/hsk1-bai-01-chao-anh\/play"/);
+  assert.match(html, /class="hsk-lesson-select" href="\/hsk\/1\/hsk1-bai-01-chao-anh\/play"/);
   assert.equal(
-    viewModule.getHskCurriculumLessonDestination("hsk-1", "hsk1-bai-02-cam-on-anh", true),
+    viewModule.getHskCurriculumLessonDestination("hsk-1", "hsk1-bai-02-cam-on-anh"),
     "/hsk/1/hsk1-bai-02-cam-on-anh/play",
   );
-  assert.equal(
-    viewModule.getHskCurriculumLessonDestination("hsk-1", "hsk1-bai-02-cam-on-anh", false),
-    "/hsk/1/hsk1-bai-02-cam-on-anh",
-  );
   assert.doesNotMatch(html, />HSK 7–9</);
+
+  const hsk4Html = renderToStaticMarkup(React.createElement(viewModule.HskCurriculumExplorer, {
+    curriculum: curriculumModule.HSK_CURRICULUM,
+    initialLevelId: "hsk-4",
+  }));
+  assert.match(hsk4Html, />Lộ trình bài học HSK 4</);
+  assert.match(hsk4Html, /aria-pressed="true"[^>]*>[^<]*<span[^>]*>肆/);
 
   const lockedCurriculum = curriculumModule.HSK_CURRICULUM.map((level, levelIndex) => levelIndex ? level : {
     ...level,
@@ -128,7 +136,7 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
     curriculum: lockedCurriculum,
   }));
   assert.match(lockedHtml, /hsk-level-tabs[\s\S]*is-vip-locked/);
-  assert.match(lockedHtml, /hsk-lesson-row is-active is-vip-locked/);
+  assert.match(lockedHtml, /hsk-lesson-row is-vip-locked/);
   assert.match(lockedHtml, /Cần nâng cấp</);
   assert.match(lockedHtml, /class="hsk-lesson-start hsk-vip-trigger"/);
   assert.doesNotMatch(lockedHtml, /href="\/hsk\/1\/hsk1-bai-01-chao-anh"/);

@@ -1,0 +1,816 @@
+{
+  "schemaVersion": "1.0.0",
+  "entityType": "media",
+  "items": [
+    {
+      "id": "media-hsk1-track-01-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "01-1",
+      "lessonNumber": 1,
+      "printedPage": 14,
+      "pdfPage": 14,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815310/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-01-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-01-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "01-2",
+      "lessonNumber": 1,
+      "printedPage": 14,
+      "pdfPage": 14,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815319/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-01-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-01-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "01-3",
+      "lessonNumber": 1,
+      "printedPage": 14,
+      "pdfPage": 14,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815323/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-01-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-02-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "02-1",
+      "lessonNumber": 2,
+      "printedPage": 20,
+      "pdfPage": 20,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815327/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-02-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-02-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "02-2",
+      "lessonNumber": 2,
+      "printedPage": 20,
+      "pdfPage": 20,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815331/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-02-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-02-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "02-3",
+      "lessonNumber": 2,
+      "printedPage": 20,
+      "pdfPage": 20,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815337/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-02-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-03-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "03-1",
+      "lessonNumber": 3,
+      "printedPage": 26,
+      "pdfPage": 26,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815341/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-03-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-03-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "03-2",
+      "lessonNumber": 3,
+      "printedPage": 27,
+      "pdfPage": 27,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815346/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-03-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-03-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "03-3",
+      "lessonNumber": 3,
+      "printedPage": 27,
+      "pdfPage": 27,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815353/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-03-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-04-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "04-1",
+      "lessonNumber": 4,
+      "printedPage": 34,
+      "pdfPage": 34,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815358/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-04-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-04-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "04-2",
+      "lessonNumber": 4,
+      "printedPage": 35,
+      "pdfPage": 35,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815363/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-04-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-04-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "04-3",
+      "lessonNumber": 4,
+      "printedPage": 35,
+      "pdfPage": 35,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815375/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-04-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-05-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "05-1",
+      "lessonNumber": 5,
+      "printedPage": 42,
+      "pdfPage": 42,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815380/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-05-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-05-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "05-2",
+      "lessonNumber": 5,
+      "printedPage": 43,
+      "pdfPage": 43,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815385/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-05-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-05-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "05-3",
+      "lessonNumber": 5,
+      "printedPage": 43,
+      "pdfPage": 43,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815393/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-05-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-06-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "06-1",
+      "lessonNumber": 6,
+      "printedPage": 52,
+      "pdfPage": 50,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815401/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-06-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-06-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "06-2",
+      "lessonNumber": 6,
+      "printedPage": 53,
+      "pdfPage": 51,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815412/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-06-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-06-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "06-3",
+      "lessonNumber": 6,
+      "printedPage": 53,
+      "pdfPage": 51,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815419/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-06-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-07-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "07-1",
+      "lessonNumber": 7,
+      "printedPage": 60,
+      "pdfPage": 58,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815427/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-07-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-07-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "07-2",
+      "lessonNumber": 7,
+      "printedPage": 61,
+      "pdfPage": 59,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815434/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-07-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-07-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "07-3",
+      "lessonNumber": 7,
+      "printedPage": 61,
+      "pdfPage": 59,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815441/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-07-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-08-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "08-1",
+      "lessonNumber": 8,
+      "printedPage": 68,
+      "pdfPage": 66,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815450/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-08-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-08-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "08-2",
+      "lessonNumber": 8,
+      "printedPage": 69,
+      "pdfPage": 67,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815461/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-08-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-08-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "08-3",
+      "lessonNumber": 8,
+      "printedPage": 69,
+      "pdfPage": 67,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815470/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-08-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-09-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "09-1",
+      "lessonNumber": 9,
+      "printedPage": 76,
+      "pdfPage": 74,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815478/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-09-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-09-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "09-2",
+      "lessonNumber": 9,
+      "printedPage": 77,
+      "pdfPage": 75,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815489/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-09-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-09-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "09-3",
+      "lessonNumber": 9,
+      "printedPage": 77,
+      "pdfPage": 75,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815496/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-09-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-10-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "10-1",
+      "lessonNumber": 10,
+      "printedPage": 84,
+      "pdfPage": 82,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815503/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-10-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-10-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "10-2",
+      "lessonNumber": 10,
+      "printedPage": 85,
+      "pdfPage": 83,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815518/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-10-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-10-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "10-3",
+      "lessonNumber": 10,
+      "printedPage": 85,
+      "pdfPage": 83,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815525/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-10-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-11-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "11-1",
+      "lessonNumber": 11,
+      "printedPage": 94,
+      "pdfPage": 92,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815533/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-11-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-11-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "11-2",
+      "lessonNumber": 11,
+      "printedPage": 95,
+      "pdfPage": 93,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815542/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-11-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-11-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "11-3",
+      "lessonNumber": 11,
+      "printedPage": 95,
+      "pdfPage": 93,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815549/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-11-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-12-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "12-1",
+      "lessonNumber": 12,
+      "printedPage": 102,
+      "pdfPage": 100,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815559/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-12-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-12-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "12-2",
+      "lessonNumber": 12,
+      "printedPage": 103,
+      "pdfPage": 101,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815567/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-12-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-12-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "12-3",
+      "lessonNumber": 12,
+      "printedPage": 103,
+      "pdfPage": 101,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815577/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-12-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-13-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "13-1",
+      "lessonNumber": 13,
+      "printedPage": 110,
+      "pdfPage": 108,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815584/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-13-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-13-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "13-2",
+      "lessonNumber": 13,
+      "printedPage": 111,
+      "pdfPage": 109,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815593/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-13-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-13-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "13-3",
+      "lessonNumber": 13,
+      "printedPage": 111,
+      "pdfPage": 109,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815602/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-13-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-14-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "14-1",
+      "lessonNumber": 14,
+      "printedPage": 116,
+      "pdfPage": 114,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815610/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-14-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-14-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "14-2",
+      "lessonNumber": 14,
+      "printedPage": 117,
+      "pdfPage": 115,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815618/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-14-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-14-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "14-3",
+      "lessonNumber": 14,
+      "printedPage": 117,
+      "pdfPage": 115,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815625/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-14-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-15-1",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "15-1",
+      "lessonNumber": 15,
+      "printedPage": 124,
+      "pdfPage": 122,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815635/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-15-1.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-15-2",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "15-2",
+      "lessonNumber": 15,
+      "printedPage": 125,
+      "pdfPage": 123,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815644/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-15-2.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    },
+    {
+      "id": "media-hsk1-track-15-3",
+      "type": "audio",
+      "purpose": "textbook-dialogue-track",
+      "sourceTrackId": "15-3",
+      "lessonNumber": 15,
+      "printedPage": 125,
+      "pdfPage": 123,
+      "availability": "generated",
+      "uri": "https://res.cloudinary.com/db0om4ius/video/upload/v1789815651/hanziwork/hsk1/textbook-dialogues/media-hsk1-track-15-3.mp3",
+      "reviewStatus": "pending-audio-review",
+      "noteVi": "PDF chỉ ghi mã track; file MP3/CD không nằm trong tài liệu được cung cấp.",
+      "generation": {
+        "provider": "elevenlabs",
+        "modelId": "eleven_v3",
+        "voiceId": "9lHjugDhwqoxA5MhX0az"
+      }
+    }
+  ]
+}

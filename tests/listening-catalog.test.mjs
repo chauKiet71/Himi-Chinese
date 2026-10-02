@@ -80,3 +80,15 @@ test("lesson transport keeps the reference-style play hierarchy", () => {
   assert.match(studioStyles, /\.listening-catalog-detail-page \.listening-focus-transport \.listening-focus-play \{[\s\S]*?width: 50px;[\s\S]*?height: 50px;/);
   assert.match(studioStyles, /\.listening-catalog-detail-page \.listening-focus-transport button > svg \{[\s\S]*?width: 34px;[\s\S]*?height: 34px;/);
 });
+
+test("immersive transcript removes the empty top padding on desktop and mobile", () => {
+  assert.match(studioStyles, /padding: 0 clamp\(14px, 3vw, 36px\) var\(--listening-player-clearance, 128px\);/);
+  assert.match(studioStyles, /padding: 0 8px var\(--listening-player-clearance, 120px\);/);
+});
+
+test("compact mobile listening controls keep the requested thirty-five percent reduction", () => {
+  assert.match(studioStyles, /\.listening-catalog-detail-page \.listening-focus-player-logo \{ width: 27px; height: 27px; border-width: 2px; \}/);
+  assert.match(studioStyles, /\.listening-catalog-detail-page \.listening-focus-transport \.listening-focus-play \{ width: 30px; height: 30px; min-height: 30px; flex-basis: 30px; \}/);
+  assert.match(studioStyles, /\.listening-focus-mobile-speed \{ grid-column: 4; width: 65%; align-self: center; \}/);
+  assert.match(studioStyles, /\.listening-focus-mobile-display \{ grid-column: 5; width: 65%; \}/);
+});

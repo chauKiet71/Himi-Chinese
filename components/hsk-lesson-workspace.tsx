@@ -21,13 +21,14 @@ import {
   Volume2,
   X,
 } from "lucide-react";
-import type {
-  HskExercise,
-  HskLessonContent,
-  HskLessonMode,
-  HskVocabularyAudio,
-  HskVocabularyItem,
-  HskWritingCharacter,
+import {
+  getHskCurriculumHref,
+  type HskExercise,
+  type HskLessonContent,
+  type HskLessonMode,
+  type HskVocabularyAudio,
+  type HskVocabularyItem,
+  type HskWritingCharacter,
 } from "@/lib/hsk-lesson-content";
 import { cancelHskPronunciation, playHskPronunciation } from "@/lib/hsk-audio";
 import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
@@ -523,7 +524,7 @@ export function HskLessonWorkspace({ lesson, initialMode = "vocabulary", showLau
 
   return <main className="hsk-lesson-page">
     <header className="hsk-learning-header">
-      <div className="hsk-learning-breadcrumb"><Link href="/courses?view=hsk"><ArrowLeft aria-hidden="true" size={17} /> Lộ trình HSK</Link><span>{lesson.levelLabel} · Bài {lesson.lessonNumber}</span></div>
+      <div className="hsk-learning-breadcrumb"><Link href={getHskCurriculumHref(lesson.levelId)}><ArrowLeft aria-hidden="true" size={17} /> Lộ trình HSK</Link><span>{lesson.levelLabel} · Bài {lesson.lessonNumber}</span></div>
       <div className="hsk-learning-title-row">
         <div className="hsk-learning-greeting" lang="zh-CN">{lesson.greeting}</div>
         <div><span>{lesson.levelLabel} · {lesson.minutes} phút</span><h1>Bài {lesson.lessonNumber}: {lesson.title}</h1></div>

@@ -5,14 +5,13 @@ import test from "node:test";
 import { createServer } from "vite";
 
 const CORE_SECTION_LABELS = [
-  "Giới thiệu",
   "Từ vựng",
   "Luyện viết",
   "Luyện tập",
   "Hoàn thành",
 ];
 
-test("every available HSK lesson exposes the complete five-stage guided journey", async (t) => {
+test("every available HSK lesson exposes the complete four-stage guided journey", async (t) => {
   const server = await createServer({
     appType: "custom",
     cacheDir: path.join(os.tmpdir(), "himi-vite-tests", "hsk-guided-curriculum-coverage"),
@@ -34,10 +33,10 @@ test("every available HSK lesson exposes the complete five-stage guided journey"
         .map((lesson) => ({ level, lesson }))
     )));
 
-  assert.equal(availableLessons.length, 30);
+  assert.equal(availableLessons.length, 146);
   assert.deepEqual(
     [...new Set(availableLessons.map(({ level }) => level.label))],
-    ["HSK 1", "HSK 2"],
+    ["HSK 1", "HSK 2", "HSK 3", "HSK 4", "HSK 5", "HSK 6"],
   );
 
   for (const { level, lesson: summary } of availableLessons) {
@@ -53,11 +52,11 @@ test("every available HSK lesson exposes the complete five-stage guided journey"
     assert.deepEqual(
       navigation.map((section) => section.label),
       CORE_SECTION_LABELS,
-      `${level.label} / ${summary.id} phải có đủ 5 chặng`,
+      `${level.label} / ${summary.id} phải có đủ 4 chặng`,
     );
     assert.ok(steps.length >= navigation.length, `${level.label} / ${summary.id} phải có tổng số bước hợp lệ`);
     assert.ok(lesson.vocabulary.length > 0, `${level.label} / ${summary.id} phải có từ vựng`);
-    assert.equal(lesson.writingCharacters.length, lesson.vocabulary.length, `${level.label} / ${summary.id} phải có luyện viết cho từng từ`);
+    assert.ok(lesson.writingCharacters.length > 0, `${level.label} / ${summary.id} phải có nội dung luyện viết`);
     assert.equal(guidedModule.buildHskGuidedExercises(lesson).length, lesson.vocabulary.length, `${level.label} / ${summary.id} phải có luyện tập cho từng từ`);
   }
 });

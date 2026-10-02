@@ -1,12 +1,9 @@
 import type { HskExercise, HskLessonContent, HskVocabularyItem } from "./hsk-lesson-content";
 
 export type HskGuidedStepKind =
-  | "introduction"
   | "vocabulary"
-  | "grammar"
   | "writing"
-  | "practice"
-  | "complete";
+  | "practice";
 
 export type HskGuidedStep = {
   id: string;
@@ -22,20 +19,15 @@ export type HskGuidedSection = {
 };
 
 const SECTION_LABELS: Array<[HskGuidedStepKind, string]> = [
-  ["introduction", "Giới thiệu"],
   ["vocabulary", "Từ vựng"],
-  ["grammar", "Ngữ pháp"],
   ["writing", "Luyện viết"],
   ["practice", "Luyện tập"],
-  ["complete", "Hoàn thành"],
 ];
 
 export const HSK_GUIDED_NAVIGATION_SECTION_IDS = [
-  "introduction",
   "vocabulary",
   "writing",
   "practice",
-  "complete",
 ] as const satisfies readonly HskGuidedStepKind[];
 
 function normalizeExerciseValue(value: string | null | undefined): string {
@@ -91,6 +83,8 @@ function buildGeneratedVocabularyExercise(
     type: useMeaning ? "meaning" : "pinyin",
     instruction: useMeaning ? "Chọn nghĩa đúng" : "Chọn pinyin đúng",
     prompt: word.hanzi,
+    pinyin: word.pinyin,
+    speakText: word.hanzi,
     options: distractors,
     answer,
   };
@@ -107,7 +101,11 @@ export function buildHskGuidedExercises(lesson: HskLessonContent): HskExercise[]
     ));
     if (sourceExercise) {
       usedExerciseIds.add(sourceExercise.id);
-      return sourceExercise;
+      return {
+        ...sourceExercise,
+        pinyin: sourceExercise.pinyin ?? word.pinyin,
+        speakText: sourceExercise.speakText ?? word.hanzi,
+      };
     }
     return buildGeneratedVocabularyExercise(lesson, word, wordIndex);
   });
@@ -117,14 +115,11 @@ export function buildHskGuidedLessonSteps(lesson: HskLessonContent): HskGuidedSt
   const placeholders = new Set(lesson.guidedPlaceholders ?? []);
   const exercises = buildHskGuidedExercises(lesson);
   return [
-    { id: "introduction", kind: "introduction" },
     ...(lesson.vocabulary.length
       ? lesson.vocabulary.map((word, itemIndex) => ({ id: `vocabulary-${word.id}`, kind: "vocabulary" as const, itemIndex }))
       : placeholders.has("vocabulary") ? [{ id: "vocabulary-overview", kind: "vocabulary" as const }] : []),
-    ...lesson.grammar.map((point, itemIndex) => ({ id: `grammar-${point.id}`, kind: "grammar" as const, itemIndex })),
     ...(lesson.writingCharacters.length || placeholders.has("writing") ? [{ id: "writing", kind: "writing" as const }] : []),
     ...exercises.map((exercise, itemIndex) => ({ id: `practice-${exercise.id}`, kind: "practice" as const, itemIndex })),
-    { id: "complete", kind: "complete" },
   ];
 }
 
@@ -134,7 +129,7 @@ export function countHskGuidedLessonSteps(lesson: HskLessonContent): number {
   const writingSteps = lesson.writingCharacters.length || placeholders.has("writing") ? 1 : 0;
   const practiceSteps = lesson.vocabulary.length || lesson.exercises.length;
 
-  return 2 + vocabularySteps + lesson.grammar.length + writingSteps + practiceSteps;
+  return vocabularySteps + writingSteps + practiceSteps;
 }
 
 export function buildHskGuidedSections(lesson: HskLessonContent): HskGuidedSection[] {

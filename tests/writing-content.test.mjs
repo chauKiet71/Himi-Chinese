@@ -70,6 +70,7 @@ test("writing catalog exposes only HSK lessons approved for learning", async (t)
   const practiceHtml = renderToStaticMarkup(React.createElement(studio.HimiWritingStudio, {
     topic: writing.getWritingTopicFromLesson(lesson.levelId, lesson.id, lesson),
   }));
+  assert.doesNotMatch(practiceHtml, /himi-writing-session-header|Danh sách bài học|chữ trọng tâm/);
   assert.doesNotMatch(practiceHtml, /himi-writing-feedback-copy|nét đúng|lần cần sửa/);
   assert.match(practiceHtml, /class="sr-only" role="status"/);
   assert.match(practiceHtml, /role="progressbar"/);

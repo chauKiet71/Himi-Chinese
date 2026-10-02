@@ -16,6 +16,16 @@ test("client breadcrumb matches the requested HSK level navigation", () => {
     parentLabel: "Các cấp độ",
     currentLabel: "HSK 3",
   });
+  assert.deepEqual(getClientBreadcrumb("/writing/hsk-2/hsk2-bai-01-du-lich-bac-kinh/practice"), {
+    parentHref: "/writing/hsk-2",
+    parentLabel: "HSK 2",
+    currentLabel: "Giáo trình - Bài 01",
+  });
+  assert.deepEqual(getClientBreadcrumb("/writing/hsk-5/hsk5-workbook-lesson-03/practice"), {
+    parentHref: "/writing/hsk-5",
+    parentLabel: "HSK 5",
+    currentLabel: "Sách bài tập - Bài 03",
+  });
 });
 
 test("client breadcrumb keeps useful parents across learner routes", () => {

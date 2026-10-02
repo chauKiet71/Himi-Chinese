@@ -21,7 +21,7 @@ export async function getCourseRoadmapPageData({
 }): Promise<CourseRoadmapPageData | null> {
   const curriculumPromise = getLessonPageData({ courseSlug });
   const learnerStatePromise = !userId || !process.env.DATABASE_URL
-    ? Promise.resolve({ completedLessonSlugs: [] as string[], openedLessonSlugs: [] as string[], viewerHasVip: false })
+    ? Promise.resolve({ completedLessonSlugs: [] as string[], openedLessonSlugs: [] as string[], lessonProgressBySlug: {} as Record<string, number>, viewerHasVip: false })
     : readDb(async (db) => {
       const [progressRows, viewerHasVip] = await Promise.all([
         db.select({ slug: lessons.slug, completionPercent: lessonProgress.completionPercent })
@@ -40,6 +40,7 @@ export async function getCourseRoadmapPageData({
       return {
         completedLessonSlugs: progressRows.filter((row) => row.completionPercent >= 100).map((row) => row.slug),
         openedLessonSlugs: progressRows.map((row) => row.slug),
+        lessonProgressBySlug: Object.fromEntries(progressRows.map((row) => [row.slug, row.completionPercent])),
         viewerHasVip,
       };
     });
@@ -53,6 +54,7 @@ export async function getCourseRoadmapPageData({
       lessons: curriculum.lessons,
       completedLessonSlugs: learnerState.completedLessonSlugs,
       openedLessonSlugs: learnerState.openedLessonSlugs,
+      lessonProgressBySlug: learnerState.lessonProgressBySlug,
       viewerHasVip: learnerState.viewerHasVip,
     }),
     viewerHasVip: learnerState.viewerHasVip,

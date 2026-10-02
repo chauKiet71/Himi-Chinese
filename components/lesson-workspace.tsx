@@ -126,15 +126,12 @@ export function LessonWorkspace({
 
   useEffect(() => {
     if (!authenticated || !access.allowed) return;
-    const timer = window.setTimeout(() => {
-      void fetch("/api/progress/lesson/open", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ courseSlug: course.slug, lessonSlug: lesson.slug }),
-        keepalive: true,
-      });
-    }, 600);
-    return () => window.clearTimeout(timer);
+    void fetch("/api/progress/lesson/open", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ courseSlug: course.slug, lessonSlug: lesson.slug }),
+      keepalive: true,
+    });
   }, [access.allowed, authenticated, course.slug, lesson.slug]);
 
   return <section className="lesson-main lesson-stage-workspace" data-active-tab={tab}>

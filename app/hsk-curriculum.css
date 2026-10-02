@@ -412,12 +412,12 @@ button.hsk-lesson-start {
 }
 
 .hsk-lesson-row.is-active {
-  min-height: 128px;
+  min-height: 90px;
   margin-bottom: 3px;
-  padding-block: 14px 12px;
+  padding-block: 9px 8px;
   border-bottom-color: transparent;
-  border-radius: 15px;
-  background: var(--hsk-peach);
+  border-radius: 11px;
+  background: transparent;
 }
 
 .hsk-lesson-row.is-vip-locked {
@@ -449,18 +449,18 @@ button.hsk-lesson-start {
   cursor: pointer;
 }
 
-.hsk-lesson-row.is-completed .hsk-lesson-select {
+a.hsk-lesson-select {
   position: static;
 }
 
-.hsk-lesson-row.is-completed .hsk-lesson-select::after {
+a.hsk-lesson-select::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
 }
 
-.hsk-lesson-row.is-completed:hover {
+.hsk-lesson-row:has(a.hsk-lesson-select):hover {
   background: #f5fbf9;
 }
 
@@ -541,6 +541,8 @@ button.hsk-lesson-start {
 .hsk-lesson-meta svg { color: #65778b; }
 
 .hsk-curriculum .hsk-lesson-start {
+  position: relative;
+  z-index: 2;
   min-width: 176px;
   min-height: 58px;
   padding: 0 20px;
@@ -571,6 +573,53 @@ button.hsk-lesson-start {
 .hsk-curriculum .hsk-lesson-start > svg {
   grid-column: 2;
   grid-row: 1 / span 2;
+}
+
+.hsk-curriculum .hsk-lesson-start.hsk-progress-link {
+  width: 50px;
+  min-width: 50px;
+  min-height: 50px;
+  padding: 0;
+  place-items: center;
+  justify-self: end;
+  color: var(--hsk-red);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+}
+
+.hsk-circular-progress {
+  --hsk-progress: 0deg;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #f51f23 0deg var(--hsk-progress), #ff8a24 var(--hsk-progress) 360deg);
+  transition: transform .18s ease;
+}
+
+.hsk-circular-progress::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: inherit;
+  background: #fff;
+}
+
+.hsk-circular-progress > strong {
+  position: relative;
+  z-index: 1;
+  color: #ff7028;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.hsk-progress-link:hover .hsk-circular-progress {
+  transform: scale(1.04);
 }
 
 .hsk-curriculum .hsk-lesson-start.hsk-vip-trigger {
@@ -611,71 +660,6 @@ button.hsk-lesson-start {
   color: #87919c;
   font-size: 11px;
   font-weight: 700;
-  white-space: nowrap;
-}
-
-.hsk-lesson-coach-note {
-  min-width: 0;
-  min-height: 58px;
-  padding: 7px 9px;
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: 42px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 11px;
-  border: 1px solid rgba(255, 76, 59, .14);
-  border-radius: 13px;
-  background: rgba(255, 255, 255, .82);
-  box-shadow: 0 5px 16px rgba(113, 55, 40, .05);
-}
-
-.hsk-lesson-coach-avatar {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  border-radius: 12px;
-  background: #fff1ec;
-}
-
-.hsk-lesson-coach-avatar img {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
-}
-
-.hsk-lesson-coach-copy {
-  min-width: 0;
-  display: grid;
-  gap: 2px;
-}
-
-.hsk-lesson-coach-copy > strong {
-  color: var(--hsk-red);
-  font-size: 11px;
-  font-weight: 850;
-  line-height: 1.25;
-}
-
-.hsk-lesson-coach-copy > small {
-  color: #59616b;
-  font-size: 11px;
-  font-weight: 550;
-  line-height: 1.4;
-}
-
-.hsk-lesson-coach-boost {
-  min-height: 30px;
-  padding: 0 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--hsk-red);
-  border-radius: 999px;
-  background: var(--hsk-peach-strong);
-  font-size: 10px;
-  font-weight: 850;
   white-space: nowrap;
 }
 
@@ -939,28 +923,6 @@ button.hsk-lesson-start {
   .hsk-lesson-duration { padding-right: 1px; font-size: 9px; }
   .hsk-lesson-duration svg { width: 15px; height: 15px; }
 
-  .hsk-lesson-coach-note {
-    min-height: 0;
-    padding: 7px;
-    grid-template-columns: 34px minmax(0, 1fr);
-    gap: 5px 8px;
-  }
-
-  .hsk-lesson-coach-avatar { width: 34px; height: 34px; border-radius: 10px; }
-  .hsk-lesson-coach-avatar img { width: 31px; height: 31px; }
-  .hsk-lesson-coach-copy > strong { font-size: 9.5px; }
-  .hsk-lesson-coach-copy > small { font-size: 9px; line-height: 1.38; }
-  .hsk-lesson-coach-boost {
-    min-height: 23px;
-    padding-inline: 8px;
-    grid-column: 2;
-    justify-self: start;
-    gap: 4px;
-    font-size: 8.5px;
-  }
-
-  .hsk-lesson-coach-boost svg { width: 11px; height: 11px; }
-
   .industry-course-heading { width: calc(100% - 24px); padding-top: 38px; }
   .industry-course-heading h2 { font-size: 28px; }
   .course-catalog-heading { padding-top: 28px; }
@@ -1085,8 +1047,6 @@ button.hsk-lesson-start {
   .hsk-lesson-index { left: -56px; width: 34px; height: 34px; }
   .hsk-lesson-copy > strong { font-size: 13px; white-space: normal; }
   .hsk-curriculum .hsk-lesson-start { width: 100%; min-width: 0; min-height: 45px; grid-column: 1; }
-  .hsk-lesson-coach-note { grid-template-columns: 34px minmax(0, 1fr); }
-  .hsk-lesson-coach-boost { grid-column: 2; justify-self: start; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -68,12 +68,12 @@ test("HSK 4 lower textbook converts all lessons into the HSK 1 learning shape", 
     writing: 30,
     exercises: 4,
     minutes: 35,
-    guidedSteps: 48,
+    guidedSteps: 47,
     available: true,
   });
 
   const sections = guidedModule.buildHskGuidedSections(lesson).map((section) => section.label);
-  assert.deepEqual(sections, ["Giới thiệu", "Từ vựng", "Ngữ pháp", "Luyện viết", "Luyện tập", "Hoàn thành"]);
+  assert.deepEqual(sections, ["Từ vựng", "Luyện viết", "Luyện tập"]);
 });
 
 test("HSK 4 renders through the same workspace, guided lesson and flashcard components as HSK 1", async (t) => {
@@ -113,7 +113,7 @@ test("HSK 4 renders through the same workspace, guided lesson and flashcard comp
   assert.match(workspaceHtml, /href="\/hsk\/4\/hsk4l-tb-lesson-11\/quiz"/);
 
   const guidedHtml = renderToStaticMarkup(React.createElement(guidedViewModule.HskGuidedLesson, { lesson }));
-  for (const label of ["Giới thiệu", "Từ vựng", "Luyện viết", "Luyện tập", "Hoàn thành"]) {
+  for (const label of ["Từ vựng", "Luyện viết", "Luyện tập", "Hoàn thành"]) {
     assert.match(guidedHtml, new RegExp(`>${label}`));
   }
 

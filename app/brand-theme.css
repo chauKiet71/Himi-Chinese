@@ -1005,7 +1005,6 @@ body {
 .hsk-guided-dialogue-title > button,
 .hsk-guided-writing-picker button[aria-pressed="true"],
 .hsk-guided-listen,
-.hsk-guided-completion > span,
 .hsk-guided-completion nav a:last-child,
 .hsk-guided-footer > button.is-primary {
   color: var(--himi-on-red);

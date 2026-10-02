@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LockKeyhole } from "lucide-react";
-import type { HskLessonContent } from "@/lib/hsk-lesson-content";
+import { getHskCurriculumHref, type HskLessonContent } from "@/lib/hsk-lesson-content";
 import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 
 export function HskVipLocked({ lesson }: { lesson: HskLessonContent }) {
@@ -12,7 +12,7 @@ export function HskVipLocked({ lesson }: { lesson: HskLessonContent }) {
       <p>Bài học này thuộc nội dung VIP. Nội dung, câu hỏi và đáp án chưa được gửi tới trình duyệt của bạn.</p>
       <div>
         <VipUpgradeInlineForm />
-        <Link className="button button-secondary" href="/courses?view=hsk">Quay lại lộ trình HSK</Link>
+        <Link className="button button-secondary" href={getHskCurriculumHref(lesson.levelId)}>Quay lại lộ trình HSK</Link>
       </div>
     </section>
   </main>;

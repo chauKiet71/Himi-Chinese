@@ -175,7 +175,7 @@ const HSK_1_TEXTBOOK_LESSONS: HskCurriculumLesson[] = RAW_HSK_1_LESSONS.map((les
     dialogues,
     writing,
     minutes: lesson.metadata.estimatedMinutes,
-    guidedSteps: vocabulary + grammar + dialogues + pronunciationSteps + assessments + 3,
+    guidedSteps: vocabulary + grammar + dialogues + pronunciationSteps + assessments + 2,
     available: true,
   };
 });
@@ -218,7 +218,7 @@ const HSK_2_TEXTBOOK_LESSONS: HskCurriculumLesson[] = RAW_HSK_2_CURRICULUM.lesso
     writing,
     exercises,
     minutes: Math.max(25, Math.min(30, 24 + Math.ceil(vocabulary / 4))),
-    guidedSteps: vocabulary + grammar + dialogues + exercises + 4,
+    guidedSteps: vocabulary + grammar + dialogues + exercises + 3,
     available: true,
   };
 });
@@ -262,7 +262,7 @@ const HSK_3_TEXTBOOK_LESSONS: HskCurriculumLesson[] = RAW_HSK_3_CURRICULUM.lesso
     writing,
     exercises,
     minutes: Math.max(25, Math.min(35, 20 + Math.ceil(vocabulary / 3))),
-    guidedSteps: vocabulary + grammar + guidedDialogueSteps + exercises + 4,
+    guidedSteps: vocabulary + grammar + guidedDialogueSteps + exercises + 3,
     available: true,
   };
 });
@@ -298,7 +298,7 @@ function buildHsk4TextbookLessons(
       writing,
       exercises,
       minutes: Math.max(35, Math.min(45, 25 + Math.ceil(vocabulary / 3))),
-      guidedSteps: vocabulary + grammar + dialogues + exercises + 4,
+      guidedSteps: vocabulary + grammar + dialogues + exercises + 3,
       available: true,
     };
   });
@@ -362,7 +362,7 @@ const HSK_5_TEXTBOOK_TOPICS: HskCurriculumTopic[] = RAW_HSK_5_CURRICULUM.units.m
         + lesson.grammar.length
         + lesson.dialogues.length
         + lesson.exercises.length
-        + 4,
+        + 3,
       available: true,
     };
   }),
@@ -406,7 +406,7 @@ const HSK_5_WORKBOOK_1_TOPICS: HskCurriculumTopic[] = RAW_HSK_5_WORKBOOK_1_CURRI
         + lesson.grammar.length
         + lesson.dialogues.length
         + lesson.exercises.length
-        + 4,
+        + 3,
       available: true,
     };
   }),
@@ -454,7 +454,7 @@ function hsk6CurriculumLesson(lesson: (typeof HSK6_VOLUME1_TEXTBOOK_LESSONS)[num
       + lesson.grammar.length
       + lesson.dialogues.length
       + lesson.exercises.length
-      + 4,
+      + 3,
     available: true,
   };
 }

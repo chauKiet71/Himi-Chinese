@@ -14,16 +14,18 @@ export function CourseLibraryView({
   courses,
   hskCurriculum,
   hskSummary = emptyHskSummary,
+  initialHskLevelId,
   view,
 }: {
   authenticated: boolean;
   courses: Course[];
   hskCurriculum: HskCurriculumLevel[];
   hskSummary?: HskCourseSummary;
+  initialHskLevelId?: string;
   view: CourseLibraryViewName;
 }) {
   if (view === "hsk") {
-    return <HskCurriculumExplorer authenticated={authenticated} catalogHref="/courses" curriculum={hskCurriculum} />;
+    return <HskCurriculumExplorer authenticated={authenticated} catalogHref="/courses" curriculum={hskCurriculum} initialLevelId={initialHskLevelId} />;
   }
 
   return <>

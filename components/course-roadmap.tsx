@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import {
   BookOpen,
   Check,
   CheckSquare2,
   ChevronRight,
-  Circle,
+  CircleCheck,
   Clock3,
   Crown,
   Lightbulb,
@@ -28,12 +28,6 @@ function formatMinutes(minutes: number) {
   return `${hours} giờ ${remainder} phút`;
 }
 
-function LessonStateIcon({ lesson }: { lesson: RoadmapLesson }) {
-  if (lesson.status === "completed") return <Check aria-hidden="true" size={14} strokeWidth={3} />;
-  if (lesson.status === "current" || lesson.status === "available") return <Circle aria-hidden="true" size={19} />;
-  return <LockKeyhole aria-hidden="true" size={16} />;
-}
-
 function RoadmapLessonRow({
   lesson,
   lessonNumber,
@@ -43,8 +37,13 @@ function RoadmapLessonRow({
   lessonNumber: number;
   onVipLocked: (target: VipUpgradeTarget) => void;
 }) {
+  const inProgress = lesson.started && lesson.completionPercent < 100;
+  const visualState = lesson.status === "completed"
+    ? "completed"
+    : lesson.vipLocked
+      ? "vip-locked"
+      : inProgress ? "in-progress" : "available";
   const copy = <>
-    <span className="roadmap-lesson-state"><LessonStateIcon lesson={lesson} /></span>
     <span className="roadmap-lesson-copy">
       <span>Bài {String(lessonNumber).padStart(2, "0")}</span>
       <i aria-hidden="true">·</i>
@@ -53,36 +52,26 @@ function RoadmapLessonRow({
     <span className="roadmap-lesson-minutes">{lesson.estimatedMinutes} phút</span>
   </>;
 
-  if (lesson.status === "current" && lesson.href) {
-    return <div className="roadmap-lesson-row is-current">
-      {copy}
-      <Link aria-current="step" className="roadmap-lesson-cta" href={lesson.href} prefetch={false}>
-        {lesson.started ? "Tiếp tục học" : "Bắt đầu bài học"}
-      </Link>
-      <ChevronRight aria-hidden="true" className="roadmap-lesson-chevron" size={19} />
-    </div>;
-  }
-
   if (lesson.vipLocked) {
     return <button className="roadmap-lesson-row is-vip-locked" onClick={() => onVipLocked({ kind: "Bài học", title: lesson.title })} type="button">
       {copy}
-      <span className="roadmap-lesson-vip"><Crown aria-hidden="true" size={15} /> Cần nâng cấp</span>
-      <ChevronRight aria-hidden="true" className="roadmap-lesson-chevron" size={19} />
+      <span aria-label="Bài học VIP" className="roadmap-lesson-vip"><Crown aria-hidden="true" size={21} /></span>
     </button>;
   }
 
   if (lesson.href) {
-    return <Link className={`roadmap-lesson-row is-${lesson.status}`} href={lesson.href} prefetch={false}>
+    return <Link className={`roadmap-lesson-row is-${visualState}`} href={lesson.href} prefetch={false}>
       {copy}
-      {lesson.status === "completed" ? <span className="roadmap-lesson-cta is-replay">Học lại</span> : null}
-      {lesson.status === "available" ? <span className="roadmap-lesson-cta">Bắt đầu bài học</span> : null}
-      <ChevronRight aria-hidden="true" className="roadmap-lesson-chevron" size={19} />
+      {lesson.status === "completed" ? <span className="roadmap-lesson-status is-completed"><CircleCheck aria-hidden="true" size={17} /> Đã hoàn thành</span> : inProgress ? <span
+        aria-label={`${lesson.completionPercent}% đã học`}
+        className="roadmap-circular-progress"
+        style={{ "--roadmap-progress": `${Math.max(lesson.completionPercent * 3.6, 2)}deg` } as CSSProperties}
+      ><strong>{lesson.completionPercent}%</strong></span> : <span className="roadmap-lesson-status is-available">Mở bài <ChevronRight aria-hidden="true" size={19} /></span>}
     </Link>;
   }
 
-  return <div aria-disabled="true" className={`roadmap-lesson-row is-${lesson.status}`}>
+  return <div aria-disabled="true" className={`roadmap-lesson-row is-${visualState}`}>
     {copy}
-    <ChevronRight aria-hidden="true" className="roadmap-lesson-chevron" size={19} />
   </div>;
 }
 
@@ -137,7 +126,7 @@ function RoadmapStage({
 
   return <div className={`roadmap-stage is-${module.status}${module.vipLocked ? " is-vip-locked" : ""}`}>
     <div aria-hidden="true" className="roadmap-stage-rail"><StageMarker index={index} module={module} /></div>
-    {module.vipLocked ? <button className="roadmap-stage-card roadmap-stage-vip-trigger" onClick={() => onVipLocked({ kind: "Module", title: module.title })} type="button">{summary}<ChevronRight aria-hidden="true" className="roadmap-stage-expand" size={20} /></button> : module.status === "locked" ? <article className="roadmap-stage-card">{summary}</article> : <details className="roadmap-stage-card" open={module.status === "active"}>
+    {module.status === "locked" && !module.vipLocked ? <article className="roadmap-stage-card">{summary}</article> : <details className="roadmap-stage-card" open={module.status === "active"}>
       <summary>{summary}<ChevronRight aria-hidden="true" className="roadmap-stage-expand" size={20} /></summary>
       <div className="roadmap-lesson-list">
         {module.lessons.map((lesson) => <RoadmapLessonRow

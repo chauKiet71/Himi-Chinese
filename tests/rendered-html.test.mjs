@@ -570,7 +570,7 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   assert.doesNotMatch(studio, /import\("hanzi-writer"\)/);
   assert.match(styles, /\.writing-topic-grid/);
   assert.match(styles, /\.writing-lesson-grid/);
-  assert.match(styles, /\.himi-writing-session-header/);
+  assert.doesNotMatch(studio, /himi-writing-session-header/);
   assert.match(styles, /@media \(max-width: 920px\) \{[\s\S]*?\.himi-writing-library \{ order: 1; \}[\s\S]*?\.himi-writing-practice \{ order: 2; \}/);
 });
 

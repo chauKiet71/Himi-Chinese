@@ -448,3 +448,7 @@ export function normalizeHskLevelParam(level: string): string {
 export function getHskLessonHref(levelId: string, lessonId: string): string {
   return `/hsk/${levelId.replace(/^hsk-/, "")}/${lessonId}`;
 }
+
+export function getHskCurriculumHref(levelId: string): string {
+  return `/courses?view=hsk&level=${encodeURIComponent(normalizeHskLevelParam(levelId))}`;
+}

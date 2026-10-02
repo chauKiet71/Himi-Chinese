@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { coreWorkplaceModules } from "../lib/core-workplace-course-seed.ts";
 import { ecommerceModules } from "../lib/ecommerce-course-seed.ts";
 import { factoryModules } from "../lib/factory-course-seed.ts";
@@ -8,6 +9,14 @@ import { logisticsModules } from "../lib/logistics-course-seed.ts";
 import { officeLessons, officeModules } from "../lib/office-course-seed.ts";
 import { restaurantModules } from "../lib/restaurant-course-seed.ts";
 import { salesModules } from "../lib/sales-course-seed.ts";
+
+test("an authenticated lesson records its opened state immediately", () => {
+  const source = readFileSync("components/lesson-workspace.tsx", "utf8");
+  const openedEffect = source.match(/useEffect\(\(\) => \{[\s\S]*?\/api\/progress\/lesson\/open[\s\S]*?\}, \[access\.allowed, authenticated, course\.slug, lesson\.slug\]\);/)?.[0] ?? "";
+  assert.match(openedEffect, /void fetch\("\/api\/progress\/lesson\/open"/);
+  assert.match(openedEffect, /keepalive: true/);
+  assert.doesNotMatch(openedEffect, /setTimeout/);
+});
 
 test("course roadmap groups 30 lessons into five stages and identifies the next lesson", async () => {
   const roadmapModule = await import("../lib/course-roadmap.ts").catch(() => null);
@@ -125,6 +134,27 @@ test("course roadmap marks an opened unfinished lesson for continue learning", a
     viewerHasVip: true,
   });
   assert.equal(roadmap.nextLesson?.started, true);
+  assert.equal(roadmap.nextLesson?.completionPercent, 0);
+});
+
+test("course roadmap preserves saved lesson percentages for the HSK-style progress ring", async () => {
+  const { buildCourseRoadmap } = await import("../lib/course-roadmap.ts");
+  const firstLesson = officeLessons[0];
+  const roadmap = buildCourseRoadmap({
+    courseSlug: "van-phong-hanh-chinh",
+    lessons: officeLessons.map((lesson, order) => ({
+      ...lesson,
+      order,
+      moduleTitle: officeModules.find((module) => module.slug === lesson.moduleSlug)?.title ?? "",
+      moduleOrder: officeModules.findIndex((module) => module.slug === lesson.moduleSlug),
+    })),
+    completedLessonSlugs: [],
+    openedLessonSlugs: [firstLesson.slug],
+    lessonProgressBySlug: { [firstLesson.slug]: 37 },
+    viewerHasVip: true,
+  });
+
+  assert.equal(roadmap.nextLesson?.completionPercent, 37);
 });
 
 test("office roadmap stages use distinct module artwork", async () => {
