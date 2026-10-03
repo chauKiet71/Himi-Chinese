@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-15",
+  "lessonNumber": 15,
+  "lessonTitle": "Năm mới sắp đến rồi.",
+  "topicId": "so-sanh-trang-thai-trai-nghiem",
+  "topicTitle": "So sánh, trạng thái & trải nghiệm",
+  "route": "/hsk/2/hsk2-tb-lesson-15/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-2713-meaning",
+      "vocabularyId": "2713",
+      "sourceIndex": 32,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "回去",
+      "pinyin": "huíqù",
+      "note": "Ví dụ: 我们回去吧。 — Hãy quay trở lại.",
+      "speakText": "回去",
+      "options": [
+        "trở về; quay lại",
+        "mở; hiển thị (vé); bật; chuyển sang",
+        "di chuyển | làm chuyển động | xê dịch | chạm | sử dụng | xúc động | thay đổi | viết tắt của động từ",
+        "xuống; đánh dấu hành động hoàn thành; (sau động từ chỉ chuyển động, chỉ chuyển động xuống và về phía chúng ta, cũng mang nghĩa bóng); (chỉ sự tiếp diễn từ quá khứ về phía chúng ta); được thu hoạch (của cây trồng); kết thúc (của một khoảng thời gian); đi vào quần chúng (dùng cho lãnh đạo)"
+      ],
+      "answer": "trở về; quay lại",
+      "exampleHanzi": "我们回去吧。",
+      "exampleVi": "Hãy quay trở lại."
+    },
+    {
+      "id": "hero-hsk-2-3145-meaning",
+      "vocabularyId": "3145",
+      "sourceIndex": 36,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "票",
+      "pinyin": "piào",
+      "note": "Ví dụ: 我买了一张票。 — Tôi đã mua một vé.",
+      "speakText": "票",
+      "options": [
+        "(thân mật) bà nội; (lịch sự) chủ nhà (nữ); (lóng) ngực; bầu ngực",
+        "vé; phiếu bầu; tiền giấy; con tin bị bắt cóc; vở diễn opera Trung Quốc nghiệp dư; lượng từ cho nhóm, lô, giao dịch kinh doanh",
+        "khung cửa; cổng",
+        "ga; đứng; dừng lại; dừng; chi nhánh của công ty hoặc tổ chức; trang web"
+      ],
+      "answer": "vé; phiếu bầu; tiền giấy; con tin bị bắt cóc; vở diễn opera Trung Quốc nghiệp dư; lượng từ cho nhóm, lô, giao dịch kinh doanh",
+      "exampleHanzi": "我买了一张票。",
+      "exampleVi": "Tôi đã mua một vé."
+    },
+    {
+      "id": "hero-hsk-2-3772-meaning",
+      "vocabularyId": "3772",
+      "sourceIndex": 43,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "车站",
+      "pinyin": "chēzhàn",
+      "note": "Ví dụ: 车站有很多人等车。 — Có rất nhiều người đang chờ xe buýt ở bến xe.",
+      "speakText": "车站",
+      "options": [
+        "khung cửa; cổng",
+        "ga tàu; điểm dừng xe buýt",
+        "ga; đứng; dừng lại; dừng; chi nhánh của công ty hoặc tổ chức; trang web",
+        "vé máy bay; vé hành khách"
+      ],
+      "answer": "ga tàu; điểm dừng xe buýt",
+      "exampleHanzi": "车站有很多人等车。",
+      "exampleVi": "Có rất nhiều người đang chờ xe buýt ở bến xe."
+    },
+    {
+      "id": "hero-hsk-2-4085-meaning",
+      "vocabularyId": "4085",
+      "sourceIndex": 54,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "奶奶",
+      "pinyin": "nǎinai",
+      "note": "Ví dụ: 我的奶奶很慈祥。 — Bà tôi rất tốt bụng.",
+      "speakText": "奶奶",
+      "options": [
+        "ga; đứng; dừng lại; dừng; chi nhánh của công ty hoặc tổ chức; trang web",
+        "(thân mật) bà nội; (lịch sự) chủ nhà (nữ); (lóng) ngực; bầu ngực",
+        "vé máy bay; vé hành khách",
+        "trở về; quay lại"
+      ],
+      "answer": "(thân mật) bà nội; (lịch sự) chủ nhà (nữ); (lóng) ngực; bầu ngực",
+      "exampleHanzi": "我的奶奶很慈祥。",
+      "exampleVi": "Bà tôi rất tốt bụng."
+    },
+    {
+      "id": "hero-hsk-2-5111-meaning",
+      "vocabularyId": "5111",
+      "sourceIndex": 62,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "快要",
+      "pinyin": "kuàiyào",
+      "note": "Ví dụ: 快要下雨了。 — Trời sắp mưa.",
+      "speakText": "快要",
+      "options": [
+        "(thân mật) bà nội; (lịch sự) chủ nhà (nữ); (lóng) ngực; bầu ngực",
+        "khung cửa; cổng",
+        "gần đến điểm (làm gì đó); sắp sửa (làm gì đó)",
+        "Vẫn (như trước); tốt hơn nên; bất ngờ; hoặc"
+      ],
+      "answer": "gần đến điểm (làm gì đó); sắp sửa (làm gì đó)",
+      "exampleHanzi": "快要下雨了。",
+      "exampleVi": "Trời sắp mưa."
+    },
+    {
+      "id": "hero-hsk-2-5208-meaning",
+      "vocabularyId": "5208",
+      "sourceIndex": 67,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "门口",
+      "pinyin": "ménkǒu",
+      "note": "Ví dụ: 他在门口等我。 — Anh ấy đang đợi tôi ở cửa.",
+      "speakText": "门口",
+      "options": [
+        "khung cửa; cổng",
+        "trở về; quay lại",
+        "gần đến điểm (làm gì đó); sắp sửa (làm gì đó)",
+        "Vẫn (như trước); tốt hơn nên; bất ngờ; hoặc"
+      ],
+      "answer": "khung cửa; cổng",
+      "exampleHanzi": "他在门口等我。",
+      "exampleVi": "Anh ấy đang đợi tôi ở cửa."
+    },
+    {
+      "id": "hero-hsk-2-5782-meaning",
+      "vocabularyId": "5782",
+      "sourceIndex": 92,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "还是",
+      "pinyin": "háishi",
+      "note": "Ví dụ: 你还是去吧。 — Bạn vẫn nên đi.",
+      "speakText": "还是",
+      "options": [
+        "thán từ hoặc tiếng ừ thể hiện sự đồng ý; ừm; Ah, được rồi; biểu hiện sự nhận ra; Oh, là bạn!",
+        "mở; hiển thị (vé); bật; chuyển sang",
+        "Vẫn (như trước); tốt hơn nên; bất ngờ; hoặc",
+        "di chuyển | làm chuyển động | xê dịch | chạm | sử dụng | xúc động | thay đổi | viết tắt của động từ"
+      ],
+      "answer": "Vẫn (như trước); tốt hơn nên; bất ngờ; hoặc",
+      "exampleHanzi": "你还是去吧。",
+      "exampleVi": "Bạn vẫn nên đi."
+    },
+    {
+      "id": "hero-hsk-2-5783-meaning",
+      "vocabularyId": "5783",
+      "sourceIndex": 93,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "还是",
+      "pinyin": "háishi",
+      "note": "Ví dụ: 你去还是我去？ — Bạn nên đi hay tôi nên đi?",
+      "speakText": "还是",
+      "options": [
+        "Vẫn (như trước); tốt hơn nên; bất ngờ; hoặc",
+        "thán từ hoặc tiếng ừ thể hiện sự đồng ý; ừm; Ah, được rồi; biểu hiện sự nhận ra; Oh, là bạn!",
+        "mở; hiển thị (vé); bật; chuyển sang",
+        "di chuyển | làm chuyển động | xê dịch | chạm | sử dụng | xúc động | thay đổi | viết tắt của động từ"
+      ],
+      "answer": "Vẫn (như trước); tốt hơn nên; bất ngờ; hoặc",
+      "exampleHanzi": "你去还是我去？",
+      "exampleVi": "Bạn nên đi hay tôi nên đi?"
+    },
+    {
+      "id": "hero-hsk-2-7385-meaning",
+      "vocabularyId": "7385",
+      "sourceIndex": 131,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "啊",
+      "pinyin": "a",
+      "note": "Ví dụ: 啊，原来是这样！ — A, thì ra là như vậy!",
+      "speakText": "啊",
+      "options": [
+        "mở; hiển thị (vé); bật; chuyển sang",
+        "di chuyển | làm chuyển động | xê dịch | chạm | sử dụng | xúc động | thay đổi | viết tắt của động từ",
+        "ga; đứng; dừng lại; dừng; chi nhánh của công ty hoặc tổ chức; trang web",
+        "thán từ hoặc tiếng ừ thể hiện sự đồng ý; ừm; Ah, được rồi; biểu hiện sự nhận ra; Oh, là bạn!"
+      ],
+      "answer": "thán từ hoặc tiếng ừ thể hiện sự đồng ý; ừm; Ah, được rồi; biểu hiện sự nhận ra; Oh, là bạn!",
+      "exampleHanzi": "啊，原来是这样！",
+      "exampleVi": "A, thì ra là như vậy!"
+    },
+    {
+      "id": "hero-hsk-2-10205-meaning",
+      "vocabularyId": "10205",
+      "sourceIndex": 169,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "打开",
+      "pinyin": "dǎkāi",
+      "note": "Ví dụ: 请打开窗户。 — Hãy mở cửa sổ.",
+      "speakText": "打开",
+      "options": [
+        "Vẫn (như trước); tốt hơn nên; bất ngờ; hoặc",
+        "thán từ hoặc tiếng ừ thể hiện sự đồng ý; ừm; Ah, được rồi; biểu hiện sự nhận ra; Oh, là bạn!",
+        "mở; hiển thị (vé); bật; chuyển sang",
+        "ga; đứng; dừng lại; dừng; chi nhánh của công ty hoặc tổ chức; trang web"
+      ],
+      "answer": "mở; hiển thị (vé); bật; chuyển sang",
+      "exampleHanzi": "请打开窗户。",
+      "exampleVi": "Hãy mở cửa sổ."
+    },
+    {
+      "id": "hero-hsk-2-10213-meaning",
+      "vocabularyId": "10213",
+      "sourceIndex": 177,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "动",
+      "pinyin": "dòng",
+      "note": "Ví dụ: 请不要动我的书。 — Làm ơn đừng chạm vào sách của tôi.",
+      "speakText": "动",
+      "options": [
+        "thán từ hoặc tiếng ừ thể hiện sự đồng ý; ừm; Ah, được rồi; biểu hiện sự nhận ra; Oh, là bạn!",
+        "ga; đứng; dừng lại; dừng; chi nhánh của công ty hoặc tổ chức; trang web",
+        "họ Yin",
+        "di chuyển | làm chuyển động | xê dịch | chạm | sử dụng | xúc động | thay đổi | viết tắt của động từ"
+      ],
+      "answer": "di chuyển | làm chuyển động | xê dịch | chạm | sử dụng | xúc động | thay đổi | viết tắt của động từ",
+      "exampleHanzi": "请不要动我的书。",
+      "exampleVi": "Làm ơn đừng chạm vào sách của tôi."
+    },
+    {
+      "id": "hero-hsk-2-10840-meaning",
+      "vocabularyId": "10840",
+      "sourceIndex": 200,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "站",
+      "pinyin": "zhàn",
+      "note": "Ví dụ: 我在车站等车。 — Tôi đang đợi xe buýt ở bến xe buýt.",
+      "speakText": "站",
+      "options": [
+        "di chuyển | làm chuyển động | xê dịch | chạm | sử dụng | xúc động | thay đổi | viết tắt của động từ",
+        "họ Yin",
+        "xuống; đánh dấu hành động hoàn thành; (sau động từ chỉ chuyển động, chỉ chuyển động xuống và về phía chúng ta, cũng mang nghĩa bóng); (chỉ sự tiếp diễn từ quá khứ về phía chúng ta); được thu hoạch (của cây trồng); kết thúc (của một khoảng thời gian); đi vào quần chúng (dùng cho lãnh đạo)",
+        "ga; đứng; dừng lại; dừng; chi nhánh của công ty hoặc tổ chức; trang web"
+      ],
+      "answer": "ga; đứng; dừng lại; dừng; chi nhánh của công ty hoặc tổ chức; trang web",
+      "exampleHanzi": "我在车站等车。",
+      "exampleVi": "Tôi đang đợi xe buýt ở bến xe buýt."
+    },
+    {
+      "id": "hero-hsk-2-10995-meaning",
+      "vocabularyId": "10995",
+      "sourceIndex": 205,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "阴",
+      "pinyin": "yīn",
+      "note": "Ví dụ: 今天天气阴。 — Thời tiết hôm nay nhiều mây.",
+      "speakText": "阴",
+      "options": [
+        "vé máy bay; vé hành khách",
+        "họ Yin",
+        "xuống; đánh dấu hành động hoàn thành; (sau động từ chỉ chuyển động, chỉ chuyển động xuống và về phía chúng ta, cũng mang nghĩa bóng); (chỉ sự tiếp diễn từ quá khứ về phía chúng ta); được thu hoạch (của cây trồng); kết thúc (của một khoảng thời gian); đi vào quần chúng (dùng cho lãnh đạo)",
+        "trở về; quay lại"
+      ],
+      "answer": "họ Yin",
+      "exampleHanzi": "今天天气阴。",
+      "exampleVi": "Thời tiết hôm nay nhiều mây."
+    },
+    {
+      "id": "hero-hsk-2-11066-meaning",
+      "vocabularyId": "11066",
+      "sourceIndex": 208,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "机票",
+      "pinyin": "jīpiào",
+      "note": "Ví dụ: 我买了机票。 — Tôi đã mua vé máy bay.",
+      "speakText": "机票",
+      "options": [
+        "xuống; đánh dấu hành động hoàn thành; (sau động từ chỉ chuyển động, chỉ chuyển động xuống và về phía chúng ta, cũng mang nghĩa bóng); (chỉ sự tiếp diễn từ quá khứ về phía chúng ta); được thu hoạch (của cây trồng); kết thúc (của một khoảng thời gian); đi vào quần chúng (dùng cho lãnh đạo)",
+        "vé máy bay; vé hành khách",
+        "vé; phiếu bầu; tiền giấy; con tin bị bắt cóc; vở diễn opera Trung Quốc nghiệp dư; lượng từ cho nhóm, lô, giao dịch kinh doanh",
+        "ga tàu; điểm dừng xe buýt"
+      ],
+      "answer": "vé máy bay; vé hành khách",
+      "exampleHanzi": "我买了机票。",
+      "exampleVi": "Tôi đã mua vé máy bay."
+    },
+    {
+      "id": "hero-hsk-2-11377-meaning",
+      "vocabularyId": "11377",
+      "sourceIndex": 209,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "下来",
+      "pinyin": "xiàlái",
+      "note": "Ví dụ: 请下来坐。 — Xin hãy xuống và ngồi.",
+      "speakText": "下来",
+      "options": [
+        "trở về; quay lại",
+        "mở; hiển thị (vé); bật; chuyển sang",
+        "di chuyển | làm chuyển động | xê dịch | chạm | sử dụng | xúc động | thay đổi | viết tắt của động từ",
+        "xuống; đánh dấu hành động hoàn thành; (sau động từ chỉ chuyển động, chỉ chuyển động xuống và về phía chúng ta, cũng mang nghĩa bóng); (chỉ sự tiếp diễn từ quá khứ về phía chúng ta); được thu hoạch (của cây trồng); kết thúc (của một khoảng thời gian); đi vào quần chúng (dùng cho lãnh đạo)"
+      ],
+      "answer": "xuống; đánh dấu hành động hoàn thành; (sau động từ chỉ chuyển động, chỉ chuyển động xuống và về phía chúng ta, cũng mang nghĩa bóng); (chỉ sự tiếp diễn từ quá khứ về phía chúng ta); được thu hoạch (của cây trồng); kết thúc (của một khoảng thời gian); đi vào quần chúng (dùng cho lãnh đạo)",
+      "exampleHanzi": "请下来坐。",
+      "exampleVi": "Xin hãy xuống và ngồi."
+    }
+  ]
+}

@@ -1,0 +1,483 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-02-cam-on-anh",
+  "lessonNumber": 2,
+  "lessonTitle": "Cảm ơn bạn!",
+  "topicId": "nen-tang-lam-quen",
+  "topicTitle": "Nền tảng & Làm quen",
+  "route": "/hsk/1/hsk1-bai-02-cam-on-anh/play",
+  "vocabularyCount": 22,
+  "exerciseCount": 22,
+  "typeCounts": {
+    "meaning": 22,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-87-meaning",
+      "vocabularyId": "87",
+      "sourceIndex": 5,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "小学",
+      "pinyin": "xiǎoxué",
+      "note": "Ví dụ: 我的小学很美丽。 — Trường tiểu học của tôi rất đẹp.",
+      "speakText": "小学",
+      "options": [
+        "tiệm; khách sạn kiểu cũ; (dạng kết hợp) cửa hàng; cửa hiệu",
+        "tiểu học",
+        "công ty",
+        "sữa bò"
+      ],
+      "answer": "tiểu học",
+      "exampleHanzi": "我的小学很美丽。",
+      "exampleVi": "Trường tiểu học của tôi rất đẹp."
+    },
+    {
+      "id": "hero-hsk-1-121-meaning",
+      "vocabularyId": "121",
+      "sourceIndex": 9,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "那里",
+      "pinyin": "nàlǐ",
+      "note": "Ví dụ: 那里有很多人。 — Có rất nhiều người ở đó.",
+      "speakText": "那里",
+      "options": [
+        "một số; hơi; khá",
+        "tiểu học",
+        "ở đó; nơi đó",
+        "tiệm; khách sạn kiểu cũ; (dạng kết hợp) cửa hàng; cửa hiệu"
+      ],
+      "answer": "ở đó; nơi đó",
+      "exampleHanzi": "那里有很多人。",
+      "exampleVi": "Có rất nhiều người ở đó."
+    },
+    {
+      "id": "hero-hsk-1-976-meaning",
+      "vocabularyId": "976",
+      "sourceIndex": 32,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "店",
+      "pinyin": "diàn",
+      "note": "Ví dụ: 这家店很大。 — Cửa hàng này rất lớn.",
+      "speakText": "店",
+      "options": [
+        "sữa bò",
+        "phòng; phòng ốc",
+        "tiệm; khách sạn kiểu cũ; (dạng kết hợp) cửa hàng; cửa hiệu",
+        "họ Xue"
+      ],
+      "answer": "tiệm; khách sạn kiểu cũ; (dạng kết hợp) cửa hàng; cửa hiệu",
+      "exampleHanzi": "这家店很大。",
+      "exampleVi": "Cửa hàng này rất lớn."
+    },
+    {
+      "id": "hero-hsk-1-1216-meaning",
+      "vocabularyId": "1216",
+      "sourceIndex": 50,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "这里",
+      "pinyin": "zhèlǐ",
+      "note": "Ví dụ: 这里有很多人。 — Có rất nhiều người ở đây.",
+      "speakText": "这里",
+      "options": [
+        "tiệm; khách sạn kiểu cũ; (dạng kết hợp) cửa hàng; cửa hiệu",
+        "ở đây",
+        "nghĩ rằng ...; cảm thấy rằng ...; cảm thấy (khó chịu v.v.)",
+        "tám; 8"
+      ],
+      "answer": "ở đây",
+      "exampleHanzi": "这里有很多人。",
+      "exampleVi": "Có rất nhiều người ở đây."
+    },
+    {
+      "id": "hero-hsk-1-1859-meaning",
+      "vocabularyId": "1859",
+      "sourceIndex": 59,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "觉得",
+      "pinyin": "juéde",
+      "note": "Ví dụ: 我觉得这本书很有趣。 — Tôi nghĩ cuốn sách này rất thú vị.",
+      "speakText": "觉得",
+      "options": [
+        "ở đó; nơi đó",
+        "tiệm; khách sạn kiểu cũ; (dạng kết hợp) cửa hàng; cửa hiệu",
+        "ở đây",
+        "nghĩ rằng ...; cảm thấy rằng ...; cảm thấy (khó chịu v.v.)"
+      ],
+      "answer": "nghĩ rằng ...; cảm thấy rằng ...; cảm thấy (khó chịu v.v.)",
+      "exampleHanzi": "我觉得这本书很有趣。",
+      "exampleVi": "Tôi nghĩ cuốn sách này rất thú vị."
+    },
+    {
+      "id": "hero-hsk-1-1967-meaning",
+      "vocabularyId": "1967",
+      "sourceIndex": 65,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "八",
+      "pinyin": "bā",
+      "note": "Ví dụ: 现在是八点。 — Bây giờ là tám giờ.",
+      "speakText": "八",
+      "options": [
+        "nghĩ rằng ...; cảm thấy rằng ...; cảm thấy (khó chịu v.v.)",
+        "công ty",
+        "tám; 8",
+        "cảm ơn; lời cảm ơn; cảm ơn bạn"
+      ],
+      "answer": "tám; 8",
+      "exampleHanzi": "现在是八点。",
+      "exampleVi": "Bây giờ là tám giờ."
+    },
+    {
+      "id": "hero-hsk-1-1969-meaning",
+      "vocabularyId": "1969",
+      "sourceIndex": 67,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "百",
+      "pinyin": "bǎi",
+      "note": "Ví dụ: 一百块钱。 — Một trăm nhân dân tệ.",
+      "speakText": "百",
+      "options": [
+        "công ty",
+        "họ Bách",
+        "cảm ơn; lời cảm ơn; cảm ơn bạn",
+        "dễ nghe; hay nghe"
+      ],
+      "answer": "họ Bách",
+      "exampleHanzi": "一百块钱。",
+      "exampleVi": "Một trăm nhân dân tệ."
+    },
+    {
+      "id": "hero-hsk-1-2418-meaning",
+      "vocabularyId": "2418",
+      "sourceIndex": 84,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "公司",
+      "pinyin": "gōngsī",
+      "note": "Ví dụ: 我在一家公司上班。 — Tôi làm việc tại một công ty.",
+      "speakText": "公司",
+      "options": [
+        "bánh mì",
+        "bữa sáng",
+        "ở đó; nơi đó",
+        "công ty"
+      ],
+      "answer": "công ty",
+      "exampleHanzi": "我在一家公司上班。",
+      "exampleVi": "Tôi làm việc tại một công ty."
+    },
+    {
+      "id": "hero-hsk-1-2995-meaning",
+      "vocabularyId": "2995",
+      "sourceIndex": 90,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "谢谢",
+      "pinyin": "xièxie",
+      "note": "Ví dụ: 谢谢你的帮助。 — Cảm ơn sự giúp đỡ của bạn.",
+      "speakText": "谢谢",
+      "options": [
+        "họ Bách",
+        "công ty",
+        "cảm ơn; lời cảm ơn; cảm ơn bạn",
+        "dễ nghe; hay nghe"
+      ],
+      "answer": "cảm ơn; lời cảm ơn; cảm ơn bạn",
+      "exampleHanzi": "谢谢你的帮助。",
+      "exampleVi": "Cảm ơn sự giúp đỡ của bạn."
+    },
+    {
+      "id": "hero-hsk-1-3466-meaning",
+      "vocabularyId": "3466",
+      "sourceIndex": 107,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "好听",
+      "pinyin": "hǎotīng",
+      "note": "Ví dụ: 这首歌很好听。 — Bài hát này nghe hay đấy.",
+      "speakText": "好听",
+      "options": [
+        "dễ nghe; hay nghe",
+        "sữa bò",
+        "không; không phải; (dạng liên kết) không; un-",
+        "lịch sự; cung kính; hình thức; khiêm tốn"
+      ],
+      "answer": "dễ nghe; hay nghe",
+      "exampleHanzi": "这首歌很好听。",
+      "exampleVi": "Bài hát này nghe hay đấy."
+    },
+    {
+      "id": "hero-hsk-1-3578-meaning",
+      "vocabularyId": "3578",
+      "sourceIndex": 121,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "牛奶",
+      "pinyin": "niúnǎi",
+      "note": "Ví dụ: 我每天喝牛奶。 — Tôi uống sữa mỗi ngày.",
+      "speakText": "牛奶",
+      "options": [
+        "ở đây",
+        "nghĩ rằng ...; cảm thấy rằng ...; cảm thấy (khó chịu v.v.)",
+        "tám; 8",
+        "sữa bò"
+      ],
+      "answer": "sữa bò",
+      "exampleHanzi": "我每天喝牛奶。",
+      "exampleVi": "Tôi uống sữa mỗi ngày."
+    },
+    {
+      "id": "hero-hsk-1-4200-meaning",
+      "vocabularyId": "4200",
+      "sourceIndex": 133,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "不",
+      "pinyin": "bù",
+      "note": "Ví dụ: 我不去学校。 — Tôi sẽ không đi học.",
+      "speakText": "不",
+      "options": [
+        "không; không phải; (dạng liên kết) không; un-",
+        "lịch sự; cung kính; hình thức; khiêm tốn",
+        "phòng; phòng ốc",
+        "họ Xue"
+      ],
+      "answer": "không; không phải; (dạng liên kết) không; un-",
+      "exampleHanzi": "我不去学校。",
+      "exampleVi": "Tôi sẽ không đi học."
+    },
+    {
+      "id": "hero-hsk-1-4201-meaning",
+      "vocabularyId": "4201",
+      "sourceIndex": 134,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "客气",
+      "pinyin": "bú kèqi",
+      "note": "Ví dụ: 谢谢！不客气。 — Cảm ơn! Không có gì.",
+      "speakText": "客气",
+      "options": [
+        "không; không phải; (dạng liên kết) không; un-",
+        "phòng; phòng ốc",
+        "lịch sự; cung kính; hình thức; khiêm tốn",
+        "họ Xue"
+      ],
+      "answer": "lịch sự; cung kính; hình thức; khiêm tốn",
+      "exampleHanzi": "谢谢！不客气。",
+      "exampleVi": "Cảm ơn! Không có gì."
+    },
+    {
+      "id": "hero-hsk-1-7362-meaning",
+      "vocabularyId": "7362",
+      "sourceIndex": 188,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "房间",
+      "pinyin": "fángjiān",
+      "note": "Ví dụ: 我的房间很干净。 — Phòng của tôi rất sạch sẽ.",
+      "speakText": "房间",
+      "options": [
+        "họ Bách",
+        "phòng; phòng ốc",
+        "cảm ơn; lời cảm ơn; cảm ơn bạn",
+        "dễ nghe; hay nghe"
+      ],
+      "answer": "phòng; phòng ốc",
+      "exampleHanzi": "我的房间很干净。",
+      "exampleVi": "Phòng của tôi rất sạch sẽ."
+    },
+    {
+      "id": "hero-hsk-1-8404-meaning",
+      "vocabularyId": "8404",
+      "sourceIndex": 232,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "雪",
+      "pinyin": "xuě",
+      "note": "Ví dụ: 外面下雪了。 — Ngoài trời đang có tuyết.",
+      "speakText": "雪",
+      "options": [
+        "cảm ơn; lời cảm ơn; cảm ơn bạn",
+        "dễ nghe; hay nghe",
+        "họ Xue",
+        "không; không phải; (dạng liên kết) không; un-"
+      ],
+      "answer": "họ Xue",
+      "exampleHanzi": "外面下雪了。",
+      "exampleVi": "Ngoài trời đang có tuyết."
+    },
+    {
+      "id": "hero-hsk-1-8755-meaning",
+      "vocabularyId": "8755",
+      "sourceIndex": 235,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "事",
+      "pinyin": "shì",
+      "note": "Ví dụ: 我有重要的事。 — Tôi có việc quan trọng phải làm.",
+      "speakText": "事",
+      "options": [
+        "dễ nghe; hay nghe",
+        "không; không phải; (dạng liên kết) không; un-",
+        "việc; sự việc; mục; công việc; sự vụ",
+        "lịch sự; cung kính; hình thức; khiêm tốn"
+      ],
+      "answer": "việc; sự việc; mục; công việc; sự vụ",
+      "exampleHanzi": "我有重要的事。",
+      "exampleVi": "Tôi có việc quan trọng phải làm."
+    },
+    {
+      "id": "hero-hsk-1-8759-meaning",
+      "vocabularyId": "8759",
+      "sourceIndex": 239,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "手机",
+      "pinyin": "shǒujī",
+      "note": "Ví dụ: 我的手机没电了。 — Điện thoại của tôi hết pin rồi.",
+      "speakText": "手机",
+      "options": [
+        "không; không phải; (dạng liên kết) không; un-",
+        "lịch sự; cung kính; hình thức; khiêm tốn",
+        "một số; hơi; khá",
+        "điện thoại di động"
+      ],
+      "answer": "điện thoại di động",
+      "exampleHanzi": "我的手机没电了。",
+      "exampleVi": "Điện thoại của tôi hết pin rồi."
+    },
+    {
+      "id": "hero-hsk-1-9141-meaning",
+      "vocabularyId": "9141",
+      "sourceIndex": 249,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "有些",
+      "pinyin": "yǒuxiē",
+      "note": "Ví dụ: 有些书很难。 — Một số cuốn sách rất khó.",
+      "speakText": "有些",
+      "options": [
+        "bánh mì",
+        "một vài; một ít; một chút; (theo sau tính từ) hơi ... hơn",
+        "một số; hơi; khá",
+        "tạm biệt; hẹn gặp lại"
+      ],
+      "answer": "một số; hơi; khá",
+      "exampleHanzi": "有些书很难。",
+      "exampleVi": "Một số cuốn sách rất khó."
+    },
+    {
+      "id": "hero-hsk-1-10964-meaning",
+      "vocabularyId": "10964",
+      "sourceIndex": 290,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "面包",
+      "pinyin": "miànbāo",
+      "note": "Ví dụ: 我早餐吃面包。 — Tôi ăn bánh mì cho bữa sáng.",
+      "speakText": "面包",
+      "options": [
+        "bánh mì",
+        "một số; hơi; khá",
+        "một vài; một ít; một chút; (theo sau tính từ) hơi ... hơn",
+        "tạm biệt; hẹn gặp lại"
+      ],
+      "answer": "bánh mì",
+      "exampleHanzi": "我早餐吃面包。",
+      "exampleVi": "Tôi ăn bánh mì cho bữa sáng."
+    },
+    {
+      "id": "hero-hsk-1-12266-meaning",
+      "vocabularyId": "12266",
+      "sourceIndex": 314,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "一些",
+      "pinyin": "yìxiē",
+      "note": "Ví dụ: 我有一些书。 — Tôi có một số cuốn sách.",
+      "speakText": "一些",
+      "options": [
+        "tạm biệt; hẹn gặp lại",
+        "một vài; một ít; một chút; (theo sau tính từ) hơi ... hơn",
+        "bữa sáng",
+        "tiểu học"
+      ],
+      "answer": "một vài; một ít; một chút; (theo sau tính từ) hơi ... hơn",
+      "exampleHanzi": "我有一些书。",
+      "exampleVi": "Tôi có một số cuốn sách."
+    },
+    {
+      "id": "hero-hsk-1-12290-meaning",
+      "vocabularyId": "12290",
+      "sourceIndex": 318,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "再见",
+      "pinyin": "zàijiàn",
+      "note": "Ví dụ: 明天见！ — Hẹn gặp lại bạn vào ngày mai!",
+      "speakText": "再见",
+      "options": [
+        "bữa sáng",
+        "nghĩ rằng ...; cảm thấy rằng ...; cảm thấy (khó chịu v.v.)",
+        "tạm biệt; hẹn gặp lại",
+        "cảm ơn; lời cảm ơn; cảm ơn bạn"
+      ],
+      "answer": "tạm biệt; hẹn gặp lại",
+      "exampleHanzi": "明天见！",
+      "exampleVi": "Hẹn gặp lại bạn vào ngày mai!"
+    },
+    {
+      "id": "hero-hsk-1-12292-meaning",
+      "vocabularyId": "12292",
+      "sourceIndex": 320,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "早饭",
+      "pinyin": "zǎofàn",
+      "note": "Ví dụ: 我早饭吃面包。 — Tôi ăn bánh mì cho bữa sáng.",
+      "speakText": "早饭",
+      "options": [
+        "tiểu học",
+        "bữa sáng",
+        "tiệm; khách sạn kiểu cũ; (dạng kết hợp) cửa hàng; cửa hiệu",
+        "công ty"
+      ],
+      "answer": "bữa sáng",
+      "exampleHanzi": "我早饭吃面包。",
+      "exampleVi": "Tôi ăn bánh mì cho bữa sáng."
+    }
+  ]
+}

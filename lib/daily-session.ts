@@ -58,7 +58,7 @@ export const defaultDailySessionSource: DailySessionSource = {
     title: "Chào hỏi tại nơi làm việc",
   },
   practice: {
-    href: "/practice?scenario=bao-tien-do-tre-han",
+    href: "/listening?mode=scenario&scenario=bao-tien-do-tre-han",
     title: "Báo tiến độ khi sắp trễ hạn",
   },
   game: {

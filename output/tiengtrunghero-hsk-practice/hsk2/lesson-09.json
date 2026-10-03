@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-09",
+  "lessonNumber": 9,
+  "lessonTitle": "Câu hỏi quá nhiều nên mình không làm hết.",
+  "topicId": "sinh-hoat-di-chuyen-ke-hoach",
+  "topicTitle": "Sinh hoạt, di chuyển & kế hoạch",
+  "route": "/hsk/2/hsk2-tb-lesson-09/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-932-meaning",
+      "vocabularyId": "932",
+      "sourceIndex": 6,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "公交车",
+      "pinyin": "gōngjiāochē",
+      "note": "Ví dụ: 我坐公交车去上班。 — Tôi bắt xe buýt để đi làm.",
+      "speakText": "公交车",
+      "options": [
+        "họ Ti",
+        "sở thích; đam mê",
+        "xe buýt công cộng",
+        "đường sắt ngầm; tàu điện ngầm; tàu điện ngầm"
+      ],
+      "answer": "xe buýt công cộng",
+      "exampleHanzi": "我坐公交车去上班。",
+      "exampleVi": "Tôi bắt xe buýt để đi làm."
+    },
+    {
+      "id": "hero-hsk-2-2450-meaning",
+      "vocabularyId": "2450",
+      "sourceIndex": 22,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "从",
+      "pinyin": "cóng",
+      "note": "Ví dụ: 我从早上开始学习。 — Tôi bắt đầu học từ sáng.",
+      "speakText": "从",
+      "options": [
+        "họ Cuo",
+        "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+        "họ Hoa",
+        "từ; qua; qua đường; đi theo; tuân theo; tham gia (hoạt động); chưa bao giờ (trong câu phủ định); (Đài Loan đọc [zòng]) người hầu; trợ lý; phụ trợ; cấp dưới; cùng họ với ông nội hoặc tổ tiên sớm hơn"
+      ],
+      "answer": "từ; qua; qua đường; đi theo; tuân theo; tham gia (hoạt động); chưa bao giờ (trong câu phủ định); (Đài Loan đọc [zòng]) người hầu; trợ lý; phụ trợ; cấp dưới; cùng họ với ông nội hoặc tổ tiên sớm hơn",
+      "exampleHanzi": "我从早上开始学习。",
+      "exampleVi": "Tôi bắt đầu học từ sáng."
+    },
+    {
+      "id": "hero-hsk-2-2452-meaning",
+      "vocabularyId": "2452",
+      "sourceIndex": 24,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "错",
+      "pinyin": "cuò",
+      "note": "Ví dụ: 这个答案是错的。 — Câu trả lời này là sai.",
+      "speakText": "错",
+      "options": [
+        "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+        "họ Hoa",
+        "họ Cuo",
+        "hoàn thành; kết thúc; nguyên vẹn; đầy đủ; trọn vẹn"
+      ],
+      "answer": "họ Cuo",
+      "exampleHanzi": "这个答案是错的。",
+      "exampleVi": "Câu trả lời này là sai."
+    },
+    {
+      "id": "hero-hsk-2-2707-meaning",
+      "vocabularyId": "2707",
+      "sourceIndex": 26,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "画",
+      "pinyin": "huà",
+      "note": "Ví dụ: 我喜欢画画。 — Tôi thích vẽ.",
+      "speakText": "画",
+      "options": [
+        "sở thích; đam mê",
+        "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+        "hiểu; nắm được",
+        "hy vọng; một hy vọng; một mong ước"
+      ],
+      "answer": "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+      "exampleHanzi": "我喜欢画画。",
+      "exampleVi": "Tôi thích vẽ."
+    },
+    {
+      "id": "hero-hsk-2-2709-meaning",
+      "vocabularyId": "2709",
+      "sourceIndex": 28,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "花",
+      "pinyin": "huā",
+      "note": "Ví dụ: 我花钱买书。 — Tôi dành tiền để mua sách.",
+      "speakText": "花",
+      "options": [
+        "họ Hoa",
+        "hiểu; nắm được",
+        "hy vọng; một hy vọng; một mong ước",
+        "đi vào"
+      ],
+      "answer": "họ Hoa",
+      "exampleHanzi": "我花钱买书。",
+      "exampleVi": "Tôi dành tiền để mua sách."
+    },
+    {
+      "id": "hero-hsk-2-6718-meaning",
+      "vocabularyId": "6718",
+      "sourceIndex": 106,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "完",
+      "pinyin": "wán",
+      "note": "Ví dụ: 我完作业了。 — Tôi đã làm xong bài tập về nhà.",
+      "speakText": "完",
+      "options": [
+        "hy vọng; một hy vọng; một mong ước",
+        "đi vào",
+        "đi lên; tiến lại gần; (bổ ngữ động từ chỉ sự thành công)",
+        "hoàn thành; kết thúc; nguyên vẹn; đầy đủ; trọn vẹn"
+      ],
+      "answer": "hoàn thành; kết thúc; nguyên vẹn; đầy đủ; trọn vẹn",
+      "exampleHanzi": "我完作业了。",
+      "exampleVi": "Tôi đã làm xong bài tập về nhà."
+    },
+    {
+      "id": "hero-hsk-2-6791-meaning",
+      "vocabularyId": "6791",
+      "sourceIndex": 117,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "题",
+      "pinyin": "tí",
+      "note": "Ví dụ: 这道题很难。 — Câu hỏi này rất khó.",
+      "speakText": "题",
+      "options": [
+        "họ Hoa",
+        "hoàn thành; kết thúc; nguyên vẹn; đầy đủ; trọn vẹn",
+        "nhảy múa",
+        "họ Ti"
+      ],
+      "answer": "họ Ti",
+      "exampleHanzi": "这道题很难。",
+      "exampleVi": "Câu hỏi này rất khó."
+    },
+    {
+      "id": "hero-hsk-2-6794-meaning",
+      "vocabularyId": "6794",
+      "sourceIndex": 120,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "跳舞",
+      "pinyin": "tiàowǔ",
+      "note": "Ví dụ: 她喜欢跳舞。 — Cô ấy thích khiêu vũ.",
+      "speakText": "跳舞",
+      "options": [
+        "đi lên; tiến lại gần; (bổ ngữ động từ chỉ sự thành công)",
+        "xe buýt công cộng",
+        "từ; qua; qua đường; đi theo; tuân theo; tham gia (hoạt động); chưa bao giờ (trong câu phủ định); (Đài Loan đọc [zòng]) người hầu; trợ lý; phụ trợ; cấp dưới; cùng họ với ông nội hoặc tổ tiên sớm hơn",
+        "nhảy múa"
+      ],
+      "answer": "nhảy múa",
+      "exampleHanzi": "她喜欢跳舞。",
+      "exampleVi": "Cô ấy thích khiêu vũ."
+    },
+    {
+      "id": "hero-hsk-2-7386-meaning",
+      "vocabularyId": "7386",
+      "sourceIndex": 132,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "爱好",
+      "pinyin": "àihào",
+      "note": "Ví dụ: 我爱好音乐。 — Tôi yêu âm nhạc.",
+      "speakText": "爱好",
+      "options": [
+        "sở thích; đam mê",
+        "xe buýt công cộng",
+        "từ; qua; qua đường; đi theo; tuân theo; tham gia (hoạt động); chưa bao giờ (trong câu phủ định); (Đài Loan đọc [zòng]) người hầu; trợ lý; phụ trợ; cấp dưới; cùng họ với ông nội hoặc tổ tiên sớm hơn",
+        "họ Cuo"
+      ],
+      "answer": "sở thích; đam mê",
+      "exampleHanzi": "我爱好音乐。",
+      "exampleVi": "Tôi yêu âm nhạc."
+    },
+    {
+      "id": "hero-hsk-2-9867-meaning",
+      "vocabularyId": "9867",
+      "sourceIndex": 161,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "爱好",
+      "pinyin": "àihào",
+      "note": "Ví dụ: 我的爱好是读书。 — Sở thích của tôi là đọc sách.",
+      "speakText": "爱好",
+      "options": [
+        "hiểu; nắm được",
+        "hy vọng; một hy vọng; một mong ước",
+        "sở thích; đam mê",
+        "đi vào"
+      ],
+      "answer": "sở thích; đam mê",
+      "exampleHanzi": "我的爱好是读书。",
+      "exampleVi": "Sở thích của tôi là đọc sách."
+    },
+    {
+      "id": "hero-hsk-2-10212-meaning",
+      "vocabularyId": "10212",
+      "sourceIndex": 176,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "地铁",
+      "pinyin": "dìtiě",
+      "note": "Ví dụ: 我每天坐地铁上班。 — Tôi đi tàu điện ngầm đi làm hàng ngày.",
+      "speakText": "地铁",
+      "options": [
+        "hiểu; nắm được",
+        "hy vọng; một hy vọng; một mong ước",
+        "đường sắt ngầm; tàu điện ngầm; tàu điện ngầm",
+        "đi vào"
+      ],
+      "answer": "đường sắt ngầm; tàu điện ngầm; tàu điện ngầm",
+      "exampleHanzi": "我每天坐地铁上班。",
+      "exampleVi": "Tôi đi tàu điện ngầm đi làm hàng ngày."
+    },
+    {
+      "id": "hero-hsk-2-10214-meaning",
+      "vocabularyId": "10214",
+      "sourceIndex": 178,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "懂",
+      "pinyin": "dǒng",
+      "note": "Ví dụ: 我懂你的意思。 — Tôi hiểu ý bạn.",
+      "speakText": "懂",
+      "options": [
+        "họ Ti",
+        "hiểu; nắm được",
+        "sở thích; đam mê",
+        "đường sắt ngầm; tàu điện ngầm; tàu điện ngầm"
+      ],
+      "answer": "hiểu; nắm được",
+      "exampleHanzi": "我懂你的意思。",
+      "exampleVi": "Tôi hiểu ý bạn."
+    },
+    {
+      "id": "hero-hsk-2-10567-meaning",
+      "vocabularyId": "10567",
+      "sourceIndex": 189,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "希望",
+      "pinyin": "xīwàng",
+      "note": "Ví dụ: 我希望明天不下雨。 — Tôi hy vọng ngày mai trời không mưa.",
+      "speakText": "希望",
+      "options": [
+        "sở thích; đam mê",
+        "hy vọng; một hy vọng; một mong ước",
+        "đường sắt ngầm; tàu điện ngầm; tàu điện ngầm",
+        "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp"
+      ],
+      "answer": "hy vọng; một hy vọng; một mong ước",
+      "exampleHanzi": "我希望明天不下雨。",
+      "exampleVi": "Tôi hy vọng ngày mai trời không mưa."
+    },
+    {
+      "id": "hero-hsk-2-11065-meaning",
+      "vocabularyId": "11065",
+      "sourceIndex": 207,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "进去",
+      "pinyin": "jìnqù",
+      "note": "Ví dụ: 我们进去看看。 — Chúng ta hãy đi vào và xem xét.",
+      "speakText": "进去",
+      "options": [
+        "đi vào",
+        "đường sắt ngầm; tàu điện ngầm; tàu điện ngầm",
+        "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+        "họ Hoa"
+      ],
+      "answer": "đi vào",
+      "exampleHanzi": "我们进去看看。",
+      "exampleVi": "Chúng ta hãy đi vào và xem xét."
+    },
+    {
+      "id": "hero-hsk-2-12235-meaning",
+      "vocabularyId": "12235",
+      "sourceIndex": 225,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "上来",
+      "pinyin": "shànglái",
+      "note": "Ví dụ: 请上来坐。 — Xin mời lên và ngồi.",
+      "speakText": "上来",
+      "options": [
+        "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+        "họ Hoa",
+        "hoàn thành; kết thúc; nguyên vẹn; đầy đủ; trọn vẹn",
+        "đi lên; tiến lại gần; (bổ ngữ động từ chỉ sự thành công)"
+      ],
+      "answer": "đi lên; tiến lại gần; (bổ ngữ động từ chỉ sự thành công)",
+      "exampleHanzi": "请上来坐。",
+      "exampleVi": "Xin mời lên và ngồi."
+    }
+  ]
+}

@@ -1,0 +1,483 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-05-con-gai-co-ay-hai-muoi-tuoi",
+  "lessonNumber": 5,
+  "lessonTitle": "Con gái của cô ấy năm nay 20 tuổi.",
+  "topicId": "nen-tang-lam-quen",
+  "topicTitle": "Nền tảng & Làm quen",
+  "route": "/hsk/1/hsk1-bai-05-con-gai-co-ay-hai-muoi-tuoi/play",
+  "vocabularyCount": 22,
+  "exerciseCount": 22,
+  "typeCounts": {
+    "meaning": 22,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-822-meaning",
+      "vocabularyId": "822",
+      "sourceIndex": 12,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "找",
+      "pinyin": "zhǎo",
+      "note": "Ví dụ: 我找我的书。 — Tôi đang tìm cuốn sách của tôi.",
+      "speakText": "找",
+      "options": [
+        "cố tìm; tìm kiếm; gọi ai đó; tìm thấy; tìm kiếm; hoàn trả; thối tiền",
+        "bệnh; bệnh tật; bị ốm; khuyết điểm",
+        "có | tồn tại | (dạng liên kết) mang, có, đầy, -ed, -al (như trong yi có chủ đích)",
+        "năm nay"
+      ],
+      "answer": "cố tìm; tìm kiếm; gọi ai đó; tìm thấy; tìm kiếm; hoàn trả; thối tiền",
+      "exampleHanzi": "我找我的书。",
+      "exampleVi": "Tôi đang tìm cuốn sách của tôi."
+    },
+    {
+      "id": "hero-hsk-1-1856-meaning",
+      "vocabularyId": "1856",
+      "sourceIndex": 56,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "今年",
+      "pinyin": "jīnnián",
+      "note": "Ví dụ: 今年我很开心。 — Tôi rất hạnh phúc trong năm nay.",
+      "speakText": "今年",
+      "options": [
+        "nhà; gia đình; (lịch sự) tôi (chị, chú, v.v.); lượng từ cho gia đình hoặc doanh nghiệp; chỉ các trường phái triết học Trung Quốc thời tiền Hán; hậu tố danh từ cho chuyên gia trong một hoạt động nào đó, như nhạc sĩ hoặc cách mạng, tương ứng với -ist, -er, -ary hoặc -ian trong tiếng Anh",
+        "năm nay",
+        "miệng; lượng từ cho những thứ có miệng (người, vật nuôi, pháo, giếng, v.v.); lượng từ cho miếng cắn hoặc ngụm",
+        "em gái; phụ nữ trẻ"
+      ],
+      "answer": "năm nay",
+      "exampleHanzi": "今年我很开心。",
+      "exampleVi": "Tôi rất hạnh phúc trong năm nay."
+    },
+    {
+      "id": "hero-hsk-1-2422-meaning",
+      "vocabularyId": "2422",
+      "sourceIndex": 88,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "贵",
+      "pinyin": "guì",
+      "note": "Ví dụ: 这个包很贵。 — Chiếc túi này rất đắt tiền.",
+      "speakText": "贵",
+      "options": [
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "lớn | to | vĩ đại | anh cả | rất | tự do | (miệng) cha | (miệng) chú (anh của cha)",
+        "đắt; quý tộc; quý giá; (lịch sự) của bạn",
+        "cố tìm; tìm kiếm; gọi ai đó; tìm thấy; tìm kiếm; hoàn trả; thối tiền"
+      ],
+      "answer": "đắt; quý tộc; quý giá; (lịch sự) của bạn",
+      "exampleHanzi": "这个包很贵。",
+      "exampleVi": "Chiếc túi này rất đắt tiền."
+    },
+    {
+      "id": "hero-hsk-1-3290-meaning",
+      "vocabularyId": "3290",
+      "sourceIndex": 103,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "岁",
+      "pinyin": "suì",
+      "note": "Ví dụ: 我今年十岁。 — Năm nay tôi mười tuổi.",
+      "speakText": "岁",
+      "options": [
+        "năm nay",
+        "đắt; quý tộc; quý giá; (lịch sự) của bạn",
+        "lượng từ chỉ năm (tuổi); năm; năm (vụ thu hoạch)",
+        "biến thể erhua của vui vẻ | vui | thú vị | hay ho"
+      ],
+      "answer": "lượng từ chỉ năm (tuổi); năm; năm (vụ thu hoạch)",
+      "exampleHanzi": "我今年十岁。",
+      "exampleVi": "Năm nay tôi mười tuổi."
+    },
+    {
+      "id": "hero-hsk-1-3467-meaning",
+      "vocabularyId": "3467",
+      "sourceIndex": 108,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "好玩儿",
+      "pinyin": "hǎowánr",
+      "note": "Ví dụ: 这个玩具很好玩儿。 — Đồ chơi này rất thú vị để chơi.",
+      "speakText": "好玩儿",
+      "options": [
+        "biến thể erhua của vui vẻ | vui | thú vị | hay ho",
+        "cố tìm; tìm kiếm; gọi ai đó; tìm thấy; tìm kiếm; hoàn trả; thối tiền",
+        "năm nay",
+        "lượng từ chỉ năm (tuổi); năm; năm (vụ thu hoạch)"
+      ],
+      "answer": "biến thể erhua của vui vẻ | vui | thú vị | hay ho",
+      "exampleHanzi": "这个玩具很好玩儿。",
+      "exampleVi": "Đồ chơi này rất thú vị để chơi."
+    },
+    {
+      "id": "hero-hsk-1-3580-meaning",
+      "vocabularyId": "3580",
+      "sourceIndex": 123,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "女儿",
+      "pinyin": "nǚ'ér",
+      "note": "Ví dụ: 我的女儿五岁了。 — Con gái tôi năm tuổi.",
+      "speakText": "女儿",
+      "options": [
+        "con gái",
+        "đắt; quý tộc; quý giá; (lịch sự) của bạn",
+        "lượng từ chỉ năm (tuổi); năm; năm (vụ thu hoạch)",
+        "biến thể erhua của vui vẻ | vui | thú vị | hay ho"
+      ],
+      "answer": "con gái",
+      "exampleHanzi": "我的女儿五岁了。",
+      "exampleVi": "Con gái tôi năm tuổi."
+    },
+    {
+      "id": "hero-hsk-1-4199-meaning",
+      "vocabularyId": "4199",
+      "sourceIndex": 132,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "病",
+      "pinyin": "bìng",
+      "note": "Ví dụ: 他病得很严重。 — Anh ấy đang bị bệnh nặng.",
+      "speakText": "病",
+      "options": [
+        "con gái",
+        "đúng; chính xác; hướng về; tại; cho; liên quan đến; về; đối xử (với ai đó theo cách nhất định); đối diện; (dạng liên kết) đối diện; đối mặt; khớp; khớp với nhau; điều chỉnh; vừa; phù hợp; trả lời; phản hồi; thêm; đổ vào (chất lỏng); kiểm tra; so sánh; lượng từ: cặp; đôi",
+        "bệnh; bệnh tật; bị ốm; khuyết điểm",
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-"
+      ],
+      "answer": "bệnh; bệnh tật; bị ốm; khuyết điểm",
+      "exampleHanzi": "他病得很严重。",
+      "exampleVi": "Anh ấy đang bị bệnh nặng."
+    },
+    {
+      "id": "hero-hsk-1-6271-meaning",
+      "vocabularyId": "6271",
+      "sourceIndex": 157,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "对",
+      "pinyin": "duì",
+      "note": "Ví dụ: 这个答案是对的。 — Câu trả lời này là chính xác.",
+      "speakText": "对",
+      "options": [
+        "đúng; chính xác; hướng về; tại; cho; liên quan đến; về; đối xử (với ai đó theo cách nhất định); đối diện; (dạng liên kết) đối diện; đối mặt; khớp; khớp với nhau; điều chỉnh; vừa; phù hợp; trả lời; phản hồi; thêm; đổ vào (chất lỏng); kiểm tra; so sánh; lượng từ: cặp; đôi",
+        "con gái",
+        "bệnh; bệnh tật; bị ốm; khuyết điểm",
+        "gần như"
+      ],
+      "answer": "đúng; chính xác; hướng về; tại; cho; liên quan đến; về; đối xử (với ai đó theo cách nhất định); đối diện; (dạng liên kết) đối diện; đối mặt; khớp; khớp với nhau; điều chỉnh; vừa; phù hợp; trả lời; phản hồi; thêm; đổ vào (chất lỏng); kiểm tra; so sánh; lượng từ: cặp; đôi",
+      "exampleHanzi": "这个答案是对的。",
+      "exampleVi": "Câu trả lời này là chính xác."
+    },
+    {
+      "id": "hero-hsk-1-6272-meaning",
+      "vocabularyId": "6272",
+      "sourceIndex": 158,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "对",
+      "pinyin": "duì",
+      "note": "Ví dụ: 他对我说话很友好。 — Anh ấy nói chuyện với tôi rất thân thiện.",
+      "speakText": "对",
+      "options": [
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "gần như",
+        "đúng; chính xác; hướng về; tại; cho; liên quan đến; về; đối xử (với ai đó theo cách nhất định); đối diện; (dạng liên kết) đối diện; đối mặt; khớp; khớp với nhau; điều chỉnh; vừa; phù hợp; trả lời; phản hồi; thêm; đổ vào (chất lỏng); kiểm tra; so sánh; lượng từ: cặp; đôi",
+        "nhà; gia đình; (lịch sự) tôi (chị, chú, v.v.); lượng từ cho gia đình hoặc doanh nghiệp; chỉ các trường phái triết học Trung Quốc thời tiền Hán; hậu tố danh từ cho chuyên gia trong một hoạt động nào đó, như nhạc sĩ hoặc cách mạng, tương ứng với -ist, -er, -ary hoặc -ian trong tiếng Anh"
+      ],
+      "answer": "đúng; chính xác; hướng về; tại; cho; liên quan đến; về; đối xử (với ai đó theo cách nhất định); đối diện; (dạng liên kết) đối diện; đối mặt; khớp; khớp với nhau; điều chỉnh; vừa; phù hợp; trả lời; phản hồi; thêm; đổ vào (chất lỏng); kiểm tra; so sánh; lượng từ: cặp; đôi",
+      "exampleHanzi": "他对我说话很友好。",
+      "exampleVi": "Anh ấy nói chuyện với tôi rất thân thiện."
+    },
+    {
+      "id": "hero-hsk-1-6274-meaning",
+      "vocabularyId": "6274",
+      "sourceIndex": 160,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "多",
+      "pinyin": "duō",
+      "note": "Ví dụ: 这里有很多人。 — Có rất nhiều người ở đây.",
+      "speakText": "多",
+      "options": [
+        "đúng; chính xác; hướng về; tại; cho; liên quan đến; về; đối xử (với ai đó theo cách nhất định); đối diện; (dạng liên kết) đối diện; đối mặt; khớp; khớp với nhau; điều chỉnh; vừa; phù hợp; trả lời; phản hồi; thêm; đổ vào (chất lỏng); kiểm tra; so sánh; lượng từ: cặp; đôi",
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "gần như",
+        "nhà; gia đình; (lịch sự) tôi (chị, chú, v.v.); lượng từ cho gia đình hoặc doanh nghiệp; chỉ các trường phái triết học Trung Quốc thời tiền Hán; hậu tố danh từ cho chuyên gia trong một hoạt động nào đó, như nhạc sĩ hoặc cách mạng, tương ứng với -ist, -er, -ary hoặc -ian trong tiếng Anh"
+      ],
+      "answer": "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+      "exampleHanzi": "这里有很多人。",
+      "exampleVi": "Có rất nhiều người ở đây."
+    },
+    {
+      "id": "hero-hsk-1-6617-meaning",
+      "vocabularyId": "6617",
+      "sourceIndex": 161,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "几",
+      "pinyin": "jǐ",
+      "note": "Ví dụ: 你有几本书？ — Bạn có bao nhiêu cuốn sách?",
+      "speakText": "几",
+      "options": [
+        "đúng; chính xác; hướng về; tại; cho; liên quan đến; về; đối xử (với ai đó theo cách nhất định); đối diện; (dạng liên kết) đối diện; đối mặt; khớp; khớp với nhau; điều chỉnh; vừa; phù hợp; trả lời; phản hồi; thêm; đổ vào (chất lỏng); kiểm tra; so sánh; lượng từ: cặp; đôi",
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "nhà; gia đình; (lịch sự) tôi (chị, chú, v.v.); lượng từ cho gia đình hoặc doanh nghiệp; chỉ các trường phái triết học Trung Quốc thời tiền Hán; hậu tố danh từ cho chuyên gia trong một hoạt động nào đó, như nhạc sĩ hoặc cách mạng, tương ứng với -ist, -er, -ary hoặc -ian trong tiếng Anh",
+        "gần như"
+      ],
+      "answer": "gần như",
+      "exampleHanzi": "你有几本书？",
+      "exampleVi": "Bạn có bao nhiêu cuốn sách?"
+    },
+    {
+      "id": "hero-hsk-1-6618-meaning",
+      "vocabularyId": "6618",
+      "sourceIndex": 162,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "几",
+      "pinyin": "jǐ",
+      "note": "Ví dụ: 现在是几点？ — Bây giờ là mấy giờ rồi?",
+      "speakText": "几",
+      "options": [
+        "nhà; gia đình; (lịch sự) tôi (chị, chú, v.v.); lượng từ cho gia đình hoặc doanh nghiệp; chỉ các trường phái triết học Trung Quốc thời tiền Hán; hậu tố danh từ cho chuyên gia trong một hoạt động nào đó, như nhạc sĩ hoặc cách mạng, tương ứng với -ist, -er, -ary hoặc -ian trong tiếng Anh",
+        "gần như",
+        "biến thể không chính thức của liào",
+        "miệng; lượng từ cho những thứ có miệng (người, vật nuôi, pháo, giếng, v.v.); lượng từ cho miếng cắn hoặc ngụm"
+      ],
+      "answer": "gần như",
+      "exampleHanzi": "现在是几点？",
+      "exampleVi": "Bây giờ là mấy giờ rồi?"
+    },
+    {
+      "id": "hero-hsk-1-6619-meaning",
+      "vocabularyId": "6619",
+      "sourceIndex": 163,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "家",
+      "pinyin": "jiā",
+      "note": "Ví dụ: 我家在北京。 — Nhà tôi ở Bắc Kinh.",
+      "speakText": "家",
+      "options": [
+        "gần như",
+        "biến thể không chính thức của liào",
+        "miệng; lượng từ cho những thứ có miệng (người, vật nuôi, pháo, giếng, v.v.); lượng từ cho miếng cắn hoặc ngụm",
+        "nhà; gia đình; (lịch sự) tôi (chị, chú, v.v.); lượng từ cho gia đình hoặc doanh nghiệp; chỉ các trường phái triết học Trung Quốc thời tiền Hán; hậu tố danh từ cho chuyên gia trong một hoạt động nào đó, như nhạc sĩ hoặc cách mạng, tương ứng với -ist, -er, -ary hoặc -ian trong tiếng Anh"
+      ],
+      "answer": "nhà; gia đình; (lịch sự) tôi (chị, chú, v.v.); lượng từ cho gia đình hoặc doanh nghiệp; chỉ các trường phái triết học Trung Quốc thời tiền Hán; hậu tố danh từ cho chuyên gia trong một hoạt động nào đó, như nhạc sĩ hoặc cách mạng, tương ứng với -ist, -er, -ary hoặc -ian trong tiếng Anh",
+      "exampleHanzi": "我家在北京。",
+      "exampleVi": "Nhà tôi ở Bắc Kinh."
+    },
+    {
+      "id": "hero-hsk-1-6620-meaning",
+      "vocabularyId": "6620",
+      "sourceIndex": 164,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "家",
+      "pinyin": "jiā",
+      "note": "Ví dụ: 我买了两家人。 — Tôi đã mua hai gia đình.",
+      "speakText": "家",
+      "options": [
+        "biến thể không chính thức của liào",
+        "nhà; gia đình; (lịch sự) tôi (chị, chú, v.v.); lượng từ cho gia đình hoặc doanh nghiệp; chỉ các trường phái triết học Trung Quốc thời tiền Hán; hậu tố danh từ cho chuyên gia trong một hoạt động nào đó, như nhạc sĩ hoặc cách mạng, tương ứng với -ist, -er, -ary hoặc -ian trong tiếng Anh",
+        "miệng; lượng từ cho những thứ có miệng (người, vật nuôi, pháo, giếng, v.v.); lượng từ cho miếng cắn hoặc ngụm",
+        "có | tồn tại | (dạng liên kết) mang, có, đầy, -ed, -al (như trong yi có chủ đích)"
+      ],
+      "answer": "nhà; gia đình; (lịch sự) tôi (chị, chú, v.v.); lượng từ cho gia đình hoặc doanh nghiệp; chỉ các trường phái triết học Trung Quốc thời tiền Hán; hậu tố danh từ cho chuyên gia trong một hoạt động nào đó, như nhạc sĩ hoặc cách mạng, tương ứng với -ist, -er, -ary hoặc -ian trong tiếng Anh",
+      "exampleHanzi": "我买了两家人。",
+      "exampleVi": "Tôi đã mua hai gia đình."
+    },
+    {
+      "id": "hero-hsk-1-7285-meaning",
+      "vocabularyId": "7285",
+      "sourceIndex": 181,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "了",
+      "pinyin": "le",
+      "note": "Ví dụ: 我吃了早饭。 — Tôi đã ăn sáng.",
+      "speakText": "了",
+      "options": [
+        "miệng; lượng từ cho những thứ có miệng (người, vật nuôi, pháo, giếng, v.v.); lượng từ cho miếng cắn hoặc ngụm",
+        "có | tồn tại | (dạng liên kết) mang, có, đầy, -ed, -al (như trong yi có chủ đích)",
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "biến thể không chính thức của liào"
+      ],
+      "answer": "biến thể không chính thức của liào",
+      "exampleHanzi": "我吃了早饭。",
+      "exampleVi": "Tôi đã ăn sáng."
+    },
+    {
+      "id": "hero-hsk-1-8170-meaning",
+      "vocabularyId": "8170",
+      "sourceIndex": 210,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "口",
+      "pinyin": "kǒu",
+      "note": "Ví dụ: 他有一张大嘴巴。 — Anh ta có một cái miệng lớn.",
+      "speakText": "口",
+      "options": [
+        "biến thể không chính thức của liào",
+        "miệng; lượng từ cho những thứ có miệng (người, vật nuôi, pháo, giếng, v.v.); lượng từ cho miếng cắn hoặc ngụm",
+        "có | tồn tại | (dạng liên kết) mang, có, đầy, -ed, -al (như trong yi có chủ đích)",
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-"
+      ],
+      "answer": "miệng; lượng từ cho những thứ có miệng (người, vật nuôi, pháo, giếng, v.v.); lượng từ cho miếng cắn hoặc ngụm",
+      "exampleHanzi": "他有一张大嘴巴。",
+      "exampleVi": "Anh ta có một cái miệng lớn."
+    },
+    {
+      "id": "hero-hsk-1-8171-meaning",
+      "vocabularyId": "8171",
+      "sourceIndex": 211,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "口",
+      "pinyin": "kǒu",
+      "note": "Ví dụ: 我喝了一口水。 — Tôi uống một ngụm nước.",
+      "speakText": "口",
+      "options": [
+        "có | tồn tại | (dạng liên kết) mang, có, đầy, -ed, -al (như trong yi có chủ đích)",
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "lớn | to | vĩ đại | anh cả | rất | tự do | (miệng) cha | (miệng) chú (anh của cha)",
+        "miệng; lượng từ cho những thứ có miệng (người, vật nuôi, pháo, giếng, v.v.); lượng từ cho miếng cắn hoặc ngụm"
+      ],
+      "answer": "miệng; lượng từ cho những thứ có miệng (người, vật nuôi, pháo, giếng, v.v.); lượng từ cho miếng cắn hoặc ngụm",
+      "exampleHanzi": "我喝了一口水。",
+      "exampleVi": "Tôi uống một ngụm nước."
+    },
+    {
+      "id": "hero-hsk-1-9139-meaning",
+      "vocabularyId": "9139",
+      "sourceIndex": 247,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "有",
+      "pinyin": "yǒu",
+      "note": "Ví dụ: 我有一本书。 — Tôi có một cuốn sách.",
+      "speakText": "有",
+      "options": [
+        "có | tồn tại | (dạng liên kết) mang, có, đầy, -ed, -al (như trong yi có chủ đích)",
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "lớn | to | vĩ đại | anh cả | rất | tự do | (miệng) cha | (miệng) chú (anh của cha)",
+        "mọi người; gia đình có thế lực; chuyên gia lớn"
+      ],
+      "answer": "có | tồn tại | (dạng liên kết) mang, có, đầy, -ed, -al (như trong yi có chủ đích)",
+      "exampleHanzi": "我有一本书。",
+      "exampleVi": "Tôi có một cuốn sách."
+    },
+    {
+      "id": "hero-hsk-1-9225-meaning",
+      "vocabularyId": "9225",
+      "sourceIndex": 261,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "多",
+      "pinyin": "duō",
+      "note": "Ví dụ: 你多大了？ — Bạn bao nhiêu tuổi?",
+      "speakText": "多",
+      "options": [
+        "có | tồn tại | (dạng liên kết) mang, có, đầy, -ed, -al (như trong yi có chủ đích)",
+        "lớn | to | vĩ đại | anh cả | rất | tự do | (miệng) cha | (miệng) chú (anh của cha)",
+        "em gái; phụ nữ trẻ",
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-"
+      ],
+      "answer": "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+      "exampleHanzi": "你多大了？",
+      "exampleVi": "Bạn bao nhiêu tuổi?"
+    },
+    {
+      "id": "hero-hsk-1-10612-meaning",
+      "vocabularyId": "10612",
+      "sourceIndex": 278,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "大",
+      "pinyin": "dà",
+      "note": "Ví dụ: 这个苹果很大。 — Quả táo này rất to.",
+      "speakText": "大",
+      "options": [
+        "mọi người; gia đình có thế lực; chuyên gia lớn",
+        "lớn | to | vĩ đại | anh cả | rất | tự do | (miệng) cha | (miệng) chú (anh của cha)",
+        "em gái; phụ nữ trẻ",
+        "đắt; quý tộc; quý giá; (lịch sự) của bạn"
+      ],
+      "answer": "lớn | to | vĩ đại | anh cả | rất | tự do | (miệng) cha | (miệng) chú (anh của cha)",
+      "exampleHanzi": "这个苹果很大。",
+      "exampleVi": "Quả táo này rất to."
+    },
+    {
+      "id": "hero-hsk-1-10614-meaning",
+      "vocabularyId": "10614",
+      "sourceIndex": 280,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "大家",
+      "pinyin": "dàjiā",
+      "note": "Ví dụ: 大家好！ — Xin chào tất cả mọi người!",
+      "speakText": "大家",
+      "options": [
+        "mọi người; gia đình có thế lực; chuyên gia lớn",
+        "em gái; phụ nữ trẻ",
+        "gần như",
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-"
+      ],
+      "answer": "mọi người; gia đình có thế lực; chuyên gia lớn",
+      "exampleHanzi": "大家好！",
+      "exampleVi": "Xin chào tất cả mọi người!"
+    },
+    {
+      "id": "hero-hsk-1-10959-meaning",
+      "vocabularyId": "10959",
+      "sourceIndex": 285,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "妹妹",
+      "pinyin": "mèimei",
+      "note": "Ví dụ: 我的妹妹很可爱。 — Em gái tôi rất dễ thương.",
+      "speakText": "妹妹",
+      "options": [
+        "năm nay",
+        "con gái",
+        "em gái; phụ nữ trẻ",
+        "nhà; gia đình; (lịch sự) tôi (chị, chú, v.v.); lượng từ cho gia đình hoặc doanh nghiệp; chỉ các trường phái triết học Trung Quốc thời tiền Hán; hậu tố danh từ cho chuyên gia trong một hoạt động nào đó, như nhạc sĩ hoặc cách mạng, tương ứng với -ist, -er, -ary hoặc -ian trong tiếng Anh"
+      ],
+      "answer": "em gái; phụ nữ trẻ",
+      "exampleHanzi": "我的妹妹很可爱。",
+      "exampleVi": "Em gái tôi rất dễ thương."
+    }
+  ]
+}

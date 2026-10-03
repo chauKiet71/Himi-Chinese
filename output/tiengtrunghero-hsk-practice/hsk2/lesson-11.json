@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-11",
+  "lessonNumber": 11,
+  "lessonTitle": "Anh ấy lớn hơn mình ba tuổi.",
+  "topicId": "so-sanh-trang-thai-trai-nghiem",
+  "topicTitle": "So sánh, trạng thái & trải nghiệm",
+  "route": "/hsk/2/hsk2-tb-lesson-11/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-1750-meaning",
+      "vocabularyId": "1750",
+      "sourceIndex": 14,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "左",
+      "pinyin": "zuǒ",
+      "note": "Ví dụ: 请向左转。 — Vui lòng rẽ trái.",
+      "speakText": "左",
+      "options": [
+        "họ Hoa",
+        "có thể; khả năng; có lẽ; có thể xảy ra",
+        "họ Tả",
+        "cặp sách; cặp sách học sinh; túi đựng sách"
+      ],
+      "answer": "họ Tả",
+      "exampleHanzi": "请向左转。",
+      "exampleVi": "Vui lòng rẽ trái."
+    },
+    {
+      "id": "hero-hsk-2-2451-meaning",
+      "vocabularyId": "2451",
+      "sourceIndex": 23,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "从小",
+      "pinyin": "cóngxiǎo",
+      "note": "Ví dụ: 他从小学习汉语。 — Anh ấy đã học tiếng Trung từ khi còn nhỏ.",
+      "speakText": "从小",
+      "options": [
+        "từ nhỏ; từ khi còn trẻ",
+        "họ Hoa",
+        "Bỉ | người Bỉ | viết tắt của Bỉ",
+        "có thể; khả năng; có lẽ; có thể xảy ra"
+      ],
+      "answer": "từ nhỏ; từ khi còn trẻ",
+      "exampleHanzi": "他从小学习汉语。",
+      "exampleVi": "Anh ấy đã học tiếng Trung từ khi còn nhỏ."
+    },
+    {
+      "id": "hero-hsk-2-2710-meaning",
+      "vocabularyId": "2710",
+      "sourceIndex": 29,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "花",
+      "pinyin": "huā",
+      "note": "Ví dụ: 花园里有很多花。 — Có rất nhiều hoa trong vườn.",
+      "speakText": "花",
+      "options": [
+        "cặp sách; cặp sách học sinh; túi đựng sách",
+        "bé trai",
+        "bên phải; bên phải, về phía phải",
+        "họ Hoa"
+      ],
+      "answer": "họ Hoa",
+      "exampleHanzi": "花园里有很多花。",
+      "exampleVi": "Có rất nhiều hoa trong vườn."
+    },
+    {
+      "id": "hero-hsk-2-3766-meaning",
+      "vocabularyId": "3766",
+      "sourceIndex": 37,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "比",
+      "pinyin": "bǐ",
+      "note": "Ví dụ: 我比他大两岁。 — Tôi hơn anh ấy hai tuổi.",
+      "speakText": "比",
+      "options": [
+        "Bỉ | người Bỉ | viết tắt của Bỉ",
+        "có thể; khả năng; có lẽ; có thể xảy ra",
+        "cặp sách; cặp sách học sinh; túi đựng sách",
+        "bé trai"
+      ],
+      "answer": "Bỉ | người Bỉ | viết tắt của Bỉ",
+      "exampleHanzi": "我比他大两岁。",
+      "exampleVi": "Tôi hơn anh ấy hai tuổi."
+    },
+    {
+      "id": "hero-hsk-2-5106-meaning",
+      "vocabularyId": "5106",
+      "sourceIndex": 57,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "可能",
+      "pinyin": "kěnéng",
+      "note": "Ví dụ: 有这种可能。 — Có khả năng này.",
+      "speakText": "可能",
+      "options": [
+        "bên phải; bên phải, về phía phải",
+        "có thể; khả năng; có lẽ; có thể xảy ra",
+        "bên trong; nội bộ; cũng đọc là [lǐ mian]",
+        "họ; họ tên; mang họ"
+      ],
+      "answer": "có thể; khả năng; có lẽ; có thể xảy ra",
+      "exampleHanzi": "有这种可能。",
+      "exampleVi": "Có khả năng này."
+    },
+    {
+      "id": "hero-hsk-2-5107-meaning",
+      "vocabularyId": "5107",
+      "sourceIndex": 58,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "可能",
+      "pinyin": "kěnéng",
+      "note": "Ví dụ: 他可能来。 — Anh ấy có thể đến.",
+      "speakText": "可能",
+      "options": [
+        "Bỉ | người Bỉ | viết tắt của Bỉ",
+        "cặp sách; cặp sách học sinh; túi đựng sách",
+        "bé trai",
+        "có thể; khả năng; có lẽ; có thể xảy ra"
+      ],
+      "answer": "có thể; khả năng; có lẽ; có thể xảy ra",
+      "exampleHanzi": "他可能来。",
+      "exampleVi": "Anh ấy có thể đến."
+    },
+    {
+      "id": "hero-hsk-2-5474-meaning",
+      "vocabularyId": "5474",
+      "sourceIndex": 73,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "书包",
+      "pinyin": "shūbāo",
+      "note": "Ví dụ: 我的书包很重。 — Cặp đi học của tôi rất nặng.",
+      "speakText": "书包",
+      "options": [
+        "họ; họ tên; mang họ",
+        "từ nhỏ; từ khi còn trẻ",
+        "Bỉ | người Bỉ | viết tắt của Bỉ",
+        "cặp sách; cặp sách học sinh; túi đựng sách"
+      ],
+      "answer": "cặp sách; cặp sách học sinh; túi đựng sách",
+      "exampleHanzi": "我的书包很重。",
+      "exampleVi": "Cặp đi học của tôi rất nặng."
+    },
+    {
+      "id": "hero-hsk-2-5604-meaning",
+      "vocabularyId": "5604",
+      "sourceIndex": 86,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "可能",
+      "pinyin": "kěnéng",
+      "note": "Ví dụ: 这个想法可能对。 — Ý tưởng này có thể đúng.",
+      "speakText": "可能",
+      "options": [
+        "bé trai",
+        "có thể; khả năng; có lẽ; có thể xảy ra",
+        "Bỉ | người Bỉ | viết tắt của Bỉ",
+        "bên phải; bên phải, về phía phải"
+      ],
+      "answer": "có thể; khả năng; có lẽ; có thể xảy ra",
+      "exampleHanzi": "这个想法可能对。",
+      "exampleVi": "Ý tưởng này có thể đúng."
+    },
+    {
+      "id": "hero-hsk-2-6109-meaning",
+      "vocabularyId": "6109",
+      "sourceIndex": 97,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "男孩儿",
+      "pinyin": "nánháir",
+      "note": "Ví dụ: 这个男孩儿很聪明。 — Cậu bé này rất thông minh.",
+      "speakText": "男孩儿",
+      "options": [
+        "Bỉ | người Bỉ | viết tắt của Bỉ",
+        "bé trai",
+        "có thể; khả năng; có lẽ; có thể xảy ra",
+        "họ; họ tên; mang họ"
+      ],
+      "answer": "bé trai",
+      "exampleHanzi": "这个男孩儿很聪明。",
+      "exampleVi": "Cậu bé này rất thông minh."
+    },
+    {
+      "id": "hero-hsk-2-7916-meaning",
+      "vocabularyId": "7916",
+      "sourceIndex": 134,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "比",
+      "pinyin": "bǐ",
+      "note": "Ví dụ: 我比他高。 — Tôi cao hơn anh ấy.",
+      "speakText": "比",
+      "options": [
+        "bé trai",
+        "bên phải; bên phải, về phía phải",
+        "bên trong; nội bộ; cũng đọc là [lǐ mian]",
+        "Bỉ | người Bỉ | viết tắt của Bỉ"
+      ],
+      "answer": "Bỉ | người Bỉ | viết tắt của Bỉ",
+      "exampleHanzi": "我比他高。",
+      "exampleVi": "Tôi cao hơn anh ấy."
+    },
+    {
+      "id": "hero-hsk-2-8843-meaning",
+      "vocabularyId": "8843",
+      "sourceIndex": 151,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "右边",
+      "pinyin": "yòubian",
+      "note": "Ví dụ: 请坐右边。 — Xin vui lòng ngồi ở phía bên phải.",
+      "speakText": "右边",
+      "options": [
+        "có thể; khả năng; có lẽ; có thể xảy ra",
+        "bên phải; bên phải, về phía phải",
+        "Bỉ | người Bỉ | viết tắt của Bỉ",
+        "họ; họ tên; mang họ"
+      ],
+      "answer": "bên phải; bên phải, về phía phải",
+      "exampleHanzi": "请坐右边。",
+      "exampleVi": "Xin vui lòng ngồi ở phía bên phải."
+    },
+    {
+      "id": "hero-hsk-2-9628-meaning",
+      "vocabularyId": "9628",
+      "sourceIndex": 154,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "里面",
+      "pinyin": "lǐmiàn",
+      "note": "Ví dụ: 书在盒子里。 — Cuốn sách nằm trong hộp.",
+      "speakText": "里面",
+      "options": [
+        "Bỉ | người Bỉ | viết tắt của Bỉ",
+        "bên trong; nội bộ; cũng đọc là [lǐ mian]",
+        "họ; họ tên; mang họ",
+        "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)"
+      ],
+      "answer": "bên trong; nội bộ; cũng đọc là [lǐ mian]",
+      "exampleHanzi": "书在盒子里。",
+      "exampleVi": "Cuốn sách nằm trong hộp."
+    },
+    {
+      "id": "hero-hsk-2-11383-meaning",
+      "vocabularyId": "11383",
+      "sourceIndex": 215,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "姓",
+      "pinyin": "xìng",
+      "note": "Ví dụ: 我的姓是李。 — Họ của tôi là Lý.",
+      "speakText": "姓",
+      "options": [
+        "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)",
+        "họ Tả",
+        "họ Hoa",
+        "họ; họ tên; mang họ"
+      ],
+      "answer": "họ; họ tên; mang họ",
+      "exampleHanzi": "我的姓是李。",
+      "exampleVi": "Họ của tôi là Lý."
+    },
+    {
+      "id": "hero-hsk-2-11384-meaning",
+      "vocabularyId": "11384",
+      "sourceIndex": 216,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "姓",
+      "pinyin": "xìng",
+      "note": "Ví dụ: 他姓王。 — Anh ấy họ Vương.",
+      "speakText": "姓",
+      "options": [
+        "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)",
+        "họ; họ tên; mang họ",
+        "có thể; khả năng; có lẽ; có thể xảy ra",
+        "Bỉ | người Bỉ | viết tắt của Bỉ"
+      ],
+      "answer": "họ; họ tên; mang họ",
+      "exampleHanzi": "他姓王。",
+      "exampleVi": "Anh ấy họ Vương."
+    },
+    {
+      "id": "hero-hsk-2-11824-meaning",
+      "vocabularyId": "11824",
+      "sourceIndex": 224,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "跟",
+      "pinyin": "gēn",
+      "note": "Ví dụ: 你跟他一样高。 — Bạn cao bằng anh ấy.",
+      "speakText": "跟",
+      "options": [
+        "họ Tả",
+        "từ nhỏ; từ khi còn trẻ",
+        "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)",
+        "họ Hoa"
+      ],
+      "answer": "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)",
+      "exampleHanzi": "你跟他一样高。",
+      "exampleVi": "Bạn cao bằng anh ấy."
+    }
+  ]
+}

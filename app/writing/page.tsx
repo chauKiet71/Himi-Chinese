@@ -27,7 +27,6 @@ export default function WritingPage() {
         <div>
           <h2 id="writing-topic-heading">Bài luyện viết theo HSK</h2>
         </div>
-        <p>Chọn cấp độ rồi vào đúng bài đang học. Mỗi bài đều có xem nét, tô theo và tự viết.</p>
       </div>
 
       <div className="writing-topic-grid">

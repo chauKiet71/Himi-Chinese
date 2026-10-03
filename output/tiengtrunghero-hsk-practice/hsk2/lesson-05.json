@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-05",
+  "lessonNumber": 5,
+  "lessonTitle": "Mua chiếc áo này đi.",
+  "topicId": "du-lich-cong-viec-mua-sam",
+  "topicTitle": "Du lịch, công việc & mua sắm",
+  "route": "/hsk/2/hsk2-tb-lesson-05/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-1745-meaning",
+      "vocabularyId": "1745",
+      "sourceIndex": 9,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "准备",
+      "pinyin": "zhǔnbèi",
+      "note": "Ví dụ: 我准备去学校。 — Tôi đang chuẩn bị đi học.",
+      "speakText": "准备",
+      "options": [
+        "đi ra | đi ra ngoài | xảy ra | sản xuất | vượt ra | mọc lên | đưa ra | diễn ra | (dùng sau động từ chỉ hướng ra hoặc kết quả tích cực) | lượng từ cho kịch, vở",
+        "sự chuẩn bị; chuẩn bị; dự định; sắp sửa; dự trữ (quỹ)",
+        "đi lên",
+        "kiểm tra; xác minh; thử nghiệm; khảo sát; dự thi; dự thi tuyển; cha đã mất"
+      ],
+      "answer": "sự chuẩn bị; chuẩn bị; dự định; sắp sửa; dự trữ (quỹ)",
+      "exampleHanzi": "我准备去学校。",
+      "exampleVi": "Tôi đang chuẩn bị đi học."
+    },
+    {
+      "id": "hero-hsk-2-2711-meaning",
+      "vocabularyId": "2711",
+      "sourceIndex": 30,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "坏",
+      "pinyin": "huài",
+      "note": "Ví dụ: 这个苹果坏了。 — Quả táo này tệ quá.",
+      "speakText": "坏",
+      "options": [
+        "sự chuẩn bị; chuẩn bị; dự định; sắp sửa; dự trữ (quỹ)",
+        "đi ra | đi ra ngoài | xảy ra | sản xuất | vượt ra | mọc lên | đưa ra | diễn ra | (dùng sau động từ chỉ hướng ra hoặc kết quả tích cực) | lượng từ cho kịch, vở",
+        "đi lên",
+        "tệ; hỏng; gãy; bị hỏng; (hậu tố) đến mức tột cùng"
+      ],
+      "answer": "tệ; hỏng; gãy; bị hỏng; (hậu tố) đến mức tột cùng",
+      "exampleHanzi": "这个苹果坏了。",
+      "exampleVi": "Quả táo này tệ quá."
+    },
+    {
+      "id": "hero-hsk-2-3770-meaning",
+      "vocabularyId": "3770",
+      "sourceIndex": 41,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "不错",
+      "pinyin": "búcuò",
+      "note": "Ví dụ: 这家餐厅的菜很不错。 — Đồ ăn ở nhà hàng này khá ngon.",
+      "speakText": "不错",
+      "options": [
+        "đi ra | đi ra ngoài | xảy ra | sản xuất | vượt ra | mọc lên | đưa ra | diễn ra | (dùng sau động từ chỉ hướng ra hoặc kết quả tích cực) | lượng từ cho kịch, vở",
+        "đi lên",
+        "nhàm chán; không thú vị",
+        "đúng; phải; không tệ; khá tốt"
+      ],
+      "answer": "đúng; phải; không tệ; khá tốt",
+      "exampleHanzi": "这家餐厅的菜很不错。",
+      "exampleVi": "Đồ ăn ở nhà hàng này khá ngon."
+    },
+    {
+      "id": "hero-hsk-2-3773-meaning",
+      "vocabularyId": "3773",
+      "sourceIndex": 44,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "出",
+      "pinyin": "chū",
+      "note": "Ví dụ: 我出门买菜。 — Tôi ra ngoài mua rau.",
+      "speakText": "出",
+      "options": [
+        "dự thi; kỳ thi",
+        "tệ; hỏng; gãy; bị hỏng; (hậu tố) đến mức tột cùng",
+        "đúng; phải; không tệ; khá tốt",
+        "đi ra | đi ra ngoài | xảy ra | sản xuất | vượt ra | mọc lên | đưa ra | diễn ra | (dùng sau động từ chỉ hướng ra hoặc kết quả tích cực) | lượng từ cho kịch, vở"
+      ],
+      "answer": "đi ra | đi ra ngoài | xảy ra | sản xuất | vượt ra | mọc lên | đưa ra | diễn ra | (dùng sau động từ chỉ hướng ra hoặc kết quả tích cực) | lượng từ cho kịch, vở",
+      "exampleHanzi": "我出门买菜。",
+      "exampleVi": "Tôi ra ngoài mua rau."
+    },
+    {
+      "id": "hero-hsk-2-3816-meaning",
+      "vocabularyId": "3816",
+      "sourceIndex": 45,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "上去",
+      "pinyin": "shàngqù",
+      "note": "Ví dụ: 我们上去看看。 — Chúng ta hãy đi lên và nhìn xem.",
+      "speakText": "上去",
+      "options": [
+        "tệ; hỏng; gãy; bị hỏng; (hậu tố) đến mức tột cùng",
+        "đi lên",
+        "đúng; phải; không tệ; khá tốt",
+        "nhàm chán; không thú vị"
+      ],
+      "answer": "đi lên",
+      "exampleHanzi": "我们上去看看。",
+      "exampleVi": "Chúng ta hãy đi lên và nhìn xem."
+    },
+    {
+      "id": "hero-hsk-2-5206-meaning",
+      "vocabularyId": "5206",
+      "sourceIndex": 65,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "没意思",
+      "pinyin": "méi yìsi",
+      "note": "Ví dụ: 这部电影没意思。 — Phim này chán quá.",
+      "speakText": "没意思",
+      "options": [
+        "trong trường hợp đó; vậy thì | ngay khi; ngay sau khi | chỉ | chỉ bao nhiêu đó | nhiều đến mức; nhiều đến chừng nào | tiến tới; tiến về phía | đảm nhận; tham gia | nhân tiện | (về đồ ăn) ăn cùng | liên quan đến; về phần | (mẫu: ... ... ... ... ) dù ... vẫn ... | (mẫu: ... ... ) nếu không ... thì phải ...",
+        "cà phê (từ vay mượn)",
+        "nhàm chán; không thú vị",
+        "kiểm tra; xác minh; thử nghiệm; khảo sát; dự thi; dự thi tuyển; cha đã mất"
+      ],
+      "answer": "nhàm chán; không thú vị",
+      "exampleHanzi": "这部电影没意思。",
+      "exampleVi": "Phim này chán quá."
+    },
+    {
+      "id": "hero-hsk-2-5595-meaning",
+      "vocabularyId": "5595",
+      "sourceIndex": 77,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "就",
+      "pinyin": "jiù",
+      "note": "Ví dụ: 我就去。 — Tôi sẽ đi ngay.",
+      "speakText": "就",
+      "options": [
+        "cà phê (từ vay mượn)",
+        "kiểm tra; xác minh; thử nghiệm; khảo sát; dự thi; dự thi tuyển; cha đã mất",
+        "dự thi; kỳ thi",
+        "trong trường hợp đó; vậy thì | ngay khi; ngay sau khi | chỉ | chỉ bao nhiêu đó | nhiều đến mức; nhiều đến chừng nào | tiến tới; tiến về phía | đảm nhận; tham gia | nhân tiện | (về đồ ăn) ăn cùng | liên quan đến; về phần | (mẫu: ... ... ... ... ) dù ... vẫn ... | (mẫu: ... ... ) nếu không ... thì phải ..."
+      ],
+      "answer": "trong trường hợp đó; vậy thì | ngay khi; ngay sau khi | chỉ | chỉ bao nhiêu đó | nhiều đến mức; nhiều đến chừng nào | tiến tới; tiến về phía | đảm nhận; tham gia | nhân tiện | (về đồ ăn) ăn cùng | liên quan đến; về phần | (mẫu: ... ... ... ... ) dù ... vẫn ... | (mẫu: ... ... ) nếu không ... thì phải ...",
+      "exampleHanzi": "我就去。",
+      "exampleVi": "Tôi sẽ đi ngay."
+    },
+    {
+      "id": "hero-hsk-2-5597-meaning",
+      "vocabularyId": "5597",
+      "sourceIndex": 79,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "咖啡",
+      "pinyin": "kāfēi",
+      "note": "Ví dụ: 我喝咖啡。 — Tôi uống cà phê.",
+      "speakText": "咖啡",
+      "options": [
+        "đúng; phải; không tệ; khá tốt",
+        "đi ra | đi ra ngoài | xảy ra | sản xuất | vượt ra | mọc lên | đưa ra | diễn ra | (dùng sau động từ chỉ hướng ra hoặc kết quả tích cực) | lượng từ cho kịch, vở",
+        "cà phê (từ vay mượn)",
+        "đi lên"
+      ],
+      "answer": "cà phê (từ vay mượn)",
+      "exampleHanzi": "我喝咖啡。",
+      "exampleVi": "Tôi uống cà phê."
+    },
+    {
+      "id": "hero-hsk-2-5601-meaning",
+      "vocabularyId": "5601",
+      "sourceIndex": 83,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "考",
+      "pinyin": "kǎo",
+      "note": "Ví dụ: 我要考试。 — Tôi sắp đi thi.",
+      "speakText": "考",
+      "options": [
+        "cà phê (từ vay mượn)",
+        "dự thi; kỳ thi",
+        "họ Yu",
+        "kiểm tra; xác minh; thử nghiệm; khảo sát; dự thi; dự thi tuyển; cha đã mất"
+      ],
+      "answer": "kiểm tra; xác minh; thử nghiệm; khảo sát; dự thi; dự thi tuyển; cha đã mất",
+      "exampleHanzi": "我要考试。",
+      "exampleVi": "Tôi sắp đi thi."
+    },
+    {
+      "id": "hero-hsk-2-5602-meaning",
+      "vocabularyId": "5602",
+      "sourceIndex": 84,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "考试",
+      "pinyin": "kǎoshì",
+      "note": "Ví dụ: 我明天考试。 — Ngày mai tôi có bài kiểm tra.",
+      "speakText": "考试",
+      "options": [
+        "họ Yu",
+        "dự thi; kỳ thi",
+        "bên ngoài (cũng đọc [wài mian] cho nghĩa này); bề mặt; bên ngoài; ngoại hình",
+        "ý nghĩa; ý tưởng; quan điểm; mong muốn; ham muốn; sở thích; niềm vui; vật biểu thị sự biết ơn, tình cảm v.v.; tặng làm quà nhỏ; làm gì đó như một cử chỉ thiện chí v.v."
+      ],
+      "answer": "dự thi; kỳ thi",
+      "exampleHanzi": "我明天考试。",
+      "exampleVi": "Ngày mai tôi có bài kiểm tra."
+    },
+    {
+      "id": "hero-hsk-2-5603-meaning",
+      "vocabularyId": "5603",
+      "sourceIndex": 85,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "考试",
+      "pinyin": "kǎoshì",
+      "note": "Ví dụ: hskmocktest.com是一个汉语水平模拟考试平台 — hskmocktest.com là một nền tảng thi thử trình độ tiếng Trung.",
+      "speakText": "考试",
+      "options": [
+        "nhàm chán; không thú vị",
+        "trong trường hợp đó; vậy thì | ngay khi; ngay sau khi | chỉ | chỉ bao nhiêu đó | nhiều đến mức; nhiều đến chừng nào | tiến tới; tiến về phía | đảm nhận; tham gia | nhân tiện | (về đồ ăn) ăn cùng | liên quan đến; về phần | (mẫu: ... ... ... ... ) dù ... vẫn ... | (mẫu: ... ... ) nếu không ... thì phải ...",
+        "kiểm tra; xác minh; thử nghiệm; khảo sát; dự thi; dự thi tuyển; cha đã mất",
+        "dự thi; kỳ thi"
+      ],
+      "answer": "dự thi; kỳ thi",
+      "exampleHanzi": "hskmocktest.com是一个汉语水平模拟考试平台",
+      "exampleVi": "hskmocktest.com là một nền tảng thi thử trình độ tiếng Trung."
+    },
+    {
+      "id": "hero-hsk-2-6516-meaning",
+      "vocabularyId": "6516",
+      "sourceIndex": 104,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "鱼",
+      "pinyin": "yú",
+      "note": "Ví dụ: 鱼在水里游。 — Cá bơi trong nước.",
+      "speakText": "鱼",
+      "options": [
+        "trong trường hợp đó; vậy thì | ngay khi; ngay sau khi | chỉ | chỉ bao nhiêu đó | nhiều đến mức; nhiều đến chừng nào | tiến tới; tiến về phía | đảm nhận; tham gia | nhân tiện | (về đồ ăn) ăn cùng | liên quan đến; về phần | (mẫu: ... ... ... ... ) dù ... vẫn ... | (mẫu: ... ... ) nếu không ... thì phải ...",
+        "kiểm tra; xác minh; thử nghiệm; khảo sát; dự thi; dự thi tuyển; cha đã mất",
+        "dự thi; kỳ thi",
+        "họ Yu"
+      ],
+      "answer": "họ Yu",
+      "exampleHanzi": "鱼在水里游。",
+      "exampleVi": "Cá bơi trong nước."
+    },
+    {
+      "id": "hero-hsk-2-6717-meaning",
+      "vocabularyId": "6717",
+      "sourceIndex": 105,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "外面",
+      "pinyin": "wàimiàn",
+      "note": "Ví dụ: 外面很冷。 — Bên ngoài trời rất lạnh.",
+      "speakText": "外面",
+      "options": [
+        "kiểm tra; xác minh; thử nghiệm; khảo sát; dự thi; dự thi tuyển; cha đã mất",
+        "bên ngoài (cũng đọc [wài mian] cho nghĩa này); bề mặt; bên ngoài; ngoại hình",
+        "dự thi; kỳ thi",
+        "cà phê (từ vay mượn)"
+      ],
+      "answer": "bên ngoài (cũng đọc [wài mian] cho nghĩa này); bề mặt; bên ngoài; ngoại hình",
+      "exampleHanzi": "外面很冷。",
+      "exampleVi": "Bên ngoài trời rất lạnh."
+    },
+    {
+      "id": "hero-hsk-2-8839-meaning",
+      "vocabularyId": "8839",
+      "sourceIndex": 147,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "意思",
+      "pinyin": "yìsi",
+      "note": "Ví dụ: 我不明白你的意思。 — Tôi không hiểu ý của bạn.",
+      "speakText": "意思",
+      "options": [
+        "ý nghĩa; ý tưởng; quan điểm; mong muốn; ham muốn; sở thích; niềm vui; vật biểu thị sự biết ơn, tình cảm v.v.; tặng làm quà nhỏ; làm gì đó như một cử chỉ thiện chí v.v.",
+        "dự thi; kỳ thi",
+        "cà phê (từ vay mượn)",
+        "họ Yu"
+      ],
+      "answer": "ý nghĩa; ý tưởng; quan điểm; mong muốn; ham muốn; sở thích; niềm vui; vật biểu thị sự biết ơn, tình cảm v.v.; tặng làm quà nhỏ; làm gì đó như một cử chỉ thiện chí v.v.",
+      "exampleHanzi": "我不明白你的意思。",
+      "exampleVi": "Tôi không hiểu ý của bạn."
+    },
+    {
+      "id": "hero-hsk-2-11817-meaning",
+      "vocabularyId": "11817",
+      "sourceIndex": 217,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "饭馆",
+      "pinyin": "fànguǎn",
+      "note": "Ví dụ: 我们去饭馆吃饭吧。 — Chúng ta hãy đến nhà hàng để ăn.",
+      "speakText": "饭馆",
+      "options": [
+        "cà phê (từ vay mượn)",
+        "dự thi; kỳ thi",
+        "họ Yu",
+        "nhà hàng"
+      ],
+      "answer": "nhà hàng",
+      "exampleHanzi": "我们去饭馆吃饭吧。",
+      "exampleVi": "Chúng ta hãy đến nhà hàng để ăn."
+    }
+  ]
+}

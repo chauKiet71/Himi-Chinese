@@ -1,0 +1,462 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-13-anh-ay-dang-hoc-nau-mon-trung-quoc",
+  "lessonNumber": 13,
+  "lessonTitle": "Anh ấy đang học nấu món ăn Trung Quốc.",
+  "topicId": "thoi-gian-hoat-dong",
+  "topicTitle": "Thời gian & Hoạt động",
+  "route": "/hsk/1/hsk1-bai-13-anh-ay-dang-hoc-nau-mon-trung-quoc/play",
+  "vocabularyCount": 21,
+  "exerciseCount": 21,
+  "typeCounts": {
+    "meaning": 21,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-868-meaning",
+      "vocabularyId": "868",
+      "sourceIndex": 18,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "哪些",
+      "pinyin": "nǎxiē",
+      "note": "Ví dụ: 哪些是你喜欢的书？ — Bạn thích những cuốn sách nào?",
+      "speakText": "哪些",
+      "options": [
+        "(có) một số (người...); một số (tồn tại)",
+        "cho ăn",
+        "những cái nào?; ai?; cái gì?",
+        "điện thoại; cuộc gọi điện thoại; số điện thoại"
+      ],
+      "answer": "những cái nào?; ai?; cái gì?",
+      "exampleHanzi": "哪些是你喜欢的书？",
+      "exampleVi": "Bạn thích những cuốn sách nào?"
+    },
+    {
+      "id": "hero-hsk-1-967-meaning",
+      "vocabularyId": "967",
+      "sourceIndex": 25,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "喂",
+      "pinyin": "wèi",
+      "note": "Ví dụ: 喂，你好！ — Xin chào!",
+      "speakText": "喂",
+      "options": [
+        "điện thoại; cuộc gọi điện thoại; số điện thoại",
+        "truyền hình; TV",
+        "cho ăn",
+        "(trợ từ tình thái biểu thị lời đề nghị hoặc suy đoán); ...phải không?; ...được không?; ...tôi đoán vậy."
+      ],
+      "answer": "cho ăn",
+      "exampleHanzi": "喂，你好！",
+      "exampleVi": "Xin chào!"
+    },
+    {
+      "id": "hero-hsk-1-978-meaning",
+      "vocabularyId": "978",
+      "sourceIndex": 34,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "电话",
+      "pinyin": "diànhuà",
+      "note": "Ví dụ: 我的电话号码是多少？ — Số điện thoại của tôi là gì?",
+      "speakText": "电话",
+      "options": [
+        "điện thoại; cuộc gọi điện thoại; số điện thoại",
+        "bài hát | hát",
+        "bánh bao; bánh gối",
+        "buổi sáng"
+      ],
+      "answer": "điện thoại; cuộc gọi điện thoại; số điện thoại",
+      "exampleHanzi": "我的电话号码是多少？",
+      "exampleVi": "Số điện thoại của tôi là gì?"
+    },
+    {
+      "id": "hero-hsk-1-980-meaning",
+      "vocabularyId": "980",
+      "sourceIndex": 36,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "电视",
+      "pinyin": "diànshì",
+      "note": "Ví dụ: 我们一起看电视吧。 — Chúng ta hãy cùng nhau xem TV.",
+      "speakText": "电视",
+      "options": [
+        "bánh bao; bánh gối",
+        "buổi sáng",
+        "dạng erhua | mì",
+        "truyền hình; TV"
+      ],
+      "answer": "truyền hình; TV",
+      "exampleHanzi": "我们一起看电视吧。",
+      "exampleVi": "Chúng ta hãy cùng nhau xem TV."
+    },
+    {
+      "id": "hero-hsk-1-1966-meaning",
+      "vocabularyId": "1966",
+      "sourceIndex": 64,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "吧",
+      "pinyin": "ba",
+      "note": "Ví dụ: 我们走吧。 — Đi thôi.",
+      "speakText": "吧",
+      "options": [
+        "(trợ từ tình thái biểu thị lời đề nghị hoặc suy đoán); ...phải không?; ...được không?; ...tôi đoán vậy.",
+        "bánh bao (bánh hấp nhân)",
+        "bài hát | hát",
+        "cung cấp; đáp ứng"
+      ],
+      "answer": "(trợ từ tình thái biểu thị lời đề nghị hoặc suy đoán); ...phải không?; ...được không?; ...tôi đoán vậy.",
+      "exampleHanzi": "我们走吧。",
+      "exampleVi": "Đi thôi."
+    },
+    {
+      "id": "hero-hsk-1-1972-meaning",
+      "vocabularyId": "1972",
+      "sourceIndex": 70,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "包子",
+      "pinyin": "bāozi",
+      "note": "Ví dụ: 我喜欢吃包子。 — Tôi thích ăn bánh bao hấp.",
+      "speakText": "包子",
+      "options": [
+        "dạng erhua | mì",
+        "những cái nào?; ai?; cái gì?",
+        "cho ăn",
+        "bánh bao (bánh hấp nhân)"
+      ],
+      "answer": "bánh bao (bánh hấp nhân)",
+      "exampleHanzi": "我喜欢吃包子。",
+      "exampleVi": "Tôi thích ăn bánh bao hấp."
+    },
+    {
+      "id": "hero-hsk-1-2415-meaning",
+      "vocabularyId": "2415",
+      "sourceIndex": 81,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "歌",
+      "pinyin": "gē",
+      "note": "Ví dụ: 她喜欢唱歌。 — Cô ấy thích hát những bài hát.",
+      "speakText": "歌",
+      "options": [
+        "những cái nào?; ai?; cái gì?",
+        "cho ăn",
+        "(trợ từ tình thái biểu thị lời đề nghị hoặc suy đoán); ...phải không?; ...được không?; ...tôi đoán vậy.",
+        "bài hát | hát"
+      ],
+      "answer": "bài hát | hát",
+      "exampleHanzi": "她喜欢唱歌。",
+      "exampleVi": "Cô ấy thích hát những bài hát."
+    },
+    {
+      "id": "hero-hsk-1-2417-meaning",
+      "vocabularyId": "2417",
+      "sourceIndex": 83,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "给",
+      "pinyin": "gěi",
+      "note": "Ví dụ: 妈妈给我一本书。 — Mẹ đưa cho tôi một cuốn sách.",
+      "speakText": "给",
+      "options": [
+        "cho ăn",
+        "điện thoại; cuộc gọi điện thoại; số điện thoại",
+        "cung cấp; đáp ứng",
+        "truyền hình; TV"
+      ],
+      "answer": "cung cấp; đáp ứng",
+      "exampleHanzi": "妈妈给我一本书。",
+      "exampleVi": "Mẹ đưa cho tôi một cuốn sách."
+    },
+    {
+      "id": "hero-hsk-1-3286-meaning",
+      "vocabularyId": "3286",
+      "sourceIndex": 99,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "睡觉",
+      "pinyin": "shuìjiào",
+      "note": "Ví dụ: 我每天晚上十点睡觉。 — Tôi đi ngủ lúc mười giờ mỗi đêm.",
+      "speakText": "睡觉",
+      "options": [
+        "điện thoại; cuộc gọi điện thoại; số điện thoại",
+        "truyền hình; TV",
+        "(trợ từ tình thái biểu thị lời đề nghị hoặc suy đoán); ...phải không?; ...được không?; ...tôi đoán vậy.",
+        "đi ngủ; ngủ"
+      ],
+      "answer": "đi ngủ; ngủ",
+      "exampleHanzi": "我每天晚上十点睡觉。",
+      "exampleVi": "Tôi đi ngủ lúc mười giờ mỗi đêm."
+    },
+    {
+      "id": "hero-hsk-1-3545-meaning",
+      "vocabularyId": "3545",
+      "sourceIndex": 116,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "学习",
+      "pinyin": "xuéxí",
+      "note": "Ví dụ: 我每天学习汉语。 — Tôi học tiếng Trung mỗi ngày.",
+      "speakText": "学习",
+      "options": [
+        "truyền hình; TV",
+        "học; nghiên cứu",
+        "(trợ từ tình thái biểu thị lời đề nghị hoặc suy đoán); ...phải không?; ...được không?; ...tôi đoán vậy.",
+        "bánh bao (bánh hấp nhân)"
+      ],
+      "answer": "học; nghiên cứu",
+      "exampleHanzi": "我每天学习汉语。",
+      "exampleVi": "Tôi học tiếng Trung mỗi ngày."
+    },
+    {
+      "id": "hero-hsk-1-6624-meaning",
+      "vocabularyId": "6624",
+      "sourceIndex": 168,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "饺子",
+      "pinyin": "jiǎozi",
+      "note": "Ví dụ: 我最喜欢吃饺子。 — Tôi thích ăn bánh bao nhất.",
+      "speakText": "饺子",
+      "options": [
+        "đi ngủ; ngủ",
+        "học; nghiên cứu",
+        "bánh bao; bánh gối",
+        "đọc sách; học tập; đi học"
+      ],
+      "answer": "bánh bao; bánh gối",
+      "exampleHanzi": "我最喜欢吃饺子。",
+      "exampleVi": "Tôi thích ăn bánh bao nhất."
+    },
+    {
+      "id": "hero-hsk-1-7357-meaning",
+      "vocabularyId": "7357",
+      "sourceIndex": 183,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "读书",
+      "pinyin": "dúshū",
+      "note": "Ví dụ: 我喜欢读书。 — Tôi thích đọc sách.",
+      "speakText": "读书",
+      "options": [
+        "bánh bao (bánh hấp nhân)",
+        "bài hát | hát",
+        "đọc sách; học tập; đi học",
+        "bánh bao; bánh gối"
+      ],
+      "answer": "đọc sách; học tập; đi học",
+      "exampleHanzi": "我喜欢读书。",
+      "exampleVi": "Tôi thích đọc sách."
+    },
+    {
+      "id": "hero-hsk-1-8008-meaning",
+      "vocabularyId": "8008",
+      "sourceIndex": 194,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "上课",
+      "pinyin": "shàngkè",
+      "note": "Ví dụ: 我每天上午上课。 — Tôi có lớp học vào mỗi buổi sáng.",
+      "speakText": "上课",
+      "options": [
+        "bài hát | hát",
+        "bánh bao; bánh gối",
+        "đi học; tham gia lớp học; đi dạy",
+        "buổi sáng"
+      ],
+      "answer": "đi học; tham gia lớp học; đi dạy",
+      "exampleHanzi": "我每天上午上课。",
+      "exampleVi": "Tôi có lớp học vào mỗi buổi sáng."
+    },
+    {
+      "id": "hero-hsk-1-8009-meaning",
+      "vocabularyId": "8009",
+      "sourceIndex": 195,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "上午",
+      "pinyin": "shàngwǔ",
+      "note": "Ví dụ: 上午我有三节课。 — Tôi có ba lớp học vào buổi sáng.",
+      "speakText": "上午",
+      "options": [
+        "buổi sáng",
+        "đi học; tham gia lớp học; đi dạy",
+        "hát; gọi to; ngâm nga",
+        "thích; ưa thích"
+      ],
+      "answer": "buổi sáng",
+      "exampleHanzi": "上午我有三节课。",
+      "exampleVi": "Tôi có ba lớp học vào buổi sáng."
+    },
+    {
+      "id": "hero-hsk-1-8086-meaning",
+      "vocabularyId": "8086",
+      "sourceIndex": 204,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "唱",
+      "pinyin": "chàng",
+      "note": "Ví dụ: 她喜欢唱歌。 — Cô ấy thích hát.",
+      "speakText": "唱",
+      "options": [
+        "buổi sáng",
+        "(có) một số (người...); một số (tồn tại)",
+        "hát; gọi to; ngâm nga",
+        "Vẫn; vẫn đang diễn ra; còn hơn; vẫn còn; thậm chí hơn; thêm vào; khá; khá (tốt); sớm như; thậm chí; cũng; khác"
+      ],
+      "answer": "hát; gọi to; ngâm nga",
+      "exampleHanzi": "她喜欢唱歌。",
+      "exampleVi": "Cô ấy thích hát."
+    },
+    {
+      "id": "hero-hsk-1-8397-meaning",
+      "vocabularyId": "8397",
+      "sourceIndex": 225,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "喜欢",
+      "pinyin": "xǐhuan",
+      "note": "Ví dụ: 我喜欢中国菜。 — Tôi thích đồ ăn Trung Quốc.",
+      "speakText": "喜欢",
+      "options": [
+        "thích; ưa thích",
+        "(có) một số (người...); một số (tồn tại)",
+        "Vẫn; vẫn đang diễn ra; còn hơn; vẫn còn; thậm chí hơn; thêm vào; khá; khá (tốt); sớm như; thậm chí; cũng; khác",
+        "họ Ye"
+      ],
+      "answer": "thích; ưa thích",
+      "exampleHanzi": "我喜欢中国菜。",
+      "exampleVi": "Tôi thích đồ ăn Trung Quốc."
+    },
+    {
+      "id": "hero-hsk-1-9140-meaning",
+      "vocabularyId": "9140",
+      "sourceIndex": 248,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "有的",
+      "pinyin": "yǒude",
+      "note": "Ví dụ: 有的学生喜欢音乐。 — Một số học sinh thích âm nhạc.",
+      "speakText": "有的",
+      "options": [
+        "(có) một số (người...); một số (tồn tại)",
+        "Vẫn; vẫn đang diễn ra; còn hơn; vẫn còn; thậm chí hơn; thêm vào; khá; khá (tốt); sớm như; thậm chí; cũng; khác",
+        "họ Ye",
+        "dạng erhua | mì"
+      ],
+      "answer": "(có) một số (người...); một số (tồn tại)",
+      "exampleHanzi": "有的学生喜欢音乐。",
+      "exampleVi": "Một số học sinh thích âm nhạc."
+    },
+    {
+      "id": "hero-hsk-1-9168-meaning",
+      "vocabularyId": "9168",
+      "sourceIndex": 254,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "还",
+      "pinyin": "hái",
+      "note": "Ví dụ: 我还有一本书。 — Tôi vẫn còn một cuốn sách nữa.",
+      "speakText": "还",
+      "options": [
+        "(có) một số (người...); một số (tồn tại)",
+        "dạng erhua | mì",
+        "gọi điện thoại",
+        "Vẫn; vẫn đang diễn ra; còn hơn; vẫn còn; thậm chí hơn; thêm vào; khá; khá (tốt); sớm như; thậm chí; cũng; khác"
+      ],
+      "answer": "Vẫn; vẫn đang diễn ra; còn hơn; vẫn còn; thậm chí hơn; thêm vào; khá; khá (tốt); sớm như; thậm chí; cũng; khác",
+      "exampleHanzi": "我还有一本书。",
+      "exampleVi": "Tôi vẫn còn một cuốn sách nữa."
+    },
+    {
+      "id": "hero-hsk-1-9239-meaning",
+      "vocabularyId": "9239",
+      "sourceIndex": 265,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "也",
+      "pinyin": "yě",
+      "note": "Ví dụ: 我也喜欢音乐。 — Tôi cũng thích âm nhạc.",
+      "speakText": "也",
+      "options": [
+        "dạng erhua | mì",
+        "gọi điện thoại",
+        "Vẫn; vẫn đang diễn ra; còn hơn; vẫn còn; thậm chí hơn; thêm vào; khá; khá (tốt); sớm như; thậm chí; cũng; khác",
+        "họ Ye"
+      ],
+      "answer": "họ Ye",
+      "exampleHanzi": "我也喜欢音乐。",
+      "exampleVi": "Tôi cũng thích âm nhạc."
+    },
+    {
+      "id": "hero-hsk-1-10595-meaning",
+      "vocabularyId": "10595",
+      "sourceIndex": 271,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "面条儿",
+      "pinyin": "miàntiáor",
+      "note": "Ví dụ: 我喜欢吃面条儿。 — Tôi thích ăn mì.",
+      "speakText": "面条儿",
+      "options": [
+        "gọi điện thoại",
+        "điện thoại; cuộc gọi điện thoại; số điện thoại",
+        "dạng erhua | mì",
+        "truyền hình; TV"
+      ],
+      "answer": "dạng erhua | mì",
+      "exampleHanzi": "我喜欢吃面条儿。",
+      "exampleVi": "Tôi thích ăn mì."
+    },
+    {
+      "id": "hero-hsk-1-10613-meaning",
+      "vocabularyId": "10613",
+      "sourceIndex": 279,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "打电话",
+      "pinyin": "dǎ diànhuà",
+      "note": "Ví dụ: 我要打电话给妈妈。 — Tôi muốn gọi cho mẹ tôi.",
+      "speakText": "打电话",
+      "options": [
+        "những cái nào?; ai?; cái gì?",
+        "cho ăn",
+        "điện thoại; cuộc gọi điện thoại; số điện thoại",
+        "gọi điện thoại"
+      ],
+      "answer": "gọi điện thoại",
+      "exampleHanzi": "我要打电话给妈妈。",
+      "exampleVi": "Tôi muốn gọi cho mẹ tôi."
+    }
+  ]
+}

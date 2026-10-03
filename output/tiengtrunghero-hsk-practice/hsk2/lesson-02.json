@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-02",
+  "lessonNumber": 2,
+  "lessonTitle": "Hằng ngày tôi thức dậy lúc 6 giờ.",
+  "topicId": "du-lich-cong-viec-mua-sam",
+  "topicTitle": "Du lịch, công việc & mua sắm",
+  "route": "/hsk/2/hsk2-tb-lesson-02/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-2447-meaning",
+      "vocabularyId": "2447",
+      "sourceIndex": 19,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "出去",
+      "pinyin": "chūqù",
+      "note": "Ví dụ: 我们出去玩吧。 — Chúng ta hãy ra ngoài chơi nhé.",
+      "speakText": "出去",
+      "options": [
+        "chạy; chạy bộ; (quân sự) diễu hành nhanh",
+        "đi nước ngoài; rời khỏi đất nước",
+        "sự thành lập Đại học hoặc Cao đẳng; khai giảng; bắt đầu học kỳ mới",
+        "đi ra"
+      ],
+      "answer": "đi ra",
+      "exampleHanzi": "我们出去玩吧。",
+      "exampleVi": "Chúng ta hãy ra ngoài chơi nhé."
+    },
+    {
+      "id": "hero-hsk-2-2755-meaning",
+      "vocabularyId": "2755",
+      "sourceIndex": 34,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "每",
+      "pinyin": "měi",
+      "note": "Ví dụ: 每个学生都有书。 — Mỗi học sinh đều có một cuốn sách.",
+      "speakText": "每",
+      "options": [
+        "chạy; chạy bộ; (quân sự) diễu hành nhanh",
+        "thân thể; sức khỏe; trực tiếp",
+        "giờ; thời gian; khi; giờ; mùa; kỳ",
+        "mỗi; từng"
+      ],
+      "answer": "mỗi; từng",
+      "exampleHanzi": "每个学生都有书。",
+      "exampleVi": "Mỗi học sinh đều có một cuốn sách."
+    },
+    {
+      "id": "hero-hsk-2-3144-meaning",
+      "vocabularyId": "3144",
+      "sourceIndex": 35,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "跑步",
+      "pinyin": "pǎobù",
+      "note": "Ví dụ: 我喜欢跑步锻炼身体。 — Tôi thích chạy bộ để rèn luyện cơ thể.",
+      "speakText": "跑步",
+      "options": [
+        "sự thành lập Đại học hoặc Cao đẳng; khai giảng; bắt đầu học kỳ mới",
+        "chạy; chạy bộ; (quân sự) diễu hành nhanh",
+        "chạy; chạy trốn; bỏ chạy; chạy đi lại (làm việc vặt, v.v.); (khí hoặc chất lỏng) rò rỉ hoặc bay hơi; (bổ ngữ động từ) đi xa; rời đi",
+        "mỗi; từng"
+      ],
+      "answer": "chạy; chạy bộ; (quân sự) diễu hành nhanh",
+      "exampleHanzi": "我喜欢跑步锻炼身体。",
+      "exampleVi": "Tôi thích chạy bộ để rèn luyện cơ thể."
+    },
+    {
+      "id": "hero-hsk-2-3819-meaning",
+      "vocabularyId": "3819",
+      "sourceIndex": 48,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "身体",
+      "pinyin": "shēntǐ",
+      "note": "Ví dụ: 他身体很健康。 — Cơ thể anh ấy rất khỏe mạnh.",
+      "speakText": "身体",
+      "options": [
+        "(dạng kết hợp) phải; bên phải; (dạng kết hợp) (chính trị) phe hữu; (dạng kết hợp) (cổ) phía tây; (văn chương) bên phải là bên có thứ bậc cao hơn",
+        "trà xanh; (lóng) (dành cho nữ) trông có vẻ ngây thơ và quyến rũ nhưng thực chất tính toán và thao túng; cô gái có những phẩm chất này",
+        "thuốc; dược phẩm; chất dùng cho mục đích cụ thể (ví dụ: đầu độc, nổ, lên men); đầu độc",
+        "thân thể; sức khỏe; trực tiếp"
+      ],
+      "answer": "thân thể; sức khỏe; trực tiếp",
+      "exampleHanzi": "他身体很健康。",
+      "exampleVi": "Cơ thể anh ấy rất khỏe mạnh."
+    },
+    {
+      "id": "hero-hsk-2-3820-meaning",
+      "vocabularyId": "3820",
+      "sourceIndex": 49,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "时",
+      "pinyin": "shí",
+      "note": "Ví dụ: 这个时间很合适。 — Thời điểm này rất thích hợp.",
+      "speakText": "时",
+      "options": [
+        "trà xanh; (lóng) (dành cho nữ) trông có vẻ ngây thơ và quyến rũ nhưng thực chất tính toán và thao túng; cô gái có những phẩm chất này",
+        "giờ; thời gian; khi; giờ; mùa; kỳ",
+        "thuốc; dược phẩm; chất dùng cho mục đích cụ thể (ví dụ: đầu độc, nổ, lên men); đầu độc",
+        "họ Gao"
+      ],
+      "answer": "giờ; thời gian; khi; giờ; mùa; kỳ",
+      "exampleHanzi": "这个时间很合适。",
+      "exampleVi": "Thời điểm này rất thích hợp."
+    },
+    {
+      "id": "hero-hsk-2-5526-meaning",
+      "vocabularyId": "5526",
+      "sourceIndex": 76,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "出国",
+      "pinyin": "chūguó",
+      "note": "Ví dụ: 他计划明年出国学习。 — Anh ấy dự định sẽ đi du học vào năm tới.",
+      "speakText": "出国",
+      "options": [
+        "thân thể; sức khỏe; trực tiếp",
+        "đi nước ngoài; rời khỏi đất nước",
+        "giờ; thời gian; khi; giờ; mùa; kỳ",
+        "chim; bộ thủ \"chim\" trong chữ Hán (bộ Khanghy 196); (phương ngữ) chú ý; (thán từ) thật là; chết tiệt"
+      ],
+      "answer": "đi nước ngoài; rời khỏi đất nước",
+      "exampleHanzi": "他计划明年出国学习。",
+      "exampleVi": "Anh ấy dự định sẽ đi du học vào năm tới."
+    },
+    {
+      "id": "hero-hsk-2-5600-meaning",
+      "vocabularyId": "5600",
+      "sourceIndex": 82,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "开学",
+      "pinyin": "kāixué",
+      "note": "Ví dụ: 九月一日开学。 — Trường học bắt đầu vào ngày 1 tháng 9.",
+      "speakText": "开学",
+      "options": [
+        "sự thành lập Đại học hoặc Cao đẳng; khai giảng; bắt đầu học kỳ mới",
+        "giờ; thời gian; khi; giờ; mùa; kỳ",
+        "chim; bộ thủ \"chim\" trong chữ Hán (bộ Khanghy 196); (phương ngữ) chú ý; (thán từ) thật là; chết tiệt",
+        "họ Zhou; nhà Chu (1046-256 TCN)"
+      ],
+      "answer": "sự thành lập Đại học hoặc Cao đẳng; khai giảng; bắt đầu học kỳ mới",
+      "exampleHanzi": "九月一日开学。",
+      "exampleVi": "Trường học bắt đầu vào ngày 1 tháng 9."
+    },
+    {
+      "id": "hero-hsk-2-6111-meaning",
+      "vocabularyId": "6111",
+      "sourceIndex": 99,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "鸟",
+      "pinyin": "niǎo",
+      "note": "Ví dụ: 鸟儿在天空中飞翔。 — Chim bay trên bầu trời.",
+      "speakText": "鸟",
+      "options": [
+        "đi ra",
+        "mỗi; từng",
+        "chim; bộ thủ \"chim\" trong chữ Hán (bộ Khanghy 196); (phương ngữ) chú ý; (thán từ) thật là; chết tiệt",
+        "chạy; chạy bộ; (quân sự) diễu hành nhanh"
+      ],
+      "answer": "chim; bộ thủ \"chim\" trong chữ Hán (bộ Khanghy 196); (phương ngữ) chú ý; (thán từ) thật là; chết tiệt",
+      "exampleHanzi": "鸟儿在天空中飞翔。",
+      "exampleVi": "Chim bay trên bầu trời."
+    },
+    {
+      "id": "hero-hsk-2-6114-meaning",
+      "vocabularyId": "6114",
+      "sourceIndex": 102,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "跑",
+      "pinyin": "pǎo",
+      "note": "Ví dụ: 我每天早上跑步。 — Tôi chạy bộ vào mỗi buổi sáng.",
+      "speakText": "跑",
+      "options": [
+        "họ Zhou; nhà Chu (1046-256 TCN)",
+        "(dạng kết hợp) phải; bên phải; (dạng kết hợp) (chính trị) phe hữu; (dạng kết hợp) (cổ) phía tây; (văn chương) bên phải là bên có thứ bậc cao hơn",
+        "chạy; chạy trốn; bỏ chạy; chạy đi lại (làm việc vặt, v.v.); (khí hoặc chất lỏng) rò rỉ hoặc bay hơi; (bổ ngữ động từ) đi xa; rời đi",
+        "trà xanh; (lóng) (dành cho nữ) trông có vẻ ngây thơ và quyến rũ nhưng thực chất tính toán và thao túng; cô gái có những phẩm chất này"
+      ],
+      "answer": "chạy; chạy trốn; bỏ chạy; chạy đi lại (làm việc vặt, v.v.); (khí hoặc chất lỏng) rò rỉ hoặc bay hơi; (bổ ngữ động từ) đi xa; rời đi",
+      "exampleHanzi": "我每天早上跑步。",
+      "exampleVi": "Tôi chạy bộ vào mỗi buổi sáng."
+    },
+    {
+      "id": "hero-hsk-2-6856-meaning",
+      "vocabularyId": "6856",
+      "sourceIndex": 122,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "周",
+      "pinyin": "zhōu",
+      "note": "Ví dụ: 我每周去一次图书馆。 — Tôi đến thư viện mỗi tuần một lần.",
+      "speakText": "周",
+      "options": [
+        "chạy; chạy bộ; (quân sự) diễu hành nhanh",
+        "đi nước ngoài; rời khỏi đất nước",
+        "sự thành lập Đại học hoặc Cao đẳng; khai giảng; bắt đầu học kỳ mới",
+        "họ Zhou; nhà Chu (1046-256 TCN)"
+      ],
+      "answer": "họ Zhou; nhà Chu (1046-256 TCN)",
+      "exampleHanzi": "我每周去一次图书馆。",
+      "exampleVi": "Tôi đến thư viện mỗi tuần một lần."
+    },
+    {
+      "id": "hero-hsk-2-8841-meaning",
+      "vocabularyId": "8841",
+      "sourceIndex": 149,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "右",
+      "pinyin": "yòu",
+      "note": "Ví dụ: 请向右转。 — Vui lòng rẽ phải.",
+      "speakText": "右",
+      "options": [
+        "đi nước ngoài; rời khỏi đất nước",
+        "sự thành lập Đại học hoặc Cao đẳng; khai giảng; bắt đầu học kỳ mới",
+        "chạy; chạy trốn; bỏ chạy; chạy đi lại (làm việc vặt, v.v.); (khí hoặc chất lỏng) rò rỉ hoặc bay hơi; (bổ ngữ động từ) đi xa; rời đi",
+        "(dạng kết hợp) phải; bên phải; (dạng kết hợp) (chính trị) phe hữu; (dạng kết hợp) (cổ) phía tây; (văn chương) bên phải là bên có thứ bậc cao hơn"
+      ],
+      "answer": "(dạng kết hợp) phải; bên phải; (dạng kết hợp) (chính trị) phe hữu; (dạng kết hợp) (cổ) phía tây; (văn chương) bên phải là bên có thứ bậc cao hơn",
+      "exampleHanzi": "请向右转。",
+      "exampleVi": "Vui lòng rẽ phải."
+    },
+    {
+      "id": "hero-hsk-2-9631-meaning",
+      "vocabularyId": "9631",
+      "sourceIndex": 157,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "绿茶",
+      "pinyin": "lǜchá",
+      "note": "Ví dụ: 我爱喝绿茶。 — Tôi thích uống trà xanh.",
+      "speakText": "绿茶",
+      "options": [
+        "trà xanh; (lóng) (dành cho nữ) trông có vẻ ngây thơ và quyến rũ nhưng thực chất tính toán và thao túng; cô gái có những phẩm chất này",
+        "sự thành lập Đại học hoặc Cao đẳng; khai giảng; bắt đầu học kỳ mới",
+        "chạy; chạy trốn; bỏ chạy; chạy đi lại (làm việc vặt, v.v.); (khí hoặc chất lỏng) rò rỉ hoặc bay hơi; (bổ ngữ động từ) đi xa; rời đi",
+        "họ Gao"
+      ],
+      "answer": "trà xanh; (lóng) (dành cho nữ) trông có vẻ ngây thơ và quyến rũ nhưng thực chất tính toán và thao túng; cô gái có những phẩm chất này",
+      "exampleHanzi": "我爱喝绿茶。",
+      "exampleVi": "Tôi thích uống trà xanh."
+    },
+    {
+      "id": "hero-hsk-2-10570-meaning",
+      "vocabularyId": "10570",
+      "sourceIndex": 192,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "药",
+      "pinyin": "yào",
+      "note": "Ví dụ: 他感冒了，医生给他开了一些药。 — Anh ấy bị cảm lạnh nên bác sĩ đã kê đơn thuốc cho anh ấy.",
+      "speakText": "药",
+      "options": [
+        "thuốc; dược phẩm; chất dùng cho mục đích cụ thể (ví dụ: đầu độc, nổ, lên men); đầu độc",
+        "chạy; chạy trốn; bỏ chạy; chạy đi lại (làm việc vặt, v.v.); (khí hoặc chất lỏng) rò rỉ hoặc bay hơi; (bổ ngữ động từ) đi xa; rời đi",
+        "họ Gao",
+        "thân thể; sức khỏe; trực tiếp"
+      ],
+      "answer": "thuốc; dược phẩm; chất dùng cho mục đích cụ thể (ví dụ: đầu độc, nổ, lên men); đầu độc",
+      "exampleHanzi": "他感冒了，医生给他开了一些药。",
+      "exampleVi": "Anh ấy bị cảm lạnh nên bác sĩ đã kê đơn thuốc cho anh ấy."
+    },
+    {
+      "id": "hero-hsk-2-11819-meaning",
+      "vocabularyId": "11819",
+      "sourceIndex": 219,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "高",
+      "pinyin": "gāo",
+      "note": "Ví dụ: 这座山很高。 — Ngọn núi này rất cao.",
+      "speakText": "高",
+      "options": [
+        "họ Gao",
+        "đi ra",
+        "mỗi; từng",
+        "chạy; chạy bộ; (quân sự) diễu hành nhanh"
+      ],
+      "answer": "họ Gao",
+      "exampleHanzi": "这座山很高。",
+      "exampleVi": "Ngọn núi này rất cao."
+    },
+    {
+      "id": "hero-hsk-2-11820-meaning",
+      "vocabularyId": "11820",
+      "sourceIndex": 220,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "高",
+      "pinyin": "gāo",
+      "note": "Ví dụ: 他跳得很高兴。 — Anh ấy nhảy rất vui vẻ.",
+      "speakText": "高",
+      "options": [
+        "thân thể; sức khỏe; trực tiếp",
+        "giờ; thời gian; khi; giờ; mùa; kỳ",
+        "họ Gao",
+        "chim; bộ thủ \"chim\" trong chữ Hán (bộ Khanghy 196); (phương ngữ) chú ý; (thán từ) thật là; chết tiệt"
+      ],
+      "answer": "họ Gao",
+      "exampleHanzi": "他跳得很高兴。",
+      "exampleVi": "Anh ấy nhảy rất vui vẻ."
+    }
+  ]
+}

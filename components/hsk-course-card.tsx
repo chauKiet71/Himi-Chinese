@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight, BookOpen, Layers3 } from "lucide-react";
+import { BookOpen, ChevronsRight, Layers3 } from "lucide-react";
 
 export type HskCourseSummary = {
   lessonCount: number;
@@ -35,7 +35,7 @@ export function HskCourseCard({ lessonCount = 0, levelCount = 0 }: Partial<HskCo
       </div>
       <div className="course-card-footer">
         <span className="free-label">Bắt đầu từ HSK 1</span>
-        <span aria-hidden="true" className="icon-link"><ArrowUpRight size={18} /></span>
+        <span aria-hidden="true" className="icon-link"><ChevronsRight size={23} strokeWidth={3} /></span>
       </div>
     </div>
   </a>;

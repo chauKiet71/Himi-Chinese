@@ -1,0 +1,462 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-10-toi-co-the-ngoi-o-day-khong",
+  "lessonNumber": 10,
+  "lessonTitle": "Tôi có thể ngồi ở đây được không?",
+  "topicId": "giao-tiep-hang-ngay",
+  "topicTitle": "Giao tiếp hằng ngày",
+  "route": "/hsk/1/hsk1-bai-10-toi-co-the-ngoi-o-day-khong/play",
+  "vocabularyCount": 21,
+  "exerciseCount": 21,
+  "typeCounts": {
+    "meaning": 21,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-122-meaning",
+      "vocabularyId": "122",
+      "sourceIndex": 10,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "哪里",
+      "pinyin": "nǎlǐ",
+      "note": "Ví dụ: 你来自哪里？ — Bạn đến từ đâu?",
+      "speakText": "哪里",
+      "options": [
+        "ở đây",
+        "cái đó; cái đó",
+        "ở đâu?; ở đâu đó; bất kỳ đâu; bất cứ đâu; không đâu (câu trả lời phủ định cho câu hỏi); cách nói khiêm tốn phủ nhận lời khen",
+        "họ Neng"
+      ],
+      "answer": "ở đâu?; ở đâu đó; bất kỳ đâu; bất cứ đâu; không đâu (câu trả lời phủ định cho câu hỏi); cách nói khiêm tốn phủ nhận lời khen",
+      "exampleHanzi": "你来自哪里？",
+      "exampleVi": "Bạn đến từ đâu?"
+    },
+    {
+      "id": "hero-hsk-1-870-meaning",
+      "vocabularyId": "870",
+      "sourceIndex": 20,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "能",
+      "pinyin": "néng",
+      "note": "Ví dụ: 我能说汉语。 — Tôi có thể nói tiếng Trung Quốc.",
+      "speakText": "能",
+      "options": [
+        "đi học; đến trường",
+        "họ Neng",
+        "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+        "đi làm; trực ca; bắt đầu làm việc"
+      ],
+      "answer": "họ Neng",
+      "exampleHanzi": "我能说汉语。",
+      "exampleVi": "Tôi có thể nói tiếng Trung Quốc."
+    },
+    {
+      "id": "hero-hsk-1-979-meaning",
+      "vocabularyId": "979",
+      "sourceIndex": 35,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "电脑",
+      "pinyin": "diànnǎo",
+      "note": "Ví dụ: 我用电脑工作。 — Tôi làm việc bằng máy tính.",
+      "speakText": "电脑",
+      "options": [
+        "bàn; bàn làm việc",
+        "máy tính",
+        "lớp lót | bên trong | bên trong | nội bộ | cũng viết là lǐ",
+        "ở đâu?; ở đâu đó; bất kỳ đâu; bất cứ đâu; không đâu (câu trả lời phủ định cho câu hỏi); cách nói khiêm tốn phủ nhận lời khen"
+      ],
+      "answer": "máy tính",
+      "exampleHanzi": "我用电脑工作。",
+      "exampleVi": "Tôi làm việc bằng máy tính."
+    },
+    {
+      "id": "hero-hsk-1-1162-meaning",
+      "vocabularyId": "1162",
+      "sourceIndex": 46,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "本",
+      "pinyin": "běn",
+      "note": "Ví dụ: 这是一本书。 — Đây là một cuốn sách.",
+      "speakText": "本",
+      "options": [
+        "đúng lúc (đó); đúng chỗ (đó); đang ở giữa (làm gì đó)",
+        "gốc; thân; nguồn gốc; nguồn; này; hiện tại; nguyên bản; vốn có; ban đầu; lượng từ cho sách, tạp chí, hồ sơ v.v.",
+        "ở đây",
+        "cái đó; cái đó"
+      ],
+      "answer": "gốc; thân; nguồn gốc; nguồn; này; hiện tại; nguyên bản; vốn có; ban đầu; lượng từ cho sách, tạp chí, hồ sơ v.v.",
+      "exampleHanzi": "这是一本书。",
+      "exampleVi": "Đây là một cuốn sách."
+    },
+    {
+      "id": "hero-hsk-1-1218-meaning",
+      "vocabularyId": "1218",
+      "sourceIndex": 52,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "正在",
+      "pinyin": "zhèngzài",
+      "note": "Ví dụ: 他正在吃饭。 — Anh ấy đang ăn.",
+      "speakText": "正在",
+      "options": [
+        "đúng lúc (đó); đúng chỗ (đó); đang ở giữa (làm gì đó)",
+        "ở đây",
+        "cái đó; cái đó",
+        "(nối hai danh từ) và | cùng với | (toán) tổng | hòa bình | (thể thao) hòa | (từ hạn định) hài hòa | (từ hạn định) Nhật Bản; người Nhật"
+      ],
+      "answer": "đúng lúc (đó); đúng chỗ (đó); đang ở giữa (làm gì đó)",
+      "exampleHanzi": "他正在吃饭。",
+      "exampleVi": "Anh ấy đang ăn."
+    },
+    {
+      "id": "hero-hsk-1-1219-meaning",
+      "vocabularyId": "1219",
+      "sourceIndex": 53,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "这儿",
+      "pinyin": "zhèr",
+      "note": "Ví dụ: 我们在这儿见面。 — Chúng ta sẽ gặp nhau ở đây.",
+      "speakText": "这儿",
+      "options": [
+        "đúng lúc (đó); đúng chỗ (đó); đang ở giữa (làm gì đó)",
+        "(nối hai danh từ) và | cùng với | (toán) tổng | hòa bình | (thể thao) hòa | (từ hạn định) hài hòa | (từ hạn định) Nhật Bản; người Nhật",
+        "ở đây",
+        "bên; cạnh; mép; biên giới; ranh giới; đồng thời"
+      ],
+      "answer": "ở đây",
+      "exampleHanzi": "我们在这儿见面。",
+      "exampleVi": "Chúng ta sẽ gặp nhau ở đây."
+    },
+    {
+      "id": "hero-hsk-1-3042-meaning",
+      "vocabularyId": "3042",
+      "sourceIndex": 97,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "那个",
+      "pinyin": "nàge",
+      "note": "Ví dụ: 那个是你的包吗？ — Đó có phải là túi của bạn không?",
+      "speakText": "那个",
+      "options": [
+        "(nối hai danh từ) và | cùng với | (toán) tổng | hòa bình | (thể thao) hòa | (từ hạn định) hài hòa | (từ hạn định) Nhật Bản; người Nhật",
+        "bên; cạnh; mép; biên giới; ranh giới; đồng thời",
+        "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+        "cái đó; cái đó"
+      ],
+      "answer": "cái đó; cái đó",
+      "exampleHanzi": "那个是你的包吗？",
+      "exampleVi": "Đó có phải là túi của bạn không?"
+    },
+    {
+      "id": "hero-hsk-1-3468-meaning",
+      "vocabularyId": "3468",
+      "sourceIndex": 109,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "和",
+      "pinyin": "hé",
+      "note": "Ví dụ: 我和朋友一起去学校。 — Tôi đi học cùng bạn tôi.",
+      "speakText": "和",
+      "options": [
+        "(nối hai danh từ) và | cùng với | (toán) tổng | hòa bình | (thể thao) hòa | (từ hạn định) hài hòa | (từ hạn định) Nhật Bản; người Nhật",
+        "bên; cạnh; mép; biên giới; ranh giới; đồng thời",
+        "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+        "họ Tọa"
+      ],
+      "answer": "(nối hai danh từ) và | cùng với | (toán) tổng | hòa bình | (thể thao) hòa | (từ hạn định) hài hòa | (từ hạn định) Nhật Bản; người Nhật",
+      "exampleHanzi": "我和朋友一起去学校。",
+      "exampleVi": "Tôi đi học cùng bạn tôi."
+    },
+    {
+      "id": "hero-hsk-1-3469-meaning",
+      "vocabularyId": "3469",
+      "sourceIndex": 110,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "和",
+      "pinyin": "hé",
+      "note": "Ví dụ: 苹果和香蕉都是水果。 — Táo và chuối đều là trái cây.",
+      "speakText": "和",
+      "options": [
+        "bên; cạnh; mép; biên giới; ranh giới; đồng thời",
+        "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+        "(nối hai danh từ) và | cùng với | (toán) tổng | hòa bình | (thể thao) hòa | (từ hạn định) hài hòa | (từ hạn định) Nhật Bản; người Nhật",
+        "họ Tọa"
+      ],
+      "answer": "(nối hai danh từ) và | cùng với | (toán) tổng | hòa bình | (thể thao) hòa | (từ hạn định) hài hòa | (từ hạn định) Nhật Bản; người Nhật",
+      "exampleHanzi": "苹果和香蕉都是水果。",
+      "exampleVi": "Táo và chuối đều là trái cây."
+    },
+    {
+      "id": "hero-hsk-1-4196-meaning",
+      "vocabularyId": "4196",
+      "sourceIndex": 129,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "边",
+      "pinyin": "biān",
+      "note": "Ví dụ: 桌子的边很光滑。 — Các cạnh của bàn rất mịn.",
+      "speakText": "边",
+      "options": [
+        "cái đó; cái đó",
+        "(nối hai danh từ) và | cùng với | (toán) tổng | hòa bình | (thể thao) hòa | (từ hạn định) hài hòa | (từ hạn định) Nhật Bản; người Nhật",
+        "bên; cạnh; mép; biên giới; ranh giới; đồng thời",
+        "họ Tọa"
+      ],
+      "answer": "bên; cạnh; mép; biên giới; ranh giới; đồng thời",
+      "exampleHanzi": "桌子的边很光滑。",
+      "exampleVi": "Các cạnh của bàn rất mịn."
+    },
+    {
+      "id": "hero-hsk-1-4197-meaning",
+      "vocabularyId": "4197",
+      "sourceIndex": 130,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "边",
+      "pinyin": "biān",
+      "note": "Ví dụ: 一边走一边说话。 — Vừa đi vừa nói chuyện.",
+      "speakText": "边",
+      "options": [
+        "bên; cạnh; mép; biên giới; ranh giới; đồng thời",
+        "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+        "họ Tọa",
+        "đi học; đến trường"
+      ],
+      "answer": "bên; cạnh; mép; biên giới; ranh giới; đồng thời",
+      "exampleHanzi": "一边走一边说话。",
+      "exampleVi": "Vừa đi vừa nói chuyện."
+    },
+    {
+      "id": "hero-hsk-1-7144-meaning",
+      "vocabularyId": "7144",
+      "sourceIndex": 178,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "上",
+      "pinyin": "shàng",
+      "note": "Ví dụ: 我在上衣口袋里放了手机。 — Tôi nhét điện thoại vào túi áo khoác.",
+      "speakText": "上",
+      "options": [
+        "(nối hai danh từ) và | cùng với | (toán) tổng | hòa bình | (thể thao) hòa | (từ hạn định) hài hòa | (từ hạn định) Nhật Bản; người Nhật",
+        "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+        "bên; cạnh; mép; biên giới; ranh giới; đồng thời",
+        "họ Tọa"
+      ],
+      "answer": "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+      "exampleHanzi": "我在上衣口袋里放了手机。",
+      "exampleVi": "Tôi nhét điện thoại vào túi áo khoác."
+    },
+    {
+      "id": "hero-hsk-1-7245-meaning",
+      "vocabularyId": "7245",
+      "sourceIndex": 179,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "坐",
+      "pinyin": "zuò",
+      "note": "Ví dụ: 请坐。 — Xin mời ngồi xuống.",
+      "speakText": "坐",
+      "options": [
+        "(nối hai danh từ) và | cùng với | (toán) tổng | hòa bình | (thể thao) hòa | (từ hạn định) hài hòa | (từ hạn định) Nhật Bản; người Nhật",
+        "bên; cạnh; mép; biên giới; ranh giới; đồng thời",
+        "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+        "họ Tọa"
+      ],
+      "answer": "họ Tọa",
+      "exampleHanzi": "请坐。",
+      "exampleVi": "Xin mời ngồi xuống."
+    },
+    {
+      "id": "hero-hsk-1-8010-meaning",
+      "vocabularyId": "8010",
+      "sourceIndex": 196,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "上学",
+      "pinyin": "shàngxué",
+      "note": "Ví dụ: 我每天上学。 — Tôi đi học mỗi ngày.",
+      "speakText": "上学",
+      "options": [
+        "bên; cạnh; mép; biên giới; ranh giới; đồng thời",
+        "đi học; đến trường",
+        "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+        "bàn; bàn làm việc"
+      ],
+      "answer": "đi học; đến trường",
+      "exampleHanzi": "我每天上学。",
+      "exampleVi": "Tôi đi học mỗi ngày."
+    },
+    {
+      "id": "hero-hsk-1-8233-meaning",
+      "vocabularyId": "8233",
+      "sourceIndex": 221,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "桌子",
+      "pinyin": "zhuōzi",
+      "note": "Ví dụ: 书在桌子上。 — Cuốn sách ở trên bàn.",
+      "speakText": "桌子",
+      "options": [
+        "đi học; đến trường",
+        "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+        "đi làm; trực ca; bắt đầu làm việc",
+        "bàn; bàn làm việc"
+      ],
+      "answer": "bàn; bàn làm việc",
+      "exampleHanzi": "书在桌子上。",
+      "exampleVi": "Cuốn sách ở trên bàn."
+    },
+    {
+      "id": "hero-hsk-1-8285-meaning",
+      "vocabularyId": "8285",
+      "sourceIndex": 223,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "上",
+      "pinyin": "shàng",
+      "note": "Ví dụ: 我上学。 — Tôi đi học.",
+      "speakText": "上",
+      "options": [
+        "bàn; bàn làm việc",
+        "viết tắt của Tân Cương hoặc Singapore | họ Tân",
+        "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+        "lớp lót | bên trong | bên trong | nội bộ | cũng viết là lǐ"
+      ],
+      "answer": "lên; phía trên; ở trên; trước; đầu tiên; leo; lên xe; đi học; (bổ ngữ chỉ hướng) lên; (hậu tố danh từ) trên; ở trên",
+      "exampleHanzi": "我上学。",
+      "exampleVi": "Tôi đi học."
+    },
+    {
+      "id": "hero-hsk-1-8286-meaning",
+      "vocabularyId": "8286",
+      "sourceIndex": 224,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "上班",
+      "pinyin": "shàngbān",
+      "note": "Ví dụ: 我每天八点上班。 — Tôi đi làm lúc tám giờ mỗi ngày.",
+      "speakText": "上班",
+      "options": [
+        "đi làm; trực ca; bắt đầu làm việc",
+        "bàn; bàn làm việc",
+        "viết tắt của Tân Cương hoặc Singapore | họ Tân",
+        "lớp lót | bên trong | bên trong | nội bộ | cũng viết là lǐ"
+      ],
+      "answer": "đi làm; trực ca; bắt đầu làm việc",
+      "exampleHanzi": "我每天八点上班。",
+      "exampleVi": "Tôi đi làm lúc tám giờ mỗi ngày."
+    },
+    {
+      "id": "hero-hsk-1-8398-meaning",
+      "vocabularyId": "8398",
+      "sourceIndex": 226,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "新",
+      "pinyin": "xīn",
+      "note": "Ví dụ: 这是一本新书。 — Đây là một cuốn sách mới.",
+      "speakText": "新",
+      "options": [
+        "đi làm; trực ca; bắt đầu làm việc",
+        "không có; không có",
+        "lớp lót | bên trong | bên trong | nội bộ | cũng viết là lǐ",
+        "viết tắt của Tân Cương hoặc Singapore | họ Tân"
+      ],
+      "answer": "viết tắt của Tân Cương hoặc Singapore | họ Tân",
+      "exampleHanzi": "这是一本新书。",
+      "exampleVi": "Đây là một cuốn sách mới."
+    },
+    {
+      "id": "hero-hsk-1-10961-meaning",
+      "vocabularyId": "10961",
+      "sourceIndex": 287,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "没（有）",
+      "pinyin": "méi(yǒu)",
+      "note": "Ví dụ: 我没有书。 — Tôi không có sách.",
+      "speakText": "没（有）",
+      "options": [
+        "lớp lót | bên trong | bên trong | nội bộ | cũng viết là lǐ",
+        "không có; không có",
+        "rẻ; giá thấp; lợi ích nhỏ; tha thứ nhẹ nhàng cho ai đó",
+        "họ Neng"
+      ],
+      "answer": "không có; không có",
+      "exampleHanzi": "我没有书。",
+      "exampleVi": "Tôi không có sách."
+    },
+    {
+      "id": "hero-hsk-1-11837-meaning",
+      "vocabularyId": "11837",
+      "sourceIndex": 297,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "里",
+      "pinyin": "lǐ",
+      "note": "Ví dụ: 学校在银行里面。 — Trường học nằm trong ngân hàng.",
+      "speakText": "里",
+      "options": [
+        "lớp lót | bên trong | bên trong | nội bộ | cũng viết là lǐ",
+        "rẻ; giá thấp; lợi ích nhỏ; tha thứ nhẹ nhàng cho ai đó",
+        "máy tính",
+        "bên; cạnh; mép; biên giới; ranh giới; đồng thời"
+      ],
+      "answer": "lớp lót | bên trong | bên trong | nội bộ | cũng viết là lǐ",
+      "exampleHanzi": "学校在银行里面。",
+      "exampleVi": "Trường học nằm trong ngân hàng."
+    },
+    {
+      "id": "hero-hsk-1-12147-meaning",
+      "vocabularyId": "12147",
+      "sourceIndex": 305,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "便宜",
+      "pinyin": "piányi",
+      "note": "Ví dụ: 这个苹果很便宜。 — Quả táo này rất rẻ.",
+      "speakText": "便宜",
+      "options": [
+        "viết tắt của Tân Cương hoặc Singapore | họ Tân",
+        "rẻ; giá thấp; lợi ích nhỏ; tha thứ nhẹ nhàng cho ai đó",
+        "ở đâu?; ở đâu đó; bất kỳ đâu; bất cứ đâu; không đâu (câu trả lời phủ định cho câu hỏi); cách nói khiêm tốn phủ nhận lời khen",
+        "họ Neng"
+      ],
+      "answer": "rẻ; giá thấp; lợi ích nhỏ; tha thứ nhẹ nhàng cho ai đó",
+      "exampleHanzi": "这个苹果很便宜。",
+      "exampleVi": "Quả táo này rất rẻ."
+    }
+  ]
+}

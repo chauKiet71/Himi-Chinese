@@ -201,12 +201,13 @@ test("guided HSK vocabulary exposes the save-word control and account-aware pers
   assert.match(component, /nextLessonHref \? "Bài tiếp theo" : "Về lộ trình"/);
   assert.match(component, /getHskCurriculumHref\(lesson\.levelId\)/);
   assert.match(component, /onClick=\{persistCurrentProgress\}/);
-  assert.match(component, /next >= steps\.length && currentStep === steps\.length - 1[\s\S]*?saveProgress\(lesson\.id, nextProgress\)/);
+  assert.match(component, /next >= steps\.length && currentStep === steps\.length - 1[\s\S]*?saveProgress\(lesson, nextProgress\)/);
+  assert.match(component, /recordRecentHskLesson\(lesson, progress\)/);
   assert.match(page, /getCurrentUser\(\)/);
   assert.match(page, /data\.access\.source !== "guest"/);
   assert.match(page, /redirect\(learnerLoginPath\(returnTo\)\)/);
   assert.match(page, /getHskLessonHref\(data\.lesson\.levelId, nextLesson\.id\)/);
-  assert.match(page, /<HskGuidedLesson authenticated=\{Boolean\(user\)\} lesson=/);
+  assert.match(page, /<HskLessonLoader authenticated=\{Boolean\(user\)\}.*mode="play".*resource=\{resource\}/);
   assert.match(client, /return response\.ok/);
   assert.match(css, /\.hsk-guided-vocabulary-grid \{[\s\S]*?grid-template-columns: minmax\(360px, \.62fr\) minmax\(0, 1fr\)/);
   assert.match(css, /\.hsk-guided-word-glyph > strong \{[\s\S]*?white-space: nowrap/);

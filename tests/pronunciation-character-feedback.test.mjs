@@ -14,3 +14,9 @@ test("pronunciation feedback propagates nested syllable errors to the owning cha
 test("unscored pronunciation characters do not inherit the correct green color", () => {
   assert.match(styles, /\.pronunciation-character\.is-unscored\s*\{[^}]*color:\s*#334155;[^}]*text-decoration:\s*none;/);
 });
+
+test("microphone toggle chime plays when recording starts and after it stops", () => {
+  assert.match(evaluator, /function playMicToggleChime\(\)/);
+  assert.match(evaluator, /const recorder = await releaseRecorder\(\);[\s\S]*?if \(playToggleSound\) playMicToggleChime\(\);/);
+  assert.match(evaluator, /if \(!navigator\.mediaDevices\?\.getUserMedia\)[\s\S]*?if \(playToggleSound\) playMicToggleChime\(\);[\s\S]*?navigator\.mediaDevices\.getUserMedia/);
+});

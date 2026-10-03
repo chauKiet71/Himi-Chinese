@@ -1,0 +1,462 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-11-bay-gio-may-gio",
+  "lessonNumber": 11,
+  "lessonTitle": "Bây giờ là mấy giờ?",
+  "topicId": "thoi-gian-hoat-dong",
+  "topicTitle": "Thời gian & Hoạt động",
+  "route": "/hsk/1/hsk1-bai-11-bay-gio-may-gio/play",
+  "vocabularyCount": 21,
+  "exerciseCount": 21,
+  "typeCounts": {
+    "meaning": 21,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-977-meaning",
+      "vocabularyId": "977",
+      "sourceIndex": 33,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "点",
+      "pinyin": "diǎn",
+      "note": "Ví dụ: 现在是三点钟。 — Bây giờ là ba giờ.",
+      "speakText": "点",
+      "options": [
+        "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+        "chấm | giọt | điểm | lúc | vẽ chấm | đánh dấu | chọn | gọi món | chạm nhẹ | ám chỉ | thắp | đốt | nhỏ từng giọt | năm phần canh (5 thời cổ) | nét chấm trong chữ Hán | lượng từ",
+        "chia; tách; phân phối; phân bổ; phân biệt (tốt và xấu); (dạng ghép) nhánh của (tổ chức); phân số; một phần mười (của một số đơn vị); đơn vị chiều dài bằng 0,33 cm; phút (đơn vị thời gian); phút (đơn vị đo góc); điểm (trong thể thao hoặc trò chơi); 0,01 nguyên tệ (đơn vị tiền tệ)",
+        "chúng tôi; chúng ta; chúng mình; của chúng tôi; của chúng ta"
+      ],
+      "answer": "chấm | giọt | điểm | lúc | vẽ chấm | đánh dấu | chọn | gọi món | chạm nhẹ | ám chỉ | thắp | đốt | nhỏ từng giọt | năm phần canh (5 thời cổ) | nét chấm trong chữ Hán | lượng từ",
+      "exampleHanzi": "现在是三点钟。",
+      "exampleVi": "Bây giờ là ba giờ."
+    },
+    {
+      "id": "hero-hsk-1-2173-meaning",
+      "vocabularyId": "2173",
+      "sourceIndex": 73,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "我们",
+      "pinyin": "wǒmen",
+      "note": "Ví dụ: 我们是朋友。 — Chúng tôi là bạn bè.",
+      "speakText": "我们",
+      "options": [
+        "phim; phim ảnh",
+        "rạp chiếu phim; rạp phim",
+        "chúng tôi; chúng ta; chúng mình; của chúng tôi; của chúng ta",
+        "vòng lại | quay về | xoay | trả lời | trở về | quay vòng | dân tộc Hồi | lần | lượng từ cho các hồi kịch | mục sách cổ"
+      ],
+      "answer": "chúng tôi; chúng ta; chúng mình; của chúng tôi; của chúng ta",
+      "exampleHanzi": "我们是朋友。",
+      "exampleVi": "Chúng tôi là bạn bè."
+    },
+    {
+      "id": "hero-hsk-1-2183-meaning",
+      "vocabularyId": "2183",
+      "sourceIndex": 75,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "电影",
+      "pinyin": "diànyǐng",
+      "note": "Ví dụ: 昨晚我看了一部电影。 — Tôi đã xem một bộ phim tối qua.",
+      "speakText": "电影",
+      "options": [
+        "trưa; giữa trưa",
+        "phim; phim ảnh",
+        "Chủ Nhật",
+        "thời gian; khoảng thời gian; khoảnh khắc; kỳ"
+      ],
+      "answer": "phim; phim ảnh",
+      "exampleHanzi": "昨晚我看了一部电影。",
+      "exampleVi": "Tôi đã xem một bộ phim tối qua."
+    },
+    {
+      "id": "hero-hsk-1-2184-meaning",
+      "vocabularyId": "2184",
+      "sourceIndex": 76,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "电影院",
+      "pinyin": "diànyǐngyuàn",
+      "note": "Ví dụ: 我们去电影院看电影。 — Chúng ta hãy đến rạp chiếu phim để xem một bộ phim.",
+      "speakText": "电影院",
+      "options": [
+        "Chủ Nhật",
+        "thời gian; khoảng thời gian; khoảnh khắc; kỳ",
+        "thời gian; kỳ",
+        "rạp chiếu phim; rạp phim"
+      ],
+      "answer": "rạp chiếu phim; rạp phim",
+      "exampleHanzi": "我们去电影院看电影。",
+      "exampleVi": "Chúng ta hãy đến rạp chiếu phim để xem một bộ phim."
+    },
+    {
+      "id": "hero-hsk-1-3473-meaning",
+      "vocabularyId": "3473",
+      "sourceIndex": 114,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "回",
+      "pinyin": "huí",
+      "note": "Ví dụ: 我回家了。 — Tôi trở về nhà.",
+      "speakText": "回",
+      "options": [
+        "phim; phim ảnh",
+        "rạp chiếu phim; rạp phim",
+        "vòng lại | quay về | xoay | trả lời | trở về | quay vòng | dân tộc Hồi | lần | lượng từ cho các hồi kịch | mục sách cổ",
+        "bây giờ; hiện tại; lúc này; hiện đại; hiện tại; ngày nay"
+      ],
+      "answer": "vòng lại | quay về | xoay | trả lời | trở về | quay vòng | dân tộc Hồi | lần | lượng từ cho các hồi kịch | mục sách cổ",
+      "exampleHanzi": "我回家了。",
+      "exampleVi": "Tôi trở về nhà."
+    },
+    {
+      "id": "hero-hsk-1-3635-meaning",
+      "vocabularyId": "3635",
+      "sourceIndex": 128,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "现在",
+      "pinyin": "xiànzài",
+      "note": "Ví dụ: 现在是下午三点。 — Bây giờ đã là ba giờ chiều.",
+      "speakText": "现在",
+      "options": [
+        "thời gian; kỳ",
+        "bây giờ; hiện tại; lúc này; hiện đại; hiện tại; ngày nay",
+        "hiệu sách",
+        "siêu thị"
+      ],
+      "answer": "bây giờ; hiện tại; lúc này; hiện đại; hiện tại; ngày nay",
+      "exampleHanzi": "现在是下午三点。",
+      "exampleVi": "Bây giờ đã là ba giờ chiều."
+    },
+    {
+      "id": "hero-hsk-1-5680-meaning",
+      "vocabularyId": "5680",
+      "sourceIndex": 146,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "下",
+      "pinyin": "xià",
+      "note": "Ví dụ: 我们下了一盘棋。 — Chúng tôi đã chơi một ván cờ.",
+      "speakText": "下",
+      "options": [
+        "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+        "bây giờ; hiện tại; lúc này; hiện đại; hiện tại; ngày nay",
+        "tan học; hết giờ học; (nghĩa bóng) (đặc biệt của huấn luyện viên thể thao) bị sa thải; bị đuổi",
+        "hai; 2; (tiếng Bắc Kinh) ngốc"
+      ],
+      "answer": "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+      "exampleHanzi": "我们下了一盘棋。",
+      "exampleVi": "Chúng tôi đã chơi một ván cờ."
+    },
+    {
+      "id": "hero-hsk-1-5683-meaning",
+      "vocabularyId": "5683",
+      "sourceIndex": 149,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "下课",
+      "pinyin": "xiàkè",
+      "note": "Ví dụ: 下课后我们一起去吃饭。 — Sau giờ học chúng tôi cùng nhau đi ăn.",
+      "speakText": "下课",
+      "options": [
+        "tan học; hết giờ học; (nghĩa bóng) (đặc biệt của huấn luyện viên thể thao) bị sa thải; bị đuổi",
+        "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+        "hai; 2; (tiếng Bắc Kinh) ngốc",
+        "mười; 10"
+      ],
+      "answer": "tan học; hết giờ học; (nghĩa bóng) (đặc biệt của huấn luyện viên thể thao) bị sa thải; bị đuổi",
+      "exampleHanzi": "下课后我们一起去吃饭。",
+      "exampleVi": "Sau giờ học chúng tôi cùng nhau đi ăn."
+    },
+    {
+      "id": "hero-hsk-1-7358-meaning",
+      "vocabularyId": "7358",
+      "sourceIndex": 184,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "二",
+      "pinyin": "èr",
+      "note": "Ví dụ: 现在是二月。 — Bây giờ là tháng Hai.",
+      "speakText": "二",
+      "options": [
+        "hai; 2; (tiếng Bắc Kinh) ngốc",
+        "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+        "tan học; hết giờ học; (nghĩa bóng) (đặc biệt của huấn luyện viên thể thao) bị sa thải; bị đuổi",
+        "chia; tách; phân phối; phân bổ; phân biệt (tốt và xấu); (dạng ghép) nhánh của (tổ chức); phân số; một phần mười (của một số đơn vị); đơn vị chiều dài bằng 0,33 cm; phút (đơn vị thời gian); phút (đơn vị đo góc); điểm (trong thể thao hoặc trò chơi); 0,01 nguyên tệ (đơn vị tiền tệ)"
+      ],
+      "answer": "hai; 2; (tiếng Bắc Kinh) ngốc",
+      "exampleHanzi": "现在是二月。",
+      "exampleVi": "Bây giờ là tháng Hai."
+    },
+    {
+      "id": "hero-hsk-1-7436-meaning",
+      "vocabularyId": "7436",
+      "sourceIndex": 192,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "十",
+      "pinyin": "shí",
+      "note": "Ví dụ: 现在是十点。 — Bây giờ là mười giờ.",
+      "speakText": "十",
+      "options": [
+        "tan học; hết giờ học; (nghĩa bóng) (đặc biệt của huấn luyện viên thể thao) bị sa thải; bị đuổi",
+        "mười; 10",
+        "chia; tách; phân phối; phân bổ; phân biệt (tốt và xấu); (dạng ghép) nhánh của (tổ chức); phân số; một phần mười (của một số đơn vị); đơn vị chiều dài bằng 0,33 cm; phút (đơn vị thời gian); phút (đơn vị đo góc); điểm (trong thể thao hoặc trò chơi); 0,01 nguyên tệ (đơn vị tiền tệ)",
+        "trưa; giữa trưa"
+      ],
+      "answer": "mười; 10",
+      "exampleHanzi": "现在是十点。",
+      "exampleVi": "Bây giờ là mười giờ."
+    },
+    {
+      "id": "hero-hsk-1-8115-meaning",
+      "vocabularyId": "8115",
+      "sourceIndex": 205,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "分",
+      "pinyin": "fēn",
+      "note": "Ví dụ: 现在是十分。 — Bây giờ đã quá mười phút rồi.",
+      "speakText": "分",
+      "options": [
+        "trưa; giữa trưa",
+        "sống; cư trú; ở lại; cư trú; dừng lại; (hậu tố chỉ sự chắc chắn, ổn định hoặc dừng lại)",
+        "Chủ Nhật",
+        "chia; tách; phân phối; phân bổ; phân biệt (tốt và xấu); (dạng ghép) nhánh của (tổ chức); phân số; một phần mười (của một số đơn vị); đơn vị chiều dài bằng 0,33 cm; phút (đơn vị thời gian); phút (đơn vị đo góc); điểm (trong thể thao hoặc trò chơi); 0,01 nguyên tệ (đơn vị tiền tệ)"
+      ],
+      "answer": "chia; tách; phân phối; phân bổ; phân biệt (tốt và xấu); (dạng ghép) nhánh của (tổ chức); phân số; một phần mười (của một số đơn vị); đơn vị chiều dài bằng 0,33 cm; phút (đơn vị thời gian); phút (đơn vị đo góc); điểm (trong thể thao hoặc trò chơi); 0,01 nguyên tệ (đơn vị tiền tệ)",
+      "exampleHanzi": "现在是十分。",
+      "exampleVi": "Bây giờ đã quá mười phút rồi."
+    },
+    {
+      "id": "hero-hsk-1-8229-meaning",
+      "vocabularyId": "8229",
+      "sourceIndex": 217,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "中午",
+      "pinyin": "zhōngwǔ",
+      "note": "Ví dụ: 中午我吃午饭。 — Buổi trưa tôi ăn trưa.",
+      "speakText": "中午",
+      "options": [
+        "trưa; giữa trưa",
+        "vòng lại | quay về | xoay | trả lời | trở về | quay vòng | dân tộc Hồi | lần | lượng từ cho các hồi kịch | mục sách cổ",
+        "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+        "tan học; hết giờ học; (nghĩa bóng) (đặc biệt của huấn luyện viên thể thao) bị sa thải; bị đuổi"
+      ],
+      "answer": "trưa; giữa trưa",
+      "exampleHanzi": "中午我吃午饭。",
+      "exampleVi": "Buổi trưa tôi ăn trưa."
+    },
+    {
+      "id": "hero-hsk-1-8232-meaning",
+      "vocabularyId": "8232",
+      "sourceIndex": 220,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "住",
+      "pinyin": "zhù",
+      "note": "Ví dụ: 我住在北京。 — Tôi sống ở Bắc Kinh.",
+      "speakText": "住",
+      "options": [
+        "sống; cư trú; ở lại; cư trú; dừng lại; (hậu tố chỉ sự chắc chắn, ổn định hoặc dừng lại)",
+        "Chủ Nhật",
+        "thời gian; khoảng thời gian; khoảnh khắc; kỳ",
+        "thời gian; kỳ"
+      ],
+      "answer": "sống; cư trú; ở lại; cư trú; dừng lại; (hậu tố chỉ sự chắc chắn, ổn định hoặc dừng lại)",
+      "exampleHanzi": "我住在北京。",
+      "exampleVi": "Tôi sống ở Bắc Kinh."
+    },
+    {
+      "id": "hero-hsk-1-8401-meaning",
+      "vocabularyId": "8401",
+      "sourceIndex": 229,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "星期天",
+      "pinyin": "xīngqītiān",
+      "note": "Ví dụ: 星期天我们去公园。 — Chúng tôi đi đến công viên vào ngày chủ nhật.",
+      "speakText": "星期天",
+      "options": [
+        "tan học; hết giờ học; (nghĩa bóng) (đặc biệt của huấn luyện viên thể thao) bị sa thải; bị đuổi",
+        "hai; 2; (tiếng Bắc Kinh) ngốc",
+        "Chủ Nhật",
+        "mười; 10"
+      ],
+      "answer": "Chủ Nhật",
+      "exampleHanzi": "星期天我们去公园。",
+      "exampleVi": "Chúng tôi đi đến công viên vào ngày chủ nhật."
+    },
+    {
+      "id": "hero-hsk-1-8757-meaning",
+      "vocabularyId": "8757",
+      "sourceIndex": 237,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "时候",
+      "pinyin": "shíhou",
+      "note": "Ví dụ: 我回家的时候已经很晚了。 — Lúc tôi về đến nhà thì đã muộn rồi.",
+      "speakText": "时候",
+      "options": [
+        "hai; 2; (tiếng Bắc Kinh) ngốc",
+        "mười; 10",
+        "chia; tách; phân phối; phân bổ; phân biệt (tốt và xấu); (dạng ghép) nhánh của (tổ chức); phân số; một phần mười (của một số đơn vị); đơn vị chiều dài bằng 0,33 cm; phút (đơn vị thời gian); phút (đơn vị đo góc); điểm (trong thể thao hoặc trò chơi); 0,01 nguyên tệ (đơn vị tiền tệ)",
+        "thời gian; khoảng thời gian; khoảnh khắc; kỳ"
+      ],
+      "answer": "thời gian; khoảng thời gian; khoảnh khắc; kỳ",
+      "exampleHanzi": "我回家的时候已经很晚了。",
+      "exampleVi": "Lúc tôi về đến nhà thì đã muộn rồi."
+    },
+    {
+      "id": "hero-hsk-1-8758-meaning",
+      "vocabularyId": "8758",
+      "sourceIndex": 238,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "时间",
+      "pinyin": "shíjiān",
+      "note": "Ví dụ: 现在是学习的时间。 — Bây giờ là lúc để học.",
+      "speakText": "时间",
+      "options": [
+        "mười; 10",
+        "thời gian; kỳ",
+        "chia; tách; phân phối; phân bổ; phân biệt (tốt và xấu); (dạng ghép) nhánh của (tổ chức); phân số; một phần mười (của một số đơn vị); đơn vị chiều dài bằng 0,33 cm; phút (đơn vị thời gian); phút (đơn vị đo góc); điểm (trong thể thao hoặc trò chơi); 0,01 nguyên tệ (đơn vị tiền tệ)",
+        "sống; cư trú; ở lại; cư trú; dừng lại; (hậu tố chỉ sự chắc chắn, ổn định hoặc dừng lại)"
+      ],
+      "answer": "thời gian; kỳ",
+      "exampleHanzi": "现在是学习的时间。",
+      "exampleVi": "Bây giờ là lúc để học."
+    },
+    {
+      "id": "hero-hsk-1-8761-meaning",
+      "vocabularyId": "8761",
+      "sourceIndex": 241,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "书店",
+      "pinyin": "shūdiàn",
+      "note": "Ví dụ: 我们去书店买书吧。 — Chúng ta hãy đến hiệu sách để mua sách nhé.",
+      "speakText": "书店",
+      "options": [
+        "chia; tách; phân phối; phân bổ; phân biệt (tốt và xấu); (dạng ghép) nhánh của (tổ chức); phân số; một phần mười (của một số đơn vị); đơn vị chiều dài bằng 0,33 cm; phút (đơn vị thời gian); phút (đơn vị đo góc); điểm (trong thể thao hoặc trò chơi); 0,01 nguyên tệ (đơn vị tiền tệ)",
+        "hiệu sách",
+        "sống; cư trú; ở lại; cư trú; dừng lại; (hậu tố chỉ sự chắc chắn, ổn định hoặc dừng lại)",
+        "dấu hiệu số nhiều dùng cho đại từ và danh từ chỉ cá nhân"
+      ],
+      "answer": "hiệu sách",
+      "exampleHanzi": "我们去书店买书吧。",
+      "exampleVi": "Chúng ta hãy đến hiệu sách để mua sách nhé."
+    },
+    {
+      "id": "hero-hsk-1-10607-meaning",
+      "vocabularyId": "10607",
+      "sourceIndex": 273,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "超市",
+      "pinyin": "chāoshì",
+      "note": "Ví dụ: 我们去超市买东西。 — Chúng tôi đi siêu thị để mua đồ.",
+      "speakText": "超市",
+      "options": [
+        "sống; cư trú; ở lại; cư trú; dừng lại; (hậu tố chỉ sự chắc chắn, ổn định hoặc dừng lại)",
+        "dấu hiệu số nhiều dùng cho đại từ và danh từ chỉ cá nhân",
+        "siêu thị",
+        "không; số không; ký hiệu số không; phân số; lẻ tẻ; lẻ (của số); (đặt giữa hai số để chỉ số lượng nhỏ hơn theo sau là số lượng lớn hơn); phân số; (trong toán học) số dư (sau khi chia); thừa; rụng và tàn lụi; tàn lụi"
+      ],
+      "answer": "siêu thị",
+      "exampleHanzi": "我们去超市买东西。",
+      "exampleVi": "Chúng tôi đi siêu thị để mua đồ."
+    },
+    {
+      "id": "hero-hsk-1-10963-meaning",
+      "vocabularyId": "10963",
+      "sourceIndex": 289,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "们",
+      "pinyin": "men",
+      "note": "Ví dụ: 我们是朋友。 — Chúng tôi là bạn bè.",
+      "speakText": "们",
+      "options": [
+        "không; số không; ký hiệu số không; phân số; lẻ tẻ; lẻ (của số); (đặt giữa hai số để chỉ số lượng nhỏ hơn theo sau là số lượng lớn hơn); phân số; (trong toán học) số dư (sau khi chia); thừa; rụng và tàn lụi; tàn lụi",
+        "phía trước | phía trước | trước đây | đầu tiên | trên (theo số) | tương lai | trước đây | trước Công nguyên | cựu | từng",
+        "chấm | giọt | điểm | lúc | vẽ chấm | đánh dấu | chọn | gọi món | chạm nhẹ | ám chỉ | thắp | đốt | nhỏ từng giọt | năm phần canh (5 thời cổ) | nét chấm trong chữ Hán | lượng từ",
+        "dấu hiệu số nhiều dùng cho đại từ và danh từ chỉ cá nhân"
+      ],
+      "answer": "dấu hiệu số nhiều dùng cho đại từ và danh từ chỉ cá nhân",
+      "exampleHanzi": "我们是朋友。",
+      "exampleVi": "Chúng tôi là bạn bè."
+    },
+    {
+      "id": "hero-hsk-1-11839-meaning",
+      "vocabularyId": "11839",
+      "sourceIndex": 299,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "零",
+      "pinyin": "líng",
+      "note": "Ví dụ: 现在是十二点零分。 — Bây giờ chính xác là mười hai giờ.",
+      "speakText": "零",
+      "options": [
+        "phía trước | phía trước | trước đây | đầu tiên | trên (theo số) | tương lai | trước đây | trước Công nguyên | cựu | từng",
+        "hai; 2; (tiếng Bắc Kinh) ngốc",
+        "không; số không; ký hiệu số không; phân số; lẻ tẻ; lẻ (của số); (đặt giữa hai số để chỉ số lượng nhỏ hơn theo sau là số lượng lớn hơn); phân số; (trong toán học) số dư (sau khi chia); thừa; rụng và tàn lụi; tàn lụi",
+        "mười; 10"
+      ],
+      "answer": "không; số không; ký hiệu số không; phân số; lẻ tẻ; lẻ (của số); (đặt giữa hai số để chỉ số lượng nhỏ hơn theo sau là số lượng lớn hơn); phân số; (trong toán học) số dư (sau khi chia); thừa; rụng và tàn lụi; tàn lụi",
+      "exampleHanzi": "现在是十二点零分。",
+      "exampleVi": "Bây giờ chính xác là mười hai giờ."
+    },
+    {
+      "id": "hero-hsk-1-12151-meaning",
+      "vocabularyId": "12151",
+      "sourceIndex": 309,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "前",
+      "pinyin": "qián",
+      "note": "Ví dụ: 银行在学校的前面。 — Ngân hàng ở trước trường học.",
+      "speakText": "前",
+      "options": [
+        "phim; phim ảnh",
+        "phía trước | phía trước | trước đây | đầu tiên | trên (theo số) | tương lai | trước đây | trước Công nguyên | cựu | từng",
+        "rạp chiếu phim; rạp phim",
+        "bây giờ; hiện tại; lúc này; hiện đại; hiện tại; ngày nay"
+      ],
+      "answer": "phía trước | phía trước | trước đây | đầu tiên | trên (theo số) | tương lai | trước đây | trước Công nguyên | cựu | từng",
+      "exampleHanzi": "银行在学校的前面。",
+      "exampleVi": "Ngân hàng ở trước trường học."
+    }
+  ]
+}

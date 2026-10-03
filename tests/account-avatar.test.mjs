@@ -73,3 +73,12 @@ test("account avatar flow uploads in the browser, fills every frame, and persist
   assert.match(shell, /className="user-chip-avatar-image"/);
   assert.match(styles, /\.user-chip-avatar > \.user-chip-avatar-image[^}]*width: 100%[^}]*height: 100%[^}]*object-fit: cover/s);
 });
+
+test("mobile account avatar exposes a clear brand-aligned edit control", async () => {
+  const styles = await read("app/account-wallet.css");
+
+  assert.match(styles, /Refined mobile avatar control/);
+  assert.match(styles, /@media \(max-width: 720px\)[\s\S]*\.account-wallet-redesign \.account-profile-avatar > button,[\s\S]*width:\s*28px;[\s\S]*aspect-ratio:\s*1;[\s\S]*border-radius:\s*999px;[\s\S]*background:\s*rgba\(255, 255, 255, \.98\)/);
+  assert.match(styles, /\.account-wallet-redesign \.account-avatar-uploader:focus-within \.account-profile-avatar/);
+  assert.match(styles, /\.account-wallet-redesign \.account-profile-avatar > button:active:not\(:disabled\)[\s\S]*transform:\s*scale\(\.94\)/);
+});

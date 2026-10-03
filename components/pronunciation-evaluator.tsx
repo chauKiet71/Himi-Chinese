@@ -150,6 +150,41 @@ function categoryFor(text: string) {
   return "read_sentence";
 }
 
+function playMicToggleChime() {
+  const AudioContextConstructor = window.AudioContext
+    ?? (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!AudioContextConstructor) return;
+
+  try {
+    const context = new AudioContextConstructor();
+    const gain = context.createGain();
+    const primary = context.createOscillator();
+    const overtone = context.createOscillator();
+    const now = context.currentTime;
+
+    primary.type = "sine";
+    primary.frequency.setValueAtTime(1046.5, now);
+    overtone.type = "sine";
+    overtone.frequency.setValueAtTime(1568, now);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.08, now + 0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+    primary.connect(gain);
+    overtone.connect(gain);
+    gain.connect(context.destination);
+    primary.start(now);
+    overtone.start(now);
+    primary.stop(now + 0.18);
+    overtone.stop(now + 0.18);
+    primary.addEventListener("ended", () => { void context.close(); }, { once: true });
+    if (context.state === "suspended") {
+      void context.resume().catch(() => { void context.close(); });
+    }
+  } catch {
+    // Audio feedback is optional; microphone recording must still work without it.
+  }
+}
+
 async function evaluateWithIflytek(pcm: Uint8Array, targetText: string, webSocketRef: MutableRefObject<WebSocket | null>) {
   const authResponse = await fetch("/api/speech/iflytek/authorize", { method: "POST", cache: "no-store" });
   const auth = await authResponse.json() as { appId?: string; url?: string; message?: string };
@@ -246,6 +281,7 @@ export function PronunciationEvaluator({
   actionMiddle = null,
   onEvaluated,
   previewResult = null,
+  playToggleSound = false,
 }: {
   targetText: string;
   compact?: boolean;
@@ -254,6 +290,7 @@ export function PronunciationEvaluator({
   actionMiddle?: ReactNode;
   onEvaluated?: (result: PronunciationResult) => void;
   previewResult?: PronunciationResult | null;
+  playToggleSound?: boolean;
 }) {
   const [status, setStatus] = useState<"idle" | "recording" | "evaluating">("idle");
   const [seconds, setSeconds] = useState(0);
@@ -291,6 +328,7 @@ export function PronunciationEvaluator({
       setStatus("idle");
       return;
     }
+    if (playToggleSound) playMicToggleChime();
 
     const samples = mergeAudioChunks(recorder.chunks);
     if (samples.length < recorder.sampleRate * 0.35) {
@@ -308,7 +346,7 @@ export function PronunciationEvaluator({
     } finally {
       setStatus("idle");
     }
-  }, [onEvaluated, releaseRecorder, status, targetText]);
+  }, [onEvaluated, playToggleSound, releaseRecorder, status, targetText]);
   useEffect(() => {
     stopRecordingRef.current = () => { void stopRecording(); };
   }, [stopRecording]);
@@ -321,6 +359,7 @@ export function PronunciationEvaluator({
       setError("Trình duyệt này chưa hỗ trợ ghi âm bằng micro.");
       return;
     }
+    if (playToggleSound) playMicToggleChime();
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({

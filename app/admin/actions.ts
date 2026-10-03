@@ -74,7 +74,7 @@ function resultRedirect(result: MutationResult, successPath: string, errorPath: 
   if (!result.ok) redirect(`${errorPath}?error=${result.error}`);
   revalidatePath("/admin");
   revalidatePath("/courses");
-  revalidatePath("/practice");
+  revalidatePath("/listening");
   revalidatePath("/admin/practice");
   revalidatePath("/admin/subscriptions");
   revalidatePath("/admin/users");

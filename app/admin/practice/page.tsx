@@ -47,7 +47,7 @@ export default async function AdminPracticePage({ searchParams }: {
         <p>{user.role === "editor" ? "Mở một nhóm ngành để tạo ca mới hoặc tiếp tục sửa các ca ở trạng thái Bản nháp. Khi hoàn tất, gửi ca sang Chờ duyệt." : "Mở các ca Chờ duyệt để nghe audio, đối chiếu transcript và kiểm tra đáp án trước khi xuất bản hoặc trả lại bản nháp."}</p>
       </section>}
       <section className="admin-panel">
-        <div className="panel-heading"><h2>{industries.length} nhóm ngành</h2><Link href="/practice" prefetch={false}>Xem trang người học →</Link></div>
+        <div className="panel-heading"><h2>{industries.length} nhóm ngành</h2><Link href="/listening?mode=scenario" prefetch={false}>Xem trang người học →</Link></div>
         <div className="admin-record-list practice-admin-list">
           {industries.length ? industries.map((industry) => <AdminLink href={`/admin/practice/industries/${industry.id}`} intentPrefetch key={industry.id}>
             <span><strong>{industry.label}</strong><small>{industry.slug} · {industry.scenarioCount} ca · {industry.publishedCount} đang xuất bản</small></span>

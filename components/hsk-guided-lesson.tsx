@@ -25,7 +25,8 @@ import {
   Volume2,
   X,
 } from "lucide-react";
-import { getHskCurriculumHref, type HskExercise, type HskLessonContent, type HskVocabularyAudio, type HskVocabularyItem } from "@/lib/hsk-lesson-content";
+import type { HskExercise, HskLessonContent, HskVocabularyAudio, HskVocabularyItem } from "@/lib/hsk-lesson-content";
+import { getHskCurriculumHref } from "@/lib/hsk-routing";
 import { cancelHskPronunciation, playHskPronunciation } from "@/lib/hsk-audio";
 import { VipContentGate, VipUpgradeDialog, type VipUpgradeTarget } from "@/components/vip-upgrade-prompt";
 import { buildHskGuidedExercises, buildHskGuidedLessonSteps, buildHskGuidedNavigationSections, type HskGuidedStepKind } from "@/lib/hsk-guided-lesson";
@@ -35,6 +36,7 @@ import {
   parseHskLessonProgress,
   type HskLessonProgress,
 } from "@/lib/hsk-lesson-progress";
+import { recordRecentHskLesson } from "@/lib/recent-hsk-learning";
 import { trySaveHskVocabularyWord } from "@/lib/saved-vocabulary-client";
 
 type WritingMode = "watch" | "trace" | "quiz";
@@ -75,9 +77,10 @@ const SECTION_ICONS = {
   practice: Target,
 } satisfies Record<HskGuidedStepKind, typeof BookOpen>;
 
-function saveProgress(lessonId: string, progress: HskLessonProgress) {
+function saveProgress(lesson: HskLessonContent, progress: HskLessonProgress) {
   try {
-    window.localStorage.setItem(getHskLessonProgressStorageKey(lessonId), JSON.stringify(progress));
+    window.localStorage.setItem(getHskLessonProgressStorageKey(lesson.id), JSON.stringify(progress));
+    recordRecentHskLesson(lesson, progress);
   } catch {
     // The guided lesson stays usable when browser storage is unavailable.
   }
@@ -376,6 +379,7 @@ export function HskGuidedLesson({ lesson, nextLessonHref = null, authenticated =
         const saved = parseHskLessonProgress(window.localStorage.getItem(getHskLessonProgressStorageKey(lesson.id)), lesson);
         progressRef.current = saved;
         setProgress(saved);
+        recordRecentHskLesson(lesson, saved);
         if (saved.guidedStep >= 0) setCurrentStep(Math.min(saved.guidedStep, steps.length - 1));
       } catch {
         progressRef.current = EMPTY_HSK_LESSON_PROGRESS;
@@ -397,7 +401,7 @@ export function HskGuidedLesson({ lesson, nextLessonHref = null, authenticated =
   const goToStep = useCallback((next: number) => {
     if (next >= steps.length && currentStep === steps.length - 1 && step.kind === "practice") {
       const nextProgress = commit({ guidedStep: currentStep, guidedCompleted: true });
-      saveProgress(lesson.id, nextProgress);
+      saveProgress(lesson, nextProgress);
       setCompletionOpen(true);
       window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
       return;
@@ -407,15 +411,15 @@ export function HskGuidedLesson({ lesson, nextLessonHref = null, authenticated =
     setCurrentStep(clamped);
     commit({ guidedStep: clamped });
     window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-  }, [commit, currentStep, lesson.id, step.kind, steps.length]);
+  }, [commit, currentStep, lesson, step.kind, steps.length]);
 
   const persistCurrentProgress = useCallback(() => {
     const nextProgress = commit((current) => ({
       guidedStep: currentStep,
       guidedCompleted: current.guidedCompleted,
     }));
-    saveProgress(lesson.id, nextProgress);
-  }, [commit, currentStep, lesson.id]);
+    saveProgress(lesson, nextProgress);
+  }, [commit, currentStep, lesson]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {

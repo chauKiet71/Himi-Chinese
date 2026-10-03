@@ -1,0 +1,462 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-12-ngay-mai-thoi-tiet-the-nao",
+  "lessonNumber": 12,
+  "lessonTitle": "Ngày mai thời tiết thế nào?",
+  "topicId": "thoi-gian-hoat-dong",
+  "topicTitle": "Thời gian & Hoạt động",
+  "route": "/hsk/1/hsk1-bai-12-ngay-mai-thoi-tiet-the-nao/play",
+  "vocabularyCount": 21,
+  "exerciseCount": 21,
+  "typeCounts": {
+    "meaning": 21,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-821-meaning",
+      "vocabularyId": "821",
+      "sourceIndex": 11,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "怎么样",
+      "pinyin": "zěnmeyàng",
+      "note": "Ví dụ: 这本书怎么样？ — Cuốn sách này thế nào?",
+      "speakText": "怎么样",
+      "options": [
+        "chúng (dùng cho đồ vật vô tri)",
+        "buổi tối; đêm; muộn",
+        "ngày; trời; thiên đường",
+        "thế nào?; thế nào nhỉ?; đã thế nào rồi?; mọi việc thế nào?"
+      ],
+      "answer": "thế nào?; thế nào nhỉ?; đã thế nào rồi?; mọi việc thế nào?",
+      "exampleHanzi": "这本书怎么样？",
+      "exampleVi": "Cuốn sách này thế nào?"
+    },
+    {
+      "id": "hero-hsk-1-964-meaning",
+      "vocabularyId": "964",
+      "sourceIndex": 22,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "晚",
+      "pinyin": "wǎn",
+      "note": "Ví dụ: 今天回来得很晚。 — Hôm nay tôi về rất muộn.",
+      "speakText": "晚",
+      "options": [
+        "họ Leng",
+        "thế nào?; thế nào nhỉ?; đã thế nào rồi?; mọi việc thế nào?",
+        "chúng (dùng cho đồ vật vô tri)",
+        "buổi tối; đêm; muộn"
+      ],
+      "answer": "buổi tối; đêm; muộn",
+      "exampleHanzi": "今天回来得很晚。",
+      "exampleVi": "Hôm nay tôi về rất muộn."
+    },
+    {
+      "id": "hero-hsk-1-1133-meaning",
+      "vocabularyId": "1133",
+      "sourceIndex": 37,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "它们",
+      "pinyin": "tāmen",
+      "note": "Ví dụ: 它们是小鸟。 — Chúng là những con chim nhỏ.",
+      "speakText": "它们",
+      "options": [
+        "ngày; trời; thiên đường",
+        "thời tiết",
+        "thực sự; thật; quả thực; thật; đúng; chân thực",
+        "chúng (dùng cho đồ vật vô tri)"
+      ],
+      "answer": "chúng (dùng cho đồ vật vô tri)",
+      "exampleHanzi": "它们是小鸟。",
+      "exampleVi": "Chúng là những con chim nhỏ."
+    },
+    {
+      "id": "hero-hsk-1-1135-meaning",
+      "vocabularyId": "1135",
+      "sourceIndex": 39,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "天",
+      "pinyin": "tiān",
+      "note": "Ví dụ: 今天天气很好。 — Thời tiết hôm nay rất đẹp.",
+      "speakText": "天",
+      "options": [
+        "trái cây",
+        "mưa",
+        "ngày; trời; thiên đường",
+        "thế nào?; thế nào nhỉ?; đã thế nào rồi?; mọi việc thế nào?"
+      ],
+      "answer": "ngày; trời; thiên đường",
+      "exampleHanzi": "今天天气很好。",
+      "exampleVi": "Thời tiết hôm nay rất đẹp."
+    },
+    {
+      "id": "hero-hsk-1-1137-meaning",
+      "vocabularyId": "1137",
+      "sourceIndex": 41,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "天气",
+      "pinyin": "tiānqì",
+      "note": "Ví dụ: 今天天气很好。 — Thời tiết hôm nay rất đẹp.",
+      "speakText": "天气",
+      "options": [
+        "mưa",
+        "thời tiết",
+        "thế nào?; thế nào nhỉ?; đã thế nào rồi?; mọi việc thế nào?",
+        "buổi tối; đêm; muộn"
+      ],
+      "answer": "thời tiết",
+      "exampleHanzi": "今天天气很好。",
+      "exampleVi": "Thời tiết hôm nay rất đẹp."
+    },
+    {
+      "id": "hero-hsk-1-1217-meaning",
+      "vocabularyId": "1217",
+      "sourceIndex": 51,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "真",
+      "pinyin": "zhēn",
+      "note": "Ví dụ: 今天真热。 — Hôm nay trời nóng quá.",
+      "speakText": "真",
+      "options": [
+        "thực sự; thật; quả thực; thật; đúng; chân thực",
+        "chúng (dùng cho đồ vật vô tri)",
+        "ngày; trời; thiên đường",
+        "thời tiết"
+      ],
+      "answer": "thực sự; thật; quả thực; thật; đúng; chân thực",
+      "exampleHanzi": "今天真热。",
+      "exampleVi": "Hôm nay trời nóng quá."
+    },
+    {
+      "id": "hero-hsk-1-1965-meaning",
+      "vocabularyId": "1965",
+      "sourceIndex": 63,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "爱",
+      "pinyin": "ài",
+      "note": "Ví dụ: 我爱我的家人。 — Tôi yêu gia đình tôi.",
+      "speakText": "爱",
+      "options": [
+        "ngày; trời; thiên đường",
+        "yêu; quý mến; thích; tình cảm; có xu hướng (làm gì); có tendency (xảy ra)",
+        "thời tiết",
+        "thực sự; thật; quả thực; thật; đúng; chân thực"
+      ],
+      "answer": "yêu; quý mến; thích; tình cảm; có xu hướng (làm gì); có tendency (xảy ra)",
+      "exampleHanzi": "我爱我的家人。",
+      "exampleVi": "Tôi yêu gia đình tôi."
+    },
+    {
+      "id": "hero-hsk-1-2994-meaning",
+      "vocabularyId": "2994",
+      "sourceIndex": 89,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "些",
+      "pinyin": "xiē",
+      "note": "Ví dụ: 请给我一些水。 — Xin vui lòng cho tôi một ít nước.",
+      "speakText": "些",
+      "options": [
+        "lượng từ chỉ một lượng nhỏ hoặc số lượng nhỏ lớn hơn 1: một vài, vài, một số",
+        "phụ nữ; bà; cô; quý bà",
+        "mưa rơi",
+        "làm nóng lên; đun nóng; nóng (về thời tiết); nhiệt; nồng nhiệt"
+      ],
+      "answer": "lượng từ chỉ một lượng nhỏ hoặc số lượng nhỏ lớn hơn 1: một vài, vài, một số",
+      "exampleHanzi": "请给我一些水。",
+      "exampleVi": "Xin vui lòng cho tôi một ít nước."
+    },
+    {
+      "id": "hero-hsk-1-3582-meaning",
+      "vocabularyId": "3582",
+      "sourceIndex": 125,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "女士",
+      "pinyin": "nǚshì",
+      "note": "Ví dụ: 这位女士是医生。 — Cô này là bác sĩ.",
+      "speakText": "女士",
+      "options": [
+        "thực sự; thật; quả thực; thật; đúng; chân thực",
+        "phụ nữ; bà; cô; quý bà",
+        "yêu; quý mến; thích; tình cảm; có xu hướng (làm gì); có tendency (xảy ra)",
+        "lượng từ chỉ một lượng nhỏ hoặc số lượng nhỏ lớn hơn 1: một vài, vài, một số"
+      ],
+      "answer": "phụ nữ; bà; cô; quý bà",
+      "exampleHanzi": "这位女士是医生。",
+      "exampleVi": "Cô này là bác sĩ."
+    },
+    {
+      "id": "hero-hsk-1-5681-meaning",
+      "vocabularyId": "5681",
+      "sourceIndex": 147,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "下雨",
+      "pinyin": "xià yǔ",
+      "note": "Ví dụ: 今天下雨了。 — Hôm nay trời mưa.",
+      "speakText": "下雨",
+      "options": [
+        "mưa rơi",
+        "làm nóng lên; đun nóng; nóng (về thời tiết); nhiệt; nồng nhiệt",
+        "họ Leng",
+        "rất; thật sự; khác thường; phi thường"
+      ],
+      "answer": "mưa rơi",
+      "exampleHanzi": "今天下雨了。",
+      "exampleVi": "Hôm nay trời mưa."
+    },
+    {
+      "id": "hero-hsk-1-7139-meaning",
+      "vocabularyId": "7139",
+      "sourceIndex": 173,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "热",
+      "pinyin": "rè",
+      "note": "Ví dụ: 今天天气很热。 — Thời tiết hôm nay rất nóng.",
+      "speakText": "热",
+      "options": [
+        "mưa rơi",
+        "rất; thật sự; khác thường; phi thường",
+        "đến | (dùng thay cho động từ cụ thể hơn) | đây (bổ hướng chỉ chuyển động về phía người nói, như huí lái) | từ khi (như zì gǔ yǐ lái) | trong khoảng (thời gian) | (tiền tố) đến ...; đời ... tiếp theo (như lái shì) | (giữa hai động từ) để | (sau số tròn) khoảng | (dùng sau de để chỉ khả năng, như tán de lái, hoặc sau bù để chỉ không thể, như chī bù lái)",
+        "làm nóng lên; đun nóng; nóng (về thời tiết); nhiệt; nồng nhiệt"
+      ],
+      "answer": "làm nóng lên; đun nóng; nóng (về thời tiết); nhiệt; nồng nhiệt",
+      "exampleHanzi": "今天天气很热。",
+      "exampleVi": "Thời tiết hôm nay rất nóng."
+    },
+    {
+      "id": "hero-hsk-1-7286-meaning",
+      "vocabularyId": "7286",
+      "sourceIndex": 182,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "冷",
+      "pinyin": "lěng",
+      "note": "Ví dụ: 今天很冷。 — Hôm nay trời rất lạnh.",
+      "speakText": "冷",
+      "options": [
+        "rất; thật sự; khác thường; phi thường",
+        "họ Leng",
+        "đến | (dùng thay cho động từ cụ thể hơn) | đây (bổ hướng chỉ chuyển động về phía người nói, như huí lái) | từ khi (như zì gǔ yǐ lái) | trong khoảng (thời gian) | (tiền tố) đến ...; đời ... tiếp theo (như lái shì) | (giữa hai động từ) để | (sau số tròn) khoảng | (dùng sau de để chỉ khả năng, như tán de lái, hoặc sau bù để chỉ không thể, như chī bù lái)",
+        "cao nhất; lớn nhất; quá (nhiều); rất; cực kỳ"
+      ],
+      "answer": "họ Leng",
+      "exampleHanzi": "今天很冷。",
+      "exampleVi": "Hôm nay trời rất lạnh."
+    },
+    {
+      "id": "hero-hsk-1-7363-meaning",
+      "vocabularyId": "7363",
+      "sourceIndex": 189,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "非常",
+      "pinyin": "fēicháng",
+      "note": "Ví dụ: 今天天气非常好。 — Thời tiết hôm nay rất tốt.",
+      "speakText": "非常",
+      "options": [
+        "làm nóng lên; đun nóng; nóng (về thời tiết); nhiệt; nồng nhiệt",
+        "rất; thật sự; khác thường; phi thường",
+        "họ Leng",
+        "đến | (dùng thay cho động từ cụ thể hơn) | đây (bổ hướng chỉ chuyển động về phía người nói, như huí lái) | từ khi (như zì gǔ yǐ lái) | trong khoảng (thời gian) | (tiền tố) đến ...; đời ... tiếp theo (như lái shì) | (giữa hai động từ) để | (sau số tròn) khoảng | (dùng sau de để chỉ khả năng, như tán de lái, hoặc sau bù để chỉ không thể, như chī bù lái)"
+      ],
+      "answer": "rất; thật sự; khác thường; phi thường",
+      "exampleHanzi": "今天天气非常好。",
+      "exampleVi": "Thời tiết hôm nay rất tốt."
+    },
+    {
+      "id": "hero-hsk-1-8173-meaning",
+      "vocabularyId": "8173",
+      "sourceIndex": 213,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "来",
+      "pinyin": "lái",
+      "note": "Ví dụ: 请来北京玩。 — Hãy đến Bắc Kinh để chơi.",
+      "speakText": "来",
+      "options": [
+        "họ Leng",
+        "rất; thật sự; khác thường; phi thường",
+        "đến | (dùng thay cho động từ cụ thể hơn) | đây (bổ hướng chỉ chuyển động về phía người nói, như huí lái) | từ khi (như zì gǔ yǐ lái) | trong khoảng (thời gian) | (tiền tố) đến ...; đời ... tiếp theo (như lái shì) | (giữa hai động từ) để | (sau số tròn) khoảng | (dùng sau de để chỉ khả năng, như tán de lái, hoặc sau bù để chỉ không thể, như chī bù lái)",
+        "cao nhất; lớn nhất; quá (nhiều); rất; cực kỳ"
+      ],
+      "answer": "đến | (dùng thay cho động từ cụ thể hơn) | đây (bổ hướng chỉ chuyển động về phía người nói, như huí lái) | từ khi (như zì gǔ yǐ lái) | trong khoảng (thời gian) | (tiền tố) đến ...; đời ... tiếp theo (như lái shì) | (giữa hai động từ) để | (sau số tròn) khoảng | (dùng sau de để chỉ khả năng, như tán de lái, hoặc sau bù để chỉ không thể, như chī bù lái)",
+      "exampleHanzi": "请来北京玩。",
+      "exampleVi": "Hãy đến Bắc Kinh để chơi."
+    },
+    {
+      "id": "hero-hsk-1-8645-meaning",
+      "vocabularyId": "8645",
+      "sourceIndex": 233,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "太",
+      "pinyin": "tài",
+      "note": "Ví dụ: 今天太热了。 — Hôm nay nóng quá.",
+      "speakText": "太",
+      "options": [
+        "đến | (dùng thay cho động từ cụ thể hơn) | đây (bổ hướng chỉ chuyển động về phía người nói, như huí lái) | từ khi (như zì gǔ yǐ lái) | trong khoảng (thời gian) | (tiền tố) đến ...; đời ... tiếp theo (như lái shì) | (giữa hai động từ) để | (sau số tròn) khoảng | (dùng sau de để chỉ khả năng, như tán de lái, hoặc sau bù để chỉ không thể, như chī bù lái)",
+        "họ Shui",
+        "trái cây",
+        "cao nhất; lớn nhất; quá (nhiều); rất; cực kỳ"
+      ],
+      "answer": "cao nhất; lớn nhất; quá (nhiều); rất; cực kỳ",
+      "exampleHanzi": "今天太热了。",
+      "exampleVi": "Hôm nay nóng quá."
+    },
+    {
+      "id": "hero-hsk-1-8763-meaning",
+      "vocabularyId": "8763",
+      "sourceIndex": 243,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "水",
+      "pinyin": "shuǐ",
+      "note": "Ví dụ: 我喝水。 — Tôi uống nước.",
+      "speakText": "水",
+      "options": [
+        "đến | (dùng thay cho động từ cụ thể hơn) | đây (bổ hướng chỉ chuyển động về phía người nói, như huí lái) | từ khi (như zì gǔ yǐ lái) | trong khoảng (thời gian) | (tiền tố) đến ...; đời ... tiếp theo (như lái shì) | (giữa hai động từ) để | (sau số tròn) khoảng | (dùng sau de để chỉ khả năng, như tán de lái, hoặc sau bù để chỉ không thể, như chī bù lái)",
+        "cao nhất; lớn nhất; quá (nhiều); rất; cực kỳ",
+        "họ Shui",
+        "một chút; hơi"
+      ],
+      "answer": "họ Shui",
+      "exampleHanzi": "我喝水。",
+      "exampleVi": "Tôi uống nước."
+    },
+    {
+      "id": "hero-hsk-1-8764-meaning",
+      "vocabularyId": "8764",
+      "sourceIndex": 244,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "水果",
+      "pinyin": "shuǐguǒ",
+      "note": "Ví dụ: 我喜欢吃水果。 — Tôi thích ăn trái cây.",
+      "speakText": "水果",
+      "options": [
+        "trái cây",
+        "cao nhất; lớn nhất; quá (nhiều); rất; cực kỳ",
+        "một chút; hơi",
+        "không sao đâu; không có vấn đề gì"
+      ],
+      "answer": "trái cây",
+      "exampleHanzi": "我喜欢吃水果。",
+      "exampleVi": "Tôi thích ăn trái cây."
+    },
+    {
+      "id": "hero-hsk-1-9142-meaning",
+      "vocabularyId": "9142",
+      "sourceIndex": 250,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "有（一）点儿",
+      "pinyin": "yǒu(yì)diǎnr",
+      "note": "Ví dụ: 今天有点儿冷。 — Hôm nay trời hơi lạnh.",
+      "speakText": "有（一）点儿",
+      "options": [
+        "mưa",
+        "không sao đâu; không có vấn đề gì",
+        "bán; phản bội; nỗ lực hết mình; khoe khoang; phô trương",
+        "một chút; hơi"
+      ],
+      "answer": "một chút; hơi",
+      "exampleHanzi": "今天有点儿冷。",
+      "exampleVi": "Hôm nay trời hơi lạnh."
+    },
+    {
+      "id": "hero-hsk-1-9143-meaning",
+      "vocabularyId": "9143",
+      "sourceIndex": 251,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "雨",
+      "pinyin": "yǔ",
+      "note": "Ví dụ: 今天下雨了。 — Hôm nay trời mưa.",
+      "speakText": "雨",
+      "options": [
+        "không sao đâu; không có vấn đề gì",
+        "mưa",
+        "bán; phản bội; nỗ lực hết mình; khoe khoang; phô trương",
+        "ngày; trời; thiên đường"
+      ],
+      "answer": "mưa",
+      "exampleHanzi": "今天下雨了。",
+      "exampleVi": "Hôm nay trời mưa."
+    },
+    {
+      "id": "hero-hsk-1-10960-meaning",
+      "vocabularyId": "10960",
+      "sourceIndex": 286,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "没事",
+      "pinyin": "méishì",
+      "note": "Ví dụ: 没事，一切都会好起来的。 — Không sao đâu, mọi chuyện sẽ ổn thôi.",
+      "speakText": "没事",
+      "options": [
+        "mưa",
+        "không sao đâu; không có vấn đề gì",
+        "yêu; quý mến; thích; tình cảm; có xu hướng (làm gì); có tendency (xảy ra)",
+        "đến | (dùng thay cho động từ cụ thể hơn) | đây (bổ hướng chỉ chuyển động về phía người nói, như huí lái) | từ khi (như zì gǔ yǐ lái) | trong khoảng (thời gian) | (tiền tố) đến ...; đời ... tiếp theo (như lái shì) | (giữa hai động từ) để | (sau số tròn) khoảng | (dùng sau de để chỉ khả năng, như tán de lái, hoặc sau bù để chỉ không thể, như chī bù lái)"
+      ],
+      "answer": "không sao đâu; không có vấn đề gì",
+      "exampleHanzi": "没事，一切都会好起来的。",
+      "exampleVi": "Không sao đâu, mọi chuyện sẽ ổn thôi."
+    },
+    {
+      "id": "hero-hsk-1-11842-meaning",
+      "vocabularyId": "11842",
+      "sourceIndex": 302,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "卖",
+      "pinyin": "mài",
+      "note": "Ví dụ: 商店卖水果。 — Cửa hàng bán trái cây.",
+      "speakText": "卖",
+      "options": [
+        "yêu; quý mến; thích; tình cảm; có xu hướng (làm gì); có tendency (xảy ra)",
+        "đến | (dùng thay cho động từ cụ thể hơn) | đây (bổ hướng chỉ chuyển động về phía người nói, như huí lái) | từ khi (như zì gǔ yǐ lái) | trong khoảng (thời gian) | (tiền tố) đến ...; đời ... tiếp theo (như lái shì) | (giữa hai động từ) để | (sau số tròn) khoảng | (dùng sau de để chỉ khả năng, như tán de lái, hoặc sau bù để chỉ không thể, như chī bù lái)",
+        "bán; phản bội; nỗ lực hết mình; khoe khoang; phô trương",
+        "không sao đâu; không có vấn đề gì"
+      ],
+      "answer": "bán; phản bội; nỗ lực hết mình; khoe khoang; phô trương",
+      "exampleHanzi": "商店卖水果。",
+      "exampleVi": "Cửa hàng bán trái cây."
+    }
+  ]
+}

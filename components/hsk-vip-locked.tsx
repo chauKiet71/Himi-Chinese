@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LockKeyhole } from "lucide-react";
-import { getHskCurriculumHref, type HskLessonContent } from "@/lib/hsk-lesson-content";
+import type { HskLessonContent } from "@/lib/hsk-lesson-content";
+import { getHskCurriculumHref } from "@/lib/hsk-routing";
 import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 
 export function HskVipLocked({ lesson }: { lesson: HskLessonContent }) {

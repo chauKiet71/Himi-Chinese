@@ -1,0 +1,483 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-01-chao-anh",
+  "lessonNumber": 1,
+  "lessonTitle": "Xin chào!",
+  "topicId": "nen-tang-lam-quen",
+  "topicTitle": "Nền tảng & Làm quen",
+  "route": "/hsk/1/hsk1-bai-01-chao-anh/play",
+  "vocabularyCount": 22,
+  "exerciseCount": 22,
+  "typeCounts": {
+    "meaning": 22,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-965-meaning",
+      "vocabularyId": "965",
+      "sourceIndex": 23,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "晚饭",
+      "pinyin": "wǎnfàn",
+      "note": "Ví dụ: 我晚饭吃面条。 — Tôi ăn mì cho bữa tối.",
+      "speakText": "晚饭",
+      "options": [
+        "ban ngày; trong ngày; ngày",
+        "bệnh; bệnh tật; bị ốm; khuyết điểm",
+        "tàu hỏa",
+        "bữa tối; bữa ăn tối; bữa cơm tối"
+      ],
+      "answer": "bữa tối; bữa ăn tối; bữa cơm tối",
+      "exampleHanzi": "我晚饭吃面条。",
+      "exampleVi": "Tôi ăn mì cho bữa tối."
+    },
+    {
+      "id": "hero-hsk-1-1136-meaning",
+      "vocabularyId": "1136",
+      "sourceIndex": 40,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "天",
+      "pinyin": "tiān",
+      "note": "Ví dụ: 我在这里住了三天。 — Tôi ở đây ba ngày.",
+      "speakText": "天",
+      "options": [
+        "bữa tối; bữa ăn tối; bữa cơm tối",
+        "ngày; trời; thiên đường",
+        "bên này; ở đây",
+        "ban ngày; trong ngày; ngày"
+      ],
+      "answer": "ngày; trời; thiên đường",
+      "exampleHanzi": "我在这里住了三天。",
+      "exampleVi": "Tôi ở đây ba ngày."
+    },
+    {
+      "id": "hero-hsk-1-1214-meaning",
+      "vocabularyId": "1214",
+      "sourceIndex": 48,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "这边",
+      "pinyin": "zhèbiān",
+      "note": "Ví dụ: 请坐这边。 — Xin vui lòng ngồi ở đây.",
+      "speakText": "这边",
+      "options": [
+        "nó",
+        "các bạn (số nhiều)",
+        "bên này; ở đây",
+        "bạn (kính ngữ, khác với thân mật Nin)"
+      ],
+      "answer": "bên này; ở đây",
+      "exampleHanzi": "请坐这边。",
+      "exampleVi": "Xin vui lòng ngồi ở đây."
+    },
+    {
+      "id": "hero-hsk-1-1970-meaning",
+      "vocabularyId": "1970",
+      "sourceIndex": 68,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "白天",
+      "pinyin": "báitiān",
+      "note": "Ví dụ: 白天很热。 — Ban ngày rất nóng.",
+      "speakText": "白天",
+      "options": [
+        "em trai",
+        "Trẻ em",
+        "ngày; trời; thiên đường",
+        "ban ngày; trong ngày; ngày"
+      ],
+      "answer": "ban ngày; trong ngày; ngày",
+      "exampleHanzi": "白天很热。",
+      "exampleVi": "Ban ngày rất nóng."
+    },
+    {
+      "id": "hero-hsk-1-2243-meaning",
+      "vocabularyId": "2243",
+      "sourceIndex": 77,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "你",
+      "pinyin": "nǐ",
+      "note": "Ví dụ: 你好吗？ — Bạn có khỏe không?",
+      "speakText": "你",
+      "options": [
+        "bạn (kính ngữ, khác với thân mật Nin)",
+        "bạn (thân mật, khác với kính ngữ Nin)",
+        "bữa tối; bữa ăn tối; bữa cơm tối",
+        "ngày; trời; thiên đường"
+      ],
+      "answer": "bạn (thân mật, khác với kính ngữ Nin)",
+      "exampleHanzi": "你好吗？",
+      "exampleVi": "Bạn có khỏe không?"
+    },
+    {
+      "id": "hero-hsk-1-2244-meaning",
+      "vocabularyId": "2244",
+      "sourceIndex": 78,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "你好",
+      "pinyin": "nǐ hǎo",
+      "note": "Ví dụ: 你好，很高兴认识你。 — Xin chào hân hạnh được gặp bạn.",
+      "speakText": "你好",
+      "options": [
+        "cái nào",
+        "nó",
+        "các bạn (số nhiều)",
+        "xin chào"
+      ],
+      "answer": "xin chào",
+      "exampleHanzi": "你好，很高兴认识你。",
+      "exampleVi": "Xin chào hân hạnh được gặp bạn."
+    },
+    {
+      "id": "hero-hsk-1-3043-meaning",
+      "vocabularyId": "3043",
+      "sourceIndex": 98,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "哪个",
+      "pinyin": "nǎge",
+      "note": "Ví dụ: 哪个是你哥哥？ — Anh trai của bạn là ai?",
+      "speakText": "哪个",
+      "options": [
+        "cái nào",
+        "ngày; trời; thiên đường",
+        "ban ngày; trong ngày; ngày",
+        "xin chào"
+      ],
+      "answer": "cái nào",
+      "exampleHanzi": "哪个是你哥哥？",
+      "exampleVi": "Anh trai của bạn là ai?"
+    },
+    {
+      "id": "hero-hsk-1-3292-meaning",
+      "vocabularyId": "3292",
+      "sourceIndex": 105,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "它",
+      "pinyin": "tā",
+      "note": "Ví dụ: 它是一只猫。 — Đó là một con mèo.",
+      "speakText": "它",
+      "options": [
+        "nó",
+        "ban ngày; trong ngày; ngày",
+        "xin chào",
+        "bệnh; bệnh tật; bị ốm; khuyết điểm"
+      ],
+      "answer": "nó",
+      "exampleHanzi": "它是一只猫。",
+      "exampleVi": "Đó là một con mèo."
+    },
+    {
+      "id": "hero-hsk-1-3576-meaning",
+      "vocabularyId": "3576",
+      "sourceIndex": 119,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "你们",
+      "pinyin": "nǐmen",
+      "note": "Ví dụ: 你们是好朋友吗？ — Bạn có phải là bạn tốt không?",
+      "speakText": "你们",
+      "options": [
+        "xin chào",
+        "bệnh; bệnh tật; bị ốm; khuyết điểm",
+        "tàu hỏa",
+        "các bạn (số nhiều)"
+      ],
+      "answer": "các bạn (số nhiều)",
+      "exampleHanzi": "你们是好朋友吗？",
+      "exampleVi": "Bạn có phải là bạn tốt không?"
+    },
+    {
+      "id": "hero-hsk-1-3577-meaning",
+      "vocabularyId": "3577",
+      "sourceIndex": 120,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "您",
+      "pinyin": "nín",
+      "note": "Ví dụ: 您好，请问这是您的座位吗？ — Xin chào, tôi có thể hỏi đây có phải chỗ ngồi của bạn không?",
+      "speakText": "您",
+      "options": [
+        "bệnh; bệnh tật; bị ốm; khuyết điểm",
+        "bạn (kính ngữ, khác với thân mật Nin)",
+        "tàu hỏa",
+        "em trai"
+      ],
+      "answer": "bạn (kính ngữ, khác với thân mật Nin)",
+      "exampleHanzi": "您好，请问这是您的座位吗？",
+      "exampleVi": "Xin chào, tôi có thể hỏi đây có phải chỗ ngồi của bạn không?"
+    },
+    {
+      "id": "hero-hsk-1-4198-meaning",
+      "vocabularyId": "4198",
+      "sourceIndex": 131,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "病",
+      "pinyin": "bìng",
+      "note": "Ví dụ: 他生病了。 — Anh ấy bị ốm.",
+      "speakText": "病",
+      "options": [
+        "nó",
+        "bệnh; bệnh tật; bị ốm; khuyết điểm",
+        "các bạn (số nhiều)",
+        "bạn (kính ngữ, khác với thân mật Nin)"
+      ],
+      "answer": "bệnh; bệnh tật; bị ốm; khuyết điểm",
+      "exampleHanzi": "他生病了。",
+      "exampleVi": "Anh ấy bị ốm."
+    },
+    {
+      "id": "hero-hsk-1-5766-meaning",
+      "vocabularyId": "5766",
+      "sourceIndex": 152,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "火车",
+      "pinyin": "huǒchē",
+      "note": "Ví dụ: 我坐火车去上海。 — Tôi đi tàu tới Thượng Hải.",
+      "speakText": "火车",
+      "options": [
+        "các bạn (số nhiều)",
+        "bạn (kính ngữ, khác với thân mật Nin)",
+        "xin lỗi; xin thứ lỗi; tôi xin lỗi; làm (ai đó) thất vọng; làm thất vọng",
+        "tàu hỏa"
+      ],
+      "answer": "tàu hỏa",
+      "exampleHanzi": "我坐火车去上海。",
+      "exampleVi": "Tôi đi tàu tới Thượng Hải."
+    },
+    {
+      "id": "hero-hsk-1-6267-meaning",
+      "vocabularyId": "6267",
+      "sourceIndex": 153,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "弟弟",
+      "pinyin": "dìdi",
+      "note": "Ví dụ: 我的弟弟很可爱。 — Em trai tôi rất dễ thương.",
+      "speakText": "弟弟",
+      "options": [
+        "bạn (kính ngữ, khác với thân mật Nin)",
+        "em trai",
+        "xin lỗi; xin thứ lỗi; tôi xin lỗi; làm (ai đó) thất vọng; làm thất vọng",
+        "họ San"
+      ],
+      "answer": "em trai",
+      "exampleHanzi": "我的弟弟很可爱。",
+      "exampleVi": "Em trai tôi rất dễ thương."
+    },
+    {
+      "id": "hero-hsk-1-6273-meaning",
+      "vocabularyId": "6273",
+      "sourceIndex": 159,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "对不起",
+      "pinyin": "duìbuqǐ",
+      "note": "Ví dụ: 对不起，我迟到了。 — Xin lỗi, tôi đến muộn.",
+      "speakText": "对不起",
+      "options": [
+        "xin lỗi; xin thứ lỗi; tôi xin lỗi; làm (ai đó) thất vọng; làm thất vọng",
+        "tàu hỏa",
+        "em trai",
+        "họ San"
+      ],
+      "answer": "xin lỗi; xin thứ lỗi; tôi xin lỗi; làm (ai đó) thất vọng; làm thất vọng",
+      "exampleHanzi": "对不起，我迟到了。",
+      "exampleVi": "Xin lỗi, tôi đến muộn."
+    },
+    {
+      "id": "hero-hsk-1-7143-meaning",
+      "vocabularyId": "7143",
+      "sourceIndex": 177,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "三",
+      "pinyin": "sān",
+      "note": "Ví dụ: 我有三本书。 — Tôi có ba cuốn sách.",
+      "speakText": "三",
+      "options": [
+        "bị ốm",
+        "có thể; có khả năng; khá tốt; không tệ",
+        "Trẻ em",
+        "họ San"
+      ],
+      "answer": "họ San",
+      "exampleHanzi": "我有三本书。",
+      "exampleVi": "Tôi có ba cuốn sách."
+    },
+    {
+      "id": "hero-hsk-1-8014-meaning",
+      "vocabularyId": "8014",
+      "sourceIndex": 200,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "生病",
+      "pinyin": "shēngbìng",
+      "note": "Ví dụ: 他生病了，所以没来上课。 — Anh ấy bị ốm nên không đến lớp.",
+      "speakText": "生病",
+      "options": [
+        "họ San",
+        "có thể; có khả năng; khá tốt; không tệ",
+        "Trẻ em",
+        "bị ốm"
+      ],
+      "answer": "bị ốm",
+      "exampleHanzi": "他生病了，所以没来上课。",
+      "exampleVi": "Anh ấy bị ốm nên không đến lớp."
+    },
+    {
+      "id": "hero-hsk-1-8169-meaning",
+      "vocabularyId": "8169",
+      "sourceIndex": 209,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "可以",
+      "pinyin": "kěyǐ",
+      "note": "Ví dụ: 这个想法可以的。 — Ý tưởng này được đấy.",
+      "speakText": "可以",
+      "options": [
+        "bị ốm",
+        "có thể; có khả năng; khá tốt; không tệ",
+        "Trẻ em",
+        "không sao cả; không vấn đề gì"
+      ],
+      "answer": "có thể; có khả năng; khá tốt; không tệ",
+      "exampleHanzi": "这个想法可以的。",
+      "exampleVi": "Ý tưởng này được đấy."
+    },
+    {
+      "id": "hero-hsk-1-9169-meaning",
+      "vocabularyId": "9169",
+      "sourceIndex": 255,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "孩子",
+      "pinyin": "háizi",
+      "note": "Ví dụ: 孩子们在公园里玩。 — Bọn trẻ đang chơi trong công viên.",
+      "speakText": "孩子",
+      "options": [
+        "Trẻ em",
+        "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+        "không sao cả; không vấn đề gì",
+        "chỉ | chỉ có | duy nhất"
+      ],
+      "answer": "Trẻ em",
+      "exampleHanzi": "孩子们在公园里玩。",
+      "exampleVi": "Bọn trẻ đang chơi trong công viên."
+    },
+    {
+      "id": "hero-hsk-1-9174-meaning",
+      "vocabularyId": "9174",
+      "sourceIndex": 260,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "好",
+      "pinyin": "hǎo",
+      "note": "Ví dụ: 这个主意很好。 — Ý tưởng này rất hay.",
+      "speakText": "好",
+      "options": [
+        "không sao cả; không vấn đề gì",
+        "chỉ | chỉ có | duy nhất",
+        "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+        "một lát; một chút"
+      ],
+      "answer": "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+      "exampleHanzi": "这个主意很好。",
+      "exampleVi": "Ý tưởng này rất hay."
+    },
+    {
+      "id": "hero-hsk-1-10958-meaning",
+      "vocabularyId": "10958",
+      "sourceIndex": 284,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "没关系",
+      "pinyin": "méi guānxi",
+      "note": "Ví dụ: 没关系，别担心。 — Không sao đâu, đừng lo lắng.",
+      "speakText": "没关系",
+      "options": [
+        "chỉ | chỉ có | duy nhất",
+        "một lát; một chút",
+        "xin lỗi; xin thứ lỗi; tôi xin lỗi; làm (ai đó) thất vọng; làm thất vọng",
+        "không sao cả; không vấn đề gì"
+      ],
+      "answer": "không sao cả; không vấn đề gì",
+      "exampleHanzi": "没关系，别担心。",
+      "exampleVi": "Không sao đâu, đừng lo lắng."
+    },
+    {
+      "id": "hero-hsk-1-11175-meaning",
+      "vocabularyId": "11175",
+      "sourceIndex": 291,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "只",
+      "pinyin": "zhī",
+      "note": "Ví dụ: 我只有一本书。 — Tôi chỉ có một cuốn sách.",
+      "speakText": "只",
+      "options": [
+        "một lát; một chút",
+        "ngày; trời; thiên đường",
+        "bữa tối; bữa ăn tối; bữa cơm tối",
+        "chỉ | chỉ có | duy nhất"
+      ],
+      "answer": "chỉ | chỉ có | duy nhất",
+      "exampleHanzi": "我只有一本书。",
+      "exampleVi": "Tôi chỉ có một cuốn sách."
+    },
+    {
+      "id": "hero-hsk-1-12265-meaning",
+      "vocabularyId": "12265",
+      "sourceIndex": 313,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "一下",
+      "pinyin": "yíxià",
+      "note": "Ví dụ: 请等一下。 — Xin vui lòng chờ một lát.",
+      "speakText": "一下",
+      "options": [
+        "bữa tối; bữa ăn tối; bữa cơm tối",
+        "ngày; trời; thiên đường",
+        "một lát; một chút",
+        "bên này; ở đây"
+      ],
+      "answer": "một lát; một chút",
+      "exampleHanzi": "请等一下。",
+      "exampleVi": "Xin vui lòng chờ một lát."
+    }
+  ]
+}

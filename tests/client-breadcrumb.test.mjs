@@ -29,10 +29,11 @@ test("client breadcrumb matches the requested HSK level navigation", () => {
 });
 
 test("client breadcrumb keeps useful parents across learner routes", () => {
-  assert.deepEqual(getClientBreadcrumb("/courses", "hsk"), {
+  assert.equal(getClientBreadcrumb("/courses", "hsk"), null);
+  assert.deepEqual(getClientBreadcrumb("/courses"), {
     parentHref: "/",
     parentLabel: "Học tập",
-    currentLabel: "Các cấp độ HSK",
+    currentLabel: "Lộ trình",
   });
   assert.deepEqual(getClientBreadcrumb("/hsk/2/hsk2-bai-01/play"), {
     parentHref: "/hsk/2/hsk2-bai-01",
@@ -48,6 +49,8 @@ test("client breadcrumb keeps useful parents across learner routes", () => {
 
 test("home and developer-only previews do not render a redundant breadcrumb", () => {
   assert.equal(getClientBreadcrumb("/"), null);
+  assert.equal(getClientBreadcrumb("/typing"), null);
+  assert.equal(getClientBreadcrumb("/writing"), null);
   assert.equal(getClientBreadcrumb("/dev/completion-preview"), null);
 });
 
@@ -76,5 +79,6 @@ test("the learner shell renders one shared accessible breadcrumb", async () => {
   assert.match(component, /aria-label="Điều hướng trang"/);
   assert.match(component, /aria-current="page"/);
   assert.match(styles, /\.client-breadcrumb-current[\s\S]*var\(--himi-red/);
+  assert.match(styles, /@media \(max-width: 720px\)[\s\S]*\.learner-app-shell:has\(\.account-wallet-redesign\) \.client-breadcrumb-bar\s*\{[\s\S]*display:\s*none;/);
   assert.match(styles, /\.learner-app-shell :is\(\.writing-breadcrumbs, \.typing-breadcrumbs, \.hsk-learning-breadcrumb/);
 });

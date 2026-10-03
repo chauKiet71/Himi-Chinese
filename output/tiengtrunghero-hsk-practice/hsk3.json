@@ -1,0 +1,397 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK3",
+  "levelId": "hsk-3",
+  "label": "HSK3",
+  "levelLabel": "HSK3",
+  "lessonCount": 20,
+  "vocabularyCount": 549,
+  "exerciseCount": 549,
+  "typeCounts": {
+    "meaning": 549,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "lessons": [
+    {
+      "id": "hsk3-tb-lesson-01",
+      "lessonNumber": 1,
+      "title": "Anh dự định làm gì vào cuối tuần vậy?",
+      "topicId": "ke-hoach-sinh-hoat",
+      "topicTitle": "Kế hoạch & Sinh hoạt",
+      "route": "/hsk/3/hsk3-tb-lesson-01/play",
+      "targetCount": 28,
+      "vocabularyCount": 28,
+      "exactAnchorCount": 13,
+      "semanticBalanceCount": 15,
+      "file": "hsk3/lesson-01.json",
+      "exerciseCount": 28,
+      "typeCounts": {
+        "meaning": 28,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-02",
+      "lessonNumber": 2,
+      "title": "Khi nào anh ấy quay về?",
+      "topicId": "ke-hoach-sinh-hoat",
+      "topicTitle": "Kế hoạch & Sinh hoạt",
+      "route": "/hsk/3/hsk3-tb-lesson-02/play",
+      "targetCount": 28,
+      "vocabularyCount": 28,
+      "exactAnchorCount": 14,
+      "semanticBalanceCount": 14,
+      "file": "hsk3/lesson-02.json",
+      "exerciseCount": 28,
+      "typeCounts": {
+        "meaning": 28,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-03",
+      "lessonNumber": 3,
+      "title": "Trên bàn có rất nhiều thức uống.",
+      "topicId": "ke-hoach-sinh-hoat",
+      "topicTitle": "Kế hoạch & Sinh hoạt",
+      "route": "/hsk/3/hsk3-tb-lesson-03/play",
+      "targetCount": 28,
+      "vocabularyCount": 28,
+      "exactAnchorCount": 9,
+      "semanticBalanceCount": 19,
+      "file": "hsk3/lesson-03.json",
+      "exerciseCount": 28,
+      "typeCounts": {
+        "meaning": 28,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-04",
+      "lessonNumber": 4,
+      "title": "Cô ấy luôn cười khi nói chuyện với khách hàng.",
+      "topicId": "ke-hoach-sinh-hoat",
+      "topicTitle": "Kế hoạch & Sinh hoạt",
+      "route": "/hsk/3/hsk3-tb-lesson-04/play",
+      "targetCount": 28,
+      "vocabularyCount": 28,
+      "exactAnchorCount": 17,
+      "semanticBalanceCount": 11,
+      "file": "hsk3/lesson-04.json",
+      "exerciseCount": 28,
+      "typeCounts": {
+        "meaning": 28,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-05",
+      "lessonNumber": 5,
+      "title": "Dạo này em ngày càng béo ra.",
+      "topicId": "ke-hoach-sinh-hoat",
+      "topicTitle": "Kế hoạch & Sinh hoạt",
+      "route": "/hsk/3/hsk3-tb-lesson-05/play",
+      "targetCount": 28,
+      "vocabularyCount": 28,
+      "exactAnchorCount": 14,
+      "semanticBalanceCount": 14,
+      "file": "hsk3/lesson-05.json",
+      "exerciseCount": 28,
+      "typeCounts": {
+        "meaning": 28,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-06",
+      "lessonNumber": 6,
+      "title": "Sao bỗng dưng lại không tìm thấy?",
+      "topicId": "di-chuyen-so-sanh",
+      "topicTitle": "Di chuyển & So sánh",
+      "route": "/hsk/3/hsk3-tb-lesson-06/play",
+      "targetCount": 28,
+      "vocabularyCount": 28,
+      "exactAnchorCount": 15,
+      "semanticBalanceCount": 13,
+      "file": "hsk3/lesson-06.json",
+      "exerciseCount": 28,
+      "typeCounts": {
+        "meaning": 28,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-07",
+      "lessonNumber": 7,
+      "title": "Tôi và cô ấy quen nhau được năm năm rồi.",
+      "topicId": "di-chuyen-so-sanh",
+      "topicTitle": "Di chuyển & So sánh",
+      "route": "/hsk/3/hsk3-tb-lesson-07/play",
+      "targetCount": 28,
+      "vocabularyCount": 28,
+      "exactAnchorCount": 12,
+      "semanticBalanceCount": 16,
+      "file": "hsk3/lesson-07.json",
+      "exerciseCount": 28,
+      "typeCounts": {
+        "meaning": 28,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-08",
+      "lessonNumber": 8,
+      "title": "Em đi đâu thì anh đi đến đó.",
+      "topicId": "di-chuyen-so-sanh",
+      "topicTitle": "Di chuyển & So sánh",
+      "route": "/hsk/3/hsk3-tb-lesson-08/play",
+      "targetCount": 28,
+      "vocabularyCount": 28,
+      "exactAnchorCount": 15,
+      "semanticBalanceCount": 13,
+      "file": "hsk3/lesson-08.json",
+      "exerciseCount": 28,
+      "typeCounts": {
+        "meaning": 28,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-09",
+      "lessonNumber": 9,
+      "title": "Cô ấy nói tiếng Trung Quốc hay như người Trung Quốc vậy.",
+      "topicId": "di-chuyen-so-sanh",
+      "topicTitle": "Di chuyển & So sánh",
+      "route": "/hsk/3/hsk3-tb-lesson-09/play",
+      "targetCount": 28,
+      "vocabularyCount": 28,
+      "exactAnchorCount": 15,
+      "semanticBalanceCount": 13,
+      "file": "hsk3/lesson-09.json",
+      "exerciseCount": 28,
+      "typeCounts": {
+        "meaning": 28,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-10",
+      "lessonNumber": 10,
+      "title": "Môn Toán khó hơn môn Lịch sử nhiều.",
+      "topicId": "di-chuyen-so-sanh",
+      "topicTitle": "Di chuyển & So sánh",
+      "route": "/hsk/3/hsk3-tb-lesson-10/play",
+      "targetCount": 27,
+      "vocabularyCount": 27,
+      "exactAnchorCount": 13,
+      "semanticBalanceCount": 14,
+      "file": "hsk3/lesson-10.json",
+      "exerciseCount": 27,
+      "typeCounts": {
+        "meaning": 27,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-11",
+      "lessonNumber": 11,
+      "title": "Đừng quên tắt máy điều hòa không khí nhé.",
+      "topicId": "cong-viec-trai-nghiem",
+      "topicTitle": "Công việc & Trải nghiệm",
+      "route": "/hsk/3/hsk3-tb-lesson-11/play",
+      "targetCount": 27,
+      "vocabularyCount": 27,
+      "exactAnchorCount": 16,
+      "semanticBalanceCount": 11,
+      "file": "hsk3/lesson-11.json",
+      "exerciseCount": 27,
+      "typeCounts": {
+        "meaning": 27,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-12",
+      "lessonNumber": 12,
+      "title": "Hãy để những đồ quan trọng ở chỗ tôi đi.",
+      "topicId": "cong-viec-trai-nghiem",
+      "topicTitle": "Công việc & Trải nghiệm",
+      "route": "/hsk/3/hsk3-tb-lesson-12/play",
+      "targetCount": 27,
+      "vocabularyCount": 27,
+      "exactAnchorCount": 10,
+      "semanticBalanceCount": 17,
+      "file": "hsk3/lesson-12.json",
+      "exerciseCount": 27,
+      "typeCounts": {
+        "meaning": 27,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-13",
+      "lessonNumber": 13,
+      "title": "Tôi đi bộ về.",
+      "topicId": "cong-viec-trai-nghiem",
+      "topicTitle": "Công việc & Trải nghiệm",
+      "route": "/hsk/3/hsk3-tb-lesson-13/play",
+      "targetCount": 27,
+      "vocabularyCount": 27,
+      "exactAnchorCount": 11,
+      "semanticBalanceCount": 16,
+      "file": "hsk3/lesson-13.json",
+      "exerciseCount": 27,
+      "typeCounts": {
+        "meaning": 27,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-14",
+      "lessonNumber": 14,
+      "title": "Cậu hãy mang trái cây đến đây.",
+      "topicId": "cong-viec-trai-nghiem",
+      "topicTitle": "Công việc & Trải nghiệm",
+      "route": "/hsk/3/hsk3-tb-lesson-14/play",
+      "targetCount": 27,
+      "vocabularyCount": 27,
+      "exactAnchorCount": 16,
+      "semanticBalanceCount": 11,
+      "file": "hsk3/lesson-14.json",
+      "exerciseCount": 27,
+      "typeCounts": {
+        "meaning": 27,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-15",
+      "lessonNumber": 15,
+      "title": "Những câu khác đều không có vấn đề gì.",
+      "topicId": "cong-viec-trai-nghiem",
+      "topicTitle": "Công việc & Trải nghiệm",
+      "route": "/hsk/3/hsk3-tb-lesson-15/play",
+      "targetCount": 27,
+      "vocabularyCount": 27,
+      "exactAnchorCount": 17,
+      "semanticBalanceCount": 10,
+      "file": "hsk3/lesson-15.json",
+      "exerciseCount": 27,
+      "typeCounts": {
+        "meaning": 27,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-16",
+      "lessonNumber": 16,
+      "title": "Bây giờ tôi mệt đến nỗi chỉ muốn đi ngủ sau khi hết giờ làm việc.",
+      "topicId": "quan-diem-anh-huong",
+      "topicTitle": "Quan điểm & Ảnh hưởng",
+      "route": "/hsk/3/hsk3-tb-lesson-16/play",
+      "targetCount": 27,
+      "vocabularyCount": 27,
+      "exactAnchorCount": 12,
+      "semanticBalanceCount": 15,
+      "file": "hsk3/lesson-16.json",
+      "exerciseCount": 27,
+      "typeCounts": {
+        "meaning": 27,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-17",
+      "lessonNumber": 17,
+      "title": "Ai cũng có cách chữa khỏi “bệnh” của em.",
+      "topicId": "quan-diem-anh-huong",
+      "topicTitle": "Quan điểm & Ảnh hưởng",
+      "route": "/hsk/3/hsk3-tb-lesson-17/play",
+      "targetCount": 27,
+      "vocabularyCount": 27,
+      "exactAnchorCount": 15,
+      "semanticBalanceCount": 12,
+      "file": "hsk3/lesson-17.json",
+      "exerciseCount": 27,
+      "typeCounts": {
+        "meaning": 27,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-18",
+      "lessonNumber": 18,
+      "title": "Tôi tin họ sẽ đồng ý.",
+      "topicId": "quan-diem-anh-huong",
+      "topicTitle": "Quan điểm & Ảnh hưởng",
+      "route": "/hsk/3/hsk3-tb-lesson-18/play",
+      "targetCount": 27,
+      "vocabularyCount": 27,
+      "exactAnchorCount": 14,
+      "semanticBalanceCount": 13,
+      "file": "hsk3/lesson-18.json",
+      "exerciseCount": 27,
+      "typeCounts": {
+        "meaning": 27,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-19",
+      "lessonNumber": 19,
+      "title": "Anh không nhìn ra được à?",
+      "topicId": "quan-diem-anh-huong",
+      "topicTitle": "Quan điểm & Ảnh hưởng",
+      "route": "/hsk/3/hsk3-tb-lesson-19/play",
+      "targetCount": 27,
+      "vocabularyCount": 27,
+      "exactAnchorCount": 12,
+      "semanticBalanceCount": 15,
+      "file": "hsk3/lesson-19.json",
+      "exerciseCount": 27,
+      "typeCounts": {
+        "meaning": 27,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk3-tb-lesson-20",
+      "lessonNumber": 20,
+      "title": "Mình chịu ảnh hưởng từ anh ấy.",
+      "topicId": "quan-diem-anh-huong",
+      "topicTitle": "Quan điểm & Ảnh hưởng",
+      "route": "/hsk/3/hsk3-tb-lesson-20/play",
+      "targetCount": 27,
+      "vocabularyCount": 27,
+      "exactAnchorCount": 12,
+      "semanticBalanceCount": 15,
+      "file": "hsk3/lesson-20.json",
+      "exerciseCount": 27,
+      "typeCounts": {
+        "meaning": 27,
+        "pinyin": 0,
+        "listening": 0
+      }
+    }
+  ]
+}

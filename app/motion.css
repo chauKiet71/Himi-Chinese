@@ -150,7 +150,6 @@
   transform: scale(.97);
 }
 
-.explorer-count,
 .course-motion-item,
 .explorer > .empty-state {
   animation: course-item-enter .22s var(--motion-ease) both;
@@ -451,10 +450,7 @@
     transform: translate3d(0, -1px, 0);
   }
 
-  .course-card:not(.course-card-coming):is(:hover, :focus-visible) .icon-link {
-    color: #fff;
-    border-color: var(--forest);
-    background: var(--forest);
+  .course-card:not(.course-card-coming):focus-visible .icon-link {
     transform: translate3d(3px, -3px, 0) scale(1.04);
   }
 
@@ -689,7 +685,7 @@
     transform: translate3d(-1px, -1px, 0) scale(1.02);
   }
 
-  .course-card:not(.course-card-coming):is(:hover, :focus-visible) .icon-link {
+  .course-card:not(.course-card-coming):focus-visible .icon-link {
     transform: translate3d(2px, -2px, 0) scale(1.02);
   }
 

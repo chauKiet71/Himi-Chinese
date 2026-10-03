@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-06",
+  "lessonNumber": 6,
+  "lessonTitle": "Sao anh không ăn nữa?",
+  "topicId": "sinh-hoat-di-chuyen-ke-hoach",
+  "topicTitle": "Sinh hoạt, di chuyển & kế hoạch",
+  "route": "/hsk/2/hsk2-tb-lesson-06/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-2446-meaning",
+      "vocabularyId": "2446",
+      "sourceIndex": 18,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "出门",
+      "pinyin": "chūmén",
+      "note": "Ví dụ: 我出门去学校。 — Tôi đi ra ngoài trường học.",
+      "speakText": "出门",
+      "options": [
+        "bơi lội; bơi",
+        "bút; bút chì; bút lông; viết; nét chữ Hán; lượng từ dùng cho số tiền, giao dịch",
+        "đi ra; rời nhà; đi du lịch; xa nhà; (của phụ nữ) kết hôn",
+        "bóng rổ"
+      ],
+      "answer": "đi ra; rời nhà; đi du lịch; xa nhà; (của phụ nữ) kết hôn",
+      "exampleHanzi": "我出门去学校。",
+      "exampleVi": "Tôi đi ra ngoài trường học."
+    },
+    {
+      "id": "hero-hsk-2-3767-meaning",
+      "vocabularyId": "3767",
+      "sourceIndex": 38,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "笔",
+      "pinyin": "bǐ",
+      "note": "Ví dụ: 我用笔写字。 — Tôi dùng bút để viết.",
+      "speakText": "笔",
+      "options": [
+        "họ Men",
+        "tên; danh từ (loại từ); nơi (ví dụ: trong số người chiến thắng); nổi tiếng; lượng từ dùng cho người",
+        "tiệm rượu; quán rượu; khách sạn; nhà hàng; (Đài Loan) câu lạc bộ chủ quán",
+        "bút; bút chì; bút lông; viết; nét chữ Hán; lượng từ dùng cho số tiền, giao dịch"
+      ],
+      "answer": "bút; bút chì; bút lông; viết; nét chữ Hán; lượng từ dùng cho số tiền, giao dịch",
+      "exampleHanzi": "我用笔写字。",
+      "exampleVi": "Tôi dùng bút để viết."
+    },
+    {
+      "id": "hero-hsk-2-5113-meaning",
+      "vocabularyId": "5113",
+      "sourceIndex": 64,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "篮球",
+      "pinyin": "lánqiú",
+      "note": "Ví dụ: 他喜欢打篮球。 — Anh ấy thích chơi bóng rổ.",
+      "speakText": "篮球",
+      "options": [
+        "tên; danh từ (loại từ); nơi (ví dụ: trong số người chiến thắng); nổi tiếng; lượng từ dùng cho người",
+        "tiệm rượu; quán rượu; khách sạn; nhà hàng; (Đài Loan) câu lạc bộ chủ quán",
+        "bóng rổ",
+        "đi ra; rời nhà; đi du lịch; xa nhà; (của phụ nữ) kết hôn"
+      ],
+      "answer": "bóng rổ",
+      "exampleHanzi": "他喜欢打篮球。",
+      "exampleVi": "Anh ấy thích chơi bóng rổ."
+    },
+    {
+      "id": "hero-hsk-2-5207-meaning",
+      "vocabularyId": "5207",
+      "sourceIndex": 66,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "门",
+      "pinyin": "mén",
+      "note": "Ví dụ: 请关上门。 — Hãy đóng cửa lại.",
+      "speakText": "门",
+      "options": [
+        "tiệm rượu; quán rượu; khách sạn; nhà hàng; (Đài Loan) câu lạc bộ chủ quán",
+        "họ Men",
+        "đi ra; rời nhà; đi du lịch; xa nhà; (của phụ nữ) kết hôn",
+        "bột mì; mì; (thực phẩm) mềm (không giòn); (lóng) (người) yếu đuối; không có lập trường"
+      ],
+      "answer": "họ Men",
+      "exampleHanzi": "请关上门。",
+      "exampleVi": "Hãy đóng cửa lại."
+    },
+    {
+      "id": "hero-hsk-2-5210-meaning",
+      "vocabularyId": "5210",
+      "sourceIndex": 69,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "面",
+      "pinyin": "miàn",
+      "note": "Ví dụ: 他是我的朋友。 — Anh ấy là bạn tôi.",
+      "speakText": "面",
+      "options": [
+        "tên; danh từ (loại từ); nơi (ví dụ: trong số người chiến thắng); nổi tiếng; lượng từ dùng cho người",
+        "bột mì; mì; (thực phẩm) mềm (không giòn); (lóng) (người) yếu đuối; không có lập trường",
+        "tiệm rượu; quán rượu; khách sạn; nhà hàng; (Đài Loan) câu lạc bộ chủ quán",
+        "như thế; theo cách đó; chừng ấy; rất; khoảng; trong trường hợp đó"
+      ],
+      "answer": "bột mì; mì; (thực phẩm) mềm (không giòn); (lóng) (người) yếu đuối; không có lập trường",
+      "exampleHanzi": "他是我的朋友。",
+      "exampleVi": "Anh ấy là bạn tôi."
+    },
+    {
+      "id": "hero-hsk-2-5211-meaning",
+      "vocabularyId": "5211",
+      "sourceIndex": 70,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "名",
+      "pinyin": "míng",
+      "note": "Ví dụ: 这是我的名字。 — Đây là tên của tôi.",
+      "speakText": "名",
+      "options": [
+        "bột mì; mì; (thực phẩm) mềm (không giòn); (lóng) (người) yếu đuối; không có lập trường",
+        "như thế; theo cách đó; chừng ấy; rất; khoảng; trong trường hợp đó",
+        "bơi lội; bơi",
+        "tên; danh từ (loại từ); nơi (ví dụ: trong số người chiến thắng); nổi tiếng; lượng từ dùng cho người"
+      ],
+      "answer": "tên; danh từ (loại từ); nơi (ví dụ: trong số người chiến thắng); nổi tiếng; lượng từ dùng cho người",
+      "exampleHanzi": "这是我的名字。",
+      "exampleVi": "Đây là tên của tôi."
+    },
+    {
+      "id": "hero-hsk-2-5212-meaning",
+      "vocabularyId": "5212",
+      "sourceIndex": 71,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "名",
+      "pinyin": "míng",
+      "note": "Ví dụ: 我买了三名学生的书。 — Tôi đã mua sách cho ba học sinh.",
+      "speakText": "名",
+      "options": [
+        "tiệm rượu; quán rượu; khách sạn; nhà hàng; (Đài Loan) câu lạc bộ chủ quán",
+        "tên; danh từ (loại từ); nơi (ví dụ: trong số người chiến thắng); nổi tiếng; lượng từ dùng cho người",
+        "như thế; theo cách đó; chừng ấy; rất; khoảng; trong trường hợp đó",
+        "bơi lội; bơi"
+      ],
+      "answer": "tên; danh từ (loại từ); nơi (ví dụ: trong số người chiến thắng); nổi tiếng; lượng từ dùng cho người",
+      "exampleHanzi": "我买了三名学生的书。",
+      "exampleVi": "Tôi đã mua sách cho ba học sinh."
+    },
+    {
+      "id": "hero-hsk-2-5596-meaning",
+      "vocabularyId": "5596",
+      "sourceIndex": 78,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "酒店",
+      "pinyin": "jiǔdiàn",
+      "note": "Ví dụ: 我们住在酒店。 — Chúng tôi ở tại khách sạn.",
+      "speakText": "酒店",
+      "options": [
+        "như thế; theo cách đó; chừng ấy; rất; khoảng; trong trường hợp đó",
+        "tiệm rượu; quán rượu; khách sạn; nhà hàng; (Đài Loan) câu lạc bộ chủ quán",
+        "bơi lội; bơi",
+        "do đó; kết quả là; vậy; lý do tại sao"
+      ],
+      "answer": "tiệm rượu; quán rượu; khách sạn; nhà hàng; (Đài Loan) câu lạc bộ chủ quán",
+      "exampleHanzi": "我们住在酒店。",
+      "exampleVi": "Chúng tôi ở tại khách sạn."
+    },
+    {
+      "id": "hero-hsk-2-6107-meaning",
+      "vocabularyId": "6107",
+      "sourceIndex": 95,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "那么",
+      "pinyin": "nàme",
+      "note": "Ví dụ: 那么远的地方怎么去？ — Làm thế nào để chúng ta đến được một nơi xa như vậy?",
+      "speakText": "那么",
+      "options": [
+        "bơi lội; bơi",
+        "do đó; kết quả là; vậy; lý do tại sao",
+        "bởi vì; do; vì",
+        "như thế; theo cách đó; chừng ấy; rất; khoảng; trong trường hợp đó"
+      ],
+      "answer": "như thế; theo cách đó; chừng ấy; rất; khoảng; trong trường hợp đó",
+      "exampleHanzi": "那么远的地方怎么去？",
+      "exampleVi": "Làm thế nào để chúng ta đến được một nơi xa như vậy?"
+    },
+    {
+      "id": "hero-hsk-2-6108-meaning",
+      "vocabularyId": "6108",
+      "sourceIndex": 96,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "那么",
+      "pinyin": "nàme",
+      "note": "Ví dụ: 天气那么热，我们去游泳吧。 — Vì thời tiết nóng quá nên chúng ta hãy đi bơi nhé.",
+      "speakText": "那么",
+      "options": [
+        "tiệm rượu; quán rượu; khách sạn; nhà hàng; (Đài Loan) câu lạc bộ chủ quán",
+        "như thế; theo cách đó; chừng ấy; rất; khoảng; trong trường hợp đó",
+        "bơi lội; bơi",
+        "thường xuyên; liên tục; đều đặn; hay; hàng ngày; hằng ngày; hàng ngày"
+      ],
+      "answer": "như thế; theo cách đó; chừng ấy; rất; khoảng; trong trường hợp đó",
+      "exampleHanzi": "天气那么热，我们去游泳吧。",
+      "exampleVi": "Vì thời tiết nóng quá nên chúng ta hãy đi bơi nhé."
+    },
+    {
+      "id": "hero-hsk-2-6515-meaning",
+      "vocabularyId": "6515",
+      "sourceIndex": 103,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "游泳",
+      "pinyin": "yóuyǒng",
+      "note": "Ví dụ: 夏天我喜欢游泳。 — Tôi thích bơi vào mùa hè.",
+      "speakText": "游泳",
+      "options": [
+        "do đó; kết quả là; vậy; lý do tại sao",
+        "bơi lội; bơi",
+        "bởi vì; do; vì",
+        "thường xuyên; liên tục; đều đặn; hay; hàng ngày; hằng ngày; hàng ngày"
+      ],
+      "answer": "bơi lội; bơi",
+      "exampleHanzi": "夏天我喜欢游泳。",
+      "exampleVi": "Tôi thích bơi vào mùa hè."
+    },
+    {
+      "id": "hero-hsk-2-6789-meaning",
+      "vocabularyId": "6789",
+      "sourceIndex": 115,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "所以",
+      "pinyin": "suǒyǐ",
+      "note": "Ví dụ: 我很累，所以我需要休息。 — Tôi mệt quá nên cần nghỉ ngơi.",
+      "speakText": "所以",
+      "options": [
+        "bơi lội; bơi",
+        "thường xuyên; liên tục; đều đặn; hay; hàng ngày; hằng ngày; hàng ngày",
+        "do đó; kết quả là; vậy; lý do tại sao",
+        "bởi vì; do; vì"
+      ],
+      "answer": "do đó; kết quả là; vậy; lý do tại sao",
+      "exampleHanzi": "我很累，所以我需要休息。",
+      "exampleVi": "Tôi mệt quá nên cần nghỉ ngơi."
+    },
+    {
+      "id": "hero-hsk-2-8837-meaning",
+      "vocabularyId": "8837",
+      "sourceIndex": 145,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "因为",
+      "pinyin": "yīnwèi",
+      "note": "Ví dụ: 因为天气好，我们去爬山。 — Vì thời tiết tốt nên chúng tôi sẽ đi leo núi.",
+      "speakText": "因为",
+      "options": [
+        "thường xuyên; liên tục; đều đặn; hay; hàng ngày; hằng ngày; hàng ngày",
+        "bởi vì; do; vì",
+        "như thế; theo cách đó; chừng ấy; rất; khoảng; trong trường hợp đó",
+        "do đó; kết quả là; vậy; lý do tại sao"
+      ],
+      "answer": "bởi vì; do; vì",
+      "exampleHanzi": "因为天气好，我们去爬山。",
+      "exampleVi": "Vì thời tiết tốt nên chúng tôi sẽ đi leo núi."
+    },
+    {
+      "id": "hero-hsk-2-10463-meaning",
+      "vocabularyId": "10463",
+      "sourceIndex": 185,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "经常",
+      "pinyin": "jīngcháng",
+      "note": "Ví dụ: 我经常去图书馆。 — Tôi thường đến thư viện.",
+      "speakText": "经常",
+      "options": [
+        "bởi vì; do; vì",
+        "đi ra; rời nhà; đi du lịch; xa nhà; (của phụ nữ) kết hôn",
+        "thường xuyên; liên tục; đều đặn; hay; hàng ngày; hằng ngày; hàng ngày",
+        "bút; bút chì; bút lông; viết; nét chữ Hán; lượng từ dùng cho số tiền, giao dịch"
+      ],
+      "answer": "thường xuyên; liên tục; đều đặn; hay; hàng ngày; hằng ngày; hàng ngày",
+      "exampleHanzi": "我经常去图书馆。",
+      "exampleVi": "Tôi thường đến thư viện."
+    },
+    {
+      "id": "hero-hsk-2-10996-meaning",
+      "vocabularyId": "10996",
+      "sourceIndex": 206,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "因为",
+      "pinyin": "yīnwèi",
+      "note": "Ví dụ: 因为下雨，我们不去公园。 — Vì trời mưa nên chúng tôi không đi công viên.",
+      "speakText": "因为",
+      "options": [
+        "bởi vì; do; vì",
+        "đi ra; rời nhà; đi du lịch; xa nhà; (của phụ nữ) kết hôn",
+        "bút; bút chì; bút lông; viết; nét chữ Hán; lượng từ dùng cho số tiền, giao dịch",
+        "bóng rổ"
+      ],
+      "answer": "bởi vì; do; vì",
+      "exampleHanzi": "因为下雨，我们不去公园。",
+      "exampleVi": "Vì trời mưa nên chúng tôi không đi công viên."
+    }
+  ]
+}

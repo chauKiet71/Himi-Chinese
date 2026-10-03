@@ -187,7 +187,7 @@ export async function getDailySessionSource(
     gameCompletedToday: activity.gameRows.some((row) => row.completedAt >= start && row.completedAt < end),
     lesson: lessonRecommendation(accessibleLesson),
     practice: practice ? {
-      href: `/practice?scenario=${practice.id}`,
+      href: `/listening?mode=scenario&scenario=${practice.id}`,
       title: practice.title,
     } : defaultDailySessionSource.practice,
     game: {

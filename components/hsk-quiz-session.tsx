@@ -20,6 +20,7 @@ import {
   getHskLessonProgressStorageKey,
   parseHskLessonProgress,
 } from "@/lib/hsk-lesson-progress";
+import { recordRecentHskLesson } from "@/lib/recent-hsk-learning";
 
 const SPEEDS = [0.75, 1, 1.25] as const;
 
@@ -31,11 +32,13 @@ function saveQuizProgress(lesson: HskLessonContent, exerciseId: string, scorePer
       ? progress.reviewedExercises
       : [...progress.reviewedExercises, exerciseId];
 
-    window.localStorage.setItem(storageKey, JSON.stringify({
+    const nextProgress = {
       ...progress,
       exerciseBestPercent: Math.max(progress.exerciseBestPercent, scorePercent),
       reviewedExercises,
-    }));
+    };
+    window.localStorage.setItem(storageKey, JSON.stringify(nextProgress));
+    recordRecentHskLesson(lesson, nextProgress);
   } catch {
     // The quiz remains fully usable when browser storage is unavailable.
   }
@@ -67,6 +70,10 @@ export function HskQuizSession({ lesson }: { lesson: HskLessonContent }) {
   const finalPercent = accessibleQuestionCount
     ? Math.round((correctCount / accessibleQuestionCount) * 100)
     : 0;
+
+  useEffect(() => {
+    recordRecentHskLesson(lesson);
+  }, [lesson]);
 
   useEffect(() => () => {
     if (celebrationTimerRef.current) clearTimeout(celebrationTimerRef.current);

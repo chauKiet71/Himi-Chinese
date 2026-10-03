@@ -46,6 +46,328 @@
 - No further visual correction is required for this scoped issue.
 
 final result: passed
+
+# Design QA — Box đổi ảnh đại diện trên trang Tài khoản mobile
+
+- Source visual truth: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/account-avatar-before.png` (823 × 1585 physical px), captured from the annotated `/account` state before the CSS refinement.
+- Implementation: `http://localhost:3001/account`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/account-avatar-after.png` (823 × 1585 physical px).
+- Combined focused comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/account-avatar-comparison.png` (1172 × 235 px; before and after card crops at identical scale).
+- Viewport: 628 × 1189 CSS px; capture density approximately 1.31.
+- State: signed-in VIP account, mobile layout, avatar loaded, uploader idle.
+
+## Full-view comparison evidence
+
+- Profile card dimensions, text hierarchy, mascot, membership details and CTA remain unchanged.
+- The avatar retains its existing size and position, so the compact header composition and the space reserved for the member name are preserved.
+- The revised edit affordance stays fully inside the card and no horizontal overflow or content collision is introduced.
+
+## Focused region comparison evidence
+
+- The combined crop shows the previous coral-on-coral edit button on the left and the revised white button with coral icon on the right.
+- The avatar now has a clearer white ring and softer depth; the edit action is visually separated from both the image and the orange-red ticket background.
+- Button placement remains anchored to the avatar's lower-right corner while moving closer to the image boundary, reducing interference with the member name.
+
+## Required fidelity surfaces
+
+- Fonts and typography: no text styles changed; name, verification badge and membership copy retain their established hierarchy.
+- Spacing and layout rhythm: avatar size and grid tracks remain stable; only the edit control grows to 34 px and shifts to a cleaner corner position.
+- Colors and visual tokens: white surface, Himi coral icon and warm shadow reuse the account card palette.
+- Image quality and asset fidelity: the original uploaded avatar remains untouched and continues to use cover cropping; the existing Lucide `PenLine` icon remains sharp at 16 px.
+- Copy and content: accessible label `Chọn ảnh đại diện mới`, title and uploader status behavior are unchanged.
+
+## Interaction and console verification
+
+- The edit button is visible and discoverable by its accessible role/name in the rendered browser.
+- Existing upload validation, Cloudinary completion and avatar synchronization tests pass.
+- Browser console errors: none.
+- Account avatar tests, account layout test, ESLint and `git diff --check` pass.
+
+## Findings and comparison history
+
+1. Baseline P2: the 29 px coral button blended into the orange-red card, sat close to the member name and had a weak visual boundary against the avatar.
+2. Fix: changed the control to a 34 px white surface with coral icon, a dual subtle shadow, stronger avatar ring, focus-within feedback and pressed state; constrained the change to mobile account layouts.
+3. Post-fix evidence: the combined focused comparison shows stronger separation and a clearer tap affordance without shifting surrounding layout.
+
+No actionable P0, P1, or P2 findings remain for this scoped avatar-control update.
+
+final result: passed
+
+# Design QA — Thu nhỏ box tính năng trang chủ 30%
+
+- Source visual truth: giao diện box tính năng trước thay đổi tại `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-feature-boxes-page.png`, kết hợp yêu cầu người dùng giảm kích thước 30%.
+- Implementation: `http://localhost:3001/`.
+- Desktop screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-feature-boxes-compact-desktop.png` (2013 × 1523 physical px).
+- Mobile screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-feature-boxes-compact-mobile.png` (675 × 1500 physical px).
+- Normalized before/after comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-feature-boxes-compact-comparison.png` (2012 × 761 px).
+- Viewport and normalization: desktop was inspected with the same in-app Browser viewport before and after; both 2013 × 1523 captures were downsampled equally to 1006 × 761 and placed side by side. Mobile was inspected at the 390 × 844 responsive override using the browser's display density.
+- State: authenticated learner homepage, default feature-card state.
+
+## Full-view comparison evidence
+
+- Desktop card aspect ratio changed from `1.28` to `1.82`; at the measured 298.23 px card width, height is now 163.85 px instead of approximately 232.99 px, a 29.7% reduction.
+- Mobile card aspect ratio changed from `1.65` to `2.36`, preserving the same approximately 30% height reduction while keeping full-width stacked cards.
+- All four cards remain aligned in one row on desktop; their order, links, palette, artwork, and surrounding homepage layout are unchanged.
+
+## Focused region comparison evidence
+
+- A separate focused crop was unnecessary because the normalized before/after comparison keeps the entire feature row readable at equal scale and clearly exposes the changed height, title scale, padding, radius, and artwork scale.
+- Measured desktop title typography is 22.10 px, 24.31 px line height, weight 900; artwork remains fully visible inside every card.
+- Mobile inspection shows all four cards stacked without horizontal document overflow; browser console errors are empty.
+
+## Required fidelity surfaces
+
+- Fonts and typography: title scale was reduced with the cards while retaining weight, hierarchy, color, and Vietnamese copy.
+- Spacing and layout rhythm: padding, radius, title size, card height, and artwork footprint were reduced proportionally; grid gaps and section spacing remain stable.
+- Colors and visual tokens: the rose, blue, apricot, and lilac brand surfaces and matching title colors are unchanged.
+- Image quality and asset fidelity: the original transparent 3D PNG assets are reused and remain sharp at the smaller rendered size; no new placeholders or code-drawn artwork were introduced.
+- Copy and content: all four labels and their destination links remain unchanged.
+
+## Findings and comparison history
+
+1. Baseline P2: the feature cards occupied more vertical space than requested.
+2. Fix: increased card aspect ratios to reduce height by approximately 30%, then proportionally reduced padding, radius, title sizing, and responsive mobile dimensions.
+3. Post-fix evidence: desktop measurement confirms a 29.7% reduction; mobile cards preserve the same proportion, no horizontal overflow is present, scoped homepage tests and ESLint pass, and the browser console has no errors.
+
+No actionable P0, P1, or P2 findings remain for this scoped sizing change.
+
+final result: passed
+
+---
+
+# Design QA — Thiết kế lại trang chủ Himi
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-5dfbb4f3-2bae-47fe-92dd-0ef2c52d3afb.png` (1141 × 857 px).
+- Implementation: `http://localhost:3001/`.
+- Desktop screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-redesign-desktop.png`.
+- Mobile screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-redesign-mobile.png`.
+- Normalized side-by-side comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-redesign-comparison.png`.
+- Viewports: desktop 1143 × 857 CSS px and mobile 390 × 844 CSS px. The in-app browser captures at device display density; the comparison image normalizes the desktop capture back to the source dimensions.
+
+## Full-view comparison evidence
+
+- The implementation preserves the reference hierarchy: warm rounded hero, left-aligned greeting/headline/CTA, large Himi mascot, four feature cards, six popular-topic cards, and three recent lessons.
+- Existing Himi 3D artwork and the warm orange Chinese studio background replace generic placeholders while retaining the website's coral/orange brand palette.
+- Desktop keeps the four feature cards on one line at the reference width; mobile becomes a touch-friendly single-column feature flow and a two/three-column topic grid without horizontal overflow.
+
+## Required fidelity surfaces
+
+- Typography: Roboto Vietnamese remains the project display family; headings use compact heavy weights and the red `Himi Chinese!` line matches the reference emphasis.
+- Spacing and layout rhythm: the hero, section gaps, card radii, feature-card height, topic density, and recent-lesson rows follow the source proportions within the existing learner shell.
+- Colors and visual tokens: coral CTA, warm cream hero, pastel pink/blue/apricot/lilac feature cards, muted secondary copy, and subtle warm shadows match the reference direction.
+- Asset fidelity: the hero uses `source-studio-arches.png` plus `himi-wave.webp`; feature cards use the existing high-resolution Himi game artwork. Images remain sharp at desktop and mobile densities.
+- Interaction: the hero CTA, feature cards, topic cards, recent lessons, and section links are semantic links with visible focus states. The CTA was clicked in-browser and opened the intended HSK lesson, then returned successfully.
+
+## Findings and comparison history
+
+1. Baseline P1: the previous homepage was a single full-viewport campaign image and did not expose the learning features, popular topics, or recent lesson progress shown in the reference.
+2. Fix: replaced the campaign-only composition with a responsive learning dashboard while retaining the existing navigation shell, VIP welcome offer, real routes, and Himi brand assets.
+3. First desktop pass P2: the fixed top bar overlapped the greeting at the top of the hero. Fix: restored 82 px desktop content clearance and zeroed it only for the mobile navigation layout.
+4. First reference-size capture P2: lazily loaded feature artwork had not finished decoding in the immediate screenshot. Verification after image completion confirmed all four assets loaded at full intrinsic resolution.
+5. Post-fix evidence: desktop and mobile visual checks passed, the CTA route smoke test passed, browser console errors are empty, ESLint passed, and the five scoped homepage tests passed.
+
+No actionable P0, P1, or P2 findings remain for the homepage redesign.
+
+final result: passed
+
+---
+
+# Design QA — Responsive card styling for writing practice
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-6ebaf425-4292-4f7e-9316-6d539e7d5e96.png` (757 × 449 px).
+- Implementation: `http://localhost:3001/writing/hsk-1/hsk1-bai-01-chao-anh/practice`.
+- Implementation capture: Codex in-app Browser capture from this task; the capture API does not expose a filesystem path.
+- Verified CSS viewports: 1600 × 1200, 766 × 1189, and 390 px mobile.
+
+## Comparison evidence
+
+- The workspace uses a pale blue-gray page canvas and two white, 28 px rounded cards with subtle gray borders and restrained shadows, matching the reference surface treatment.
+- Header, character strip, two-card workspace, and footer now share the exact same centered 840 px container (`left: 380`, `right: 1220` at the verified wide viewport).
+- Desktop/tablet retains an approximately 2.85:1 practice-to-information ratio. The mode selector and square writing board use viewport-aware clamps instead of fixed dimensions.
+- The board grid is reduced to the reference's horizontal and vertical guides; diagonal decoration and the floating mode badge are absent in this lesson presentation.
+- Below 620 px the cards stack, retain practical controls, and produce zero horizontal overflow.
+- Dynamic Hanzi, pinyin, Vietnamese meaning, stroke metadata, pronunciation control, lesson navigation, and HanziWriter behavior remain unchanged.
+- Browser console warnings/errors: none. Targeted writing-route test, ESLint, and diff whitespace checks: passed.
+
+## Findings and comparison history
+
+1. P2: the first pass used a 390 px board and 330 px segmented control at a 766 px viewport, making the practice card denser than the reference. Fixed with responsive clamps capped at 340 px and 280 px.
+2. P2: a 760 px stacking breakpoint changed the reference-width layout to one column too early. Lowered the phone breakpoint to 620 px.
+3. P1: the workspace used a wider 980 px cap than the surrounding 840 px lesson container, allowing the two-card group to appear outside the shared alignment frame. Reduced the workspace cap to 840 px.
+4. Post-fix desktop, tablet-edge, and phone checks show no actionable P0, P1, or P2 mismatch.
+
+final result: passed
+
+---
+
+# Design QA — Container bài học chủ đề Văn phòng
+
+- Source visual truth paths: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-e9fcae2a-c9e4-4a46-84fd-2c432a0709bd.png` (trạng thái ban đầu, 1021 × 693 px) và `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-3853fb0f-d0d3-4872-9e7e-d8b78bcec577.png` (bố cục container mục tiêu, 1024 × 691 px).
+- Implementation: `http://localhost:3001/learn/van-phong-hanh-chinh?lesson=chao-hoi-tai-noi-lam-viec`.
+- Implementation screenshot path: Codex in-app Browser captures in this task; the browser capture API does not expose a filesystem path.
+- Viewport and normalization: desktop was inspected at 1024 × 690 CSS px with a 1365 × 920 px browser capture and compared against the 1024 × 691 px target by CSS geometry. A second desktop capture at 1706 × 960 CSS px / 2275 × 1280 px confirmed the 840 px max-width. Mobile was inspected at 390 × 800 CSS px. Browser capture density was 4/3 physical pixels per CSS pixel.
+- State: `Từ vựng`, bước 1/14, từ `同事`; `Cụm từ` and `Nghe & Nói` were also exercised.
+
+## Full-view comparison evidence
+
+- At 1024 px CSS width, header, stage, and footer content share the same 840 px centered frame from x=92 to x=932, closely matching the target's centered content frame around x=95 to x=929.
+- The full-width white page background, section separators, lesson card hierarchy, and bottom navigation chrome remain intact; only the content alignment frame changed.
+- No horizontal overflow was present at either desktop or 390 px mobile widths.
+
+## Focused region comparison evidence
+
+- Header: close control, progress rail, and all three lesson tabs now sit inside the same centered frame.
+- Stage: vocabulary, phrase, listening/pronunciation content, and the phrase navigation arrows resolve within the centered frame.
+- Footer: previous button, step counter, keyboard hint, and next button align to the same frame instead of the viewport edges.
+- Loading state uses the same three inner wrappers, preventing layout shift while the lesson is fetched.
+
+## Required fidelity surfaces
+
+- Fonts and typography: existing families, weights, sizes, hierarchy, and Vietnamese/Chinese copy are unchanged on desktop; the mobile Hanzi size was reduced only enough to keep two-character words on one line.
+- Spacing and layout rhythm: the requested 840 px centered container is shared consistently across header, stage, and footer; mobile uses proportional 14 px side gutters.
+- Colors and visual tokens: existing coral, navy, gray, and warm-white tokens are unchanged.
+- Image quality and asset fidelity: this screen contains no raster imagery; existing icon-library glyphs remain unchanged and sharp.
+- Copy and content: labels, vocabulary content, progress text, and interaction copy are unchanged.
+
+## Findings and comparison history
+
+1. Baseline P1: the office lesson header, tabs, stage, and footer were aligned to the full viewport instead of the centered frame shown in the target.
+2. Fix: added shared 840 px inner containers for header, stage, footer, and loading state while preserving full-width background layers.
+3. First responsive pass P2: at 390 px width, the two-character Hanzi wrapped vertically inside the vocabulary card.
+4. Fix: adjusted the mobile Hanzi scale and enforced a single line; the post-fix capture shows `同事` on one row with no page overflow.
+5. Post-fix evidence: desktop frame measurements are identical across all three regions, `Cụm từ` and `Nghe & Nói` interactions preserve the frame, browser console errors are empty, and the targeted UI test plus ESLint and diff checks pass.
+
+No actionable P0, P1, or P2 findings remain for the requested container change.
+
+final result: passed
+
+---
+
+# Design QA — Container bài học luyện viết
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-2ba386bf-8ead-40f4-9db5-1fc176c2c39c.png`; baseline issue path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-1d1c77b1-834c-4c26-a468-0cee16885493.png`.
+- Implementation: `http://localhost:3001/writing/hsk-1/hsk1-bai-01-chao-anh/practice`.
+- Implementation screenshot path: Codex in-app Browser capture in this task; the browser capture API does not expose a filesystem path.
+- Viewport and normalization: source is 1028 × 694 px at 1×. Implementation was rendered at 1028 × 694 CSS px and captured at 1370 × 925 px (effective 1.333× browser density); layout bounds were compared in CSS pixels to normalize density.
+- State: first character `你`, `Xem nét`, step 1 / 13.
+
+## Full-view comparison evidence
+
+- The reference keeps its lesson chrome on a centered axis with about 95 px side margins. The revised writing lesson now gives the header, character strip, two-column workspace, and footer inner area the same centered 840 px container.
+- Browser measurements at the matched CSS viewport report `left: 94`, `right: 934`, and `width: 840` for all four regions, with document `scrollWidth` equal to `clientWidth`.
+- The white header/footer backgrounds still span the viewport while their controls align to the container, matching the reference composition.
+
+## Focused region comparison evidence
+
+- Header: close control and progress bar no longer hug the viewport edges; both sit on the shared 840 px axis.
+- Workspace: practice and character-information cards remain a stable two-column grid within the container, preserving the live HanziWriter board and existing visual hierarchy.
+- Footer: previous, progress text, and next action align with the same container edges as the content above.
+- Mobile: at 390 × 844 CSS px, header/workspace/footer measure 349 px, the workspace collapses to one column, and there is no horizontal overflow.
+
+## Required fidelity surfaces
+
+- Fonts and typography: unchanged; existing Vietnamese UI and Chinese display stacks remain intact.
+- Spacing and layout rhythm: corrected from an almost full-width 1120 px cap to a centered 840 px cap; vertical sizing and card gaps remain unchanged.
+- Colors and visual tokens: unchanged; coral progress/actions, warm neutral canvas, and white chrome still match the existing lesson design.
+- Image quality and asset fidelity: unchanged; HanziWriter continues to render live vector strokes and the existing icon library supplies controls.
+- Copy and content: unchanged and still populated from the selected lesson.
+
+## Findings and comparison history
+
+1. Baseline P1: the writing lesson used a 1120 px layout cap, placing cards and persistent controls against the viewport edges at 1028 px and visibly breaking the reference container rhythm.
+2. Fix: introduced dedicated header/footer inner wrappers and applied one 840 px responsive container to header, character strip, workspace, and footer.
+3. Post-fix evidence: matched-viewport browser capture shows all regions centered from x=94 to x=934; mobile has no overflow; the `Tiếp tục` action advances to step 2 / 13; browser warnings/errors are empty.
+
+No actionable P0, P1, or P2 findings remain for the requested container correction.
+
+final result: passed
+
+---
+
+# Design QA — Bài học toàn màn hình từ lộ trình ngành
+
+- Source visual truth: ảnh giao diện bài học được đính kèm trong Browser Comment 1 (không có đường dẫn tệp cục bộ trong phiên).
+- Implementation: `http://localhost:3001/learn/van-phong-hanh-chinh?lesson=chao-hoi-tai-noi-lam-viec`.
+- Entry point: box `Bài 01 · Chào hỏi tại nơi làm việc` tại `http://localhost:3001/courses/van-phong-hanh-chinh`.
+- Verified viewport: 957 × 901 CSS px trong Codex in-app Browser.
+- State: bước từ vựng 01/14, bước 02/14, Cụm từ 07/14 và Nghe & Nói 11/14.
+
+## Full-view comparison evidence
+
+- Click toàn bộ hàng Bài 01 mở đúng bài học ở chế độ toàn màn hình; rail, topbar, breadcrumb, mobile navigation và chatbot của ứng dụng không còn chiếm chỗ.
+- Thanh tiến trình, nút đóng, ba tab học, thẻ Hán tự ở giữa và footer cố định khớp cấu trúc ảnh tham chiếu.
+- Toàn bộ nội dung chính và footer nằm trong một viewport, không xuất hiện cuộn trang sau khi loại bỏ breadcrumb wrapper.
+
+## Focused region and interaction evidence
+
+- Từ vựng sử dụng dữ liệu thật của bài: `同事 / tóngshì / đồng nghiệp`, có nút nghe, tốc độ phát và lưu từ.
+- Nút `Tiếp tục` chuyển sang `部门 / bùmén / bộ phận, phòng ban` và cập nhật tiến trình từ 01/14 thành 02/14.
+- Tab `Cụm từ` mở câu thực tế cùng pinyin, nghĩa và audio; tab `Nghe & Nói` mở đúng nội dung nghe của bài.
+- Nút đóng quay lại chính xác `/courses/van-phong-hanh-chinh`.
+- Loading state dùng cùng khung toàn màn hình để tránh nháy giao diện điều hướng cũ.
+
+## Required fidelity surfaces
+
+- Typography: Hanzi dùng font Songti/SimSun, pinyin dạng pill cam, nghĩa tiếng Việt đậm và căn giữa.
+- Spacing: nội dung chính cân giữa vùng còn lại giữa header 74 px và footer 68 px.
+- Colors: coral, trắng, kem nhạt và navy kế thừa hệ màu hiện có.
+- Responsive behavior: desktop giữ toàn bộ bài học trong 100dvh; breakpoint mobile thu gọn header, thẻ từ và footer nhưng giữ touch targets.
+- Copy and content: toàn bộ nội dung lấy theo bài được chọn, không hard-code dữ liệu từ ảnh mẫu.
+
+## Verification
+
+- Browser click-through từ roadmap: passed.
+- Next / section navigation / close: passed.
+- Targeted static UI test: 1/1 passed.
+- ESLint: passed with zero warnings.
+- Production compilation: 763 modules transformed and chunks rendered; final hosting plugin cleanup was blocked by the running dev server locking `dist/.openai/hosting.json` (`EPERM`).
+- Browser console: no visible runtime error during the verified flow.
+
+No actionable P0, P1, or P2 issue remains for this scoped implementation.
+
+final result: passed
+
+---
+
+# Design QA — Tab Cụm từ và Nghe & Nói của bài học ngành
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-00e291a8-e199-4068-8c64-2d553628cebc.png` (Cụm từ, 816 × 520 px) và `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-be8b5eb0-21b8-41e4-b4ba-0e7617b7e89d.png` (Nghe & Nói, 816 × 554 px).
+- Implementation: `http://localhost:3001/learn/van-phong-hanh-chinh?lesson=chao-hoi-tai-noi-lam-viec`.
+- Browser capture: Codex in-app Browser; API chụp không cung cấp đường dẫn tệp.
+- Verified viewport: 957 × 901 CSS px; các kích thước dùng đơn vị responsive để giữ cùng tỷ lệ ở viewport tham chiếu 816 px.
+
+## Full-view comparison evidence
+
+- Cụm từ: thẻ câu kem viền cam nhạt chiếm gần toàn chiều ngang, Hanzi hai dòng căn giữa; pinyin cam, nghĩa Việt, cấu trúc tách bằng dấu cộng và ba nút hành động nằm đúng thứ tự dưới thẻ.
+- Nghe & Nói: Hanzi được chia màu xanh/coral theo cụm mở đầu và nội dung chính; audio tròn nằm cuối câu, pinyin và nghĩa căn giữa; dock luyện phát âm nằm dưới nội dung.
+- Header, ba tab, thanh tiến trình, nút điều hướng cạnh, footer và trạng thái bước giữ nguyên giữa hai màn hình.
+
+## Focused interaction evidence
+
+- Tab Cụm từ mở đúng dữ liệu thật `大家好，我是新来的同事，我叫安。` và hiển thị cấu trúc `大家好， + 我是新来的同事，我叫安。`.
+- Tab Nghe & Nói hiển thị cùng câu, nút nghe mẫu, tốc độ phát, điểm phát âm và micro.
+- Micro sử dụng `PronunciationEvaluator`/iFlytek sẵn có; điểm bên trái cập nhật từ kết quả thật thay vì số giả định trong ảnh mẫu.
+- Nút nghe mẫu và điều chỉnh tốc độ vẫn hoạt động với dữ liệu từng câu.
+
+## Fidelity and responsive findings
+
+- Typography: Songti/SimSun cho Hanzi; trọng lượng, màu pinyin và nghĩa Việt khớp phân cấp của nguồn.
+- Spacing and shape: card 20 px radius; dock 32 px radius; active pills và bóng coral giữ thiết kế hệ thống.
+- Mobile breakpoint thu gọn card, câu, dock bốn cột và ẩn mũi tên cạnh để tránh tràn ngang.
+- Không dùng ảnh giả hoặc nội dung hard-code; toàn bộ câu học lấy từ bài đang chọn.
+- Browser state không có cuộn trang; footer luôn nằm trong viewport.
+
+## Verification
+
+- Browser tab switching and rendered states: passed.
+- Targeted UI test: passed.
+- ESLint: passed.
+- Diff whitespace validation: passed.
+- No visible runtime error in the verified browser flow.
+
+No actionable P0, P1, or P2 mismatch remains for the requested tab designs.
+
+final result: passed
 ---
 
 **Design QA — Visible Himi in compact celebrations**
@@ -1745,3 +2067,1308 @@ final result: passed
 
 ---
 >>>>>>> 830582fbb5791b31b2f1fb30e8dd71d60fac9c0a
+
+---
+
+# Design QA — Mở bài học từ box lộ trình ngành
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-ce1a5ab4-7fdd-4286-96ca-5d2038c4d159.png`.
+- Source state: box `Bài 01 · Chào hỏi tại nơi làm việc` đang học tại `/courses/van-phong-hanh-chinh`.
+- Implementation state: cùng box và bố cục; click mở `/learn/van-phong-hanh-chinh?lesson=chao-hoi-tai-noi-lam-viec` bằng điều hướng toàn trang.
+
+## Comparison and interaction evidence
+
+- Typography, spacing, progress ring, duration, lesson number, border, and active-row background remain unchanged from the reference.
+- The whole lesson row remains a semantic link and is keyboard accessible.
+- Browser verification passed: clicking Bài 01 loads the existing lesson workspace with `Từ vựng`, `Cụm từ`, and `Nghe & nói`.
+- Browser console warnings/errors: none observed.
+- Targeted roadmap tests: 17/17 passed.
+- ESLint and diff whitespace checks: passed.
+
+No actionable P0, P1, or P2 visual or interaction findings remain.
+
+final result: passed
+
+---
+
+# Design QA — Metadata box bài học HSK
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-79c4d05b-7e6d-4e23-8cfd-3aebf5cdf022.png`.
+- Implementation: `http://localhost:3001/courses?view=hsk&level=hsk-1`.
+- Implementation screenshot path: Codex in-app Browser captures in this task; the browser capture API does not expose a filesystem path.
+- Viewport and normalization: source crop is 750 × 95 px. Implementation was inspected at 1706 × 960 CSS px with a focused 1160 × 76 CSS px lesson-row region, plus 390 × 844 CSS px mobile validation. Browser captures use the in-app display density; comparison focused on the normalized lesson-row content and alignment.
+- State: HSK 1, topic 1 expanded, with completed and in-progress lessons visible.
+
+## Full-view comparison evidence
+
+- Lesson title remains the dominant left-aligned element and progress state remains aligned at the far right, matching the reference hierarchy.
+- Every visible HSK 1 row now contains only vocabulary count and exercise count beneath the title; dialogue count and duration are absent.
+- Existing row spacing, dividers, title weight, status colors, and click target remain unchanged.
+
+## Focused region comparison evidence
+
+- HSK 1 lesson 1 renders `6 từ vựng · 2 bài tập · Đã hoàn thành`.
+- HSK 2 lesson 1 renders `12 từ vựng · 4 bài tập` with its saved progress state.
+- HSK 6 lesson 1 renders `32 từ vựng · 4 bài tập · Chưa bắt đầu`.
+- At 390 × 844 CSS px, the first row remains within the 390 px document width and preserves both metadata fields and progress state without horizontal page overflow.
+
+## Required fidelity surfaces
+
+- Fonts and typography: unchanged; title, metadata, and progress-state weights retain the existing HSK hierarchy.
+- Spacing and layout rhythm: removing two metadata items reduces clutter without changing row height, divider rhythm, or status alignment.
+- Colors and visual tokens: unchanged; metadata stays muted blue-gray and progress states retain their semantic colors.
+- Image quality and asset fidelity: no raster imagery is involved in the lesson row; BookOpen, FileText, and status icons continue using the existing icon library.
+- Copy and content: metadata is now limited to the requested vocabulary count, exercise count, and learning progress state.
+
+## Findings and comparison history
+
+1. Baseline P1: lesson rows exposed dialogue count and estimated minutes, which violated the requested three-field information model; HSK 1 also did not surface its real practice-question count in the curriculum model.
+2. Fix: removed dialogue/time rendering, always rendered vocabulary/exercise counts, and mapped each HSK 1 lesson's `practice` item count into `exercises`.
+3. Post-fix evidence: component tests pass for all HSK 1–6 curriculum data, browser checks across HSK 1, 2, and 6 show only the approved metadata, mobile has no horizontal overflow, and browser warnings/errors are empty.
+
+No actionable P0, P1, or P2 findings remain for this scoped metadata change.
+
+final result: passed
+
+---
+
+# Design QA — Đồng bộ phong cách tab bài học Văn phòng
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-aa0d4937-bb09-43a4-8001-71292d4aa026.png` (phong cách HSK mục tiêu, 329 × 42 px).
+- Baseline source path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-b661d889-23c4-4dcc-936b-fce9b3f32fad.png` (tab Văn phòng trước chỉnh sửa, 336 × 40 px).
+- Implementation: `http://localhost:3001/learn/van-phong-hanh-chinh?lesson=chao-hoi-tai-noi-lam-viec`.
+- Implementation screenshot path: Codex in-app Browser captures in this task; the browser capture API does not expose a filesystem path.
+- Viewport and normalization: desktop page inspected at 1024 × 690 CSS px; focused tab capture was 330 × 45 CSS px (approximately 440 × 60 physical pixels at the browser's 4/3 capture density). Mobile was inspected at 390 × 800 CSS px with a 390 × 55 CSS px focused tab region.
+- State: `Từ vựng` active; `Cụm từ` and `Nghe & Nói` were clicked and returned to the initial state.
+
+## Full-view comparison evidence
+
+- The office lesson retains its existing centered 840 px frame and all lesson content; only the tab/header styling changed.
+- The active tab now uses the HSK coral, rounded pill, compact type scale, and soft coral elevation. Inactive tabs use the same muted blue-gray visual weight as the HSK reference.
+- The header now shares the HSK reference's pale blue divider, subtle elevation, translucent white surface, and blur treatment.
+
+## Focused region comparison evidence
+
+- Active tab measured 33 px high with `#ff4f3d`, white text, 999 px radius, and `0 5px 12px rgba(255, 79, 61, .18)` shadow.
+- Tab typography measured 12 px / weight 690 on desktop; inactive text resolved to `#71809a`.
+- The three original labels remain unchanged and all active states transition correctly without horizontal overflow.
+- At 390 px width, the nav remains inside its 363 px content frame; all three labels fit and the page has zero horizontal overflow.
+
+## Required fidelity surfaces
+
+- Fonts and typography: tab size, weight, line height, and nowrap behavior now match the compact HSK treatment; the existing project font family remains unchanged.
+- Spacing and layout rhythm: tab height, horizontal padding, inter-tab gap, pill radius, and header separation follow the HSK proportions while preserving the office container.
+- Colors and visual tokens: active coral, inactive blue-gray, hover surface, focus ring, divider, and shadow now use the HSK visual language.
+- Image quality and asset fidelity: no images or decorative assets are present in this component; no asset substitution was needed.
+- Copy and content: `Từ vựng`, `Cụm từ`, and `Nghe & Nói` remain unchanged as requested; HSK-specific icons and counts were intentionally not introduced.
+
+## Findings and comparison history
+
+1. Baseline P1: the office tabs used a looser, lighter style and the header lacked the HSK divider/elevation treatment.
+2. Fix: synchronized the pill geometry, colors, typography, gaps, hover/focus states, header divider, blur, and shadow using CSS only.
+3. First browser pass P2: the existing `font` shorthand was invalid in the browser, so the tabs rendered at inherited 16 px / weight 400 instead of the intended compact HSK typography.
+4. Fix: split the shorthand into explicit `font-family`, `font-size`, `font-weight`, and `line-height` declarations.
+5. Post-fix evidence: computed styles report 12 px / 690, 33 px active pill height, exact target colors/shadow, successful transitions across all three tabs, zero desktop/mobile overflow, and no browser console errors.
+
+No actionable P0, P1, or P2 findings remain for this scoped CSS synchronization.
+
+final result: passed
+
+---
+
+# Design QA — Box tính năng trang chủ
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-8f48adcc-d769-4cd4-8a5f-8db2177ef552.png` (2172 × 724 px).
+- Implementation: `http://localhost:3001/`.
+- Desktop page screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-feature-boxes-page.png` (2013 × 1523 physical px).
+- Focused implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-feature-boxes-focused.png` (1260 × 320 px).
+- Mobile screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-feature-boxes-mobile.png` (390 × 844 CSS px at browser display density).
+- Normalized comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-feature-boxes-comparison.png`.
+- State: authenticated learner homepage, default feature-card state.
+
+## Full-view comparison evidence
+
+- The four cards remain in the same order and now match the selected visual direction: pale rose, blue, apricot, and lilac surfaces; large top-left labels; and isolated 3D learning objects at lower right.
+- The feature heading now carries the coral vertical accent from the source. The existing `Xem tất cả` route remains intentionally visible to preserve product navigation.
+- At desktop width all four cards remain on one row. At 390 px they become full-width stacked cards with large touch targets and no horizontal overflow.
+
+## Focused region comparison evidence
+
+- A normalized side-by-side image confirms that card ratio, title placement, object scale, object direction, and palette track the source closely.
+- Pencil, headphones, keyboard, and book stack are real transparent PNG assets generated for the component rather than CSS or placeholder artwork.
+- The source's subtle lower-left tonal arc is omitted as nonessential P3 decoration; card hierarchy and focal objects remain equivalent.
+
+## Required fidelity surfaces
+
+- Fonts and typography: titles retain the project's Roboto Vietnamese family, heavy optical weight, compact line height, and per-card source colors.
+- Spacing and layout rhythm: four equal grid tracks, 16 px gaps, 20 px radii, top-left title padding, and lower-right illustration anchoring follow the source proportions.
+- Colors and visual tokens: card surfaces resolve to `#fff0ef`, `#eaf6ff`, `#fff3df`, and `#f4e8ff`; title colors use deep red, navy, burnt orange, and deep violet.
+- Image quality and asset fidelity: all four assets are 1536 px transparent PNG renders and remain sharp after responsive scaling; transparency and shadow edges were visually checked.
+- Copy and content: `Luyện viết`, `Luyện nghe`, `Luyện gõ`, and `Giáo trình HSK` match the source exactly; existing destination links are unchanged.
+
+## Findings and comparison history
+
+1. Baseline P1: the cards used Himi mascot scenes, bottom descriptions, and circular arrows, which differed materially from the selected standalone-object design.
+2. Fix: generated four source-matched 3D assets, removed secondary card copy/arrows, enlarged the labels, simplified the pastel surfaces, and matched object placement.
+3. Post-fix evidence: desktop focused comparison matches the selected hierarchy and subjects; mobile cards stack cleanly; all images load at full intrinsic resolution; five scoped homepage tests and ESLint pass.
+
+No actionable P0, P1, or P2 findings remain for the feature-box redesign.
+
+final result: passed
+
+---
+
+# Design QA — Trang chủ mobile theo ảnh tham chiếu
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-cf3f7546-61d5-40a4-83a0-0b088b1b460d.png` (1024 × 1536 px, có khung điện thoại).
+- Implementation: `http://localhost:3001/`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-mobile-reference-implementation.png` (503 × 1125 physical px; app viewport kiểm tra ở 390 × 844 CSS px).
+- Normalized comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-mobile-reference-comparison.png` (788 × 844 px).
+- Density normalization: nguồn được cắt còn vùng nội dung ứng dụng 800 × 1410 px, loại bỏ phần lớn khung máy và status bar, sau đó thu về chiều rộng 390 px. Ảnh triển khai được cắt đúng vùng nội dung 390 × 844 CSS px; hai bên được đặt cạnh nhau trên cùng một ảnh so sánh.
+- State: người học đã đăng nhập, trang chủ ở đầu trang, thanh điều hướng mobile hiển thị.
+
+## Full-view comparison evidence
+
+- Header mobile có logo Himi bên trái và nút thông báo tròn bên phải, cùng nhịp chiều cao và khoảng thở như nguồn.
+- Hero dùng bố cục chữ trái, mascot–sách–bút phải, bong bóng `Học là vui!`, nền kem–đào và CTA đỏ dạng pill; tỷ lệ thẻ và bán kính bám sát nguồn.
+- Bốn tính năng được chuyển sang lưới 2 × 2, mỗi thẻ có tiêu đề, mô tả, nút tròn và minh họa 3D ở góc phải dưới.
+- Chủ đề phổ biến là hàng cuộn ngang; thanh điều hướng cố định có bốn mục `Trang chủ`, `Khóa học`, `Tiến độ`, `Cá nhân`.
+- Giao diện desktop giữ nguyên hero, lưới bốn cột, nội dung gần đây và điều hướng hiện có; không có tràn ngang ở desktop hoặc mobile.
+
+## Focused region comparison evidence
+
+- So sánh cạnh nhau cho thấy thứ tự nội dung, mật độ hero, lưới 2 × 2, bảng màu pastel, vị trí minh họa và nhịp giữa các section đều tương đương ảnh nguồn.
+- Hero mobile sử dụng hai tài sản raster riêng: nền paper-cut đào–kem và mascot Himi cầm bút phía sau sách; card luyện viết dùng minh họa bút + giấy chữ `汉` riêng.
+- Sai khác chấp nhận được: ảnh nguồn sử dụng một khung thiết bị ngắn hơn, trong khi triển khai được kiểm tra ở viewport 390 × 844 CSS px; so sánh đã chuẩn hóa theo chiều rộng và loại bỏ device chrome.
+
+## Required fidelity surfaces
+
+- Fonts and typography: giữ Roboto của sản phẩm, dùng tiêu đề đậm, kicker chữ hoa, mô tả nhỏ và nhấn coral theo nguồn; không có cắt chữ ở 390 px.
+- Spacing and layout rhythm: header 72–76 px, hero khoảng tỷ lệ 1.76, card 2 cột tỷ lệ 1.55, gap 10 px, topic 94 px và nav bốn cột cố định tạo mật độ gần nguồn.
+- Colors and visual tokens: nền `#fffdfb`, coral thương hiệu, bốn bề mặt rose/blue/apricot/lilac và nav trắng mờ khớp ngôn ngữ màu của ảnh.
+- Image quality and asset fidelity: mascot, nền hero và card luyện viết là PNG chất lượng cao; các asset feature hiện có được tái sử dụng, không dùng placeholder hoặc hình vẽ CSS thay thế.
+- Copy and content: nội dung hero, bốn mô tả tính năng, `Xem tất cả` và nhãn thanh điều hướng theo ảnh; các liên kết chính vẫn hoạt động.
+
+## Interaction and console verification
+
+- Nhấp `Luyện viết` điều hướng thành công tới `/writing` và quay lại trang chủ được.
+- Nhấp `Khóa học` trên bottom navigation điều hướng thành công tới `/courses` và quay lại trang chủ được.
+- Browser console errors: none.
+
+## Findings and comparison history
+
+1. Baseline P1: mobile trước đó dùng hero cao, feature card một cột, không có header logo và dùng thanh điều hướng năm mục của shell; mật độ khác rõ ảnh nguồn.
+2. Fix: thêm bố cục mobile riêng, hero raster mới, lưới feature 2 × 2 có mô tả/nút tròn, topic cuộn ngang và nav bốn mục; desktop được giữ nguyên.
+3. First browser pass P2: brand vẫn bị `opacity: 0` bởi quy tắc responsive cũ và ảnh feature nằm sau nền card do `z-index: -1`.
+4. Fix: buộc brand về opacity/transform bình thường và đưa artwork mobile lên lớp nội dung card.
+5. Post-fix evidence: comparison cuối bám sát nguồn, tất cả asset tải đầy đủ, viewport 390 × 844 không tràn ngang, hai luồng điều hướng hoạt động, console sạch, scoped tests và ESLint đều pass.
+
+No actionable P0, P1, or P2 findings remain for the mobile homepage redesign.
+
+final result: passed
+
+---
+
+# Design QA — Bài học gần đây trên trang chủ mobile
+
+- Source requirement: hiển thị section `Bài học gần đây` ngay dưới `Chủ đề phổ biến` ở phiên bản mobile.
+- Implementation: `http://localhost:3001/`.
+- Browser screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-mobile-recent-lessons.png`.
+- Viewport: 390 × 844 CSS px; trang được cuộn tới vùng chủ đề và bài học gần đây.
+
+## Evidence
+
+- Section mới nằm ngay sau hàng chủ đề cuộn ngang và trước vùng đệm của bottom navigation.
+- Ba bài học hiển thị icon, tiêu đề, mô tả, thanh tiến độ, phần trăm và mũi tên điều hướng trong các card bo góc đồng nhất.
+- Bottom navigation vẫn cố định, không gây tràn ngang; nội dung cuối có đủ khoảng trống để cuộn ra khỏi vùng nav.
+- Desktop vẫn giữ bố cục `Chủ đề phổ biến` và `Bài học gần đây` hai cột như trước.
+- Scoped homepage tests, rendered-home test và ESLint pass; browser console errors: none.
+
+No actionable P0, P1, or P2 findings remain for this scoped mobile section update.
+
+final result: passed
+
+---
+
+# Design QA — Menu năm mục trên trang chủ mobile
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-79f8da32-caf6-40b0-b614-cbd194a0dfa0.png` (336 × 67 px).
+- Implementation: `http://localhost:3001/`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-mobile-five-item-menu.png` (503 × 1125 physical px; app viewport 390 × 844 CSS px).
+- Focused implementation crop: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-mobile-five-item-menu-focused.png` (390 × 62 px).
+- Combined comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-mobile-menu-comparison.png` (390 × 144 px).
+- Density normalization: ảnh nguồn được nội suy lên 390 × 74 px theo đúng tỷ lệ; menu triển khai được cắt theo vùng 390 × 62 px và đặt chung trong một ảnh so sánh.
+- State: trang chủ mobile, mục `Hôm nay` đang active; ảnh nguồn minh họa trạng thái `Tài khoản` active nên khác biệt màu active là có chủ đích theo route.
+
+## Full-view comparison evidence
+
+- Thanh điều hướng cố định sát cạnh dưới viewport, phủ gần trọn chiều rộng và giữ đủ khoảng trống để nội dung không bị che.
+- Năm mục theo đúng thứ tự `Hôm nay`, `Luyện tập`, `Trò chơi`, `VIP`, `Tài khoản`; biểu tượng nằm trên nhãn và phân bố đều trên năm cột.
+- Nền trắng, viền xám rất nhạt, bo góc phía trên và bóng đổ nhẹ bám sát mật độ gọn của ảnh nguồn.
+
+## Focused region comparison evidence
+
+- Ảnh so sánh ghép chung cho thấy chiều cao, vị trí icon, khoảng cách icon–nhãn, màu xám inactive và màu coral active tương đồng nguồn.
+- Khác biệt chấp nhận được: icon dùng bộ Lucide nhất quán của sản phẩm; mục active là `Hôm nay` do đang ở route trang chủ, thay vì `Tài khoản` như trạng thái minh họa trong nguồn.
+
+## Required fidelity surfaces
+
+- Fonts and typography: nhãn 8 px, đậm vừa, canh giữa và không bị xuống dòng ở chiều rộng 390 px.
+- Spacing and layout rhythm: dock cao 62 px, năm cột bằng nhau, gap nội bộ 3 px và lề ngang 2 px.
+- Colors and visual tokens: coral thương hiệu cho active, xám trung tính cho inactive, nền trắng mờ và viền nhạt.
+- Image quality and asset fidelity: icon vector Lucide sắc nét ở kích thước 18 px, không dùng emoji hoặc placeholder.
+- Copy and content: đủ năm nhãn tiếng Việt, đúng thứ tự và liên kết đến `/`, `/practice`, `/games`, `/vip`, `/account`.
+
+## Interaction and console verification
+
+- Nhấp `Trò chơi` từ menu trang chủ điều hướng thành công tới `http://localhost:3001/games`.
+- Trở lại trang chủ và menu hiển thị lại ở trạng thái `Hôm nay` active.
+- Browser console errors: none.
+- Scoped responsive tests, rendered-home test, ESLint và `git diff --check` đều pass.
+
+## Findings and comparison history
+
+1. Baseline P2: menu trang chủ trước đó có bốn mục `Trang chủ`, `Khóa học`, `Tiến độ`, `Cá nhân`, cao 72 px và nổi cách mép dưới 8 px nên khác mẫu.
+2. Fix: thay bằng năm đích điều hướng theo nguồn, giảm icon/nhãn, đổi lưới thành năm cột, hạ chiều cao còn 62 px và đưa dock sát mép dưới.
+3. Post-fix evidence: ảnh focused comparison cho thấy cấu trúc và mật độ đã bám sát nguồn; điều hướng hoạt động và console sạch.
+
+No actionable P0, P1, or P2 findings remain for this scoped mobile menu update.
+
+final result: passed
+
+---
+
+# Design QA — Đóng/mở chủ đề HSK bằng tiêu đề
+
+- Source visual truth paths: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-1e3bddd4-ab6b-413a-b35f-cc3de8315b6e.png` (trạng thái mở) và `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-fa5aca48-eece-4bf2-81fc-b417c298033b.png` (trạng thái đóng).
+- Implementation: `http://localhost:3001/courses?view=hsk`.
+- Browser-rendered implementation screenshot: Codex in-app Browser capture trong lượt QA ngày 2026-10-03.
+- Viewport: 1707 × 960 CSS px, desktop, HSK 1.
+- Density normalization: đối chiếu trực tiếp theo vùng tiêu đề chủ đề; không cần đổi mật độ vì thay đổi chỉ liên quan trạng thái hiển thị.
+- State: mở Chủ đề 3, click lại toàn bộ tiêu đề, danh sách Bài 11–15 biến mất và `aria-expanded` đổi từ `true` sang `false`.
+
+## Full-view and focused comparison evidence
+
+- Khi mở, danh sách bài học nằm ngay dưới tiêu đề và chevron hướng lên như ảnh 1.
+- Khi click lại tiêu đề, chỉ còn hàng chủ đề, tiến độ và chevron hướng xuống như ảnh 2.
+- Không cần focused crop bổ sung vì trạng thái đóng/mở và toàn bộ vùng bị ảnh hưởng đều nhìn rõ trong capture toàn trang.
+
+## Required fidelity surfaces
+
+- Fonts and typography: không thay đổi font, cỡ, độ đậm hoặc phân cấp chữ hiện có.
+- Spacing and layout rhythm: trạng thái đóng loại bỏ toàn bộ danh sách bài và giữ đúng một hàng chủ đề.
+- Colors and visual tokens: không thay đổi màu sắc hoặc token hiện có.
+- Image quality and asset fidelity: icon chủ đề hiện có được giữ nguyên; không thêm asset thay thế.
+- Copy and content: tiêu đề, mô tả và tiến độ chủ đề giữ nguyên ở cả hai trạng thái.
+
+## Interaction and console verification
+
+- Chủ đề 3 mở thành công khi click lần đầu và hiển thị Bài 11–15.
+- Click lại cùng tiêu đề thu gọn thành công; Bài 11–15 không còn trong accessibility tree.
+- Browser console errors: none.
+- Scoped HSK tests: 3 passed; ESLint scoped: passed.
+
+No actionable P0, P1, or P2 findings remain for the topic toggle interaction.
+
+final result: passed
+
+---
+
+# Design QA — Badge xác minh email trên mobile
+
+- Source visual truth: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/account-email-verified-before.png` (823 × 1585 physical px), captured from the annotated `/account` state before refinement.
+- Implementation: `http://localhost:3001/account`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/account-email-verified-after.png` (823 × 1585 physical px).
+- Narrow mobile screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/account-email-verified-390.png` (503 × 1125 physical px; 390 × 844 CSS viewport).
+- Combined focused comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/account-email-verified-comparison.png` (1586 × 290 px; identical before/after crops).
+- Primary viewport: 628 × 1189 CSS px at approximately 1.31 density; additional 390 × 844 CSS check.
+- State: signed-in VIP account, email verified, account information panel visible.
+
+## Full-view comparison evidence
+
+- The information card, row heights, icons, email value and surrounding security section remain aligned at the annotated viewport.
+- At 390 px, the badge wraps below the email within the same row rather than overflowing or covering content.
+- The rest of the account page and persistent mobile navigation remain unchanged.
+
+## Focused region comparison evidence
+
+- The combined crop shows the previous unlabeled 32 px mint circle on the left and the revised compact `Đã xác minh` pill on the right.
+- The new pill keeps the verification icon while making the status explicit, with a soft teal border and background that separate it from the white card.
+
+## Required fidelity surfaces
+
+- Fonts and typography: 9 px bold status text is legible without competing with the 12 px account metadata.
+- Spacing and layout rhythm: 27 px pill height, 8 px horizontal padding and 4 px icon gap keep the control compact.
+- Colors and visual tokens: teal foreground and pale mint surface retain the existing semantic verified color.
+- Image quality and asset fidelity: the existing Lucide `BadgeCheck` vector remains crisp at 13 px; no image assets were changed.
+- Copy and content: the visible status now matches the existing accessible text `Đã xác minh`.
+
+## Interaction and console verification
+
+- The badge remains discoverable in the rendered accessibility tree as part of the email value.
+- Browser console errors: none.
+- Scoped account layout test, avatar tests, ESLint and `git diff --check` pass.
+
+## Findings and comparison history
+
+1. Baseline P2: mobile CSS set `font-size: 0` and forced the status to a 32 px icon-only circle, hiding the meaning of the state.
+2. Fix: restored the text in a compact pill, added a subtle semantic border/surface and retained flexible email truncation/wrapping behavior.
+3. Post-fix evidence: focused before/after comparison and the 390 px capture show the label is readable with no overflow or overlap.
+
+No actionable P0, P1, or P2 findings remain for this scoped verification-badge update.
+
+final result: passed
+
+---
+
+# Design QA — Icon điều hướng card khóa học
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-12bc887e-81fb-47dd-8060-22ad093cd57d.png` (168 × 141 px), biểu tượng hai chevron hướng phải.
+- Target card reference: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-d31a5f66-5bd0-4ed5-bc59-dcb674df4d31.png` (527 × 593 px).
+- Implementation: `http://localhost:3001/courses`.
+- Desktop evidence: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/course-cards-double-chevron-desktop.png` (2257 × 1280 px).
+- Mobile evidence: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/course-cards-double-chevron-mobile.png` (675 × 1500 px; 390 × 844 CSS viewport).
+- Combined focused comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/course-card-double-chevron-comparison.png` (820 × 430 px).
+- State: signed-in course catalog with all nine available course cards rendered.
+
+## Full-view and focused comparison evidence
+
+- Desktop capture confirms the icon is applied consistently across the three-column catalog without changing card spacing, footer alignment or button dimensions.
+- Mobile capture confirms the first HSK card retains the original square control and displays a crisp double chevron at the narrow breakpoint.
+- The combined comparison places the provided source icon and the rendered control in one image; direction, two-stroke silhouette and visual weight match the requested reference.
+
+## Required fidelity surfaces
+
+- Fonts and typography: unchanged.
+- Spacing and layout rhythm: existing 42 × 42 px icon container, border radius and footer placement are preserved.
+- Colors and visual tokens: existing neutral border, white surface and dark foreground remain consistent with the site brand.
+- Image quality and asset fidelity: the icon uses Lucide `ChevronsRight` at 23 px with stroke width 3, so it remains sharp at every density without a raster dependency.
+- Copy and content: unchanged across HSK and specialist course cards.
+
+## Interaction and console verification
+
+- DOM verification: nine `.lucide-chevrons-right` icons and zero legacy `.lucide-arrow-up-right` icons inside course-card action controls.
+- Selecting a course card navigates successfully to its roadmap page.
+- Browser console errors: none.
+- Scoped course roadmap tests: 2 passed; HSK curriculum tests: 3 passed; scoped ESLint and `git diff --check`: passed.
+
+## Findings and comparison history
+
+1. Baseline P2: course-card action controls used a single diagonal arrow, which did not match the supplied double-chevron reference.
+2. Fix: replaced the icon in both shared course-card components with a bold right-facing double chevron while preserving the existing control and navigation behavior.
+3. Post-fix evidence: desktop, mobile and focused comparison captures show the requested icon consistently across the catalog.
+
+No actionable P0, P1, or P2 findings remain for this scoped course-card icon update.
+
+final result: passed
+
+---
+
+# Design QA — Viền trái tiêu đề trang chủ
+
+- Source visual truth: ảnh tham chiếu đính kèm trong Browser Comment 1 và 2 (`Tính năng học tập`, 296 × 58 px), cho thấy thanh đỏ dày ở bên trái và khoảng đệm rõ trước tiêu đề.
+- Implementation: `http://localhost:3001/`.
+- Browser-rendered evidence: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/home-heading-left-border-mobile.jpg` (579 × 1585 px).
+- Viewport: 448 × 1189 CSS px; browser-reported device pixel ratio 0.75; capture scale approximately 1.29 px/CSS px.
+- State: trang chủ mobile, các mục `Chủ đề phổ biến` và `Bài học gần đây` cùng link `Xem tất cả` hiển thị.
+- Density normalization: nguồn là crop tập trung còn implementation là toàn viewport, nên kiểm tra trực quan theo tỷ lệ nét/typography và xác minh thêm bằng kích thước CSS thực tế thay vì so khớp từng pixel.
+
+## Full-view comparison evidence
+
+- Cả hai tiêu đề hiện có thanh đỏ `#ff5a4e` ở mép trái, cùng sắc đỏ với ảnh mẫu.
+- Thanh viền và khoảng đệm không làm thay đổi bề rộng card, hàng chủ đề, danh sách bài học hoặc thanh điều hướng cố định.
+- Link `Xem tất cả` vẫn nằm cùng hàng và không chồng lên tiêu đề tại viewport kiểm tra.
+
+## Focused region comparison evidence
+
+- Ảnh nguồn thể hiện mô-típ viền trái 7 px và khoảng cách 18 px trước chữ; implementation dùng đúng `border-left: 7px solid #ff5a4e` và `padding-left: 18px` cho cả hai heading.
+- Kích thước render đo được: `Chủ đề phổ biến` 154.44 × 28.5 CSS px và `Bài học gần đây` 151.5 × 28.5 CSS px; border được trình duyệt raster hóa thành 6.67 CSS px ở mức zoom hiện tại.
+
+## Required fidelity surfaces
+
+- Fonts and typography: giữ nguyên Roboto, cỡ 19 px, weight và letter spacing hiện có; không phát sinh wrap.
+- Spacing and layout rhythm: thêm đúng khoảng đệm trái 18 px; cả hai heading row còn hơn 178 CSS px khoảng trống trước link hành động và không overlap.
+- Colors and visual tokens: dùng cùng coral `#ff5a4e` với mẫu viền hiện có trên trang.
+- Image quality and asset fidelity: không thay đổi hoặc thay thế bất kỳ asset nào; nét viền là CSS sắc nét ở mọi mật độ.
+- Copy and content: giữ nguyên `Chủ đề phổ biến`, `Bài học gần đây` và toàn bộ nội dung liên quan.
+
+## Interaction and console verification
+
+- Các link `Xem tất cả` và nội dung section vẫn hiển thị, không bị che hoặc lệch hàng.
+- Browser console errors: none.
+- Scoped responsive test: 4 passed.
+
+## Findings and comparison history
+
+1. Baseline P2: hai tiêu đề được đánh dấu không có viền trái nên thiếu phân cấp thị giác theo ảnh tham chiếu.
+2. Fix: thêm chung viền trái coral 7 px và padding trái 18 px cho `#home-topic-title` và `#home-recent-title`; bổ sung kiểm thử hồi quy.
+3. Post-fix evidence: ảnh browser sau chỉnh sửa và số đo layout xác nhận hai viền hiển thị đồng nhất, không chồng lấp hoặc làm vỡ responsive layout.
+
+No actionable P0, P1, or P2 findings remain for this scoped heading-border update.
+
+final result: passed
+
+---
+
+# Design QA — Logo mặt Himi trên header mobile
+
+- Source visual truth: ảnh logo mặt Himi đính kèm trong Browser Comment 1 (64 × 64 px) và asset thương hiệu desktop tương ứng `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/public/assets/brand/himi-sidebar-logo-transparent.webp` (1254 × 1254 px, nền trong suốt).
+- Implementation: `http://localhost:3001/`.
+- Browser-rendered evidence: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/home-mobile-face-logo.jpg` (861 × 1585 px).
+- Combined focused comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/home-mobile-face-logo-comparison.jpg` (981 × 120 px).
+- Viewport: 660 × 1189 CSS px; browser-reported device pixel ratio 0.75; effective screenshot scale approximately 1.30 px/CSS px.
+- State: trang chủ mobile, header và wordmark `Himi Chinese` đang hiển thị.
+- Density normalization: asset nguồn được thu về 72 × 72 px trong comparison; implementation giữ nguyên capture để đánh giá crop, silhouette và tỷ lệ trong khung.
+
+## Full-view comparison evidence
+
+- Header trang chủ hiện dùng đúng mặt Himi đang dùng ở desktop thay cho mascot toàn thân trước đó.
+- Wordmark, chuông thông báo, chiều cao header và toàn bộ nội dung trang chủ không thay đổi.
+- Logo mới đọc rõ ở kích thước nhỏ và không làm thay đổi căn chỉnh ngang của header.
+
+## Focused region comparison evidence
+
+- Comparison đặt asset mặt Himi gốc cạnh crop header sau chỉnh sửa; mắt nháy, mỏ cam, má hồng và silhouette tóc khớp trực tiếp.
+- Ảnh render dùng chính `himi-sidebar-logo-transparent.webp`, nằm trong box 44 × 44 CSS px, ảnh hiển thị 41.33 × 41.33 CSS px với `object-fit: contain` và radius 15 px.
+
+## Required fidelity surfaces
+
+- Fonts and typography: wordmark `Himi Chinese` giữ nguyên font, weight, màu đỏ/đen và khoảng cách hiện có.
+- Spacing and layout rhythm: box logo 44 px và gap header hiện tại được giữ nguyên; không có overlap hoặc thay đổi chiều cao.
+- Colors and visual tokens: nền box trắng, đường viền trung tính và màu mascot đúng asset thương hiệu đã duyệt.
+- Image quality and asset fidelity: dùng trực tiếp WebP trong suốt 1254 × 1254 px của logo desktop, không dùng SVG/CSS/emoji thay thế; hình sắc nét và crop đúng mặt.
+- Copy and content: không thay đổi nhãn truy cập `Himi Chinese - Trang chủ` hoặc wordmark hiển thị.
+
+## Interaction and console verification
+
+- Logo vẫn nằm trong link trang chủ hiện có và giữ nguyên hành vi điều hướng.
+- Browser console errors: none.
+- Scoped tests: 6 passed; scoped ESLint: passed.
+
+## Findings and comparison history
+
+1. Baseline P2: header mobile dùng mascot toàn thân trong khung nhỏ, khiến logo trông thu nhỏ và không đồng nhất với logo mặt Himi ở desktop.
+2. Fix: thêm biến thể `face` cho `BrandMark` và dùng biến thể này riêng khi learner shell đang ở route trang chủ; các route khác tiếp tục dùng mascot hiện tại.
+3. Post-fix evidence: browser capture và comparison tập trung xác nhận đúng asset mặt Himi, tỷ lệ lớn hơn trong box, không làm lệch header.
+
+No actionable P0, P1, or P2 findings remain for this scoped mobile-logo update.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ “Xem tất cả” khỏi Bài học gần đây
+
+- Source visual truth: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-mobile-recent-lessons.png` (503 × 1125 px), matching the annotated mobile state with the `Xem tất cả` link visible beside the section title.
+- Implementation: `http://localhost:3001/`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/home-recent-lessons-without-view-all.png` (823 × 1585 px).
+- Combined focused comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/home-recent-lessons-view-all-comparison.png` (900 × 300 px).
+- Viewport: 630 × 1189 CSS px; browser capture density approximately 1.31.
+- Density normalization: before and after header crops were scaled to a common 100 px comparison height.
+- State: signed-in VIP learner, mobile homepage, recent-lessons section visible.
+
+## Full-view and focused comparison evidence
+
+- The full mobile capture shows the `Bài học gần đây` heading without a trailing header action while all three lesson rows remain in place.
+- The combined comparison places the prior state and revised state together; the only scoped content removed is `Xem tất cả` and its arrow.
+- The section title, red accent, card spacing and bottom navigation remain aligned and unobstructed.
+
+## Required fidelity surfaces
+
+- Fonts and typography: the heading font, size, weight and wrapping are unchanged.
+- Spacing and layout rhythm: the heading row retains its height and alignment; removal does not collapse or shift the lesson list.
+- Colors and visual tokens: the existing black heading, coral accent and lesson-card palette remain unchanged.
+- Image quality and asset fidelity: no image assets were added, removed or rescaled.
+- Copy and content: only the requested `Xem tất cả` header action was removed; all three recent lesson titles, subtitles and progress values remain visible.
+
+## Interaction and console verification
+
+- DOM verification: zero links inside `.home-redesign-recent .home-redesign-heading-row` and three lesson links inside the recent list.
+- Browser console errors: none.
+- Scoped responsive-home tests: 4 passed; scoped ESLint and `git diff --check`: passed.
+- The broader rendered-HTML suite still has four unrelated pre-existing failures in deployment, learner-shell, daily-session and course-cover assertions; none touch this section.
+
+## Findings and comparison history
+
+1. Baseline P2: the recent-lessons heading included a `Xem tất cả` action that the annotation requested to remove.
+2. Fix: removed only the `/courses` link from the recent-lessons heading, preserving the feature and popular-topic header actions.
+3. Post-fix evidence: mobile capture and focused before/after comparison show the header action is gone with no layout regression.
+
+No actionable P0, P1, or P2 findings remain for this scoped homepage update.
+
+final result: passed
+
+---
+
+# Design QA — Nút chevron không có hover
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-315a7efa-1d2f-4c54-b5a5-6f9f19f2b4cf.png` (69 × 66 px), showing the requested neutral square chevron control.
+- Implementation: `http://localhost:3001/courses`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/course-card-chevron-static.png` (2257 × 1280 px).
+- Combined focused comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/course-card-chevron-static-comparison.png` (760 × 330 px).
+- Viewport: 1706 × 960 CSS px; device pixel ratio 0.75.
+- Density normalization: source and implementation icon crops were enlarged into equal visual panels for shape, border and resting-state comparison.
+- State: signed-in VIP learner, desktop course catalog with nine course cards visible.
+
+## Full-view and focused comparison evidence
+
+- The full catalog capture confirms every card retains the same 42 × 42 px chevron control, footer alignment and neutral border treatment.
+- The focused comparison shows the supplied neutral icon box and rendered control share the same white/transparent surface, pale border, rounded corners and black double chevron.
+- Browser CSS inspection found zero hover selectors targeting `.icon-link` across the loaded stylesheets.
+
+## Required fidelity surfaces
+
+- Fonts and typography: unchanged; the control contains only the existing vector icon.
+- Spacing and layout rhythm: width, height, radius, footer gap and card layout are unchanged.
+- Colors and visual tokens: the control remains dark text on a transparent surface with the existing neutral border in both resting and pointer-hover states.
+- Image quality and asset fidelity: the Lucide double chevron remains a crisp vector; the supplied raster image was used only as visual reference.
+- Copy and content: unchanged across HSK and specialist course cards.
+
+## Interaction and console verification
+
+- Runtime CSS verification: nine controls rendered; `background-color: transparent`, neutral border, dark foreground and `transform: none` at rest, with no hover rules able to alter them.
+- Keyboard `:focus-visible` feedback remains available for accessibility.
+- All course cards retain their destination links and navigation semantics.
+- Browser console errors: none before the preview restart; the restored preview loads successfully at `/courses`.
+- Scoped course-card tests: 3 passed; scoped ESLint and `git diff --check`: passed.
+
+## Findings and comparison history
+
+1. Baseline P2: direct icon hover and parent-card hover changed the control color, background and position.
+2. Fix: removed both direct `.icon-link:hover` declarations and changed the parent-card motion rules to apply only on `:focus-visible`.
+3. Post-fix evidence: browser CSS inspection reports no hover selector for the control, and the visual capture shows the requested neutral state without layout drift.
+
+No actionable P0, P1, or P2 findings remain for this scoped hover-state update.
+
+final result: passed
+
+---
+
+# Design QA — Tinh gọn phần đầu danh mục lộ trình
+
+- Source visual truth: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/course-card-chevron-static.png` (2257 × 1280 px), showing the catalog before the three annotated text removals.
+- Implementation: `http://localhost:3001/courses`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/course-catalog-clean-header.png` (2257 × 1280 px).
+- Combined focused comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/course-catalog-clean-header-comparison.png` (2048 × 372 px).
+- Viewport: 1706 × 960 CSS px; browser-reported device pixel ratio 0.75.
+- Density normalization: source and implementation captures share the same 2257 × 1280 pixel dimensions; the focused comparison uses equal 1000 × 300 px panels from matching source regions.
+- State: signed-in VIP learner, desktop course catalog, default “Tất cả” filter.
+
+## Full-view and focused comparison evidence
+
+- The full implementation capture shows one clear page title followed directly by search, filters and the course grid.
+- The combined comparison visibly confirms removal of the uppercase eyebrow, explanatory sentence and route-count line while preserving the title and course content.
+- DOM inspection reports zero `.explorer-count` elements and no matches for any of the three removed strings.
+
+## Required fidelity surfaces
+
+- Fonts and typography: the existing title family, weight, size, line height and color remain unchanged; only the requested secondary copy was removed.
+- Spacing and layout rhythm: title spacing and the loading skeleton were updated together, keeping a clean title-to-toolbar transition without layout shift or horizontal overflow.
+- Colors and visual tokens: the established forest title, coral active filter, neutral borders and white surfaces remain unchanged.
+- Image quality and asset fidelity: all course imagery, crops, labels and card illustrations remain unchanged and sharp.
+- Copy and content: only `LỘ TRÌNH HỌC TIẾNG TRUNG`, the explanatory sentence, and the route-count sentence were removed; the main title, filters and all course-card content remain present.
+
+## Interaction and console verification
+
+- Search and filter controls remain visible and accessible; nine destination cards remain in the catalog DOM.
+- Horizontal overflow: none at the verified desktop viewport.
+- Browser console warnings/errors: none.
+- Scoped HSK/catalog tests: 3 passed; scoped ESLint and `git diff --check`: passed.
+
+## Findings and comparison history
+
+1. Baseline P2: three secondary text blocks added unnecessary hierarchy and vertical density in the annotated catalog header.
+2. Fix: removed the eyebrow and description from `CourseLibraryView`, removed the dynamic count from `CourseExplorer`, and synchronized the loading skeleton and spacing styles.
+3. Post-fix evidence: the browser capture, DOM assertions and focused comparison show the requested text is absent with the catalog controls and grid intact.
+
+No actionable P0, P1, or P2 findings remain for this scoped catalog-header update.
+
+final result: passed
+
+---
+
+# Design QA — Tinh gọn phần đầu lộ trình HSK
+
+- Source visual truth: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/hsk-curriculum-before-removal.png` (2257 × 1280 px), captured at the annotated HSK state before removal.
+- Implementation: `http://localhost:3001/courses?view=hsk`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/hsk-curriculum-clean-header.png` (2257 × 1280 px).
+- Combined focused comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/hsk-curriculum-clean-header-comparison.png` (2048 × 383 px).
+- Viewport: 1706 × 960 CSS px; browser-reported device pixel ratio 0.75.
+- Density normalization: both full captures share the same pixel dimensions; the focused comparison uses equal 1000 × 311 px panels from matching source regions.
+- State: signed-in VIP learner, desktop HSK curriculum, HSK 1 active, topic 1 expanded, 4/15 lessons completed.
+
+## Full-view and focused comparison evidence
+
+- The full implementation capture shows the curriculum beginning directly below the learner top bar, with the title and mascot leading into the level controls.
+- The combined comparison confirms removal of the shared breadcrumb, uppercase `HIMI CHINESE` eyebrow and 15-lesson description while preserving all curriculum controls and content.
+- Runtime DOM inspection reports zero `.client-breadcrumb-bar`, zero `.hsk-curriculum-heading-copy > span` and zero `.hsk-curriculum-heading-copy > p` elements.
+
+## Required fidelity surfaces
+
+- Fonts and typography: the HSK title retains its existing family, 900 weight, responsive size, line height and letter spacing; no unintended wrapping is introduced.
+- Spacing and layout rhythm: removing the breadcrumb shifts the curriculum upward cleanly; the title remains vertically balanced against the mascot and the controls retain their grid alignment.
+- Colors and visual tokens: the existing red/orange brand accents, neutral dividers and white page surface remain unchanged.
+- Image quality and asset fidelity: the Himi mascot and speech bubble remain the same source asset, size and crop with no raster degradation.
+- Copy and content: only the three requested text/navigation elements are absent; the title, six HSK level controls, progress, industry link and three topic sections remain intact.
+
+## Interaction and console verification
+
+- Level switching was tested from HSK 1 to HSK 2 and back to HSK 1; the title updated correctly in both states.
+- Horizontal overflow: none at the verified desktop viewport.
+- Browser console warnings/errors: none.
+- Scoped HSK tests: 3 passed; breadcrumb tests: 5 passed; scoped ESLint and `git diff --check`: passed.
+
+## Findings and comparison history
+
+1. Baseline P2: the breadcrumb and two secondary copy lines added duplicate hierarchy and excess vertical density above the curriculum controls.
+2. Fix: returned no shared breadcrumb for the HSK query view, removed the eyebrow and description from `HskCurriculumExplorer`, and deleted their now-unused responsive styles.
+3. Post-fix evidence: matching browser captures, DOM counts and the focused comparison show the requested elements are gone without affecting title, mascot, controls, progress or lesson content.
+
+No actionable P0, P1, or P2 findings remain for this scoped HSK-header update.
+
+final result: passed
+
+---
+
+# Design QA — Liên kết quay lại trên lộ trình HSK
+
+- Source visual truth: Browser Comment 1 additional inline reference (198 × 43 px), normalized for comparison at `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/hsk-back-link-reference-normalized.png` (198 × 43 px).
+- Implementation: `http://localhost:3001/courses?view=hsk`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/hsk-curriculum-back-link.png` (2257 × 1280 px).
+- Combined focused comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/hsk-curriculum-back-link-comparison.png` (1240 × 205 px).
+- Viewport: 1706 × 960 CSS px; browser-reported device pixel ratio 0.75.
+- Density normalization: the 198 × 43 px source reference and the matching implementation crop were enlarged into equal 600 × 131 px panels.
+- State: signed-in VIP learner, desktop HSK curriculum, HSK 1 active, topic 1 expanded.
+
+## Full-view and focused comparison evidence
+
+- The full implementation capture shows the back link directly above `Lộ trình bài học HSK 1`, aligned to the same left edge as the title.
+- The focused comparison confirms the small left chevron, dark semibold label and unboxed treatment match the reference direction.
+- The reference wording `Về trang Bài tập` was intentionally adapted to `Về trang Lộ trình` because the destination of this screen is the course catalog.
+
+## Required fidelity surfaces
+
+- Fonts and typography: the link uses the existing UI font at 15 px/750 weight with a compact 1.2 line height, closely matching the supplied reference hierarchy.
+- Spacing and layout rhythm: the link sits 14 px above the title and preserves alignment, mascot balance, controls and the lesson list below.
+- Colors and visual tokens: the resting text uses neutral slate `#3f4752`; hover and focus reuse the existing HSK red token.
+- Image quality and asset fidelity: no raster assets changed; the arrow uses the project’s installed Lucide icon library and remains crisp at all densities.
+- Copy and content: one context-aware label, `Về trang Lộ trình`, was added without changing existing curriculum copy.
+
+## Interaction and console verification
+
+- The link resolved to `/courses`, was clicked successfully, navigated to the catalog, and browser history returned to the HSK view.
+- Keyboard focus styling is present via `:focus-visible`.
+- Horizontal overflow: none at the verified desktop viewport.
+- Browser console warnings/errors: none.
+- Scoped HSK tests: 3 passed; scoped ESLint and `git diff --check`: passed.
+
+## Findings and comparison history
+
+1. Baseline P2: after removal of the shared breadcrumb, the HSK title had no local path back to the course catalog.
+2. Fix: added a semantic `Link` with a left chevron above the title, wired to the existing `catalogHref`, with hover and keyboard-focus states.
+3. Post-fix evidence: browser capture, focused comparison and live navigation test confirm the link is visible, visually aligned and functional.
+
+No actionable P0, P1, or P2 findings remain for this scoped back-link update.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ “Xem tất cả” khỏi Tính năng học tập
+
+- Source visual truth: Browser Comment 1 inline capture at 1232 × 1189 px; the earlier matching desktop capture is preserved at `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/homepage-redesign-desktop.png` (2013 × 1523 px).
+- Implementation: `http://localhost:3001/`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/home-feature-view-all-removed-desktop.png` (1232 × 1189 px).
+- Combined focused comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/home-feature-view-all-comparison.png` (1200 × 620 px).
+- Viewport: 1232 × 1189 CSS px; live in-app browser device pixel ratio 0.75. The saved headless capture uses device scale factor 1.
+- Density normalization: the focused comparison resizes both heading/card regions to a common 1144 px panel width. The source capture comes from an earlier visual iteration, so comparison is intentionally scoped to the feature heading action and card preservation rather than unrelated page styling.
+- State: desktop home dashboard. Live DOM checks used the signed-in learner state; the saved implementation screenshot used the signed-out state, whose feature section has identical content and structure.
+
+## Full-view and focused comparison evidence
+
+- The implementation capture shows `Tính năng học tập` followed directly by the four learning cards, with no trailing action text.
+- The focused comparison shows the earlier `Xem tất cả` action in the source and its absence in the current implementation while keeping all four cards visible.
+- Live DOM inspection reports zero links in the feature heading, four feature cards, one preserved `Xem tất cả` link in the popular-topics heading, zero links in the recent-lessons heading, and no horizontal overflow.
+
+## Required fidelity surfaces
+
+- Fonts and typography: the feature heading family, weight, size, line height and left-accent hierarchy remain unchanged; removing the secondary link does not alter wrapping.
+- Spacing and layout rhythm: the heading row keeps its existing height and alignment, and the four-column card grid remains directly below it without a gap or reflow regression.
+- Colors and visual tokens: the red heading accent and the four pastel feature tones remain unchanged.
+- Image quality and asset fidelity: the pencil, headphones, keyboard and HSK books assets retain their existing crop, scale and sharpness.
+- Copy and content: only the requested `Xem tất cả` label in the feature heading is absent. The popular-topics `Xem tất cả` label remains present, and all four feature labels remain intact.
+
+## Interaction and console verification
+
+- Feature cards remain links and their count is unchanged at four.
+- Popular-topics navigation remains available through its own `Xem tất cả` link.
+- Browser console warnings/errors: none; only a development CSS hot-update debug entry was present.
+- Scoped home tests: 4 passed; scoped ESLint and `git diff --check`: passed.
+
+## Findings and comparison history
+
+1. Baseline P2: the feature heading contained a secondary `Xem tất cả` action that the user requested to remove.
+2. Fix: the feature heading now contains only `Tính năng học tập`; a regression assertion prevents the action from being reintroduced and separately protects the popular-topics action.
+3. Post-fix evidence: browser DOM counts, the 1232 × 1189 implementation capture and the focused comparison confirm the requested action is gone without affecting the cards or neighboring sections.
+
+No actionable P0, P1, or P2 findings remain for this scoped homepage update.
+
+final result: passed
+
+---
+
+# Design QA — Độ đậm tiêu đề box Tính năng học tập
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-f2d33af1-b68c-48c6-879d-a0644589e23d.png` (1443 × 105 px).
+- Implementation: `http://localhost:3001/`.
+- Implementation screenshot: captured and visually inspected in the Codex in-app Browser at 1232 × 1189 CSS px, device pixel ratio 0.75; the browser capture API did not expose a filesystem path.
+- State: signed-in VIP learner, desktop homepage, feature section visible, no hover or focus state.
+- Density normalization: the source is a focused 1443 × 105 crop; the implementation was inspected at native browser density and its four computed title styles were measured directly.
+
+## Evidence and required fidelity surfaces
+
+- Fonts and typography: all four `.home-redesign-feature h3` elements resolve to `font-weight: 400`, approximately 17.864 px with a 19.6504 px line height. The family, size, line height, letter spacing and wrapping remain unchanged.
+- Spacing and layout rhythm: the four desktop grid tracks remain equal at 225.125 px; card padding, height, radii and section spacing are unchanged.
+- Colors and visual tokens: the existing rose, blue, apricot and lilac title colors remain unchanged.
+- Image quality and asset fidelity: pencil, headphones, keyboard and HSK book assets remain unchanged and sharp.
+- Copy and content: `Luyện viết`, `Luyện nghe`, `Luyện gõ` and `Giáo trình HSK` remain intact.
+- Responsiveness: the shared title rule supplies weight 400 at every breakpoint; no horizontal overflow was present at the verified desktop viewport.
+- Browser console warnings/errors: none.
+- Scoped tests: 4 passed; scoped ESLint and `git diff --check`: passed.
+
+## Findings and comparison history
+
+1. Baseline P2: feature titles used `font-weight: 900`, visibly heavier than the supplied regular-weight reference.
+2. Fix: changed the shared title rule to `font-weight: 400` and added a regression assertion.
+3. Post-fix evidence: live computed styles report weight 400 for all four titles and the browser capture visually shows the lighter hierarchy.
+
+## Blocker
+
+- The in-app Browser security policy blocked the temporary combined reference/implementation comparison page, and its screenshot API did not provide a writable file path. The source and implementation were both opened and inspected, but the mandatory persisted combined comparison artifact could not be produced without switching browser surfaces or using a prohibited workaround.
+
+No actionable P0, P1, or P2 implementation findings remain; only the required combined Design QA artifact is blocked.
+
+final result: blocked
+
+---
+
+# Design QA — Khôi phục nút Tiếp tục học trên hero
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-8648e84a-e04d-4dd4-9288-50468624da2a.png` (1570 × 649 px), kèm yêu cầu khôi phục CTA `Tiếp tục học`.
+- Implementation URL: `http://localhost:3001/`.
+- Implementation screenshot: captured and visually inspected in the Codex in-app Browser; the screenshot API did not expose a writable filesystem path.
+- Viewport/state: signed-in VIP learner, desktop homepage, approximately 1232 × 1189 CSS px, default state.
+- Density normalization: the source is a focused hero capture while the implementation evidence is a full desktop viewport; the hero region was inspected directly, but no persisted combined comparison artifact was available.
+
+## Evidence and required fidelity surfaces
+
+- Fonts and typography: the restored CTA reuses the existing live `home-redesign-primary` button styles, including the established bold label and arrow icon; the banner's raster typography remains unchanged.
+- Spacing and layout rhythm: the CTA is positioned at `left: 5.4%` and `bottom: 12%`, beneath the banner description and within the hero bounds without changing the banner aspect ratio or surrounding section spacing.
+- Colors and visual tokens: the existing coral button fill, white foreground, pill radius, and shadow are reused.
+- Image quality and asset fidelity: the supplied desktop banner asset remains unchanged and uncropped; no image layer or legacy mascot layer was reintroduced.
+- Copy and content: `Tiếp tục học` is visible again and links to `/hsk/1/hsk1-bai-01-chao-anh`.
+- Responsiveness: the override applies only above 720px; the existing mobile hero CTA and layout are unchanged.
+- Browser evidence: after reload, the CTA is visibly rendered in the lower-left portion of the hero and the accessibility tree exposes it as a link named `Tiếp tục học` with the expected lesson URL.
+- Automated evidence: all 4 focused home-responsive tests passed; scoped ESLint and `git diff --check` passed.
+
+## Findings and comparison history
+
+1. Baseline P1: the desktop hero's copy wrapper was fully hidden, which also removed the existing continuation CTA.
+2. Fix: restored the wrapper as a non-interactive full-hero overlay, kept legacy copy/mascot/bubble children hidden, and enabled pointer interaction only for the existing CTA.
+3. Post-fix evidence: the browser capture shows the CTA without duplicated banner text or artwork, and the focused regression assertion verifies its desktop position and interaction rule.
+
+## Blocker
+
+- The in-app Browser screenshot API did not provide a writable screenshot path, so the mandatory persisted combined source/implementation comparison artifact could not be created. The source and rendered implementation were both opened and inspected, but separate views cannot be treated as a passing combined comparison under the Design QA rules.
+
+No actionable P0, P1, or P2 implementation findings remain; only the required combined Design QA artifact is blocked.
+
+final result: blocked
+
+---
+
+# Design QA — Cỡ chữ tiêu đề section trang chủ
+
+- Source visual truth paths: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-e8720316-aa65-4020-b33e-df96a7c09a70.png` (250 × 57 px), `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-23ecc1f9-19a1-44ca-b788-2770322a7a29.png` (263 × 51 px), and `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-0c08591b-f8a5-4896-af96-4485e44c5486.png` (256 × 46 px).
+- Implementation: `http://localhost:3001/`.
+- Implementation screenshot: captured and visually inspected in the Codex in-app Browser at 1232 × 1189 CSS px, device pixel ratio 0.75; the browser capture API did not expose a filesystem path.
+- State: signed-in VIP learner, desktop homepage, all three section headings visible.
+- Density normalization: the references are focused heading crops; implementation typography was measured directly through browser computed styles.
+
+## Evidence and required fidelity surfaces
+
+- Fonts and typography: `Tính năng học tập`, `Chủ đề phổ biến`, and `Bài học gần đây` each resolve to exactly `18px`, weight 880. The existing font family, letter spacing and hierarchy are preserved.
+- Spacing and layout rhythm: the heading rows, coral accent bars, section margins and card grids remain unchanged; only font size declarations were normalized.
+- Colors and visual tokens: heading foreground and coral accent colors are unchanged.
+- Image quality and asset fidelity: no image or icon assets changed.
+- Copy and content: all three labels remain unchanged and fully visible.
+- Responsiveness: base, intermediate and mobile overrides all specify 18px, preventing breakpoint drift.
+- Horizontal overflow: none at the verified desktop viewport.
+- Browser console warnings/errors: none.
+- Scoped tests: 4 passed; scoped ESLint and `git diff --check`: passed.
+
+## Findings and comparison history
+
+1. Baseline P2: the headings used inconsistent responsive values, including 22px and 19px; `Bài học gần đây` also had a more specific 22px override.
+2. Fix: normalized the shared rule and every more-specific breakpoint override to 18px, with regression coverage for the general and recent-lessons selectors.
+3. Post-fix evidence: live computed styles report 18px for all three headings with no overflow or layout shift.
+
+## Blocker
+
+- The in-app Browser screenshot API did not provide a writable implementation path, and the browser security policy previously blocked the temporary combined comparison surface. The references and rendered implementation were both opened and inspected, but a persisted combined comparison artifact could not be produced within the selected browser.
+
+No actionable P0, P1, or P2 implementation findings remain; only the required combined Design QA artifact is blocked.
+
+final result: blocked
+
+---
+
+# Design QA — Trạng thái active của menu Luyện tập
+
+- Source visual truth paths: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-2a93dc5a-e172-4fa0-b8d9-3cd2234a02e1.png` (253 × 402 px) and `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-76e6caaf-ae2a-4cc1-8386-8950b75a1528.png` (246 × 309 px).
+- Implementation URL: `http://localhost:3001/courses/van-phong-hanh-chinh`.
+- Implementation screenshot path: unavailable; the Codex in-app Browser rejected the localhost tab selection before a capture could be produced.
+- Intended viewport/state: signed-in desktop learner rail; a non-practice primary route remains selected while the Luyện tập submenu is expanded, then Luyện tập becomes selected only after navigating to a practice child route.
+- Density normalization: not applicable because the implementation capture was blocked.
+
+## Evidence and required fidelity surfaces
+
+- Fonts and typography: unchanged by this implementation.
+- Spacing and layout rhythm: unchanged; the existing collapsed and expanded submenu layouts remain intact.
+- Colors and visual tokens: the existing active styling is preserved, but is now applied from route membership instead of the disclosure state.
+- Image quality and asset fidelity: no images or icon assets changed.
+- Copy and content: all menu labels and child links remain unchanged.
+- Interaction logic: `practiceMenuOpen` exclusively controls expansion; `practiceSectionActive` exclusively controls the Luyện tập active state; primary rail items continue deriving active state from the current route.
+- Automated evidence: four scoped navigation tests passed; scoped ESLint and `git diff --check` passed.
+- Browser evidence: blocked before interaction testing; console errors could not be checked for this iteration.
+
+## Findings and comparison history
+
+1. Baseline P1: clicking the Luyện tập disclosure set `practiceTriggerSelected`, which incorrectly removed active styling from the current route and applied active styling to Luyện tập before a child route was selected.
+2. Fix: removed the transient selection state, preserved route-based active state on primary items, and made the Luyện tập trigger active only when the current or pending route matches a practice child.
+3. Post-fix evidence: source-level regression tests verify submenu expansion remains independent from active selection. A rendered post-fix comparison could not be captured.
+
+## Blocker
+
+- The selected in-app Browser rejected the local implementation URL under its browser security policy. Without an implementation screenshot, the required combined source/implementation comparison and direct interaction verification cannot be completed.
+
+No actionable issue remains in the scoped source and automated tests, but the required rendered Design QA evidence is unavailable.
+
+final result: blocked
+
+---
+
+# Design QA — Tiêu đề catalog 25px với thanh nhấn trái
+
+- Source visual truth paths: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-448963dc-9d15-44ea-8a68-994f0f326304.png` (489 × 98 px), `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-b7281c00-cc98-4dac-89c9-ef4c0613d937.png` (464 × 99 px), `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-09711278-8c0a-4025-b70c-9fb54aee00a9.png` (587 × 89 px), and style reference `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-f86cb2ca-2378-4fed-b3ea-d1f03b2d6052.png` (263 × 51 px).
+- Implementation URLs: `http://localhost:3001/courses`, `http://localhost:3001/typing`, and `http://localhost:3001/writing`.
+- Implementation screenshots: captured and visually inspected in the Codex in-app Browser; the screenshot API did not expose writable filesystem paths.
+- Viewport: desktop in-app Browser, approximately 2256 × 1268 captured pixels.
+- State: signed-in VIP learner; catalog title visible on each of the three routes.
+- Density normalization: the source images are focused text crops while the implementations are full-page browser captures; no pixel-normalized combined artifact was available.
+
+## Evidence and required fidelity surfaces
+
+- Fonts and typography: all three target titles render at the requested 25px with a 1.4 line height. Existing font family and weight are preserved per page.
+- Spacing and layout rhythm: each title uses 18px left padding and a 7px border, matching the established homepage section-heading treatment; surrounding page layouts remain unchanged.
+- Colors and visual tokens: all three borders use the existing Himi coral `#ff5a4e`.
+- Image quality and asset fidelity: no image or icon assets changed.
+- Copy and content: `Chọn chủ đề bạn muốn học`, `Bài luyện gõ HSK`, and `Bài luyện viết theo HSK` remain unchanged and fully visible.
+- Responsiveness: the final selectors are placed after existing responsive overrides so the requested 25px size is retained at all breakpoints.
+- Browser evidence: all three routes were reloaded and visually inspected; no clipping or wrapping regression was visible.
+- Automated evidence: the new focused regression test passed; scoped ESLint and `git diff --check` passed.
+
+## Findings and comparison history
+
+1. Baseline P2: the three catalog titles used different responsive font sizes and did not share the homepage's coral left-border treatment.
+2. Fix: normalized each target selector to 25px, 18px left padding, a 7px solid `#ff5a4e` border, and 1.4 line height.
+3. Post-fix evidence: browser captures show consistent title scale and border treatment on `/courses`, `/typing`, and `/writing` with no visible layout regression.
+
+## Blocker
+
+- The Browser screenshot API did not provide writable screenshot paths, so the required persisted combined source/implementation comparison artifact could not be produced. Separate source images and rendered pages were opened and inspected, but Design QA rules do not permit treating those separate views as a passing combined comparison.
+
+No actionable P0, P1, or P2 implementation findings remain; only the required combined Design QA artifact is blocked.
+
+final result: blocked
+
+---
+
+# Design QA — Thay ảnh bìa hero trang chủ
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-6a31b028-5615-4635-91e4-34eb90279b80.png` (1945 × 808 px).
+- Implementation URL: `http://localhost:3001/`.
+- Implementation asset: `public/assets/home/home-hero-cover-desktop.png` (1945 × 808 px, exact supplied source pixels).
+- Implementation screenshot: captured twice and visually inspected in the Codex in-app Browser; the screenshot API did not expose a writable filesystem path.
+- Viewport/state: signed-in VIP learner, desktop homepage, selected browser viewport approximately 1409 × 1189 CSS px.
+- Density normalization: the implementation uses the source raster directly at its native 1945:808 aspect ratio; no resampling or generated substitute was introduced.
+
+## Evidence and required fidelity surfaces
+
+- Fonts and typography: all hero typography is now part of the supplied raster on desktop, preserving the exact source lettering, wrapping, weight, and spacing. Mobile retains the existing live-text hero.
+- Spacing and layout rhythm: the desktop hero uses `aspect-ratio: 1945 / 808`, preserving the full composition without cropping; existing border radius and page spacing remain intact.
+- Colors and visual tokens: the supplied warm coral, cream, black, and orange palette is preserved exactly.
+- Image quality and asset fidelity: the original 1945 × 808 PNG was copied directly into the public asset folder and rendered through `next/image`; no approximation, recompression, or generated replacement was used.
+- Copy and content: the desktop banner visibly contains `Nǐ hǎo!`, `Chào mừng bạn đến với Himi Chinese!`, the supporting sentence, and `Học là vui!` exactly as supplied.
+- Responsiveness: the replacement is desktop-only at widths above 720px; the established mobile hero background, copy, mascot, CTA, and layout remain unchanged.
+- Browser evidence: first capture exposed the legacy speech bubble layered over the supplied banner; the desktop hiding rule was moved to the end of the stylesheet and strengthened, and the second capture shows only the supplied banner with no duplicate copy, mascot, or bubble.
+- Automated evidence: 4 home-responsive tests passed; the focused home rendering assertion passed. Scoped ESLint and `git diff --check` passed. The wider rendered-html suite still has 3 unrelated pre-existing failures.
+
+## Findings and comparison history
+
+1. Baseline P1: the previous desktop hero used a different background plus independent live copy, mascot, speech bubble, and CTA layers.
+2. Fix: added the exact supplied banner asset, rendered it as the desktop hero cover at its native aspect ratio, and kept the existing mobile composition unchanged.
+3. First post-fix P2: the legacy speech bubble remained visible because a later CSS rule overrode the initial desktop hide rule.
+4. Second fix: moved the desktop-only override to the end of the stylesheet and scoped it to direct hero children.
+5. Final visible evidence: the second browser capture shows the full supplied banner, correct crop and radius, and no duplicated overlay elements.
+
+## Blocker
+
+- The Browser screenshot API did not provide a writable screenshot path, so the mandatory persisted combined source/implementation comparison artifact could not be created. The source and both implementation iterations were opened and inspected, but separate views cannot be treated as a passing combined comparison under the Design QA rules.
+
+No actionable P0, P1, or P2 implementation findings remain; only the required combined Design QA artifact is blocked.
+
+final result: blocked
+
+---
+
+# Design QA — Hover nâng nhẹ các box trang chủ
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-44412757-1063-454f-9c60-b03b0e9a8d6c.png` (1604 × 659 px).
+- Implementation URL: `http://localhost:3001/`.
+- Implementation screenshot: captured and visually inspected in the Codex in-app Browser; the screenshot API did not expose a writable filesystem path.
+- Viewport/state: signed-in VIP learner, desktop homepage, default non-hover state.
+- Density normalization: source and implementation were inspected as desktop layouts; no combined normalized comparison artifact was available.
+
+## Evidence and required fidelity surfaces
+
+- Fonts and typography: unchanged.
+- Spacing and layout rhythm: card dimensions and grid gaps remain unchanged in the resting state. Feature and topic cards lift 4px; recent lesson rows lift 3px.
+- Colors and visual tokens: existing card colors are preserved; hover adds only a slightly stronger soft shadow and coral border emphasis where applicable.
+- Image quality and asset fidelity: no image or icon assets changed.
+- Copy and content: all labels, lesson titles, progress values, and links remain unchanged.
+- Interaction state: hover transitions use a 220ms cubic-bezier motion and run only on fine-pointer devices through `@media (hover: hover) and (pointer: fine)`.
+- Accessibility: `prefers-reduced-motion: reduce` removes both transitions and hover transforms; touch devices do not receive sticky hover movement.
+- Automated evidence: all 4 home-responsive tests passed; scoped ESLint and `git diff --check` passed.
+- Browser evidence: the resting page was reloaded and captured with no layout regression. The selected in-app Browser surface does not expose pointer-hover automation, so an actual hovered frame could not be captured.
+
+## Findings and comparison history
+
+1. Baseline P2: feature and topic cards had inconsistent lift distances, while recent lesson rows moved horizontally instead of lifting.
+2. Fix: normalized desktop hover behavior to vertical lift with coordinated shadows and timing across the three card groups.
+3. Post-fix source evidence: focused regression assertions verify feature/topic `translateY(-4px)`, recent lessons `translateY(-3px)`, the fine-pointer media query, and the reduced-motion fallback.
+
+## Blocker
+
+- The chosen in-app Browser can reload and capture the page but does not expose pointer movement or element hover controls. Therefore the required hovered implementation screenshot and combined source/implementation comparison could not be produced.
+
+The resting layout has no actionable P0, P1, or P2 findings; direct rendered verification of the new hover state remains blocked.
+
+final result: blocked
+
+---
+
+# Design QA — Menu Luyện tập mobile và gỡ `/practice`
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-06524365-178f-4c4e-9894-74d1d44b2902.png` (249 × 101 px).
+- Implementation URL: `http://localhost:3001/`.
+- Implementation screenshot: desktop homepage captured and visually inspected in the Codex in-app Browser; the available in-app surface did not expose a mobile viewport control or pointer/click automation, so the requested open mobile-menu state could not be captured.
+- Intended viewport/state: phone width at or below 720 CSS px, signed-in learner, homepage, `Luyện tập` menu expanded.
+- Density normalization: unavailable because a matching mobile implementation capture could not be produced.
+
+## Evidence and required fidelity surfaces
+
+- Fonts and typography: the shared mobile menu preserves the existing compact labels and weights for `Lộ trình`, `Luyện gõ`, `Luyện viết`, `Luyện nghe`, `Video`, and `Bộ từ vựng`.
+- Spacing and layout rhythm: the menu remains a 3-column × 2-row grid with equal cells, matching the reference structure.
+- Colors and visual tokens: the existing pale mint option backgrounds and coral active state are preserved; opening the parent trigger alone no longer applies its active color.
+- Image quality and asset fidelity: no raster artwork is involved; the existing Lucide icon components remain unchanged.
+- Copy and content: the six labels and their destination routes match the supplied reference. The standalone `/practice` route and its loading route were removed.
+- Interaction/accessibility: `Luyện tập` remains a semantic button with `aria-expanded` and `aria-controls`; choosing an option closes the menu and navigates. Opening the menu does not navigate or mark the parent active.
+- Route evidence: public and admin-facing links formerly targeting `/practice` now use `/listening?mode=scenario`; daily-session links preserve scenario and session query parameters.
+- Automated evidence: 51/54 selected tests passed; all focused tests for this change passed. The three failures are unrelated pre-existing assertions in staging configuration, legacy daily-session rendering, and course-cover counts. Scoped ESLint and `git diff --check` passed.
+- Build evidence: Vinext compiled all 765 modules successfully, then the Sites close hook was blocked by an existing Windows file lock on `dist/.openai/hosting.json` (`EPERM`).
+
+## Findings and comparison history
+
+1. Baseline P1: the homepage-specific mobile `Luyện tập` item was a direct link to `/practice`, bypassing the six-option menu.
+2. Fix: removed the duplicate homepage nav so the shared learner mobile navigation and its six-option menu render on the homepage.
+3. Baseline P1: `/practice` remained as a legacy redirect route and several public/admin/daily-session links still targeted it.
+4. Fix: deleted the route files and migrated those links to the canonical listening scenario mode.
+5. Baseline P2: opening the parent menu visually applied the active color before a child destination was selected.
+6. Fix: removed the `aria-expanded=true` active-color rule; active styling now follows only the selected child route.
+
+## Blocker
+
+- The selected in-app Browser surface can capture and navigate the desktop page but does not expose viewport resizing or click/pointer controls. Therefore the required matching mobile expanded-state screenshot and combined source/implementation comparison could not be produced.
+
+No actionable code-level P0, P1, or P2 findings remain; direct visual verification of the expanded mobile state remains blocked.
+
+final result: blocked
+
+---
+
+# Design QA — Bỏ breadcrumb trang Luyện viết
+
+- Source visual truth: Browser annotation capture attached to the request, route `/writing`, target `.client-breadcrumb-bar` containing `Học tập / Luyện viết` (source capture path was not exposed by the annotation surface).
+- Implementation: `http://localhost:3001/writing`.
+- Browser-rendered implementation screenshot: Codex in-app Browser capture from 2026-10-03 (no persistent screenshot path exposed by the browser surface).
+- Viewport: 1169 × 1189 CSS px, desktop, authenticated learner.
+- State: writing catalog landing page after removing the shared breadcrumb on the exact `/writing` route.
+- Density normalization: not required; comparison is limited to the presence/absence of the full-width breadcrumb row.
+
+## Full-view and focused comparison evidence
+
+- The original capture contains a full-width row between the top bar and the writing hero.
+- The implementation capture begins the writing hero directly below the top bar; the targeted breadcrumb and its vertical space are gone.
+- A focused crop is unnecessary because the removed row spans the complete content width and is clearly visible in the full-page comparison.
+
+## Required fidelity surfaces
+
+- Fonts and typography: all writing-page typography remains unchanged.
+- Spacing and layout rhythm: the redundant breadcrumb row and its reserved height are removed; the hero moves upward without overlap.
+- Colors and visual tokens: the writing page palette remains unchanged.
+- Image quality and asset fidelity: the hero artwork and catalog assets remain unchanged and sharp.
+- Copy and content: only `Học tập / Luyện viết` is removed; all writing-page content and links remain intact.
+
+## Verification
+
+- `/writing` accessibility tree no longer contains `Điều hướng trang` or `Học tập / Luyện viết`.
+- Deeper writing routes retain their useful level and lesson breadcrumbs.
+- Browser console errors: none.
+- Breadcrumb tests: 5 passed; scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ breadcrumb trang Luyện gõ
+
+- Source visual truth: Browser annotation capture attached to the request, route `/typing`, target `.client-breadcrumb-bar` containing `Học tập / Luyện gõ` (source capture path was not exposed by the annotation surface; supplied image 1409 × 1189 px).
+- Implementation: `http://localhost:3001/typing`.
+- Browser-rendered implementation screenshot: Codex in-app Browser capture from 2026-10-03 (no persistent screenshot path exposed by the browser surface; capture 1708 × 1189 px).
+- Viewport/state: desktop, authenticated learner, typing catalog landing page after removing the shared breadcrumb on the exact `/typing` route.
+- Density normalization: not required; comparison is limited to the presence or absence of the full-width breadcrumb row.
+
+## Full-view and focused comparison evidence
+
+- The source capture contains a full-width breadcrumb row between the top bar and the typing hero.
+- The implementation capture begins the typing hero directly below the top bar; the targeted breadcrumb and its reserved vertical space are gone.
+- A focused crop is unnecessary because the removed row spans the complete content width and the result is unambiguous in the full-view capture.
+
+## Required fidelity surfaces
+
+- Fonts and typography: all typing-page typography remains unchanged.
+- Spacing and layout rhythm: the redundant breadcrumb row and its reserved height are removed; the hero moves upward without overlap.
+- Colors and visual tokens: the typing-page palette remains unchanged.
+- Image quality and asset fidelity: the hero artwork and catalog assets remain unchanged and sharp.
+- Copy and content: only `Học tập / Luyện gõ` is removed; all typing-page content and links remain intact.
+
+## Verification
+
+- `/typing` accessibility tree no longer contains `Điều hướng trang` or `Học tập / Luyện gõ`.
+- Deeper typing routes retain their useful level and lesson breadcrumbs.
+- Browser console errors: none.
+- Breadcrumb tests: 5 passed; scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Lưới full-width trang Luyện viết
+
+- Source visual truth: reference image attached to the Browser annotation and the live `/typing` catalog used by that image (attachment path was not exposed).
+- Implementation: `http://localhost:3001/writing`.
+- Browser-rendered captures: Codex in-app Browser captures of `/typing` and `/writing` at the same 1706 × 960 CSS viewport; screenshot paths were not exposed by the browser surface.
+- State: authenticated desktop learner, expanded navigation rail, catalog landing pages.
+- Density normalization: both live pages were captured by the same browser surface, viewport and device density.
+
+## Full-view and focused comparison evidence
+
+- Source `/typing`: content and grid are both 1437.33px wide, with three equal 467.1px columns and no horizontal overflow.
+- Implementation `/writing`: content and grid are both 1437.33px wide, with the same three equal 467.1px columns and no horizontal overflow.
+- At the normal 1173 × 1189 viewport, `/writing` remains full-width inside the learner area and renders three equal 361.33px columns; all six HSK cards form a 3 × 2 grid.
+- The full-view captures clearly show page width, column count, card edges and spacing, so no additional focused crop was needed.
+
+## Required fidelity surfaces
+
+- Fonts and typography: existing writing typography and hierarchy are unchanged.
+- Spacing and layout rhythm: the former large side padding is removed; hero, heading and grid now share one full-width alignment. Card gaps remain 18px like the reference.
+- Colors and visual tokens: existing red/orange/white writing palette is preserved.
+- Image quality and asset fidelity: the writing hero artwork is unchanged and remains sharp at the wider width.
+- Copy and content: all writing labels, descriptions, counts and links remain unchanged.
+
+## Comparison history and verification
+
+1. Initial P2: the writing catalog used large page padding and switched to two columns too early, making its boxes visibly narrower than the three-column reference.
+2. Fix: matched the typing catalog's 1480px full-width container, aligned the banner and topic section to 100%, and delayed the two-column breakpoint to 1050px.
+3. Post-fix evidence: source and implementation have identical desktop grid widths and column tracks at the comparison viewport; the normal viewport has no horizontal overflow.
+
+- Primary interaction checked: every visible card retains its `Xem bài học` link.
+- Browser console errors: none.
+- Focused writing route test: passed; scoped ESLint and `git diff --check`: passed.
+- Known unrelated suite state: the broader `rendered-html` suite still has three pre-existing failures outside this change.
+
+No actionable P0, P1, or P2 findings remain for this scoped layout update.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ mô tả phụ trang Luyện viết
+
+- Source visual truth: Browser annotation on `/writing`, targeting `.writing-topic-heading > p` with the text `Chọn cấp độ rồi vào đúng bài đang học. Mỗi bài đều có xem nét, tô theo và tự viết.` (annotation capture path was not exposed).
+- Implementation: `http://localhost:3001/writing`.
+- Browser-rendered implementation screenshot: Codex in-app Browser capture from 2026-10-03 (no persistent screenshot path exposed by the browser surface).
+- Viewport/state: 1173 × 1189 CSS px, authenticated desktop learner, writing catalog landing page.
+- Density normalization: not required; comparison concerns the presence or absence of one text block at the same route and state.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: the targeted paragraph is absent and the HSK heading remains aligned above the unchanged three-column grid.
+- Focused evidence: DOM inspection reports zero matching `.writing-topic-heading > p` elements containing the removed copy and one retained section heading.
+- Fonts and typography: all remaining headings and card typography are unchanged.
+- Spacing and layout rhythm: the empty right-side copy block is removed without leaving overflow or a placeholder.
+- Colors and visual tokens: unchanged.
+- Image quality and asset fidelity: hero and card assets are unchanged.
+- Copy and content: only the explicitly selected sentence is removed.
+
+## Verification
+
+- Browser console errors: none.
+- Horizontal overflow: none.
+- Focused writing route test, scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Empty state full box trên trang chủ
+
+- Source visual truth: Browser annotation capture on `/`, targeting `.home-redesign-recent-empty` (annotation capture path was not exposed).
+- Implementation: `http://localhost:3001/`; the empty-history state was rendered on the same local app through the clean `[::1]` origin to avoid changing the learner's existing local history.
+- Browser-rendered implementation screenshot: Codex in-app Browser capture from 2026-10-03 (no persistent screenshot path exposed by the browser surface).
+- Viewport/state: 1280 × 720 CSS px, desktop, empty recent-learning history.
+- Density normalization: not required; source and implementation use the same desktop composition and the comparison focuses on the selected empty-state box.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: the dashed empty-state surface now occupies the complete content area below the `Bài học gần đây` heading.
+- Focused measurements: recent section height 206px; content list height 141px; empty-state box height 141px. The empty box and list share the same top, bottom and width.
+- Fonts and typography: message typography, centering and wrapping are unchanged.
+- Spacing and layout rhythm: the unused space below the previous 60px box is removed; the message remains vertically and horizontally centered.
+- Colors and visual tokens: existing border, white surface and muted text color are preserved.
+- Image quality and asset fidelity: no image assets changed.
+- Copy and content: empty-state wording is unchanged.
+
+## Verification
+
+- Empty state is visible and fills its content region without horizontal overflow.
+- Populated recent lessons remain correctly stacked inside the same outer card.
+- Browser console errors: none.
+- Home responsive tests: 4 passed; scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped layout update.
+
+final result: passed
+
+---
+
+# Design QA — Màu icon mũi tên thẻ khóa học
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-9635b796-9898-4967-8e12-c9250303ef91.png` (34 × 40 px).
+- Implementation URL: `http://localhost:3001/courses`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/courses-chevron-color.jpg` (2257 × 1280 px).
+- Focused source/implementation comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/courses-chevron-comparison.png` (460 × 230 px).
+- Viewport/state: 1706 × 960 CSS px, desktop, authenticated course catalog, default card state.
+- Density normalization: the 34 × 40 source and focused implementation crop were enlarged only for inspection; color verification used the browser's computed CSS value.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: all nine visible course-card double-chevron icons use the requested red while the catalog layout remains unchanged.
+- Focused evidence: the combined comparison shows the same rounded bordered icon control, with only the double-chevron foreground changed to red.
+- Fonts and typography: unchanged.
+- Spacing and layout rhythm: the existing 42 × 42 px control, border and radius are unchanged.
+- Colors and visual tokens: computed icon and SVG color are `rgb(255, 76, 59)`, equivalent to `#FF4C3B`; border and background remain unchanged.
+- Image quality and asset fidelity: the existing Lucide vector icon is preserved; no raster assets changed.
+- Copy and content: unchanged.
+
+## Verification
+
+- Primary interaction checked: course cards remain navigable; the icon remains visually static on hover and retains the existing focus treatment.
+- Browser console errors: none.
+- Focused course-roadmap UI tests: 3 passed.
+- `git diff --check`: passed for the scoped files.
+
+No actionable P0, P1, or P2 findings remain for this scoped color update.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ box ngoài icon mũi tên
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-5f715115-309f-4157-beab-be8daee75b11.png` (38 × 46 px), with the user's explicit override to remove the outer box and keep only the icon.
+- Implementation URL: `http://localhost:3001/courses`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/courses-chevron-icon-only.jpg` (2257 × 1280 px).
+- Focused source/implementation comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/courses-chevron-icon-only-comparison.png` (460 × 230 px).
+- Viewport/state: 1706 × 960 CSS px, desktop, authenticated course catalog, default card state.
+- Density normalization: the source and focused implementation crop were enlarged for inspection; computed CSS measurements were used for exact box verification.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: all nine visible course cards now show the red double-chevron without a surrounding white box or border.
+- Focused evidence: the combined comparison makes the requested removal visible while preserving the same icon form.
+- Fonts and typography: unchanged.
+- Spacing and layout rhythm: the wrapper now resolves to the icon's intrinsic 23 × 23 px size; no surrounding 42 × 42 px box remains.
+- Colors and visual tokens: icon remains `rgb(255, 76, 59)` (`#FF4C3B`); wrapper background is transparent and border width is 0px.
+- Image quality and asset fidelity: the existing Lucide vector icon is preserved and remains sharp.
+- Copy and content: unchanged.
+
+## Verification
+
+- Default and focus CSS states no longer add a border or background to the icon wrapper.
+- Course cards remain navigable and the catalog layout is unchanged.
+- Browser console errors: none.
+- Focused course-roadmap UI tests: 3 passed.
+- `git diff --check`: passed for the scoped files.
+
+No actionable P0, P1, or P2 findings remain for this scoped visual update.
+
+final result: passed
+
+---
+
+# Design QA — Màu badge HSK 3 và HSK 6
+
+- Source visual truth: two browser annotation captures on `/writing` targeting the `HSK 3` and `HSK 6` badges, each specifying `#FF4C3B` (annotation file paths were not exposed).
+- Implementation URL: `http://localhost:3001/writing`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/writing-hsk-3-6-badges-red.jpg` (1547 × 1585 px).
+- Focused source/implementation comparison: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/writing-hsk-3-6-color-comparison.png` (520 × 240 px), using the exact requested color swatch beside both rendered badges.
+- Viewport/state: desktop authenticated writing catalog, default card state.
+- Density normalization: focused badge crops were enlarged uniformly for inspection; exact color was verified from computed CSS.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: `HSK 3` and `HSK 6` now visually match the red badges used by the other HSK levels.
+- Focused evidence: both badge crops match the `#FF4C3B` reference swatch; computed background is `rgb(255, 76, 59)`.
+- Fonts and typography: badge text, weight and white foreground are unchanged.
+- Spacing and layout rhythm: badge padding, pill radius and card layout are unchanged.
+- Colors and visual tokens: only the two requested badge backgrounds changed from orange to `#FF4C3B`; foreground remains white.
+- Image quality and asset fidelity: no image assets changed.
+- Copy and content: unchanged.
+
+## Verification
+
+- Browser console errors: none.
+- Focused writing badge color test: 1 passed.
+- `git diff --check`: passed for the scoped files.
+
+No actionable P0, P1, or P2 findings remain for this scoped color update.
+
+final result: passed

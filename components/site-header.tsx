@@ -4,7 +4,7 @@ import { BrandMark, BrandWordmark } from "@/components/brand-logo";
 import { LogoutForm } from "@/components/logout-form";
 import { getCurrentUser } from "@/lib/auth-session";
 
-const publicNavItems = [{ href: "/courses", label: "Lộ trình" }, { href: "/practice", label: "Luyện tập" }, { href: "/vip", label: "Himi Chinese VIP" }];
+const publicNavItems = [{ href: "/courses", label: "Lộ trình" }, { href: "/listening?mode=scenario", label: "Luyện tập" }, { href: "/vip", label: "Himi Chinese VIP" }];
 
 export async function SiteHeader() {
   const user = await getCurrentUser();

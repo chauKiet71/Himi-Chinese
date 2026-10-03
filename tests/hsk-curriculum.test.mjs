@@ -27,6 +27,9 @@ test("HSK curriculum exposes 15 HSK 1 lessons and 15 HSK 2 textbook lessons", as
   assert.ok(HSK_CURRICULUM.every((level) => level.topics.every((topic) => (
     topic.lessons.every((lesson) => lesson.writing === lesson.vocabulary)
   ))));
+  assert.ok(HSK_CURRICULUM.slice(0, 6).every((level) => level.topics.every((topic) => (
+    topic.lessons.every((lesson) => Number.isInteger(lesson.exercises))
+  ))));
   assert.equal(HSK_CURRICULUM[0].topics.flatMap((topic) => topic.lessons).length, 15);
   assert.equal(HSK_CURRICULUM[1].topics.flatMap((topic) => topic.lessons).length, 15);
   assert.ok(HSK_CURRICULUM[1].topics.flatMap((topic) => topic.lessons).every((lesson) => lesson.kind === "textbook" && lesson.available));
@@ -40,6 +43,7 @@ test("HSK curriculum exposes 15 HSK 1 lessons and 15 HSK 2 textbook lessons", as
     grammar: 0,
     dialogues: 3,
     writing: 6,
+    exercises: 2,
     minutes: 25,
     guidedSteps: 14,
     available: true,
@@ -88,8 +92,12 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   }));
   assert.match(html, /aria-label="Chọn cấp độ HSK"/);
   assert.match(html, /aria-pressed="true"[^>]*>[^<]*<span[^>]*>壹/);
+  assert.match(html, /class="hsk-curriculum-back" href="#course-catalog"/);
+  assert.match(html, /lucide-chevron-left/);
+  assert.match(html, />Về trang Lộ trình</);
   assert.match(html, />Lộ trình bài học HSK 1</);
-  assert.match(html, />Himi Chinese</);
+  assert.doesNotMatch(html, />Himi Chinese</);
+  assert.doesNotMatch(html, /15 bài từ Giáo trình chuẩn HSK 1/);
   assert.doesNotMatch(html, />Himi Modern Curriculum Desk</);
   assert.match(html, /aria-label="Lời nhắn từ Himi"/);
   assert.match(html, /aria-label="Đã hoàn thành 0 trên 15 bài"/);
@@ -99,15 +107,18 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   assert.match(html, /aria-expanded="false"/);
   assert.match(html, />Bài 1: Xin chào!</);
   assert.doesNotMatch(html, /class="hsk-circular-progress"/);
-  assert.match(html, />Mở bài/);
+  assert.match(html, />Chưa bắt đầu/);
+  assert.doesNotMatch(html, />Mở bài/);
   assert.doesNotMatch(html, /Hoàn thành bài trước/);
   assert.match(html, /href="\/hsk\/1\/hsk1-bai-02-cam-on-anh\/play"/);
   assert.equal((html.match(/class="hsk-lesson-start hsk-progress-link"/g) ?? []).length, 0);
   assert.doesNotMatch(html, />Himi nhắc bạn:</);
   assert.match(html, /6 từ vựng/);
+  assert.match(html, /2 bài tập/);
   assert.doesNotMatch(html, /ngữ pháp/);
-  assert.match(html, /3 hội thoại/);
-  assert.match(html, /class="hsk-lesson-select" href="\/hsk\/1\/hsk1-bai-01-chao-anh\/play"/);
+  assert.doesNotMatch(html, /3 hội thoại/);
+  assert.doesNotMatch(html, /25 phút/);
+  assert.match(html, /class="hsk-lesson-select"[^>]*href="\/hsk\/1\/hsk1-bai-01-chao-anh\/play"/);
   assert.equal(
     viewModule.getHskCurriculumLessonDestination("hsk-1", "hsk1-bai-02-cam-on-anh"),
     "/hsk/1/hsk1-bai-02-cam-on-anh/play",
@@ -168,11 +179,16 @@ test("course library opens the HSK curriculum from a dedicated catalog card", as
   const hskCard = HskCourseCard();
   assert.equal(hskCard.type, "a", "the same-route HSK switch must use a full document navigation");
   assert.equal(hskCard.props.href, "/courses?view=hsk");
+  assert.match(renderToStaticMarkup(hskCard), /lucide-chevrons-right/);
 
   const catalogHtml = renderToStaticMarkup(React.createElement(CourseLibraryView, { courses, hskCurriculum: HSK_CURRICULUM, view: "catalog" }));
   assert.match(catalogHtml, /href="\/courses\?view=hsk"/);
   assert.match(catalogHtml, />Giáo trình HSK</);
   assert.match(catalogHtml, />Văn phòng &amp; hành chính</);
+  assert.match(catalogHtml, />Chọn chủ đề bạn muốn học</);
+  assert.doesNotMatch(catalogHtml, /Lộ trình học tiếng Trung/);
+  assert.doesNotMatch(catalogHtml, /Học theo chuẩn HSK/);
+  assert.doesNotMatch(catalogHtml, /lộ trình đang mở/);
   assert.doesNotMatch(catalogHtml, /aria-label="Chọn cấp độ HSK"/);
 
   const hskHtml = renderToStaticMarkup(React.createElement(CourseLibraryView, { courses, hskCurriculum: HSK_CURRICULUM, view: "hsk" }));

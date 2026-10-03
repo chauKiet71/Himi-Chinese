@@ -72,5 +72,5 @@ test("daily session keeps the original review target after a learner resumes", (
   assert.equal(session.reviewTarget, 3);
   assert.equal(session.steps[0].completed, false);
   assert.match(session.steps[0].title, /1/);
-  assert.equal(withDailySessionFlow("/practice?scenario=demo#listen"), "/practice?scenario=demo&session=today#listen");
+  assert.equal(withDailySessionFlow("/listening?mode=scenario&scenario=demo#listen"), "/listening?mode=scenario&scenario=demo&session=today#listen");
 });

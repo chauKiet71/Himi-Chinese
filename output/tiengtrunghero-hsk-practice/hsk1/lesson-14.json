@@ -1,0 +1,462 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-14-co-ay-da-mua-nhieu-quan-ao",
+  "lessonNumber": 14,
+  "lessonTitle": "Cô ấy đã mua nhiều quần áo.",
+  "topicId": "thoi-gian-hoat-dong",
+  "topicTitle": "Thời gian & Hoạt động",
+  "route": "/hsk/1/hsk1-bai-14-co-ay-da-mua-nhieu-quan-ao/play",
+  "vocabularyCount": 21,
+  "exerciseCount": 21,
+  "typeCounts": {
+    "meaning": 21,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-1220-meaning",
+      "vocabularyId": "1220",
+      "sourceIndex": 54,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "这些",
+      "pinyin": "zhèxiē",
+      "note": "Ví dụ: 这些是我的朋友。 — Đây là những người bạn của tôi.",
+      "speakText": "这些",
+      "options": [
+        "mở | (tàu xe) xuất phát | bật; vận hành; chạy | đun sôi | viết ra (đơn thuốc, séc, hóa đơn) | bổ trợ phương hướng | carat (vàng) | viết tắt của Kelvin | viết tắt của kích thước sách (kích bản)",
+        "hậu",
+        "những cái này",
+        "giáo viên; quý ông; thưa ông; ông (Mr.); chồng; (phương ngữ) bác sĩ"
+      ],
+      "answer": "những cái này",
+      "exampleHanzi": "这些是我的朋友。",
+      "exampleVi": "Đây là những người bạn của tôi."
+    },
+    {
+      "id": "hero-hsk-1-1860-meaning",
+      "vocabularyId": "1860",
+      "sourceIndex": 60,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "开",
+      "pinyin": "kāi",
+      "note": "Ví dụ: 我开门。 — Tôi mở cửa.",
+      "speakText": "开",
+      "options": [
+        "mặc; xỏ qua; xuyên thủng; đâm thủng; đi qua; luồn",
+        "mở | (tàu xe) xuất phát | bật; vận hành; chạy | đun sôi | viết ra (đơn thuốc, séc, hóa đơn) | bổ trợ phương hướng | carat (vàng) | viết tắt của Kelvin | viết tắt của kích thước sách (kích bản)",
+        "nhìn thấy; bắt gặp",
+        "những cái này"
+      ],
+      "answer": "mở | (tàu xe) xuất phát | bật; vận hành; chạy | đun sôi | viết ra (đơn thuốc, séc, hóa đơn) | bổ trợ phương hướng | carat (vàng) | viết tắt của Kelvin | viết tắt của kích thước sách (kích bản)",
+      "exampleHanzi": "我开门。",
+      "exampleVi": "Tôi mở cửa."
+    },
+    {
+      "id": "hero-hsk-1-3472-meaning",
+      "vocabularyId": "3472",
+      "sourceIndex": 113,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "后",
+      "pinyin": "hòu",
+      "note": "Ví dụ: 学校在银行后面。 — Trường học nằm sau ngân hàng.",
+      "speakText": "后",
+      "options": [
+        "quần áo",
+        "xe chiến (cổ); xe xe (trong cờ tướng); xe (trong cờ vua)",
+        "táo",
+        "hậu"
+      ],
+      "answer": "hậu",
+      "exampleHanzi": "学校在银行后面。",
+      "exampleVi": "Trường học nằm sau ngân hàng."
+    },
+    {
+      "id": "hero-hsk-1-3634-meaning",
+      "vocabularyId": "3634",
+      "sourceIndex": 127,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "先生",
+      "pinyin": "xiānsheng",
+      "note": "Ví dụ: 这位先生是医生。 — Người đàn ông này là một bác sĩ.",
+      "speakText": "先生",
+      "options": [
+        "xe chiến (cổ); xe xe (trong cờ tướng); xe (trong cờ vua)",
+        "táo",
+        "giáo viên; quý ông; thưa ông; ông (Mr.); chồng; (phương ngữ) bác sĩ",
+        "những cái này"
+      ],
+      "answer": "giáo viên; quý ông; thưa ông; ông (Mr.); chồng; (phương ngữ) bác sĩ",
+      "exampleHanzi": "这位先生是医生。",
+      "exampleVi": "Người đàn ông này là một bác sĩ."
+    },
+    {
+      "id": "hero-hsk-1-4625-meaning",
+      "vocabularyId": "4625",
+      "sourceIndex": 140,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "好看",
+      "pinyin": "hǎokàn",
+      "note": "Ví dụ: 这件衣服很好看。 — Bộ quần áo này trông đẹp đấy.",
+      "speakText": "好看",
+      "options": [
+        "đẹp; xinh; hay (về phim, sách, chương trình TV v.v.); xấu hổ; bị nhục",
+        "hậu",
+        "giáo viên; quý ông; thưa ông; ông (Mr.); chồng; (phương ngữ) bác sĩ",
+        "vật; đồ; người"
+      ],
+      "answer": "đẹp; xinh; hay (về phim, sách, chương trình TV v.v.); xấu hổ; bị nhục",
+      "exampleHanzi": "这件衣服很好看。",
+      "exampleVi": "Bộ quần áo này trông đẹp đấy."
+    },
+    {
+      "id": "hero-hsk-1-6268-meaning",
+      "vocabularyId": "6268",
+      "sourceIndex": 154,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "东西",
+      "pinyin": "dōngxi",
+      "note": "Ví dụ: 这是什么东西？ — Thứ này là gì vậy?",
+      "speakText": "东西",
+      "options": [
+        "những cái này",
+        "mở | (tàu xe) xuất phát | bật; vận hành; chạy | đun sôi | viết ra (đơn thuốc, séc, hóa đơn) | bổ trợ phương hướng | carat (vàng) | viết tắt của Kelvin | viết tắt của kích thước sách (kích bản)",
+        "đẹp; xinh; hay (về phim, sách, chương trình TV v.v.); xấu hổ; bị nhục",
+        "vật; đồ; người"
+      ],
+      "answer": "vật; đồ; người",
+      "exampleHanzi": "这是什么东西？",
+      "exampleVi": "Thứ này là gì vậy?"
+    },
+    {
+      "id": "hero-hsk-1-6269-meaning",
+      "vocabularyId": "6269",
+      "sourceIndex": 155,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "都",
+      "pinyin": "dōu",
+      "note": "Ví dụ: 我们都喜欢中国菜。 — Tất cả chúng ta đều thích đồ ăn Trung Quốc.",
+      "speakText": "都",
+      "options": [
+        "mục; thành phần; lượng từ cho sự kiện, đồ vật, quần áo, v.v.",
+        "họ Du",
+        "trẻ",
+        "phút"
+      ],
+      "answer": "họ Du",
+      "exampleHanzi": "我们都喜欢中国菜。",
+      "exampleVi": "Tất cả chúng ta đều thích đồ ăn Trung Quốc."
+    },
+    {
+      "id": "hero-hsk-1-6622-meaning",
+      "vocabularyId": "6622",
+      "sourceIndex": 166,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "件",
+      "pinyin": "jiàn",
+      "note": "Ví dụ: 我有三件衣服。 — Tôi có ba bộ quần áo.",
+      "speakText": "件",
+      "options": [
+        "họ Du",
+        "mục; thành phần; lượng từ cho sự kiện, đồ vật, quần áo, v.v.",
+        "trẻ",
+        "một; đơn; một (mạo từ); ngay khi; toàn bộ; nguyên; tất cả; khắp nơi; bộ thủ \"nhất\" trong chữ Hán (bộ Khanghy 1); cũng đọc [yāo] để rõ ràng hơn khi đọc số từng chữ số"
+      ],
+      "answer": "mục; thành phần; lượng từ cho sự kiện, đồ vật, quần áo, v.v.",
+      "exampleHanzi": "我有三件衣服。",
+      "exampleVi": "Tôi có ba bộ quần áo."
+    },
+    {
+      "id": "hero-hsk-1-8011-meaning",
+      "vocabularyId": "8011",
+      "sourceIndex": 197,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "少",
+      "pinyin": "shǎo",
+      "note": "Ví dụ: 这里人很少。 — Có rất ít người ở đây.",
+      "speakText": "少",
+      "options": [
+        "mục; thành phần; lượng từ cho sự kiện, đồ vật, quần áo, v.v.",
+        "trẻ",
+        "phút",
+        "một; đơn; một (mạo từ); ngay khi; toàn bộ; nguyên; tất cả; khắp nơi; bộ thủ \"nhất\" trong chữ Hán (bộ Khanghy 1); cũng đọc [yāo] để rõ ràng hơn khi đọc số từng chữ số"
+      ],
+      "answer": "trẻ",
+      "exampleHanzi": "这里人很少。",
+      "exampleVi": "Có rất ít người ở đây."
+    },
+    {
+      "id": "hero-hsk-1-8012-meaning",
+      "vocabularyId": "8012",
+      "sourceIndex": 198,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "少",
+      "pinyin": "shǎo",
+      "note": "Ví dụ: 我少吃一些。 — Tôi ăn ít hơn.",
+      "speakText": "少",
+      "options": [
+        "mục; thành phần; lượng từ cho sự kiện, đồ vật, quần áo, v.v.",
+        "phút",
+        "một; đơn; một (mạo từ); ngay khi; toàn bộ; nguyên; tất cả; khắp nơi; bộ thủ \"nhất\" trong chữ Hán (bộ Khanghy 1); cũng đọc [yāo] để rõ ràng hơn khi đọc số từng chữ số",
+        "trẻ"
+      ],
+      "answer": "trẻ",
+      "exampleHanzi": "我少吃一些。",
+      "exampleVi": "Tôi ăn ít hơn."
+    },
+    {
+      "id": "hero-hsk-1-8116-meaning",
+      "vocabularyId": "8116",
+      "sourceIndex": 206,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "分钟",
+      "pinyin": "fēnzhōng",
+      "note": "Ví dụ: 还有五分钟开始上课。 — Còn năm phút nữa là giờ học bắt đầu.",
+      "speakText": "分钟",
+      "options": [
+        "phút",
+        "một; đơn; một (mạo từ); ngay khi; toàn bộ; nguyên; tất cả; khắp nơi; bộ thủ \"nhất\" trong chữ Hán (bộ Khanghy 1); cũng đọc [yāo] để rõ ràng hơn khi đọc số từng chữ số",
+        "nửa",
+        "dạng erhua của một chút | một chút | (dùng trong câu phủ định) không chút nào | (sau tính từ, so sánh) hơn một chút"
+      ],
+      "answer": "phút",
+      "exampleHanzi": "还有五分钟开始上课。",
+      "exampleVi": "Còn năm phút nữa là giờ học bắt đầu."
+    },
+    {
+      "id": "hero-hsk-1-9240-meaning",
+      "vocabularyId": "9240",
+      "sourceIndex": 266,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "一",
+      "pinyin": "yī",
+      "note": "Ví dụ: 我有一个苹果。 — Tôi có một quả táo.",
+      "speakText": "一",
+      "options": [
+        "trẻ",
+        "một; đơn; một (mạo từ); ngay khi; toàn bộ; nguyên; tất cả; khắp nơi; bộ thủ \"nhất\" trong chữ Hán (bộ Khanghy 1); cũng đọc [yāo] để rõ ràng hơn khi đọc số từng chữ số",
+        "phút",
+        "dạng erhua của một chút | một chút | (dùng trong câu phủ định) không chút nào | (sau tính từ, so sánh) hơn một chút"
+      ],
+      "answer": "một; đơn; một (mạo từ); ngay khi; toàn bộ; nguyên; tất cả; khắp nơi; bộ thủ \"nhất\" trong chữ Hán (bộ Khanghy 1); cũng đọc [yāo] để rõ ràng hơn khi đọc số từng chữ số",
+      "exampleHanzi": "我有一个苹果。",
+      "exampleVi": "Tôi có một quả táo."
+    },
+    {
+      "id": "hero-hsk-1-9241-meaning",
+      "vocabularyId": "9241",
+      "sourceIndex": 267,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "一半",
+      "pinyin": "yíbàn",
+      "note": "Ví dụ: 这个苹果吃了一半。 — Tôi đã ăn một nửa quả táo này.",
+      "speakText": "一半",
+      "options": [
+        "phút",
+        "dạng erhua của một chút | một chút | (dùng trong câu phủ định) không chút nào | (sau tính từ, so sánh) hơn một chút",
+        "quần áo",
+        "nửa"
+      ],
+      "answer": "nửa",
+      "exampleHanzi": "这个苹果吃了一半。",
+      "exampleVi": "Tôi đã ăn một nửa quả táo này."
+    },
+    {
+      "id": "hero-hsk-1-9242-meaning",
+      "vocabularyId": "9242",
+      "sourceIndex": 268,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "一点儿",
+      "pinyin": "yìdiǎnr",
+      "note": "Ví dụ: 我想要一点儿水。 — Tôi muốn một ít nước.",
+      "speakText": "一点儿",
+      "options": [
+        "quần áo",
+        "dạng erhua của một chút | một chút | (dùng trong câu phủ định) không chút nào | (sau tính từ, so sánh) hơn một chút",
+        "xe chiến (cổ); xe xe (trong cờ tướng); xe (trong cờ vua)",
+        "mặc; xỏ qua; xuyên thủng; đâm thủng; đi qua; luồn"
+      ],
+      "answer": "dạng erhua của một chút | một chút | (dùng trong câu phủ định) không chút nào | (sau tính từ, so sánh) hơn một chút",
+      "exampleHanzi": "我想要一点儿水。",
+      "exampleVi": "Tôi muốn một ít nước."
+    },
+    {
+      "id": "hero-hsk-1-9243-meaning",
+      "vocabularyId": "9243",
+      "sourceIndex": 269,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "衣服",
+      "pinyin": "yīfu",
+      "note": "Ví dụ: 这件衣服很漂亮。 — Bộ quần áo này rất đẹp.",
+      "speakText": "衣服",
+      "options": [
+        "nửa",
+        "dạng erhua của một chút | một chút | (dùng trong câu phủ định) không chút nào | (sau tính từ, so sánh) hơn một chút",
+        "mặc; xỏ qua; xuyên thủng; đâm thủng; đi qua; luồn",
+        "quần áo"
+      ],
+      "answer": "quần áo",
+      "exampleHanzi": "这件衣服很漂亮。",
+      "exampleVi": "Bộ quần áo này rất đẹp."
+    },
+    {
+      "id": "hero-hsk-1-10608-meaning",
+      "vocabularyId": "10608",
+      "sourceIndex": 274,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "车",
+      "pinyin": "chē",
+      "note": "Ví dụ: 这辆车很新。 — Chiếc xe này rất mới.",
+      "speakText": "车",
+      "options": [
+        "dạng erhua của một chút | một chút | (dùng trong câu phủ định) không chút nào | (sau tính từ, so sánh) hơn một chút",
+        "xe chiến (cổ); xe xe (trong cờ tướng); xe (trong cờ vua)",
+        "mặc; xỏ qua; xuyên thủng; đâm thủng; đi qua; luồn",
+        "nhìn thấy; bắt gặp"
+      ],
+      "answer": "xe chiến (cổ); xe xe (trong cờ tướng); xe (trong cờ vua)",
+      "exampleHanzi": "这辆车很新。",
+      "exampleVi": "Chiếc xe này rất mới."
+    },
+    {
+      "id": "hero-hsk-1-10610-meaning",
+      "vocabularyId": "10610",
+      "sourceIndex": 276,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "穿",
+      "pinyin": "chuān",
+      "note": "Ví dụ: 她穿红色的衣服。 — Cô ấy mặc quần áo màu đỏ.",
+      "speakText": "穿",
+      "options": [
+        "mặc; xỏ qua; xuyên thủng; đâm thủng; đi qua; luồn",
+        "xe chiến (cổ); xe xe (trong cờ tướng); xe (trong cờ vua)",
+        "hai | cả hai | một vài | vài | lạng, đơn vị khối lượng bằng 50 gram (hiện đại) hoặc 1⁄6 cân (cũ)",
+        "đẹp; xinh đẹp"
+      ],
+      "answer": "mặc; xỏ qua; xuyên thủng; đâm thủng; đi qua; luồn",
+      "exampleHanzi": "她穿红色的衣服。",
+      "exampleVi": "Cô ấy mặc quần áo màu đỏ."
+    },
+    {
+      "id": "hero-hsk-1-10636-meaning",
+      "vocabularyId": "10636",
+      "sourceIndex": 282,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "看见",
+      "pinyin": "kànjiàn",
+      "note": "Ví dụ: 我看见一只鸟。 — Tôi nhìn thấy một con chim.",
+      "speakText": "看见",
+      "options": [
+        "hai | cả hai | một vài | vài | lạng, đơn vị khối lượng bằng 50 gram (hiện đại) hoặc 1⁄6 cân (cũ)",
+        "đẹp; xinh đẹp",
+        "táo",
+        "nhìn thấy; bắt gặp"
+      ],
+      "answer": "nhìn thấy; bắt gặp",
+      "exampleHanzi": "我看见一只鸟。",
+      "exampleVi": "Tôi nhìn thấy một con chim."
+    },
+    {
+      "id": "hero-hsk-1-11838-meaning",
+      "vocabularyId": "11838",
+      "sourceIndex": 298,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "两",
+      "pinyin": "liǎng",
+      "note": "Ví dụ: 我有两个苹果。 — Tôi có hai quả táo.",
+      "speakText": "两",
+      "options": [
+        "hai | cả hai | một vài | vài | lạng, đơn vị khối lượng bằng 50 gram (hiện đại) hoặc 1⁄6 cân (cũ)",
+        "đẹp; xinh đẹp",
+        "táo",
+        "một; đơn; một (mạo từ); ngay khi; toàn bộ; nguyên; tất cả; khắp nơi; bộ thủ \"nhất\" trong chữ Hán (bộ Khanghy 1); cũng đọc [yāo] để rõ ràng hơn khi đọc số từng chữ số"
+      ],
+      "answer": "hai | cả hai | một vài | vài | lạng, đơn vị khối lượng bằng 50 gram (hiện đại) hoặc 1⁄6 cân (cũ)",
+      "exampleHanzi": "我有两个苹果。",
+      "exampleVi": "Tôi có hai quả táo."
+    },
+    {
+      "id": "hero-hsk-1-12148-meaning",
+      "vocabularyId": "12148",
+      "sourceIndex": 306,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "漂亮",
+      "pinyin": "piàoliang",
+      "note": "Ví dụ: 这个女孩很漂亮。 — Cô gái này rất đẹp.",
+      "speakText": "漂亮",
+      "options": [
+        "táo",
+        "đẹp; xinh đẹp",
+        "đẹp; xinh; hay (về phim, sách, chương trình TV v.v.); xấu hổ; bị nhục",
+        "trẻ"
+      ],
+      "answer": "đẹp; xinh đẹp",
+      "exampleHanzi": "这个女孩很漂亮。",
+      "exampleVi": "Cô gái này rất đẹp."
+    },
+    {
+      "id": "hero-hsk-1-12149-meaning",
+      "vocabularyId": "12149",
+      "sourceIndex": 307,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "苹果",
+      "pinyin": "píngguǒ",
+      "note": "Ví dụ: 我喜欢吃苹果。 — Tôi thích ăn táo.",
+      "speakText": "苹果",
+      "options": [
+        "hậu",
+        "giáo viên; quý ông; thưa ông; ông (Mr.); chồng; (phương ngữ) bác sĩ",
+        "vật; đồ; người",
+        "táo"
+      ],
+      "answer": "táo",
+      "exampleHanzi": "我喜欢吃苹果。",
+      "exampleVi": "Tôi thích ăn táo."
+    }
+  ]
+}

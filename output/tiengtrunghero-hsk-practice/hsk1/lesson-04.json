@@ -1,0 +1,483 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-04-co-ay-la-co-giao-tieng-trung",
+  "lessonNumber": 4,
+  "lessonTitle": "Cô ấy là giáo viên tiếng Trung của tôi.",
+  "topicId": "nen-tang-lam-quen",
+  "topicTitle": "Nền tảng & Làm quen",
+  "route": "/hsk/1/hsk1-bai-04-co-ay-la-co-giao-tieng-trung/play",
+  "vocabularyCount": 22,
+  "exerciseCount": 22,
+  "typeCounts": {
+    "meaning": 22,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-85-meaning",
+      "vocabularyId": "85",
+      "sourceIndex": 3,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "小朋友",
+      "pinyin": "xiǎopéngyǒu",
+      "note": "Ví dụ: 这个小朋友很可爱。 — Đứa nhỏ này rất dễ thương.",
+      "speakText": "小朋友",
+      "options": [
+        "giờ",
+        "bạn trai",
+        "học cùng trường; bạn học; cùng lớp",
+        "trẻ em"
+      ],
+      "answer": "trẻ em",
+      "exampleHanzi": "这个小朋友很可爱。",
+      "exampleVi": "Đứa nhỏ này rất dễ thương."
+    },
+    {
+      "id": "hero-hsk-1-86-meaning",
+      "vocabularyId": "86",
+      "sourceIndex": 4,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "小时",
+      "pinyin": "xiǎoshí",
+      "note": "Ví dụ: 我学习了两个小时。 — Tôi đã học trong hai giờ.",
+      "speakText": "小时",
+      "options": [
+        "bạn trai",
+        "giờ",
+        "học cùng trường; bạn học; cùng lớp",
+        "bạn gái"
+      ],
+      "answer": "giờ",
+      "exampleHanzi": "我学习了两个小时。",
+      "exampleVi": "Tôi đã học trong hai giờ."
+    },
+    {
+      "id": "hero-hsk-1-864-meaning",
+      "vocabularyId": "864",
+      "sourceIndex": 14,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "男朋友",
+      "pinyin": "nánpéngyou",
+      "note": "Ví dụ: 我的男朋友是中国人。 — Bạn trai tôi là người Trung Quốc.",
+      "speakText": "男朋友",
+      "options": [
+        "bạn trai",
+        "học cùng trường; bạn học; cùng lớp",
+        "bạn gái",
+        "bạn bè"
+      ],
+      "answer": "bạn trai",
+      "exampleHanzi": "我的男朋友是中国人。",
+      "exampleVi": "Bạn trai tôi là người Trung Quốc."
+    },
+    {
+      "id": "hero-hsk-1-867-meaning",
+      "vocabularyId": "867",
+      "sourceIndex": 17,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "那些",
+      "pinyin": "nàxiē",
+      "note": "Ví dụ: 那些是我的朋友。 — Đó là những người bạn của tôi.",
+      "speakText": "那些",
+      "options": [
+        "những cái đó; những người đó",
+        "ai; cũng đọc là [shuí]",
+        "họ",
+        "trẻ em"
+      ],
+      "answer": "những cái đó; những người đó",
+      "exampleHanzi": "那些是我的朋友。",
+      "exampleVi": "Đó là những người bạn của tôi."
+    },
+    {
+      "id": "hero-hsk-1-869-meaning",
+      "vocabularyId": "869",
+      "sourceIndex": 19,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "呢",
+      "pinyin": "ne",
+      "note": "Ví dụ: 你呢？ — Còn bạn thì sao?",
+      "speakText": "呢",
+      "options": [
+        "những cái đó; những người đó",
+        "học cùng trường; bạn học; cùng lớp",
+        "âm đọc trong một từ ghép",
+        "trợ từ cho thấy một câu hỏi đã được đặt trước đó sẽ được áp dụng cho từ đứng trước (\"Còn về...?\", \"Và...?\"); trợ từ dùng để hỏi về địa điểm (\"... ở đâu?\"); trợ từ báo hiệu sự tạm dừng, để nhấn mạnh các từ đứng trước và cho người nghe thời gian tiếp nhận (\"được chứ?\", \"bạn hiểu chứ?\"); (ở cuối câu trần thuật) trợ từ cho thấy trạng thái hoặc hành động tiếp tục; trợ từ cho thấy sự khẳng định mạnh mẽ"
+      ],
+      "answer": "trợ từ cho thấy một câu hỏi đã được đặt trước đó sẽ được áp dụng cho từ đứng trước (\"Còn về...?\", \"Và...?\"); trợ từ dùng để hỏi về địa điểm (\"... ở đâu?\"); trợ từ báo hiệu sự tạm dừng, để nhấn mạnh các từ đứng trước và cho người nghe thời gian tiếp nhận (\"được chứ?\", \"bạn hiểu chứ?\"); (ở cuối câu trần thuật) trợ từ cho thấy trạng thái hoặc hành động tiếp tục; trợ từ cho thấy sự khẳng định mạnh mẽ",
+      "exampleHanzi": "你呢？",
+      "exampleVi": "Còn bạn thì sao?"
+    },
+    {
+      "id": "hero-hsk-1-974-meaning",
+      "vocabularyId": "974",
+      "sourceIndex": 30,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "的",
+      "pinyin": "de",
+      "note": "Ví dụ: 这是我的书。 — Đây là cuốn sách của tôi",
+      "speakText": "的",
+      "options": [
+        "học cùng trường; bạn học; cùng lớp",
+        "âm đọc trong một từ ghép",
+        "anh ấy; hắn (dùng cho cả hai giới khi giới tính không rõ hoặc không quan trọng); (dùng trước tên ai đó để nhấn mạnh); (dùng như một đối tượng giả vô nghĩa); (văn học) khác",
+        "thật sự; đích thực"
+      ],
+      "answer": "thật sự; đích thực",
+      "exampleHanzi": "这是我的书。",
+      "exampleVi": "Đây là cuốn sách của tôi"
+    },
+    {
+      "id": "hero-hsk-1-1140-meaning",
+      "vocabularyId": "1140",
+      "sourceIndex": 44,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "同学",
+      "pinyin": "tóngxué",
+      "note": "Ví dụ: 他是我的同学。 — Anh ấy là bạn cùng lớp của tôi.",
+      "speakText": "同学",
+      "options": [
+        "tiếng Trung",
+        "họ Quách",
+        "học cùng trường; bạn học; cùng lớp",
+        "Chinese language"
+      ],
+      "answer": "học cùng trường; bạn học; cùng lớp",
+      "exampleHanzi": "他是我的同学。",
+      "exampleVi": "Anh ấy là bạn cùng lớp của tôi."
+    },
+    {
+      "id": "hero-hsk-1-3040-meaning",
+      "vocabularyId": "3040",
+      "sourceIndex": 95,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "哪",
+      "pinyin": "nǎ",
+      "note": "Ví dụ: 你是哪国人？ — Bạn đến từ nước nào?",
+      "speakText": "哪",
+      "options": [
+        "bạn trai",
+        "trợ từ cho thấy một câu hỏi đã được đặt trước đó sẽ được áp dụng cho từ đứng trước (\"Còn về...?\", \"Và...?\"); trợ từ dùng để hỏi về địa điểm (\"... ở đâu?\"); trợ từ báo hiệu sự tạm dừng, để nhấn mạnh các từ đứng trước và cho người nghe thời gian tiếp nhận (\"được chứ?\", \"bạn hiểu chứ?\"); (ở cuối câu trần thuật) trợ từ cho thấy trạng thái hoặc hành động tiếp tục; trợ từ cho thấy sự khẳng định mạnh mẽ",
+        "âm đọc trong một từ ghép",
+        "thật sự; đích thực"
+      ],
+      "answer": "âm đọc trong một từ ghép",
+      "exampleHanzi": "你是哪国人？",
+      "exampleVi": "Bạn đến từ nước nào?"
+    },
+    {
+      "id": "hero-hsk-1-3291-meaning",
+      "vocabularyId": "3291",
+      "sourceIndex": 104,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "他",
+      "pinyin": "tā",
+      "note": "Ví dụ: 他是我的朋友。 — Anh ấy là bạn tôi.",
+      "speakText": "他",
+      "options": [
+        "anh ấy; hắn (dùng cho cả hai giới khi giới tính không rõ hoặc không quan trọng); (dùng trước tên ai đó để nhấn mạnh); (dùng như một đối tượng giả vô nghĩa); (văn học) khác",
+        "trợ từ cho thấy một câu hỏi đã được đặt trước đó sẽ được áp dụng cho từ đứng trước (\"Còn về...?\", \"Và...?\"); trợ từ dùng để hỏi về địa điểm (\"... ở đâu?\"); trợ từ báo hiệu sự tạm dừng, để nhấn mạnh các từ đứng trước và cho người nghe thời gian tiếp nhận (\"được chứ?\", \"bạn hiểu chứ?\"); (ở cuối câu trần thuật) trợ từ cho thấy trạng thái hoặc hành động tiếp tục; trợ từ cho thấy sự khẳng định mạnh mẽ",
+        "thật sự; đích thực",
+        "học cùng trường; bạn học; cùng lớp"
+      ],
+      "answer": "anh ấy; hắn (dùng cho cả hai giới khi giới tính không rõ hoặc không quan trọng); (dùng trước tên ai đó để nhấn mạnh); (dùng như một đối tượng giả vô nghĩa); (văn học) khác",
+      "exampleHanzi": "他是我的朋友。",
+      "exampleVi": "Anh ấy là bạn tôi."
+    },
+    {
+      "id": "hero-hsk-1-3293-meaning",
+      "vocabularyId": "3293",
+      "sourceIndex": 106,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "她",
+      "pinyin": "tā",
+      "note": "Ví dụ: 她很漂亮。 — Cô ấy rất đẹp.",
+      "speakText": "她",
+      "options": [
+        "thật sự; đích thực",
+        "học cùng trường; bạn học; cùng lớp",
+        "bạn gái",
+        "cô ấy"
+      ],
+      "answer": "cô ấy",
+      "exampleHanzi": "她很漂亮。",
+      "exampleVi": "Cô ấy rất đẹp."
+    },
+    {
+      "id": "hero-hsk-1-3581-meaning",
+      "vocabularyId": "3581",
+      "sourceIndex": 124,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "女朋友",
+      "pinyin": "nǚpéngyou",
+      "note": "Ví dụ: 我的女朋友是中国人。 — Bạn gái tôi là người Trung Quốc.",
+      "speakText": "女朋友",
+      "options": [
+        "những cái đó; những người đó",
+        "trợ từ cho thấy một câu hỏi đã được đặt trước đó sẽ được áp dụng cho từ đứng trước (\"Còn về...?\", \"Và...?\"); trợ từ dùng để hỏi về địa điểm (\"... ở đâu?\"); trợ từ báo hiệu sự tạm dừng, để nhấn mạnh các từ đứng trước và cho người nghe thời gian tiếp nhận (\"được chứ?\", \"bạn hiểu chứ?\"); (ở cuối câu trần thuật) trợ từ cho thấy trạng thái hoặc hành động tiếp tục; trợ từ cho thấy sự khẳng định mạnh mẽ",
+        "bạn gái",
+        "thật sự; đích thực"
+      ],
+      "answer": "bạn gái",
+      "exampleHanzi": "我的女朋友是中国人。",
+      "exampleVi": "Bạn gái tôi là người Trung Quốc."
+    },
+    {
+      "id": "hero-hsk-1-3583-meaning",
+      "vocabularyId": "3583",
+      "sourceIndex": 126,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "朋友",
+      "pinyin": "péngyou",
+      "note": "Ví dụ: 他是我的好朋友。 — Anh ấy là bạn tốt của tôi.",
+      "speakText": "朋友",
+      "options": [
+        "trợ từ cho thấy một câu hỏi đã được đặt trước đó sẽ được áp dụng cho từ đứng trước (\"Còn về...?\", \"Và...?\"); trợ từ dùng để hỏi về địa điểm (\"... ở đâu?\"); trợ từ báo hiệu sự tạm dừng, để nhấn mạnh các từ đứng trước và cho người nghe thời gian tiếp nhận (\"được chứ?\", \"bạn hiểu chứ?\"); (ở cuối câu trần thuật) trợ từ cho thấy trạng thái hoặc hành động tiếp tục; trợ từ cho thấy sự khẳng định mạnh mẽ",
+        "bạn bè",
+        "thật sự; đích thực",
+        "âm đọc trong một từ ghép"
+      ],
+      "answer": "bạn bè",
+      "exampleHanzi": "他是我的好朋友。",
+      "exampleVi": "Anh ấy là bạn tốt của tôi."
+    },
+    {
+      "id": "hero-hsk-1-8013-meaning",
+      "vocabularyId": "8013",
+      "sourceIndex": 199,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "谁",
+      "pinyin": "shéi/shuí",
+      "note": "Ví dụ: 这是谁的书？ — Cuốn sách này là của ai?",
+      "speakText": "谁",
+      "options": [
+        "bạn bè",
+        "môn học; khóa học; lớp học; bài học; đánh thuế; hình thức bói toán",
+        "tiếng Trung",
+        "ai; cũng đọc là [shuí]"
+      ],
+      "answer": "ai; cũng đọc là [shuí]",
+      "exampleHanzi": "这是谁的书？",
+      "exampleVi": "Cuốn sách này là của ai?"
+    },
+    {
+      "id": "hero-hsk-1-8167-meaning",
+      "vocabularyId": "8167",
+      "sourceIndex": 207,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "课",
+      "pinyin": "kè",
+      "note": "Ví dụ: 今天有汉语课。 — Hôm nay có lớp học tiếng Trung.",
+      "speakText": "课",
+      "options": [
+        "môn học; khóa học; lớp học; bài học; đánh thuế; hình thức bói toán",
+        "âm đọc trong một từ ghép",
+        "anh ấy; hắn (dùng cho cả hai giới khi giới tính không rõ hoặc không quan trọng); (dùng trước tên ai đó để nhấn mạnh); (dùng như một đối tượng giả vô nghĩa); (văn học) khác",
+        "cô ấy"
+      ],
+      "answer": "môn học; khóa học; lớp học; bài học; đánh thuế; hình thức bói toán",
+      "exampleHanzi": "今天有汉语课。",
+      "exampleVi": "Hôm nay có lớp học tiếng Trung."
+    },
+    {
+      "id": "hero-hsk-1-8228-meaning",
+      "vocabularyId": "8228",
+      "sourceIndex": 216,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "中文",
+      "pinyin": "Zhōngwén",
+      "note": "Ví dụ: 我学中文。 — Tôi học tiếng Trung.",
+      "speakText": "中文",
+      "options": [
+        "anh ấy; hắn (dùng cho cả hai giới khi giới tính không rõ hoặc không quan trọng); (dùng trước tên ai đó để nhấn mạnh); (dùng như một đối tượng giả vô nghĩa); (văn học) khác",
+        "cô ấy",
+        "tiếng Trung",
+        "ai; cũng đọc là [shuí]"
+      ],
+      "answer": "tiếng Trung",
+      "exampleHanzi": "我学中文。",
+      "exampleVi": "Tôi học tiếng Trung."
+    },
+    {
+      "id": "hero-hsk-1-8403-meaning",
+      "vocabularyId": "8403",
+      "sourceIndex": 231,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "学",
+      "pinyin": "xué",
+      "note": "Ví dụ: 我学汉语。 — Tôi học tiếng Trung.",
+      "speakText": "学",
+      "options": [
+        "tiếng Trung",
+        "họ",
+        "học; nghiên cứu; bắt chước; khoa học; - học",
+        "họ Quách"
+      ],
+      "answer": "học; nghiên cứu; bắt chước; khoa học; - học",
+      "exampleHanzi": "我学汉语。",
+      "exampleVi": "Tôi học tiếng Trung."
+    },
+    {
+      "id": "hero-hsk-1-8646-meaning",
+      "vocabularyId": "8646",
+      "sourceIndex": 234,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "他们",
+      "pinyin": "tāmen",
+      "note": "Ví dụ: 他们是我的同学。 — Họ là bạn cùng lớp của tôi.",
+      "speakText": "他们",
+      "options": [
+        "họ Quách",
+        "Chinese language",
+        "họ",
+        "muốn; cần; yêu cầu | sẽ; sắp | cần phải; nên | nếu | (dạng liên kết) quan trọng"
+      ],
+      "answer": "họ",
+      "exampleHanzi": "他们是我的同学。",
+      "exampleVi": "Họ là bạn cùng lớp của tôi."
+    },
+    {
+      "id": "hero-hsk-1-9167-meaning",
+      "vocabularyId": "9167",
+      "sourceIndex": 253,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "国",
+      "pinyin": "guó",
+      "note": "Ví dụ: 中国是一个美丽的国家。 — Trung Quốc là một đất nước xinh đẹp.",
+      "speakText": "国",
+      "options": [
+        "học; nghiên cứu; bắt chước; khoa học; - học",
+        "họ",
+        "họ Quách",
+        "muốn; cần; yêu cầu | sẽ; sắp | cần phải; nên | nếu | (dạng liên kết) quan trọng"
+      ],
+      "answer": "họ Quách",
+      "exampleHanzi": "中国是一个美丽的国家。",
+      "exampleVi": "Trung Quốc là một đất nước xinh đẹp."
+    },
+    {
+      "id": "hero-hsk-1-9170-meaning",
+      "vocabularyId": "9170",
+      "sourceIndex": 256,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "汉语",
+      "pinyin": "Hànyǔ",
+      "note": "Ví dụ: hskmocktest.com是一个汉语水平模拟考试平台 — hskmocktest.com là một nền tảng thi thử trình độ tiếng Trung.",
+      "speakText": "汉语",
+      "options": [
+        "họ",
+        "muốn; cần; yêu cầu | sẽ; sắp | cần phải; nên | nếu | (dạng liên kết) quan trọng",
+        "Chinese language",
+        "bận rộn; vội vã; hối hả; cuống cuồng"
+      ],
+      "answer": "Chinese language",
+      "exampleHanzi": "hskmocktest.com是一个汉语水平模拟考试平台",
+      "exampleVi": "hskmocktest.com là một nền tảng thi thử trình độ tiếng Trung."
+    },
+    {
+      "id": "hero-hsk-1-9238-meaning",
+      "vocabularyId": "9238",
+      "sourceIndex": 264,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "要",
+      "pinyin": "yào",
+      "note": "Ví dụ: 我要喝水。 — Tôi muốn uống nước.",
+      "speakText": "要",
+      "options": [
+        "bận rộn; vội vã; hối hả; cuống cuồng",
+        "bên ngoài; bề mặt ngoài; nước ngoài; nơi khác ngoài nhà",
+        "học; nghiên cứu; bắt chước; khoa học; - học",
+        "muốn; cần; yêu cầu | sẽ; sắp | cần phải; nên | nếu | (dạng liên kết) quan trọng"
+      ],
+      "answer": "muốn; cần; yêu cầu | sẽ; sắp | cần phải; nên | nếu | (dạng liên kết) quan trọng",
+      "exampleHanzi": "我要喝水。",
+      "exampleVi": "Tôi muốn uống nước."
+    },
+    {
+      "id": "hero-hsk-1-11515-meaning",
+      "vocabularyId": "11515",
+      "sourceIndex": 293,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "忙",
+      "pinyin": "máng",
+      "note": "Ví dụ: 他今天很忙。 — Hôm nay anh ấy rất bận.",
+      "speakText": "忙",
+      "options": [
+        "bên ngoài; bề mặt ngoài; nước ngoài; nơi khác ngoài nhà",
+        "bận rộn; vội vã; hối hả; cuống cuồng",
+        "trẻ em",
+        "giờ"
+      ],
+      "answer": "bận rộn; vội vã; hối hả; cuống cuồng",
+      "exampleHanzi": "他今天很忙。",
+      "exampleVi": "Hôm nay anh ấy rất bận."
+    },
+    {
+      "id": "hero-hsk-1-11526-meaning",
+      "vocabularyId": "11526",
+      "sourceIndex": 296,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "外边",
+      "pinyin": "wàibian",
+      "note": "Ví dụ: 外边很冷。 — Bên ngoài trời rất lạnh.",
+      "speakText": "外边",
+      "options": [
+        "trẻ em",
+        "bên ngoài; bề mặt ngoài; nước ngoài; nơi khác ngoài nhà",
+        "giờ",
+        "bạn trai"
+      ],
+      "answer": "bên ngoài; bề mặt ngoài; nước ngoài; nơi khác ngoài nhà",
+      "exampleHanzi": "外边很冷。",
+      "exampleVi": "Bên ngoài trời rất lạnh."
+    }
+  ]
+}

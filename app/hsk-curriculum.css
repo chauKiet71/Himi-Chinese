@@ -34,14 +34,25 @@
   align-self: center;
 }
 
-.hsk-curriculum-heading-copy > span {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--hsk-red);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .2em;
-  text-transform: uppercase;
+.hsk-curriculum-back {
+  width: fit-content;
+  margin-bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #3f4752;
+  font-size: 15px;
+  font-weight: 750;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: color .18s ease;
+}
+
+.hsk-curriculum-back:hover { color: var(--hsk-red); }
+.hsk-curriculum-back:focus-visible {
+  border-radius: 5px;
+  outline: 3px solid rgba(255, 76, 59, .24);
+  outline-offset: 4px;
 }
 
 .hsk-curriculum-heading h1 {
@@ -51,14 +62,6 @@
   font-weight: 900;
   line-height: 1.04;
   letter-spacing: -.045em;
-}
-
-.hsk-curriculum-heading-copy > p {
-  max-width: 800px;
-  margin: 10px 0 0;
-  color: #4e5762;
-  font-size: 15px;
-  line-height: 1.55;
 }
 
 .hsk-curriculum-coach {
@@ -453,6 +456,42 @@ a.hsk-lesson-select {
   position: static;
 }
 
+.hsk-lesson-loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+  padding-right: 8px;
+  color: #6f7785;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hsk-lesson-spinner { position: relative; display: inline-block; flex: 0 0 26px; width: 26px; height: 26px; }
+.hsk-lesson-spinner i {
+  position: absolute;
+  top: 0;
+  left: 11.5px;
+  width: 3px;
+  height: 7px;
+  border-radius: 3px;
+  background: #d4bb00;
+  transform-origin: 1.5px 13px;
+  transform: rotate(calc(var(--spoke) * 30deg));
+  opacity: .16;
+  animation: hsk-lesson-spoke 1.2s linear infinite;
+  animation-delay: calc(var(--spoke) * .1s - 1.2s);
+}
+@keyframes hsk-lesson-spoke { 0% { opacity: 1; } 100% { opacity: .16; } }
+.hsk-lesson-load-error { grid-column: 1 / -1; color: #bd352b; font-size: 12px; padding: 0 8px 12px; }
+@media (max-width: 600px) {
+  .hsk-lesson-loading { justify-content: flex-start; font-size: 11px; padding-bottom: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hsk-lesson-spinner i { animation: none; opacity: calc(.2 + var(--spoke) / 15); }
+}
+
 a.hsk-lesson-select::after {
   content: "";
   position: absolute;
@@ -691,7 +730,7 @@ a.hsk-lesson-select::after {
 }
 
 .course-catalog-heading h1 {
-  margin: 8px 0 0;
+  margin: 0 0 28px;
   color: #153d37;
   font-size: clamp(30px, 3.2vw, 44px);
   line-height: 1.08;
@@ -710,12 +749,13 @@ a.hsk-lesson-select::after {
 
 .course-catalog-heading-skeleton {
   display: grid;
-  gap: 10px;
 }
 
-.course-catalog-heading-skeleton .skeleton-block:nth-child(1) { width: 160px; height: 10px; }
-.course-catalog-heading-skeleton .skeleton-block:nth-child(2) { width: min(430px, 80%); height: 42px; }
-.course-catalog-heading-skeleton .skeleton-block:nth-child(3) { width: min(620px, 90%); height: 13px; }
+.course-catalog-heading-skeleton .skeleton-block {
+  width: min(430px, 80%);
+  height: 42px;
+  margin-bottom: 28px;
+}
 
 .hsk-entry-cover { background: #dfead4; }
 
@@ -772,7 +812,6 @@ a.hsk-lesson-select::after {
   }
 
   .hsk-curriculum-heading h1 { font-size: clamp(30px, 5vw, 40px); }
-  .hsk-curriculum-heading-copy > p { max-width: 580px; }
   .hsk-curriculum-coach { width: 150px; height: 126px; }
   .hsk-curriculum-coach-image { width: 116px; height: 116px; }
   .hsk-curriculum-coach > p { width: 64px; font-size: 9px; }
@@ -804,17 +843,8 @@ a.hsk-lesson-select::after {
   }
 
   .hsk-curriculum-heading-copy { min-height: 128px; padding-right: 104px; }
-  .hsk-curriculum-heading-copy > span { margin-bottom: 6px; font-size: 9px; letter-spacing: .14em; }
+  .hsk-curriculum-back { margin-bottom: 10px; font-size: 13px; }
   .hsk-curriculum-heading h1 { font-size: clamp(27px, 8vw, 34px); line-height: 1.08; }
-  .hsk-curriculum-heading-copy > p {
-    margin-top: 8px;
-    display: -webkit-box;
-    overflow: hidden;
-    font-size: 12px;
-    line-height: 1.45;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-  }
 
   .hsk-curriculum-coach {
     position: absolute;
@@ -942,6 +972,14 @@ a.hsk-lesson-select::after {
   .hsk-lesson-row:not(.is-active) .hsk-lesson-duration { padding: 0 0 8px; }
 }
 
+/* Keep catalog section titles aligned with the branded homepage heading treatment. */
+.course-catalog-heading h1 {
+  padding-left: 18px;
+  border-left: 7px solid #ff5a4e;
+  font-size: 25px;
+  line-height: 1.4;
+}
+
 /* The learner rail changes the usable canvas without changing viewport width. */
 @container learner-content (max-width: 860px) {
   .hsk-curriculum { width: calc(100% - 32px); }
@@ -981,15 +1019,8 @@ a.hsk-lesson-select::after {
   }
 
   .hsk-curriculum-heading-copy { min-height: 128px; padding-right: 104px; }
-  .hsk-curriculum-heading-copy > span { font-size: 9px; letter-spacing: .14em; }
+  .hsk-curriculum-back { margin-bottom: 10px; font-size: 13px; }
   .hsk-curriculum-heading h1 { font-size: clamp(27px, 8vw, 34px); }
-  .hsk-curriculum-heading-copy > p {
-    display: -webkit-box;
-    overflow: hidden;
-    font-size: 12px;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-  }
 
   .hsk-curriculum-coach {
     position: absolute;

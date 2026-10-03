@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { HskLessonWorkspace } from "@/components/hsk-lesson-workspace";
+import { HskLessonLoader } from "@/components/hsk-lesson-loader";
 import { HskVipLocked } from "@/components/hsk-vip-locked";
 import { getHskLessonPageData } from "@/lib/hsk-access-repository";
 import { getHskLearningLessonContent } from "@/lib/hsk-learning-content";
 import { getCurrentUser } from "@/lib/auth-session";
 import { learnerLoginPath } from "@/lib/learner-auth";
+import { hskLessonResourceUrl, learningContentScope } from "@/lib/lesson-resource";
+import { createLessonResource } from "@/lib/lesson-resource-server";
 
 type HskLessonPageProps = {
   params: Promise<{ level: string; lesson: string }>;
@@ -33,5 +35,6 @@ export default async function HskLessonPage({ params }: HskLessonPageProps) {
   if (!data) notFound();
   if (!user && data.access.source !== "guest") redirect(learnerLoginPath(returnTo));
   if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
-  return <HskLessonWorkspace authenticated={Boolean(user)} lesson={data.lesson} />;
+  const resource = await createLessonResource(hskLessonResourceUrl(data.lesson.levelId, data.lesson.id), data.lesson, learningContentScope(user));
+  return <HskLessonLoader authenticated={Boolean(user)} levelId={data.lesson.levelId} mode="workspace" resource={resource} title={data.lesson.title} />;
 }

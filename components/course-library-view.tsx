@@ -30,9 +30,7 @@ export function CourseLibraryView({
 
   return <>
     <header className="section-shell industry-course-heading course-catalog-heading">
-      <span>Lộ trình học tiếng Trung</span>
       <h1>Chọn chủ đề bạn muốn học</h1>
-      <p>Học theo chuẩn HSK hoặc chọn tình huống nghề nghiệp sát với mục tiêu sử dụng tiếng Trung của bạn.</p>
     </header>
     <CourseExplorer authenticated={authenticated} courses={courses} hskSummary={hskSummary} includeHskCard />
   </>;

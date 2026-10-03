@@ -1,19 +1,19 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import HanziWriter from "hanzi-writer";
 import {
   ArrowLeft,
   ArrowRight,
-  Check,
   Eye,
   LockKeyhole,
   PenLine,
   Play,
   RotateCcw,
-  Search,
   Sparkles,
   Volume2,
+  X,
 } from "lucide-react";
 import { VipContentGate } from "@/components/vip-upgrade-prompt";
 import type { WritingCharacter, WritingTopic } from "@/lib/writing-content";
@@ -60,21 +60,16 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
   const [canvasSize, setCanvasSize] = useState(420);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [mode, setMode] = useState<WritingMode>("watch");
-  const [query, setQuery] = useState("");
   const [resetVersion, setResetVersion] = useState(0);
   const [status, setStatus] = useState("Đang chuẩn bị dữ liệu nét…");
   const [correctStrokes, setCorrectStrokes] = useState(0);
   const [completedCharacters, setCompletedCharacters] = useState<string[]>([]);
   const [loadedStrokeCount, setLoadedStrokeCount] = useState<{ characterId: string; count: number } | null>(null);
+  const [lessonFinished, setLessonFinished] = useState(false);
 
   const selected = topic.characters[selectedIndex];
   const totalStrokes = selected.locked ? 0 : selected.strokes
     ?? (loadedStrokeCount?.characterId === selected.id ? loadedStrokeCount.count : 0);
-  const filteredCharacters = useMemo(() => {
-    const normalizedQuery = normalizeWritingSearch(query);
-    return topic.characters.filter((character) => !normalizedQuery
-      || normalizeWritingSearch(`${character.hanzi} ${character.pinyin} ${character.meaning}`).includes(normalizedQuery));
-  }, [query, topic.characters]);
 
   useEffect(() => {
     let handle: number | undefined;
@@ -208,6 +203,7 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
   const chooseCharacter = (character: WritingCharacter) => {
     const nextIndex = topic.characters.indexOf(character);
     prepareSession("watch");
+    setLessonFinished(false);
     setSelectedIndex(nextIndex);
     setMode("watch");
     setResetVersion((current) => current + 1);
@@ -215,6 +211,7 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
 
   const moveCharacter = (direction: -1 | 1) => {
     prepareSession("watch");
+    setLessonFinished(false);
     setSelectedIndex((current) => (current + direction + topic.characters.length) % topic.characters.length);
     setMode("watch");
     setResetVersion((current) => current + 1);
@@ -222,6 +219,7 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
 
   const changeMode = (nextMode: WritingMode) => {
     prepareSession(nextMode);
+    setLessonFinished(false);
     setMode(nextMode);
     setResetVersion((current) => current + 1);
   };
@@ -258,45 +256,79 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
     ? Math.min(100, Math.round((correctStrokes / totalStrokes) * 100))
     : 0;
 
-  return (
-    <main className="learner-dashboard himi-writing-studio">
-      <section className="himi-writing-workspace" aria-label="Bàn luyện viết Hán tự">
-        <aside className="himi-writing-library">
-          <div className="himi-writing-library-heading">
-            <div><span>Kho chữ</span><strong>{filteredCharacters.length} chữ</strong></div>
-            <label className="himi-writing-search">
-              <Search aria-hidden="true" size={17} />
-              <span className="sr-only">Tìm chữ, pinyin hoặc nghĩa</span>
-              <input onChange={(event) => setQuery(event.target.value)} placeholder="Tìm chữ, pinyin, nghĩa…" type="search" value={query} />
-            </label>
-          </div>
-          <div className="himi-writing-character-grid">
-            {filteredCharacters.map((character) => {
-              const active = character.id === selected.id;
-              const completed = !character.locked && completedCharacters.includes(character.id);
-              return (
-                <button
-                  aria-label={character.locked
-                    ? "Chữ luyện viết dành cho thành viên VIP"
-                    : `${character.hanzi}, ${character.pinyin}, ${character.meaning}${completed ? ", đã luyện" : ""}`}
-                  aria-pressed={active}
-                  className={`${active ? "active" : ""} ${completed ? "completed" : ""} ${character.locked ? "locked" : ""}`.trim()}
-                  key={character.id}
-                  onClick={() => chooseCharacter(character)}
-                  type="button"
-                >
-                  {character.locked ? <><LockKeyhole aria-hidden="true" size={21} /><small>VIP</small></> : <>
-                    <span lang="zh-CN">{character.hanzi}</span>
-                    <small>{character.pinyin}</small>
-                    {completed ? <Check aria-hidden="true" size={12} /> : null}
-                  </>}
-                </button>
-              );
-            })}
-            {!filteredCharacters.length ? <p className="himi-writing-empty">Chưa tìm thấy chữ phù hợp.</p> : null}
-          </div>
-        </aside>
+  const lessonStepCount = (topic.characters.length * 2) + 1;
+  const lessonStep = lessonFinished
+    ? lessonStepCount
+    : Math.min(topic.characters.length * 2, (selectedIndex * 2) + (mode === "watch" ? 1 : 2));
+  const lessonProgress = Math.round((lessonStep / lessonStepCount) * 100);
 
+  const continueLesson = () => {
+    if (mode === "watch") {
+      changeMode("trace");
+      return;
+    }
+    if (selectedIndex === topic.characters.length - 1) {
+      setLessonFinished(true);
+      return;
+    }
+    moveCharacter(1);
+  };
+
+  useEffect(() => {
+    const handleEnter = (event: KeyboardEvent) => {
+      if (event.key !== "Enter" || lessonFinished) return;
+      if (event.target instanceof HTMLButtonElement || event.target instanceof HTMLAnchorElement || event.target instanceof HTMLInputElement) return;
+      event.preventDefault();
+      setCorrectStrokes(0);
+      if (mode === "watch") {
+        setStatus(getModeMessage("trace"));
+        setMode("trace");
+        setResetVersion((current) => current + 1);
+        return;
+      }
+      if (selectedIndex === topic.characters.length - 1) {
+        setLessonFinished(true);
+        return;
+      }
+      setStatus("Himi đang chuẩn bị thứ tự nét…");
+      setSelectedIndex((current) => current + 1);
+      setMode("watch");
+      setResetVersion((current) => current + 1);
+    };
+    window.addEventListener("keydown", handleEnter);
+    return () => window.removeEventListener("keydown", handleEnter);
+  }, [lessonFinished, mode, selectedIndex, topic.characters.length]);
+
+  return (
+    <main className="learner-dashboard himi-writing-studio himi-writing-lesson-session">
+      <header className="himi-writing-lesson-header">
+        <div className="himi-writing-lesson-header-inner">
+          <Link aria-label="Đóng bài luyện viết" href={`/writing/${topic.levelId}`}><X aria-hidden="true" size={22} /></Link>
+          <div aria-label={`Tiến độ bài học ${lessonProgress}%`} className="himi-writing-lesson-progress" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={lessonProgress}>
+            <span style={{ width: `${lessonProgress}%` }} />
+          </div>
+        </div>
+      </header>
+
+      <nav aria-label="Các chữ trong bài" className="himi-writing-lesson-characters">
+        {topic.characters.map((character, index) => {
+          const active = character.id === selected.id;
+          const completed = !character.locked && completedCharacters.includes(character.id);
+          return <button
+            aria-label={character.locked ? "Chữ luyện viết dành cho thành viên VIP" : `${character.hanzi}, ${character.pinyin}, ${character.meaning}`}
+            aria-pressed={active}
+            className={`${active ? "active" : ""} ${completed ? "completed" : ""} ${character.locked ? "locked" : ""}`.trim()}
+            key={character.id}
+            onClick={() => chooseCharacter(character)}
+            type="button"
+          >
+            {character.locked ? <LockKeyhole aria-hidden="true" size={20} /> : <span lang="zh-CN">{character.hanzi}</span>}
+            <small>{index + 1}/{topic.characters.length}</small>
+          </button>;
+        })}
+      </nav>
+
+      <section className="himi-writing-workspace" aria-label="Bàn luyện viết Hán tự">
         <section className="himi-writing-practice">
           {selected.locked ? <VipContentGate
             className="himi-writing-vip-lock"
@@ -336,11 +368,6 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
           </div>
           </>}
 
-          <div className="himi-writing-navigation">
-            <button aria-label="Chữ trước" onClick={() => moveCharacter(-1)} type="button"><ArrowLeft aria-hidden="true" size={18} /></button>
-            <span>{selectedIndex + 1} / {topic.characters.length}</span>
-            <button aria-label="Chữ tiếp theo" onClick={() => moveCharacter(1)} type="button"><ArrowRight aria-hidden="true" size={18} /></button>
-          </div>
         </section>
 
         <aside className="himi-writing-character-info">
@@ -358,6 +385,18 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
 
         </aside>
       </section>
+
+      <footer className="himi-writing-lesson-footer">
+        <div className="himi-writing-lesson-footer-inner">
+          <button className="is-back" disabled={selectedIndex === 0 && mode === "watch"} onClick={() => mode === "watch" ? moveCharacter(-1) : changeMode("watch")} type="button">
+            <ArrowLeft aria-hidden="true" size={16} /> Trước
+          </button>
+          <span><strong>Bước {lessonStep} / {lessonStepCount}</strong><small>Nhấn Enter để tiếp tục</small></span>
+          {lessonFinished
+            ? <Link className="is-next" href={`/writing/${topic.levelId}`}>Hoàn tất <ArrowRight aria-hidden="true" size={16} /></Link>
+            : <button className="is-next" onClick={continueLesson} type="button">Tiếp tục <ArrowRight aria-hidden="true" size={16} /></button>}
+        </div>
+      </footer>
     </main>
   );
 }

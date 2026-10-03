@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { HskGuidedLesson } from "@/components/hsk-guided-lesson";
+import { HskLessonLoader } from "@/components/hsk-lesson-loader";
 import { HskVipLocked } from "@/components/hsk-vip-locked";
 import { getHskLessonPageData } from "@/lib/hsk-access-repository";
 import { HSK_CURRICULUM } from "@/lib/hsk-curriculum";
 import { getHskLessonHref } from "@/lib/hsk-lesson-content";
 import { getCurrentUser } from "@/lib/auth-session";
 import { learnerLoginPath } from "@/lib/learner-auth";
+import { hskLessonResourceUrl, learningContentScope } from "@/lib/lesson-resource";
+import { createLessonResource } from "@/lib/lesson-resource-server";
 
 type PageProps = { params: Promise<{ level: string; lesson: string }> };
 
@@ -36,5 +38,6 @@ export default async function HskGuidedLessonPage({ params }: PageProps) {
   const nextLessonHref = nextLesson?.available
     ? `${getHskLessonHref(data.lesson.levelId, nextLesson.id)}/play`
     : null;
-  return <HskGuidedLesson authenticated={Boolean(user)} lesson={data.lesson} nextLessonHref={nextLessonHref} />;
+  const resource = await createLessonResource(hskLessonResourceUrl(data.lesson.levelId, data.lesson.id), data.lesson, learningContentScope(user));
+  return <HskLessonLoader authenticated={Boolean(user)} levelId={data.lesson.levelId} mode="play" nextLessonHref={nextLessonHref} resource={resource} title={data.lesson.title} />;
 }

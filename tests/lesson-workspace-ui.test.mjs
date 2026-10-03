@@ -65,10 +65,11 @@ test("lesson views render the learning content without a course sidebar", async 
   }));
   const loadingHtml = renderToStaticMarkup(React.createElement(loadingModule.default));
 
-  for (const html of [loadedHtml, loadingHtml]) {
-    assert.match(html, /class="lesson-main"/);
-    assert.doesNotMatch(html, /lesson-shell|lesson-sidebar|lesson-course-navigation|Danh sách bài học/);
-  }
+  assert.match(loadedHtml, /class="lesson-main/);
+  assert.match(loadingHtml, /class="industry-guided-lesson lesson-loading-only"/);
+  assert.match(loadingHtml, /Đang tải bài học/);
+  assert.doesNotMatch(loadingHtml, /skeleton-block/);
+  for (const html of [loadedHtml, loadingHtml]) assert.doesNotMatch(html, /lesson-shell|lesson-sidebar|lesson-course-navigation|Danh sách bài học/);
   assert.match(loadedHtml, />Bài học mẫu</);
   assert.match(loadedHtml, /action="\/vip"/);
   assert.match(loadedHtml, /> Nâng cấp<\/button>/);

@@ -57,7 +57,7 @@ export function LessonWorkspace({
   const lessonHref = `/learn/${course.slug}?lesson=${lesson.slug}`;
   const returnTo = dailyFlow ? withDailySessionFlow(lessonHref) : lessonHref;
   const completionReturnTo = dailyFlow ? `${returnTo}#daily-next` : returnTo;
-  const dailyNextKind = dailyNextStep?.href.startsWith("/practice")
+  const dailyNextKind = dailyNextStep?.href.startsWith("/listening?mode=scenario")
     ? "practice"
     : dailyNextStep?.href.startsWith("/games")
       ? "game"

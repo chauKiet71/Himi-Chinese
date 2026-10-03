@@ -1615,3 +1615,11 @@ body:has(.typing-session-page) .himi-chatbot-widget {
   .typing-lesson-card:hover,
   .typing-lesson-card:hover .typing-lesson-preview span { transform: none; }
 }
+
+/* Keep catalog section titles aligned with the branded homepage heading treatment. */
+.typing-section-heading h2 {
+  padding-left: 18px;
+  border-left: 7px solid #ff5a4e;
+  font-size: 25px;
+  line-height: 1.4;
+}

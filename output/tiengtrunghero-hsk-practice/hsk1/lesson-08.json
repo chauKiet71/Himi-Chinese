@@ -1,0 +1,462 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-08-toi-muon-uong-tra",
+  "lessonNumber": 8,
+  "lessonTitle": "Tôi muốn uống trà.",
+  "topicId": "giao-tiep-hang-ngay",
+  "topicTitle": "Giao tiếp hằng ngày",
+  "route": "/hsk/1/hsk1-bai-08-toi-muon-uong-tra/play",
+  "vocabularyCount": 21,
+  "exerciseCount": 21,
+  "typeCounts": {
+    "meaning": 21,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-89-meaning",
+      "vocabularyId": "89",
+      "sourceIndex": 7,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "下午",
+      "pinyin": "xiàwǔ",
+      "note": "Ví dụ: 下午我有汉语课。 — Tôi có lớp học tiếng Trung vào buổi chiều.",
+      "speakText": "下午",
+      "options": [
+        "cốc; ly",
+        "cơm trưa",
+        "cơm; bữa ăn; (từ vay mượn) fan; người hâm mộ",
+        "buổi chiều; chiều"
+      ],
+      "answer": "buổi chiều; chiều",
+      "exampleHanzi": "下午我有汉语课。",
+      "exampleVi": "Tôi có lớp học tiếng Trung vào buổi chiều."
+    },
+    {
+      "id": "hero-hsk-1-1161-meaning",
+      "vocabularyId": "1161",
+      "sourceIndex": 45,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "杯子",
+      "pinyin": "bēizi",
+      "note": "Ví dụ: 请给我一个杯子。 — Xin vui lòng cho tôi một cốc.",
+      "speakText": "杯子",
+      "options": [
+        "cơm trưa",
+        "cơm; bữa ăn; (từ vay mượn) fan; người hâm mộ",
+        "cốc; ly",
+        "cửa hàng"
+      ],
+      "answer": "cốc; ly",
+      "exampleHanzi": "请给我一个杯子。",
+      "exampleVi": "Xin vui lòng cho tôi một cốc."
+    },
+    {
+      "id": "hero-hsk-1-1213-meaning",
+      "vocabularyId": "1213",
+      "sourceIndex": 47,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "这",
+      "pinyin": "zhè",
+      "note": "Ví dụ: 这是我的书。 — Đây là cuốn sách của tôi",
+      "speakText": "这",
+      "options": [
+        "bao nhiêu?; có bao nhiêu?; (số điện thoại, mã sinh viên, v.v.) số mấy?",
+        "(đại từ) này; những cái này; (dạng liên kết) này; the (theo sau là danh từ); (dạng liên kết) này; những cái này (theo sau là lượng từ) (trong nghĩa này, thường đọc [zhèi], đặc biệt ở Bắc Kinh)",
+        "buổi chiều; chiều",
+        "cốc; ly"
+      ],
+      "answer": "(đại từ) này; những cái này; (dạng liên kết) này; the (theo sau là danh từ); (dạng liên kết) này; những cái này (theo sau là lượng từ) (trong nghĩa này, thường đọc [zhèi], đặc biệt ở Bắc Kinh)",
+      "exampleHanzi": "这是我的书。",
+      "exampleVi": "Đây là cuốn sách của tôi"
+    },
+    {
+      "id": "hero-hsk-1-1215-meaning",
+      "vocabularyId": "1215",
+      "sourceIndex": 49,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "这个",
+      "pinyin": "zhège",
+      "note": "Ví dụ: 这个是我的书。 — Đây là cuốn sách của tôi",
+      "speakText": "这个",
+      "options": [
+        "cái này",
+        "buổi chiều; chiều",
+        "cốc; ly",
+        "dùng trong"
+      ],
+      "answer": "cái này",
+      "exampleHanzi": "这个是我的书。",
+      "exampleVi": "Đây là cuốn sách của tôi"
+    },
+    {
+      "id": "hero-hsk-1-2414-meaning",
+      "vocabularyId": "2414",
+      "sourceIndex": 80,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "个",
+      "pinyin": "gè",
+      "note": "Ví dụ: 我有一个苹果。 — Tôi có một quả táo.",
+      "speakText": "个",
+      "options": [
+        "dùng trong",
+        "(đại từ) này; những cái này; (dạng liên kết) này; the (theo sau là danh từ); (dạng liên kết) này; những cái này (theo sau là lượng từ) (trong nghĩa này, thường đọc [zhèi], đặc biệt ở Bắc Kinh)",
+        "cái này",
+        "dạng khác"
+      ],
+      "answer": "dùng trong",
+      "exampleHanzi": "我有一个苹果。",
+      "exampleVi": "Tôi có một quả táo."
+    },
+    {
+      "id": "hero-hsk-1-3039-meaning",
+      "vocabularyId": "3039",
+      "sourceIndex": 94,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "那",
+      "pinyin": "nà",
+      "note": "Ví dụ: 那是我的书。 — Đó là cuốn sách của tôi.",
+      "speakText": "那",
+      "options": [
+        "dùng trong",
+        "hét; la",
+        "cơm trưa",
+        "dạng khác"
+      ],
+      "answer": "dạng khác",
+      "exampleHanzi": "那是我的书。",
+      "exampleVi": "Đó là cuốn sách của tôi."
+    },
+    {
+      "id": "hero-hsk-1-3470-meaning",
+      "vocabularyId": "3470",
+      "sourceIndex": 111,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "喝",
+      "pinyin": "hē",
+      "note": "Ví dụ: 我喝水。 — Tôi uống nước.",
+      "speakText": "喝",
+      "options": [
+        "(đại từ) này; những cái này; (dạng liên kết) này; the (theo sau là danh từ); (dạng liên kết) này; những cái này (theo sau là lượng từ) (trong nghĩa này, thường đọc [zhèi], đặc biệt ở Bắc Kinh)",
+        "hét; la",
+        "cái này",
+        "dùng trong"
+      ],
+      "answer": "hét; la",
+      "exampleHanzi": "我喝水。",
+      "exampleVi": "Tôi uống nước."
+    },
+    {
+      "id": "hero-hsk-1-5677-meaning",
+      "vocabularyId": "5677",
+      "sourceIndex": 143,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "午饭",
+      "pinyin": "wǔfàn",
+      "note": "Ví dụ: 我午饭吃米饭。 — Tôi ăn cơm vào bữa trưa.",
+      "speakText": "午饭",
+      "options": [
+        "sáng sớm",
+        "(đại từ) này; những cái này; (dạng liên kết) này; the (theo sau là danh từ); (dạng liên kết) này; những cái này (theo sau là lượng từ) (trong nghĩa này, thường đọc [zhèi], đặc biệt ở Bắc Kinh)",
+        "cơm trưa",
+        "cái này"
+      ],
+      "answer": "cơm trưa",
+      "exampleHanzi": "我午饭吃米饭。",
+      "exampleVi": "Tôi ăn cơm vào bữa trưa."
+    },
+    {
+      "id": "hero-hsk-1-5682-meaning",
+      "vocabularyId": "5682",
+      "sourceIndex": 148,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "下班",
+      "pinyin": "xiàbān",
+      "note": "Ví dụ: 我下午五点下班。 — Tôi kết thúc công việc lúc 5 giờ chiều.",
+      "speakText": "下班",
+      "options": [
+        "tan ca; hết giờ làm",
+        "dùng trong",
+        "dạng khác",
+        "cơm trưa"
+      ],
+      "answer": "tan ca; hết giờ làm",
+      "exampleHanzi": "我下午五点下班。",
+      "exampleVi": "Tôi kết thúc công việc lúc 5 giờ chiều."
+    },
+    {
+      "id": "hero-hsk-1-5684-meaning",
+      "vocabularyId": "5684",
+      "sourceIndex": 150,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "想",
+      "pinyin": "xiǎng",
+      "note": "Ví dụ: 我想回家。 — Tôi muốn về nhà.",
+      "speakText": "想",
+      "options": [
+        "dạng khác",
+        "cơm trưa",
+        "cơm; bữa ăn; (từ vay mượn) fan; người hâm mộ",
+        "nghĩ (về); nghĩ đến; suy nghĩ; tin rằng; muốn; mong muốn; nhớ (cảm thấy lưu luyến khi vắng mặt)"
+      ],
+      "answer": "nghĩ (về); nghĩ đến; suy nghĩ; tin rằng; muốn; mong muốn; nhớ (cảm thấy lưu luyến khi vắng mặt)",
+      "exampleHanzi": "我想回家。",
+      "exampleVi": "Tôi muốn về nhà."
+    },
+    {
+      "id": "hero-hsk-1-7360-meaning",
+      "vocabularyId": "7360",
+      "sourceIndex": 186,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "饭",
+      "pinyin": "fàn",
+      "note": "Ví dụ: 我吃米饭。 — Tôi ăn cơm.",
+      "speakText": "饭",
+      "options": [
+        "cơm; bữa ăn; (từ vay mượn) fan; người hâm mộ",
+        "dùng trong",
+        "dạng khác",
+        "hét; la"
+      ],
+      "answer": "cơm; bữa ăn; (từ vay mượn) fan; người hâm mộ",
+      "exampleHanzi": "我吃米饭。",
+      "exampleVi": "Tôi ăn cơm."
+    },
+    {
+      "id": "hero-hsk-1-8007-meaning",
+      "vocabularyId": "8007",
+      "sourceIndex": 193,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "商店",
+      "pinyin": "shāngdiàn",
+      "note": "Ví dụ: 商店里有很多商品。 — Có rất nhiều sản phẩm trong cửa hàng.",
+      "speakText": "商店",
+      "options": [
+        "cửa hàng",
+        "dạng khác",
+        "hét; la",
+        "tan ca; hết giờ làm"
+      ],
+      "answer": "cửa hàng",
+      "exampleHanzi": "商店里有很多商品。",
+      "exampleVi": "Có rất nhiều sản phẩm trong cửa hàng."
+    },
+    {
+      "id": "hero-hsk-1-8085-meaning",
+      "vocabularyId": "8085",
+      "sourceIndex": 203,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "茶",
+      "pinyin": "chá",
+      "note": "Ví dụ: 我想喝茶。 — Tôi muốn uống trà.",
+      "speakText": "茶",
+      "options": [
+        "hét; la",
+        "tan ca; hết giờ làm",
+        "nghĩ (về); nghĩ đến; suy nghĩ; tin rằng; muốn; mong muốn; nhớ (cảm thấy lưu luyến khi vắng mặt)",
+        "trà; cây chè"
+      ],
+      "answer": "trà; cây chè",
+      "exampleHanzi": "我想喝茶。",
+      "exampleVi": "Tôi muốn uống trà."
+    },
+    {
+      "id": "hero-hsk-1-8172-meaning",
+      "vocabularyId": "8172",
+      "sourceIndex": 212,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "块",
+      "pinyin": "kuài",
+      "note": "Ví dụ: 我要一块蛋糕。 — Tôi muốn một miếng bánh.",
+      "speakText": "块",
+      "options": [
+        "trà; cây chè",
+        "mảnh; cục; miếng; lượng từ dùng cho vải, bánh, xà phòng v.v.; (miệng) lượng từ dùng cho tiền và đơn vị tiền tệ",
+        "bao nhiêu?; có bao nhiêu?; (số điện thoại, mã sinh viên, v.v.) số mấy?",
+        "cơm (đã nấu)"
+      ],
+      "answer": "mảnh; cục; miếng; lượng từ dùng cho vải, bánh, xà phòng v.v.; (miệng) lượng từ dùng cho tiền và đơn vị tiền tệ",
+      "exampleHanzi": "我要一块蛋糕。",
+      "exampleVi": "Tôi muốn một miếng bánh."
+    },
+    {
+      "id": "hero-hsk-1-9144-meaning",
+      "vocabularyId": "9144",
+      "sourceIndex": 252,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "元",
+      "pinyin": "yuán",
+      "note": "Ví dụ: 这个苹果五元。 — Quả táo này có giá 5 nhân dân tệ.",
+      "speakText": "元",
+      "options": [
+        "bao nhiêu?; có bao nhiêu?; (số điện thoại, mã sinh viên, v.v.) số mấy?",
+        "cơm (đã nấu)",
+        "họ Yuan; nhà Nguyên hay nhà Mông Cổ (1279-1368)",
+        "ăn | tiêu thụ | ăn tại (tiệm ăn) | tiêu diệt | phá hủy | hấp thụ | chịu (điện giật, thương tích, thất bại...)"
+      ],
+      "answer": "họ Yuan; nhà Nguyên hay nhà Mông Cổ (1279-1368)",
+      "exampleHanzi": "这个苹果五元。",
+      "exampleVi": "Quả táo này có giá 5 nhân dân tệ."
+    },
+    {
+      "id": "hero-hsk-1-9226-meaning",
+      "vocabularyId": "9226",
+      "sourceIndex": 262,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "多少",
+      "pinyin": "duōshao",
+      "note": "Ví dụ: 这个多少钱？ — Cái này bao nhiêu?",
+      "speakText": "多少",
+      "options": [
+        "cơm (đã nấu)",
+        "bao nhiêu?; có bao nhiêu?; (số điện thoại, mã sinh viên, v.v.) số mấy?",
+        "ăn | tiêu thụ | ăn tại (tiệm ăn) | tiêu diệt | phá hủy | hấp thụ | chịu (điện giật, thương tích, thất bại...)",
+        "mua; mua sắm"
+      ],
+      "answer": "bao nhiêu?; có bao nhiêu?; (số điện thoại, mã sinh viên, v.v.) số mấy?",
+      "exampleHanzi": "这个多少钱？",
+      "exampleVi": "Cái này bao nhiêu?"
+    },
+    {
+      "id": "hero-hsk-1-10596-meaning",
+      "vocabularyId": "10596",
+      "sourceIndex": 272,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "米饭",
+      "pinyin": "mǐfàn",
+      "note": "Ví dụ: 我吃米饭。 — Tôi ăn cơm.",
+      "speakText": "米饭",
+      "options": [
+        "cơm (đã nấu)",
+        "họ Yuan; nhà Nguyên hay nhà Mông Cổ (1279-1368)",
+        "bao nhiêu?; có bao nhiêu?; (số điện thoại, mã sinh viên, v.v.) số mấy?",
+        "ăn | tiêu thụ | ăn tại (tiệm ăn) | tiêu diệt | phá hủy | hấp thụ | chịu (điện giật, thương tích, thất bại...)"
+      ],
+      "answer": "cơm (đã nấu)",
+      "exampleHanzi": "我吃米饭。",
+      "exampleVi": "Tôi ăn cơm."
+    },
+    {
+      "id": "hero-hsk-1-10609-meaning",
+      "vocabularyId": "10609",
+      "sourceIndex": 275,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "吃",
+      "pinyin": "chī",
+      "note": "Ví dụ: 我吃饭。 — Tôi ăn cơm.",
+      "speakText": "吃",
+      "options": [
+        "ăn | tiêu thụ | ăn tại (tiệm ăn) | tiêu diệt | phá hủy | hấp thụ | chịu (điện giật, thương tích, thất bại...)",
+        "cơm (đã nấu)",
+        "họ Tiền",
+        "sáng sớm"
+      ],
+      "answer": "ăn | tiêu thụ | ăn tại (tiệm ăn) | tiêu diệt | phá hủy | hấp thụ | chịu (điện giật, thương tích, thất bại...)",
+      "exampleHanzi": "我吃饭。",
+      "exampleVi": "Tôi ăn cơm."
+    },
+    {
+      "id": "hero-hsk-1-11843-meaning",
+      "vocabularyId": "11843",
+      "sourceIndex": 303,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "买",
+      "pinyin": "mǎi",
+      "note": "Ví dụ: 我去商店买书。 — Tôi đến cửa hàng để mua sách.",
+      "speakText": "买",
+      "options": [
+        "họ Tiền",
+        "mua; mua sắm",
+        "sáng sớm",
+        "hét; la"
+      ],
+      "answer": "mua; mua sắm",
+      "exampleHanzi": "我去商店买书。",
+      "exampleVi": "Tôi đến cửa hàng để mua sách."
+    },
+    {
+      "id": "hero-hsk-1-12152-meaning",
+      "vocabularyId": "12152",
+      "sourceIndex": 310,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "钱",
+      "pinyin": "qián",
+      "note": "Ví dụ: 我有钱买书。 — Tôi có tiền mua sách.",
+      "speakText": "钱",
+      "options": [
+        "mua; mua sắm",
+        "họ Tiền",
+        "buổi chiều; chiều",
+        "cốc; ly"
+      ],
+      "answer": "họ Tiền",
+      "exampleHanzi": "我有钱买书。",
+      "exampleVi": "Tôi có tiền mua sách."
+    },
+    {
+      "id": "hero-hsk-1-12293-meaning",
+      "vocabularyId": "12293",
+      "sourceIndex": 321,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "早上",
+      "pinyin": "zǎoshang",
+      "note": "Ví dụ: 早上空气很好。 — Không khí buổi sáng rất tốt.",
+      "speakText": "早上",
+      "options": [
+        "buổi chiều; chiều",
+        "sáng sớm",
+        "cốc; ly",
+        "cơm trưa"
+      ],
+      "answer": "sáng sớm",
+      "exampleHanzi": "早上空气很好。",
+      "exampleVi": "Không khí buổi sáng rất tốt."
+    }
+  ]
+}

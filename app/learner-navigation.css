@@ -1058,6 +1058,12 @@
 }
 
 @media (max-width: 720px) {
+  /* The account screen owns a dedicated mobile header, so the shared
+   * breadcrumb would duplicate navigation and waste vertical space. */
+  .learner-app-shell:has(.account-wallet-redesign) .client-breadcrumb-bar {
+    display: none;
+  }
+
   .client-breadcrumb-bar {
     padding: 27px 5px 13px;
   }
@@ -1310,8 +1316,7 @@
   }
 
   .learner-app-shell .learner-mobile-nav > a.active > svg,
-  .learner-app-shell .mobile-practice-trigger.active > svg,
-  .learner-app-shell .mobile-practice-trigger[aria-expanded="true"] > svg {
+  .learner-app-shell .mobile-practice-trigger.active > svg {
     transform: translateY(-1px);
   }
 
@@ -1326,8 +1331,7 @@
     touch-action: manipulation;
   }
 
-  .learner-app-shell .mobile-practice-trigger.active,
-  .learner-app-shell .mobile-practice-trigger[aria-expanded="true"] {
+  .learner-app-shell .mobile-practice-trigger.active {
     color: var(--himi-red);
     background: transparent;
   }

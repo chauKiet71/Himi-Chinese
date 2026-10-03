@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-07",
+  "lessonNumber": 7,
+  "lessonTitle": "Nhà chị có ở xa công ty không?",
+  "topicId": "sinh-hoat-di-chuyen-ke-hoach",
+  "topicTitle": "Sinh hoạt, di chuyển & kế hoạch",
+  "route": "/hsk/2/hsk2-tb-lesson-07/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-652-meaning",
+      "vocabularyId": "652",
+      "sourceIndex": 4,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "打车",
+      "pinyin": "dǎchē",
+      "note": "Ví dụ: 我们打车去机场吧。 — Chúng ta hãy bắt taxi tới sân bay.",
+      "speakText": "打车",
+      "options": [
+        "gọi taxi (trong thành phố); bắt xe nhờ chở",
+        "đi bộ | đi | chạy | di chuyển (của phương tiện) | thăm | rời đi | đi mất | mất (lối nói giảm) | từ | qua | ở phía sau (trong động từ phức hợp, như zǒu) | thay đổi (hình dạng, cấu trúc, ý nghĩa)",
+        "trở về; quay lại",
+        "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-"
+      ],
+      "answer": "gọi taxi (trong thành phố); bắt xe nhờ chở",
+      "exampleHanzi": "我们打车去机场吧。",
+      "exampleVi": "Chúng ta hãy bắt taxi tới sân bay."
+    },
+    {
+      "id": "hero-hsk-2-1747-meaning",
+      "vocabularyId": "1747",
+      "sourceIndex": 11,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "走",
+      "pinyin": "zǒu",
+      "note": "Ví dụ: 我们走吧。 — Đi thôi.",
+      "speakText": "走",
+      "options": [
+        "đi bộ | đi | chạy | di chuyển (của phương tiện) | thăm | rời đi | đi mất | mất (lối nói giảm) | từ | qua | ở phía sau (trong động từ phức hợp, như zǒu) | thay đổi (hình dạng, cấu trúc, ý nghĩa)",
+        "trở về; quay lại",
+        "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+        "họ Li"
+      ],
+      "answer": "đi bộ | đi | chạy | di chuyển (của phương tiện) | thăm | rời đi | đi mất | mất (lối nói giảm) | từ | qua | ở phía sau (trong động từ phức hợp, như zǒu) | thay đổi (hình dạng, cấu trúc, ý nghĩa)",
+      "exampleHanzi": "我们走吧。",
+      "exampleVi": "Đi thôi."
+    },
+    {
+      "id": "hero-hsk-2-2712-meaning",
+      "vocabularyId": "2712",
+      "sourceIndex": 31,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "回来",
+      "pinyin": "huílái",
+      "note": "Ví dụ: 我回来了。 — Tôi đã trở lại.",
+      "speakText": "回来",
+      "options": [
+        "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+        "trở về; quay lại",
+        "họ Li",
+        "đi xuống; hạ xuống; tiếp tục; (của người hầu) lui ra"
+      ],
+      "answer": "trở về; quay lại",
+      "exampleHanzi": "我回来了。",
+      "exampleVi": "Tôi đã trở lại."
+    },
+    {
+      "id": "hero-hsk-2-2754-meaning",
+      "vocabularyId": "2754",
+      "sourceIndex": 33,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "慢",
+      "pinyin": "màn",
+      "note": "Ví dụ: 这个车很慢。 — Chiếc xe này chạy rất chậm.",
+      "speakText": "慢",
+      "options": [
+        "chậm",
+        "đi bộ | đi | chạy | di chuyển (của phương tiện) | thăm | rời đi | đi mất | mất (lối nói giảm) | từ | qua | ở phía sau (trong động từ phức hợp, như zǒu) | thay đổi (hình dạng, cấu trúc, ý nghĩa)",
+        "trở về; quay lại",
+        "nhanh; mau; tốc độ; tốc độ; sớm; hầu như; vội; khéo léo; sắc bén (dao hoặc trí tuệ); thẳng thắn; nói thẳng; hài lòng; vui vẻ; dễ chịu"
+      ],
+      "answer": "chậm",
+      "exampleHanzi": "这个车很慢。",
+      "exampleVi": "Chiếc xe này chạy rất chậm."
+    },
+    {
+      "id": "hero-hsk-2-5108-meaning",
+      "vocabularyId": "5108",
+      "sourceIndex": 59,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "快",
+      "pinyin": "kuài",
+      "note": "Ví dụ: 这个车很快。 — Chiếc xe này rất nhanh.",
+      "speakText": "快",
+      "options": [
+        "trở về; quay lại",
+        "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+        "họ Li",
+        "nhanh; mau; tốc độ; tốc độ; sớm; hầu như; vội; khéo léo; sắc bén (dao hoặc trí tuệ); thẳng thắn; nói thẳng; hài lòng; vui vẻ; dễ chịu"
+      ],
+      "answer": "nhanh; mau; tốc độ; tốc độ; sớm; hầu như; vội; khéo léo; sắc bén (dao hoặc trí tuệ); thẳng thắn; nói thẳng; hài lòng; vui vẻ; dễ chịu",
+      "exampleHanzi": "这个车很快。",
+      "exampleVi": "Chiếc xe này rất nhanh."
+    },
+    {
+      "id": "hero-hsk-2-5109-meaning",
+      "vocabularyId": "5109",
+      "sourceIndex": 60,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "快",
+      "pinyin": "kuài",
+      "note": "Ví dụ: 请快一点。 — Làm ơn nhanh lên.",
+      "speakText": "快",
+      "options": [
+        "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+        "nhanh; mau; tốc độ; tốc độ; sớm; hầu như; vội; khéo léo; sắc bén (dao hoặc trí tuệ); thẳng thắn; nói thẳng; hài lòng; vui vẻ; dễ chịu",
+        "họ Li",
+        "họ Lặc"
+      ],
+      "answer": "nhanh; mau; tốc độ; tốc độ; sớm; hầu như; vội; khéo léo; sắc bén (dao hoặc trí tuệ); thẳng thắn; nói thẳng; hài lòng; vui vẻ; dễ chịu",
+      "exampleHanzi": "请快一点。",
+      "exampleVi": "Làm ơn nhanh lên."
+    },
+    {
+      "id": "hero-hsk-2-5777-meaning",
+      "vocabularyId": "5777",
+      "sourceIndex": 87,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "过",
+      "pinyin": "guo",
+      "note": "Ví dụ: 我学过汉语。 — Tôi đã học tiếng Trung Quốc.",
+      "speakText": "过",
+      "options": [
+        "họ Li",
+        "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+        "họ Lặc",
+        "trên đường; trong hành trình; mặt đường"
+      ],
+      "answer": "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+      "exampleHanzi": "我学过汉语。",
+      "exampleVi": "Tôi đã học tiếng Trung Quốc."
+    },
+    {
+      "id": "hero-hsk-2-5778-meaning",
+      "vocabularyId": "5778",
+      "sourceIndex": 88,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "过",
+      "pinyin": "guò",
+      "note": "Ví dụ: 我过马路。 — Tôi băng qua đường.",
+      "speakText": "过",
+      "options": [
+        "nhanh; mau; tốc độ; tốc độ; sớm; hầu như; vội; khéo léo; sắc bén (dao hoặc trí tuệ); thẳng thắn; nói thẳng; hài lòng; vui vẻ; dễ chịu",
+        "họ Lặc",
+        "trên đường; trong hành trình; mặt đường",
+        "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-"
+      ],
+      "answer": "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+      "exampleHanzi": "我过马路。",
+      "exampleVi": "Tôi băng qua đường."
+    },
+    {
+      "id": "hero-hsk-2-9627-meaning",
+      "vocabularyId": "9627",
+      "sourceIndex": 153,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "离",
+      "pinyin": "lí",
+      "note": "Ví dụ: 学校离我家很近。 — Trường học rất gần nhà tôi.",
+      "speakText": "离",
+      "options": [
+        "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+        "họ Li",
+        "họ Lặc",
+        "trên đường; trong hành trình; mặt đường"
+      ],
+      "answer": "họ Li",
+      "exampleHanzi": "学校离我家很近。",
+      "exampleVi": "Trường học rất gần nhà tôi."
+    },
+    {
+      "id": "hero-hsk-2-9630-meaning",
+      "vocabularyId": "9630",
+      "sourceIndex": 156,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "路",
+      "pinyin": "lù",
+      "note": "Ví dụ: 这条路很长。 — Con đường này rất dài.",
+      "speakText": "路",
+      "options": [
+        "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+        "họ Lặc",
+        "họ Li",
+        "tránh xa (cổ văn)"
+      ],
+      "answer": "họ Lặc",
+      "exampleHanzi": "这条路很长。",
+      "exampleVi": "Con đường này rất dài."
+    },
+    {
+      "id": "hero-hsk-2-9633-meaning",
+      "vocabularyId": "9633",
+      "sourceIndex": 159,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "路上",
+      "pinyin": "lùshang",
+      "note": "Ví dụ: 路上有很多车。 — Có rất nhiều xe ô tô trên đường.",
+      "speakText": "路上",
+      "options": [
+        "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+        "trên đường; trong hành trình; mặt đường",
+        "họ Li",
+        "tránh xa (cổ văn)"
+      ],
+      "answer": "trên đường; trong hành trình; mặt đường",
+      "exampleHanzi": "路上有很多车。",
+      "exampleVi": "Có rất nhiều xe ô tô trên đường."
+    },
+    {
+      "id": "hero-hsk-2-10457-meaning",
+      "vocabularyId": "10457",
+      "sourceIndex": 179,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "教室",
+      "pinyin": "jiàoshì",
+      "note": "Ví dụ: 我们在教室里上课。 — Chúng tôi có các lớp học trong lớp học.",
+      "speakText": "教室",
+      "options": [
+        "họ Li",
+        "tránh xa (cổ văn)",
+        "phòng học",
+        "đi xuống; hạ xuống; tiếp tục; (của người hầu) lui ra"
+      ],
+      "answer": "phòng học",
+      "exampleHanzi": "我们在教室里上课。",
+      "exampleVi": "Chúng tôi có các lớp học trong lớp học."
+    },
+    {
+      "id": "hero-hsk-2-10458-meaning",
+      "vocabularyId": "10458",
+      "sourceIndex": 180,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "机场",
+      "pinyin": "jīchǎng",
+      "note": "Ví dụ: 我们在机场等飞机。 — Chúng tôi chờ máy bay ở sân bay.",
+      "speakText": "机场",
+      "options": [
+        "sân bay; bãi đáp; (lóng) nhà cung cấp dịch vụ cho Shadowsocks hoặc phần mềm tương tự để vượt kiểm duyệt Internet",
+        "tránh xa (cổ văn)",
+        "đi xuống; hạ xuống; tiếp tục; (của người hầu) lui ra",
+        "họ Lặc"
+      ],
+      "answer": "sân bay; bãi đáp; (lóng) nhà cung cấp dịch vụ cho Shadowsocks hoặc phần mềm tương tự để vượt kiểm duyệt Internet",
+      "exampleHanzi": "我们在机场等飞机。",
+      "exampleVi": "Chúng tôi chờ máy bay ở sân bay."
+    },
+    {
+      "id": "hero-hsk-2-10837-meaning",
+      "vocabularyId": "10837",
+      "sourceIndex": 197,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "远",
+      "pinyin": "yuǎn",
+      "note": "Ví dụ: 学校离我家很远。 — Trường học cách nhà tôi rất xa.",
+      "speakText": "远",
+      "options": [
+        "đi xuống; hạ xuống; tiếp tục; (của người hầu) lui ra",
+        "chậm",
+        "tránh xa (cổ văn)",
+        "nhanh; mau; tốc độ; tốc độ; sớm; hầu như; vội; khéo léo; sắc bén (dao hoặc trí tuệ); thẳng thắn; nói thẳng; hài lòng; vui vẻ; dễ chịu"
+      ],
+      "answer": "tránh xa (cổ văn)",
+      "exampleHanzi": "学校离我家很远。",
+      "exampleVi": "Trường học cách nhà tôi rất xa."
+    },
+    {
+      "id": "hero-hsk-2-11382-meaning",
+      "vocabularyId": "11382",
+      "sourceIndex": 214,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "下去",
+      "pinyin": "xiàqù",
+      "note": "Ví dụ: 我们下去看看。 — Chúng ta hãy đi xuống và xem xét.",
+      "speakText": "下去",
+      "options": [
+        "đi xuống; hạ xuống; tiếp tục; (của người hầu) lui ra",
+        "gọi taxi (trong thành phố); bắt xe nhờ chở",
+        "đi bộ | đi | chạy | di chuyển (của phương tiện) | thăm | rời đi | đi mất | mất (lối nói giảm) | từ | qua | ở phía sau (trong động từ phức hợp, như zǒu) | thay đổi (hình dạng, cấu trúc, ý nghĩa)",
+        "trở về; quay lại"
+      ],
+      "answer": "đi xuống; hạ xuống; tiếp tục; (của người hầu) lui ra",
+      "exampleHanzi": "我们下去看看。",
+      "exampleVi": "Chúng ta hãy đi xuống và xem xét."
+    }
+  ]
+}

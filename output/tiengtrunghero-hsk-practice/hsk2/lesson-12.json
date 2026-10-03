@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-12",
+  "lessonNumber": 12,
+  "lessonTitle": "Anh mặc ít quần áo quá.",
+  "topicId": "so-sanh-trang-thai-trai-nghiem",
+  "topicTitle": "So sánh, trạng thái & trải nghiệm",
+  "route": "/hsk/2/hsk2-tb-lesson-12/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-2706-meaning",
+      "vocabularyId": "2706",
+      "sourceIndex": 25,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "后面",
+      "pinyin": "hòumiàn",
+      "note": "Ví dụ: 我在后面跟着。 — Tôi đang theo sau.",
+      "speakText": "后面",
+      "options": [
+        "vợ",
+        "phía sau; phía sau; phần cuối; đằng sau; gần cuối; ở phía sau; sau đó; sau này",
+        "(thông tục) cha của cha; ông nội",
+        "quên; bỏ sót; bỏ qua"
+      ],
+      "answer": "phía sau; phía sau; phần cuối; đằng sau; gần cuối; ở phía sau; sau đó; sau này",
+      "exampleHanzi": "我在后面跟着。",
+      "exampleVi": "Tôi đang theo sau."
+    },
+    {
+      "id": "hero-hsk-2-6720-meaning",
+      "vocabularyId": "6720",
+      "sourceIndex": 108,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "忘",
+      "pinyin": "wàng",
+      "note": "Ví dụ: 我忘记带书了。 — Tôi quên mang theo sách.",
+      "speakText": "忘",
+      "options": [
+        "nhớ",
+        "quên; bỏ sót; bỏ qua",
+        "tiến lên; tiến tới; đi vào; bước vào; đưa vào; nộp; tiếp nhận; chấp nhận; (toán học) cơ số của hệ thống số; lượng từ dùng cho các phần trong tòa nhà hoặc khu dân cư",
+        "vào trong"
+      ],
+      "answer": "quên; bỏ sót; bỏ qua",
+      "exampleHanzi": "我忘记带书了。",
+      "exampleVi": "Tôi quên mang theo sách."
+    },
+    {
+      "id": "hero-hsk-2-6790-meaning",
+      "vocabularyId": "6790",
+      "sourceIndex": 116,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "疼",
+      "pinyin": "téng",
+      "note": "Ví dụ: 我的头很疼。 — Đầu tôi đau quá.",
+      "speakText": "疼",
+      "options": [
+        "quên; bỏ sót; bỏ qua",
+        "loại này; vậy; theo cách này; như thế này; như vậy",
+        "(cảm giác) đau; đau nhức; yêu thương dearly",
+        "vợ"
+      ],
+      "answer": "(cảm giác) đau; đau nhức; yêu thương dearly",
+      "exampleHanzi": "我的头很疼。",
+      "exampleVi": "Đầu tôi đau quá."
+    },
+    {
+      "id": "hero-hsk-2-6855-meaning",
+      "vocabularyId": "6855",
+      "sourceIndex": 121,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "这样",
+      "pinyin": "zhèyàng",
+      "note": "Ví dụ: 这样做好吗？ — Làm theo cách này có ổn không?",
+      "speakText": "这样",
+      "options": [
+        "loại này; vậy; theo cách này; như thế này; như vậy",
+        "vợ",
+        "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+        "họ You"
+      ],
+      "answer": "loại này; vậy; theo cách này; như thế này; như vậy",
+      "exampleHanzi": "这样做好吗？",
+      "exampleVi": "Làm theo cách này có ổn không?"
+    },
+    {
+      "id": "hero-hsk-2-7001-meaning",
+      "vocabularyId": "7001",
+      "sourceIndex": 127,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "妻子",
+      "pinyin": "qīzi",
+      "note": "Ví dụ: 他的妻子是老师。 — Vợ anh là giáo viên.",
+      "speakText": "妻子",
+      "options": [
+        "loại này; vậy; theo cách này; như thế này; như vậy",
+        "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+        "họ You",
+        "vợ"
+      ],
+      "answer": "vợ",
+      "exampleHanzi": "他的妻子是老师。",
+      "exampleVi": "Vợ anh là giáo viên."
+    },
+    {
+      "id": "hero-hsk-2-8053-meaning",
+      "vocabularyId": "8053",
+      "sourceIndex": 139,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "好",
+      "pinyin": "hǎo",
+      "note": "Ví dụ: 你好，很高兴见到你。 — Xin chào hân hạnh được gặp bạn.",
+      "speakText": "好",
+      "options": [
+        "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+        "họ You",
+        "trợ từ cấu trúc: dùng sau động từ (hoặc tính từ làm động từ chính), nối với cụm từ theo sau chỉ hiệu quả, mức độ, khả năng v.v.",
+        "nhớ"
+      ],
+      "answer": "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+      "exampleHanzi": "你好，很高兴见到你。",
+      "exampleVi": "Xin chào hân hạnh được gặp bạn."
+    },
+    {
+      "id": "hero-hsk-2-8840-meaning",
+      "vocabularyId": "8840",
+      "sourceIndex": 148,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "游",
+      "pinyin": "yóu",
+      "note": "Ví dụ: 鱼在水里游。 — Cá bơi trong nước.",
+      "speakText": "游",
+      "options": [
+        "(cảm giác) đau; đau nhức; yêu thương dearly",
+        "loại này; vậy; theo cách này; như thế này; như vậy",
+        "họ You",
+        "vợ"
+      ],
+      "answer": "họ You",
+      "exampleHanzi": "鱼在水里游。",
+      "exampleVi": "Cá bơi trong nước."
+    },
+    {
+      "id": "hero-hsk-2-10208-meaning",
+      "vocabularyId": "10208",
+      "sourceIndex": 172,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "得",
+      "pinyin": "de",
+      "note": "Ví dụ: 他跑得很快。 — Anh ấy chạy rất nhanh.",
+      "speakText": "得",
+      "options": [
+        "nhớ",
+        "tiến lên; tiến tới; đi vào; bước vào; đưa vào; nộp; tiếp nhận; chấp nhận; (toán học) cơ số của hệ thống số; lượng từ dùng cho các phần trong tòa nhà hoặc khu dân cư",
+        "gần; gần với; khoảng",
+        "trợ từ cấu trúc: dùng sau động từ (hoặc tính từ làm động từ chính), nối với cụm từ theo sau chỉ hiệu quả, mức độ, khả năng v.v."
+      ],
+      "answer": "trợ từ cấu trúc: dùng sau động từ (hoặc tính từ làm động từ chính), nối với cụm từ theo sau chỉ hiệu quả, mức độ, khả năng v.v.",
+      "exampleHanzi": "他跑得很快。",
+      "exampleVi": "Anh ấy chạy rất nhanh."
+    },
+    {
+      "id": "hero-hsk-2-10459-meaning",
+      "vocabularyId": "10459",
+      "sourceIndex": 181,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "记得",
+      "pinyin": "jìde",
+      "note": "Ví dụ: 我记得你的名字。 — Tôi nhớ tên của bạn.",
+      "speakText": "记得",
+      "options": [
+        "vợ",
+        "nhớ",
+        "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+        "trợ từ cấu trúc: dùng sau động từ (hoặc tính từ làm động từ chính), nối với cụm từ theo sau chỉ hiệu quả, mức độ, khả năng v.v."
+      ],
+      "answer": "nhớ",
+      "exampleHanzi": "我记得你的名字。",
+      "exampleVi": "Tôi nhớ tên của bạn."
+    },
+    {
+      "id": "hero-hsk-2-10461-meaning",
+      "vocabularyId": "10461",
+      "sourceIndex": 183,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "进",
+      "pinyin": "jìn",
+      "note": "Ví dụ: 我进学校。 — Tôi vào trường.",
+      "speakText": "进",
+      "options": [
+        "tiến lên; tiến tới; đi vào; bước vào; đưa vào; nộp; tiếp nhận; chấp nhận; (toán học) cơ số của hệ thống số; lượng từ dùng cho các phần trong tòa nhà hoặc khu dân cư",
+        "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+        "trợ từ cấu trúc: dùng sau động từ (hoặc tính từ làm động từ chính), nối với cụm từ theo sau chỉ hiệu quả, mức độ, khả năng v.v.",
+        "gần; gần với; khoảng"
+      ],
+      "answer": "tiến lên; tiến tới; đi vào; bước vào; đưa vào; nộp; tiếp nhận; chấp nhận; (toán học) cơ số của hệ thống số; lượng từ dùng cho các phần trong tòa nhà hoặc khu dân cư",
+      "exampleHanzi": "我进学校。",
+      "exampleVi": "Tôi vào trường."
+    },
+    {
+      "id": "hero-hsk-2-10462-meaning",
+      "vocabularyId": "10462",
+      "sourceIndex": 184,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "近",
+      "pinyin": "jìn",
+      "note": "Ví dụ: 学校离我家很近。 — Trường học rất gần nhà tôi.",
+      "speakText": "近",
+      "options": [
+        "vào trong",
+        "(thông tục) cha của cha; ông nội",
+        "gần; gần với; khoảng",
+        "một lát; một lúc; trong chốc lát; bây giờ...bây giờ...; cũng đọc [yī huǐ r]"
+      ],
+      "answer": "gần; gần với; khoảng",
+      "exampleHanzi": "学校离我家很近。",
+      "exampleVi": "Trường học rất gần nhà tôi."
+    },
+    {
+      "id": "hero-hsk-2-10464-meaning",
+      "vocabularyId": "10464",
+      "sourceIndex": 186,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "进来",
+      "pinyin": "jìnlái",
+      "note": "Ví dụ: 请进来。 — Xin mời vào.",
+      "speakText": "进来",
+      "options": [
+        "gần; gần với; khoảng",
+        "vào trong",
+        "(thông tục) cha của cha; ông nội",
+        "một lát; một lúc; trong chốc lát; bây giờ...bây giờ...; cũng đọc [yī huǐ r]"
+      ],
+      "answer": "vào trong",
+      "exampleHanzi": "请进来。",
+      "exampleVi": "Xin mời vào."
+    },
+    {
+      "id": "hero-hsk-2-10572-meaning",
+      "vocabularyId": "10572",
+      "sourceIndex": 194,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "爷爷",
+      "pinyin": "yéye",
+      "note": "Ví dụ: 我的爷爷很慈祥。 — Ông nội tôi rất tốt bụng.",
+      "speakText": "爷爷",
+      "options": [
+        "một lát; một lúc; trong chốc lát; bây giờ...bây giờ...; cũng đọc [yī huǐ r]",
+        "bay",
+        "(thông tục) cha của cha; ông nội",
+        "phía sau; phía sau; phần cuối; đằng sau; gần cuối; ở phía sau; sau đó; sau này"
+      ],
+      "answer": "(thông tục) cha của cha; ông nội",
+      "exampleHanzi": "我的爷爷很慈祥。",
+      "exampleVi": "Ông nội tôi rất tốt bụng."
+    },
+    {
+      "id": "hero-hsk-2-10573-meaning",
+      "vocabularyId": "10573",
+      "sourceIndex": 195,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "一会儿",
+      "pinyin": "yíhuìr",
+      "note": "Ví dụ: 我等一会儿。 — Tôi sẽ đợi một lúc.",
+      "speakText": "一会儿",
+      "options": [
+        "một lát; một lúc; trong chốc lát; bây giờ...bây giờ...; cũng đọc [yī huǐ r]",
+        "bay",
+        "phía sau; phía sau; phần cuối; đằng sau; gần cuối; ở phía sau; sau đó; sau này",
+        "quên; bỏ sót; bỏ qua"
+      ],
+      "answer": "một lát; một lúc; trong chốc lát; bây giờ...bây giờ...; cũng đọc [yī huǐ r]",
+      "exampleHanzi": "我等一会儿。",
+      "exampleVi": "Tôi sẽ đợi một lúc."
+    },
+    {
+      "id": "hero-hsk-2-11818-meaning",
+      "vocabularyId": "11818",
+      "sourceIndex": 218,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "飞",
+      "pinyin": "fēi",
+      "note": "Ví dụ: 鸟儿在天空中飞。 — Chim bay trên bầu trời.",
+      "speakText": "飞",
+      "options": [
+        "bay",
+        "quên; bỏ sót; bỏ qua",
+        "họ You",
+        "nhớ"
+      ],
+      "answer": "bay",
+      "exampleHanzi": "鸟儿在天空中飞。",
+      "exampleVi": "Chim bay trên bầu trời."
+    }
+  ]
+}

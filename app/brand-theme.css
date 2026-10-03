@@ -375,12 +375,6 @@ body {
   background: var(--himi-orange);
 }
 
-.icon-link:hover {
-  color: var(--himi-on-red);
-  border-color: var(--himi-red);
-  background: var(--himi-red);
-}
-
 .hsk-curriculum {
   --hsk-accent: var(--himi-red);
   --hsk-accent-deep: color-mix(in srgb, var(--himi-red) 72%, var(--himi-black));
@@ -1553,8 +1547,8 @@ body {
 
 .writing-topic-card.is-level-3 .writing-topic-card-topline > span,
 .writing-topic-card.is-level-6 .writing-topic-card-topline > span {
-  color: var(--himi-on-orange);
-  background: var(--himi-orange);
+  color: var(--himi-on-red);
+  background: #FF4C3B;
 }
 
 .writing-single-lesson-index,
@@ -2075,6 +2069,49 @@ body {
   background: color-mix(in srgb, var(--himi-orange) 62%, var(--himi-white));
 }
 
+.course-roadmap-stages .roadmap-stage-card {
+  border-color: color-mix(in srgb, var(--himi-black) 10%, var(--himi-white));
+  background: var(--himi-white);
+  box-shadow: 0 5px 16px color-mix(in srgb, var(--himi-black) 6%, transparent);
+}
+
+.roadmap-stage.is-available .roadmap-stage-card {
+  border-color: color-mix(in srgb, var(--himi-orange) 25%, var(--himi-white));
+  background: color-mix(in srgb, var(--himi-orange) 4%, var(--himi-white));
+}
+
+.roadmap-stage.is-completed .roadmap-stage-card {
+  border-color: color-mix(in srgb, var(--himi-red) 28%, var(--himi-white));
+  background: color-mix(in srgb, var(--himi-red) 4%, var(--himi-white));
+}
+
+.roadmap-stage.is-locked .roadmap-stage-card {
+  color: var(--himi-muted);
+  border-color: color-mix(in srgb, var(--himi-black) 9%, var(--himi-white));
+  background: color-mix(in srgb, var(--himi-black) 2%, var(--himi-white));
+}
+
+.roadmap-stage:not(:last-child) .roadmap-stage-rail::after {
+  background: color-mix(in srgb, var(--himi-orange) 22%, var(--himi-white));
+}
+
+.roadmap-stage-marker.is-completed {
+  color: var(--himi-on-red);
+  background: var(--himi-red);
+  box-shadow: 0 0 0 5px var(--himi-red-soft), 0 4px 10px color-mix(in srgb, var(--himi-red) 22%, transparent);
+}
+
+.roadmap-stage-marker.is-available {
+  color: color-mix(in srgb, var(--himi-orange) 72%, var(--himi-black));
+  border: 1px solid color-mix(in srgb, var(--himi-orange) 30%, var(--himi-white));
+  background: var(--himi-orange-soft);
+}
+
+.roadmap-stage-marker.is-locked {
+  color: var(--himi-muted);
+  background: color-mix(in srgb, var(--himi-black) 6%, var(--himi-white));
+}
+
 .roadmap-stage-marker.is-active {
   color: var(--himi-on-orange);
   background: var(--himi-orange);
@@ -2082,13 +2119,75 @@ body {
 }
 
 .roadmap-stage.is-active .roadmap-stage-card {
-  border-color: color-mix(in srgb, var(--himi-red) 32%, var(--himi-white));
-  box-shadow: 0 6px 20px rgba(34, 34, 34, .075);
+  border-color: color-mix(in srgb, var(--himi-red) 46%, var(--himi-white));
+  background: color-mix(in srgb, var(--himi-red) 3%, var(--himi-white));
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--himi-red) 10%, transparent);
 }
 
 .roadmap-stage-status.is-active {
   color: var(--himi-red);
+  border-color: color-mix(in srgb, var(--himi-red) 17%, var(--himi-white));
   background: var(--himi-red-soft);
+}
+
+.roadmap-stage-status.is-available {
+  color: color-mix(in srgb, var(--himi-orange) 72%, var(--himi-black));
+  border-color: color-mix(in srgb, var(--himi-orange) 25%, var(--himi-white));
+  background: var(--himi-orange-soft);
+}
+
+.roadmap-stage-status.is-completed {
+  color: var(--himi-red);
+  border-color: color-mix(in srgb, var(--himi-red) 20%, var(--himi-white));
+  background: var(--himi-red-soft);
+}
+
+.roadmap-stage-status.is-locked {
+  color: var(--himi-muted);
+  border-color: color-mix(in srgb, var(--himi-black) 10%, var(--himi-white));
+  background: color-mix(in srgb, var(--himi-black) 4%, var(--himi-white));
+}
+
+.course-roadmap-stages .roadmap-stage-expand { color: var(--himi-orange); }
+
+.course-roadmap-stages .roadmap-lesson-list {
+  border-color: color-mix(in srgb, var(--himi-red) 16%, var(--himi-white));
+  background: var(--himi-white);
+}
+
+.course-roadmap-stages .roadmap-lesson-row {
+  color: var(--himi-muted);
+  border-bottom-color: color-mix(in srgb, var(--himi-black) 8%, var(--himi-white));
+  background: var(--himi-white);
+}
+
+.course-roadmap-stages .roadmap-lesson-row.is-in-progress {
+  color: var(--himi-black);
+  background: var(--himi-red-soft);
+}
+
+.course-roadmap-stages .roadmap-lesson-row.is-completed {
+  background: color-mix(in srgb, var(--himi-orange) 7%, var(--himi-white));
+}
+
+.course-roadmap-stages .roadmap-lesson-row.is-locked {
+  background: color-mix(in srgb, var(--himi-black) 2%, var(--himi-white));
+}
+
+.course-roadmap-stages a.roadmap-lesson-row:hover {
+  color: var(--himi-black);
+  background: var(--himi-orange-soft);
+}
+
+.course-roadmap-stages .roadmap-lesson-row.is-in-progress .roadmap-lesson-copy > strong,
+.course-roadmap-stages .roadmap-lesson-row.is-in-progress .roadmap-lesson-copy > span {
+  color: var(--himi-red);
+}
+
+.course-roadmap-stages .roadmap-lesson-status.is-available,
+.course-roadmap-stages .roadmap-lesson-status.is-completed,
+.course-roadmap-stages .roadmap-lesson-chevron {
+  color: color-mix(in srgb, var(--himi-orange) 76%, var(--himi-black));
 }
 
 .roadmap-lesson-row.is-current {

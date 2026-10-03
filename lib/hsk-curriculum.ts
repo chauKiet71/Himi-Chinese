@@ -174,6 +174,7 @@ const HSK_1_TEXTBOOK_LESSONS: HskCurriculumLesson[] = RAW_HSK_1_LESSONS.map((les
     grammar,
     dialogues,
     writing,
+    exercises: assessments,
     minutes: lesson.metadata.estimatedMinutes,
     guidedSteps: vocabulary + grammar + dialogues + pronunciationSteps + assessments + 2,
     available: true,

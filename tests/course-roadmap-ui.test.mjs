@@ -9,6 +9,22 @@ import { getCourse } from "../lib/course-data.ts";
 import { officeLessons, officeModules } from "../lib/office-course-seed.ts";
 import { buildCourseRoadmap } from "../lib/course-roadmap.ts";
 
+test("course card chevron remains visually static on hover", async () => {
+  const css = (await Promise.all([
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/brand-theme.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/motion.css", import.meta.url), "utf8"),
+  ])).join("\n");
+
+  assert.doesNotMatch(css, /\.icon-link:hover/);
+  assert.doesNotMatch(css, /:is\(:hover,\s*:focus-visible\)\s+\.icon-link/);
+  const iconLinkRule = css.match(/\.icon-link\s*\{([^}]*)\}/)?.[1] ?? "";
+  assert.match(iconLinkRule, /color:\s*#FF4C3B;/);
+  assert.doesNotMatch(iconLinkRule, /(?:width|height|border|border-radius|background)\s*:/);
+  assert.doesNotMatch(css, /:focus-visible\s+\.icon-link\s*\{[^}]*(?:border|background|color)\s*:/);
+  assert.match(css, /:focus-visible\s+\.icon-link/);
+});
+
 test("an available course opens an overview that leads to the learner's next lesson", async (t) => {
   const server = await createServer({
     appType: "custom",
@@ -32,6 +48,7 @@ test("an available course opens an overview that leads to the learner's next les
   const html = renderToStaticMarkup(React.createElement(CourseCard, { course }));
 
   assert.match(html, /href="\/courses\/van-phong-hanh-chinh"/);
+  assert.match(html, /lucide-chevrons-right/);
   assert.doesNotMatch(html, /href="\/learn\/van-phong-hanh-chinh"/);
 
   const lockedCardHtml = renderToStaticMarkup(React.createElement(CourseCard, {
@@ -118,6 +135,7 @@ test("an available course opens an overview that leads to the learner's next les
   assert.match(justOpenedRow, /aria-label="0% đã học"/);
   assert.match(justOpenedRow, />0%<\/strong>/);
   assert.doesNotMatch(justOpenedRow, /Mở bài/);
+  assert.match(justOpenedRow, /^<a /);
 
   const vipRoadmap = buildCourseRoadmap({
     courseSlug: course.slug,

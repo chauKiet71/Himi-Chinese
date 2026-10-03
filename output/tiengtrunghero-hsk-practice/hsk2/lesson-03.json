@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-03",
+  "lessonNumber": 3,
+  "lessonTitle": "Cái màu đỏ bên trái là của tôi.",
+  "topicId": "du-lich-cong-viec-mua-sam",
+  "topicTitle": "Du lịch, công việc & mua sắm",
+  "route": "/hsk/2/hsk2-tb-lesson-03/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-1202-meaning",
+      "vocabularyId": "1202",
+      "sourceIndex": 8,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "红色",
+      "pinyin": "hóngsè",
+      "note": "Ví dụ: 这是红色的花。 — Đây là một bông hoa màu đỏ.",
+      "speakText": "红色",
+      "options": [
+        "màu đỏ; cách mạng",
+        "trái; phía bên trái; bên trái của",
+        "đồng hồ đeo tay",
+        "trà sữa"
+      ],
+      "answer": "màu đỏ; cách mạng",
+      "exampleHanzi": "这是红色的花。",
+      "exampleVi": "Đây là một bông hoa màu đỏ."
+    },
+    {
+      "id": "hero-hsk-2-1751-meaning",
+      "vocabularyId": "1751",
+      "sourceIndex": 15,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "左边",
+      "pinyin": "zuǒbian",
+      "note": "Ví dụ: 请坐左边。 — Xin vui lòng ngồi ở phía bên trái.",
+      "speakText": "左边",
+      "options": [
+        "trái; phía bên trái; bên trái của",
+        "đồng hồ đeo tay",
+        "trà sữa",
+        "đen"
+      ],
+      "answer": "trái; phía bên trái; bên trái của",
+      "exampleHanzi": "请坐左边。",
+      "exampleVi": "Xin vui lòng ngồi ở phía bên trái."
+    },
+    {
+      "id": "hero-hsk-2-3769-meaning",
+      "vocabularyId": "3769",
+      "sourceIndex": 40,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "不好意思",
+      "pinyin": "bù hǎoyìsi",
+      "note": "Ví dụ: 不好意思，打扰一下。 — Xin lỗi, xin lỗi đã làm phiền bạn.",
+      "speakText": "不好意思",
+      "options": [
+        "đồng hồ đeo tay",
+        "trà sữa",
+        "cảm thấy xấu hổ; cảm thấy ngại; xin lỗi (vì làm phiền ai)",
+        "Đến đây; đối phó; xử lý; có thể lo liệu"
+      ],
+      "answer": "cảm thấy xấu hổ; cảm thấy ngại; xin lỗi (vì làm phiền ai)",
+      "exampleHanzi": "不好意思，打扰一下。",
+      "exampleVi": "Xin lỗi, xin lỗi đã làm phiền bạn."
+    },
+    {
+      "id": "hero-hsk-2-3823-meaning",
+      "vocabularyId": "3823",
+      "sourceIndex": 52,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "手表",
+      "pinyin": "shǒubiǎo",
+      "note": "Ví dụ: 我有一只手表。 — Tôi có một chiếc đồng hồ.",
+      "speakText": "手表",
+      "options": [
+        "đen",
+        "bên cạnh; nơi liền kề",
+        "họ Lâu",
+        "đồng hồ đeo tay"
+      ],
+      "answer": "đồng hồ đeo tay",
+      "exampleHanzi": "我有一只手表。",
+      "exampleVi": "Tôi có một chiếc đồng hồ."
+    },
+    {
+      "id": "hero-hsk-2-4084-meaning",
+      "vocabularyId": "4084",
+      "sourceIndex": 53,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "奶茶",
+      "pinyin": "nǎichá",
+      "note": "Ví dụ: 我喜欢喝奶茶。 — Tôi thích uống trà sữa.",
+      "speakText": "奶茶",
+      "options": [
+        "bên cạnh; nơi liền kề",
+        "trà sữa",
+        "họ Lâu",
+        "xanh lá cây"
+      ],
+      "answer": "trà sữa",
+      "exampleHanzi": "我喜欢喝奶茶。",
+      "exampleVi": "Tôi thích uống trà sữa."
+    },
+    {
+      "id": "hero-hsk-2-5779-meaning",
+      "vocabularyId": "5779",
+      "sourceIndex": 89,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "过来",
+      "pinyin": "guòlái",
+      "note": "Ví dụ: 请过来一下。 — Xin vui lòng đến đây một lát.",
+      "speakText": "过来",
+      "options": [
+        "trà sữa",
+        "đen",
+        "Đến đây; đối phó; xử lý; có thể lo liệu",
+        "bên cạnh; nơi liền kề"
+      ],
+      "answer": "Đến đây; đối phó; xử lý; có thể lo liệu",
+      "exampleHanzi": "请过来一下。",
+      "exampleVi": "Xin vui lòng đến đây một lát."
+    },
+    {
+      "id": "hero-hsk-2-5784-meaning",
+      "vocabularyId": "5784",
+      "sourceIndex": 94,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "黑色",
+      "pinyin": "hēisè",
+      "note": "Ví dụ: 我喜欢黑色。 — Tôi thích màu đen.",
+      "speakText": "黑色",
+      "options": [
+        "đen",
+        "xanh lá cây",
+        "họ Bào",
+        "màu sắc; dung mạo; ngoại hình; biểu cảm khuôn mặt; chất màu; thuốc nhuộm"
+      ],
+      "answer": "đen",
+      "exampleHanzi": "我喜欢黑色。",
+      "exampleVi": "Tôi thích màu đen."
+    },
+    {
+      "id": "hero-hsk-2-6113-meaning",
+      "vocabularyId": "6113",
+      "sourceIndex": 101,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "旁边",
+      "pinyin": "pángbiān",
+      "note": "Ví dụ: 请坐在我旁边。 — Hãy ngồi cạnh tôi.",
+      "speakText": "旁边",
+      "options": [
+        "bên cạnh; nơi liền kề",
+        "họ Bào",
+        "màu sắc; dung mạo; ngoại hình; biểu cảm khuôn mặt; chất màu; thuốc nhuộm",
+        "hiệu thuốc"
+      ],
+      "answer": "bên cạnh; nơi liền kề",
+      "exampleHanzi": "请坐在我旁边。",
+      "exampleVi": "Hãy ngồi cạnh tôi."
+    },
+    {
+      "id": "hero-hsk-2-6787-meaning",
+      "vocabularyId": "6787",
+      "sourceIndex": 113,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "送",
+      "pinyin": "sòng",
+      "note": "Ví dụ: 我送你一本书。 — Tôi đưa cho bạn một cuốn sách.",
+      "speakText": "送",
+      "options": [
+        "họ Lâu",
+        "gửi; giao; truyền; tặng; tiễn; đi cùng; đi theo",
+        "xanh lá cây",
+        "họ Bào"
+      ],
+      "answer": "gửi; giao; truyền; tặng; tiễn; đi cùng; đi theo",
+      "exampleHanzi": "我送你一本书。",
+      "exampleVi": "Tôi đưa cho bạn một cuốn sách."
+    },
+    {
+      "id": "hero-hsk-2-9629-meaning",
+      "vocabularyId": "9629",
+      "sourceIndex": 155,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "楼",
+      "pinyin": "lóu",
+      "note": "Ví dụ: 我住在三楼。 — Tôi sống ở tầng ba.",
+      "speakText": "楼",
+      "options": [
+        "họ Lâu",
+        "hiệu thuốc",
+        "chồng",
+        "cảm thấy xấu hổ; cảm thấy ngại; xin lỗi (vì làm phiền ai)"
+      ],
+      "answer": "họ Lâu",
+      "exampleHanzi": "我住在三楼。",
+      "exampleVi": "Tôi sống ở tầng ba."
+    },
+    {
+      "id": "hero-hsk-2-9632-meaning",
+      "vocabularyId": "9632",
+      "sourceIndex": 158,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "绿色",
+      "pinyin": "lǜsè",
+      "note": "Ví dụ: 绿色是春天的颜色。 — Màu xanh lá cây là màu của mùa xuân.",
+      "speakText": "绿色",
+      "options": [
+        "xanh lá cây",
+        "chồng",
+        "cảm thấy xấu hổ; cảm thấy ngại; xin lỗi (vì làm phiền ai)",
+        "Đến đây; đối phó; xử lý; có thể lo liệu"
+      ],
+      "answer": "xanh lá cây",
+      "exampleHanzi": "绿色是春天的颜色。",
+      "exampleVi": "Màu xanh lá cây là màu của mùa xuân."
+    },
+    {
+      "id": "hero-hsk-2-9873-meaning",
+      "vocabularyId": "9873",
+      "sourceIndex": 167,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "包",
+      "pinyin": "bāo",
+      "note": "Ví dụ: 我的包是红色的。 — Túi của tôi màu đỏ.",
+      "speakText": "包",
+      "options": [
+        "cảm thấy xấu hổ; cảm thấy ngại; xin lỗi (vì làm phiền ai)",
+        "Đến đây; đối phó; xử lý; có thể lo liệu",
+        "họ Bào",
+        "gửi; giao; truyền; tặng; tiễn; đi cùng; đi theo"
+      ],
+      "answer": "họ Bào",
+      "exampleHanzi": "我的包是红色的。",
+      "exampleVi": "Túi của tôi màu đỏ."
+    },
+    {
+      "id": "hero-hsk-2-10569-meaning",
+      "vocabularyId": "10569",
+      "sourceIndex": 191,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "颜色",
+      "pinyin": "yánsè",
+      "note": "Ví dụ: 这个颜色很漂亮。 — Màu này rất đẹp.",
+      "speakText": "颜色",
+      "options": [
+        "Đến đây; đối phó; xử lý; có thể lo liệu",
+        "gửi; giao; truyền; tặng; tiễn; đi cùng; đi theo",
+        "màu đỏ; cách mạng",
+        "màu sắc; dung mạo; ngoại hình; biểu cảm khuôn mặt; chất màu; thuốc nhuộm"
+      ],
+      "answer": "màu sắc; dung mạo; ngoại hình; biểu cảm khuôn mặt; chất màu; thuốc nhuộm",
+      "exampleHanzi": "这个颜色很漂亮。",
+      "exampleVi": "Màu này rất đẹp."
+    },
+    {
+      "id": "hero-hsk-2-10571-meaning",
+      "vocabularyId": "10571",
+      "sourceIndex": 193,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "药店",
+      "pinyin": "yàodiàn",
+      "note": "Ví dụ: 药店在银行旁边。 — Hiệu thuốc nằm cạnh ngân hàng.",
+      "speakText": "药店",
+      "options": [
+        "gửi; giao; truyền; tặng; tiễn; đi cùng; đi theo",
+        "màu đỏ; cách mạng",
+        "hiệu thuốc",
+        "trái; phía bên trái; bên trái của"
+      ],
+      "answer": "hiệu thuốc",
+      "exampleHanzi": "药店在银行旁边。",
+      "exampleVi": "Hiệu thuốc nằm cạnh ngân hàng."
+    },
+    {
+      "id": "hero-hsk-2-10841-meaning",
+      "vocabularyId": "10841",
+      "sourceIndex": 201,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "丈夫",
+      "pinyin": "zhàngfu",
+      "note": "Ví dụ: 她的丈夫是医生。 — Chồng cô là bác sĩ.",
+      "speakText": "丈夫",
+      "options": [
+        "màu đỏ; cách mạng",
+        "trái; phía bên trái; bên trái của",
+        "đồng hồ đeo tay",
+        "chồng"
+      ],
+      "answer": "chồng",
+      "exampleHanzi": "她的丈夫是医生。",
+      "exampleVi": "Chồng cô là bác sĩ."
+    }
+  ]
+}

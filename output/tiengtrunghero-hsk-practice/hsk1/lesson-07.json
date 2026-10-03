@@ -1,0 +1,483 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-07-hom-nay-ngay-may",
+  "lessonNumber": 7,
+  "lessonTitle": "Hôm nay là ngày mấy?",
+  "topicId": "giao-tiep-hang-ngay",
+  "topicTitle": "Giao tiếp hằng ngày",
+  "route": "/hsk/1/hsk1-bai-07-hom-nay-ngay-may/play",
+  "vocabularyCount": 22,
+  "exerciseCount": 22,
+  "typeCounts": {
+    "meaning": 22,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-968-meaning",
+      "vocabularyId": "968",
+      "sourceIndex": 26,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "问",
+      "pinyin": "wèn",
+      "note": "Ví dụ: 我可以问你一个问题吗？ — Tôi có thể hỏi bạn một câu được không?",
+      "speakText": "问",
+      "options": [
+        "chăm sóc; trông nom; xem; canh giữ",
+        "đến; đạt đến; khởi hành đến; đi đến; (một nơi); cho đến (một thời điểm); lên đến (một điểm); (bổ ngữ động từ chỉ việc đến một nơi hoặc đạt đến một điểm); chu đáo; kỹ lưỡng; thấu đáo",
+        "hỏi; hỏi han",
+        "nhìn thấy; gặp; xuất hiện (trông như cái gì); phỏng vấn; ý kiến; quan điểm"
+      ],
+      "answer": "hỏi; hỏi han",
+      "exampleHanzi": "我可以问你一个问题吗？",
+      "exampleVi": "Tôi có thể hỏi bạn một câu được không?"
+    },
+    {
+      "id": "hero-hsk-1-1857-meaning",
+      "vocabularyId": "1857",
+      "sourceIndex": 57,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "今天",
+      "pinyin": "jīntiān",
+      "note": "Ví dụ: 今天是星期一。 — Hôm nay là thứ Hai.",
+      "speakText": "今天",
+      "options": [
+        "mặt trăng; tháng; hàng tháng",
+        "hôm qua",
+        "hôm nay; hiện tại; bây giờ",
+        "tuần; ngày trong tuần; Chủ Nhật"
+      ],
+      "answer": "hôm nay; hiện tại; bây giờ",
+      "exampleHanzi": "今天是星期一。",
+      "exampleVi": "Hôm nay là thứ Hai."
+    },
+    {
+      "id": "hero-hsk-1-1858-meaning",
+      "vocabularyId": "1858",
+      "sourceIndex": 58,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "九",
+      "pinyin": "jiǔ",
+      "note": "Ví dụ: 现在是九点。 — Bây giờ là chín giờ.",
+      "speakText": "九",
+      "options": [
+        "chín; 9",
+        "hôm nay; hiện tại; bây giờ",
+        "chăm sóc; trông nom; xem; canh giữ",
+        "đến; đạt đến; khởi hành đến; đi đến; (một nơi); cho đến (một thời điểm); lên đến (một điểm); (bổ ngữ động từ chỉ việc đến một nơi hoặc đạt đến một điểm); chu đáo; kỹ lưỡng; thấu đáo"
+      ],
+      "answer": "chín; 9",
+      "exampleHanzi": "现在是九点。",
+      "exampleVi": "Bây giờ là chín giờ."
+    },
+    {
+      "id": "hero-hsk-1-1862-meaning",
+      "vocabularyId": "1862",
+      "sourceIndex": 62,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "看",
+      "pinyin": "kàn",
+      "note": "Ví dụ: 我看书。 — Tôi đọc sách.",
+      "speakText": "看",
+      "options": [
+        "hỏi; mời; làm ơn (làm gì đó); đãi (bữa ăn, v.v.); yêu cầu",
+        "chăm sóc; trông nom; xem; canh giữ",
+        "Xin lỗi, tôi có thể hỏi...?",
+        "đi; đi đến (một nơi); (về thời gian) năm ngoái; vừa qua; gửi; loại bỏ; tống khứ; giảm; cách xa về không gian hoặc thời gian; chết (từ euphemism); đóng vai (một phần); (khi dùng trước hoặc sau động từ) đi để làm gì đó; (sau động từ chỉ chuyển động cho thấy chuyển động ra xa người nói); (dùng sau một số động từ để chỉ sự tách rời hoặc phân ly)"
+      ],
+      "answer": "chăm sóc; trông nom; xem; canh giữ",
+      "exampleHanzi": "我看书。",
+      "exampleVi": "Tôi đọc sách."
+    },
+    {
+      "id": "hero-hsk-1-1971-meaning",
+      "vocabularyId": "1971",
+      "sourceIndex": 69,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "半",
+      "pinyin": "bàn",
+      "note": "Ví dụ: 现在是半夜。 — Bây giờ là nửa đêm.",
+      "speakText": "半",
+      "options": [
+        "đến; đạt đến; khởi hành đến; đi đến; (một nơi); cho đến (một thời điểm); lên đến (một điểm); (bổ ngữ động từ chỉ việc đến một nơi hoặc đạt đến một điểm); chu đáo; kỹ lưỡng; thấu đáo",
+        "nửa; bán-; chưa hoàn chỉnh; (sau số) và một nửa",
+        "ngày mai",
+        "ở đằng kia; ở đó xa xa"
+      ],
+      "answer": "nửa; bán-; chưa hoàn chỉnh; (sau số) và một nửa",
+      "exampleHanzi": "现在是半夜。",
+      "exampleVi": "Bây giờ là nửa đêm."
+    },
+    {
+      "id": "hero-hsk-1-2143-meaning",
+      "vocabularyId": "2143",
+      "sourceIndex": 71,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "到",
+      "pinyin": "dào",
+      "note": "Ví dụ: 我到了学校。 — Tôi đã đến trường.",
+      "speakText": "到",
+      "options": [
+        "đến; đạt đến; khởi hành đến; đi đến; (một nơi); cho đến (một thời điểm); lên đến (một điểm); (bổ ngữ động từ chỉ việc đến một nơi hoặc đạt đến một điểm); chu đáo; kỹ lưỡng; thấu đáo",
+        "đi; đi đến (một nơi); (về thời gian) năm ngoái; vừa qua; gửi; loại bỏ; tống khứ; giảm; cách xa về không gian hoặc thời gian; chết (từ euphemism); đóng vai (một phần); (khi dùng trước hoặc sau động từ) đi để làm gì đó; (sau động từ chỉ chuyển động cho thấy chuyển động ra xa người nói); (dùng sau một số động từ để chỉ sự tách rời hoặc phân ly)",
+        "hôm nay; hiện tại; bây giờ",
+        "chín; 9"
+      ],
+      "answer": "đến; đạt đến; khởi hành đến; đi đến; (một nơi); cho đến (một thời điểm); lên đến (một điểm); (bổ ngữ động từ chỉ việc đến một nơi hoặc đạt đến một điểm); chu đáo; kỹ lưỡng; thấu đáo",
+      "exampleHanzi": "我到了学校。",
+      "exampleVi": "Tôi đã đến trường."
+    },
+    {
+      "id": "hero-hsk-1-3037-meaning",
+      "vocabularyId": "3037",
+      "sourceIndex": 92,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "明天",
+      "pinyin": "míngtiān",
+      "note": "Ví dụ: 明天是周末。 — Ngày mai là cuối tuần.",
+      "speakText": "明天",
+      "options": [
+        "trường học",
+        "bên ngoài; thêm vào; nước ngoài; bên ngoài",
+        "ngày mai",
+        "hỏi; hỏi han"
+      ],
+      "answer": "ngày mai",
+      "exampleHanzi": "明天是周末。",
+      "exampleVi": "Ngày mai là cuối tuần."
+    },
+    {
+      "id": "hero-hsk-1-3041-meaning",
+      "vocabularyId": "3041",
+      "sourceIndex": 96,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "那边",
+      "pinyin": "nàbiān",
+      "note": "Ví dụ: 学校在那边。 — Trường học ở đằng kia.",
+      "speakText": "那边",
+      "options": [
+        "mặt trăng; tháng; hàng tháng",
+        "nhìn thấy; gặp; xuất hiện (trông như cái gì); phỏng vấn; ý kiến; quan điểm",
+        "hỏi; mời; làm ơn (làm gì đó); đãi (bữa ăn, v.v.); yêu cầu",
+        "ở đằng kia; ở đó xa xa"
+      ],
+      "answer": "ở đằng kia; ở đó xa xa",
+      "exampleHanzi": "学校在那边。",
+      "exampleVi": "Trường học ở đằng kia."
+    },
+    {
+      "id": "hero-hsk-1-4344-meaning",
+      "vocabularyId": "4344",
+      "sourceIndex": 137,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "月",
+      "pinyin": "yuè",
+      "note": "Ví dụ: 现在是三月。 — Bây giờ là tháng Ba.",
+      "speakText": "月",
+      "options": [
+        "hỏi; hỏi han",
+        "mặt trăng; tháng; hàng tháng",
+        "chín; 9",
+        "chăm sóc; trông nom; xem; canh giữ"
+      ],
+      "answer": "mặt trăng; tháng; hàng tháng",
+      "exampleHanzi": "现在是三月。",
+      "exampleVi": "Bây giờ là tháng Ba."
+    },
+    {
+      "id": "hero-hsk-1-6621-meaning",
+      "vocabularyId": "6621",
+      "sourceIndex": 165,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "见",
+      "pinyin": "jiàn",
+      "note": "Ví dụ: 明天见！ — Hẹn gặp lại bạn vào ngày mai!",
+      "speakText": "见",
+      "options": [
+        "ngày mai",
+        "ở đằng kia; ở đó xa xa",
+        "nhìn thấy; gặp; xuất hiện (trông như cái gì); phỏng vấn; ý kiến; quan điểm",
+        "mặt trăng; tháng; hàng tháng"
+      ],
+      "answer": "nhìn thấy; gặp; xuất hiện (trông như cái gì); phỏng vấn; ý kiến; quan điểm",
+      "exampleHanzi": "明天见！",
+      "exampleVi": "Hẹn gặp lại bạn vào ngày mai!"
+    },
+    {
+      "id": "hero-hsk-1-7085-meaning",
+      "vocabularyId": "7085",
+      "sourceIndex": 169,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "请",
+      "pinyin": "qǐng",
+      "note": "Ví dụ: 请坐。 — Xin mời ngồi xuống.",
+      "speakText": "请",
+      "options": [
+        "ở đằng kia; ở đó xa xa",
+        "mặt trăng; tháng; hàng tháng",
+        "abbr. for , Japan",
+        "hỏi; mời; làm ơn (làm gì đó); đãi (bữa ăn, v.v.); yêu cầu"
+      ],
+      "answer": "hỏi; mời; làm ơn (làm gì đó); đãi (bữa ăn, v.v.); yêu cầu",
+      "exampleHanzi": "请坐。",
+      "exampleVi": "Xin mời ngồi xuống."
+    },
+    {
+      "id": "hero-hsk-1-7086-meaning",
+      "vocabularyId": "7086",
+      "sourceIndex": 170,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "请问",
+      "pinyin": "qǐngwèn",
+      "note": "Ví dụ: 请问，学校在哪里？ — Xin lỗi, trường học ở đâu?",
+      "speakText": "请问",
+      "options": [
+        "mặt trăng; tháng; hàng tháng",
+        "Xin lỗi, tôi có thể hỏi...?",
+        "abbr. for , Japan",
+        "hôm qua"
+      ],
+      "answer": "Xin lỗi, tôi có thể hỏi...?",
+      "exampleHanzi": "请问，学校在哪里？",
+      "exampleVi": "Xin lỗi, trường học ở đâu?"
+    },
+    {
+      "id": "hero-hsk-1-7137-meaning",
+      "vocabularyId": "7137",
+      "sourceIndex": 171,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "去",
+      "pinyin": "qù",
+      "note": "Ví dụ: 我去学校。 — Tôi đi học.",
+      "speakText": "去",
+      "options": [
+        "abbr. for , Japan",
+        "hôm qua",
+        "tuần; ngày trong tuần; Chủ Nhật",
+        "đi; đi đến (một nơi); (về thời gian) năm ngoái; vừa qua; gửi; loại bỏ; tống khứ; giảm; cách xa về không gian hoặc thời gian; chết (từ euphemism); đóng vai (một phần); (khi dùng trước hoặc sau động từ) đi để làm gì đó; (sau động từ chỉ chuyển động cho thấy chuyển động ra xa người nói); (dùng sau một số động từ để chỉ sự tách rời hoặc phân ly)"
+      ],
+      "answer": "đi; đi đến (một nơi); (về thời gian) năm ngoái; vừa qua; gửi; loại bỏ; tống khứ; giảm; cách xa về không gian hoặc thời gian; chết (từ euphemism); đóng vai (một phần); (khi dùng trước hoặc sau động từ) đi để làm gì đó; (sau động từ chỉ chuyển động cho thấy chuyển động ra xa người nói); (dùng sau một số động từ để chỉ sự tách rời hoặc phân ly)",
+      "exampleHanzi": "我去学校。",
+      "exampleVi": "Tôi đi học."
+    },
+    {
+      "id": "hero-hsk-1-7142-meaning",
+      "vocabularyId": "7142",
+      "sourceIndex": 176,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "日",
+      "pinyin": "rì",
+      "note": "Ví dụ: 今天是三月十五日。 — Hôm nay là ngày 15 tháng 3.",
+      "speakText": "日",
+      "options": [
+        "đi; đi đến (một nơi); (về thời gian) năm ngoái; vừa qua; gửi; loại bỏ; tống khứ; giảm; cách xa về không gian hoặc thời gian; chết (từ euphemism); đóng vai (một phần); (khi dùng trước hoặc sau động từ) đi để làm gì đó; (sau động từ chỉ chuyển động cho thấy chuyển động ra xa người nói); (dùng sau một số động từ để chỉ sự tách rời hoặc phân ly)",
+        "abbr. for , Japan",
+        "hôm qua",
+        "tuần; ngày trong tuần; Chủ Nhật"
+      ],
+      "answer": "abbr. for , Japan",
+      "exampleHanzi": "今天是三月十五日。",
+      "exampleVi": "Hôm nay là ngày 15 tháng 3."
+    },
+    {
+      "id": "hero-hsk-1-8048-meaning",
+      "vocabularyId": "8048",
+      "sourceIndex": 202,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "昨天",
+      "pinyin": "zuótiān",
+      "note": "Ví dụ: 昨天我去看电影了。 — Hôm qua tôi đã đi xem phim.",
+      "speakText": "昨天",
+      "options": [
+        "hôm qua",
+        "nhìn thấy; gặp; xuất hiện (trông như cái gì); phỏng vấn; ý kiến; quan điểm",
+        "hỏi; mời; làm ơn (làm gì đó); đãi (bữa ăn, v.v.); yêu cầu",
+        "Xin lỗi, tôi có thể hỏi...?"
+      ],
+      "answer": "hôm qua",
+      "exampleHanzi": "昨天我去看电影了。",
+      "exampleVi": "Hôm qua tôi đã đi xem phim."
+    },
+    {
+      "id": "hero-hsk-1-8399-meaning",
+      "vocabularyId": "8399",
+      "sourceIndex": 227,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "星期",
+      "pinyin": "xīngqī",
+      "note": "Ví dụ: 星期六我不上课。 — Tôi không có lớp học vào thứ bảy.",
+      "speakText": "星期",
+      "options": [
+        "hỏi; mời; làm ơn (làm gì đó); đãi (bữa ăn, v.v.); yêu cầu",
+        "Xin lỗi, tôi có thể hỏi...?",
+        "tuần; ngày trong tuần; Chủ Nhật",
+        "đi; đi đến (một nơi); (về thời gian) năm ngoái; vừa qua; gửi; loại bỏ; tống khứ; giảm; cách xa về không gian hoặc thời gian; chết (từ euphemism); đóng vai (một phần); (khi dùng trước hoặc sau động từ) đi để làm gì đó; (sau động từ chỉ chuyển động cho thấy chuyển động ra xa người nói); (dùng sau một số động từ để chỉ sự tách rời hoặc phân ly)"
+      ],
+      "answer": "tuần; ngày trong tuần; Chủ Nhật",
+      "exampleHanzi": "星期六我不上课。",
+      "exampleVi": "Tôi không có lớp học vào thứ bảy."
+    },
+    {
+      "id": "hero-hsk-1-8760-meaning",
+      "vocabularyId": "8760",
+      "sourceIndex": 240,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "书",
+      "pinyin": "shū",
+      "note": "Ví dụ: 我有一本书。 — Tôi có một cuốn sách.",
+      "speakText": "书",
+      "options": [
+        "viết tắt của Kinh Thư",
+        "Xin lỗi, tôi có thể hỏi...?",
+        "đi; đi đến (một nơi); (về thời gian) năm ngoái; vừa qua; gửi; loại bỏ; tống khứ; giảm; cách xa về không gian hoặc thời gian; chết (từ euphemism); đóng vai (một phần); (khi dùng trước hoặc sau động từ) đi để làm gì đó; (sau động từ chỉ chuyển động cho thấy chuyển động ra xa người nói); (dùng sau một số động từ để chỉ sự tách rời hoặc phân ly)",
+        "abbr. for , Japan"
+      ],
+      "answer": "viết tắt của Kinh Thư",
+      "exampleHanzi": "我有一本书。",
+      "exampleVi": "Tôi có một cuốn sách."
+    },
+    {
+      "id": "hero-hsk-1-9172-meaning",
+      "vocabularyId": "9172",
+      "sourceIndex": 258,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "号",
+      "pinyin": "hào",
+      "note": "Ví dụ: 我的电话号码是八号。 — Số điện thoại của tôi là tám.",
+      "speakText": "号",
+      "options": [
+        "đi; đi đến (một nơi); (về thời gian) năm ngoái; vừa qua; gửi; loại bỏ; tống khứ; giảm; cách xa về không gian hoặc thời gian; chết (từ euphemism); đóng vai (một phần); (khi dùng trước hoặc sau động từ) đi để làm gì đó; (sau động từ chỉ chuyển động cho thấy chuyển động ra xa người nói); (dùng sau một số động từ để chỉ sự tách rời hoặc phân ly)",
+        "abbr. for , Japan",
+        "sớm; buổi sáng; Chào buổi sáng!; từ lâu; quá sớm",
+        "số thứ tự; ngày trong tháng; dấu; ký hiệu; cơ sở kinh doanh; kích cỡ; hậu tố tàu; kèn (nhạc cụ hơi); lệnh kèn; tên hiệu; bắt mạch; lượng từ dùng để chỉ số người"
+      ],
+      "answer": "số thứ tự; ngày trong tháng; dấu; ký hiệu; cơ sở kinh doanh; kích cỡ; hậu tố tàu; kèn (nhạc cụ hơi); lệnh kèn; tên hiệu; bắt mạch; lượng từ dùng để chỉ số người",
+      "exampleHanzi": "我的电话号码是八号。",
+      "exampleVi": "Số điện thoại của tôi là tám."
+    },
+    {
+      "id": "hero-hsk-1-9173-meaning",
+      "vocabularyId": "9173",
+      "sourceIndex": 259,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "号",
+      "pinyin": "hào",
+      "note": "Ví dụ: 今天是十五号。 — Hôm nay là ngày mười lăm.",
+      "speakText": "号",
+      "options": [
+        "trường học",
+        "số thứ tự; ngày trong tháng; dấu; ký hiệu; cơ sở kinh doanh; kích cỡ; hậu tố tàu; kèn (nhạc cụ hơi); lệnh kèn; tên hiệu; bắt mạch; lượng từ dùng để chỉ số người",
+        "bên ngoài; thêm vào; nước ngoài; bên ngoài",
+        "sớm; buổi sáng; Chào buổi sáng!; từ lâu; quá sớm"
+      ],
+      "answer": "số thứ tự; ngày trong tháng; dấu; ký hiệu; cơ sở kinh doanh; kích cỡ; hậu tố tàu; kèn (nhạc cụ hơi); lệnh kèn; tên hiệu; bắt mạch; lượng từ dùng để chỉ số người",
+      "exampleHanzi": "今天是十五号。",
+      "exampleVi": "Hôm nay là ngày mười lăm."
+    },
+    {
+      "id": "hero-hsk-1-9237-meaning",
+      "vocabularyId": "9237",
+      "sourceIndex": 263,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "学校",
+      "pinyin": "xuéxiào",
+      "note": "Ví dụ: 我的学校很大。 — Trường của tôi rất lớn.",
+      "speakText": "学校",
+      "options": [
+        "số thứ tự; ngày trong tháng; dấu; ký hiệu; cơ sở kinh doanh; kích cỡ; hậu tố tàu; kèn (nhạc cụ hơi); lệnh kèn; tên hiệu; bắt mạch; lượng từ dùng để chỉ số người",
+        "sớm; buổi sáng; Chào buổi sáng!; từ lâu; quá sớm",
+        "trường học",
+        "hôm nay; hiện tại; bây giờ"
+      ],
+      "answer": "trường học",
+      "exampleHanzi": "我的学校很大。",
+      "exampleVi": "Trường của tôi rất lớn."
+    },
+    {
+      "id": "hero-hsk-1-11525-meaning",
+      "vocabularyId": "11525",
+      "sourceIndex": 295,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "外",
+      "pinyin": "wài",
+      "note": "Ví dụ: 学校在银行的外边。 — Trường học nằm bên ngoài ngân hàng.",
+      "speakText": "外",
+      "options": [
+        "sớm; buổi sáng; Chào buổi sáng!; từ lâu; quá sớm",
+        "hôm nay; hiện tại; bây giờ",
+        "ngày mai",
+        "bên ngoài; thêm vào; nước ngoài; bên ngoài"
+      ],
+      "answer": "bên ngoài; thêm vào; nước ngoài; bên ngoài",
+      "exampleHanzi": "学校在银行的外边。",
+      "exampleVi": "Trường học nằm bên ngoài ngân hàng."
+    },
+    {
+      "id": "hero-hsk-1-12291-meaning",
+      "vocabularyId": "12291",
+      "sourceIndex": 319,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "早",
+      "pinyin": "zǎo",
+      "note": "Ví dụ: 今天回来得很早。 — Hôm nay tôi về rất sớm.",
+      "speakText": "早",
+      "options": [
+        "sớm; buổi sáng; Chào buổi sáng!; từ lâu; quá sớm",
+        "hỏi; hỏi han",
+        "hôm nay; hiện tại; bây giờ",
+        "chín; 9"
+      ],
+      "answer": "sớm; buổi sáng; Chào buổi sáng!; từ lâu; quá sớm",
+      "exampleHanzi": "今天回来得很早。",
+      "exampleVi": "Hôm nay tôi về rất sớm."
+    }
+  ]
+}

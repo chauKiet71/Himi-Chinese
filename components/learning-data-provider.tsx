@@ -3,13 +3,15 @@
 import { createContext, Suspense, useContext, useEffect, useMemo, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { createBrowserApiCache, type BrowserApiCache } from "@/lib/browser-api-cache";
+import { createLessonContentCache, LESSON_SESSION_CHANNEL, type LessonContentCache } from "@/lib/lesson-content-cache";
 
 const LearningDataContext = createContext<BrowserApiCache | null>(null);
+const LessonDataContext = createContext<LessonContentCache | null>(null);
 const backgroundExcluded = /^\/(?:admin|login|register|forgot-password|reset-password|verify-email|terms|privacy)(?:\/|$)/;
 
 function learningWarmupUrls(pathname: string, authenticated: boolean): string[] {
   if (pathname === "/games") return ["/api/games/vocabulary?level=hsk-1"];
-  if (authenticated && (pathname === "/" || pathname.startsWith("/practice"))) {
+  if (authenticated && (pathname === "/" || pathname === "/listening")) {
     return ["/api/progress/practice"];
   }
   return [];
@@ -17,10 +19,28 @@ function learningWarmupUrls(pathname: string, authenticated: boolean): string[] 
 
 export function LearningDataProvider({ scope, authenticated, children }: { scope: string; authenticated: boolean; children: ReactNode }) {
   const cache = useMemo(() => createBrowserApiCache({ scope }), [scope]);
+  const lessonCache = useMemo(() => createLessonContentCache({ scope }), [scope]);
   useEffect(() => { void cache.removeOtherScopes(); }, [cache]);
+  useEffect(() => {
+    void lessonCache.removeOtherScopes();
+    let channel: BroadcastChannel | undefined;
+    try {
+      channel = new BroadcastChannel(LESSON_SESSION_CHANNEL);
+      channel.onmessage = (event) => {
+        if (event.data?.logout || (event.data?.scope && event.data.scope !== scope)) {
+          lessonCache.dispose();
+          window.location.reload();
+        }
+      };
+      channel.postMessage({ scope });
+    } catch { /* Browser storage and cross-tab messaging are optional. */ }
+    return () => channel?.close();
+  }, [lessonCache, scope]);
   return <LearningDataContext.Provider value={cache}>
-    <Suspense fallback={null}><LearningDataWarmup cache={cache} authenticated={authenticated} /></Suspense>
-    {children}
+    <LessonDataContext.Provider value={lessonCache}>
+      <Suspense fallback={null}><LearningDataWarmup cache={cache} authenticated={authenticated} /></Suspense>
+      {children}
+    </LessonDataContext.Provider>
   </LearningDataContext.Provider>;
 }
 
@@ -76,4 +96,18 @@ export function useLearningData() {
   const cache = useContext(LearningDataContext);
   if (!cache) throw new Error("LearningDataProvider is required");
   return cache;
+}
+
+export function useLessonContentCache() {
+  const cache = useContext(LessonDataContext);
+  if (!cache) throw new Error("LearningDataProvider is required");
+  return cache;
+}
+
+export function usePrepareLesson() {
+  const cache = useContext(LessonDataContext);
+  return async (url: string, signal: AbortSignal) => {
+    if (!cache) throw new Error("LearningDataProvider is required");
+    await cache.prepare(url, signal);
+  };
 }

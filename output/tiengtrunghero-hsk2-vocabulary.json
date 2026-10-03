@@ -1,0 +1,2270 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "sourceTitle": "Đề cương từ vựng New HSK2 (2026 Edition)",
+  "level": "HSK2",
+  "scrapedAt": "2026-10-03T04:02:38.315Z",
+  "count": 226,
+  "items": [
+    {
+      "id": "601",
+      "hanzi": "姓名",
+      "pinyin": "xìngmíng",
+      "wordType": "Danh từ",
+      "meaningVi": "họ và tên; tên đầy đủ",
+      "exampleHanzi": "请写你的姓名。",
+      "examplePinyin": "[xìngmíng]",
+      "exampleVi": "Hãy viết tên của bạn."
+    },
+    {
+      "id": "602",
+      "hanzi": "洗手间",
+      "pinyin": "xǐshǒujiān",
+      "wordType": "Danh từ",
+      "meaningVi": "nhà vệ sinh; phòng vệ sinh; phòng rửa tay",
+      "exampleHanzi": "洗手间在哪里？",
+      "examplePinyin": "[xǐshǒujiān]",
+      "exampleVi": "Phòng vệ sinh ở đâu?"
+    },
+    {
+      "id": "651",
+      "hanzi": "打",
+      "pinyin": "dǎ",
+      "wordType": "Động từ",
+      "meaningVi": "tá (từ vay mượn)",
+      "exampleHanzi": "我打电话给你。",
+      "examplePinyin": "[dǎ]",
+      "exampleVi": "Tôi sẽ gọi cho bạn."
+    },
+    {
+      "id": "652",
+      "hanzi": "打车",
+      "pinyin": "dǎchē",
+      "wordType": "Động từ",
+      "meaningVi": "gọi taxi (trong thành phố); bắt xe nhờ chở",
+      "exampleHanzi": "我们打车去机场吧。",
+      "examplePinyin": "[dǎchē]",
+      "exampleVi": "Chúng ta hãy bắt taxi tới sân bay."
+    },
+    {
+      "id": "931",
+      "hanzi": "个子",
+      "pinyin": "gèzi",
+      "wordType": "Danh từ",
+      "meaningVi": "chiều cao; tầm vóc; dáng người; kích thước",
+      "exampleHanzi": "他的个子很高。",
+      "examplePinyin": "[gèzi]",
+      "exampleVi": "Anh ấy rất cao."
+    },
+    {
+      "id": "932",
+      "hanzi": "公交车",
+      "pinyin": "gōngjiāochē",
+      "wordType": "Danh từ",
+      "meaningVi": "xe buýt công cộng",
+      "exampleHanzi": "我坐公交车去上班。",
+      "examplePinyin": "[gōngjiāochē]",
+      "exampleVi": "Tôi bắt xe buýt để đi làm."
+    },
+    {
+      "id": "1201",
+      "hanzi": "红茶",
+      "pinyin": "hóngchá",
+      "wordType": "Danh từ",
+      "meaningVi": "trà đen",
+      "exampleHanzi": "我喝茶。",
+      "examplePinyin": "[hóngchá]",
+      "exampleVi": "Tôi uống trà."
+    },
+    {
+      "id": "1202",
+      "hanzi": "红色",
+      "pinyin": "hóngsè",
+      "wordType": "Danh từ",
+      "meaningVi": "màu đỏ; cách mạng",
+      "exampleHanzi": "这是红色的花。",
+      "examplePinyin": "[hóngsè]",
+      "exampleVi": "Đây là một bông hoa màu đỏ."
+    },
+    {
+      "id": "1745",
+      "hanzi": "准备",
+      "pinyin": "zhǔnbèi",
+      "wordType": "Động từ",
+      "meaningVi": "sự chuẩn bị; chuẩn bị; dự định; sắp sửa; dự trữ (quỹ)",
+      "exampleHanzi": "我准备去学校。",
+      "examplePinyin": "[zhǔnbèi]",
+      "exampleVi": "Tôi đang chuẩn bị đi học."
+    },
+    {
+      "id": "1746",
+      "hanzi": "自己",
+      "pinyin": "zìjǐ",
+      "wordType": "Đại từ",
+      "meaningVi": "bản thân; của riêng mình",
+      "exampleHanzi": "我自己做作业。",
+      "examplePinyin": "[zìjǐ]",
+      "exampleVi": "Tôi tự làm bài tập về nhà."
+    },
+    {
+      "id": "1747",
+      "hanzi": "走",
+      "pinyin": "zǒu",
+      "wordType": "Động từ",
+      "meaningVi": "đi bộ | đi | chạy | di chuyển (của phương tiện) | thăm | rời đi | đi mất | mất (lối nói giảm) | từ | qua | ở phía sau (trong động từ phức hợp, như zǒu) | thay đổi (hình dạng, cấu trúc, ý nghĩa)",
+      "exampleHanzi": "我们走吧。",
+      "examplePinyin": "[zǒu]",
+      "exampleVi": "Đi thôi."
+    },
+    {
+      "id": "1748",
+      "hanzi": "走路",
+      "pinyin": "zǒulù",
+      "wordType": "Động từ",
+      "meaningVi": "đi bộ; đi bộ",
+      "exampleHanzi": "我喜欢走路去学校。",
+      "examplePinyin": "[zǒulù]",
+      "exampleVi": "Tôi thích đi bộ đến trường."
+    },
+    {
+      "id": "1749",
+      "hanzi": "最",
+      "pinyin": "zuì",
+      "wordType": "Phó từ",
+      "meaningVi": "nhất; nhất (hậu tố so sánh nhất)",
+      "exampleHanzi": "这是最好的选择。",
+      "examplePinyin": "[zuì]",
+      "exampleVi": "Đây là sự lựa chọn tốt nhất."
+    },
+    {
+      "id": "1750",
+      "hanzi": "左",
+      "pinyin": "zuǒ",
+      "wordType": "Danh từ",
+      "meaningVi": "họ Tả",
+      "exampleHanzi": "请向左转。",
+      "examplePinyin": "[zuǒ]",
+      "exampleVi": "Vui lòng rẽ trái."
+    },
+    {
+      "id": "1751",
+      "hanzi": "左边",
+      "pinyin": "zuǒbian",
+      "wordType": "Danh từ",
+      "meaningVi": "trái; phía bên trái; bên trái của",
+      "exampleHanzi": "请坐左边。",
+      "examplePinyin": "[zuǒbian]",
+      "exampleVi": "Xin vui lòng ngồi ở phía bên trái."
+    },
+    {
+      "id": "1752",
+      "hanzi": "足球",
+      "pinyin": "zúqiú",
+      "wordType": "Danh từ",
+      "meaningVi": "bóng đá; một quả bóng đá; bóng đá; bóng đá",
+      "exampleHanzi": "他喜欢踢足球。",
+      "examplePinyin": "[zúqiú]",
+      "exampleVi": "Anh ấy thích chơi bóng đá."
+    },
+    {
+      "id": "2445",
+      "hanzi": "出来",
+      "pinyin": "chūlái",
+      "wordType": "Động từ",
+      "meaningVi": "đi ra; xuất hiện; nảy sinh",
+      "exampleHanzi": "请把书拿出来。",
+      "examplePinyin": "[chūlái]",
+      "exampleVi": "Xin vui lòng lấy cuốn sách ra."
+    },
+    {
+      "id": "2446",
+      "hanzi": "出门",
+      "pinyin": "chūmén",
+      "wordType": "Động từ",
+      "meaningVi": "đi ra; rời nhà; đi du lịch; xa nhà; (của phụ nữ) kết hôn",
+      "exampleHanzi": "我出门去学校。",
+      "examplePinyin": "[chūmén]",
+      "exampleVi": "Tôi đi ra ngoài trường học."
+    },
+    {
+      "id": "2447",
+      "hanzi": "出去",
+      "pinyin": "chūqù",
+      "wordType": "Động từ",
+      "meaningVi": "đi ra",
+      "exampleHanzi": "我们出去玩吧。",
+      "examplePinyin": "[chūqù]",
+      "exampleVi": "Chúng ta hãy ra ngoài chơi nhé."
+    },
+    {
+      "id": "2448",
+      "hanzi": "词",
+      "pinyin": "cí",
+      "wordType": "Danh từ",
+      "meaningVi": "từ | lời nói | bài nói | lời bài hát | thể thơ Đường, thịnh hành thời Tống",
+      "exampleHanzi": "我需要学习新词。",
+      "examplePinyin": "[cí]",
+      "exampleVi": "Tôi cần học từ mới."
+    },
+    {
+      "id": "2449",
+      "hanzi": "次",
+      "pinyin": "cì",
+      "wordType": "Lượng từ",
+      "meaningVi": "kế tiếp trong trình tự; thứ hai; thứ hai (ngày, thời gian, v.v.); thứ yếu; phó-; phụ-; hạ-; chất lượng kém; dưới tiêu chuẩn; thứ tự; trình tự; hypo- (hóa học); lượng từ cho các sự kiện được liệt kê: lần",
+      "exampleHanzi": "我去了北京两次。",
+      "examplePinyin": "[cì]",
+      "exampleVi": "Tôi đã đến Bắc Kinh hai lần."
+    },
+    {
+      "id": "2450",
+      "hanzi": "从",
+      "pinyin": "cóng",
+      "wordType": "Giới từ",
+      "meaningVi": "từ; qua; qua đường; đi theo; tuân theo; tham gia (hoạt động); chưa bao giờ (trong câu phủ định); (Đài Loan đọc [zòng]) người hầu; trợ lý; phụ trợ; cấp dưới; cùng họ với ông nội hoặc tổ tiên sớm hơn",
+      "exampleHanzi": "我从早上开始学习。",
+      "examplePinyin": "[cóng]",
+      "exampleVi": "Tôi bắt đầu học từ sáng."
+    },
+    {
+      "id": "2451",
+      "hanzi": "从小",
+      "pinyin": "cóngxiǎo",
+      "wordType": "Phó từ",
+      "meaningVi": "từ nhỏ; từ khi còn trẻ",
+      "exampleHanzi": "他从小学习汉语。",
+      "examplePinyin": "[cóngxiǎo]",
+      "exampleVi": "Anh ấy đã học tiếng Trung từ khi còn nhỏ."
+    },
+    {
+      "id": "2452",
+      "hanzi": "错",
+      "pinyin": "cuò",
+      "wordType": "Tính từ",
+      "meaningVi": "họ Cuo",
+      "exampleHanzi": "这个答案是错的。",
+      "examplePinyin": "[cuò]",
+      "exampleVi": "Câu trả lời này là sai."
+    },
+    {
+      "id": "2706",
+      "hanzi": "后面",
+      "pinyin": "hòumiàn",
+      "wordType": "Danh từ",
+      "meaningVi": "phía sau; phía sau; phần cuối; đằng sau; gần cuối; ở phía sau; sau đó; sau này",
+      "exampleHanzi": "我在后面跟着。",
+      "examplePinyin": "[hòumiàn]",
+      "exampleVi": "Tôi đang theo sau."
+    },
+    {
+      "id": "2707",
+      "hanzi": "画",
+      "pinyin": "huà",
+      "wordType": "Động từ",
+      "meaningVi": "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+      "exampleHanzi": "我喜欢画画。",
+      "examplePinyin": "[huà]",
+      "exampleVi": "Tôi thích vẽ."
+    },
+    {
+      "id": "2708",
+      "hanzi": "画",
+      "pinyin": "huà",
+      "wordType": "Danh từ",
+      "meaningVi": "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+      "exampleHanzi": "这是一幅美丽的画。",
+      "examplePinyin": "[huà]",
+      "exampleVi": "Đây là một bức tranh đẹp."
+    },
+    {
+      "id": "2709",
+      "hanzi": "花",
+      "pinyin": "huā",
+      "wordType": "Động từ",
+      "meaningVi": "họ Hoa",
+      "exampleHanzi": "我花钱买书。",
+      "examplePinyin": "[huā]",
+      "exampleVi": "Tôi dành tiền để mua sách."
+    },
+    {
+      "id": "2710",
+      "hanzi": "花",
+      "pinyin": "huā",
+      "wordType": "Danh từ",
+      "meaningVi": "họ Hoa",
+      "exampleHanzi": "花园里有很多花。",
+      "examplePinyin": "[huā]",
+      "exampleVi": "Có rất nhiều hoa trong vườn."
+    },
+    {
+      "id": "2711",
+      "hanzi": "坏",
+      "pinyin": "huài",
+      "wordType": "Tính từ",
+      "meaningVi": "tệ; hỏng; gãy; bị hỏng; (hậu tố) đến mức tột cùng",
+      "exampleHanzi": "这个苹果坏了。",
+      "examplePinyin": "[huài]",
+      "exampleVi": "Quả táo này tệ quá."
+    },
+    {
+      "id": "2712",
+      "hanzi": "回来",
+      "pinyin": "huílái",
+      "wordType": "Động từ",
+      "meaningVi": "trở về; quay lại",
+      "exampleHanzi": "我回来了。",
+      "examplePinyin": "[huílái]",
+      "exampleVi": "Tôi đã trở lại."
+    },
+    {
+      "id": "2713",
+      "hanzi": "回去",
+      "pinyin": "huíqù",
+      "wordType": "Động từ",
+      "meaningVi": "trở về; quay lại",
+      "exampleHanzi": "我们回去吧。",
+      "examplePinyin": "[huíqù]",
+      "exampleVi": "Hãy quay trở lại."
+    },
+    {
+      "id": "2754",
+      "hanzi": "慢",
+      "pinyin": "màn",
+      "wordType": "Tính từ",
+      "meaningVi": "chậm",
+      "exampleHanzi": "这个车很慢。",
+      "examplePinyin": "[màn]",
+      "exampleVi": "Chiếc xe này chạy rất chậm."
+    },
+    {
+      "id": "2755",
+      "hanzi": "每",
+      "pinyin": "měi",
+      "wordType": "Đại từ",
+      "meaningVi": "mỗi; từng",
+      "exampleHanzi": "每个学生都有书。",
+      "examplePinyin": "[měi]",
+      "exampleVi": "Mỗi học sinh đều có một cuốn sách."
+    },
+    {
+      "id": "3144",
+      "hanzi": "跑步",
+      "pinyin": "pǎobù",
+      "wordType": "Động từ",
+      "meaningVi": "chạy; chạy bộ; (quân sự) diễu hành nhanh",
+      "exampleHanzi": "我喜欢跑步锻炼身体。",
+      "examplePinyin": "[pǎobù]",
+      "exampleVi": "Tôi thích chạy bộ để rèn luyện cơ thể."
+    },
+    {
+      "id": "3145",
+      "hanzi": "票",
+      "pinyin": "piào",
+      "wordType": "Danh từ",
+      "meaningVi": "vé; phiếu bầu; tiền giấy; con tin bị bắt cóc; vở diễn opera Trung Quốc nghiệp dư; lượng từ cho nhóm, lô, giao dịch kinh doanh",
+      "exampleHanzi": "我买了一张票。",
+      "examplePinyin": "[piào]",
+      "exampleVi": "Tôi đã mua một vé."
+    },
+    {
+      "id": "3766",
+      "hanzi": "比",
+      "pinyin": "bǐ",
+      "wordType": "Giới từ",
+      "meaningVi": "Bỉ | người Bỉ | viết tắt của Bỉ",
+      "exampleHanzi": "我比他大两岁。",
+      "examplePinyin": "[bǐ]",
+      "exampleVi": "Tôi hơn anh ấy hai tuổi."
+    },
+    {
+      "id": "3767",
+      "hanzi": "笔",
+      "pinyin": "bǐ",
+      "wordType": "Danh từ",
+      "meaningVi": "bút; bút chì; bút lông; viết; nét chữ Hán; lượng từ dùng cho số tiền, giao dịch",
+      "exampleHanzi": "我用笔写字。",
+      "examplePinyin": "[bǐ]",
+      "exampleVi": "Tôi dùng bút để viết."
+    },
+    {
+      "id": "3768",
+      "hanzi": "别",
+      "pinyin": "bié",
+      "wordType": "Phó từ",
+      "meaningVi": "buộc ai đó thay đổi cách sống, quan điểm v.v.",
+      "exampleHanzi": "别担心，一切都会好起来的。",
+      "examplePinyin": "[bié]",
+      "exampleVi": "Đừng lo lắng, mọi thứ sẽ ổn thôi."
+    },
+    {
+      "id": "3769",
+      "hanzi": "不好意思",
+      "pinyin": "bù hǎoyìsi",
+      "wordType": "Từ vựng",
+      "meaningVi": "cảm thấy xấu hổ; cảm thấy ngại; xin lỗi (vì làm phiền ai)",
+      "exampleHanzi": "不好意思，打扰一下。",
+      "examplePinyin": "[bù hǎoyìsi]",
+      "exampleVi": "Xin lỗi, xin lỗi đã làm phiền bạn."
+    },
+    {
+      "id": "3770",
+      "hanzi": "不错",
+      "pinyin": "búcuò",
+      "wordType": "Tính từ",
+      "meaningVi": "đúng; phải; không tệ; khá tốt",
+      "exampleHanzi": "这家餐厅的菜很不错。",
+      "examplePinyin": "[búcuò]",
+      "exampleVi": "Đồ ăn ở nhà hàng này khá ngon."
+    },
+    {
+      "id": "3771",
+      "hanzi": "长",
+      "pinyin": "cháng",
+      "wordType": "Tính từ",
+      "meaningVi": "chiều dài; dài; mãi mãi; luôn luôn; liên tục",
+      "exampleHanzi": "这条裙子很长。",
+      "examplePinyin": "[cháng]",
+      "exampleVi": "Chiếc váy này rất dài."
+    },
+    {
+      "id": "3772",
+      "hanzi": "车站",
+      "pinyin": "chēzhàn",
+      "wordType": "Danh từ",
+      "meaningVi": "ga tàu; điểm dừng xe buýt",
+      "exampleHanzi": "车站有很多人等车。",
+      "examplePinyin": "[chēzhàn]",
+      "exampleVi": "Có rất nhiều người đang chờ xe buýt ở bến xe."
+    },
+    {
+      "id": "3773",
+      "hanzi": "出",
+      "pinyin": "chū",
+      "wordType": "Động từ",
+      "meaningVi": "đi ra | đi ra ngoài | xảy ra | sản xuất | vượt ra | mọc lên | đưa ra | diễn ra | (dùng sau động từ chỉ hướng ra hoặc kết quả tích cực) | lượng từ cho kịch, vở",
+      "exampleHanzi": "我出门买菜。",
+      "examplePinyin": "[chū]",
+      "exampleVi": "Tôi ra ngoài mua rau."
+    },
+    {
+      "id": "3816",
+      "hanzi": "上去",
+      "pinyin": "shàngqù",
+      "wordType": "Động từ",
+      "meaningVi": "đi lên",
+      "exampleHanzi": "我们上去看看。",
+      "examplePinyin": "[shàngqù]",
+      "exampleVi": "Chúng ta hãy đi lên và nhìn xem."
+    },
+    {
+      "id": "3817",
+      "hanzi": "上网",
+      "pinyin": "shàngwǎng",
+      "wordType": "Động từ",
+      "meaningVi": "lên mạng; kết nối Internet; (tài liệu) được tải lên mạng; (quần vợt, bóng chuyền) tiến gần lưới",
+      "exampleHanzi": "我每天晚上上网。",
+      "examplePinyin": "[shàngwǎng]",
+      "exampleVi": "Tôi lên mạng mỗi tối."
+    },
+    {
+      "id": "3818",
+      "hanzi": "生日",
+      "pinyin": "shēngrì",
+      "wordType": "Danh từ",
+      "meaningVi": "sinh nhật",
+      "exampleHanzi": "今天是我的生日。",
+      "examplePinyin": "[shēngrì]",
+      "exampleVi": "Hôm nay là sinh nhật của tôi."
+    },
+    {
+      "id": "3819",
+      "hanzi": "身体",
+      "pinyin": "shēntǐ",
+      "wordType": "Danh từ",
+      "meaningVi": "thân thể; sức khỏe; trực tiếp",
+      "exampleHanzi": "他身体很健康。",
+      "examplePinyin": "[shēntǐ]",
+      "exampleVi": "Cơ thể anh ấy rất khỏe mạnh."
+    },
+    {
+      "id": "3820",
+      "hanzi": "时",
+      "pinyin": "shí",
+      "wordType": "Danh từ",
+      "meaningVi": "giờ; thời gian; khi; giờ; mùa; kỳ",
+      "exampleHanzi": "这个时间很合适。",
+      "examplePinyin": "[shí]",
+      "exampleVi": "Thời điểm này rất thích hợp."
+    },
+    {
+      "id": "3821",
+      "hanzi": "事情",
+      "pinyin": "shìqing",
+      "wordType": "Danh từ",
+      "meaningVi": "việc; sự việc; đồ; công việc",
+      "exampleHanzi": "这件事情很重要。",
+      "examplePinyin": "[shìqing]",
+      "exampleVi": "Vấn đề này rất quan trọng."
+    },
+    {
+      "id": "3822",
+      "hanzi": "手",
+      "pinyin": "shǒu",
+      "wordType": "Danh từ",
+      "meaningVi": "tay; (trang trọng) cầm; người làm nghề nhất định; người có tay nghề; cá nhân; tiện lợi; lượng từ chỉ kỹ năng",
+      "exampleHanzi": "我用手机。",
+      "examplePinyin": "[shǒu]",
+      "exampleVi": "Tôi sử dụng điện thoại di động."
+    },
+    {
+      "id": "3823",
+      "hanzi": "手表",
+      "pinyin": "shǒubiǎo",
+      "wordType": "Danh từ",
+      "meaningVi": "đồng hồ đeo tay",
+      "exampleHanzi": "我有一只手表。",
+      "examplePinyin": "[shǒubiǎo]",
+      "exampleVi": "Tôi có một chiếc đồng hồ."
+    },
+    {
+      "id": "4084",
+      "hanzi": "奶茶",
+      "pinyin": "nǎichá",
+      "wordType": "Danh từ",
+      "meaningVi": "trà sữa",
+      "exampleHanzi": "我喜欢喝奶茶。",
+      "examplePinyin": "[nǎichá]",
+      "exampleVi": "Tôi thích uống trà sữa."
+    },
+    {
+      "id": "4085",
+      "hanzi": "奶奶",
+      "pinyin": "nǎinai",
+      "wordType": "Danh từ",
+      "meaningVi": "(thân mật) bà nội; (lịch sự) chủ nhà (nữ); (lóng) ngực; bầu ngực",
+      "exampleHanzi": "我的奶奶很慈祥。",
+      "examplePinyin": "[nǎinai]",
+      "exampleVi": "Bà tôi rất tốt bụng."
+    },
+    {
+      "id": "4234",
+      "hanzi": "累",
+      "pinyin": "lèi",
+      "wordType": "Tính từ",
+      "meaningVi": "tích lũy; liên quan hoặc ám chỉ (phát âm Đài Loan [lèi]); liên tục; lặp lại",
+      "exampleHanzi": "今天我很累。",
+      "examplePinyin": "[lèi]",
+      "exampleVi": "Hôm nay tôi rất mệt mỏi."
+    },
+    {
+      "id": "4235",
+      "hanzi": "累",
+      "pinyin": "lèi",
+      "wordType": "Động từ",
+      "meaningVi": "tích lũy; liên quan hoặc ám chỉ (phát âm Đài Loan [lèi]); liên tục; lặp lại",
+      "exampleHanzi": "工作累人。",
+      "examplePinyin": "[lèi]",
+      "exampleVi": "Công việc làm mọi người mệt mỏi."
+    },
+    {
+      "id": "5106",
+      "hanzi": "可能",
+      "pinyin": "kěnéng",
+      "wordType": "Danh từ",
+      "meaningVi": "có thể; khả năng; có lẽ; có thể xảy ra",
+      "exampleHanzi": "有这种可能。",
+      "examplePinyin": "[kěnéng]",
+      "exampleVi": "Có khả năng này."
+    },
+    {
+      "id": "5107",
+      "hanzi": "可能",
+      "pinyin": "kěnéng",
+      "wordType": "Động từ",
+      "meaningVi": "có thể; khả năng; có lẽ; có thể xảy ra",
+      "exampleHanzi": "他可能来。",
+      "examplePinyin": "[kěnéng]",
+      "exampleVi": "Anh ấy có thể đến."
+    },
+    {
+      "id": "5108",
+      "hanzi": "快",
+      "pinyin": "kuài",
+      "wordType": "Tính từ",
+      "meaningVi": "nhanh; mau; tốc độ; tốc độ; sớm; hầu như; vội; khéo léo; sắc bén (dao hoặc trí tuệ); thẳng thắn; nói thẳng; hài lòng; vui vẻ; dễ chịu",
+      "exampleHanzi": "这个车很快。",
+      "examplePinyin": "[kuài]",
+      "exampleVi": "Chiếc xe này rất nhanh."
+    },
+    {
+      "id": "5109",
+      "hanzi": "快",
+      "pinyin": "kuài",
+      "wordType": "Phó từ",
+      "meaningVi": "nhanh; mau; tốc độ; tốc độ; sớm; hầu như; vội; khéo léo; sắc bén (dao hoặc trí tuệ); thẳng thắn; nói thẳng; hài lòng; vui vẻ; dễ chịu",
+      "exampleHanzi": "请快一点。",
+      "examplePinyin": "[kuài]",
+      "exampleVi": "Làm ơn nhanh lên."
+    },
+    {
+      "id": "5110",
+      "hanzi": "快乐",
+      "pinyin": "kuàilè",
+      "wordType": "Tính từ",
+      "meaningVi": "vui vẻ; hạnh phúc",
+      "exampleHanzi": "今天我很快乐。",
+      "examplePinyin": "[kuàilè]",
+      "exampleVi": "Hôm nay tôi hạnh phúc."
+    },
+    {
+      "id": "5111",
+      "hanzi": "快要",
+      "pinyin": "kuàiyào",
+      "wordType": "Phó từ",
+      "meaningVi": "gần đến điểm (làm gì đó); sắp sửa (làm gì đó)",
+      "exampleHanzi": "快要下雨了。",
+      "examplePinyin": "[kuàiyào]",
+      "exampleVi": "Trời sắp mưa."
+    },
+    {
+      "id": "5112",
+      "hanzi": "裤子",
+      "pinyin": "kùzi",
+      "wordType": "Danh từ",
+      "meaningVi": "quần dài; quần",
+      "exampleHanzi": "这条裤子很漂亮。",
+      "examplePinyin": "[kùzi]",
+      "exampleVi": "Chiếc quần này rất đẹp."
+    },
+    {
+      "id": "5113",
+      "hanzi": "篮球",
+      "pinyin": "lánqiú",
+      "wordType": "Danh từ",
+      "meaningVi": "bóng rổ",
+      "exampleHanzi": "他喜欢打篮球。",
+      "examplePinyin": "[lánqiú]",
+      "exampleVi": "Anh ấy thích chơi bóng rổ."
+    },
+    {
+      "id": "5206",
+      "hanzi": "没意思",
+      "pinyin": "méi yìsi",
+      "wordType": "Từ vựng",
+      "meaningVi": "nhàm chán; không thú vị",
+      "exampleHanzi": "这部电影没意思。",
+      "examplePinyin": "[méi yìsi]",
+      "exampleVi": "Phim này chán quá."
+    },
+    {
+      "id": "5207",
+      "hanzi": "门",
+      "pinyin": "mén",
+      "wordType": "Danh từ",
+      "meaningVi": "họ Men",
+      "exampleHanzi": "请关上门。",
+      "examplePinyin": "[mén]",
+      "exampleVi": "Hãy đóng cửa lại."
+    },
+    {
+      "id": "5208",
+      "hanzi": "门口",
+      "pinyin": "ménkǒu",
+      "wordType": "Danh từ",
+      "meaningVi": "khung cửa; cổng",
+      "exampleHanzi": "他在门口等我。",
+      "examplePinyin": "[ménkǒu]",
+      "exampleVi": "Anh ấy đang đợi tôi ở cửa."
+    },
+    {
+      "id": "5209",
+      "hanzi": "门票",
+      "pinyin": "ménpiào",
+      "wordType": "Danh từ",
+      "meaningVi": "vé (cho nhà hát, rạp chiếu phim, v.v.)",
+      "exampleHanzi": "我买了一张门票。",
+      "examplePinyin": "[ménpiào]",
+      "exampleVi": "Tôi đã mua một vé."
+    },
+    {
+      "id": "5210",
+      "hanzi": "面",
+      "pinyin": "miàn",
+      "wordType": "后缀",
+      "meaningVi": "bột mì; mì; (thực phẩm) mềm (không giòn); (lóng) (người) yếu đuối; không có lập trường",
+      "exampleHanzi": "他是我的朋友。",
+      "examplePinyin": "[miàn]",
+      "exampleVi": "Anh ấy là bạn tôi."
+    },
+    {
+      "id": "5211",
+      "hanzi": "名",
+      "pinyin": "míng",
+      "wordType": "Danh từ",
+      "meaningVi": "tên; danh từ (loại từ); nơi (ví dụ: trong số người chiến thắng); nổi tiếng; lượng từ dùng cho người",
+      "exampleHanzi": "这是我的名字。",
+      "examplePinyin": "[míng]",
+      "exampleVi": "Đây là tên của tôi."
+    },
+    {
+      "id": "5212",
+      "hanzi": "名",
+      "pinyin": "míng",
+      "wordType": "Lượng từ",
+      "meaningVi": "tên; danh từ (loại từ); nơi (ví dụ: trong số người chiến thắng); nổi tiếng; lượng từ dùng cho người",
+      "exampleHanzi": "我买了三名学生的书。",
+      "examplePinyin": "[míng]",
+      "exampleVi": "Tôi đã mua sách cho ba học sinh."
+    },
+    {
+      "id": "5213",
+      "hanzi": "拿",
+      "pinyin": "ná",
+      "wordType": "Động từ",
+      "meaningVi": "âm đọc trong một từ ghép",
+      "exampleHanzi": "请拿这本书。",
+      "examplePinyin": "[ná]",
+      "exampleVi": "Xin vui lòng lấy cuốn sách này."
+    },
+    {
+      "id": "5474",
+      "hanzi": "书包",
+      "pinyin": "shūbāo",
+      "wordType": "Danh từ",
+      "meaningVi": "cặp sách; cặp sách học sinh; túi đựng sách",
+      "exampleHanzi": "我的书包很重。",
+      "examplePinyin": "[shūbāo]",
+      "exampleVi": "Cặp đi học của tôi rất nặng."
+    },
+    {
+      "id": "5475",
+      "hanzi": "舒服",
+      "pinyin": "shūfu",
+      "wordType": "Tính từ",
+      "meaningVi": "thoải mái; cảm thấy khỏe khoắn",
+      "exampleHanzi": "这张椅子很舒服。",
+      "examplePinyin": "[shūfu]",
+      "exampleVi": "Chiếc ghế này rất thoải mái."
+    },
+    {
+      "id": "5525",
+      "hanzi": "床",
+      "pinyin": "chuáng",
+      "wordType": "Danh từ",
+      "meaningVi": "giường | ghế dài | lượng từ cho giường",
+      "exampleHanzi": "我每天晚上在床上看书。",
+      "examplePinyin": "[chuáng]",
+      "exampleVi": "Tôi đọc sách trên giường mỗi tối."
+    },
+    {
+      "id": "5526",
+      "hanzi": "出国",
+      "pinyin": "chūguó",
+      "wordType": "Động từ",
+      "meaningVi": "đi nước ngoài; rời khỏi đất nước",
+      "exampleHanzi": "他计划明年出国学习。",
+      "examplePinyin": "[chūguó]",
+      "exampleVi": "Anh ấy dự định sẽ đi du học vào năm tới."
+    },
+    {
+      "id": "5595",
+      "hanzi": "就",
+      "pinyin": "jiù",
+      "wordType": "Phó từ",
+      "meaningVi": "trong trường hợp đó; vậy thì | ngay khi; ngay sau khi | chỉ | chỉ bao nhiêu đó | nhiều đến mức; nhiều đến chừng nào | tiến tới; tiến về phía | đảm nhận; tham gia | nhân tiện | (về đồ ăn) ăn cùng | liên quan đến; về phần | (mẫu: ... ... ... ... ) dù ... vẫn ... | (mẫu: ... ... ) nếu không ... thì phải ...",
+      "exampleHanzi": "我就去。",
+      "examplePinyin": "[jiù]",
+      "exampleVi": "Tôi sẽ đi ngay."
+    },
+    {
+      "id": "5596",
+      "hanzi": "酒店",
+      "pinyin": "jiǔdiàn",
+      "wordType": "Danh từ",
+      "meaningVi": "tiệm rượu; quán rượu; khách sạn; nhà hàng; (Đài Loan) câu lạc bộ chủ quán",
+      "exampleHanzi": "我们住在酒店。",
+      "examplePinyin": "[jiǔdiàn]",
+      "exampleVi": "Chúng tôi ở tại khách sạn."
+    },
+    {
+      "id": "5597",
+      "hanzi": "咖啡",
+      "pinyin": "kāfēi",
+      "wordType": "Danh từ",
+      "meaningVi": "cà phê (từ vay mượn)",
+      "exampleHanzi": "我喝咖啡。",
+      "examplePinyin": "[kāfēi]",
+      "exampleVi": "Tôi uống cà phê."
+    },
+    {
+      "id": "5598",
+      "hanzi": "开始",
+      "pinyin": "kāishǐ",
+      "wordType": "Động từ",
+      "meaningVi": "bắt đầu; phần mở đầu; khởi động; ban đầu",
+      "exampleHanzi": "我们开始上课。",
+      "examplePinyin": "[kāishǐ]",
+      "exampleVi": "Chúng tôi bắt đầu lớp học."
+    },
+    {
+      "id": "5599",
+      "hanzi": "开始",
+      "pinyin": "kāishǐ",
+      "wordType": "Danh từ",
+      "meaningVi": "bắt đầu; phần mở đầu; khởi động; ban đầu",
+      "exampleHanzi": "开始很重要。",
+      "examplePinyin": "[kāishǐ]",
+      "exampleVi": "Sự khởi đầu là rất quan trọng."
+    },
+    {
+      "id": "5600",
+      "hanzi": "开学",
+      "pinyin": "kāixué",
+      "wordType": "Động từ",
+      "meaningVi": "sự thành lập Đại học hoặc Cao đẳng; khai giảng; bắt đầu học kỳ mới",
+      "exampleHanzi": "九月一日开学。",
+      "examplePinyin": "[kāixué]",
+      "exampleVi": "Trường học bắt đầu vào ngày 1 tháng 9."
+    },
+    {
+      "id": "5601",
+      "hanzi": "考",
+      "pinyin": "kǎo",
+      "wordType": "Động từ",
+      "meaningVi": "kiểm tra; xác minh; thử nghiệm; khảo sát; dự thi; dự thi tuyển; cha đã mất",
+      "exampleHanzi": "我要考试。",
+      "examplePinyin": "[kǎo]",
+      "exampleVi": "Tôi sắp đi thi."
+    },
+    {
+      "id": "5602",
+      "hanzi": "考试",
+      "pinyin": "kǎoshì",
+      "wordType": "Động từ",
+      "meaningVi": "dự thi; kỳ thi",
+      "exampleHanzi": "我明天考试。",
+      "examplePinyin": "[kǎoshì]",
+      "exampleVi": "Ngày mai tôi có bài kiểm tra."
+    },
+    {
+      "id": "5603",
+      "hanzi": "考试",
+      "pinyin": "kǎoshì",
+      "wordType": "Danh từ",
+      "meaningVi": "dự thi; kỳ thi",
+      "exampleHanzi": "hskmocktest.com是一个汉语水平模拟考试平台",
+      "examplePinyin": "[kǎoshì]",
+      "exampleVi": "hskmocktest.com là một nền tảng thi thử trình độ tiếng Trung."
+    },
+    {
+      "id": "5604",
+      "hanzi": "可能",
+      "pinyin": "kěnéng",
+      "wordType": "Tính từ",
+      "meaningVi": "có thể; khả năng; có lẽ; có thể xảy ra",
+      "exampleHanzi": "这个想法可能对。",
+      "examplePinyin": "[kěnéng]",
+      "exampleVi": "Ý tưởng này có thể đúng."
+    },
+    {
+      "id": "5777",
+      "hanzi": "过",
+      "pinyin": "guo",
+      "wordType": "Trợ từ",
+      "meaningVi": "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+      "exampleHanzi": "我学过汉语。",
+      "examplePinyin": "[guo]",
+      "exampleVi": "Tôi đã học tiếng Trung Quốc."
+    },
+    {
+      "id": "5778",
+      "hanzi": "过",
+      "pinyin": "guò",
+      "wordType": "Động từ",
+      "meaningVi": "Vượt qua; đi qua; qua (thời gian); ăn mừng (lễ); sống; đối phó; quá mức; quá-",
+      "exampleHanzi": "我过马路。",
+      "examplePinyin": "[guò]",
+      "exampleVi": "Tôi băng qua đường."
+    },
+    {
+      "id": "5779",
+      "hanzi": "过来",
+      "pinyin": "guòlái",
+      "wordType": "Động từ",
+      "meaningVi": "Đến đây; đối phó; xử lý; có thể lo liệu",
+      "exampleHanzi": "请过来一下。",
+      "examplePinyin": "[guòlái]",
+      "exampleVi": "Xin vui lòng đến đây một lát."
+    },
+    {
+      "id": "5780",
+      "hanzi": "过年",
+      "pinyin": "guònián",
+      "wordType": "Động từ",
+      "meaningVi": "Ăn mừng Tết Nguyên đán",
+      "exampleHanzi": "我们回家过年。",
+      "examplePinyin": "[guònián]",
+      "exampleVi": "Chúng ta về nhà đón năm mới."
+    },
+    {
+      "id": "5781",
+      "hanzi": "过去",
+      "pinyin": "guòqù",
+      "wordType": "Động từ",
+      "meaningVi": "(Trong) quá khứ; cựu; trước đây; đi qua; đi ngang qua",
+      "exampleHanzi": "我过去看看。",
+      "examplePinyin": "[guòqù]",
+      "exampleVi": "Tôi sẽ đi qua và xem xét."
+    },
+    {
+      "id": "5782",
+      "hanzi": "还是",
+      "pinyin": "háishi",
+      "wordType": "Phó từ",
+      "meaningVi": "Vẫn (như trước); tốt hơn nên; bất ngờ; hoặc",
+      "exampleHanzi": "你还是去吧。",
+      "examplePinyin": "[háishi]",
+      "exampleVi": "Bạn vẫn nên đi."
+    },
+    {
+      "id": "5783",
+      "hanzi": "还是",
+      "pinyin": "háishi",
+      "wordType": "Liên từ",
+      "meaningVi": "Vẫn (như trước); tốt hơn nên; bất ngờ; hoặc",
+      "exampleHanzi": "你去还是我去？",
+      "examplePinyin": "[háishi]",
+      "exampleVi": "Bạn nên đi hay tôi nên đi?"
+    },
+    {
+      "id": "5784",
+      "hanzi": "黑色",
+      "pinyin": "hēisè",
+      "wordType": "Danh từ",
+      "meaningVi": "đen",
+      "exampleHanzi": "我喜欢黑色。",
+      "examplePinyin": "[hēisè]",
+      "exampleVi": "Tôi thích màu đen."
+    },
+    {
+      "id": "6107",
+      "hanzi": "那么",
+      "pinyin": "nàme",
+      "wordType": "Đại từ",
+      "meaningVi": "như thế; theo cách đó; chừng ấy; rất; khoảng; trong trường hợp đó",
+      "exampleHanzi": "那么远的地方怎么去？",
+      "examplePinyin": "[nàme]",
+      "exampleVi": "Làm thế nào để chúng ta đến được một nơi xa như vậy?"
+    },
+    {
+      "id": "6108",
+      "hanzi": "那么",
+      "pinyin": "nàme",
+      "wordType": "Liên từ",
+      "meaningVi": "như thế; theo cách đó; chừng ấy; rất; khoảng; trong trường hợp đó",
+      "exampleHanzi": "天气那么热，我们去游泳吧。",
+      "examplePinyin": "[nàme]",
+      "exampleVi": "Vì thời tiết nóng quá nên chúng ta hãy đi bơi nhé."
+    },
+    {
+      "id": "6109",
+      "hanzi": "男孩儿",
+      "pinyin": "nánháir",
+      "wordType": "Danh từ",
+      "meaningVi": "bé trai",
+      "exampleHanzi": "这个男孩儿很聪明。",
+      "examplePinyin": "[nánháir]",
+      "exampleVi": "Cậu bé này rất thông minh."
+    },
+    {
+      "id": "6110",
+      "hanzi": "那样",
+      "pinyin": "nàyàng",
+      "wordType": "Đại từ",
+      "meaningVi": "kiểu đó; loại đó",
+      "exampleHanzi": "我不喜欢那样做。",
+      "examplePinyin": "[nàyàng]",
+      "exampleVi": "Tôi không thích làm theo cách đó."
+    },
+    {
+      "id": "6111",
+      "hanzi": "鸟",
+      "pinyin": "niǎo",
+      "wordType": "Danh từ",
+      "meaningVi": "chim; bộ thủ \"chim\" trong chữ Hán (bộ Khanghy 196); (phương ngữ) chú ý; (thán từ) thật là; chết tiệt",
+      "exampleHanzi": "鸟儿在天空中飞翔。",
+      "examplePinyin": "[niǎo]",
+      "exampleVi": "Chim bay trên bầu trời."
+    },
+    {
+      "id": "6112",
+      "hanzi": "女孩儿",
+      "pinyin": "nǚháir",
+      "wordType": "Danh từ",
+      "meaningVi": "bé gái",
+      "exampleHanzi": "这个女孩儿很漂亮。",
+      "examplePinyin": "[nǚháir]",
+      "exampleVi": "Cô gái này rất đẹp."
+    },
+    {
+      "id": "6113",
+      "hanzi": "旁边",
+      "pinyin": "pángbiān",
+      "wordType": "Danh từ",
+      "meaningVi": "bên cạnh; nơi liền kề",
+      "exampleHanzi": "请坐在我旁边。",
+      "examplePinyin": "[pángbiān]",
+      "exampleVi": "Hãy ngồi cạnh tôi."
+    },
+    {
+      "id": "6114",
+      "hanzi": "跑",
+      "pinyin": "pǎo",
+      "wordType": "Động từ",
+      "meaningVi": "chạy; chạy trốn; bỏ chạy; chạy đi lại (làm việc vặt, v.v.); (khí hoặc chất lỏng) rò rỉ hoặc bay hơi; (bổ ngữ động từ) đi xa; rời đi",
+      "exampleHanzi": "我每天早上跑步。",
+      "examplePinyin": "[pǎo]",
+      "exampleVi": "Tôi chạy bộ vào mỗi buổi sáng."
+    },
+    {
+      "id": "6515",
+      "hanzi": "游泳",
+      "pinyin": "yóuyǒng",
+      "wordType": "Động từ",
+      "meaningVi": "bơi lội; bơi",
+      "exampleHanzi": "夏天我喜欢游泳。",
+      "examplePinyin": "[yóuyǒng]",
+      "exampleVi": "Tôi thích bơi vào mùa hè."
+    },
+    {
+      "id": "6516",
+      "hanzi": "鱼",
+      "pinyin": "yú",
+      "wordType": "Danh từ",
+      "meaningVi": "họ Yu",
+      "exampleHanzi": "鱼在水里游。",
+      "examplePinyin": "[yú]",
+      "exampleVi": "Cá bơi trong nước."
+    },
+    {
+      "id": "6717",
+      "hanzi": "外面",
+      "pinyin": "wàimiàn",
+      "wordType": "Danh từ",
+      "meaningVi": "bên ngoài (cũng đọc [wài mian] cho nghĩa này); bề mặt; bên ngoài; ngoại hình",
+      "exampleHanzi": "外面很冷。",
+      "examplePinyin": "[wàimiàn]",
+      "exampleVi": "Bên ngoài trời rất lạnh."
+    },
+    {
+      "id": "6718",
+      "hanzi": "完",
+      "pinyin": "wán",
+      "wordType": "Động từ",
+      "meaningVi": "hoàn thành; kết thúc; nguyên vẹn; đầy đủ; trọn vẹn",
+      "exampleHanzi": "我完作业了。",
+      "examplePinyin": "[wán]",
+      "exampleVi": "Tôi đã làm xong bài tập về nhà."
+    },
+    {
+      "id": "6719",
+      "hanzi": "万",
+      "pinyin": "wàn",
+      "wordType": "Số từ",
+      "meaningVi": "họ Wan",
+      "exampleHanzi": "这个手机一万块钱。",
+      "examplePinyin": "[wàn]",
+      "exampleVi": "Chiếc điện thoại này có giá mười nghìn nhân dân tệ."
+    },
+    {
+      "id": "6720",
+      "hanzi": "忘",
+      "pinyin": "wàng",
+      "wordType": "Động từ",
+      "meaningVi": "quên; bỏ sót; bỏ qua",
+      "exampleHanzi": "我忘记带书了。",
+      "examplePinyin": "[wàng]",
+      "exampleVi": "Tôi quên mang theo sách."
+    },
+    {
+      "id": "6721",
+      "hanzi": "往",
+      "pinyin": "wǎng",
+      "wordType": "Động từ",
+      "meaningVi": "đi (về hướng) |đến |hướng về |(tàu) đi đến |quá khứ |trước đây",
+      "exampleHanzi": "我往前面走。",
+      "examplePinyin": "[wǎng]",
+      "exampleVi": "Tôi đi về phía trước."
+    },
+    {
+      "id": "6722",
+      "hanzi": "往",
+      "pinyin": "wǎng",
+      "wordType": "Giới từ",
+      "meaningVi": "đi (về hướng) |đến |hướng về |(tàu) đi đến |quá khứ |trước đây",
+      "exampleHanzi": "我往学校走。",
+      "examplePinyin": "[wǎng]",
+      "exampleVi": "Tôi đi về phía trường học."
+    },
+    {
+      "id": "6723",
+      "hanzi": "网上",
+      "pinyin": "wǎngshang",
+      "wordType": "Danh từ",
+      "meaningVi": "trực tuyến",
+      "exampleHanzi": "我在网上买东西。",
+      "examplePinyin": "[wǎngshang]",
+      "exampleVi": "Tôi mua đồ trực tuyến."
+    },
+    {
+      "id": "6724",
+      "hanzi": "位",
+      "pinyin": "wèi",
+      "wordType": "Lượng từ",
+      "meaningVi": "vị trí | địa điểm | nơi | chỗ ngồi | lượng từ tôn xưng chỉ người | lượng từ chỉ bit (ví dụ 16-bit) | (vật lý) điện thế",
+      "exampleHanzi": "请坐这位子。",
+      "examplePinyin": "[wèi]",
+      "exampleVi": "Xin hãy ngồi ở ghế này."
+    },
+    {
+      "id": "6787",
+      "hanzi": "送",
+      "pinyin": "sòng",
+      "wordType": "Động từ",
+      "meaningVi": "gửi; giao; truyền; tặng; tiễn; đi cùng; đi theo",
+      "exampleHanzi": "我送你一本书。",
+      "examplePinyin": "[sòng]",
+      "exampleVi": "Tôi đưa cho bạn một cuốn sách."
+    },
+    {
+      "id": "6788",
+      "hanzi": "虽然",
+      "pinyin": "suīrán",
+      "wordType": "Liên từ",
+      "meaningVi": "although; even though",
+      "exampleHanzi": "虽然下雨，但是我还是要去。",
+      "examplePinyin": "[suīrán]",
+      "exampleVi": "Dù trời mưa nhưng tôi vẫn phải đi."
+    },
+    {
+      "id": "6789",
+      "hanzi": "所以",
+      "pinyin": "suǒyǐ",
+      "wordType": "Liên từ",
+      "meaningVi": "do đó; kết quả là; vậy; lý do tại sao",
+      "exampleHanzi": "我很累，所以我需要休息。",
+      "examplePinyin": "[suǒyǐ]",
+      "exampleVi": "Tôi mệt quá nên cần nghỉ ngơi."
+    },
+    {
+      "id": "6790",
+      "hanzi": "疼",
+      "pinyin": "téng",
+      "wordType": "Tính từ",
+      "meaningVi": "(cảm giác) đau; đau nhức; yêu thương dearly",
+      "exampleHanzi": "我的头很疼。",
+      "examplePinyin": "[téng]",
+      "exampleVi": "Đầu tôi đau quá."
+    },
+    {
+      "id": "6791",
+      "hanzi": "题",
+      "pinyin": "tí",
+      "wordType": "Danh từ",
+      "meaningVi": "họ Ti",
+      "exampleHanzi": "这道题很难。",
+      "examplePinyin": "[tí]",
+      "exampleVi": "Câu hỏi này rất khó."
+    },
+    {
+      "id": "6792",
+      "hanzi": "踢",
+      "pinyin": "tī",
+      "wordType": "Động từ",
+      "meaningVi": "đá; chơi (ví dụ: bóng đá); (lóng) người mạnh mẽ (trong mối quan hệ đồng tính nữ)",
+      "exampleHanzi": "他喜欢踢足球。",
+      "examplePinyin": "[tī]",
+      "exampleVi": "Anh ấy thích chơi bóng đá."
+    },
+    {
+      "id": "6793",
+      "hanzi": "条",
+      "pinyin": "tiáo",
+      "wordType": "Lượng từ",
+      "meaningVi": "dải; mục; điều khoản; điều (của luật hoặc hiệp ước); lượng từ dùng cho vật dài và mỏng (ruy băng, sông, đường, quần v.v.)",
+      "exampleHanzi": "我买了一条鱼。",
+      "examplePinyin": "[tiáo]",
+      "exampleVi": "Tôi đã mua một con cá."
+    },
+    {
+      "id": "6794",
+      "hanzi": "跳舞",
+      "pinyin": "tiàowǔ",
+      "wordType": "Động từ",
+      "meaningVi": "nhảy múa",
+      "exampleHanzi": "她喜欢跳舞。",
+      "examplePinyin": "[tiàowǔ]",
+      "exampleVi": "Cô ấy thích khiêu vũ."
+    },
+    {
+      "id": "6855",
+      "hanzi": "这样",
+      "pinyin": "zhèyàng",
+      "wordType": "Đại từ",
+      "meaningVi": "loại này; vậy; theo cách này; như thế này; như vậy",
+      "exampleHanzi": "这样做好吗？",
+      "examplePinyin": "[zhèyàng]",
+      "exampleVi": "Làm theo cách này có ổn không?"
+    },
+    {
+      "id": "6856",
+      "hanzi": "周",
+      "pinyin": "zhōu",
+      "wordType": "Danh từ",
+      "meaningVi": "họ Zhou; nhà Chu (1046-256 TCN)",
+      "exampleHanzi": "我每周去一次图书馆。",
+      "examplePinyin": "[zhōu]",
+      "exampleVi": "Tôi đến thư viện mỗi tuần một lần."
+    },
+    {
+      "id": "6997",
+      "hanzi": "前面",
+      "pinyin": "qiánmiàn",
+      "wordType": "Danh từ",
+      "meaningVi": "phía trước; ở phía trước; trước đó; ở trên; cũng đọc là [qián mian]",
+      "exampleHanzi": "学校在银行的前面。",
+      "examplePinyin": "[qiánmiàn]",
+      "exampleVi": "Trường học nằm đối diện ngân hàng."
+    },
+    {
+      "id": "6998",
+      "hanzi": "起来",
+      "pinyin": "qǐlái",
+      "wordType": "Động từ",
+      "meaningVi": "đứng dậy; dậy; cũng đọc là [qǐ lái]",
+      "exampleHanzi": "请站起来。",
+      "examplePinyin": "[qǐlái]",
+      "exampleVi": "Xin hãy đứng lên."
+    },
+    {
+      "id": "6999",
+      "hanzi": "晴",
+      "pinyin": "qíng",
+      "wordType": "Tính từ",
+      "meaningVi": "trong trẻo, đẹp (thời tiết)",
+      "exampleHanzi": "今天天气晴朗。",
+      "examplePinyin": "[qíng]",
+      "exampleVi": "Thời tiết hôm nay nắng đẹp."
+    },
+    {
+      "id": "7000",
+      "hanzi": "球",
+      "pinyin": "qiú",
+      "wordType": "Danh từ",
+      "meaningVi": "quả; hình cầu; trái đất; môn bóng; trận đấu",
+      "exampleHanzi": "他喜欢踢球。",
+      "examplePinyin": "[qiú]",
+      "exampleVi": "Anh ấy thích chơi bóng."
+    },
+    {
+      "id": "7001",
+      "hanzi": "妻子",
+      "pinyin": "qīzi",
+      "wordType": "Danh từ",
+      "meaningVi": "vợ",
+      "exampleHanzi": "他的妻子是老师。",
+      "examplePinyin": "[qīzi]",
+      "exampleVi": "Vợ anh là giáo viên."
+    },
+    {
+      "id": "7002",
+      "hanzi": "让",
+      "pinyin": "ràng",
+      "wordType": "Động từ",
+      "meaningVi": "hành động: yield | permit | let sb do sth | have sb do sth | make sb (feel sad etc) | by (indicates the agent in a passive clause, like )",
+      "exampleHanzi": "请让我帮忙。",
+      "examplePinyin": "[ràng]",
+      "exampleVi": "Xin hãy để tôi giúp đỡ."
+    },
+    {
+      "id": "7003",
+      "hanzi": "肉",
+      "pinyin": "ròu",
+      "wordType": "Danh từ",
+      "meaningVi": "thịt; thớ; cùi (quả); (lóng) (quả) mềm nhũn; (người) bở; thiếu quyết đoán; bộ thủ Khanghy 130",
+      "exampleHanzi": "我爱吃肉。",
+      "examplePinyin": "[ròu]",
+      "exampleVi": "Tôi thích ăn thịt."
+    },
+    {
+      "id": "7004",
+      "hanzi": "商场",
+      "pinyin": "shāngchǎng",
+      "wordType": "Danh từ",
+      "meaningVi": "trung tâm thương mại; cửa hàng bách hóa",
+      "exampleHanzi": "我们去商场购物吧。",
+      "examplePinyin": "[shāngchǎng]",
+      "exampleVi": "Chúng ta hãy đi mua sắm ở trung tâm mua sắm."
+    },
+    {
+      "id": "7385",
+      "hanzi": "啊",
+      "pinyin": "a",
+      "wordType": "Trợ từ",
+      "meaningVi": "thán từ hoặc tiếng ừ thể hiện sự đồng ý; ừm; Ah, được rồi; biểu hiện sự nhận ra; Oh, là bạn!",
+      "exampleHanzi": "啊，原来是这样！",
+      "examplePinyin": "[a]",
+      "exampleVi": "A, thì ra là như vậy!"
+    },
+    {
+      "id": "7386",
+      "hanzi": "爱好",
+      "pinyin": "àihào",
+      "wordType": "Động từ",
+      "meaningVi": "sở thích; đam mê",
+      "exampleHanzi": "我爱好音乐。",
+      "examplePinyin": "[àihào]",
+      "exampleVi": "Tôi yêu âm nhạc."
+    },
+    {
+      "id": "7915",
+      "hanzi": "本子",
+      "pinyin": "běnzi",
+      "wordType": "Danh từ",
+      "meaningVi": "sách; sổ tay; truyện tranh tự xuất bản kiểu Nhật (đặc biệt là truyện khiêu dâm), còn gọi là \"dōjinshi\"; ấn bản",
+      "exampleHanzi": "我用本子写字。",
+      "examplePinyin": "[běnzi]",
+      "exampleVi": "Tôi sử dụng một cuốn sổ để viết."
+    },
+    {
+      "id": "7916",
+      "hanzi": "比",
+      "pinyin": "bǐ",
+      "wordType": "Động từ",
+      "meaningVi": "Bỉ | người Bỉ | viết tắt của Bỉ",
+      "exampleHanzi": "我比他高。",
+      "examplePinyin": "[bǐ]",
+      "exampleVi": "Tôi cao hơn anh ấy."
+    },
+    {
+      "id": "8049",
+      "hanzi": "多",
+      "pinyin": "duō",
+      "wordType": "Động từ",
+      "meaningVi": "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+      "exampleHanzi": "我多想回家看看。",
+      "examplePinyin": "[duō]",
+      "exampleVi": "Tôi muốn về nhà xem thử biết bao."
+    },
+    {
+      "id": "8050",
+      "hanzi": "多",
+      "pinyin": "duō",
+      "wordType": "Số từ",
+      "meaningVi": "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+      "exampleHanzi": "这里有多少钱？",
+      "examplePinyin": "[duō]",
+      "exampleVi": "Ở đây có bao nhiêu tiền?"
+    },
+    {
+      "id": "8051",
+      "hanzi": "多",
+      "pinyin": "duō",
+      "wordType": "Phó từ",
+      "meaningVi": "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+      "exampleHanzi": "他多聪明啊！",
+      "examplePinyin": "[duō]",
+      "exampleVi": "Anh ấy thông minh làm sao!"
+    },
+    {
+      "id": "8052",
+      "hanzi": "给",
+      "pinyin": "gěi",
+      "wordType": "Giới từ",
+      "meaningVi": "cung cấp; đáp ứng",
+      "exampleHanzi": "我给他写了封信。",
+      "examplePinyin": "[gěi]",
+      "exampleVi": "Tôi đã viết cho anh ấy một lá thư."
+    },
+    {
+      "id": "8053",
+      "hanzi": "好",
+      "pinyin": "hǎo",
+      "wordType": "Phó từ",
+      "meaningVi": "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+      "exampleHanzi": "你好，很高兴见到你。",
+      "examplePinyin": "[hǎo]",
+      "exampleVi": "Xin chào hân hạnh được gặp bạn."
+    },
+    {
+      "id": "8054",
+      "hanzi": "那",
+      "pinyin": "nà",
+      "wordType": "Liên từ",
+      "meaningVi": "dạng khác",
+      "exampleHanzi": "那我就放心了。",
+      "examplePinyin": "[nà]",
+      "exampleVi": "Lúc đó tôi sẽ cảm thấy thoải mái."
+    },
+    {
+      "id": "8655",
+      "hanzi": "头",
+      "pinyin": "tóu",
+      "wordType": "Danh từ",
+      "meaningVi": "đầu; kiểu tóc; đỉnh; cuối; đầu hoặc cuối; mẩu; phần còn lại; trưởng; sếp; phía; khía cạnh; đầu tiên; dẫn đầu; lượng từ dùng cho lợn hoặc gia súc",
+      "exampleHanzi": "我的头很痛。",
+      "examplePinyin": "[tóu]",
+      "exampleVi": "Đầu tôi đau quá."
+    },
+    {
+      "id": "8656",
+      "hanzi": "外国",
+      "pinyin": "wàiguó",
+      "wordType": "Danh từ",
+      "meaningVi": "nước ngoài",
+      "exampleHanzi": "他来自外国。",
+      "examplePinyin": "[wàiguó]",
+      "exampleVi": "Anh ấy đến từ nước ngoài."
+    },
+    {
+      "id": "8735",
+      "hanzi": "为什么",
+      "pinyin": "wèi shénme",
+      "wordType": "Từ vựng",
+      "meaningVi": "tại sao?; vì lý do gì?",
+      "exampleHanzi": "你为什么不来？",
+      "examplePinyin": "[wèi shénme]",
+      "exampleVi": "Tại sao bạn không đến?"
+    },
+    {
+      "id": "8736",
+      "hanzi": "洗",
+      "pinyin": "xǐ",
+      "wordType": "Động từ",
+      "meaningVi": "giặt; tắm; rửa (ảnh); xáo (bài v.v.); xóa (bản ghi)",
+      "exampleHanzi": "我洗衣服。",
+      "examplePinyin": "[xǐ]",
+      "exampleVi": "Tôi giặt quần áo."
+    },
+    {
+      "id": "8837",
+      "hanzi": "因为",
+      "pinyin": "yīnwèi",
+      "wordType": "Liên từ",
+      "meaningVi": "bởi vì; do; vì",
+      "exampleHanzi": "因为天气好，我们去爬山。",
+      "examplePinyin": "[yīnwèi]",
+      "exampleVi": "Vì thời tiết tốt nên chúng tôi sẽ đi leo núi."
+    },
+    {
+      "id": "8838",
+      "hanzi": "一起",
+      "pinyin": "yìqǐ",
+      "wordType": "���",
+      "meaningVi": "cùng nơi; cùng nhau; với; nói chung (tổng cộng)",
+      "exampleHanzi": "我们一起学习汉语。",
+      "examplePinyin": "[yìqǐ]",
+      "exampleVi": "Chúng tôi cùng nhau học tiếng Trung."
+    },
+    {
+      "id": "8839",
+      "hanzi": "意思",
+      "pinyin": "yìsi",
+      "wordType": "Danh từ",
+      "meaningVi": "ý nghĩa; ý tưởng; quan điểm; mong muốn; ham muốn; sở thích; niềm vui; vật biểu thị sự biết ơn, tình cảm v.v.; tặng làm quà nhỏ; làm gì đó như một cử chỉ thiện chí v.v.",
+      "exampleHanzi": "我不明白你的意思。",
+      "examplePinyin": "[yìsi]",
+      "exampleVi": "Tôi không hiểu ý của bạn."
+    },
+    {
+      "id": "8840",
+      "hanzi": "游",
+      "pinyin": "yóu",
+      "wordType": "Động từ",
+      "meaningVi": "họ You",
+      "exampleHanzi": "鱼在水里游。",
+      "examplePinyin": "[yóu]",
+      "exampleVi": "Cá bơi trong nước."
+    },
+    {
+      "id": "8841",
+      "hanzi": "右",
+      "pinyin": "yòu",
+      "wordType": "Danh từ",
+      "meaningVi": "(dạng kết hợp) phải; bên phải; (dạng kết hợp) (chính trị) phe hữu; (dạng kết hợp) (cổ) phía tây; (văn chương) bên phải là bên có thứ bậc cao hơn",
+      "exampleHanzi": "请向右转。",
+      "examplePinyin": "[yòu]",
+      "exampleVi": "Vui lòng rẽ phải."
+    },
+    {
+      "id": "8842",
+      "hanzi": "有意思",
+      "pinyin": "yǒu yìsi",
+      "wordType": "Từ vựng",
+      "meaningVi": "thú vị; có ý nghĩa; thú vị; vui vẻ",
+      "exampleHanzi": "这本书很有意思。",
+      "examplePinyin": "[yǒu yìsi]",
+      "exampleVi": "Cuốn sách này rất thú vị."
+    },
+    {
+      "id": "8843",
+      "hanzi": "右边",
+      "pinyin": "yòubian",
+      "wordType": "Danh từ",
+      "meaningVi": "bên phải; bên phải, về phía phải",
+      "exampleHanzi": "请坐右边。",
+      "examplePinyin": "[yòubian]",
+      "exampleVi": "Xin vui lòng ngồi ở phía bên phải."
+    },
+    {
+      "id": "8844",
+      "hanzi": "有时（候）",
+      "pinyin": "yǒushí(hou)",
+      "wordType": "Phó từ",
+      "meaningVi": "đôi khi; thỉnh thoảng",
+      "exampleHanzi": "有时我坐公交车去学校。",
+      "examplePinyin": "[yǒushí(hou)]",
+      "exampleVi": "Thỉnh thoảng tôi bắt xe buýt tới trường."
+    },
+    {
+      "id": "9627",
+      "hanzi": "离",
+      "pinyin": "lí",
+      "wordType": "Động từ",
+      "meaningVi": "họ Li",
+      "exampleHanzi": "学校离我家很近。",
+      "examplePinyin": "[lí]",
+      "exampleVi": "Trường học rất gần nhà tôi."
+    },
+    {
+      "id": "9628",
+      "hanzi": "里面",
+      "pinyin": "lǐmiàn",
+      "wordType": "Danh từ",
+      "meaningVi": "bên trong; nội bộ; cũng đọc là [lǐ mian]",
+      "exampleHanzi": "书在盒子里。",
+      "examplePinyin": "[lǐmiàn]",
+      "exampleVi": "Cuốn sách nằm trong hộp."
+    },
+    {
+      "id": "9629",
+      "hanzi": "楼",
+      "pinyin": "lóu",
+      "wordType": "Danh từ",
+      "meaningVi": "họ Lâu",
+      "exampleHanzi": "我住在三楼。",
+      "examplePinyin": "[lóu]",
+      "exampleVi": "Tôi sống ở tầng ba."
+    },
+    {
+      "id": "9630",
+      "hanzi": "路",
+      "pinyin": "lù",
+      "wordType": "Danh từ",
+      "meaningVi": "họ Lặc",
+      "exampleHanzi": "这条路很长。",
+      "examplePinyin": "[lù]",
+      "exampleVi": "Con đường này rất dài."
+    },
+    {
+      "id": "9631",
+      "hanzi": "绿茶",
+      "pinyin": "lǜchá",
+      "wordType": "Danh từ",
+      "meaningVi": "trà xanh; (lóng) (dành cho nữ) trông có vẻ ngây thơ và quyến rũ nhưng thực chất tính toán và thao túng; cô gái có những phẩm chất này",
+      "exampleHanzi": "我爱喝绿茶。",
+      "examplePinyin": "[lǜchá]",
+      "exampleVi": "Tôi thích uống trà xanh."
+    },
+    {
+      "id": "9632",
+      "hanzi": "绿色",
+      "pinyin": "lǜsè",
+      "wordType": "Danh từ",
+      "meaningVi": "xanh lá cây",
+      "exampleHanzi": "绿色是春天的颜色。",
+      "examplePinyin": "[lǜsè]",
+      "exampleVi": "Màu xanh lá cây là màu của mùa xuân."
+    },
+    {
+      "id": "9633",
+      "hanzi": "路上",
+      "pinyin": "lùshang",
+      "wordType": "Danh từ",
+      "meaningVi": "trên đường; trong hành trình; mặt đường",
+      "exampleHanzi": "路上有很多车。",
+      "examplePinyin": "[lùshang]",
+      "exampleVi": "Có rất nhiều xe ô tô trên đường."
+    },
+    {
+      "id": "9634",
+      "hanzi": "旅游",
+      "pinyin": "lǚyóu",
+      "wordType": "Động từ",
+      "meaningVi": "chuyến đi; hành trình; du lịch; đi du lịch; tour; du lịch",
+      "exampleHanzi": "我们去旅游吧。",
+      "examplePinyin": "[lǚyóu]",
+      "exampleVi": "Hãy đi du lịch nào."
+    },
+    {
+      "id": "9867",
+      "hanzi": "爱好",
+      "pinyin": "àihào",
+      "wordType": "Danh từ",
+      "meaningVi": "sở thích; đam mê",
+      "exampleHanzi": "我的爱好是读书。",
+      "examplePinyin": "[àihào]",
+      "exampleVi": "Sở thích của tôi là đọc sách."
+    },
+    {
+      "id": "9868",
+      "hanzi": "白色",
+      "pinyin": "báisè",
+      "wordType": "Danh từ",
+      "meaningVi": "màu trắng; nghĩa bóng: phản động; chống cộng",
+      "exampleHanzi": "这件衣服是白色。",
+      "examplePinyin": "[báisè]",
+      "exampleVi": "Bộ quần áo này có màu trắng."
+    },
+    {
+      "id": "9869",
+      "hanzi": "班",
+      "pinyin": "bān",
+      "wordType": "Danh từ",
+      "meaningVi": "họ Ban",
+      "exampleHanzi": "我有一个班的同学。",
+      "examplePinyin": "[bān]",
+      "exampleVi": "Tôi có một lớp bạn cùng lớp."
+    },
+    {
+      "id": "9870",
+      "hanzi": "帮",
+      "pinyin": "bāng",
+      "wordType": "Động từ",
+      "meaningVi": "giúp; hỗ trợ; ủng hộ; cho ai (tức là như một sự giúp đỡ); thuê (làm công nhân); bên (của xô, thuyền v.v.); lớp ngoài; phần trên (của giày); nhóm; băng đảng; phe phái; đảng hội đen",
+      "exampleHanzi": "请帮我一个忙。",
+      "examplePinyin": "[bāng]",
+      "exampleVi": "Làm ơn giúp tôi một việc."
+    },
+    {
+      "id": "9871",
+      "hanzi": "帮忙",
+      "pinyin": "bāngmáng",
+      "wordType": "Động từ",
+      "meaningVi": "giúp đỡ; ra tay; làm ơn; làm việc tốt",
+      "exampleHanzi": "你能帮忙吗？",
+      "examplePinyin": "[bāngmáng]",
+      "exampleVi": "Bạn có thể giúp được không?"
+    },
+    {
+      "id": "9872",
+      "hanzi": "包",
+      "pinyin": "bāo",
+      "wordType": "Động từ",
+      "meaningVi": "họ Bào",
+      "exampleHanzi": "我们包饺子。",
+      "examplePinyin": "[bāo]",
+      "exampleVi": "Chúng tôi làm bánh bao."
+    },
+    {
+      "id": "9873",
+      "hanzi": "包",
+      "pinyin": "bāo",
+      "wordType": "Danh từ",
+      "meaningVi": "họ Bào",
+      "exampleHanzi": "我的包是红色的。",
+      "examplePinyin": "[bāo]",
+      "exampleVi": "Túi của tôi màu đỏ."
+    },
+    {
+      "id": "9874",
+      "hanzi": "包",
+      "pinyin": "bāo",
+      "wordType": "Lượng từ",
+      "meaningVi": "họ Bào",
+      "exampleHanzi": "我买了一包糖。",
+      "examplePinyin": "[bāo]",
+      "exampleVi": "Tôi mua một gói đường."
+    },
+    {
+      "id": "10205",
+      "hanzi": "打开",
+      "pinyin": "dǎkāi",
+      "wordType": "Động từ",
+      "meaningVi": "mở; hiển thị (vé); bật; chuyển sang",
+      "exampleHanzi": "请打开窗户。",
+      "examplePinyin": "[dǎkāi]",
+      "exampleVi": "Hãy mở cửa sổ."
+    },
+    {
+      "id": "10206",
+      "hanzi": "但",
+      "pinyin": "dàn",
+      "wordType": "Liên từ",
+      "meaningVi": "nhưng; tuy nhiên; vẫn; chỉ; chỉ là; chỉ có",
+      "exampleHanzi": "天气很冷，但我还是要出去。",
+      "examplePinyin": "[dàn]",
+      "exampleVi": "Thời tiết rất lạnh nhưng tôi vẫn phải ra ngoài."
+    },
+    {
+      "id": "10207",
+      "hanzi": "但是",
+      "pinyin": "dànshì",
+      "wordType": "Liên từ",
+      "meaningVi": "nhưng; tuy nhiên",
+      "exampleHanzi": "我很累，但是还要继续工作。",
+      "examplePinyin": "[dànshì]",
+      "exampleVi": "Tôi rất mệt nhưng vẫn phải tiếp tục làm việc."
+    },
+    {
+      "id": "10208",
+      "hanzi": "得",
+      "pinyin": "de",
+      "wordType": "Trợ từ",
+      "meaningVi": "trợ từ cấu trúc: dùng sau động từ (hoặc tính từ làm động từ chính), nối với cụm từ theo sau chỉ hiệu quả, mức độ, khả năng v.v.",
+      "exampleHanzi": "他跑得很快。",
+      "examplePinyin": "[de]",
+      "exampleVi": "Anh ấy chạy rất nhanh."
+    },
+    {
+      "id": "10209",
+      "hanzi": "地",
+      "pinyin": "de",
+      "wordType": "Trợ từ",
+      "meaningVi": "trái đất; mặt đất; cánh đồng; nơi; đất đai",
+      "exampleHanzi": "他认真地学习汉语。",
+      "examplePinyin": "[de]",
+      "exampleVi": "Anh ấy học tiếng Trung một cách nghiêm túc."
+    },
+    {
+      "id": "10210",
+      "hanzi": "等",
+      "pinyin": "děng",
+      "wordType": "Động từ",
+      "meaningVi": "hạng; bậc; loại; bằng; giống như; đợi; chờ; vân vân; và thế nữa; vân (các tác giả khác); sau; ngay khi; một khi",
+      "exampleHanzi": "我在车站等车。",
+      "examplePinyin": "[děng]",
+      "exampleVi": "Tôi đang đợi xe buýt ở nhà ga."
+    },
+    {
+      "id": "10211",
+      "hanzi": "点",
+      "pinyin": "diǎn",
+      "wordType": "Động từ",
+      "meaningVi": "chấm | giọt | điểm | lúc | vẽ chấm | đánh dấu | chọn | gọi món | chạm nhẹ | ám chỉ | thắp | đốt | nhỏ từng giọt | năm phần canh (5 thời cổ) | nét chấm trong chữ Hán | lượng từ",
+      "exampleHanzi": "服务员，请点菜。",
+      "examplePinyin": "[diǎn]",
+      "exampleVi": "Người phục vụ, vui lòng gọi đồ ăn."
+    },
+    {
+      "id": "10212",
+      "hanzi": "地铁",
+      "pinyin": "dìtiě",
+      "wordType": "Danh từ",
+      "meaningVi": "đường sắt ngầm; tàu điện ngầm; tàu điện ngầm",
+      "exampleHanzi": "我每天坐地铁上班。",
+      "examplePinyin": "[dìtiě]",
+      "exampleVi": "Tôi đi tàu điện ngầm đi làm hàng ngày."
+    },
+    {
+      "id": "10213",
+      "hanzi": "动",
+      "pinyin": "dòng",
+      "wordType": "Động từ",
+      "meaningVi": "di chuyển | làm chuyển động | xê dịch | chạm | sử dụng | xúc động | thay đổi | viết tắt của động từ",
+      "exampleHanzi": "请不要动我的书。",
+      "examplePinyin": "[dòng]",
+      "exampleVi": "Làm ơn đừng chạm vào sách của tôi."
+    },
+    {
+      "id": "10214",
+      "hanzi": "懂",
+      "pinyin": "dǒng",
+      "wordType": "Động từ",
+      "meaningVi": "hiểu; nắm được",
+      "exampleHanzi": "我懂你的意思。",
+      "examplePinyin": "[dǒng]",
+      "exampleVi": "Tôi hiểu ý bạn."
+    },
+    {
+      "id": "10457",
+      "hanzi": "教室",
+      "pinyin": "jiàoshì",
+      "wordType": "Danh từ",
+      "meaningVi": "phòng học",
+      "exampleHanzi": "我们在教室里上课。",
+      "examplePinyin": "[jiàoshì]",
+      "exampleVi": "Chúng tôi có các lớp học trong lớp học."
+    },
+    {
+      "id": "10458",
+      "hanzi": "机场",
+      "pinyin": "jīchǎng",
+      "wordType": "Danh từ",
+      "meaningVi": "sân bay; bãi đáp; (lóng) nhà cung cấp dịch vụ cho Shadowsocks hoặc phần mềm tương tự để vượt kiểm duyệt Internet",
+      "exampleHanzi": "我们在机场等飞机。",
+      "examplePinyin": "[jīchǎng]",
+      "exampleVi": "Chúng tôi chờ máy bay ở sân bay."
+    },
+    {
+      "id": "10459",
+      "hanzi": "记得",
+      "pinyin": "jìde",
+      "wordType": "Động từ",
+      "meaningVi": "nhớ",
+      "exampleHanzi": "我记得你的名字。",
+      "examplePinyin": "[jìde]",
+      "exampleVi": "Tôi nhớ tên của bạn."
+    },
+    {
+      "id": "10460",
+      "hanzi": "介绍",
+      "pinyin": "jièshào",
+      "wordType": "Động từ",
+      "meaningVi": "giới thiệu (ai đó với ai đó); trình bày; giới thiệu (ai đó cho công việc v.v.); sự giới thiệu",
+      "exampleHanzi": "请介绍你的朋友。",
+      "examplePinyin": "[jièshào]",
+      "exampleVi": "Hãy giới thiệu bạn của bạn."
+    },
+    {
+      "id": "10461",
+      "hanzi": "进",
+      "pinyin": "jìn",
+      "wordType": "Động từ",
+      "meaningVi": "tiến lên; tiến tới; đi vào; bước vào; đưa vào; nộp; tiếp nhận; chấp nhận; (toán học) cơ số của hệ thống số; lượng từ dùng cho các phần trong tòa nhà hoặc khu dân cư",
+      "exampleHanzi": "我进学校。",
+      "examplePinyin": "[jìn]",
+      "exampleVi": "Tôi vào trường."
+    },
+    {
+      "id": "10462",
+      "hanzi": "近",
+      "pinyin": "jìn",
+      "wordType": "Tính từ",
+      "meaningVi": "gần; gần với; khoảng",
+      "exampleHanzi": "学校离我家很近。",
+      "examplePinyin": "[jìn]",
+      "exampleVi": "Trường học rất gần nhà tôi."
+    },
+    {
+      "id": "10463",
+      "hanzi": "经常",
+      "pinyin": "jīngcháng",
+      "wordType": "Phó từ",
+      "meaningVi": "thường xuyên; liên tục; đều đặn; hay; hàng ngày; hằng ngày; hàng ngày",
+      "exampleHanzi": "我经常去图书馆。",
+      "examplePinyin": "[jīngcháng]",
+      "exampleVi": "Tôi thường đến thư viện."
+    },
+    {
+      "id": "10464",
+      "hanzi": "进来",
+      "pinyin": "jìnlái",
+      "wordType": "Động từ",
+      "meaningVi": "vào trong",
+      "exampleHanzi": "请进来。",
+      "examplePinyin": "[jìnlái]",
+      "exampleVi": "Xin mời vào."
+    },
+    {
+      "id": "10505",
+      "hanzi": "间",
+      "pinyin": "jiān",
+      "wordType": "Lượng từ",
+      "meaningVi": "giữa; trong; trong một khoảng thời gian hoặc không gian xác định; phòng; phần của phòng hoặc khoảng không gian ngang giữa hai cặp cột; lượng từ cho phòng",
+      "exampleHanzi": "我住一间房。",
+      "examplePinyin": "[jiān]",
+      "exampleVi": "Tôi sống trong một phòng."
+    },
+    {
+      "id": "10506",
+      "hanzi": "教",
+      "pinyin": "jiāo",
+      "wordType": "Động từ",
+      "meaningVi": "họ Jiao",
+      "exampleHanzi": "老师教我们汉语。",
+      "examplePinyin": "[jiāo]",
+      "exampleVi": "Giáo viên dạy chúng tôi tiếng Trung."
+    },
+    {
+      "id": "10567",
+      "hanzi": "希望",
+      "pinyin": "xīwàng",
+      "wordType": "Động từ",
+      "meaningVi": "hy vọng; một hy vọng; một mong ước",
+      "exampleHanzi": "我希望明天不下雨。",
+      "examplePinyin": "[xīwàng]",
+      "exampleVi": "Tôi hy vọng ngày mai trời không mưa."
+    },
+    {
+      "id": "10568",
+      "hanzi": "眼睛",
+      "pinyin": "yǎnjing",
+      "wordType": "Danh từ",
+      "meaningVi": "mắt",
+      "exampleHanzi": "他的眼睛很大。",
+      "examplePinyin": "[yǎnjing]",
+      "exampleVi": "Mắt anh ấy rất to."
+    },
+    {
+      "id": "10569",
+      "hanzi": "颜色",
+      "pinyin": "yánsè",
+      "wordType": "Danh từ",
+      "meaningVi": "màu sắc; dung mạo; ngoại hình; biểu cảm khuôn mặt; chất màu; thuốc nhuộm",
+      "exampleHanzi": "这个颜色很漂亮。",
+      "examplePinyin": "[yánsè]",
+      "exampleVi": "Màu này rất đẹp."
+    },
+    {
+      "id": "10570",
+      "hanzi": "药",
+      "pinyin": "yào",
+      "wordType": "Danh từ",
+      "meaningVi": "thuốc; dược phẩm; chất dùng cho mục đích cụ thể (ví dụ: đầu độc, nổ, lên men); đầu độc",
+      "exampleHanzi": "他感冒了，医生给他开了一些药。",
+      "examplePinyin": "[yào]",
+      "exampleVi": "Anh ấy bị cảm lạnh nên bác sĩ đã kê đơn thuốc cho anh ấy."
+    },
+    {
+      "id": "10571",
+      "hanzi": "药店",
+      "pinyin": "yàodiàn",
+      "wordType": "Danh từ",
+      "meaningVi": "hiệu thuốc",
+      "exampleHanzi": "药店在银行旁边。",
+      "examplePinyin": "[yàodiàn]",
+      "exampleVi": "Hiệu thuốc nằm cạnh ngân hàng."
+    },
+    {
+      "id": "10572",
+      "hanzi": "爷爷",
+      "pinyin": "yéye",
+      "wordType": "Danh từ",
+      "meaningVi": "(thông tục) cha của cha; ông nội",
+      "exampleHanzi": "我的爷爷很慈祥。",
+      "examplePinyin": "[yéye]",
+      "exampleVi": "Ông nội tôi rất tốt bụng."
+    },
+    {
+      "id": "10573",
+      "hanzi": "一会儿",
+      "pinyin": "yíhuìr",
+      "wordType": "数量",
+      "meaningVi": "một lát; một lúc; trong chốc lát; bây giờ...bây giờ...; cũng đọc [yī huǐ r]",
+      "exampleHanzi": "我等一会儿。",
+      "examplePinyin": "[yíhuìr]",
+      "exampleVi": "Tôi sẽ đợi một lúc."
+    },
+    {
+      "id": "10574",
+      "hanzi": "已经",
+      "pinyin": "yǐjīng",
+      "wordType": "Phó từ",
+      "meaningVi": "đã rồi",
+      "exampleHanzi": "我已经吃饭了。",
+      "examplePinyin": "[yǐjīng]",
+      "exampleVi": "Tôi đã ăn rồi."
+    },
+    {
+      "id": "10837",
+      "hanzi": "远",
+      "pinyin": "yuǎn",
+      "wordType": "Tính từ",
+      "meaningVi": "tránh xa (cổ văn)",
+      "exampleHanzi": "学校离我家很远。",
+      "examplePinyin": "[yuǎn]",
+      "exampleVi": "Trường học cách nhà tôi rất xa."
+    },
+    {
+      "id": "10838",
+      "hanzi": "运动",
+      "pinyin": "yùndòng",
+      "wordType": "Động từ",
+      "meaningVi": "vận động; tập thể dục; thể thao; vận động; chuyển động; phong trào",
+      "exampleHanzi": "我每天运动一小时。",
+      "examplePinyin": "[yùndòng]",
+      "exampleVi": "Tôi tập thể dục một giờ mỗi ngày."
+    },
+    {
+      "id": "10839",
+      "hanzi": "运动",
+      "pinyin": "yùndòng",
+      "wordType": "Danh từ",
+      "meaningVi": "vận động; tập thể dục; thể thao; vận động; chuyển động; phong trào",
+      "exampleHanzi": "游泳是一项很好的运动。",
+      "examplePinyin": "[yùndòng]",
+      "exampleVi": "Bơi lội là một môn thể thao tuyệt vời."
+    },
+    {
+      "id": "10840",
+      "hanzi": "站",
+      "pinyin": "zhàn",
+      "wordType": "Danh từ",
+      "meaningVi": "ga; đứng; dừng lại; dừng; chi nhánh của công ty hoặc tổ chức; trang web",
+      "exampleHanzi": "我在车站等车。",
+      "examplePinyin": "[zhàn]",
+      "exampleVi": "Tôi đang đợi xe buýt ở bến xe buýt."
+    },
+    {
+      "id": "10841",
+      "hanzi": "丈夫",
+      "pinyin": "zhàngfu",
+      "wordType": "Danh từ",
+      "meaningVi": "chồng",
+      "exampleHanzi": "她的丈夫是医生。",
+      "examplePinyin": "[zhàngfu]",
+      "exampleVi": "Chồng cô là bác sĩ."
+    },
+    {
+      "id": "10842",
+      "hanzi": "着",
+      "pinyin": "zhe",
+      "wordType": "Trợ từ",
+      "meaningVi": "chạm; tiếp xúc; cảm thấy; bị ảnh hưởng bởi; bắt lửa; cháy; (thông tục) ngủ thiếp đi; (sau động từ) trúng đích; thành công",
+      "exampleHanzi": "他看着书。",
+      "examplePinyin": "[zhe]",
+      "exampleVi": "Anh ấy đang đọc một cuốn sách."
+    },
+    {
+      "id": "10843",
+      "hanzi": "这么",
+      "pinyin": "zhème",
+      "wordType": "Đại từ",
+      "meaningVi": "nhiều như vậy; nhiều như thế; bao nhiêu?; theo cách này; như thế này",
+      "exampleHanzi": "这么远的地方怎么去？",
+      "examplePinyin": "[zhème]",
+      "exampleVi": "Làm thế nào để chúng ta đến được một nơi xa như vậy?"
+    },
+    {
+      "id": "10844",
+      "hanzi": "正",
+      "pinyin": "zhèng",
+      "wordType": "Phó từ",
+      "meaningVi": "tháng giêng âm lịch",
+      "exampleHanzi": "他正在吃饭。",
+      "examplePinyin": "[zhèng]",
+      "exampleVi": "Anh ấy đang ăn."
+    },
+    {
+      "id": "10995",
+      "hanzi": "阴",
+      "pinyin": "yīn",
+      "wordType": "Tính từ",
+      "meaningVi": "họ Yin",
+      "exampleHanzi": "今天天气阴。",
+      "examplePinyin": "[yīn]",
+      "exampleVi": "Thời tiết hôm nay nhiều mây."
+    },
+    {
+      "id": "10996",
+      "hanzi": "因为",
+      "pinyin": "yīnwèi",
+      "wordType": "Giới từ",
+      "meaningVi": "bởi vì; do; vì",
+      "exampleHanzi": "因为下雨，我们不去公园。",
+      "examplePinyin": "[yīnwèi]",
+      "exampleVi": "Vì trời mưa nên chúng tôi không đi công viên."
+    },
+    {
+      "id": "11065",
+      "hanzi": "进去",
+      "pinyin": "jìnqù",
+      "wordType": "Động từ",
+      "meaningVi": "đi vào",
+      "exampleHanzi": "我们进去看看。",
+      "examplePinyin": "[jìnqù]",
+      "exampleVi": "Chúng ta hãy đi vào và xem xét."
+    },
+    {
+      "id": "11066",
+      "hanzi": "机票",
+      "pinyin": "jīpiào",
+      "wordType": "Danh từ",
+      "meaningVi": "vé máy bay; vé hành khách",
+      "exampleHanzi": "我买了机票。",
+      "examplePinyin": "[jīpiào]",
+      "exampleVi": "Tôi đã mua vé máy bay."
+    },
+    {
+      "id": "11377",
+      "hanzi": "下来",
+      "pinyin": "xiàlái",
+      "wordType": "Động từ",
+      "meaningVi": "xuống; đánh dấu hành động hoàn thành; (sau động từ chỉ chuyển động, chỉ chuyển động xuống và về phía chúng ta, cũng mang nghĩa bóng); (chỉ sự tiếp diễn từ quá khứ về phía chúng ta); được thu hoạch (của cây trồng); kết thúc (của một khoảng thời gian); đi vào quần chúng (dùng cho lãnh đạo)",
+      "exampleHanzi": "请下来坐。",
+      "examplePinyin": "[xiàlái]",
+      "exampleVi": "Xin hãy xuống và ngồi."
+    },
+    {
+      "id": "11378",
+      "hanzi": "下面",
+      "pinyin": "xiàmiàn",
+      "wordType": "Danh từ",
+      "meaningVi": "luộc mì",
+      "exampleHanzi": "请看下面的图片。",
+      "examplePinyin": "[xiàmiàn]",
+      "exampleVi": "Xin vui lòng nhìn vào hình ảnh dưới đây."
+    },
+    {
+      "id": "11379",
+      "hanzi": "笑",
+      "pinyin": "xiào",
+      "wordType": "Động từ",
+      "meaningVi": "cười; mỉm cười; chế giễu",
+      "exampleHanzi": "他笑得很开心。",
+      "examplePinyin": "[xiào]",
+      "exampleVi": "Anh cười rất vui vẻ."
+    },
+    {
+      "id": "11380",
+      "hanzi": "小孩儿",
+      "pinyin": "xiǎoháir",
+      "wordType": "Danh từ",
+      "meaningVi": "dạng thêm thanh erhua của từ chỉ trẻ em | trẻ em",
+      "exampleHanzi": "这个小孩儿很可爱。",
+      "examplePinyin": "[xiǎoháir]",
+      "exampleVi": "Đứa trẻ này rất dễ thương."
+    },
+    {
+      "id": "11381",
+      "hanzi": "小时候",
+      "pinyin": "xiǎoshíhou",
+      "wordType": "Danh từ",
+      "meaningVi": "trong thời thơ ấu",
+      "exampleHanzi": "小时候我很调皮。",
+      "examplePinyin": "[xiǎoshíhou]",
+      "exampleVi": "Hồi nhỏ tôi rất nghịch ngợm."
+    },
+    {
+      "id": "11382",
+      "hanzi": "下去",
+      "pinyin": "xiàqù",
+      "wordType": "Động từ",
+      "meaningVi": "đi xuống; hạ xuống; tiếp tục; (của người hầu) lui ra",
+      "exampleHanzi": "我们下去看看。",
+      "examplePinyin": "[xiàqù]",
+      "exampleVi": "Chúng ta hãy đi xuống và xem xét."
+    },
+    {
+      "id": "11383",
+      "hanzi": "姓",
+      "pinyin": "xìng",
+      "wordType": "Danh từ",
+      "meaningVi": "họ; họ tên; mang họ",
+      "exampleHanzi": "我的姓是李。",
+      "examplePinyin": "[xìng]",
+      "exampleVi": "Họ của tôi là Lý."
+    },
+    {
+      "id": "11384",
+      "hanzi": "姓",
+      "pinyin": "xìng",
+      "wordType": "Động từ",
+      "meaningVi": "họ; họ tên; mang họ",
+      "exampleHanzi": "他姓王。",
+      "examplePinyin": "[xìng]",
+      "exampleVi": "Anh ấy họ Vương."
+    },
+    {
+      "id": "11817",
+      "hanzi": "饭馆",
+      "pinyin": "fànguǎn",
+      "wordType": "Danh từ",
+      "meaningVi": "nhà hàng",
+      "exampleHanzi": "我们去饭馆吃饭吧。",
+      "examplePinyin": "[fànguǎn]",
+      "exampleVi": "Chúng ta hãy đến nhà hàng để ăn."
+    },
+    {
+      "id": "11818",
+      "hanzi": "飞",
+      "pinyin": "fēi",
+      "wordType": "Động từ",
+      "meaningVi": "bay",
+      "exampleHanzi": "鸟儿在天空中飞。",
+      "examplePinyin": "[fēi]",
+      "exampleVi": "Chim bay trên bầu trời."
+    },
+    {
+      "id": "11819",
+      "hanzi": "高",
+      "pinyin": "gāo",
+      "wordType": "Tính từ",
+      "meaningVi": "họ Gao",
+      "exampleHanzi": "这座山很高。",
+      "examplePinyin": "[gāo]",
+      "exampleVi": "Ngọn núi này rất cao."
+    },
+    {
+      "id": "11820",
+      "hanzi": "高",
+      "pinyin": "gāo",
+      "wordType": "Danh từ",
+      "meaningVi": "họ Gao",
+      "exampleHanzi": "他跳得很高兴。",
+      "examplePinyin": "[gāo]",
+      "exampleVi": "Anh ấy nhảy rất vui vẻ."
+    },
+    {
+      "id": "11821",
+      "hanzi": "告诉",
+      "pinyin": "gàosu",
+      "wordType": "Động từ",
+      "meaningVi": "truy tố; khiếu nại",
+      "exampleHanzi": "请告诉我地址。",
+      "examplePinyin": "[gàosu]",
+      "exampleVi": "Xin vui lòng cho tôi biết địa chỉ."
+    },
+    {
+      "id": "11822",
+      "hanzi": "高中",
+      "pinyin": "gāozhōng",
+      "wordType": "Danh từ",
+      "meaningVi": "đỗ đạt xuất sắc (dùng trong lời chúc mừng)",
+      "exampleHanzi": "我在高中读书。",
+      "examplePinyin": "[gāozhōng]",
+      "exampleVi": "Tôi học ở trường trung học."
+    },
+    {
+      "id": "11823",
+      "hanzi": "跟",
+      "pinyin": "gēn",
+      "wordType": "Giới từ",
+      "meaningVi": "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)",
+      "exampleHanzi": "我跟他一起去学校。",
+      "examplePinyin": "[gēn]",
+      "exampleVi": "Tôi đi học cùng anh ấy."
+    },
+    {
+      "id": "11824",
+      "hanzi": "跟",
+      "pinyin": "gēn",
+      "wordType": "Liên từ",
+      "meaningVi": "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)",
+      "exampleHanzi": "你跟他一样高。",
+      "examplePinyin": "[gēn]",
+      "exampleVi": "Bạn cao bằng anh ấy."
+    },
+    {
+      "id": "12235",
+      "hanzi": "上来",
+      "pinyin": "shànglái",
+      "wordType": "Động từ",
+      "meaningVi": "đi lên; tiến lại gần; (bổ ngữ động từ chỉ sự thành công)",
+      "exampleHanzi": "请上来坐。",
+      "examplePinyin": "[shànglái]",
+      "exampleVi": "Xin mời lên và ngồi."
+    },
+    {
+      "id": "12236",
+      "hanzi": "上面",
+      "pinyin": "shàngmiàn",
+      "wordType": "Danh từ",
+      "meaningVi": "phía trên; đã đề cập ở trên",
+      "exampleHanzi": "书在桌子上面。",
+      "examplePinyin": "[shàngmiàn]",
+      "exampleVi": "Cuốn sách ở trên cùng của bàn."
+    }
+  ]
+}

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { HskQuizSession } from "@/components/hsk-quiz-session";
+import { HskLessonLoader } from "@/components/hsk-lesson-loader";
 import { HskVipLocked } from "@/components/hsk-vip-locked";
 import { getHskLessonPageData } from "@/lib/hsk-access-repository";
 import { getCurrentUser } from "@/lib/auth-session";
 import { learnerLoginPath } from "@/lib/learner-auth";
+import { hskLessonResourceUrl, learningContentScope } from "@/lib/lesson-resource";
+import { createLessonResource } from "@/lib/lesson-resource-server";
 
 type PageProps = { params: Promise<{ level: string; lesson: string }> };
 
@@ -19,5 +21,6 @@ export default async function HskQuizPage({ params }: PageProps) {
   if (!user && data.access.source !== "guest") redirect(learnerLoginPath(returnTo));
   if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
   if (!data.lesson.exercises.length) notFound();
-  return <HskQuizSession lesson={data.lesson} />;
+  const resource = await createLessonResource(hskLessonResourceUrl(data.lesson.levelId, data.lesson.id), data.lesson, learningContentScope(user));
+  return <HskLessonLoader authenticated={Boolean(user)} levelId={data.lesson.levelId} mode="quiz" resource={resource} title={data.lesson.title} />;
 }

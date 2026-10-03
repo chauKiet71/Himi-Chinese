@@ -1,0 +1,302 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "label": "HSK1",
+  "levelLabel": "HSK1",
+  "lessonCount": 15,
+  "vocabularyCount": 322,
+  "exerciseCount": 322,
+  "typeCounts": {
+    "meaning": 322,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "lessons": [
+    {
+      "id": "hsk1-bai-01-chao-anh",
+      "lessonNumber": 1,
+      "title": "Xin chào!",
+      "topicId": "nen-tang-lam-quen",
+      "topicTitle": "Nền tảng & Làm quen",
+      "route": "/hsk/1/hsk1-bai-01-chao-anh/play",
+      "targetCount": 22,
+      "vocabularyCount": 22,
+      "exactAnchorCount": 6,
+      "semanticBalanceCount": 16,
+      "file": "hsk1/lesson-01.json",
+      "exerciseCount": 22,
+      "typeCounts": {
+        "meaning": 22,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-02-cam-on-anh",
+      "lessonNumber": 2,
+      "title": "Cảm ơn bạn!",
+      "topicId": "nen-tang-lam-quen",
+      "topicTitle": "Nền tảng & Làm quen",
+      "route": "/hsk/1/hsk1-bai-02-cam-on-anh/play",
+      "targetCount": 22,
+      "vocabularyCount": 22,
+      "exactAnchorCount": 3,
+      "semanticBalanceCount": 19,
+      "file": "hsk1/lesson-02.json",
+      "exerciseCount": 22,
+      "typeCounts": {
+        "meaning": 22,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-03-co-ten-gi",
+      "lessonNumber": 3,
+      "title": "Bạn tên gì?",
+      "topicId": "nen-tang-lam-quen",
+      "topicTitle": "Nền tảng & Làm quen",
+      "route": "/hsk/1/hsk1-bai-03-co-ten-gi/play",
+      "targetCount": 22,
+      "vocabularyCount": 22,
+      "exactAnchorCount": 10,
+      "semanticBalanceCount": 12,
+      "file": "hsk1/lesson-03.json",
+      "exerciseCount": 22,
+      "typeCounts": {
+        "meaning": 22,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-04-co-ay-la-co-giao-tieng-trung",
+      "lessonNumber": 4,
+      "title": "Cô ấy là giáo viên tiếng Trung của tôi.",
+      "topicId": "nen-tang-lam-quen",
+      "topicTitle": "Nền tảng & Làm quen",
+      "route": "/hsk/1/hsk1-bai-04-co-ay-la-co-giao-tieng-trung/play",
+      "targetCount": 22,
+      "vocabularyCount": 22,
+      "exactAnchorCount": 10,
+      "semanticBalanceCount": 12,
+      "file": "hsk1/lesson-04.json",
+      "exerciseCount": 22,
+      "typeCounts": {
+        "meaning": 22,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-05-con-gai-co-ay-hai-muoi-tuoi",
+      "lessonNumber": 5,
+      "title": "Con gái của cô ấy năm nay 20 tuổi.",
+      "topicId": "nen-tang-lam-quen",
+      "topicTitle": "Nền tảng & Làm quen",
+      "route": "/hsk/1/hsk1-bai-05-con-gai-co-ay-hai-muoi-tuoi/play",
+      "targetCount": 22,
+      "vocabularyCount": 22,
+      "exactAnchorCount": 14,
+      "semanticBalanceCount": 8,
+      "file": "hsk1/lesson-05.json",
+      "exerciseCount": 22,
+      "typeCounts": {
+        "meaning": 22,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-06-toi-biet-noi-tieng-trung",
+      "lessonNumber": 6,
+      "title": "Tôi biết nói tiếng Trung Quốc.",
+      "topicId": "giao-tiep-hang-ngay",
+      "topicTitle": "Giao tiếp hằng ngày",
+      "route": "/hsk/1/hsk1-bai-06-toi-biet-noi-tieng-trung/play",
+      "targetCount": 22,
+      "vocabularyCount": 22,
+      "exactAnchorCount": 12,
+      "semanticBalanceCount": 10,
+      "file": "hsk1/lesson-06.json",
+      "exerciseCount": 22,
+      "typeCounts": {
+        "meaning": 22,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-07-hom-nay-ngay-may",
+      "lessonNumber": 7,
+      "title": "Hôm nay là ngày mấy?",
+      "topicId": "giao-tiep-hang-ngay",
+      "topicTitle": "Giao tiếp hằng ngày",
+      "route": "/hsk/1/hsk1-bai-07-hom-nay-ngay-may/play",
+      "targetCount": 22,
+      "vocabularyCount": 22,
+      "exactAnchorCount": 13,
+      "semanticBalanceCount": 9,
+      "file": "hsk1/lesson-07.json",
+      "exerciseCount": 22,
+      "typeCounts": {
+        "meaning": 22,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-08-toi-muon-uong-tra",
+      "lessonNumber": 8,
+      "title": "Tôi muốn uống trà.",
+      "topicId": "giao-tiep-hang-ngay",
+      "topicTitle": "Giao tiếp hằng ngày",
+      "route": "/hsk/1/hsk1-bai-08-toi-muon-uong-tra/play",
+      "targetCount": 21,
+      "vocabularyCount": 21,
+      "exactAnchorCount": 15,
+      "semanticBalanceCount": 6,
+      "file": "hsk1/lesson-08.json",
+      "exerciseCount": 21,
+      "typeCounts": {
+        "meaning": 21,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-09-con-trai-anh-lam-viec-o-dau",
+      "lessonNumber": 9,
+      "title": "Con trai anh làm việc ở đâu?",
+      "topicId": "giao-tiep-hang-ngay",
+      "topicTitle": "Giao tiếp hằng ngày",
+      "route": "/hsk/1/hsk1-bai-09-con-trai-anh-lam-viec-o-dau/play",
+      "targetCount": 21,
+      "vocabularyCount": 21,
+      "exactAnchorCount": 16,
+      "semanticBalanceCount": 5,
+      "file": "hsk1/lesson-09.json",
+      "exerciseCount": 21,
+      "typeCounts": {
+        "meaning": 21,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-10-toi-co-the-ngoi-o-day-khong",
+      "lessonNumber": 10,
+      "title": "Tôi có thể ngồi ở đây được không?",
+      "topicId": "giao-tiep-hang-ngay",
+      "topicTitle": "Giao tiếp hằng ngày",
+      "route": "/hsk/1/hsk1-bai-10-toi-co-the-ngoi-o-day-khong/play",
+      "targetCount": 21,
+      "vocabularyCount": 21,
+      "exactAnchorCount": 11,
+      "semanticBalanceCount": 10,
+      "file": "hsk1/lesson-10.json",
+      "exerciseCount": 21,
+      "typeCounts": {
+        "meaning": 21,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-11-bay-gio-may-gio",
+      "lessonNumber": 11,
+      "title": "Bây giờ là mấy giờ?",
+      "topicId": "thoi-gian-hoat-dong",
+      "topicTitle": "Thời gian & Hoạt động",
+      "route": "/hsk/1/hsk1-bai-11-bay-gio-may-gio/play",
+      "targetCount": 21,
+      "vocabularyCount": 21,
+      "exactAnchorCount": 10,
+      "semanticBalanceCount": 11,
+      "file": "hsk1/lesson-11.json",
+      "exerciseCount": 21,
+      "typeCounts": {
+        "meaning": 21,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-12-ngay-mai-thoi-tiet-the-nao",
+      "lessonNumber": 12,
+      "title": "Ngày mai thời tiết thế nào?",
+      "topicId": "thoi-gian-hoat-dong",
+      "topicTitle": "Thời gian & Hoạt động",
+      "route": "/hsk/1/hsk1-bai-12-ngay-mai-thoi-tiet-the-nao/play",
+      "targetCount": 21,
+      "vocabularyCount": 21,
+      "exactAnchorCount": 11,
+      "semanticBalanceCount": 10,
+      "file": "hsk1/lesson-12.json",
+      "exerciseCount": 21,
+      "typeCounts": {
+        "meaning": 21,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-13-anh-ay-dang-hoc-nau-mon-trung-quoc",
+      "lessonNumber": 13,
+      "title": "Anh ấy đang học nấu món ăn Trung Quốc.",
+      "topicId": "thoi-gian-hoat-dong",
+      "topicTitle": "Thời gian & Hoạt động",
+      "route": "/hsk/1/hsk1-bai-13-anh-ay-dang-hoc-nau-mon-trung-quoc/play",
+      "targetCount": 21,
+      "vocabularyCount": 21,
+      "exactAnchorCount": 10,
+      "semanticBalanceCount": 11,
+      "file": "hsk1/lesson-13.json",
+      "exerciseCount": 21,
+      "typeCounts": {
+        "meaning": 21,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-14-co-ay-da-mua-nhieu-quan-ao",
+      "lessonNumber": 14,
+      "title": "Cô ấy đã mua nhiều quần áo.",
+      "topicId": "thoi-gian-hoat-dong",
+      "topicTitle": "Thời gian & Hoạt động",
+      "route": "/hsk/1/hsk1-bai-14-co-ay-da-mua-nhieu-quan-ao/play",
+      "targetCount": 21,
+      "vocabularyCount": 21,
+      "exactAnchorCount": 15,
+      "semanticBalanceCount": 6,
+      "file": "hsk1/lesson-14.json",
+      "exerciseCount": 21,
+      "typeCounts": {
+        "meaning": 21,
+        "pinyin": 0,
+        "listening": 0
+      }
+    },
+    {
+      "id": "hsk1-bai-15-toi-dap-may-bay-den-day",
+      "lessonNumber": 15,
+      "title": "Tôi đáp máy bay đến đây.",
+      "topicId": "thoi-gian-hoat-dong",
+      "topicTitle": "Thời gian & Hoạt động",
+      "route": "/hsk/1/hsk1-bai-15-toi-dap-may-bay-den-day/play",
+      "targetCount": 21,
+      "vocabularyCount": 21,
+      "exactAnchorCount": 9,
+      "semanticBalanceCount": 12,
+      "file": "hsk1/lesson-15.json",
+      "exerciseCount": 21,
+      "typeCounts": {
+        "meaning": 21,
+        "pinyin": 0,
+        "listening": 0
+      }
+    }
+  ]
+}

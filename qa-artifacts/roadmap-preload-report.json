@@ -1,0 +1,6 @@
+[
+  "Pending body: stays on roadmap with 12-spoke spinner; repeated/other clicks do not start navigation or duplicate downloads.",
+  "Destination and reload reuse the lesson saved before navigation.",
+  "Failure stays on roadmap and clears spinner; retry succeeds using the saved content.",
+  "Mobile loading state fits without horizontal overflow."
+]

@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
-test("home page contains the lightweight Himi language portal", async () => {
+test("home page contains the Himi learning dashboard", async () => {
   const [page, studio, portalStyles, verifyEmail] = await Promise.all([
     read("app/page.tsx"),
     read("components/review-home-studio.tsx"),
@@ -16,14 +16,16 @@ test("home page contains the lightweight Himi language portal", async () => {
   assert.doesNotMatch(page, /getDailySessionSource|listPracticeVocabulary|buildDailySession/);
   assert.match(studio, /Email đã xác minh\. Chào mừng bạn đến Himi Chinese\./);
   assert.match(verifyEmail, /new URL\("\/\?verified=1"/);
-  assert.match(studio, /Mỗi ngày một tí/);
-  assert.match(studio, /Tình huống thật\. Phản xạ tự nhiên\./);
-  assert.match(portalStyles, /himi-wave-animated\.webp/);
-  assert.match(portalStyles, /max-width: 720px[\s\S]*himi-wave\.webp/);
-  assert.match(studio, /usePrefersReducedMotion/);
+  assert.match(studio, /Chào mừng bạn đến với <em>Himi Chinese!<\/em>/);
+  assert.match(studio, /Tính năng học tập/);
+  assert.match(studio, /Chủ đề phổ biến/);
+  assert.match(studio, /Bài học gần đây/);
+  assert.match(studio, /home-hero-cover-desktop\.png/);
+  assert.match(portalStyles, /max-width: 720px[\s\S]*home-redesign-feature-grid/);
+  assert.match(studio, /himi-wave\.webp/);
   assert.doesNotMatch(studio, /motion\/react/);
-  assert.match(studio, /href="\/courses\?view=hsk"/);
-  assert.match(studio, /Bắt đầu học ngay/);
+  assert.match(studio, /href: "\/courses\?view=hsk"/);
+  assert.match(studio, /Tiếp tục học/);
   assert.doesNotMatch(studio, /Bắt đầu luyện nói/);
 });
 
@@ -272,6 +274,7 @@ test("account page uses the approved profile-first layout without learning progr
   assert.match(account, /Tài khoản của tôi/);
   assert.match(account, /account-profile-hero/);
   assert.match(account, /Thông tin tài khoản/);
+  assert.doesNotMatch(account, /<span>Vai trò<\/span>/);
   assert.match(account, /Tài khoản &amp; bảo mật/);
   assert.match(account, /Ngày tham gia/);
   assert.match(passwordSheet, /account-security-details/);
@@ -290,6 +293,8 @@ test("account page uses the approved profile-first layout without learning progr
   assert.match(walletStyles, /account-membership-vip \.account-membership-band/);
   assert.match(walletStyles, /account-vip-ticket-mobile\.webp/);
   assert.match(walletStyles, /Active VIP mobile ticket/);
+  assert.match(walletStyles, /Keep the verification state readable/);
+  assert.match(walletStyles, /\.account-wallet-redesign \.account-information dd em\s*\{[\s\S]*display:\s*inline-flex;[\s\S]*font-size:\s*9px;/);
   assert.match(account, /account-page-\$\{membershipState\}/);
   assert.match(account, /account-membership-days/);
   assert.match(account, /account-membership-meta-icon/);
@@ -335,11 +340,10 @@ test("development layout suppresses only the known Urban VPN rejection", async (
 });
 
 test("learner routes share one responsive application shell", async () => {
-  const [layout, shell, home, practice] = await Promise.all([
+  const [layout, shell, home] = await Promise.all([
     read("app/layout.tsx"),
     read("components/learner-app-shell.tsx"),
     read("app/page.tsx"),
-    read("app/practice/page.tsx"),
   ]);
   assert.match(layout, /LearnerAppShell/);
   assert.match(shell, /usePathname/);
@@ -349,29 +353,29 @@ test("learner routes share one responsive application shell", async () => {
   assert.match(shell, /setPracticeMenuOpen\(false\);[\s\S]*beginRoute\(event, href\);/);
   assert.match(shell, /onClick=\{\(event\) => closeMobilePracticeMenuAndNavigate\(event, href\)\}/);
   assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, "\/"\)/);
-  assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, "\/courses"\)/);
   assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, "\/games"\)/);
   assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, "\/vip"\)/);
   assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, profileHref\)/);
-  assert.match(shell, /const mobileCoursesActive = !practiceTriggerSelected/);
-  assert.match(shell, /aria-current=\{mobileCoursesActive \? "page" : undefined\}/);
-  assert.match(shell, /className=\{mobileCoursesActive \? "active" : ""\}/);
+  assert.match(shell, /const mobilePracticeActive = mobilePracticeItems\.some/);
+  assert.match(shell, /practiceTriggerActive \|\| mobilePracticeActive/);
   assert.doesNotMatch(shell, /navigationHiddenPrefixes/);
   assert.doesNotMatch(shell, /is-navigation-hidden/);
   assert.match(shell, /"\/admin"/);
   assert.match(shell, /"\/login"/);
   assert.doesNotMatch(home, /className="learn-rail"/);
-  assert.doesNotMatch(practice, /className="learn-rail"/);
 });
 
-test("legacy practice route redirects into the combined listening hub", async () => {
+test("scenario practice lives only inside the combined listening hub", async () => {
   const [page, scenarioMode, hub, repository] = await Promise.all([
-    read("app/practice/page.tsx"),
+    read("app/listening/page.tsx"),
     read("components/scenario-practice.tsx"),
     read("components/work-practice-hub.tsx"),
     read("lib/practice-repository.ts"),
   ]);
-  assert.match(page, /redirect\(`\/listening\?\$\{destination\.toString\(\)\}`\)/);
+  await assert.rejects(() => read("app/practice/page.tsx"));
+  await assert.rejects(() => read("app/practice/loading.tsx"));
+  assert.match(page, /firstValue\(params\.mode\) === "scenario"/);
+  assert.match(page, /import\("@\/components\/scenario-practice"\)/);
   assert.match(scenarioMode, /WorkPracticeHub/);
   assert.match(hub, /Kho ca làm/);
   assert.match(hub, /Bắt đầu ca nghe/);
@@ -539,6 +543,7 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   ]);
   assert.match(catalog, /getWritingLevels/);
   assert.match(catalog, /\{lessonCount\} bài học/);
+  assert.doesNotMatch(catalog, /Chọn cấp độ rồi vào đúng bài đang học/);
   assert.doesNotMatch(catalog, /<span>6 cấp độ/);
   assert.match(catalog, /href=\{`\/writing\/\$\{level\.id\}`\}/);
   assert.match(content, /WRITING_LEVEL_IDS/);
@@ -550,12 +555,12 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   assert.match(legacyPractice, /redirect/);
   assert.match(practice, /HimiWritingStudio/);
   assert.match(practice, /notFound/);
-  assert.match(practice, /requireLearnerUser/);
+  assert.match(practice, /getCurrentUser/);
   assert.match(practice, /getHskLessonPageData/);
   assert.match(practice, /getWritingTopicFromLesson/);
   assert.match(studio, /topic\.characters/);
-  assert.match(studio, /Chữ này cần tài khoản VIP/);
-  assert.match(studio, /VipUpgradeInlineForm/);
+  assert.match(studio, /Mở khóa chữ Hán này/);
+  assert.match(studio, /VipContentGate/);
   assert.match(studio, /Xem nét/);
   assert.match(studio, /Tô theo/);
   assert.match(studio, /Tự viết/);
@@ -565,13 +570,23 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   assert.doesNotMatch(studio, /prefers-reduced-motion/);
   assert.doesNotMatch(studio, /himi-writing-daily-card/);
   assert.doesNotMatch(studio, /himi-writing-rule-card/);
-  assert.match(studio, /himi-writing-board-actions[\s\S]*himi-writing-navigation[\s\S]*<\/section>[\s\S]*himi-writing-character-info/);
+  assert.match(studio, /himi-writing-board-actions[\s\S]*<\/section>[\s\S]*himi-writing-character-info[\s\S]*himi-writing-lesson-footer/);
   assert.match(studio, /import HanziWriter from "hanzi-writer"/);
   assert.doesNotMatch(studio, /import\("hanzi-writer"\)/);
   assert.match(styles, /\.writing-topic-grid/);
+  assert.match(styles, /\.writing-catalog-page \{[\s\S]*?width: min\(1480px, calc\(100% - 40px\)\);[\s\S]*?padding: 26px 0 68px;/);
+  assert.match(styles, /\.writing-catalog-banner,[\s\S]*?\.writing-topic-section \{[\s\S]*?width: 100%;[\s\S]*?max-width: none;/);
+  assert.match(styles, /@media \(min-width: 721px\) and \(max-width: 1050px\) \{[\s\S]*?\.writing-topic-grid \{ grid-template-columns: repeat\(2, minmax\(0, 1fr\)\); \}/);
   assert.match(styles, /\.writing-lesson-grid/);
-  assert.doesNotMatch(studio, /himi-writing-session-header/);
-  assert.match(styles, /@media \(max-width: 920px\) \{[\s\S]*?\.himi-writing-library \{ order: 1; \}[\s\S]*?\.himi-writing-practice \{ order: 2; \}/);
+  assert.match(studio, /himi-writing-lesson-header/);
+  assert.match(studio, /himi-writing-lesson-header-inner/);
+  assert.match(studio, /himi-writing-lesson-footer/);
+  assert.match(studio, /himi-writing-lesson-footer-inner/);
+  assert.match(styles, /\.himi-writing-lesson-session \.himi-writing-workspace \{[\s\S]*?width: min\(840px, calc\(100% - 48px\)\)/);
+  assert.match(styles, /\.himi-writing-lesson-session \.himi-writing-workspace \{[\s\S]*?grid-template-columns: minmax\(0, 2\.85fr\) minmax\(180px, 1fr\)/);
+  assert.match(styles, /\.himi-writing-lesson-session \.himi-writing-practice \{[\s\S]*?border-radius: 28px[\s\S]*?box-shadow: 0 18px 48px/);
+  assert.match(styles, /\.himi-writing-lesson-session \.himi-writing-character-card \{[\s\S]*?border-radius: 28px[\s\S]*?box-shadow: 0 18px 48px/);
+  assert.match(styles, /@media \(max-width: 620px\) \{[\s\S]*?\.himi-writing-lesson-session \.himi-writing-practice \{ order: 1;[\s\S]*?\.himi-writing-lesson-session \.himi-writing-character-info \{ order: 2;/);
 });
 
 test("practice and game progress persist per authenticated learner", async () => {
@@ -642,11 +657,10 @@ test("public trust pages and current account copy are present", async () => {
 });
 
 test("learner navigation prefetches routes and keeps a persistent collapsible desktop rail", async () => {
-  const [shell, railStyles, coursesLoading, practiceLoading, lessons, siteHeader, siteFooter, mobileNav] = await Promise.all([
+  const [shell, railStyles, coursesLoading, lessons, siteHeader, siteFooter, mobileNav] = await Promise.all([
     read("components/learner-app-shell.tsx"),
     read("app/learner-navigation.css"),
     read("app/courses/loading.tsx"),
-    read("app/practice/loading.tsx"),
     read("lib/lesson-repository.ts"),
     read("components/site-header.tsx"),
     read("components/site-footer.tsx"),
@@ -673,7 +687,8 @@ test("learner navigation prefetches routes and keeps a persistent collapsible de
   assert.match(siteFooter, /prefetch=\{false\}/);
   assert.match(mobileNav, /prefetch=\{false\}/);
   assert.match(coursesLoading, /CoursesPageSkeleton/);
-  assert.match(practiceLoading, /Đang chuẩn bị Kho ca làm/);
+  assert.doesNotMatch(`${siteHeader}${siteFooter}${mobileNav}`, /href="\/practice/);
+  assert.match(`${siteHeader}${siteFooter}${mobileNav}`, /\/listening\?mode=scenario/);
   assert.match(lessons, /getCachedLessonCatalog/);
   assert.match(lessons, /getCachedLessonBody/);
 });
@@ -684,7 +699,7 @@ test("practice menu stays open until its Luyện tập trigger is clicked again"
     read("app/learner-navigation.css"),
   ]);
 
-  assert.match(shell, /practiceSectionActive \|\| practiceTriggerSelected/);
+  assert.match(shell, /const practiceTriggerActive = practiceSectionActive;/);
   assert.doesNotMatch(shell, /closePracticeMenuOnBlur/);
   assert.doesNotMatch(shell, /closePracticeMenuOnEscape/);
   assert.doesNotMatch(shell, /selectPracticeRoute/);
@@ -698,18 +713,35 @@ test("practice menu stays open until its Luyện tập trigger is clicked again"
   assert.doesNotMatch(railStyles, /rail-practice-group:is\(:hover, :focus-within, \.is-open\)/);
 });
 
-test("opening the practice menu clears active state from primary rail items", async () => {
+test("opening the practice menu preserves the active primary rail item", async () => {
   const shell = await read("components/learner-app-shell.tsx");
 
-  assert.match(shell, /const active = !practiceTriggerSelected && matches\(visualPathname\);/);
+  assert.match(shell, /const active = matches\(visualPathname\);/);
+  assert.doesNotMatch(shell, /practiceTriggerSelected/);
 });
 
-test("navigating to a primary rail item transfers active state without closing the practice menu", async () => {
+test("the practice trigger is active only on a practice child route", async () => {
   const shell = await read("components/learner-app-shell.tsx");
 
-  assert.match(shell, /const \[practiceTriggerSelected, setPracticeTriggerSelected\] = useState\(false\);/);
-  assert.match(shell, /setPracticeTriggerSelected\(false\);[\s\S]*?if \(pathname === href\) return;/);
-  assert.match(shell, /const practiceTriggerActive = practiceSectionActive \|\| practiceTriggerSelected;/);
+  assert.match(shell, /const practiceTriggerActive = practiceSectionActive;/);
+  assert.match(shell, /rail-practice-trigger \$\{practiceTriggerActive \? "active" : ""\}/);
+  assert.doesNotMatch(shell, /setPracticeTriggerSelected/);
+});
+
+test("catalog titles share the 25px branded left-border treatment", async () => {
+  const [courseStyles, typingStyles, writingStyles] = await Promise.all([
+    read("app/hsk-curriculum.css"),
+    read("app/typing-practice.css"),
+    read("app/writing-studio.css"),
+  ]);
+
+  for (const [styles, selector] of [
+    [courseStyles, "\\.course-catalog-heading h1"],
+    [typingStyles, "\\.typing-section-heading h2"],
+    [writingStyles, "\\.writing-topic-heading h2"],
+  ]) {
+    assert.match(styles, new RegExp(`${selector} \\{[\\s\\S]*?padding-left: 18px;[\\s\\S]*?border-left: 7px solid #ff5a4e;[\\s\\S]*?font-size: 25px;`));
+  }
 });
 
 test("expanded learner rail ends with a Pro upgrade card that disappears when collapsed", async () => {

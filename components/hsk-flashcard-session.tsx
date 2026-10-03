@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -23,19 +23,22 @@ import {
   getHskLessonProgressStorageKey,
   parseHskLessonProgress,
 } from "@/lib/hsk-lesson-progress";
+import { recordRecentHskLesson } from "@/lib/recent-hsk-learning";
 import { trySaveHskVocabularyWord } from "@/lib/saved-vocabulary-client";
 import { GameResultCelebration } from "@/components/game-result-celebration";
 import { VocabularySavedToast, type VocabularySavedNotice } from "@/components/vocabulary-saved-toast";
 
-function saveRememberedWord(lessonId: string, wordId: string): void {
+function saveRememberedWord(lesson: HskLessonContent, wordId: string): void {
   try {
-    const storageKey = getHskLessonProgressStorageKey(lessonId);
+    const storageKey = getHskLessonProgressStorageKey(lesson.id);
     const progress = parseHskLessonProgress(window.localStorage.getItem(storageKey));
     if (progress.vocabulary.includes(wordId)) return;
-    window.localStorage.setItem(storageKey, JSON.stringify({
+    const nextProgress = {
       ...progress,
       vocabulary: [...progress.vocabulary, wordId],
-    }));
+    };
+    window.localStorage.setItem(storageKey, JSON.stringify(nextProgress));
+    recordRecentHskLesson(lesson, nextProgress);
   } catch {
     // The flashcard session remains usable when browser storage is unavailable.
   }
@@ -56,6 +59,10 @@ export function HskFlashcardSession({ lesson, backHref, authenticated = false }:
   const word = lesson.vocabulary[index];
   const accessibleWordCount = lesson.vocabulary.filter((item) => !item.locked).length;
   const score = rememberedIds.length * 160;
+
+  useEffect(() => {
+    recordRecentHskLesson(lesson);
+  }, [lesson]);
 
   const advance = () => {
     if (index === lesson.vocabulary.length - 1) {
@@ -90,7 +97,7 @@ export function HskFlashcardSession({ lesson, backHref, authenticated = false }:
     }
 
     if (remembered) {
-      saveRememberedWord(lesson.id, word.id);
+      saveRememberedWord(lesson, word.id);
       setRememberedIds((current) => current.includes(word.id) ? current : [...current, word.id]);
     }
 

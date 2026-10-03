@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { LessonWorkspace } from "@/components/lesson-workspace";
+import { IndustryGuidedLesson } from "@/components/industry-guided-lesson";
+import { IndustryLessonLoader } from "@/components/industry-lesson-loader";
 import { listPublishedCourses } from "@/lib/course-repository";
-import { getDailySessionSource } from "@/lib/daily-session-repository";
 import { getCurrentUser } from "@/lib/auth-session";
 import { learnerLoginPath } from "@/lib/learner-auth";
 import { getLessonPageData } from "@/lib/lesson-repository";
+import { industryLessonResourceUrl, learningContentScope } from "@/lib/lesson-resource";
+import { createLessonResource } from "@/lib/lesson-resource-server";
 
 export async function generateStaticParams() {
   const courses = await listPublishedCourses();
@@ -25,34 +27,24 @@ export default async function LearnPage({
   if (session) returnParams.set("session", session);
   const returnTo = `/learn/${encodeURIComponent(slug)}${returnParams.size ? `?${returnParams}` : ""}`;
   const user = await getCurrentUser();
-  const dailyFlow = Boolean(user) && session === "today";
-  const [data, dailySource] = await Promise.all([
-    getLessonPageData({ courseSlug: slug, lessonSlug, userId: user?.id ?? null }),
-    dailyFlow && user ? getDailySessionSource(user.id) : Promise.resolve(null),
-  ]);
+  const data = await getLessonPageData({ courseSlug: slug, lessonSlug, userId: user?.id ?? null });
   if (!data || data.invalidLesson) notFound();
   if (!user && data.access?.source !== "guest") redirect(learnerLoginPath(returnTo));
-  const dailyNextStep = !dailySource
-    ? null
-    : !dailySource.practiceCompletedToday
-      ? dailySource.practice
-      : !dailySource.gameCompletedToday
-        ? dailySource.game
-        : { href: "/#today-summary", title: "Tổng kết phiên 10 phút" };
 
-  return <main className="lesson-page"><div className="section-shell lesson-responsive-shell">
-    {data.lesson && data.access
-      ? <LessonWorkspace
+  if (data.lesson && data.access?.allowed) {
+    const resource = await createLessonResource(industryLessonResourceUrl(slug, data.lesson.slug), data.lesson, learningContentScope(user));
+    return <IndustryLessonLoader resource={resource} title={data.lesson.title} course={data.course} lessons={data.lessons} access={data.access} progress={data.progress} authenticated={Boolean(user)} />;
+  }
+
+  return data.lesson && data.access
+      ? <IndustryGuidedLesson
         course={data.course}
         lessons={data.lessons}
         lesson={data.lesson}
         access={data.access}
         progress={data.progress}
         authenticated={Boolean(user)}
-        dailyFlow={dailyFlow}
-        dailyNextStep={dailyNextStep}
         key={data.lesson.slug}
       />
-      : <div className="empty-state"><h1>Nội dung đang được biên soạn</h1><p>Lộ trình này đã có trong catalog nhưng chưa có bài học được xuất bản.</p><Link className="button button-primary" href="/courses">Chọn lộ trình khác</Link></div>}
-  </div></main>;
+      : <main className="lesson-page"><div className="section-shell lesson-responsive-shell"><div className="empty-state"><h1>Nội dung đang được biên soạn</h1><p>Lộ trình này đã có trong catalog nhưng chưa có bài học được xuất bản.</p><Link className="button button-primary" href="/courses">Chọn lộ trình khác</Link></div></div></main>;
 }

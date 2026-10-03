@@ -1,0 +1,462 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-15-toi-dap-may-bay-den-day",
+  "lessonNumber": 15,
+  "lessonTitle": "Tôi đáp máy bay đến đây.",
+  "topicId": "thoi-gian-hoat-dong",
+  "topicTitle": "Thời gian & Hoạt động",
+  "route": "/hsk/1/hsk1-bai-15-toi-dap-may-bay-den-day/play",
+  "vocabularyCount": 21,
+  "exerciseCount": 21,
+  "typeCounts": {
+    "meaning": 21,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-973-meaning",
+      "vocabularyId": "973",
+      "sourceIndex": 29,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "大学生",
+      "pinyin": "dàxuéshēng",
+      "note": "Ví dụ: 他是大学生。 — Anh ấy là sinh viên đại học.",
+      "speakText": "大学生",
+      "options": [
+        "Đại học, một trong Tứ Thư trong Nho giáo",
+        "sinh viên đại học; sinh viên cao đẳng",
+        "họ Nian",
+        "thành viên gia đình; (cũ) người hầu"
+      ],
+      "answer": "sinh viên đại học; sinh viên cao đẳng",
+      "exampleHanzi": "他是大学生。",
+      "exampleVi": "Anh ấy là sinh viên đại học."
+    },
+    {
+      "id": "hero-hsk-1-975-meaning",
+      "vocabularyId": "975",
+      "sourceIndex": 31,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "第",
+      "pinyin": "dì",
+      "note": "Ví dụ: 第一节课开始了。 — Tiết học đầu tiên đã bắt đầu.",
+      "speakText": "第",
+      "options": [
+        "tiền tố chỉ thứ tự (như số sáu) | cấp bậc khoa bảng | dinh thự quan lại | nhưng | chỉ có",
+        "cười (cổ)",
+        "lái xe ô tô",
+        "Đại học, một trong Tứ Thư trong Nho giáo"
+      ],
+      "answer": "tiền tố chỉ thứ tự (như số sáu) | cấp bậc khoa bảng | dinh thự quan lại | nhưng | chỉ có",
+      "exampleHanzi": "第一节课开始了。",
+      "exampleVi": "Tiết học đầu tiên đã bắt đầu."
+    },
+    {
+      "id": "hero-hsk-1-1138-meaning",
+      "vocabularyId": "1138",
+      "sourceIndex": 42,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "听",
+      "pinyin": "tīng",
+      "note": "Ví dụ: 我听音乐。 — Tôi nghe nhạc.",
+      "speakText": "听",
+      "options": [
+        "cười (cổ)",
+        "biết; nhận ra; quen thuộc; làm quen; kiến thức; sự hiểu biết; nhận thức; nhận biết",
+        "ngủ; nằm xuống",
+        "sinh viên đại học; sinh viên cao đẳng"
+      ],
+      "answer": "cười (cổ)",
+      "exampleHanzi": "我听音乐。",
+      "exampleVi": "Tôi nghe nhạc."
+    },
+    {
+      "id": "hero-hsk-1-1861-meaning",
+      "vocabularyId": "1861",
+      "sourceIndex": 61,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "开车",
+      "pinyin": "kāichē",
+      "note": "Ví dụ: 他每天开车上班。 — Anh ấy lái xe đi làm hàng ngày.",
+      "speakText": "开车",
+      "options": [
+        "lái xe ô tô",
+        "ngủ; nằm xuống",
+        "sinh viên đại học; sinh viên cao đẳng",
+        "tiền tố chỉ thứ tự (như số sáu) | cấp bậc khoa bảng | dinh thự quan lại | nhưng | chỉ có"
+      ],
+      "answer": "lái xe ô tô",
+      "exampleHanzi": "他每天开车上班。",
+      "exampleVi": "Anh ấy lái xe đi làm hàng ngày."
+    },
+    {
+      "id": "hero-hsk-1-2144-meaning",
+      "vocabularyId": "2144",
+      "sourceIndex": 72,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "大学",
+      "pinyin": "dàxué",
+      "note": "Ví dụ: 我在北京大学读书。 — Tôi học ở Đại học Bắc Kinh.",
+      "speakText": "大学",
+      "options": [
+        "Đại học, một trong Tứ Thư trong Nho giáo",
+        "máy bay",
+        "taxi; (Đài Loan) xe thuê",
+        "tiền tố chỉ thứ tự (như số sáu) | cấp bậc khoa bảng | dinh thự quan lại | nhưng | chỉ có"
+      ],
+      "answer": "Đại học, một trong Tứ Thư trong Nho giáo",
+      "exampleHanzi": "我在北京大学读书。",
+      "exampleVi": "Tôi học ở Đại học Bắc Kinh."
+    },
+    {
+      "id": "hero-hsk-1-2174-meaning",
+      "vocabularyId": "2174",
+      "sourceIndex": 74,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "五",
+      "pinyin": "wǔ",
+      "note": "Ví dụ: 现在是五点。 — Bây giờ là năm giờ.",
+      "speakText": "五",
+      "options": [
+        "cười (cổ)",
+        "lái xe ô tô",
+        "Đại học, một trong Tứ Thư trong Nho giáo",
+        "năm; 5"
+      ],
+      "answer": "năm; 5",
+      "exampleHanzi": "现在是五点。",
+      "exampleVi": "Bây giờ là năm giờ."
+    },
+    {
+      "id": "hero-hsk-1-2413-meaning",
+      "vocabularyId": "2413",
+      "sourceIndex": 79,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "高兴",
+      "pinyin": "gāoxìng",
+      "note": "Ví dụ: 我今天很高兴。 — Hôm nay tôi rất hạnh phúc.",
+      "speakText": "高兴",
+      "options": [
+        "bốn; 4",
+        "vui vẻ; vui mừng; sẵn sàng (làm gì đó); trong tâm trạng vui vẻ",
+        "họ Nian",
+        "đừng!; không được"
+      ],
+      "answer": "vui vẻ; vui mừng; sẵn sàng (làm gì đó); trong tâm trạng vui vẻ",
+      "exampleHanzi": "我今天很高兴。",
+      "exampleVi": "Hôm nay tôi rất hạnh phúc."
+    },
+    {
+      "id": "hero-hsk-1-3289-meaning",
+      "vocabularyId": "3289",
+      "sourceIndex": 102,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "四",
+      "pinyin": "sì",
+      "note": "Ví dụ: 现在是四点。 — Bây giờ là bốn giờ.",
+      "speakText": "四",
+      "options": [
+        "Đại học, một trong Tứ Thư trong Nho giáo",
+        "bốn; 4",
+        "vui vẻ; vui mừng; sẵn sàng (làm gì đó); trong tâm trạng vui vẻ",
+        "họ Nian"
+      ],
+      "answer": "bốn; 4",
+      "exampleHanzi": "现在是四点。",
+      "exampleVi": "Bây giờ là bốn giờ."
+    },
+    {
+      "id": "hero-hsk-1-3574-meaning",
+      "vocabularyId": "3574",
+      "sourceIndex": 117,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "年",
+      "pinyin": "nián",
+      "note": "Ví dụ: 今年是龙年。 — Năm nay là năm Rồng.",
+      "speakText": "年",
+      "options": [
+        "lái xe ô tô",
+        "họ Nian",
+        "năm; 5",
+        "vui vẻ; vui mừng; sẵn sàng (làm gì đó); trong tâm trạng vui vẻ"
+      ],
+      "answer": "họ Nian",
+      "exampleHanzi": "今年是龙年。",
+      "exampleVi": "Năm nay là năm Rồng."
+    },
+    {
+      "id": "hero-hsk-1-3575-meaning",
+      "vocabularyId": "3575",
+      "sourceIndex": 118,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "年",
+      "pinyin": "nián",
+      "note": "Ví dụ: 我学了三年汉语。 — Tôi đã học tiếng Trung được ba năm.",
+      "speakText": "年",
+      "options": [
+        "đừng!; không được",
+        "lại | một lần nữa | re- | thứ hai | khác | rồi (sau khi cái gì, và không đến lúc đó) | cho dù... (theo sau là tính từ hoặc động từ, rồi thường là ye hoặc dou để nhấn mạnh)",
+        "thành viên gia đình; (cũ) người hầu",
+        "họ Nian"
+      ],
+      "answer": "họ Nian",
+      "exampleHanzi": "我学了三年汉语。",
+      "exampleVi": "Tôi đã học tiếng Trung được ba năm."
+    },
+    {
+      "id": "hero-hsk-1-4202-meaning",
+      "vocabularyId": "4202",
+      "sourceIndex": 135,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "不要",
+      "pinyin": "búyào",
+      "note": "Ví dụ: 不要说话。 — Đừng nói chuyện.",
+      "speakText": "不要",
+      "options": [
+        "họ Nian",
+        "đừng!; không được",
+        "thành viên gia đình; (cũ) người hầu",
+        "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động"
+      ],
+      "answer": "đừng!; không được",
+      "exampleHanzi": "不要说话。",
+      "exampleVi": "Đừng nói chuyện."
+    },
+    {
+      "id": "hero-hsk-1-4345-meaning",
+      "vocabularyId": "4345",
+      "sourceIndex": 138,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "再",
+      "pinyin": "zài",
+      "note": "Ví dụ: 再见！ — Tạm biệt!",
+      "speakText": "再",
+      "options": [
+        "thành viên gia đình; (cũ) người hầu",
+        "lại | một lần nữa | re- | thứ hai | khác | rồi (sau khi cái gì, và không đến lúc đó) | cho dù... (theo sau là tính từ hoặc động từ, rồi thường là ye hoặc dou để nhấn mạnh)",
+        "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+        "biết; nhận ra; quen thuộc; làm quen; kiến thức; sự hiểu biết; nhận thức; nhận biết"
+      ],
+      "answer": "lại | một lần nữa | re- | thứ hai | khác | rồi (sau khi cái gì, và không đến lúc đó) | cho dù... (theo sau là tính từ hoặc động từ, rồi thường là ye hoặc dou để nhấn mạnh)",
+      "exampleHanzi": "再见！",
+      "exampleVi": "Tạm biệt!"
+    },
+    {
+      "id": "hero-hsk-1-5154-meaning",
+      "vocabularyId": "5154",
+      "sourceIndex": 141,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "家人",
+      "pinyin": "jiārén",
+      "note": "Ví dụ: 我和家人一起吃饭。 — Tôi ăn cùng gia đình.",
+      "speakText": "家人",
+      "options": [
+        "họ Nian",
+        "thành viên gia đình; (cũ) người hầu",
+        "đừng!; không được",
+        "lại | một lần nữa | re- | thứ hai | khác | rồi (sau khi cái gì, và không đến lúc đó) | cho dù... (theo sau là tính từ hoặc động từ, rồi thường là ye hoặc dou để nhấn mạnh)"
+      ],
+      "answer": "thành viên gia đình; (cũ) người hầu",
+      "exampleHanzi": "我和家人一起吃饭。",
+      "exampleVi": "Tôi ăn cùng gia đình."
+    },
+    {
+      "id": "hero-hsk-1-5679-meaning",
+      "vocabularyId": "5679",
+      "sourceIndex": 145,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "下",
+      "pinyin": "xià",
+      "note": "Ví dụ: 我下车。 — Tôi xuống xe buýt.",
+      "speakText": "下",
+      "options": [
+        "lại | một lần nữa | re- | thứ hai | khác | rồi (sau khi cái gì, và không đến lúc đó) | cho dù... (theo sau là tính từ hoặc động từ, rồi thường là ye hoặc dou để nhấn mạnh)",
+        "thành viên gia đình; (cũ) người hầu",
+        "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+        "nhà hàng; khách sạn"
+      ],
+      "answer": "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+      "exampleHanzi": "我下车。",
+      "exampleVi": "Tôi xuống xe buýt."
+    },
+    {
+      "id": "hero-hsk-1-7141-meaning",
+      "vocabularyId": "7141",
+      "sourceIndex": 175,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "认识",
+      "pinyin": "rènshi",
+      "note": "Ví dụ: 我认识他。 — Tôi biết anh ấy.",
+      "speakText": "认识",
+      "options": [
+        "thành viên gia đình; (cũ) người hầu",
+        "biết; nhận ra; quen thuộc; làm quen; kiến thức; sự hiểu biết; nhận thức; nhận biết",
+        "nhà hàng; khách sạn",
+        "máy bay"
+      ],
+      "answer": "biết; nhận ra; quen thuộc; làm quen; kiến thức; sự hiểu biết; nhận thức; nhận biết",
+      "exampleHanzi": "我认识他。",
+      "exampleVi": "Tôi biết anh ấy."
+    },
+    {
+      "id": "hero-hsk-1-7361-meaning",
+      "vocabularyId": "7361",
+      "sourceIndex": 187,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "饭店",
+      "pinyin": "fàndiàn",
+      "note": "Ví dụ: 这家饭店的菜很好吃。 — Đồ ăn ở nhà hàng này rất ngon.",
+      "speakText": "饭店",
+      "options": [
+        "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+        "biết; nhận ra; quen thuộc; làm quen; kiến thức; sự hiểu biết; nhận thức; nhận biết",
+        "nhà hàng; khách sạn",
+        "ngủ; nằm xuống"
+      ],
+      "answer": "nhà hàng; khách sạn",
+      "exampleHanzi": "这家饭店的菜很好吃。",
+      "exampleVi": "Đồ ăn ở nhà hàng này rất ngon."
+    },
+    {
+      "id": "hero-hsk-1-7364-meaning",
+      "vocabularyId": "7364",
+      "sourceIndex": 190,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "飞机",
+      "pinyin": "fēijī",
+      "note": "Ví dụ: 我坐飞机去北京。 — Tôi đáp máy bay tới Bắc Kinh.",
+      "speakText": "飞机",
+      "options": [
+        "biết; nhận ra; quen thuộc; làm quen; kiến thức; sự hiểu biết; nhận thức; nhận biết",
+        "ngủ; nằm xuống",
+        "máy bay",
+        "sáu; 6"
+      ],
+      "answer": "máy bay",
+      "exampleHanzi": "我坐飞机去北京。",
+      "exampleVi": "Tôi đáp máy bay tới Bắc Kinh."
+    },
+    {
+      "id": "hero-hsk-1-8762-meaning",
+      "vocabularyId": "8762",
+      "sourceIndex": 242,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "睡",
+      "pinyin": "shuì",
+      "note": "Ví dụ: 我晚上睡觉。 — Tôi ngủ vào ban đêm.",
+      "speakText": "睡",
+      "options": [
+        "taxi; (Đài Loan) xe thuê",
+        "sáu; 6",
+        "bảy; 7",
+        "ngủ; nằm xuống"
+      ],
+      "answer": "ngủ; nằm xuống",
+      "exampleHanzi": "我晚上睡觉。",
+      "exampleVi": "Tôi ngủ vào ban đêm."
+    },
+    {
+      "id": "hero-hsk-1-10611-meaning",
+      "vocabularyId": "10611",
+      "sourceIndex": 277,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "出租车",
+      "pinyin": "chūzūchē",
+      "note": "Ví dụ: 我们坐出租车回家。 — Chúng tôi bắt taxi về nhà.",
+      "speakText": "出租车",
+      "options": [
+        "sáu; 6",
+        "bảy; 7",
+        "sinh viên đại học; sinh viên cao đẳng",
+        "taxi; (Đài Loan) xe thuê"
+      ],
+      "answer": "taxi; (Đài Loan) xe thuê",
+      "exampleHanzi": "我们坐出租车回家。",
+      "exampleVi": "Chúng tôi bắt taxi về nhà."
+    },
+    {
+      "id": "hero-hsk-1-11840-meaning",
+      "vocabularyId": "11840",
+      "sourceIndex": 300,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "六",
+      "pinyin": "liù",
+      "note": "Ví dụ: 现在是六点钟。 — Bây giờ là sáu giờ.",
+      "speakText": "六",
+      "options": [
+        "taxi; (Đài Loan) xe thuê",
+        "năm; 5",
+        "bốn; 4",
+        "sáu; 6"
+      ],
+      "answer": "sáu; 6",
+      "exampleHanzi": "现在是六点钟。",
+      "exampleVi": "Bây giờ là sáu giờ."
+    },
+    {
+      "id": "hero-hsk-1-12150-meaning",
+      "vocabularyId": "12150",
+      "sourceIndex": 308,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "七",
+      "pinyin": "qī",
+      "note": "Ví dụ: 现在是七点。 — Bây giờ là bảy giờ.",
+      "speakText": "七",
+      "options": [
+        "bảy; 7",
+        "năm; 5",
+        "bốn; 4",
+        "sáu; 6"
+      ],
+      "answer": "bảy; 7",
+      "exampleHanzi": "现在是七点。",
+      "exampleVi": "Bây giờ là bảy giờ."
+    }
+  ]
+}

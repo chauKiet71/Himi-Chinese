@@ -441,14 +441,4 @@ export function getHskLessonContent(levelId: string, lessonId: string): HskLesso
   return HSK_LESSONS_BY_ID.get(canonicalId);
 }
 
-export function normalizeHskLevelParam(level: string): string {
-  return level.startsWith("hsk-") ? level : `hsk-${level}`;
-}
-
-export function getHskLessonHref(levelId: string, lessonId: string): string {
-  return `/hsk/${levelId.replace(/^hsk-/, "")}/${lessonId}`;
-}
-
-export function getHskCurriculumHref(levelId: string): string {
-  return `/courses?view=hsk&level=${encodeURIComponent(normalizeHskLevelParam(levelId))}`;
-}
+export { normalizeHskLevelParam, getHskLessonHref, getHskCurriculumHref } from "./hsk-routing.ts";

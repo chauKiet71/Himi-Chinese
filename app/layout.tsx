@@ -17,6 +17,7 @@ import { MobileNav } from "@/components/mobile-nav";
 import { DeferredHimiChatbot } from "@/components/deferred-himi-chatbot";
 import { LearnerAppShell } from "@/components/learner-app-shell";
 import { LearningDataProvider } from "@/components/learning-data-provider";
+import { learningContentScope } from "@/lib/lesson-resource";
 import { getCurrentUser } from "@/lib/auth-session";
 import { createBrandTheme } from "@/lib/brand";
 import { isLifetimeVipPlan } from "@/lib/vip-plan";
@@ -110,7 +111,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const activeVipDaysRemaining = activeVip && !activeVipIsLifetime
     ? vipDaysRemaining(activeVip.endsAt)
     : null;
-  const learningCacheScope = user ? `${user.id}:${user.role}:${user.sessionCreatedAt?.toISOString() ?? "session"}` : "guest";
+  const learningCacheScope = learningContentScope(user);
   const shellUser = user ? {
     displayName: user.displayName,
     email: user.email,

@@ -1,0 +1,483 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-06-toi-biet-noi-tieng-trung",
+  "lessonNumber": 6,
+  "lessonTitle": "Tôi biết nói tiếng Trung Quốc.",
+  "topicId": "giao-tiep-hang-ngay",
+  "topicTitle": "Giao tiếp hằng ngày",
+  "route": "/hsk/1/hsk1-bai-06-toi-biet-noi-tieng-trung/play",
+  "vocabularyCount": 22,
+  "exerciseCount": 22,
+  "typeCounts": {
+    "meaning": 22,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-90-meaning",
+      "vocabularyId": "90",
+      "sourceIndex": 8,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "写",
+      "pinyin": "xiě",
+      "note": "Ví dụ: 我写汉字。 — Tôi viết chữ Hán.",
+      "speakText": "写",
+      "options": [
+        "viết",
+        "hành động: speak; talk; say | explain; comment | scold; tell off | (bound form) theory; doctrine",
+        "nói; nói; nói chuyện; nói chuyện phiếm; kể chuyện; lời nói; từ ngữ",
+        "cân đối tài khoản; kế toán; kế toán viên"
+      ],
+      "answer": "viết",
+      "exampleHanzi": "我写汉字。",
+      "exampleVi": "Tôi viết chữ Hán."
+    },
+    {
+      "id": "hero-hsk-1-966-meaning",
+      "vocabularyId": "966",
+      "sourceIndex": 24,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "晚上",
+      "pinyin": "wǎnshang",
+      "note": "Ví dụ: 晚上我通常看书。 — Tôi thường đọc sách vào buổi tối.",
+      "speakText": "晚上",
+      "options": [
+        "món ăn (loại thực phẩm); rau; ẩm thực; (lóng) loại của (ai đó); (về kỹ năng v.v.) yếu; kém",
+        "buổi tối; ban đêm; vào buổi tối",
+        "trứng gà; trứng gà mái",
+        "trung học"
+      ],
+      "answer": "buổi tối; ban đêm; vào buổi tối",
+      "exampleHanzi": "晚上我通常看书。",
+      "exampleVi": "Tôi thường đọc sách vào buổi tối."
+    },
+    {
+      "id": "hero-hsk-1-969-meaning",
+      "vocabularyId": "969",
+      "sourceIndex": 27,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "问题",
+      "pinyin": "wèntí",
+      "note": "Ví dụ: 这个问题很难。 — Câu hỏi này rất khó.",
+      "speakText": "问题",
+      "options": [
+        "trứng gà; trứng gà mái",
+        "câu hỏi; vấn đề; chủ đề; đề tài",
+        "trung học",
+        "chữ cái; ký hiệu; ký tự; từ; tên tự (tên hiệu) truyền thống dành cho nam giới từ 20 tuổi trở lên trong Trung Quốc phong kiến"
+      ],
+      "answer": "câu hỏi; vấn đề; chủ đề; đề tài",
+      "exampleHanzi": "这个问题很难。",
+      "exampleVi": "Câu hỏi này rất khó."
+    },
+    {
+      "id": "hero-hsk-1-3287-meaning",
+      "vocabularyId": "3287",
+      "sourceIndex": 100,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "说",
+      "pinyin": "shuō",
+      "note": "Ví dụ: 他说汉语。 — Anh ấy nói tiếng Trung Quốc.",
+      "speakText": "说",
+      "options": [
+        "đọc to; đọc thành tiếng; đọc; đi học; học (một môn ở trường); phát âm",
+        "làm; sản xuất; viết; soạn; thực hiện; tham gia; tổ chức (bữa tiệc, v.v.); (về người) là (người trung gian, học sinh giỏi, v.v.); trở thành (vợ chồng, bạn bè, v.v.); (về vật) đóng vai trò; được sử dụng để; giả vờ (thái độ hoặc phong cách)",
+        "có thể; có khả năng; khá tốt; không tệ",
+        "hành động: speak; talk; say | explain; comment | scold; tell off | (bound form) theory; doctrine"
+      ],
+      "answer": "hành động: speak; talk; say | explain; comment | scold; tell off | (bound form) theory; doctrine",
+      "exampleHanzi": "他说汉语。",
+      "exampleVi": "Anh ấy nói tiếng Trung Quốc."
+    },
+    {
+      "id": "hero-hsk-1-3288-meaning",
+      "vocabularyId": "3288",
+      "sourceIndex": 101,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "说话",
+      "pinyin": "shuōhuà",
+      "note": "Ví dụ: 请小声说话。 — Hãy nói chuyện nhẹ nhàng.",
+      "speakText": "说话",
+      "options": [
+        "làm; sản xuất; viết; soạn; thực hiện; tham gia; tổ chức (bữa tiệc, v.v.); (về người) là (người trung gian, học sinh giỏi, v.v.); trở thành (vợ chồng, bạn bè, v.v.); (về vật) đóng vai trò; được sử dụng để; giả vờ (thái độ hoặc phong cách)",
+        "nói; nói; nói chuyện; nói chuyện phiếm; kể chuyện; lời nói; từ ngữ",
+        "có thể; có khả năng; khá tốt; không tệ",
+        "nghỉ ngơi; nghỉ ngơi"
+      ],
+      "answer": "nói; nói; nói chuyện; nói chuyện phiếm; kể chuyện; lời nói; từ ngữ",
+      "exampleHanzi": "请小声说话。",
+      "exampleVi": "Hãy nói chuyện nhẹ nhàng."
+    },
+    {
+      "id": "hero-hsk-1-3471-meaning",
+      "vocabularyId": "3471",
+      "sourceIndex": 112,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "很",
+      "pinyin": "hěn",
+      "note": "Ví dụ: 今天天气很好。 — Thời tiết hôm nay rất đẹp.",
+      "speakText": "很",
+      "options": [
+        "món ăn (loại thực phẩm); rau; ẩm thực; (lóng) loại của (ai đó); (về kỹ năng v.v.) yếu; kém",
+        "(trạng từ chỉ mức độ); khá; rất; lắm",
+        "tasty; delicious",
+        "trứng gà; trứng gà mái"
+      ],
+      "answer": "(trạng từ chỉ mức độ); khá; rất; lắm",
+      "exampleHanzi": "今天天气很好。",
+      "exampleVi": "Thời tiết hôm nay rất đẹp."
+    },
+    {
+      "id": "hero-hsk-1-4203-meaning",
+      "vocabularyId": "4203",
+      "sourceIndex": 136,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "菜",
+      "pinyin": "cài",
+      "note": "Ví dụ: 这个菜很好吃。 — Món ăn này rất ngon.",
+      "speakText": "菜",
+      "options": [
+        "mẹ; má; mẹ",
+        "viết",
+        "món ăn (loại thực phẩm); rau; ẩm thực; (lóng) loại của (ai đó); (về kỹ năng v.v.) yếu; kém",
+        "hành động: speak; talk; say | explain; comment | scold; tell off | (bound form) theory; doctrine"
+      ],
+      "answer": "món ăn (loại thực phẩm); rau; ẩm thực; (lóng) loại của (ai đó); (về kỹ năng v.v.) yếu; kém",
+      "exampleHanzi": "这个菜很好吃。",
+      "exampleVi": "Món ăn này rất ngon."
+    },
+    {
+      "id": "hero-hsk-1-4624-meaning",
+      "vocabularyId": "4624",
+      "sourceIndex": 139,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "好吃",
+      "pinyin": "hǎochī",
+      "note": "Ví dụ: 这个苹果很好吃。 — Táo này có vị ngon.",
+      "speakText": "好吃",
+      "options": [
+        "trứng gà; trứng gà mái",
+        "cân đối tài khoản; kế toán; kế toán viên",
+        "tasty; delicious",
+        "đọc to; đọc thành tiếng; đọc; đi học; học (một môn ở trường); phát âm"
+      ],
+      "answer": "tasty; delicious",
+      "exampleHanzi": "这个苹果很好吃。",
+      "exampleVi": "Táo này có vị ngon."
+    },
+    {
+      "id": "hero-hsk-1-5155-meaning",
+      "vocabularyId": "5155",
+      "sourceIndex": 142,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "鸡蛋",
+      "pinyin": "jīdàn",
+      "note": "Ví dụ: 早餐我吃鸡蛋。 — Tôi ăn trứng vào bữa sáng.",
+      "speakText": "鸡蛋",
+      "options": [
+        "hành động: speak; talk; say | explain; comment | scold; tell off | (bound form) theory; doctrine",
+        "nói; nói; nói chuyện; nói chuyện phiếm; kể chuyện; lời nói; từ ngữ",
+        "trứng gà; trứng gà mái",
+        "(trạng từ chỉ mức độ); khá; rất; lắm"
+      ],
+      "answer": "trứng gà; trứng gà mái",
+      "exampleHanzi": "早餐我吃鸡蛋。",
+      "exampleVi": "Tôi ăn trứng vào bữa sáng."
+    },
+    {
+      "id": "hero-hsk-1-5765-meaning",
+      "vocabularyId": "5765",
+      "sourceIndex": 151,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "会",
+      "pinyin": "huì",
+      "note": "Ví dụ: 我会说汉语。 — Tôi có thể nói tiếng Trung Quốc.",
+      "speakText": "会",
+      "options": [
+        "cân đối tài khoản; kế toán; kế toán viên",
+        "buổi tối; ban đêm; vào buổi tối",
+        "câu hỏi; vấn đề; chủ đề; đề tài",
+        "(trạng từ chỉ mức độ); khá; rất; lắm"
+      ],
+      "answer": "cân đối tài khoản; kế toán; kế toán viên",
+      "exampleHanzi": "我会说汉语。",
+      "exampleVi": "Tôi có thể nói tiếng Trung Quốc."
+    },
+    {
+      "id": "hero-hsk-1-6270-meaning",
+      "vocabularyId": "6270",
+      "sourceIndex": 156,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "读",
+      "pinyin": "dú",
+      "note": "Ví dụ: 我现在读这本书。 — Bây giờ tôi đang đọc cuốn sách này.",
+      "speakText": "读",
+      "options": [
+        "câu hỏi; vấn đề; chủ đề; đề tài",
+        "(trạng từ chỉ mức độ); khá; rất; lắm",
+        "đọc to; đọc thành tiếng; đọc; đi học; học (một môn ở trường); phát âm",
+        "món ăn (loại thực phẩm); rau; ẩm thực; (lóng) loại của (ai đó); (về kỹ năng v.v.) yếu; kém"
+      ],
+      "answer": "đọc to; đọc thành tiếng; đọc; đi học; học (một môn ở trường); phát âm",
+      "exampleHanzi": "我现在读这本书。",
+      "exampleVi": "Bây giờ tôi đang đọc cuốn sách này."
+    },
+    {
+      "id": "hero-hsk-1-7246-meaning",
+      "vocabularyId": "7246",
+      "sourceIndex": 180,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "做",
+      "pinyin": "zuò",
+      "note": "Ví dụ: 我做作业。 — Tôi làm bài tập về nhà.",
+      "speakText": "做",
+      "options": [
+        "(trạng từ chỉ mức độ); khá; rất; lắm",
+        "món ăn (loại thực phẩm); rau; ẩm thực; (lóng) loại của (ai đó); (về kỹ năng v.v.) yếu; kém",
+        "tasty; delicious",
+        "làm; sản xuất; viết; soạn; thực hiện; tham gia; tổ chức (bữa tiệc, v.v.); (về người) là (người trung gian, học sinh giỏi, v.v.); trở thành (vợ chồng, bạn bè, v.v.); (về vật) đóng vai trò; được sử dụng để; giả vờ (thái độ hoặc phong cách)"
+      ],
+      "answer": "làm; sản xuất; viết; soạn; thực hiện; tham gia; tổ chức (bữa tiệc, v.v.); (về người) là (người trung gian, học sinh giỏi, v.v.); trở thành (vợ chồng, bạn bè, v.v.); (về vật) đóng vai trò; được sử dụng để; giả vờ (thái độ hoặc phong cách)",
+      "exampleHanzi": "我做作业。",
+      "exampleVi": "Tôi làm bài tập về nhà."
+    },
+    {
+      "id": "hero-hsk-1-8047-meaning",
+      "vocabularyId": "8047",
+      "sourceIndex": 201,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "做饭",
+      "pinyin": "zuò fàn",
+      "note": "Ví dụ: 妈妈做饭很好吃。 — Mẹ nấu rất ngon.",
+      "speakText": "做饭",
+      "options": [
+        "có thể; có khả năng; khá tốt; không tệ",
+        "chuẩn bị bữa ăn; nấu ăn",
+        "trung học",
+        "chữ cái; ký hiệu; ký tự; từ; tên tự (tên hiệu) truyền thống dành cho nam giới từ 20 tuổi trở lên trong Trung Quốc phong kiến"
+      ],
+      "answer": "chuẩn bị bữa ăn; nấu ăn",
+      "exampleHanzi": "妈妈做饭很好吃。",
+      "exampleVi": "Mẹ nấu rất ngon."
+    },
+    {
+      "id": "hero-hsk-1-8168-meaning",
+      "vocabularyId": "8168",
+      "sourceIndex": 208,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "可以",
+      "pinyin": "kěyǐ",
+      "note": "Ví dụ: 我可以问你一个问题吗？ — Tôi có thể hỏi bạn một câu được không?",
+      "speakText": "可以",
+      "options": [
+        "tasty; delicious",
+        "có thể; có khả năng; khá tốt; không tệ",
+        "trứng gà; trứng gà mái",
+        "chuẩn bị bữa ăn; nấu ăn"
+      ],
+      "answer": "có thể; có khả năng; khá tốt; không tệ",
+      "exampleHanzi": "我可以问你一个问题吗？",
+      "exampleVi": "Tôi có thể hỏi bạn một câu được không?"
+    },
+    {
+      "id": "hero-hsk-1-8230-meaning",
+      "vocabularyId": "8230",
+      "sourceIndex": 218,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "中学",
+      "pinyin": "zhōngxué",
+      "note": "Ví dụ: 我在中学读书。 — Tôi học ở trường trung học.",
+      "speakText": "中学",
+      "options": [
+        "trung học",
+        "làm; sản xuất; viết; soạn; thực hiện; tham gia; tổ chức (bữa tiệc, v.v.); (về người) là (người trung gian, học sinh giỏi, v.v.); trở thành (vợ chồng, bạn bè, v.v.); (về vật) đóng vai trò; được sử dụng để; giả vờ (thái độ hoặc phong cách)",
+        "chuẩn bị bữa ăn; nấu ăn",
+        "có thể; có khả năng; khá tốt; không tệ"
+      ],
+      "answer": "trung học",
+      "exampleHanzi": "我在中学读书。",
+      "exampleVi": "Tôi học ở trường trung học."
+    },
+    {
+      "id": "hero-hsk-1-8234-meaning",
+      "vocabularyId": "8234",
+      "sourceIndex": 222,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "字",
+      "pinyin": "zì",
+      "note": "Ví dụ: 这个字很难写。 — Nhân vật này rất khó viết.",
+      "speakText": "字",
+      "options": [
+        "chuẩn bị bữa ăn; nấu ăn",
+        "chữ cái; ký hiệu; ký tự; từ; tên tự (tên hiệu) truyền thống dành cho nam giới từ 20 tuổi trở lên trong Trung Quốc phong kiến",
+        "có thể; có khả năng; khá tốt; không tệ",
+        "nghỉ ngơi; nghỉ ngơi"
+      ],
+      "answer": "chữ cái; ký hiệu; ký tự; từ; tên tự (tên hiệu) truyền thống dành cho nam giới từ 20 tuổi trở lên trong Trung Quốc phong kiến",
+      "exampleHanzi": "这个字很难写。",
+      "exampleVi": "Nhân vật này rất khó viết."
+    },
+    {
+      "id": "hero-hsk-1-8402-meaning",
+      "vocabularyId": "8402",
+      "sourceIndex": 230,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "休息",
+      "pinyin": "xiūxi",
+      "note": "Ví dụ: 我现在休息一下。 — Bây giờ tôi đang nghỉ ngơi.",
+      "speakText": "休息",
+      "options": [
+        "trung học",
+        "chữ cái; ký hiệu; ký tự; từ; tên tự (tên hiệu) truyền thống dành cho nam giới từ 20 tuổi trở lên trong Trung Quốc phong kiến",
+        "nghỉ ngơi; nghỉ ngơi",
+        "Chinese character; Japanese: kanji; Korean: hanja; Vietnamese: hán tự"
+      ],
+      "answer": "nghỉ ngơi; nghỉ ngơi",
+      "exampleHanzi": "我现在休息一下。",
+      "exampleVi": "Bây giờ tôi đang nghỉ ngơi."
+    },
+    {
+      "id": "hero-hsk-1-9171-meaning",
+      "vocabularyId": "9171",
+      "sourceIndex": 257,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "汉字",
+      "pinyin": "Hànzì",
+      "note": "Ví dụ: 汉字很有趣。 — Chữ Hán rất thú vị.",
+      "speakText": "汉字",
+      "options": [
+        "nghỉ ngơi; nghỉ ngơi",
+        "biết; nhận thức được; cũng đọc là [zhī dao]",
+        "Chinese character; Japanese: kanji; Korean: hanja; Vietnamese: hán tự",
+        "dậy khỏi giường; dậy"
+      ],
+      "answer": "Chinese character; Japanese: kanji; Korean: hanja; Vietnamese: hán tự",
+      "exampleHanzi": "汉字很有趣。",
+      "exampleVi": "Chữ Hán rất thú vị."
+    },
+    {
+      "id": "hero-hsk-1-11176-meaning",
+      "vocabularyId": "11176",
+      "sourceIndex": 292,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "知道",
+      "pinyin": "zhīdào",
+      "note": "Ví dụ: 我知道答案。 — Tôi biết câu trả lời.",
+      "speakText": "知道",
+      "options": [
+        "Chinese character; Japanese: kanji; Korean: hanja; Vietnamese: hán tự",
+        "mẹ; má; mẹ",
+        "biết; nhận thức được; cũng đọc là [zhī dao]",
+        "làm sao | thế nào | sao | tại sao"
+      ],
+      "answer": "biết; nhận thức được; cũng đọc là [zhī dao]",
+      "exampleHanzi": "我知道答案。",
+      "exampleVi": "Tôi biết câu trả lời."
+    },
+    {
+      "id": "hero-hsk-1-11844-meaning",
+      "vocabularyId": "11844",
+      "sourceIndex": 304,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "妈妈",
+      "pinyin": "māma",
+      "note": "Ví dụ: 妈妈在家做饭。 — Mẹ đang nấu ăn ở nhà.",
+      "speakText": "妈妈",
+      "options": [
+        "dậy khỏi giường; dậy",
+        "làm sao | thế nào | sao | tại sao",
+        "buổi tối; ban đêm; vào buổi tối",
+        "mẹ; má; mẹ"
+      ],
+      "answer": "mẹ; má; mẹ",
+      "exampleHanzi": "妈妈在家做饭。",
+      "exampleVi": "Mẹ đang nấu ăn ở nhà."
+    },
+    {
+      "id": "hero-hsk-1-12154-meaning",
+      "vocabularyId": "12154",
+      "sourceIndex": 312,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "起床",
+      "pinyin": "qǐchuáng",
+      "note": "Ví dụ: 我每天七点起床。 — Tôi thức dậy lúc bảy giờ mỗi ngày.",
+      "speakText": "起床",
+      "options": [
+        "dậy khỏi giường; dậy",
+        "làm sao | thế nào | sao | tại sao",
+        "viết",
+        "hành động: speak; talk; say | explain; comment | scold; tell off | (bound form) theory; doctrine"
+      ],
+      "answer": "dậy khỏi giường; dậy",
+      "exampleHanzi": "我每天七点起床。",
+      "exampleVi": "Tôi thức dậy lúc bảy giờ mỗi ngày."
+    },
+    {
+      "id": "hero-hsk-1-12294-meaning",
+      "vocabularyId": "12294",
+      "sourceIndex": 322,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "怎么",
+      "pinyin": "zěnme",
+      "note": "Ví dụ: 你怎么去学校？ — Bạn đi học bằng cách nào?",
+      "speakText": "怎么",
+      "options": [
+        "viết",
+        "buổi tối; ban đêm; vào buổi tối",
+        "câu hỏi; vấn đề; chủ đề; đề tài",
+        "làm sao | thế nào | sao | tại sao"
+      ],
+      "answer": "làm sao | thế nào | sao | tại sao",
+      "exampleHanzi": "你怎么去学校？",
+      "exampleVi": "Bạn đi học bằng cách nào?"
+    }
+  ]
+}

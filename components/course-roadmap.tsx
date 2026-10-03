@@ -60,14 +60,14 @@ function RoadmapLessonRow({
   }
 
   if (lesson.href) {
-    return <Link className={`roadmap-lesson-row is-${visualState}`} href={lesson.href} prefetch={false}>
+    return <a className={`roadmap-lesson-row is-${visualState}`} href={lesson.href}>
       {copy}
       {lesson.status === "completed" ? <span className="roadmap-lesson-status is-completed"><CircleCheck aria-hidden="true" size={17} /> Đã hoàn thành</span> : inProgress ? <span
         aria-label={`${lesson.completionPercent}% đã học`}
         className="roadmap-circular-progress"
         style={{ "--roadmap-progress": `${Math.max(lesson.completionPercent * 3.6, 2)}deg` } as CSSProperties}
       ><strong>{lesson.completionPercent}%</strong></span> : <span className="roadmap-lesson-status is-available">Mở bài <ChevronRight aria-hidden="true" size={19} /></span>}
-    </Link>;
+    </a>;
   }
 
   return <div aria-disabled="true" className={`roadmap-lesson-row is-${visualState}`}>

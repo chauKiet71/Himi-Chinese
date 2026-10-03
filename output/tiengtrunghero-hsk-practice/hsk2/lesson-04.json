@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-04",
+  "lessonNumber": 4,
+  "lessonTitle": "Công việc này là do anh ấy giới thiệu cho tôi.",
+  "topicId": "du-lich-cong-viec-mua-sam",
+  "topicTitle": "Du lịch, công việc & mua sắm",
+  "route": "/hsk/2/hsk2-tb-lesson-04/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-3771-meaning",
+      "vocabularyId": "3771",
+      "sourceIndex": 42,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "长",
+      "pinyin": "cháng",
+      "note": "Ví dụ: 这条裙子很长。 — Chiếc váy này rất dài.",
+      "speakText": "长",
+      "options": [
+        "vui vẻ; hạnh phúc",
+        "lên mạng; kết nối Internet; (tài liệu) được tải lên mạng; (quần vợt, bóng chuyền) tiến gần lưới",
+        "chiều dài; dài; mãi mãi; luôn luôn; liên tục",
+        "sinh nhật"
+      ],
+      "answer": "chiều dài; dài; mãi mãi; luôn luôn; liên tục",
+      "exampleHanzi": "这条裙子很长。",
+      "exampleVi": "Chiếc váy này rất dài."
+    },
+    {
+      "id": "hero-hsk-2-3817-meaning",
+      "vocabularyId": "3817",
+      "sourceIndex": 46,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "上网",
+      "pinyin": "shàngwǎng",
+      "note": "Ví dụ: 我每天晚上上网。 — Tôi lên mạng mỗi tối.",
+      "speakText": "上网",
+      "options": [
+        "Ăn mừng Tết Nguyên đán",
+        "giúp; hỗ trợ; ủng hộ; cho ai (tức là như một sự giúp đỡ); thuê (làm công nhân); bên (của xô, thuyền v.v.); lớp ngoài; phần trên (của giày); nhóm; băng đảng; phe phái; đảng hội đen",
+        "giúp đỡ; ra tay; làm ơn; làm việc tốt",
+        "lên mạng; kết nối Internet; (tài liệu) được tải lên mạng; (quần vợt, bóng chuyền) tiến gần lưới"
+      ],
+      "answer": "lên mạng; kết nối Internet; (tài liệu) được tải lên mạng; (quần vợt, bóng chuyền) tiến gần lưới",
+      "exampleHanzi": "我每天晚上上网。",
+      "exampleVi": "Tôi lên mạng mỗi tối."
+    },
+    {
+      "id": "hero-hsk-2-3818-meaning",
+      "vocabularyId": "3818",
+      "sourceIndex": 47,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "生日",
+      "pinyin": "shēngrì",
+      "note": "Ví dụ: 今天是我的生日。 — Hôm nay là sinh nhật của tôi.",
+      "speakText": "生日",
+      "options": [
+        "quả; hình cầu; trái đất; môn bóng; trận đấu",
+        "sinh nhật",
+        "sách; sổ tay; truyện tranh tự xuất bản kiểu Nhật (đặc biệt là truyện khiêu dâm), còn gọi là \"dōjinshi\"; ấn bản",
+        "chiều dài; dài; mãi mãi; luôn luôn; liên tục"
+      ],
+      "answer": "sinh nhật",
+      "exampleHanzi": "今天是我的生日。",
+      "exampleVi": "Hôm nay là sinh nhật của tôi."
+    },
+    {
+      "id": "hero-hsk-2-5110-meaning",
+      "vocabularyId": "5110",
+      "sourceIndex": 61,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "快乐",
+      "pinyin": "kuàilè",
+      "note": "Ví dụ: 今天我很快乐。 — Hôm nay tôi hạnh phúc.",
+      "speakText": "快乐",
+      "options": [
+        "vui vẻ; hạnh phúc",
+        "giường | ghế dài | lượng từ cho giường",
+        "bắt đầu; phần mở đầu; khởi động; ban đầu",
+        "Ăn mừng Tết Nguyên đán"
+      ],
+      "answer": "vui vẻ; hạnh phúc",
+      "exampleHanzi": "今天我很快乐。",
+      "exampleVi": "Hôm nay tôi hạnh phúc."
+    },
+    {
+      "id": "hero-hsk-2-5525-meaning",
+      "vocabularyId": "5525",
+      "sourceIndex": 75,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "床",
+      "pinyin": "chuáng",
+      "note": "Ví dụ: 我每天晚上在床上看书。 — Tôi đọc sách trên giường mỗi tối.",
+      "speakText": "床",
+      "options": [
+        "chiều dài; dài; mãi mãi; luôn luôn; liên tục",
+        "lên mạng; kết nối Internet; (tài liệu) được tải lên mạng; (quần vợt, bóng chuyền) tiến gần lưới",
+        "vui vẻ; hạnh phúc",
+        "giường | ghế dài | lượng từ cho giường"
+      ],
+      "answer": "giường | ghế dài | lượng từ cho giường",
+      "exampleHanzi": "我每天晚上在床上看书。",
+      "exampleVi": "Tôi đọc sách trên giường mỗi tối."
+    },
+    {
+      "id": "hero-hsk-2-5598-meaning",
+      "vocabularyId": "5598",
+      "sourceIndex": 80,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "开始",
+      "pinyin": "kāishǐ",
+      "note": "Ví dụ: 我们开始上课。 — Chúng tôi bắt đầu lớp học.",
+      "speakText": "开始",
+      "options": [
+        "chiều dài; dài; mãi mãi; luôn luôn; liên tục",
+        "bắt đầu; phần mở đầu; khởi động; ban đầu",
+        "sinh nhật",
+        "vui vẻ; hạnh phúc"
+      ],
+      "answer": "bắt đầu; phần mở đầu; khởi động; ban đầu",
+      "exampleHanzi": "我们开始上课。",
+      "exampleVi": "Chúng tôi bắt đầu lớp học."
+    },
+    {
+      "id": "hero-hsk-2-5599-meaning",
+      "vocabularyId": "5599",
+      "sourceIndex": 81,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "开始",
+      "pinyin": "kāishǐ",
+      "note": "Ví dụ: 开始很重要。 — Sự khởi đầu là rất quan trọng.",
+      "speakText": "开始",
+      "options": [
+        "vui vẻ; hạnh phúc",
+        "Ăn mừng Tết Nguyên đán",
+        "cung cấp; đáp ứng",
+        "bắt đầu; phần mở đầu; khởi động; ban đầu"
+      ],
+      "answer": "bắt đầu; phần mở đầu; khởi động; ban đầu",
+      "exampleHanzi": "开始很重要。",
+      "exampleVi": "Sự khởi đầu là rất quan trọng."
+    },
+    {
+      "id": "hero-hsk-2-5780-meaning",
+      "vocabularyId": "5780",
+      "sourceIndex": 90,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "过年",
+      "pinyin": "guònián",
+      "note": "Ví dụ: 我们回家过年。 — Chúng ta về nhà đón năm mới.",
+      "speakText": "过年",
+      "options": [
+        "vui vẻ; hạnh phúc",
+        "Ăn mừng Tết Nguyên đán",
+        "giường | ghế dài | lượng từ cho giường",
+        "bắt đầu; phần mở đầu; khởi động; ban đầu"
+      ],
+      "answer": "Ăn mừng Tết Nguyên đán",
+      "exampleHanzi": "我们回家过年。",
+      "exampleVi": "Chúng ta về nhà đón năm mới."
+    },
+    {
+      "id": "hero-hsk-2-7000-meaning",
+      "vocabularyId": "7000",
+      "sourceIndex": 126,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "球",
+      "pinyin": "qiú",
+      "note": "Ví dụ: 他喜欢踢球。 — Anh ấy thích chơi bóng.",
+      "speakText": "球",
+      "options": [
+        "Ăn mừng Tết Nguyên đán",
+        "cung cấp; đáp ứng",
+        "quả; hình cầu; trái đất; môn bóng; trận đấu",
+        "giúp; hỗ trợ; ủng hộ; cho ai (tức là như một sự giúp đỡ); thuê (làm công nhân); bên (của xô, thuyền v.v.); lớp ngoài; phần trên (của giày); nhóm; băng đảng; phe phái; đảng hội đen"
+      ],
+      "answer": "quả; hình cầu; trái đất; môn bóng; trận đấu",
+      "exampleHanzi": "他喜欢踢球。",
+      "exampleVi": "Anh ấy thích chơi bóng."
+    },
+    {
+      "id": "hero-hsk-2-7915-meaning",
+      "vocabularyId": "7915",
+      "sourceIndex": 133,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "本子",
+      "pinyin": "běnzi",
+      "note": "Ví dụ: 我用本子写字。 — Tôi sử dụng một cuốn sổ để viết.",
+      "speakText": "本子",
+      "options": [
+        "cung cấp; đáp ứng",
+        "giúp; hỗ trợ; ủng hộ; cho ai (tức là như một sự giúp đỡ); thuê (làm công nhân); bên (của xô, thuyền v.v.); lớp ngoài; phần trên (của giày); nhóm; băng đảng; phe phái; đảng hội đen",
+        "sách; sổ tay; truyện tranh tự xuất bản kiểu Nhật (đặc biệt là truyện khiêu dâm), còn gọi là \"dōjinshi\"; ấn bản",
+        "giúp đỡ; ra tay; làm ơn; làm việc tốt"
+      ],
+      "answer": "sách; sổ tay; truyện tranh tự xuất bản kiểu Nhật (đặc biệt là truyện khiêu dâm), còn gọi là \"dōjinshi\"; ấn bản",
+      "exampleHanzi": "我用本子写字。",
+      "exampleVi": "Tôi sử dụng một cuốn sổ để viết."
+    },
+    {
+      "id": "hero-hsk-2-8052-meaning",
+      "vocabularyId": "8052",
+      "sourceIndex": 138,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "给",
+      "pinyin": "gěi",
+      "note": "Ví dụ: 我给他写了封信。 — Tôi đã viết cho anh ấy một lá thư.",
+      "speakText": "给",
+      "options": [
+        "cung cấp; đáp ứng",
+        "giúp; hỗ trợ; ủng hộ; cho ai (tức là như một sự giúp đỡ); thuê (làm công nhân); bên (của xô, thuyền v.v.); lớp ngoài; phần trên (của giày); nhóm; băng đảng; phe phái; đảng hội đen",
+        "giúp đỡ; ra tay; làm ơn; làm việc tốt",
+        "giới thiệu (ai đó với ai đó); trình bày; giới thiệu (ai đó cho công việc v.v.); sự giới thiệu"
+      ],
+      "answer": "cung cấp; đáp ứng",
+      "exampleHanzi": "我给他写了封信。",
+      "exampleVi": "Tôi đã viết cho anh ấy một lá thư."
+    },
+    {
+      "id": "hero-hsk-2-9870-meaning",
+      "vocabularyId": "9870",
+      "sourceIndex": 164,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "帮",
+      "pinyin": "bāng",
+      "note": "Ví dụ: 请帮我一个忙。 — Làm ơn giúp tôi một việc.",
+      "speakText": "帮",
+      "options": [
+        "sách; sổ tay; truyện tranh tự xuất bản kiểu Nhật (đặc biệt là truyện khiêu dâm), còn gọi là \"dōjinshi\"; ấn bản",
+        "cung cấp; đáp ứng",
+        "đã rồi",
+        "giúp; hỗ trợ; ủng hộ; cho ai (tức là như một sự giúp đỡ); thuê (làm công nhân); bên (của xô, thuyền v.v.); lớp ngoài; phần trên (của giày); nhóm; băng đảng; phe phái; đảng hội đen"
+      ],
+      "answer": "giúp; hỗ trợ; ủng hộ; cho ai (tức là như một sự giúp đỡ); thuê (làm công nhân); bên (của xô, thuyền v.v.); lớp ngoài; phần trên (của giày); nhóm; băng đảng; phe phái; đảng hội đen",
+      "exampleHanzi": "请帮我一个忙。",
+      "exampleVi": "Làm ơn giúp tôi một việc."
+    },
+    {
+      "id": "hero-hsk-2-9871-meaning",
+      "vocabularyId": "9871",
+      "sourceIndex": 165,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "帮忙",
+      "pinyin": "bāngmáng",
+      "note": "Ví dụ: 你能帮忙吗？ — Bạn có thể giúp được không?",
+      "speakText": "帮忙",
+      "options": [
+        "cung cấp; đáp ứng",
+        "giúp đỡ; ra tay; làm ơn; làm việc tốt",
+        "đã rồi",
+        "lên mạng; kết nối Internet; (tài liệu) được tải lên mạng; (quần vợt, bóng chuyền) tiến gần lưới"
+      ],
+      "answer": "giúp đỡ; ra tay; làm ơn; làm việc tốt",
+      "exampleHanzi": "你能帮忙吗？",
+      "exampleVi": "Bạn có thể giúp được không?"
+    },
+    {
+      "id": "hero-hsk-2-10460-meaning",
+      "vocabularyId": "10460",
+      "sourceIndex": 182,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "介绍",
+      "pinyin": "jièshào",
+      "note": "Ví dụ: 请介绍你的朋友。 — Hãy giới thiệu bạn của bạn.",
+      "speakText": "介绍",
+      "options": [
+        "đã rồi",
+        "lên mạng; kết nối Internet; (tài liệu) được tải lên mạng; (quần vợt, bóng chuyền) tiến gần lưới",
+        "bắt đầu; phần mở đầu; khởi động; ban đầu",
+        "giới thiệu (ai đó với ai đó); trình bày; giới thiệu (ai đó cho công việc v.v.); sự giới thiệu"
+      ],
+      "answer": "giới thiệu (ai đó với ai đó); trình bày; giới thiệu (ai đó cho công việc v.v.); sự giới thiệu",
+      "exampleHanzi": "请介绍你的朋友。",
+      "exampleVi": "Hãy giới thiệu bạn của bạn."
+    },
+    {
+      "id": "hero-hsk-2-10574-meaning",
+      "vocabularyId": "10574",
+      "sourceIndex": 196,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "已经",
+      "pinyin": "yǐjīng",
+      "note": "Ví dụ: 我已经吃饭了。 — Tôi đã ăn rồi.",
+      "speakText": "已经",
+      "options": [
+        "chiều dài; dài; mãi mãi; luôn luôn; liên tục",
+        "lên mạng; kết nối Internet; (tài liệu) được tải lên mạng; (quần vợt, bóng chuyền) tiến gần lưới",
+        "đã rồi",
+        "sinh nhật"
+      ],
+      "answer": "đã rồi",
+      "exampleHanzi": "我已经吃饭了。",
+      "exampleVi": "Tôi đã ăn rồi."
+    }
+  ]
+}

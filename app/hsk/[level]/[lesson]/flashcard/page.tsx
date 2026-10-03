@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { HskFlashcardSession } from "@/components/hsk-flashcard-session";
+import { HskLessonLoader } from "@/components/hsk-lesson-loader";
 import { HskVipLocked } from "@/components/hsk-vip-locked";
 import { getHskLessonPageData } from "@/lib/hsk-access-repository";
-import { getHskLessonHref } from "@/lib/hsk-lesson-content";
 import { getCurrentUser } from "@/lib/auth-session";
 import { learnerLoginPath } from "@/lib/learner-auth";
+import { hskLessonResourceUrl, learningContentScope } from "@/lib/lesson-resource";
+import { createLessonResource } from "@/lib/lesson-resource-server";
 
 type PageProps = { params: Promise<{ level: string; lesson: string }> };
 
@@ -20,5 +21,6 @@ export default async function HskFlashcardPage({ params }: PageProps) {
   if (!user && data.access.source !== "guest") redirect(learnerLoginPath(returnTo));
   if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
   if (!data.lesson.vocabulary.length) notFound();
-  return <HskFlashcardSession authenticated={Boolean(user)} backHref={getHskLessonHref(data.lesson.levelId, data.lesson.id)} lesson={data.lesson} />;
+  const resource = await createLessonResource(hskLessonResourceUrl(data.lesson.levelId, data.lesson.id), data.lesson, learningContentScope(user));
+  return <HskLessonLoader authenticated={Boolean(user)} levelId={data.lesson.levelId} mode="flashcard" resource={resource} title={data.lesson.title} />;
 }

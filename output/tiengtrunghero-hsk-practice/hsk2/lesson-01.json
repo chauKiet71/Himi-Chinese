@@ -1,0 +1,357 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-01",
+  "lessonNumber": 1,
+  "lessonTitle": "Nếu đi Bắc Kinh để du lịch thì tốt nhất là đi vào tháng chín.",
+  "topicId": "du-lich-cong-viec-mua-sam",
+  "topicTitle": "Du lịch, công việc & mua sắm",
+  "route": "/hsk/2/hsk2-tb-lesson-01/play",
+  "vocabularyCount": 16,
+  "exerciseCount": 16,
+  "typeCounts": {
+    "meaning": 16,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-1749-meaning",
+      "vocabularyId": "1749",
+      "sourceIndex": 13,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "最",
+      "pinyin": "zuì",
+      "note": "Ví dụ: 这是最好的选择。 — Đây là sự lựa chọn tốt nhất.",
+      "speakText": "最",
+      "options": [
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "nhất; nhất (hậu tố so sánh nhất)",
+        "bóng đá; một quả bóng đá; bóng đá; bóng đá",
+        "vị trí | địa điểm | nơi | chỗ ngồi | lượng từ tôn xưng chỉ người | lượng từ chỉ bit (ví dụ 16-bit) | (vật lý) điện thế"
+      ],
+      "answer": "nhất; nhất (hậu tố so sánh nhất)",
+      "exampleHanzi": "这是最好的选择。",
+      "exampleVi": "Đây là sự lựa chọn tốt nhất."
+    },
+    {
+      "id": "hero-hsk-2-1752-meaning",
+      "vocabularyId": "1752",
+      "sourceIndex": 16,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "足球",
+      "pinyin": "zúqiú",
+      "note": "Ví dụ: 他喜欢踢足球。 — Anh ấy thích chơi bóng đá.",
+      "speakText": "足球",
+      "options": [
+        "vận động; tập thể dục; thể thao; vận động; chuyển động; phong trào",
+        "bóng đá; một quả bóng đá; bóng đá; bóng đá",
+        "luộc mì",
+        "nhất; nhất (hậu tố so sánh nhất)"
+      ],
+      "answer": "bóng đá; một quả bóng đá; bóng đá; bóng đá",
+      "exampleHanzi": "他喜欢踢足球。",
+      "exampleVi": "Anh ấy thích chơi bóng đá."
+    },
+    {
+      "id": "hero-hsk-2-6724-meaning",
+      "vocabularyId": "6724",
+      "sourceIndex": 112,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "位",
+      "pinyin": "wèi",
+      "note": "Ví dụ: 请坐这位子。 — Xin hãy ngồi ở ghế này.",
+      "speakText": "位",
+      "options": [
+        "bóng đá; một quả bóng đá; bóng đá; bóng đá",
+        "đá; chơi (ví dụ: bóng đá); (lóng) người mạnh mẽ (trong mối quan hệ đồng tính nữ)",
+        "vị trí | địa điểm | nơi | chỗ ngồi | lượng từ tôn xưng chỉ người | lượng từ chỉ bit (ví dụ 16-bit) | (vật lý) điện thế",
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-"
+      ],
+      "answer": "vị trí | địa điểm | nơi | chỗ ngồi | lượng từ tôn xưng chỉ người | lượng từ chỉ bit (ví dụ 16-bit) | (vật lý) điện thế",
+      "exampleHanzi": "请坐这位子。",
+      "exampleVi": "Xin hãy ngồi ở ghế này."
+    },
+    {
+      "id": "hero-hsk-2-6792-meaning",
+      "vocabularyId": "6792",
+      "sourceIndex": 118,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "踢",
+      "pinyin": "tī",
+      "note": "Ví dụ: 他喜欢踢足球。 — Anh ấy thích chơi bóng đá.",
+      "speakText": "踢",
+      "options": [
+        "nhất; nhất (hậu tố so sánh nhất)",
+        "đá; chơi (ví dụ: bóng đá); (lóng) người mạnh mẽ (trong mối quan hệ đồng tính nữ)",
+        "bóng đá; một quả bóng đá; bóng đá; bóng đá",
+        "vị trí | địa điểm | nơi | chỗ ngồi | lượng từ tôn xưng chỉ người | lượng từ chỉ bit (ví dụ 16-bit) | (vật lý) điện thế"
+      ],
+      "answer": "đá; chơi (ví dụ: bóng đá); (lóng) người mạnh mẽ (trong mối quan hệ đồng tính nữ)",
+      "exampleHanzi": "他喜欢踢足球。",
+      "exampleVi": "Anh ấy thích chơi bóng đá."
+    },
+    {
+      "id": "hero-hsk-2-6793-meaning",
+      "vocabularyId": "6793",
+      "sourceIndex": 119,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "条",
+      "pinyin": "tiáo",
+      "note": "Ví dụ: 我买了一条鱼。 — Tôi đã mua một con cá.",
+      "speakText": "条",
+      "options": [
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "tại sao?; vì lý do gì?",
+        "cùng nơi; cùng nhau; với; nói chung (tổng cộng)",
+        "dải; mục; điều khoản; điều (của luật hoặc hiệp ước); lượng từ dùng cho vật dài và mỏng (ruy băng, sông, đường, quần v.v.)"
+      ],
+      "answer": "dải; mục; điều khoản; điều (của luật hoặc hiệp ước); lượng từ dùng cho vật dài và mỏng (ruy băng, sông, đường, quần v.v.)",
+      "exampleHanzi": "我买了一条鱼。",
+      "exampleVi": "Tôi đã mua một con cá."
+    },
+    {
+      "id": "hero-hsk-2-8049-meaning",
+      "vocabularyId": "8049",
+      "sourceIndex": 135,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "多",
+      "pinyin": "duō",
+      "note": "Ví dụ: 我多想回家看看。 — Tôi muốn về nhà xem thử biết bao.",
+      "speakText": "多",
+      "options": [
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "vị trí | địa điểm | nơi | chỗ ngồi | lượng từ tôn xưng chỉ người | lượng từ chỉ bit (ví dụ 16-bit) | (vật lý) điện thế",
+        "dải; mục; điều khoản; điều (của luật hoặc hiệp ước); lượng từ dùng cho vật dài và mỏng (ruy băng, sông, đường, quần v.v.)",
+        "tại sao?; vì lý do gì?"
+      ],
+      "answer": "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+      "exampleHanzi": "我多想回家看看。",
+      "exampleVi": "Tôi muốn về nhà xem thử biết bao."
+    },
+    {
+      "id": "hero-hsk-2-8050-meaning",
+      "vocabularyId": "8050",
+      "sourceIndex": 136,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "多",
+      "pinyin": "duō",
+      "note": "Ví dụ: 这里有多少钱？ — Ở đây có bao nhiêu tiền?",
+      "speakText": "多",
+      "options": [
+        "tại sao?; vì lý do gì?",
+        "cùng nơi; cùng nhau; với; nói chung (tổng cộng)",
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "chuyến đi; hành trình; du lịch; đi du lịch; tour; du lịch"
+      ],
+      "answer": "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+      "exampleHanzi": "这里有多少钱？",
+      "exampleVi": "Ở đây có bao nhiêu tiền?"
+    },
+    {
+      "id": "hero-hsk-2-8051-meaning",
+      "vocabularyId": "8051",
+      "sourceIndex": 137,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "多",
+      "pinyin": "duō",
+      "note": "Ví dụ: 他多聪明啊！ — Anh ấy thông minh làm sao!",
+      "speakText": "多",
+      "options": [
+        "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+        "tại sao?; vì lý do gì?",
+        "cùng nơi; cùng nhau; với; nói chung (tổng cộng)",
+        "chuyến đi; hành trình; du lịch; đi du lịch; tour; du lịch"
+      ],
+      "answer": "nhiều; nhiều (về lượng); quá nhiều; vượt quá; (sau số từ) ... lẻ; bao nhiêu (ở mức độ nào) (phát âm Đài Loan [duó]); (dạng liên kết) đa-; đa-",
+      "exampleHanzi": "他多聪明啊！",
+      "exampleVi": "Anh ấy thông minh làm sao!"
+    },
+    {
+      "id": "hero-hsk-2-8735-meaning",
+      "vocabularyId": "8735",
+      "sourceIndex": 143,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "为什么",
+      "pinyin": "wèi shénme",
+      "note": "Ví dụ: 你为什么不来？ — Tại sao bạn không đến?",
+      "speakText": "为什么",
+      "options": [
+        "cùng nơi; cùng nhau; với; nói chung (tổng cộng)",
+        "chuyến đi; hành trình; du lịch; đi du lịch; tour; du lịch",
+        "mắt",
+        "tại sao?; vì lý do gì?"
+      ],
+      "answer": "tại sao?; vì lý do gì?",
+      "exampleHanzi": "你为什么不来？",
+      "exampleVi": "Tại sao bạn không đến?"
+    },
+    {
+      "id": "hero-hsk-2-8838-meaning",
+      "vocabularyId": "8838",
+      "sourceIndex": 146,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "一起",
+      "pinyin": "yìqǐ",
+      "note": "Ví dụ: 我们一起学习汉语。 — Chúng tôi cùng nhau học tiếng Trung.",
+      "speakText": "一起",
+      "options": [
+        "chuyến đi; hành trình; du lịch; đi du lịch; tour; du lịch",
+        "mắt",
+        "vận động; tập thể dục; thể thao; vận động; chuyển động; phong trào",
+        "cùng nơi; cùng nhau; với; nói chung (tổng cộng)"
+      ],
+      "answer": "cùng nơi; cùng nhau; với; nói chung (tổng cộng)",
+      "exampleHanzi": "我们一起学习汉语。",
+      "exampleVi": "Chúng tôi cùng nhau học tiếng Trung."
+    },
+    {
+      "id": "hero-hsk-2-9634-meaning",
+      "vocabularyId": "9634",
+      "sourceIndex": 160,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "旅游",
+      "pinyin": "lǚyóu",
+      "note": "Ví dụ: 我们去旅游吧。 — Hãy đi du lịch nào.",
+      "speakText": "旅游",
+      "options": [
+        "cùng nơi; cùng nhau; với; nói chung (tổng cộng)",
+        "mắt",
+        "chuyến đi; hành trình; du lịch; đi du lịch; tour; du lịch",
+        "vận động; tập thể dục; thể thao; vận động; chuyển động; phong trào"
+      ],
+      "answer": "chuyến đi; hành trình; du lịch; đi du lịch; tour; du lịch",
+      "exampleHanzi": "我们去旅游吧。",
+      "exampleVi": "Hãy đi du lịch nào."
+    },
+    {
+      "id": "hero-hsk-2-10568-meaning",
+      "vocabularyId": "10568",
+      "sourceIndex": 190,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "眼睛",
+      "pinyin": "yǎnjing",
+      "note": "Ví dụ: 他的眼睛很大。 — Mắt anh ấy rất to.",
+      "speakText": "眼睛",
+      "options": [
+        "cùng nơi; cùng nhau; với; nói chung (tổng cộng)",
+        "mắt",
+        "chuyến đi; hành trình; du lịch; đi du lịch; tour; du lịch",
+        "vận động; tập thể dục; thể thao; vận động; chuyển động; phong trào"
+      ],
+      "answer": "mắt",
+      "exampleHanzi": "他的眼睛很大。",
+      "exampleVi": "Mắt anh ấy rất to."
+    },
+    {
+      "id": "hero-hsk-2-10838-meaning",
+      "vocabularyId": "10838",
+      "sourceIndex": 198,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "运动",
+      "pinyin": "yùndòng",
+      "note": "Ví dụ: 我每天运动一小时。 — Tôi tập thể dục một giờ mỗi ngày.",
+      "speakText": "运动",
+      "options": [
+        "luộc mì",
+        "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)",
+        "vận động; tập thể dục; thể thao; vận động; chuyển động; phong trào",
+        "đá; chơi (ví dụ: bóng đá); (lóng) người mạnh mẽ (trong mối quan hệ đồng tính nữ)"
+      ],
+      "answer": "vận động; tập thể dục; thể thao; vận động; chuyển động; phong trào",
+      "exampleHanzi": "我每天运动一小时。",
+      "exampleVi": "Tôi tập thể dục một giờ mỗi ngày."
+    },
+    {
+      "id": "hero-hsk-2-10839-meaning",
+      "vocabularyId": "10839",
+      "sourceIndex": 199,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "运动",
+      "pinyin": "yùndòng",
+      "note": "Ví dụ: 游泳是一项很好的运动。 — Bơi lội là một môn thể thao tuyệt vời.",
+      "speakText": "运动",
+      "options": [
+        "vận động; tập thể dục; thể thao; vận động; chuyển động; phong trào",
+        "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)",
+        "bóng đá; một quả bóng đá; bóng đá; bóng đá",
+        "mắt"
+      ],
+      "answer": "vận động; tập thể dục; thể thao; vận động; chuyển động; phong trào",
+      "exampleHanzi": "游泳是一项很好的运动。",
+      "exampleVi": "Bơi lội là một môn thể thao tuyệt vời."
+    },
+    {
+      "id": "hero-hsk-2-11378-meaning",
+      "vocabularyId": "11378",
+      "sourceIndex": 210,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "下面",
+      "pinyin": "xiàmiàn",
+      "note": "Ví dụ: 请看下面的图片。 — Xin vui lòng nhìn vào hình ảnh dưới đây.",
+      "speakText": "下面",
+      "options": [
+        "luộc mì",
+        "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)",
+        "bóng đá; một quả bóng đá; bóng đá; bóng đá",
+        "mắt"
+      ],
+      "answer": "luộc mì",
+      "exampleHanzi": "请看下面的图片。",
+      "exampleVi": "Xin vui lòng nhìn vào hình ảnh dưới đây."
+    },
+    {
+      "id": "hero-hsk-2-11823-meaning",
+      "vocabularyId": "11823",
+      "sourceIndex": 223,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "跟",
+      "pinyin": "gēn",
+      "note": "Ví dụ: 我跟他一起去学校。 — Tôi đi học cùng anh ấy.",
+      "speakText": "跟",
+      "options": [
+        "nhất; nhất (hậu tố so sánh nhất)",
+        "bóng đá; một quả bóng đá; bóng đá; bóng đá",
+        "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)",
+        "vị trí | địa điểm | nơi | chỗ ngồi | lượng từ tôn xưng chỉ người | lượng từ chỉ bit (ví dụ 16-bit) | (vật lý) điện thế"
+      ],
+      "answer": "gót chân; đi theo sát; đi cùng; (của phụ nữ) kết hôn với ai; với; so với; đến; hướng về; và (nối hai danh từ)",
+      "exampleHanzi": "我跟他一起去学校。",
+      "exampleVi": "Tôi đi học cùng anh ấy."
+    }
+  ]
+}

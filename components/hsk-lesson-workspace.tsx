@@ -22,7 +22,6 @@ import {
   X,
 } from "lucide-react";
 import {
-  getHskCurriculumHref,
   type HskExercise,
   type HskLessonContent,
   type HskLessonMode,
@@ -30,6 +29,7 @@ import {
   type HskVocabularyItem,
   type HskWritingCharacter,
 } from "@/lib/hsk-lesson-content";
+import { getHskCurriculumHref } from "@/lib/hsk-routing";
 import { cancelHskPronunciation, playHskPronunciation } from "@/lib/hsk-audio";
 import { VipUpgradeInlineForm } from "@/components/vip-upgrade-prompt";
 import {
@@ -39,6 +39,7 @@ import {
   parseHskLessonProgress,
   type HskLessonProgress,
 } from "@/lib/hsk-lesson-progress";
+import { recordRecentHskLesson } from "@/lib/recent-hsk-learning";
 import { saveHskVocabularyWord } from "@/lib/saved-vocabulary-client";
 
 type SpeechRate = 0.75 | 1 | 1.25;
@@ -56,9 +57,10 @@ function addUnique(items: string[], item: string): string[] {
   return items.includes(item) ? items : [...items, item];
 }
 
-function saveProgress(lessonId: string, progress: HskLessonProgress): void {
+function saveProgress(lesson: HskLessonContent, progress: HskLessonProgress): void {
   try {
-    window.localStorage.setItem(getHskLessonProgressStorageKey(lessonId), JSON.stringify(progress));
+    window.localStorage.setItem(getHskLessonProgressStorageKey(lesson.id), JSON.stringify(progress));
+    recordRecentHskLesson(lesson, progress);
   } catch {
     // The lesson remains fully usable when browser storage is unavailable.
   }
@@ -488,23 +490,25 @@ export function HskLessonWorkspace({ lesson, initialMode = "vocabulary", showLau
   useEffect(() => {
     const handle = window.setTimeout(() => {
       try {
-        setProgress(parseHskLessonProgress(window.localStorage.getItem(getHskLessonProgressStorageKey(lesson.id))));
+        const saved = parseHskLessonProgress(window.localStorage.getItem(getHskLessonProgressStorageKey(lesson.id)), lesson);
+        setProgress(saved);
+        recordRecentHskLesson(lesson, saved);
       } catch {
         setProgress(EMPTY_HSK_LESSON_PROGRESS);
       }
     }, 0);
     return () => window.clearTimeout(handle);
-  }, [lesson.id]);
+  }, [lesson]);
 
   useEffect(() => () => cancelHskPronunciation(), []);
 
   const commitProgress = useCallback((updater: (current: HskLessonProgress) => HskLessonProgress) => {
     setProgress((current) => {
       const next = updater(current);
-      saveProgress(lesson.id, next);
+      saveProgress(lesson, next);
       return next;
     });
-  }, [lesson.id]);
+  }, [lesson]);
 
   const speak = useCallback((text: string, rate: SpeechRate = 1, audio?: HskVocabularyAudio) => {
     void playHskPronunciation({ audio, rate, text });

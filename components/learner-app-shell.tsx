@@ -58,7 +58,7 @@ const learnerRailItems = [
 const learnerPracticeItems = [
   { href: "/typing", label: "Luyện gõ", icon: Keyboard, matches: (pathname: string) => pathname.startsWith("/typing") },
   { href: "/writing", label: "Luyện viết", icon: PenLine, matches: (pathname: string) => pathname.startsWith("/writing") },
-  { href: "/listening", label: "Luyện nghe", icon: AudioLines, matches: (pathname: string) => pathname.startsWith("/listening") || pathname.startsWith("/practice") },
+  { href: "/listening", label: "Luyện nghe", icon: AudioLines, matches: (pathname: string) => pathname.startsWith("/listening") },
   { href: "/videos", label: "Video", icon: Clapperboard, matches: (pathname: string) => pathname.startsWith("/videos") },
 ];
 
@@ -97,7 +97,12 @@ function UserChipAvatar({ avatarUrl, displayName }: { avatarUrl: string | null; 
 }
 
 function isStandaloneRoute(pathname: string): boolean {
-  return standalonePrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+  return standalonePrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`))
+    || /^\/writing\/[^/]+\/[^/]+\/practice$/u.test(pathname);
+}
+
+function isWritingPracticeRoute(pathname: string): boolean {
+  return /^\/writing\/[^/]+\/[^/]+\/practice$/u.test(pathname);
 }
 
 function isPlainNavigation(event: MouseEvent<HTMLElement>): boolean {
@@ -119,7 +124,6 @@ export function LearnerAppShell({
   const [routeProgressCompleting, setRouteProgressCompleting] = useState(false);
   const [railExpanded, setRailExpanded] = useState(true);
   const [practiceMenuOpen, setPracticeMenuOpen] = useState(false);
-  const [practiceTriggerSelected, setPracticeTriggerSelected] = useState(false);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [topbarAvatarUrl, setTopbarAvatarUrl] = useState(user?.avatarUrl ?? null);
   const practiceAutoExpandedRef = useRef(false);
@@ -231,20 +235,20 @@ export function LearnerAppShell({
   }, [pathname, router]);
   const beginRoute = (event: MouseEvent<HTMLElement>, href: string) => {
     if (!isPlainNavigation(event)) return;
-    setPracticeTriggerSelected(false);
     if (pathname === href) return;
     routeProgressStartedAtRef.current = event.timeStamp;
     setRouteProgressCompleting(false);
     setPendingHref(href);
   };
   const captureContentNavigation = (event: MouseEvent<HTMLDivElement>) => {
+    if (event.target instanceof Element && event.target.closest("[data-lesson-preload]")) return;
     const href = getInternalNavigationHref(event);
     if (href) beginRoute(event, href);
   };
   const prepareContentNavigation = (event: SyntheticEvent<HTMLDivElement>) => {
     if (!(event.target instanceof Element)) return;
     const anchor = event.target.closest<HTMLAnchorElement>("a[href]");
-    if (!anchor || anchor.hasAttribute("download")) return;
+    if (!anchor || anchor.hasAttribute("download") || anchor.hasAttribute("data-lesson-preload")) return;
     const target = anchor.getAttribute("target");
     const href = anchor.getAttribute("href");
     if ((target && target.toLowerCase() !== "_self") || !href?.startsWith("/") || href.startsWith("//")) return;
@@ -272,33 +276,26 @@ export function LearnerAppShell({
       practiceAutoExpandedRef.current = true;
       setRailExpanded(true);
       setPracticeMenuOpen(true);
-      setPracticeTriggerSelected(true);
       return;
     }
 
     if (practiceMenuOpen) {
       setPracticeMenuOpen(false);
-      setPracticeTriggerSelected(false);
       restoreAutoCollapsedRail();
       return;
     }
 
     setPracticeMenuOpen(true);
-    setPracticeTriggerSelected(true);
   };
   const toggleMobilePracticeMenu = () => {
-    const next = !practiceMenuOpen;
-    setPracticeMenuOpen(next);
-    setPracticeTriggerSelected(next);
+    setPracticeMenuOpen((current) => !current);
   };
   const closeMobilePracticeMenuAndNavigate = (event: MouseEvent<HTMLElement>, href: string) => {
     setPracticeMenuOpen(false);
-    setPracticeTriggerSelected(false);
     beginRoute(event, href);
   };
   const toggleAccountMenu = () => {
     setPracticeMenuOpen(false);
-    setPracticeTriggerSelected(false);
     setAccountMenuOpen((current) => !current);
   };
   const closeAccountMenuAndNavigate = (event: MouseEvent<HTMLElement>, href: string) => {
@@ -306,7 +303,7 @@ export function LearnerAppShell({
     beginRoute(event, href);
   };
   if (isStandaloneRoute(pathname)) {
-    const standaloneBreadcrumb = pathname.startsWith("/admin") || pathname.startsWith("/_not-found")
+    const standaloneBreadcrumb = pathname.startsWith("/admin") || pathname.startsWith("/_not-found") || isWritingPracticeRoute(pathname)
       ? null
       : <ClientBreadcrumb />;
     return <div className="standalone-route-shell">{standaloneBreadcrumb}{children}</div>;
@@ -323,15 +320,15 @@ export function LearnerAppShell({
   const routeProgressActive = navigating || (routeArrived && !routeProgressCompleting);
   const visualPathname = navigating && pendingHref ? pendingHref : pathname;
   const practiceSectionActive = learnerPracticeItems.some(({ matches }) => matches(visualPathname));
-  const practiceTriggerActive = practiceSectionActive || practiceTriggerSelected;
+  const practiceTriggerActive = practiceSectionActive;
   const mobilePracticeActive = mobilePracticeItems.some(({ matches }) => matches(visualPathname));
-  const mobileHomeActive = !practiceTriggerSelected && visualPathname === "/";
-  const mobileGamesActive = !practiceTriggerSelected && visualPathname.startsWith("/games");
-  const mobileVipActive = !practiceTriggerSelected && visualPathname.startsWith("/vip");
-  const mobileAccountActive = !practiceTriggerSelected && visualPathname.startsWith("/account");
+  const mobileHomeActive = visualPathname === "/";
+  const mobileGamesActive = visualPathname.startsWith("/games");
+  const mobileVipActive = visualPathname.startsWith("/vip");
+  const mobileAccountActive = visualPathname.startsWith("/account");
   const membershipPlanSuffix = membership?.planName.replace(/^VIP\s*/iu, "").trim();
   const renderRailItem = ({ href, label, icon: Icon, matches }: (typeof learnerRailItems)[number]) => {
-    const active = !practiceTriggerSelected && matches(visualPathname);
+    const active = matches(visualPathname);
     const pending = pendingHref === href;
     return (
       <Link
@@ -489,7 +486,7 @@ export function LearnerAppShell({
       </aside>
 
       <header className="learn-topbar">
-        <Link aria-label="Himi Chinese - Trang chủ" className="brand" href="/" onClick={(event) => beginRoute(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch={false}><BrandMark priority /><BrandWordmark /></Link>
+        <Link aria-label="Himi Chinese - Trang chủ" className="brand" href="/" onClick={(event) => beginRoute(event, "/")} onPointerEnter={() => prepareRoute("/")} prefetch={false}><BrandMark priority variant={pathname === "/" ? "face" : "mascot"} /><BrandWordmark /></Link>
         <div className="topbar-actions">
           <Link
             aria-label={user?.unreadNotificationCount ? `${user.unreadNotificationCount} thông báo chưa đọc` : "Thông báo"}

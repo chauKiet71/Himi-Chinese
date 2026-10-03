@@ -11,17 +11,14 @@ const staticRoutes: Record<string, ClientBreadcrumbModel> = {
   "/listening": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Luyện nghe" },
   "/login": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Đăng nhập" },
   "/notifications": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Thông báo" },
-  "/practice": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Luyện tập" },
   "/privacy": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Chính sách bảo mật" },
   "/register": { parentHref: "/login", parentLabel: "Đăng nhập", currentLabel: "Đăng ký" },
   "/reset-password": { parentHref: "/login", parentLabel: "Đăng nhập", currentLabel: "Đặt lại mật khẩu" },
   "/terms": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Điều khoản sử dụng" },
-  "/typing": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Luyện gõ" },
   "/videos": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Video" },
   "/vip": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Himi Chinese VIP" },
   "/vocabulary": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Bộ từ vựng" },
   "/verify-email": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Xác minh email" },
-  "/writing": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Luyện viết" },
 };
 
 function levelLabel(value: string): string {
@@ -44,12 +41,11 @@ function writingLessonLabel(value: string): string {
 }
 
 export function getClientBreadcrumb(pathname: string, courseView?: string | null): ClientBreadcrumbModel | null {
-  if (pathname === "/" || pathname.startsWith("/dev/")) return null;
+  if (pathname === "/" || pathname === "/typing" || pathname === "/writing" || pathname.startsWith("/dev/")) return null;
 
   if (pathname === "/courses") {
-    return courseView === "hsk"
-      ? { parentHref: "/", parentLabel: "Học tập", currentLabel: "Các cấp độ HSK" }
-      : { parentHref: "/", parentLabel: "Học tập", currentLabel: "Lộ trình" };
+    if (courseView === "hsk") return null;
+    return { parentHref: "/", parentLabel: "Học tập", currentLabel: "Lộ trình" };
   }
 
   const segments = pathname.split("/").filter(Boolean);

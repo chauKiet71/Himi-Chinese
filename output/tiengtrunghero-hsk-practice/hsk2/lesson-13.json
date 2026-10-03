@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-13",
+  "lessonNumber": 13,
+  "lessonTitle": "Cửa đang mở.",
+  "topicId": "so-sanh-trang-thai-trai-nghiem",
+  "topicTitle": "So sánh, trạng thái & trải nghiệm",
+  "route": "/hsk/2/hsk2-tb-lesson-13/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-1748-meaning",
+      "vocabularyId": "1748",
+      "sourceIndex": 12,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "走路",
+      "pinyin": "zǒulù",
+      "note": "Ví dụ: 我喜欢走路去学校。 — Tôi thích đi bộ đến trường.",
+      "speakText": "走路",
+      "options": [
+        "đi bộ; đi bộ",
+        "đi ra; xuất hiện; nảy sinh",
+        "tích lũy; liên quan hoặc ám chỉ (phát âm Đài Loan [lèi]); liên tục; lặp lại",
+        "âm đọc trong một từ ghép"
+      ],
+      "answer": "đi bộ; đi bộ",
+      "exampleHanzi": "我喜欢走路去学校。",
+      "exampleVi": "Tôi thích đi bộ đến trường."
+    },
+    {
+      "id": "hero-hsk-2-2445-meaning",
+      "vocabularyId": "2445",
+      "sourceIndex": 17,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "出来",
+      "pinyin": "chūlái",
+      "note": "Ví dụ: 请把书拿出来。 — Xin vui lòng lấy cuốn sách ra.",
+      "speakText": "出来",
+      "options": [
+        "tích lũy; liên quan hoặc ám chỉ (phát âm Đài Loan [lèi]); liên tục; lặp lại",
+        "âm đọc trong một từ ghép",
+        "đi ra; xuất hiện; nảy sinh",
+        "đi (về hướng) |đến |hướng về |(tàu) đi đến |quá khứ |trước đây"
+      ],
+      "answer": "đi ra; xuất hiện; nảy sinh",
+      "exampleHanzi": "请把书拿出来。",
+      "exampleVi": "Xin vui lòng lấy cuốn sách ra."
+    },
+    {
+      "id": "hero-hsk-2-2708-meaning",
+      "vocabularyId": "2708",
+      "sourceIndex": 27,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "画",
+      "pinyin": "huà",
+      "note": "Ví dụ: 这是一幅美丽的画。 — Đây là một bức tranh đẹp.",
+      "speakText": "画",
+      "options": [
+        "phía trước; ở phía trước; trước đó; ở trên; cũng đọc là [qián mian]",
+        "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+        "đầu; kiểu tóc; đỉnh; cuối; đầu hoặc cuối; mẩu; phần còn lại; trưởng; sếp; phía; khía cạnh; đầu tiên; dẫn đầu; lượng từ dùng cho lợn hoặc gia súc",
+        "họ Ban"
+      ],
+      "answer": "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+      "exampleHanzi": "这是一幅美丽的画。",
+      "exampleVi": "Đây là một bức tranh đẹp."
+    },
+    {
+      "id": "hero-hsk-2-3822-meaning",
+      "vocabularyId": "3822",
+      "sourceIndex": 51,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "手",
+      "pinyin": "shǒu",
+      "note": "Ví dụ: 我用手机。 — Tôi sử dụng điện thoại di động.",
+      "speakText": "手",
+      "options": [
+        "đầu; kiểu tóc; đỉnh; cuối; đầu hoặc cuối; mẩu; phần còn lại; trưởng; sếp; phía; khía cạnh; đầu tiên; dẫn đầu; lượng từ dùng cho lợn hoặc gia súc",
+        "họ Ban",
+        "tay; (trang trọng) cầm; người làm nghề nhất định; người có tay nghề; cá nhân; tiện lợi; lượng từ chỉ kỹ năng",
+        "đi bộ; đi bộ"
+      ],
+      "answer": "tay; (trang trọng) cầm; người làm nghề nhất định; người có tay nghề; cá nhân; tiện lợi; lượng từ chỉ kỹ năng",
+      "exampleHanzi": "我用手机。",
+      "exampleVi": "Tôi sử dụng điện thoại di động."
+    },
+    {
+      "id": "hero-hsk-2-4234-meaning",
+      "vocabularyId": "4234",
+      "sourceIndex": 55,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "累",
+      "pinyin": "lèi",
+      "note": "Ví dụ: 今天我很累。 — Hôm nay tôi rất mệt mỏi.",
+      "speakText": "累",
+      "options": [
+        "âm đọc trong một từ ghép",
+        "bé gái",
+        "đi (về hướng) |đến |hướng về |(tàu) đi đến |quá khứ |trước đây",
+        "tích lũy; liên quan hoặc ám chỉ (phát âm Đài Loan [lèi]); liên tục; lặp lại"
+      ],
+      "answer": "tích lũy; liên quan hoặc ám chỉ (phát âm Đài Loan [lèi]); liên tục; lặp lại",
+      "exampleHanzi": "今天我很累。",
+      "exampleVi": "Hôm nay tôi rất mệt mỏi."
+    },
+    {
+      "id": "hero-hsk-2-4235-meaning",
+      "vocabularyId": "4235",
+      "sourceIndex": 56,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "累",
+      "pinyin": "lèi",
+      "note": "Ví dụ: 工作累人。 — Công việc làm mọi người mệt mỏi.",
+      "speakText": "累",
+      "options": [
+        "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+        "tích lũy; liên quan hoặc ám chỉ (phát âm Đài Loan [lèi]); liên tục; lặp lại",
+        "tay; (trang trọng) cầm; người làm nghề nhất định; người có tay nghề; cá nhân; tiện lợi; lượng từ chỉ kỹ năng",
+        "bé gái"
+      ],
+      "answer": "tích lũy; liên quan hoặc ám chỉ (phát âm Đài Loan [lèi]); liên tục; lặp lại",
+      "exampleHanzi": "工作累人。",
+      "exampleVi": "Công việc làm mọi người mệt mỏi."
+    },
+    {
+      "id": "hero-hsk-2-5213-meaning",
+      "vocabularyId": "5213",
+      "sourceIndex": 72,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "拿",
+      "pinyin": "ná",
+      "note": "Ví dụ: 请拿这本书。 — Xin vui lòng lấy cuốn sách này.",
+      "speakText": "拿",
+      "options": [
+        "tay; (trang trọng) cầm; người làm nghề nhất định; người có tay nghề; cá nhân; tiện lợi; lượng từ chỉ kỹ năng",
+        "tích lũy; liên quan hoặc ám chỉ (phát âm Đài Loan [lèi]); liên tục; lặp lại",
+        "âm đọc trong một từ ghép",
+        "bé gái"
+      ],
+      "answer": "âm đọc trong một từ ghép",
+      "exampleHanzi": "请拿这本书。",
+      "exampleVi": "Xin vui lòng lấy cuốn sách này."
+    },
+    {
+      "id": "hero-hsk-2-6112-meaning",
+      "vocabularyId": "6112",
+      "sourceIndex": 100,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "女孩儿",
+      "pinyin": "nǚháir",
+      "note": "Ví dụ: 这个女孩儿很漂亮。 — Cô gái này rất đẹp.",
+      "speakText": "女孩儿",
+      "options": [
+        "tích lũy; liên quan hoặc ám chỉ (phát âm Đài Loan [lèi]); liên tục; lặp lại",
+        "âm đọc trong một từ ghép",
+        "đi (về hướng) |đến |hướng về |(tàu) đi đến |quá khứ |trước đây",
+        "bé gái"
+      ],
+      "answer": "bé gái",
+      "exampleHanzi": "这个女孩儿很漂亮。",
+      "exampleVi": "Cô gái này rất đẹp."
+    },
+    {
+      "id": "hero-hsk-2-6721-meaning",
+      "vocabularyId": "6721",
+      "sourceIndex": 109,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "往",
+      "pinyin": "wǎng",
+      "note": "Ví dụ: 我往前面走。 — Tôi đi về phía trước.",
+      "speakText": "往",
+      "options": [
+        "bé gái",
+        "đi (về hướng) |đến |hướng về |(tàu) đi đến |quá khứ |trước đây",
+        "phía trước; ở phía trước; trước đó; ở trên; cũng đọc là [qián mian]",
+        "đầu; kiểu tóc; đỉnh; cuối; đầu hoặc cuối; mẩu; phần còn lại; trưởng; sếp; phía; khía cạnh; đầu tiên; dẫn đầu; lượng từ dùng cho lợn hoặc gia súc"
+      ],
+      "answer": "đi (về hướng) |đến |hướng về |(tàu) đi đến |quá khứ |trước đây",
+      "exampleHanzi": "我往前面走。",
+      "exampleVi": "Tôi đi về phía trước."
+    },
+    {
+      "id": "hero-hsk-2-6722-meaning",
+      "vocabularyId": "6722",
+      "sourceIndex": 110,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "往",
+      "pinyin": "wǎng",
+      "note": "Ví dụ: 我往学校走。 — Tôi đi về phía trường học.",
+      "speakText": "往",
+      "options": [
+        "phía trước; ở phía trước; trước đó; ở trên; cũng đọc là [qián mian]",
+        "đầu; kiểu tóc; đỉnh; cuối; đầu hoặc cuối; mẩu; phần còn lại; trưởng; sếp; phía; khía cạnh; đầu tiên; dẫn đầu; lượng từ dùng cho lợn hoặc gia súc",
+        "họ Ban",
+        "đi (về hướng) |đến |hướng về |(tàu) đi đến |quá khứ |trước đây"
+      ],
+      "answer": "đi (về hướng) |đến |hướng về |(tàu) đi đến |quá khứ |trước đây",
+      "exampleHanzi": "我往学校走。",
+      "exampleVi": "Tôi đi về phía trường học."
+    },
+    {
+      "id": "hero-hsk-2-6997-meaning",
+      "vocabularyId": "6997",
+      "sourceIndex": 123,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "前面",
+      "pinyin": "qiánmiàn",
+      "note": "Ví dụ: 学校在银行的前面。 — Trường học nằm đối diện ngân hàng.",
+      "speakText": "前面",
+      "options": [
+        "đi (về hướng) |đến |hướng về |(tàu) đi đến |quá khứ |trước đây",
+        "phía trước; ở phía trước; trước đó; ở trên; cũng đọc là [qián mian]",
+        "chạm; tiếp xúc; cảm thấy; bị ảnh hưởng bởi; bắt lửa; cháy; (thông tục) ngủ thiếp đi; (sau động từ) trúng đích; thành công",
+        "cười; mỉm cười; chế giễu"
+      ],
+      "answer": "phía trước; ở phía trước; trước đó; ở trên; cũng đọc là [qián mian]",
+      "exampleHanzi": "学校在银行的前面。",
+      "exampleVi": "Trường học nằm đối diện ngân hàng."
+    },
+    {
+      "id": "hero-hsk-2-8655-meaning",
+      "vocabularyId": "8655",
+      "sourceIndex": 141,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "头",
+      "pinyin": "tóu",
+      "note": "Ví dụ: 我的头很痛。 — Đầu tôi đau quá.",
+      "speakText": "头",
+      "options": [
+        "đầu; kiểu tóc; đỉnh; cuối; đầu hoặc cuối; mẩu; phần còn lại; trưởng; sếp; phía; khía cạnh; đầu tiên; dẫn đầu; lượng từ dùng cho lợn hoặc gia súc",
+        "đi (về hướng) |đến |hướng về |(tàu) đi đến |quá khứ |trước đây",
+        "chạm; tiếp xúc; cảm thấy; bị ảnh hưởng bởi; bắt lửa; cháy; (thông tục) ngủ thiếp đi; (sau động từ) trúng đích; thành công",
+        "cười; mỉm cười; chế giễu"
+      ],
+      "answer": "đầu; kiểu tóc; đỉnh; cuối; đầu hoặc cuối; mẩu; phần còn lại; trưởng; sếp; phía; khía cạnh; đầu tiên; dẫn đầu; lượng từ dùng cho lợn hoặc gia súc",
+      "exampleHanzi": "我的头很痛。",
+      "exampleVi": "Đầu tôi đau quá."
+    },
+    {
+      "id": "hero-hsk-2-9869-meaning",
+      "vocabularyId": "9869",
+      "sourceIndex": 163,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "班",
+      "pinyin": "bān",
+      "note": "Ví dụ: 我有一个班的同学。 — Tôi có một lớp bạn cùng lớp.",
+      "speakText": "班",
+      "options": [
+        "chạm; tiếp xúc; cảm thấy; bị ảnh hưởng bởi; bắt lửa; cháy; (thông tục) ngủ thiếp đi; (sau động từ) trúng đích; thành công",
+        "cười; mỉm cười; chế giễu",
+        "vẽ | tranh | vẽ đường kẻ | nét chữ | nét ngang thư pháp",
+        "họ Ban"
+      ],
+      "answer": "họ Ban",
+      "exampleHanzi": "我有一个班的同学。",
+      "exampleVi": "Tôi có một lớp bạn cùng lớp."
+    },
+    {
+      "id": "hero-hsk-2-10842-meaning",
+      "vocabularyId": "10842",
+      "sourceIndex": 202,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "着",
+      "pinyin": "zhe",
+      "note": "Ví dụ: 他看着书。 — Anh ấy đang đọc một cuốn sách.",
+      "speakText": "着",
+      "options": [
+        "cười; mỉm cười; chế giễu",
+        "đi bộ; đi bộ",
+        "đi ra; xuất hiện; nảy sinh",
+        "chạm; tiếp xúc; cảm thấy; bị ảnh hưởng bởi; bắt lửa; cháy; (thông tục) ngủ thiếp đi; (sau động từ) trúng đích; thành công"
+      ],
+      "answer": "chạm; tiếp xúc; cảm thấy; bị ảnh hưởng bởi; bắt lửa; cháy; (thông tục) ngủ thiếp đi; (sau động từ) trúng đích; thành công",
+      "exampleHanzi": "他看着书。",
+      "exampleVi": "Anh ấy đang đọc một cuốn sách."
+    },
+    {
+      "id": "hero-hsk-2-11379-meaning",
+      "vocabularyId": "11379",
+      "sourceIndex": 211,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "笑",
+      "pinyin": "xiào",
+      "note": "Ví dụ: 他笑得很开心。 — Anh cười rất vui vẻ.",
+      "speakText": "笑",
+      "options": [
+        "đi bộ; đi bộ",
+        "cười; mỉm cười; chế giễu",
+        "đi ra; xuất hiện; nảy sinh",
+        "tích lũy; liên quan hoặc ám chỉ (phát âm Đài Loan [lèi]); liên tục; lặp lại"
+      ],
+      "answer": "cười; mỉm cười; chế giễu",
+      "exampleHanzi": "他笑得很开心。",
+      "exampleVi": "Anh cười rất vui vẻ."
+    }
+  ]
+}

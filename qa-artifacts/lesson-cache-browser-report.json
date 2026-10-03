@@ -1,0 +1,22 @@
+{
+  "checks": [
+    "Roadmap: zero lesson-body requests before selection",
+    "First selection: one body request and one IndexedDB entry",
+    "Full document reload: zero additional body requests",
+    "Quiz uses the same saved lesson without downloading again",
+    "Selecting lesson 2 downloads only lesson 2",
+    "Outdated persisted version is replaced with one new download",
+    "Real IndexedDB: 200-entry limit, 40 MiB limit, oldest eviction, other-scope cleanup",
+    "Network failure displays retry; retry successfully opens the lesson",
+    "Blocked IndexedDB: lesson still opens from network",
+    "No uncaught browser errors"
+  ],
+  "requests": [
+    "/api/lessons/hsk/hsk-1/hsk1-bai-01-chao-anh",
+    "/api/lessons/hsk/hsk-1/hsk1-bai-02-cam-on-anh",
+    "/api/lessons/hsk/hsk-1/hsk1-bai-01-chao-anh",
+    "/api/lessons/hsk/hsk-1/hsk1-bai-01-chao-anh",
+    "/api/lessons/hsk/hsk-1/hsk1-bai-01-chao-anh"
+  ],
+  "errors": []
+}

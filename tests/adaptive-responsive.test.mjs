@@ -35,11 +35,18 @@ test("adaptive layouts cover small phones, short landscape screens and reduced m
 });
 
 test("mobile practice menu keeps both sets of three destinations on one row", async () => {
-  const css = await readFile(new URL("app/learner-navigation.css", root), "utf8");
+  const [css, shell] = await Promise.all([
+    readFile(new URL("app/learner-navigation.css", root), "utf8"),
+    readFile(new URL("components/learner-app-shell.tsx", root), "utf8"),
+  ]);
 
   assert.match(css, /\.learner-app-shell \.mobile-practice-menu\s*\{[^}]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);/s);
   assert.doesNotMatch(css, /\.mobile-practice-menu a:nth-child\(4\)/);
   assert.doesNotMatch(css, /\.mobile-practice-menu a\s*\{[^}]*grid-column:/s);
+  assert.doesNotMatch(css, /mobile-practice-trigger\[aria-expanded="true"\][^{]*\{[^}]*color:/s);
+  for (const label of ["Lộ trình", "Luyện gõ", "Luyện viết", "Luyện nghe", "Video", "Bộ từ vựng"]) {
+    assert.match(shell, new RegExp(label));
+  }
 });
 
 test("practice sessions expose the learning task before requiring page scroll", async () => {

@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK2",
+  "levelId": "hsk-2",
+  "levelLabel": "HSK2",
+  "lessonId": "hsk2-tb-lesson-10",
+  "lessonNumber": 10,
+  "lessonTitle": "Đừng tìm nữa, điện thoại di động ở trên bàn kìa.",
+  "topicId": "sinh-hoat-di-chuyen-ke-hoach",
+  "topicTitle": "Sinh hoạt, di chuyển & kế hoạch",
+  "route": "/hsk/2/hsk2-tb-lesson-10/play",
+  "vocabularyCount": 15,
+  "exerciseCount": 15,
+  "typeCounts": {
+    "meaning": 15,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-2-3768-meaning",
+      "vocabularyId": "3768",
+      "sourceIndex": 39,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "别",
+      "pinyin": "bié",
+      "note": "Ví dụ: 别担心，一切都会好起来的。 — Đừng lo lắng, mọi thứ sẽ ổn thôi.",
+      "speakText": "别",
+      "options": [
+        "tháng giêng âm lịch",
+        "thoải mái; cảm thấy khỏe khoắn",
+        "(Trong) quá khứ; cựu; trước đây; đi qua; đi ngang qua",
+        "buộc ai đó thay đổi cách sống, quan điểm v.v."
+      ],
+      "answer": "buộc ai đó thay đổi cách sống, quan điểm v.v.",
+      "exampleHanzi": "别担心，一切都会好起来的。",
+      "exampleVi": "Đừng lo lắng, mọi thứ sẽ ổn thôi."
+    },
+    {
+      "id": "hero-hsk-2-5475-meaning",
+      "vocabularyId": "5475",
+      "sourceIndex": 74,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "舒服",
+      "pinyin": "shūfu",
+      "note": "Ví dụ: 这张椅子很舒服。 — Chiếc ghế này rất thoải mái.",
+      "speakText": "舒服",
+      "options": [
+        "(Trong) quá khứ; cựu; trước đây; đi qua; đi ngang qua",
+        "họ Wan",
+        "trực tuyến",
+        "thoải mái; cảm thấy khỏe khoắn"
+      ],
+      "answer": "thoải mái; cảm thấy khỏe khoắn",
+      "exampleHanzi": "这张椅子很舒服。",
+      "exampleVi": "Chiếc ghế này rất thoải mái."
+    },
+    {
+      "id": "hero-hsk-2-5781-meaning",
+      "vocabularyId": "5781",
+      "sourceIndex": 91,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "过去",
+      "pinyin": "guòqù",
+      "note": "Ví dụ: 我过去看看。 — Tôi sẽ đi qua và xem xét.",
+      "speakText": "过去",
+      "options": [
+        "họ Jiao",
+        "(Trong) quá khứ; cựu; trước đây; đi qua; đi ngang qua",
+        "buộc ai đó thay đổi cách sống, quan điểm v.v.",
+        "thoải mái; cảm thấy khỏe khoắn"
+      ],
+      "answer": "(Trong) quá khứ; cựu; trước đây; đi qua; đi ngang qua",
+      "exampleHanzi": "我过去看看。",
+      "exampleVi": "Tôi sẽ đi qua và xem xét."
+    },
+    {
+      "id": "hero-hsk-2-6719-meaning",
+      "vocabularyId": "6719",
+      "sourceIndex": 107,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "万",
+      "pinyin": "wàn",
+      "note": "Ví dụ: 这个手机一万块钱。 — Chiếc điện thoại này có giá mười nghìn nhân dân tệ.",
+      "speakText": "万",
+      "options": [
+        "trực tuyến",
+        "dạng khác",
+        "họ Wan",
+        "nước ngoài"
+      ],
+      "answer": "họ Wan",
+      "exampleHanzi": "这个手机一万块钱。",
+      "exampleVi": "Chiếc điện thoại này có giá mười nghìn nhân dân tệ."
+    },
+    {
+      "id": "hero-hsk-2-6723-meaning",
+      "vocabularyId": "6723",
+      "sourceIndex": 111,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "网上",
+      "pinyin": "wǎngshang",
+      "note": "Ví dụ: 我在网上买东西。 — Tôi mua đồ trực tuyến.",
+      "speakText": "网上",
+      "options": [
+        "(Trong) quá khứ; cựu; trước đây; đi qua; đi ngang qua",
+        "họ Wan",
+        "dạng khác",
+        "trực tuyến"
+      ],
+      "answer": "trực tuyến",
+      "exampleHanzi": "我在网上买东西。",
+      "exampleVi": "Tôi mua đồ trực tuyến."
+    },
+    {
+      "id": "hero-hsk-2-8054-meaning",
+      "vocabularyId": "8054",
+      "sourceIndex": 140,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "那",
+      "pinyin": "nà",
+      "note": "Ví dụ: 那我就放心了。 — Lúc đó tôi sẽ cảm thấy thoải mái.",
+      "speakText": "那",
+      "options": [
+        "nước ngoài",
+        "dạng khác",
+        "giặt; tắm; rửa (ảnh); xáo (bài v.v.); xóa (bản ghi)",
+        "màu trắng; nghĩa bóng: phản động; chống cộng"
+      ],
+      "answer": "dạng khác",
+      "exampleHanzi": "那我就放心了。",
+      "exampleVi": "Lúc đó tôi sẽ cảm thấy thoải mái."
+    },
+    {
+      "id": "hero-hsk-2-8656-meaning",
+      "vocabularyId": "8656",
+      "sourceIndex": 142,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "外国",
+      "pinyin": "wàiguó",
+      "note": "Ví dụ: 他来自外国。 — Anh ấy đến từ nước ngoài.",
+      "speakText": "外国",
+      "options": [
+        "nước ngoài",
+        "dạng khác",
+        "giặt; tắm; rửa (ảnh); xáo (bài v.v.); xóa (bản ghi)",
+        "họ Bào"
+      ],
+      "answer": "nước ngoài",
+      "exampleHanzi": "他来自外国。",
+      "exampleVi": "Anh ấy đến từ nước ngoài."
+    },
+    {
+      "id": "hero-hsk-2-8736-meaning",
+      "vocabularyId": "8736",
+      "sourceIndex": 144,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "洗",
+      "pinyin": "xǐ",
+      "note": "Ví dụ: 我洗衣服。 — Tôi giặt quần áo.",
+      "speakText": "洗",
+      "options": [
+        "dạng khác",
+        "nước ngoài",
+        "màu trắng; nghĩa bóng: phản động; chống cộng",
+        "giặt; tắm; rửa (ảnh); xáo (bài v.v.); xóa (bản ghi)"
+      ],
+      "answer": "giặt; tắm; rửa (ảnh); xáo (bài v.v.); xóa (bản ghi)",
+      "exampleHanzi": "我洗衣服。",
+      "exampleVi": "Tôi giặt quần áo."
+    },
+    {
+      "id": "hero-hsk-2-9868-meaning",
+      "vocabularyId": "9868",
+      "sourceIndex": 162,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "白色",
+      "pinyin": "báisè",
+      "note": "Ví dụ: 这件衣服是白色。 — Bộ quần áo này có màu trắng.",
+      "speakText": "白色",
+      "options": [
+        "họ Bào",
+        "trái đất; mặt đất; cánh đồng; nơi; đất đai",
+        "màu trắng; nghĩa bóng: phản động; chống cộng",
+        "họ Jiao"
+      ],
+      "answer": "màu trắng; nghĩa bóng: phản động; chống cộng",
+      "exampleHanzi": "这件衣服是白色。",
+      "exampleVi": "Bộ quần áo này có màu trắng."
+    },
+    {
+      "id": "hero-hsk-2-9872-meaning",
+      "vocabularyId": "9872",
+      "sourceIndex": 166,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "包",
+      "pinyin": "bāo",
+      "note": "Ví dụ: 我们包饺子。 — Chúng tôi làm bánh bao.",
+      "speakText": "包",
+      "options": [
+        "màu trắng; nghĩa bóng: phản động; chống cộng",
+        "trái đất; mặt đất; cánh đồng; nơi; đất đai",
+        "nhiều như vậy; nhiều như thế; bao nhiêu?; theo cách này; như thế này",
+        "họ Bào"
+      ],
+      "answer": "họ Bào",
+      "exampleHanzi": "我们包饺子。",
+      "exampleVi": "Chúng tôi làm bánh bao."
+    },
+    {
+      "id": "hero-hsk-2-9874-meaning",
+      "vocabularyId": "9874",
+      "sourceIndex": 168,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "包",
+      "pinyin": "bāo",
+      "note": "Ví dụ: 我买了一包糖。 — Tôi mua một gói đường.",
+      "speakText": "包",
+      "options": [
+        "trái đất; mặt đất; cánh đồng; nơi; đất đai",
+        "họ Jiao",
+        "họ Bào",
+        "nhiều như vậy; nhiều như thế; bao nhiêu?; theo cách này; như thế này"
+      ],
+      "answer": "họ Bào",
+      "exampleHanzi": "我买了一包糖。",
+      "exampleVi": "Tôi mua một gói đường."
+    },
+    {
+      "id": "hero-hsk-2-10209-meaning",
+      "vocabularyId": "10209",
+      "sourceIndex": 173,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "地",
+      "pinyin": "de",
+      "note": "Ví dụ: 他认真地学习汉语。 — Anh ấy học tiếng Trung một cách nghiêm túc.",
+      "speakText": "地",
+      "options": [
+        "trái đất; mặt đất; cánh đồng; nơi; đất đai",
+        "họ Jiao",
+        "nhiều như vậy; nhiều như thế; bao nhiêu?; theo cách này; như thế này",
+        "tháng giêng âm lịch"
+      ],
+      "answer": "trái đất; mặt đất; cánh đồng; nơi; đất đai",
+      "exampleHanzi": "他认真地学习汉语。",
+      "exampleVi": "Anh ấy học tiếng Trung một cách nghiêm túc."
+    },
+    {
+      "id": "hero-hsk-2-10506-meaning",
+      "vocabularyId": "10506",
+      "sourceIndex": 188,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "教",
+      "pinyin": "jiāo",
+      "note": "Ví dụ: 老师教我们汉语。 — Giáo viên dạy chúng tôi tiếng Trung.",
+      "speakText": "教",
+      "options": [
+        "họ Jiao",
+        "nhiều như vậy; nhiều như thế; bao nhiêu?; theo cách này; như thế này",
+        "tháng giêng âm lịch",
+        "(Trong) quá khứ; cựu; trước đây; đi qua; đi ngang qua"
+      ],
+      "answer": "họ Jiao",
+      "exampleHanzi": "老师教我们汉语。",
+      "exampleVi": "Giáo viên dạy chúng tôi tiếng Trung."
+    },
+    {
+      "id": "hero-hsk-2-10843-meaning",
+      "vocabularyId": "10843",
+      "sourceIndex": 203,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "这么",
+      "pinyin": "zhème",
+      "note": "Ví dụ: 这么远的地方怎么去？ — Làm thế nào để chúng ta đến được một nơi xa như vậy?",
+      "speakText": "这么",
+      "options": [
+        "nhiều như vậy; nhiều như thế; bao nhiêu?; theo cách này; như thế này",
+        "tháng giêng âm lịch",
+        "buộc ai đó thay đổi cách sống, quan điểm v.v.",
+        "thoải mái; cảm thấy khỏe khoắn"
+      ],
+      "answer": "nhiều như vậy; nhiều như thế; bao nhiêu?; theo cách này; như thế này",
+      "exampleHanzi": "这么远的地方怎么去？",
+      "exampleVi": "Làm thế nào để chúng ta đến được một nơi xa như vậy?"
+    },
+    {
+      "id": "hero-hsk-2-10844-meaning",
+      "vocabularyId": "10844",
+      "sourceIndex": 204,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "正",
+      "pinyin": "zhèng",
+      "note": "Ví dụ: 他正在吃饭。 — Anh ấy đang ăn.",
+      "speakText": "正",
+      "options": [
+        "buộc ai đó thay đổi cách sống, quan điểm v.v.",
+        "thoải mái; cảm thấy khỏe khoắn",
+        "tháng giêng âm lịch",
+        "(Trong) quá khứ; cựu; trước đây; đi qua; đi ngang qua"
+      ],
+      "answer": "tháng giêng âm lịch",
+      "exampleHanzi": "他正在吃饭。",
+      "exampleVi": "Anh ấy đang ăn."
+    }
+  ]
+}

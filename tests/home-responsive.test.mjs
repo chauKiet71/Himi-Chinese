@@ -4,70 +4,84 @@ import test from "node:test";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
-test("home portal reserves mobile navigation space and keeps phone controls touch friendly", async () => {
+test("home dashboard exposes the four core learning paths and useful continuation links", async () => {
+  const page = await read("components/review-home-studio.tsx");
+
+  assert.match(page, /Chào mừng bạn đến với <em>Himi Chinese!<\/em>/);
+  assert.match(page, /href="\/hsk\/1\/hsk1-bai-01-chao-anh"[\s\S]*Tiếp tục học/);
+  assert.match(page, /title: "Luyện viết"[\s\S]*href: "\/writing"/);
+  assert.match(page, /title: "Luyện nghe"[\s\S]*href: "\/listening"/);
+  assert.match(page, /title: "Luyện gõ"[\s\S]*href: "\/typing"/);
+  assert.match(page, /title: "Giáo trình HSK"[\s\S]*href: "\/courses\?view=hsk"/);
+  assert.match(page, /Chủ đề phổ biến/);
+  assert.match(page, /Bài học gần đây/);
+  assert.match(page, /readRecentLearningHistory\(\)\.slice\(0, 3\)/);
+  assert.match(page, /RECENT_LEARNING_HISTORY_CHANGED_EVENT/);
+  assert.doesNotMatch(page, /const RECENT_LESSONS/);
+  assert.doesNotMatch(page, /href="\/practice" prefetch=\{false\}>Xem tất cả/);
+  assert.doesNotMatch(page, /home-feature-title[\s\S]*?Xem tất cả[\s\S]*?home-redesign-feature-grid/);
+  assert.match(page, /home-topic-title[\s\S]*?href="\/courses\/tieng-trung-tan-suat-cao"[\s\S]*?Xem tất cả/);
+  assert.doesNotMatch(page, /home-recent-title[\s\S]*href="\/courses"[\s\S]*home-redesign-recent-list/);
+});
+
+test("home dashboard reuses Himi artwork and the selected warm learning-hub composition", async () => {
+  const page = await read("components/review-home-studio.tsx");
+  const css = await read("app/home-portal.css");
+
+  assert.match(page, /\/assets\/mascot\/himi-v2\/himi-wave\.webp/);
+  assert.match(page, /\/assets\/home\/features\/feature-writing-pencil-3d\.png/);
+  assert.match(page, /\/assets\/home\/features\/feature-listening-headphones-3d\.png/);
+  assert.match(page, /\/assets\/home\/features\/feature-typing-keyboard-3d\.png/);
+  assert.match(page, /\/assets\/home\/features\/feature-hsk-books-3d\.png/);
+  assert.match(page, /home-hero-cover-desktop\.png/);
+  assert.match(css, /\.home-redesign-cover-image\s*\{[^}]*object-fit:\s*cover/);
+  assert.match(css, /@media \(min-width: 721px\)[\s\S]*?aspect-ratio:\s*1945\s*\/\s*808/);
+  assert.match(css, /@media \(min-width: 721px\)[\s\S]*?\.home-redesign-hero-copy > \.home-redesign-primary\s*\{[\s\S]*?left:\s*5\.4%;[\s\S]*?bottom:\s*12%;[\s\S]*?pointer-events:\s*auto/);
+  assert.doesNotMatch(css, /\.home-redesign-hero > \.home-redesign-hero-copy,\s*\.home-redesign-hero > \.home-redesign-mascot-wrap/);
+  assert.match(css, /\.home-redesign-heading-row h2\s*\{[\s\S]*font-size:\s*18px/);
+  assert.match(css, /\.home-redesign-recent \.home-redesign-heading-row h2\s*\{\s*font-size:\s*18px/);
+  assert.match(css, /\.home-redesign-recent\s*\{[\s\S]*display:\s*flex;[\s\S]*flex-direction:\s*column/);
+  assert.match(css, /\.home-redesign-recent-list:has\(\.home-redesign-recent-empty\)\s*\{[\s\S]*grid-template-rows:\s*minmax\(60px, 1fr\)/);
+  assert.match(css, /\.home-redesign-recent-empty\s*\{[\s\S]*height:\s*100%/);
+  assert.match(css, /\.home-redesign-feature-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(4, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.home-redesign-feature h3\s*\{[\s\S]*font-weight:\s*400/);
+  assert.match(css, /\.home-redesign-topic-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(6, minmax\(0, 1fr\)\)/);
+  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*\.home-redesign-feature:hover[\s\S]*transform:\s*translateY\(-4px\)/);
+  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*\.home-redesign-topic:hover[\s\S]*transform:\s*translateY\(-4px\)/);
+  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*\.home-redesign-recent-item:hover[\s\S]*transform:\s*translateY\(-3px\)/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*\.home-redesign-feature:hover,[\s\S]*\.home-redesign-recent-item:hover \{ transform: none; \}/);
+});
+
+test("home dashboard matches the compact mobile reference and preserves bottom navigation clearance", async () => {
+  const page = await read("components/review-home-studio.tsx");
   const css = await read("app/home-portal.css");
   const shell = await read("components/learner-app-shell.tsx");
-  const responsive = await read("app/responsive.css");
-  const brand = await read("app/brand-theme.css");
+  const brand = await read("components/brand-logo.tsx");
 
-  assert.match(css, /--home-mobile-nav-clearance:\s*calc\(86px \+ env\(safe-area-inset-bottom\)\)/);
-  assert.match(css, /min-height:\s*max\(100dvh, 720px\)/);
-  assert.match(css, /\.home-portal-art\s*\{[\s\S]*top:\s*0;[\s\S]*bottom:\s*var\(--home-mobile-nav-clearance\);[\s\S]*height:\s*auto/);
-  assert.match(css, /font-size:\s*15px;\s*\n\s*line-height:\s*1\.5/);
-  assert.match(css, /\.home-portal-quick-action\s*\{[\s\S]*min-height:\s*100px/);
-  assert.match(css, /@media \(max-width: 359px\)[\s\S]*right:\s*max\(8px, env\(safe-area-inset-right\)\)/);
-  assert.match(responsive, /\.learner-app-shell \.learn-topbar\s*\{\s*\n\s*display:\s*none/);
-  assert.match(responsive, /grid-template-columns:\s*repeat\(6, minmax\(0, 1fr\)\)/);
-  assert.match(shell, /<UserRound aria-hidden="true" size=\{20\} \/><span>Tài khoản<\/span>/);
-  assert.match(shell, /<span>Luyện tập<\/span>/);
-  const homeStudio = await read("components/review-home-studio.tsx");
-  assert.match(homeStudio, /className="home-portal-secondary" href="\/courses#course-catalog"[\s\S]*Xem lộ trình/);
-  assert.match(homeStudio, /aria-label="Bắt đầu luyện nhanh"[\s\S]*href="\/typing"[\s\S]*Luyện gõ[\s\S]*href="\/listening"[\s\S]*Luyện nghe[\s\S]*href="\/vocabulary"[\s\S]*Ôn từ vựng/);
-  assert.doesNotMatch(homeStudio, /href="\/hsk\/1\/hsk1-bai-01-chao-anh\/flashcard"/);
-  assert.match(css, /\.home-portal-quick-dock\s*\{[\s\S]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
-  assert.match(css, /\.home-portal-actions\s*\{\s*\n\s*display:\s*none/);
-  assert.match(css, /transition:\s*transform 220ms ease/);
-  assert.match(css, /\.home-portal-primary:hover,\s*\.home-portal-secondary:hover\s*\{\s*transform:\s*translateY\(-3px\)/);
-  assert.doesNotMatch(css, /\.home-portal-primary:hover svg/);
-  assert.doesNotMatch(css, /\.home-portal-secondary:hover > span/);
-  assert.match(brand, /\.home-portal-art::before\s*\{[\s\S]*--home-portal-curve-height:[\s\S]*border-radius:\s*50%/);
-  assert.match(brand, /top:\s*calc\(260px - var\(--home-portal-curve-height\)\)/);
-  assert.match(brand, /@media \(max-width: 720px\)[\s\S]*\.home-portal-art::after[\s\S]*linear-gradient\(180deg/);
-  assert.match(brand, /\.home-portal-copy > p\s*\{\s*\n\s*color:\s*color-mix\(in srgb, var\(--himi-black\) 86%, var\(--himi-white\)\);\s*\n\s*font-weight:\s*650/);
+  assert.match(page, /home-mobile-hero-penguin-cutout\.png/);
+  assert.match(page, /home-redesign-mobile-title[\s\S]*Học tiếng Trung thật/);
+  assert.doesNotMatch(page, /home-redesign-mobile-nav|href="\/practice"/);
+  assert.match(css, /Mobile home composition based on the selected compact app reference/);
+  assert.match(css, /padding:\s*0 12px calc\(104px \+ env\(safe-area-inset-bottom\)\)/);
+  assert.match(css, /\.home-redesign-feature-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.home-redesign-topic-grid\s*\{[\s\S]*display:\s*flex;[\s\S]*overflow-x:\s*auto/);
+  assert.match(css, /\.home-redesign-recent\s*\{[\s\S]*margin-top:\s*20px;[\s\S]*display:\s*block/);
+  assert.match(css, /\.home-redesign-recent-item\s*\{[\s\S]*grid-template-columns:\s*40px minmax\(0, 1fr\) 72px 16px/);
+  assert.match(css, /#home-feature-title\s*\{[\s\S]*padding-left:\s*18px;[\s\S]*border-left:\s*7px solid #ff5a4e/);
+  assert.doesNotMatch(css, /#home-feature-title\s*\{\s*padding-left:\s*0;\s*border-left:\s*0/);
+  assert.match(css, /#home-topic-title,\s*#home-recent-title\s*\{[\s\S]*padding-left:\s*18px;[\s\S]*border-left:\s*7px solid #ff5a4e/);
+  assert.doesNotMatch(css, /\.learner-app-shell\.is-home-route > \.learner-mobile-nav\s*\{\s*display:\s*none/);
+  assert.match(shell, /const mobilePracticeItems = \[learnerRailItems\[1\], \.\.\.learnerPracticeItems, learnerRailItems\[3\]\]/);
+  assert.match(shell, /mobile-practice-menu[\s\S]*mobilePracticeItems\.map/);
+  assert.match(shell, /<BrandMark priority variant=\{pathname === "\/" \? "face" : "mascot"\} \/>/);
+  assert.match(brand, /variant === "face" \? FACE_BRAND_LOGO_SOURCE : BRAND_LOGO_SOURCE/);
+  assert.match(brand, /himi-sidebar-logo-transparent\.webp/);
 });
 
-test("home portal uses the rhythmic Himi headline and Roboto Vietnamese display typeface", async () => {
-  const page = await read("components/review-home-studio.tsx");
-  const layout = await read("app/layout.tsx");
-  const css = await read("app/home-portal.css");
-  const globals = await read("app/globals.css");
-
-  assert.match(page, /<span>Mỗi ngày một tí,<\/span>/);
-  assert.match(page, /<span>tự tin cùng <em>Himi<\/em>\.<\/span>/);
-  assert.match(page, /Tình huống thật\. Phản xạ tự nhiên\./);
-  assert.doesNotMatch(layout, /next\/font\/google/);
-  assert.match(globals, /font-family:\s*"Himi Roboto"/);
-  assert.match(globals, /roboto-vietnamese\.woff2/);
-  assert.match(globals, /font-weight:\s*100 900/);
-  assert.match(css, /font-family:\s*var\(--font-roboto\) !important/);
-  assert.match(css, /\.home-portal-copy h1 em[\s\S]*color:\s*#ff4c3b/);
-});
-
-test("home portal treats short landscape viewports as phones instead of desktop rail layouts", async () => {
-  const css = await read("app/home-portal.css");
-
-  assert.match(css, /@media \(orientation: landscape\) and \(max-height: 500px\) and \(max-width: 960px\)/);
-  assert.match(css, /\.learner-app-shell\.is-home-route \.learn-rail\s*\{\s*\n\s*display:\s*none/);
-  assert.match(css, /grid-template-columns:\s*repeat\(6, minmax\(0, 1fr\)\)/);
-  assert.match(css, /\.home-portal-copy\s*\{\s*\n\s*width:\s*52%;\s*\n\s*padding:\s*max\(22px, env\(safe-area-inset-top\)\)/);
-});
-
-test("welcome offer stays compact on desktop and phone viewports", async () => {
+test("home welcome offer remains compact on desktop and phone viewports", async () => {
   const css = await read("app/home-portal.css");
 
   assert.match(css, /\.home-welcome-offer-dialog\s*\{[\s\S]*width:\s*min\(560px, calc\(100vw - 48px\)\);[\s\S]*max-height:\s*calc\(100dvh - 40px\)/);
   assert.match(css, /\.home-welcome-offer-card\s*\{[\s\S]*min-height:\s*0;[\s\S]*padding:\s*32px 30px 24px/);
-  assert.match(css, /\.home-welcome-offer-hero\s*\{\s*\n\s*min-height:\s*270px/);
-  assert.match(css, /@media \(max-width: 720px\)[\s\S]*width:\s*min\(100% - 28px, 500px\);[\s\S]*min-height:\s*260px/);
   assert.match(css, /@media \(max-width: 390px\)[\s\S]*\.home-welcome-offer-hero \{ min-height: 255px; \}/);
 });

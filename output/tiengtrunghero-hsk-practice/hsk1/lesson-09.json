@@ -1,0 +1,462 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-09-con-trai-anh-lam-viec-o-dau",
+  "lessonNumber": 9,
+  "lessonTitle": "Con trai anh làm việc ở đâu?",
+  "topicId": "giao-tiep-hang-ngay",
+  "topicTitle": "Giao tiếp hằng ngày",
+  "route": "/hsk/1/hsk1-bai-09-con-trai-anh-lam-viec-o-dau/play",
+  "vocabularyCount": 21,
+  "exerciseCount": 21,
+  "typeCounts": {
+    "meaning": 21,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-83-meaning",
+      "vocabularyId": "83",
+      "sourceIndex": 1,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "小",
+      "pinyin": "xiǎo",
+      "note": "Ví dụ: 这个房间很小。 — Căn phòng này rất nhỏ.",
+      "speakText": "小",
+      "options": [
+        "ở đó",
+        "nhỏ; tí hon; ít; trẻ",
+        "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?",
+        "chơi |vui chơi |đùa cợt |đồ chơi |vật giải trí |đồ cổ (Đài Loan đọc [wàn]) |giữ vật gì để giải trí"
+      ],
+      "answer": "nhỏ; tí hon; ít; trẻ",
+      "exampleHanzi": "这个房间很小。",
+      "exampleVi": "Căn phòng này rất nhỏ."
+    },
+    {
+      "id": "hero-hsk-1-84-meaning",
+      "vocabularyId": "84",
+      "sourceIndex": 2,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "小",
+      "pinyin": "xiǎo",
+      "note": "Ví dụ: 这是小明的书。 — Đây là cuốn sách của Xiaoming.",
+      "speakText": "小",
+      "options": [
+        "ở đó",
+        "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?",
+        "chơi |vui chơi |đùa cợt |đồ chơi |vật giải trí |đồ cổ (Đài Loan đọc [wàn]) |giữ vật gì để giải trí",
+        "nhỏ; tí hon; ít; trẻ"
+      ],
+      "answer": "nhỏ; tí hon; ít; trẻ",
+      "exampleHanzi": "这是小明的书。",
+      "exampleVi": "Đây là cuốn sách của Xiaoming."
+    },
+    {
+      "id": "hero-hsk-1-865-meaning",
+      "vocabularyId": "865",
+      "sourceIndex": 15,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "那儿",
+      "pinyin": "nàr",
+      "note": "Ví dụ: 我们去那儿玩吧。 — Chúng ta tới đó chơi nhé.",
+      "speakText": "那儿",
+      "options": [
+        "nhỏ; tí hon; ít; trẻ",
+        "ở đó",
+        "chơi |vui chơi |đùa cợt |đồ chơi |vật giải trí |đồ cổ (Đài Loan đọc [wàn]) |giữ vật gì để giải trí",
+        "(thông tục) bố; ba"
+      ],
+      "answer": "ở đó",
+      "exampleHanzi": "我们去那儿玩吧。",
+      "exampleVi": "Chúng ta tới đó chơi nhé."
+    },
+    {
+      "id": "hero-hsk-1-866-meaning",
+      "vocabularyId": "866",
+      "sourceIndex": 16,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "哪儿",
+      "pinyin": "nǎr",
+      "note": "Ví dụ: 你的书在哪儿？ — Sách của bạn ở đâu?",
+      "speakText": "哪儿",
+      "options": [
+        "chơi |vui chơi |đùa cợt |đồ chơi |vật giải trí |đồ cổ (Đài Loan đọc [wàn]) |giữ vật gì để giải trí",
+        "(thông tục) bố; ba",
+        "anh trai",
+        "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?"
+      ],
+      "answer": "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?",
+      "exampleHanzi": "你的书在哪儿？",
+      "exampleVi": "Sách của bạn ở đâu?"
+    },
+    {
+      "id": "hero-hsk-1-963-meaning",
+      "vocabularyId": "963",
+      "sourceIndex": 21,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "玩",
+      "pinyin": "wán",
+      "note": "Ví dụ: 孩子们在公园里玩。 — Bọn trẻ đang chơi trong công viên.",
+      "speakText": "玩",
+      "options": [
+        "nhỏ; tí hon; ít; trẻ",
+        "chơi |vui chơi |đùa cợt |đồ chơi |vật giải trí |đồ cổ (Đài Loan đọc [wàn]) |giữ vật gì để giải trí",
+        "ở đó",
+        "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?"
+      ],
+      "answer": "chơi |vui chơi |đùa cợt |đồ chơi |vật giải trí |đồ cổ (Đài Loan đọc [wàn]) |giữ vật gì để giải trí",
+      "exampleHanzi": "孩子们在公园里玩。",
+      "exampleVi": "Bọn trẻ đang chơi trong công viên."
+    },
+    {
+      "id": "hero-hsk-1-1968-meaning",
+      "vocabularyId": "1968",
+      "sourceIndex": 66,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "爸爸",
+      "pinyin": "bàba",
+      "note": "Ví dụ: 爸爸在家吗？ — Bố có ở nhà không?",
+      "speakText": "爸爸",
+      "options": [
+        "bệnh viện",
+        "ghế",
+        "bác sĩ",
+        "(thông tục) bố; ba"
+      ],
+      "answer": "(thông tục) bố; ba",
+      "exampleHanzi": "爸爸在家吗？",
+      "exampleVi": "Bố có ở nhà không?"
+    },
+    {
+      "id": "hero-hsk-1-2416-meaning",
+      "vocabularyId": "2416",
+      "sourceIndex": 82,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "哥哥",
+      "pinyin": "gēge",
+      "note": "Ví dụ: 我哥哥在北京工作。 — Anh trai tôi làm việc ở Bắc Kinh.",
+      "speakText": "哥哥",
+      "options": [
+        "anh trai",
+        "ghế",
+        "bác sĩ",
+        "mèo; (phương ngữ) ẩn nấp; (lóng) modem"
+      ],
+      "answer": "anh trai",
+      "exampleHanzi": "我哥哥在北京工作。",
+      "exampleVi": "Anh trai tôi làm việc ở Bắc Kinh."
+    },
+    {
+      "id": "hero-hsk-1-2419-meaning",
+      "vocabularyId": "2419",
+      "sourceIndex": 85,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "工作",
+      "pinyin": "gōngzuò",
+      "note": "Ví dụ: 他每天工作八小时。 — Anh ấy làm việc tám giờ mỗi ngày.",
+      "speakText": "工作",
+      "options": [
+        "làm việc; (của máy) hoạt động; công việc; việc; nhiệm vụ",
+        "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?",
+        "(thông tục) bố; ba",
+        "anh trai"
+      ],
+      "answer": "làm việc; (của máy) hoạt động; công việc; việc; nhiệm vụ",
+      "exampleHanzi": "他每天工作八小时。",
+      "exampleVi": "Anh ấy làm việc tám giờ mỗi ngày."
+    },
+    {
+      "id": "hero-hsk-1-2420-meaning",
+      "vocabularyId": "2420",
+      "sourceIndex": 86,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "工作",
+      "pinyin": "gōngzuò",
+      "note": "Ví dụ: 这份工作很有意思。 — Công việc này rất thú vị.",
+      "speakText": "工作",
+      "options": [
+        "mèo; (phương ngữ) ẩn nấp; (lóng) modem",
+        "nhỏ; tí hon; ít; trẻ",
+        "làm việc; (của máy) hoạt động; công việc; việc; nhiệm vụ",
+        "ở đó"
+      ],
+      "answer": "làm việc; (của máy) hoạt động; công việc; việc; nhiệm vụ",
+      "exampleHanzi": "这份工作很有意思。",
+      "exampleVi": "Công việc này rất thú vị."
+    },
+    {
+      "id": "hero-hsk-1-2421-meaning",
+      "vocabularyId": "2421",
+      "sourceIndex": 87,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "狗",
+      "pinyin": "gǒu",
+      "note": "Ví dụ: 我家有一只狗。 — Nhà tôi có một con chó.",
+      "speakText": "狗",
+      "options": [
+        "chó",
+        "nhỏ; tí hon; ít; trẻ",
+        "ở đó",
+        "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?"
+      ],
+      "answer": "chó",
+      "exampleHanzi": "我家有一只狗。",
+      "exampleVi": "Nhà tôi có một con chó."
+    },
+    {
+      "id": "hero-hsk-1-5678-meaning",
+      "vocabularyId": "5678",
+      "sourceIndex": 144,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "下",
+      "pinyin": "xià",
+      "note": "Ví dụ: 学校在银行的下面。 — Trường học ở dưới bờ sông.",
+      "speakText": "下",
+      "options": [
+        "nhỏ; tí hon; ít; trẻ",
+        "ở đó",
+        "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+        "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?"
+      ],
+      "answer": "xuống; hướng xuống; bên dưới; thấp hơn; sau; tiếp theo (tuần sau, v.v.); thứ hai (trong hai phần); giảm; đi xuống; đi đến (quyết định, kết luận, v.v.); lượng từ chỉ tần suất hành động",
+      "exampleHanzi": "学校在银行的下面。",
+      "exampleVi": "Trường học ở dưới bờ sông."
+    },
+    {
+      "id": "hero-hsk-1-7359-meaning",
+      "vocabularyId": "7359",
+      "sourceIndex": 185,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "儿子",
+      "pinyin": "érzi",
+      "note": "Ví dụ: 我的儿子今年五岁。 — Con trai tôi năm nay được năm tuổi.",
+      "speakText": "儿子",
+      "options": [
+        "con trai",
+        "ở đó",
+        "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?",
+        "chơi |vui chơi |đùa cợt |đồ chơi |vật giải trí |đồ cổ (Đài Loan đọc [wàn]) |giữ vật gì để giải trí"
+      ],
+      "answer": "con trai",
+      "exampleHanzi": "我的儿子今年五岁。",
+      "exampleVi": "Con trai tôi năm nay được năm tuổi."
+    },
+    {
+      "id": "hero-hsk-1-9137-meaning",
+      "vocabularyId": "9137",
+      "sourceIndex": 245,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "医院",
+      "pinyin": "yīyuàn",
+      "note": "Ví dụ: 医院在银行旁边。 — Bệnh viện nằm cạnh ngân hàng.",
+      "speakText": "医院",
+      "options": [
+        "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?",
+        "bệnh viện",
+        "chơi |vui chơi |đùa cợt |đồ chơi |vật giải trí |đồ cổ (Đài Loan đọc [wàn]) |giữ vật gì để giải trí",
+        "làm việc; (của máy) hoạt động; công việc; việc; nhiệm vụ"
+      ],
+      "answer": "bệnh viện",
+      "exampleHanzi": "医院在银行旁边。",
+      "exampleVi": "Bệnh viện nằm cạnh ngân hàng."
+    },
+    {
+      "id": "hero-hsk-1-9138-meaning",
+      "vocabularyId": "9138",
+      "sourceIndex": 246,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "椅子",
+      "pinyin": "yǐzi",
+      "note": "Ví dụ: 请坐椅子。 — Xin vui lòng ngồi trên ghế.",
+      "speakText": "椅子",
+      "options": [
+        "chơi |vui chơi |đùa cợt |đồ chơi |vật giải trí |đồ cổ (Đài Loan đọc [wàn]) |giữ vật gì để giải trí",
+        "làm việc; (của máy) hoạt động; công việc; việc; nhiệm vụ",
+        "đi khám bác sĩ; thăm bệnh nhân",
+        "ghế"
+      ],
+      "answer": "ghế",
+      "exampleHanzi": "请坐椅子。",
+      "exampleVi": "Xin vui lòng ngồi trên ghế."
+    },
+    {
+      "id": "hero-hsk-1-9244-meaning",
+      "vocabularyId": "9244",
+      "sourceIndex": 270,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "医生",
+      "pinyin": "yīshēng",
+      "note": "Ví dụ: 我的爸爸是医生。 — Bố tôi là bác sĩ.",
+      "speakText": "医生",
+      "options": [
+        "bác sĩ",
+        "làm việc; (của máy) hoạt động; công việc; việc; nhiệm vụ",
+        "đi khám bác sĩ; thăm bệnh nhân",
+        "bận rộn; vội vã; hối hả; cuống cuồng"
+      ],
+      "answer": "bác sĩ",
+      "exampleHanzi": "我的爸爸是医生。",
+      "exampleVi": "Bố tôi là bác sĩ."
+    },
+    {
+      "id": "hero-hsk-1-10635-meaning",
+      "vocabularyId": "10635",
+      "sourceIndex": 281,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "看病",
+      "pinyin": "kànbìng",
+      "note": "Ví dụ: 他去医院看病。 — Anh ấy đến bệnh viện để gặp bác sĩ.",
+      "speakText": "看病",
+      "options": [
+        "đi khám bác sĩ; thăm bệnh nhân",
+        "ghế",
+        "bác sĩ",
+        "mèo; (phương ngữ) ẩn nấp; (lóng) modem"
+      ],
+      "answer": "đi khám bác sĩ; thăm bệnh nhân",
+      "exampleHanzi": "他去医院看病。",
+      "exampleVi": "Anh ấy đến bệnh viện để gặp bác sĩ."
+    },
+    {
+      "id": "hero-hsk-1-10957-meaning",
+      "vocabularyId": "10957",
+      "sourceIndex": 283,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "猫",
+      "pinyin": "māo",
+      "note": "Ví dụ: 我家有一只猫。 — Tôi có một con mèo ở nhà.",
+      "speakText": "猫",
+      "options": [
+        "bận rộn; vội vã; hối hả; cuống cuồng",
+        "tồn tại; còn sống; (của ai đó hoặc cái gì đó) ở (tại); (dùng trước động từ để chỉ hành động đang diễn ra)",
+        "(thông tục) bố; ba",
+        "mèo; (phương ngữ) ẩn nấp; (lóng) modem"
+      ],
+      "answer": "mèo; (phương ngữ) ẩn nấp; (lóng) modem",
+      "exampleHanzi": "我家有一只猫。",
+      "exampleVi": "Tôi có một con mèo ở nhà."
+    },
+    {
+      "id": "hero-hsk-1-11516-meaning",
+      "vocabularyId": "11516",
+      "sourceIndex": 294,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "忙",
+      "pinyin": "máng",
+      "note": "Ví dụ: 他忙着工作。 — Anh ấy đang bận làm việc.",
+      "speakText": "忙",
+      "options": [
+        "mèo; (phương ngữ) ẩn nấp; (lóng) modem",
+        "tồn tại; còn sống; (của ai đó hoặc cái gì đó) ở (tại); (dùng trước động từ để chỉ hành động đang diễn ra)",
+        "chơi |vui chơi |đùa cợt |đồ chơi |vật giải trí |đồ cổ (Đài Loan đọc [wàn]) |giữ vật gì để giải trí",
+        "bận rộn; vội vã; hối hả; cuống cuồng"
+      ],
+      "answer": "bận rộn; vội vã; hối hả; cuống cuồng",
+      "exampleHanzi": "他忙着工作。",
+      "exampleVi": "Anh ấy đang bận làm việc."
+    },
+    {
+      "id": "hero-hsk-1-12287-meaning",
+      "vocabularyId": "12287",
+      "sourceIndex": 315,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "在",
+      "pinyin": "zài",
+      "note": "Ví dụ: 我在学校。 — Tôi đang ở trường.",
+      "speakText": "在",
+      "options": [
+        "chơi |vui chơi |đùa cợt |đồ chơi |vật giải trí |đồ cổ (Đài Loan đọc [wàn]) |giữ vật gì để giải trí",
+        "tồn tại; còn sống; (của ai đó hoặc cái gì đó) ở (tại); (dùng trước động từ để chỉ hành động đang diễn ra)",
+        "làm việc; (của máy) hoạt động; công việc; việc; nhiệm vụ",
+        "đi khám bác sĩ; thăm bệnh nhân"
+      ],
+      "answer": "tồn tại; còn sống; (của ai đó hoặc cái gì đó) ở (tại); (dùng trước động từ để chỉ hành động đang diễn ra)",
+      "exampleHanzi": "我在学校。",
+      "exampleVi": "Tôi đang ở trường."
+    },
+    {
+      "id": "hero-hsk-1-12288-meaning",
+      "vocabularyId": "12288",
+      "sourceIndex": 316,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "在",
+      "pinyin": "zài",
+      "note": "Ví dụ: 书在桌子上。 — Cuốn sách ở trên bàn.",
+      "speakText": "在",
+      "options": [
+        "nhỏ; tí hon; ít; trẻ",
+        "ở đó",
+        "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?",
+        "tồn tại; còn sống; (của ai đó hoặc cái gì đó) ở (tại); (dùng trước động từ để chỉ hành động đang diễn ra)"
+      ],
+      "answer": "tồn tại; còn sống; (của ai đó hoặc cái gì đó) ở (tại); (dùng trước động từ để chỉ hành động đang diễn ra)",
+      "exampleHanzi": "书在桌子上。",
+      "exampleVi": "Cuốn sách ở trên bàn."
+    },
+    {
+      "id": "hero-hsk-1-12289-meaning",
+      "vocabularyId": "12289",
+      "sourceIndex": 317,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "在",
+      "pinyin": "zài",
+      "note": "Ví dụ: 他正在学习。 — Anh ấy đang học.",
+      "speakText": "在",
+      "options": [
+        "nhỏ; tí hon; ít; trẻ",
+        "tồn tại; còn sống; (của ai đó hoặc cái gì đó) ở (tại); (dùng trước động từ để chỉ hành động đang diễn ra)",
+        "ở đó",
+        "ở đâu?; bất cứ đâu; bất kỳ đâu; ở đâu đó; (dùng trong câu hỏi tu từ) làm sao có thể ...?; làm sao có thể ...?"
+      ],
+      "answer": "tồn tại; còn sống; (của ai đó hoặc cái gì đó) ở (tại); (dùng trước động từ để chỉ hành động đang diễn ra)",
+      "exampleHanzi": "他正在学习。",
+      "exampleVi": "Anh ấy đang học."
+    }
+  ]
+}

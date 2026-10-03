@@ -1,0 +1,483 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "https://hsk.tiengtrunghero.edu.vn/syllabus/HSK1",
+  "levelId": "hsk-1",
+  "levelLabel": "HSK1",
+  "lessonId": "hsk1-bai-03-co-ten-gi",
+  "lessonNumber": 3,
+  "lessonTitle": "Bạn tên gì?",
+  "topicId": "nen-tang-lam-quen",
+  "topicTitle": "Nền tảng & Làm quen",
+  "route": "/hsk/1/hsk1-bai-03-co-ten-gi/play",
+  "vocabularyCount": 22,
+  "exerciseCount": 22,
+  "typeCounts": {
+    "meaning": 22,
+    "pinyin": 0,
+    "listening": 0
+  },
+  "exercises": [
+    {
+      "id": "hero-hsk-1-88-meaning",
+      "vocabularyId": "88",
+      "sourceIndex": 6,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "小学生",
+      "pinyin": "xiǎoxuéshēng",
+      "note": "Ví dụ: 这个小学生很聪明。 — Học sinh tiểu học này rất thông minh.",
+      "speakText": "小学生",
+      "options": [
+        "chị gái",
+        "năm sau",
+        "học sinh tiểu học; học sinh; (nghĩa bóng) người mới bắt đầu",
+        "tên (của người hoặc vật)"
+      ],
+      "answer": "học sinh tiểu học; học sinh; (nghĩa bóng) người mới bắt đầu",
+      "exampleHanzi": "这个小学生很聪明。",
+      "exampleVi": "Học sinh tiểu học này rất thông minh."
+    },
+    {
+      "id": "hero-hsk-1-863-meaning",
+      "vocabularyId": "863",
+      "sourceIndex": 13,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "男",
+      "pinyin": "nán",
+      "note": "Ví dụ: 他是男老师。 — Anh ấy là một giáo viên nam.",
+      "speakText": "男",
+      "options": [
+        "học sinh tiểu học; học sinh; (nghĩa bóng) người mới bắt đầu",
+        "tôi; ta; của tôi",
+        "nam; nam tước, tước vị thấp nhất trong năm bậc quý tộc",
+        "họ; họ (dùng cho nữ)"
+      ],
+      "answer": "nam; nam tước, tước vị thấp nhất trong năm bậc quý tộc",
+      "exampleHanzi": "他是男老师。",
+      "exampleVi": "Anh ấy là một giáo viên nam."
+    },
+    {
+      "id": "hero-hsk-1-970-meaning",
+      "vocabularyId": "970",
+      "sourceIndex": 28,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "我",
+      "pinyin": "wǒ",
+      "note": "Ví dụ: 我是学生。 — Tôi là một sinh viên.",
+      "speakText": "我",
+      "options": [
+        "học sinh tiểu học; học sinh; (nghĩa bóng) người mới bắt đầu",
+        "nam; nam tước, tước vị thấp nhất trong năm bậc quý tộc",
+        "tôi; ta; của tôi",
+        "nghe thấy"
+      ],
+      "answer": "tôi; ta; của tôi",
+      "exampleHanzi": "我是学生。",
+      "exampleVi": "Tôi là một sinh viên."
+    },
+    {
+      "id": "hero-hsk-1-1134-meaning",
+      "vocabularyId": "1134",
+      "sourceIndex": 38,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "她们",
+      "pinyin": "tāmen",
+      "note": "Ví dụ: 她们是老师。 — Họ là giáo viên.",
+      "speakText": "她们",
+      "options": [
+        "nam; nam tước, tước vị thấp nhất trong năm bậc quý tộc",
+        "họ; họ (dùng cho nữ)",
+        "nghe thấy",
+        "chị gái"
+      ],
+      "answer": "họ; họ (dùng cho nữ)",
+      "exampleHanzi": "她们是老师。",
+      "exampleVi": "Họ là giáo viên."
+    },
+    {
+      "id": "hero-hsk-1-1139-meaning",
+      "vocabularyId": "1139",
+      "sourceIndex": 43,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "听见",
+      "pinyin": "tīngjiàn",
+      "note": "Ví dụ: 我听见了你的声音。 — Tôi đã nghe thấy giọng nói của bạn.",
+      "speakText": "听见",
+      "options": [
+        "tôi; ta; của tôi",
+        "họ; họ (dùng cho nữ)",
+        "chị gái",
+        "nghe thấy"
+      ],
+      "answer": "nghe thấy",
+      "exampleHanzi": "我听见了你的声音。",
+      "exampleVi": "Tôi đã nghe thấy giọng nói của bạn."
+    },
+    {
+      "id": "hero-hsk-1-1855-meaning",
+      "vocabularyId": "1855",
+      "sourceIndex": 55,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "姐姐",
+      "pinyin": "jiějie",
+      "note": "Ví dụ: 我的姐姐是老师。 — Chị gái tôi là giáo viên.",
+      "speakText": "姐姐",
+      "options": [
+        "chị gái",
+        "người; mọi người",
+        "giáo viên",
+        "Trung Quốc"
+      ],
+      "answer": "chị gái",
+      "exampleHanzi": "我的姐姐是老师。",
+      "exampleVi": "Chị gái tôi là giáo viên."
+    },
+    {
+      "id": "hero-hsk-1-3036-meaning",
+      "vocabularyId": "3036",
+      "sourceIndex": 91,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "明年",
+      "pinyin": "míngnián",
+      "note": "Ví dụ: 明年我要去中国。 — Tôi sẽ đi Trung Quốc vào năm tới.",
+      "speakText": "明年",
+      "options": [
+        "giáo viên",
+        "năm sau",
+        "Trung Quốc",
+        "học sinh trung học; học sinh phổ thông trung học"
+      ],
+      "answer": "năm sau",
+      "exampleHanzi": "明年我要去中国。",
+      "exampleVi": "Tôi sẽ đi Trung Quốc vào năm tới."
+    },
+    {
+      "id": "hero-hsk-1-3038-meaning",
+      "vocabularyId": "3038",
+      "sourceIndex": 93,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "名字",
+      "pinyin": "míngzi",
+      "note": "Ví dụ: 我的名字是小明。 — Tôi tên là Hiểu Minh.",
+      "speakText": "名字",
+      "options": [
+        "tên (của người hoặc vật)",
+        "Trung Quốc",
+        "học sinh trung học; học sinh phổ thông trung học",
+        "Chủ Nhật"
+      ],
+      "answer": "tên (của người hoặc vật)",
+      "exampleHanzi": "我的名字是小明。",
+      "exampleVi": "Tôi tên là Hiểu Minh."
+    },
+    {
+      "id": "hero-hsk-1-3544-meaning",
+      "vocabularyId": "3544",
+      "sourceIndex": 115,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "学生",
+      "pinyin": "xuéshēng",
+      "note": "Ví dụ: 我是学生。 — Tôi là một sinh viên.",
+      "speakText": "学生",
+      "options": [
+        "học sinh trung học; học sinh phổ thông trung học",
+        "Chủ Nhật",
+        "nam; nam tước, tước vị thấp nhất trong năm bậc quý tộc",
+        "học sinh; trẻ đi học"
+      ],
+      "answer": "học sinh; trẻ đi học",
+      "exampleHanzi": "我是学生。",
+      "exampleVi": "Tôi là một sinh viên."
+    },
+    {
+      "id": "hero-hsk-1-3579-meaning",
+      "vocabularyId": "3579",
+      "sourceIndex": 122,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "女",
+      "pinyin": "nǚ",
+      "note": "Ví dụ: 她是女老师。 — Cô ấy là một nữ giáo viên.",
+      "speakText": "女",
+      "options": [
+        "gọi to | gọi | đặt | nhờ | được gọi | bởi (chỉ tác nhân trong câu bị động)",
+        "năm ngoái",
+        "người; mọi người",
+        "biến thể cổ của chữ Nhữ"
+      ],
+      "answer": "biến thể cổ của chữ Nhữ",
+      "exampleHanzi": "她是女老师。",
+      "exampleVi": "Cô ấy là một nữ giáo viên."
+    },
+    {
+      "id": "hero-hsk-1-6623-meaning",
+      "vocabularyId": "6623",
+      "sourceIndex": 167,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "叫",
+      "pinyin": "jiào",
+      "note": "Ví dụ: 他的名字叫小明。 — Anh ấy tên là Hiểu Minh.",
+      "speakText": "叫",
+      "options": [
+        "biến thể cổ của chữ Nhữ",
+        "gọi to | gọi | đặt | nhờ | được gọi | bởi (chỉ tác nhân trong câu bị động)",
+        "năm ngoái",
+        "người; mọi người"
+      ],
+      "answer": "gọi to | gọi | đặt | nhờ | được gọi | bởi (chỉ tác nhân trong câu bị động)",
+      "exampleHanzi": "他的名字叫小明。",
+      "exampleVi": "Anh ấy tên là Hiểu Minh."
+    },
+    {
+      "id": "hero-hsk-1-7138-meaning",
+      "vocabularyId": "7138",
+      "sourceIndex": 172,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "去年",
+      "pinyin": "qùnián",
+      "note": "Ví dụ: 去年我在中国学习。 — Năm ngoái tôi đã học ở Trung Quốc.",
+      "speakText": "去年",
+      "options": [
+        "tôi; ta; của tôi",
+        "họ; họ (dùng cho nữ)",
+        "nghe thấy",
+        "năm ngoái"
+      ],
+      "answer": "năm ngoái",
+      "exampleHanzi": "去年我在中国学习。",
+      "exampleVi": "Năm ngoái tôi đã học ở Trung Quốc."
+    },
+    {
+      "id": "hero-hsk-1-7140-meaning",
+      "vocabularyId": "7140",
+      "sourceIndex": 174,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "人",
+      "pinyin": "rén",
+      "note": "Ví dụ: 这里有很多人。 — Có rất nhiều người ở đây.",
+      "speakText": "人",
+      "options": [
+        "họ; họ (dùng cho nữ)",
+        "nghe thấy",
+        "người; mọi người",
+        "biến thể cổ của chữ Nhữ"
+      ],
+      "answer": "người; mọi người",
+      "exampleHanzi": "这里有很多人。",
+      "exampleVi": "Có rất nhiều người ở đây."
+    },
+    {
+      "id": "hero-hsk-1-7435-meaning",
+      "vocabularyId": "7435",
+      "sourceIndex": 191,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "什么",
+      "pinyin": "shénme",
+      "note": "Ví dụ: 你在说什么？ — Bạn đang nói về cái gì vậy?",
+      "speakText": "什么",
+      "options": [
+        "gì?; cái gì; bất cứ cái gì",
+        "giáo viên",
+        "Trung Quốc",
+        "học sinh trung học; học sinh phổ thông trung học"
+      ],
+      "answer": "gì?; cái gì; bất cứ cái gì",
+      "exampleHanzi": "你在说什么？",
+      "exampleVi": "Bạn đang nói về cái gì vậy?"
+    },
+    {
+      "id": "hero-hsk-1-8174-meaning",
+      "vocabularyId": "8174",
+      "sourceIndex": 214,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "老师",
+      "pinyin": "lǎoshī",
+      "note": "Ví dụ: 我的老师很友好。 — Giáo viên của tôi rất thân thiện.",
+      "speakText": "老师",
+      "options": [
+        "giáo viên",
+        "biến thể cổ của chữ Nhữ",
+        "gọi to | gọi | đặt | nhờ | được gọi | bởi (chỉ tác nhân trong câu bị động)",
+        "gì?; cái gì; bất cứ cái gì"
+      ],
+      "answer": "giáo viên",
+      "exampleHanzi": "我的老师很友好。",
+      "exampleVi": "Giáo viên của tôi rất thân thiện."
+    },
+    {
+      "id": "hero-hsk-1-8227-meaning",
+      "vocabularyId": "8227",
+      "sourceIndex": 215,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "中国",
+      "pinyin": "Zhōngguó",
+      "note": "Ví dụ: 我来自中国。 — Tôi đến từ Trung Quốc.",
+      "speakText": "中国",
+      "options": [
+        "gọi to | gọi | đặt | nhờ | được gọi | bởi (chỉ tác nhân trong câu bị động)",
+        "gì?; cái gì; bất cứ cái gì",
+        "Trung Quốc",
+        "hành động: be (followed by substantives only) | correct; right; true | (respectful acknowledgement of a command) very well | (adverb for emphatic assertion)"
+      ],
+      "answer": "Trung Quốc",
+      "exampleHanzi": "我来自中国。",
+      "exampleVi": "Tôi đến từ Trung Quốc."
+    },
+    {
+      "id": "hero-hsk-1-8231-meaning",
+      "vocabularyId": "8231",
+      "sourceIndex": 219,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "中学生",
+      "pinyin": "zhōngxuéshēng",
+      "note": "Ví dụ: 他是中学生。 — Anh ấy là một học sinh trung học.",
+      "speakText": "中学生",
+      "options": [
+        "gì?; cái gì; bất cứ cái gì",
+        "hành động: be (followed by substantives only) | correct; right; true | (respectful acknowledgement of a command) very well | (adverb for emphatic assertion)",
+        "không có; không có",
+        "học sinh trung học; học sinh phổ thông trung học"
+      ],
+      "answer": "học sinh trung học; học sinh phổ thông trung học",
+      "exampleHanzi": "他是中学生。",
+      "exampleVi": "Anh ấy là một học sinh trung học."
+    },
+    {
+      "id": "hero-hsk-1-8400-meaning",
+      "vocabularyId": "8400",
+      "sourceIndex": 228,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "星期日",
+      "pinyin": "xīngqīrì",
+      "note": "Ví dụ: 星期日我休息。 — Tôi nghỉ vào ngày chủ nhật.",
+      "speakText": "星期日",
+      "options": [
+        "hành động: be (followed by substantives only) | correct; right; true | (respectful acknowledgement of a command) very well | (adverb for emphatic assertion)",
+        "Chủ Nhật",
+        "không có; không có",
+        "(thông tục) gì?"
+      ],
+      "answer": "Chủ Nhật",
+      "exampleHanzi": "星期日我休息。",
+      "exampleVi": "Tôi nghỉ vào ngày chủ nhật."
+    },
+    {
+      "id": "hero-hsk-1-8756-meaning",
+      "vocabularyId": "8756",
+      "sourceIndex": 236,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "是",
+      "pinyin": "shì",
+      "note": "Ví dụ: 我是学生。 — Tôi là một sinh viên.",
+      "speakText": "是",
+      "options": [
+        "không có; không có",
+        "(thông tục) gì?",
+        "hành động: be (followed by substantives only) | correct; right; true | (respectful acknowledgement of a command) very well | (adverb for emphatic assertion)",
+        "nghìn"
+      ],
+      "answer": "hành động: be (followed by substantives only) | correct; right; true | (respectful acknowledgement of a command) very well | (adverb for emphatic assertion)",
+      "exampleHanzi": "我是学生。",
+      "exampleVi": "Tôi là một sinh viên."
+    },
+    {
+      "id": "hero-hsk-1-10962-meaning",
+      "vocabularyId": "10962",
+      "sourceIndex": 288,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "没（有）",
+      "pinyin": "méi(yǒu)",
+      "note": "Ví dụ: 我没什么问题。 — Tôi không có vấn đề gì.",
+      "speakText": "没（有）",
+      "options": [
+        "(thông tục) gì?",
+        "nghìn",
+        "học sinh tiểu học; học sinh; (nghĩa bóng) người mới bắt đầu",
+        "không có; không có"
+      ],
+      "answer": "không có; không có",
+      "exampleHanzi": "我没什么问题。",
+      "exampleVi": "Tôi không có vấn đề gì."
+    },
+    {
+      "id": "hero-hsk-1-11841-meaning",
+      "vocabularyId": "11841",
+      "sourceIndex": 301,
+      "assignmentMethod": "exact-anchor",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "吗",
+      "pinyin": "ma",
+      "note": "Ví dụ: 你好吗？ — Bạn có khỏe không?",
+      "speakText": "吗",
+      "options": [
+        "nghìn",
+        "(thông tục) gì?",
+        "học sinh tiểu học; học sinh; (nghĩa bóng) người mới bắt đầu",
+        "nam; nam tước, tước vị thấp nhất trong năm bậc quý tộc"
+      ],
+      "answer": "(thông tục) gì?",
+      "exampleHanzi": "你好吗？",
+      "exampleVi": "Bạn có khỏe không?"
+    },
+    {
+      "id": "hero-hsk-1-12153-meaning",
+      "vocabularyId": "12153",
+      "sourceIndex": 311,
+      "assignmentMethod": "semantic-balance",
+      "type": "meaning",
+      "instruction": "Chọn nghĩa đúng của từ",
+      "prompt": "千",
+      "pinyin": "qiān",
+      "note": "Ví dụ: 这个手机一千元。 — Chiếc điện thoại này có giá một nghìn nhân dân tệ.",
+      "speakText": "千",
+      "options": [
+        "nghìn",
+        "học sinh tiểu học; học sinh; (nghĩa bóng) người mới bắt đầu",
+        "nam; nam tước, tước vị thấp nhất trong năm bậc quý tộc",
+        "tôi; ta; của tôi"
+      ],
+      "answer": "nghìn",
+      "exampleHanzi": "这个手机一千元。",
+      "exampleVi": "Chiếc điện thoại này có giá một nghìn nhân dân tệ."
+    }
+  ]
+}

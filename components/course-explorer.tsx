@@ -32,7 +32,6 @@ export function CourseExplorer({
   const showHskCard = includeHskCard
     && (filter === "Tất cả" || filter === "Nền tảng")
     && (!normalizedQuery || "giáo trình hsk 汉语水平考试 cấp độ nền tảng".includes(normalizedQuery));
-  const availableCount = visibleCourses.filter((course) => course.availability === "available").length + (showHskCard ? 1 : 0);
   const resultCount = visibleCourses.length + (showHskCard ? 1 : 0);
 
   return <section className="section-shell explorer">
@@ -50,7 +49,6 @@ export function CourseExplorer({
         <span aria-hidden="true" className="filter-scroll-cue"><ChevronRight size={17} /></span>
       </div>
     </div>
-    <p aria-live="polite" className="explorer-count" key={`${resultCount}-${availableCount}`}>{availableCount} lộ trình đang mở · {resultCount - availableCount} lộ trình trong kế hoạch</p>
     {resultCount ? <div className="course-grid">{showHskCard ? <div
         className="course-motion-item"
         key="hsk-curriculum"

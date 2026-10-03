@@ -2234,6 +2234,103 @@ html[data-account-sheet-open="true"] {
   }
 }
 
+/* Refined mobile avatar control: keep the profile photo visually separate from
+ * the membership artwork and make the edit action easier to recognize/tap. */
+@media (max-width: 720px) {
+  .account-wallet-redesign .account-avatar-uploader {
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+
+  .account-wallet-redesign .account-profile-avatar,
+  .account-membership-vip .account-profile-avatar {
+    border-width: 3px;
+    border-color: rgba(255, 255, 255, .96);
+    box-shadow:
+      0 0 0 4px rgba(255, 255, 255, .16),
+      0 10px 24px rgba(111, 39, 24, .2);
+    transition: box-shadow .18s ease, transform .18s ease;
+  }
+
+  .account-wallet-redesign .account-avatar-uploader:focus-within .account-profile-avatar {
+    box-shadow:
+      0 0 0 4px rgba(255, 255, 255, .32),
+      0 0 0 7px rgba(255, 88, 47, .28),
+      0 10px 24px rgba(111, 39, 24, .2);
+  }
+
+  .account-wallet-redesign .account-profile-avatar > button,
+  .account-membership-vip .account-profile-avatar > button {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    padding: 0;
+    right: -3px;
+    bottom: -3px;
+    aspect-ratio: 1;
+    color: #ef4d36;
+    border: 2px solid rgba(255, 255, 255, .98);
+    border-radius: 999px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, .98);
+    box-shadow:
+      0 0 0 2px rgba(239, 77, 54, .14),
+      0 7px 16px rgba(114, 42, 27, .22);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .account-wallet-redesign .account-profile-avatar > button svg {
+    width: 14px;
+    height: 14px;
+    stroke-width: 2.5;
+  }
+
+  .account-wallet-redesign .account-profile-avatar > button:hover:not(:disabled) {
+    color: #e8432f;
+    background: #fff7f3;
+    box-shadow:
+      0 0 0 2px rgba(239, 77, 54, .18),
+      0 9px 18px rgba(114, 42, 27, .26);
+  }
+
+  .account-wallet-redesign .account-profile-avatar > button:active:not(:disabled) {
+    transform: scale(.94);
+  }
+
+  /* Keep the verification state readable instead of reducing it to an
+   * unlabeled icon on mobile account rows. */
+  .account-wallet-redesign .account-information dd em {
+    width: auto;
+    height: 27px;
+    min-width: max-content;
+    padding: 0 8px;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    overflow: visible;
+    color: #167866;
+    border: 1px solid rgba(22, 120, 102, .14);
+    border-radius: 999px;
+    background: #eef9f5;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .78);
+    font-size: 9px;
+    font-weight: 780;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .account-wallet-redesign .account-information dd em svg {
+    width: 13px;
+    height: 13px;
+    flex: 0 0 13px;
+    stroke-width: 2.25;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .account-password-dialog::backdrop,
   .account-password-sheet {
@@ -2243,6 +2340,8 @@ html[data-account-sheet-open="true"] {
   .account-wallet-mascot,
   .account-password-submit,
   .account-mobile-header a,
+  .account-profile-avatar,
+  .account-profile-avatar > button,
   .account-membership-band > a {
     transition: none;
   }

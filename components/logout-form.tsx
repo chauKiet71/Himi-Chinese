@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent, type ReactNode } from "react";
+import { clearLessonContentCache } from "@/lib/lesson-content-cache";
 
 type LogoutResult = {
   ok?: boolean;
@@ -38,11 +39,13 @@ export function LogoutForm({
       });
       const result = await response.json() as LogoutResult;
       if (!response.ok || !result.ok || !result.redirectTo) throw new Error("Logout failed");
+      await clearLessonContentCache();
 
       // A document navigation discards prefetched RSC state and rebuilds the
       // account shell from the now-cleared session cookie.
       window.location.replace(result.redirectTo);
     } catch {
+      await clearLessonContentCache();
       // Keep logout usable without client JavaScript/fetch by falling back to
       // the route's normal POST + 303 redirect behavior.
       HTMLFormElement.prototype.submit.call(form);
