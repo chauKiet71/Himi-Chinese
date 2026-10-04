@@ -29,6 +29,7 @@ import { logisticsLessons, logisticsModules } from "./logistics-course-seed.ts";
 import { officeLessons, officeModules } from "./office-course-seed.ts";
 import { restaurantLessons, restaurantModules } from "./restaurant-course-seed.ts";
 import { salesLessons, salesModules } from "./sales-course-seed.ts";
+import { travelLessons, travelModules } from "./travel-course-seed.ts";
 import type { CourseLessonSeed, CourseModuleSeed, CourseSeedBundle } from "./course-seed-types.ts";
 import type {
   ChallengeQuestion,
@@ -52,6 +53,7 @@ const courseSeedBundles = new Map<string, CourseSeedBundle>([
   ["thuong-mai-dien-tu", { courseSlug: "thuong-mai-dien-tu", modules: ecommerceModules, lessons: ecommerceLessons }],
   ["giao-tiep-cong-so", { courseSlug: "giao-tiep-cong-so", modules: coreWorkplaceModules, lessons: coreWorkplaceLessons }],
   ["tieng-trung-tan-suat-cao", { courseSlug: "tieng-trung-tan-suat-cao", modules: highFrequencyModules, lessons: highFrequencyLessons }],
+  ["tu-tin-kham-pha-trung-quoc", { courseSlug: "tu-tin-kham-pha-trung-quoc", modules: travelModules, lessons: travelLessons }],
 ]);
 
 export type LessonPageData = {
@@ -464,7 +466,7 @@ function normalizeVocabularyRows(rows: Array<{
 
 export async function listPracticeVocabulary(limit = 12, userId: string | null = null, includeVip = false): Promise<Vocabulary[]> {
   if (!process.env.DATABASE_URL) {
-    const lessonGroups = [officeLessons, factoryLessons, logisticsLessons, salesLessons, restaurantLessons, ecommerceLessons, coreWorkplaceLessons].map((lessons) => lessons.filter((lesson) => includeVip || lesson.isFree));
+    const lessonGroups = [officeLessons, factoryLessons, logisticsLessons, salesLessons, restaurantLessons, ecommerceLessons, coreWorkplaceLessons, travelLessons].map((lessons) => lessons.filter((lesson) => includeVip || lesson.isFree));
     const vocabularyGroups = lessonGroups.map((lessons) => lessons.flatMap((lesson) => lesson.vocabulary));
     const maxWords = Math.max(...vocabularyGroups.map((words) => words.length));
     return Array.from({ length: maxWords }, (_, index) => vocabularyGroups.flatMap((words) => words[index] ? [words[index]] : [])).flat().slice(0, limit);

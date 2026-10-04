@@ -7,6 +7,7 @@ import { logisticsCourseStats } from "./logistics-course-seed.ts";
 import { officeCourseStats } from "./office-course-seed.ts";
 import { restaurantCourseStats } from "./restaurant-course-seed.ts";
 import { salesCourseStats } from "./sales-course-seed.ts";
+import { travelCourseStats } from "./travel-course-seed.ts";
 
 export type { Course } from "./content-types.ts";
 
@@ -19,6 +20,7 @@ export const courses: Course[] = [
   { slug: "thuong-mai-dien-tu", category: "Kinh doanh", title: "Thương mại điện tử", chineseTitle: "电子商务", hanzi: "商", description: "Sản phẩm, gian hàng, nhà cung cấp, vận hành đơn, hậu mãi và tối ưu dựa trên dữ liệu.", lessons: ecommerceCourseStats.lessons, minutes: ecommerceCourseStats.minutes, freeLessons: ecommerceCourseStats.freeLessons, level: "Cơ bản", color: "#e3dfef", ink: "#63558c", availability: "available" },
   { slug: "giao-tiep-cong-so", category: "Nền tảng", title: "Giao tiếp công sở cốt lõi", chineseTitle: "职场基础沟通", hanzi: "职", description: "Nghe hiểu, nhận việc, phối hợp, báo vấn đề và giao tiếp đa kênh dùng chéo mọi môi trường.", lessons: coreWorkplaceCourseStats.lessons, minutes: coreWorkplaceCourseStats.minutes, freeLessons: coreWorkplaceCourseStats.freeLessons, level: "Cơ bản", color: "#dce9dc", ink: "#3f7044", availability: "available" },
   { slug: "tieng-trung-tan-suat-cao", category: "Nền tảng", title: "Tiếng Trung tần suất cao", chineseTitle: "高频汉语主题", hanzi: "频", description: "27 chủ đề giao tiếp thiết thực với từ vựng, câu mẫu và audio phát âm được sắp xếp thành lộ trình rõ ràng.", lessons: highFrequencyCourseStats.lessons, minutes: highFrequencyCourseStats.minutes, freeLessons: highFrequencyCourseStats.freeLessons, level: "Theo chủ đề", color: "#dcebe8", ink: "#176b66", availability: "available" },
+  { slug: "tu-tin-kham-pha-trung-quoc", category: "Du lịch", title: "Tự tin khám phá Trung Quốc", chineseTitle: "自信游中国", hanzi: "游", description: "Đặt vé, di chuyển, nhận phòng, ăn uống, mua sắm và xử lý những tình huống thường gặp khi du lịch tự túc.", lessons: travelCourseStats.lessons, minutes: travelCourseStats.minutes, freeLessons: travelCourseStats.freeLessons, level: "Cơ bản đến ứng dụng", color: "#e4edf2", ink: "#315f73", availability: "available" },
 ];
 
 export function getCourse(slug: string) { return courses.find((course) => course.slug === slug); }

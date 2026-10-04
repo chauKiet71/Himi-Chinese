@@ -47,6 +47,102 @@
 
 final result: passed
 
+---
+
+# Design QA — Form hoàn thành bài học ngành nghề
+
+- Source visual truth: ảnh tham chiếu người dùng đính kèm trong Browser Comment 1 (ảnh 732 × 582 px; tệp nguồn không được trình duyệt cung cấp đường dẫn cục bộ), thể hiện modal hoàn thành nền trắng với cúp vàng, ba ô thống kê và hai hành động.
+- Implementation URL: `http://localhost:3001/learn/nha-may-san-xuat?lesson=xac-nhan-quy-trinh-van-hanh`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the screenshot API did not expose a filesystem path.
+- Desktop implementation capture: viewport 1545 × 901 CSS px; completion card 664 × 500.5 CSS px at x=440.8, y=200.4.
+- Responsive implementation capture: viewport reported as 520 × 1125 CSS px after the mobile override; completion card 492.5 × 635.5 CSS px at x=14, y=244.9.
+- State: authenticated, completed lesson `Xác nhận quy trình vận hành` with the next lesson available.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the completion experience now uses the supplied centered modal composition rather than the former compact card near the top edge.
+- Centering: measured card center deltas are exactly `0px` horizontally and `0px` vertically at both desktop and responsive captures.
+- Visual hierarchy: the production golden trophy asset leads the card, followed by the coral completion pill, black/coral title, supporting copy, three outlined stat cards and the two navigation actions.
+- Fonts and typography: existing project typography is preserved; the title uses a responsive 34–42px desktop scale and a 29–36px mobile scale with the requested coral emphasis.
+- Spacing and layout rhythm: desktop uses a 664px modal, three equal 192.6px statistic columns and a 1:1.45 action split; mobile stacks statistics and actions while keeping the entire form centered.
+- Colors and visual tokens: the established Himi coral tokens are reused for emphasis, outlines and the primary button; the page background is a cool `rgb(243, 246, 249)` and the modal remains warm white.
+- Image quality and asset fidelity: reused the real transparent `public/assets/hsk/hsk-completion-trophy.png` asset; no emoji trophy, placeholder or generated substitute remains.
+- Copy and content: the lesson title and counts are data-driven (`6` vocabulary items, `4` phrase exercises and `6` writing targets for this lesson); existing close, lesson-list and next-lesson destinations remain intact.
+
+## Findings and comparison history
+
+- Initial P1: the inherited three-row guided-lesson grid placed the completion card in the first 74px row, clipping most of the card above the desktop viewport.
+- Fix: completion mode now explicitly replaces the lesson grid with one full-height row, producing exact two-axis centering.
+- Responsive P1: the mobile guided-lesson breakpoint reintroduced the three-row grid and clipped the top half of the modal.
+- Fix: the completion-specific one-row grid is repeated in the mobile breakpoint; the final responsive capture is fully visible and centered.
+- Initial P2: the prior completion UI used an emoji trophy and omitted the reference metrics.
+- Fix: replaced it with the production trophy asset and added three accessible, data-backed stat cards using the project's Lucide icons.
+
+## Verification
+
+- Source and implementation compared in one visual evidence pass: passed.
+- Desktop center measurement: passed (`0px`, `0px`).
+- Responsive center measurement: passed (`0px`, `0px`).
+- Horizontal overflow: none at desktop or responsive viewport.
+- Browser console warnings/errors: none.
+- Focused industry guided-lesson UI test: passed.
+- Scoped ESLint, TypeScript check and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped completion-form change.
+
+final result: passed
+
+---
+
+# Design QA — Khung full-width cho trang Bộ từ vựng
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-ea46f56f-e475-4854-83b6-2d1c7752205a.png` (1340 × 717 px), dùng làm chuẩn tỷ lệ khung full-width của trang Luyện gõ.
+- Supporting current-state path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-cbdba661-36d7-4310-b430-3daad9c610a1.png` (1340 × 706 px).
+- Implementation URL: `http://localhost:3001/vocabulary`.
+- Implementation screenshot path: Codex in-app Browser capture trong lượt này; API chụp của trình duyệt không cung cấp đường dẫn tệp.
+- Viewport và chuẩn hóa: nguồn 1340 × 717 px; bản triển khai được kiểm tra tại 1339 × 720 CSS px trong cùng trạng thái desktop. Một lượt responsive bổ sung được kiểm tra ở 506 px CSS width. Mật độ hiển thị được chuẩn hóa bằng kích thước CSS và geometry DOM.
+- State: tài khoản VIP đã đăng nhập, tab `Từ đã lưu`, bộ lọc `Tất cả`, một từ đã lưu.
+
+## Full-view comparison evidence
+
+- Ảnh chuẩn và bản triển khai được hiển thị trong cùng một lượt so sánh. Khung Bộ từ vựng hiện trải hết vùng nội dung còn lại sau sidebar, với khoảng đệm 20px hai bên giống nguyên tắc `min(1480px, calc(100% - 40px))` của trang Luyện gõ.
+- Hero, thư viện bên trái, vùng tìm kiếm/bộ lọc và bảng từ giữ nguyên tỷ lệ nội bộ, màu sắc, bo góc và hành vi; chỉ giới hạn khung desktop được nới rộng.
+- Ở mobile, trang vẫn dùng padding `18px 13px 96px`, không có tràn ngang và header/bottom navigation giữ nguyên.
+
+## Focused region comparison evidence
+
+- Không cần crop chi tiết riêng vì yêu cầu chỉ liên quan tới chiều rộng khung ngoài; full-view cùng kích thước đã thể hiện rõ hai mép khung, sidebar và toàn bộ vùng nội dung.
+- DOM desktop xác nhận `max-width: none`, `padding-left: 0px`; khung sử dụng toàn bộ vùng khả dụng sau gutter.
+- DOM mobile xác nhận `overflowX: false` và padding mobile cũ vẫn hoạt động.
+
+## Required fidelity surfaces
+
+- Fonts and typography: không thay đổi family, weight, size, line-height, wrapping hoặc hierarchy.
+- Spacing and layout rhythm: khung desktop đổi sang chuẩn rộng 1480px/20px gutter; khoảng cách nội bộ, grid track, radius và vertical rhythm được giữ nguyên.
+- Colors and visual tokens: không thay đổi token màu, opacity, border hoặc shadow.
+- Image quality and asset fidelity: artwork `学 / 词` hiện có được giữ nguyên kích thước/cách hiển thị; không thêm placeholder hay tài sản thay thế.
+- Copy and content: toàn bộ nội dung tiếng Việt, Hán tự, số lượng và nhãn thao tác được giữ nguyên.
+
+## Findings and comparison history
+
+1. Baseline P2: trang Bộ từ vựng bị giới hạn bởi `max-width: 1320px` và 32px padding nội bộ, tạo lề desktop lớn hơn đáng kể so với trang Luyện gõ.
+2. Fix: thêm modifier `vsets-library-page` cho riêng trang thư viện và áp dụng khung `min(1480px, calc(100% - 40px))` ở desktop; không tác động trang chi tiết hoặc phiên học.
+3. Post-fix evidence: full-view 1339 × 720 cho thấy khung phủ toàn bộ vùng sau sidebar với gutter đều; mobile không tràn ngang; bộ lọc HSK/Tất cả hoạt động; browser console không có warning/error.
+
+## Verification
+
+- Source và implementation được đối chiếu trong cùng một browser evidence pass: passed.
+- Desktop full-width: passed.
+- Mobile responsive và horizontal overflow: passed.
+- Filter interaction: passed.
+- Browser console errors: none.
+- Targeted tests: 9 passed.
+- Scoped ESLint và `git diff --check`: passed.
+
+Không còn P0, P1 hoặc P2 có thể hành động cho thay đổi full-width này.
+
+final result: passed
+
 # Design QA — Box đổi ảnh đại diện trên trang Tài khoản mobile
 
 - Source visual truth: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/qa-artifacts/account-avatar-before.png` (823 × 1585 physical px), captured from the annotated `/account` state before the CSS refinement.
@@ -4131,5 +4227,44 @@ final result: passed
 - Scoped `git diff --check`: passed.
 
 No actionable P0, P1, or P2 findings remain for this scoped full-width layout change.
+
+final result: passed
+
+---
+
+# Design QA — Căn chỉnh ba thẻ thống kê hoàn thành
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-0453f67b-2c34-4ea2-b781-f798daeeff8b.png` (649 × 108 px, density 96), showing three 193 × 86 px statistic cards with 10px gaps.
+- Implementation URL: `http://localhost:3001/learn/nha-may-san-xuat?lesson=xac-nhan-quy-trinh-van-hanh`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the screenshot API did not expose a filesystem path.
+- Desktop viewport: 1545 × 901 CSS px. The rendered statistic group measures 597.87 × 86px; each card measures 192.62 × 86px with a 10px gap.
+- Responsive viewport: browser-reported 520 × 1125 CSS px after the mobile viewport override; cards stack at 454.4 × 64px without horizontal overflow.
+- State: completed lesson `Xác nhận quy trình vận hành`.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the three cards retain their position and visual role inside the centered completion modal.
+- Focused comparison: source and implementation both use a 46px icon circle, approximately 17px left inset, 11px icon-to-count gap, 86px card height and 10px inter-card gap.
+- Fonts and typography: the count remains 24px in the Himi coral color; the 11px muted label begins at the top of the count area and remains stable for one- or two-digit values.
+- Spacing and layout rhythm: replaced negative-margin positioning with a three-column grid (`46px max-content minmax(0, 1fr)`), matching the source while preventing drift when the count width changes.
+- Colors and visual tokens: card border resolves to the sampled source color `rgb(251, 202, 196)`; the icon surface uses `#fef0ee`; white card surfaces and coral content remain unchanged.
+- Image quality and asset fidelity: no raster assets are used in this focused UI region; the existing project Lucide icons remain crisp and correctly sized.
+- Copy and content: labels and data-driven values are unchanged; the reference's two-digit sample is supported without hardcoding counts.
+
+## Findings and comparison history
+
+- Initial P2: labels were positioned with a large negative top margin, making their alignment dependent on count width and fragile across lessons.
+- Fix: moved icon, count and label into explicit grid tracks and sampled the border/icon-surface colors from the provided reference.
+- Post-fix visual evidence: card size, spacing, icon placement, count baseline and label top offset now match the reference measurements; desktop and responsive captures show no clipping or overlap.
+
+## Verification
+
+- Source and implementation inspected in the same focused evidence pass: passed.
+- Desktop card geometry: passed.
+- Responsive layout and horizontal overflow: passed.
+- Browser console warnings/errors: none.
+- Focused UI test, scoped ESLint, TypeScript check and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped statistic-card adjustment.
 
 final result: passed

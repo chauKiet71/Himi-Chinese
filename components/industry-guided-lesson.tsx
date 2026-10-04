@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, BarChart3, Bookmark, Check, Headphones, Play, Volume2, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, BarChart3, BookOpen, Bookmark, Check, Headphones, List, PenLine, Play, Target, Trophy, Volume2, X } from "lucide-react";
 import { LessonSpeedMenu, type LessonPlaybackRate } from "@/components/lesson-speed-menu";
 import { PronunciationEvaluator, type PronunciationResult } from "@/components/pronunciation-evaluator";
 import { VipContentGate } from "@/components/vip-upgrade-prompt";
@@ -205,10 +206,17 @@ export function IndustryGuidedLesson({ course, lessons, lesson, access, progress
 
   if (completed) return <main className="industry-guided-lesson industry-guided-complete">
     <section aria-labelledby="industry-complete-title" className="industry-complete-card">
-      <Link aria-label="Đóng" className="industry-complete-close" href={closeHref}><X /></Link>
-      <div className="industry-complete-trophy" aria-hidden="true">🏆</div><span>HOÀN THÀNH</span>
-      <h1 id="industry-complete-title">Hoàn thành <em>bài học!</em></h1><p>Bạn vừa học xong <strong>{lesson.title}</strong>.</p>
-      <div className="industry-complete-actions"><Link href={closeHref}>Danh sách bài học</Link><Link className="primary" href={nextLessonHref}>{nextLesson ? "Bài tiếp theo" : "Về lộ trình"}<ArrowRight size={18} /></Link></div>
+      <Link aria-label="Đóng" className="industry-complete-close" href={closeHref}><X size={22} /></Link>
+      <Image alt="" aria-hidden="true" className="industry-complete-trophy" height={160} priority src="/assets/hsk/hsk-completion-trophy.png" width={160} />
+      <span className="industry-complete-badge"><Trophy aria-hidden="true" size={14} /> HOÀN THÀNH</span>
+      <h1 id="industry-complete-title">Hoàn thành <em>bài học!</em></h1>
+      <p>Bạn vừa học xong <strong>{lesson.title}</strong>. <span aria-hidden="true">🎉</span></p>
+      <dl aria-label="Thống kê bài học" className="industry-complete-stats">
+        <div><dt><span><BookOpen aria-hidden="true" size={22} /></span><strong>{lesson.vocabulary.length}</strong></dt><dd>từ vựng</dd></div>
+        <div><dt><span><Target aria-hidden="true" size={22} /></span><strong>{phrases.length}</strong></dt><dd>bài tập</dd></div>
+        <div><dt><span><PenLine aria-hidden="true" size={22} /></span><strong>{lesson.vocabulary.length}</strong></dt><dd>từ luyện viết</dd></div>
+      </dl>
+      <div className="industry-complete-actions"><Link href={closeHref}><List aria-hidden="true" size={18} />Danh sách bài học</Link><Link className="primary" href={nextLessonHref}>{nextLesson ? "Bài tiếp theo" : "Về lộ trình"}<ArrowRight aria-hidden="true" size={18} /></Link></div>
     </section>
   </main>;
 
@@ -230,7 +238,7 @@ export function IndustryGuidedLesson({ course, lessons, lesson, access, progress
       <div className="industry-guided-stage-inner">
         {currentWord ? <article className="industry-word-card" key={currentWord.slug}>
         <div className="industry-word-hanzi" lang="zh-CN">{currentWord.hanzi}</div><div className="industry-word-pinyin">{currentWord.pinyin}</div><h1>{currentWord.meaning}</h1>
-        <div className="industry-word-actions"><button aria-pressed={isSpeaking} className="industry-audio-button" onClick={playCurrent} type="button"><Play fill="currentColor" size={18} />{isSpeaking ? "Đang phát âm…" : "Nghe phát âm chuẩn"}</button><LessonSpeedMenu onChange={setPlaybackRate} rate={playbackRate} /><button aria-label={saved ? "Bỏ lưu từ" : "Lưu từ"} aria-pressed={saved} className="industry-save-button" onClick={saveWord} type="button">{saved ? <Check size={18} /> : <Bookmark size={18} />}</button></div>
+        <div className="industry-word-actions"><button aria-pressed={isSpeaking} className="industry-audio-button" onClick={playCurrent} type="button"><Play fill="currentColor" size={18} />{isSpeaking ? "Đang phát âm…" : "Nghe mẫu"}</button><LessonSpeedMenu onChange={setPlaybackRate} rate={playbackRate} /><button aria-label={saved ? "Bỏ lưu từ" : "Lưu từ"} aria-pressed={saved} className="industry-save-button" onClick={saveWord} type="button">{saved ? <Check size={18} /> : <Bookmark size={18} />}</button></div>
       </article> : currentPhrase && section === "phrases" ? <article className="industry-phrase-card" key={currentPhrase.id}>
         <div className="industry-phrase-surface"><div className="industry-phrase-hanzi" lang="zh-CN">{currentPhrase.hanzi}</div></div>
         <div className="industry-phrase-pinyin">{currentPhrase.pinyin}</div>

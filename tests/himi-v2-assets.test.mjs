@@ -84,3 +84,24 @@ test("password focus makes Himi cover his eyes", async () => {
   assert.match(styles, /\.auth-password-is-active \.auth-login-scene-art::after/);
   assert.match(styles, /\.auth-password-is-active \.auth-password-mascot/);
 });
+
+test("mobile authentication home button centers its icon", async () => {
+  const styles = await read("app/responsive.css");
+
+  assert.match(styles, /\.auth-scene-home \{[^}]*display: inline-flex;[^}]*align-items: center;[^}]*justify-content: center;[^}]*gap: 0;[^}]*line-height: 0;/s);
+  assert.match(styles, /\.auth-scene-home svg,[\s\S]*?\.auth-scene-replay svg \{[^}]*display: block;[^}]*margin: 0;/s);
+});
+
+test("mobile authentication inputs use the requested 14px type size", async () => {
+  const [globalStyles, styles] = await Promise.all([
+    read("app/globals.css"),
+    read("app/responsive.css"),
+  ]);
+
+  assert.match(globalStyles, /\.auth-card-register-scene \.auth-input-shell input \{[^}]*font-size: 14px;/s);
+  assert.match(globalStyles, /\.auth-card-login-scene \.auth-input-shell input \{[^}]*font-size: 14px;[^}]*font-weight: 400;/s);
+  assert.match(globalStyles, /\.auth-card-login-scene \.auth-input-shell input::placeholder \{[^}]*font-weight: 400;/s);
+  assert.match(styles, /@media \(max-width: 720px\)[\s\S]*?\.auth-card-login-scene \.auth-input-shell input \{[^}]*font-size: 14px;/s);
+  assert.match(styles, /@media \(orientation: landscape\) and \(max-height: 500px\)[\s\S]*?\.auth-card-login-scene \.auth-input-shell input \{[^}]*font-size: 14px;/s);
+  assert.match(styles, /@media \(max-width: 720px\) \{\s*\.auth-card-register-scene \.auth-input-shell input \{\s*font-size: 14px;/s);
+});

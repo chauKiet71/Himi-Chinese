@@ -25,6 +25,8 @@ test("learner shell renders one shared mobile header with back and notification 
   ]);
 
   assert.match(shell, /getMobilePageHeader\(pathname, searchParams\.get\("view"\)\)/);
+  assert.match(shell, /const hideMobileHeader = pathname\.startsWith\("\/learn\/"\)/);
+  assert.match(shell, /\{hideMobileHeader \? null : <header className=\{`learner-mobile-header/);
   assert.match(shell, /className=\{`learner-mobile-header \$\{pathname === "\/" \? "is-home" : ""\}`\.trim\(\)\}/);
   assert.match(shell, /className="learner-mobile-header-brand"[\s\S]*?<BrandMark priority variant="face" \/>/);
   assert.match(shell, /learner-mobile-header-back/);

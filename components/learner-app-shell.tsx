@@ -322,6 +322,7 @@ export function LearnerAppShell({
   const routeProgressActive = navigating || (routeArrived && !routeProgressCompleting);
   const visualPathname = navigating && pendingHref ? pendingHref : pathname;
   const mobilePageHeader = getMobilePageHeader(pathname, searchParams.get("view"));
+  const hideMobileHeader = pathname.startsWith("/learn/");
   const practiceSectionActive = learnerPracticeItems.some(({ matches }) => matches(visualPathname));
   const practiceTriggerActive = practiceSectionActive;
   const mobileVideoLibraryActive = visualPathname === "/videos";
@@ -547,7 +548,7 @@ export function LearnerAppShell({
         </div>
       </header>
 
-      <header className={`learner-mobile-header ${pathname === "/" ? "is-home" : ""}`.trim()}>
+      {hideMobileHeader ? null : <header className={`learner-mobile-header ${pathname === "/" ? "is-home" : ""}`.trim()}>
         {pathname === "/" ? <Link
           aria-label="Himi Chinese - Trang chủ"
           className="learner-mobile-header-brand"
@@ -581,7 +582,7 @@ export function LearnerAppShell({
           <Bell aria-hidden="true" size={23} strokeWidth={2} />
           {user?.unreadNotificationCount ? <span aria-hidden="true">{Math.min(user.unreadNotificationCount, 99)}</span> : null}
         </Link>
-      </header>
+      </header>}
 
       <div
         aria-hidden="true"

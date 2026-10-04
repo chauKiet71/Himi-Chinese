@@ -15238,10 +15238,11 @@ body:has(.auth-register-is-success) { overflow: hidden; }
   border-radius: 14px;
   background: rgba(255, 255, 255, .9);
   font-size: 14px;
+  font-weight: 400;
   transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
-.auth-card-login-scene .auth-input-shell input::placeholder { color: #9ba8a4; }
+.auth-card-login-scene .auth-input-shell input::placeholder { color: #9ba8a4; font-weight: 400; }
 .auth-card-login-scene .auth-input-shell:focus-within > svg { color: #12816e; }
 .auth-card-login-scene .auth-input-shell input:focus { transform: translateY(-1px); }
 
@@ -15283,7 +15284,7 @@ body:has(.auth-register-is-success) { overflow: hidden; }
 .auth-card-register-scene .auth-form { margin-top: 13px; gap: 8px; }
 .auth-card-register-scene .auth-form label,
 .auth-card-register-scene .auth-form-field { gap: 5px; font-size: 11px; }
-.auth-card-register-scene .auth-input-shell input { min-height: 45px; font-size: 13px; }
+.auth-card-register-scene .auth-input-shell input { min-height: 45px; font-size: 14px; }
 .auth-card-register-scene .auth-form .button { min-height: 47px; }
 .auth-card-register-scene .auth-switch { margin-top: 10px; padding-top: 10px; }
 

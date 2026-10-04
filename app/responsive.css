@@ -811,7 +811,13 @@ video {
 
   .auth-scene-home {
     right: max(12px, env(safe-area-inset-right));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
     font-size: 0;
+    line-height: 0;
+    text-align: center;
   }
 
   .auth-scene-replay {
@@ -822,7 +828,9 @@ video {
   .auth-scene-replay svg {
     width: 19px;
     height: 19px;
+    display: block;
     flex: 0 0 auto;
+    margin: 0;
   }
 
   .auth-card-login-scene {
@@ -889,7 +897,7 @@ video {
     min-width: 0;
     min-height: 50px;
     padding-right: 13px;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .auth-card-login-scene .auth-form .button {
@@ -1059,7 +1067,7 @@ video {
   }
 
   .auth-card-login-scene .auth-input-shell input {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .auth-card-login-scene .auth-switch {
@@ -1560,7 +1568,7 @@ video {
  * action while a short phone is scrolled to the top of this full-height art. */
 @media (max-width: 720px) {
   .auth-card-register-scene .auth-input-shell input {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   body:has(.auth-page-login-scene) > .himi-chatbot-widget {

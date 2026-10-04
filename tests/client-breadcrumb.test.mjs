@@ -41,6 +41,7 @@ test("home and developer-only previews do not render a redundant breadcrumb", ()
   assert.equal(getClientBreadcrumb("/games"), null);
   assert.equal(getClientBreadcrumb("/typing"), null);
   assert.equal(getClientBreadcrumb("/vip"), null);
+  assert.equal(getClientBreadcrumb("/vocabulary"), null);
   assert.equal(getClientBreadcrumb("/writing"), null);
   assert.equal(getClientBreadcrumb("/dev/completion-preview"), null);
 });
@@ -53,11 +54,9 @@ test("VIP page starts directly with account status and pricing", async () => {
 });
 
 test("standalone client pages keep the shared navigation while admin remains separate", () => {
-  assert.deepEqual(getClientBreadcrumb("/login"), {
-    parentHref: "/",
-    parentLabel: "Học tập",
-    currentLabel: "Đăng nhập",
-  });
+  assert.equal(getClientBreadcrumb("/login"), null);
+  assert.equal(getClientBreadcrumb("/register"), null);
+  assert.equal(getClientBreadcrumb("/forgot-password"), null);
   assert.deepEqual(getClientBreadcrumb("/privacy"), {
     parentHref: "/",
     parentLabel: "Học tập",

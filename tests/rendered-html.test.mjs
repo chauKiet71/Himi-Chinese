@@ -274,6 +274,8 @@ test("account page uses the approved profile-first layout without learning progr
   assert.match(account, /Tài khoản của tôi/);
   assert.match(account, /account-profile-hero/);
   assert.match(account, /Thông tin tài khoản/);
+  assert.match(account, /<div id="account-email">[^\n]*<dd><span>\{user\.email\}<\/span><\/dd><\/div>/);
+  assert.doesNotMatch(account, /<div id="account-email">[^\n]*<em>/);
   assert.doesNotMatch(account, /<span>Vai trò<\/span>/);
   assert.match(account, /Tài khoản &amp; bảo mật/);
   assert.match(account, /Ngày tham gia/);
@@ -293,8 +295,6 @@ test("account page uses the approved profile-first layout without learning progr
   assert.match(walletStyles, /account-membership-vip \.account-membership-band/);
   assert.match(walletStyles, /account-vip-ticket-mobile\.webp/);
   assert.match(walletStyles, /Active VIP mobile ticket/);
-  assert.match(walletStyles, /Keep the verification state readable/);
-  assert.match(walletStyles, /\.account-wallet-redesign \.account-information dd em\s*\{[\s\S]*display:\s*inline-flex;[\s\S]*font-size:\s*9px;/);
   assert.match(account, /account-page-\$\{membershipState\}/);
   assert.match(account, /account-membership-days/);
   assert.match(account, /account-membership-meta-icon/);
@@ -680,7 +680,13 @@ test("public trust pages and current account copy are present", async () => {
   assert.match(footer, /href="\/terms"/);
   assert.match(footer, /href="\/privacy"/);
   assert.doesNotMatch(footer, /Bản prototype sản phẩm/);
-  assert.match(authCard, /đồng bộ bài học, Luyện ca, trò chơi và lịch ôn/);
+  assert.doesNotMatch(authCard, /đồng bộ bài học, Luyện ca, trò chơi và lịch ôn/);
+  assert.doesNotMatch(authCard, /Tạo tài khoản học/);
+  assert.match(authCard, /\? "Tạo tài khoản"/);
+  assert.doesNotMatch(authCard, /Đăng nhập để tiếp tục đúng bài đang học/);
+  assert.match(authCard, /"Đăng nhập ngay"/);
+  assert.doesNotMatch(authCard, /Sẵn sàng cho ca học hôm nay/);
+  assert.match(authCard, /\{description \? <p>\{description\}<\/p> : null\}/);
   assert.match(terms, /Điều khoản sử dụng/);
   assert.match(privacy, /Chính sách bảo mật/);
 });

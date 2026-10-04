@@ -1475,7 +1475,8 @@ body:has(.typing-session-page) .himi-chatbot-widget {
     padding: 14px 0 92px;
   }
 
-  .typing-catalog-section { margin-top: 28px; }
+  .typing-catalog-section { margin-top: 0; }
+  .typing-catalog-page .typing-section-heading { display: none; }
   .typing-lesson-list-section { padding: 0; }
   .typing-section-heading { display: block; }
   .typing-section-heading > p { margin-top: 10px; }

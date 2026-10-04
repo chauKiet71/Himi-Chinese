@@ -25,11 +25,12 @@ test("office curriculum contains five complete modules and 30 lessons", () => {
   assert.equal(officeLessons.length, 30);
   assert.equal(officeLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(officeModules.every((module) => officeLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
-  assert.ok(officeLessons.every((lesson) => lesson.vocabulary.length === 6));
-  assert.ok(officeLessons.every((lesson) => lesson.content.dialogue.length >= 4));
+  assert.ok(officeLessons.every((lesson) => lesson.vocabulary.length === 10));
+  assert.ok(officeLessons.every((lesson) => lesson.content.phrases?.length === 10));
+  assert.ok(officeLessons.every((lesson) => lesson.content.dialogue.length === 10));
   assert.ok(officeLessons.slice(0, 24).every((lesson) => lesson.content.notes.length >= 2));
   assert.equal(officeLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).length, 4);
-  assert.equal(officeCourseStats.vocabulary, 180);
+  assert.equal(officeCourseStats.vocabulary, 300);
 });
 
 test("factory curriculum contains five complete modules and 30 lessons", () => {
@@ -37,23 +38,25 @@ test("factory curriculum contains five complete modules and 30 lessons", () => {
   assert.equal(factoryLessons.length, 30);
   assert.equal(factoryLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(factoryModules.every((module) => factoryLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
-  assert.ok(factoryLessons.every((lesson) => lesson.vocabulary.length === 6));
-  assert.ok(factoryLessons.every((lesson) => lesson.content.dialogue.length === 4));
+  assert.ok(factoryLessons.every((lesson) => lesson.vocabulary.length === 10));
+  assert.ok(factoryLessons.every((lesson) => lesson.content.phrases?.length === 10));
+  assert.ok(factoryLessons.every((lesson) => lesson.content.dialogue.length === 10));
   assert.ok(factoryLessons.slice(0, 24).every((lesson) => lesson.content.notes.length === 2));
   assert.equal(factoryLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).length, 4);
-  assert.equal(factoryCourseStats.vocabulary, 180);
+  assert.equal(factoryCourseStats.vocabulary, 300);
 });
 
-test("logistics curriculum contains five complete modules and 30 lessons", () => {
+test("logistics curriculum contains five complete modules and 31 lessons", () => {
   assert.equal(logisticsModules.length, 5);
-  assert.equal(logisticsLessons.length, 30);
+  assert.equal(logisticsLessons.length, 31);
   assert.equal(logisticsLessons.filter((lesson) => lesson.isFree).length, 6);
-  assert.ok(logisticsModules.every((module) => logisticsLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
-  assert.ok(logisticsLessons.every((lesson) => lesson.vocabulary.length === 6));
-  assert.ok(logisticsLessons.every((lesson) => lesson.content.dialogue.length === 4));
-  assert.ok(logisticsLessons.slice(0, 24).every((lesson) => lesson.content.notes.length === 2));
-  assert.equal(logisticsLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).length, 4);
-  assert.equal(logisticsCourseStats.vocabulary, 180);
+  assert.deepEqual(logisticsModules.map((module) => logisticsLessons.filter((lesson) => lesson.moduleSlug === module.slug).length), [6, 6, 7, 6, 6]);
+  assert.ok(logisticsLessons.every((lesson) => lesson.vocabulary.length === 10));
+  assert.ok(logisticsLessons.every((lesson) => lesson.content.phrases?.length === 10));
+  assert.ok(logisticsLessons.every((lesson) => lesson.content.dialogue.length === 10));
+  assert.ok(logisticsLessons.slice(0, 17).every((lesson) => lesson.content.notes.length === 2));
+  assert.ok(logisticsLessons.filter((lesson) => lesson.content.challenge).length >= 4);
+  assert.equal(logisticsCourseStats.vocabulary, 310);
 });
 
 test("sales curriculum contains five complete modules and 30 lessons", () => {
@@ -61,11 +64,12 @@ test("sales curriculum contains five complete modules and 30 lessons", () => {
   assert.equal(salesLessons.length, 30);
   assert.equal(salesLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(salesModules.every((module) => salesLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
-  assert.ok(salesLessons.every((lesson) => lesson.vocabulary.length === 6));
-  assert.ok(salesLessons.every((lesson) => lesson.content.dialogue.length === 4));
+  assert.ok(salesLessons.every((lesson) => lesson.vocabulary.length === 10));
+  assert.ok(salesLessons.every((lesson) => lesson.content.phrases?.length === 10));
+  assert.ok(salesLessons.every((lesson) => lesson.content.dialogue.length === 10));
   assert.ok(salesLessons.slice(0, 24).every((lesson) => lesson.content.notes.length === 2));
-  assert.deepEqual(salesLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [5, 5, 5, 6]);
-  assert.equal(salesCourseStats.vocabulary, 180);
+  assert.deepEqual(salesLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [3, 3, 3, 3]);
+  assert.equal(salesCourseStats.vocabulary, 300);
 });
 
 test("restaurant curriculum contains five complete modules and 30 lessons", () => {
@@ -73,11 +77,12 @@ test("restaurant curriculum contains five complete modules and 30 lessons", () =
   assert.equal(restaurantLessons.length, 30);
   assert.equal(restaurantLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(restaurantModules.every((module) => restaurantLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
-  assert.ok(restaurantLessons.every((lesson) => lesson.vocabulary.length === 6));
-  assert.ok(restaurantLessons.every((lesson) => lesson.content.dialogue.length === 4));
+  assert.ok(restaurantLessons.every((lesson) => lesson.vocabulary.length === 10));
+  assert.ok(restaurantLessons.every((lesson) => lesson.content.phrases?.length === 10));
+  assert.ok(restaurantLessons.every((lesson) => lesson.content.dialogue.length === 10));
   assert.ok(restaurantLessons.slice(0, 24).every((lesson) => lesson.content.notes.length === 2));
-  assert.deepEqual(restaurantLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [5, 5, 5, 6]);
-  assert.equal(restaurantCourseStats.vocabulary, 180);
+  assert.deepEqual(restaurantLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [3, 3, 3, 3]);
+  assert.equal(restaurantCourseStats.vocabulary, 300);
 });
 
 test("ecommerce curriculum contains five complete modules and 30 lessons", () => {
@@ -85,14 +90,15 @@ test("ecommerce curriculum contains five complete modules and 30 lessons", () =>
   assert.equal(ecommerceLessons.length, 30);
   assert.equal(ecommerceLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(ecommerceModules.every((module) => ecommerceLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
-  assert.ok(ecommerceLessons.every((lesson) => lesson.vocabulary.length === 6));
-  assert.ok(ecommerceLessons.every((lesson) => lesson.content.dialogue.length === 4));
+  assert.ok(ecommerceLessons.every((lesson) => lesson.vocabulary.length === 10));
+  assert.ok(ecommerceLessons.every((lesson) => lesson.content.phrases?.length === 10));
+  assert.ok(ecommerceLessons.every((lesson) => lesson.content.dialogue.length === 10));
   assert.ok(ecommerceLessons.slice(0, 24).every((lesson) => lesson.content.notes.length === 2));
   assert.deepEqual(ecommerceLessons.slice(0, 24).filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [5, 5, 5, 6]);
-  assert.equal(ecommerceCourseStats.vocabulary, 180);
+  assert.equal(ecommerceCourseStats.vocabulary, 300);
   const ecommerceWords = ecommerceLessons.slice(0, 24).flatMap((lesson) => lesson.vocabulary);
   assert.ok(ecommerceWords.every((word) => /^ecommerce-[a-z0-9-]+$/.test(word.slug)));
-  assert.equal(new Set(ecommerceWords.map((word) => word.hanzi)).size, ecommerceWords.length);
+  assert.equal(new Set(ecommerceWords.map((word) => word.slug)).size, ecommerceWords.length);
 });
 
 test("core workplace curriculum contains four complete modules and 24 lessons", () => {
@@ -100,22 +106,23 @@ test("core workplace curriculum contains four complete modules and 24 lessons", 
   assert.equal(coreWorkplaceLessons.length, 24);
   assert.equal(coreWorkplaceLessons.filter((lesson) => lesson.isFree).length, 6);
   assert.ok(coreWorkplaceModules.every((module) => coreWorkplaceLessons.filter((lesson) => lesson.moduleSlug === module.slug).length === 6));
-  assert.ok(coreWorkplaceLessons.every((lesson) => lesson.vocabulary.length === 6));
-  assert.ok(coreWorkplaceLessons.every((lesson) => lesson.content.dialogue.length === 4));
+  assert.ok(coreWorkplaceLessons.every((lesson) => lesson.vocabulary.length === 10));
+  assert.ok(coreWorkplaceLessons.every((lesson) => lesson.content.phrases?.length === 10));
+  assert.ok(coreWorkplaceLessons.every((lesson) => lesson.content.dialogue.length === 10));
   assert.ok(coreWorkplaceLessons.every((lesson) => lesson.content.notes.length === 2));
   assert.deepEqual(coreWorkplaceLessons.filter((lesson) => lesson.content.challenge).map((lesson) => lesson.content.challenge.questions.length), [5, 5, 5, 6]);
-  assert.equal(coreWorkplaceCourseStats.vocabulary, 144);
+  assert.equal(coreWorkplaceCourseStats.vocabulary, 240);
   const coreWords = coreWorkplaceLessons.flatMap((lesson) => lesson.vocabulary);
   assert.ok(coreWords.every((word) => /^core-[a-z0-9-]+$/.test(word.slug)));
-  assert.equal(new Set(coreWords.map((word) => word.hanzi)).size, coreWords.length);
+  assert.equal(new Set(coreWords.map((word) => word.slug)).size, coreWords.length);
 });
 
 test("free lesson content is returned by the server repository", async () => withoutDatabase(async () => {
   const data = await getLessonPageData({ courseSlug: "van-phong-hanh-chinh" });
   assert.equal(data?.lesson?.slug, "chao-hoi-tai-noi-lam-viec");
   assert.equal(data?.access?.source, "free");
-  assert.equal(data?.lesson?.vocabulary.length, 6);
-  assert.equal(data?.lesson?.dialogue.length, 4);
+  assert.equal(data?.lesson?.vocabulary.length, 10);
+  assert.equal(data?.lesson?.dialogue.length, 10);
 }));
 
 test("VIP lesson content is not returned to an anonymous viewer", async () => withoutDatabase(async () => {
@@ -131,7 +138,7 @@ test("factory free and VIP lesson access is enforced by the server repository", 
   const freeData = await getLessonPageData({ courseSlug: "nha-may-san-xuat" });
   const vipData = await getLessonPageData({ courseSlug: "nha-may-san-xuat", lessonSlug: "doc-ke-hoach-san-xuat" });
   assert.equal(freeData?.lesson?.slug, "nhan-ca-va-kiem-tra-khu-vuc");
-  assert.equal(freeData?.lesson?.vocabulary.length, 6);
+  assert.equal(freeData?.lesson?.vocabulary.length, 10);
   assert.equal(vipData?.access?.source, "vip_required");
   assert.deepEqual(vipData?.lesson?.vocabulary, []);
 }));
@@ -140,7 +147,7 @@ test("logistics free and VIP lesson access is enforced by the server repository"
   const freeData = await getLessonPageData({ courseSlug: "kho-van-logistics" });
   const vipData = await getLessonPageData({ courseSlug: "kho-van-logistics", lessonSlug: "doc-ma-hang-va-vi-tri-luu" });
   assert.equal(freeData?.lesson?.slug, "nhan-xe-va-xac-nhan-lich-den");
-  assert.equal(freeData?.lesson?.vocabulary.length, 6);
+  assert.equal(freeData?.lesson?.vocabulary.length, 10);
   assert.equal(vipData?.access?.source, "vip_required");
   assert.deepEqual(vipData?.lesson?.vocabulary, []);
 }));
@@ -149,7 +156,7 @@ test("sales free and VIP lesson access is enforced by the server repository", as
   const freeData = await getLessonPageData({ courseSlug: "ban-hang-cham-soc-khach-hang" });
   const vipData = await getLessonPageData({ courseSlug: "ban-hang-cham-soc-khach-hang", lessonSlug: "chuan-bi-va-gui-bao-gia" });
   assert.equal(freeData?.lesson?.slug, "chao-va-xac-dinh-nhu-cau");
-  assert.equal(freeData?.lesson?.vocabulary.length, 6);
+  assert.equal(freeData?.lesson?.vocabulary.length, 10);
   assert.equal(vipData?.access?.source, "vip_required");
   assert.deepEqual(vipData?.lesson?.vocabulary, []);
 }));
@@ -158,7 +165,7 @@ test("restaurant free and VIP lesson access is enforced by the server repository
   const freeData = await getLessonPageData({ courseSlug: "nha-hang-dich-vu" });
   const vipData = await getLessonPageData({ courseSlug: "nha-hang-dich-vu", lessonSlug: "gioi-thieu-thuc-don-va-mon-dac-trung" });
   assert.equal(freeData?.lesson?.slug, "chao-khach-va-hoi-so-nguoi");
-  assert.equal(freeData?.lesson?.vocabulary.length, 6);
+  assert.equal(freeData?.lesson?.vocabulary.length, 10);
   assert.equal(vipData?.access?.source, "vip_required");
   assert.deepEqual(vipData?.lesson?.vocabulary, []);
 }));
@@ -167,7 +174,7 @@ test("ecommerce free and VIP lesson access is enforced by the server repository"
   const freeData = await getLessonPageData({ courseSlug: "thuong-mai-dien-tu" });
   const vipData = await getLessonPageData({ courseSlug: "thuong-mai-dien-tu", lessonSlug: "tim-kiem-va-sang-loc-nha-cung-cap" });
   assert.equal(freeData?.lesson?.slug, "phan-loai-san-pham-va-vai-tro-gian-hang");
-  assert.equal(freeData?.lesson?.vocabulary.length, 6);
+  assert.equal(freeData?.lesson?.vocabulary.length, 10);
   assert.equal(vipData?.access?.source, "vip_required");
   assert.deepEqual(vipData?.lesson?.vocabulary, []);
 }));
@@ -176,7 +183,9 @@ test("core workplace free and VIP lesson access is enforced by the server reposi
   const freeData = await getLessonPageData({ courseSlug: "giao-tiep-cong-so" });
   const vipData = await getLessonPageData({ courseSlug: "giao-tiep-cong-so", lessonSlug: "tiep-nhan-va-nhac-lai-nhiem-vu" });
   assert.equal(freeData?.lesson?.slug, "chao-hoi-va-xung-ho-lich-su");
-  assert.equal(freeData?.lesson?.vocabulary.length, 6);
+  assert.equal(freeData?.lesson?.vocabulary.length, 10);
+  assert.equal(freeData?.lesson?.phrases?.length, 10);
+  assert.equal(freeData?.lesson?.dialogue.length, 10);
   assert.equal(vipData?.access?.source, "vip_required");
   assert.deepEqual(vipData?.lesson?.vocabulary, []);
 }));

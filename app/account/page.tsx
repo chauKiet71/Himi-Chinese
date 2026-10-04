@@ -182,7 +182,7 @@ export default async function AccountPage({
         <section className="account-information" id="account-information" aria-labelledby="account-information-title">
           <h2 id="account-information-title">Thông tin tài khoản</h2>
           <dl>
-            <div id="account-email"><dt><Mail size={20} /><span>Email</span></dt><dd><span>{user.email}</span><em><BadgeCheck size={14} />Đã xác minh</em></dd></div>
+            <div id="account-email"><dt><Mail size={20} /><span>Email</span></dt><dd><span>{user.email}</span></dd></div>
             <div><dt><CalendarDays size={20} /><span>Ngày tham gia</span></dt><dd>{joinedAt}</dd></div>
           </dl>
         </section>

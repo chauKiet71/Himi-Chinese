@@ -956,7 +956,7 @@ a.hsk-lesson-select::after {
 
   .industry-course-heading { width: calc(100% - 24px); padding-top: 38px; }
   .industry-course-heading h2 { font-size: 28px; }
-  .course-catalog-heading { padding-top: 28px; }
+  .course-catalog-heading { display: none; }
   .course-catalog-heading h1 { font-size: 31px; }
   .industry-course-heading p { font-size: 12px; }
 }
@@ -979,6 +979,10 @@ a.hsk-lesson-select::after {
   border-left: 7px solid #ff5a4e;
   font-size: 25px;
   line-height: 1.4;
+}
+
+@media (max-width: 720px) {
+  .course-catalog-heading { display: none; }
 }
 
 /* The learner rail changes the usable canvas without changing viewport width. */

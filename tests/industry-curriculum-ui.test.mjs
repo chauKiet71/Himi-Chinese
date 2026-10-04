@@ -6,7 +6,7 @@ import { createServer } from "vite";
 import { industryCurricula } from "../lib/industry-curriculum.ts";
 import { getCourse } from "../lib/course-data.ts";
 
-test("all 36 authored lessons render vocabulary, phrases, pronunciation and an answerable quiz", async (t) => {
+test("all authored applied lessons render vocabulary, phrases, pronunciation and an answerable quiz", async (t) => {
   const server = await createServer({ appType: "custom", configFile: false, resolve: { alias: [{ find: "@", replacement: process.cwd() }] }, server: { middlewareMode: true, hmr: false } });
   t.after(() => server.close());
   const [{ LessonWorkspace }, { LessonPhrasebook }, { LessonPronunciationCoach }, { LessonChallengePanel }] = await Promise.all([

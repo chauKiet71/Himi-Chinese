@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookOpen, MessageSquareText } from "lucide-react";
-import { HimiSectionBanner } from "@/components/himi-section-banner";
 import { getTypingCatalog } from "@/lib/typing-practice";
 
 export const metadata: Metadata = {
@@ -11,18 +10,8 @@ export const metadata: Metadata = {
 
 export default function TypingPage() {
   const levels = getTypingCatalog();
-  const lessonCount = levels.reduce((total, level) => total + level.lessonCount, 0);
-  const itemCount = levels.reduce((total, level) => total + level.wordCount + level.sentenceCount, 0);
 
   return <main className="learner-dashboard typing-catalog-page">
-    <HimiSectionBanner
-      className="typing-catalog-banner"
-      description={`${lessonCount} bài học và ${itemCount.toLocaleString("vi-VN")} lượt gõ từ HSK 1–6. Nhìn nghĩa hoặc nghe âm thanh, rồi tự nhớ lại pinyin.`}
-      titleId="typing-catalog-title"
-      titleLines={["Nghe thật kỹ.", "Gõ pinyin thật chắc."]}
-      variant="practice"
-    />
-
     <section aria-labelledby="typing-level-heading" className="typing-catalog-section">
       <div className="typing-section-heading">
         <div>

@@ -106,19 +106,17 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
   const forgotPassword = mode === "forgot-password";
   const learnerAuth = learnerLogin || registering || forgotPassword;
   const title = registering
-    ? "Tạo tài khoản học"
+    ? "Tạo tài khoản"
     : forgotPassword
       ? "Đặt lại mật khẩu"
       : admin
         ? "Đăng nhập quản trị"
-        : "Sẵn sàng cho ca học hôm nay?";
-  const description = registering
-    ? "Tạo tài khoản để đồng bộ bài học, Luyện ca, trò chơi và lịch ôn trên các thiết bị của bạn."
-    : forgotPassword
+        : "Đăng nhập ngay";
+  const description = forgotPassword
       ? "Nhập email đã đăng ký. Nếu tài khoản tồn tại, Himi Chinese sẽ gửi một liên kết dùng một lần."
-    : admin
-      ? "Console dành cho biên tập viên, kiểm duyệt viên và quản trị viên đã được phân quyền."
-      : "Đăng nhập để tiếp tục đúng bài đang học.";
+      : admin
+        ? "Console dành cho biên tập viên, kiểm duyệt viên và quản trị viên đã được phân quyền."
+        : null;
   const Icon = registering ? UserPlus : admin ? ShieldCheck : KeyRound;
   const action = registering ? "/api/auth/register" : forgotPassword ? "/api/auth/forgot-password" : "/api/auth/login";
   const notice = error === "password_changed" || error === "password_reset";
@@ -282,7 +280,7 @@ export function AuthCard({ mode, error, initialRegisterSuccess = false, returnTo
   const authPanel = <section className={`auth-card ${admin ? "auth-card-admin" : ""} ${learnerAuth ? "auth-card-login-scene" : ""} ${registering ? "auth-card-register-scene" : ""} ${forgotPassword ? "auth-card-forgot-scene" : ""}`.trim()}>
     {!learnerAuth ? <div className="auth-brand"><BrandMark priority /><BrandWordmark /></div> : null}
     {!learnerAuth ? <div className="auth-icon"><Icon size={24} /></div> : null}
-    <div className="auth-heading"><span>{admin ? "Himi Chinese Console" : "Tài khoản Himi Chinese"}</span><h1>{title}</h1><p>{description}</p></div>
+    <div className="auth-heading"><span>{admin ? "Himi Chinese Console" : "Tài khoản Himi Chinese"}</span><h1>{title}</h1>{description ? <p>{description}</p> : null}</div>
     {visibleError && errorMessages[visibleError] ? <p className={notice ? "auth-notice" : "auth-error"} role="status">{errorMessages[visibleError]}</p> : null}
     {forgotPasswordSent ? <aside aria-atomic="true" aria-live="polite" className="auth-forgot-toast" role="status"><CheckCircle2 aria-hidden="true" size={21} /><strong>Yêu cầu đã được ghi nhận</strong><button aria-label="Đóng thông báo" onClick={() => setForgotPasswordState("idle")} type="button"><X aria-hidden="true" size={17} /></button></aside> : null}
     <form action={action} aria-busy={forgotPasswordState === "submitting"} className="auth-form" method="post" onSubmit={forgotPassword ? handleForgotPasswordSubmit : handleRegisterSubmit}>

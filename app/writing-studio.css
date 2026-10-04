@@ -1013,10 +1013,11 @@
     margin-inline: 0;
   }
   .writing-topic-section { margin-top: 0; }
+  .writing-catalog-page .writing-topic-heading { display: none; }
   .writing-topic-heading { align-items: start; flex-direction: column; gap: 10px; }
   .writing-topic-heading h2 { font-size: clamp(26px, 8.2vw, 34px); line-height: 1.08; }
   .writing-topic-heading > p { font-size: 13px; line-height: 1.55; }
-  .writing-topic-grid { margin-top: 20px; grid-template-columns: 1fr; gap: 13px; }
+  .writing-topic-grid { margin-top: 0; grid-template-columns: 1fr; gap: 13px; }
   .writing-topic-card { min-height: 0; padding: 18px; border-radius: 22px; }
   .writing-topic-characters { margin-top: 17px; }
   .writing-topic-characters span { width: clamp(45px, 13vw, 52px); border-radius: 14px; font-size: 25px; }

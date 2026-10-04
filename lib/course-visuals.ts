@@ -45,9 +45,21 @@ const courseVisuals: Record<string, CourseVisual> = {
     alt: "Himi học tiếng Trung qua nhiều chủ đề giao tiếp thiết thực",
     position: "center",
   },
+  "tu-tin-kham-pha-trung-quoc": {
+    src: "/assets/courses/himi-concepts/himi-hospitality-tourism.webp",
+    alt: "Himi chuẩn bị hành lý và bản đồ để khám phá Trung Quốc",
+    position: "center",
+  },
 };
 
 const courseModuleVisuals: Record<string, Record<string, CourseVisual>> = {
+  "tu-tin-kham-pha-trung-quoc": {
+    "hanh-trinh-du-lich-tu-tuc": {
+      src: "/assets/courses/hospitality-modules/hospitality-tours-destinations.webp",
+      alt: "Himi hướng dẫn hành trình du lịch tự túc tại Trung Quốc",
+      position: "center",
+    },
+  },
   "van-phong-hanh-chinh": {
     "giao-tiep-van-phong-can-ban": {
       src: "/assets/courses/office-modules/office-basics.webp",

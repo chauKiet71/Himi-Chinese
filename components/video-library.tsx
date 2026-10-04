@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { ArrowRight, Captions, CirclePlay, Search } from "lucide-react";
-import { HimiSectionBanner } from "@/components/himi-section-banner";
 import type { LearningVideo } from "@/lib/video-library";
 
 function VideoCard({ priority, video }: { priority?: boolean; video: LearningVideo }) {
@@ -36,13 +35,6 @@ export function VideoLibrary({ videos }: { videos: LearningVideo[] }) {
 
   return <main className="video-library-page learner-full-width-catalog">
     <div className="video-library-shell">
-      <HimiSectionBanner
-        description="Xem tình huống thật, nghe từng câu rõ hơn và luyện lại ngay trong phòng học tương tác."
-        titleId="video-library-title"
-        titleLines={["Nghe dễ hơn.", "Nhớ lâu hơn."]}
-        variant="videos"
-      />
-
       <section className="video-catalog" aria-labelledby="video-catalog-title">
         <h2 className="sr-only" id="video-catalog-title">Thư viện video tuyển chọn</h2>
         <div className="video-catalog-tools">

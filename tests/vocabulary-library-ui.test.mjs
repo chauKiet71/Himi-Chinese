@@ -34,6 +34,8 @@ test("vocabulary library renders saved learning words and a working study CTA", 
   assert.match(component, /placeholder="Ví dụ: Từ mới tuần này"/);
   assert.match(component, /placeholder="Bạn muốn học những gì trong bộ này\?"/);
   assert.match(stylesheet, /\.vsets-page \.vsets-start-learning/);
+  assert.match(component, /className="vsets-page vsets-library-page"/);
+  assert.match(stylesheet, /@media \(min-width: 681px\) \{[\s\S]*?\.vsets-page\.vsets-library-page \{[\s\S]*?width: min\(1480px, calc\(100% - 40px\)\);[\s\S]*?padding: 26px 0 80px;/);
   assert.match(stylesheet, /\.vsets-library-shell/);
   assert.match(stylesheet, /\.vsets-saved-table/);
   assert.match(stylesheet, /\.vsets-create-overlay \{ position: fixed;/);

@@ -1057,6 +1057,8 @@
 .learner-app-shell:has(.game-immersive-dashboard) .client-breadcrumb-bar,
 .learner-app-shell:has(.hsk-guided-page) .client-breadcrumb-bar,
 .learner-app-shell:has(.hsk-quiz-session) .client-breadcrumb-bar,
+.learner-app-shell:has(.listening-studio) .client-breadcrumb-bar,
+.learner-app-shell:has(.video-library-page) .client-breadcrumb-bar,
 .learner-app-shell:has(.typing-session-page) .client-breadcrumb-bar {
   display: none;
 }

@@ -889,7 +889,6 @@
 }
 
 @media (max-width: 720px) {
-  .learner-app-shell .learner-mobile-nav { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .video-library-page,
   .video-detail-page { min-height: calc(100vh - 68px); }
   .video-library-shell,

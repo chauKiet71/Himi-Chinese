@@ -8,14 +8,12 @@ const staticRoutes: Record<string, ClientBreadcrumbModel> = {
   "/account": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Tài khoản" },
   "/forgot-password": { parentHref: "/login", parentLabel: "Đăng nhập", currentLabel: "Quên mật khẩu" },
   "/listening": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Luyện nghe" },
-  "/login": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Đăng nhập" },
   "/notifications": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Thông báo" },
   "/privacy": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Chính sách bảo mật" },
   "/register": { parentHref: "/login", parentLabel: "Đăng nhập", currentLabel: "Đăng ký" },
   "/reset-password": { parentHref: "/login", parentLabel: "Đăng nhập", currentLabel: "Đặt lại mật khẩu" },
   "/terms": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Điều khoản sử dụng" },
   "/videos": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Video" },
-  "/vocabulary": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Bộ từ vựng" },
   "/verify-email": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Xác minh email" },
 };
 
@@ -39,7 +37,7 @@ function writingLessonLabel(value: string): string {
 }
 
 export function getClientBreadcrumb(pathname: string): ClientBreadcrumbModel | null {
-  if (pathname === "/" || pathname.startsWith("/courses") || pathname === "/games" || pathname === "/typing" || pathname === "/vip" || pathname === "/writing" || pathname.startsWith("/dev/")) return null;
+  if (pathname === "/" || pathname.startsWith("/courses") || pathname === "/forgot-password" || pathname === "/games" || pathname === "/login" || pathname === "/register" || pathname === "/typing" || pathname === "/vip" || pathname === "/vocabulary" || pathname === "/writing" || pathname.startsWith("/dev/")) return null;
 
   const segments = pathname.split("/").filter(Boolean);
   const [section, first, second, third] = segments;

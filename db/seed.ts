@@ -26,6 +26,7 @@ import { getPracticeListeningStatement, getPracticeMeaningQuestion, practiceIndu
 import { detectPracticeAudioMime } from "../lib/practice-audio-validation.ts";
 import { restaurantLessons, restaurantModules } from "../lib/restaurant-course-seed.ts";
 import { salesLessons, salesModules } from "../lib/sales-course-seed.ts";
+import { travelLessons, travelModules } from "../lib/travel-course-seed.ts";
 import type { CourseSeedBundle } from "../lib/course-seed-types.ts";
 import { LIFETIME_VIP_PLAN_CODE, LIFETIME_VIP_STORAGE_DAYS } from "../lib/vip-plan.ts";
 
@@ -74,6 +75,7 @@ const courseSeedBundles: CourseSeedBundle[] = [
   { courseSlug: "thuong-mai-dien-tu", modules: ecommerceModules, lessons: ecommerceLessons },
   { courseSlug: "giao-tiep-cong-so", modules: coreWorkplaceModules, lessons: coreWorkplaceLessons },
   { courseSlug: "tieng-trung-tan-suat-cao", modules: highFrequencyModules, lessons: highFrequencyLessons },
+  { courseSlug: "tu-tin-kham-pha-trung-quoc", modules: travelModules, lessons: travelLessons },
 ];
 
 const practiceIndustryImages: Record<string, string> = {

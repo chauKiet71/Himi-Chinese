@@ -16,7 +16,8 @@ test("industry roadmap lessons use the immersive guided lesson interface", async
   assert.match(component, /Từ vựng/);
   assert.match(component, /Cụm từ/);
   assert.match(component, /Nghe & Nói/);
-  assert.match(component, /Nghe phát âm chuẩn/);
+  assert.match(component, /Nghe mẫu/);
+  assert.doesNotMatch(component, /Nghe phát âm chuẩn/);
   assert.match(component, /industry-phrase-surface/);
   assert.match(component, /industry-phrase-structure/);
   assert.match(component, /industry-pronunciation-dock/);
@@ -39,6 +40,12 @@ test("industry roadmap lessons use the immersive guided lesson interface", async
   assert.match(component, /industry-guided-header-inner/);
   assert.match(component, /industry-guided-stage-inner/);
   assert.match(component, /industry-guided-footer-inner/);
+  assert.match(component, /src="\/assets\/hsk\/hsk-completion-trophy\.png"/);
+  assert.match(component, /industry-complete-stats/);
+  assert.match(component, /từ vựng/);
+  assert.match(component, /bài tập/);
+  assert.match(component, /từ luyện viết/);
+  assert.doesNotMatch(component, /<div className="industry-complete-trophy" aria-hidden="true">🏆<\/div>/);
   assert.match(loading, /LessonLoadingIndicator/);
   assert.doesNotMatch(loading, /skeleton-block/);
   assert.match(css, /:has\(\.industry-guided-lesson\) \.learn-rail/);
@@ -61,4 +68,12 @@ test("industry roadmap lessons use the immersive guided lesson interface", async
   assert.match(css, /\.industry-pronunciation-control \.pronunciation-record svg \{ width: 36\.4px; height: 36\.4px/);
   assert.doesNotMatch(css, /\.industry-pronunciation-score \{[^}]*border-right/);
   assert.match(css, /body:has\(\.industry-guided-lesson\) \.himi-chatbot-widget/);
+  assert.match(css, /\.industry-guided-complete \{[^}]*grid-template-rows: minmax\(0, 1fr\)[^}]*place-items: center[^}]*min-height: 100dvh/);
+  assert.match(css, /\.industry-complete-card \{[^}]*width: min\(664px, 100%\)/);
+  assert.match(css, /\.industry-complete-stats \{[^}]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.industry-complete-stats > div \{[^}]*grid-template-columns: 46px max-content minmax\(0, 1fr\)/);
+  assert.match(css, /\.industry-complete-stats dt \{ display: contents;/);
+  assert.doesNotMatch(css, /\.industry-complete-stats dd \{[^}]*margin: -28px/);
+  assert.match(css, /\.lesson-speed-options button\[aria-pressed="true"\]\s*\{[^}]*background: var\(--himi-red, #ff4f3d\)/);
+  assert.doesNotMatch(css, /\.lesson-speed-options button\[aria-pressed="true"\]\s*\{[^}]*background: #08796d/);
 });

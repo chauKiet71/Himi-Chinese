@@ -160,7 +160,7 @@ export function VocabularySetLibrary({
     setQuery("");
   }
 
-  return <main className="vsets-page">
+  return <main className="vsets-page vsets-library-page">
     <header className="vsets-hero">
       <div className="vsets-hero-copy">
         <span className="vsets-eyebrow"><Layers3 size={17} /> BỘ TỪ VỰNG</span>
