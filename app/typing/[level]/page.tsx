@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Keyboard, MessageSquareText } from "lucide-react";
+import { ArrowRight, ChevronLeft, Keyboard, MessageSquareText } from "lucide-react";
 import { getTypingLevel, TYPING_LEVEL_IDS } from "@/lib/typing-practice";
 
 type TypingLevelPageProps = { params: Promise<{ level: string }> };
@@ -25,21 +25,9 @@ export default async function TypingLevelPage({ params }: TypingLevelPageProps) 
   if (!level) notFound();
 
   return <main className="learner-dashboard typing-lesson-page">
-    <nav aria-label="Điều hướng luyện gõ" className="typing-breadcrumbs">
-      <Link href="/typing"><ArrowLeft aria-hidden="true" size={16} /> Các cấp độ</Link>
-      <span aria-hidden="true">/</span><strong>{level.label}</strong>
+    <nav aria-label="Quay lại trang Luyện gõ" className="typing-level-back">
+      <Link href="/typing" prefetch={false}><ChevronLeft aria-hidden="true" size={17} strokeWidth={2.3} /> Về trang Luyện gõ</Link>
     </nav>
-
-    <header className="typing-lesson-hero">
-      <div>
-        <span>{level.label} · {level.lessonCount} bài học</span>
-        <h1>Chọn bài để bắt đầu luyện gõ</h1>
-        <p>Từng bài bám đúng kho từ và câu nguồn, kèm phát âm thường và chậm.</p>
-      </div>
-      <div aria-label={`Một số từ trong cấp độ: ${level.previewHanzi.join(", ")}`} className="typing-lesson-character-strip" lang="zh-CN">
-        {level.previewHanzi.map((character, index) => <span key={`${character}-${index}`}>{character}</span>)}
-      </div>
-    </header>
 
     <section aria-label="Danh sách bài luyện gõ" className="typing-lesson-list-section">
       <div className="typing-lesson-grid">

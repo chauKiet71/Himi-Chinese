@@ -3143,6 +3143,36 @@ final result: passed
 
 ---
 
+# Design QA — Bỏ box kỹ năng khỏi bản đồ trò chơi
+
+- Source visual truth: browser annotation screenshot in the current task targeting `aside.game-journey-skills` on `/games`; the annotation capture did not expose a filesystem path.
+- Implementation URL: `http://localhost:3001/games`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the capture API did not expose a filesystem path.
+- Viewport: 1525 × 901 CSS px at device scale 1, matching the annotated desktop state.
+- State: game journey map loaded with `Luyện chém từ` as the current station.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the targeted `Kỹ năng bạn đang rèn` panel is absent while the map composition, featured game card, stations and chatbot remain intact.
+- Focused DOM evidence: `.game-journey-skills` count is `0`; all six secondary `.game-journey-station` nodes remain present alongside the featured first station.
+- Fonts and typography: no surviving typography or hierarchy was changed.
+- Spacing and layout rhythm: removing the absolutely positioned panel does not alter the map grid or station positions.
+- Colors and visual tokens: existing Himi palette and state colors remain unchanged.
+- Image quality and asset fidelity: all original game artwork remains unchanged and fully rendered.
+- Copy and content: only the requested skills-panel copy was removed.
+
+## Verification
+
+- Browser visual inspection at 1525 × 901: passed.
+- Focused rendered-HTML test: passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
 # Design QA — Bỏ breadcrumb trang Luyện gõ
 
 - Source visual truth: Browser annotation capture attached to the request, route `/typing`, target `.client-breadcrumb-bar` containing `Học tập / Luyện gõ` (source capture path was not exposed by the annotation surface; supplied image 1409 × 1189 px).
@@ -3370,5 +3400,736 @@ final result: passed
 - `git diff --check`: passed for the scoped files.
 
 No actionable P0, P1, or P2 findings remain for this scoped color update.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ tiêu đề và box Himi khỏi header HSK
+
+- Source visual truth: two browser annotation captures on `/courses?view=hsk` (1280 × 756 px each), targeting `#hsk-curriculum-title` and `.hsk-curriculum-coach`; annotation file paths were not exposed.
+- Implementation URL: `http://localhost:3001/courses?view=hsk`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/hsk-header-without-title-coach.jpg` (2256 × 1280 px).
+- Viewport/state: 1706 × 960 CSS px, desktop, authenticated HSK 1 curriculum with the first topic expanded.
+- Density normalization: not required for the removal check; source and implementation were compared by the same header region and DOM selectors.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: the large `Lộ trình bài học HSK 1` heading and the Himi coach illustration/message are absent; the back link, HSK tabs, progress and industry link remain visible.
+- Focused evidence: no separate crop was needed because both removed regions occupied the complete top header; DOM verification reports zero matches for `#hsk-curriculum-title` and `.hsk-curriculum-coach`.
+- Fonts and typography: retained controls and lesson typography are unchanged.
+- Spacing and layout rhythm: header height is reduced to about 147px and the tabs/progress move upward without leaving the former empty coach column.
+- Colors and visual tokens: unchanged.
+- Image quality and asset fidelity: only the explicitly selected coach asset is removed; all remaining course imagery is unchanged.
+- Copy and content: only the selected title and coach message are removed; navigation and progress copy remain.
+
+## Verification
+
+- Primary interaction checked: HSK level tabs, progress summary and topic disclosure remain present.
+- Browser console errors: none.
+- HSK curriculum tests: 3 passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ breadcrumb trang Lộ trình (latest)
+
+- Source visual truth: browser annotation capture on `/courses` (1525 × 901 px) targeting `.client-breadcrumb-bar`; the annotation file path was not exposed.
+- Implementation URL: `http://localhost:3001/courses`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/courses-without-breadcrumb.jpg` (2256 × 1280 px).
+- Viewport/state: 1706 × 960 CSS px, desktop, authenticated course catalog.
+- Density normalization: not required for the removal check; the source and implementation were compared using the same top-of-page content region and the annotated DOM selector.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: the selected `Học tập / Lộ trình` breadcrumb box is absent and the catalog begins with `Chọn chủ đề bạn muốn học`.
+- Focused evidence: a separate crop was unnecessary because the selected element occupied the full-width strip above the catalog; DOM verification reports zero `.client-breadcrumb-bar` elements.
+- Fonts and typography: the catalog heading and card typography are unchanged.
+- Spacing and layout rhythm: the removed strip no longer reserves vertical space; the course catalog remains aligned and has no horizontal overflow.
+- Colors and visual tokens: unchanged outside the removed breadcrumb surface.
+- Image quality and asset fidelity: course card imagery remains unchanged and sharp.
+- Copy and content: only the selected breadcrumb copy is removed; the heading, filters and course cards remain present.
+
+## Verification
+
+- Primary page content checked: catalog heading and the HSK course card remain visible.
+- Browser console errors: none.
+- Focused breadcrumb tests: 5 passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ breadcrumb trang chi tiết lộ trình
+
+- Source visual truth: browser annotation capture on `/courses/van-phong-hanh-chinh` (1525 × 901 px) targeting `.client-breadcrumb-bar`; the annotation file path was not exposed.
+- Implementation URL: `http://localhost:3001/courses/van-phong-hanh-chinh`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/course-detail-without-breadcrumb.jpg` (2256 × 1280 px).
+- Viewport/state: 1525 × 901 CSS px, desktop, authenticated roadmap detail with the first stage expanded.
+- Density normalization: not required for the removal check; source and implementation use the same route, content and interaction state.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: the selected `Lộ trình / Chi tiết lộ trình` strip is absent and the page begins directly with `Lộ trình học` and the roadmap title.
+- Focused evidence: no separate crop was needed because the selected element occupied the complete top strip; DOM verification reports zero `.client-breadcrumb-bar` elements.
+- Fonts and typography: roadmap title, lesson rows and summary typography are unchanged.
+- Spacing and layout rhythm: the removed strip no longer reserves vertical space; the roadmap and summary panel remain aligned with no horizontal overflow.
+- Colors and visual tokens: unchanged outside the removed breadcrumb surface.
+- Image quality and asset fidelity: stage thumbnails and the Himi coach illustration remain unchanged and sharp.
+- Copy and content: only the selected breadcrumb copy is removed; the roadmap title, progress, lessons and summary remain present.
+
+## Verification
+
+- Primary interactions checked: all 30 lesson links remain in the DOM and the first roadmap stage remains expanded.
+- Browser console errors: none.
+- Focused breadcrumb tests: 5 passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Thẻ quay lại trên trang chi tiết lộ trình
+
+- Source visual truth: browser annotation on `/courses/van-phong-hanh-chinh` plus the attached compact reference showing a left arrow and `Về trang Lộ trình`; attachment file path was not exposed.
+- Implementation URL: `http://localhost:3001/courses/van-phong-hanh-chinh`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/course-roadmap-back-link.jpg` (2256 × 1280 px).
+- Viewport/state: 1525 × 901 CSS px, desktop, authenticated roadmap detail, page scrolled to the top.
+- Density normalization: not required; the reference is a focused component crop and the implementation was inspected at rendered CSS size.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: `Về trang Lộ trình` appears immediately above `Lộ trình Văn phòng & hành chính` without displacing the progress bar or roadmap controls.
+- Focused evidence: DOM geometry confirms the back link is above the title with a 7px gap; its destination is `/courses`.
+- Fonts and typography: 13px, weight 700, matching the compact reference hierarchy.
+- Spacing and layout rhythm: inline arrow/text alignment and 7px title separation match the supplied compact treatment; no horizontal overflow is introduced.
+- Colors and visual tokens: default text uses `rgb(63, 75, 80)` and changes to the existing Himi red on hover/focus.
+- Image quality and asset fidelity: the arrow uses the existing Lucide icon library and remains vector-sharp.
+- Copy and content: exact requested copy `Về trang Lộ trình`; the former non-interactive eyebrow is replaced by this functional link.
+
+## Verification
+
+- Primary interaction: link resolves to `/courses`.
+- Browser console errors: none.
+- Focused course-roadmap UI tests: 3 passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped addition.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ tiến độ khỏi header chi tiết lộ trình
+
+- Source visual truth: browser annotation capture on `/courses/van-phong-hanh-chinh` (1525 × 901 px) targeting `.course-roadmap-progress-row`; annotation file path was not exposed.
+- Implementation URL: `http://localhost:3001/courses/van-phong-hanh-chinh`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/course-roadmap-without-header-progress.jpg` (2256 × 1280 px).
+- Viewport/state: 1525 × 901 CSS px, desktop, authenticated roadmap detail with the first stage expanded.
+- Density normalization: not required for the removal check; source and implementation use the same route and interaction state.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: the selected `1 / 30 bài`, progress track and `3%` row is absent from the header; the roadmap begins below the title divider.
+- Focused evidence: a separate crop was unnecessary because the selected row spanned the full title column; DOM verification reports zero `.course-roadmap-progress-row` elements.
+- Fonts and typography: the back link, page title and roadmap typography remain unchanged.
+- Spacing and layout rhythm: header height contracts cleanly without leaving an empty progress-row gap; no horizontal overflow is introduced.
+- Colors and visual tokens: unchanged outside the removed progress row.
+- Image quality and asset fidelity: roadmap and coach imagery remain unchanged.
+- Copy and content: only the selected header progress summary is removed; `Tiến độ tổng` remains available in the overview panel.
+
+## Verification
+
+- Primary page content checked: back link, title, switch action, lesson stages and overview progress remain present.
+- Browser console errors: none.
+- Focused course-roadmap UI tests: 3 passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Đồng bộ tone box chặng bài học
+
+- Source visual truth: browser annotation on the active roadmap stage plus the attached HSK topic reference showing a white lesson surface, neutral separators and orange accents; attachment file path was not exposed.
+- Implementation URL: `http://localhost:3001/courses/van-phong-hanh-chinh`.
+- Browser-rendered implementation screenshot: `D:/Code/HiMi/Hanzi-work-lab-nextjs-web-app/tmp/design-qa/course-roadmap-neutral-tone.jpg` (2256 × 1280 px).
+- Viewport/state: 1525 × 901 CSS px, desktop, authenticated roadmap detail with stage 1 expanded.
+- Density normalization: not required; the visual comparison focused on palette, borders and row states rather than pixel-identical structure.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: the active stage now reads as a white lesson list with light neutral separators and orange status/progress accents, matching the HSK reference tone.
+- Focused evidence: computed styles confirm white backgrounds for the stage, list, in-progress row and completed row; stage shadow is removed and borders use the neutral line token.
+- Fonts and typography: lesson hierarchy, weights and labels are preserved.
+- Spacing and layout rhythm: existing roadmap image header, row heights and open/close affordance remain unchanged.
+- Colors and visual tokens: pink/red surface fills are removed; `Đang học` uses the orange-soft state while the progress ring keeps the existing red-to-orange treatment.
+- Image quality and asset fidelity: course thumbnail and Himi artwork remain unchanged.
+- Copy and content: all six lessons, statuses, durations and progress values remain unchanged.
+
+## Verification
+
+- Primary interaction checked: stage 1 remains expanded and lesson links remain available.
+- Browser console errors: none.
+- Focused course-roadmap UI tests: 4 passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped tone update.
+
+final result: passed
+
+---
+
+# Design QA — Bài luyện viết luôn nằm gọn trong viewport
+
+- Source visual truth: `codex-clipboard-a07bea1c-ad02-44bd-9b1b-9e26338cc11c.png` (trạng thái lỗi 1914 × 806 px) và `codex-clipboard-2406d6ea-be7a-4a9a-afe1-0b28bc6f804b.png` (giao diện mục tiêu 1898 × 883 px).
+- Implementation URL: `http://localhost:3001/writing/hsk-1/hsk1-bai-01-chao-anh/practice`.
+- Viewports verified in the in-app browser: 1914 × 807, 1898 × 883, 1367 × 768 và 391 × 844 CSS px.
+- Density normalization: browser viewport override was normalized to the rendered CSS viewport before geometry comparison.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: ở 1914 × 807, khung luyện viết kết thúc tại y=737, nút thao tác tại y=645 và footer bắt đầu tại y=745; không còn phần tử bị footer che.
+- Focused evidence: ở 1898 × 883, khung luyện viết kết thúc tại y=805, nút thao tác tại y=719 và footer bắt đầu tại y=817, khớp bố cục của ảnh mục tiêu.
+- Fonts and typography: không thay đổi font, cỡ chữ hay phân cấp nội dung.
+- Spacing and layout rhythm: bảng chữ co theo chiều cao khả dụng; màn hình thấp dùng khoảng đệm và nút gọn hơn nhưng vẫn giữ nhịp dọc rõ ràng.
+- Colors and visual tokens: giữ nguyên toàn bộ palette đỏ, trắng và nền xám hiện tại.
+- Mobile behavior: trang ngoài vẫn cố định trong `100dvh`; nội dung bài học cuộn bên trong vùng workspace, footer luôn nằm trong viewport và các nút luyện tập xuất hiện trước phần thông tin chữ.
+
+## Verification
+
+- 1914 × 807: `documentScrollHeight === innerHeight`, nút thao tác không chạm footer.
+- 1898 × 883: `documentScrollHeight === innerHeight`, toàn bộ card và footer cùng nằm trong viewport.
+- 1367 × 768: kiểm tra hình học đạt, không có cuộn trang ngoài.
+- 391 × 844: trang ngoài không tràn; workspace dùng cuộn nội bộ có kiểm soát.
+- Focused writing-route test: passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this responsive containment update.
+
+final result: passed
+
+---
+
+# Design QA — Thanh điều hướng mobile trên `/videos`
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-eaac31d8-efd6-4de9-a7e8-0d1ba7e0466f.png` (trạng thái lỗi, 280 × 54 px) và `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-8281fd29-d4b8-43d8-a62a-ab1eb8924136.png` (trạng thái mục tiêu, 280 × 54 px).
+- Implementation URL: `http://localhost:3001/videos`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser at 391 × 844 CSS px; the browser capture API did not expose a filesystem path.
+- Density normalization: the source is a focused navigation crop; the implementation was judged against the matching bottom-navigation region rather than the full page.
+- State: video library loaded on mobile, practice menu closed, chatbot deferred component mounted.
+
+## Evidence and required fidelity surfaces
+
+- Full-view evidence: the video catalog remains usable and the mobile navigation stays pinned to the bottom without an overlapping floating control.
+- Focused evidence: DOM state confirms `Hôm nay` is active with `aria-current="page"`, `Luyện tập` is inactive, and the mounted chatbot widget computes to `display: none`.
+- Fonts and typography: labels, sizes, weights and five-column hierarchy are unchanged from the reference navigation.
+- Spacing and layout rhythm: the existing 72px navigation height, item spacing, top radii and shadow are preserved.
+- Colors and visual tokens: the red active token is applied only to `Hôm nay`; the remaining items use the neutral gray token.
+- Image quality and asset fidelity: navigation uses the existing Lucide icon set; no raster or replacement assets were introduced.
+- Copy and content: all five labels remain `Hôm nay`, `Luyện tập`, `Trò chơi`, `VIP`, and `Tài khoản`.
+
+## Verification
+
+- Primary state: `/videos` activates the home tab only.
+- Delayed state: chatbot remains hidden after its deferred component mounts.
+- Focused tests: 3 passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+## Comparison history
+
+- P1: `Luyện tập` was active on `/videos`, differing from the supplied target. Fixed by assigning the video-library mobile state to `Hôm nay` and excluding it from the mobile practice-active calculation.
+- P1: the chatbot launcher overlapped the mobile navigation region. Fixed by hiding the launcher on `.video-library-page` at the mobile breakpoint.
+
+No actionable P0, P1, or P2 findings remain for this scoped mobile navigation fix.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ box thể lệ khỏi màn chọn khóa HSK
+
+- Source visual truth: browser annotation screenshot on `/games` at 1525 × 901 CSS px, targeting the box labelled `Thể lệ mỗi lượt chơi`.
+- Implementation URL: `http://localhost:3001/games`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the browser capture API did not expose a filesystem path.
+- State: `Luyện chém từ` course-selection screen with all six HSK choices visible.
+
+## Evidence and required fidelity surfaces
+
+- The targeted `.writing-course-facts` box is absent from the slice-game course-selection screen.
+- The heading `Chọn khóa HSK để chơi`, mascot artwork, six HSK course cards and bottom status message remain present.
+- DOM inspection reports `factsCount: 0` and `courseButtons: 6`.
+- No shared `.writing-course-facts` styling was removed, so other game experiences that still use the component remain unaffected.
+
+## Verification
+
+- Browser visual inspection at desktop size: passed.
+- Focused rendered-HTML test: passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ breadcrumb khỏi trang Trò chơi
+
+- Source visual truth: browser annotation screenshot in the current task targeting `div#learner-main-content > div.client-breadcrumb-bar` on `/games`; the annotation capture did not expose a filesystem path.
+- Implementation URL: `http://localhost:3001/games`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the capture API did not expose a filesystem path.
+- Viewport and density: source and implementation use 1525 × 901 CSS px at device scale 1; no density normalization was required.
+- State: game journey map loaded with `Luyện chém từ` as the current station.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the requested `Học tập / Trò chơi` breadcrumb row is absent and the journey map begins directly below the persistent top header.
+- Focused DOM evidence: `.client-breadcrumb-bar` count is `0`, `.game-journey-stage` count remains `1`, and the game dashboard top begins at approximately 88px.
+- Fonts and typography: no surviving text style, weight or hierarchy changed.
+- Spacing and layout rhythm: the removed row leaves no blank band; the map reflows upward naturally.
+- Colors and visual tokens: the map, navigation and active-game colors remain unchanged.
+- Image quality and asset fidelity: all original journey artwork remains unchanged and fully rendered.
+- Copy and content: only the requested breadcrumb text was removed from `/games`.
+
+## Verification
+
+- Browser visual inspection at 1525 × 901: passed.
+- Client breadcrumb test suite: 5 passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ hero khỏi trang cấp độ Luyện gõ
+
+- Source visual truth: browser annotation screenshot in the current task targeting `header.typing-lesson-hero` on `/typing/hsk-1`; the annotation capture did not expose a filesystem path.
+- Implementation URL: `http://localhost:3001/typing/hsk-1`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the capture API did not expose a filesystem path.
+- Viewport and density: source is 1525 × 901 CSS px; implementation was inspected at 1140 × 901 CSS px at device scale 1. The changed region is responsive and was compared by DOM identity and layout behavior rather than pixel position.
+- State: HSK 1 typing lesson list with all 15 lessons loaded.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the requested hero is absent and the lesson-card grid begins directly below the retained `Các cấp độ / HSK 1` breadcrumb.
+- Focused DOM evidence: `.typing-lesson-hero` count is `0`, `.typing-lesson-card` count remains `15`, and the list begins at approximately 192px in the inspected viewport.
+- Fonts and typography: all lesson-card and breadcrumb typography remains unchanged.
+- Spacing and layout rhythm: the lesson grid reflows upward with no placeholder or empty hero space.
+- Colors and visual tokens: cards, badges and action buttons retain the current Himi palette.
+- Image quality and asset fidelity: this scoped removal changes no image assets.
+- Copy and content: only hero-specific copy and its preview-character strip were removed; lesson content is intact.
+
+## Verification
+
+- Browser visual inspection: passed.
+- Focused typing-level test: passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ hero khỏi trang cấp độ Luyện viết
+
+- Source visual truth: browser annotation screenshot in the current task targeting `header.writing-lesson-hero` on `/writing/hsk-1`; the annotation capture did not expose a filesystem path.
+- Implementation URL: `http://localhost:3001/writing/hsk-1`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the capture API did not expose a filesystem path.
+- Viewport and density: source is 1525 × 901 CSS px; implementation was inspected at 1706 × 960 CSS px at device scale 1. The scoped responsive region was compared using DOM identity and layout behavior.
+- State: HSK 1 writing lesson list with all 15 lessons loaded.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the requested hero is absent and the lesson-card grid begins directly below the retained `Các cấp độ / HSK 1` breadcrumb.
+- Focused DOM evidence: `.writing-lesson-hero` count is `0`, `.writing-lesson-card` count remains `15`, and the list starts at approximately 240px in the inspected viewport.
+- Fonts and typography: all lesson-card and breadcrumb typography remains unchanged.
+- Spacing and layout rhythm: hero-specific separation was removed so the lesson grid reflows upward without a placeholder gap.
+- Colors and visual tokens: cards, character chips and action buttons retain the current Himi palette.
+- Image quality and asset fidelity: this scoped removal changes no image assets.
+- Copy and content: only hero-specific copy and its preview-character strip were removed; all lesson content remains intact.
+
+## Verification
+
+- Browser visual inspection: passed.
+- Focused writing-route test: passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Căn giữa box luyện viết
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-afb0f5dc-5083-4083-9ed8-166e598bf046.png`.
+- Source dimensions: 772 × 642 px.
+- Implementation URL: `http://localhost:3001/writing/hsk-1/hsk1-bai-01-chao-anh/practice`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the capture API did not expose a filesystem path.
+- Viewport and density: implementation inspected at 1706 × 960 CSS px at device scale 1.
+- States checked: `Xem nét` and `Tô theo`.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the mode tabs, character board, progress bar and action buttons form one centered vertical group inside the practice card.
+- Focused DOM evidence: the practice card computed `align-items: center`; the practice, tabs, board, feedback and actions all share an x-center of approximately 736.83px in both inspected modes.
+- Typography: no font, size, weight or line-height was changed.
+- Spacing and layout rhythm: existing vertical spacing is preserved while child alignment is made explicit and stable.
+- Colors and visual tokens: no color token changed.
+- Image quality and assets: no image asset changed.
+- Copy and behavior: no copy or writing interaction changed.
+
+## Verification
+
+- Browser visual inspection in `Xem nét`: passed.
+- Browser visual inspection in `Tô theo`: passed.
+- Focused writing-route test: passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped centering change.
+
+final result: passed
+
+---
+
+# Design QA — Bỏ banner trang Luyện viết
+
+- Source visual truth: browser annotation screenshot in the current task targeting `header.himi-section-banner.is-immersive` on `/writing`; the annotation capture did not expose a filesystem path.
+- Implementation URL: `http://localhost:3001/writing`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the capture API did not expose a filesystem path.
+- Source viewport: 1140 × 901 CSS px from the browser annotation.
+- Implementation viewport: 1706 × 960 CSS px at device pixel ratio 0.9375.
+- State: writing catalog with all six HSK level cards loaded.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the annotated hero banner is absent and `Bài luyện viết theo HSK` now begins directly below the persistent application header.
+- Focused DOM evidence: `.himi-section-banner` count is `0`, `.writing-topic-card` count remains `6`, and the topic section begins at approximately 114px with no horizontal overflow.
+- Fonts and typography: the HSK section heading and all card typography remain unchanged.
+- Spacing and layout rhythm: banner-specific spacing was removed; the catalog section now uses a zero top margin on desktop and mobile breakpoints.
+- Colors and visual tokens: no palette or semantic color changed.
+- Image quality and asset fidelity: the removed banner was the only affected image surface; card content and icons remain intact.
+- Copy and content: only the banner title and description were removed; all HSK level content remains present.
+
+## Findings and comparison history
+
+- Initial P2: removing only the component would leave banner-oriented top spacing at responsive breakpoints.
+- Fix: removed the banner component, its unused data/import, and the catalog-specific banner spacing rules; normalized the topic section top margin to zero.
+- Post-fix evidence: the browser capture shows the heading and six cards reflowed upward without a blank placeholder or overflow.
+
+## Verification
+
+- Browser visual inspection: passed.
+- Writing catalog banner test: passed.
+- Focused writing-route test: passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped removal.
+
+final result: passed
+
+---
+
+# Design QA — Liên kết quay lại trang cấp độ Luyện gõ
+
+- Source visual truth: browser annotation on `/typing/hsk-1` plus the attached 256 × 92 px reference crop showing `‹ Về trang Lộ trình`; the attachment API did not expose a filesystem path.
+- Implementation URL: `http://localhost:3001/typing/hsk-1`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the capture API did not expose a filesystem path.
+- Source viewport: 1140 × 901 CSS px for the annotated page.
+- Implementation viewport: 1706 × 960 CSS px at device pixel ratio 0.9375.
+- State: HSK 1 lesson list with all 15 lesson cards loaded.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the full-width shared breadcrumb bar is absent and a compact back link now sits inside the page content above the lesson grid.
+- Focused region comparison: the new link uses a left chevron, 16px text, 700 weight, dark neutral color and a 6px icon gap, matching the reference's compact single-line treatment.
+- Focused DOM evidence: `.client-breadcrumb-bar` count is `0`; the link text is `Về trang Luyện gõ`, its href is `/typing`, and its measured size is approximately 153 × 36px.
+- Fonts and typography: the link inherits the existing app font and uses the reference-like 16px/700 hierarchy; lesson-card typography is unchanged.
+- Spacing and layout rhythm: the link occupies one 36px row with a 16px gap before the lesson grid; no empty breadcrumb container remains.
+- Colors and visual tokens: neutral text uses `#3f4b50`, with the existing Himi red token reserved for hover/focus feedback.
+- Image quality and asset fidelity: no raster assets were changed; the chevron comes from the project's existing Lucide icon library.
+- Copy and content: the label is contextualized to `Về trang Luyện gõ`; all HSK lesson content remains intact.
+
+## Findings and comparison history
+
+- Initial P2: the shared breadcrumb displayed two labels and occupied a full-width page bar, unlike the compact reference link.
+- Fix: suppressed the shared breadcrumb for typing level pages and replaced the hidden local breadcrumb with one accessible back link.
+- Post-fix evidence: the browser capture shows the compact link in the intended location, and activating it navigates successfully to `/typing`.
+
+## Verification
+
+- Browser visual inspection: passed.
+- Back-link interaction to `/typing`: passed.
+- Client breadcrumb tests: 5 passed.
+- Focused typing-level test: passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped navigation change.
+
+final result: passed
+
+---
+
+# Design QA — Liên kết quay lại trang bài học Luyện gõ
+
+- Source visual truth: browser annotation on `/typing/hsk-1/hsk1-l1` plus the attached 256 × 92 px reference crop showing `‹ Về trang Lộ trình`; the attachment API did not expose a filesystem path.
+- Implementation URL: `http://localhost:3001/typing/hsk-1/hsk1-l1`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the capture API did not expose a filesystem path.
+- Source viewport: 1140 × 901 CSS px for the annotated page.
+- Implementation viewport: 1706 × 960 CSS px at device pixel ratio 0.9375.
+- State: HSK 1 lesson 1 choice screen with word and sentence practice cards.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the full-width `HSK 1 / Bài học` breadcrumb is gone and one compact back link appears above the lesson hero.
+- Focused region comparison: the link uses the same left chevron, 16px/700 typography, neutral color and spacing as the supplied reference and the preceding HSK-level implementation.
+- Focused DOM evidence: `.client-breadcrumb-bar` count is `0`, `.typing-level-back a` count is `1`, and the link measures approximately 132 × 36px with text `Về trang HSK 1` and href `/typing/hsk-1`.
+- Fonts and typography: no hero or card typography changed; the new link inherits the app font and shared back-link styling.
+- Spacing and layout rhythm: the link occupies one compact row, followed by a 16px gap before the hero; the previous duplicate navigation row is removed.
+- Colors and visual tokens: the neutral back-link color and Himi red hover/focus token match the established pattern.
+- Image quality and asset fidelity: no raster assets changed; the existing Lucide chevron is used.
+- Copy and content: the contextual label points to the exact previous level page; lesson title, practice choices and tip remain intact.
+
+## Findings and comparison history
+
+- Initial P2: after exposing route-local navigation, the detail page temporarily showed both the shared breadcrumb and its older local breadcrumb.
+- Fix: suppressed the shared breadcrumb for non-session typing pages and converted the local row into the single reference-style back link.
+- Post-fix evidence: the browser capture shows exactly one link, no duplicate breadcrumb, no horizontal overflow, and successful navigation to `/typing/hsk-1`.
+
+## Verification
+
+- Browser visual inspection: passed.
+- Back-link interaction to `/typing/hsk-1`: passed.
+- Client breadcrumb tests: 5 passed.
+- Focused typing lesson test: passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped navigation change.
+
+final result: passed
+
+---
+
+# Design QA — Liên kết quay lại trang cấp độ Luyện viết
+
+- Source visual truth: browser annotation on `/writing/hsk-1` plus the attached 256 × 92 px reference crop showing `‹ Về trang Lộ trình`; the attachment API did not expose a filesystem path.
+- Implementation URL: `http://localhost:3001/writing/hsk-1`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the capture API did not expose a filesystem path.
+- Source viewport: 1140 × 901 CSS px for the annotated page.
+- Implementation viewport: 1140 × 901 CSS px at device pixel ratio 0.9375.
+- State: HSK 1 lesson list with all 15 lesson cards loaded.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the full-width shared breadcrumb bar is absent and a compact back link now sits inside the page content above the lesson grid.
+- Focused region comparison: the new link uses a left chevron, 16px text, 700 weight, dark neutral color and a 6px icon gap, matching the reference's compact single-line treatment.
+- Focused DOM evidence: `.client-breadcrumb-bar` count is `0`; `.writing-level-back a` count is `1`; the link text is `Về trang Luyện viết`, its href is `/writing`, and its measured size is approximately 161 × 36px.
+- Fonts and typography: the link inherits the existing app font and uses the reference-like 16px/700 hierarchy; lesson-card typography is unchanged.
+- Spacing and layout rhythm: the link occupies one 36px row with a 16px gap before the lesson grid; no empty breadcrumb container remains.
+- Colors and visual tokens: neutral text uses `#3f4b50`, with the existing Himi red token reserved for hover/focus feedback.
+- Image quality and asset fidelity: no raster assets were changed; the chevron comes from the project's existing Lucide icon library.
+- Copy and content: the label is contextualized to `Về trang Luyện viết`; all 15 HSK 1 lesson cards remain intact.
+
+## Findings and comparison history
+
+- Initial P2: the shared breadcrumb displayed two labels and occupied a full-width page bar, unlike the compact reference link.
+- Fix: suppressed the shared breadcrumb for writing level pages and replaced the local breadcrumb with one accessible back link.
+- Post-fix evidence: the browser capture shows the compact link in the intended location, no horizontal overflow, and successful navigation to `/writing`.
+
+## Verification
+
+- Browser visual inspection: passed.
+- Back-link interaction to `/writing`: passed.
+- Client breadcrumb tests: 5 passed.
+- Focused writing route test: passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped navigation change.
+
+final result: passed
+
+---
+
+# Design QA — Header điều hướng mobile dùng chung
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-c03c9edb-e875-41ec-bc5d-28d89e0b4098.png`, a 414 × 62 px crop showing a warm-white mobile header with back chevron, centered title and notification bell.
+- Implementation URL: `http://localhost:3001/typing/hsk-1`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the screenshot API did not expose a filesystem path.
+- Implementation capture: 675 × 1500 px JPEG; browser-reported viewport 520 × 1125 CSS px at device pixel ratio 0.75.
+- Density normalization: the focused header region was compared by its CSS geometry and proportional layout because the source is a component crop while the implementation capture includes the full page.
+- State: authenticated HSK 1 typing lesson selection on a phone layout, with the shared bottom navigation visible.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the lesson grid begins immediately below one sticky header, while the bottom navigation remains fully visible and the page has no horizontal overflow.
+- Focused region comparison: source and implementation both use three equal control tracks, a left chevron, centered bold title and right bell on a warm-white surface with a fine coral top edge.
+- Focused DOM evidence: `.learner-mobile-header` count is `1`; title is `Chọn bài luyện gõ`; back href is `/typing`; the header measures approximately 507 × 56 CSS px and both icon targets measure 44 × 44 CSS px.
+- Fonts and typography: the shared app font uses a 21px, 790-weight centered title with single-line ellipsis; this preserves the reference's compact, strong hierarchy across longer route titles.
+- Spacing and layout rhythm: symmetric 48px side tracks keep the title optically centered; safe-area padding, a 56px base height and 44px touch targets preserve phone usability.
+- Colors and visual tokens: warm white `rgba(255, 250, 247, .94)`, dark neutral text and the existing Himi red token match the reference and app palette.
+- Image quality and asset fidelity: no raster artwork is used in the header; both controls use the project's Lucide icon library at the measured reference-like scale.
+- Copy and content: route-aware titles describe the current screen (`Chọn bài luyện gõ`, `Chọn bài luyện viết`, `Chi tiết lộ trình`, `Video`, `Hồ sơ`), while back links point to each screen's deterministic parent.
+
+## Findings and comparison history
+
+- Initial P1: learner pages used inconsistent page-local back rows and most screens lacked the centered current-page title and bell shown in the reference.
+- Fix: promoted the existing account header pattern into one shell-level mobile header, added route-aware title/parent mapping, removed the duplicate account header, and hid legacy breadcrumb/back rows on phones.
+- Initial P1 interaction regression: the pending-navigation preview could update the back href during the click and jump two levels to Home.
+- Fix: bound header content to the committed pathname rather than the pending visual route.
+- Post-fix evidence: activating the header back control on `/typing/hsk-1` reaches `/typing`; browser checks on Home, Account, Writing HSK 1, course detail and Videos each show exactly one header, the expected title/back link and no overflow.
+
+## Verification
+
+- Source and implementation compared in one browser evidence pass: passed.
+- Primary back interaction `/typing/hsk-1` → `/typing`: passed.
+- Route coverage checks on five additional learner screens: passed.
+- Browser console errors: none.
+- Mobile header and breadcrumb tests: 7 passed.
+- Home responsive tests: 4 passed.
+- Focused learner-navigation test: passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+Focused full-screen learning sessions retain their dedicated exit controls and intentionally suppress the shared header to avoid duplicated navigation.
+
+No actionable P0, P1, or P2 findings remain for this scoped mobile navigation change.
+
+final result: passed
+
+---
+
+# Design QA — Header Trang chủ mobile
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-c5a9c2f2-3ef6-4c3e-a523-b1f1ffe162c2.png`, a 270 × 52 px crop showing the Himi logo and wordmark on the left and a notification bell in a pale circular surface on the right.
+- Implementation URL: `http://localhost:3001/`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the screenshot API did not expose a filesystem path.
+- Implementation capture: 675 × 1500 px JPEG; browser-reported viewport 520 × 1125 CSS px at device pixel ratio 0.75.
+- Density normalization: the source crop and the focused 52px implementation header were compared proportionally using the measured CSS geometry; the full implementation capture was also reviewed for page context and responsive behavior.
+- State: authenticated Trang chủ on the mobile learner layout with the shared bottom navigation visible.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the home content starts directly below the compact header, the persistent bottom navigation remains visible and the body has no horizontal overflow (`bodyClientWidth = bodyScrollWidth = 507px`).
+- Focused region comparison: source and implementation were displayed in the same comparison pass; both show one white 52px header, compact brand lockup at left and a pale-pink circular bell at right.
+- Focused DOM evidence: `.learner-mobile-header.is-home` count is `1`; header is approximately 507 × 52 CSS px, logo 28 × 28px, wordmark 71.8 × 13px and bell target 36 × 36px.
+- Fonts and typography: the existing Himi wordmark component renders compact 13px/800 text with red `Himi` and black `Chinese`, preserving the reference hierarchy and preventing wrapping.
+- Spacing and layout rhythm: 6px left inset, 6px brand gap and 10px right inset closely match the compact crop; vertical centering is exact within the 52px header.
+- Colors and visual tokens: white header, subtle warm border, Himi red wordmark accent and `#fff3ef` bell surface match the supplied palette without introducing a desktop-style shadow.
+- Image quality and asset fidelity: the real existing Himi face asset and production `BrandWordmark` component are reused; the bell uses the project's Lucide icon rather than a placeholder or custom approximation.
+- Copy and content: the mobile home header now reads only `Himi Chinese`; the unrelated centered `Học tập` title is intentionally omitted on Home while all non-home mobile headers keep their route-aware title and back navigation.
+
+## Findings and comparison history
+
+- Initial P2: the shared mobile header rendered the generic centered title `Học tập`, which did not match the supplied home-specific brand lockup.
+- Fix: added a Home-only shell variant with a linked Himi logo/wordmark on the left and a 36px pale circular notification control on the right; non-home route headers remain unchanged.
+- Post-fix visual evidence: the focused comparison matches the 52px reference height and left/right visual anchors; the full mobile capture confirms correct integration with the Home content and bottom navigation.
+
+## Verification
+
+- Source and implementation compared in one browser evidence pass: passed.
+- Notification interaction `/` → `/notifications`: passed.
+- Browser console errors after returning to Home: none.
+- Home/mobile header tests: 6 passed.
+- Scoped ESLint and `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped home-header change.
+
+final result: passed
+
+---
+
+# Design QA — Đồng bộ tone màu lộ trình Văn phòng
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-cd45b270-6968-4ce8-a10c-a3ab6aef7c3e.png`, a 1320 × 456 px HSK topic reference using white surfaces, cool-neutral status text and quiet gray dividers with orange reserved for the topic marker.
+- Original implementation reference: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-10f147ce-a92a-4e87-942a-a62d3dc30129.png`, a 904 × 506 px crop of the office roadmap stage before the palette update.
+- Implementation URL: `http://localhost:3001/courses/van-phong-hanh-chinh`.
+- Browser-rendered implementation: captured and inspected in the Codex in-app browser; the screenshot API did not expose a filesystem path.
+- Implementation capture: 1728 × 1080 px; browser-reported viewport 1706 × 960 CSS px at device pixel ratio 0.9375.
+- Density normalization: the full-page implementation was judged together with the source image, then the active stage was measured as an 894 × 484 CSS px focused region; structural differences were intentionally excluded because the request was scoped to color.
+- State: authenticated office roadmap with the first stage expanded and its six lessons visible.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the roadmap keeps the original office layout, artwork and information hierarchy while removing the previous orange tint from non-accent surfaces.
+- Focused region comparison: the source and post-fix implementation were displayed in the same evidence pass; both now use white cards and lesson rows, quiet gray dividers, dark lesson titles and muted gray-blue status text.
+- Fonts and typography: unchanged intentionally; weight, hierarchy, wrapping and truncation remain consistent with the established roadmap component and the scope was color-only.
+- Spacing and layout rhythm: unchanged intentionally; card dimensions, row heights, radii, image slot and stage spacing remain stable.
+- Colors and visual tokens: active and available cards resolve to white; borders resolve to `rgb(232, 225, 222)`; status text resolves to `rgb(98, 91, 88)`; orange remains only on the active marker/progress ring and the Himi-red token is used for expand chevrons.
+- Image quality and asset fidelity: all existing office/penguin artwork is preserved at its original crop and resolution; no placeholders or generated replacements were introduced.
+- Copy and content: all Vietnamese lesson titles, times, progress values and statuses remain unchanged.
+
+## Findings and comparison history
+
+- Initial P2: available stage cards, stage pills, lesson actions, dividers and connecting rails were tinted orange, making the office roadmap visually warmer and busier than the neutral HSK reference.
+- Fix: remapped stage surfaces and borders to `--himi-white`/`--himi-line`, status text to `--himi-muted`, hover fill to a 2% neutral mix, connecting rails to the shared line token and expand arrows to `--himi-red`.
+- Post-fix visual evidence: the active and available stages now share white surfaces and neutral borders; `Mở bài`, `Đã hoàn thành`, `Đang học` and `Sẵn sàng` use the same muted tone while the active orange marker remains the single dominant accent.
+
+## Verification
+
+- Source and implementation compared in one browser evidence pass: passed.
+- Expand/collapse interaction on an available stage: passed; the page returned to one open stage.
+- Horizontal overflow: none.
+- Browser console errors: none.
+- Focused roadmap tests: 2 passed.
+- Scoped `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped palette update.
+
+final result: passed
+
+---
+
+# Design QA — Đồng bộ khung full-width cho Lộ trình, Luyện nghe và Video
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-4d1c31c7-a016-4af2-8f4b-61b5b5fb61d0.png`, a 1648 × 795 px desktop reference showing the wide Luyện gõ catalog with approximately 30px outer gutters, a full-width hero and a three-column card grid.
+- Supporting current-state references: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-1839c6a6-63fc-497b-b971-64c2e6784a15.png` and `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-fef4b898-9244-4339-9419-6e295a278517.png`.
+- Implementation URLs: `http://localhost:3001/courses`, `http://localhost:3001/listening`, and `http://localhost:3001/videos`.
+- Browser-rendered implementations: captured and inspected in the Codex in-app browser; the screenshot API did not expose filesystem paths.
+- Implementation captures: 1728 × 1080 px each; browser-reported viewport 1706 × 960 CSS px at device pixel ratio 0.9375.
+- Density normalization: the 1648px source and 1706px browser viewport were compared proportionally; the target was the shared content-frame ratio and outer gutter rather than page-specific artwork or copy.
+- State: authenticated desktop catalogs with default filters selected and loaded content visible.
+
+## Evidence and required fidelity surfaces
+
+- Full-view comparison: the source and all three implementations were displayed in the same browser evidence pass. Course, listening and video content now occupy the same wide frame as the typing reference instead of stopping at legacy 1180–1320px caps.
+- Focused region comparison: DOM measurements confirm the course heading/grid, listening hero/browser and video shell/hero/grid each span 1436.8 CSS px, from x=236 to x=1672.8, leaving exactly 20px on each side of the 1476.8px post-sidebar content region.
+- Fonts and typography: unchanged intentionally; existing families, weights, sizes, line heights and page-specific hierarchies remain intact because the request is strictly about full-screen composition.
+- Spacing and layout rhythm: all three catalogs use `min(1480px, calc(100% - 40px))` on wide desktop, matching the typing catalog frame. Existing vertical rhythm, card gaps, radii and responsive breakpoints are preserved.
+- Colors and visual tokens: unchanged intentionally; every page retains its established palette and semantic states.
+- Image quality and asset fidelity: all existing Himi hero art and catalog thumbnails are reused at their original quality and crop behavior; the wider cards expose more usable image area without stretching or replacing assets.
+- Copy and content: unchanged; titles, descriptions, counts, categories and lesson/video names remain the same.
+
+## Findings and comparison history
+
+- Initial P2: the course catalog was capped at 1180px, while listening and video were capped at 1220px and 1320px; at the reference viewport this left visibly larger side margins and made hero/filter/grid regions feel smaller than the typing reference.
+- Fix: introduced a shared `learner-full-width-catalog` modifier and scoped each catalog's desktop container to the typing reference width. Listening also releases its old outer horizontal padding on wide screens. Detail/study routes and viewports below 1121px are intentionally unaffected.
+- Post-fix visual evidence: all six measured primary regions resolve to 1436.8px at the 1706px viewport, the card grids remain three columns, and `document.documentElement.scrollWidth` equals the 1692px client surface with no horizontal overflow.
+
+## Verification
+
+- Source and implementations compared in one browser evidence pass: passed.
+- Course filter `Văn phòng`: passed; only `Văn phòng & hành chính` remained.
+- Video filter `Ăn uống`: passed; result count updated to 3.
+- Listening tab `Độc thoại`: passed; active tab and lesson heading updated.
+- Browser console errors after interactions: none.
+- Responsive protection: the full-width rule is desktop-only (`min-width: 1121px`); existing tablet/mobile widths remain in control. A 520px video capture retained the mobile header, single-column cards and no horizontal overflow.
+- Focused catalog tests: passed.
+- Scoped ESLint: no errors; one pre-existing internal-navigation warning remains in `components/listening-catalog-studio.tsx`.
+- Scoped `git diff --check`: passed.
+
+No actionable P0, P1, or P2 findings remain for this scoped full-width layout change.
 
 final result: passed

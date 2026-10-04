@@ -21,7 +21,7 @@ export function CourseGridSkeleton() {
 }
 
 export function CoursesPageSkeleton() {
-  return <main aria-busy="true" className="course-library-page hsk-curriculum-page">
+  return <main aria-busy="true" className="course-library-page hsk-curriculum-page learner-full-width-catalog">
     <span className="sr-only" role="status">Đang tải danh sách lộ trình…</span>
     <header aria-hidden="true" className="section-shell industry-course-heading course-catalog-heading course-catalog-heading-skeleton">
       <span className="skeleton-block" />

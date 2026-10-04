@@ -4,7 +4,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 
-test("writing catalog uses the shared animated Himi banner", async (t) => {
+test("writing catalog starts directly with the HSK level list", async (t) => {
   const server = await createServer({
     appType: "custom",
     configFile: false,
@@ -17,7 +17,7 @@ test("writing catalog uses the shared animated Himi banner", async (t) => {
   const { default: WritingPage } = await server.ssrLoadModule("/app/writing/page.tsx");
   const html = renderToStaticMarkup(React.createElement(WritingPage));
 
-  assert.match(html, /class="himi-section-banner is-immersive is-writing/);
-  assert.match(html, /class="himi-section-banner-mascot himi-immersive-banner-mascot himi-writing-banner-mascot"/);
-  assert.doesNotMatch(html, /writing-catalog-hero-mark/);
+  assert.match(html, /id="writing-topic-heading">Bài luyện viết theo HSK/);
+  assert.doesNotMatch(html, /himi-section-banner/);
+  assert.doesNotMatch(html, /Chọn bài đã học/);
 });

@@ -936,6 +936,17 @@
   background: var(--listening-cream);
 }
 
+@media (min-width: 1121px) {
+  .listening-catalog-studio.learner-full-width-catalog:not(.listening-catalog-detail-page) {
+    padding-inline: 0;
+  }
+
+  .listening-catalog-studio.learner-full-width-catalog:not(.listening-catalog-detail-page) .listening-redesign-hero,
+  .listening-catalog-studio.learner-full-width-catalog:not(.listening-catalog-detail-page) .listening-catalog-browser {
+    width: min(1480px, calc(100% - 40px));
+  }
+}
+
 .listening-catalog-studio:not(.listening-catalog-detail-page) .listening-mode-shell,
 .listening-redesign-hero {
   width: min(1220px, 100%);

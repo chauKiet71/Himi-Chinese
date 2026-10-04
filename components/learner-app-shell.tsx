@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type MouseEvent, type ReactNode, type SyntheticEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   ArrowRight,
   AudioLines,
@@ -30,6 +30,7 @@ import { BrandMark, BrandWordmark } from "@/components/brand-logo";
 import { ClientBreadcrumb } from "@/components/client-breadcrumb";
 import { LogoutForm } from "@/components/logout-form";
 import { getInternalNavigationHref } from "@/lib/navigation-progress";
+import { getMobilePageHeader } from "@/lib/mobile-page-header";
 
 type LearnerShellUser = {
   displayName: string;
@@ -120,6 +121,7 @@ export function LearnerAppShell({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [pendingHref, setPendingHref] = useState<string | null>(null);
   const [routeProgressCompleting, setRouteProgressCompleting] = useState(false);
   const [railExpanded, setRailExpanded] = useState(true);
@@ -319,10 +321,12 @@ export function LearnerAppShell({
   const routeArrived = Boolean(pendingHref && pendingHref === pathname);
   const routeProgressActive = navigating || (routeArrived && !routeProgressCompleting);
   const visualPathname = navigating && pendingHref ? pendingHref : pathname;
+  const mobilePageHeader = getMobilePageHeader(pathname, searchParams.get("view"));
   const practiceSectionActive = learnerPracticeItems.some(({ matches }) => matches(visualPathname));
   const practiceTriggerActive = practiceSectionActive;
-  const mobilePracticeActive = mobilePracticeItems.some(({ matches }) => matches(visualPathname));
-  const mobileHomeActive = visualPathname === "/";
+  const mobileVideoLibraryActive = visualPathname === "/videos";
+  const mobilePracticeActive = !mobileVideoLibraryActive && mobilePracticeItems.some(({ matches }) => matches(visualPathname));
+  const mobileHomeActive = visualPathname === "/" || mobileVideoLibraryActive;
   const mobileGamesActive = visualPathname.startsWith("/games");
   const mobileVipActive = visualPathname.startsWith("/vip");
   const mobileAccountActive = visualPathname.startsWith("/account");
@@ -543,6 +547,42 @@ export function LearnerAppShell({
         </div>
       </header>
 
+      <header className={`learner-mobile-header ${pathname === "/" ? "is-home" : ""}`.trim()}>
+        {pathname === "/" ? <Link
+          aria-label="Himi Chinese - Trang chủ"
+          className="learner-mobile-header-brand"
+          href="/"
+          prefetch={false}
+        >
+          <BrandMark priority variant="face" />
+          <BrandWordmark />
+        </Link> : <>
+          {mobilePageHeader.backHref ? <Link
+            aria-label={`Quay lại từ ${mobilePageHeader.title}`}
+            className="learner-mobile-header-back"
+            href={mobilePageHeader.backHref}
+            onClick={(event) => beginRoute(event, mobilePageHeader.backHref!)}
+            onPointerEnter={() => prepareRoute(mobilePageHeader.backHref!)}
+            prefetch={false}
+          >
+            <ChevronLeft aria-hidden="true" size={26} strokeWidth={2.2} />
+          </Link> : <span aria-hidden="true" className="learner-mobile-header-placeholder" />}
+          <strong aria-current="page">{mobilePageHeader.title}</strong>
+        </>}
+        <Link
+          aria-label={user?.unreadNotificationCount ? `${user.unreadNotificationCount} thông báo chưa đọc` : "Mở thông báo"}
+          aria-current={visualPathname === "/notifications" ? "page" : undefined}
+          className={`learner-mobile-header-notifications ${user?.unreadNotificationCount ? "has-notifications" : ""}`.trim()}
+          href={notificationsHref}
+          onClick={(event) => beginRoute(event, notificationsHref)}
+          onPointerEnter={() => prepareRoute(notificationsHref)}
+          prefetch={false}
+        >
+          <Bell aria-hidden="true" size={23} strokeWidth={2} />
+          {user?.unreadNotificationCount ? <span aria-hidden="true">{Math.min(user.unreadNotificationCount, 99)}</span> : null}
+        </Link>
+      </header>
+
       <div
         aria-hidden="true"
         className={`route-transition-progress ${routeProgressActive ? "active" : ""} ${routeProgressCompleting ? "complete" : ""}`.trim()}
@@ -563,7 +603,7 @@ export function LearnerAppShell({
             aria-controls="mobile-practice-menu"
             aria-expanded={practiceMenuOpen}
             aria-label="Mở các nội dung luyện tập"
-            className={`mobile-practice-trigger ${practiceTriggerActive || mobilePracticeActive ? "active" : ""}`.trim()}
+            className={`mobile-practice-trigger ${mobilePracticeActive ? "active" : ""}`.trim()}
             onClick={toggleMobilePracticeMenu}
             type="button"
           >

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, BookOpen, Clock3, PenLine } from "lucide-react";
+import { ArrowRight, BookOpen, ChevronLeft, Clock3, PenLine } from "lucide-react";
 import { getWritingLevel, getWritingLessons, WRITING_LEVEL_IDS } from "@/lib/writing-content";
 
 type WritingLevelPageProps = {
@@ -28,28 +28,13 @@ export default async function WritingLevelPage({ params }: WritingLevelPageProps
   if (!level) notFound();
 
   const lessons = getWritingLessons(level.id);
-  const heroCharacters = lessons
-    .flatMap((lesson) => lesson.previewCharacters)
-    .filter((character, index, characters) => characters.indexOf(character) === index)
-    .slice(0, 6);
 
   return <main className="learner-dashboard writing-lesson-page">
-    <nav aria-label="Điều hướng luyện viết" className="writing-breadcrumbs">
-      <Link href="/writing"><ArrowLeft aria-hidden="true" size={16} /> Các cấp độ</Link>
-      <span aria-hidden="true">/</span>
-      <strong>{level.label}</strong>
+    <nav aria-label="Quay lại trang Luyện viết" className="writing-level-back">
+      <Link href="/writing" prefetch={false}>
+        <ChevronLeft aria-hidden="true" size={17} strokeWidth={2.3} /> Về trang Luyện viết
+      </Link>
     </nav>
-
-    <header className="writing-lesson-hero">
-      <div>
-        <span>{level.label} · {lessons.length} bài có thể luyện</span>
-        <h1>Luyện viết theo từng bài học</h1>
-        <p>Chọn đúng bài bạn đang học. Kho chữ và tiến độ luyện viết sẽ được tách riêng cho từng bài.</p>
-      </div>
-      <div aria-label={`Một số chữ trong cấp độ: ${heroCharacters.join(", ")}`} className="writing-lesson-character-strip" lang="zh-CN">
-        {heroCharacters.map((character) => <span key={character}>{character}</span>)}
-      </div>
-    </header>
 
     <section className="writing-lesson-list-section" aria-label="Danh sách bài học">
       <div className="writing-lesson-grid">

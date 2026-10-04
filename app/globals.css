@@ -4301,7 +4301,13 @@ button { color: inherit; }
 /* Course roadmap */
 .course-roadmap-page { min-height: 760px; padding: 18px 0 92px; background: #fbfcfa; }
 .course-roadmap-shell { width: min(1280px, calc(100% - 44px)); }
-.course-roadmap-header { min-height: 112px; padding: 0 4px 14px; display: flex; align-items: center; justify-content: space-between; gap: 30px; border-bottom: 1px solid #e4e9e5; }
+.course-roadmap-header { min-height: 0; padding: 0 4px 14px; display: flex; align-items: flex-start; justify-content: flex-start; border-bottom: 1px solid #e4e9e5; }
+.course-roadmap-back { width: fit-content; margin-bottom: 7px; display: inline-flex; align-items: center; gap: 6px; color: #3f4b50; font-size: 13px; font-weight: 700; line-height: 1.3; }
+.course-roadmap-back-action { display: inline-flex; align-items: center; gap: 6px; transition: color .18s ease; }
+.course-roadmap-back-context, .course-roadmap-back-separator { color: #3f4b50; }
+.course-roadmap-back:hover .course-roadmap-back-action,
+.course-roadmap-back:focus-visible .course-roadmap-back-action { color: #ff4c3b; }
+.course-roadmap-back:focus-visible { border-radius: 4px; outline: 2px solid #ff4c3b; outline-offset: 3px; }
 .course-roadmap-eyebrow { display: block; margin-bottom: 7px; color: #667a74; font-size: 13px; font-weight: 620; }
 .course-roadmap-header h1 { margin: 0; color: #10463e; font-size: clamp(29px, 3vw, 38px); font-weight: 760; line-height: 1.12; letter-spacing: -.035em; }
 .course-roadmap-progress-row { margin-top: 14px; display: grid; grid-template-columns: auto minmax(150px, 390px) auto; align-items: center; gap: 18px; color: #405a54; }
@@ -11139,7 +11145,7 @@ body:has(.learner-app-shell) > .mobile-nav {
   left: clamp(30px, 3.2vw, 52px);
   z-index: 4;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
   border: 1px solid var(--himi-line);
   border-radius: 24px;
@@ -11305,7 +11311,7 @@ body:has(.learner-app-shell) > .mobile-nav {
   color: #fff;
 }
 
-.writing-course-recommended {
+.writing-course-picker .writing-course-card > .writing-course-recommended {
   min-height: 32px;
   padding: 0 14px;
   position: absolute;

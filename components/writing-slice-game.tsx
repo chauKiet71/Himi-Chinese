@@ -6,7 +6,6 @@ import { gsap } from "gsap";
 import {
   ArrowLeft,
   ArrowRight,
-  BookOpen,
   Check,
   Heart,
   Keyboard,
@@ -145,11 +144,6 @@ export function WritingSliceGame(props: WritingSliceGameProps = {}) {
             width="966"
           />
 
-          <div className="writing-course-facts" aria-label="Thể lệ mỗi lượt chơi">
-            <span><BookOpen aria-hidden="true" size={25} /><strong>Không giới hạn</strong></span>
-            <span><Heart aria-hidden="true" size={25} /><strong>3 lần trượt liên tiếp</strong></span>
-            <span><Keyboard aria-hidden="true" size={25} /><strong>Gõ pinyin</strong></span>
-          </div>
         </section>
 
         <section className="writing-course-picker" aria-label="Chọn cấp độ HSK">

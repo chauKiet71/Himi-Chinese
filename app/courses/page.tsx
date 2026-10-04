@@ -50,7 +50,7 @@ export default async function CoursesPage({
     ? requestedLevelId
     : undefined;
 
-  return <main className="course-library-page hsk-curriculum-page">
+  return <main className={`course-library-page hsk-curriculum-page ${view === "catalog" ? "learner-full-width-catalog" : ""}`.trim()}>
     {view === "hsk" ? <CourseLibraryView authenticated={Boolean(user)} courses={[]} hskCurriculum={hskCurriculum} hskSummary={hskSummary} initialHskLevelId={initialHskLevelId} view="hsk" /> : <div id="course-catalog">
       <Suspense fallback={<CourseGridSkeleton />}><CourseCatalog userId={user?.id ?? null} /></Suspense>
     </div>}

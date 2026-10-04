@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, type CSSProperties } from "react";
 import {
+  ArrowLeft,
   BookOpen,
   Check,
   CheckSquare2,
@@ -13,7 +14,6 @@ import {
   Crown,
   Lightbulb,
   LockKeyhole,
-  RefreshCw,
 } from "lucide-react";
 import type { CourseRoadmap as CourseRoadmapModel, RoadmapLesson, RoadmapModule } from "@/lib/course-roadmap";
 import type { Course } from "@/lib/content-types";
@@ -94,6 +94,13 @@ function StageMarker({ module, index }: { module: RoadmapModule; index: number }
   </span>;
 }
 
+function formatRoadmapBreadcrumbTitle(title: string) {
+  return title
+    .split(" & ")
+    .map((segment) => `${segment.charAt(0).toLocaleUpperCase("vi-VN")}${segment.slice(1)}`)
+    .join(" & ");
+}
+
 function RoadmapStage({
   course,
   index,
@@ -150,6 +157,7 @@ export function CourseRoadmap({
   roadmap: CourseRoadmapModel;
 }) {
   const [upgradeTarget, setUpgradeTarget] = useState<VipUpgradeTarget | null>(null);
+  const breadcrumbTitle = formatRoadmapBreadcrumbTitle(course.title);
   const complete = roadmap.completedLessons === roadmap.totalLessons && roadmap.totalLessons > 0;
   const coachCopy = complete
     ? "Bạn đã hoàn thành toàn bộ lộ trình. Hãy quay lại ôn những bài cần củng cố."
@@ -161,17 +169,13 @@ export function CourseRoadmap({
     <div className="section-shell course-roadmap-shell">
       <header className="course-roadmap-header">
         <div>
-          <span className="course-roadmap-eyebrow">Lộ trình học</span>
-          <h1>Lộ trình {course.title}</h1>
-          <div className="course-roadmap-progress-row">
-            <strong>{roadmap.completedLessons} / {roadmap.totalLessons} bài</strong>
-            <span className="course-roadmap-progress-track">
-              <span style={{ width: `${roadmap.progressPercent}%` }} />
-            </span>
-            <small>{roadmap.progressPercent}%</small>
-          </div>
+          <Link className="course-roadmap-back" href="/courses">
+            <span className="course-roadmap-back-action"><ArrowLeft aria-hidden="true" size={16} /> Về trang Lộ trình</span>
+            <span aria-hidden="true" className="course-roadmap-back-separator">/</span>
+            <span className="course-roadmap-back-context">{breadcrumbTitle}</span>
+          </Link>
+          <h1 className="sr-only">Lộ trình {course.title}</h1>
         </div>
-        <Link className="course-roadmap-switch" href="/courses"><RefreshCw aria-hidden="true" size={17} /> Đổi lộ trình</Link>
       </header>
 
       <div className="course-roadmap-layout">

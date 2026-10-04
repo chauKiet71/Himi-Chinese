@@ -34,7 +34,7 @@ export function VideoLibrary({ videos }: { videos: LearningVideo[] }) {
     return matchesCategory && (!normalizedQuery || haystack.includes(normalizedQuery));
   }), [videos, category, normalizedQuery]);
 
-  return <main className="video-library-page">
+  return <main className="video-library-page learner-full-width-catalog">
     <div className="video-library-shell">
       <HimiSectionBanner
         description="Xem tình huống thật, nghe từng câu rõ hơn và luyện lại ngay trong phòng học tương tác."

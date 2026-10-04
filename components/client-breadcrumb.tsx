@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { getClientBreadcrumb } from "@/lib/client-breadcrumb";
 
 export function ClientBreadcrumb() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const breadcrumb = getClientBreadcrumb(pathname, searchParams.get("view"));
+  const breadcrumb = getClientBreadcrumb(pathname);
   if (!breadcrumb) return null;
 
   return <div className="client-breadcrumb-bar">

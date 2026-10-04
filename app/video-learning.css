@@ -19,6 +19,12 @@
   padding: 42px 0 76px;
 }
 
+@media (min-width: 1121px) {
+  .video-library-page.learner-full-width-catalog .video-library-shell {
+    width: min(1480px, calc(100% - 40px));
+  }
+}
+
 .video-library-header {
   min-height: 205px;
   padding: 24px clamp(30px, 4vw, 50px);

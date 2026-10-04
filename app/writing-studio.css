@@ -17,13 +17,10 @@
   padding: 26px 0 68px;
 }
 
-.writing-catalog-banner,
 .writing-topic-section {
   width: 100%;
   max-width: none;
 }
-
-.writing-catalog-banner { margin-inline: auto; }
 
 .writing-topic-heading > div > span,
 .writing-lesson-hero > div:first-child > span,
@@ -39,7 +36,7 @@
   text-transform: uppercase;
 }
 
-.writing-topic-section { max-width: 1480px; margin: clamp(34px, 5vw, 62px) auto 0; }
+.writing-topic-section { max-width: 1480px; margin: 0 auto; }
 .writing-topic-heading { display: flex; align-items: end; justify-content: space-between; gap: 28px; }
 .writing-topic-heading h2 { margin: 8px 0 0; color: var(--writing-ink); font-size: clamp(27px, 3vw, 42px); letter-spacing: -.035em; }
 .writing-topic-heading > p { max-width: 480px; margin: 0; color: var(--writing-muted); font-size: 14px; line-height: 1.6; }
@@ -136,10 +133,30 @@
 .writing-single-lesson-action a { transition: transform 160ms ease, box-shadow 160ms ease; }
 .writing-single-lesson-action a:hover { transform: translateY(-2px); }
 
-.writing-breadcrumbs { max-width: 1320px; margin: 0 auto 18px; display: flex; align-items: center; gap: 10px; color: #71837e; font-size: 12px; }
-.writing-breadcrumbs a { display: inline-flex; align-items: center; gap: 6px; }
-.writing-breadcrumbs a:hover { color: var(--writing-teal); }
-.writing-breadcrumbs strong { color: var(--writing-ink); }
+.writing-level-back {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  margin-bottom: 16px;
+}
+.writing-level-back a {
+  width: fit-content;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #3f4b50;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-decoration: none;
+}
+.writing-level-back a:hover { color: var(--writing-red); }
+.writing-level-back a:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid var(--writing-red);
+  outline-offset: 3px;
+}
 
 .writing-lesson-hero {
   max-width: 1320px;
@@ -188,6 +205,10 @@
 .writing-lesson-list-section {
   max-width: 1320px;
   margin: clamp(30px, 4vw, 48px) auto 0;
+}
+
+.writing-lesson-page .writing-lesson-list-section {
+  margin-top: 0;
 }
 
 .writing-lesson-list-heading {
@@ -991,7 +1012,7 @@
     width: 100%;
     margin-inline: 0;
   }
-  .writing-topic-section { margin-top: 28px; }
+  .writing-topic-section { margin-top: 0; }
   .writing-topic-heading { align-items: start; flex-direction: column; gap: 10px; }
   .writing-topic-heading h2 { font-size: clamp(26px, 8.2vw, 34px); line-height: 1.08; }
   .writing-topic-heading > p { font-size: 13px; line-height: 1.55; }
@@ -1012,8 +1033,8 @@
   .writing-lesson-card-header small { max-width: none; }
   .writing-lesson-card-footer { align-items: stretch; flex-direction: column; }
   .writing-lesson-card-footer a { width: 100%; }
-  .writing-breadcrumbs { margin-bottom: 12px; }
-  .writing-breadcrumbs a { min-height: 44px; }
+  .writing-level-back { margin-bottom: 12px; }
+  .writing-level-back a { min-height: 44px; }
   .writing-lesson-hero { min-height: 0; padding: 21px 17px; gap: 18px; border-radius: 24px; }
   .writing-lesson-hero h1 { font-size: clamp(30px, 9.5vw, 40px); line-height: 1.04; }
   .writing-lesson-hero p { margin-top: 13px; font-size: 14px; line-height: 1.55; }
@@ -1092,14 +1113,7 @@
     padding-bottom: calc(82px + env(safe-area-inset-bottom));
     padding-left: max(10px, env(safe-area-inset-left));
   }
-  .writing-catalog-banner.himi-section-banner.is-immersive {
-    min-height: 236px;
-    padding: 18px 225px 18px 18px;
-    align-items: center;
-    background-position: center;
-  }
-  .writing-catalog-banner.is-immersive .himi-section-banner-copy { max-width: 390px; }
-  .writing-topic-section { margin-top: 22px; }
+  .writing-topic-section { margin-top: 0; }
   .writing-topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .writing-lesson-hero { grid-template-columns: minmax(0, 1fr) minmax(210px, .7fr); padding: 18px; }
   .writing-lesson-character-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -1196,7 +1210,7 @@
   box-shadow: 0 12px 28px color-mix(in srgb, var(--himi-red) 28%, transparent);
 }
 
-.writing-breadcrumbs a:hover,
+.writing-level-back a:hover,
 .writing-single-lesson-copy li svg {
   color: var(--himi-red);
 }
@@ -1292,17 +1306,21 @@
 
 /* Immersive writing lesson — follows the focused, step-by-step reference flow. */
 .standalone-route-shell:has(.himi-writing-lesson-session) {
-  min-height: 100dvh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
   background: #f5f7fb;
 }
 
 body:has(.himi-writing-lesson-session) .himi-chatbot-widget { display: none; }
 
 .himi-writing-lesson-session {
-  min-height: 100dvh;
+  height: 100dvh;
+  min-height: 0;
   padding: 0;
   display: grid;
   grid-template-rows: 64px auto minmax(0, 1fr) 66px;
+  overflow: hidden;
   color: #252424;
   background: #f5f7fb;
 }
@@ -1393,15 +1411,15 @@ body:has(.himi-writing-lesson-session) .himi-chatbot-widget { display: none; }
 .himi-writing-lesson-session .himi-writing-workspace {
   width: min(840px, calc(100% - 48px));
   max-width: none;
-  height: auto;
+  height: calc(100% - 24px);
   min-height: 0;
-  max-height: calc(100% - 24px);
   margin: auto;
   align-self: center;
   display: grid;
   grid-template-columns: minmax(0, 2.85fr) minmax(180px, 1fr);
   gap: clamp(14px, 1.6vw, 20px);
   align-items: stretch;
+  overflow: hidden;
 }
 
 .himi-writing-lesson-session .himi-writing-practice {
@@ -1409,7 +1427,9 @@ body:has(.himi-writing-lesson-session) .himi-chatbot-widget { display: none; }
   padding: clamp(18px, 2.2vw, 28px);
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+  overflow: hidden;
   border-color: #dfe5ec;
   border-radius: 28px;
   background: #fff;
@@ -1418,7 +1438,7 @@ body:has(.himi-writing-lesson-session) .himi-chatbot-widget { display: none; }
 
 .himi-writing-lesson-session .himi-writing-mode-tabs {
   width: min(100%, clamp(220px, 30vw, 280px));
-  margin: 0 auto;
+  margin: 0;
   padding: 4px;
   gap: 4px;
   border-radius: 13px;
@@ -1442,13 +1462,27 @@ body:has(.himi-writing-lesson-session) .himi-chatbot-widget { display: none; }
 }
 
 .himi-writing-lesson-session .himi-writing-board-shell {
-  width: min(100%, clamp(280px, 36vw, 340px), calc(100dvh - 360px));
-  min-width: 230px;
+  width: auto;
+  height: min(100%, clamp(220px, 36vw, 340px), max(180px, calc(100dvh - 500px)));
+  min-width: 0;
+  max-width: 100%;
+  min-height: 0;
+  place-self: center;
   margin-top: clamp(14px, 2vh, 20px);
   border: 1px solid #d9e3e5;
   border-radius: 20px;
   background: #fff;
   box-shadow: none;
+}
+
+.himi-writing-lesson-session .himi-writing-feedback,
+.himi-writing-lesson-session .himi-writing-board-actions {
+  align-self: center;
+}
+
+.himi-writing-lesson-session .himi-writing-vip-lock {
+  width: 100%;
+  align-self: stretch;
 }
 
 .himi-writing-lesson-session .himi-writing-board-shell::after,
@@ -1517,17 +1551,60 @@ body:has(.himi-writing-lesson-session) .himi-chatbot-widget { display: none; }
 .himi-writing-lesson-footer .is-back:disabled { opacity: .5; cursor: default; }
 .himi-writing-lesson-footer .is-next { color: #fff; border: 1px solid var(--writing-red); background: var(--writing-red); box-shadow: 0 8px 18px rgba(255, 79, 69, .2); }
 
+@media (min-width: 621px) and (max-height: 840px) {
+  .himi-writing-lesson-session { grid-template-rows: 56px auto minmax(0, 1fr) 62px; }
+  .himi-writing-lesson-characters { margin-block: 8px; }
+  .himi-writing-lesson-characters button { width: 58px; height: 60px; flex-basis: 58px; }
+  .himi-writing-lesson-session .himi-writing-workspace { height: calc(100% - 16px); }
+  .himi-writing-lesson-session .himi-writing-practice { padding: clamp(14px, 2vh, 18px); }
+  .himi-writing-lesson-session .himi-writing-mode-tabs button { min-height: 36px; }
+  .himi-writing-lesson-session .himi-writing-board-shell {
+    height: min(100%, 320px, max(170px, calc(100dvh - 500px)));
+    margin-top: 10px;
+  }
+  .himi-writing-lesson-session .himi-writing-feedback,
+  .himi-writing-lesson-session .himi-writing-board-actions { margin-top: 6px; }
+  .himi-writing-lesson-session .himi-writing-board-actions button { min-height: 34px; }
+  .himi-writing-lesson-session .himi-writing-character-card { padding-block: 18px; }
+  .himi-writing-lesson-session .himi-writing-character-card > strong { font-size: clamp(66px, 7vw, 96px); }
+  .himi-writing-lesson-session .himi-writing-character-card p { margin-top: 12px; padding-top: 12px; }
+  .himi-writing-lesson-session .himi-writing-meta { margin-top: 12px; }
+}
+
 @media (max-width: 620px) {
-  .himi-writing-lesson-session { grid-template-rows: 56px auto auto 62px; min-height: 100dvh; }
+  .himi-writing-lesson-session { height: 100dvh; min-height: 0; grid-template-rows: 56px auto minmax(0, 1fr) 62px; }
   .himi-writing-lesson-header-inner { width: calc(100% - 28px); grid-template-columns: 30px minmax(0, 1fr) 30px; gap: 12px; }
   .himi-writing-lesson-characters { width: calc(100% - 28px); margin-block: 10px; }
   .himi-writing-lesson-characters button { width: 57px; height: 61px; flex-basis: 57px; }
-  .himi-writing-lesson-session .himi-writing-workspace { width: calc(100% - 28px); max-height: none; margin: 0 auto 14px; grid-template-columns: 1fr; }
-  .himi-writing-lesson-session .himi-writing-practice { order: 1; padding: 16px; border-radius: 22px; }
+  .himi-writing-lesson-session .himi-writing-workspace {
+    width: calc(100% - 28px);
+    height: calc(100% - 12px);
+    margin: 0 auto 12px;
+    grid-template-columns: 1fr;
+    grid-auto-rows: max-content;
+    align-content: start;
+    align-self: start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .himi-writing-lesson-session .himi-writing-practice {
+    order: 1;
+    min-height: max-content;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    border-radius: 22px;
+  }
   .himi-writing-lesson-session .himi-writing-character-info { order: 2; }
   .himi-writing-lesson-session .himi-writing-character-card { min-height: 240px; border-radius: 22px; }
-  .himi-writing-lesson-session .himi-writing-board-shell { width: min(100%, 360px); min-width: 0; }
-  .himi-writing-lesson-footer { position: sticky; bottom: 0; z-index: 8; }
+  .himi-writing-lesson-session .himi-writing-board-shell {
+    width: min(100%, 360px, max(210px, calc(100dvh - 400px)));
+    height: auto;
+    min-width: 0;
+  }
+  .himi-writing-lesson-footer { position: relative; z-index: 8; }
   .himi-writing-lesson-footer-inner { width: calc(100% - 28px); grid-template-columns: 90px minmax(0, 1fr) 100px; }
   .himi-writing-lesson-footer-inner > span small { display: none; }
 }
@@ -1540,9 +1617,7 @@ body:has(.himi-writing-lesson-session) .himi-chatbot-widget { display: none; }
     var(--himi-white);
 }
 
-.writing-lesson-page .writing-breadcrumbs { color: var(--himi-muted); }
-.writing-lesson-page .writing-breadcrumbs strong { color: var(--himi-black); }
-.writing-lesson-page .writing-breadcrumbs a:hover { color: var(--himi-red); }
+.writing-lesson-page .writing-level-back a:hover { color: var(--himi-red); }
 
 .writing-lesson-page .writing-lesson-hero {
   border: 1px solid color-mix(in srgb, var(--himi-orange) 24%, var(--himi-white));

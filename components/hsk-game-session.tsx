@@ -135,7 +135,6 @@ export function HskGameSession({ gameId, title, exitLabel, authenticated, comple
         <div className="writing-course-facts" aria-label={`Thể lệ ${title}`}>
           <span><BookOpen aria-hidden="true" size={25} /><strong>{HSK_GAME_ROUND_SIZE[gameId]} từ</strong></span>
           <span><Target aria-hidden="true" size={25} /><strong>{details.skill}</strong></span>
-          <span><Sparkles aria-hidden="true" size={25} /><strong>Bộ từ mới</strong></span>
         </div>
       </section>
 

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
 import {
@@ -190,25 +189,11 @@ export function HskCurriculumExplorer({
     setActiveTopicId((currentTopicId) => currentTopicId === nextTopic.id ? null : nextTopic.id);
   };
 
-  return <section className="section-shell hsk-curriculum" aria-labelledby="hsk-curriculum-title">
+  return <section className="section-shell hsk-curriculum" aria-label={`Lộ trình bài học ${activeLevel.label}`}>
     <header className="hsk-curriculum-heading">
       <div className="hsk-curriculum-heading-copy">
         <Link className="hsk-curriculum-back" href={catalogHref}><ChevronLeft aria-hidden="true" size={16} strokeWidth={2.2} />Về trang Lộ trình</Link>
-        <h1 id="hsk-curriculum-title">Lộ trình bài học {activeLevel.label}</h1>
       </div>
-
-      <aside className="hsk-curriculum-coach" aria-label="Lời nhắn từ Himi">
-        <p>Kiên trì<br />mỗi ngày<br />bạn nhé!</p>
-        <Image
-          alt="Himi cổ vũ bạn học mỗi ngày"
-          className="hsk-curriculum-coach-image"
-          height={170}
-          priority
-          src="/assets/brand/himi-mascot-icon-transparent.webp"
-          unoptimized
-          width={170}
-        />
-      </aside>
 
       <div className="hsk-curriculum-controls">
         <div aria-label="Chọn cấp độ HSK" className="hsk-level-tabs" role="group">

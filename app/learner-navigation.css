@@ -819,6 +819,10 @@
   transition: opacity 140ms ease;
 }
 
+.learner-mobile-header {
+  display: none;
+}
+
 .learner-app-shell .account-menu-anchor {
   position: relative;
   display: flex;
@@ -1045,7 +1049,7 @@
 }
 
 /* The shared breadcrumb replaces older route-specific breadcrumb rows. */
-.learner-app-shell :is(.writing-breadcrumbs, .typing-breadcrumbs, .hsk-learning-breadcrumb, .vsets-back, .video-detail-back) {
+.learner-app-shell :is(.hsk-learning-breadcrumb, .vsets-back, .video-detail-back) {
   display: none;
 }
 
@@ -1058,28 +1062,184 @@
 }
 
 @media (max-width: 720px) {
-  /* The account screen owns a dedicated mobile header, so the shared
-   * breadcrumb would duplicate navigation and waste vertical space. */
-  .learner-app-shell:has(.account-wallet-redesign) .client-breadcrumb-bar {
+  .learner-mobile-header {
+    min-height: calc(56px + env(safe-area-inset-top));
+    padding: env(safe-area-inset-top) max(10px, env(safe-area-inset-right)) 0 max(10px, env(safe-area-inset-left));
+    position: sticky;
+    z-index: 72;
+    top: 0;
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
+    align-items: center;
+    color: #242120;
+    border-top: 1px solid color-mix(in srgb, var(--himi-red, #ff4c3b) 28%, transparent);
+    border-bottom: 1px solid rgba(82, 65, 60, .08);
+    background: rgba(255, 250, 247, .94);
+    box-shadow: 0 5px 18px rgba(52, 36, 31, .035);
+    backdrop-filter: blur(18px) saturate(1.2);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  }
+
+  .learner-mobile-header > strong {
+    min-width: 0;
+    overflow: hidden;
+    justify-self: center;
+    font-size: 21px;
+    font-weight: 790;
+    line-height: 1.1;
+    letter-spacing: -.035em;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .learner-mobile-header.is-home {
+    min-height: calc(52px + env(safe-area-inset-top));
+    padding-right: max(10px, env(safe-area-inset-right));
+    padding-left: max(6px, env(safe-area-inset-left));
+    grid-template-columns: minmax(0, 1fr) 44px;
+    border-bottom-color: rgba(82, 65, 60, .06);
+    background: rgba(255, 255, 255, .97);
+    box-shadow: none;
+  }
+
+  .learner-mobile-header-brand {
+    width: fit-content;
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #111;
+    text-decoration: none;
+  }
+
+  .learner-mobile-header-brand .brand-mark {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    display: grid;
+    place-items: center;
+    overflow: visible;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .learner-mobile-header-brand .brand-mark img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
+
+  .learner-mobile-header-brand .brand-wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -.035em;
+    white-space: nowrap;
+  }
+
+  .learner-mobile-header-brand .brand-wordmark strong {
+    color: var(--himi-red, #ff4c3b);
+  }
+
+  .learner-mobile-header-brand .brand-wordmark span {
+    color: #111;
+  }
+
+  .learner-mobile-header.is-home .learner-mobile-header-notifications {
+    width: 36px;
+    height: 36px;
+    justify-self: end;
+    border-radius: 50%;
+    background: #fff3ef;
+  }
+
+  .learner-mobile-header.is-home .learner-mobile-header-notifications > svg {
+    width: 17px;
+    height: 17px;
+    stroke-width: 1.8;
+  }
+
+  .learner-mobile-header.is-home .learner-mobile-header-brand:hover,
+  .learner-mobile-header.is-home .learner-mobile-header-brand:active {
+    color: inherit;
+    background: transparent;
+    transform: none;
+  }
+
+  .learner-mobile-header-back,
+  .learner-mobile-header-notifications,
+  .learner-mobile-header-placeholder {
+    width: 44px;
+    height: 44px;
+  }
+
+  .learner-mobile-header-back,
+  .learner-mobile-header-notifications {
+    position: relative;
+    display: grid;
+    place-items: center;
+    color: inherit;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: color 160ms ease, background-color 160ms ease, transform 160ms ease;
+  }
+
+  .learner-mobile-header-back {
+    justify-self: start;
+  }
+
+  .learner-mobile-header-notifications {
+    justify-self: end;
+  }
+
+  .learner-mobile-header :is(a:hover, a:active) {
+    color: var(--himi-red, #ff4c3b);
+    background: color-mix(in srgb, var(--himi-red, #ff4c3b) 8%, transparent);
+  }
+
+  .learner-mobile-header a:active {
+    transform: scale(.94);
+  }
+
+  .learner-mobile-header a:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--himi-red, #ff4c3b) 30%, transparent);
+    outline-offset: 1px;
+  }
+
+  .learner-mobile-header-notifications > span {
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    position: absolute;
+    top: 5px;
+    right: 2px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    border: 2px solid #fffaf7;
+    border-radius: 999px;
+    background: var(--himi-red, #ff4c3b);
+    font-size: 8px;
+    font-weight: 850;
+    line-height: 1;
+  }
+
+  .client-breadcrumb-bar,
+  .learner-app-shell :is(.typing-level-back, .writing-level-back, .course-roadmap-back, .hsk-curriculum-back) {
     display: none;
   }
 
-  .client-breadcrumb-bar {
-    padding: 27px 5px 13px;
-  }
-
-  .client-breadcrumb {
-    min-height: 30px;
-    gap: 17px;
-    font-size: 16px;
-  }
-
-  .client-breadcrumb a {
-    gap: 10px;
-  }
-
-  .client-breadcrumb-current {
-    margin-left: -3px;
+  .learner-app-shell:has(.game-immersive-dashboard) .learner-mobile-header,
+  .learner-app-shell:has(.hsk-guided-page) .learner-mobile-header,
+  .learner-app-shell:has(.hsk-quiz-session) .learner-mobile-header,
+  .learner-app-shell:has(.typing-session-page) .learner-mobile-header {
+    display: none;
   }
 }
 

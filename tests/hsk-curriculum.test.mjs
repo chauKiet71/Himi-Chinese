@@ -95,11 +95,13 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
   assert.match(html, /class="hsk-curriculum-back" href="#course-catalog"/);
   assert.match(html, /lucide-chevron-left/);
   assert.match(html, />Về trang Lộ trình</);
-  assert.match(html, />Lộ trình bài học HSK 1</);
+  assert.match(html, /aria-label="Lộ trình bài học HSK 1"/);
+  assert.doesNotMatch(html, /id="hsk-curriculum-title"/);
   assert.doesNotMatch(html, />Himi Chinese</);
   assert.doesNotMatch(html, /15 bài từ Giáo trình chuẩn HSK 1/);
   assert.doesNotMatch(html, />Himi Modern Curriculum Desk</);
-  assert.match(html, /aria-label="Lời nhắn từ Himi"/);
+  assert.doesNotMatch(html, /aria-label="Lời nhắn từ Himi"/);
+  assert.doesNotMatch(html, /hsk-curriculum-coach/);
   assert.match(html, /aria-label="Đã hoàn thành 0 trên 15 bài"/);
   assert.match(html, />Nền tảng &amp; Làm quen</);
   assert.match(html, /class="hsk-topic-section is-active"/);
@@ -129,7 +131,7 @@ test("HSK curriculum renders the reference hierarchy and a working lesson destin
     curriculum: curriculumModule.HSK_CURRICULUM,
     initialLevelId: "hsk-4",
   }));
-  assert.match(hsk4Html, />Lộ trình bài học HSK 4</);
+  assert.match(hsk4Html, /aria-label="Lộ trình bài học HSK 4"/);
   assert.match(hsk4Html, /aria-pressed="true"[^>]*>[^<]*<span[^>]*>肆/);
 
   const lockedCurriculum = curriculumModule.HSK_CURRICULUM.map((level, levelIndex) => levelIndex ? level : {

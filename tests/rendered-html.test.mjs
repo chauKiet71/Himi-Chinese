@@ -356,13 +356,28 @@ test("learner routes share one responsive application shell", async () => {
   assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, "\/games"\)/);
   assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, "\/vip"\)/);
   assert.match(shell, /closeMobilePracticeMenuAndNavigate\(event, profileHref\)/);
-  assert.match(shell, /const mobilePracticeActive = mobilePracticeItems\.some/);
-  assert.match(shell, /practiceTriggerActive \|\| mobilePracticeActive/);
+  assert.match(shell, /const mobileVideoLibraryActive = visualPathname === "\/videos";/);
+  assert.match(shell, /const mobilePracticeActive = !mobileVideoLibraryActive && mobilePracticeItems\.some/);
+  assert.match(shell, /const mobileHomeActive = visualPathname === "\/" \|\| mobileVideoLibraryActive;/);
+  assert.match(shell, /mobile-practice-trigger \$\{mobilePracticeActive \? "active" : ""\}/);
   assert.doesNotMatch(shell, /navigationHiddenPrefixes/);
   assert.doesNotMatch(shell, /is-navigation-hidden/);
   assert.match(shell, /"\/admin"/);
   assert.match(shell, /"\/login"/);
   assert.doesNotMatch(home, /className="learn-rail"/);
+});
+
+test("mobile video library uses the home tab without chatbot overlap", async () => {
+  const [shell, chatbotStyles] = await Promise.all([
+    read("components/learner-app-shell.tsx"),
+    read("app/chatbot-widget.css"),
+  ]);
+
+  assert.match(shell, /const mobileVideoLibraryActive = visualPathname === "\/videos";/);
+  assert.match(shell, /const mobilePracticeActive = !mobileVideoLibraryActive/);
+  assert.match(shell, /const mobileHomeActive = visualPathname === "\/" \|\| mobileVideoLibraryActive;/);
+  assert.match(shell, /mobile-practice-trigger \$\{mobilePracticeActive \? "active" : ""\}/);
+  assert.match(chatbotStyles, /@media \(max-width: 720px\) \{[\s\S]*?body:has\(\.video-library-page\) > \.himi-chatbot-widget \{[\s\S]*?display: none;/);
 });
 
 test("scenario practice lives only inside the combined listening hub", async () => {
@@ -448,6 +463,7 @@ test("games route renders the new Himi slice game and six video-inspired activit
   assert.match(center, /Flashcard 3D/);
   assert.match(center, /Thử thách tổng hợp/);
   assert.match(center, /Hành trình trò chơi/);
+  assert.doesNotMatch(center, /aria-label="Kỹ năng bạn đang rèn"/);
   assert.match(center, /journey-map-desktop\.webp/);
   assert.match(center, /journey-map-mobile-long\.webp/);
   assert.match(center, /himi-v2-memory\.webp/);
@@ -463,6 +479,7 @@ test("games route renders the new Himi slice game and six video-inspired activit
   assert.match(center, /himi-v2-slice\.webp/);
   assert.match(game, /himi-v2-slice\.webp/);
   assert.doesNotMatch(game, /penguin-bamboo-warrior(?:-cape)?\.png/);
+  assert.doesNotMatch(game, /aria-label="Thể lệ mỗi lượt chơi"/);
   assert.match(game, /bamboo-slice-burst\.webp/);
   assert.match(game, /normalizeAnswer/);
   assert.match(game, /handleCorrect/);
@@ -542,7 +559,8 @@ test("writing route flows from HSK levels to their lessons and the writing studi
     read("app/writing-studio.css"),
   ]);
   assert.match(catalog, /getWritingLevels/);
-  assert.match(catalog, /\{lessonCount\} bài học/);
+  assert.doesNotMatch(catalog, /HimiSectionBanner/);
+  assert.doesNotMatch(catalog, /Chọn bài đã học/);
   assert.doesNotMatch(catalog, /Chọn cấp độ rồi vào đúng bài đang học/);
   assert.doesNotMatch(catalog, /<span>6 cấp độ/);
   assert.match(catalog, /href=\{`\/writing\/\$\{level\.id\}`\}/);
@@ -550,7 +568,12 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   assert.match(content, /getHskLearningLessonContent/);
   assert.match(lessons, /getWritingLessons/);
   assert.match(lessons, /lessons\.map/);
+  assert.match(lessons, /className="writing-level-back"/);
+  assert.match(lessons, /href="\/writing"[^>]*>[\s\S]*Về trang Luyện viết/);
+  assert.doesNotMatch(lessons, /className="writing-lesson-hero"/);
   assert.doesNotMatch(lessons, /writing-lesson-list-heading/);
+  assert.match(styles, /\.writing-level-back a\s*\{[^}]*font-size:\s*16px;[^}]*font-weight:\s*700;/s);
+  assert.match(styles, /\.writing-lesson-page \.writing-lesson-list-section \{[\s\S]*?margin-top: 0;/);
   assert.match(lessons, /href=\{`\/writing\/\$\{level\.id\}\/\$\{lesson\.id\}\/practice`\}/);
   assert.match(legacyPractice, /redirect/);
   assert.match(practice, /HimiWritingStudio/);
@@ -575,7 +598,8 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   assert.doesNotMatch(studio, /import\("hanzi-writer"\)/);
   assert.match(styles, /\.writing-topic-grid/);
   assert.match(styles, /\.writing-catalog-page \{[\s\S]*?width: min\(1480px, calc\(100% - 40px\)\);[\s\S]*?padding: 26px 0 68px;/);
-  assert.match(styles, /\.writing-catalog-banner,[\s\S]*?\.writing-topic-section \{[\s\S]*?width: 100%;[\s\S]*?max-width: none;/);
+  assert.match(styles, /\.writing-topic-section \{[\s\S]*?width: 100%;[\s\S]*?max-width: none;/);
+  assert.match(styles, /\.writing-topic-section \{ max-width: 1480px; margin: 0 auto; \}/);
   assert.match(styles, /@media \(min-width: 721px\) and \(max-width: 1050px\) \{[\s\S]*?\.writing-topic-grid \{ grid-template-columns: repeat\(2, minmax\(0, 1fr\)\); \}/);
   assert.match(styles, /\.writing-lesson-grid/);
   assert.match(studio, /himi-writing-lesson-header/);
@@ -586,7 +610,12 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   assert.match(styles, /\.himi-writing-lesson-session \.himi-writing-workspace \{[\s\S]*?grid-template-columns: minmax\(0, 2\.85fr\) minmax\(180px, 1fr\)/);
   assert.match(styles, /\.himi-writing-lesson-session \.himi-writing-practice \{[\s\S]*?border-radius: 28px[\s\S]*?box-shadow: 0 18px 48px/);
   assert.match(styles, /\.himi-writing-lesson-session \.himi-writing-character-card \{[\s\S]*?border-radius: 28px[\s\S]*?box-shadow: 0 18px 48px/);
-  assert.match(styles, /@media \(max-width: 620px\) \{[\s\S]*?\.himi-writing-lesson-session \.himi-writing-practice \{ order: 1;[\s\S]*?\.himi-writing-lesson-session \.himi-writing-character-info \{ order: 2;/);
+  assert.match(styles, /\.himi-writing-lesson-session \{[\s\S]*?height: 100dvh;[\s\S]*?grid-template-rows: 64px auto minmax\(0, 1fr\) 66px;[\s\S]*?overflow: hidden;/);
+  assert.match(styles, /\.himi-writing-lesson-session \.himi-writing-workspace \{[\s\S]*?height: calc\(100% - 24px\);[\s\S]*?overflow: hidden;/);
+  assert.match(styles, /\.himi-writing-lesson-session \.himi-writing-practice \{[\s\S]*?display: flex;[\s\S]*?align-items: center;[\s\S]*?justify-content: center;[\s\S]*?overflow: hidden;/);
+  assert.match(styles, /@media \(min-width: 621px\) and \(max-height: 840px\) \{[\s\S]*?\.himi-writing-lesson-session \.himi-writing-board-shell \{[\s\S]*?calc\(100dvh - 500px\)/);
+  assert.match(styles, /@media \(max-width: 620px\) \{[\s\S]*?\.himi-writing-lesson-session \.himi-writing-practice \{[\s\S]*?order: 1;[\s\S]*?\.himi-writing-lesson-session \.himi-writing-character-info \{ order: 2;/);
+  assert.match(styles, /@media \(max-width: 620px\) \{[\s\S]*?\.himi-writing-lesson-session \.himi-writing-workspace \{[\s\S]*?overflow-y: auto;[\s\S]*?overscroll-behavior: contain;/);
 });
 
 test("practice and game progress persist per authenticated learner", async () => {
@@ -670,6 +699,8 @@ test("learner navigation prefetches routes and keeps a persistent collapsible de
   assert.match(shell, /if \(isStandaloneRoute\(pathname\)\) return;/);
   assert.match(shell, /route-transition-progress/);
   assert.match(shell, /pendingHref/);
+  assert.match(shell, /learner-mobile-header/);
+  assert.match(shell, /getMobilePageHeader/);
   assert.match(shell, /RAIL_STORAGE_KEY/);
   assert.match(shell, /useState\(true\)/);
   assert.match(shell, /ChevronLeft/);

@@ -45,6 +45,15 @@ test("HSK game session no longer renders the duplicate course bar", () => {
   assert.doesNotMatch(brandStyles, /game-hsk-course-bar/);
 });
 
+test("every HSK game course picker omits the redundant new-word fact", () => {
+  const hskSession = read("components/hsk-game-session.tsx");
+  const globalStyles = read("app/globals.css");
+
+  assert.doesNotMatch(hskSession, /Bộ từ mới/);
+  assert.match(globalStyles, /\.writing-course-facts \{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(globalStyles, /\.writing-course-picker \.writing-course-card > \.writing-course-recommended \{[\s\S]*?color: #fff;/);
+});
+
 test("an HSK course shows DONE only after its random game round is completed", () => {
   const gameCenter = read("components/game-center.tsx");
   const hskSession = read("components/hsk-game-session.tsx");

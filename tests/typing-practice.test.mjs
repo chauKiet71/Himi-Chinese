@@ -170,14 +170,18 @@ test("every HSK level uses the shared reference-style lesson card layout", async
   const stylesheet = await readFile(path.join(root, "app", "typing-practice.css"), "utf8");
 
   assert.match(levelPage, /level\.lessons\.map/);
+  assert.doesNotMatch(levelPage, /className="typing-lesson-hero"/);
   assert.match(levelPage, /className="typing-lesson-card-topline"/);
   assert.match(levelPage, /lesson\.previewHanzi\.slice\(0, 4\)/);
   assert.match(levelPage, /className="typing-lesson-card-description"/);
   assert.match(levelPage, /lesson\.titleZh !== lesson\.titleVi/);
   assert.match(levelPage, /className="typing-lesson-card-footer"/);
+  assert.match(levelPage, /className="typing-level-back"/);
+  assert.match(levelPage, /href="\/typing"[^>]*>[\s\S]*Về trang Luyện gõ/);
   assert.match(stylesheet, /\.typing-lesson-grid\s*\{[^}]*grid-template-columns:\s*repeat\(3,/s);
   assert.match(stylesheet, /\.typing-lesson-card\s*\{[^}]*min-height:\s*350px;/s);
   assert.match(stylesheet, /\.typing-lesson-list-section\s*\{[^}]*padding:\s*0;/s);
+  assert.match(stylesheet, /\.typing-level-back a\s*\{[^}]*font-size:\s*16px;[^}]*font-weight:\s*700;/s);
 });
 
 test("learner practice navigation includes the typing route", async () => {
@@ -195,4 +199,6 @@ test("typing practice requires login and returns learners to the selected exerci
   assert.match(lessonPage, /learnerLoginPath\(wordPracticeHref\)/);
   assert.match(lessonPage, /learnerLoginPath\(sentencePracticeHref\)/);
   assert.match(lessonPage, /Đăng nhập để luyện/);
+  assert.match(lessonPage, /className="typing-level-back"/);
+  assert.match(lessonPage, /href=\{`\/typing\/\$\{level\.id\}`\}[\s\S]*Về trang \{level\.label\}/);
 });

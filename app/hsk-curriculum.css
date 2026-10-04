@@ -703,16 +703,9 @@ a.hsk-lesson-select::after {
 }
 
 .industry-course-heading {
-  margin-top: 14px;
-  padding-top: 54px;
-  border-top: 1px solid #e2e6e5;
+  margin-top: 20px;
 }
 
-.course-catalog-heading {
-  margin-top: 0;
-  padding-top: 42px;
-  border-top: 0;
-}
 
 .industry-course-heading > span {
   color: var(--forest);
@@ -735,6 +728,14 @@ a.hsk-lesson-select::after {
   font-size: clamp(30px, 3.2vw, 44px);
   line-height: 1.08;
   letter-spacing: -.045em;
+}
+
+/* Keep catalog pages aligned with the wide typing-library frame. */
+@media (min-width: 1121px) {
+  .course-library-page.learner-full-width-catalog > #course-catalog > .section-shell,
+  .course-library-page.learner-full-width-catalog > .section-shell {
+    width: min(1480px, calc(100% - 40px));
+  }
 }
 
 .industry-course-heading p {
@@ -1085,3 +1086,23 @@ a.hsk-lesson-select::after {
   .hsk-level-progress-track > i,
   .hsk-topic-chevron { transition: none; }
 }
+
+/* Keep the curriculum header compact after removing the title and coach panel. */
+.hsk-curriculum-heading {
+  min-height: 0;
+  padding: 24px 4px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: start;
+  row-gap: 18px;
+}
+
+.hsk-curriculum-heading-copy {
+  min-height: 0;
+  padding-right: 0;
+  align-self: auto;
+}
+
+.hsk-curriculum-back { margin-bottom: 0; }
+.hsk-curriculum-controls { margin-top: 0; }

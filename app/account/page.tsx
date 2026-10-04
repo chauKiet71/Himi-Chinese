@@ -5,10 +5,8 @@ import { redirect } from "next/navigation";
 import {
   ArrowRight,
   BadgeCheck,
-  Bell,
   CalendarDays,
   ChevronRight,
-  ChevronLeft,
   Clock3,
   Crown,
   LogOut,
@@ -119,11 +117,6 @@ export default async function AccountPage({
   return (
     <main className={`account-page account-wallet-redesign account-page-${membershipState}`}>
       <div className="account-page-inner">
-        <header className="account-mobile-header">
-          <Link aria-label="Quay lại trang học" href="/"><ChevronLeft aria-hidden="true" size={26} /></Link>
-          <strong>Hồ sơ</strong>
-          <Link aria-label="Mở thông báo" href="/notifications"><Bell aria-hidden="true" size={23} /></Link>
-        </header>
         <h1 className="account-page-title">Tài khoản của tôi</h1>
 
         {params.verified === "1" ? <p className="auth-notice account-feedback" role="status">Email đã được xác minh. Tài khoản của bạn đã sẵn sàng.</p> : null}

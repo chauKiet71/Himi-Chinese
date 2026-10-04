@@ -2,7 +2,6 @@
  * Desktop keeps the approved profile-first layout; phones combine profile and
  * membership into one compact card with explicit Free, pending, and VIP states. */
 
-.account-mobile-header,
 .account-wallet-mascot,
 .account-profile-verified,
 .account-membership-status-badge,
@@ -223,7 +222,6 @@ html[data-account-sheet-open="true"] {
 }
 
 .account-password-sheet :is(button, input):focus-visible,
-.account-mobile-header a:focus-visible,
 .account-membership-band > a:focus-visible {
   outline: 3px solid rgba(255, 86, 64, .3);
   outline-offset: 3px;
@@ -251,48 +249,6 @@ html[data-account-sheet-open="true"] {
   .account-wallet-redesign .account-page-inner {
     width: 100%;
     padding: 0 0 max(108px, calc(82px + env(safe-area-inset-bottom)));
-  }
-
-  .account-mobile-header {
-    min-height: 54px;
-    padding: env(safe-area-inset-top) 18px 0;
-    position: sticky;
-    z-index: 20;
-    top: 0;
-    display: grid;
-    grid-template-columns: 44px minmax(0, 1fr) 44px;
-    align-items: center;
-    color: #211f1e;
-    border-bottom: 1px solid rgba(82, 65, 60, .08);
-    background: rgba(255, 253, 251, .9);
-    backdrop-filter: blur(18px) saturate(1.2);
-  }
-
-  .account-mobile-header strong {
-    justify-self: center;
-    font-size: 23px;
-    font-weight: 780;
-    letter-spacing: -.035em;
-  }
-
-  .account-mobile-header a {
-    width: 44px;
-    height: 44px;
-    display: grid;
-    place-items: center;
-    color: inherit;
-    border-radius: 14px;
-    transition: color 160ms ease, background-color 160ms ease, transform 160ms ease;
-  }
-
-  .account-mobile-header a:last-child {
-    justify-self: end;
-  }
-
-  .account-mobile-header a:active {
-    color: #ff4f3c;
-    background: #fff0ec;
-    transform: scale(.94);
   }
 
   .account-wallet-redesign .account-page-title {
@@ -2339,7 +2295,6 @@ html[data-account-sheet-open="true"] {
 
   .account-wallet-mascot,
   .account-password-submit,
-  .account-mobile-header a,
   .account-profile-avatar,
   .account-profile-avatar > button,
   .account-membership-band > a {

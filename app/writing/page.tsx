@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookOpen, PenLine } from "lucide-react";
-import { HimiSectionBanner } from "@/components/himi-section-banner";
 import { getWritingLevels } from "@/lib/writing-content";
 
 export const metadata: Metadata = {
@@ -11,17 +10,8 @@ export const metadata: Metadata = {
 
 export default function WritingPage() {
   const levels = getWritingLevels();
-  const lessonCount = levels.reduce((total, level) => total + level.lessonCount, 0);
 
   return <main className="learner-dashboard writing-catalog-page">
-    <HimiSectionBanner
-      className="writing-catalog-banner"
-      description={`Chọn trong ${lessonCount} bài học HSK 1–6 và luyện đúng những chữ xuất hiện trong từng bài trên bàn viết tương tác.`}
-      titleId="writing-catalog-title"
-      titleLines={["Chọn bài đã học.", "Viết từng nét thật chắc."]}
-      variant="writing"
-    />
-
     <section className="writing-topic-section" aria-labelledby="writing-topic-heading">
       <div className="writing-topic-heading">
         <div>

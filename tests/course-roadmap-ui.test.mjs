@@ -89,6 +89,10 @@ test("an available course opens an overview that leads to the learner's next les
   }));
 
   assert.match(overviewHtml, /aria-label="Chi tiết lộ trình Văn phòng &amp; hành chính"/);
+  assert.match(overviewHtml, /href="\/courses"[^>]*>[\s\S]*course-roadmap-back-action[\s\S]*lucide-arrow-left[\s\S]*Về trang Lộ trình[\s\S]*course-roadmap-back-context[\s\S]*Văn phòng &amp; Hành chính/);
+  assert.match(overviewHtml, /<h1 class="sr-only">Lộ trình Văn phòng &amp; hành chính<\/h1>/);
+  assert.doesNotMatch(overviewHtml, /course-roadmap-switch|Đổi lộ trình/);
+  assert.doesNotMatch(overviewHtml, /course-roadmap-progress-row/);
   assert.match(overviewHtml, />Tổng quan lộ trình</);
   assert.match(overviewHtml, />8 \/ 30 bài</);
   assert.match(overviewHtml, />1 \/ 5 chặng</);
@@ -171,4 +175,22 @@ test("roadmap progress ring is thirty percent smaller", async () => {
   assert.match(css, /\.roadmap-circular-progress \{[^}]*width: 34px;[^}]*height: 34px;/);
   assert.match(css, /\.roadmap-circular-progress::after \{[^}]*inset: 3px;/);
   assert.match(css, /\.roadmap-circular-progress > strong \{[^}]*font-size: 9px;/);
+});
+
+test("industry roadmap stages use the neutral HSK lesson tone", async () => {
+  const [css, globals] = await Promise.all([
+    readFile(new URL("../app/brand-theme.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(css, /\.roadmap-stage\.is-active \.roadmap-stage-card\s*\{[^}]*border-color:\s*var\(--himi-line\);[^}]*background:\s*var\(--himi-white\);[^}]*box-shadow:\s*none;/);
+  assert.match(css, /\.roadmap-stage\.is-available \.roadmap-stage-card\s*\{[^}]*border-color:\s*var\(--himi-line\);[^}]*background:\s*var\(--himi-white\);/);
+  assert.match(css, /\.roadmap-stage-status\.is-active\s*\{[^}]*color:\s*var\(--himi-muted\);[^}]*border-color:\s*var\(--himi-line\);[^}]*background:\s*var\(--himi-white\);/);
+  assert.match(css, /\.roadmap-stage-status\.is-available\s*\{[^}]*color:\s*var\(--himi-muted\);[^}]*border-color:\s*var\(--himi-line\);[^}]*background:\s*var\(--himi-white\);/);
+  assert.match(css, /\.course-roadmap-stages \.roadmap-lesson-row\.is-in-progress\s*\{[^}]*background:\s*var\(--himi-white\);/);
+  assert.match(css, /\.course-roadmap-stages \.roadmap-lesson-row\.is-completed\s*\{[^}]*background:\s*var\(--himi-white\);/);
+  assert.match(css, /\.course-roadmap-stages \.roadmap-lesson-list\s*\{[^}]*border-color:\s*var\(--himi-line\);/);
+  assert.match(css, /\.course-roadmap-stages \.roadmap-stage-expand\s*\{\s*color:\s*var\(--himi-red\);\s*\}/);
+  assert.match(globals, /\.course-roadmap-back:hover \.course-roadmap-back-action,[\s\S]*\.course-roadmap-back:focus-visible \.course-roadmap-back-action\s*\{\s*color:\s*#ff4c3b;/);
+  assert.match(globals, /\.course-roadmap-back-context, \.course-roadmap-back-separator\s*\{\s*color:\s*#3f4b50;/);
 });

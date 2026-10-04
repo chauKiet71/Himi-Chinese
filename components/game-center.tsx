@@ -20,7 +20,6 @@ import {
   Star,
   Target,
   Timer,
-  Trophy,
   Volume2,
   X,
   Zap,
@@ -835,14 +834,6 @@ export function GameCenter({
             })}
           </div>
 
-          <aside className="game-journey-skills" aria-label="Kỹ năng bạn đang rèn">
-            <strong><Sparkles size={14} /> Kỹ năng bạn đang rèn</strong>
-            <div>
-              <span><Zap size={17} /><small>Phản xạ</small></span>
-              <span><Trophy size={17} /><small>Chính xác</small></span>
-              <span><BrainCircuit size={17} /><small>Ghi nhớ</small></span>
-            </div>
-          </aside>
         </section>
 
         <footer className="game-center-footer-note"><Sparkles size={17} /><span><strong>Ôn từ vựng HSK qua trò chơi.</strong> Chọn HSK1–HSK6 để luyện từ các bài học trong khóa. Mỗi lượt chơi là một bộ từ mới.</span></footer>

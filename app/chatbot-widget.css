@@ -563,6 +563,10 @@ body:has(.game-immersive-dashboard) > .himi-chatbot-widget {
 }
 
 @media (max-width: 720px) {
+  body:has(.video-library-page) > .himi-chatbot-widget {
+    display: none;
+  }
+
   .himi-chatbot-widget {
     right: max(10px, env(safe-area-inset-right));
     bottom: calc(82px + env(safe-area-inset-bottom));

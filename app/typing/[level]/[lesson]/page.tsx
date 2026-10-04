@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Headphones, Keyboard, MessageSquareText, Volume2 } from "lucide-react";
+import { ArrowRight, ChevronLeft, Headphones, Keyboard, MessageSquareText, Volume2 } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth-session";
 import { learnerLoginPath } from "@/lib/learner-auth";
 import { getTypingLesson, getTypingLessonParams } from "@/lib/typing-practice";
@@ -30,9 +30,8 @@ export default async function TypingLessonPage({ params }: TypingLessonPageProps
   const sentencePracticeHref = `/typing/${level.id}/${lesson.id}/practice?stage=sentence`;
 
   return <main className="learner-dashboard typing-choice-page">
-    <nav aria-label="Điều hướng bài luyện gõ" className="typing-breadcrumbs">
-      <Link href={`/typing/${level.id}`}><ArrowLeft aria-hidden="true" size={16} /> {level.label}</Link>
-      <span aria-hidden="true">/</span><strong>Bài {lesson.number}</strong>
+    <nav aria-label={`Quay lại trang ${level.label}`} className="typing-level-back">
+      <Link href={`/typing/${level.id}`} prefetch={false}><ChevronLeft aria-hidden="true" size={17} strokeWidth={2.3} /> Về trang {level.label}</Link>
     </nav>
 
     <header className="typing-choice-hero">

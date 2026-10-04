@@ -8,7 +8,6 @@ import {
   Crown,
 } from "lucide-react";
 import { cancelVipActivationRequestAction } from "@/app/vip/actions";
-import { HimiSectionBanner } from "@/components/himi-section-banner";
 import { VipTransferFlow } from "@/components/vip-transfer-flow";
 import { getCurrentUser } from "@/lib/auth-session";
 import { getVipUpgradeOverview } from "@/lib/vip-activation-request-service";
@@ -91,12 +90,7 @@ export default async function VipPage({
   });
 
   return <main className="vip-page">
-    <section className="section-shell himi-banner-shell vip-page-header"><HimiSectionBanner
-      description="Mở bài học và tình huống nâng cao, giữ trọn tiến độ trên một tài khoản."
-      titleId="vip-page-title"
-      titleLines={["Học liền mạch.", "Mở trọn hành trình."]}
-      variant="vip"
-    /></section>
+    <h1 className="sr-only">Himi Chinese VIP</h1>
 
     {hasAccountStatus ? <section className="section-shell vip-request-feedback" aria-live="polite">
       {notice ? <p className="vip-request-notice success"><Check size={17} />{notice}</p> : null}

@@ -560,7 +560,7 @@ export function ListeningCatalogStudio({
   }
 
   return (
-    <main className="learner-dashboard listening-studio listening-catalog-studio" data-initial-group={initialGroupId}>
+    <main className="learner-dashboard listening-studio listening-catalog-studio learner-full-width-catalog" data-initial-group={initialGroupId}>
       <section className="listening-redesign-hero" aria-labelledby="listening-title">
         <div className="listening-redesign-hero-copy">
           <span className="listening-redesign-eyebrow">LISTENING PRACTICE</span>

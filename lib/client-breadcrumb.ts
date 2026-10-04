@@ -6,7 +6,6 @@ export type ClientBreadcrumbModel = {
 
 const staticRoutes: Record<string, ClientBreadcrumbModel> = {
   "/account": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Tài khoản" },
-  "/games": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Trò chơi" },
   "/forgot-password": { parentHref: "/login", parentLabel: "Đăng nhập", currentLabel: "Quên mật khẩu" },
   "/listening": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Luyện nghe" },
   "/login": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Đăng nhập" },
@@ -16,7 +15,6 @@ const staticRoutes: Record<string, ClientBreadcrumbModel> = {
   "/reset-password": { parentHref: "/login", parentLabel: "Đăng nhập", currentLabel: "Đặt lại mật khẩu" },
   "/terms": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Điều khoản sử dụng" },
   "/videos": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Video" },
-  "/vip": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Himi Chinese VIP" },
   "/vocabulary": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Bộ từ vựng" },
   "/verify-email": { parentHref: "/", parentLabel: "Học tập", currentLabel: "Xác minh email" },
 };
@@ -40,20 +38,11 @@ function writingLessonLabel(value: string): string {
   return `${sourceLabel} - Bài ${String(Number(lessonNumber)).padStart(2, "0")}`;
 }
 
-export function getClientBreadcrumb(pathname: string, courseView?: string | null): ClientBreadcrumbModel | null {
-  if (pathname === "/" || pathname === "/typing" || pathname === "/writing" || pathname.startsWith("/dev/")) return null;
-
-  if (pathname === "/courses") {
-    if (courseView === "hsk") return null;
-    return { parentHref: "/", parentLabel: "Học tập", currentLabel: "Lộ trình" };
-  }
+export function getClientBreadcrumb(pathname: string): ClientBreadcrumbModel | null {
+  if (pathname === "/" || pathname.startsWith("/courses") || pathname === "/games" || pathname === "/typing" || pathname === "/vip" || pathname === "/writing" || pathname.startsWith("/dev/")) return null;
 
   const segments = pathname.split("/").filter(Boolean);
   const [section, first, second, third] = segments;
-
-  if (section === "courses" && first) {
-    return { parentHref: "/courses", parentLabel: "Lộ trình", currentLabel: "Chi tiết lộ trình" };
-  }
 
   if (section === "learn" && first) {
     return { parentHref: "/courses", parentLabel: "Lộ trình", currentLabel: "Bài học" };
@@ -68,6 +57,8 @@ export function getClientBreadcrumb(pathname: string, courseView?: string | null
   }
 
   if ((section === "writing" || section === "typing") && first) {
+    if (section === "typing" && !third) return null;
+    if (section === "writing" && !second) return null;
     const sectionLabel = section === "writing" ? "Luyện viết" : "Luyện gõ";
     const levelHref = `/${section}/${encodeURIComponent(first)}`;
     if (second && third === "practice") {
