@@ -257,6 +257,7 @@ export function VipTransferFlow({
               height={240}
               priority
               src="/assets/mascot/himi-v2/himi-celebrate.webp"
+              unoptimized
               width={240}
             />
           </div>
