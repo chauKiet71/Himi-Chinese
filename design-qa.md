@@ -4268,3 +4268,74 @@ final result: passed
 No actionable P0, P1, or P2 findings remain for this scoped statistic-card adjustment.
 
 final result: passed
+
+---
+
+# Design QA — Trang chủ HIMI theo mock-up số 2 (2026-10-05)
+
+- Source visual truth: `D:/CodexData/.codex/generated_images/01a10a9e-b3f2-7d31-9234-fea853a10fcb/exec-f1a31a7e-c131-4573-9c7d-2a242934bc92.png` (1544 × 1018 px).
+- Implementation: `/` on local preview `http://localhost:4173/`.
+- Captures: `qa-artifacts/home-study-desktop.png` (1440 px), `qa-artifacts/home-study-laptop.png` (1024 px), `qa-artifacts/home-study-mobile.png` (390 px), `qa-artifacts/home-study-mobile-with-history.png` (390 px), and `qa-artifacts/home-study-comparison.png` (side-by-side).
+- State: signed out; empty recent history and then one HSK lesson opened from the home hero.
+
+## Comparison and responsive result
+
+- Four Himi feature cards use the mock's palette, type hierarchy, prominent mascot illustrations and colored calls to action. They remain in one row at 1440 and 1024 px as requested; the 390 px layout becomes a two-column grid.
+- Popular topics match the six compact horizontal cards and 3 × 2 arrangement in the mock. At 390 px they become 2 × 3 without horizontal clipping.
+- The recent lesson panel has a Himi reading illustration and clear empty-state action. Opening HSK 1 lesson 1 and returning home replaces it with the actual lesson title, HSK level, progress and continuation link. The existing history source also supports industry lessons.
+- The desktop hero's referenced image path was missing and is now supplied from the existing homepage illustration, keeping the complete homepage visual in the final browser capture.
+- At 1024 px the mascot positions were raised to stay visible within the narrow four-card row. The existing phone bottom navigation overlays the full-page capture at its viewport position; content remains scrollable below it.
+
+## Verification
+
+- `node --test tests/home-responsive.test.mjs tests/recent-learning-history.test.mjs`: 6/6 passed.
+- `npx eslint components/review-home-studio.tsx`: passed.
+- `git diff --check`: passed.
+- `npm run build` with `NODE_OPTIONS=--max-old-space-size=8192`: passed. Initial build with default memory failed during transform with a memory allocation error; rerun completed.
+- Browser interaction: opening HSK 1 lesson 1 and returning home displayed `Bài 1: Xin chào!` in recent lessons with `0%` progress and the correct study link.
+
+## Findings
+
+- No remaining P0/P1/P2 visual or functional issue in the checked desktop, laptop and phone states.
+
+final result: passed
+
+---
+
+# Design QA — Chỉnh độ giống mock-up số 2 (2026-10-05)
+
+- Source: `D:/CodexData/.codex/generated_images/01a10a9e-b3f2-7d31-9234-fea853a10fcb/exec-f1a31a7e-c131-4573-9c7d-2a242934bc92.png`.
+- Final captures: `qa-artifacts/home-study-desktop-v2.png` (1440 px), `qa-artifacts/home-study-laptop-v2.png` (1024 px), `qa-artifacts/home-study-mobile-v2.png` (390 px), `qa-artifacts/home-study-comparison-v2.png`.
+- Refined all four feature artworks into full square scenes matching the reference mascot, color palette, brush, headphones, keyboard and HSK books. The artwork now fills each card instead of leaving large flat pastel areas.
+- Desktop and 1024 px: four features remain in a single row; text, mascot faces and calls to action remain visible. Phone: a two-column layout retains all four scenes and topic cards without horizontal clipping.
+- Recent lessons still display real history; one-item history adds decorative reading artwork in the unused space. The empty state retains its dedicated illustration and action.
+- Visual exception from the reference is intentional: reference features are 2 × 2, while implementation is one row on laptop, as requested by the user. This necessarily changes each card's crop and copy scale.
+- Browser captures inspected at all three widths. Targeted tests 6/6, ESLint, `git diff --check`, and production build with an 8 GB Node heap pass.
+
+final result: passed
+
+---
+
+# Design QA — Ảnh phủ kín card trang chủ (2026-10-05)
+
+- User references: `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-cc51e44a-aa80-4f9e-801f-79847fc8ad40.png` and `C:/Users/Windows/AppData/Local/Temp/codex-clipboard-35cb5136-b9a7-4559-9e18-d9a20875148b.png`.
+- Root causes: feature images were translated downward, leaving a fallback-color strip at the top; the desktop hero asset itself has a white outer frame.
+- Fix: feature images now fill the entire content area with `object-fit: cover`, with soft gradient overlays behind live text; the desktop hero image is scaled within its clipped container to remove its baked-in white frame. The 721–900 px hero button sits lower so it does not cover the image's paragraph. The decorative recent-lesson image is hidden when that panel stacks into one column.
+- Browser captures: `qa-artifacts/home-image-fit-1440.png`, `home-image-fit-1024.png`, `home-image-fit-768.png`, `home-image-fit-390.png`, `home-image-fit-360.png`.
+- Verified at 1440, 1024, 768, 390 and 360 CSS px: images meet card edges within their 1 px borders, the hero is cropped edge-to-edge, and no horizontal page overflow is present in the stable 360 px state.
+- Targeted tests: 6/6 passed. `git diff --check` passed.
+
+final result: passed
+
+---
+
+# Design QA — Chủ đề phổ biến, mẫu số 1 (2026-10-05)
+
+- Reference: `D:/CodexData/.codex/generated_images/01a10a9e-b3f2-7d31-9234-fea853a10fcb/exec-59b601d8-e256-4993-aacc-56d0bef91a9c.png`.
+- Applied the selected open editorial layout: six topic links in two rows on desktop, without individual card backgrounds, borders, or shadows; pastel icon stickers, fine row dividers, coral arrows, and a Himi landscape illustration at the bottom.
+- Kept the four learning features in one desktop row. Recent lessons remain alongside topics at 1440 px and below them at 1024 px and phone widths, still using actual lesson history.
+- Captures: `qa-artifacts/home-topics-open-1440.png`, `home-topics-open-1024.png`, `home-topics-open-720.png`, `home-topics-open-390.png`, `home-topics-open-320.png`.
+- Checked 1440, 1024, 720, 390, 360, and 320 CSS px in the browser. All six topic links and the recent-lesson panel were present, the landscape image loaded, and horizontal overflow was 0 px after layout settled.
+- Targeted tests 6/6 passed; ESLint and `git diff --check` passed.
+
+final result: passed

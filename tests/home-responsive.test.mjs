@@ -24,32 +24,24 @@ test("home dashboard exposes the four core learning paths and useful continuatio
   assert.doesNotMatch(page, /home-recent-title[\s\S]*href="\/courses"[\s\S]*home-redesign-recent-list/);
 });
 
-test("home dashboard reuses Himi artwork and the selected warm learning-hub composition", async () => {
+test("home dashboard uses the selected Himi study artwork and keeps four features in one desktop row", async () => {
   const page = await read("components/review-home-studio.tsx");
   const css = await read("app/home-portal.css");
 
   assert.match(page, /\/assets\/mascot\/himi-v2\/himi-wave\.webp/);
-  assert.match(page, /\/assets\/home\/features\/feature-writing-pencil-3d\.png/);
-  assert.match(page, /\/assets\/home\/features\/feature-listening-headphones-3d\.png/);
-  assert.match(page, /\/assets\/home\/features\/feature-typing-keyboard-3d\.png/);
-  assert.match(page, /\/assets\/home\/features\/feature-hsk-books-3d\.png/);
+  assert.match(page, /\/assets\/home\/features\/feature-himi-writing\.png/);
+  assert.match(page, /\/assets\/home\/features\/feature-himi-listening\.png/);
+  assert.match(page, /\/assets\/home\/features\/feature-himi-typing\.png/);
+  assert.match(page, /\/assets\/home\/features\/feature-himi-hsk\.png/);
+  assert.match(page, /\/assets\/home\/himi-recent-reading\.png/);
+  assert.match(page, /\/assets\/home\/himi-topics-landscape\.png/);
   assert.match(page, /home-hero-cover-desktop\.png/);
   assert.match(css, /\.home-redesign-cover-image\s*\{[^}]*object-fit:\s*cover/);
-  assert.match(css, /@media \(min-width: 721px\)[\s\S]*?aspect-ratio:\s*1945\s*\/\s*808/);
-  assert.match(css, /@media \(min-width: 721px\)[\s\S]*?\.home-redesign-hero-copy > \.home-redesign-primary\s*\{[\s\S]*?left:\s*5\.4%;[\s\S]*?bottom:\s*12%;[\s\S]*?pointer-events:\s*auto/);
-  assert.doesNotMatch(css, /\.home-redesign-hero > \.home-redesign-hero-copy,\s*\.home-redesign-hero > \.home-redesign-mascot-wrap/);
-  assert.match(css, /\.home-redesign-heading-row h2\s*\{[\s\S]*font-size:\s*18px/);
-  assert.match(css, /\.home-redesign-recent \.home-redesign-heading-row h2\s*\{\s*font-size:\s*18px/);
-  assert.match(css, /\.home-redesign-recent\s*\{[\s\S]*display:\s*flex;[\s\S]*flex-direction:\s*column/);
-  assert.match(css, /\.home-redesign-recent-list:has\(\.home-redesign-recent-empty\)\s*\{[\s\S]*grid-template-rows:\s*minmax\(60px, 1fr\)/);
-  assert.match(css, /\.home-redesign-recent-empty\s*\{[\s\S]*height:\s*100%/);
-  assert.match(css, /\.home-redesign-feature-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(4, minmax\(0, 1fr\)\)/);
-  assert.match(css, /\.home-redesign-feature h3\s*\{[\s\S]*font-weight:\s*400/);
-  assert.match(css, /\.home-redesign-topic-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(6, minmax\(0, 1fr\)\)/);
-  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*\.home-redesign-feature:hover[\s\S]*transform:\s*translateY\(-4px\)/);
-  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*\.home-redesign-topic:hover[\s\S]*transform:\s*translateY\(-4px\)/);
-  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*\.home-redesign-recent-item:hover[\s\S]*transform:\s*translateY\(-3px\)/);
-  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*\.home-redesign-feature:hover,[\s\S]*\.home-redesign-recent-item:hover \{ transform: none; \}/);
+  assert.match(css, /\.home-study-feature-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(4, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.home-study-topic-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(page, /recentLessonsLoaded && recentLessons\.length === 0[\s\S]*?Bạn chưa học bài nào/);
+  assert.match(page, /recentLessons\.map\(\(lesson\) =>[\s\S]*?lesson\.href/);
+  assert.match(page, /home-study-progress[\s\S]*?lesson\.progress/);
 });
 
 test("home dashboard matches the compact mobile reference and preserves bottom navigation clearance", async () => {
@@ -63,10 +55,9 @@ test("home dashboard matches the compact mobile reference and preserves bottom n
   assert.doesNotMatch(page, /home-redesign-mobile-nav|href="\/practice"/);
   assert.match(css, /Mobile home composition based on the selected compact app reference/);
   assert.match(css, /padding:\s*0 12px calc\(104px \+ env\(safe-area-inset-bottom\)\)/);
-  assert.match(css, /\.home-redesign-feature-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
-  assert.match(css, /\.home-redesign-topic-grid\s*\{[\s\S]*display:\s*flex;[\s\S]*overflow-x:\s*auto/);
-  assert.match(css, /\.home-redesign-recent\s*\{[\s\S]*margin-top:\s*20px;[\s\S]*display:\s*block/);
-  assert.match(css, /\.home-redesign-recent-item\s*\{[\s\S]*grid-template-columns:\s*40px minmax\(0, 1fr\) 72px 16px/);
+  assert.match(css, /@media \(max-width: 720px\)[\s\S]*?\.home-study-feature-grid\s*\{\s*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(css, /@media \(max-width: 720px\)[\s\S]*?\.home-study-topic-grid\s*\{\s*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.home-study-recent-item\s*\{[\s\S]*?grid-template-columns:\s*40px minmax\(0, 1fr\) 58px 16px/);
   assert.match(css, /#home-feature-title\s*\{[\s\S]*padding-left:\s*18px;[\s\S]*border-left:\s*7px solid #ff5a4e/);
   assert.doesNotMatch(css, /#home-feature-title\s*\{\s*padding-left:\s*0;\s*border-left:\s*0/);
   assert.match(css, /#home-topic-title,\s*#home-recent-title\s*\{[\s\S]*padding-left:\s*18px;[\s\S]*border-left:\s*7px solid #ff5a4e/);

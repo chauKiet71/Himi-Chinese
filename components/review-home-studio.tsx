@@ -37,10 +37,10 @@ type Topic = {
 };
 
 const FEATURES = [
-  { title: "Luyện viết", description: "Học viết chữ Hán đúng nét, đúng thứ tự", href: "/writing", image: "/assets/home/features/feature-writing-pencil-3d.png", mobileImage: "/assets/home/features/feature-writing-practice-3d.png", tone: "rose" },
-  { title: "Luyện nghe", description: "Nâng cao kỹ năng nghe hiểu tiếng Trung", href: "/listening", image: "/assets/home/features/feature-listening-headphones-3d.png", tone: "blue" },
-  { title: "Luyện gõ", description: "Luyện gõ pinyin dễ dàng và nhanh chóng", href: "/typing", image: "/assets/home/features/feature-typing-keyboard-3d.png", tone: "apricot" },
-  { title: "Giáo trình HSK", description: "Lộ trình học bài bản từ HSK 1 - 6", href: "/courses?view=hsk", image: "/assets/home/features/feature-hsk-books-3d.png", tone: "lilac" },
+  { title: "Luyện viết", description: "Tập viết Hán tự đúng nét, nhớ lâu hơn.", action: "Bắt đầu luyện viết", href: "/writing", image: "/assets/home/features/feature-himi-writing.png", tone: "rose" },
+  { title: "Luyện nghe", description: "Nghe hội thoại thực tế, làm quen phát âm chuẩn.", action: "Bắt đầu luyện nghe", href: "/listening", image: "/assets/home/features/feature-himi-listening.png", tone: "apricot" },
+  { title: "Luyện gõ", description: "Gõ pinyin nhanh và chính xác theo ngữ cảnh.", action: "Bắt đầu luyện gõ", href: "/typing", image: "/assets/home/features/feature-himi-typing.png", tone: "blue" },
+  { title: "Giáo trình HSK", description: "Học theo giáo trình chuẩn, chinh phục từng cấp độ.", action: "Khám phá giáo trình", href: "/courses?view=hsk", image: "/assets/home/features/feature-himi-hsk.png", tone: "lilac" },
 ] as const;
 
 const TOPICS: Topic[] = [
@@ -132,14 +132,15 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
         <div className="home-redesign-heading-row">
           <h2 id="home-feature-title">Tính năng học tập</h2>
         </div>
-        <div className="home-redesign-feature-grid">
+        <div className="home-study-feature-grid">
           {FEATURES.map((feature) => (
-            <Link className={`home-redesign-feature is-${feature.tone}`} href={feature.href} key={feature.title} prefetch={false}>
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
-              <span aria-hidden="true" className="home-redesign-feature-arrow"><ArrowRight size={19} strokeWidth={2.6} /></span>
-              <Image alt="" className={`home-redesign-feature-art ${"mobileImage" in feature ? "is-desktop" : ""}`.trim()} height={512} src={feature.image} width={512} />
-              {"mobileImage" in feature ? <Image alt="" className="home-redesign-feature-art is-mobile" height={512} src={feature.mobileImage} width={512} /> : null}
+            <Link className={`home-study-feature is-${feature.tone}`} href={feature.href} key={feature.title} prefetch={false}>
+              <span className="home-study-feature-copy">
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </span>
+              <span aria-hidden="true" className="home-study-feature-action"><span>{feature.action}</span><ArrowRight size={18} strokeWidth={2.5} /></span>
+              <Image alt="" className="home-study-feature-art" height={700} sizes="(max-width: 900px) 50vw, 25vw" src={feature.image} width={700} />
             </Link>
           ))}
         </div>
@@ -151,39 +152,54 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
             <h2 id="home-topic-title">Chủ đề phổ biến</h2>
             <Link href="/courses/tieng-trung-tan-suat-cao" prefetch={false}>Xem tất cả <ArrowRight aria-hidden="true" size={18} /></Link>
           </div>
-          <div className="home-redesign-topic-grid">
-            {TOPICS.map((topic) => {
-              const Icon = topic.icon;
-              return (
-                <Link className="home-redesign-topic" href={topic.href} key={topic.title} prefetch={false}>
-                  <span className={`home-redesign-topic-icon is-${topic.tone}`}><Icon aria-hidden="true" size={32} strokeWidth={2.15} /></span>
-                  <strong>{topic.title}</strong><small>{topic.lessons} bài học</small>
-                </Link>
-              );
-            })}
+          <div className="home-study-topic-scene">
+            <div className="home-study-topic-grid">
+              {TOPICS.map((topic) => {
+                const Icon = topic.icon;
+                return (
+                  <Link className="home-study-topic" href={topic.href} key={topic.title} prefetch={false}>
+                    <span className={`home-study-topic-icon is-${topic.tone}`}><Icon aria-hidden="true" size={29} strokeWidth={2.1} /></span>
+                    <span className="home-study-topic-copy"><strong>{topic.title}</strong><small>{topic.lessons} bài học</small></span>
+                    <ArrowRight aria-hidden="true" className="home-study-topic-arrow" size={18} />
+                  </Link>
+                );
+              })}
+            </div>
+            <Image alt="" aria-hidden="true" className="home-study-topic-landscape" height={768} sizes="(max-width: 1180px) 100vw, 55vw" src="/assets/home/himi-topics-landscape.png" width={2048} />
           </div>
         </section>
 
-        <section className="home-redesign-section home-redesign-recent" aria-labelledby="home-recent-title">
+        <section className="home-redesign-section home-study-recent" aria-labelledby="home-recent-title">
           <div className="home-redesign-heading-row">
             <h2 id="home-recent-title">Bài học gần đây</h2>
           </div>
-          <div className="home-redesign-recent-list">
-            {recentLessons.map((lesson) => {
-              const RecentIcon = lesson.kind === "industry" ? BriefcaseBusiness : BookOpenText;
-              return (
-                <Link className="home-redesign-recent-item" href={lesson.href} key={lesson.id} prefetch={false}>
-                  <span className={`home-redesign-lesson-icon is-${lesson.kind === "industry" ? "amber" : "coral"}`}><RecentIcon aria-hidden="true" size={25} strokeWidth={2.2} /></span>
-                  <span className="home-redesign-lesson-copy"><strong>{lesson.title}</strong><small>{lesson.subtitle}</small></span>
-                  <span className="home-redesign-progress" aria-label={`Tiến độ ${lesson.progress}%`}>
-                    <i><b style={{ width: `${lesson.progress}%` }} /></i><small>{lesson.progress}%</small>
-                  </span>
-                  <ArrowRight aria-hidden="true" className="home-redesign-lesson-arrow" size={18} />
-                </Link>
-              );
-            })}
-            {recentLessonsLoaded && recentLessons.length === 0 ? <p className="home-redesign-recent-empty">Bạn chưa học bài nào. Hãy mở một bài học để bắt đầu nhé!</p> : null}
-          </div>
+          {recentLessonsLoaded && recentLessons.length === 0 ? (
+            <div className="home-study-recent-empty">
+              <Image alt="" className="home-study-recent-art" height={500} src="/assets/home/himi-recent-reading.png" width={700} />
+              <div className="home-study-recent-empty-copy">
+                <h3>Bạn chưa học bài nào</h3>
+                <p>Hãy mở một bài học để bắt đầu nhé!</p>
+                <Link href="/courses" prefetch={false}>Khám phá bài học <ArrowRight aria-hidden="true" size={17} /></Link>
+              </div>
+            </div>
+          ) : (
+            <div className="home-study-recent-list" aria-live="polite">
+              {recentLessons.map((lesson) => {
+                const RecentIcon = lesson.kind === "industry" ? BriefcaseBusiness : BookOpenText;
+                return (
+                  <Link className="home-study-recent-item" href={lesson.href} key={lesson.id} prefetch={false}>
+                    <span className={`home-study-lesson-icon is-${lesson.kind === "industry" ? "amber" : "coral"}`}><RecentIcon aria-hidden="true" size={23} strokeWidth={2.2} /></span>
+                    <span className="home-study-lesson-copy"><strong>{lesson.title}</strong><small>{lesson.subtitle}</small></span>
+                    <span className="home-study-progress" aria-label={`Tiến độ ${lesson.progress}%`}>
+                      <i><b style={{ width: `${lesson.progress}%` }} /></i><small>{lesson.progress}%</small>
+                    </span>
+                    <ArrowRight aria-hidden="true" className="home-redesign-lesson-arrow" size={18} />
+                  </Link>
+                );
+              })}
+              {recentLessons.length === 1 ? <Image alt="" className="home-study-recent-list-art" height={500} src="/assets/home/himi-recent-reading.png" width={700} /> : null}
+            </div>
+          )}
         </section>
       </div>
 
