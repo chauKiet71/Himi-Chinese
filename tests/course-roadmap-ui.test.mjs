@@ -99,7 +99,7 @@ test("an available course opens an overview that leads to the learner's next les
   assert.match(overviewHtml, /Bạn có thể chọn bất kỳ bài học đang mở/);
   assert.match(overviewHtml, /href="\/learn\/van-phong-hanh-chinh\?lesson=xu-ly-thay-doi-uu-tien"/);
   assert.match(overviewHtml, new RegExp(`href="/learn/van-phong-hanh-chinh\\?lesson=${officeLessons[29].slug}"`));
-  assert.match(overviewHtml, /Mở bài/);
+  assert.match(overviewHtml, /Chưa bắt đầu/);
   assert.match(overviewHtml, /Đã hoàn thành/);
   assert.doesNotMatch(overviewHtml, />Bắt đầu bài học|>Tiếp tục học|>Học lại</);
 
@@ -138,7 +138,7 @@ test("an available course opens an overview that leads to the learner's next les
   assert.match(justOpenedRow, /class="roadmap-circular-progress"/);
   assert.match(justOpenedRow, /aria-label="0% đã học"/);
   assert.match(justOpenedRow, />0%<\/strong>/);
-  assert.doesNotMatch(justOpenedRow, /Mở bài/);
+  assert.doesNotMatch(justOpenedRow, /Chưa bắt đầu/);
   assert.match(justOpenedRow, /^<a /);
 
   const vipRoadmap = buildCourseRoadmap({

@@ -15,6 +15,11 @@ export type PronunciationResult = {
   characterFeedback: Array<"correct" | "incorrect" | "unscored">;
 };
 
+export type PronunciationRecording = {
+  blob: Blob;
+  durationSeconds: number;
+};
+
 type RecorderSession = {
   context: AudioContext;
   source: MediaStreamAudioSourceNode;
@@ -58,6 +63,31 @@ function toPcm16(audio: Float32Array, sourceRate: number) {
   }
 
   return new Uint8Array(pcm.buffer);
+}
+
+function pcm16ToWavBlob(pcm: Uint8Array, sampleRate = 16_000) {
+  const headerSize = 44;
+  const buffer = new ArrayBuffer(headerSize + pcm.byteLength);
+  const view = new DataView(buffer);
+  const writeAscii = (offset: number, value: string) => {
+    for (let index = 0; index < value.length; index += 1) view.setUint8(offset + index, value.charCodeAt(index));
+  };
+
+  writeAscii(0, "RIFF");
+  view.setUint32(4, 36 + pcm.byteLength, true);
+  writeAscii(8, "WAVE");
+  writeAscii(12, "fmt ");
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true);
+  writeAscii(36, "data");
+  view.setUint32(40, pcm.byteLength, true);
+  new Uint8Array(buffer, headerSize).set(pcm);
+  return new Blob([buffer], { type: "audio/wav" });
 }
 
 function bytesToBase64(bytes: Uint8Array) {
@@ -280,6 +310,7 @@ export function PronunciationEvaluator({
   listenRate = 1,
   actionMiddle = null,
   onEvaluated,
+  onRecordingStart,
   previewResult = null,
   playToggleSound = false,
 }: {
@@ -288,7 +319,8 @@ export function PronunciationEvaluator({
   showListen?: boolean;
   listenRate?: number;
   actionMiddle?: ReactNode;
-  onEvaluated?: (result: PronunciationResult) => void;
+  onEvaluated?: (result: PronunciationResult, recording: PronunciationRecording) => void;
+  onRecordingStart?: () => void;
   previewResult?: PronunciationResult | null;
   playToggleSound?: boolean;
 }) {
@@ -338,9 +370,13 @@ export function PronunciationEvaluator({
     }
 
     try {
-      const nextResult = await evaluateWithIflytek(toPcm16(samples, recorder.sampleRate), targetText, webSocketRef);
+      const pcm = toPcm16(samples, recorder.sampleRate);
+      const nextResult = await evaluateWithIflytek(pcm, targetText, webSocketRef);
       setResult(nextResult);
-      onEvaluated?.(nextResult);
+      onEvaluated?.(nextResult, {
+        blob: pcm16ToWavBlob(pcm),
+        durationSeconds: samples.length / recorder.sampleRate,
+      });
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Chưa thể chấm phát âm. Hãy thử lại.");
     } finally {
@@ -352,6 +388,7 @@ export function PronunciationEvaluator({
   }, [stopRecording]);
 
   const startRecording = async () => {
+    onRecordingStart?.();
     setError("");
     setResult(null);
     setSeconds(0);

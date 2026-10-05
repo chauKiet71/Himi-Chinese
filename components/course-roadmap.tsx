@@ -66,7 +66,7 @@ function RoadmapLessonRow({
         aria-label={`${lesson.completionPercent}% đã học`}
         className="roadmap-circular-progress"
         style={{ "--roadmap-progress": `${Math.max(lesson.completionPercent * 3.6, 2)}deg` } as CSSProperties}
-      ><strong>{lesson.completionPercent}%</strong></span> : <span className="roadmap-lesson-status is-available">Mở bài <ChevronRight aria-hidden="true" size={19} /></span>}
+      ><strong>{lesson.completionPercent}%</strong></span> : <span className="roadmap-lesson-status is-available">Chưa bắt đầu <ChevronRight aria-hidden="true" size={19} /></span>}
     </a>;
   }
 

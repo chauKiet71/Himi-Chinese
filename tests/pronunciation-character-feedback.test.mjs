@@ -20,3 +20,11 @@ test("microphone toggle chime plays when recording starts and after it stops", (
   assert.match(evaluator, /const recorder = await releaseRecorder\(\);[\s\S]*?if \(playToggleSound\) playMicToggleChime\(\);/);
   assert.match(evaluator, /if \(!navigator\.mediaDevices\?\.getUserMedia\)[\s\S]*?if \(playToggleSound\) playMicToggleChime\(\);[\s\S]*?navigator\.mediaDevices\.getUserMedia/);
 });
+
+test("a successful evaluation exposes the recorded audio as a playable WAV blob", () => {
+  assert.match(evaluator, /export type PronunciationRecording = \{[\s\S]*?blob: Blob;[\s\S]*?durationSeconds: number;/);
+  assert.match(evaluator, /function pcm16ToWavBlob\(pcm: Uint8Array, sampleRate = 16_000\)/);
+  assert.match(evaluator, /new Blob\(\[buffer\], \{ type: "audio\/wav" \}\)/);
+  assert.match(evaluator, /onEvaluated\?\.\(nextResult, \{[\s\S]*?blob: pcm16ToWavBlob\(pcm\)/);
+  assert.match(evaluator, /const startRecording = async \(\) => \{[\s\S]*?onRecordingStart\?\.\(\);/);
+});

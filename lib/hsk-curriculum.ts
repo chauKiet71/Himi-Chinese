@@ -595,8 +595,8 @@ export const HSK_CURRICULUM: HskCurriculumLevel[] = [
     symbol: "伍",
     description: "36 bài HSK 5 từ Sách bài tập Tập 1 và Giáo trình chuẩn Tập 2, được tổ chức thành lộ trình học và luyện tập.",
     topics: [
-      ...HSK_5_WORKBOOK_1_TOPICS.map((topic) => ({ ...topic, title: `Sách bài tập Tập 1 · ${topic.title}` })),
-      ...HSK_5_TEXTBOOK_TOPICS.map((topic) => ({ ...topic, title: `Giáo trình Tập 2 · ${topic.title}` })),
+      ...HSK_5_WORKBOOK_1_TOPICS,
+      ...HSK_5_TEXTBOOK_TOPICS,
     ],
   },
   {

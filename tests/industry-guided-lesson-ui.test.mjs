@@ -29,8 +29,13 @@ test("industry roadmap lessons use the immersive guided lesson interface", async
   assert.doesNotMatch(component, /Nhấn để đọc/);
   assert.match(component, /pronunciationResult \? " has-result" : " is-pending"/);
   assert.match(component, /pronunciationResult \? <div className="industry-pronunciation-score"/);
-  assert.match(component, /pronunciationResult \? <button className="industry-listen-sample"/);
-  assert.match(component, /<span>Nghe lại<\/span>/);
+  assert.match(component, /pronunciationResult && recordingUrls\[currentPhrase\.id\] \? <button/);
+  assert.match(component, /onClick=\{playUserRecording\}/);
+  assert.match(component, /onRecordingStart=\{stopAudio\}/);
+  assert.match(component, /URL\.createObjectURL\(recording\.blob\)/);
+  assert.match(component, /URL\.revokeObjectURL\(previousUrl\)/);
+  assert.match(component, /Phát lại bản ghi âm của bạn/);
+  assert.match(component, /playingRecordingId === currentPhrase\.id \? "Đang phát" : "Nghe lại"/);
   assert.doesNotMatch(component, /industry-speed-control/);
   assert.match(component, /result\?\.characterFeedback\[hanziIndex\+\+\] \?\? "unscored"/);
   assert.match(component, /industry-listening-character is-\$\{state\}/);

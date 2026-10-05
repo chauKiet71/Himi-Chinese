@@ -48,6 +48,23 @@ test("HSK 5 workbook 1 converts all lessons into the HSK 1 learning shape", asyn
   assert.ok(hsk5);
   assert.equal(hsk5.topics.length, 12);
   assert.equal(hsk5.topics.flatMap((topic) => topic.lessons).length, 36);
+  assert.deepEqual(
+    hsk5.topics.map((topic) => topic.title),
+    [
+      "Hiểu cuộc sống",
+      "Bàn chuyện xưa và nay",
+      "Lắng nghe câu chuyện",
+      "Đến gần khoa học",
+      "Nhìn ra thế giới",
+      "Tu dưỡng bản thân",
+      "Giao lưu văn hóa",
+      "Hiểu về giáo dục",
+      "Cảm nhận về đời người",
+      "Quan tâm kinh tế",
+      "Quan sát xã hội",
+      "Gần với thiên nhiên",
+    ],
+  );
   const workbookLessons = hsk5.topics.flatMap((topic) => topic.lessons).filter((item) => item.kind === "workbook");
   assert.equal(workbookLessons.length, 18);
   assert.ok(workbookLessons.every((item) => item.available && item.availabilityLabel === undefined && item.scoredExercises === false));

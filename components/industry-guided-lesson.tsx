@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, BarChart3, BookOpen, Bookmark, Check, Headphones, List, PenLine, Play, Target, Trophy, Volume2, X } from "lucide-react";
 import { LessonSpeedMenu, type LessonPlaybackRate } from "@/components/lesson-speed-menu";
-import { PronunciationEvaluator, type PronunciationResult } from "@/components/pronunciation-evaluator";
+import { PronunciationEvaluator, type PronunciationRecording, type PronunciationResult } from "@/components/pronunciation-evaluator";
 import { VipContentGate } from "@/components/vip-upgrade-prompt";
 import { speakMandarin } from "@/lib/client-mandarin-audio";
 import type { Course, DialogueLine, LessonAccess, LessonDetail, LessonProgressState, LessonSummary } from "@/lib/content-types";
@@ -70,8 +70,11 @@ export function IndustryGuidedLesson({ course, lessons, lesson, access, progress
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [savedSlugs, setSavedSlugs] = useState<Set<string>>(() => new Set());
   const [pronunciationResults, setPronunciationResults] = useState<Record<string, PronunciationResult>>({});
+  const [recordingUrls, setRecordingUrls] = useState<Record<string, string>>({});
+  const [playingRecordingId, setPlayingRecordingId] = useState<string | null>(null);
   const [completed, setCompleted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const recordingUrlsRef = useRef<Record<string, string>>({});
   const router = useRouter();
 
   const totalSteps = availableSections.reduce((total, item) => total + sectionItems[item].length, 0);
@@ -98,9 +101,13 @@ export function IndustryGuidedLesson({ course, lessons, lesson, access, progress
     }
     if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel();
     setIsSpeaking(false);
+    setPlayingRecordingId(null);
   }, []);
 
-  useEffect(() => () => stopAudio(), [stopAudio]);
+  useEffect(() => () => {
+    stopAudio();
+    Object.values(recordingUrlsRef.current).forEach((url) => URL.revokeObjectURL(url));
+  }, [stopAudio]);
 
   useEffect(() => {
     if (!authenticated || !access.allowed) return;
@@ -158,6 +165,41 @@ export function IndustryGuidedLesson({ course, lessons, lesson, access, progress
       body: JSON.stringify({ vocabularySlug: currentWord.slug, saved: !isSaved }),
     }).catch(() => undefined);
   };
+
+  const receivePronunciation = useCallback((phraseId: string, result: PronunciationResult, recording: PronunciationRecording) => {
+    const recordingUrl = URL.createObjectURL(recording.blob);
+    const previousUrl = recordingUrlsRef.current[phraseId];
+    if (previousUrl) URL.revokeObjectURL(previousUrl);
+    recordingUrlsRef.current = { ...recordingUrlsRef.current, [phraseId]: recordingUrl };
+    setRecordingUrls((items) => ({ ...items, [phraseId]: recordingUrl }));
+    setPronunciationResults((items) => ({ ...items, [phraseId]: result }));
+  }, []);
+
+  const playUserRecording = useCallback(async () => {
+    if (!currentPhrase) return;
+    const recordingUrl = recordingUrlsRef.current[currentPhrase.id];
+    if (!recordingUrl) return;
+    if (playingRecordingId === currentPhrase.id) {
+      stopAudio();
+      return;
+    }
+
+    stopAudio();
+    const audio = new Audio(recordingUrl);
+    audioRef.current = audio;
+    setPlayingRecordingId(currentPhrase.id);
+    const finish = () => {
+      if (audioRef.current === audio) audioRef.current = null;
+      setPlayingRecordingId((activeId) => activeId === currentPhrase.id ? null : activeId);
+    };
+    audio.addEventListener("ended", finish, { once: true });
+    audio.addEventListener("error", finish, { once: true });
+    try {
+      await audio.play();
+    } catch {
+      finish();
+    }
+  }, [currentPhrase, playingRecordingId, stopAudio]);
 
   const finishLesson = useCallback(() => {
     if (!authenticated) {
@@ -254,8 +296,8 @@ export function IndustryGuidedLesson({ course, lessons, lesson, access, progress
         <div className="industry-pronunciation-shell">
           <div className={`industry-pronunciation-dock${pronunciationResult ? " has-result" : " is-pending"}`}>
             {pronunciationResult ? <div className="industry-pronunciation-score"><span><BarChart3 size={15} />Điểm phát âm</span><strong>{pronunciationResult.totalScore}<small>/ 100</small></strong></div> : null}
-            <div className="industry-pronunciation-control"><PronunciationEvaluator compact key={currentPhrase.id} onEvaluated={(result) => setPronunciationResults((items) => ({ ...items, [currentPhrase.id]: result }))} playToggleSound showListen={false} targetText={currentPhrase.hanzi} /></div>
-            {pronunciationResult ? <button className="industry-listen-sample" onClick={playCurrent} type="button"><Headphones size={20} /><span>Nghe lại</span></button> : null}
+            <div className="industry-pronunciation-control"><PronunciationEvaluator compact key={currentPhrase.id} onEvaluated={(result, recording) => receivePronunciation(currentPhrase.id, result, recording)} onRecordingStart={stopAudio} playToggleSound showListen={false} targetText={currentPhrase.hanzi} /></div>
+            {pronunciationResult && recordingUrls[currentPhrase.id] ? <button aria-label={playingRecordingId === currentPhrase.id ? "Dừng phát bản ghi âm" : "Phát lại bản ghi âm của bạn"} aria-pressed={playingRecordingId === currentPhrase.id} className="industry-listen-sample" onClick={playUserRecording} type="button"><Headphones size={20} /><span>{playingRecordingId === currentPhrase.id ? "Đang phát" : "Nghe lại"}</span></button> : null}
           </div>
         </div>
         </article> : <article className="industry-empty-card"><h1>Bài học đang được cập nhật</h1><p>Hãy chọn phần học khác để tiếp tục.</p></article>}
