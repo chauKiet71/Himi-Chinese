@@ -37,10 +37,10 @@ type Topic = {
 };
 
 const FEATURES = [
-  { title: "Luyện viết", description: "Tập viết Hán tự đúng nét, nhớ lâu hơn.", action: "Bắt đầu luyện viết", href: "/writing", image: "/assets/home/features/feature-himi-writing.png", tone: "rose" },
-  { title: "Luyện nghe", description: "Nghe hội thoại thực tế, làm quen phát âm chuẩn.", action: "Bắt đầu luyện nghe", href: "/listening", image: "/assets/home/features/feature-himi-listening.png", tone: "apricot" },
-  { title: "Luyện gõ", description: "Gõ pinyin nhanh và chính xác theo ngữ cảnh.", action: "Bắt đầu luyện gõ", href: "/typing", image: "/assets/home/features/feature-himi-typing.png", tone: "blue" },
-  { title: "Giáo trình HSK", description: "Học theo giáo trình chuẩn, chinh phục từng cấp độ.", action: "Khám phá giáo trình", href: "/courses?view=hsk", image: "/assets/home/features/feature-himi-hsk.png", tone: "lilac" },
+  { title: "Luyện viết", description: "Tập viết Hán tự đúng nét, nhớ lâu hơn.", action: "Bắt đầu luyện viết", href: "/writing", image: "/assets/home/features/feature-himi-writing.webp", tone: "rose" },
+  { title: "Luyện nghe", description: "Nghe hội thoại thực tế, làm quen phát âm chuẩn.", action: "Bắt đầu luyện nghe", href: "/listening", image: "/assets/home/features/feature-himi-listening.webp", tone: "apricot" },
+  { title: "Luyện gõ", description: "Gõ pinyin nhanh và chính xác theo ngữ cảnh.", action: "Bắt đầu luyện gõ", href: "/typing", image: "/assets/home/features/feature-himi-typing.webp", tone: "blue" },
+  { title: "Giáo trình HSK", description: "Học theo giáo trình chuẩn, chinh phục từng cấp độ.", action: "Khám phá giáo trình", href: "/courses?view=hsk", image: "/assets/home/features/feature-himi-hsk.webp", tone: "lilac" },
 ] as const;
 
 const TOPICS: Topic[] = [
@@ -106,9 +106,11 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
             alt=""
             className="home-redesign-cover-image"
             fill
-            priority
+            fetchPriority="high"
+            loading="lazy"
             sizes="(min-width: 721px) calc(100vw - 240px), 100vw"
-            src="/assets/home/home-hero-cover-desktop.png"
+            src="/assets/home/home-hero-cover-desktop.webp"
+            unoptimized
           />
           <span className="home-redesign-sun" />
           <span className="home-redesign-cloud home-redesign-cloud-one" />
@@ -119,8 +121,7 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
         </div>
 
         <div aria-hidden="true" className="home-redesign-mascot-wrap">
-          <Image alt="" className="home-redesign-mascot is-desktop" height={640} priority src="/assets/mascot/himi-v2/himi-wave.webp" width={640} />
-          <Image alt="" className="home-redesign-mascot is-mobile" height={1024} priority src="/assets/home/mobile/home-mobile-hero-penguin-cutout.png" width={1536} />
+          <Image alt="" className="home-redesign-mascot is-mobile" fetchPriority="high" height={1024} loading="lazy" src="/assets/home/mobile/home-mobile-hero-penguin-cutout.webp" unoptimized width={1536} />
           <span className="home-redesign-spark is-one" />
           <span className="home-redesign-spark is-two" />
         </div>
@@ -140,7 +141,7 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
                 <p>{feature.description}</p>
               </span>
               <span aria-hidden="true" className="home-study-feature-action"><span>{feature.action}</span><ArrowRight size={18} strokeWidth={2.5} /></span>
-              <Image alt="" className="home-study-feature-art" height={700} sizes="(max-width: 900px) 50vw, 25vw" src={feature.image} width={700} />
+              <Image alt="" className="home-study-feature-art" height={700} sizes="(max-width: 900px) 50vw, 25vw" src={feature.image} unoptimized width={700} />
             </Link>
           ))}
         </div>
@@ -165,7 +166,7 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
                 );
               })}
             </div>
-            <Image alt="" aria-hidden="true" className="home-study-topic-landscape" height={768} sizes="(max-width: 1180px) 100vw, 55vw" src="/assets/home/himi-topics-landscape.png" width={2048} />
+            <Image alt="" aria-hidden="true" className="home-study-topic-landscape" height={768} sizes="(max-width: 1180px) 100vw, 55vw" src="/assets/home/himi-topics-landscape.webp" unoptimized width={2048} />
           </div>
         </section>
 
@@ -175,7 +176,7 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
           </div>
           {recentLessonsLoaded && recentLessons.length === 0 ? (
             <div className="home-study-recent-empty">
-              <Image alt="" className="home-study-recent-art" height={500} src="/assets/home/himi-recent-reading.png" width={700} />
+              <Image alt="" className="home-study-recent-art" height={500} src="/assets/home/himi-recent-reading.webp" unoptimized width={700} />
               <div className="home-study-recent-empty-copy">
                 <h3>Bạn chưa học bài nào</h3>
                 <p>Hãy mở một bài học để bắt đầu nhé!</p>
@@ -197,7 +198,7 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
                   </Link>
                 );
               })}
-              {recentLessons.length === 1 ? <Image alt="" className="home-study-recent-list-art" height={500} src="/assets/home/himi-recent-reading.png" width={700} /> : null}
+              {recentLessons.length === 1 ? <Image alt="" className="home-study-recent-list-art" height={500} src="/assets/home/himi-recent-reading.webp" unoptimized width={700} /> : null}
             </div>
           )}
         </section>

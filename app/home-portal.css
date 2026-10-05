@@ -2257,7 +2257,7 @@ body:has(.home-redesign) {
   }
 
   .home-redesign-landscape {
-    background-image: url("/assets/home/mobile/home-mobile-hero-background.png");
+    background-image: url("/assets/home/mobile/home-mobile-hero-background.webp");
     background-position: center;
     background-size: cover;
   }

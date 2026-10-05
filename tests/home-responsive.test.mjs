@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import test from "node:test";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
@@ -28,14 +28,13 @@ test("home dashboard uses the selected Himi study artwork and keeps four feature
   const page = await read("components/review-home-studio.tsx");
   const css = await read("app/home-portal.css");
 
-  assert.match(page, /\/assets\/mascot\/himi-v2\/himi-wave\.webp/);
-  assert.match(page, /\/assets\/home\/features\/feature-himi-writing\.png/);
-  assert.match(page, /\/assets\/home\/features\/feature-himi-listening\.png/);
-  assert.match(page, /\/assets\/home\/features\/feature-himi-typing\.png/);
-  assert.match(page, /\/assets\/home\/features\/feature-himi-hsk\.png/);
-  assert.match(page, /\/assets\/home\/himi-recent-reading\.png/);
-  assert.match(page, /\/assets\/home\/himi-topics-landscape\.png/);
-  assert.match(page, /home-hero-cover-desktop\.png/);
+  assert.match(page, /\/assets\/home\/features\/feature-himi-writing\.webp/);
+  assert.match(page, /\/assets\/home\/features\/feature-himi-listening\.webp/);
+  assert.match(page, /\/assets\/home\/features\/feature-himi-typing\.webp/);
+  assert.match(page, /\/assets\/home\/features\/feature-himi-hsk\.webp/);
+  assert.match(page, /\/assets\/home\/himi-recent-reading\.webp/);
+  assert.match(page, /\/assets\/home\/himi-topics-landscape\.webp/);
+  assert.match(page, /home-hero-cover-desktop\.webp/);
   assert.match(css, /\.home-redesign-cover-image\s*\{[^}]*object-fit:\s*cover/);
   assert.match(css, /\.home-study-feature-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(4, minmax\(0, 1fr\)\)/);
   assert.match(css, /\.home-study-topic-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
@@ -50,7 +49,7 @@ test("home dashboard matches the compact mobile reference and preserves bottom n
   const shell = await read("components/learner-app-shell.tsx");
   const brand = await read("components/brand-logo.tsx");
 
-  assert.match(page, /home-mobile-hero-penguin-cutout\.png/);
+  assert.match(page, /home-mobile-hero-penguin-cutout\.webp/);
   assert.match(page, /home-redesign-mobile-title[\s\S]*Học tiếng Trung thật/);
   assert.doesNotMatch(page, /home-redesign-mobile-nav|href="\/practice"/);
   assert.match(css, /Mobile home composition based on the selected compact app reference/);
@@ -67,6 +66,23 @@ test("home dashboard matches the compact mobile reference and preserves bottom n
   assert.match(shell, /<BrandMark priority variant=\{pathname === "\/" \? "face" : "mascot"\} \/>/);
   assert.match(brand, /variant === "face" \? FACE_BRAND_LOGO_SOURCE : BRAND_LOGO_SOURCE/);
   assert.match(brand, /himi-sidebar-logo-transparent\.webp/);
+});
+
+test("home illustrations stay within a compact transfer budget", async () => {
+  const files = [
+    "public/assets/home/home-hero-cover-desktop.webp",
+    "public/assets/home/mobile/home-mobile-hero-background.webp",
+    "public/assets/home/mobile/home-mobile-hero-penguin-cutout.webp",
+    "public/assets/home/features/feature-himi-writing.webp",
+    "public/assets/home/features/feature-himi-listening.webp",
+    "public/assets/home/features/feature-himi-typing.webp",
+    "public/assets/home/features/feature-himi-hsk.webp",
+    "public/assets/home/himi-recent-reading.webp",
+    "public/assets/home/himi-topics-landscape.webp",
+  ];
+  const sizes = await Promise.all(files.map(async (path) => (await stat(new URL(`../${path}`, import.meta.url))).size));
+
+  assert.ok(sizes.reduce((total, size) => total + size, 0) < 850_000);
 });
 
 test("home welcome offer remains compact on desktop and phone viewports", async () => {
