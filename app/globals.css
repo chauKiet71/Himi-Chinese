@@ -11639,20 +11639,21 @@ body:has(.learner-app-shell) > .mobile-nav {
 }
 
 .writing-game-back {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 18px;
+  left: 18px;
   z-index: 32;
   display: grid;
   place-items: center;
   cursor: pointer;
   color: #0c766a;
   border: 1px solid #e2d8bb;
-  border-radius: 14px;
-  background: #fffdf5;
-  box-shadow: 0 8px 20px rgba(31, 72, 58, .1);
+  border-radius: 15px;
+  background: rgba(255, 253, 245, .88);
+  box-shadow: 0 10px 28px rgba(31, 72, 58, .1);
+  backdrop-filter: blur(12px);
   transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
 }
 
@@ -11675,27 +11676,37 @@ body:has(.learner-app-shell) > .mobile-nav {
 
 .writing-arena-metrics {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 18px;
+  right: 18px;
   z-index: 30;
   display: flex;
   align-items: stretch;
-  gap: 10px;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid rgba(226, 216, 187, .9);
+  border-radius: 18px;
+  background: rgba(255, 253, 245, .88);
+  box-shadow: 0 10px 30px rgba(31, 72, 58, .1);
+  backdrop-filter: blur(12px);
 }
 
 .writing-arena-metrics > span {
-  min-width: 88px;
-  min-height: 66px;
-  padding: 10px 12px 9px;
+  min-width: 82px;
+  min-height: 54px;
+  padding: 8px 12px 7px;
   display: grid;
   place-content: center;
   justify-items: center;
-  gap: 5px;
+  gap: 4px;
   color: #0a4d44;
-  border: 1px solid #e2d8bb;
-  border-radius: 13px;
-  background: #fffdf5;
-  box-shadow: 0 8px 20px rgba(31, 72, 58, .08);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.writing-arena-metrics > span + span {
+  border-left: 1px solid rgba(226, 216, 187, .88);
 }
 
 .writing-arena-metrics strong {
@@ -11718,55 +11729,103 @@ body:has(.learner-app-shell) > .mobile-nav {
 }
 
 .writing-arena-topline {
-  min-height: 58px;
-  padding: 0 220px 0 72px;
-  position: relative;
-  z-index: 6;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 14px;
+  min-height: 82px;
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 31;
+  pointer-events: none;
   color: #164e43;
 }
 
 .writing-arena-controls {
+  position: absolute;
+  top: 18px;
+  left: 74px;
   display: flex;
   align-items: center;
   gap: 7px;
+  pointer-events: auto;
 }
 
 .writing-arena-controls button,
 .writing-current-word button {
-  width: 36px;
-  height: 36px;
+  width: 46px;
+  height: 46px;
   display: grid;
   place-items: center;
   cursor: pointer;
   color: #0c6f61;
   border: 1px solid rgba(8, 112, 97, .18);
+  border-radius: 15px;
+  background: rgba(255, 255, 248, .88);
+  box-shadow: 0 10px 28px rgba(31, 72, 58, .1);
+  backdrop-filter: blur(12px);
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+}
+
+.writing-current-word button {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: rgba(255, 255, 248, .76);
+  backdrop-filter: none;
 }
 
 .writing-arena-controls button:disabled {
   cursor: default;
-  opacity: .45;
+  opacity: .55;
 }
 
 .writing-arena-topline > span:nth-child(2) {
-  justify-self: center;
-  padding: 7px 14px;
+  min-height: 42px;
+  padding: 0 17px;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 999px;
   background: rgba(33, 120, 87, .12);
   font-size: 10px;
   font-weight: 820;
-  letter-spacing: .06em;
+  letter-spacing: .08em;
+  box-shadow: 0 8px 24px rgba(31, 72, 58, .08);
+  backdrop-filter: blur(12px);
+  translate: -50% 0;
 }
 
 .writing-hearts {
+  min-height: 42px;
+  padding: 0 14px;
+  position: absolute;
+  top: 20px;
+  right: 204px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
   color: #f0a330;
+  border: 1px solid rgba(226, 216, 187, .9);
+  border-radius: 999px;
+  background: rgba(255, 253, 245, .88);
+  box-shadow: 0 8px 24px rgba(31, 72, 58, .08);
+  backdrop-filter: blur(12px);
+  pointer-events: auto;
+}
+
+.writing-game-back:focus-visible,
+.writing-arena-controls button:focus-visible {
+  outline: 3px solid rgba(255, 76, 59, .3);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .writing-arena-controls button:not(:disabled):hover {
+    color: #075f57;
+    background: #f2fbf6;
+    box-shadow: 0 12px 30px rgba(31, 72, 58, .14);
+    transform: translateY(-2px);
+  }
 }
 
 .writing-target-ribbon {
@@ -12179,7 +12238,7 @@ body:has(.learner-app-shell) > .mobile-nav {
   font: inherit;
   font-size: 12px;
   font-weight: 760;
-  transform: translate(-50%, -50%);
+  translate: -50% -50%;
 }
 
 .writing-answer-bar {
@@ -12487,7 +12546,6 @@ body:has(.learner-app-shell) > .mobile-nav {
   .writing-arena-metrics {
     top: 10px;
     right: 10px;
-    gap: 6px;
   }
 
   .writing-game-back {
@@ -12499,10 +12557,9 @@ body:has(.learner-app-shell) > .mobile-nav {
   }
 
   .writing-arena-metrics > span {
-    min-width: 65px;
-    min-height: 54px;
+    min-width: 61px;
+    min-height: 50px;
     padding: 7px 8px 6px;
-    border-radius: 11px;
   }
 
   .writing-arena-metrics strong {
@@ -12514,14 +12571,29 @@ body:has(.learner-app-shell) > .mobile-nav {
   }
 
   .writing-arena-topline {
-    min-height: 58px;
-    padding: 0 156px 0 60px;
-    grid-template-columns: auto 1fr;
-    gap: 8px;
+    min-height: 70px;
+  }
+
+  .writing-arena-controls {
+    top: 10px;
+    left: 62px;
+  }
+
+  .writing-arena-controls button {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
   }
 
   .writing-arena-topline > span:nth-child(2) {
     display: none;
+  }
+
+  .writing-hearts {
+    min-height: 34px;
+    padding-inline: 10px;
+    top: 64px;
+    right: 11px;
   }
 
   .writing-arena {
@@ -12738,10 +12810,10 @@ body:has(.learner-app-shell) > .mobile-nav {
     padding-right: max(8px, env(safe-area-inset-right));
     padding-left: max(8px, env(safe-area-inset-left));
   }
-  .writing-arena-metrics { right: 8px; gap: 4px; }
-  .writing-arena-metrics > span { min-width: 58px; padding-inline: 6px; }
+  .writing-arena-metrics { right: 8px; }
+  .writing-arena-metrics > span { min-width: 56px; padding-inline: 6px; }
   .writing-arena-metrics strong { font-size: 15px; }
-  .writing-arena-topline { padding-right: 132px; }
+  .writing-hearts { right: 9px; }
   .writing-arena { border-radius: 19px; }
   .writing-falling-word { width: 105px; }
   .writing-penguin { width: 150px; }
@@ -12761,7 +12833,9 @@ body:has(.learner-app-shell) > .mobile-nav {
   .writing-game-back { top: 7px; left: 7px; }
   .writing-arena-metrics { top: 7px; right: 7px; }
   .writing-arena-metrics > span { min-height: 46px; }
-  .writing-arena-topline { min-height: 50px; }
+  .writing-arena-topline { min-height: 58px; }
+  .writing-arena-controls { top: 7px; left: 59px; }
+  .writing-hearts { top: 59px; right: 8px; }
   .writing-falling-word { width: 100px; min-height: 58px; }
   .writing-penguin { width: 126px; top: 57%; }
   .writing-target-ribbon { bottom: 9px; }

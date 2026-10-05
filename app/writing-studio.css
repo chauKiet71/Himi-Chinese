@@ -11,7 +11,8 @@
     #fbfaf6;
 }
 
-.writing-catalog-page {
+.writing-catalog-page,
+.writing-lesson-page {
   width: min(1480px, calc(100% - 40px));
   margin: 0 auto;
   padding: 26px 0 68px;
@@ -208,6 +209,8 @@
 }
 
 .writing-lesson-page .writing-lesson-list-section {
+  width: 100%;
+  max-width: none;
   margin-top: 0;
 }
 
@@ -237,8 +240,8 @@
 .writing-lesson-grid {
   margin-top: 22px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .writing-lesson-card {
@@ -963,6 +966,7 @@
 }
 
 @media (max-width: 1220px) {
+  .writing-lesson-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .writing-single-lesson { grid-template-columns: 88px minmax(0, 1fr); }
   .writing-single-lesson-action { grid-column: 2; grid-template-columns: auto auto minmax(170px, .6fr); align-items: center; }
   .writing-single-lesson-action a { margin: 0; }
@@ -1008,7 +1012,8 @@
       max(12px, env(safe-area-inset-left));
     overflow-x: clip;
   }
-  .writing-catalog-page {
+  .writing-catalog-page,
+  .writing-lesson-page {
     width: 100%;
     margin-inline: 0;
   }

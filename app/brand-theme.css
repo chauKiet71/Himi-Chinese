@@ -1384,11 +1384,29 @@ body {
   box-shadow: 0 6px 18px rgba(34, 34, 34, .06);
 }
 .writing-game-dashboard .writing-game-back:hover { background: var(--himi-red-soft); }
+.writing-game-dashboard .writing-arena-metrics {
+  border-color: var(--himi-line);
+  background: color-mix(in srgb, var(--himi-white) 88%, transparent);
+}
+.writing-game-dashboard .writing-arena-metrics > span {
+  background: transparent;
+  box-shadow: none;
+}
+.writing-game-dashboard .writing-arena-metrics > span + span { border-color: var(--himi-line); }
+.writing-game-dashboard .writing-arena-metrics strong { color: var(--himi-red); }
 .writing-game-dashboard :is(.writing-arena-topline, .writing-current-word strong, .writing-game-overlay, .writing-answer-bar input) { color: var(--himi-black); }
 .writing-game-dashboard :is(.writing-arena-metrics em, .writing-arena-metrics small, .writing-course-current > span, .writing-game-overlay p, .writing-game-overlay > small, .writing-answer-bar > label, .writing-answer-bar > span, .writing-current-word p, .writing-session-note p, .writing-howto li, .writing-session-summary-copy > small) { color: var(--himi-muted); }
 .writing-game-dashboard :is(.writing-current-word > span, .writing-current-word b, .writing-howto > span, .writing-howto li b, .writing-overlay-kicker, .writing-session-summary-action) { color: var(--forest-deep); }
-.writing-game-dashboard .writing-hearts { color: var(--himi-red); }
-.writing-game-dashboard .writing-arena-topline > span:nth-child(2) { background: var(--himi-orange-soft); }
+.writing-game-dashboard .writing-hearts {
+  color: var(--himi-red);
+  border-color: var(--himi-line);
+  background: color-mix(in srgb, var(--himi-white) 88%, transparent);
+}
+.writing-game-dashboard .writing-arena-topline > span:nth-child(2) {
+  color: var(--himi-red);
+  border: 1px solid color-mix(in srgb, var(--himi-red) 20%, var(--himi-line));
+  background: color-mix(in srgb, var(--himi-red-soft) 82%, transparent);
+}
 .writing-game-dashboard :is(.writing-target-ribbon, .writing-overlay-mark, .writing-session-note, .writing-session-summary-icon) {
   color: var(--himi-black);
   border-color: var(--himi-line);

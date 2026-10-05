@@ -52,13 +52,15 @@ const TOPICS: Topic[] = [
   { title: "Học tập", lessons: 25, href: "/courses?view=hsk", icon: GraduationCap, tone: "indigo" },
 ];
 
+const RECENT_LESSON_LIMIT = 4;
+
 export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: ReviewHomeStudioProps) {
   const [recentLessons, setRecentLessons] = useState<RecentLearningHistoryEntry[]>([]);
   const [recentLessonsLoaded, setRecentLessonsLoaded] = useState(false);
 
   useEffect(() => {
     const refreshRecentLessons = () => {
-      setRecentLessons(readRecentLearningHistory().slice(0, 3));
+      setRecentLessons(readRecentLearningHistory().slice(0, RECENT_LESSON_LIMIT));
       setRecentLessonsLoaded(true);
     };
     const handleStorage = (event: StorageEvent) => {

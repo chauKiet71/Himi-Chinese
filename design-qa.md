@@ -49,6 +49,49 @@ final result: passed
 
 ---
 
+# Design QA — Thanh HUD trò chơi chém từ (2026-10-06)
+
+- Source visual truth path: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-ae8e7073-f305-49b5-a910-2ae7a4e677cb.png` (1424 × 86 px), thể hiện trạng thái HUD trước khi làm đẹp.
+- Implementation: `http://localhost:3001/games`.
+- Implementation screenshot path: ảnh chụp trực tiếp trong Codex in-app Browser ở lượt này; API chụp trình duyệt không cung cấp đường dẫn tệp cục bộ.
+- Desktop evidence: viewport 1560 × 1189 CSS px, vùng HUD được kiểm tra ở 1560 × 115 px.
+- Responsive evidence: viewport override 390 × 844, trình duyệt báo content viewport 520 × 1125 CSS px theo mật độ hiển thị của thiết bị; vùng HUD được kiểm tra ở 520 × 135 px.
+- State: trò chơi đang tạm dừng, lượt 1, ba tim, điểm và số từ đã chém đều bằng 0.
+
+## Full-view comparison evidence
+
+- Ảnh nguồn và bản triển khai sau chỉnh sửa được mở trong cùng một lượt QA. Nội dung, thứ tự và chức năng của HUD được giữ nguyên; thay đổi chỉ làm rõ nhóm điều khiển, lượt chơi, số tim và thống kê.
+- Desktop dùng ba cụm cân bằng: hai nút 46px bên trái, pill lượt chơi nằm đúng tâm tuyệt đối, và cụm tim + thống kê ở bên phải. Kiểm tra hình học xác nhận không có phần tử HUD nào chồng lấn.
+- Mobile giữ nút quay lại/tạm dừng trên cùng, thống kê ở góc phải và chuyển tim xuống một hàng nhỏ bên dưới; ảnh chụp xác nhận không tràn ngang hoặc che nội dung mục tiêu.
+
+## Focused region comparison evidence
+
+- Fonts and typography: giữ nguyên font dự án; nhãn 8–10px vẫn đọc được, số thống kê dùng màu đỏ thương hiệu để tăng thứ bậc, pill `LƯỢT 1` có tracking và trọng lượng đồng nhất.
+- Spacing and layout rhythm: back/pause cùng kích thước và radius; lượt chơi căn chính xác tại 50%; tim cách cụm thống kê 8px; hai chỉ số dùng một capsule phân đoạn thay vì hai hộp rời.
+- Colors and visual tokens: dùng `--himi-white`, `--himi-red`, `--himi-red-soft`, `--himi-line` và nền kính mờ 88%, nhất quán với giao diện Himi hiện có.
+- Image quality and asset fidelity: hình nền tre và toàn bộ asset trò chơi được giữ nguyên; không thêm placeholder, CSS art hoặc raster asset mới.
+- Copy and content: `LƯỢT`, `ĐÃ CHÉM`, `ĐIỂM` và trạng thái ba tim được giữ nguyên; aria-label của các điều khiển không đổi.
+
+## Findings and comparison history
+
+1. Baseline P2: pill lượt chơi lệch khỏi tâm vì grid có padding trái/phải không cân, còn tim và hai thẻ thống kê trông như các phần tử rời rạc.
+2. Fix: chuyển topline sang lớp HUD tuyệt đối, căn lượt chơi bằng `left: 50%` + `translate`, gom hai thống kê thành capsule phân đoạn và cho các điều khiển dùng cùng surface/radius/shadow.
+3. Responsive P2: nếu giữ vị trí desktop, tim có thể cạnh tranh không gian với thống kê trên màn hình hẹp.
+4. Fix: ở mobile, tim chuyển xuống dưới cụm thống kê, trong khi hai nút trái vẫn giữ vùng chạm 44px.
+5. Post-fix evidence: desktop không có overlap; mobile không có overlap/tràn ngang; browser console không có warning/error.
+
+## Verification
+
+- Focused slice-game test: passed.
+- `git diff --check`: passed.
+- Desktop and responsive browser captures: passed.
+- Browser console warnings/errors: none.
+- Primary controls and their accessible names remain present.
+
+Không còn P0, P1 hoặc P2 có thể hành động trong phạm vi thanh HUD này.
+
+final result: passed
+
 # Design QA — Form hoàn thành bài học ngành nghề
 
 - Source visual truth: ảnh tham chiếu người dùng đính kèm trong Browser Comment 1 (ảnh 732 × 582 px; tệp nguồn không được trình duyệt cung cấp đường dẫn cục bộ), thể hiện modal hoàn thành nền trắng với cúp vàng, ba ô thống kê và hai hành động.
@@ -4337,5 +4380,34 @@ final result: passed
 - Captures: `qa-artifacts/home-topics-open-1440.png`, `home-topics-open-1024.png`, `home-topics-open-720.png`, `home-topics-open-390.png`, `home-topics-open-320.png`.
 - Checked 1440, 1024, 720, 390, 360, and 320 CSS px in the browser. All six topic links and the recent-lesson panel were present, the landscape image loaded, and horizontal overflow was 0 px after layout settled.
 - Targeted tests 6/6 passed; ESLint and `git diff --check` passed.
+
+final result: passed
+
+---
+
+# Design QA — Danh sách bài học luyện viết full-width (2026-10-05)
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-88108937-1d0f-4b06-81cc-74bb39fcfd1e.png` (bố cục full-width, ba cột) và `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-a7bb022b-26ab-43a8-adef-509cff36b6ab.png` (trang danh sách bài học cần chỉnh).
+- Implementation: `/writing/hsk-1` trên local preview `http://localhost:3000/writing/hsk-1`.
+- Scope: chỉ thay đổi chiều rộng khung, số cột và breakpoint; dữ liệu, copy, liên kết và hành vi thẻ bài học giữ nguyên.
+
+## Evidence and responsive result
+
+- Desktop 1634 × 900 CSS px: khung nội dung rộng 1365 px trong phần còn lại sau sidebar, ba cột bằng nhau khoảng 443 px, gap 18 px và không có tràn ngang.
+- Desktop rộng: khung giữ trần 1480 px đúng với catalog HSK tham chiếu; ba thẻ đầu tiên nằm cùng một hàng và đồng đều chiều cao.
+- Tablet 1000 × 900 CSS px: tự chuyển còn hai cột khoảng 356 px; không tràn ngang.
+- Mobile 400 × 900 CSS px: tự chuyển một cột khoảng 363 px, nút hành động chiếm toàn chiều rộng thẻ và không tràn ngang.
+- Typography, màu thương hiệu, badge chữ Hán, viền, shadow và nội dung thẻ không bị thay đổi ngoài việc reflow theo kích thước mới.
+- Không cần thêm hoặc thay thế raster asset cho thay đổi bố cục này.
+
+## Verification
+
+- Targeted rendered HTML test `writing route flows from HSK levels to their lessons and the writing studio`: passed.
+- Scoped ESLint: passed.
+- `git diff --check`: passed.
+- Browser console warnings/errors on the verified route: none.
+- Repository-wide TypeScript check vẫn báo các lỗi nền có sẵn ở CSS `?url` module declarations và một số file ngoài phạm vi; không có lỗi mới từ hai file đã chỉnh.
+
+No actionable P0, P1, or P2 findings remain for this scoped writing-list layout change.
 
 final result: passed

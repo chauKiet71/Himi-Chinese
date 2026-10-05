@@ -15,7 +15,8 @@ test("home dashboard exposes the four core learning paths and useful continuatio
   assert.match(page, /title: "Giáo trình HSK"[\s\S]*href: "\/courses\?view=hsk"/);
   assert.match(page, /Chủ đề phổ biến/);
   assert.match(page, /Bài học gần đây/);
-  assert.match(page, /readRecentLearningHistory\(\)\.slice\(0, 3\)/);
+  assert.match(page, /const RECENT_LESSON_LIMIT = 4/);
+  assert.match(page, /readRecentLearningHistory\(\)\.slice\(0, RECENT_LESSON_LIMIT\)/);
   assert.match(page, /RECENT_LEARNING_HISTORY_CHANGED_EVENT/);
   assert.doesNotMatch(page, /const RECENT_LESSONS/);
   assert.doesNotMatch(page, /href="\/practice" prefetch=\{false\}>Xem tất cả/);

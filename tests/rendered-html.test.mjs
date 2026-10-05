@@ -543,6 +543,10 @@ test("slice game flies to the target, splits the word and reveals its Vietnamese
   assert.doesNotMatch(game, /className="writing-course-current"/);
   assert.doesNotMatch(game, /className="writing-session-aside"/);
   assert.match(styles, /\.writing-hit-score small/);
+  assert.match(styles, /\.writing-pause-overlay \{[\s\S]*?left: 50%;[\s\S]*?top: 50%;[\s\S]*?translate: -50% -50%;/);
+  assert.match(styles, /\.writing-arena-metrics \{[\s\S]*?gap: 0;[\s\S]*?backdrop-filter: blur\(12px\);/);
+  assert.match(styles, /\.writing-arena-topline > span:nth-child\(2\) \{[\s\S]*?left: 50%;[\s\S]*?translate: -50% 0;/);
+  assert.match(styles, /\.writing-hearts \{[\s\S]*?right: 204px;[\s\S]*?border-radius: 999px;/);
   assert.match(styles, /\.writing-game-dashboard:not\(\.writing-course-selection-page\) \.writing-arena-column \{[\s\S]*height: 100%/);
   assert.match(styles, /\.writing-game-dashboard:not\(\.writing-course-selection-page\) \.writing-arena \{[\s\S]*height: auto/);
   assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*?\.writing-penguin \{[\s\S]*?left: -44px;[\s\S]*?top: auto;[\s\S]*?bottom: -42px;/);
@@ -597,11 +601,13 @@ test("writing route flows from HSK levels to their lessons and the writing studi
   assert.match(studio, /import HanziWriter from "hanzi-writer"/);
   assert.doesNotMatch(studio, /import\("hanzi-writer"\)/);
   assert.match(styles, /\.writing-topic-grid/);
-  assert.match(styles, /\.writing-catalog-page \{[\s\S]*?width: min\(1480px, calc\(100% - 40px\)\);[\s\S]*?padding: 26px 0 68px;/);
+  assert.match(styles, /\.writing-catalog-page,\s*\.writing-lesson-page \{[\s\S]*?width: min\(1480px, calc\(100% - 40px\)\);[\s\S]*?padding: 26px 0 68px;/);
   assert.match(styles, /\.writing-topic-section \{[\s\S]*?width: 100%;[\s\S]*?max-width: none;/);
   assert.match(styles, /\.writing-topic-section \{ max-width: 1480px; margin: 0 auto; \}/);
   assert.match(styles, /@media \(min-width: 721px\) and \(max-width: 1050px\) \{[\s\S]*?\.writing-topic-grid \{ grid-template-columns: repeat\(2, minmax\(0, 1fr\)\); \}/);
-  assert.match(styles, /\.writing-lesson-grid/);
+  assert.match(styles, /\.writing-lesson-page \.writing-lesson-list-section \{[\s\S]*?width: 100%;[\s\S]*?max-width: none;/);
+  assert.match(styles, /\.writing-lesson-grid \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(styles, /@media \(max-width: 1220px\) \{[\s\S]*?\.writing-lesson-grid \{ grid-template-columns: repeat\(2, minmax\(0, 1fr\)\); \}/);
   assert.match(studio, /himi-writing-lesson-header/);
   assert.match(studio, /himi-writing-lesson-header-inner/);
   assert.match(studio, /himi-writing-lesson-footer/);
