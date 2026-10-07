@@ -723,7 +723,6 @@ a.hsk-lesson-select::after {
 }
 
 .course-catalog-heading h1 {
-  margin: 0 0 28px;
   color: #153d37;
   font-size: clamp(30px, 3.2vw, 44px);
   line-height: 1.08;

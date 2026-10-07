@@ -52,7 +52,7 @@ type LearnerShellMembership = {
 const learnerRailItems = [
   { href: "/", label: "Học tập", icon: Home, matches: (pathname: string) => pathname === "/" },
   { href: "/courses", label: "Lộ trình", icon: BookOpen, matches: (pathname: string) => pathname.startsWith("/courses") || pathname.startsWith("/learn") || pathname.startsWith("/hsk") },
-  { href: "/games", label: "Trò chơi", icon: Gamepad2, matches: (pathname: string) => pathname.startsWith("/games") },
+  { href: "/games", label: "Trò chơi(Beta)", icon: Gamepad2, matches: (pathname: string) => pathname.startsWith("/games") },
   { href: "/vocabulary", label: "Bộ từ vựng", icon: Layers3, matches: (pathname: string) => pathname.startsWith("/vocabulary") },
 ];
 
@@ -626,7 +626,7 @@ export function LearnerAppShell({
             ))}
           </div>
         </div>
-        <Link aria-current={mobileGamesActive ? "page" : undefined} className={mobileGamesActive ? "active" : ""} href="/games" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/games")} onPointerEnter={() => prepareRoute("/games")} prefetch={false}><Gamepad2 aria-hidden="true" size={20} /><span>Trò chơi</span></Link>
+        <Link aria-current={mobileGamesActive ? "page" : undefined} className={mobileGamesActive ? "active" : ""} href="/games" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/games")} onPointerEnter={() => prepareRoute("/games")} prefetch={false}><Gamepad2 aria-hidden="true" size={20} /><span>Trò chơi(Beta)</span></Link>
         <Link aria-current={mobileVipActive ? "page" : undefined} className={mobileVipActive ? "active" : ""} href="/vip" onClick={(event) => closeMobilePracticeMenuAndNavigate(event, "/vip")} onPointerEnter={() => prepareRoute("/vip")} prefetch={false}><Crown aria-hidden="true" size={20} /><span>VIP</span></Link>
         <Link aria-current={mobileAccountActive ? "page" : undefined} className={mobileAccountActive ? "active" : ""} href={profileHref} onClick={(event) => closeMobilePracticeMenuAndNavigate(event, profileHref)} onPointerEnter={() => prepareRoute(profileHref)} prefetch={false}><UserRound aria-hidden="true" size={20} /><span>Tài khoản</span></Link>
       </nav>
