@@ -18,7 +18,7 @@ test("typing API rechecks login, VIP and item rules; admin covers all 146 lesson
   const modules = {
     "auth-session": "export async function getCurrentUser() { return globalThis.__typingAccessTest.user; }",
     "admin-auth": "export async function requireAdminUser() { const user = globalThis.__typingAccessTest.user; if (!user || user.role !== 'admin') throw new Error('admin_required'); return { ...user, displayName: 'Admin' }; }",
-    "content-access-repository": "export async function getContentAccessPolicies(targets, database, options) { const state = globalThis.__typingAccessTest; state.policyCalls.push({targets, options}); if (state.failure) throw new Error('policy_db_unavailable'); return state.policies.filter(p => targets.some(t => t.type === p.targetType && t.key === p.targetKey)); } export async function setContentAccessPolicy(input) { const state = globalThis.__typingAccessTest; state.policies = state.policies.filter(p => p.targetType !== input.targetType || p.targetKey !== input.targetKey); state.policies.push(input); }",
+    "content-access-repository": "export async function getContentAccessPolicies(targets, database, options) { const state = globalThis.__typingAccessTest; state.policyCalls.push({targets, options}); if (state.failure) throw new Error('policy_db_unavailable'); return state.policies.filter(p => targets.some(t => t.type === p.targetType && t.key === p.targetKey)); } export async function setContentAccessPolicies(input) { for (const policy of input.policies) await setContentAccessPolicy({ ...policy, actorId: input.actorId }); } export async function setContentAccessPolicy(input) { const state = globalThis.__typingAccessTest; state.policies = state.policies.filter(p => p.targetType !== input.targetType || p.targetKey !== input.targetKey); state.policies.push(input); }",
     "lesson-access": "export async function hasActiveVipAccess() { return globalThis.__typingAccessTest.vip; }",
   };
   const server = await createServer({
@@ -45,7 +45,7 @@ test("typing API rechecks login, VIP and item rules; admin covers all 146 lesson
       load(id) {
         if (id === "\0typing-test:action-navigation") return "export function redirect(url) { throw new Error('redirect:' + url); } export function notFound() { throw new Error('not_found'); }";
         if (id === "\0typing-test:action-cache") return "export function revalidatePath() {} export function revalidateTag() {} export function updateTag() {} export function unstable_cache(fn) { return fn; }";
-        if (id === "\0typing-test:actions") return "export async function updateContentAccessPolicyAction() {}";
+        if (id === "\0typing-test:actions") return "export async function updateContentAccessPolicyAction() {} export async function updateContentAccessPoliciesAction() {}";
         if (id.startsWith("\0typing-test:")) return modules[id.slice("\0typing-test:".length)];
       },
     }],
@@ -157,9 +157,34 @@ test("typing API rechecks login, VIP and item rules; admin covers all 146 lesson
   hskForm.set("tier", "vip");
   hskForm.set("returnTo", "/admin/access/hsk?level=hsk-1&lesson=hsk1-bai-01-chao-anh");
   await assert.rejects(actions.updateContentAccessPolicyAction(hskForm), /redirect:\/admin\/access\/hsk\?level=hsk-1&lesson=hsk1-bai-01-chao-anh&success=content_access_updated/);
+  const batchForm = new FormData();
+  batchForm.set("returnTo", "/admin/access/typing?level=hsk-1&lesson=hsk1-l1");
+  const batchPolicies = lessonView.targets.map((target) => ({
+    targetType: target.type, targetKey: target.key, tier: target.key === question.target.key ? "vip" : "free",
+  }));
+  const snapshot = structuredClone(state.policies);
+  for (const invalidPolicies of [batchPolicies.slice(1), [...batchPolicies, batchPolicies[0]], batchPolicies.map((policy, i) => i === 0 ? { ...policy, targetKey: "hsk-2" } : policy)]) {
+    batchForm.set("policies", JSON.stringify(invalidPolicies));
+    await assert.rejects(actions.updateContentAccessPoliciesAction(batchForm), /error=invalid_input/);
+    assert.deepEqual(state.policies, snapshot, "invalid batches must not save any rule");
+  }
+  batchForm.set("policies", JSON.stringify(batchPolicies));
+  await assert.rejects(actions.updateContentAccessPoliciesAction(batchForm), /success=content_access_batch_updated/);
+  for (const policy of batchPolicies) assert.equal(state.policies.find((row) => row.targetType === policy.targetType && row.targetKey === policy.targetKey)?.tier, policy.tier);
+  assert.equal(state.policies.find((row) => row.targetType === "hsk_lesson")?.tier, "vip", "saving typing must preserve HSK rules");
+  const hskAdmin = await server.ssrLoadModule("/lib/admin-content-access-view.ts");
+  const hskView = await hskAdmin.buildAdminHskAccessView("hsk-1", "hsk1-bai-01-chao-anh");
+  const hskBatchPolicies = hskView.targets.map((target, index) => ({ targetType: target.type, targetKey: target.key, tier: ["free", "guest", "vip"][index % 3] }));
+  const hskBatchForm = new FormData();
+  hskBatchForm.set("returnTo", "/admin/access/hsk?level=hsk-1&lesson=hsk1-bai-01-chao-anh");
+  hskBatchForm.set("policies", JSON.stringify(hskBatchPolicies));
+  await assert.rejects(actions.updateContentAccessPoliciesAction(hskBatchForm), /success=content_access_batch_updated/);
+  for (const policy of hskBatchPolicies) assert.equal(state.policies.find((row) => row.targetType === policy.targetType && row.targetKey === policy.targetKey)?.tier, policy.tier);
+  assert.equal(state.policies.find((row) => row.targetType === question.target.type && row.targetKey === question.target.key)?.tier, "vip", "saving HSK must preserve typing rules");
   state.user = { id: "learner-1", role: "learner" };
   assert.equal((await (await call()).json()).words[0].locked, true, "saved admin rules must reach the learner API");
   await assert.rejects(actions.updateContentAccessPolicyAction(form), /admin_required/);
+  await assert.rejects(actions.updateContentAccessPoliciesAction(batchForm), /admin_required/);
 });
 
 test("typing migration extends the policy enum and persists each independent target", async (t) => {

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { AdminAccessBulkSave } from "@/components/admin-access-bulk-save";
 import { AdminAccessSections } from "@/components/admin-access-sections";
 import { AdminConsoleHeader, AdminNotice, ContentAccessPolicyForm } from "@/components/admin-console";
 import { requireAdminUser } from "@/lib/admin-auth";
 import { buildAdminTypingAccessView } from "@/lib/admin-typing-access-view";
 import { getContentAccessPolicies } from "@/lib/content-access-repository";
 import { contentAccessPolicyKey, typingLevelTarget, type ContentAccessTarget } from "@/lib/content-access-types";
-import { updateContentAccessPolicyAction } from "../../actions";
+import { updateContentAccessPoliciesAction, updateContentAccessPolicyAction } from "../../actions";
 
 export const metadata: Metadata = { title: "Khóa VIP Luyện gõ" };
 
@@ -24,16 +25,7 @@ export default async function AdminTypingAccessPage({ searchParams }: {
   const levelHref = view.selectedLevel ? `${base}?level=${view.selectedLevel.id}` : base;
   const returnTo = view.selectedLesson ? `${levelHref}&lesson=${view.selectedLesson.id}` : levelHref;
 
-  return <main className="admin-page"><div className="section-shell">
-    <AdminConsoleHeader description="Quản lý riêng quyền Luyện gõ theo cấp độ HSK, bài học và từng mục từ/câu. Khóa VIP ở cấp cha áp dụng cho mọi mục bên dưới." eyebrow="Content access" title="Khóa VIP Luyện gõ" userName={user.displayName} />
-    <AdminAccessSections selected="typing" />
-    <AdminNotice error={query.error} success={query.success} />
-    {view.selectedLevel ? <nav aria-label="Điều hướng phân quyền Luyện gõ" className="admin-access-breadcrumbs">
-      <Link href={base}><ArrowLeft aria-hidden="true" size={15} /> Cấp độ HSK</Link><span>/</span>
-      {view.selectedLesson ? <Link href={levelHref}>{view.selectedLevel.label}</Link> : <strong>{view.selectedLevel.label}</strong>}
-      {view.selectedLesson ? <><span>/</span><strong>Bài {view.selectedLesson.number}</strong></> : null}
-    </nav> : null}
-    <section className="admin-panel">
+  const panel = <section className="admin-panel">
       <div className="panel-heading"><h2>{view.selectedLesson?.titleVi ?? view.selectedLevel?.label ?? "Chọn cấp độ cần quản lý"}</h2><span>{view.selectedLesson ? `${view.questions.length} mục từ/câu` : view.selectedLevel ? `${view.lessonEntries.length} bài` : `${view.levels.length} cấp độ`}</span></div>
       {!view.selectedLevel ? <div className="admin-access-list">
         {view.levels.map((level) => {
@@ -73,6 +65,17 @@ export default async function AdminTypingAccessPage({ searchParams }: {
           })}
         </>}
       </>}
-    </section>
+    </section>;
+
+  return <main className="admin-page"><div className="section-shell">
+    <AdminConsoleHeader description="Quản lý riêng quyền Luyện gõ theo cấp độ HSK, bài học và từng mục từ/câu. Khóa VIP ở cấp cha áp dụng cho mọi mục bên dưới." eyebrow="Content access" title="Khóa VIP Luyện gõ" userName={user.displayName} />
+    <AdminAccessSections selected="typing" />
+    <AdminNotice error={query.error} success={query.success} />
+    {view.selectedLevel ? <nav aria-label="Điều hướng phân quyền Luyện gõ" className="admin-access-breadcrumbs">
+      <Link href={base}><ArrowLeft aria-hidden="true" size={15} /> Cấp độ HSK</Link><span>/</span>
+      {view.selectedLesson ? <Link href={levelHref}>{view.selectedLevel.label}</Link> : <strong>{view.selectedLevel.label}</strong>}
+      {view.selectedLesson ? <><span>/</span><strong>Bài {view.selectedLesson.number}</strong></> : null}
+    </nav> : null}
+    {view.selectedLesson ? <AdminAccessBulkSave action={updateContentAccessPoliciesAction} returnTo={returnTo}>{panel}</AdminAccessBulkSave> : panel}
   </div></main>;
 }

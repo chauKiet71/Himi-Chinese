@@ -76,6 +76,7 @@ const successMessages: Record<string, string> = {
   vip_plan_deleted: "Đã xóa gói VIP chưa có dữ liệu liên quan.",
   user_deleted: "Đã khóa tài khoản, thu hồi phiên đăng nhập và giữ lại lịch sử giao dịch.",
   content_access_updated: "Đã cập nhật quyền truy cập nội dung và ghi audit log.",
+  content_access_batch_updated: "Đã lưu toàn bộ trạng thái quyền truy cập của bài học.",
 };
 
 const roleLabels: Record<UserRole, string> = {

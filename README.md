@@ -20,6 +20,15 @@ Prototype web responsive cho sản phẩm học tiếng Trung chuyên ngành dà
 
 Các trang học viên `/`, `/courses`, `/learn/*`, `/practice`, `/vip` và `/account` dùng chung một application shell: sidebar pine + top bar trên laptop, bottom navigation bốn mục trên điện thoại. Route đăng nhập/xác minh mật khẩu và toàn bộ `/admin/*` giữ layout riêng để không trộn luồng học với luồng vận hành.
 
+## Sitemap và Google Search
+
+- `/sitemap.xml` được tạo từ các trang công khai, lộ trình đã xuất bản, video và danh mục cấp độ luyện gõ/luyện viết. Không liệt kê trang quản trị, tài khoản, đăng nhập, bộ từ cá nhân hoặc các phiên luyện tập cần đăng nhập.
+- `/robots.txt` khai báo đường dẫn sitemap và hạn chế crawl các khu vực quản trị, API, tài khoản, thông báo, dev và trò chơi cần đăng nhập. Quyền truy cập và `noindex` vẫn do ứng dụng xử lý; robots.txt không thay thế bảo vệ dữ liệu.
+- Khi deploy, đặt `NEXT_PUBLIC_APP_URL` thành domain HTTPS chính thức (ví dụ `https://example.com`), không để `localhost`. Hai endpoint đọc cấu hình ở runtime; danh sách lộ trình dùng cùng bộ đệm 5 phút với trang danh mục.
+- Sau khi deploy, kiểm tra hai URL trên domain thật và gửi `https://<domain>/sitemap.xml` trong mục **Sitemaps** của Google Search Console. Sitemap giúp Google tìm URL, không bảo đảm tất cả trang được lập chỉ mục.
+
+Tham khảo: [sitemap của Next.js](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap), [hướng dẫn Google](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap).
+
 ## Chạy dự án
 
 Yêu cầu Node.js từ 22.13 trở lên.

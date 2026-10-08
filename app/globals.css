@@ -4805,6 +4805,10 @@ a.roadmap-lesson-row:hover .roadmap-circular-progress { transform: scale(1.04); 
 .admin-access-tree summary { padding: 14px 16px; cursor: pointer; color: var(--ink); font-weight: 750; }
 .admin-access-tree details > div { padding: 0 16px 16px; display: grid; gap: 14px; }
 .admin-access-list { display: grid; gap: 14px; }
+.admin-access-bulk-toolbar { position: sticky; top: 16px; z-index: 5; margin-bottom: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border: 1px solid var(--line); border-radius: 12px; background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,.04); }
+.admin-access-bulk-toolbar p { margin: 0; color: var(--muted); font-size: 13px; }
+.admin-access-bulk-fields { min-width: 0; margin: 0; padding: 0; border: 0; }
+.admin-access-bulk-save button:disabled { cursor: wait; opacity: .65; }
 .admin-access-breadcrumbs { margin-bottom: 14px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 12px; }
 .admin-access-breadcrumbs a { display: inline-flex; align-items: center; gap: 6px; color: var(--forest); font-weight: 750; }
 .admin-access-breadcrumbs strong { color: var(--ink); }

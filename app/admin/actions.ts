@@ -56,8 +56,9 @@ import {
 } from "@/lib/admin-practice-service";
 import { parsePracticeReviewDueDate, parsePracticeReviewPriority } from "@/lib/practice-review-queue";
 import { parsePracticeAudioReviewIssues, parsePracticeAudioReviewStatus } from "@/lib/practice-audio-review";
-import { setContentAccessPolicy } from "@/lib/content-access-repository";
+import { setContentAccessPolicies, setContentAccessPolicy } from "@/lib/content-access-repository";
 import { CONTENT_ACCESS_TARGET_TYPES, type AccessTier } from "@/lib/content-access-types";
+import { batchMatchesContentAccessTargets, parseContentAccessPolicyBatch } from "@/lib/admin-content-access-batch";
 import {
   isUuid,
   normalizeSlug,
@@ -470,13 +471,35 @@ export async function updateContentAccessPolicyAction(formData: FormData) {
   if (!targetType || !targetKey || !tier) invalid(returnTo);
 
   await setContentAccessPolicy({ targetType, targetKey, tier, actorId: admin.id });
+  contentAccessUpdated(returnTo);
+}
+
+export async function updateContentAccessPoliciesAction(formData: FormData) {
+  const admin = await requireAdminUser();
+  const returnTo = contentAccessReturnTo(valueString(formData, "returnTo", 500));
+  const policies = parseContentAccessPolicyBatch(formData.get("policies"));
+  const url = new URL(returnTo, "https://admin.local");
+  const level = url.searchParams.get("level") ?? undefined;
+  const lesson = url.searchParams.get("lesson") ?? undefined;
+  if (!policies || !level || !lesson) invalid(returnTo);
+  const view = url.pathname === "/admin/access/typing"
+    ? await (await import("@/lib/admin-typing-access-view")).buildAdminTypingAccessView(level, lesson)
+    : url.pathname === "/admin/access/hsk"
+      ? await (await import("@/lib/admin-content-access-view")).buildAdminHskAccessView(level, lesson)
+      : null;
+  if (!view?.selectedLesson || !batchMatchesContentAccessTargets(policies, view.targets)) invalid(returnTo);
+  await setContentAccessPolicies({ policies, actorId: admin.id });
+  contentAccessUpdated(returnTo, "content_access_batch_updated");
+}
+
+function contentAccessUpdated(returnTo: string, success = "content_access_updated"): never {
   revalidatePath("/courses");
   revalidatePath("/hsk", "layout");
   revalidatePath("/admin/access", "layout");
   revalidatePath("/typing", "layout");
   revalidateTag("published-content", "max");
   updateTag("content-access-policies");
-  redirect(`${returnTo}${returnTo.includes("?") ? "&" : "?"}success=content_access_updated`);
+  redirect(`${returnTo}${returnTo.includes("?") ? "&" : "?"}success=${success}`);
 }
 
 export async function createVocabularyAction(formData: FormData) {

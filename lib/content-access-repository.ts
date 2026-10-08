@@ -1,4 +1,4 @@
-import { and, eq, inArray } from "drizzle-orm";
+import { and, eq, inArray, sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache.js";
 import { isDatabaseUnavailableError, readDb, writeDb, type Database } from "../db/index.ts";
 import { auditLogs, contentAccessPolicies } from "../db/schema.ts";
@@ -93,25 +93,33 @@ export async function setContentAccessPolicy(input: {
   tier: AccessTier;
   actorId: string;
 }): Promise<void> {
-  await writeDb((db) => db.transaction(async (tx) => {
+  await setContentAccessPolicies({ actorId: input.actorId, policies: [{ targetType: input.targetType, targetKey: input.targetKey, tier: input.tier }] });
+}
+
+export async function setContentAccessPolicies(input: {
+  actorId: string;
+  policies: ContentAccessPolicy[];
+}, database?: Database): Promise<void> {
+  if (input.policies.length === 0) return;
+  const operation = (db: Database) => db.transaction(async (tx) => {
     const now = new Date();
-    await tx.insert(contentAccessPolicies).values({
-      targetType: input.targetType,
-      targetKey: input.targetKey,
-      tier: input.tier,
+    await tx.insert(contentAccessPolicies).values(input.policies.map((policy) => ({
+      ...policy,
       updatedBy: input.actorId,
       updatedAt: now,
-    }).onConflictDoUpdate({
+    }))).onConflictDoUpdate({
       target: [contentAccessPolicies.targetType, contentAccessPolicies.targetKey],
-      set: { tier: input.tier, updatedBy: input.actorId, updatedAt: now },
+      set: { tier: sql`excluded.tier`, updatedBy: input.actorId, updatedAt: now },
     });
-    await tx.insert(auditLogs).values({
+    await tx.insert(auditLogs).values(input.policies.map((policy) => ({
       actorId: input.actorId,
       action: "admin.content_access.updated",
-      entityType: input.targetType,
-      metadata: { targetKey: input.targetKey, tier: input.tier },
-    });
-  }));
+      entityType: policy.targetType,
+      metadata: { targetKey: policy.targetKey, tier: policy.tier },
+    })));
+  });
+  if (database) await operation(database);
+  else await writeDb(operation);
 }
 
 export async function getContentAccessPolicy(

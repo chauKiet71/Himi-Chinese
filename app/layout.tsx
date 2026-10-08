@@ -24,8 +24,8 @@ import { isLifetimeVipPlan } from "@/lib/vip-plan";
 import { getActiveVipSubscription, vipDaysRemaining } from "@/lib/vip-subscription";
 
 export const metadata: Metadata = {
-  title: { default: "Himi Chinese — Tiếng Trung cho người đi làm", template: "%s | Himi Chinese" },
-  description: "Học tiếng Trung chuyên ngành theo tình huống thực tế tại nơi làm việc.",
+  title: { default: "Himi Chinese — Nền tảng học tiếng Trung cho người mới bắt đầu", template: "%s | Himi Chinese" },
+  description: "Himi Chinese là nền tảng học tiếng Trung dành cho người mới bắt đầu, giúp người học xây dựng nền tảng từ phát âm, từ vựng đến giao tiếp thông qua bài học ngắn gọn, trực quan và dễ hiểu.",
 };
 
 const developmentBrowserErrorGuard = String.raw`(() => {

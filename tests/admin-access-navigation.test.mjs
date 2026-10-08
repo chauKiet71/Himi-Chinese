@@ -27,7 +27,7 @@ test("VIP group links resolve to distinct pages with the matching policy forms",
       load(id) {
         if (id === "\0access-test:auth") return "export async function requireAdminUser() { return { id: 'admin-test', displayName: 'Admin', role: 'admin' }; }";
         if (id === "\0access-test:policies") return "export async function getContentAccessPolicies() { return []; }";
-        if (id === "\0access-test:actions") return "export async function updateContentAccessPolicyAction() {}";
+        if (id === "\0access-test:actions") return "export async function updateContentAccessPolicyAction() {} export async function updateContentAccessPoliciesAction() {}";
         if (id === "\0access-test:navigation") return "export function redirect(url) { throw new Error('redirect:' + url); }";
       },
     }],
@@ -56,7 +56,12 @@ test("VIP group links resolve to distinct pages with the matching policy forms",
       assert.ok(types.length > 0);
       assert.ok(types.every((type) => type.startsWith(`${group}_`)), `${group} page must only edit its own group`);
       assert.match(markup, new RegExp(`name="returnTo"[^>]*value="/admin/access/${group}`));
-      if (query.includes("lesson=")) assert.ok(types.includes(`${group}_question`));
+      if (query.includes("lesson=")) {
+        assert.ok(types.includes(`${group}_question`));
+        assert.match(markup, /admin-access-bulk-toolbar/);
+        assert.match(markup, /Lưu tất cả trạng thái đang chọn/);
+        assert.match(markup, /<fieldset[^>]*class="admin-access-bulk-fields"/);
+      } else assert.doesNotMatch(markup, /admin-access-bulk-toolbar/);
     }
   }
   await assert.rejects(renderRoute("/admin/access?level=hsk-1&lesson=hsk1-bai-01-chao-anh&success=content_access_updated"), /redirect:\/admin\/access\/hsk\?level=hsk-1&lesson=hsk1-bai-01-chao-anh&success=content_access_updated/);

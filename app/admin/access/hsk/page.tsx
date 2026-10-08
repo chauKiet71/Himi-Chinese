@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AdminAccessBulkSave } from "@/components/admin-access-bulk-save";
 import { AdminAccessSections } from "@/components/admin-access-sections";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -7,7 +8,7 @@ import { requireAdminUser } from "@/lib/admin-auth";
 import { buildAdminHskAccessView } from "@/lib/admin-content-access-view";
 import { getContentAccessPolicies } from "@/lib/content-access-repository";
 import { contentAccessPolicyKey, hskLevelTarget, type ContentAccessTarget } from "@/lib/content-access-types";
-import { updateContentAccessPolicyAction } from "../../actions";
+import { updateContentAccessPoliciesAction, updateContentAccessPolicyAction } from "../../actions";
 
 export const metadata: Metadata = { title: "Khóa VIP Lộ trình HSK" };
 
@@ -30,26 +31,7 @@ export default async function AdminContentAccessPage({
       ? `/admin/access/hsk?level=${view.selectedLevel.id}`
       : "/admin/access/hsk";
 
-  return <main className="admin-page"><div className="section-shell">
-    <AdminConsoleHeader
-      description="Chỉ tải cấp độ hoặc bài đang quản lý để thao tác nhanh. Quyền chữ luyện viết được dùng chung tại bài HSK, chủ đề và kho Luyện viết."
-      eyebrow="Content access"
-      title="Khóa VIP Lộ trình HSK"
-      userName={user.displayName}
-    />
-    <AdminAccessSections selected="hsk" />
-    <AdminNotice error={query.error} success={query.success} />
-
-    {view.selectedLevel ? <nav aria-label="Điều hướng phân quyền" className="admin-access-breadcrumbs">
-      <Link href="/admin/access/hsk"><ArrowLeft aria-hidden="true" size={15} /> Cấp độ HSK</Link>
-      <span>/</span>
-      {view.selectedLesson
-        ? <Link href={`/admin/access/hsk?level=${view.selectedLevel.id}`}>{view.selectedLevel.label}</Link>
-        : <strong>{view.selectedLevel.label}</strong>}
-      {view.selectedLesson ? <><span>/</span><strong>Bài {view.selectedLesson.lessonNumber}</strong></> : null}
-    </nav> : null}
-
-    <section className="admin-panel">
+  const panel = <section className="admin-panel">
       {!view.selectedLevel ? <>
         <div className="panel-heading"><h2>Chọn cấp độ cần quản lý</h2><span>{view.levels.length} cấp độ</span></div>
         <div className="admin-access-list">
@@ -115,6 +97,27 @@ export default async function AdminContentAccessPage({
           </div>)}
         </section> : null}
       </>}
-    </section>
+    </section>;
+
+  return <main className="admin-page"><div className="section-shell">
+    <AdminConsoleHeader
+      description="Chỉ tải cấp độ hoặc bài đang quản lý để thao tác nhanh. Quyền chữ luyện viết được dùng chung tại bài HSK, chủ đề và kho Luyện viết."
+      eyebrow="Content access"
+      title="Khóa VIP Lộ trình HSK"
+      userName={user.displayName}
+    />
+    <AdminAccessSections selected="hsk" />
+    <AdminNotice error={query.error} success={query.success} />
+
+    {view.selectedLevel ? <nav aria-label="Điều hướng phân quyền" className="admin-access-breadcrumbs">
+      <Link href="/admin/access/hsk"><ArrowLeft aria-hidden="true" size={15} /> Cấp độ HSK</Link>
+      <span>/</span>
+      {view.selectedLesson
+        ? <Link href={`/admin/access/hsk?level=${view.selectedLevel.id}`}>{view.selectedLevel.label}</Link>
+        : <strong>{view.selectedLevel.label}</strong>}
+      {view.selectedLesson ? <><span>/</span><strong>Bài {view.selectedLesson.lessonNumber}</strong></> : null}
+    </nav> : null}
+
+    {view.selectedLesson ? <AdminAccessBulkSave action={updateContentAccessPoliciesAction} returnTo={returnTo}>{panel}</AdminAccessBulkSave> : panel}
   </div></main>;
 }

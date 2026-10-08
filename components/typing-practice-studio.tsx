@@ -35,6 +35,7 @@ import {
 import { getTypingPinyinProgress, isTypingPinyinCorrect } from "@/lib/typing-answer";
 import { GameResultCelebration } from "@/components/game-result-celebration";
 import { TypingAccessGate } from "@/components/typing-access-gate";
+import { VipUpgradeDialog } from "@/components/vip-upgrade-prompt";
 import type {
   TypingLessonPayload,
   TypingLessonSummary,
@@ -194,6 +195,7 @@ export function TypingPracticeStudio({
   const [audioError, setAudioError] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [complete, setComplete] = useState(false);
+  const [lockedDestination, setLockedDestination] = useState<TypingPracticeItem | null>(null);
   const [durationSeconds, setDurationSeconds] = useState(0);
   const [celebratingItemId, setCelebratingItemId] = useState<string | null>(null);
   const [celebrationKey, setCelebrationKey] = useState(0);
@@ -339,7 +341,7 @@ export function TypingPracticeStudio({
   }, [complete, currentItem, index, mode, playAudio]);
 
   const advanceCorrectAnswer = useEffectEvent((event: globalThis.KeyboardEvent) => {
-    if (event.key !== "Enter" || event.isComposing || !currentAnswer.correct || complete) return;
+    if (event.key !== "Enter" || event.isComposing || !currentAnswer.correct || complete || lockedDestination) return;
     const target = event.target as HTMLElement | null;
     if (target?.closest("button, a")) return;
     event.preventDefault();
@@ -461,7 +463,12 @@ export function TypingPracticeStudio({
   }
 
   function goNext() {
-    if (!currentItem) return;
+    if (!currentItem || lockedDestination) return;
+    const nextItem = items[index + 1];
+    if (nextItem?.locked) {
+      setLockedDestination(nextItem);
+      return;
+    }
     if (!currentItem.locked && !currentAnswer.correct) {
       updateCurrentAnswer((current) => ({ ...current, skipped: true }));
     }
@@ -474,9 +481,14 @@ export function TypingPracticeStudio({
   }
 
   function goPrevious() {
+    if (lockedDestination) return;
     const previousIndex = index - 1;
     const previousItem = items[previousIndex];
     if (!previousItem) return;
+    if (previousItem.locked) {
+      setLockedDestination(previousItem);
+      return;
+    }
 
     setAnswers((current) => {
       const nextAnswers = { ...current };
@@ -670,5 +682,15 @@ export function TypingPracticeStudio({
     {audioError ? <p className="typing-audio-error" role="alert">Chưa phát được audio này. Bạn có thể thử lại bằng nút Nghe.</p> : null}
     {toast ? <div className="typing-toast" role="status"><CheckCircle2 aria-hidden="true" size={18} /> {toast}</div> : null}
     <span className="typing-keyboard-hint"><Gauge aria-hidden="true" size={14} /> Gõ đúng rồi nhấn Enter để đi tiếp</span>
+    <VipUpgradeDialog
+      authenticated={lockedDestination?.requiredTier !== "free"}
+      onClose={() => setLockedDestination(null)}
+      open={lockedDestination !== null}
+      returnTo={practiceReturnTo}
+      target={lockedDestination ? {
+        kind: "Câu hỏi",
+        title: `${stage === "word" ? "Từ vựng" : "Câu"} ${items.indexOf(lockedDestination) + 1} · ${lessonSummary.titleVi}`,
+      } : null}
+    />
   </section>;
 }
