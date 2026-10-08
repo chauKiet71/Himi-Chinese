@@ -1,4 +1,4 @@
-import { and, asc, eq, isNull, lte, sql } from "drizzle-orm";
+import { and, asc, eq, inArray, isNull, lte, sql } from "drizzle-orm";
 import type { Database } from "../db/index.ts";
 import { supportConversations as conversations, supportMessages as messages, supportImages as images,
   supportJobs as jobs, supportReplySessions as sessions } from "../db/schema.ts";
@@ -7,6 +7,7 @@ import { enqueue, latestTelegramAdminReply, type SupportConversation, type Suppo
 import { importTelegramPhoto, readSupportImage } from "./support-storage.ts";
 import { authorizedTelegramUpdate, notificationText, SUPPORT_NOTIFICATION_TITLE, SUPPORT_REPLY_RECEIPT_TEXT, supportKeyboard, telegramCall, telegramMemberDisplayName, TelegramError, type TelegramCall, type TelegramUpdate } from "./support-telegram.ts";
 import { sendSepayNotification } from "./sepay-telegram.ts";
+import { sendRegistrationNotification } from "./registration-telegram.ts";
 
 export type SupportTransport = {
   call: TelegramCall;
@@ -21,6 +22,10 @@ function messageId(result: Record<string, unknown>) {
 }
 
 async function processJob(tx: SupportTx, job: Job, io: SupportTransport) {
+  if (job.kind === "registration-notify") {
+    await sendRegistrationNotification(job.payload, io.call);
+    return;
+  }
   if (job.kind === "sepay-notify") {
     await sendSepayNotification(job.payload, io.call);
     return;
@@ -144,10 +149,10 @@ async function processJob(tx: SupportTx, job: Job, io: SupportTransport) {
   throw new Error("unknown_support_job");
 }
 
-export async function processSupportJob(db: Database, io: SupportTransport = transport, kind?: string) {
+export async function processSupportJob(db: Database, io: SupportTransport = transport, kind?: string | string[]) {
   return db.transaction(async tx => {
     const [job] = await tx.select().from(jobs).where(and(isNull(jobs.finishedAt), lte(jobs.availableAt, new Date()),
-      ...(kind ? [eq(jobs.kind, kind)] : [])))
+      ...(kind ? [Array.isArray(kind) ? inArray(jobs.kind, kind) : eq(jobs.kind, kind)] : [])))
       .orderBy(asc(jobs.availableAt), asc(jobs.createdAt)).limit(1).for("update", { skipLocked: true });
     if (!job) return false;
     try {

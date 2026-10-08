@@ -100,7 +100,14 @@ Khi chưa có `DATABASE_URL`, ứng dụng tự dùng catalog demo để fronten
 
 Sáu bài đầu của mỗi lộ trình đang mở là miễn phí; 18 bài chuyên sâu còn lại yêu cầu VIP. Việc kiểm tra quyền diễn ra ở server và nội dung bài VIP không được gửi xuống client ẩn danh. Tiến độ, lịch ôn và đơn thanh toán SePay được lưu theo người dùng. Không đưa khóa API vào Git và không bật nhận tiền thật trước khi hoàn thành thông tin chủ thể kinh doanh, điều khoản sử dụng, bảo mật và hoàn tiền.
 
+## Thông báo đăng ký qua Telegram
+
+Mỗi tài khoản học viên được tạo bằng email hoặc Google sẽ đưa một tin vào hàng đợi riêng `registration_notification_jobs` trong transaction đăng ký. Hàng đợi riêng ngăn worker support bản cũ đọc nhầm và đánh dấu hoàn tất mà chưa gửi Telegram khi local và production dùng chung database. Worker `npm run support:worker` gửi ở lượt xử lý kế tiếp (poll mặc định 1 giây khi rảnh); tin có tên, email, thời gian Việt Nam, cách đăng ký và trạng thái xác minh email tại lúc tạo. Đăng nhập, liên kết Google với tài khoản cũ hoặc gửi lại mã xác minh không tạo tin mới. Telegram lỗi được retry và không ảnh hưởng tài khoản đã tạo; chỉ đánh dấu gửi thành công khi Telegram trả về message ID, rồi xóa payload.
+
+Đặt `TELEGRAM_REGISTRATION_CHAT_ID` ở web và worker để gửi riêng cho bạn (chat cá nhân cần bấm Start với bot); nếu để trống, dùng `TELEGRAM_PAYMENT_CHAT_ID`, rồi `TELEGRAM_ADMIN_CHAT_ID`. Local cần chạy worker riêng; chỉ `npm run dev` sẽ không gửi Telegram. Nếu chỉ dùng bot báo thanh toán/đăng ký, chạy `npm run support:worker -- --notifications-only`; `--payments-only` vẫn chỉ báo thanh toán. Cần migration `0030_registration_notifications`, được áp dụng bởi `npm run db:migrate:auto` hoặc predev/prestart. Kiểm tra bằng `npm run support:status` (trường `registration`); khi triển khai, migrate trước rồi cập nhật/restart web và worker. Worker local chạy khi máy bật; muốn gửi liên tục cần worker mới trên server.
+
 ## Thanh toán SePay
+
 
 - Trang `/vip` tạo một `payment_order` có mã `HIMI…` duy nhất, hiển thị QR VietQR MBBank theo đúng số tiền và tự kiểm tra trạng thái qua `GET /api/payments/sepay/orders/[orderId]`.
 - Endpoint nhận webhook là `POST /api/webhooks/sepay`. Trên SePay Dashboard, đặt URL production thành `https://<domain>/api/webhooks/sepay`, loại giao dịch **Tiền vào**, content type **JSON**, mục đích **Xác thực thanh toán** và lọc mã có tiền tố `HIMI`.

@@ -1,5 +1,29 @@
 # Nhật ký bàn giao phiên làm việc
 
+## 2026-10-09 — Cấu hình đích nhận đăng ký mới trên VPS
+
+- Theo yêu cầu người dùng, đọc thông tin đăng nhập từ file được cung cấp và kết nối VPS qua SSH key có sẵn, xác minh host key; không ghi nội dung private key, mật khẩu hoặc token vào log/tài liệu.
+- Cập nhật riêng `TELEGRAM_REGISTRATION_CHAT_ID` trong `/opt/hanziwork/.env` về cùng nhóm hỗ trợ hiện có. Lưu bản sao `.env.backup-registration-20261008T184618207169Z` trên VPS với quyền 600; giữ nguyên các biến, quyền và chủ sở hữu file `.env`.
+- Restart web và worker qua systemd; cả hai service active. VPS còn ở commit `d8483b90`, chưa có code worker đăng ký hoặc file migration 0030. Cần commit/push đầy đủ thay đổi tính năng lên master và chờ CI/CD deploy thành công; cấu hình env đã sẵn sàng.
+
+## 2026-10-09 — Sửa đăng ký local chưa gửi Telegram
+
+- Kiểm tra thực tế: web local ở cổng 3001, chưa có worker local. `.env` cấu hình đúng registration/admin chat, bot là administrator của supergroup; web và worker dùng cùng DB/bot. Job đăng ký thử trong `support_jobs` đã bị worker bên ngoài đánh dấu finished và xóa payload sau khoảng 1 giây dù người dùng chưa nhận tin. Hành vi phù hợp với worker bản cũ bỏ qua loại job mới khi không có conversation.
+- Tách hàng đợi sang `registration_notification_jobs`, unique theo user ID và FK cascade; thêm retry/backoff, SKIP LOCKED và `telegram_message_id` xác nhận delivery. Worker cũ đọc `support_jobs` không thể tiêu thụ hàng đợi mới. Worker mặc định/notifications-only xử lý cả bảng riêng; payments-only giữ nguyên phạm vi. `support:status` trả thêm trạng thái registration.
+- Generate và kiểm tra migration `0030_registration_notifications`; xác minh chỉ migration này còn pending rồi áp dụng thành công qua db:migrate:auto. Chỉ thêm bảng, không thay đổi/xóa dữ liệu hiện có. Schema và journal/snapshot cập nhật.
+- Khôi phục đúng một thông báo của tài khoản người dùng vừa test, không tạo tài khoản hay tin giả. Worker local chạy nền PID 52228 bằng `--notifications-only`; log `.codex-tmp/registration-worker.out.log` và `.err.log`, PID lưu `.pid`. Telegram đã xác nhận message ID 83; hàng đợi registration pending=0, không lỗi. Không sửa cấu hình hoặc dừng worker server.
+- 69/69 tests registration/SePay/support đạt; ESLint và TypeScript phạm vi file sửa đạt. Local health trả 200; đăng ký Origin sai trả 403 (không ghi DB). Chưa triển khai web/worker production; worker local cần chạy lại sau khi tắt máy. Bản trước dùng chung support_jobs ở mục bàn giao dưới đây đã được thay bằng bảng riêng.
+
+## 2026-10-09 — Telegram báo tài khoản học viên mới
+
+- Thêm `lib/registration-telegram.ts`: tin tiếng Việt gồm tên/email, thời gian Việt Nam, phương thức Email/Google và trạng thái xác minh tại lúc tạo; không chứa mật khẩu/mã/token, không parse markup người dùng.
+- `registerLearner` tạo user và job `registration-notify` trong cùng transaction; Google chỉ enqueue khi tạo user mới. Email trùng, gửi lại mã, đăng nhập và liên kết Google với learner cũ không tạo thông báo mới. Dedupe theo user ID.
+- Worker support xử lý loại job mới với retry/backoff và xóa payload sau khi giao thành công. `--notifications-only` xử lý SePay + đăng ký; `--payments-only` giữ nguyên phạm vi. Telegram lỗi không ảnh hưởng user đã commit; lỗi ghi job rollback cùng tài khoản.
+- Thêm `TELEGRAM_REGISTRATION_CHAT_ID`, fallback payment rồi admin chat; web chưa có đích thì worker dùng cấu hình của mình. Runtime Railway forward cả payment và registration chat IDs. Tài liệu `.env.example`, README và SUPPORT_TELEGRAM cập nhật.
+- 79/79 tests liên quan đạt (11 test mới về đăng ký, cộng auth/email verification, SePay, support); ESLint các file thay đổi đạt. Tests dùng PGlite và transport giả lập, không gửi Telegram thật hoặc ghi vào DB người dùng.
+- `tsc --noEmit` còn lỗi ở CSS `?url`, admin analytics và script import travel ngoài phạm vi thay đổi, không có lỗi ở file sửa. `npm run build` transform xong 929 module ở bước client references rồi bị Sites plugin chặn bởi EPERM unlink `dist/.openai/hosting.json`, tương tự lỗi quyền đã ghi nhận trước đây; chưa xác nhận build production đầy đủ.
+- Chưa triển khai production, đổi secrets hoặc restart service thật. Không cần migration mới nếu bảng support đã tồn tại. Triển khai worker mới trước web để worker nhận được `registration-notify`; đích riêng cho chủ dự án dùng registration chat ID ở cả hai service.
+
 ## 2026-09-10 — Triển khai quyền thành viên Telegram lên Railway production
 
 - Đăng nhập Railway với chấp thuận của người dùng. Xác minh project himi, hai service Himi-Chinese/Himi-Support-Worker đều chạy bản cũ 7c48806 và chat ID nhóm trước migration.

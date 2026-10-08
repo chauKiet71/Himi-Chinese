@@ -132,6 +132,20 @@ export const supportTelegramUpdates = pgTable("support_telegram_updates", {
   receivedAt: timestamp("received_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+// Keep account alerts separate: older support workers consume unknown support_jobs.
+export const registrationNotificationJobs = pgTable("registration_notification_jobs", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  payload: jsonb("payload").$type<Record<string, unknown>>().notNull().default({}),
+  attempts: integer("attempts").notNull().default(0),
+  availableAt: timestamp("available_at", { withTimezone: true }).notNull().defaultNow(),
+  finishedAt: timestamp("finished_at", { withTimezone: true }),
+  telegramMessageId: integer("telegram_message_id"),
+  lastError: text("last_error"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (t) => [uniqueIndex("registration_notification_user_uq").on(t.userId),
+  index("registration_notification_due_idx").on(t.availableAt).where(sql`${t.finishedAt} is null`)]);
+
 export const authSessions = pgTable("auth_sessions", {
   id: uuid("id").defaultRandom().primaryKey(),
   userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),

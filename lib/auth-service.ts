@@ -4,6 +4,7 @@ import { readDb, writeDb, type Database } from "../db/index.ts";
 import { oauthAccounts, users } from "../db/schema.ts";
 import { hashPassword, passwordNeedsRehash, verifyPassword } from "./auth-crypto.ts";
 import type { RegistrationInput } from "./auth-validation.ts";
+import { enqueueRegistrationNotification } from "./registration-telegram.ts";
 
 export type UserRole = typeof users.$inferSelect.role;
 
@@ -32,21 +33,25 @@ function toAuthenticatedUser(user: typeof users.$inferSelect): AuthenticatedUser
   };
 }
 
-export async function registerLearner(input: RegistrationInput): Promise<{ user?: AuthenticatedUser; duplicate?: true }> {
+export async function registerLearner(input: RegistrationInput, database?: Database): Promise<{ user?: AuthenticatedUser; duplicate?: true }> {
   const passwordHash = await hashPassword(input.password);
-  const inserted = await writeDb((db) => db
-    .insert(users)
-    .values({
-      displayName: input.displayName,
-      email: input.email,
-      passwordHash,
-      role: "learner",
-    })
-    .onConflictDoNothing({ target: users.email })
-    .returning());
+  const register = (db: Database) => db.transaction(async (tx) => {
+    const inserted = await tx.insert(users)
+      .values({
+        displayName: input.displayName,
+        email: input.email,
+        passwordHash,
+        role: "learner",
+      })
+      .onConflictDoNothing({ target: users.email })
+      .returning();
 
-  const user = inserted[0];
-  return user ? { user: toAuthenticatedUser(user) } : { duplicate: true };
+    const user = inserted[0];
+    if (!user) return { duplicate: true as const };
+    await enqueueRegistrationNotification(tx, user, "email");
+    return { user: toAuthenticatedUser(user) };
+  });
+  return database ? register(database) : writeDb(register);
 }
 
 export async function authenticateWithPassword(
@@ -118,6 +123,7 @@ export async function authenticateWithGoogle(profile: {
           role: "learner",
         }).returning();
         user = inserted[0];
+        await enqueueRegistrationNotification(tx, user, "google");
       } else {
         const updated = await tx.update(users).set({
           displayName: user.displayName || profile.displayName,

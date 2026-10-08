@@ -47,6 +47,7 @@ Migration chỉ thêm bảng/cột, không xóa hoặc sửa dữ liệu học/a
 | `CLOUDINARY_URL` | Storage hiện có; cần cho ảnh user/admin |
 | `TELEGRAM_BOT_TOKEN` | Token do BotFather cấp |
 | `TELEGRAM_ADMIN_CHAT_ID` | Numeric ID của một group/supergroup hỗ trợ, giữ dấu âm |
+| `TELEGRAM_REGISTRATION_CHAT_ID` | Tùy chọn: chat cá nhân hoặc nhóm riêng nhận đăng ký mới; fallback `TELEGRAM_PAYMENT_CHAT_ID`, rồi `TELEGRAM_ADMIN_CHAT_ID` |
 | `TELEGRAM_ADMIN_USER_IDS` | Tùy chọn: numeric IDs của người cấu hình được dùng `/groupid`; không giới hạn nhân viên hỗ trợ |
 | `TELEGRAM_WEBHOOK_SECRET` | Chuỗi ngẫu nhiên 32–64 ký tự thuộc A-Z/a-z/0-9/_/- |
 | `SUPPORT_WEBHOOK_BASE_URL` | Origin HTTPS công khai; local dùng tunnel HTTPS |
@@ -78,6 +79,10 @@ Terminal khác:
 ```powershell
 npm run support:worker
 ```
+
+Worker cũng gửi thông báo `🎉 HIMI · Tài khoản mới` ngay ở lượt xử lý kế tiếp sau khi tạo học viên qua email hoặc Google (poll mặc định 1 giây khi rảnh). Thông báo chứa tên, email, thời gian Việt Nam, phương thức đăng ký và trạng thái xác minh email **tại lúc tạo**; đăng ký email được báo trước bước xác minh. Không gửi mật khẩu, mã xác minh hay token. Đăng nhập, liên kết Google với tài khoản cũ và gửi lại mã không báo trùng. Job được lưu vào bảng riêng `registration_notification_jobs` cùng transaction tạo tài khoản, có dedupe theo user ID và retry/backoff của worker. Worker support cũ không thể đọc nhầm job trong bảng này khi local/production dùng chung DB. Payload được xóa sau khi gửi thành công; `telegram_message_id` lưu bằng chứng Telegram xác nhận. Delivery có thể trùng nếu Telegram đã nhận tin nhưng worker chưa ghi được kết quả, giống các thông báo SePay.
+
+Để nhận riêng, đặt `TELEGRAM_REGISTRATION_CHAT_ID` ở cả web và worker; chat cá nhân phải bấm Start với bot trước. Nếu không đặt, bot dùng đích nhận SePay rồi nhóm hỗ trợ hiện có. Nếu web chưa có đích nhận, worker dùng cấu hình của mình. Chạy `npm run support:worker -- --notifications-only` khi chỉ cần thông báo SePay và đăng ký, không cần webhook hỗ trợ; `--payments-only` vẫn chỉ xử lý SePay. Kiểm tra job chờ/lỗi bằng `npm run support:status`, trường `registration`. Cần migration `0030_registration_notifications`; chạy `npm run db:migrate:auto` trước khi cập nhật/restart web và worker (predev/prestart cũng tự migrate). Web local phải có worker đang chạy, không phụ thuộc worker server bản cũ.
 
 Sau khi HTTPS domain/tunnel trỏ tới web:
 
