@@ -130,7 +130,17 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     isLifetime: activeVipIsLifetime,
   } : null;
 
-  return <html lang="vi" style={createBrandTheme() as CSSProperties}><body>
+  return <html lang="vi" style={createBrandTheme() as CSSProperties}>
+    <head>
+      <Script id="microsoft-clarity" strategy="afterInteractive">{`
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "yumdmomlpa");
+      `}</Script>
+    </head>
+    <body>
     {process.env.NODE_ENV === "development" ? <Script
       dangerouslySetInnerHTML={{ __html: developmentBrowserErrorGuard }}
       id="development-browser-error-guard"
@@ -145,5 +155,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <SiteFooter />
     <MobileNav />
     <DeferredHimiChatbot />
-  </body></html>;
+    </body>
+  </html>;
 }
