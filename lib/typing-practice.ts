@@ -38,6 +38,8 @@ export type TypingPracticeSegment = {
 export type TypingPracticeItem = {
   id: string;
   stage: TypingPracticeStage;
+  locked?: boolean;
+  requiredTier?: "free" | "vip";
   meaning: string;
   hanzi: string;
   pinyin: string;
@@ -78,7 +80,7 @@ export function getTypingLesson(levelId: string, lessonId: string) {
 }
 
 export function getTypingLessonDataUrl(levelId: TypingLevelId, lessonId: string): string {
-  return `/content/typing/${levelId}/${encodeURIComponent(lessonId)}.json`;
+  return `/api/typing/${levelId}/${encodeURIComponent(lessonId)}`;
 }
 
 export function getTypingLessonParams() {

@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ChevronLeft, Keyboard, MessageSquareText } from "lucide-react";
+import { ArrowRight, ChevronLeft, Keyboard, LockKeyhole, MessageSquareText } from "lucide-react";
 import { getTypingLevel, TYPING_LEVEL_IDS } from "@/lib/typing-practice";
+
+import { getCurrentUser } from "@/lib/auth-session";
+import { getTypingAccessStates } from "@/lib/typing-content-repository";
+import { typingLessonTargets } from "@/lib/typing-content-access";
+
+export const dynamic = "force-dynamic";
 
 type TypingLevelPageProps = { params: Promise<{ level: string }> };
 
@@ -23,6 +29,8 @@ export default async function TypingLevelPage({ params }: TypingLevelPageProps) 
   const { level: levelId } = await params;
   const level = getTypingLevel(levelId);
   if (!level) notFound();
+  const user = await getCurrentUser();
+  const accessStates = await getTypingAccessStates(level.lessons.map((lesson) => typingLessonTargets(level.id, lesson.id)), user?.id ?? null);
 
   return <main className="learner-dashboard typing-lesson-page">
     <nav aria-label="Quay lại trang Luyện gõ" className="typing-level-back">
@@ -31,16 +39,16 @@ export default async function TypingLevelPage({ params }: TypingLevelPageProps) 
 
     <section aria-label="Danh sách bài luyện gõ" className="typing-lesson-list-section">
       <div className="typing-lesson-grid">
-        {level.lessons.map((lesson) => (
+        {level.lessons.map((lesson, lessonIndex) => (
           <article className="typing-lesson-card" key={lesson.id}>
             <div className="typing-lesson-card-topline">
               <strong>Bài {String(lesson.number).padStart(2, "0")}</strong>
               <span><Keyboard aria-hidden="true" size={15} /> {lesson.wordCount} từ</span>
             </div>
-            <div aria-label={`Từ đầu bài: ${lesson.previewHanzi.join(", ")}`} className="typing-lesson-preview" lang="zh-CN">
-              {lesson.previewHanzi.slice(0, 4).map((character, index) => <span key={`${character}-${index}`}>{character}</span>)}
+            <div aria-label="Luyện gõ pinyin" className="typing-lesson-preview" lang="zh-CN">
+              {["拼", "音", "练", "习"].map((character, index) => <span key={`${character}-${index}`}>{character}</span>)}
             </div>
-            <h2>{lesson.titleVi}</h2>
+            <h2>{lesson.titleVi} {accessStates[lessonIndex].source === "vip_required" ? <span className="typing-vip-badge"><LockKeyhole aria-hidden="true" size={14} /> VIP</span> : null}</h2>
             <p className="typing-lesson-card-description">
               {lesson.titleZh !== lesson.titleVi ? <strong lang="zh-CN">{lesson.titleZh}</strong> : null}
               <span>Luyện {lesson.wordCount} từ/cụm từ và {lesson.sentenceCount} câu với audio thường, audio chậm.</span>

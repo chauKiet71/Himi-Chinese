@@ -8,6 +8,9 @@ export const CONTENT_ACCESS_TARGET_TYPES = [
   "hsk_vocabulary",
   "hsk_writing",
   "hsk_question",
+  "typing_level",
+  "typing_lesson",
+  "typing_question",
 ] as const;
 
 export type ContentAccessTargetType = typeof CONTENT_ACCESS_TARGET_TYPES[number];
@@ -117,4 +120,16 @@ export function hskWritingTarget(levelId: string, lessonId: string, writingId: s
 
 export function hskQuestionTarget(levelId: string, lessonId: string, questionId: string, defaultTier: AccessTier = "free"): ContentAccessTarget {
   return { type: "hsk_question", key: `${levelId}:${lessonId}:${questionId}`, defaultTier };
+}
+
+export function typingLevelTarget(levelId: string): ContentAccessTarget {
+  return { type: "typing_level", key: levelId };
+}
+
+export function typingLessonTarget(levelId: string, lessonId: string): ContentAccessTarget {
+  return { type: "typing_lesson", key: `${levelId}:${lessonId}` };
+}
+
+export function typingQuestionTarget(levelId: string, lessonId: string, stage: "word" | "sentence", itemId: string): ContentAccessTarget {
+  return { type: "typing_question", key: `${levelId}:${lessonId}:${stage}:${itemId}` };
 }

@@ -8,7 +8,12 @@ import {
   type TypingPracticeMode,
   type TypingPracticeStage,
 } from "@/lib/typing-practice";
-import { requireLearnerUser } from "@/lib/learner-auth";
+import { getCurrentUser } from "@/lib/auth-session";
+import { getTypingAccessStates } from "@/lib/typing-content-repository";
+import { typingLessonTargets } from "@/lib/typing-content-access";
+import { TypingAccessGate } from "@/components/typing-access-gate";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Phiên luyện gõ pinyin",
@@ -41,15 +46,19 @@ export default async function TypingPracticePage({ params, searchParams = Promis
 
   const returnParams = new URLSearchParams({ stage: initialStage, mode: initialMode });
   const returnTo = `/typing/${selection.level.id}/${selection.lesson.id}/practice?${returnParams.toString()}`;
-  await requireLearnerUser(returnTo);
+  const user = await getCurrentUser();
+  const [access] = await getTypingAccessStates([typingLessonTargets(selection.level.id, selection.lesson.id)], user?.id ?? null);
+  if (!access.allowed) return <main className="typing-session-page">
+    <TypingAccessGate backHref={`/typing/${selection.level.id}`} loginRequired={access.source === "login_required"} returnTo={returnTo} title={selection.lesson.titleVi} />
+  </main>;
 
   return <main className="typing-session-page">
     <TypingPracticeStudio
       initialMode={initialMode}
       initialStage={initialStage}
-      lesson={selection.lesson}
+      lesson={{ ...selection.lesson, previewHanzi: [] }}
       lessonDataUrl={getTypingLessonDataUrl(selection.level.id, selection.lesson.id)}
-      level={selection.level}
+      level={{ ...selection.level, previewHanzi: [], lessons: selection.level.lessons.map((lesson) => ({ ...lesson, previewHanzi: [] })) }}
     />
   </main>;
 }

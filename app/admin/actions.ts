@@ -91,7 +91,7 @@ function invalid(path: string): never {
 }
 
 function contentAccessReturnTo(value: string): string {
-  return /^\/admin\/access(?:\?level=[a-z0-9_-]+(?:&lesson=[a-z0-9_-]+)?)?$/iu.test(value)
+  return /^\/admin\/access(?:\/typing)?(?:\?level=[a-z0-9_-]+(?:&lesson=[a-z0-9_-]+)?)?$/iu.test(value)
     ? value
     : "/admin/access";
 }
@@ -472,7 +472,8 @@ export async function updateContentAccessPolicyAction(formData: FormData) {
   await setContentAccessPolicy({ targetType, targetKey, tier, actorId: admin.id });
   revalidatePath("/courses");
   revalidatePath("/hsk", "layout");
-  revalidatePath("/admin/access");
+  revalidatePath("/admin/access", "layout");
+  revalidatePath("/typing", "layout");
   revalidateTag("published-content", "max");
   updateTag("content-access-policies");
   redirect(`${returnTo}${returnTo.includes("?") ? "&" : "?"}success=content_access_updated`);

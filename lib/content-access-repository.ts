@@ -25,8 +25,13 @@ const getCachedContentAccessPolicyRows = unstable_cache(async () => readDb((db) 
 export async function getContentAccessPolicies(
   targets: ContentAccessTarget[],
   database?: Database,
+  options: { failClosed?: boolean } = {},
 ): Promise<ContentAccessPolicy[]> {
-  if (!process.env.DATABASE_URL || targets.length === 0) return [];
+  if (targets.length === 0) return [];
+  if (!process.env.DATABASE_URL) {
+    if (options.failClosed && process.env.NODE_ENV === "production") throw new Error("Content access database is not configured");
+    return [];
+  }
   const targetTypes = [...new Set(targets.map((target) => target.type))];
   const targetKeys = [...new Set(targets.map((target) => target.key))];
   const wanted = new Set(targets.map((target) => contentAccessPolicyKey(target.type, target.key)));
@@ -45,7 +50,7 @@ export async function getContentAccessPolicies(
     try {
       rows = await getCachedContentAccessPolicyRows();
     } catch (error) {
-      if (!isDatabaseUnavailableError(error)) throw error;
+      if (options.failClosed || !isDatabaseUnavailableError(error)) throw error;
       console.warn("[content-access] database unavailable; using default access tiers");
       return [];
     }

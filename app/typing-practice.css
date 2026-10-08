@@ -1630,3 +1630,17 @@ body:has(.typing-session-page) .himi-chatbot-widget {
   font-size: 25px;
   line-height: 1.4;
 }
+
+.typing-vip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: #fff1cb;
+  color: #80530b;
+  font-size: 12px;
+  vertical-align: middle;
+}
+.typing-locked-question { margin: auto; width: min(100%, 720px); }
+.typing-locked-navigation { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 16px; }

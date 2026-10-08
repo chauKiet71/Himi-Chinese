@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AdminAccessSections } from "@/components/admin-access-sections";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { AdminConsoleHeader, AdminNotice, ContentAccessPolicyForm } from "@/components/admin-console";
@@ -36,6 +37,7 @@ export default async function AdminContentAccessPage({
       title="Khóa nội dung HSK"
       userName={user.displayName}
     />
+    <AdminAccessSections selected="hsk" />
     <AdminNotice error={query.error} success={query.success} />
 
     {view.selectedLevel ? <nav aria-label="Điều hướng phân quyền" className="admin-access-breadcrumbs">

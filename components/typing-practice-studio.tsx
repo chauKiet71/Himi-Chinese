@@ -34,6 +34,7 @@ import {
 } from "react";
 import { getTypingPinyinProgress, isTypingPinyinCorrect } from "@/lib/typing-answer";
 import { GameResultCelebration } from "@/components/game-result-celebration";
+import { TypingAccessGate } from "@/components/typing-access-gate";
 import type {
   TypingLessonPayload,
   TypingLessonSummary,
@@ -183,6 +184,7 @@ export function TypingPracticeStudio({
 }) {
   const [lesson, setLesson] = useState<TypingLessonPayload | null>(null);
   const [loadError, setLoadError] = useState(false);
+  const [accessError, setAccessError] = useState<"vip_required" | "login_required" | null>(null);
   const [mode, setMode] = useState<TypingPracticeMode>(initialMode);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, AnswerState>>({});
@@ -207,13 +209,18 @@ export function TypingPracticeStudio({
 
   useEffect(() => {
     let active = true;
-    void fetch(lessonDataUrl)
-      .then((response) => {
+    void fetch(lessonDataUrl, { cache: "no-store" })
+      .then(async (response) => {
+        if (response.status === 401 || response.status === 403) {
+          const denial = await response.json();
+          if (active) setAccessError(denial.error === "vip_required" ? "vip_required" : "login_required");
+          return null;
+        }
         if (!response.ok) throw new Error("Typing lesson fetch failed");
         return response.json() as Promise<TypingLessonPayload>;
       })
       .then((payload) => {
-        if (active) {
+        if (active && payload) {
           startedAtRef.current = Date.now();
           setLesson(payload);
         }
@@ -248,6 +255,7 @@ export function TypingPracticeStudio({
     if (!viewport) return;
 
     function syncKeyboardOffset() {
+      if (!viewport) return;
       const bottomInset = Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop);
       studioRef.current?.style.setProperty("--typing-keyboard-offset", `${Math.round(bottomInset)}px`);
     }
@@ -306,7 +314,7 @@ export function TypingPracticeStudio({
   }, []);
 
   useEffect(() => {
-    if (!currentItem || complete) return;
+    if (!currentItem || currentItem.locked || complete) return;
     const focusHandle = window.requestAnimationFrame(() => {
       if (stage === "sentence") segmentInputRefs.current[activeSegment]?.focus({ preventScroll: true });
       else wordInputRef.current?.focus({ preventScroll: true });
@@ -315,6 +323,11 @@ export function TypingPracticeStudio({
   }, [activeSegment, complete, currentItem, index, stage]);
 
   useEffect(() => {
+    if (currentItem?.locked) {
+      audioRef.current?.pause();
+      playNextAudioRef.current = false;
+      return;
+    }
     if (!currentItem || complete) return;
     const shouldAutoplay = mode === "listening" || playNextAudioRef.current;
     playNextAudioRef.current = false;
@@ -346,7 +359,7 @@ export function TypingPracticeStudio({
   }
 
   function updateCurrentAnswer(update: (current: AnswerState) => AnswerState) {
-    if (!currentItem) return;
+    if (!currentItem || currentItem.locked) return;
     setAnswers((current) => ({
       ...current,
       [currentItem.id]: update(answerStateFor(current, currentItem.id)),
@@ -449,7 +462,7 @@ export function TypingPracticeStudio({
 
   function goNext() {
     if (!currentItem) return;
-    if (!currentAnswer.correct) {
+    if (!currentItem.locked && !currentAnswer.correct) {
       updateCurrentAnswer((current) => ({ ...current, skipped: true }));
     }
     if (index >= items.length - 1) {
@@ -499,6 +512,9 @@ export function TypingPracticeStudio({
     setMode(nextMode);
   }
 
+  const practiceReturnTo = `/typing/${level.id}/${lessonSummary.id}/practice?stage=${stage}&mode=${mode}`;
+  if (accessError) return <TypingAccessGate backHref={`/typing/${level.id}/${lessonSummary.id}`} loginRequired={accessError === "login_required"} returnTo={practiceReturnTo} title={lessonSummary.titleVi} />;
+
   if (loadError) {
     return <section className="typing-load-state" role="alert">
       <CircleHelp aria-hidden="true" size={30} />
@@ -516,10 +532,20 @@ export function TypingPracticeStudio({
     </section>;
   }
 
+  const availableCount = items.filter((item) => !item.locked).length;
+  if (currentItem.locked && (!complete || availableCount === 0)) return <section className="typing-locked-question" aria-label="Mục luyện gõ bị khóa">
+    <p>Mục {index + 1} / {items.length} · {stage === "word" ? "Từ vựng" : "Câu"}</p>
+    <TypingAccessGate backHref={`/typing/${level.id}/${lessonSummary.id}`} loginRequired={currentItem.requiredTier === "free"} returnTo={practiceReturnTo} title="Mở khóa mục luyện gõ này" />
+    <div className="typing-locked-navigation">
+      <button className="button button-secondary" disabled={index === 0} onClick={goPrevious} type="button">Mục trước</button>
+      <button className="button button-secondary" disabled={index === items.length - 1 && availableCount === 0} onClick={goNext} type="button">{index === items.length - 1 ? "Kết thúc phiên" : "Bỏ qua mục bị khóa"}</button>
+    </div>
+  </section>;
+
   const correctCount = Object.values(answers).filter((answer) => answer.correct && !answer.usedAnswer).length;
   const assistedCount = Object.values(answers).filter((answer) => answer.usedAnswer).length;
   const skippedCount = Object.values(answers).filter((answer) => answer.skipped && !answer.correct && !answer.usedAnswer).length;
-  const completionScore = items.length ? Math.round((correctCount / items.length) * 1000) : 0;
+  const completionScore = availableCount ? Math.round((correctCount / availableCount) * 1000) : 0;
   const lessonIndex = level.lessons.findIndex((item) => item.id === lessonSummary.id);
   const nextLesson = level.lessons[lessonIndex + 1];
 
@@ -533,7 +559,7 @@ export function TypingPracticeStudio({
           </Link>
         </>}
         details={<>
-          <p className="typing-complete-summary">Bạn đã đi hết {items.length} {stage === "word" ? "từ và cụm từ" : "câu"} trong phiên này.</p>
+          <p className="typing-complete-summary">Bạn đã đi hết {availableCount} {stage === "word" ? "từ và cụm từ" : "câu"} trong phiên này.</p>
           <div className="typing-complete-stats">
             <div><CheckCircle2 aria-hidden="true" size={21} /><span><strong>{correctCount}</strong><small>Tự gõ đúng</small></span></div>
             <div><Eye aria-hidden="true" size={21} /><span><strong>{assistedCount}</strong><small>Có xem đáp án</small></span></div>

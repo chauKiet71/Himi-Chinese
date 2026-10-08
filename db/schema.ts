@@ -41,6 +41,9 @@ export const contentAccessTargetType = pgEnum("content_access_target_type", [
   "hsk_vocabulary",
   "hsk_writing",
   "hsk_question",
+  "typing_level",
+  "typing_lesson",
+  "typing_question",
 ]);
 
 export const users = pgTable("users", {

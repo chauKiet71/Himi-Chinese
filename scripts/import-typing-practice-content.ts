@@ -8,6 +8,8 @@ import {
 } from "node:fs";
 import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 
+import { writeTypingContentManifest } from "./typing-content-manifest.ts";
+
 type RawSegment = {
   text?: unknown;
   pinyin?: unknown;
@@ -169,7 +171,7 @@ if (!sourceDataDirectoryArgument || !sourcePublicDirectoryArgument) {
 const sourceDataDirectory = resolve(sourceDataDirectoryArgument);
 const sourcePublicDirectory = resolve(sourcePublicDirectoryArgument);
 const targetPublicDirectory = resolve(process.cwd(), "public");
-const targetLessonDirectory = resolve(targetPublicDirectory, "content", "typing");
+const targetLessonDirectory = resolve(process.cwd(), "content", "typing-practice", "lessons");
 const targetCatalogFile = resolve(process.cwd(), "content", "typing-practice", "catalog.json");
 const counters = { copiedAudio: 0, reusedAudio: 0 };
 
@@ -248,6 +250,8 @@ for (let level = 1; level <= 6; level += 1) {
 
 mkdirSync(dirname(targetCatalogFile), { recursive: true });
 writeFileSync(targetCatalogFile, `${JSON.stringify(catalog, null, 2)}\n`, "utf8");
+
+writeTypingContentManifest(catalog);
 
 console.log(
   `Đã nhập ${catalog.reduce((total, level) => total + level.lessonCount, 0)} bài, `

@@ -34,7 +34,7 @@ test("typing catalog exposes every HSK level and points to deployable lesson aud
   assert.deepEqual(catalog.map((level) => level.id), ["hsk-1", "hsk-2", "hsk-3", "hsk-4", "hsk-5", "hsk-6"]);
   assert.equal(catalog.reduce((total, level) => total + level.lessonCount, 0), 146);
 
-  const firstLessonFile = path.join(root, "public", "content", "typing", "hsk-1", "hsk1-l1.json");
+  const firstLessonFile = path.join(root, "content", "typing-practice", "lessons", "hsk-1", "hsk1-l1.json");
   const firstLesson = JSON.parse(await readFile(firstLessonFile, "utf8"));
   assert.equal(firstLesson.words.length, 20);
   assert.equal(firstLesson.words[0].pinyin, "nǐ");
@@ -53,7 +53,7 @@ test("every HSK word and phrase item uses the shared adaptive answer flow", asyn
 
   for (const level of catalog) {
     for (const lesson of level.lessons) {
-      const lessonFile = path.join(root, "public", "content", "typing", level.id, `${lesson.id}.json`);
+      const lessonFile = path.join(root, "content", "typing-practice", "lessons", level.id, `${lesson.id}.json`);
       const payload = JSON.parse(await readFile(lessonFile, "utf8"));
       assert.ok(payload.words.length > 0, `${level.id}/${lesson.id} should expose word practice items`);
       assert.ok(payload.words.every((item) => item.stage === "word"), `${level.id}/${lesson.id} should use the shared word stage`);
@@ -172,7 +172,7 @@ test("every HSK level uses the shared reference-style lesson card layout", async
   assert.match(levelPage, /level\.lessons\.map/);
   assert.doesNotMatch(levelPage, /className="typing-lesson-hero"/);
   assert.match(levelPage, /className="typing-lesson-card-topline"/);
-  assert.match(levelPage, /lesson\.previewHanzi\.slice\(0, 4\)/);
+  assert.doesNotMatch(levelPage, /lesson\.previewHanzi/, "catalog cards must not leak individually locked question answers");
   assert.match(levelPage, /className="typing-lesson-card-description"/);
   assert.match(levelPage, /lesson\.titleZh !== lesson\.titleVi/);
   assert.match(levelPage, /className="typing-lesson-card-footer"/);
@@ -194,7 +194,7 @@ test("typing practice requires login and returns learners to the selected exerci
   const practicePage = await readFile(path.join(root, "app", "typing", "[level]", "[lesson]", "practice", "page.tsx"), "utf8");
   const lessonPage = await readFile(path.join(root, "app", "typing", "[level]", "[lesson]", "page.tsx"), "utf8");
 
-  assert.match(practicePage, /await requireLearnerUser\(returnTo\)/);
+  assert.match(practicePage, /getTypingAccessStates\(/);
   assert.match(practicePage, /new URLSearchParams\(\{ stage: initialStage, mode: initialMode \}\)/);
   assert.match(lessonPage, /learnerLoginPath\(wordPracticeHref\)/);
   assert.match(lessonPage, /learnerLoginPath\(sentencePracticeHref\)/);
