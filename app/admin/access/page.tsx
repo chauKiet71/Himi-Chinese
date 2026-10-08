@@ -76,6 +76,7 @@ export default async function AdminContentAccessPage({
         </div>
       </> : <>
         <div className="panel-heading"><h2>Bài {view.selectedLesson.lessonNumber}: {view.selectedLesson.title}</h2><span>{view.vocabulary.length + view.writing.length + view.questions.length} mục</span></div>
+        <p><Link href={`/admin/hsk?level=${selectedLevelId}&lesson=${view.selectedLesson.id}`} prefetch={false}>Xem đầy đủ nội dung bài học và đáp án</Link></p>
         <div className="admin-access-node admin-access-parent-node">
           <header><strong>Toàn bộ bài học</strong><span>{view.selectedLesson.content?.summary}</span></header>
           <ContentAccessPolicyForm action={updateContentAccessPolicyAction} currentTier={currentTier(view.selectedLesson.target)} defaultTier={view.selectedLesson.content?.accessTier ?? "free"} returnTo={returnTo} targetKey={view.selectedLesson.target.key} targetType={view.selectedLesson.target.type} />

@@ -43,6 +43,12 @@ const navigationGroups = [
         matches: (pathname: string) => ["/admin/courses", "/admin/modules", "/admin/lessons"].some((prefix) => pathname.startsWith(prefix)),
       },
       {
+        href: "/admin/hsk",
+        label: "Lộ trình HSK",
+        icon: BookOpenText,
+        matches: (pathname: string) => pathname.startsWith("/admin/hsk"),
+      },
+      {
         href: "/admin/vocabulary",
         label: "Kho từ vựng",
         icon: Languages,
