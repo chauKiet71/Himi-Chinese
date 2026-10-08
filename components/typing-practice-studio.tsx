@@ -513,7 +513,7 @@ export function TypingPracticeStudio({
   }
 
   const practiceReturnTo = `/typing/${level.id}/${lessonSummary.id}/practice?stage=${stage}&mode=${mode}`;
-  if (accessError) return <TypingAccessGate backHref={`/typing/${level.id}/${lessonSummary.id}`} loginRequired={accessError === "login_required"} returnTo={practiceReturnTo} title={lessonSummary.titleVi} />;
+  if (accessError) return <TypingAccessGate backHref={`/typing/${level.id}/${lessonSummary.id}`} closeHref={`/typing/${level.id}`} loginRequired={accessError === "login_required"} returnTo={practiceReturnTo} title={lessonSummary.titleVi} />;
 
   if (loadError) {
     return <section className="typing-load-state" role="alert">
@@ -533,14 +533,7 @@ export function TypingPracticeStudio({
   }
 
   const availableCount = items.filter((item) => !item.locked).length;
-  if (currentItem.locked && (!complete || availableCount === 0)) return <section className="typing-locked-question" aria-label="Mục luyện gõ bị khóa">
-    <p>Mục {index + 1} / {items.length} · {stage === "word" ? "Từ vựng" : "Câu"}</p>
-    <TypingAccessGate backHref={`/typing/${level.id}/${lessonSummary.id}`} loginRequired={currentItem.requiredTier === "free"} returnTo={practiceReturnTo} title="Mở khóa mục luyện gõ này" />
-    <div className="typing-locked-navigation">
-      <button className="button button-secondary" disabled={index === 0} onClick={goPrevious} type="button">Mục trước</button>
-      <button className="button button-secondary" disabled={index === items.length - 1 && availableCount === 0} onClick={goNext} type="button">{index === items.length - 1 ? "Kết thúc phiên" : "Bỏ qua mục bị khóa"}</button>
-    </div>
-  </section>;
+  if (currentItem.locked && (!complete || availableCount === 0)) return <TypingAccessGate key={currentItem.id} backHref={`/typing/${level.id}/${lessonSummary.id}`} closeHref={`/typing/${level.id}`} loginRequired={currentItem.requiredTier === "free"} returnTo={practiceReturnTo} title="Mở khóa mục luyện gõ này" />;
 
   const correctCount = Object.values(answers).filter((answer) => answer.correct && !answer.usedAnswer).length;
   const assistedCount = Object.values(answers).filter((answer) => answer.usedAnswer).length;

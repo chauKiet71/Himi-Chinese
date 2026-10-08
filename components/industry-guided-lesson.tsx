@@ -244,7 +244,7 @@ export function IndustryGuidedLesson({ course, lessons, lesson, access, progress
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [move]);
 
-  if (!access.allowed) return <main className="industry-guided-lesson is-gated"><VipContentGate description="Mở khóa từ vựng, cụm từ, luyện nghe và luyện nói trong phần này." title="Mở khóa phần học này" /></main>;
+  if (!access.allowed) return <main className="industry-guided-lesson is-gated"><VipContentGate closeHref={closeHref} title="Mở khóa phần học này" /></main>;
 
   if (completed) return <main className="industry-guided-lesson industry-guided-complete">
     <section aria-labelledby="industry-complete-title" className="industry-complete-card">

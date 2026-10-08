@@ -152,7 +152,7 @@ function getVocabularyDetail(word: HskVocabularyItem): VocabularyDetail {
   };
 }
 
-function GuidedVocabulary({ lesson, itemIndex, showPinyin, speak, authenticated, saveStatus, onSave }: {
+function GuidedVocabulary({ lesson, itemIndex, showPinyin, speak, authenticated, saveStatus, onSave, onExit }: {
   lesson: HskLessonContent;
   itemIndex: number;
   showPinyin: boolean;
@@ -160,13 +160,14 @@ function GuidedVocabulary({ lesson, itemIndex, showPinyin, speak, authenticated,
   authenticated: boolean;
   saveStatus: VocabularySaveStatus;
   onSave: (word: HskVocabularyItem) => void;
+  onExit: () => void;
 }) {
   const word = lesson.vocabulary[itemIndex];
   const details = getVocabularyDetail(word);
   if (word.locked) return <VipContentGate
-    className="hsk-guided-practice"
-    description="Mở khóa từ, pinyin, nghĩa và ví dụ để tiếp tục phần từ vựng."
-    eyebrow={`Từ vựng VIP · ${String(itemIndex + 1).padStart(2, "0")}/${lesson.vocabulary.length}`}
+    onExit={onExit}
+    closeHref={getHskCurriculumHref(lesson.levelId)}
+    key={word.id}
     title="Mở khóa từ vựng này"
   />;
   return <section className="hsk-guided-vocabulary">
@@ -214,10 +215,11 @@ function GuidedVocabulary({ lesson, itemIndex, showPinyin, speak, authenticated,
   </section>;
 }
 
-function GuidedWriting({ lesson, speak, onComplete }: {
+function GuidedWriting({ lesson, speak, onComplete, onExit }: {
   lesson: HskLessonContent;
   speak: GuidedSpeak;
   onComplete: (writingId: string) => void;
+  onExit: () => void;
 }) {
   const boardRef = useRef<HTMLDivElement>(null);
   const writerRef = useRef<HanziWriter | null>(null);
@@ -296,11 +298,11 @@ function GuidedWriting({ lesson, speak, onComplete }: {
     <span className="hsk-guided-kicker">Luyện viết</span>
     <h1>Luyện viết chữ Hán</h1>
     <div className="hsk-guided-writing-picker" aria-label="Chọn từ luyện viết">{lesson.writingCharacters.map((item, itemIndex) => <button aria-label={item.locked ? `Chữ ${itemIndex + 1} yêu cầu VIP` : undefined} aria-pressed={itemIndex === index} className={item.locked ? "is-locked" : ""} key={item.id} onClick={() => chooseCharacter(itemIndex)} type="button">{item.locked ? <LockKeyhole aria-hidden="true" size={20} /> : <span lang="zh-CN">{item.hanzi}</span>}<small>{itemIndex + 1}/{lesson.writingCharacters.length}</small></button>)}</div>
-    <VipUpgradeDialog onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} target={upgradeTarget} />
+    <VipUpgradeDialog closeHref={getHskCurriculumHref(lesson.levelId)} onExit={onExit} onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} target={upgradeTarget} />
     {character.locked ? <VipContentGate
-      className="hsk-guided-writing-locked hsk-guided-practice"
-      description="Mở khóa chữ, pinyin và dữ liệu luyện nét của phần này."
-      eyebrow="Luyện viết VIP"
+      onExit={onExit}
+      closeHref={getHskCurriculumHref(lesson.levelId)}
+      key={character.id}
       title="Mở khóa chữ Hán này"
     /> : <div className="hsk-guided-writing-layout">
       <div>
@@ -315,12 +317,12 @@ function GuidedWriting({ lesson, speak, onComplete }: {
   </section>;
 }
 
-function GuidedPractice({ exercise, showPinyin, speak }: { exercise: HskExercise; showPinyin: boolean; speak: GuidedSpeak }) {
+function GuidedPractice({ closeHref, exercise, showPinyin, speak, onExit }: { closeHref: string; exercise: HskExercise; showPinyin: boolean; speak: GuidedSpeak; onExit: () => void }) {
   const [selected, setSelected] = useState<string | null>(null);
   if (exercise.locked) return <VipContentGate
-    className="hsk-guided-practice"
-    description="Mở khóa câu hỏi và đáp án để tiếp tục phần luyện tập."
-    eyebrow="Luyện tập VIP"
+    onExit={onExit}
+    closeHref={closeHref}
+    key={exercise.id}
     title="Mở khóa câu hỏi này"
   />;
   const scored = exercise.answer !== null;
@@ -452,16 +454,16 @@ export function HskGuidedLesson({ lesson, nextLessonHref = null, authenticated =
 
   let content = null;
   if (step.kind === "vocabulary") content = lesson.vocabulary.length
-    ? <GuidedVocabulary authenticated={authenticated} itemIndex={step.itemIndex ?? 0} key={lesson.vocabulary[step.itemIndex ?? 0]?.id} lesson={lesson} onSave={saveVocabularyWord} saveStatus={wordSaveStatuses[lesson.vocabulary[step.itemIndex ?? 0]?.id] ?? "idle"} showPinyin speak={speak} />
+    ? <GuidedVocabulary authenticated={authenticated} itemIndex={step.itemIndex ?? 0} key={lesson.vocabulary[step.itemIndex ?? 0]?.id} lesson={lesson} onExit={persistCurrentProgress} onSave={saveVocabularyWord} saveStatus={wordSaveStatuses[lesson.vocabulary[step.itemIndex ?? 0]?.id] ?? "idle"} showPinyin speak={speak} />
     : <GuidedUnavailableSection kind="vocabulary" />;
   if (step.kind === "writing") content = lesson.writingCharacters.length
-    ? <GuidedWriting lesson={lesson} onComplete={completeWriting} speak={speak} />
+    ? <GuidedWriting lesson={lesson} onComplete={completeWriting} onExit={persistCurrentProgress} speak={speak} />
     : <GuidedUnavailableSection kind="writing" />;
   if (completionOpen) {
     content = <GuidedCompletion exerciseCount={exercises.length} lesson={lesson} nextLessonHref={nextLessonHref} />;
   } else if (step.kind === "practice") {
     const exercise = exercises[step.itemIndex ?? 0];
-    content = <GuidedPractice exercise={exercise} key={exercise.id} showPinyin speak={speak} />;
+    content = <GuidedPractice closeHref={courseHref} exercise={exercise} key={exercise.id} onExit={persistCurrentProgress} showPinyin speak={speak} />;
   }
 
   return <div className={`hsk-guided-page${completionOpen ? " is-complete" : ""}`}>

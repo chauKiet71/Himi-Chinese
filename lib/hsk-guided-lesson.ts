@@ -91,6 +91,7 @@ function buildGeneratedVocabularyExercise(
 }
 
 export function buildHskGuidedExercises(lesson: HskLessonContent): HskExercise[] {
+  if (lesson.guidedExercises) return lesson.guidedExercises;
   if (!lesson.vocabulary.length) return lesson.exercises;
   const usedExerciseIds = new Set<string>();
 
@@ -127,7 +128,7 @@ export function countHskGuidedLessonSteps(lesson: HskLessonContent): number {
   const placeholders = new Set(lesson.guidedPlaceholders ?? []);
   const vocabularySteps = lesson.vocabulary.length || (placeholders.has("vocabulary") ? 1 : 0);
   const writingSteps = lesson.writingCharacters.length || placeholders.has("writing") ? 1 : 0;
-  const practiceSteps = lesson.vocabulary.length || lesson.exercises.length;
+  const practiceSteps = lesson.guidedExercises?.length ?? (lesson.vocabulary.length || lesson.exercises.length);
 
   return vocabularySteps + writingSteps + practiceSteps;
 }

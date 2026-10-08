@@ -155,8 +155,7 @@ export function LessonWorkspace({
       </div> : null}
 
       {!access.allowed ? <VipContentGate
-        className="lesson-content-card"
-        description="Mở khóa từ vựng, cụm từ, luyện nghe và luyện nói trong phần này."
+        closeHref={`/courses/${course.slug}`}
         title="Mở khóa phần học này"
       /> : <div className={`lesson-content-card${stageTab ? " lesson-content-card-stage" : ""}${tab === "Từ vựng" || tab === "Cụm từ" ? " lesson-content-card-vocabulary" : ""}${tab === "Tình huống" ? " lesson-content-card-video" : ""}`}>
         <div className="lesson-tab-panel-viewport">

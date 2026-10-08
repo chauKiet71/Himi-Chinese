@@ -4411,3 +4411,20 @@ final result: passed
 No actionable P0, P1, or P2 findings remain for this scoped writing-list layout change.
 
 final result: passed
+
+---
+
+# Giao diện khóa VIP dùng chung
+
+- Source visual truth: `C:/Users/DELL/AppData/Local/Temp/codex-clipboard-2a9270e6-2f24-4969-9e54-ddee658281fb.png` (ảnh 2, 925 × 641 px).
+- Implementation: `components/vip-upgrade-prompt.tsx`, dùng lại `VipUpgradeDialog` và linh vật hiện có.
+- State: popup khóa VIP tự mở khi gặp nội dung bị khóa; bấm X thoát bài học về danh sách tương ứng. Escape hoặc bấm nền cũng thoát bài học, không để lại trang trống. Khung khóa nền đã được bỏ hoàn toàn.
+- Implementation screenshot / CSS viewport / density normalization: chưa có.
+- Full-view và focused-region comparison: chưa thực hiện.
+- Fonts, spacing, colors, asset, copy: dùng lại nguyên mẫu popup hiện có; chưa xác nhận bằng ảnh trình duyệt.
+- Verification: ESLint đạt; 28 kiểm tra phân quyền và Luyện gõ đạt.
+- Comparison history: không có vòng so sánh trực quan.
+- Blocker: trình duyệt tích hợp lỗi khởi động. Người dùng chọn “Chỉ sửa mã, tôi tự kiểm tra giao diện”, không cho phép dùng Playwright.
+- Kiểm tra thủ công còn lại: desktop/mobile, X thoát bài học về đúng danh sách (HSK lưu tiến độ trước khi thoát), Escape và bấm nền thoát bài học, không còn khung khóa nền, nút nâng cấp, chuyển giữa các mục bị khóa.
+
+final result: blocked

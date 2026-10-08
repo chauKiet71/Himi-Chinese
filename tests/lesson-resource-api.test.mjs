@@ -10,7 +10,7 @@ test("lesson pages send descriptors; APIs recheck account, item access and the e
   globalThis.__lessonResourceTest = state;
   const modules = {
     "auth-session": "export async function getCurrentUser() { return globalThis.__lessonResourceTest.user; }",
-    "content-access-repository": "export async function getContentAccessPolicies() { return globalThis.__lessonResourceTest.policies; }",
+    "content-access-repository": "export async function getContentAccessPolicies(targets) { return globalThis.__lessonResourceTest.policies.filter(p => targets.some(t => t.type === p.targetType && t.key === p.targetKey)); }",
     "lesson-access": "export async function hasActiveVipAccess() { return false; }",
     "lesson-repository": "export async function getLessonPageData() { return globalThis.__lessonResourceTest.industry; }",
   };
@@ -36,6 +36,15 @@ test("lesson pages send descriptors; APIs recheck account, item access and the e
   const params = { level: "hsk-1", lesson: "hsk1-bai-01-chao-anh" };
   const data = await getHskLessonPageData({ level: params.level, lessonId: params.lesson, userId: state.user.id });
   assert.equal(data.access.allowed, true);
+  const { buildHskGuidedExercises } = await server.ssrLoadModule("/lib/hsk-guided-lesson.ts");
+  const { buildAdminHskAccessView } = await server.ssrLoadModule("/lib/admin-content-access-view.ts");
+  const accessView = await buildAdminHskAccessView(params.level, params.lesson);
+  assert.deepEqual(buildHskGuidedExercises(data.lesson), accessView.questions.map(({ exercise }) => exercise));
+  assert.equal(data.lesson.guidedExercises.length, data.lesson.vocabulary.length);
+  const { getHskCurriculumPageData } = await server.ssrLoadModule("/lib/hsk-access-repository.ts");
+  const curriculum = await getHskCurriculumPageData(state.user.id);
+  const curriculumLesson = curriculum.find(level => level.id === params.level).topics.flatMap(topic => topic.lessons).find(lesson => lesson.id === params.lesson);
+  assert.equal(curriculumLesson.exercises, data.lesson.guidedExercises.length);
   const scope = learningContentScope(state.user);
   const resource = await createLessonResource(hskLessonResourceUrl(params.level, params.lesson), data.lesson, scope);
   const request = (target = resource) => new Request(`https://local.test${target.url}`, { headers: { "X-Himi-Lesson-Scope": target.scope, "X-Himi-Lesson-Version": target.version } });
@@ -68,6 +77,38 @@ test("lesson pages send descriptors; APIs recheck account, item access and the e
   const redactedBody = await (await call(redactedResource)).json();
   assert.equal(redactedBody.data.vocabulary[0].hanzi, "");
   assert.equal(redactedBody.data.vocabulary[0].locked, true);
+  const lockedWordPractice = buildHskGuidedExercises(redactedBody.data)[0];
+  assert.equal(lockedWordPractice.id, data.lesson.guidedExercises[0].id);
+  assert.equal(lockedWordPractice.locked, true);
+  assert.deepEqual(lockedWordPractice.options, []);
+
+  // Both reused source questions and generated questions must obey admin locks.
+  const sourceIds = new Set(data.lesson.exercises.map(exercise => exercise.id));
+  const questionSamples = [
+    data.lesson.guidedExercises.find(exercise => sourceIds.has(exercise.id)),
+    data.lesson.guidedExercises.find(exercise => !sourceIds.has(exercise.id)),
+  ];
+  for (const exercise of questionSamples) {
+    assert.ok(exercise);
+    state.policies = [{ targetType: "hsk_question", targetKey: `${params.level}:${params.lesson}:${exercise.id}`, tier: "vip" }];
+    const restricted = await getHskLessonPageData({ level: params.level, lessonId: params.lesson, userId: state.user.id });
+    const practice = buildHskGuidedExercises(restricted.lesson);
+    assert.equal(practice.length, data.lesson.guidedExercises.length);
+    const question = practice.find(item => item.id === exercise.id);
+    assert.equal(question.locked, true);
+    assert.equal(question.prompt, "");
+    assert.equal(question.answer, null);
+    assert.deepEqual(question.options, []);
+    assert.deepEqual(practice.filter(item => item.id !== exercise.id), data.lesson.guidedExercises.filter(item => item.id !== exercise.id));
+    const restrictedResource = await createLessonResource(resource.url, restricted.lesson, scope);
+    assert.notEqual(restrictedResource.version, resource.version);
+    assert.equal((await call()).status, 409);
+    const restrictedBody = await (await call(restrictedResource)).json();
+    assert.equal(buildHskGuidedExercises(restrictedBody.data).find(item => item.id === exercise.id).locked, true);
+  }
+  state.policies = [];
+  const unlocked = await getHskLessonPageData({ level: params.level, lessonId: params.lesson, userId: state.user.id });
+  assert.deepEqual(buildHskGuidedExercises(unlocked.lesson), data.lesson.guidedExercises);
 
   state.policies = [{ targetType: "hsk_lesson", targetKey: `${params.level}:${params.lesson}`, tier: "vip" }];
   assert.equal((await call()).status, 403);

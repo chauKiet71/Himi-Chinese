@@ -102,8 +102,15 @@ export default async function AdminContentAccessPage({
 
         {view.questions.length ? <section className="admin-access-group" aria-label={`Luyện tập bài ${view.selectedLesson.lessonNumber}`}>
           <h3>Luyện tập · {view.questions.length} câu</h3>
+          <p>Bộ câu hỏi đang dùng trên trang học, tương ứng với từng từ vựng trong bài.</p>
           {view.questions.map(({ exercise, target }, index) => <div className="admin-access-node" key={target.key}>
             <header><strong>Câu {index + 1}</strong><span>{exercise.instruction}{exercise.prompt ? ` · ${exercise.prompt}` : ""}</span></header>
+            {exercise.pinyin ? <p>{exercise.pinyin}</p> : null}
+            <ol type="A">
+              {exercise.options.map((option, optionIndex) => <li key={`${exercise.id}-${optionIndex}`}>
+                {option === exercise.answer ? <strong>{option} — Đáp án đúng</strong> : option}
+              </li>)}
+            </ol>
             <ContentAccessPolicyForm action={updateContentAccessPolicyAction} currentTier={currentTier(target)} defaultTier={exercise.accessTier ?? "free"} returnTo={returnTo} targetKey={target.key} targetType={target.type} />
           </div>)}
         </section> : null}

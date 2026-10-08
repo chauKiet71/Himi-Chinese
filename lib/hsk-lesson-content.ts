@@ -144,6 +144,8 @@ export type HskLessonContent = {
   dialogues: HskDialogue[];
   pronunciationTopics: string[];
   exercises: HskExercise[];
+  // Server-resolved practice preserves question IDs and access decisions on the client.
+  guidedExercises?: HskExercise[];
   writingCharacters: HskWritingCharacter[];
   contentStatus: "draft" | "review" | "published" | "archived";
   languageReviewStatus: "pending" | "approved" | "changes-requested";

@@ -331,9 +331,8 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
       <section className="himi-writing-workspace" aria-label="Bàn luyện viết Hán tự">
         <section className="himi-writing-practice">
           {selected.locked ? <VipContentGate
-            className="himi-writing-vip-lock"
-            description="Mở khóa chữ, pinyin, nghĩa và dữ liệu luyện nét của phần này."
-            eyebrow="Luyện viết VIP"
+            closeHref={`/writing/${topic.levelId}`}
+            key={selected.id}
             title="Mở khóa chữ Hán này"
           /> : <>
           <div aria-label="Chế độ luyện viết" className="himi-writing-mode-tabs">

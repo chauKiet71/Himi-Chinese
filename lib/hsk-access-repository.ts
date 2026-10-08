@@ -1,6 +1,6 @@
 import "server-only";
 import { getHskCurriculumLesson, HSK_CURRICULUM, type HskCurriculumLevel } from "./hsk-curriculum.ts";
-import { countHskGuidedLessonSteps } from "./hsk-guided-lesson.ts";
+import { buildHskGuidedExercises, countHskGuidedLessonSteps } from "./hsk-guided-lesson.ts";
 import { getHskLearningLessonContent } from "./hsk-learning-content.ts";
 import type { HskExercise, HskLessonContent, HskVocabularyItem, HskWritingCharacter } from "./hsk-lesson-content.ts";
 import { getContentAccessPolicies } from "./content-access-repository.ts";
@@ -78,6 +78,7 @@ function redactLesson(lesson: HskLessonContent): HskLessonContent {
     dialogues: [],
     pronunciationTopics: [],
     exercises: [],
+    guidedExercises: [],
     writingCharacters: [],
   };
 }
@@ -99,6 +100,15 @@ export async function getHskLessonPageData({
   if (!lesson) return null;
   if (!getHskCurriculumLesson(lesson.levelId, lesson.id)?.available) return null;
   const parentTargets = lessonTargets(lesson);
+  // Resolve the same canonical questions that admin and the learning page display.
+  // Never regenerate these after redaction: that could bypass a question's VIP lock.
+  const guidedExercises = buildHskGuidedExercises(lesson);
+  const guidedQuestionTargets = guidedExercises.map((exercise) => hskQuestionTarget(
+    lesson.levelId,
+    lesson.id,
+    exercise.id,
+    exercise.accessTier ?? "free",
+  ));
   const questionTargets = lesson.exercises.map((exercise) => hskQuestionTarget(
     lesson.levelId,
     lesson.id,
@@ -118,22 +128,39 @@ export async function getHskLessonPageData({
     character.accessTier ?? "free",
   ));
   const [policies, hasVip] = await Promise.all([
-    getContentAccessPolicies([...parentTargets, ...vocabularyTargets, ...writingTargets, ...questionTargets]),
+    getContentAccessPolicies([...parentTargets, ...vocabularyTargets, ...writingTargets, ...questionTargets, ...guidedQuestionTargets]),
     viewerVip(userId),
   ]);
   const viewerAuthenticated = Boolean(userId);
   const access = resolveContentAccess({ targets: parentTargets, policies, viewerAuthenticated, viewerHasVip: hasVip });
   if (!access.allowed) return { lesson: redactLesson(lesson), access };
 
+  const vocabulary = lesson.vocabulary.map((item, index) => resolveContentAccess({
+    targets: [...parentTargets, vocabularyTargets[index]],
+    policies,
+    viewerAuthenticated,
+    viewerHasVip: hasVip,
+  }).allowed ? item : lockedVocabulary(item));
+  const hiddenVocabularyAnswers = new Set(lesson.vocabulary.flatMap((item, index) =>
+    vocabulary[index].locked ? [item.meaning, item.pinyin] : []));
+
   return {
     lesson: {
       ...lesson,
-      vocabulary: lesson.vocabulary.map((item, index) => resolveContentAccess({
-        targets: [...parentTargets, vocabularyTargets[index]],
-        policies,
-        viewerAuthenticated,
-        viewerHasVip: hasVip,
-      }).allowed ? item : lockedVocabulary(item)),
+      vocabulary,
+      guidedExercises: guidedExercises.map((exercise, index) => {
+        const allowed = !vocabulary[index]?.locked && resolveContentAccess({
+          targets: [...parentTargets, guidedQuestionTargets[index]],
+          policies,
+          viewerAuthenticated,
+          viewerHasVip: hasVip,
+        }).allowed;
+        if (!allowed) return lockedExercise(exercise);
+        return {
+          ...exercise,
+          options: exercise.options.filter((option) => option === exercise.answer || !hiddenVocabularyAnswers.has(option)),
+        };
+      }),
       writingCharacters: lesson.writingCharacters.map((character, index) => resolveContentAccess({
         targets: [...parentTargets, writingTargets[index]],
         policies,
@@ -186,6 +213,7 @@ export async function getHskCurriculumPageData(userId: string | null): Promise<H
           });
           return {
             ...lesson,
+            exercises: content ? (content.vocabulary.length || content.exercises.length) : lesson.exercises,
             guidedSteps: content ? countHskGuidedLessonSteps(content) : lesson.guidedSteps,
             access,
           };

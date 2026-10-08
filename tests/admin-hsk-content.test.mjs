@@ -14,11 +14,12 @@ test("admin exposes every available HSK lesson and all source and generated lear
     server: { hmr: false, middlewareMode: true, watch: null },
   });
   t.after(() => server.close());
-  const [admin, learning, guided, component] = await Promise.all([
+  const [admin, learning, guided, component, accessAdmin] = await Promise.all([
     server.ssrLoadModule("/lib/admin-hsk-content.ts"),
     server.ssrLoadModule("/lib/hsk-learning-content.ts"),
     server.ssrLoadModule("/lib/hsk-guided-lesson.ts"),
     server.ssrLoadModule("/components/admin-hsk-lesson-content.tsx"),
+    server.ssrLoadModule("/lib/admin-content-access-view.ts"),
   ]);
   const root = await admin.getAdminHskContentView();
   assert.equal(root.lesson, undefined);
@@ -45,6 +46,13 @@ test("admin exposes every available HSK lesson and all source and generated lear
       assert.ok(source, `Missing source: ${level.id}/${reference.id}`);
       assert.deepEqual(view.lesson, source);
       assert.deepEqual(view.practice, guided.buildHskGuidedExercises(source));
+      const accessView = await accessAdmin.buildAdminHskAccessView(level.id, reference.id);
+      assert.deepEqual(accessView.questions.map(({ exercise }) => exercise), view.practice, `${reference.id}: access admin must show every learner question`);
+      assert.equal(new Set(accessView.questions.map(({ target }) => target.key)).size, view.practice.length);
+      for (const { exercise, target } of accessView.questions) {
+        assert.equal(target.key, `${level.id}:${reference.id}:${exercise.id}`);
+        assert.ok(accessView.targets.includes(target));
+      }
       counts.lessons++;
       counts.vocabulary += source.vocabulary.length;
       counts.examples += source.vocabulary.filter((word) => word.example).length;

@@ -1642,5 +1642,3 @@ body:has(.typing-session-page) .himi-chatbot-widget {
   font-size: 12px;
   vertical-align: middle;
 }
-.typing-locked-question { margin: auto; width: min(100%, 720px); }
-.typing-locked-navigation { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 16px; }

@@ -7,6 +7,7 @@ import {
   type ContentAccessTarget,
 } from "./content-access-types";
 import { HSK_CURRICULUM } from "./hsk-curriculum";
+import { buildHskGuidedExercises } from "./hsk-guided-lesson";
 
 export async function buildAdminHskAccessView(levelId?: string, lessonId?: string) {
   const selectedLevel = HSK_CURRICULUM.find((level) => level.id === levelId);
@@ -59,7 +60,7 @@ export async function buildAdminHskAccessView(levelId?: string, lessonId?: strin
     character,
     target: hskWritingTarget(selectedLevel.id, selectedLesson.id, character.id, character.accessTier ?? "free"),
   })) : [];
-  const questions = selectedLesson ? (selectedLesson.content?.exercises ?? []).map((exercise) => ({
+  const questions = selectedLesson?.content ? buildHskGuidedExercises(selectedLesson.content).map((exercise) => ({
     exercise,
     target: hskQuestionTarget(selectedLevel.id, selectedLesson.id, exercise.id, exercise.accessTier ?? "free"),
   })) : [];
