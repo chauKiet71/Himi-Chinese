@@ -60,7 +60,7 @@ export default async function AdminHskPage({ searchParams }: {
           <p>{lesson.summary}</p>
           <p>{lesson.minutes} phút · {lesson.levelLabel} · {lesson.greeting}</p>
           <p><Link href={`${getHskLessonHref(level.id, reference.id)}/play`} prefetch={false}>Mở trang học</Link>{" · "}
-            <Link href={`/admin/access?level=${level.id}&lesson=${reference.id}`} prefetch={false}>Quản lý quyền truy cập</Link></p>
+            <Link href={`/admin/access/hsk?level=${level.id}&lesson=${reference.id}`} prefetch={false}>Quản lý quyền truy cập</Link></p>
           <nav className="admin-access-breadcrumbs" aria-label="Các phần trong bài học">
             {ADMIN_HSK_SECTIONS.map((key) => <Link key={key} prefetch={false} aria-current={section === key ? "page" : undefined}
               href={`/admin/hsk?level=${level.id}&lesson=${reference.id}&section=${key}`}>

@@ -4808,6 +4808,16 @@ a.roadmap-lesson-row:hover .roadmap-circular-progress { transform: scale(1.04); 
 .admin-access-breadcrumbs { margin-bottom: 14px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 12px; }
 .admin-access-breadcrumbs a { display: inline-flex; align-items: center; gap: 6px; color: var(--forest); font-weight: 750; }
 .admin-access-breadcrumbs strong { color: var(--ink); }
+.admin-access-sections { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.admin-access-sections a { padding: 10px 16px; border: 1px solid var(--line); border-radius: 10px; color: var(--forest); background: #fff; font-weight: 750; }
+.admin-access-sections a[aria-current="page"] { border-color: var(--forest); color: #fff; background: var(--forest); }
+.admin-access-sections a:focus-visible, .admin-access-group-card:focus-visible { outline: 3px solid var(--forest); outline-offset: 3px; }
+.admin-access-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+.admin-access-group-card { display: grid; gap: 12px; padding: 22px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); background: #f7fbf9; }
+.admin-access-group-card:hover { border-color: var(--forest); }
+.admin-access-group-card h3, .admin-access-group-card p { margin: 0; }
+.admin-access-group-card p { color: var(--muted); line-height: 1.6; }
+.admin-access-group-card > span { color: var(--forest); font-weight: 750; }
 .admin-access-node { padding: 14px; display: grid; gap: 12px; border-left: 3px solid #d8e8e1; border-radius: 8px; background: #fff; }
 .admin-access-node > header { display: flex; justify-content: space-between; gap: 12px; }
 .admin-access-node > header span { color: var(--muted); font-size: 11px; }

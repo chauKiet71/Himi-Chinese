@@ -151,6 +151,12 @@ test("typing API rechecks login, VIP and item rules; admin covers all 146 lesson
   form.set("returnTo", "/admin/access/typing?level=hsk-1&lesson=hsk1-l1");
   state.policies = [];
   await assert.rejects(actions.updateContentAccessPolicyAction(form), /redirect:\/admin\/access\/typing\?level=hsk-1&lesson=hsk1-l1&success=content_access_updated/);
+  const hskForm = new FormData();
+  hskForm.set("targetType", "hsk_lesson");
+  hskForm.set("targetKey", "hsk-1:hsk1-bai-01-chao-anh");
+  hskForm.set("tier", "vip");
+  hskForm.set("returnTo", "/admin/access/hsk?level=hsk-1&lesson=hsk1-bai-01-chao-anh");
+  await assert.rejects(actions.updateContentAccessPolicyAction(hskForm), /redirect:\/admin\/access\/hsk\?level=hsk-1&lesson=hsk1-bai-01-chao-anh&success=content_access_updated/);
   state.user = { id: "learner-1", role: "learner" };
   assert.equal((await (await call()).json()).words[0].locked, true, "saved admin rules must reach the learner API");
   await assert.rejects(actions.updateContentAccessPolicyAction(form), /admin_required/);

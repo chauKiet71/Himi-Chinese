@@ -91,7 +91,7 @@ function invalid(path: string): never {
 }
 
 function contentAccessReturnTo(value: string): string {
-  return /^\/admin\/access(?:\/typing)?(?:\?level=[a-z0-9_-]+(?:&lesson=[a-z0-9_-]+)?)?$/iu.test(value)
+  return /^\/admin\/access(?:\/(?:hsk|typing))?(?:\?level=[a-z0-9_-]+(?:&lesson=[a-z0-9_-]+)?)?$/iu.test(value)
     ? value
     : "/admin/access";
 }
