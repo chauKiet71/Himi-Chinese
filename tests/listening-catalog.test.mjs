@@ -11,7 +11,7 @@ import {
 } from "../lib/listening-catalog.ts";
 
 const publicRoot = resolve(process.cwd(), "public");
-const catalogRoot = resolve(publicRoot, "listening-catalog");
+const catalogRoot = resolve(process.cwd(), "content/listening-catalog");
 const index = JSON.parse(readFileSync(resolve(catalogRoot, "index.json"), "utf8"));
 const studioSource = readFileSync(resolve(process.cwd(), "components/listening-catalog-studio.tsx"), "utf8");
 const studioStyles = readFileSync(resolve(process.cwd(), "app/listening-studio.css"), "utf8");

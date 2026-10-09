@@ -1,8 +1,9 @@
 import "server-only";
 
 import { and, eq, gt, isNull } from "drizzle-orm";
-import { writeDb, type Database } from "../db/index.ts";
-import { adminLoginChallenges, users } from "../db/schema.ts";
+import { readDb, writeDb, type Database } from "../db/index.ts";
+import { adminLoginChallenges, adminTotpCredentials, users } from "../db/schema.ts";
+import { consumeTotpCredential, getAdminTotpStatus } from "./admin-totp.ts";
 import {
   constantTimeTextEqual,
   createAuthToken,
@@ -21,6 +22,7 @@ export type AdminMfaChallenge = {
   challengeToken: string;
   code: string;
   expiresAt: Date;
+  method: "email" | "totp";
 };
 
 export function adminMfaCookieName(): string {
@@ -63,6 +65,8 @@ export async function issueAdminMfaChallenge(
   const expiresAt = new Date(now.getTime() + ADMIN_MFA_TTL_SECONDS * 1_000);
 
   const issue = (db: Database) => db.transaction(async (tx) => {
+    await tx.select({ id: users.id }).from(users).where(eq(users.id, userId)).for("update").limit(1);
+    const status = await getAdminTotpStatus(userId, tx as unknown as Database);
     await tx.update(adminLoginChallenges).set({ usedAt: now }).where(and(
       eq(adminLoginChallenges.userId, userId),
       isNull(adminLoginChallenges.usedAt),
@@ -71,12 +75,22 @@ export async function issueAdminMfaChallenge(
       userId,
       challengeHash,
       codeHash,
+      method: status.enabled ? "totp" : "email",
+      credentialVersion: status.version,
       returnTo: safeAdminReturnTo(returnTo),
       expiresAt,
-    }).returning({ id: adminLoginChallenges.id });
+    }).returning({ id: adminLoginChallenges.id, method: adminLoginChallenges.method });
   });
   const inserted = await (database ? issue(database) : writeDb(issue));
-  return { id: inserted[0].id, challengeToken, code, expiresAt };
+  return { id: inserted[0].id, challengeToken, code, expiresAt, method: inserted[0].method as "email" | "totp" };
+}
+
+export async function getPendingAdminMfaMethod(token: string | undefined): Promise<"email" | "totp" | null> {
+  if (!token) return null;
+  const hash = await hashAuthToken(token);
+  const [challenge] = await readDb((db) => db.select({ method: adminLoginChallenges.method }).from(adminLoginChallenges)
+    .where(and(eq(adminLoginChallenges.challengeHash, hash), isNull(adminLoginChallenges.usedAt), gt(adminLoginChallenges.expiresAt, new Date()))).limit(1));
+  return challenge?.method === "email" || challenge?.method === "totp" ? challenge.method : null;
 }
 
 export async function invalidateAdminMfaChallenge(challengeToken: string, database?: Database): Promise<void> {
@@ -95,8 +109,9 @@ export async function verifyAdminMfaChallenge(
   ok: true;
   user: { id: string; email: string; displayName: string; role: "editor" | "reviewer" | "admin" };
   returnTo: string;
+  method: "email" | "totp";
 } | { ok: false; error: "invalid_or_expired" | "invalid_code" }> {
-  if (!/^[0-9]{6}$/u.test(code)) return { ok: false, error: "invalid_code" };
+  if (!code || code.length > 32) return { ok: false, error: "invalid_code" };
   const [challengeHash, codeHash] = await Promise.all([
     hashAuthToken(challengeToken),
     hashPrivateIdentifier(`${challengeToken}:${code}`),
@@ -104,12 +119,23 @@ export async function verifyAdminMfaChallenge(
   const now = new Date();
 
   const verify = (db: Database) => db.transaction(async (tx) => {
+    const [candidate] = await tx.select({ userId: adminLoginChallenges.userId }).from(adminLoginChallenges)
+      .where(eq(adminLoginChallenges.challengeHash, challengeHash)).limit(1);
+    if (!candidate) return { ok: false as const, error: "invalid_or_expired" as const };
+    // All setup/login operations lock the user first, preventing deadlocks and
+    // serializing secret rotation with pending login challenge verification.
+    const [user] = await tx.select({ id: users.id, email: users.email, displayName: users.displayName, role: users.role,
+      isActive: users.isActive, emailVerifiedAt: users.emailVerifiedAt,
+    }).from(users).where(eq(users.id, candidate.userId)).for("update").limit(1);
+    if (!user?.isActive || !user.emailVerifiedAt || user.role === "learner") return { ok: false as const, error: "invalid_or_expired" as const };
     const challengeRows = await tx.select({
       id: adminLoginChallenges.id,
       userId: adminLoginChallenges.userId,
       codeHash: adminLoginChallenges.codeHash,
       returnTo: adminLoginChallenges.returnTo,
       attempts: adminLoginChallenges.attempts,
+      method: adminLoginChallenges.method,
+      credentialVersion: adminLoginChallenges.credentialVersion,
     }).from(adminLoginChallenges).where(and(
       eq(adminLoginChallenges.challengeHash, challengeHash),
       isNull(adminLoginChallenges.usedAt),
@@ -120,7 +146,14 @@ export async function verifyAdminMfaChallenge(
       return { ok: false as const, error: "invalid_or_expired" as const };
     }
 
-    if (!constantTimeTextEqual(codeHash, challenge.codeHash)) {
+    const [credential] = await tx.select().from(adminTotpCredentials).where(eq(adminTotpCredentials.userId, user.id)).for("update").limit(1);
+    if ((challenge.method === "email" && credential?.enabledAt) ||
+      (challenge.method === "totp" && (!credential?.enabledAt || credential.version !== challenge.credentialVersion)) ||
+      !["email", "totp"].includes(challenge.method)) return { ok: false as const, error: "invalid_or_expired" as const };
+    const valid = challenge.method === "totp"
+      ? await consumeTotpCredential(tx as unknown as Database, credential!, code, now)
+      : /^[0-9]{6}$/u.test(code) && constantTimeTextEqual(codeHash, challenge.codeHash);
+    if (!valid) {
       const attempts = challenge.attempts + 1;
       await tx.update(adminLoginChallenges).set({
         attempts,
@@ -134,19 +167,6 @@ export async function verifyAdminMfaChallenge(
       .returning({ id: adminLoginChallenges.id });
     if (!consumed[0]) return { ok: false as const, error: "invalid_or_expired" as const };
 
-    const userRows = await tx.select({
-      id: users.id,
-      email: users.email,
-      displayName: users.displayName,
-      role: users.role,
-      isActive: users.isActive,
-      emailVerifiedAt: users.emailVerifiedAt,
-    }).from(users).where(eq(users.id, challenge.userId)).for("share").limit(1);
-    const user = userRows[0];
-    if (!user?.isActive || !user.emailVerifiedAt || user.role === "learner") {
-      return { ok: false as const, error: "invalid_or_expired" as const };
-    }
-
     return {
       ok: true as const,
       user: {
@@ -156,6 +176,7 @@ export async function verifyAdminMfaChallenge(
         role: user.role,
       },
       returnTo: safeAdminReturnTo(challenge.returnTo),
+      method: challenge.method as "email" | "totp",
     };
   });
 

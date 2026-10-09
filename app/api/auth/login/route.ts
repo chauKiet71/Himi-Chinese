@@ -76,12 +76,14 @@ export async function POST(request: Request) {
         const adminReturnTo = safeAdminReturnTo(returnTo);
         const staffReturnTo = user.role !== "admin" && adminReturnTo === "/admin" ? "/admin/practice" : adminReturnTo;
         const challenge = await issueAdminMfaChallenge(user.id, staffReturnTo, database);
-        let delivery: "brevo" | "console" | "failed" = "failed";
-        try {
-          delivery = await sendAdminLoginCodeEmail(user, challenge.code, challenge.id);
-        } catch (error) {
-          await invalidateAdminMfaChallenge(challenge.challengeToken, database);
-          console.error("Không thể gửi mã xác minh Console.", error instanceof Error ? error.message : "unknown");
+        let delivery: "brevo" | "console" | "totp" | "failed" = challenge.method === "totp" ? "totp" : "failed";
+        if (challenge.method === "email") {
+          try {
+            delivery = await sendAdminLoginCodeEmail(user, challenge.code, challenge.id);
+          } catch (error) {
+            await invalidateAdminMfaChallenge(challenge.challengeToken, database);
+            console.error("Không thể gửi mã xác minh Console.", error instanceof Error ? error.message : "unknown");
+          }
         }
         await recordAuthEvent({
           action: delivery === "failed" ? "auth.admin_mfa.delivery_failed" : "auth.admin_mfa.challenge_issued",

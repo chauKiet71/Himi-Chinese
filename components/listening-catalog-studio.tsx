@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { VipUpgradeDialog } from "@/components/vip-upgrade-prompt";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   ArrowRight,
@@ -63,7 +65,11 @@ function firstSelection(catalog: ListeningCatalogIndex, initialGroupId?: string)
 }
 
 async function fetchCatalogLesson(lessonId: string, signal?: AbortSignal): Promise<ListeningCatalogLesson> {
-  const response = await fetch(`/listening-catalog/lessons/${encodeURIComponent(lessonId)}.json`, { cache: "force-cache", signal });
+  const response = await fetch(`/api/listening/lessons/${encodeURIComponent(lessonId)}`, { cache: "no-store", signal });
+  if (response.status === 401 || response.status === 403) {
+    const body = await response.json();
+    throw new Error(body.error === "vip_required" ? "vip_required" : "login_required");
+  }
   if (!response.ok) throw new Error(`Lesson request failed with ${response.status}`);
   const value = await response.json() as unknown;
   if (!isListeningCatalogLesson(value)) throw new Error("Invalid listening lesson.");
@@ -81,6 +87,7 @@ export function ListeningCatalogStudio({
   initialLessonId?: string;
   modeSwitcher?: ReactNode;
 }) {
+  const router = useRouter();
   const [catalog, setCatalog] = useState<ListeningCatalogIndex | null>(null);
   const [catalogError, setCatalogError] = useState("");
   const [activeTrackId, setActiveTrackId] = useState("");
@@ -91,6 +98,7 @@ export function ListeningCatalogStudio({
   const [lesson, setLesson] = useState<ListeningCatalogLesson | null>(null);
   const [lessonLoadingId, setLessonLoadingId] = useState("");
   const [lessonError, setLessonError] = useState("");
+  const [vipLocked, setVipLocked] = useState(false);
   const [completedLessonIds, setCompletedLessonIds] = useState<Set<string>>(new Set());
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -163,7 +171,7 @@ export function ListeningCatalogStudio({
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch(LISTENING_CATALOG_INDEX_URL, { cache: "force-cache", signal: controller.signal })
+    fetch(LISTENING_CATALOG_INDEX_URL, { cache: "no-store", signal: controller.signal })
       .then(async (response) => {
         if (!response.ok) throw new Error(`Catalog request failed with ${response.status}`);
         return response.json() as Promise<unknown>;
@@ -191,6 +199,11 @@ export function ListeningCatalogStudio({
               })
               .catch((error: unknown) => {
                 if (error instanceof DOMException && error.name === "AbortError") return;
+                if (error instanceof Error && error.message === "vip_required") { setVipLocked(true); return; }
+                if (error instanceof Error && error.message === "login_required") {
+                  router.push(`/login?error=required&returnTo=${encodeURIComponent(`/listening?lesson=${initialLessonId}`)}`);
+                  return;
+                }
                 setLessonError("Chưa mở được bài nghe này. Hãy thử lại sau ít phút.");
               })
               .finally(() => setLessonLoadingId(""));
@@ -202,7 +215,7 @@ export function ListeningCatalogStudio({
         setCatalogError("Chưa tải được kho bài nghe. Hãy tải lại trang để thử lại.");
       });
     return () => controller.abort();
-  }, [initialGroupId, initialLessonId]);
+  }, [initialGroupId, initialLessonId, router]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -292,9 +305,10 @@ export function ListeningCatalogStudio({
   }
 
   async function openLesson(summary: ListeningCatalogLessonSummary) {
-    if (!authenticated) {
+    if (summary.access?.source === "vip_required") { setVipLocked(true); return; }
+    if (!authenticated && summary.access?.source !== "guest") {
       const returnTo = `/listening?lesson=${encodeURIComponent(summary.id)}`;
-      window.location.assign(`/login?error=required&returnTo=${encodeURIComponent(returnTo)}`);
+      router.push(`/login?error=required&returnTo=${encodeURIComponent(returnTo)}`);
       return;
     }
     setLessonLoadingId(summary.id);
@@ -308,7 +322,12 @@ export function ListeningCatalogStudio({
       setAudioError("");
       clipEndRef.current = null;
       setLesson(value);
-    } catch {
+    } catch (error) {
+      if (error instanceof Error && error.message === "vip_required") { setVipLocked(true); return; }
+      if (error instanceof Error && error.message === "login_required") {
+        router.push(`/login?error=required&returnTo=${encodeURIComponent(`/listening?lesson=${summary.id}`)}`);
+        return;
+      }
       setLessonError("Chưa mở được bài nghe này. Hãy thử lại sau ít phút.");
     } finally {
       setLessonLoadingId("");
@@ -658,6 +677,9 @@ export function ListeningCatalogStudio({
           </div>
           </div>
 
+          <VipUpgradeDialog authenticated={authenticated} open={vipLocked} onClose={() => setVipLocked(false)}
+            returnTo={`/listening?lesson=${encodeURIComponent(previewLessonId || initialLessonId || "")}`}
+            target={{ kind: "Bài học", title: "Luyện nghe" }} />
           {lessonError ? <p className="listening-catalog-error" role="alert">{lessonError}</p> : null}
           {visibleLessons.length ? <div className="listening-redesign-lesson-layout">
             <section className="listening-redesign-lesson-list" aria-label={`Danh sách bài ${activeTrack.labelVi}`}>
@@ -673,7 +695,7 @@ export function ListeningCatalogStudio({
                         {lessonLoadingId === summary.id ? <LoaderCircle aria-hidden="true" className="is-spinning" size={16} /> : completed ? <Check aria-hidden="true" size={16} /> : selected ? <Play aria-hidden="true" fill="currentColor" size={15} /> : <Headphones aria-hidden="true" size={16} />}
                       </span>
                       <span className="listening-redesign-lesson-copy">
-                        <strong>{summary.titleVi}</strong>
+                        <strong>{summary.access?.requiredTier === "vip" ? "VIP · " : ""}{summary.titleVi}</strong>
                         {selected ? <small>{completed ? "Đã hoàn thành bài học" : "Tiếp tục bài học"}</small> : <progress aria-label={`Tiến độ ${summary.titleVi}`} max={100} value={completed ? 100 : 0} />}
                       </span>
                       <time>{formatListeningDuration(summary.durationSeconds).padStart(5, "0")}</time>

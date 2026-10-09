@@ -1,27 +1,23 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { HimiWritingStudio } from "@/components/himi-writing-studio";
-import { HskVipLocked } from "@/components/hsk-vip-locked";
-import { getHskLessonPageData } from "@/lib/hsk-access-repository";
+import { VipContentGate } from "@/components/vip-upgrade-prompt";
+import { getWritingPractice, getWritingCatalog } from "@/lib/practice-content-repository";
 import { getCurrentUser } from "@/lib/auth-session";
 import { learnerLoginPath } from "@/lib/learner-auth";
-import { getWritingPracticeParams, getWritingTopic, getWritingTopicFromLesson } from "@/lib/writing-content";
 
 type WritingPracticePageProps = {
   params: Promise<{ level: string; lesson: string }>;
 };
 
-export function generateStaticParams() {
-  return getWritingPracticeParams();
-}
-
 export async function generateMetadata({ params }: WritingPracticePageProps): Promise<Metadata> {
   const { level, lesson } = await params;
-  const topic = getWritingTopic(level, lesson);
+  const levelId = level.startsWith("hsk-") ? level : `hsk-${level}`;
+  const topic = (await getWritingCatalog())?.lessons[levelId]?.find((entry) => entry.id === lesson);
   if (!topic) return { title: "Không tìm thấy bài luyện viết" };
   return {
-    title: `Bài ${topic.lessonNumber}: ${topic.title} · Luyện viết ${topic.level}`,
-    description: `Luyện viết ${topic.characters.length} chữ trong bài ${topic.title}.`,
+    title: `Bài ${topic.lessonNumber}: ${topic.title} · Luyện viết ${levelId}`,
+    description: `Luyện viết ${topic.characterCount} chữ trong bài ${topic.title}.`,
   };
 }
 
@@ -29,12 +25,11 @@ export default async function WritingPracticePage({ params }: WritingPracticePag
   const { level, lesson } = await params;
   const returnTo = `/writing/${encodeURIComponent(level)}/${encodeURIComponent(lesson)}/practice`;
   const user = await getCurrentUser();
-  const data = await getHskLessonPageData({ level, lessonId: lesson, userId: user?.id ?? null });
+  const data = await getWritingPractice(level, lesson, user?.id ?? null);
   if (!data) notFound();
-  if (!user && data.access.source !== "guest") redirect(learnerLoginPath(returnTo));
-  if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
-
-  const topic = getWritingTopicFromLesson(level, lesson, data.lesson);
+  if (data.access.source === "login_required") redirect(learnerLoginPath(returnTo));
+  if (!data.access.allowed) return <VipContentGate title="Bài luyện viết dành cho thành viên VIP" closeHref={`/writing/${level}`} />;
+  const topic = data.topic;
   if (!topic) notFound();
 
   return <HimiWritingStudio key={`${topic.levelId}-${topic.slug}`} topic={topic} />;

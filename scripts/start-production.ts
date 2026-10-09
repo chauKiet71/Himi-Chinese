@@ -11,6 +11,7 @@ const forwardedArgs = process.argv.slice(2);
 const railwayEnvironmentVariables = [
   "DATABASE_URL",
   "AUTH_SECRET",
+  "ADMIN_TOTP_ENCRYPTION_KEY",
   "GOOGLE_CLIENT_ID",
   "GOOGLE_CLIENT_SECRET",
   "SEPAY_API_KEY",

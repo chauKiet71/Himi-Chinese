@@ -26,6 +26,7 @@ function AdminSidebar({ userName, userRole }: { userName: string; userRole: User
     </AdminLink>
     <AdminNavigation userRole={userRole} />
     <div className="admin-sidebar-footer">
+      <Link href="/admin/security" prefetch={false}>Bảo mật · Thiết lập TOTP</Link>
       <Link href="/account" prefetch={false}>
         <span aria-hidden="true" className="admin-user-avatar">{userInitial}</span>
         <span><strong>{userName}</strong><small>{roleLabels[userRole]}</small></span>

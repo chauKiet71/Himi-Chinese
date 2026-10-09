@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ListeningCatalogStudio } from "@/components/listening-catalog-studio";
 import { getCurrentUser } from "@/lib/auth-session";
-import { requireLearnerUser } from "@/lib/learner-auth";
 import { catalogGroupForHskLevel } from "@/lib/listening-catalog";
 
 export const metadata: Metadata = {
@@ -34,13 +33,7 @@ export default async function ListeningPage({
 
   const requestedLevel = firstValue(params.level);
   const initialLessonId = firstValue(params.lesson);
-  const returnParams = new URLSearchParams();
-  if (requestedLevel) returnParams.set("level", requestedLevel);
-  if (initialLessonId) returnParams.set("lesson", initialLessonId);
-  const returnTo = `/listening${returnParams.size ? `?${returnParams}` : ""}`;
-  const user = initialLessonId
-    ? await requireLearnerUser(returnTo)
-    : await getCurrentUser();
+  const user = await getCurrentUser();
   const initialGroupId = catalogGroupForHskLevel(requestedLevel);
 
   return <ListeningCatalogStudio

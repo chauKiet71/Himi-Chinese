@@ -70,6 +70,34 @@ npm run verify:staging
 
 ## Công nghệ và cấu trúc
 
+### Dữ liệu và khóa VIP Luyện viết / Luyện nghe
+
+Hai phần này đọc catalog và nội dung bài từ bảng `practice_content_documents`.
+Sau khi cấu hình `DATABASE_URL` cho môi trường đích, chạy:
+
+```bash
+npm run db:migrate:auto
+npm run content:practice:import-db
+```
+
+Kiểm tra nguồn mà không ghi DB: `npm run content:practice:import-db -- --dry-run`.
+Import chạy trong transaction, cập nhật theo khóa nguồn ổn định và không đổi
+`content_access_policies`. Nguồn gồm 146 bài viết HSK và 174 bài nghe; JSON nghe
+gốc nằm trong `content/listening-catalog`, các URL JSON công khai cũ chỉ còn dữ
+liệu rỗng. Audio giữ đường dẫn hiện có như Luyện gõ.
+
+Admin → Khóa nội dung VIP → Luyện viết: quản lý cấp độ, bài và từng chữ.
+Admin → Khóa nội dung VIP → Luyện nghe: quản lý loại nội dung, cấp độ, chủ đề và bài.
+Các quyền độc lập với HSK và Luyện gõ; khóa VIP ở cấp cha áp dụng cho mọi mục con.
+Mặc định cần đăng nhập; chọn Khách để cho phép xem không đăng nhập, hoặc VIP để
+yêu cầu subscription còn hiệu lực. Bài viết bị khóa trả về màn hình nâng cấp;
+chữ bị khóa được xóa hanzi/pinyin/nghĩa trước khi gửi xuống client. API nghe
+`/api/listening/lessons/[lesson]` kiểm tra quyền tại mỗi request và không trả transcript,
+từ khóa hoặc URL audio của bài bị khóa. Responses theo người dùng không được cache công khai.
+
+Khi triển khai môi trường mới, nhập DB trước khi đưa phiên bản này vào phục vụ.
+Lệnh import cần Vite/devDependencies và chạy từ checkout có nguồn `content/`.
+
 - Next.js App Router + React + TypeScript.
 - CSS responsive dùng chung, tối ưu cho laptop, iOS và Android.
 - PostgreSQL + Drizzle ORM được thiết kế sẵn trong `db/schema.ts`.
@@ -132,6 +160,14 @@ Mỗi tài khoản học viên được tạo bằng email hoặc Google sẽ đ
 - Đặt lại hoặc đổi mật khẩu thu hồi toàn bộ session cũ. Sự kiện đăng nhập, xác minh, reset và logout được ghi vào `audit_logs`.
 - Để tạo hoặc xoay tài khoản admin, đặt tạm `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_DISPLAY_NAME` trong môi trường của terminal rồi chạy `npm run admin:create`. Script cũng thu hồi các session cũ của tài khoản đó. Không ghi các biến này vào Git.
 - `AUTH_COOKIE_SECURE` mặc định đi theo `NODE_ENV`. Chỉ đặt `0` khi chạy production build qua HTTP trên máy local; môi trường HTTPS thật phải để trống hoặc đặt `1`.
+
+## TOTP cho tài khoản quản trị
+
+- Vào **Admin → Bảo mật · Thiết lập TOTP** (`/admin/security`), nhập mật khẩu hiện tại, quét QR bằng ứng dụng Authenticator hoặc nhập key thủ công, rồi xác nhận mã 6 số. Phiên đăng nhập phải mới trong 15 phút; nếu quá hạn hãy đăng nhập lại.
+- Sau khi xác nhận, tài khoản dùng TOTP thay mã email khi đăng nhập. Tài khoản chưa bật TOTP vẫn dùng email; chỉ mở QR chưa kích hoạt TOTP. QR được tạo trong ứng dụng, không gửi key tới dịch vụ ngoài. Không khuyến nghị nhập key quản trị vào website bên thứ ba như 2fa.live.
+- Lưu 10 mã khôi phục ở nơi an toàn ngay khi hiển thị. Mỗi mã dùng một lần và có thể nhập vào ô xác minh đăng nhập. Đổi key yêu cầu mật khẩu và mã TOTP/mã khôi phục hiện tại; key cũ và bộ mã khôi phục cũ hết hiệu lực sau khi xác nhận key mới. Các phiên cũ bị thu hồi.
+- Server cần `ADMIN_TOTP_ENCRYPTION_KEY`: khóa ngẫu nhiên 32 byte dạng Base64, khác `AUTH_SECRET`, không dùng tiền tố `NEXT_PUBLIC_` và không đưa vào Git. Tạo bằng `node -e "console.log(require('node:crypto').randomBytes(32).toString('base64'))"` trong môi trường riêng. Sao lưu khóa an toàn; tất cả runtime dùng cùng DB phải dùng cùng khóa, không tạo lại khi restart/deploy. `AUTH_SECRET` cũng cần ổn định để mã khôi phục còn hợp lệ.
+- Khi triển khai VPS: cấu hình khóa, chạy `npm run db:migrate:auto` (migration `0032_admin_totp`), build và restart web, sau đó mới bật TOTP cho từng tài khoản. Giữ đồng hồ VPS đồng bộ NTP. Không mất key hoặc toàn bộ mã khôi phục; hiện chưa có chức năng tự tắt/reset TOTP khi mất cả hai.
 
 ## Admin CRUD nội dung
 

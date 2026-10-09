@@ -26,7 +26,7 @@ export async function POST(request: Request) {
   const challengeCookieName = adminMfaCookieName();
   const challengeToken = cookieValue(request, challengeCookieName);
   const formData = await request.formData();
-  const code = formString(formData, "code", 6).trim();
+  const code = formString(formData, "code", 32).trim();
 
   if (!challengeToken) {
     return NextResponse.redirect(authRedirectUrl(request, "/admin/login", { error: "mfa_expired" }), 303);
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
       request,
       identifier: result.user.email,
       userId: result.user.id,
-      metadata: { mfa: "email_code", mode: "admin" },
+      metadata: { mfa: result.method === "totp" ? "totp" : "email_code", mode: "admin" },
     }, database);
 
     const response = NextResponse.redirect(authRedirectUrl(request, result.returnTo), 303);

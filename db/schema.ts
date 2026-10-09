@@ -1,5 +1,6 @@
 import {
   boolean,
+  bigint,
   customType,
   index,
   integer,
@@ -44,7 +45,23 @@ export const contentAccessTargetType = pgEnum("content_access_target_type", [
   "typing_level",
   "typing_lesson",
   "typing_question",
+  "writing_level",
+  "writing_lesson",
+  "writing_character",
+  "listening_track",
+  "listening_group",
+  "listening_topic",
+  "listening_lesson",
 ]);
+
+// Source catalogs and lesson payloads are stored separately: listing never reads
+// protected lesson bodies. Stable source keys also preserve access rules on import.
+export const practiceContentDocuments = pgTable("practice_content_documents", {
+  kind: varchar("kind", { length: 32 }).notNull(),
+  key: varchar("key", { length: 500 }).notNull(),
+  payload: jsonb("payload").notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [primaryKey({ columns: [table.kind, table.key] })]);
 
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -168,11 +185,26 @@ export const oauthAccounts = pgTable("oauth_accounts", {
   index("oauth_accounts_user_idx").on(table.userId),
 ]);
 
+export const adminTotpCredentials = pgTable("admin_totp_credentials", {
+  userId: uuid("user_id").primaryKey().references(() => users.id, { onDelete: "cascade" }),
+  version: uuid("version").notNull().defaultRandom(),
+  encryptedSecret: text("encrypted_secret"),
+  enabledAt: timestamp("enabled_at", { withTimezone: true }),
+  lastUsedStep: bigint("last_used_step", { mode: "number" }),
+  recoveryHashes: jsonb("recovery_hashes").$type<string[]>().notNull().default([]),
+  pendingSecret: text("pending_secret"),
+  pendingExpiresAt: timestamp("pending_expires_at", { withTimezone: true }),
+  pendingAttempts: integer("pending_attempts").notNull().default(0),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const adminLoginChallenges = pgTable("admin_login_challenges", {
   id: uuid("id").defaultRandom().primaryKey(),
   userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   challengeHash: varchar("challenge_hash", { length: 64 }).notNull(),
   codeHash: varchar("code_hash", { length: 64 }).notNull(),
+  method: varchar("method", { length: 10 }).notNull().default("email"),
+  credentialVersion: uuid("credential_version"),
   returnTo: varchar("return_to", { length: 500 }).notNull().default("/admin"),
   attempts: integer("attempts").notNull().default(0),
   expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),

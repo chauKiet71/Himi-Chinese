@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, BookOpen, ChevronLeft, Clock3, PenLine } from "lucide-react";
-import { getWritingLevel, getWritingLessons, WRITING_LEVEL_IDS } from "@/lib/writing-content";
+import { WRITING_LEVEL_IDS } from "@/lib/writing-content";
+import { getWritingCatalog, practiceViewerAccess } from "@/lib/practice-content-repository";
+import { getCurrentUser } from "@/lib/auth-session";
+import { writingTargets } from "@/lib/practice-content-access";
+import { resolveContentAccess } from "@/lib/content-access-types";
 
 type WritingLevelPageProps = {
   params: Promise<{ level: string }>;
@@ -14,7 +18,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: WritingLevelPageProps): Promise<Metadata> {
   const { level: levelParam } = await params;
-  const level = getWritingLevel(levelParam);
+  const level = (await getWritingCatalog())?.levels.find((entry) => entry.id === (levelParam.startsWith("hsk-") ? levelParam : `hsk-${levelParam}`));
   if (!level) return { title: "Không tìm thấy cấp độ luyện viết" };
   return {
     title: `Luyện viết theo bài · ${level.label}`,
@@ -24,10 +28,12 @@ export async function generateMetadata({ params }: WritingLevelPageProps): Promi
 
 export default async function WritingLevelPage({ params }: WritingLevelPageProps) {
   const { level: levelParam } = await params;
-  const level = getWritingLevel(levelParam);
+  const [catalog, user] = await Promise.all([getWritingCatalog(), getCurrentUser()]);
+  const level = catalog?.levels.find((entry) => entry.id === (levelParam.startsWith("hsk-") ? levelParam : `hsk-${levelParam}`));
   if (!level) notFound();
 
-  const lessons = getWritingLessons(level.id);
+  const lessons = catalog?.lessons[level.id] ?? [];
+  const viewer = await practiceViewerAccess(lessons.flatMap((lesson) => writingTargets(level.id, lesson.id)), user?.id ?? null);
 
   return <main className="learner-dashboard writing-lesson-page">
     <nav aria-label="Quay lại trang Luyện viết" className="writing-level-back">
@@ -55,7 +61,7 @@ export default async function WritingLevelPage({ params }: WritingLevelPageProps
                 <span><PenLine aria-hidden="true" size={15} /> {lesson.characterCount} chữ</span>
               </div>
               <Link href={`/writing/${level.id}/${lesson.id}/practice`} prefetch={false}>
-                Luyện viết <ArrowRight aria-hidden="true" size={17} />
+                {resolveContentAccess({ targets: writingTargets(level.id, lesson.id), ...viewer }).requiredTier === "vip" ? "VIP · Luyện viết" : "Luyện viết"} <ArrowRight aria-hidden="true" size={17} />
               </Link>
             </div>
           </article>

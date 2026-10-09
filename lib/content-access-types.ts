@@ -11,6 +11,13 @@ export const CONTENT_ACCESS_TARGET_TYPES = [
   "typing_level",
   "typing_lesson",
   "typing_question",
+  "writing_level",
+  "writing_lesson",
+  "writing_character",
+  "listening_track",
+  "listening_group",
+  "listening_topic",
+  "listening_lesson",
 ] as const;
 
 export type ContentAccessTargetType = typeof CONTENT_ACCESS_TARGET_TYPES[number];

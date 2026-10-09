@@ -41,6 +41,7 @@ if (iflytekValues.some(Boolean) && !hasCompleteIflytekConfig) {
 const secrets = {
   DATABASE_URL: requiredEnvironmentValue("DATABASE_URL"),
   AUTH_SECRET: requiredEnvironmentValue("AUTH_SECRET"),
+  ...(process.env.ADMIN_TOTP_ENCRYPTION_KEY?.trim() ? { ADMIN_TOTP_ENCRYPTION_KEY: process.env.ADMIN_TOTP_ENCRYPTION_KEY.trim() } : {}),
   CLOUDINARY_URL: requiredEnvironmentValue("CLOUDINARY_URL"),
   BREVO_API_KEY: requiredEnvironmentValue("BREVO_API_KEY"),
   BREVO_FROM_EMAIL: requiredEnvironmentValue("BREVO_FROM_EMAIL"),

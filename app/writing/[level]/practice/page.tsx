@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation";
-import { getWritingLessons, WRITING_LEVEL_IDS } from "@/lib/writing-content";
+import { WRITING_LEVEL_IDS } from "@/lib/writing-content";
+import { getWritingCatalog } from "@/lib/practice-content-repository";
 
 type LegacyWritingPracticePageProps = {
   params: Promise<{ level: string }>;
@@ -11,7 +12,8 @@ export function generateStaticParams() {
 
 export default async function LegacyWritingPracticePage({ params }: LegacyWritingPracticePageProps) {
   const { level } = await params;
-  const firstLesson = getWritingLessons(level)[0];
+  const levelId = level.startsWith("hsk-") ? level : `hsk-${level}`;
+  const firstLesson = (await getWritingCatalog())?.lessons[levelId]?.[0];
   if (!firstLesson) notFound();
   redirect(`/writing/${level}/${firstLesson.id}/practice`);
 }

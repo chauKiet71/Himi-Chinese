@@ -73,7 +73,7 @@ export async function issueEmailVerificationCode(
   return { id: inserted[0].id, code, expiresAt };
 }
 
-type VerifiedEmailUser = { id: string; email: string; displayName: string };
+type VerifiedEmailUser = { id: string; email: string; displayName: string; role: typeof users.$inferSelect.role };
 
 export async function verifyEmailCode(
   email: string,
@@ -89,6 +89,7 @@ export async function verifyEmailCode(
       userId: users.id,
       email: users.email,
       displayName: users.displayName,
+      role: users.role,
       isActive: users.isActive,
     }).from(authTokens)
       .innerJoin(users, eq(authTokens.userId, users.id))
@@ -110,7 +111,7 @@ export async function verifyEmailCode(
     if (!consumed[0]) return null;
 
     await tx.update(users).set({ emailVerifiedAt: now, updatedAt: now }).where(eq(users.id, row.userId));
-    return { id: row.userId, email: row.email, displayName: row.displayName ?? row.email };
+    return { id: row.userId, email: row.email, displayName: row.displayName ?? row.email, role: row.role };
   });
 
   return database ? verify(database) : writeDb(verify);
@@ -125,6 +126,7 @@ export async function verifyEmailToken(token: string): Promise<VerifiedEmailUser
       userId: users.id,
       email: users.email,
       displayName: users.displayName,
+      role: users.role,
       isActive: users.isActive,
     }).from(authTokens)
       .innerJoin(users, eq(authTokens.userId, users.id))
@@ -145,7 +147,7 @@ export async function verifyEmailToken(token: string): Promise<VerifiedEmailUser
     if (!consumed[0]) return null;
 
     await tx.update(users).set({ emailVerifiedAt: now, updatedAt: now }).where(eq(users.id, row.userId));
-    return { id: row.userId, email: row.email, displayName: row.displayName ?? row.email };
+    return { id: row.userId, email: row.email, displayName: row.displayName ?? row.email, role: row.role };
   }));
 }
 

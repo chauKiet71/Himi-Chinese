@@ -1,4 +1,5 @@
 export type ListeningCatalogLessonSummary = {
+  access?: import("./content-access-types").ContentAccessState;
   id: string;
   titleZh: string;
   titleVi: string;
@@ -89,7 +90,7 @@ export type ListeningCatalogLesson = {
   keywords: ListeningCatalogKeyword[];
 };
 
-export const LISTENING_CATALOG_INDEX_URL = "/listening-catalog/index.json";
+export const LISTENING_CATALOG_INDEX_URL = "/api/listening/catalog";
 export const LISTENING_CATALOG_PROGRESS_KEY = "himi-listening-catalog-progress-v1";
 
 export function listeningSentenceAtTime(

@@ -46,10 +46,13 @@ export async function POST(request: Request) {
     return verificationFailure(request, usesCode ? "invalid_code" : "invalid_or_expired", email);
   }
 
-  const session = await createSession(user.id);
   await recordAuthEvent({ action: "auth.email_verification.succeeded", request, userId: user.id });
-  const response = NextResponse.redirect(new URL("/?verified=1", request.url), 303);
-  response.cookies.set(sessionCookieName(), session.token, sessionCookieOptions(session.expiresAt));
+  // Email verification is not a substitute for staff password + MFA login.
+  const response = NextResponse.redirect(new URL(user.role === "learner" ? "/?verified=1" : "/admin/login?verified=1", request.url), 303);
+  if (user.role === "learner") {
+    const session = await createSession(user.id);
+    response.cookies.set(sessionCookieName(), session.token, sessionCookieOptions(session.expiresAt));
+  }
   response.cookies.set(pendingEmailVerificationCookieName(), "", clearPendingEmailVerificationCookieOptions());
   response.cookies.set(pendingEmailChangeCookieName(), "", clearPendingEmailChangeCookieOptions());
   return response;

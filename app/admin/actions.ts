@@ -92,7 +92,7 @@ function invalid(path: string): never {
 }
 
 function contentAccessReturnTo(value: string): string {
-  return /^\/admin\/access(?:\/(?:hsk|typing))?(?:\?level=[a-z0-9_-]+(?:&lesson=[a-z0-9_-]+)?)?$/iu.test(value)
+  return /^\/admin\/access(?:\/(?:hsk|typing|writing|listening))?(?:\?level=[a-z0-9_-]+(?:&lesson=[a-z0-9_-]+)?)?$/iu.test(value)
     ? value
     : "/admin/access";
 }
@@ -497,6 +497,8 @@ function contentAccessUpdated(returnTo: string, success = "content_access_update
   revalidatePath("/hsk", "layout");
   revalidatePath("/admin/access", "layout");
   revalidatePath("/typing", "layout");
+  revalidatePath("/writing", "layout");
+  revalidatePath("/listening", "layout");
   revalidateTag("published-content", "max");
   updateTag("content-access-policies");
   redirect(`${returnTo}${returnTo.includes("?") ? "&" : "?"}success=${success}`);

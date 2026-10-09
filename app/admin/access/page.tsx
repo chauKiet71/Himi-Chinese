@@ -21,11 +21,13 @@ export default async function AdminContentAccessPage({ searchParams }: {
 
   return <main className="admin-page"><div className="section-shell">
     <AdminConsoleHeader title="Khóa nội dung VIP" eyebrow="Content access" userName={user.displayName}
-      description="Chọn phần cần quản lý. Quyền truy cập của Lộ trình HSK và Luyện gõ được lưu riêng." />
+      description="Chọn phần cần quản lý. Quyền truy cập của HSK, Luyện gõ, Luyện viết và Luyện nghe được lưu riêng." />
     <AdminNotice error={query.error} success={query.success} />
     <section className="admin-panel" aria-labelledby="access-groups-title">
-      <div className="panel-heading"><h2 id="access-groups-title">Chọn nhóm nội dung</h2><span>2 phần</span></div>
+      <div className="panel-heading"><h2 id="access-groups-title">Chọn nhóm nội dung</h2><span>4 phần</span></div>
       <div className="admin-access-groups">
+        <Link className="admin-access-group-card" href="/admin/access/writing" prefetch={false}><h3>Luyện viết</h3><p>Khóa cấp độ, bài học và từng chữ luyện viết.</p><span>Quản lý khóa Luyện viết →</span></Link>
+        <Link className="admin-access-group-card" href="/admin/access/listening" prefetch={false}><h3>Luyện nghe</h3><p>Khóa loại nội dung, cấp độ, chủ đề và bài luyện nghe.</p><span>Quản lý khóa Luyện nghe →</span></Link>
         <Link className="admin-access-group-card" href="/admin/access/hsk" prefetch={false}>
           <h3>Lộ trình HSK</h3>
           <p>Khóa cấp độ, bài học, từ vựng, chữ luyện viết và câu hỏi của Lộ trình HSK.</p>

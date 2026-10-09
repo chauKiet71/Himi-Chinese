@@ -24,8 +24,8 @@ test("writing catalog exposes only HSK lessons approved for learning", async (t)
   assert.equal(studio.normalizeWritingSearch("YǍNJING"), "yanjing");
   assert.equal(studio.normalizeWritingSearch("đá bóng"), "da bong");
 
-  assert.deepEqual(levels.map((level) => level.lessonCount), [15, 15, 0, 0, 0, 0]);
-  assert.equal(levels.reduce((total, level) => total + level.lessonCount, 0), 30);
+  assert.deepEqual(levels.map((level) => level.lessonCount), [15, 15, 20, 20, 36, 40]);
+  assert.equal(levels.reduce((total, level) => total + level.lessonCount, 0), 146);
 
   for (const level of levels) {
     const lessons = writing.getWritingLessons(level.id);
@@ -62,8 +62,8 @@ test("writing catalog exposes only HSK lessons approved for learning", async (t)
   const html = renderToStaticMarkup(React.createElement(studio.HimiWritingStudio, {
     topic: { ...protectedTopic, characters: [protectedTopic.characters[0]] },
   }));
-  assert.match(html, /Mở khóa chữ Hán này/);
-  assert.match(html, /action="\/vip"/);
+  assert.match(html, /Chữ luyện viết dành cho thành viên VIP/);
+  assert.match(html, /Nâng cấp để xem và luyện chữ này/);
   assert.doesNotMatch(html, new RegExp(`Khu vực viết chữ ${sourceCharacter.hanzi}`));
   assert.doesNotMatch(html, new RegExp(sourceCharacter.pinyin));
 

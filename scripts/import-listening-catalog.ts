@@ -5,10 +5,11 @@ const DEFAULT_SOURCE_ROOT = "D:/Code/HuaMei/HocTrung_Final/16_30th7/pinda-v2-sta
 const sourceRoot = resolve(process.argv[2] || process.env.LISTENING_CATALOG_SOURCE || DEFAULT_SOURCE_ROOT);
 const sourceCatalogPath = resolve(sourceRoot, "data/listening-catalog.json");
 const publicRoot = resolve(process.cwd(), "public");
-const outputRoot = resolve(publicRoot, "listening-catalog");
+const outputRoot = resolve(process.cwd(), "content/listening-catalog");
+const audioOutputRoot = resolve(publicRoot, "listening-catalog");
 
-if (!outputRoot.startsWith(`${publicRoot}${sep}`)) {
-  throw new Error(`Refusing to write outside the public directory: ${outputRoot}`);
+if (!outputRoot.startsWith(`${resolve(process.cwd(), "content")}${sep}`)) {
+  throw new Error(`Refusing to write outside the content directory: ${outputRoot}`);
 }
 if (!existsSync(sourceCatalogPath)) {
   throw new Error(`Listening catalog was not found at ${sourceCatalogPath}`);
@@ -90,7 +91,7 @@ if (catalog.schema_version !== "pinda_listening_catalog_v1" || !Array.isArray(ca
 }
 
 rmSync(outputRoot, { force: true, recursive: true });
-mkdirSync(resolve(outputRoot, "audio"), { recursive: true });
+mkdirSync(resolve(audioOutputRoot, "audio"), { recursive: true });
 mkdirSync(resolve(outputRoot, "lessons"), { recursive: true });
 
 const copiedAudio = new Set<string>();
@@ -113,8 +114,8 @@ function importAudio(sourcePath: string): string {
   }
 
   if (!copiedAudio.has(relativeAudioPath)) {
-    const destinationPath = resolve(outputRoot, "audio", relativeAudioPath);
-    const destinationRelativePath = relative(outputRoot, destinationPath);
+    const destinationPath = resolve(audioOutputRoot, "audio", relativeAudioPath);
+    const destinationRelativePath = relative(audioOutputRoot, destinationPath);
     if (destinationRelativePath.startsWith("..") || isAbsolute(destinationRelativePath)) {
       throw new Error(`Refusing to copy audio outside the output directory: ${sourcePath}`);
     }

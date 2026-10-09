@@ -15,7 +15,7 @@ test("home page contains the Himi learning dashboard", async () => {
   assert.match(page, /verified=\{params\.verified === "1"\}/);
   assert.doesNotMatch(page, /getDailySessionSource|listPracticeVocabulary|buildDailySession/);
   assert.match(studio, /Email đã xác minh\. Chào mừng bạn đến Himi Chinese\./);
-  assert.match(verifyEmail, /new URL\("\/\?verified=1"/);
+  assert.match(verifyEmail, /user\.role === "learner" \? "\/\?verified=1" : "\/admin\/login\?verified=1"/);
   assert.match(studio, /Chào mừng bạn đến với <em>Himi Chinese!<\/em>/);
   assert.match(studio, /Tính năng học tập/);
   assert.match(studio, /Chủ đề phổ biến/);
