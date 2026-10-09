@@ -1,6 +1,8 @@
 const productionScriptSources = [
   "'self'",
   "'unsafe-inline'",
+  "https://*.clarity.ms",
+  "https://c.bing.com",
   "https://www.youtube.com",
   "https://www.youtube-nocookie.com",
 ];
@@ -18,10 +20,10 @@ export function contentSecurityPolicy(development = false): string {
     "object-src 'none'",
     `script-src ${scriptSources.join(" ")}`,
     "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob: https:",
+    "img-src 'self' data: blob: https: https://*.clarity.ms https://c.bing.com",
     "font-src 'self' data:",
     "media-src 'self' blob: https:",
-    "connect-src 'self' https: wss: ws:",
+    "connect-src 'self' https: wss: ws: https://*.clarity.ms https://c.bing.com",
     "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
     "worker-src 'self' blob:",
     "manifest-src 'self'",

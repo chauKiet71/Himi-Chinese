@@ -85,6 +85,12 @@ test("security headers prevent framing and harden admin responses", async () => 
   assert.match(policy, /object-src 'none'/u);
   assert.match(policy, /script-src [^;]*https:\/\/www\.youtube\.com/u);
   assert.match(policy, /script-src [^;]*https:\/\/www\.youtube-nocookie\.com/u);
+  assert.match(policy, /script-src [^;]*https:\/\/\*\.clarity\.ms/u);
+  assert.match(policy, /script-src [^;]*https:\/\/c\.bing\.com/u);
+  assert.match(policy, /connect-src [^;]*https:\/\/\*\.clarity\.ms/u);
+  assert.match(policy, /connect-src [^;]*https:\/\/c\.bing\.com/u);
+  assert.match(policy, /img-src [^;]*https:\/\/\*\.clarity\.ms/u);
+  assert.match(policy, /img-src [^;]*https:\/\/c\.bing\.com/u);
   assert.equal(policy.includes("'unsafe-eval'"), false);
   assert.equal(contentSecurityPolicy(true).includes("'unsafe-eval'"), true);
   assert.equal(applicationSecurityHeaders().find((header) => header.key === "X-Content-Type-Options")?.value, "nosniff");
