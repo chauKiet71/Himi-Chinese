@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 type CoursesSearchParams = {
   level?: string | string[];
   view?: string | string[];
+  upgradeLesson?: string | string[];
 };
 
 const hskSummary = {
@@ -51,7 +52,7 @@ export default async function CoursesPage({
     : undefined;
 
   return <main className={`course-library-page hsk-curriculum-page ${view === "catalog" ? "learner-full-width-catalog" : ""}`.trim()}>
-    {view === "hsk" ? <CourseLibraryView authenticated={Boolean(user)} courses={[]} hskCurriculum={hskCurriculum} hskSummary={hskSummary} initialHskLevelId={initialHskLevelId} view="hsk" /> : <div id="course-catalog">
+    {view === "hsk" ? <CourseLibraryView authenticated={Boolean(user)} courses={[]} hskCurriculum={hskCurriculum} hskSummary={hskSummary} initialHskLevelId={initialHskLevelId} initialUpgradeLessonId={firstValue(params.upgradeLesson)} view="hsk" /> : <div id="course-catalog">
       <Suspense fallback={<CourseGridSkeleton />}><CourseCatalog userId={user?.id ?? null} /></Suspense>
     </div>}
   </main>;

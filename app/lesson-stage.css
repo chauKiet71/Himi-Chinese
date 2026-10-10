@@ -4363,11 +4363,11 @@ body:has(.industry-guided-lesson) .himi-chatbot-widget {
 .industry-complete-card p { margin: 0; color: #8490a4; font-size: 14px; }
 .industry-complete-card p strong { color: #71809a; }
 .industry-complete-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 24px 0 0; }
-.industry-complete-stats > div { position: relative; display: grid; grid-template-columns: 46px max-content minmax(0, 1fr); align-items: center; column-gap: 11px; min-height: 86px; padding: 14px 16px; border: 1px solid #fbcac4; border-radius: 16px; background: #fff; }
+.industry-complete-stats > div { position: relative; display: grid; grid-template-columns: 46px minmax(0, 1fr); grid-template-rows: auto auto; align-items: center; column-gap: 11px; min-height: 86px; padding: 14px 16px; border: 1px solid #fbcac4; border-radius: 16px; background: #fff; }
 .industry-complete-stats dt { display: contents; margin: 0; }
-.industry-complete-stats dt > span { display: grid; place-items: center; flex: 0 0 46px; width: 46px; height: 46px; color: var(--guided-coral); border-radius: 50%; background: #fef0ee; }
-.industry-complete-stats strong { color: var(--guided-coral); font-size: 24px; line-height: 1; }
-.industry-complete-stats dd { align-self: start; margin: 7px 0 0 -4px; color: #8490a4; font-size: 11px; line-height: 1.2; text-align: left; white-space: nowrap; }
+.industry-complete-stats dt > span { grid-column: 1; grid-row: 1 / span 2; display: grid; place-items: center; flex: 0 0 46px; width: 46px; height: 46px; color: var(--guided-coral); border-radius: 50%; background: #fef0ee; }
+.industry-complete-stats strong { grid-column: 2; grid-row: 1; align-self: end; color: var(--guided-coral); font-size: 24px; line-height: 1; }
+.industry-complete-stats dd { grid-column: 2; grid-row: 2; align-self: start; margin: 6px 0 0; color: #64748b; font-size: 13px; line-height: 1.4; text-align: left; }
 .industry-complete-actions { display: grid; grid-template-columns: 1fr 1.45fr; gap: 12px; margin-top: 25px; }
 .industry-complete-actions a { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 52px; color: var(--guided-coral); font-size: 14px; font-weight: 800; border: 1px solid var(--guided-coral); border-radius: 14px; transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease; }
 .industry-complete-actions a:hover { transform: translateY(-1px); background: #fff5f3; }
@@ -4418,8 +4418,8 @@ body:has(.industry-guided-lesson) .himi-chatbot-widget {
   .industry-complete-card h1 { font-size: clamp(29px, 9vw, 36px); }
   .industry-complete-card p { font-size: 13px; }
   .industry-complete-stats { grid-template-columns: 1fr; gap: 8px; margin-top: 20px; }
-  .industry-complete-stats > div { grid-template-columns: 40px max-content minmax(0, 1fr); min-height: 64px; padding: 9px 14px; }
+  .industry-complete-stats > div { grid-template-columns: 40px minmax(0, 1fr); min-height: 64px; padding: 9px 14px; }
   .industry-complete-stats dt > span { flex-basis: 40px; width: 40px; height: 40px; }
-  .industry-complete-stats dd { margin: 3px 0 0 -4px; }
+  .industry-complete-stats dd { margin: 4px 0 0; }
   .industry-complete-actions { grid-template-columns: 1fr; }
 }

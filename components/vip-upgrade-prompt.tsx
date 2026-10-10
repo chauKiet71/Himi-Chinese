@@ -45,6 +45,7 @@ export function VipUpgradeDialog({
   open,
   returnTo = "/courses",
   target,
+  heading,
 }: {
   authenticated?: boolean;
   closeHref?: string;
@@ -53,6 +54,7 @@ export function VipUpgradeDialog({
   open: boolean;
   returnTo?: string;
   target: VipUpgradeTarget | null;
+  heading?: string;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
@@ -98,7 +100,7 @@ export function VipUpgradeDialog({
         <Image alt="" className="vip-upgrade-mascot" height={440} src="/assets/home/himi-vip-offer-mascot.png" width={356} />
       </div>
       <div className="vip-upgrade-content">
-        <h2 id={titleId}>{authenticated ? <>Bài học này chỉ có ở <strong>Himi VIP</strong></> : <>Đăng nhập để <strong>mở khóa bài học</strong></>}</h2>
+        <h2 id={titleId}>{authenticated ? heading ?? <>Bài học này chỉ có ở <strong>Himi VIP</strong></> : <>Đăng nhập để <strong>mở khóa bài học</strong></>}</h2>
         <p className="sr-only" id={descriptionId}>{authenticated
           ? `${target?.kind ?? "Nội dung"}${target?.title ? ` “${target.title}”` : ""} chỉ dành cho thành viên VIP.`
           : `Đăng nhập hoặc tạo tài khoản để tiếp tục mở khóa ${target?.kind?.toLowerCase() ?? "nội dung"}${target?.title ? ` “${target.title}”` : ""}.`}</p>

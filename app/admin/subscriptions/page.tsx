@@ -28,6 +28,8 @@ import {
   formatAdminDateTime,
 } from "@/components/admin-business-widgets";
 import { AdminConsoleHeader, AdminNotice } from "@/components/admin-console";
+import { AdminDateControls, AdminDateComparison } from "@/components/admin-date-controls";
+import { adminDateQuery, resolveAdminDateSelection, type AdminDateParams } from "@/lib/admin-date-range";
 import { requireAdminUser } from "@/lib/admin-auth";
 import { getAdminVipConsole } from "@/lib/admin-subscription-service";
 import { vipPlanDurationLabel } from "@/lib/vip-plan";
@@ -92,10 +94,12 @@ const subscriptionStatusLabels = {
 } as const;
 
 export default async function AdminSubscriptionsPage({ searchParams }: {
-  searchParams: Promise<{ error?: string; q?: string; success?: string }>;
+  searchParams: Promise<AdminDateParams & { error?: string; q?: string; success?: string }>;
 }) {
   const [admin, params] = await Promise.all([requireAdminUser(), searchParams]);
-  const data = await getAdminVipConsole(params.q ?? "");
+  const selection = resolveAdminDateSelection(params, "all");
+  const dateQuery = adminDateQuery(selection);
+  const data = await getAdminVipConsole(params.q ?? "", selection.range);
 
   return <main className="admin-page"><div className="section-shell">
     <AdminConsoleHeader
@@ -105,6 +109,8 @@ export default async function AdminSubscriptionsPage({ searchParams }: {
       userName={admin.displayName}
     />
     <AdminNotice error={params.error} success={params.success} />
+    <AdminDateControls selection={selection} description="Ngày đăng ký VIP, yêu cầu và giao dịch" />
+    <AdminDateComparison selection={selection} />
 
     <section className="admin-vip-summary" aria-label="Tổng quan VIP và thanh toán">
       <article><Crown size={19} /><div><strong>{data.activeCount}</strong><span>VIP đang hoạt động</span></div></article>
@@ -149,7 +155,7 @@ export default async function AdminSubscriptionsPage({ searchParams }: {
 
     <section className="admin-panel admin-vip-subscribers">
       <div className="admin-vip-heading"><div><span>Chi tiết đăng ký</span><h2>Danh sách người dùng đăng ký gói</h2><p>Bao gồm cả đăng ký đang hoạt động, hết hạn hoặc đã hủy để đối soát.</p></div><strong>{data.subscribers.length} bản ghi</strong></div>
-      <div className="table-scroll"><table className="data-table"><thead><tr><th>Người dùng</th><th>Gói đăng ký</th><th>Ngày đăng ký</th><th>Ngày hết hạn</th><th>Trạng thái</th></tr></thead><tbody>{data.subscribers.length ? data.subscribers.map((subscription) => <tr key={subscription.id}><td><strong>{subscription.displayName || "Chưa đặt tên"}</strong><small>{subscription.email}</small></td><td>{subscription.planName}</td><td>{formatAdminDateTime(subscription.startsAt ?? subscription.createdAt)}</td><td>{formatDate(subscription.endsAt)}</td><td><span className={`admin-payment-status is-${subscription.status}`}>{subscriptionStatusLabels[subscription.status]}</span></td></tr>) : <tr><td className="admin-table-empty" colSpan={5}>Chưa có người dùng đăng ký VIP.</td></tr>}</tbody></table></div>
+      <div className="table-scroll"><table className="data-table"><thead><tr><th>Người dùng</th><th>Gói đăng ký</th><th>Ngày đăng ký</th><th>Ngày hết hạn</th><th>Trạng thái</th></tr></thead><tbody>{data.subscribers.length ? data.subscribers.map((subscription) => <tr key={subscription.id}><td><strong>{subscription.displayName || "Chưa đặt tên"}</strong><small>{subscription.email}</small></td><td>{subscription.planName}</td><td>{formatAdminDateTime(subscription.createdAt)}</td><td>{formatDate(subscription.endsAt)}</td><td><span className={`admin-payment-status is-${subscription.status}`}>{subscriptionStatusLabels[subscription.status]}</span></td></tr>) : <tr><td className="admin-table-empty" colSpan={5}>Chưa có người dùng đăng ký VIP.</td></tr>}</tbody></table></div>
     </section>
 
     <section className="admin-panel admin-vip-transactions" id="transactions">
@@ -159,7 +165,7 @@ export default async function AdminSubscriptionsPage({ searchParams }: {
 
     <section className="admin-panel admin-vip-panel">
       <div className="admin-vip-heading"><div><span>Quản lý thủ công</span><h2>Tìm và cập nhật quyền học</h2><p>Gia hạn sẽ cộng tiếp từ hạn hiện tại nếu học viên vẫn còn VIP.</p></div><Link href="/vip" prefetch={false}>Xem bảng giá người học →</Link></div>
-      <form action="/admin/subscriptions" className="admin-search" method="get"><label className="sr-only" htmlFor="vip-member-search">Tìm theo tên hoặc email</label><input defaultValue={data.search} id="vip-member-search" name="q" placeholder="Tìm tên hoặc email học viên…" type="search" /><button className="button button-secondary" type="submit"><Search size={15} /> Tìm học viên</button></form>
+      <form action="/admin/subscriptions" className="admin-search" method="get">{Object.entries(dateQuery).map(([name, value]) => <HiddenFormValue key={name} name={name} value={value} />)}<label className="sr-only" htmlFor="vip-member-search">Tìm theo tên hoặc email</label><input defaultValue={data.search} id="vip-member-search" name="q" placeholder="Tìm tên hoặc email học viên…" type="search" /><button className="button button-secondary" type="submit"><Search size={15} /> Tìm học viên</button></form>
       <div className="admin-vip-list">{data.learners.length ? data.learners.map((learner) => {
         const subscription = learner.subscription;
         const eligible = learner.isActive && Boolean(learner.emailVerifiedAt) && data.activePlans.length > 0;

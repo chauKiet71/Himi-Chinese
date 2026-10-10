@@ -146,11 +146,11 @@ test("desktop typing practice fills the available viewport", async () => {
   assert.match(stylesheet, /@media \(max-width: 720px\)\s*\{[\s\S]*?\.typing-session-page\s*\{[^}]*padding:\s*12px 10px calc\(126px \+ env\(safe-area-inset-bottom, 0px\)\);/);
 });
 
-test("correct typing celebrates once with shared confetti and a generated chime", async () => {
+test("correct typing celebrates once with shared confetti and the supplied audio", async () => {
   const studio = await readFile(path.join(root, "components", "typing-practice-studio.tsx"), "utf8");
   const stylesheet = await readFile(path.join(root, "app", "typing-practice.css"), "utf8");
 
-  assert.match(studio, /function playCorrectChime\(\)/);
+  assert.equal(existsSync(path.join(root, "public", "audio", "feedback", "typing-correct-trimmed.mp3")), true);
   assert.match(studio, /function celebrateCorrect\(itemId: string\)/);
   assert.match(studio, /correct && !currentAnswer\.correct && currentItem/);
   assert.match(studio, /allCorrect && !currentAnswer\.correct/);

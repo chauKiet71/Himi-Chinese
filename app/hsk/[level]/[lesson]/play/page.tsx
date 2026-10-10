@@ -10,7 +10,7 @@ import { learnerLoginPath } from "@/lib/learner-auth";
 import { hskLessonResourceUrl, learningContentScope } from "@/lib/lesson-resource";
 import { createLessonResource } from "@/lib/lesson-resource-server";
 
-type PageProps = { params: Promise<{ level: string; lesson: string }> };
+type PageProps = { params: Promise<{ level: string; lesson: string }>; searchParams?: Promise<{ from?: string }> };
 
 async function getLesson(params: PageProps["params"]) {
   const { level, lesson } = await params;
@@ -22,14 +22,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return { title: lesson ? `Học bài ${lesson.lesson.lessonNumber}: ${lesson.lesson.title}` : "Học bài HSK" };
 }
 
-export default async function HskGuidedLessonPage({ params }: PageProps) {
+export default async function HskGuidedLessonPage({ params, searchParams }: PageProps) {
   const { level, lesson: lessonId } = await params;
   const returnTo = `/hsk/${encodeURIComponent(level)}/${encodeURIComponent(lessonId)}/play`;
   const user = await getCurrentUser();
   const data = await getHskLessonPageData({ level, lessonId, userId: user?.id ?? null });
   if (!data) notFound();
   if (!user && data.access.source !== "guest") redirect(learnerLoginPath(returnTo));
-  if (!data.access.allowed) return <HskVipLocked lesson={data.lesson} />;
+  if (!data.access.allowed) {
+    const query = await searchParams;
+    if (query?.from === "completion" && data.access.source === "vip_required") {
+      redirect(`/courses?view=hsk&level=${encodeURIComponent(data.lesson.levelId)}&upgradeLesson=${encodeURIComponent(data.lesson.id)}`);
+    }
+    return <HskVipLocked lesson={data.lesson} />;
+  }
   const levelLessons = HSK_CURRICULUM
     .find((curriculumLevel) => curriculumLevel.id === data.lesson.levelId)
     ?.topics.flatMap((topic) => topic.lessons) ?? [];

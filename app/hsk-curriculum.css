@@ -423,16 +423,16 @@ button.hsk-lesson-start {
   background: transparent;
 }
 
-.hsk-lesson-row.is-vip-locked {
+.hsk-lesson-row.is-vip-locked:not(.is-login-locked) {
   min-height: 94px;
   border: 1px solid #f0e2c9;
   border-radius: 14px;
   background: #fffaf2;
 }
 
-.hsk-lesson-row.is-vip-locked .hsk-lesson-copy > strong { color: #686b70; }
-.hsk-lesson-row.is-vip-locked .hsk-lesson-meta > span,
-.hsk-lesson-row.is-vip-locked .hsk-lesson-meta svg { color: #9aa0a7; }
+.hsk-lesson-row.is-vip-locked:not(.is-login-locked) .hsk-lesson-copy > strong { color: #686b70; }
+.hsk-lesson-row.is-vip-locked:not(.is-login-locked) .hsk-lesson-meta > span,
+.hsk-lesson-row.is-vip-locked:not(.is-login-locked) .hsk-lesson-meta svg { color: #9aa0a7; }
 
 .hsk-lesson-row.is-sequence-locked {
   opacity: .62;
@@ -539,7 +539,7 @@ a.hsk-lesson-select::after {
   box-shadow: 0 4px 0 var(--hsk-red-deep);
 }
 
-.hsk-lesson-row.is-vip-locked .hsk-lesson-index {
+.hsk-lesson-row.is-vip-locked:not(.is-login-locked) .hsk-lesson-index {
   color: #85531f;
   background: #ffe8be;
   box-shadow: none;
@@ -672,12 +672,17 @@ a.hsk-lesson-select::after {
   place-items: center;
   align-self: center;
   justify-self: end;
-  color: #a77c3b;
+  color: #87919c;
   border-color: transparent;
   border-radius: 12px;
-  background: #fff6e5;
+  background: transparent;
   box-shadow: none;
   transition: color .18s ease, border-color .18s ease, background-color .18s ease, transform .18s ease;
+}
+
+.hsk-curriculum :where(.hsk-lesson-row:not(.is-login-locked)) .hsk-lesson-start.hsk-vip-trigger {
+  color: #a77c3b;
+  background: #fff6e5;
 }
 
 .hsk-curriculum .hsk-lesson-start.hsk-vip-trigger > svg {

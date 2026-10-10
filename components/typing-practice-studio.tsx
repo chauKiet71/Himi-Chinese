@@ -66,43 +66,6 @@ const SAVED_STORAGE_KEY = "himi:typing:saved:v1";
 const CELEBRATION_DURATION_MS = 1400;
 const CONFETTI_PARTICLE_COUNT = 18;
 
-function playCorrectChime() {
-  const AudioContextConstructor = window.AudioContext
-    ?? (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-  if (!AudioContextConstructor) return;
-
-  try {
-    const context = new AudioContextConstructor();
-    const startedAt = context.currentTime;
-    const output = context.createGain();
-    output.gain.setValueAtTime(0.0001, startedAt);
-    output.gain.exponentialRampToValueAtTime(0.16, startedAt + 0.012);
-    output.gain.exponentialRampToValueAtTime(0.0001, startedAt + 0.48);
-    output.connect(context.destination);
-
-    [
-      { frequency: 1046.5, gain: 0.76, offset: 0, duration: 0.44 },
-      { frequency: 1567.98, gain: 0.32, offset: 0.035, duration: 0.34 },
-    ].forEach(({ frequency, gain: level, offset, duration }) => {
-      const oscillator = context.createOscillator();
-      const oscillatorGain = context.createGain();
-      oscillator.type = "sine";
-      oscillator.frequency.setValueAtTime(frequency, startedAt + offset);
-      oscillatorGain.gain.setValueAtTime(level, startedAt + offset);
-      oscillatorGain.gain.exponentialRampToValueAtTime(0.0001, startedAt + offset + duration);
-      oscillator.connect(oscillatorGain);
-      oscillatorGain.connect(output);
-      oscillator.start(startedAt + offset);
-      oscillator.stop(startedAt + offset + duration);
-    });
-
-    void context.resume().catch(() => undefined);
-    window.setTimeout(() => void context.close().catch(() => undefined), 600);
-  } catch {
-    // Correct-answer feedback remains visual when Web Audio is unavailable.
-  }
-}
-
 function formatDuration(seconds: number): string {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
@@ -202,6 +165,7 @@ export function TypingPracticeStudio({
   const startedAtRef = useRef<number | null>(null);
   const studioRef = useRef<HTMLElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const correctAudioRef = useRef<HTMLAudioElement | null>(null);
   const wordInputRef = useRef<HTMLInputElement>(null);
   const segmentInputRefs = useRef<Array<HTMLInputElement | null>>([]);
   const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -375,7 +339,11 @@ export function TypingPracticeStudio({
     celebrationTimerRef.current = setTimeout(() => {
       setCelebratingItemId((current) => current === itemId ? null : current);
     }, CELEBRATION_DURATION_MS);
-    playCorrectChime();
+    const correctAudio = correctAudioRef.current;
+    if (correctAudio) {
+      correctAudio.currentTime = 0;
+      void correctAudio.play().catch(() => undefined);
+    }
   }
 
   function handleWordChange(event: ChangeEvent<HTMLInputElement>) {
@@ -585,6 +553,7 @@ export function TypingPracticeStudio({
   const answerVisible = currentAnswer.revealed || currentAnswer.correct;
 
   return <section className="typing-studio" aria-label="Phiên luyện gõ pinyin" ref={studioRef}>
+    <audio ref={correctAudioRef} src="/audio/feedback/typing-correct-trimmed.mp3" preload="auto" />
     <header className="typing-session-header">
       <Link aria-label="Đóng phiên luyện" href={`/typing/${level.id}/${lessonSummary.id}`}><X aria-hidden="true" size={18} /></Link>
       <div aria-label={`Tiến độ ${index + 1} trên ${items.length}`} aria-valuemax={items.length} aria-valuemin={1} aria-valuenow={index + 1} className="typing-session-progress" role="progressbar">

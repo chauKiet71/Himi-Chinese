@@ -4,8 +4,11 @@ import { Crown, Download, Search, Trash2, UserRoundCheck, UsersRound } from "luc
 import { deleteAdminUserAction, grantOrExtendVipAction } from "@/app/admin/actions";
 import { formatAdminCurrency, formatAdminDateTime } from "@/components/admin-business-widgets";
 import { AdminConsoleHeader, AdminNotice } from "@/components/admin-console";
+import { AdminUserPagination } from "@/components/admin-user-pagination";
+import { AdminDateControls, AdminDateComparison } from "@/components/admin-date-controls";
+import { adminDateQuery, resolveAdminDateSelection, type AdminDateParams } from "@/lib/admin-date-range";
 import { requireAdminUser } from "@/lib/admin-auth";
-import { getAdminUserConsole, parseAdminUserPeriod } from "@/lib/admin-user-service";
+import { getAdminUserConsole } from "@/lib/admin-user-service";
 
 export const metadata: Metadata = { title: "Quản lý người dùng" };
 
@@ -24,37 +27,38 @@ function HiddenFormValue({ name, value }: { name: string; value: string }) {
 }
 
 export default async function AdminUsersPage({ searchParams }: {
-  searchParams: Promise<{ error?: string; period?: string; q?: string; success?: string }>;
+  searchParams: Promise<AdminDateParams & { error?: string; q?: string; success?: string; page?: string; pageSize?: string }>;
 }) {
   const [admin, params] = await Promise.all([requireAdminUser(), searchParams]);
-  const period = parseAdminUserPeriod(params.period);
-  const data = await getAdminUserConsole({ period, search: params.q });
-  const exportSearch = new URLSearchParams();
+  const selection = resolveAdminDateSelection(params, "all");
+  const dateQuery = adminDateQuery(selection);
+  const data = await getAdminUserConsole({ range: selection.range, search: params.q, page: Number(params.page ?? 1), pageSize: Number(params.pageSize ?? 50) });
+  const exportSearch = new URLSearchParams(dateQuery);
   if (data.search) exportSearch.set("q", data.search);
-  exportSearch.set("period", data.period);
 
   return <main className="admin-page"><div className="section-shell">
     <AdminConsoleHeader
-      description="Tra cứu tài khoản, kiểm tra trạng thái Free/VIP, nâng cấp quyền học và khóa truy cập an toàn. Lịch sử thanh toán và audit luôn được giữ lại."
+      description="Tra cứu tài khoản, kiểm tra trạng thái Free/VIP, nâng cấp quyền học và quản lý tài khoản học viên."
       eyebrow="Khách hàng"
       title="Quản lý người dùng"
       userName={admin.displayName}
     />
     <AdminNotice error={params.error} success={params.success} />
+    <AdminDateControls selection={selection} description="Thời gian đăng ký tài khoản" />
+    <AdminDateComparison selection={selection} />
 
     <section className="admin-user-toolbar admin-panel">
-      <form action="/admin/users" method="get">
+      <form action="/admin/users" method="get" className="admin-user-search-form">
+        <HiddenFormValue name="pageSize" value={String(data.pageSize)} />
+        {Object.entries(dateQuery).map(([name, value]) => <HiddenFormValue key={name} name={name} value={value} />)}
         <label><span>Tìm kiếm</span><input defaultValue={data.search} name="q" placeholder="Tên người dùng hoặc email…" type="search" /></label>
-        <label><span>Thời gian đăng ký</span><select defaultValue={data.period} name="period">
-          <option value="all">Tất cả thời gian</option><option value="day">24 giờ qua</option><option value="week">7 ngày qua</option><option value="month">30 ngày qua</option>
-        </select></label>
         <button className="button button-secondary" type="submit"><Search size={15} /> Lọc dữ liệu</button>
       </form>
       <Link className="button button-primary" href={`/api/admin/users/export?${exportSearch.toString()}`} prefetch={false}><Download size={15} /> Xuất Excel</Link>
     </section>
 
     <section className="admin-panel admin-user-panel">
-      <div className="panel-heading"><div><span>Danh sách người dùng</span><h2>{data.users.length} tài khoản trong kết quả</h2></div><span>Dữ liệu sắp xếp mới nhất trước</span></div>
+      <div className="panel-heading"><div><span>Danh sách người dùng</span><h2>{data.totalUsers} tài khoản trong kết quả</h2></div><span>Dữ liệu sắp xếp mới nhất trước</span></div>
       <div className="table-scroll"><table className="data-table admin-user-table">
         <thead><tr><th>Người dùng</th><th>Trạng thái</th><th>Thời gian đăng ký</th><th>Nâng cấp gói</th><th>Thao tác</th></tr></thead>
         <tbody>{data.users.length ? data.users.map((member) => {
@@ -71,15 +75,16 @@ export default async function AdminUsersPage({ searchParams }: {
               </select>
               <button className="button button-primary" disabled={!eligible} type="submit">{vip ? "Gia hạn" : "Nâng cấp"}</button>
             </form> : <span className="admin-muted-cell">Quản lý tại Đội nội dung</span>}</td>
-            <td>{member.role === "learner" && member.isActive ? <form action={deleteAdminUserAction} className="admin-inline-delete">
+            <td>{member.role === "learner" ? <form action={deleteAdminUserAction} className="admin-inline-delete">
               <HiddenFormValue name="userId" value={member.id} />
-              <label title="Khóa tài khoản nhưng giữ lịch sử"><input name="confirmDelete" required type="checkbox" value="DELETE" /><span className="sr-only">Xác nhận khóa {member.email}</span></label>
+              <label title="Xóa vĩnh viễn tài khoản và dữ liệu liên quan"><input name="confirmDelete" required type="checkbox" value="DELETE" /><span className="sr-only">Xác nhận xóa vĩnh viễn {member.email}</span></label>
               <button className="button button-danger" type="submit"><Trash2 size={13} /> Xóa</button>
             </form> : <span className="admin-muted-cell">Không khả dụng</span>}</td>
           </tr>;
         }) : <tr><td className="admin-table-empty" colSpan={5}>Không tìm thấy tài khoản phù hợp.</td></tr>}</tbody>
       </table></div>
-      <p className="admin-table-note"><UsersRound size={13} /> “Xóa” sẽ khóa tài khoản, thu hồi phiên đăng nhập và VIP đang hoạt động; hồ sơ giao dịch vẫn được giữ để đối soát.</p>
+      <AdminUserPagination page={data.page} pageSize={data.pageSize} totalPages={data.totalPages} totalUsers={data.totalUsers} period={data.period} search={data.search} dateQuery={dateQuery} />
+      <p className="admin-table-note"><UsersRound size={13} /> “Xóa” sẽ xóa vĩnh viễn tài khoản cùng dữ liệu học tập, VIP, giao dịch và hỗ trợ liên quan. Thao tác không thể hoàn tác; nhật ký quản trị vẫn được lưu.</p>
     </section>
   </div></main>;
 }

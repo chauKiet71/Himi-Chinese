@@ -1,18 +1,25 @@
 import "server-only";
 
-import { and, asc, count, desc, eq, gt, ilike, inArray, isNull, lte, or, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, gt, gte, ilike, inArray, isNull, lte, or, sql } from "drizzle-orm";
 import { readDb, writeDb } from "../db/index.ts";
 import {
   auditLogs,
   authSessions,
-  authTokens,
+  contentVersions,
+  paymentEvents,
+  paymentOrders,
+  practiceScenarioVersions,
+  supportConversations,
+  supportImages,
+  supportJobs,
+  supportMessages,
+  supportReplySessions,
   subscriptions,
   users,
-  vipActivationRequests,
   vipPlans,
 } from "../db/schema.ts";
 import type { MutationResult } from "./admin-content-service.ts";
-import { adminPeriodRange, type AdminPeriod } from "./admin-reporting.ts";
+import { adminPeriodRange, type AdminPeriod, type AdminPeriodRange } from "./admin-reporting.ts";
 import type { UserRole } from "./auth-service.ts";
 
 export type AdminUserPeriod = "all" | AdminPeriod;
@@ -39,6 +46,9 @@ export async function listAdminUsers() {
 
 export async function getAdminUserConsole(input: {
   limit?: number;
+  page?: number;
+  pageSize?: number;
+  range?: AdminPeriodRange;
   period?: AdminUserPeriod;
   search?: string;
 } = {}) {
@@ -52,10 +62,19 @@ export async function getAdminUserConsole(input: {
       ilike(users.email, `%${normalizedSearch}%`),
       ilike(users.displayName, `%${normalizedSearch}%`),
     ) : undefined,
-    createdAfter ? gt(users.createdAt, createdAfter) : undefined,
+    input.range ? gte(users.createdAt, input.range.start) : createdAfter ? gt(users.createdAt, createdAfter) : undefined,
+    input.range ? lte(users.createdAt, input.range.end) : undefined,
   );
 
   return readDb(async (db) => {
+    const pageSize = input.limit !== undefined
+      ? Math.min(Math.max(Math.trunc(input.limit) || 300, 1), 5_000)
+      : [50, 100, 200, 300, 500].includes(input.pageSize ?? 50) ? input.pageSize ?? 50 : 50;
+    const [totalRow] = await db.select({ value: count() }).from(users).where(userFilter);
+    const totalUsers = totalRow?.value ?? 0;
+    const totalPages = Math.max(1, Math.ceil(totalUsers / pageSize));
+    const requestedPage = Number.isFinite(input.page) ? Math.trunc(input.page!) : 1;
+    const page = input.limit !== undefined ? 1 : Math.min(Math.max(requestedPage, 1), totalPages);
     const [userRows, planRows] = await Promise.all([
       db.select({
         id: users.id,
@@ -67,8 +86,8 @@ export async function getAdminUserConsole(input: {
         createdAt: users.createdAt,
       }).from(users)
         .where(userFilter)
-        .orderBy(desc(users.createdAt), asc(users.email))
-        .limit(Math.min(Math.max(input.limit ?? 300, 1), 5_000)),
+        .orderBy(desc(users.createdAt), asc(users.email), asc(users.id))
+        .limit(pageSize).offset((page - 1) * pageSize),
       db.select({
         id: vipPlans.id,
         name: vipPlans.name,
@@ -98,6 +117,10 @@ export async function getAdminUserConsole(input: {
     }
     return {
       period,
+      page,
+      pageSize,
+      totalPages,
+      totalUsers,
       plans: planRows,
       search,
       users: userRows.map((user) => ({ ...user, subscription: subscriptionByUser.get(user.id) ?? null })),
@@ -105,7 +128,7 @@ export async function getAdminUserConsole(input: {
   });
 }
 
-export async function deactivateAdminUser(userId: string, actorId: string): Promise<MutationResult> {
+export async function deleteAdminUser(userId: string, actorId: string): Promise<MutationResult> {
   return writeDb((db) => db.transaction(async (tx) => {
     const rows = await tx.select({
       id: users.id,
@@ -115,29 +138,35 @@ export async function deactivateAdminUser(userId: string, actorId: string): Prom
     }).from(users).where(eq(users.id, userId)).for("update").limit(1);
     const target = rows[0];
     if (!target) return { ok: false, error: "not_found" };
-    if (target.id === actorId || target.role !== "learner" || !target.isActive) {
+    if (target.id === actorId || target.role !== "learner") {
       return { ok: false, error: "user_delete_forbidden" };
     }
     const now = new Date();
-    await tx.update(users).set({ isActive: false, updatedAt: now }).where(eq(users.id, target.id));
-    await Promise.all([
-      tx.delete(authSessions).where(eq(authSessions.userId, target.id)),
-      tx.delete(authTokens).where(eq(authTokens.userId, target.id)),
-      tx.update(subscriptions).set({ status: "cancelled", endsAt: now }).where(and(
-        eq(subscriptions.userId, target.id),
-        eq(subscriptions.status, "active"),
-      )),
-      tx.update(vipActivationRequests).set({ status: "cancelled", updatedAt: now }).where(and(
-        eq(vipActivationRequests.userId, target.id),
-        eq(vipActivationRequests.status, "pending"),
-      )),
-    ]);
+    // Remove restrictive foreign keys before deleting the account. Other
+    // learner-owned records (sessions, progress, notifications) cascade.
+    const conversations = tx.select({ id: supportConversations.id }).from(supportConversations).where(eq(supportConversations.userId, target.id));
+    const images = tx.select({ id: supportImages.id }).from(supportImages).where(eq(supportImages.ownerId, target.id));
+    await tx.delete(supportJobs).where(inArray(supportJobs.conversationId, conversations));
+    await tx.delete(supportReplySessions).where(inArray(supportReplySessions.conversationId, conversations));
+    await tx.delete(supportMessages).where(or(inArray(supportMessages.conversationId, conversations), inArray(supportMessages.imageId, images)));
+    await tx.delete(supportConversations).where(eq(supportConversations.userId, target.id));
+    await tx.delete(supportImages).where(eq(supportImages.ownerId, target.id));
+    const ownedSubscriptions = tx.select({ id: subscriptions.id }).from(subscriptions).where(eq(subscriptions.userId, target.id));
+    const ownedOrders = tx.select({ id: paymentOrders.id }).from(paymentOrders).where(eq(paymentOrders.userId, target.id));
+    await tx.delete(paymentEvents).where(inArray(paymentEvents.orderId, ownedOrders));
+    await tx.delete(paymentOrders).where(eq(paymentOrders.userId, target.id));
+    await tx.update(paymentOrders).set({ subscriptionId: null }).where(inArray(paymentOrders.subscriptionId, ownedSubscriptions));
+    await tx.delete(subscriptions).where(eq(subscriptions.userId, target.id));
+    await tx.update(subscriptions).set({ activatedBy: null }).where(eq(subscriptions.activatedBy, target.id));
+    await tx.delete(contentVersions).where(eq(contentVersions.createdBy, target.id));
+    await tx.delete(practiceScenarioVersions).where(eq(practiceScenarioVersions.createdBy, target.id));
+    await tx.delete(users).where(eq(users.id, target.id));
     await tx.insert(auditLogs).values({
       actorId,
-      action: "admin.user.deactivated",
+      action: "admin.user.deleted",
       entityType: "user",
       entityId: target.id,
-      metadata: { email: target.email, deactivatedAt: now.toISOString() },
+      metadata: { email: target.email, deletedAt: now.toISOString() },
     });
     return { ok: true, id: target.id };
   }));

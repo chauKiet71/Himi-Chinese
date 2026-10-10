@@ -15,6 +15,7 @@ export function CourseLibraryView({
   hskCurriculum,
   hskSummary = emptyHskSummary,
   initialHskLevelId,
+  initialUpgradeLessonId,
   view,
 }: {
   authenticated: boolean;
@@ -22,16 +23,17 @@ export function CourseLibraryView({
   hskCurriculum: HskCurriculumLevel[];
   hskSummary?: HskCourseSummary;
   initialHskLevelId?: string;
+  initialUpgradeLessonId?: string;
   view: CourseLibraryViewName;
 }) {
   if (view === "hsk") {
-    return <HskCurriculumExplorer authenticated={authenticated} catalogHref="/courses" curriculum={hskCurriculum} initialLevelId={initialHskLevelId} />;
+    return <HskCurriculumExplorer authenticated={authenticated} catalogHref="/courses" curriculum={hskCurriculum} initialLevelId={initialHskLevelId} initialUpgradeLessonId={initialUpgradeLessonId} />;
   }
 
   return <>
     <header className="section-shell industry-course-heading course-catalog-heading">
       <h1>Chọn chủ đề bạn muốn học</h1>
     </header>
-    <CourseExplorer authenticated={authenticated} courses={courses} hskSummary={hskSummary} includeHskCard />
+    <CourseExplorer authenticated={authenticated} courses={courses.filter((course) => course.slug !== "tieng-trung-tan-suat-cao")} hskSummary={hskSummary} includeHskCard />
   </>;
 }

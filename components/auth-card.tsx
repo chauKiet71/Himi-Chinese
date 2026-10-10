@@ -17,7 +17,7 @@ const errorMessages: Record<string, string> = {
   duplicate: "Email này đã được sử dụng.",
   email_in_use: "Email này đã được sử dụng. Hãy đăng nhập hoặc dùng email khác.",
   delivery_failed: "Chưa gửi được mã xác minh. Hãy thử lại sau ít phút.",
-  invalid_credentials: "Email hoặc mật khẩu không đúng. Với Console, tài khoản cũng phải có quyền editor, reviewer hoặc admin.",
+  invalid_credentials: "Email hoặc mật khẩu không đúng",
   invalid_email: "Địa chỉ email chưa đúng định dạng.",
   invalid_name: "Tên hiển thị cần từ 2 đến 120 ký tự.",
   invalid_password: `Mật khẩu cần từ ${MIN_PASSWORD_LENGTH} đến ${MAX_PASSWORD_LENGTH} ký tự.`,

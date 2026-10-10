@@ -7,10 +7,11 @@ import {
   adminPeriodRange,
   buildAdminTimeSeries,
   type AdminPeriod,
+  type AdminPeriodRange,
 } from "./admin-reporting.ts";
 
-export async function getAdminBusinessAnalytics(period: AdminPeriod, now = new Date()) {
-  const range = adminPeriodRange(period, now);
+export async function getAdminBusinessAnalytics(period: AdminPeriod | AdminPeriodRange, now = new Date()) {
+  const range = typeof period === "string" ? adminPeriodRange(period, now) : period;
   return readDb(async (db) => {
     const activeVipFilter = and(
       eq(subscriptions.status, "active"),
@@ -28,21 +29,21 @@ export async function getAdminBusinessAnalytics(period: AdminPeriod, now = new D
         totalUsers: sql<number>`(select count(*)::int from ${users})`,
         learnerCount: sql<number>`(select count(*)::int from ${users} where ${users.role} = 'learner')`,
         activeVip: sql<number>`(select count(distinct ${subscriptions.userId})::int from ${subscriptions} where ${activeVipFilter})`,
-        vipRegistrations: sql<number>`(select count(*)::int from ${subscriptions} where ${subscriptions.createdAt} >= ${range.start})`,
-      }),
+        vipRegistrations: sql<number>`(select count(*)::int from ${subscriptions} where ${subscriptions.createdAt} >= ${range.start.toISOString()} and ${subscriptions.createdAt} <= ${range.end.toISOString()})`,
+      }).from(users).limit(1),
       db.select({ amountVnd: paymentOrders.amountVnd, paidAt: paymentOrders.paidAt })
         .from(paymentOrders)
-        .where(and(eq(paymentOrders.status, "paid"), gte(paymentOrders.paidAt, range.start)))
+        .where(and(eq(paymentOrders.status, "paid"), gte(paymentOrders.paidAt, range.start), lte(paymentOrders.paidAt, range.end)))
         .orderBy(asc(paymentOrders.paidAt)),
       db.select({ createdAt: users.createdAt }).from(users)
-        .where(gte(users.createdAt, range.start))
+        .where(and(gte(users.createdAt, range.start), lte(users.createdAt, range.end)))
         .orderBy(asc(users.createdAt)),
       db.select({
         id: users.id,
         displayName: users.displayName,
         email: users.email,
         createdAt: users.createdAt,
-      }).from(users).orderBy(desc(users.createdAt)).limit(8),
+      }).from(users).where(and(gte(users.createdAt, range.start), lte(users.createdAt, range.end))).orderBy(desc(users.createdAt)).limit(8),
       db.select({
         id: paymentOrders.id,
         userId: paymentOrders.userId,
@@ -56,6 +57,7 @@ export async function getAdminBusinessAnalytics(period: AdminPeriod, now = new D
       }).from(paymentOrders)
         .innerJoin(users, eq(paymentOrders.userId, users.id))
         .innerJoin(vipPlans, eq(paymentOrders.planId, vipPlans.id))
+        .where(and(gte(sql`coalesce(${paymentOrders.paidAt}, ${paymentOrders.createdAt})`, range.start.toISOString()), lte(sql`coalesce(${paymentOrders.paidAt}, ${paymentOrders.createdAt})`, range.end.toISOString())))
         .orderBy(desc(sql`coalesce(${paymentOrders.paidAt}, ${paymentOrders.createdAt})`))
         .limit(12),
     ]);

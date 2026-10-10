@@ -79,20 +79,25 @@ export function HskCurriculumExplorer({
   catalogHref = "#course-catalog",
   curriculum,
   initialLevelId,
+  initialUpgradeLessonId,
 }: {
   authenticated: boolean;
   catalogHref?: string;
   curriculum: HskCurriculumLevel[];
   initialLevelId?: string;
+  initialUpgradeLessonId?: string;
 }) {
   const visibleCurriculum = curriculum.filter((level) => level.id !== "hsk-7-9");
   const initialLevel = visibleCurriculum.find((level) => level.id === initialLevelId) ?? visibleCurriculum[0];
+  const continuationTopic = initialLevel.topics.find(topic => topic.lessons.some(lesson => lesson.id === initialUpgradeLessonId && lesson.access?.source === "vip_required"));
+  const continuationLesson = continuationTopic?.lessons.find(lesson => lesson.id === initialUpgradeLessonId);
+  const [continuationPrompt, setContinuationPrompt] = useState(Boolean(continuationLesson));
   const [activeLevelId, setActiveLevelId] = useState(initialLevel.id);
   const activeLevel = curriculum.find((level) => level.id === activeLevelId) ?? curriculum[0];
-  const [activeTopicId, setActiveTopicId] = useState<string | null>(activeLevel.topics[0].id);
+  const [activeTopicId, setActiveTopicId] = useState<string | null>(continuationTopic?.id ?? activeLevel.topics[0].id);
   const [lessonProgress, setLessonProgress] = useState<Record<string, number>>({});
   const [openedLessonIds, setOpenedLessonIds] = useState<Set<string>>(new Set());
-  const [upgradeTarget, setUpgradeTarget] = useState<VipUpgradeTarget | null>(null);
+  const [upgradeTarget, setUpgradeTarget] = useState<VipUpgradeTarget | null>(continuationLesson ? { kind: "Bài học", title: continuationLesson.title } : null);
   const prepareLesson = usePrepareLesson();
   const pendingOpen = useRef<AbortController | null>(null);
   const [loadingLessonId, setLoadingLessonId] = useState<string | null>(null);
@@ -199,7 +204,7 @@ export function HskCurriculumExplorer({
         <div aria-label="Chọn cấp độ HSK" className="hsk-level-tabs" role="group">
           {visibleCurriculum.map((level) => <button
             aria-pressed={activeLevel.id === level.id}
-            className={`${activeLevel.id === level.id ? "is-active" : ""}${level.access && !level.access.allowed ? " is-vip-locked" : ""}`}
+            className={`${activeLevel.id === level.id ? "is-active" : ""}${authenticated && level.access && !level.access.allowed && level.access.source !== "login_required" ? " is-vip-locked" : ""}`}
             key={level.id}
             onClick={() => selectLevel(level.id)}
             type="button"
@@ -213,7 +218,7 @@ export function HskCurriculumExplorer({
 
         <Link className="hsk-industry-link" href={catalogHref}>Lộ trình theo ngành <ArrowRight aria-hidden="true" size={17} /></Link>
 
-        {activeLevel.access && !activeLevel.access.allowed ? <button className="hsk-industry-link hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Lộ trình", title: activeLevel.label })} type="button">{activeLevel.access.source === "login_required" ? <><LogIn aria-hidden="true" size={17} /> Cần đăng nhập</> : <><Crown aria-hidden="true" size={17} /> Cần nâng cấp</>}</button> : null}
+        {authenticated && activeLevel.access && !activeLevel.access.allowed && activeLevel.access.source !== "login_required" ? <button className="hsk-industry-link hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Lộ trình", title: activeLevel.label })} type="button"><Crown aria-hidden="true" size={17} /> Cần nâng cấp</button> : null}
       </div>
     </header>
 
@@ -281,7 +286,7 @@ export function HskCurriculumExplorer({
                     >
                       <strong>{savedPercent}%</strong>
                     </span>
-                  </Link> : !accessAllowed ? <button aria-label={loginLocked ? `Đăng nhập để học bài ${lesson.lessonNumber}` : `Mở quyền lợi VIP cho bài ${lesson.lessonNumber}`} className="hsk-lesson-start hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Bài học", title: lesson.title })} type="button">{loginLocked ? <LogIn aria-hidden="true" size={21} /> : <Crown aria-hidden="true" size={21} />}</button> : <span className="hsk-lesson-duration">{lessonCompleted ? <><CircleCheck aria-hidden="true" size={17} /> Đã hoàn thành</> : <>{lessonAvailable ? "Chưa bắt đầu" : lesson.availabilityLabel ?? "Sắp ra mắt"} <ChevronRight aria-hidden="true" size={19} /></>}</span>}
+                  </Link> : !accessAllowed ? authenticated ? <button aria-label={loginLocked ? `Đăng nhập để học bài ${lesson.lessonNumber}` : `Mở quyền lợi VIP cho bài ${lesson.lessonNumber}`} className="hsk-lesson-start hsk-vip-trigger" onClick={() => setUpgradeTarget({ kind: "Bài học", title: lesson.title })} type="button">{loginLocked ? <LogIn aria-hidden="true" size={21} /> : <Crown aria-hidden="true" size={21} />}</button> : null : <span className="hsk-lesson-duration">{lessonCompleted ? <><CircleCheck aria-hidden="true" size={17} /> Đã hoàn thành</> : <>{lessonAvailable ? "Chưa bắt đầu" : lesson.availabilityLabel ?? "Sắp ra mắt"} <ChevronRight aria-hidden="true" size={19} /></>}</span>}
                   {loadError?.lessonId === lesson.id ? <span className="hsk-lesson-load-error" role="alert">{loadError.message}</span> : null}
 
                 </article>;
@@ -291,6 +296,6 @@ export function HskCurriculumExplorer({
         })}
       </div>
     </div>
-    <VipUpgradeDialog authenticated={authenticated} onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} returnTo={getHskCurriculumHref(activeLevel.id)} target={upgradeTarget} />
+    <VipUpgradeDialog authenticated={authenticated} onClose={() => { setUpgradeTarget(null); setContinuationPrompt(false); }} heading={continuationPrompt ? "Nâng cấp VIP để học tiếp" : undefined} open={upgradeTarget !== null} returnTo={getHskCurriculumHref(activeLevel.id)} target={upgradeTarget} />
   </section>;
 }

@@ -3,7 +3,7 @@
 import { revalidatePath, revalidateTag, updateTag } from "next/cache.js";
 import { redirect } from "next/navigation";
 import { requireAdminUser, requirePracticeStaffUser, requireRecentAdminUser } from "@/lib/admin-auth";
-import { deactivateAdminUser, updateUserRole } from "@/lib/admin-user-service";
+import { deleteAdminUser, updateUserRole } from "@/lib/admin-user-service";
 import {
   createVipPlan,
   deleteVipPlan,
@@ -306,7 +306,7 @@ export async function deleteAdminUserAction(formData: FormData) {
   const admin = await requireRecentAdminUser("/admin/users");
   const userId = valueString(formData, "userId", 40);
   if (!isUuid(userId) || !confirmedDelete(formData)) invalid("/admin/users");
-  const result = await deactivateAdminUser(userId, admin.id);
+  const result = await deleteAdminUser(userId, admin.id);
   resultRedirect(result, "/admin/users", "/admin/users", "user_deleted");
 }
 

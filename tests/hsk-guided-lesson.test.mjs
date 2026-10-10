@@ -225,6 +225,7 @@ test("guided HSK completion uses the trophy celebration card", async () => {
 
   assert.match(component, /hsk-guided-completion-trophy/);
   assert.match(component, /\/assets\/hsk\/hsk-completion-trophy\.png/);
+  assert.match(component, /hsk-guided-completion-trophy[^>]*unoptimized/);
   assert.match(component, /hsk-guided-completion-badge/);
   assert.match(component, /Đóng thông báo hoàn thành/);
   assert.match(component, /next >= steps\.length && currentStep === steps\.length - 1 && step\.kind === "practice"/);

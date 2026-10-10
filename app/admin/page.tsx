@@ -3,7 +3,6 @@ import { CircleDollarSign, Crown, TrendingUp, UsersRound } from "lucide-react";
 import { AdminLink } from "@/components/admin-link";
 import {
   AdminLineChart,
-  AdminPeriodFilter,
   AdminRecentActivity,
   AdminTransactionTable,
   formatAdminCurrency,
@@ -12,7 +11,8 @@ import { AdminConsoleHeader, StatusBadge } from "@/components/admin-console";
 import { getAdminBusinessAnalytics } from "@/lib/admin-analytics-service";
 import { requireAdminUser } from "@/lib/admin-auth";
 import { getAdminDashboard } from "@/lib/admin-content-service";
-import { parseAdminPeriod } from "@/lib/admin-reporting";
+import { resolveAdminDateSelection, type AdminDateParams } from "@/lib/admin-date-range";
+import { AdminDateControls, AdminDateComparison } from "@/components/admin-date-controls";
 
 export const metadata: Metadata = { title: "Himi Chinese Console" };
 
@@ -52,6 +52,7 @@ const actionLabels: Record<string, string> = {
   "admin.subscription.extended": "Đã gia hạn quyền VIP",
   "admin.subscription.revoked": "Đã thu hồi quyền VIP",
   "admin.user.deactivated": "Đã khóa tài khoản học viên",
+  "admin.user.deleted": "Đã xóa tài khoản học viên",
   "admin.vip_plan.created": "Đã tạo gói VIP",
   "admin.vip_plan.updated": "Đã cập nhật gói VIP",
   "admin.vip_plan.activated": "Đã mở lại gói VIP",
@@ -60,11 +61,11 @@ const actionLabels: Record<string, string> = {
 };
 
 export default async function AdminPage({ searchParams }: {
-  searchParams: Promise<{ period?: string }>;
+  searchParams: Promise<AdminDateParams>;
 }) {
   const [user, params] = await Promise.all([requireAdminUser(), searchParams]);
-  const period = parseAdminPeriod(params.period);
-  const [data, business] = await Promise.all([getAdminDashboard(), getAdminBusinessAnalytics(period)]);
+  const selection = resolveAdminDateSelection(params);
+  const [data, business] = await Promise.all([getAdminDashboard(), getAdminBusinessAnalytics(selection.range)]);
   const stats = [
     { label: "Doanh thu", value: formatAdminCurrency(business.stats.revenue), hint: business.period.label, icon: CircleDollarSign },
     { label: "Người dùng", value: business.stats.totalUsers.toLocaleString("vi-VN"), hint: "Toàn hệ thống", icon: UsersRound },
@@ -74,11 +75,12 @@ export default async function AdminPage({ searchParams }: {
 
   return <main className="admin-page"><div className="section-shell">
     <AdminConsoleHeader eyebrow="Himi Chinese Console" title="Tổng quan vận hành" userName={user.displayName} />
-    <div className="admin-report-filter-row"><div><strong>Báo cáo kinh doanh</strong><span>{business.period.label}</span></div><AdminPeriodFilter basePath="/admin" period={period} /></div>
+    <AdminDateControls selection={selection} description="Báo cáo kinh doanh" />
+    <AdminDateComparison selection={selection} />
     <section className="admin-stats" aria-label="Chỉ số tổng quan">{stats.map(({ label, value, hint, icon: Icon }) => <article className="admin-stat" key={label}><span className="admin-stat-icon"><Icon size={18} /></span><div><span>{label}</span><strong>{value}</strong><small>{hint}</small></div></article>)}</section>
     <section className="admin-dashboard-business-grid">
       <article className="admin-panel"><div className="panel-heading"><div><span>Doanh thu theo thời gian</span><h2>{business.period.label}</h2></div><strong>{formatAdminCurrency(business.stats.revenue)}</strong></div><AdminLineChart id="dashboard-revenue" series={business.revenueSeries} title="Doanh thu dashboard" valueLabel={formatAdminCurrency} /></article>
-      <article className="admin-panel"><div className="panel-heading"><div><span>Tài khoản & thanh toán</span><h2>Hoạt động gần đây</h2></div><AdminLink href="/admin/analytics">Xem thống kê</AdminLink></div><AdminRecentActivity activities={business.recentActivity} now={business.period.end} /></article>
+      <article className="admin-panel"><div className="panel-heading"><div><span>Tài khoản & thanh toán</span><h2>Hoạt động gần đây</h2></div><AdminLink href="/admin/analytics">Xem thống kê</AdminLink></div><AdminRecentActivity activities={business.recentActivity} now={new Date()} /></article>
     </section>
     <section className="admin-panel admin-dashboard-transactions"><div className="panel-heading"><div><span>Dòng tiền</span><h2>Giao dịch gần đây</h2></div><AdminLink href="/admin/subscriptions#transactions">Xem lịch sử</AdminLink></div><AdminTransactionTable transactions={business.recentTransactions} /></section>
     <div className="admin-grid">

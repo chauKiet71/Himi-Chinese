@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFile, stat } from "node:fs/promises";
 import { HSK_LESSONS } from "../lib/hsk-lesson-content.ts";
 import { HSK4_UPPER_TEXTBOOK_LESSONS } from "../lib/hsk4-upper-textbook-content.ts";
 import { HSK4_TEXTBOOK_LESSONS } from "../lib/hsk4-textbook-content.ts";
@@ -66,4 +67,17 @@ test("HSK pinyin accepts accents, joined syllables, spaces and apostrophes", () 
     assert.equal(normalizeSliceAnswer(typed), normalizeSliceAnswer(target));
   }
   assert.notEqual(normalizeSliceAnswer("ni"), normalizeSliceAnswer("nǐ hǎo"));
+});
+
+
+test("feedback audio referenced by learning and slice screens exists in public assets", async () => {
+  for (const file of ["writing-slice-game.tsx", "typing-practice-studio.tsx", "hsk-guided-lesson.tsx"]) {
+    const source = await readFile(new URL(`../components/${file}`, import.meta.url), "utf8");
+    const references = [...source.matchAll(/src="(\/audio\/feedback\/[^"\s]+)"/g)];
+    assert.ok(references.length, `${file} must reference feedback audio`);
+    for (const [, url] of references) {
+      const asset = await stat(new URL(`../public${url}`, import.meta.url));
+      assert.ok(asset.size > 0, `${file}: ${url} must be a nonempty audio file`);
+    }
+  }
 });

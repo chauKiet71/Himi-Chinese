@@ -45,7 +45,7 @@ test("industry roadmap lessons use the immersive guided lesson interface", async
   assert.match(component, /industry-guided-header-inner/);
   assert.match(component, /industry-guided-stage-inner/);
   assert.match(component, /industry-guided-footer-inner/);
-  assert.match(component, /src="\/assets\/hsk\/hsk-completion-trophy\.png"/);
+  assert.match(component, /src="\/assets\/hsk\/hsk-completion-trophy\.png" unoptimized/);
   assert.match(component, /industry-complete-stats/);
   assert.match(component, /từ vựng/);
   assert.match(component, /bài tập/);

@@ -52,7 +52,7 @@ const errorMessages: Record<string, string> = {
   vip_request_ineligible: "Tài khoản hiện không đủ điều kiện gửi yêu cầu VIP.",
   duplicate_code: "Mã gói VIP đã tồn tại. Hãy dùng một mã khác.",
   vip_plan_in_use: "Gói đã có đăng ký, yêu cầu hoặc giao dịch nên không thể xóa. Hãy chuyển sang Tạm ngưng.",
-  user_delete_forbidden: "Không thể xóa tài khoản này. Chỉ học viên đang hoạt động và không phải tài khoản hiện tại mới được phép khóa.",
+  user_delete_forbidden: "Không thể xóa tài khoản này. Chỉ được xóa học viên và không được xóa tài khoản hiện tại.",
 };
 
 const successMessages: Record<string, string> = {
@@ -74,7 +74,7 @@ const successMessages: Record<string, string> = {
   vip_plan_updated: "Đã cập nhật thông tin gói VIP.",
   vip_plan_status_updated: "Đã cập nhật trạng thái hiển thị của gói VIP.",
   vip_plan_deleted: "Đã xóa gói VIP chưa có dữ liệu liên quan.",
-  user_deleted: "Đã khóa tài khoản, thu hồi phiên đăng nhập và giữ lại lịch sử giao dịch.",
+  user_deleted: "Đã xóa tài khoản và dữ liệu liên quan khỏi hệ thống.",
   content_access_updated: "Đã cập nhật quyền truy cập nội dung và ghi audit log.",
   content_access_batch_updated: "Đã lưu toàn bộ trạng thái quyền truy cập của bài học.",
 };

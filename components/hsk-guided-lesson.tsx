@@ -319,6 +319,7 @@ function GuidedWriting({ lesson, speak, onComplete, onExit }: {
 
 function GuidedPractice({ closeHref, exercise, showPinyin, speak, onExit }: { closeHref: string; exercise: HskExercise; showPinyin: boolean; speak: GuidedSpeak; onExit: () => void }) {
   const [selected, setSelected] = useState<string | null>(null);
+  const correctAudioRef = useRef<HTMLAudioElement>(null);
   if (exercise.locked) return <VipContentGate
     onExit={onExit}
     closeHref={closeHref}
@@ -327,13 +328,25 @@ function GuidedPractice({ closeHref, exercise, showPinyin, speak, onExit }: { cl
   />;
   const scored = exercise.answer !== null;
   const correct = scored && selected === exercise.answer;
+  const selectAnswer = (option: string) => {
+    if (selected !== null) return;
+    setSelected(option);
+    if (scored && option === exercise.answer) {
+      const audio = correctAudioRef.current;
+      if (audio) {
+        audio.currentTime = 0;
+        void audio.play().catch(() => undefined);
+      }
+    }
+  };
   return <section className="hsk-guided-practice">
+    <audio ref={correctAudioRef} src="/audio/feedback/typing-correct-trimmed.mp3" preload="auto" />
     <span className="hsk-guided-kicker">Luyện tập nhanh</span>
     <h1>{exercise.instruction}</h1>
     {exercise.type === "listening" ? <button className="hsk-guided-listen" onClick={() => speak(exercise.speakText ?? exercise.answer ?? "")} type="button"><Headphones aria-hidden="true" size={32} /><span>Nghe lại</span></button> : <><div className={`hsk-guided-practice-prompt${exercise.pinyin ? " has-pinyin" : ""}`}><span lang="zh-CN">{exercise.prompt}</span><button aria-label={`Phát âm ${exercise.prompt}`} onClick={() => speak(exercise.speakText ?? exercise.prompt)} type="button"><Volume2 aria-hidden="true" size={25} /></button></div>{showPinyin && exercise.pinyin ? <p className="hsk-guided-practice-pinyin">{exercise.pinyin}</p> : null}</>}
     <div className="hsk-guided-practice-options">{exercise.options.map((option, index) => {
       const state = scored && selected ? option === exercise.answer ? " is-correct" : option === selected ? " is-wrong" : "" : selected === option ? " is-selected" : "";
-      return <button className={state} disabled={selected !== null} key={option} onClick={() => setSelected(option)} type="button"><span className="hsk-guided-practice-letter">{String.fromCharCode(65 + index)}</span><span className="hsk-guided-practice-answer">{option}</span>{state === " is-correct" ? <Check aria-hidden="true" size={18} /> : null}</button>;
+      return <button className={state} disabled={selected !== null} key={option} onClick={() => selectAnswer(option)} type="button"><span className="hsk-guided-practice-letter">{String.fromCharCode(65 + index)}</span><span className="hsk-guided-practice-answer">{option}</span>{state === " is-correct" ? <Check aria-hidden="true" size={18} /> : null}</button>;
     })}</div>
     {selected && scored ? <p className={`hsk-guided-practice-feedback ${correct ? "is-correct" : "is-wrong"}`} role="status">{correct ? "Chính xác! Bạn đã nắm được từ này." : `Chưa đúng. Đáp án là “${exercise.answer}”.`}</p> : null}
     {!scored ? <p className="hsk-guided-practice-note">Tự chọn phương án phù hợp. Nguồn hiện không có đáp án nên hệ thống không chấm đúng sai.</p> : null}
@@ -341,16 +354,25 @@ function GuidedPractice({ closeHref, exercise, showPinyin, speak, onExit }: { cl
 }
 
 function GuidedCompletion({ lesson, exerciseCount, nextLessonHref }: { lesson: HskLessonContent; exerciseCount: number; nextLessonHref: string | null }) {
+  const completionAudioRef = useRef<HTMLAudioElement>(null);
+  useEffect(() => {
+    const audio = completionAudioRef.current;
+    if (!audio) return;
+    audio.currentTime = 0;
+    void audio.play().catch(() => undefined);
+    return () => { audio.pause(); };
+  }, []);
   const courseHref = getHskCurriculumHref(lesson.levelId);
-  const continueHref = nextLessonHref ?? courseHref;
+  const continueHref = nextLessonHref ? `${nextLessonHref}?from=completion` : courseHref;
   const followCompletionLink = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     event.preventDefault();
     window.location.assign(href);
   };
 
   return <section className="hsk-guided-completion">
+    <audio ref={completionAudioRef} src="/audio/feedback/lesson-complete-trimmed.mp3" preload="auto" />
     <Link aria-label="Đóng thông báo hoàn thành" className="hsk-guided-completion-close" href={courseHref}><X aria-hidden="true" size={30} /></Link>
-    <Image alt="Cúp hoàn thành bài học" className="hsk-guided-completion-trophy" height={300} priority src="/assets/hsk/hsk-completion-trophy.png" width={300} />
+    <Image alt="Cúp hoàn thành bài học" className="hsk-guided-completion-trophy" height={300} priority src="/assets/hsk/hsk-completion-trophy.png" unoptimized width={300} />
     <span className="hsk-guided-completion-badge"><Trophy aria-hidden="true" size={20} /> Hoàn thành</span>
     <h1>Hoàn thành <em>bài học!</em></h1>
     <p>Bạn vừa học xong <strong>Bài {lesson.lessonNumber}: {lesson.title}</strong>! <Sparkles aria-hidden="true" size={18} /></p>

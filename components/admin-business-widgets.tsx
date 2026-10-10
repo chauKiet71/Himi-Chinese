@@ -79,8 +79,8 @@ export function AdminLineChart({
     : "";
   const labelStep = series.length > 12 ? Math.ceil(series.length / 6) : 1;
 
-  return <div className="admin-chart" role="img" aria-label={`${title}. Giá trị cao nhất ${valueLabel(maximum)}.`}>
-    <svg aria-hidden="true" viewBox={`0 0 ${width} ${height}`}>
+  return <div className="admin-chart" role="group" aria-label={title}>
+    <svg role="group" aria-label={`${title}. Giá trị cao nhất ${valueLabel(Math.max(0, ...series.map(point => point.value)))}.`} viewBox={`0 0 ${width} ${height}`}>
       <defs><linearGradient id={`${id}-fill`} x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stopColor="#ef7b36" stopOpacity=".22" /><stop offset="100%" stopColor="#ef7b36" stopOpacity="0" /></linearGradient></defs>
       {[0, .25, .5, .75, 1].map((ratio) => {
         const y = top + chartHeight * ratio;
@@ -88,10 +88,22 @@ export function AdminLineChart({
       })}
       {area ? <path d={area} fill={`url(#${id}-fill)`} /> : null}
       {polyline ? <polyline fill="none" points={polyline} stroke="#e86e29" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" /> : null}
-      {coordinates.map((point, index) => <g key={`${point.label}-${index}`}>
-        {point.value > 0 ? <circle cx={point.x} cy={point.y} fill="#fff" r="4" stroke="#e86e29" strokeWidth="2" /> : null}
+      {coordinates.map((point, index) => {
+        const formattedValue = valueLabel(point.value);
+        const tooltipWidth = Math.min(240, Math.max(140, Math.max(point.label.length, formattedValue.length) * 7 + 24));
+        const tooltipX = Math.max(4, Math.min(width - tooltipWidth - 4, point.x - tooltipWidth / 2));
+        const tooltipY = point.y < 76 ? point.y + 16 : point.y - 68;
+        return <g className="admin-chart-point" key={`${point.label}-${index}`} tabIndex={0} role="img" aria-label={`${point.label}: ${formattedValue}`}>
+        <circle className="admin-chart-point-hit" cx={point.x} cy={point.y} fill="transparent" r="12" />
+        <circle className={`admin-chart-point-dot${point.value === 0 ? " is-zero" : ""}`} cx={point.x} cy={point.y} fill="#fff" r="4" stroke="#e86e29" strokeWidth="2" />
         {index % labelStep === 0 || index === coordinates.length - 1 ? <text fill="#969ba4" fontSize="10" textAnchor="middle" x={point.x} y={height - 12}>{point.label}</text> : null}
-      </g>)}
+        <g className="admin-chart-tooltip" aria-hidden="true" transform={`translate(${tooltipX}, ${tooltipY})`}>
+          <rect width={tooltipWidth} height="56" rx="8" fill="#172638" />
+          <text x="12" y="20" fill="#cbd5e1" fontSize="11">{point.label}</text>
+          <text x="12" y="41" fill="#fff" fontSize="13" fontWeight="700">{formattedValue}</text>
+        </g>
+      </g>;
+      })}
     </svg>
     <div className="sr-only"><ul>{series.map((point) => <li key={point.label}>{point.label}: {valueLabel(point.value)}</li>)}</ul></div>
   </div>;

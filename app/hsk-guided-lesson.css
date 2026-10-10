@@ -679,11 +679,12 @@ body:has(.hsk-guided-page) > .himi-chatbot-widget {
 .hsk-guided-completion > p { margin: 0; display: flex; align-items: center; gap: 6px; color: #8190aa; font-size: 20px; }
 .hsk-guided-completion > p svg { color: #ffbc39; }
 
-.hsk-guided-completion-stats { width: 100%; margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-.hsk-guided-completion-stats article { min-height: 128px; padding: 20px 18px; display: grid; grid-template-columns: 66px max-content 1fr; grid-template-rows: auto auto; align-items: center; column-gap: 14px; border: 1px solid #ffd9d6; border-radius: 24px; background: #fff; text-align: left; }
-.hsk-guided-completion-stats article > span { width: 66px; height: 66px; grid-row: 1 / span 2; display: grid; place-items: center; color: #ff4f3d; border-radius: 50%; background: #fff0ef; }
-.hsk-guided-completion-stats article strong { align-self: end; color: #ff443d; font-size: 34px; line-height: 1; }
-.hsk-guided-completion-stats article small { align-self: start; color: #8793a8; font-size: 15px; }
+.hsk-guided-completion-stats { width: 100%; margin-top: 30px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.hsk-guided-completion-stats article { min-width: 0; min-height: 108px; padding: 18px 16px; display: grid; grid-template-columns: 48px minmax(0, 1fr); grid-template-rows: auto auto; align-items: center; align-content: center; column-gap: 12px; row-gap: 5px; border: 1px solid #ffd9d6; border-radius: 20px; background: linear-gradient(180deg, #fff5f3 0%, #ffffff 100%); box-shadow: 0 4px 12px rgba(255, 76, 59, .04); text-align: left; }
+.hsk-guided-completion-stats article > span { width: 48px; height: 48px; grid-column: 1; grid-row: 1 / span 2; display: grid; place-items: center; color: #ff4f3d; border: 1px solid #ffe2dd; border-radius: 15px; background: #fff; }
+.hsk-guided-completion-stats article > span svg { width: 26px; height: 26px; }
+.hsk-guided-completion-stats article strong { grid-column: 2; grid-row: 1; color: #ff443d; font-size: 36px; font-weight: 750; line-height: 1; }
+.hsk-guided-completion-stats article small { grid-column: 2; grid-row: 2; margin: 0; color: #64748b; font-size: 17px; font-weight: 500; line-height: 1.4; }
 .hsk-guided-completion nav { width: 100%; margin-top: 40px; display: grid; grid-template-columns: 1fr 1.45fr; gap: 18px; }
 .hsk-guided-completion nav a { min-height: 78px; padding: 0 28px; display: flex; align-items: center; justify-content: center; gap: 14px; color: #ff4f3d; border: 2px solid #ff4f3d; border-radius: 22px; background: #fff; font-size: 18px; font-weight: 780; }
 .hsk-guided-completion nav a:last-child { color: #fff; background: #ff443d; box-shadow: 0 14px 26px rgba(255, 68, 61, .2); }
@@ -835,11 +836,11 @@ body:has(.hsk-guided-page) > .himi-chatbot-widget {
   .hsk-guided-completion h1 { margin-top: 12px; font-size: 33px; }
   .hsk-guided-completion > p { font-size: 13px; flex-wrap: wrap; justify-content: center; }
   .hsk-guided-completion-stats { margin-top: 20px; grid-template-columns: repeat(3, 1fr); gap: 7px; }
-  .hsk-guided-completion-stats article { min-height: 94px; padding: 10px 5px; grid-template-columns: 1fr; grid-template-rows: auto auto auto; justify-items: center; gap: 3px; text-align: center; }
-  .hsk-guided-completion-stats article > span { width: 38px; height: 38px; grid-row: auto; }
+  .hsk-guided-completion-stats article { min-height: 86px; padding: 10px 6px; grid-template-columns: 28px minmax(0, 1fr); border-radius: 16px; column-gap: 6px; row-gap: 4px; }
+  .hsk-guided-completion-stats article > span { width: 28px; height: 28px; border-radius: 9px; }
   .hsk-guided-completion-stats article > span svg { width: 20px; height: 20px; }
-  .hsk-guided-completion-stats article strong { align-self: auto; font-size: 24px; }
-  .hsk-guided-completion-stats article small { align-self: auto; font-size: 9px; }
+  .hsk-guided-completion-stats article strong { grid-column: 2; grid-row: 1; align-self: auto; font-size: 24px; }
+  .hsk-guided-completion-stats article small { grid-column: 2; grid-row: 2; margin-top: 0; align-self: auto; font-size: 11px; line-height: 1.4; }
   .hsk-guided-completion nav { width: 100%; margin-top: 20px; grid-template-columns: 1fr; gap: 9px; }
   .hsk-guided-completion nav a { min-height: 48px; padding-inline: 15px; border-radius: 15px; font-size: 13px; }
   .hsk-guided-completion nav a { justify-content: center; }

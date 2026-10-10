@@ -219,6 +219,7 @@ function SliceSession({
   const wordRef = useRef<HTMLDivElement>(null);
   const penguinRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const correctAudioRef = useRef<HTMLAudioElement>(null);
   const nextTimerRef = useRef<number | null>(null);
   const feedbackTimerRef = useRef<number | null>(null);
   const fallTweenRef = useRef<gsap.core.Tween | null>(null);
@@ -500,6 +501,13 @@ function SliceSession({
     gsap.set(impact, { autoAlpha: 0, rotation: -7, scale: .42, xPercent: -50, yPercent: -50 });
     gsap.set(hitScore, { autoAlpha: 0, rotation: 0, scale: .84, x: 32, y: -4 });
 
+    const playStrikeSound = () => {
+      const audio = correctAudioRef.current;
+      if (!audio) return;
+      audio.currentTime = 0;
+      void audio.play().catch(() => undefined);
+    };
+
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const timeline = gsap.timeline({ onComplete: finishStrike });
     strikeTimelineRef.current = timeline;
@@ -519,6 +527,7 @@ function SliceSession({
         .set(face, { autoAlpha: 0 }, .5)
         .set([leftHalf, rightHalf], { autoAlpha: 1 }, .5)
         .set(impact, { autoAlpha: 1, rotation: -1, scale: .9 }, .5)
+        .call(playStrikeSound, [], .5)
         .set(hitScore, { autoAlpha: 1, scale: 1, x: 38, y: -18 }, .5)
         .to(leftHalf, { autoAlpha: 0, duration: .34, rotation: -10, x: -24, y: 36 }, .5)
         .to(rightHalf, { autoAlpha: 0, duration: .34, rotation: 10, x: 24, y: 34 }, .5)
@@ -532,6 +541,7 @@ function SliceSession({
         .to(penguin, { duration: .5, ease: "power2.in", rotation: 9, scale: .94, x: strikePoint.impactX, y: strikePoint.impactY }, .16)
         .to(cape, { autoAlpha: 1, duration: .5, ease: "sine.inOut", rotation: -3, scaleX: 1.04, skewY: 3 }, .16)
         .addLabel("impact", .66)
+        .call(playStrikeSound, [], "impact")
         .set(face, { autoAlpha: 0 }, "impact")
         .set([leftHalf, rightHalf], { autoAlpha: 1 }, "impact")
         .to(impact, { autoAlpha: 1, duration: .16, ease: "power3.out", rotation: -1, scale: .96 }, "impact")
@@ -553,6 +563,7 @@ function SliceSession({
 
   return (
     <main className="learner-dashboard writing-game-dashboard game-immersive-dashboard" ref={sessionRef}>
+      <audio ref={correctAudioRef} src="/audio/feedback/typing-correct-trimmed.mp3" preload="auto" />
       <div className="writing-page-shell">
         <h1 className="writing-page-title">Luyện chém từ cùng Himi</h1>
         <div className="writing-game-layout">

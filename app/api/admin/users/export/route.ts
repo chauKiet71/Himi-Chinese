@@ -1,4 +1,5 @@
 import { getAdminUserConsole, parseAdminUserPeriod } from "@/lib/admin-user-service";
+import { resolveAdminDateSelection } from "@/lib/admin-date-range";
 import { hasRecentAdminAuthentication } from "@/lib/admin-auth";
 import { recordAuthEvent } from "@/lib/auth-audit";
 import { getCurrentUser } from "@/lib/auth-session";
@@ -38,6 +39,7 @@ export async function GET(request: Request) {
     limit: 5_000,
     period,
     search,
+    range: resolveAdminDateSelection(Object.fromEntries(searchParams), "all").range,
   });
   const rows = [
     ["Tên người dùng", "Email", "Vai trò", "Trạng thái", "Gói VIP", "Ngày hết hạn", "Thời gian đăng ký"],

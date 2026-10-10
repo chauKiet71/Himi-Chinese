@@ -249,7 +249,7 @@ export function IndustryGuidedLesson({ course, lessons, lesson, access, progress
   if (completed) return <main className="industry-guided-lesson industry-guided-complete">
     <section aria-labelledby="industry-complete-title" className="industry-complete-card">
       <Link aria-label="Đóng" className="industry-complete-close" href={closeHref}><X size={22} /></Link>
-      <Image alt="" aria-hidden="true" className="industry-complete-trophy" height={160} priority src="/assets/hsk/hsk-completion-trophy.png" width={160} />
+      <Image alt="" aria-hidden="true" className="industry-complete-trophy" height={160} priority src="/assets/hsk/hsk-completion-trophy.png" unoptimized width={160} />
       <span className="industry-complete-badge"><Trophy aria-hidden="true" size={14} /> HOÀN THÀNH</span>
       <h1 id="industry-complete-title">Hoàn thành <em>bài học!</em></h1>
       <p>Bạn vừa học xong <strong>{lesson.title}</strong>. <span aria-hidden="true">🎉</span></p>

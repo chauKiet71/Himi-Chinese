@@ -1,10 +1,11 @@
 import "server-only";
 
-import { and, asc, count, countDistinct, desc, eq, gt, ilike, inArray, isNotNull, isNull, lte, ne, or, sql } from "drizzle-orm";
+import { and, asc, count, countDistinct, desc, eq, gt, gte, ilike, inArray, isNotNull, isNull, lte, ne, or, sql } from "drizzle-orm";
 import { readDb, writeDb, type Database } from "../db/index.ts";
 import { auditLogs, paymentOrders, subscriptions, users, vipActivationRequests, vipPlans } from "../db/schema.ts";
 import type { MutationResult } from "./admin-content-service.ts";
 import { calculateVipPlanEndsAt } from "./vip-subscription.ts";
+import type { AdminPeriodRange } from "./admin-reporting.ts";
 
 function escapedSearch(value: string): string {
   return value.trim().slice(0, 120).replace(/[\\%_]/gu, "\\$&");
@@ -23,7 +24,7 @@ export type AdminVipPlanInput = {
   promotionLabel: string;
 };
 
-export async function getAdminVipConsole(search = "") {
+export async function getAdminVipConsole(search = "", range?: AdminPeriodRange) {
   return readDb(async (db) => {
     const now = new Date();
     const normalizedSearch = escapedSearch(search);
@@ -36,6 +37,8 @@ export async function getAdminVipConsole(search = "") {
         ),
       )
       : eq(users.role, "learner");
+    const requestDates = range ? and(gte(vipActivationRequests.createdAt, range.start), lte(vipActivationRequests.createdAt, range.end)) : undefined;
+    const subscriptionDates = range ? and(gte(subscriptions.createdAt, range.start), lte(subscriptions.createdAt, range.end)) : undefined;
     const activeSubscription = db.select({
       id: subscriptions.id,
       planId: subscriptions.planId,
@@ -72,7 +75,7 @@ export async function getAdminVipConsole(search = "") {
         subscriptionCreatedAt: activeSubscription.createdAt,
       }).from(users)
         .leftJoinLateral(activeSubscription, sql`true`)
-        .where(learnerFilter)
+        .where(and(learnerFilter, range ? gte(users.createdAt, range.start) : undefined, range ? lte(users.createdAt, range.end) : undefined))
         .orderBy(asc(users.createdAt), asc(users.email))
         .limit(100),
       db.select({
@@ -85,15 +88,16 @@ export async function getAdminVipConsole(search = "") {
         promotionLabel: vipPlans.promotionLabel,
         benefits: vipPlans.benefits,
         isActive: vipPlans.isActive,
-        subscriberCount: sql<number>`(select count(distinct ${subscriptions.userId})::int from ${subscriptions} where ${subscriptions.planId} = ${vipPlans.id})`,
+        subscriberCount: range ? sql<number>`(select count(distinct ${subscriptions.userId})::int from ${subscriptions} where ${subscriptions.planId} = ${vipPlans.id} and ${subscriptions.createdAt} >= ${range.start.toISOString()} and ${subscriptions.createdAt} <= ${range.end.toISOString()})` : sql<number>`(select count(distinct ${subscriptions.userId})::int from ${subscriptions} where ${subscriptions.planId} = ${vipPlans.id})`,
       }).from(vipPlans).orderBy(asc(vipPlans.durationDays), asc(vipPlans.name), asc(vipPlans.code)),
       db.select({ value: countDistinct(subscriptions.userId) }).from(subscriptions).where(and(
+        subscriptionDates,
         eq(subscriptions.status, "active"),
         or(isNull(subscriptions.startsAt), lte(subscriptions.startsAt, now)),
         or(isNull(subscriptions.endsAt), gt(subscriptions.endsAt, now)),
       )),
       db.select({ value: count() }).from(vipActivationRequests)
-        .where(eq(vipActivationRequests.status, "pending")),
+        .where(and(eq(vipActivationRequests.status, "pending"), requestDates)),
       db.select({
         id: vipActivationRequests.id,
         userId: vipActivationRequests.userId,
@@ -113,7 +117,7 @@ export async function getAdminVipConsole(search = "") {
       }).from(vipActivationRequests)
         .innerJoin(users, eq(vipActivationRequests.userId, users.id))
         .innerJoin(vipPlans, eq(vipActivationRequests.planId, vipPlans.id))
-        .where(eq(vipActivationRequests.status, "pending"))
+        .where(and(eq(vipActivationRequests.status, "pending"), requestDates))
         .orderBy(asc(vipActivationRequests.createdAt))
         .limit(50),
       db.select({
@@ -130,6 +134,7 @@ export async function getAdminVipConsole(search = "") {
       }).from(subscriptions)
         .innerJoin(users, eq(subscriptions.userId, users.id))
         .innerJoin(vipPlans, eq(subscriptions.planId, vipPlans.id))
+        .where(subscriptionDates)
         .orderBy(desc(subscriptions.createdAt))
         .limit(200),
       db.select({
@@ -144,6 +149,7 @@ export async function getAdminVipConsole(search = "") {
       }).from(paymentOrders)
         .innerJoin(users, eq(paymentOrders.userId, users.id))
         .innerJoin(vipPlans, eq(paymentOrders.planId, vipPlans.id))
+        .where(range ? and(gte(sql`coalesce(${paymentOrders.paidAt}, ${paymentOrders.createdAt})`, range.start.toISOString()), lte(sql`coalesce(${paymentOrders.paidAt}, ${paymentOrders.createdAt})`, range.end.toISOString())) : undefined)
         .orderBy(desc(sql`coalesce(${paymentOrders.paidAt}, ${paymentOrders.createdAt})`))
         .limit(200),
     ]);
