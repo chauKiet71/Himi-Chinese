@@ -6,7 +6,9 @@ import { CourseCard } from "@/components/course-card";
 import { HskCourseCard, type HskCourseSummary } from "@/components/hsk-course-card";
 import type { Course } from "@/lib/content-types";
 
-const filters = ["Tất cả", "Nền tảng", "Văn phòng", "Nhà máy", "Logistics", "Kinh doanh", "Dịch vụ"];
+const filters = ["Tất cả", "Nền tảng", "Văn phòng", "Nhà máy", "Logistics", "Kinh doanh", "Dịch vụ", "Du lịch"];
+const featuredSlug = "tu-tin-kham-pha-trung-quoc";
+const supportingSlugs = ["van-phong-hanh-chinh", "nha-may-san-xuat", "kho-van-logistics", "nha-hang-dich-vu"];
 export function CourseExplorer({
   authenticated,
   courses,
@@ -33,6 +35,14 @@ export function CourseExplorer({
     && (filter === "Tất cả" || filter === "Nền tảng")
     && (!normalizedQuery || "giáo trình hsk 汉语水平考试 cấp độ nền tảng".includes(normalizedQuery));
   const resultCount = visibleCourses.length + (showHskCard ? 1 : 0);
+  const showEditorial = filter === "Tất cả" && !normalizedQuery;
+  const featuredCourse = showEditorial ? visibleCourses.find((course) => course.slug === featuredSlug) : undefined;
+  const supportingCourses = featuredCourse
+    ? supportingSlugs.flatMap((slug) => visibleCourses.filter((course) => course.slug === slug))
+    : [];
+  const remainingCourses = featuredCourse
+    ? visibleCourses.filter((course) => course.slug !== featuredSlug && !supportingSlugs.includes(course.slug))
+    : visibleCourses;
 
   return <section className="section-shell explorer">
     <div className="explorer-toolbar">
@@ -49,7 +59,20 @@ export function CourseExplorer({
         <span aria-hidden="true" className="filter-scroll-cue"><ChevronRight size={17} /></span>
       </div>
     </div>
-    {resultCount ? <div className="course-grid">{showHskCard ? <div
+    {resultCount ? featuredCourse ? <>
+      <div className="course-editorial-layout">
+        <div className="course-editorial-feature course-motion-item"><CourseCard authenticated={authenticated} course={featuredCourse} priority variant="featured" /></div>
+        <div className="course-editorial-support">{supportingCourses.map((course, index) => <div className="course-motion-item" key={course.slug}>
+          <CourseCard authenticated={authenticated} course={course} priority={index < 2} variant="support" />
+        </div>)}</div>
+      </div>
+      {(showHskCard || remainingCourses.length > 0) && <>
+        <h2 className="course-editorial-more">Khám phá thêm các chủ đề khác</h2>
+        <div className="course-grid course-editorial-rest">{showHskCard ? <div className="course-motion-item" key="hsk-curriculum"><HskCourseCard {...hskSummary} /></div> : null}{remainingCourses.map((course) => <div className="course-motion-item" key={course.slug}>
+          <CourseCard authenticated={authenticated} course={course} />
+        </div>)}</div>
+      </>}
+    </> : <div className="course-grid">{showHskCard ? <div
         className="course-motion-item"
         key="hsk-curriculum"
       ><HskCourseCard {...hskSummary} /></div> : null}{visibleCourses.map((course, index) => <div

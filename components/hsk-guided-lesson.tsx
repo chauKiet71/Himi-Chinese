@@ -28,7 +28,7 @@ import {
 import type { HskExercise, HskLessonContent, HskVocabularyAudio, HskVocabularyItem } from "@/lib/hsk-lesson-content";
 import { getHskCurriculumHref } from "@/lib/hsk-routing";
 import { cancelHskPronunciation, playHskPronunciation } from "@/lib/hsk-audio";
-import { VipContentGate, VipUpgradeDialog, type VipUpgradeTarget } from "@/components/vip-upgrade-prompt";
+import { VipContentGate } from "@/components/vip-upgrade-prompt";
 import { buildHskGuidedExercises, buildHskGuidedLessonSteps, buildHskGuidedNavigationSections, type HskGuidedStepKind } from "@/lib/hsk-guided-lesson";
 import {
   EMPTY_HSK_LESSON_PROGRESS,
@@ -227,7 +227,6 @@ function GuidedWriting({ lesson, speak, onComplete, onExit }: {
   const [mode, setMode] = useState<WritingMode>("watch");
   const [version, setVersion] = useState(0);
   const [status, setStatus] = useState("Quan sát thứ tự từng nét.");
-  const [upgradeTarget, setUpgradeTarget] = useState<VipUpgradeTarget | null>(null);
   const character = lesson.writingCharacters[index];
 
   useEffect(() => {
@@ -284,11 +283,6 @@ function GuidedWriting({ lesson, speak, onComplete, onExit }: {
   }, [character.hanzi, character.id, character.locked, mode, onComplete, version]);
 
   const chooseCharacter = (next: number) => {
-    const nextCharacter = lesson.writingCharacters[next];
-    if (nextCharacter?.locked) {
-      setUpgradeTarget({ kind: "Chữ Hán", title: nextCharacter.word || `Chữ ${next + 1}` });
-      return;
-    }
     setIndex(next);
     setMode("watch");
     setVersion((current) => current + 1);
@@ -298,7 +292,6 @@ function GuidedWriting({ lesson, speak, onComplete, onExit }: {
     <span className="hsk-guided-kicker">Luyện viết</span>
     <h1>Luyện viết chữ Hán</h1>
     <div className="hsk-guided-writing-picker" aria-label="Chọn từ luyện viết">{lesson.writingCharacters.map((item, itemIndex) => <button aria-label={item.locked ? `Chữ ${itemIndex + 1} yêu cầu VIP` : undefined} aria-pressed={itemIndex === index} className={item.locked ? "is-locked" : ""} key={item.id} onClick={() => chooseCharacter(itemIndex)} type="button">{item.locked ? <LockKeyhole aria-hidden="true" size={20} /> : <span lang="zh-CN">{item.hanzi}</span>}<small>{itemIndex + 1}/{lesson.writingCharacters.length}</small></button>)}</div>
-    <VipUpgradeDialog closeHref={getHskCurriculumHref(lesson.levelId)} onExit={onExit} onClose={() => setUpgradeTarget(null)} open={upgradeTarget !== null} target={upgradeTarget} />
     {character.locked ? <VipContentGate
       onExit={onExit}
       closeHref={getHskCurriculumHref(lesson.levelId)}

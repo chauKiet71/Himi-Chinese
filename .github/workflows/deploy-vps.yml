@@ -12,13 +12,57 @@ concurrency:
 permissions:
   contents: read
 
+env:
+  NODE_VERSION: "22"
+  VPS_HOST: 160.30.159.52
+  VPS_USER: root
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     environment: production
 
     steps:
+      - name: Check out source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production artifact
+        run: |
+          set -Eeuo pipefail
+          npm run build
+
+          audio_dir="$(realpath dist/client/audio)"
+          if [[ "$audio_dir" != "$GITHUB_WORKSPACE/dist/client/audio" ]] || [[ ! -d public/audio ]]; then
+            echo "Refusing to remove an unexpected audio output path: $audio_dir" >&2
+            exit 1
+          fi
+          rm -rf -- "$audio_dir"
+
+          test -f dist/server/wrangler.json
+          test -f node_modules/wrangler/bin/wrangler.js
+
+          release_archive="$RUNNER_TEMP/hanziwork-${GITHUB_SHA}.tar.gz"
+          tar -czf "$release_archive" \
+            dist \
+            node_modules \
+            scripts \
+            lib \
+            db \
+            drizzle \
+            package.json \
+            package-lock.json
+          sha256sum "$release_archive"
+
       - name: Configure pinned SSH access
         env:
           VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
@@ -30,11 +74,41 @@ jobs:
           printf '%s\n' '160.30.159.52 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZMT7YHsS5qRX/ciXTbLxKZVCgpJS7m/L9Nwgr3RNZS' > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
-      - name: Deploy and verify
+      - name: Transfer release artifact
         run: |
+          set -Eeuo pipefail
+          release_archive="$RUNNER_TEMP/hanziwork-${GITHUB_SHA}.tar.gz"
+          remote_archive="/tmp/hanziwork-${GITHUB_SHA}.tar.gz"
+          scp \
+            -i ~/.ssh/hanziwork-vps \
+            -o BatchMode=yes \
+            -o IdentitiesOnly=yes \
+            "$release_archive" \
+            "$VPS_USER@$VPS_HOST:$remote_archive"
+
+      - name: Deploy artifact and verify
+        run: |
+          set -Eeuo pipefail
+          release_archive="$RUNNER_TEMP/hanziwork-${GITHUB_SHA}.tar.gz"
+          remote_archive="/tmp/hanziwork-${GITHUB_SHA}.tar.gz"
+          release_checksum="$(sha256sum "$release_archive" | awk '{print $1}')"
+
           ssh \
             -i ~/.ssh/hanziwork-vps \
             -o BatchMode=yes \
             -o IdentitiesOnly=yes \
-            root@160.30.159.52 \
-            'set -Eeuo pipefail; cd /opt/hanziwork; git fetch origin master; git reset --hard origin/master; bash scripts/deploy-vps.sh'
+            "$VPS_USER@$VPS_HOST" \
+            bash -s -- "$remote_archive" "$GITHUB_SHA" "$release_checksum" <<'REMOTE'
+          set -Eeuo pipefail
+
+          archive_path="$1"
+          release_id="$2"
+          expected_checksum="$3"
+          printf '%s  %s\n' "$expected_checksum" "$archive_path" | sha256sum --check --status
+
+          deploy_script="$(mktemp /tmp/hanziwork-deploy.XXXXXX)"
+          trap 'rm -f -- "$deploy_script"' EXIT
+          tar -xOzf "$archive_path" scripts/deploy-vps.sh > "$deploy_script"
+          chmod 700 "$deploy_script"
+          bash "$deploy_script" "$archive_path" "$release_id"
+          REMOTE

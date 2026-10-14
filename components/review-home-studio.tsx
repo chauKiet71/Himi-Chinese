@@ -37,10 +37,10 @@ type Topic = {
 };
 
 const FEATURES = [
-  { title: "Luyện viết", description: "Tập viết Hán tự đúng nét, nhớ lâu hơn.", action: "Bắt đầu luyện viết", href: "/writing", image: "/assets/home/features/feature-himi-writing.webp", tone: "rose" },
-  { title: "Luyện nghe", description: "Nghe hội thoại thực tế, làm quen phát âm chuẩn.", action: "Bắt đầu luyện nghe", href: "/listening", image: "/assets/home/features/feature-himi-listening.webp", tone: "apricot" },
-  { title: "Luyện gõ", description: "Gõ pinyin nhanh và chính xác theo ngữ cảnh.", action: "Bắt đầu luyện gõ", href: "/typing", image: "/assets/home/features/feature-himi-typing.webp", tone: "blue" },
-  { title: "Giáo trình HSK", description: "Học theo giáo trình chuẩn, chinh phục từng cấp độ.", action: "Khám phá giáo trình", href: "/courses?view=hsk", image: "/assets/home/features/feature-himi-hsk.webp", tone: "lilac" },
+  { title: "Giáo trình HSK", titleLead: "Giáo trình", titleAccent: "HSK", description: "Học theo giáo trình chuẩn, chinh phục từng cấp độ.", action: "Khám phá giáo trình", href: "/courses?view=hsk", image: "/assets/home/features/feature-icon-hsk.webp", tone: "hsk" },
+  { title: "Luyện viết", titleLead: "Luyện", titleAccent: "viết", description: "Tập viết Hán tự đúng nét, nhớ lâu hơn.", action: "Bắt đầu luyện viết", href: "/writing", image: "/assets/home/features/feature-icon-writing.webp", tone: "writing" },
+  { title: "Luyện nghe", titleLead: "Luyện", titleAccent: "nghe", description: "Nghe hội thoại thực tế, làm quen phát âm chuẩn.", action: "Bắt đầu luyện nghe", href: "/listening", image: "/assets/home/features/feature-icon-listening.webp", tone: "listening" },
+  { title: "Luyện gõ", titleLead: "Luyện", titleAccent: "gõ", description: "Gõ pinyin nhanh và chính xác theo ngữ cảnh.", action: "Bắt đầu luyện gõ", href: "/typing", image: "/assets/home/features/feature-icon-typing.webp", tone: "typing" },
 ] as const;
 
 const TOPICS: Topic[] = [
@@ -86,49 +86,38 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
         </p>
       ) : null}
 
-      <section className="home-redesign-hero" aria-labelledby="home-redesign-title">
+      <section className="home-redesign-hero home-compact-hero" aria-labelledby="home-redesign-title">
+        <picture className="home-compact-hero-media">
+          <source media="(max-width: 720px)" srcSet="/assets/home/home-hero-compact-mobile-v2.webp" />
+          <Image
+            alt=""
+            className="home-compact-hero-art"
+            fill
+            fetchPriority="high"
+            loading="eager"
+            sizes="(max-width: 720px) 100vw, calc(100vw - 240px)"
+            src="/assets/home/home-hero-compact-v2.webp"
+            unoptimized
+          />
+        </picture>
+        <Image
+          alt=""
+          aria-hidden="true"
+          className="home-compact-hero-bubble"
+          height={197}
+          loading="eager"
+          src="/assets/home/home-hero-speech-bubble.webp"
+          unoptimized
+          width={360}
+        />
         <div className="home-redesign-hero-copy">
-          <span className="home-redesign-greeting home-redesign-desktop-only">Nǐ hǎo!</span>
-          <span className="home-redesign-mobile-kicker">HIMI CHINESE</span>
           <h1 id="home-redesign-title">
-            <span className="home-redesign-desktop-title">Chào mừng bạn đến với <em>Himi Chinese!</em></span>
-            <span className="home-redesign-mobile-title">Học tiếng Trung thật <em>dễ dàng, thú vị và hiệu quả!</em></span>
+            Mỗi ngày một chút,<br /><em>tiếng Trung thêm vui</em>
           </h1>
-          <p>
-            <span className="home-redesign-desktop-copy">Học tiếng Trung thật dễ dàng, thú vị và hiệu quả cùng Himi.</span>
-            <span className="home-redesign-mobile-copy">Cùng Himi chinh phục tiếng Trung mỗi ngày với những bài học sinh động và thực tế.</span>
-          </p>
           <Link className="home-redesign-primary" href="/hsk/1/hsk1-bai-01-chao-anh" prefetch={false}>
             Tiếp tục học <ArrowRight aria-hidden="true" size={21} strokeWidth={2.5} />
           </Link>
         </div>
-
-        <div aria-hidden="true" className="home-redesign-landscape">
-          <Image
-            alt=""
-            className="home-redesign-cover-image"
-            fill
-            fetchPriority="high"
-            loading="lazy"
-            sizes="(min-width: 721px) calc(100vw - 240px), 100vw"
-            src="/assets/home/home-hero-cover-desktop.webp"
-            unoptimized
-          />
-          <span className="home-redesign-sun" />
-          <span className="home-redesign-cloud home-redesign-cloud-one" />
-          <span className="home-redesign-cloud home-redesign-cloud-two" />
-          <span className="home-redesign-hill home-redesign-hill-one" />
-          <span className="home-redesign-hill home-redesign-hill-two" />
-          <span className="home-redesign-pagoda">亭</span>
-        </div>
-
-        <div aria-hidden="true" className="home-redesign-mascot-wrap">
-          <Image alt="" className="home-redesign-mascot is-mobile" fetchPriority="high" height={1024} loading="lazy" src="/assets/home/mobile/home-mobile-hero-penguin-cutout.webp" unoptimized width={1536} />
-          <span className="home-redesign-spark is-one" />
-          <span className="home-redesign-spark is-two" />
-        </div>
-
-        <div aria-hidden="true" className="home-redesign-bubble">Học là vui!</div>
       </section>
 
       <section className="home-redesign-section" aria-labelledby="home-feature-title">
@@ -137,13 +126,13 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
         </div>
         <div className="home-study-feature-grid">
           {FEATURES.map((feature) => (
-            <Link className={`home-study-feature is-${feature.tone}`} href={feature.href} key={feature.title} prefetch={false}>
+            <Link aria-label={`${feature.title}. ${feature.action}`} className={`home-study-feature is-${feature.tone}`} href={feature.href} key={feature.title} prefetch={false}>
+              <Image alt="" aria-hidden="true" className="home-study-feature-art" height={700} loading="eager" sizes="(max-width: 720px) 45vw, (max-width: 900px) 40vw, 25vw" src={feature.image} unoptimized width={700} />
               <span className="home-study-feature-copy">
-                <h3>{feature.title}</h3>
+                <h3>{feature.titleLead} <em>{feature.titleAccent}</em></h3>
                 <p>{feature.description}</p>
               </span>
-              <span aria-hidden="true" className="home-study-feature-action"><span>{feature.action}</span><ArrowRight size={18} strokeWidth={2.5} /></span>
-              <Image alt="" className="home-study-feature-art" height={700} sizes="(max-width: 900px) 50vw, 25vw" src={feature.image} unoptimized width={700} />
+              <span aria-hidden="true" className="home-study-feature-action"><ArrowRight size={22} strokeWidth={2.4} /></span>
             </Link>
           ))}
         </div>
@@ -168,7 +157,6 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
                 );
               })}
             </div>
-            <Image alt="" aria-hidden="true" className="home-study-topic-landscape" height={768} sizes="(max-width: 1180px) 100vw, 55vw" src="/assets/home/himi-topics-landscape.webp" unoptimized width={2048} />
           </div>
         </section>
 
@@ -200,7 +188,6 @@ export function ReviewHomeStudio({ verified = false, welcomeOffer = null }: Revi
                   </Link>
                 );
               })}
-              {recentLessons.length === 1 ? <Image alt="" className="home-study-recent-list-art" height={500} src="/assets/home/himi-recent-reading.webp" unoptimized width={700} /> : null}
             </div>
           )}
         </section>
