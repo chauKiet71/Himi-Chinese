@@ -16,13 +16,13 @@ test("home page contains the Himi learning dashboard", async () => {
   assert.doesNotMatch(page, /getDailySessionSource|listPracticeVocabulary|buildDailySession/);
   assert.match(studio, /Email đã xác minh\. Chào mừng bạn đến Himi Chinese\./);
   assert.match(verifyEmail, /new URL\("\/\?verified=1"/);
-  assert.match(studio, /Chào mừng bạn đến với <em>Himi Chinese!<\/em>/);
+  assert.match(studio, /Mỗi ngày một chút,<br \/><em>tiếng Trung thêm vui<\/em>/);
   assert.match(studio, /Tính năng học tập/);
   assert.match(studio, /Chủ đề phổ biến/);
   assert.match(studio, /Bài học gần đây/);
-  assert.match(studio, /home-hero-cover-desktop\.png/);
-  assert.match(portalStyles, /max-width: 720px[\s\S]*home-redesign-feature-grid/);
-  assert.match(studio, /himi-wave\.webp/);
+  assert.match(studio, /home-hero-compact-v2\.webp/);
+  assert.match(studio, /home-hero-compact-mobile-v2\.webp/);
+  assert.match(portalStyles, /max-width: 720px[\s\S]*home-study-feature-grid/);
   assert.doesNotMatch(studio, /motion\/react/);
   assert.match(studio, /href: "\/courses\?view=hsk"/);
   assert.match(studio, /Tiếp tục học/);
@@ -83,8 +83,9 @@ test("in-app notifications are user-scoped, readable and linked to VIP decisions
   assert.match(actions, /getCurrentUser/);
   assert.match(actions, /markAllUserNotificationsRead/);
   assert.match(page, /Hộp thư của bạn/);
-  assert.match(page, /notification-hero/);
-  assert.match(page, /Himi sẽ báo bạn/);
+  assert.doesNotMatch(page, /notification-hero/);
+  assert.doesNotMatch(page, /notification-empty-guide/);
+  assert.match(page, /Hộp thư đang yên/);
   assert.match(page, /openNotificationAction/);
   assert.match(shell, /topbar-notification-count/);
   assert.match(shell, /href=\{notificationsHref\}/);
@@ -831,7 +832,7 @@ test("active VIP members receive the approved ticket card with real subscription
   assert.match(railStyles, /\.learner-app-shell\.is-rail-collapsed \.rail-membership-card \{[\s\S]*?display: none;/);
 });
 
-test("course library uses eight editorial topic covers and a streamed catalog", async () => {
+test("course library uses nine editorial topic covers and a streamed catalog", async () => {
   const [page, library, card, visuals] = await Promise.all([
     read("app/courses/page.tsx"),
     read("components/course-library-view.tsx"),
@@ -842,7 +843,8 @@ test("course library uses eight editorial topic covers and a streamed catalog", 
   assert.match(page, /Suspense/);
   assert.match(card, /course-cover-image/);
   assert.match(card, /unoptimized/);
-  assert.equal((visuals.match(/src: "\/assets\/courses\//g) ?? []).length, 8);
+  const courseCovers = visuals.split("const courseModuleVisuals")[0];
+  assert.equal((courseCovers.match(/src: "\/assets\/courses\//g) ?? []).length, 9);
 });
 
 test("lesson vocabulary uses a focused interactive card deck", async () => {

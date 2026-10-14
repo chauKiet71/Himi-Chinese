@@ -13,12 +13,12 @@ export function HskCourseCard({ lessonCount = 0, levelCount = 0 }: Partial<HskCo
   return <a className="course-card hsk-entry-card" href="/courses?view=hsk">
     <div className="course-cover hsk-entry-cover">
       <Image
-        alt="Himi mới học chữ Hán theo giáo trình HSK tại bàn học"
+        alt="Người học đang đọc sách và ghi chép tại bàn"
         className="course-cover-image hsk-entry-cover-image"
         fill
         priority
         sizes="(max-width: 720px) calc(100vw - 30px), (max-width: 980px) 50vw, 33vw"
-        src="/assets/courses/himi-concepts/himi-hsk-curriculum-v2.webp"
+        src="/assets/courses/photography/hsk.jpg"
         unoptimized
       />
       <span className="course-cover-shade" aria-hidden="true" />

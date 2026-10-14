@@ -95,7 +95,7 @@ export function VipUpgradeDialog({
     <section className="vip-upgrade-sheet">
       <button aria-label={closeHref ? "Đóng bài học và quay lại danh sách" : "Đóng yêu cầu nâng cấp"} className="vip-upgrade-close" onClick={closeDialog} type="button"><X aria-hidden="true" size={21} /></button>
       <div className="vip-upgrade-visual" aria-hidden="true">
-        <Image alt="" className="vip-upgrade-mascot" height={440} src="/assets/home/himi-vip-offer-mascot.png" width={356} />
+        <Image alt="" className="vip-upgrade-mascot" height={1024} src="/assets/mascot/himi-v2/himi-celebrate.webp" unoptimized width={1024} />
       </div>
       <div className="vip-upgrade-content">
         <h2 id={titleId}>{authenticated ? <>Bài học này chỉ có ở <strong>Himi VIP</strong></> : <>Đăng nhập để <strong>mở khóa bài học</strong></>}</h2>

@@ -4428,3 +4428,46 @@ final result: passed
 - Kiểm tra thủ công còn lại: desktop/mobile, X thoát bài học về đúng danh sách (HSK lưu tiến độ trước khi thoát), Escape và bấm nền thoát bài học, không còn khung khóa nền, nút nâng cấp, chuyển giữa các mục bị khóa.
 
 final result: blocked
+
+---
+
+# Design QA — trang chủ Himi, mock-up số 2
+
+**Nguồn thiết kế:** `D:\CodexData\.codex\generated_images\01a10a9e-b3f2-7d31-9234-fea853a10fcb\exec-ef5785e8-103f-4513-9789-b024090b508e.png` (1444 × 1089 px).
+
+**Bản triển khai:** `http://localhost:4173/`. Ảnh chụp triển khai được ghi bằng Codex in-app browser và đối chiếu trực tiếp cùng ảnh nguồn trong lượt QA; trình duyệt không cung cấp đường dẫn tệp bền vững cho ảnh chụp này. Ảnh chụp cuối có kích thước 1430 × 1053 px, viewport CSS 1440 × 1120, mật độ điểm ảnh 1×. So sánh theo vùng nội dung chung, không tính 10 px thanh cuộn hoặc phần dưới ngoài khung chụp. Trạng thái: trang chủ desktop, chưa đăng nhập, có một bài học gần đây thật (0%); nguồn minh họa bốn bài mẫu.
+
+## Findings
+
+Không còn khác biệt P0/P1/P2 có thể xử lý mà vẫn giữ dữ liệu và khung điều hướng thực tế của sản phẩm.
+
+- **Typography:** phân cấp tiêu đề, chữ nổi bật màu kem, nhãn thẻ và mô tả sát thiết kế. Chữ tiêu đề trên banner hơi nhỏ hơn bản mock-up do khung nội dung thực tế hẹp hơn khoảng 6%; vẫn rõ và không xuống dòng sai.
+- **Spacing/layout:** banner gọn với mép dưới lượn sóng, bốn thẻ tính năng cùng một hàng, chủ đề 3 × 2 và bài gần đây ở cột phải. Khoảng cách toàn trang lệch xuống khoảng 10–15 px do thanh điều hướng thật rộng hơn bản mock-up; chấp nhận để giữ layout chung của ứng dụng.
+- **Colors/tokens:** sắc san hô, cam, kem, nền trắng và viền nhẹ nhất quán với nguồn.
+- **Image quality/assets:** ảnh banner, bong bóng chữ và bốn vật thể tương ứng HSK, viết, nghe, gõ sắc nét; không còn dùng mascot Himi trong thẻ tính năng. Mép lượn sóng được áp dụng cho ảnh banner và giữ Himi hiển thị trọn phần cần thiết.
+- **Copy/content:** tiêu đề, tên tính năng và mô tả giữ đúng ý mock-up. Dòng “Nǐ hǎo!” được bỏ theo yêu cầu mới ở cả desktop lẫn mobile. Phần bài học gần đây hiển thị lịch sử thật, nên số dòng phụ thuộc dữ liệu người học.
+- **Responsive/interaction:** kiểm tra desktop 1440 px, laptop 900 px và mobile 390 px. Không có cuộn ngang ở mobile; thẻ HSK mở đúng trang `/courses?view=hsk`. Ảnh banner và thẻ tải thành công; console không có lỗi.
+
+## Comparison history
+
+1. Lần đối chiếu đầu: banner thiếu bong bóng “Học là vui!” ở phía trên Himi (P2). Đã tạo ảnh WebP nền trong suốt và đặt vào banner desktop.
+2. Lần đối chiếu sau sửa: bong bóng nằm đúng vùng, không che tiêu đề hoặc Himi. Nguồn và ảnh chụp cuối được mở cùng một lượt để so sánh bố cục toàn trang. Các chi tiết chữ, icon và nút đủ rõ ở ảnh toàn trang nên không cần chụp vùng phóng đại.
+3. Sau phản hồi của người dùng, mép banner còn thẳng (P2). Đã cắt mép ảnh theo đường sóng trên desktop và mobile, đưa nút “Tiếp tục học” lên trên đường cắt. Đã đối chiếu lại nguồn và ảnh chụp desktop cùng một lượt; ảnh mobile 390 px và laptop 900 px xác nhận nút cùng Himi không bị che và trang không tràn ngang.
+4. Theo yêu cầu mới, đã bỏ “Nǐ hǎo!” và giảm chiều cao banner mobile từ 242/230 px xuống dải 180–204 px theo chiều rộng màn hình. Ảnh chụp 390 px và 320 px cho thấy Himi, nút học và mép sóng vẫn rõ; trang 320 px không tràn ngang. Desktop vẫn giữ chiều cao 252 px và không còn dòng chào.
+
+## Open questions
+
+Không có. Số bài gần đây là dữ liệu người dùng, không dùng bốn dòng mẫu trong mock-up.
+
+## Implementation checklist
+
+- [x] Banner ngắn, có ảnh riêng cho desktop và mobile cùng mép dưới lượn sóng.
+- [x] Giáo trình HSK đứng đầu, tiếp theo viết, nghe, gõ.
+- [x] Chủ đề 3 × 2 và lịch sử học thật.
+- [x] Kiểm tra responsive, điều hướng, tải ảnh và lỗi trình duyệt.
+
+## Follow-up polish
+
+Không còn mục trang trí đã biết cần sửa.
+
+final result: passed

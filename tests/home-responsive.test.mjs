@@ -7,12 +7,16 @@ const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 test("home dashboard exposes the four core learning paths and useful continuation links", async () => {
   const page = await read("components/review-home-studio.tsx");
 
-  assert.match(page, /Chào mừng bạn đến với <em>Himi Chinese!<\/em>/);
+  assert.match(page, /Mỗi ngày một chút,<br \/><em>tiếng Trung thêm vui<\/em>/);
   assert.match(page, /href="\/hsk\/1\/hsk1-bai-01-chao-anh"[\s\S]*Tiếp tục học/);
-  assert.match(page, /title: "Luyện viết"[\s\S]*href: "\/writing"/);
-  assert.match(page, /title: "Luyện nghe"[\s\S]*href: "\/listening"/);
-  assert.match(page, /title: "Luyện gõ"[\s\S]*href: "\/typing"/);
-  assert.match(page, /title: "Giáo trình HSK"[\s\S]*href: "\/courses\?view=hsk"/);
+  assert.deepEqual(
+    [...page.matchAll(/\{ title: "([^"]+)", titleLead:/g)].map((match) => match[1]),
+    ["Giáo trình HSK", "Luyện viết", "Luyện nghe", "Luyện gõ"],
+  );
+  assert.match(page, /title: "Giáo trình HSK"[^\n]*href: "\/courses\?view=hsk"/);
+  assert.match(page, /title: "Luyện viết"[^\n]*href: "\/writing"/);
+  assert.match(page, /title: "Luyện nghe"[^\n]*href: "\/listening"/);
+  assert.match(page, /title: "Luyện gõ"[^\n]*href: "\/typing"/);
   assert.match(page, /Chủ đề phổ biến/);
   assert.match(page, /Bài học gần đây/);
   assert.match(page, /const RECENT_LESSON_LIMIT = 4/);
@@ -25,20 +29,22 @@ test("home dashboard exposes the four core learning paths and useful continuatio
   assert.doesNotMatch(page, /home-recent-title[\s\S]*href="\/courses"[\s\S]*home-redesign-recent-list/);
 });
 
-test("home dashboard uses the selected Himi study artwork and keeps four features in one desktop row", async () => {
+test("home dashboard uses functional artwork and keeps four features in one desktop row", async () => {
   const page = await read("components/review-home-studio.tsx");
   const css = await read("app/home-portal.css");
 
-  assert.match(page, /\/assets\/home\/features\/feature-himi-writing\.webp/);
-  assert.match(page, /\/assets\/home\/features\/feature-himi-listening\.webp/);
-  assert.match(page, /\/assets\/home\/features\/feature-himi-typing\.webp/);
-  assert.match(page, /\/assets\/home\/features\/feature-himi-hsk\.webp/);
+  assert.match(page, /\/assets\/home\/features\/feature-icon-writing\.webp/);
+  assert.match(page, /\/assets\/home\/features\/feature-icon-listening\.webp/);
+  assert.match(page, /\/assets\/home\/features\/feature-icon-typing\.webp/);
+  assert.match(page, /\/assets\/home\/features\/feature-icon-hsk\.webp/);
   assert.match(page, /\/assets\/home\/himi-recent-reading\.webp/);
-  assert.match(page, /\/assets\/home\/himi-topics-landscape\.webp/);
-  assert.match(page, /home-hero-cover-desktop\.webp/);
-  assert.match(css, /\.home-redesign-cover-image\s*\{[^}]*object-fit:\s*cover/);
+  assert.doesNotMatch(page, /feature-himi-(writing|listening|typing|hsk)|himi-topics-landscape/);
+  assert.match(page, /home-hero-compact-v2\.webp/);
+  assert.match(page, /home-hero-speech-bubble\.webp/);
+  assert.match(css, /\.home-compact-hero-art\s*\{[^}]*object-fit:\s*cover/);
   assert.match(css, /\.home-study-feature-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(4, minmax\(0, 1fr\)\)/);
   assert.match(css, /\.home-study-topic-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.home-redesign-hero\.home-compact-hero\s*\{[\s\S]*?height:\s*clamp\(220px, 17\.5vw, 260px\)/);
   assert.match(page, /recentLessonsLoaded && recentLessons\.length === 0[\s\S]*?Bạn chưa học bài nào/);
   assert.match(page, /recentLessons\.map\(\(lesson\) =>[\s\S]*?lesson\.href/);
   assert.match(page, /home-study-progress[\s\S]*?lesson\.progress/);
@@ -50,12 +56,11 @@ test("home dashboard matches the compact mobile reference and preserves bottom n
   const shell = await read("components/learner-app-shell.tsx");
   const brand = await read("components/brand-logo.tsx");
 
-  assert.match(page, /home-mobile-hero-penguin-cutout\.webp/);
-  assert.match(page, /home-redesign-mobile-title[\s\S]*Học tiếng Trung thật/);
+  assert.match(page, /home-hero-compact-mobile-v2\.webp/);
+  assert.match(page, /<source media="\(max-width: 720px\)"/);
   assert.doesNotMatch(page, /home-redesign-mobile-nav|href="\/practice"/);
-  assert.match(css, /Mobile home composition based on the selected compact app reference/);
   assert.match(css, /padding:\s*0 12px calc\(104px \+ env\(safe-area-inset-bottom\)\)/);
-  assert.match(css, /@media \(max-width: 720px\)[\s\S]*?\.home-study-feature-grid\s*\{\s*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(css, /@media \(max-width: 540px\)[\s\S]*?\.home-study-feature-grid\s*\{\s*grid-template-columns:\s*1fr/);
   assert.match(css, /@media \(max-width: 720px\)[\s\S]*?\.home-study-topic-grid\s*\{\s*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(css, /\.home-study-recent-item\s*\{[\s\S]*?grid-template-columns:\s*40px minmax\(0, 1fr\) 58px 16px/);
   assert.match(css, /#home-feature-title\s*\{[\s\S]*padding-left:\s*18px;[\s\S]*border-left:\s*7px solid #ff5a4e/);
@@ -71,19 +76,17 @@ test("home dashboard matches the compact mobile reference and preserves bottom n
 
 test("home illustrations stay within a compact transfer budget", async () => {
   const files = [
-    "public/assets/home/home-hero-cover-desktop.webp",
-    "public/assets/home/mobile/home-mobile-hero-background.webp",
-    "public/assets/home/mobile/home-mobile-hero-penguin-cutout.webp",
-    "public/assets/home/features/feature-himi-writing.webp",
-    "public/assets/home/features/feature-himi-listening.webp",
-    "public/assets/home/features/feature-himi-typing.webp",
-    "public/assets/home/features/feature-himi-hsk.webp",
-    "public/assets/home/himi-recent-reading.webp",
-    "public/assets/home/himi-topics-landscape.webp",
+    "public/assets/home/home-hero-compact-v2.webp",
+    "public/assets/home/home-hero-compact-mobile-v2.webp",
+    "public/assets/home/home-hero-speech-bubble.webp",
+    "public/assets/home/features/feature-icon-hsk.webp",
+    "public/assets/home/features/feature-icon-writing.webp",
+    "public/assets/home/features/feature-icon-listening.webp",
+    "public/assets/home/features/feature-icon-typing.webp",
   ];
   const sizes = await Promise.all(files.map(async (path) => (await stat(new URL(`../${path}`, import.meta.url))).size));
 
-  assert.ok(sizes.reduce((total, size) => total + size, 0) < 850_000);
+  assert.ok(sizes.reduce((total, size) => total + size, 0) < 350_000);
 });
 
 test("home welcome offer remains compact on desktop and phone viewports", async () => {

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
   ArrowUpRight,
-  BellRing,
   Check,
   CheckCheck,
   CircleAlert,
@@ -66,16 +65,6 @@ export default async function NotificationsPage({
 
   return <main className="notifications-page">
     <div className="section-shell notifications-page-inner">
-      <header className="notification-hero">
-        <div className="notification-hero-copy">
-          <h1>Thông báo</h1>
-          <div className="notification-hero-meta">
-            <span><BellRing aria-hidden="true" size={19} /><strong>{unreadCount}</strong> chưa đọc</span>
-          </div>
-        </div>
-        <p className="notification-hero-note">Himi sẽ báo bạn<br />ngay khi có tin mới</p>
-      </header>
-
       {params.success && successMessages[params.success] ? <p className="notification-message success" role="status"><Check size={16} />{successMessages[params.success]}</p> : null}
       {params.error && errorMessages[params.error] ? <p className="notification-message error" role="alert"><CircleAlert size={16} />{errorMessages[params.error]}</p> : null}
 
@@ -117,24 +106,6 @@ export default async function NotificationsPage({
             </div>
             <Link className="notification-empty-action" href="/courses">Khám phá lộ trình <ArrowUpRight size={17} /></Link>
           </div>
-
-          <aside className="notification-empty-guide" aria-label="Những cập nhật sẽ xuất hiện trong hộp thư">
-            <h3>Bạn sẽ nhận cập nhật về</h3>
-            <ul>
-              <li>
-                <span><CreditCard aria-hidden="true" size={19} /></span>
-                <div><strong>Thanh toán</strong><small>Xác nhận giao dịch và trạng thái xử lý</small></div>
-              </li>
-              <li>
-                <span><Crown aria-hidden="true" size={19} /></span>
-                <div><strong>Quyền VIP</strong><small>Kết quả yêu cầu và thời hạn sử dụng</small></div>
-              </li>
-              <li>
-                <span><ShieldCheck aria-hidden="true" size={19} /></span>
-                <div><strong>Tài khoản &amp; hệ thống</strong><small>Những thay đổi cần bạn chú ý</small></div>
-              </li>
-            </ul>
-          </aside>
         </div>}
       </section>
     </div>

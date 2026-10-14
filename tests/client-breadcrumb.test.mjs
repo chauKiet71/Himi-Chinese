@@ -39,6 +39,7 @@ test("client breadcrumb keeps useful parents across learner routes", () => {
 test("home and developer-only previews do not render a redundant breadcrumb", () => {
   assert.equal(getClientBreadcrumb("/"), null);
   assert.equal(getClientBreadcrumb("/games"), null);
+  assert.equal(getClientBreadcrumb("/notifications"), null);
   assert.equal(getClientBreadcrumb("/typing"), null);
   assert.equal(getClientBreadcrumb("/vip"), null);
   assert.equal(getClientBreadcrumb("/vocabulary"), null);

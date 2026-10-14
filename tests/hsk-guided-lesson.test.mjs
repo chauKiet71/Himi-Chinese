@@ -81,6 +81,21 @@ test("guided HSK practice preserves a VIP placeholder for a locked vocabulary it
   assert.deepEqual(exercise.options, []);
 });
 
+test("guided writing uses the new inline VIP gate instead of the legacy popup", async () => {
+  const [component, prompt] = await Promise.all([
+    readFile(new URL("../components/hsk-guided-lesson.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/vip-upgrade-prompt.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(component, /title="Mở khóa chữ Hán này"/);
+  assert.match(component, /closeHref=\{getHskCurriculumHref\(lesson\.levelId\)\}/);
+  assert.match(component, /<VipContentGate/);
+  assert.doesNotMatch(component, /<VipUpgradeDialog/);
+  assert.doesNotMatch(component, /setUpgradeTarget/);
+  assert.match(prompt, /\/assets\/mascot\/himi-v2\/himi-celebrate\.webp/);
+  assert.doesNotMatch(prompt, /himi-vip-offer-mascot\.png/);
+});
+
 test("guided progress is restored safely and can complete the whole lesson", async () => {
   const [contentModule, progressModule] = await Promise.all([
     import("../lib/hsk-lesson-content.ts"),
