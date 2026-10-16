@@ -132,6 +132,14 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return <html lang="vi" style={createBrandTheme() as CSSProperties}>
     <head>
+      {/* Google tag (gtag.js) */}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKK9GGRTS1" />
+      <script dangerouslySetInnerHTML={{ __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKK9GGRTS1');
+      ` }} />
       <Script id="microsoft-clarity" strategy="afterInteractive">{`
         (function(c,l,a,r,i,t,y){
           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
