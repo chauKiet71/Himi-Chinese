@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { GoogleAnalyticsPageView } from "@/components/google-analytics-page-view";
 import { Suspense, type CSSProperties } from "react";
 import "./globals.css";
 import "./motion.css";
@@ -138,7 +139,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-SKK9GGRTS1');
+        gtag('config', 'G-SKK9GGRTS1', { send_page_view: false });
       ` }} />
       <Script id="microsoft-clarity" strategy="afterInteractive">{`
         (function(c,l,a,r,i,t,y){
@@ -149,6 +150,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       `}</Script>
     </head>
     <body>
+    <Suspense fallback={null}><GoogleAnalyticsPageView /></Suspense>
     {process.env.NODE_ENV === "development" ? <Script
       dangerouslySetInnerHTML={{ __html: developmentBrowserErrorGuard }}
       id="development-browser-error-guard"
