@@ -90,7 +90,10 @@ export function HimiWritingStudio({ topic }: { topic: WritingTopic }) {
     if (selected.locked) return;
     const board = boardRef.current;
     if (!board) return;
-    const updateSize = () => setCanvasSize(Math.max(250, Math.min(460, Math.floor(board.clientWidth))));
+    const updateSize = () => {
+      const size = Math.floor(Math.min(board.clientWidth, board.clientHeight));
+      if (size > 0) setCanvasSize(size);
+    };
     updateSize();
     const observer = new ResizeObserver(updateSize);
     observer.observe(board);

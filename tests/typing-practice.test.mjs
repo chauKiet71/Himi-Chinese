@@ -150,7 +150,7 @@ test("correct typing celebrates once with shared confetti and the supplied audio
   const studio = await readFile(path.join(root, "components", "typing-practice-studio.tsx"), "utf8");
   const stylesheet = await readFile(path.join(root, "app", "typing-practice.css"), "utf8");
 
-  assert.equal(existsSync(path.join(root, "public", "audio", "feedback", "typing-correct-trimmed.mp3")), true);
+  assert.equal(existsSync(path.join(root, "public", "assets", "audio", "feedback", "typing-correct-trimmed.mp3")), true);
   assert.match(studio, /function celebrateCorrect\(itemId: string\)/);
   assert.match(studio, /correct && !currentAnswer\.correct && currentItem/);
   assert.match(studio, /allCorrect && !currentAnswer\.correct/);

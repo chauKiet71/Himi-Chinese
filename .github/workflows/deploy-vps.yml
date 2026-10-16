@@ -48,6 +48,10 @@ jobs:
           fi
           rm -rf -- "$audio_dir"
 
+          # Feedback sounds ship with each release, outside the separately hosted lesson audio.
+          test -s dist/client/assets/audio/feedback/typing-correct-trimmed.mp3
+          test -s dist/client/assets/audio/feedback/lesson-complete-trimmed.mp3
+
           test -f dist/server/wrangler.json
           test -f node_modules/wrangler/bin/wrangler.js
 

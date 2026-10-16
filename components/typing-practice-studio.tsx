@@ -553,7 +553,7 @@ export function TypingPracticeStudio({
   const answerVisible = currentAnswer.revealed || currentAnswer.correct;
 
   return <section className="typing-studio" aria-label="Phiên luyện gõ pinyin" ref={studioRef}>
-    <audio ref={correctAudioRef} src="/audio/feedback/typing-correct-trimmed.mp3" preload="auto" />
+    <audio ref={correctAudioRef} src="/assets/audio/feedback/typing-correct-trimmed.mp3" preload="auto" />
     <header className="typing-session-header">
       <Link aria-label="Đóng phiên luyện" href={`/typing/${level.id}/${lessonSummary.id}`}><X aria-hidden="true" size={18} /></Link>
       <div aria-label={`Tiến độ ${index + 1} trên ${items.length}`} aria-valuemax={items.length} aria-valuemin={1} aria-valuenow={index + 1} className="typing-session-progress" role="progressbar">

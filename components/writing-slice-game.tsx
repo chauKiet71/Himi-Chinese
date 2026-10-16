@@ -563,7 +563,7 @@ function SliceSession({
 
   return (
     <main className="learner-dashboard writing-game-dashboard game-immersive-dashboard" ref={sessionRef}>
-      <audio ref={correctAudioRef} src="/audio/feedback/typing-correct-trimmed.mp3" preload="auto" />
+      <audio ref={correctAudioRef} src="/assets/audio/feedback/typing-correct-trimmed.mp3" preload="auto" />
       <div className="writing-page-shell">
         <h1 className="writing-page-title">Luyện chém từ cùng Himi</h1>
         <div className="writing-game-layout">

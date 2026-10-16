@@ -333,7 +333,7 @@ function GuidedPractice({ closeHref, exercise, showPinyin, speak, onExit }: { cl
     }
   };
   return <section className="hsk-guided-practice">
-    <audio ref={correctAudioRef} src="/audio/feedback/typing-correct-trimmed.mp3" preload="auto" />
+    <audio ref={correctAudioRef} src="/assets/audio/feedback/typing-correct-trimmed.mp3" preload="auto" />
     <span className="hsk-guided-kicker">Luyện tập nhanh</span>
     <h1>{exercise.instruction}</h1>
     {exercise.type === "listening" ? <button className="hsk-guided-listen" onClick={() => speak(exercise.speakText ?? exercise.answer ?? "")} type="button"><Headphones aria-hidden="true" size={32} /><span>Nghe lại</span></button> : <><div className={`hsk-guided-practice-prompt${exercise.pinyin ? " has-pinyin" : ""}`}><span lang="zh-CN">{exercise.prompt}</span><button aria-label={`Phát âm ${exercise.prompt}`} onClick={() => speak(exercise.speakText ?? exercise.prompt)} type="button"><Volume2 aria-hidden="true" size={25} /></button></div>{showPinyin && exercise.pinyin ? <p className="hsk-guided-practice-pinyin">{exercise.pinyin}</p> : null}</>}
@@ -363,7 +363,7 @@ function GuidedCompletion({ lesson, exerciseCount, nextLessonHref }: { lesson: H
   };
 
   return <section className="hsk-guided-completion">
-    <audio ref={completionAudioRef} src="/audio/feedback/lesson-complete-trimmed.mp3" preload="auto" />
+    <audio ref={completionAudioRef} src="/assets/audio/feedback/lesson-complete-trimmed.mp3" preload="auto" />
     <Link aria-label="Đóng thông báo hoàn thành" className="hsk-guided-completion-close" href={courseHref}><X aria-hidden="true" size={30} /></Link>
     <Image alt="Cúp hoàn thành bài học" className="hsk-guided-completion-trophy" height={300} priority src="/assets/hsk/hsk-completion-trophy.png" unoptimized width={300} />
     <span className="hsk-guided-completion-badge"><Trophy aria-hidden="true" size={20} /> Hoàn thành</span>

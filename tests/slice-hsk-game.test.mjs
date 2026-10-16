@@ -73,7 +73,7 @@ test("HSK pinyin accepts accents, joined syllables, spaces and apostrophes", () 
 test("feedback audio referenced by learning and slice screens exists in public assets", async () => {
   for (const file of ["writing-slice-game.tsx", "typing-practice-studio.tsx", "hsk-guided-lesson.tsx"]) {
     const source = await readFile(new URL(`../components/${file}`, import.meta.url), "utf8");
-    const references = [...source.matchAll(/src="(\/audio\/feedback\/[^"\s]+)"/g)];
+    const references = [...source.matchAll(/src="(\/assets\/audio\/feedback\/[^"\s]+)"/g)];
     assert.ok(references.length, `${file} must reference feedback audio`);
     for (const [, url] of references) {
       const asset = await stat(new URL(`../public${url}`, import.meta.url));

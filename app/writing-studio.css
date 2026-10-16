@@ -1468,8 +1468,9 @@ body:has(.himi-writing-lesson-session) .himi-chatbot-widget { display: none; }
 }
 
 .himi-writing-lesson-session .himi-writing-board-shell {
-  width: auto;
-  height: min(100%, clamp(220px, 36vw, 340px), max(180px, calc(100dvh - 500px)));
+  width: min(100%, clamp(220px, 36vw, 340px), max(180px, calc(100dvh - 500px)));
+  height: auto;
+  flex-shrink: 0;
   min-width: 0;
   max-width: 100%;
   min-height: 0;
@@ -1565,7 +1566,7 @@ body:has(.himi-writing-lesson-session) .himi-chatbot-widget { display: none; }
   .himi-writing-lesson-session .himi-writing-practice { padding: clamp(14px, 2vh, 18px); }
   .himi-writing-lesson-session .himi-writing-mode-tabs button { min-height: 36px; }
   .himi-writing-lesson-session .himi-writing-board-shell {
-    height: min(100%, 320px, max(170px, calc(100dvh - 500px)));
+    width: min(100%, 320px, max(170px, calc(100dvh - 500px)));
     margin-top: 10px;
   }
   .himi-writing-lesson-session .himi-writing-feedback,
