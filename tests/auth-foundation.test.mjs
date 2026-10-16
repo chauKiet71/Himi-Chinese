@@ -83,6 +83,7 @@ test("security headers prevent framing and harden admin responses", async () => 
   const policy = contentSecurityPolicy(false);
   assert.match(policy, /frame-ancestors 'none'/u);
   assert.match(policy, /object-src 'none'/u);
+  assert.ok(policy.split(";").find((directive) => directive.trim().startsWith("script-src ")).split(/\s+/u).includes("https://www.googletagmanager.com"));
   assert.match(policy, /script-src [^;]*https:\/\/www\.youtube\.com/u);
   assert.match(policy, /script-src [^;]*https:\/\/www\.youtube-nocookie\.com/u);
   assert.match(policy, /script-src [^;]*https:\/\/\*\.clarity\.ms/u);

@@ -1,6 +1,7 @@
 const productionScriptSources = [
   "'self'",
   "'unsafe-inline'",
+  "https://www.googletagmanager.com",
   "https://*.clarity.ms",
   "https://c.bing.com",
   "https://www.youtube.com",
