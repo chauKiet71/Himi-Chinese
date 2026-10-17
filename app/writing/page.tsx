@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, BookOpen, PenLine } from "lucide-react";
 import { getWritingCatalog } from "@/lib/practice-content-repository";
 
-export const metadata: Metadata = {
-  title: "Luyện viết",
-  description: "Chọn chủ đề HSK 1–6 và luyện viết Hán tự theo từng bài cùng Himi Chinese.",
-};
+export function generateMetadata() {
+  return publicPageMetadata("/writing", "Luyện viết", "Chọn chủ đề HSK 1–6 và luyện viết Hán tự theo từng bài cùng Himi Chinese.");
+}
 
 export default async function WritingPage() {
   const levels = (await getWritingCatalog())?.levels ?? [];

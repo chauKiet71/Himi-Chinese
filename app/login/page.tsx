@@ -4,7 +4,7 @@ import { AuthCard } from "@/components/auth-card";
 import { getCurrentUser } from "@/lib/auth-session";
 import { safeReturnTo } from "@/lib/auth-validation";
 
-export const metadata: Metadata = { title: "Đăng nhập" };
+export const metadata: Metadata = { robots: { index: false, follow: true }, title: "Đăng nhập" };
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string; returnTo?: string; success?: string }> }) {
   const [params, user] = await Promise.all([searchParams, getCurrentUser()]);

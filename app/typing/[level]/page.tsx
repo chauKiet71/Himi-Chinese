@@ -1,3 +1,4 @@
+import { publicPageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -19,10 +20,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: TypingLevelPageProps): Promise<Metadata> {
   const { level: levelId } = await params;
   const level = getTypingLevel(levelId);
-  return level ? {
-    title: `Luyện gõ ${level.label}`,
-    description: `Chọn một trong ${level.lessonCount} bài ${level.label} để luyện gõ pinyin.`,
-  } : { title: "Không tìm thấy cấp độ luyện gõ" };
+  return level ? publicPageMetadata(`/typing/${encodeURIComponent(level.id)}`, `Luyện gõ ${level.label}`, `Chọn một trong ${level.lessonCount} bài ${level.label} để luyện gõ pinyin.`) : { title: "Không tìm thấy cấp độ luyện gõ" };
 }
 
 export default async function TypingLevelPage({ params }: TypingLevelPageProps) {

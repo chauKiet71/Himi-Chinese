@@ -17,6 +17,8 @@ export type LearningVideo = {
   slug: string;
   title: string;
   originalTitle?: string;
+  /** Verified original publication timestamp, ISO 8601 with timezone. */
+  uploadDate?: string;
   summary: string;
   description: string;
   source: VideoSource;

@@ -16,10 +16,11 @@ if (process.argv.slice(2).some((argument) => !allowedArguments.has(argument))) t
 if (process.argv.includes("--apply") && process.argv.includes("--dry-run")) throw new Error("Choose only one import mode.");
 
 const courseSlug = "tu-tin-kham-pha-trung-quoc";
-const course = getCourse(courseSlug);
-if (!course) throw new Error(`Missing bundled course metadata for ${courseSlug}.`);
+
 
 async function run() {
+  const course = getCourse(courseSlug);
+  if (!course) throw new Error(`Missing bundled course metadata for ${courseSlug}.`);
   if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is required. Without it the web app already reads the bundled travel course.");
   const db = getDb();
   const existing = await db.select().from(courses).where(eq(courses.slug, courseSlug)).limit(1);

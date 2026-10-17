@@ -1,9 +1,8 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Chính sách bảo mật",
-  description: "Cách Himi Chinese thu thập và sử dụng dữ liệu học tập của người dùng.",
-};
+export function generateMetadata() {
+  return publicPageMetadata("/privacy", "Chính sách bảo mật", "Cách Himi Chinese thu thập và sử dụng dữ liệu học tập của người dùng.");
+}
 
 export default function PrivacyPage() {
   return <main className="legal-page"><article className="legal-card">

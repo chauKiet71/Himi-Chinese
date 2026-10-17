@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import {
   AlertCircle,
@@ -14,10 +14,9 @@ import { getVipUpgradeOverview } from "@/lib/vip-activation-request-service";
 import { isLifetimeVipPlan, isTrialVipPlan, vipPlanAccessLabel, vipPlanDurationLabel } from "@/lib/vip-plan";
 import { vipDaysRemaining } from "@/lib/vip-subscription";
 
-export const metadata: Metadata = {
-  title: "Quyền lợi Himi Chinese VIP",
-  description: "Quyền lợi và điều kiện sử dụng nội dung VIP trên Himi Chinese.",
-};
+export function generateMetadata() {
+  return publicPageMetadata("/vip", "Quyền lợi Himi Chinese VIP", "Quyền lợi và điều kiện sử dụng nội dung VIP trên Himi Chinese.");
+}
 
 const purchaseBenefits = [
   "Toàn bộ bài học VIP",

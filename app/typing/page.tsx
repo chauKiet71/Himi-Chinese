@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, BookOpen, LockKeyhole, MessageSquareText } from "lucide-react";
 import { getTypingCatalog } from "@/lib/typing-practice";
@@ -9,10 +9,9 @@ import { typingLevelTarget } from "@/lib/content-access-types";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Luyện gõ pinyin",
-  description: "Luyện nhớ từ và câu HSK 1–6 bằng cách gõ pinyin theo nghĩa hoặc âm thanh.",
-};
+export function generateMetadata() {
+  return publicPageMetadata("/typing", "Luyện gõ pinyin", "Luyện nhớ từ và câu HSK 1–6 bằng cách gõ pinyin theo nghĩa hoặc âm thanh.");
+}
 
 export default async function TypingPage() {
   const levels = getTypingCatalog();

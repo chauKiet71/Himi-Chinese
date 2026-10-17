@@ -205,3 +205,11 @@ Mỗi tài khoản học viên được tạo bằng email hoặc Google sẽ đ
 Chatbot góc phải nay hỗ trợ hội thoại lưu PostgreSQL, ảnh Cloudinary có xác thực, nhân viên trả lời qua Telegram, reminder 30 giây và ẩn 60 giây sau hoàn thành. Cần migrate và cấu hình **worker Node chạy thường trực riêng**; không có phản hồi AI giả.
 
 Hướng dẫn bot/chat IDs, biến môi trường, webhook, local/production, retry, giới hạn và checklist E2E: [docs/SUPPORT_TELEGRAM.md](docs/SUPPORT_TELEGRAM.md).
+
+### SEO metadata
+
+Public pages generate canonical, Open Graph and Twitter metadata at request time via `lib/seo.ts`. Set `NEXT_PUBLIC_APP_URL` to the preferred HTTPS origin in every deployment; sitemap and metadata use the same origin. Canonicals omit filter and tracking parameters. Writing level aliases point to the canonical level ID. The root layout intentionally has no canonical so private or unknown pages cannot inherit the homepage URL.
+
+The homepage exposes Organization and WebSite JSON-LD. Course and video detail pages expose breadcrumbs; courses also expose Course markup. Video pages use WebPage until a verified ISO 8601 `uploadDate` with timezone is supplied in `lib/video-library.ts`, then emit VideoObject. Do not invent publication dates. Shared images use the existing brand PNG and video thumbnails. Login, registration, account and notification pages are marked noindex.
+
+Run `node --experimental-strip-types --test tests/seo.test.mjs`. After deployment, inspect rendered canonical/social tags and validate JSON-LD with Google Rich Results Test; submit the sitemap in Search Console.

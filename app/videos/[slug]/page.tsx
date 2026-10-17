@@ -1,3 +1,5 @@
+import { StructuredData } from "@/components/structured-data";
+import { publicPageMetadata, breadcrumbSchema, videoSchema } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -17,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const video = findVideoBySlug(slug);
   if (!video) return {};
-  return { title: video.title, description: video.summary };
+  return publicPageMetadata(`/videos/${encodeURIComponent(video.slug)}`, video.title, video.summary, video.thumbnailUrl);
 }
 
 export default async function VideoDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -52,6 +54,8 @@ export default async function VideoDetailPage({ params }: { params: Promise<{ sl
   </aside>;
 
   return <main className={`video-detail-page${hasInteractiveTranscript ? " is-study-studio" : ""}`}>
+    <StructuredData data={breadcrumbSchema([{ name: "Trang chủ", path: "/" }, { name: "Học qua video", path: "/videos" }, { name: video.title, path: `/videos/${encodeURIComponent(video.slug)}` }])} />
+    <StructuredData data={videoSchema(video)} />
     <div className="video-detail-shell">
       <header className={`video-detail-header${hasInteractiveTranscript ? " is-compact" : ""}`}>
         <div className="video-detail-heading">

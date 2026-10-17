@@ -1,3 +1,4 @@
+import { publicPageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -20,10 +21,7 @@ export async function generateMetadata({ params }: WritingLevelPageProps): Promi
   const { level: levelParam } = await params;
   const level = (await getWritingCatalog())?.levels.find((entry) => entry.id === (levelParam.startsWith("hsk-") ? levelParam : `hsk-${levelParam}`));
   if (!level) return { title: "Không tìm thấy cấp độ luyện viết" };
-  return {
-    title: `Luyện viết theo bài · ${level.label}`,
-    description: `Chọn một trong ${level.lessonCount} bài ${level.label} để luyện viết đúng từ vựng của bài.`,
-  };
+  return publicPageMetadata(`/writing/${encodeURIComponent(level.id)}`, `Luyện viết theo bài · ${level.label}`, `Chọn một trong ${level.lessonCount} bài ${level.label} để luyện viết đúng từ vựng của bài.`);
 }
 
 export default async function WritingLevelPage({ params }: WritingLevelPageProps) {

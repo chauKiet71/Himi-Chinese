@@ -18,7 +18,7 @@ import {
 import { getCurrentUser } from "@/lib/auth-session";
 import { getUnreadNotificationCount, getUserNotifications } from "@/lib/notification-service";
 
-export const metadata: Metadata = { title: "Thông báo" };
+export const metadata: Metadata = { robots: { index: false, follow: true }, title: "Thông báo" };
 
 const successMessages = {
   read: "Đã đánh dấu thông báo là đã đọc.",

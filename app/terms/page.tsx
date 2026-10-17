@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ChevronDown, Heart, ShieldCheck, UsersRound } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Điều khoản sử dụng",
-  description: "Điều khoản sử dụng dịch vụ học tiếng Trung Himi Chinese.",
-};
+export function generateMetadata() {
+  return publicPageMetadata("/terms", "Điều khoản sử dụng", "Điều khoản sử dụng dịch vụ học tiếng Trung Himi Chinese.");
+}
 
 const terms = [
   {

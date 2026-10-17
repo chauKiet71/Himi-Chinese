@@ -1,3 +1,10 @@
+import { StructuredData } from "@/components/structured-data";
+import { HOME_TITLE, HOME_DESCRIPTION, homeSchema, publicPageMetadata } from "@/lib/seo";
+
+export function generateMetadata() {
+  return publicPageMetadata("/", HOME_TITLE, HOME_DESCRIPTION);
+}
+
 import homeStylesheetHref from "./home-portal.css?url";
 import { ReviewHomeStudio } from "@/components/review-home-studio";
 import { getCurrentUser } from "@/lib/auth-session";
@@ -18,6 +25,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     : "/vip";
 
   return <>
+    <StructuredData data={homeSchema()} />
     <link href={homeStylesheetHref} precedence="himi-home" rel="stylesheet" />
     <ReviewHomeStudio
       verified={params.verified === "1"}

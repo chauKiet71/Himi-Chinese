@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "@/lib/seo";
 import { Suspense } from "react";
 import { CourseGridSkeleton } from "@/components/course-catalog-skeleton";
 import { CourseLibraryView, type CourseLibraryViewName } from "@/components/course-library-view";
@@ -7,10 +7,9 @@ import { listPublishedCoursesForViewer } from "@/lib/course-repository";
 import { getHskCurriculumPageData } from "@/lib/hsk-access-repository";
 import { HSK_CURRICULUM } from "@/lib/hsk-curriculum";
 
-export const metadata: Metadata = {
-  title: "Giáo trình HSK & lộ trình chuyên ngành",
-  description: "Học theo cấp độ HSK hoặc chọn lộ trình tiếng Trung phù hợp với công việc của bạn.",
-};
+export function generateMetadata() {
+  return publicPageMetadata("/courses", "Giáo trình HSK & lộ trình chuyên ngành", "Học theo cấp độ HSK hoặc chọn lộ trình tiếng Trung phù hợp với công việc của bạn.");
+}
 
 type CoursesSearchParams = {
   level?: string | string[];

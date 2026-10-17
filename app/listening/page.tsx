@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "@/lib/seo";
 import { ListeningCatalogStudio } from "@/components/listening-catalog-studio";
 import { getCurrentUser } from "@/lib/auth-session";
 import { catalogGroupForHskLevel } from "@/lib/listening-catalog";
 
-export const metadata: Metadata = {
-  title: "Luyện nghe",
-  description: "Luyện nghe và phản xạ tiếng Trung chủ động cùng Himi Chinese.",
-};
+export function generateMetadata() {
+  return publicPageMetadata("/listening", "Luyện nghe", "Luyện nghe và phản xạ tiếng Trung chủ động cùng Himi Chinese.");
+}
 
 type ListeningSearchParams = {
   mode?: string | string[];

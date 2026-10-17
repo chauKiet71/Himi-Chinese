@@ -24,7 +24,7 @@ import { getPendingVipActivationRequest } from "@/lib/vip-activation-request-ser
 import { vipPlanDurationLabel } from "@/lib/vip-plan";
 import { getActiveVipSubscription, vipDaysRemaining } from "@/lib/vip-subscription";
 
-export const metadata: Metadata = { title: "Tài khoản" };
+export const metadata: Metadata = { robots: { index: false, follow: true }, title: "Tài khoản" };
 
 const roleLabels = {
   learner: "Người học",
