@@ -81,9 +81,11 @@ test("lesson transport keeps the reference-style play hierarchy", () => {
   assert.match(studioStyles, /\.listening-catalog-detail-page \.listening-focus-transport button > svg \{[\s\S]*?width: 34px;[\s\S]*?height: 34px;/);
 });
 
-test("immersive transcript removes the empty top padding on desktop and mobile", () => {
-  assert.match(studioStyles, /padding: 0 clamp\(14px, 3vw, 36px\) var\(--listening-player-clearance, 128px\);/);
-  assert.match(studioStyles, /padding: 0 8px var\(--listening-player-clearance, 120px\);/);
+test("immersive transcript scrolls between the header and player", () => {
+  assert.match(studioStyles, /grid-template-rows: auto auto minmax\(0, 1fr\) auto;/);
+  assert.match(studioStyles, /\.listening-catalog-detail-page \.listening-focus-transcript \{[^}]*min-height: 0;[^}]*overflow-y: auto;/);
+  assert.match(studioSource, /transcript\.scrollTo\(/);
+  assert.doesNotMatch(studioSource, /--listening-player-clearance/);
 });
 
 test("compact mobile listening controls keep the requested thirty-five percent reduction", () => {

@@ -113,7 +113,7 @@ export function ListeningCatalogStudio({
   const [audioError, setAudioError] = useState("");
   const audioRef = useRef<HTMLAudioElement>(null);
   const sentenceAudioRef = useRef<HTMLAudioElement>(null);
-  const clipEndRef = useRef<number | null>(null);
+  const sentencePlaybackRef = useRef<ListeningCatalogSentence | null>(null);
   const browserSectionRef = useRef<HTMLElement>(null);
   const transcriptRef = useRef<HTMLElement>(null);
   const lessonBarRef = useRef<HTMLElement>(null);
@@ -137,22 +137,18 @@ export function ListeningCatalogStudio({
       const rows = Array.from(list.children) as HTMLElement[];
       const activeRow = rows[activeIndex];
       const anchorRow = rows[Math.min(2, rows.length - 1)];
-      const lastRow = rows.at(-1);
-      if (!activeRow || !anchorRow || !lastRow) return;
+      if (!activeRow || !anchorRow) return;
 
-      // Follow the third-row slot until the end of the transcript reaches
-      // the player; the final sentences stay in place without an empty tail.
-      const naturalAnchor = anchorRow.getBoundingClientRect().top + window.scrollY;
-      const headerBottom = (lessonBarRef.current?.offsetHeight ?? 0) + 14;
-      const playerTop = playerRef.current?.getBoundingClientRect().top ?? window.innerHeight;
-      const anchor = Math.max(headerBottom, Math.min(naturalAnchor, playerTop - activeRow.offsetHeight - 16));
-      transcript.style.removeProperty("padding-bottom");
-      transcript.closest("main")?.style.setProperty("--listening-player-clearance", `${window.innerHeight - playerTop + 16}px`);
-
-      const endOfTranscript = Math.max(0, lastRow.getBoundingClientRect().bottom + window.scrollY - playerTop + 16);
-      const top = activeIndex < 2 ? 0 : Math.min(endOfTranscript, Math.max(0, activeRow.getBoundingClientRect().top + window.scrollY - anchor));
-      if (Math.abs(window.scrollY - top) < 1) return;
-      window.scrollTo({
+      // Keep the active sentence near the third-row slot inside the transcript.
+      // Header and player occupy their own rows, outside this scroll area.
+      const viewportTop = transcript.getBoundingClientRect().top;
+      const listTop = list.getBoundingClientRect().top;
+      const naturalAnchor = anchorRow.getBoundingClientRect().top - listTop + 14;
+      const anchor = Math.max(14, Math.min(naturalAnchor, transcript.clientHeight - activeRow.offsetHeight - 16));
+      const endOfTranscript = Math.max(0, transcript.scrollHeight - transcript.clientHeight);
+      const top = activeIndex < 2 ? 0 : Math.min(endOfTranscript, Math.max(0, activeRow.getBoundingClientRect().top - viewportTop + transcript.scrollTop - anchor));
+      if (Math.abs(transcript.scrollTop - top) < 1) return;
+      transcript.scrollTo({
         top,
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
       });
@@ -161,7 +157,7 @@ export function ListeningCatalogStudio({
     followActiveSentence();
     const observer = new ResizeObserver(followActiveSentence);
     observer.observe(list);
-    if (playerRef.current) observer.observe(playerRef.current);
+    observer.observe(transcript);
     window.addEventListener("resize", followActiveSentence);
     return () => {
       observer.disconnect();
@@ -320,7 +316,7 @@ export function ListeningCatalogStudio({
       setDuration(value.durationSeconds);
       setActiveSentenceId(value.sentences[0]?.id ?? "");
       setAudioError("");
-      clipEndRef.current = null;
+      sentencePlaybackRef.current = null;
       setLesson(value);
     } catch (error) {
       if (error instanceof Error && error.message === "vip_required") { setVipLocked(true); return; }
@@ -357,12 +353,16 @@ export function ListeningCatalogStudio({
   function toggleFullAudio() {
     const audio = audioRef.current;
     if (!audio) return;
-    if (sentenceAudioRef.current && !sentenceAudioRef.current.paused) {
-      sentenceAudioRef.current.pause();
+    const sentenceAudio = sentenceAudioRef.current;
+    if (sentencePlaybackRef.current && sentenceAudio) {
+      if (sentenceAudio.paused) {
+        setAudioError("");
+        sentenceAudio.play().catch(() => setAudioError("Không phát được audio của câu này."));
+      } else sentenceAudio.pause();
       return;
     }
     sentenceAudioRef.current?.pause();
-    clipEndRef.current = null;
+    sentencePlaybackRef.current = null;
     if (audio.paused) playAudio();
     else audio.pause();
   }
@@ -371,9 +371,10 @@ export function ListeningCatalogStudio({
     const audio = audioRef.current;
     if (!audio) return;
     sentenceAudioRef.current?.pause();
+    sentencePlaybackRef.current = null;
     if (sentence.audioUrl) {
       audio.pause();
-      clipEndRef.current = null;
+      sentencePlaybackRef.current = sentence;
       setActiveSentenceId(sentence.id);
       setCurrentTime(sentence.start);
       setAudioError("");
@@ -384,7 +385,6 @@ export function ListeningCatalogStudio({
       sentenceAudio.play().catch(() => setAudioError("Không phát được audio của câu này."));
       return;
     }
-    clipEndRef.current = sentence.end;
     audio.currentTime = sentence.start;
     setCurrentTime(sentence.start);
     setActiveSentenceId(sentence.id);
@@ -393,17 +393,8 @@ export function ListeningCatalogStudio({
 
   function handleTimeUpdate() {
     const audio = audioRef.current;
-    if (!audio || !lesson) return;
+    if (!audio || !lesson || sentencePlaybackRef.current) return;
     const time = audio.currentTime;
-    const clipEnd = clipEndRef.current;
-    if (clipEnd !== null && time >= clipEnd - 0.04) {
-      clipEndRef.current = null;
-      audio.pause();
-      const boundedTime = Math.max(0, clipEnd - 0.04);
-      if (Math.abs(audio.currentTime - boundedTime) > 0.01) audio.currentTime = boundedTime;
-      setCurrentTime(boundedTime);
-      return;
-    }
     setCurrentTime(time);
     const sentence = listeningSentenceAtTime(lesson.sentences, time);
     if (sentence) setActiveSentenceId(sentence.id);
@@ -412,19 +403,35 @@ export function ListeningCatalogStudio({
   function seekAudio(value: number) {
     const audio = audioRef.current;
     if (!audio) return;
+    const wasPlaying = !audio.paused || Boolean(sentenceAudioRef.current && !sentenceAudioRef.current.paused);
     sentenceAudioRef.current?.pause();
-    clipEndRef.current = null;
+    sentencePlaybackRef.current = null;
     audio.currentTime = value;
     setCurrentTime(value);
     const sentence = lesson ? listeningSentenceAtTime(lesson.sentences, value) : undefined;
     if (sentence) setActiveSentenceId(sentence.id);
+    if (wasPlaying && audio.paused) playAudio();
   }
 
   function handleSentenceTimeUpdate() {
     const audio = sentenceAudioRef.current;
-    const sentence = lesson?.sentences.find((item) => item.id === activeSentenceId);
+    const sentence = sentencePlaybackRef.current;
     if (!audio || !sentence) return;
     setCurrentTime(Math.min(sentence.end, sentence.start + audio.currentTime));
+  }
+
+  function handleSentenceEnded() {
+    const sentence = sentencePlaybackRef.current;
+    if (!lesson || !sentence) return;
+    const index = lesson.sentences.findIndex((item) => item.id === sentence.id);
+    const nextSentence = index >= 0 ? lesson.sentences[index + 1] : undefined;
+    if (nextSentence) {
+      playSentence(nextSentence);
+      return;
+    }
+    setIsPlaying(false);
+    setCurrentTime(sentence.end);
+    rememberCompletion(lesson.id);
   }
 
   function skipSentence(direction: -1 | 1) {
@@ -432,7 +439,10 @@ export function ListeningCatalogStudio({
     const index = lesson.sentences.findIndex((sentence) => sentence.id === activeSentenceId);
     const nextIndex = Math.max(0, Math.min(lesson.sentences.length - 1, index + direction));
     const sentence = lesson.sentences[nextIndex];
-    if (sentence) seekAudio(sentence.start);
+    if (sentence) {
+      if (isPlaying) playSentence(sentence);
+      else seekAudio(sentence.start);
+    }
   }
 
   function changePlaybackRate(value: number) {
@@ -444,7 +454,7 @@ export function ListeningCatalogStudio({
   function closeLesson() {
     audioRef.current?.pause();
     sentenceAudioRef.current?.pause();
-    clipEndRef.current = null;
+    sentencePlaybackRef.current = null;
     setIsPlaying(false);
     setCurrentTime(0);
     setActiveSentenceId("");
@@ -484,7 +494,7 @@ export function ListeningCatalogStudio({
               ref={audioRef}
               src={lesson.mainAudioUrl}
             />
-            <audio onEnded={() => setIsPlaying(false)} onError={() => setAudioError("Không tải được audio của câu này.")} onPause={() => setIsPlaying(false)} onPlay={() => setIsPlaying(true)} onTimeUpdate={handleSentenceTimeUpdate} preload="none" ref={sentenceAudioRef} />
+            <audio onEnded={handleSentenceEnded} onError={() => setAudioError("Không tải được audio của câu này.")} onPause={() => setIsPlaying(false)} onPlay={() => setIsPlaying(true)} onTimeUpdate={handleSentenceTimeUpdate} preload="none" ref={sentenceAudioRef} />
             <span className="listening-focus-player-logo" aria-hidden="true">
               <Image alt="" height={128} src="/assets/mascot/himi-v2/himi-wave.webp" width={128} />
             </span>

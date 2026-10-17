@@ -2222,8 +2222,14 @@
 }
 
 /* Immersive lesson view: the transcript and compact player are the whole page. */
+html:has(.listening-catalog-detail-page),
+body:has(.listening-catalog-detail-page) {
+  overflow: hidden;
+}
+
 .learner-app-shell:has(.listening-catalog-detail-page) > .learn-rail,
 .learner-app-shell:has(.listening-catalog-detail-page) > .learn-topbar,
+.learner-app-shell:has(.listening-catalog-detail-page) .learner-mobile-header,
 .learner-app-shell:has(.listening-catalog-detail-page) > .learner-mobile-nav,
 .learner-app-shell:has(.listening-catalog-detail-page) > .route-transition-progress,
 body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
@@ -2244,13 +2250,31 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
 }
 
 .listening-catalog-detail-page {
-  min-height: 100dvh;
-  padding: 0 clamp(14px, 3vw, 36px) var(--listening-player-clearance, 128px);
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
+  min-height: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   background: #f7f7f8;
 }
 
 .listening-catalog-detail-page .listening-catalog-detail {
-  width: min(880px, 100%);
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+}
+
+.listening-catalog-detail-page .listening-catalog-error {
+  grid-row: 2;
+  margin: 0;
+  padding: 8px 14px;
 }
 
 .listening-focus-lesson-bar {
@@ -2258,8 +2282,8 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
   min-height: 70px;
   margin: 0;
   padding: 10px max(18px, calc((100% - 872px) / 2));
-  position: fixed;
-  inset: 0 0 auto;
+  position: relative;
+  grid-row: 1;
   z-index: 60;
   display: flex;
   align-items: center;
@@ -2308,7 +2332,15 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
 .listening-focus-lesson-bar button:focus-visible { outline: 3px solid rgba(255, 63, 50, .32); outline-offset: 2px; }
 
 .listening-catalog-detail-page .listening-focus-transcript {
-  margin-top: 0;
+  grid-row: 3;
+  min-height: 0;
+  width: 100%;
+  margin: 0;
+  padding: 14px max(8px, calc((100% - 880px) / 2)) 16px;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable both-edges;
+  scroll-padding-block: 14px 16px;
 }
 
 .listening-catalog-detail-page .listening-focus-transcript li,
@@ -2352,8 +2384,10 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
 .listening-catalog-detail-page .listening-focus-player {
   width: 100%;
   min-height: 112px;
-  position: fixed;
-  inset: auto 0 0;
+  position: relative;
+  grid-row: 4;
+  inset: auto;
+  margin: 0;
   z-index: 90;
   grid-template-columns: 70px minmax(0, 1fr);
   column-gap: 14px;
@@ -2447,8 +2481,8 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
 
 @media (max-width: 720px) {
   .listening-catalog-detail-page {
-    min-height: 100dvh;
-    padding: 0 8px var(--listening-player-clearance, 120px);
+    min-height: 0;
+    padding: 0;
   }
 
   .listening-focus-lesson-bar {
@@ -2483,7 +2517,7 @@ body:has(.listening-catalog-detail-page) > .himi-chatbot-widget {
   .listening-catalog-detail-page .listening-focus-player {
     width: 100%;
     min-height: 106px;
-    inset: auto 0 0;
+    inset: auto;
     grid-template-columns: 72px 140px minmax(30px, 1fr) 118px 118px 30px;
     grid-template-rows: 22px 62px;
     gap: 6px 8px;
